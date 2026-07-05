@@ -15122,27 +15122,20 @@ zenToggle.addEventListener('click', (e) => {
   });
 });
 
-// ---- Navbar: beim Runterscrollen kollabieren, beim Hochscrollen/Tippen aufklappen ----
-// Hysterese gegen Zittern: getrennte Schwellen zum Kollabieren und Aufklappen,
-// plus Mindest-Scrollweg, damit sich nichts durch Layout-Sprünge aufschaukelt.
+// ---- Navbar: beim Runterscrollen nach oben wegschieben, beim Hochscrollen zeigen ----
+// Kein Höhenwechsel -> kein Layout-Sprung -> kein Zittern. Die Leiste ist fixed und
+// wird per transform komplett aus dem Sichtfeld geschoben.
 let lastScrollY = window.scrollY;
 let ticking = false;
-let accum = 0;                    // aufsummierte Scrollrichtung
-const COLLAPSE_BELOW = 140;      // erst ab dieser Tiefe darf kollabiert werden
-const MOVE_THRESHOLD = 24;       // so weit muss man am Stück scrollen, bevor umgeschaltet wird
+const HIDE_THRESHOLD = 10; // Mindest-Scrollweg, bevor umgeschaltet wird (gegen Mikro-Jitter)
 function onScroll(){
   const y = Math.max(0, window.scrollY);
   const delta = y - lastScrollY;
-  // Richtungswechsel setzt den Zähler zurück, sonst aufsummieren
-  if((delta > 0 && accum < 0) || (delta < 0 && accum > 0)) accum = 0;
-  accum += delta;
-  const collapsed = tabBar.classList.contains('collapsed');
-  if(!collapsed && accum > MOVE_THRESHOLD && y > COLLAPSE_BELOW){
-    tabBar.classList.add('collapsed');    // deutlich runter -> minimieren
-    accum = 0;
-  } else if(collapsed && (accum < -MOVE_THRESHOLD || y <= 8)){
-    tabBar.classList.remove('collapsed'); // deutlich hoch (oder ganz oben) -> zeigen
-    accum = 0;
+  if(Math.abs(delta) < HIDE_THRESHOLD){ ticking = false; return; }
+  if(delta > 0 && y > 60){
+    tabBar.classList.add('hidden');    // runter -> wegschieben
+  } else if(delta < 0){
+    tabBar.classList.remove('hidden'); // hoch -> wieder zeigen
   }
   lastScrollY = y;
   ticking = false;
@@ -15150,10 +15143,6 @@ function onScroll(){
 window.addEventListener('scroll', () => {
   if(!ticking){ window.requestAnimationFrame(onScroll); ticking = true; }
 }, {passive:true});
-// Antippen der kollabierten Leiste klappt sie wieder auf.
-tabBar.addEventListener('click', () => {
-  if(tabBar.classList.contains('collapsed')){ tabBar.classList.remove('collapsed'); accum = 0; }
-});
 
 refreshSelState();
 const GLOSSAR = [{"a":"2FA","f":"Zwei-Faktor-Authentifizierung","d":"Anmeldung mit zwei unabhängigen Nachweisen, z. B. Passwort plus Einmalcode. Erhöht die Sicherheit deutlich."},
