@@ -15123,15 +15123,26 @@ zenToggle.addEventListener('click', (e) => {
 });
 
 // ---- Navbar: beim Runterscrollen kollabieren, beim Hochscrollen/Tippen aufklappen ----
+// Hysterese gegen Zittern: getrennte Schwellen zum Kollabieren und Aufklappen,
+// plus Mindest-Scrollweg, damit sich nichts durch Layout-Sprünge aufschaukelt.
 let lastScrollY = window.scrollY;
 let ticking = false;
-const COLLAPSE_AFTER = 120; // erst ab dieser Scrolltiefe kollabieren
+let accum = 0;                    // aufsummierte Scrollrichtung
+const COLLAPSE_BELOW = 140;      // erst ab dieser Tiefe darf kollabiert werden
+const MOVE_THRESHOLD = 24;       // so weit muss man am Stück scrollen, bevor umgeschaltet wird
 function onScroll(){
-  const y = window.scrollY;
-  if(y > lastScrollY && y > COLLAPSE_AFTER){
-    tabBar.classList.add('collapsed');      // runter -> minimieren
-  } else if(y < lastScrollY){
-    tabBar.classList.remove('collapsed');   // hoch -> wieder zeigen
+  const y = Math.max(0, window.scrollY);
+  const delta = y - lastScrollY;
+  // Richtungswechsel setzt den Zähler zurück, sonst aufsummieren
+  if((delta > 0 && accum < 0) || (delta < 0 && accum > 0)) accum = 0;
+  accum += delta;
+  const collapsed = tabBar.classList.contains('collapsed');
+  if(!collapsed && accum > MOVE_THRESHOLD && y > COLLAPSE_BELOW){
+    tabBar.classList.add('collapsed');    // deutlich runter -> minimieren
+    accum = 0;
+  } else if(collapsed && (accum < -MOVE_THRESHOLD || y <= 8)){
+    tabBar.classList.remove('collapsed'); // deutlich hoch (oder ganz oben) -> zeigen
+    accum = 0;
   }
   lastScrollY = y;
   ticking = false;
@@ -15141,7 +15152,7 @@ window.addEventListener('scroll', () => {
 }, {passive:true});
 // Antippen der kollabierten Leiste klappt sie wieder auf.
 tabBar.addEventListener('click', () => {
-  if(tabBar.classList.contains('collapsed')) tabBar.classList.remove('collapsed');
+  if(tabBar.classList.contains('collapsed')){ tabBar.classList.remove('collapsed'); accum = 0; }
 });
 
 refreshSelState();
