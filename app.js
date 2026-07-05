@@ -1,3 +1,6 @@
+// Browser soll beim Neuladen NICHT zur alten Scrollposition springen (v.a. mobil).
+if('scrollRestoration' in history){ history.scrollRestoration = 'manual'; }
+
 const POOLS = {
  "ports": {
   "name": "Ports & Sockets",
@@ -15406,3 +15409,7 @@ renderLib(GLOSSAR_SORTED);
   if(fc) fc.textContent = cats;
   if(fq) fq.textContent = qs;
 })();
+
+// Beim Laden immer oben starten (ohne Animation), egal was der Browser cachen will.
+window.scrollTo(0, 0);
+window.addEventListener('load', () => { window.scrollTo(0, 0); });

@@ -4,7 +4,8 @@
   --amber:#f5b642; --red:#ff5f6b; --code-bg:#060a0e;
 }
 *{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
+html{scroll-behavior:auto}
+nav.jump a{scroll-behavior:smooth}
 body{background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,-apple-system,sans-serif;line-height:1.6;padding:0 0 90px}
 .wrap{max-width:940px;margin:0 auto;padding:0 24px}
 header{border-bottom:1px solid var(--border);padding:40px 0 26px;margin-bottom:28px;background:linear-gradient(180deg,rgba(34,211,238,0.04),transparent);text-align:center}
