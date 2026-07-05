@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NEINT1 Symbiose – Lernscript</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <h1><span class="mono">&gt;</span> <span class="t-neint">NEINT1</span> <span class="t-symb">Symbiose</span></h1>
+    <p>Netzwerke &amp; Internettechnologien · OSI · Routing/Switching · IP · DNS/DHCP · Sicherheit · VPN · WLAN · VoIP — Nachschlagewerk + Prüfungstrainer</p>
+  </div>
+</header>
+
+<div class="tabs" id="tabBar"><div class="wrap">
+  <div class="tab active" data-view="lesen" data-short="Lesen">Nachschlagen</div>
+  <div class="tab" data-view="lib" data-short="Biblio">Bibliothek</div>
+  <div class="tab" data-view="quiz" data-short="Quiz">Multiple Choice</div>
+  <button class="zen-toggle" id="zenToggle" title="Zen Mode: Vollbild &amp; Fokus" aria-label="Zen Mode umschalten"><span class="zen-icon">&#9673;</span><span class="zen-label">Zen</span></button>
+</div></div>
+
+<div class="wrap">
+<!-- ============ VIEW: NACHSCHLAGEN ============ -->
+<div class="view active" id="view-lesen">
+<nav class="jump">
+  <a href="#r-ports">Ports</a>
+  <a href="#r-protokolle">Protokolle</a>
+  <a href="#r-mux">Multiplexing</a>
+  <a href="#r-tcpip">TCP/IP & UDP</a>
+  <a href="#r-header">Header/TTL</a>
+  <a href="#r-osi">OSI-Modell</a>
+  <a href="#r-ausdehnung">Netzausdehnung</a>
+  <a href="#r-ethernet">Ethernet</a>
+  <a href="#r-medien">Kabel/Hardware</a>
+  <a href="#r-routing">Routing/Switching</a>
+  <a href="#r-ip">IPv4/IPv6</a>
+  <a href="#r-dnsdhcp">DNS/DHCP</a>
+  <a href="#r-api">API/REST</a>
+  <a href="#r-voip">VoIP</a>
+  <a href="#r-krypto">Verschlüsselung/PKI</a>
+  <a href="#r-vpn">VPN/IPsec</a>
+  <a href="#r-security">IT-Sicherheit</a>
+  <a href="#r-wlan">WLAN</a>
+  <a href="#r-fddi">FDDI</a>
+  <a href="#r-topo">Topologien</a>
+  <a href="#r-zahlen">Zahlensysteme</a>
+  <a href="#r-logik">Logik/Gatter</a>
+</nav>
+
+<section id="r-ports">
+<h2>Ports & Sockets</h2>
+<p>Ein <span class="term">Port</span> ist eine 16-Bit-Nummer zwischen <code>0</code> und <code>65535</code>, die einen Dienst auf einem Server identifiziert. Zusammen mit der IP bildet er einen <strong>Socket</strong> (<code>IP:Port</code>). Ports gehören zur Transportschicht und werden von <span class="term">TCP</span> (Transmission Control Protocol) und <span class="term">UDP</span> (User Datagram Protocol) genutzt.</p>
+<table>
+<tr><th>Bereich</th><th>Bezeichnung</th><th>Verwendung</th></tr>
+<tr><td>0 – 1023</td><td>Well-Known</td><td>Standarddienste (HTTP, SSH, DNS …)</td></tr>
+<tr><td>1024 – 49151</td><td>Registered</td><td>Registrierte Anwendungen (RDP 3389, MySQL 3306)</td></tr>
+<tr><td>49152 – 65535</td><td>Dynamic / Ephemeral</td><td>Temporäre Quellports, vom OS vergeben</td></tr>
+</table>
+<p><strong>Quellport:</strong> Der Zielport ist fest (z. B. 443), der Quellport wird zufällig aus dem dynamischen Bereich gewählt. Dadurch kann der Server die Antwort exakt der richtigen Anwendung bzw. dem richtigen Tab zuordnen.</p>
+<div class="callout"><span class="tag">Weitere Ports</span><strong>8443</strong> liegt im Registered-Bereich und dient häufig als alternativer HTTPS-Port für Web-Interfaces. <strong>SOCKS</strong>-Proxys nutzen standardmäßig Port <strong>1080</strong> (z. B. bei Tor). Ein <strong>Proxy</strong> vermittelt Verbindungen stellvertretend und kann filtern, cachen oder anonymisieren.</div>
+</section>
+
+<section id="r-protokolle">
+<h2>Wichtige Protokolle & Ports</h2>
+<table>
+<tr><th>Port</th><th>Dienst</th><th>Transport</th><th>Funktion</th></tr>
+<tr><td>20/21</td><td>FTP Data/Control</td><td>TCP</td><td>Dateien / Steuerbefehle</td></tr>
+<tr><td>22</td><td>SSH</td><td>TCP</td><td>Verschlüsselte Fernsteuerung</td></tr>
+<tr><td>23</td><td>Telnet</td><td>TCP</td><td>Unverschlüsselt, unsicher</td></tr>
+<tr><td>25</td><td>SMTP</td><td>TCP</td><td>Mailversand Server→Server</td></tr>
+<tr><td>53</td><td>DNS</td><td>UDP/TCP</td><td>Namensauflösung</td></tr>
+<tr><td>67/68</td><td>DHCP</td><td>UDP</td><td>Auto-IP (Server/Client)</td></tr>
+<tr><td>69</td><td>TFTP</td><td>UDP</td><td>Dateitransfer ohne Login (PXE)</td></tr>
+<tr><td>80</td><td>HTTP</td><td>TCP</td><td>Web, unverschlüsselt</td></tr>
+<tr><td>110/143</td><td>POP3/IMAP</td><td>TCP</td><td>Mailabruf (löscht / behält)</td></tr>
+<tr><td>161/162</td><td>SNMP/Trap</td><td>UDP</td><td>Geräteüberwachung/Meldungen</td></tr>
+<tr><td>389/636</td><td>LDAP/LDAPS</td><td>TCP/UDP</td><td>Verzeichnisdienst (unv./verschl.)</td></tr>
+<tr><td>443</td><td>HTTPS</td><td>TCP</td><td>Web über TLS/SSL</td></tr>
+<tr><td>465/587</td><td>SMTPS/Submission</td><td>TCP</td><td>Mailversand verschlüsselt</td></tr>
+<tr><td>993/995</td><td>IMAPS/POP3S</td><td>TCP</td><td>Mailabruf verschlüsselt</td></tr>
+<tr><td>3389</td><td>RDP</td><td>TCP</td><td>Grafische Windows-Fernsteuerung</td></tr>
+<tr><td>123</td><td>NTP</td><td>UDP</td><td>Zeitsynchronisation</td></tr>
+<tr><td>22</td><td>SFTP</td><td>TCP</td><td>Dateitransfer über SSH-Kanal</td></tr>
+<tr><td>445</td><td>SMB</td><td>TCP</td><td>Windows-Datei-/Druckerfreigabe</td></tr>
+<tr><td>3306</td><td>MySQL</td><td>TCP</td><td>Datenbankserver</td></tr>
+</table>
+<div class="callout"><span class="tag">Merkhilfe</span>Verschlüsselte Varianten enden auf „S" und liegen höher: HTTP 80 → HTTPS 443, IMAP 143 → IMAPS 993, POP3 110 → POP3S 995.</div>
+</section>
+
+<section id="r-mux">
+<h2>Multiplexing</h2>
+<p><span class="term">Multiplexing</span> kombiniert mehrere Signale zu einem und überträgt sie effizient über ein gemeinsames Medium. Der <strong>Multiplexer (MUX)</strong> bündelt, der <strong>Demultiplexer (DEMUX)</strong> trennt am Ziel wieder auf. Das spart Leitungen und Kosten.</p>
+<ul>
+<li><strong>TDM (Zeitmultiplex):</strong> Signale nacheinander in Zeitschlitzen.</li>
+<li><strong>FDM (Frequenzmultiplex):</strong> Signale gleichzeitig auf verschiedenen Frequenzen.</li>
+<li><strong>WDM (Wellenlängenmultiplex):</strong> FDM-Prinzip über Lichtwellenlängen in Glasfaser.</li>
+</ul>
+<p>Auf der Transportschicht ist die Portvergabe eine Form des Multiplexings: viele Anwendungen teilen sich eine Netzverbindung, unterschieden durch Ports.</p>
+</section>
+
+<section id="r-tcpip">
+<h2>TCP/IP & UDP</h2>
+<p><span class="term">TCP/IP</span> ist die herstellerunabhängige Protokollfamilie des Internets. <strong>IP</strong> (Internet Protocol) übernimmt Adressierung und Routing (verbindungslos, unzuverlässig). <strong>TCP</strong> liefert die Zuverlässigkeit.</p>
+<div class="callout"><span class="tag">Three-Way-Handshake</span>1. <code>SYN</code> (Client fragt an) → 2. <code>SYN-ACK</code> (Server bestätigt/fragt zurück) → 3. <code>ACK</code> (Client bestätigt) → Verbindung steht. Geordneter Abbau über <code>FIN/ACK</code>; ein <code>RST</code>-Segment bricht die Verbindung dagegen sofort und ungeordnet ab (z. B. bei Fehlern).</div>
+<p><strong>Staukontrolle</strong> (Congestion Control): TCP interpretiert Paketverluste als Zeichen von Netzüberlastung und reduziert automatisch die Senderate, bevor sie wieder ansteigt — schützt das Netz vor Überlastungskollaps. Die <strong>Flusskontrolle</strong> (Flow Control) dagegen schützt den einzelnen Empfänger: über die Fenstergröße signalisiert er, wie viele Daten er noch aufnehmen kann, damit der Sender ihn nicht überflutet. Eine <strong>Prüfsumme</strong> (Checksumme) in beiden Protokollen erkennt beschädigte Pakete.</p>
+<p><strong>UDP</strong> ist verbindungslos: Datagramme werden ohne Handshake und ohne Bestätigung verschickt — schnell, aber ohne Garantie.</p>
+<table>
+<tr><th>Merkmal</th><th>TCP</th><th>UDP</th></tr>
+<tr><td>Verbindung</td><td>verbindungsorientiert</td><td>verbindungslos</td></tr>
+<tr><td>Zuverlässigkeit</td><td>garantiert (Resend)</td><td>keine Garantie</td></tr>
+<tr><td>Reihenfolge</td><td>gesichert</td><td>nicht gesichert</td></tr>
+<tr><td>Tempo</td><td>langsamer</td><td>schneller</td></tr>
+<tr><td>Einsatz</td><td>Web, Mail, Dateien</td><td>VoIP, Streaming, DNS, Gaming</td></tr>
+</table>
+<div class="callout"><span class="tag">QUIC / HTTP/3</span><strong>QUIC</strong> baut auf <strong>UDP</strong> auf und implementiert Zuverlässigkeit, Multiplexing und Verschlüsselung selbst. Vorteil: schnellerer Verbindungsaufbau (weniger Roundtrips als TCP+TLS) und kein Head-of-Line-Blocking — ein verlorenes Paket blockiert nicht alle parallelen Streams. <strong>HTTP/3</strong> nutzt QUIC.</div>
+</section>
+
+<section id="r-header">
+<h2>Header, TTL & Traceroute</h2>
+<p>Ein Paket besteht aus <strong>Header</strong> (Steuerdaten) und <strong>Payload</strong> (Nutzdaten). Wichtige Header-Felder:</p>
+<ul>
+<li><strong>Quell-/Ziel-IP</strong> und Portnummern.</li>
+<li><strong>TTL (Time to Live):</strong> Zähler (z. B. 64/128). Jeder Router zieht 1 ab; bei <code>0</code> wird das Paket verworfen (ICMP Time Exceeded; ICMP = Internet Control Message Protocol) — verhindert Endlosschleifen.</li>
+<li><strong>Protokollfeld:</strong> gibt an, welches Transportprotokoll in der Payload steckt (6 = TCP, 17 = UDP, 1 = ICMP). So weiß der Empfänger, wie er die Daten interpretieren muss.</li>
+<li><strong>Sequenznummer (Sequence Number):</strong> nummeriert die Bytes, damit zerlegte Segmente beim Empfänger in richtiger Reihenfolge zusammengesetzt werden.</li>
+<li><strong>Bestätigungsnummer (Acknowledgement Number):</strong> gibt das nächste erwartete Byte an und bestätigt so den Empfang.</li>
+<li><strong>Prüfsumme (Checksum):</strong> erkennt Übertragungsfehler in Header und Daten; ein fehlerhaftes Paket wird verworfen.</li>
+</ul>
+<p><strong>traceroute</strong> (Linux) / <strong>tracert</strong> (Windows) nutzt die TTL: erst TTL=1 (erster Router meldet sich), dann 2, 3 … bis das Ziel erreicht ist — so wird jeder Hop sichtbar. Reine Erreichbarkeit prüft man dagegen mit <strong>ping</strong> (ICMP Echo Request/Reply).</p>
+</section>
+
+<section id="r-osi">
+<h2>OSI-Modell (7 Schichten)</h2>
+<p>Das <span class="term">OSI-Referenzmodell</span> (Open Systems Interconnection) gliedert Netzwerkkommunikation in 7 Schichten; die Dateneinheit je Schicht heißt PDU (Protocol Data Unit). Beim Senden fügt jede Schicht ihren Header hinzu (<strong>Kapselung</strong>, von oben 7 nach unten 1), beim Empfangen liest und entfernt jede Schicht ihren Header wieder (<strong>Entkapselung</strong>, von unten 1 nach oben 7).</p>
+<table>
+<tr><th>#</th><th>Schicht (DE)</th><th>Layer (EN)</th><th>Aufgabe</th><th>PDU</th><th>Geräte/Protokolle</th></tr>
+<tr><td>7</td><td>Anwendung</td><td>Application</td><td>Netzdienste für Apps</td><td>Daten</td><td>HTTP, FTP, SMTP, DNS</td></tr>
+<tr><td>6</td><td>Darstellung</td><td>Presentation</td><td>Format, Codierung, Verschlüsselung, Kompression</td><td>Daten</td><td>TLS, ASCII, JPEG</td></tr>
+<tr><td>5</td><td>Sitzung</td><td>Session</td><td>Auf-/Abbau von Sitzungen</td><td>Daten</td><td>Sessions, RPC</td></tr>
+<tr><td>4</td><td>Transport</td><td>Transport</td><td>Ende-zu-Ende, Ports, Segmentierung</td><td>Segment</td><td>TCP, UDP</td></tr>
+<tr><td>3</td><td>Vermittlung</td><td>Network</td><td>Logische Adressierung, Routing</td><td>Paket</td><td>IP, Router</td></tr>
+<tr><td>2</td><td>Sicherung</td><td>Data Link</td><td>MAC-Adressen, Frames, Fehlererkennung</td><td>Frame</td><td>Switch, Bridge, Ethernet</td></tr>
+<tr><td>1</td><td>Bitübertragung</td><td>Physical</td><td>Rohe Bits über das Medium</td><td>Bit</td><td>Hub, Repeater, Kabel</td></tr>
+</table>
+<div class="callout"><span class="tag">Merkhilfe 1→7</span>„Please Do Not Throw Salami Pizza Away" — von Schicht 1 nach 7: <strong>P</strong>hysical, <strong>D</strong>ata Link, <strong>N</strong>etwork, <strong>T</strong>ransport, <strong>S</strong>ession, <strong>P</strong>resentation, <strong>A</strong>pplication. Achtung auf die Richtung: Der Satz läuft von unten (1) nach oben (7). Das TCP/IP-Modell hat 4 Schichten: Netzzugang (OSI 1+2), Internet (OSI 3), Transport (OSI 4), Anwendung (OSI 5+6+7).</div>
+</section>
+
+<section id="r-ausdehnung">
+<h2>Netzwerkausdehnung (BAN → GAN)</h2>
+<p>Netze werden nach räumlicher Reichweite klassifiziert — von körpernah bis global.</p>
+<table>
+<tr><th>Typ</th><th>Bedeutung</th><th>Reichweite</th><th>Typische Technik</th></tr>
+<tr><td>BAN</td><td>Body Area Network</td><td>am/im Körper (&lt;2 m)</td><td>Wearables, Medizinsensoren</td></tr>
+<tr><td>PAN</td><td>Personal Area Network</td><td>wenige Meter (~10 m)</td><td>Bluetooth, USB, NFC, ZigBee</td></tr>
+<tr><td>LAN</td><td>Local Area Network</td><td>Gebäude/Gelände</td><td>Ethernet (802.3), Switch</td></tr>
+<tr><td>WLAN</td><td>Wireless LAN</td><td>wie LAN, drahtlos</td><td>Wi-Fi (802.11), Access Point</td></tr>
+<tr><td>CAN</td><td>Campus Area Network</td><td>mehrere Gebäude (bis wenige km)</td><td>Glasfaser, Router-Kopplung</td></tr>
+<tr><td>MAN</td><td>Metropolitan Area Network</td><td>stadtweit (bis ~100 km)</td><td>Glasfaser-Backbone, Carrier</td></tr>
+<tr><td>WAN</td><td>Wide Area Network</td><td>land-/kontinentweit</td><td>MPLS, Leased Lines, VPN</td></tr>
+<tr><td>GAN</td><td>Global Area Network</td><td>weltweit</td><td>Satellit, globaler Mobilfunk</td></tr>
+</table>
+<div class="callout"><span class="tag">Reihenfolge</span>Reichweite aufsteigend: BAN &lt; PAN &lt; LAN &lt; CAN &lt; MAN &lt; WAN &lt; GAN. Wichtige Standards: 802.3 = Ethernet (LAN), 802.11 = WLAN, 802.15 = PAN/Bluetooth.</div>
+</section>
+
+<section id="r-api">
+<h2>API, REST, SOAP & Webhook</h2>
+<p>Eine <span class="term">API</span> ist eine vertragliche Schnittstelle zwischen Software-Systemen. Der Client sendet an einen Endpunkt (oft mit API-Key im Header), der Server verarbeitet gekapselt und antwortet standardisiert in <strong>JSON</strong> (JavaScript Object Notation) oder <strong>XML</strong> (Extensible Markup Language).</p>
+<table>
+<tr><th>Typ</th><th>Merkmale</th></tr>
+<tr><td>REST (Representational State Transfer)</td><td>Web-Standard, HTTP-Methoden GET/POST/PUT/DELETE, zustandslos → skalierbar</td></tr>
+<tr><td>SOAP (Simple Object Access Protocol)</td><td>Älter, schwerfällig, nur XML, hohe Sicherheitsstandards (Banking)</td></tr>
+<tr><td>Webhook</td><td>„Umgedrehte API": Server pusht bei Event, kein Polling</td></tr>
+</table>
+<div class="callout"><span class="tag">HTTP-Methoden</span><code>GET</code> lesen · <code>POST</code> anlegen · <code>PUT</code> ersetzen/aktualisieren · <code>DELETE</code> löschen. Zustandslos = jede Anfrage enthält alle nötigen Infos, kein Sitzungszustand am Server.</div>
+</section>
+
+<section id="r-fddi">
+<h2>FDDI (Fiber Distributed Data Interface)</h2>
+<p><span class="term">FDDI</span> ist ein Glasfaser-Ringnetz (Backbone der 80er/90er, <code>100 Mbit/s</code>) auf Token-Ring-Basis.</p>
+<ul>
+<li><strong>Token-Passing:</strong> nur der Token-Inhaber sendet → keine Kollisionen.</li>
+<li><strong>Doppelring:</strong> zwei gegenläufige Ringe; Hauptring überträgt, Hilfsring ist Reserve.</li>
+<li><strong>Wrap:</strong> bei Kabelbruch schließen die Nachbarstationen beide Ringe kurz → ein langer Ring, Betrieb läuft ohne Datenverlust weiter.</li>
+<li>Verdrängt durch günstigeres, einfacher zu verlegendes <strong>Switched Ethernet</strong>.</li>
+</ul>
+</section>
+
+<section id="r-topo">
+<h2>Netzwerktopologien</h2>
+<table>
+<tr><th>Topologie</th><th>Prinzip</th><th>Schwachstelle</th></tr>
+<tr><td>Stern</td><td>Alle an zentralem Switch. Heutiger Standard, einfache Fehlersuche.</td><td>Switch = Single Point of Failure. Hoher Kabelaufwand.</td></tr>
+<tr><td>Baum</td><td>Mehrere Sterne hierarchisch. Leicht erweiterbar.</td><td>Ausfall der Wurzel legt den Ast lahm.</td></tr>
+<tr><td>Ring</td><td>Jeder mit zwei Nachbarn, geschlossener Kreis. Kein Hub nötig.</td><td>Ein Bruch unterbricht den Ring (außer Doppelring).</td></tr>
+<tr><td>Bus</td><td>Gemeinsames Kabel, Terminatoren an den Enden. Geringster Kabelaufwand.</td><td>Kabelbruch legt alles lahm; Kollisionen.</td></tr>
+<tr><td>Masche</td><td>Jeder mit mehreren/allen verbunden. Höchste Ausfallsicherheit (Internet).</td><td>Extrem teuer in Verkabelung/Administration.</td></tr>
+</table>
+</section>
+
+<section id="r-zahlen">
+<h2>Zahlensysteme</h2>
+<table>
+<tr><th>System</th><th>Basis</th><th>Ziffern</th></tr>
+<tr><td>Dual (binär)</td><td>2</td><td>0, 1</td></tr>
+<tr><td>Oktal</td><td>8</td><td>0–7</td></tr>
+<tr><td>Dezimal</td><td>10</td><td>0–9</td></tr>
+<tr><td>Hexadezimal</td><td>16</td><td>0–9, A–F</td></tr>
+</table>
+<p><strong>Bitwertigkeiten im Byte:</strong> <code>128 64 32 16 8 4 2 1</code>. Ein Byte (8 Bit) fasst 256 Werte (0–255). Eine Hex-Ziffer = 4 Bit (Nibble).</p>
+<ul>
+<li>Binär <code>1010</code> = 8+2 = <strong>10</strong> · <code>1111</code> = <strong>15</strong> · <code>11111111</code> = <strong>255</strong></li>
+<li>Hex <code>FF</code> = <strong>255</strong> · <code>1A</code> = 16+10 = <strong>26</strong> · <code>10</code> = <strong>16</strong></li>
+<li>Hex <code>A</code>=10, <code>B</code>=11, <code>C</code>=12, <code>D</code>=13, <code>E</code>=14, <code>F</code>=15</li>
+</ul>
+<p>Hexadezimal wird in der IT genutzt, weil es Bitgruppen kompakt darstellt und leicht in Binär umrechenbar ist.</p>
+</section>
+
+<section id="r-logik">
+<h2>Logische Verknüpfungen</h2>
+<p>Logische Gatter verarbeiten binäre Eingänge (0/1) zu einem Ausgang. Grundlage der Digitaltechnik — und in der Netzwerktechnik konkret beim Subnetting.</p>
+<table>
+<tr><th>Verknüpfung</th><th>Ausgang = 1, wenn …</th><th>0/0</th><th>0/1</th><th>1/0</th><th>1/1</th></tr>
+<tr><td>AND (UND)</td><td>beide 1</td><td>0</td><td>0</td><td>0</td><td>1</td></tr>
+<tr><td>OR (ODER)</td><td>mind. ein Eingang 1</td><td>0</td><td>1</td><td>1</td><td>1</td></tr>
+<tr><td>XOR</td><td>Eingänge verschieden</td><td>0</td><td>1</td><td>1</td><td>0</td></tr>
+<tr><td>NAND</td><td>nicht beide 1</td><td>1</td><td>1</td><td>1</td><td>0</td></tr>
+<tr><td>NOR</td><td>beide 0</td><td>1</td><td>0</td><td>0</td><td>0</td></tr>
+<tr><td>XNOR</td><td>Eingänge gleich</td><td>1</td><td>0</td><td>0</td><td>1</td></tr>
+</table>
+<p><strong>NOT (Negation):</strong> ein Eingang, kehrt ihn um (0→1, 1→0). NAND/NOR/XNOR sind die negierten Varianten von AND/OR/XOR.</p>
+<div class="callout"><span class="tag">Brücke zum Subnetting</span>Die Netzadresse entsteht durch bitweises <strong>AND</strong> aus IP-Adresse UND Subnetzmaske. Die 1-Bits der Maske lassen den Netzanteil durch, die 0-Bits blenden den Hostanteil aus (Wert AND 1 = Wert, Wert AND 0 = 0). <strong>XOR</strong> erkennt Bit-Unterschiede, <strong>XNOR</strong> prüft auf Gleichheit.</div>
+</section>
+
+<section id="r-ethernet">
+<h2>Ethernet & Zugriffsverfahren</h2>
+<p><span class="term">Ethernet</span> (IEEE 802.3) ist die dominierende LAN-Technik. Adressierung über MAC (Schicht 2), Dateneinheit ist der <strong>Frame</strong> (Ziel-MAC, Quell-MAC, Nutzdaten, Prüfsumme FCS/CRC (Frame Check Sequence / Cyclic Redundancy Check), Präambel zur Synchronisation).</p>
+<table>
+<tr><th>Verfahren</th><th>Einsatz</th><th>Prinzip</th></tr>
+<tr><td>CSMA/CD (Carrier Sense Multiple Access / Collision Detection)</td><td>Kabel-Ethernet</td><td>Medium abhören, senden, Kollision erkennen → Backoff</td></tr>
+<tr><td>CSMA/CA (… / Collision Avoidance)</td><td>WLAN</td><td>Kollision vermeiden (Funk kann Kollision nicht sicher erkennen)</td></tr>
+<tr><td>Token Passing</td><td>Token Ring, FDDI</td><td>nur Token-Inhaber sendet → kollisionsfrei</td></tr>
+</table>
+<div class="callout"><span class="tag">Domänen</span><strong>Kollisionsdomäne:</strong> Bereich, in dem Frames kollidieren können. Ein <strong>Hub</strong> bildet eine gemeinsame; ein <strong>Switch</strong> trennt sie pro Port. <strong>Broadcastdomäne:</strong> wird durch einen <strong>Router</strong> begrenzt. In modernen Vollduplex-Switch-Netzen entstehen keine Kollisionen mehr, daher spielt CSMA/CD kaum noch eine Rolle.</div>
+<p>Datenraten: 10 Mbit/s (Ethernet) · 100 Mbit/s (Fast Ethernet) · 1 Gbit/s (Gigabit Ethernet) · 10 Gbit/s und mehr.</p>
+<div class="callout"><span class="tag">Adressierungsarten</span><strong>Unicast:</strong> 1:1 an eine bestimmte MAC. <strong>Multicast:</strong> 1:n an eine definierte Gruppe. <strong>Broadcast:</strong> 1:alle (Ziel-MAC <code>FF:FF:FF:FF:FF:FF</code>).</p></div>
+<p><strong>PoE</strong> (Power over Ethernet) versorgt Geräte wie Access Points, IP-Telefone und Kameras direkt über das Netzwerkkabel — kein separates Netzteil nötig. <strong>Auto-Negotiation</strong> handelt zwischen zwei verbundenen Ports automatisch die höchste gemeinsame Geschwindigkeit und den Duplex-Modus aus. Ein <strong>Uplink-Port</strong> verbindet einen Switch mit einem übergeordneten Gerät (Router, Core-Switch), oft mit höherer Bandbreite als die restlichen Ports.</p>
+</section>
+
+<section id="r-medien">
+<h2>Kabel, Medien & Hardware</h2>
+<table>
+<tr><th>Medium</th><th>Merkmale</th><th>Max. Länge</th><th>Stecker</th></tr>
+<tr><td>Twisted-Pair (UTP/STP)</td><td>Kupfer, verdrillt gegen Störungen; UTP (Unshielded Twisted Pair) ungeschirmt, STP (Shielded) geschirmt</td><td>100 m</td><td>RJ45</td></tr>
+<tr><td>Koaxialkabel</td><td>alt, frühere Bus-Netze</td><td>—</td><td>BNC</td></tr>
+<tr><td>Glasfaser Multimode</td><td>Licht, LED, kürzere Strecken</td><td>bis ~550 m</td><td>SC, LC, ST</td></tr>
+<tr><td>Glasfaser Monomode</td><td>Licht, Laser, große Distanzen</td><td>viele km</td><td>SC, LC</td></tr>
+</table>
+<p><strong>Twisted-Pair-Kategorien:</strong> Cat 5e (Gigabit-Minimum), Cat 6/6a (mehr Reserve, 10G auf kurzer Distanz), Cat 7. Die Verdrillung reduziert <span class="term">Übersprechen (Crosstalk)</span>. Glasfaser ist immun gegen elektromagnetische Störungen, aber teurer und empfindlicher beim Verlegen.</p>
+<div class="callout"><span class="tag">Hardware & MAC</span>Die <strong>Netzwerkkarte (NIC)</strong> verbindet das Gerät physisch mit dem Netz und trägt ab Werk eine weltweit eindeutige <strong>MAC-Adresse</strong> (48 Bit, 6 Hex-Paare). Die ersten 24 Bit (OUI, Organizationally Unique Identifier) kennzeichnen den Hersteller. <strong>ARP</strong> (Address Resolution Protocol) löst im LAN eine IP-Adresse in die zugehörige MAC auf. Kopplungselemente nach Schicht: Hub = L1, Switch = L2, Router = L3.</div>
+</section>
+
+<section id="r-ip">
+<h2>IPv4 & IPv6 (Auffrischung)</h2>
+<table>
+<tr><th></th><th>IPv4</th><th>IPv6</th></tr>
+<tr><td>Länge</td><td>32 Bit</td><td>128 Bit</td></tr>
+<tr><td>Schreibweise</td><td>4 Dezimal-Oktette (192.168.0.1)</td><td>8 Hex-Blöcke (2001:db8::1)</td></tr>
+<tr><td>Adressraum</td><td>~4,3 Mrd.</td><td>2¹²⁸ (praktisch unerschöpflich)</td></tr>
+<tr><td>Loopback</td><td>127.0.0.1</td><td>::1</td></tr>
+<tr><td>Adressauflösung</td><td>ARP</td><td>NDP (Neighbor Discovery Protocol, via ICMPv6)</td></tr>
+</table>
+<ul>
+<li><strong>Private Bereiche (IPv4):</strong> <code>10.0.0.0/8</code>, <code>172.16.0.0/12</code>, <code>192.168.0.0/16</code>.</li>
+<li><strong>APIPA</strong> (Automatic Private IP Addressing) / Link-Local: <code>169.254.0.0/16</code> (automatisch bei fehlendem DHCP).</li>
+<li><strong>CIDR</strong> (Classless Inter-Domain Routing): Präfix-Schreibweise wie <strong>/24</strong> = 24 Bit Netz, Maske <code>255.255.255.0</code>, 254 nutzbare Hosts (256 minus Netz- und Broadcastadresse).</li>
+<li><strong>IPv6-Kürzung:</strong> <code>::</code> ersetzt einmalig eine Folge von Nullblöcken.</li>
+</ul>
+<div class="callout"><span class="tag">IPv6-Autokonfiguration</span><strong>SLAAC</strong> (zustandslos): Der Router kündigt per <strong>Router-Advertisement</strong> ein Präfix an, das Gerät bildet den hinteren Adressteil selbst — kein Server nötig. <strong>DHCPv6</strong> (kann zustandsbehaftet): zentrale Vergabe/Verwaltung wie bei DHCPv4. Beide können auch kombiniert werden.</div>
+</section>
+
+<section id="r-routing">
+<h2>Routing & Switching</h2>
+<p><strong>Switching</strong> arbeitet innerhalb eines Netzes auf Schicht 2 (MAC), <strong>Routing</strong> verbindet Netze auf Schicht 3 (IP).</p>
+<p><span class="term">Switch:</span> lernt aus der Quell-MAC eingehender Frames, welche MAC an welchem Port hängt (MAC-Adresstabelle / CAM-Table, Content Addressable Memory). Unbekannte Ziel-MAC → <strong>Flooding</strong> an alle Ports außer dem Eingangsport. Broadcasts werden innerhalb der Broadcastdomäne geflutet.</p>
+<p><span class="term">Router:</span> entscheidet anhand der Ziel-IP und seiner <strong>Routingtabelle</strong> über den nächsten Hop. Ziele außerhalb des eigenen Netzes gehen ans <strong>Default Gateway</strong>. Router begrenzen die Broadcastdomäne.</p>
+<table>
+<tr><th></th><th>Statisches Routing</th><th>Dynamisches Routing</th></tr>
+<tr><td>Pflege</td><td>manuell eingetragen</td><td>automatisch über Protokolle wie OSPF (Open Shortest Path First) oder RIP (Routing Information Protocol)</td></tr>
+<tr><td>Vorteil</td><td>einfach, vorhersehbar</td><td>passt sich Ausfällen/Änderungen an</td></tr>
+<tr><td>Einsatz</td><td>kleine Netze</td><td>große, dynamische Netze</td></tr>
+</table>
+<div class="callout"><span class="tag">Zustellung</span>Ziel im selben Subnetz → direkt per MAC über den Switch (kein Router). Ziel in fremdem Netz → ans Default Gateway zum Weiterrouten. Hat die Routingtabelle mehrere passende Einträge, gewinnt der spezifischste (<strong>Longest Prefix Match</strong>) — ein /28-Eintrag schlägt einen /24-Eintrag.</div>
+<p><span class="term">VLAN</span> (Virtual Local Area Network): trennt einen physischen Switch logisch in mehrere Broadcastdomänen — z. B. Gäste-WLAN vom Firmennetz, ohne separate Hardware. Zwei VLANs kommunizieren nur über einen Router oder L3-Switch (Inter-VLAN-Routing). Ein <strong>Trunk-Port</strong> transportiert Frames mehrerer VLANs gleichzeitig, markiert nach <strong>IEEE 802.1Q</strong> mit einem 4-Byte-VLAN-Tag (12 Bit VLAN-ID, bis zu 4096 VLANs). Ein normaler (Access-)Port trägt dagegen nur ein VLAN, untagged.</p>
+<p><span class="term">STP</span> (Spanning Tree Protocol): verhindert Switching-Loops in redundant verkabelten Netzen, indem es überzählige Verbindungen blockiert und erst bei Ausfall der aktiven Strecke aktiviert.</p>
+</section>
+
+<section id="r-dnsdhcp">
+<h2>DNS & DHCP im Detail</h2>
+<p><span class="term">DHCP</span> (Dynamic Host Configuration Protocol) vergibt automatisch IP-Konfiguration. Ablauf <strong>DORA</strong>: <code>Discover</code> (Client sucht per Broadcast) → <code>Offer</code> (Server bietet an) → <code>Request</code> (Client fordert an) → <code>Acknowledge</code> (Server bestätigt). Vergeben werden IP, Subnetzmaske, Gateway, DNS-Server und die <strong>Lease-Time</strong>. Ohne DHCP: APIPA (169.254.x.x). Ports: 67 (Server) / 68 (Client). Da DHCP-Broadcasts nicht über Router hinauskommen, leitet ein <strong>DHCP-Relay-Agent</strong> sie als Unicast an einen zentralen Server weiter — ein Server bedient so mehrere Subnetze.</p>
+<p><span class="term">DNS</span> (Domain Name System) löst Namen in IP-Adressen auf. Ablauf: der <strong>Resolver</strong> fragt <strong>Root</strong> → <strong>TLD</strong> (.de, .com) → <strong>autoritativen Server</strong> (verbindliche Zone). Ein rekursiver Resolver erledigt das komplett für den Client; Antworten werden per <strong>TTL</strong> gecacht. Port 53.</p>
+<p>Bei der <strong>rekursiven</strong> Auflösung übernimmt der Resolver die gesamte Kette und liefert dem Client die fertige Antwort. Bei der <strong>iterativen</strong> Auflösung gibt jeder gefragte Server nur einen Verweis auf den nächsten zurück, und der Resolver fragt selbst Schritt für Schritt weiter.</p>
+<table>
+<tr><th>Record</th><th>Bedeutung</th></tr>
+<tr><td>A</td><td>Name → IPv4</td></tr>
+<tr><td>AAAA</td><td>Name → IPv6</td></tr>
+<tr><td>MX</td><td>Mailserver der Domain</td></tr>
+<tr><td>CNAME</td><td>Alias auf anderen Namen</td></tr>
+<tr><td>PTR</td><td>Reverse-Lookup: IP-Adresse → Name</td></tr>
+</table>
+<div class="callout"><span class="tag">DNS-Hierarchie</span>Die <strong>Root-Server</strong> (13 Cluster A–M) bilden die oberste Ebene und kennen nur die Adressen der TLD-Server — sie beantworten keine Domainanfragen direkt, sondern verweisen weiter. Der autoritative Server ist die einzige Quelle, deren Antwort wirklich verbindlich ist; alle anderen liefern nur gecachte Kopien.</div>
+</section>
+
+<section id="r-voip">
+<h2>VoIP</h2>
+<p><span class="term">VoIP</span> (Voice over IP) überträgt Telefonie als Datenpakete über das IP-Netz. Zwei Protokolle wirken zusammen: <strong>SIP</strong> (Session Initiation Protocol) für die <strong>Signalisierung</strong> (Rufauf-/abbau) und <strong>RTP</strong> (Real-Time Transport Protocol) für den <strong>Transport der Sprachdaten</strong> — über <strong>UDP</strong>, weil geringe Verzögerung wichtiger ist als das Nachliefern verlorener Pakete.</p>
+<ul>
+<li><strong>Latenz:</strong> Verzögerung zwischen Sprechen und Hören.</li>
+<li><strong>Jitter:</strong> Schwankung der Paketlaufzeit — ein Jitter-Buffer gleicht sie aus.</li>
+<li><strong>Paketverlust:</strong> führt zu Aussetzern (bei UDP kein Resend).</li>
+<li><strong>QoS</strong> (Quality of Service): priorisiert Sprachpakete; oft eigenes <strong>Voice-VLAN</strong>.</li>
+<li><strong>Codec:</strong> kodiert/komprimiert Sprache (z. B. G.711) — Qualität vs. Bandbreite.</li>
+</ul>
+</section>
+
+<section id="r-krypto">
+<h2>Verschlüsselung & PKI</h2>
+<table>
+<tr><th></th><th>Symmetrisch</th><th>Asymmetrisch</th></tr>
+<tr><td>Schlüssel</td><td>ein gemeinsamer geheimer</td><td>Schlüsselpaar public/private</td></tr>
+<tr><td>Tempo</td><td>schnell</td><td>langsam</td></tr>
+<tr><td>Problem</td><td>sichere Schlüsselverteilung</td><td>rechenintensiv</td></tr>
+<tr><td>Beispiel</td><td>AES (Advanced Encryption Standard)</td><td>RSA (Rivest–Shamir–Adleman), ECC (Elliptic Curve Cryptography)</td></tr>
+</table>
+<p><span class="term">Hybrid:</span> Daten werden symmetrisch mit einem Sitzungsschlüssel verschlüsselt (schnell), der Sitzungsschlüssel wird asymmetrisch mit dem Public Key des Empfängers übertragen (sicher). Genutzt bei HTTPS, VPN, PGP/S-MIME.</p>
+<p><span class="term">Digitale Signatur:</span> Der Absender verschlüsselt den <strong>Hashwert</strong> der Nachricht mit seinem <strong>privaten</strong> Schlüssel. Der Empfänger prüft mit dem <strong>öffentlichen</strong> Schlüssel und vergleicht die Hashes → <strong>Authentizität</strong> und <strong>Integrität</strong>. Ein Hash muss kollisionsresistent und nicht umkehrbar sein; beim Passwort-Hashing verhindert ein zufälliger <strong>Salt</strong> pro Passwort, dass vorberechnete Tabellen (Rainbow-Tables) funktionieren.</p>
+<p><span class="term">Diffie-Hellman:</span> Verfahren, mit dem zwei Parteien über einen unsicheren Kanal einen gemeinsamen geheimen Schlüssel vereinbaren, ohne ihn zu übertragen — Basis vieler Schlüsselaustausch-Verfahren bei HTTPS und VPN.</p>
+<div class="callout"><span class="tag">PKI (Public Key Infrastructure)</span>Ein <strong>Zertifikat</strong> (Standard <strong>X.509</strong>) bindet einen Public Key an eine Identität, signiert von einer <strong>CA</strong>. Hierarchie: Root-CA → <strong>Intermediate-CA</strong> (stellt im Alltag die Endnutzerzertifikate aus, während die Root-CA offline bleibt) → End-Entity. Vertrauen: Clients vertrauen der Root-CA und damit allem, was sie signiert. Ein <strong>Self-Signed Certificate</strong> ist von seiner eigenen CA signiert — ohne externen Vertrauensanker, daher von Browsern standardmäßig nicht akzeptiert. Widerruf wird über <strong>CRL</strong> (Certificate Revocation List) oder <strong>OCSP</strong> (Online Certificate Status Protocol) geprüft.</div>
+</section>
+
+<section id="r-vpn">
+<h2>VPN & IPsec</h2>
+<p>Ein <span class="term">VPN</span> (Virtual Private Network) baut einen verschlüsselten Tunnel durch ein unsicheres Netz (z. B. Internet). <strong>IPsec</strong> arbeitet auf Schicht 3 und bietet Verschlüsselung, Authentifizierung und Integrität. Schlüssel werden über <strong>IKE</strong> (Internet Key Exchange) ausgehandelt — <strong>IKEv2</strong> ist die modernere, stabilere Variante, besonders bei Netzwerkwechseln (Mobilfunk↔WLAN); <strong>ESP</strong> (Encapsulating Security Payload) kapselt und schützt die Nutzdaten.</p>
+<p>Neben IPsec gibt es weitere VPN-Protokolle: <strong>L2TP</strong> (Layer 2 Tunneling Protocol) baut den Tunnel, liefert aber selbst keine Verschlüsselung — daher meist als L2TP/IPsec kombiniert. <strong>OpenVPN</strong> ist ein Open-Source-Protokoll auf TLS-Basis, plattformunabhängig und flexibel konfigurierbar.</p>
+<table>
+<tr><th>Modus</th><th>Was wird geschützt</th><th>Einsatz</th></tr>
+<tr><td>Transport</td><td>nur die Nutzdaten (Payload)</td><td>Host-zu-Host / Ende-zu-Ende</td></tr>
+<tr><td>Tunnel</td><td>ganzes IP-Paket + neuer Header</td><td>Site-to-Site (Gateway↔Gateway)</td></tr>
+</table>
+<p><strong>VPN-Typen:</strong> Remote Access (einzelner Client ins Firmennetz), Site-to-Site/LAN-to-LAN (zwei Netze), End-to-End (zwei Endgeräte direkt), Site-to-End (z. B. Homeoffice ↔ Firmenrouter).</p>
+<div class="callout"><span class="tag">Tunneling & RDP</span><strong>Split Tunneling:</strong> nur Firmenverkehr durch den Tunnel, Rest direkt ins Internet (entlastet das VPN, weniger Kontrolle). Oft kombiniert mit <strong>Split DNS</strong>: interne Namen werden über den Tunnel aufgelöst, externe normal. <strong>Full/Closed Tunneling:</strong> aller Verkehr durch den Tunnel (mehr Kontrolle, mehr Last). Ein <strong>Kill Switch</strong> blockiert den Internetzugriff automatisch, sobald die VPN-Verbindung abbricht — verhindert unbemerkten Klartextverkehr. <strong>RDP</strong> (Remote Desktop Protocol, Port 3389) ermöglicht grafische Fernsteuerung; ein <strong>RD-Gateway</strong> ist der gesicherte Zugangspunkt von außen.</div>
+</section>
+
+<section id="r-security">
+<h2>IT-Sicherheit Grundlagen</h2>
+<p>Schutzziele (<span class="term">CIA</span>): Vertraulichkeit, Integrität, Verfügbarkeit. <strong>Authentifizierung</strong> = Identität nachweisen; <strong>Autorisierung</strong> = Rechte festlegen. <strong>2FA</strong> kombiniert zwei unabhängige Faktoren.</p>
+<table>
+<tr><th>Mechanismus</th><th>Funktion</th></tr>
+<tr><td>Paketfilter</td><td>prüft einzelne Pakete nach IP/Port/Protokoll</td></tr>
+<tr><td>Stateful Firewall</td><td>verfolgt Verbindungszustände, lässt Antworten gezielt zu</td></tr>
+<tr><td>DMZ (Demilitarized Zone)</td><td>abgetrennter Bereich für öffentlich erreichbare Server</td></tr>
+<tr><td>Segmentierung (VLAN, Virtual Local Area Network)</td><td>trennt Bereiche, dämmt Angriffe ein</td></tr>
+<tr><td>IDS / IPS (Intrusion Detection / Prevention System)</td><td>erkennt (IDS) bzw. blockiert (IPS) verdächtige Aktivität</td></tr>
+</table>
+<div class="callout"><span class="tag">Achtung NAT</span><strong>NAT</strong> (Network Address Translation) übersetzt private in öffentliche Adressen. Es ist <strong>kein</strong> Sicherheitsmechanismus — dass interne Adressen verborgen werden, ist nur ein Nebeneffekt, kein echter Schutz. Weitere Prinzipien: Least Privilege (minimale Rechte), <strong>Need to Know</strong> (Zugriff nur auf wirklich nötige Informationen), Whitelist (default deny) statt Blacklist, regelmäßige Updates, Defense in Depth (mehrschichtig).</div>
+<p><span class="term">Typische Angriffsformen:</span> <strong>Phishing</strong> (Social Engineering per Mail/Website, um Zugangsdaten zu stehlen), <strong>Ransomware</strong> (verschlüsselt Daten und fordert Lösegeld), <strong>Zero-Day-Exploit</strong> (nutzt eine noch nicht gepatchte, unbekannte Schwachstelle), <strong>DoS/DDoS</strong> (Überlastung eines Dienstes, verteilt über viele Systeme).</p>
+<p><span class="term">Gegenmaßnahmen:</span> Ein <strong>Honeypot</strong> ist ein absichtlich verwundbares Lockvogel-System, das Angreifer ablenkt und ihr Vorgehen sichtbar macht. Ein <strong>Penetrationstest</strong> (Pentest) simuliert autorisiert echte Angriffstechniken, um Schwachstellen vor echten Angreifern zu finden.</p>
+</section>
+
+<section id="r-wlan">
+<h2>WLAN vertieft</h2>
+<p><span class="term">SSID</span> = Netzname, <strong>Access Point</strong> stellt das WLAN bereit (IEEE 802.11). Modi: <strong>Infrastruktur</strong> (über AP) vs. <strong>Ad-hoc</strong> (Geräte direkt). Bänder: 2,4 GHz (Reichweite) · 5 GHz (Tempo) · 6 GHz (Wi-Fi 6E).</p>
+<table>
+<tr><th>Sicherheit</th><th>Bewertung</th></tr>
+<tr><td>WPA2 / WPA3 (Wi-Fi Protected Access)</td><td>Mindeststandard / aktuell (WPA3 schützt besser gegen Brute-Force)</td></tr>
+<tr><td>Personal (PSK, Pre-Shared Key)</td><td>ein gemeinsames Passwort — Heim/kleine Netze</td></tr>
+<tr><td>Enterprise (RADIUS, Remote Authentication Dial-In User Service)</td><td>individuelle Anmeldung je Nutzer — Firmen</td></tr>
+<tr><td>MAC-Filter</td><td>schwach (MAC fälschbar)</td></tr>
+<tr><td>versteckte SSID</td><td>schwach (auslesbar)</td></tr>
+</table>
+<div class="callout"><span class="tag">Planung</span>Gäste-WLAN per <strong>VLAN</strong> vom Firmennetz trennen. <strong>Kanalwahl</strong> besonders bei 2,4 GHz wichtig — nur die Kanäle 1, 6 und 11 überlappen sich in Europa nicht. <strong>Mesh</strong>: mehrere APs, gemeinsame SSID, nahtloses <strong>Roaming</strong> (mit <strong>802.11r</strong> ohne erneute Anmeldung). Ein <strong>Wireless Controller</strong> verwaltet mehrere APs zentral. <strong>Band Steering</strong> lenkt Dual-Band-Geräte automatisch aufs schnellere 5-GHz-Band. AP zentral und hoch platzieren.</div>
+<p><strong>Wi-Fi 6</strong> (IEEE <strong>802.11ax</strong>) ist der aktuelle Standard nach Wi-Fi 5 (802.11ac) und Wi-Fi 4 (802.11n). <strong>WPA3-Personal</strong> nutzt statt PSK das Verfahren <strong>SAE</strong> (Simultaneous Authentication of Equals) — macht Offline-Brute-Force-Angriffe auf das Passwort praktisch unmöglich.</p>
+<div class="callout"><span class="tag">Schwachstellen</span><strong>WPS</strong> (Wi-Fi Protected Setup) vereinfacht die Einrichtung, ist aber durch PIN-Brute-Force angreifbar und sollte deaktiviert werden. Das <strong>Hidden-Node-Problem</strong>: zwei Clients hören sich gegenseitig nicht und senden gleichzeitig zum AP — es kollidiert, obwohl beide CSMA/CA korrekt anwenden.</div>
+</section>
+
+</div>
+<!-- ============ VIEW: BIBLIOTHEK ============ -->
+<div class="view" id="view-lib">
+  <div class="lib-head">
+    <h2>Bibliothek</h2>
+    <p class="lib-sub">IT-Abkürzungen und Begriffe, alphabetisch. Abkürzung ins Suchfeld tippen — die Liste springt direkt zum Treffer.</p>
+    <div class="lib-searchrow">
+      <input type="text" id="libSearch" placeholder="Abkürzung suchen … z. B. DHCP" autocomplete="off">
+      <span class="lib-count" id="libCount"></span>
+    </div>
+  </div>
+  <div id="libList"></div>
+</div>
+<!-- ============ VIEW: QUIZ ============ -->
+<div class="view" id="view-quiz">
+
+  <!-- Kategorieauswahl -->
+  <div class="selector" id="selector">
+    <h2>Multiple Choice</h2>
+    <p class="sel-sub">Wähle bis zu 3 Kategorien und den Umfang: 15 oder 30 Fragen pro Kategorie (rotierend, ohne Wiederholung bis der Pool durch ist) oder „Alle" für den kompletten Pool. Fragen- und Antwortreihenfolge werden bei jedem Start neu gemischt. Falsch beantwortete Fragen werden automatisch als „Wackelkandidaten" gesammelt und lassen sich unten gezielt wiederholen. Diese Ergebnisse werden nur lokal im jeweiligen Browser und auf dem jeweiligen Gerät gespeichert – wer das Gerät oder den Browser wechselt, beginnt mit einer leeren Sammlung.</p>
+    <div class="cat-grid" id="catGrid"></div>
+    <div class="scope-row">
+      <span class="scope-label">Fragen pro Kategorie:</span>
+      <div class="scope-btns">
+        <button type="button" class="scope-btn active" data-scope="15">15</button>
+        <button type="button" class="scope-btn" data-scope="30">30</button>
+        <button type="button" class="scope-btn" data-scope="all">Alle</button>
+      </div>
+    </div>
+    <div class="sel-bar">
+      <button class="start-btn" id="startBtn" disabled>Quiz starten</button>
+      <span class="sel-hint" id="selHint">Keine Kategorie gewählt</span>
+    </div>
+    <div class="wrong-box" id="wrongBox">
+      <div class="wrong-info">
+        <span class="wrong-title">Wackelkandidaten</span>
+        <span class="wrong-sub" id="wrongSub">Noch keine falsch beantworteten Fragen gesammelt.</span>
+      </div>
+      <div class="wrong-actions">
+        <button class="wrong-start" id="wrongStartBtn" disabled>Wackelkandidaten üben</button>
+        <button class="wrong-reset" id="wrongResetBtn" disabled>Zurücksetzen</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Laufendes Quiz -->
+  <div class="runner" id="runner">
+    <div class="run-head">
+      <h2 id="runTitle">Quiz</h2>
+      <span class="run-meta" id="runMeta"></span>
+    </div>
+    <div class="progress"><div class="progress-fill" id="progressFill"></div></div>
+    <div id="questionArea"></div>
+    <div style="text-align:center;margin-top:20px">
+      <button class="btn-sec" id="abortBtn">Abbrechen &amp; zurück zur Auswahl</button>
+    </div>
+  </div>
+
+  <!-- Ergebnis -->
+  <div class="result" id="result">
+    <div class="score" id="resScore">0%</div>
+    <div class="verdict" id="resVerdict"></div>
+    <div class="detail" id="resDetail"></div>
+    <div class="result-actions">
+      <button class="start-btn" id="againBtn">Neue Runde (rotiert)</button>
+      <button class="btn-sec" id="backBtn">Zurück zur Auswahl</button>
+    </div>
+  </div>
+
+</div>
+</div><!-- /.wrap -->
+
+<footer><div class="wrap">
+NEINT1 Symbiose · IHK-Lernscript · <span id="footCats">–</span> Kategorien · <span id="footQs">–</span> Fragen · randomisiert · Rotation ohne Wiederholung<br>
+Fachinformatiker · Aura
+</div></footer>
+<script src="app.js"></script>
+</body>
+</html>
