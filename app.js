@@ -167,15 +167,15 @@ const POOLS = {
       "ok": true
      },
      {
-      "t": "Zur Verschlüsselung der Verbindung",
+      "t": "Damit die Verbindung automatisch verschlüsselt wird",
       "ok": false
      },
      {
-      "t": "Um die Bandbreite zu erhöhen",
+      "t": "Damit die verfügbare Bandbreite erhöht wird",
       "ok": false
      },
      {
-      "t": "Um die IP zu verschleiern",
+      "t": "Damit die eigene IP-Adresse verschleiert wird",
       "ok": false
      }
     ],
@@ -299,11 +299,11 @@ const POOLS = {
       "ok": true
      },
      {
-      "t": "Quellport",
+      "t": "Quellport / Absenderport",
       "ok": false
      },
      {
-      "t": "Ephemeral Port",
+      "t": "Port 16567",
       "ok": false
      },
      {
@@ -383,19 +383,19 @@ const POOLS = {
     "q": "Welche Kombination beschreibt eine vollständige Ende-zu-Ende-Verbindung?",
     "o": [
      {
-      "t": "Quell-IP:Quellport ↔ Ziel-IP:Zielport",
+      "t": "Quell-IP mit Quellport und Ziel-IP mit Zielport",
       "ok": true
      },
      {
-      "t": "Nur Quell- und Ziel-IP",
+      "t": "Nur die Quell-IP und die Ziel-IP ohne Ports",
       "ok": false
      },
      {
-      "t": "Nur Quell- und Zielport",
+      "t": "Nur der Quellport und der Zielport ohne IPs",
       "ok": false
      },
      {
-      "t": "MAC-Adresse und Port",
+      "t": "Die MAC-Adresse zusammen mit einer Portnummer",
       "ok": false
      }
     ],
@@ -431,15 +431,15 @@ const POOLS = {
       "ok": true
      },
      {
-      "t": "Zur Fehlerkorrektur der Nutzdaten",
+      "t": "Zur Erkennung und Korrektur von Übertragungsfehlern",
       "ok": false
      },
      {
-      "t": "Zur Kompression der Daten",
+      "t": "Zur Kompression der übertragenen Nutzdaten",
       "ok": false
      },
      {
-      "t": "Zur Vergabe der MAC-Adresse",
+      "t": "Zur automatischen Vergabe der MAC-Adresse",
       "ok": false
      }
     ],
@@ -449,7 +449,7 @@ const POOLS = {
     "q": "Ein Client verbindet sich zu einem internen Mailserver-Webinterface auf Port 8443. Welchem Portbereich entspricht das?",
     "o": [
      {
-      "t": "Registered Ports (1024–49151)",
+      "t": "Registered Ports",
       "ok": true
      },
      {
@@ -461,7 +461,7 @@ const POOLS = {
       "ok": false
      },
      {
-      "t": "Reserved Ports",
+      "t": "System-reservierte Ports",
       "ok": false
      }
     ],
@@ -471,7 +471,7 @@ const POOLS = {
     "q": "Ein Server lauscht auf Port 8080. In welchem Bereich liegt dieser Port?",
     "o": [
      {
-      "t": "Registered Ports (1024–49151)",
+      "t": "Registered Ports",
       "ok": true
      },
      {
@@ -483,11 +483,11 @@ const POOLS = {
       "ok": false
      },
      {
-      "t": "Reserviert",
+      "t": "Broadcast-Ports",
       "ok": false
      }
     ],
-    "e": "8080 liegt im Registered-Bereich — häufig als alternativer HTTP-Port genutzt."
+    "e": "8080 liegt im Registered-Bereich (zwischen 1024 und 49151) — häufig als alternativer HTTP-Port genutzt."
    },
    {
     "q": "Welcher Port wird für einen ausgehenden HTTPS-Request typischerweise als Quellport genutzt?",
@@ -497,15 +497,15 @@ const POOLS = {
       "ok": true
      },
      {
-      "t": "Immer Port 443",
+      "t": "Fest Port 443 wie beim Zielport (443)",
       "ok": false
      },
      {
-      "t": "Immer Port 80",
+      "t": "Fest Port 80 wie bei unverschlüsseltem HTTP (80)",
       "ok": false
      },
      {
-      "t": "Port 22",
+      "t": "Fest Port 22 wie bei einer SSH-Sitzung (22)",
       "ok": false
      }
     ],
@@ -581,19 +581,19 @@ const POOLS = {
     "q": "Wie nennt man Ports, die vom Betriebssystem temporär für ausgehende Verbindungen vergeben werden?",
     "o": [
      {
-      "t": "Ephemeral Ports / Dynamic Ports",
+      "t": "Ephemeral bzw. Dynamic Ports (49152–65535)",
       "ok": true
      },
      {
-      "t": "Well-Known Ports",
+      "t": "Well-Known Ports für Standarddienste (0–1023)",
       "ok": false
      },
      {
-      "t": "Registered Ports",
+      "t": "Registered Ports für bekannte Software (1024–49151)",
       "ok": false
      },
      {
-      "t": "Reserved Ports",
+      "t": "Reservierte Ports ohne feste Zuordnung (0–20)",
       "ok": false
      }
     ],
@@ -625,19 +625,19 @@ const POOLS = {
     "q": "Ein Paket kommt an Port 443 eines Servers an. Was ist die wahrscheinlichste Anwendung?",
     "o": [
      {
-      "t": "Verschlüsselter Webserver (HTTPS)",
+      "t": "Ein verschlüsselter Webserver (HTTPS)",
       "ok": true
      },
      {
-      "t": "E-Mail-Versand",
+      "t": "Ein Mailserver für den Versand (SMTP)",
       "ok": false
      },
      {
-      "t": "Datenbankzugriff",
+      "t": "Ein Datenbankdienst für Abfragen (SQL)",
       "ok": false
      },
      {
-      "t": "Netzwerküberwachung",
+      "t": "Ein Dienst zur Netzwerküberwachung (SNMP)",
       "ok": false
      }
     ],
@@ -651,15 +651,15 @@ const POOLS = {
       "ok": true
      },
      {
-      "t": "Über verschiedene Zielports",
+      "t": "Über jeweils verschiedene Zielports auf dem Server",
       "ok": false
      },
      {
-      "t": "Über die MAC-Adressen",
+      "t": "Über die Ziel-IP und MAC-Adressen der einzelnen Clients",
       "ok": false
      },
      {
-      "t": "Gar nicht — das ist nicht möglich",
+      "t": "Über getrennte physische Netzwerkkabel je Client",
       "ok": false
      }
     ],
@@ -832,15 +832,15 @@ const POOLS = {
       "ok": true
      },
      {
-      "t": "53 / 54",
+      "t": "53 (Anfrage) / 54 (Antwort)",
       "ok": false
      },
      {
-      "t": "80 / 443",
+      "t": "80 (Klartext) / 443 (verschlüsselt)",
       "ok": false
      },
      {
-      "t": "20 / 21",
+      "t": "20 (Daten) / 21 (Steuerung)",
       "ok": false
      }
     ],
@@ -916,19 +916,19 @@ const POOLS = {
     "q": "Was unterscheidet POP3 von IMAP grundlegend?",
     "o": [
      {
-      "t": "POP3 lädt herunter/löscht, IMAP lässt Mails auf dem Server",
+      "t": "POP3 lädt herunter und löscht, IMAP belässt Mails am Server",
       "ok": true
      },
      {
-      "t": "POP3 ist immer verschlüsselt",
+      "t": "POP3 ist grundsätzlich verschlüsselt, IMAP nicht",
       "ok": false
      },
      {
-      "t": "IMAP nutzt UDP",
+      "t": "IMAP nutzt UDP, POP3 nutzt TCP",
       "ok": false
      },
      {
-      "t": "POP3 ist neuer als IMAP",
+      "t": "POP3 ist der neuere Nachfolgestandard von IMAP",
       "ok": false
      }
     ],
@@ -964,15 +964,15 @@ const POOLS = {
       "ok": true
      },
      {
-      "t": "22 / 23",
+      "t": "22 (Sitzung) / 23 (Terminal)",
       "ok": false
      },
      {
-      "t": "80 / 443",
+      "t": "80 (Web) / 443 (Web-TLS)",
       "ok": false
      },
      {
-      "t": "67 / 68",
+      "t": "67 (Server) / 68 (Client)",
       "ok": false
      }
     ],
@@ -1096,15 +1096,15 @@ const POOLS = {
       "ok": true
      },
      {
-      "t": "POP3S",
+      "t": "POP3S (verschlüsseltes POP3)",
       "ok": false
      },
      {
-      "t": "SMTPS",
+      "t": "SMTPS (verschlüsselter Mailversand)",
       "ok": false
      },
      {
-      "t": "HTTPS",
+      "t": "HTTPS (verschlüsseltes Web)",
       "ok": false
      }
     ],
@@ -1184,15 +1184,15 @@ const POOLS = {
       "ok": true
      },
      {
-      "t": "LDAP-Authentifizierung",
+      "t": "Authentifizierung über LDAP (Verzeichnisdienst)",
       "ok": false
      },
      {
-      "t": "Mailversand",
+      "t": "Versand von E-Mails (Mailtransport)",
       "ok": false
      },
      {
-      "t": "DNS-Anfragen",
+      "t": "Auflösung von Namen (DNS-Anfragen)",
       "ok": false
      }
     ],
@@ -1334,19 +1334,19 @@ const POOLS = {
     "q": "Was ist der Unterschied zwischen SMTP (25) und Submission (587)?",
     "o": [
      {
-      "t": "25 für Server-to-Server, 587 für Client-to-Server mit Authentifizierung",
+      "t": "25 läuft zwischen Servern, 587 vom Client mit Login",
       "ok": true
      },
      {
-      "t": "Beide sind identisch",
+      "t": "Beide Ports sind funktional völlig identisch",
       "ok": false
      },
      {
-      "t": "587 ist unverschlüsselt, 25 nicht",
+      "t": "587 ist unverschlüsselt, 25 immer verschlüsselt",
       "ok": false
      },
      {
-      "t": "25 für Empfang, 587 für Versand",
+      "t": "25 dient dem Empfang, 587 nur dem Versand",
       "ok": false
      }
     ],
@@ -1378,19 +1378,19 @@ const POOLS = {
     "q": "Was läuft auf Port 445?",
     "o": [
      {
-      "t": "SMB (Server Message Block / Windows-Dateifreigabe)",
+      "t": "SMB (Windows-Datei- und Druckerfreigabe)",
       "ok": true
      },
      {
-      "t": "LDAP",
+      "t": "LDAP (Verzeichnis- und Benutzerdienst)",
       "ok": false
      },
      {
-      "t": "RDP",
+      "t": "RDP (grafische Fernsteuerung)",
       "ok": false
      },
      {
-      "t": "FTP",
+      "t": "FTP (klassische Dateiübertragung)",
       "ok": false
      }
     ],
@@ -1448,15 +1448,15 @@ const POOLS = {
       "ok": true
      },
      {
-      "t": "DNS",
+      "t": "DNS (Namensauflösung über 53)",
       "ok": false
      },
      {
-      "t": "SNMP",
+      "t": "SNMP (Überwachung über 161)",
       "ok": false
      },
      {
-      "t": "NTP",
+      "t": "NTP (Zeitsync über 123)",
       "ok": false
      }
     ],
@@ -1466,19 +1466,19 @@ const POOLS = {
     "q": "Was ist der Unterschied zwischen POP3 und IMAP?",
     "o": [
      {
-      "t": "POP3 lädt herunter und löscht, IMAP synchronisiert und lässt Mails am Server",
+      "t": "POP3 lädt herunter und löscht, IMAP synchronisiert am Server",
       "ok": true
      },
      {
-      "t": "POP3 ist verschlüsselt, IMAP nicht",
+      "t": "POP3 ist verschlüsselt, IMAP grundsätzlich nicht",
       "ok": false
      },
      {
-      "t": "IMAP nutzt UDP",
+      "t": "IMAP nutzt UDP statt TCP für den Abruf",
       "ok": false
      },
      {
-      "t": "POP3 ist neuer",
+      "t": "POP3 ist der modernere Standard von beiden",
       "ok": false
      }
     ],
@@ -1563,15 +1563,15 @@ const POOLS = {
       "ok": true
      },
      {
-      "t": "Demultiplexer",
+      "t": "Demultiplexer (DEMUX)",
       "ok": false
      },
      {
-      "t": "Router",
+      "t": "Router (Vermittlung)",
       "ok": false
      },
      {
-      "t": "Switch",
+      "t": "Switch (Sicherung)",
       "ok": false
      }
     ],
@@ -1585,15 +1585,15 @@ const POOLS = {
       "ok": true
      },
      {
-      "t": "Multiplexer",
+      "t": "Multiplexer (MUX)",
       "ok": false
      },
      {
-      "t": "Repeater",
+      "t": "Repeater (Signalverstärker)",
       "ok": false
      },
      {
-      "t": "Terminator",
+      "t": "Terminator (Busabschluss)",
       "ok": false
      }
     ],
@@ -1673,15 +1673,15 @@ const POOLS = {
       "ok": true
      },
      {
-      "t": "Zeitmultiplex",
+      "t": "Zeitmultiplex (TDM)",
       "ok": false
      },
      {
-      "t": "Codemultiplex",
+      "t": "Codemultiplex (CDM)",
       "ok": false
      },
      {
-      "t": "Raummultiplex",
+      "t": "Frequenzmultiplex (FDM)",
       "ok": false
      }
     ],
@@ -1739,15 +1739,15 @@ const POOLS = {
       "ok": true
      },
      {
-      "t": "Von Port 443 an einen Zufallsport",
+      "t": "Von Port 443 des Clients an einen Zufallsport",
       "ok": false
      },
      {
-      "t": "Von Port 80 an Port 80",
+      "t": "Von Port 80 des Clients an Port 80 des Servers",
       "ok": false
      },
      {
-      "t": "Ohne Ports, nur über IP",
+      "t": "Ganz ohne Ports, ausschließlich über die IP",
       "ok": false
      }
     ],
@@ -2224,19 +2224,19 @@ const POOLS = {
     "q": "Wie wird bei TCP eine Verbindung sauber beendet?",
     "o": [
      {
-      "t": "Über FIN/ACK-Sequenz (Verbindungsabbau)",
+      "t": "Über eine FIN/ACK-Sequenz (geordneter Abbau)",
       "ok": true
      },
      {
-      "t": "Durch Ziehen des Netzsteckers",
+      "t": "Durch physisches Ziehen des Netzsteckers",
       "ok": false
      },
      {
-      "t": "Automatisch nach 60 Sekunden",
+      "t": "Automatisch nach genau 60 Sekunden",
       "ok": false
      },
      {
-      "t": "Durch einen Broadcast",
+      "t": "Durch einen Broadcast an alle Hosts",
       "ok": false
      }
     ],
@@ -2444,19 +2444,19 @@ const POOLS = {
     "q": "Welcher Vorteil kennzeichnet QUIC gegenüber klassischem TCP+TLS?",
     "o": [
      {
-      "t": "Schnellerer Verbindungsaufbau (weniger Roundtrips)",
+      "t": "Schnellerer Verbindungsaufbau mit weniger Roundtrips",
       "ok": true
      },
      {
-      "t": "Es ist unverschlüsselt und daher schneller",
+      "t": "Es arbeitet unverschlüsselt und ist deshalb schneller",
       "ok": false
      },
      {
-      "t": "Es verzichtet auf Ports",
+      "t": "Es verzichtet vollständig auf Portnummern",
       "ok": false
      },
      {
-      "t": "Es nutzt keine IP-Adressen",
+      "t": "Es kommt gänzlich ohne IP-Adressen aus",
       "ok": false
      }
     ],
@@ -2999,19 +2999,19 @@ const POOLS = {
     "q": "Welches Header-Feld erkennt Übertragungsfehler?",
     "o": [
      {
-      "t": "Checksum (Prüfsumme)",
+      "t": "Die Prüfsumme (Checksum)",
       "ok": true
      },
      {
-      "t": "TTL",
+      "t": "Die Restlebenszeit (TTL)",
       "ok": false
      },
      {
-      "t": "Sequence Number",
+      "t": "Die Sequenznummer (Sequence Number)",
       "ok": false
      },
      {
-      "t": "Portnummer",
+      "t": "Die Portnummer (Port)",
       "ok": false
      }
     ],
@@ -3021,19 +3021,19 @@ const POOLS = {
     "q": "Welchen Startwert hat eine TTL häufig?",
     "o": [
      {
-      "t": "64 (oder 128)",
+      "t": "64 oder 128 (je nach Betriebssystem)",
       "ok": true
      },
      {
-      "t": "1",
+      "t": "1 (verfällt sofort am ersten Router)",
       "ok": false
      },
      {
-      "t": "1024",
+      "t": "1024 (wie ein Registered Port)",
       "ok": false
      },
      {
-      "t": "65535",
+      "t": "65535 (der Maximalwert eines Ports)",
       "ok": false
      }
     ],
@@ -3263,19 +3263,19 @@ const POOLS = {
     "q": "Was beschreibt das 'Protokollfeld' im IP-Header?",
     "o": [
      {
-      "t": "Welches Transportprotokoll die Payload enthält (z. B. 6=TCP, 17=UDP)",
+      "t": "Welches Transportprotokoll die Payload enthält (6=TCP, 17=UDP)",
       "ok": true
      },
      {
-      "t": "Die Versionsnummer von IP",
+      "t": "Die Versionsnummer des IP-Protokolls (4 oder 6)",
       "ok": false
      },
      {
-      "t": "Die TTL",
+      "t": "Die verbleibende Lebenszeit des Pakets (TTL)",
       "ok": false
      },
      {
-      "t": "Die Länge des Headers",
+      "t": "Die Gesamtlänge des IP-Headers in Byte",
       "ok": false
      }
     ],
@@ -3399,15 +3399,15 @@ const POOLS = {
       "ok": true
      },
      {
-      "t": "traceroute",
+      "t": "traceroute (verfolgt den Pfad über Hops)",
       "ok": false
      },
      {
-      "t": "nslookup",
+      "t": "nslookup (fragt DNS-Einträge ab)",
       "ok": false
      },
      {
-      "t": "netstat",
+      "t": "netstat (zeigt offene Verbindungen)",
       "ok": false
      }
     ],
@@ -3470,15 +3470,15 @@ const POOLS = {
       "ok": true
      },
      {
-      "t": "IP-Adressierung und Routing",
+      "t": "Logische Adressierung und Wegfindung zwischen Netzen",
       "ok": false
      },
      {
-      "t": "Verschlüsselung",
+      "t": "Verschlüsselung und Kompression der Nutzdaten",
       "ok": false
      },
      {
-      "t": "Sitzungsaufbau",
+      "t": "Auf- und Abbau von Sitzungen zwischen Anwendungen",
       "ok": false
      }
     ],
@@ -3488,19 +3488,19 @@ const POOLS = {
     "q": "Was läuft auf Schicht 2 (Sicherungsschicht / Data Link)?",
     "o": [
      {
-      "t": "MAC-Adressierung, Frames, Fehlererkennung im lokalen Netz",
+      "t": "MAC-Adressierung und Fehlererkennung im lokalen Netz",
       "ok": true
      },
      {
-      "t": "Routing zwischen Netzen",
+      "t": "Wegfindung und Routing zwischen verschiedenen Netzen",
       "ok": false
      },
      {
-      "t": "Portzuordnung",
+      "t": "Zuordnung von Ports zu Anwendungen",
       "ok": false
      },
      {
-      "t": "Datenkompression",
+      "t": "Kompression und Codierung der Darstellung",
       "ok": false
      }
     ],
@@ -3514,15 +3514,15 @@ const POOLS = {
       "ok": true
      },
      {
-      "t": "Physische Bitübertragung",
+      "t": "Übertragung einzelner Bits über das physische Medium",
       "ok": false
      },
      {
-      "t": "MAC-Adressierung",
+      "t": "MAC-Adressierung und Rahmenbildung im LAN",
       "ok": false
      },
      {
-      "t": "Verschlüsselung der Darstellung",
+      "t": "Verschlüsselung und Formatierung der Darstellung",
       "ok": false
      }
     ],
@@ -3532,19 +3532,19 @@ const POOLS = {
     "q": "Was läuft auf Schicht 4 (Transportschicht / Transport)?",
     "o": [
      {
-      "t": "Ende-zu-Ende, Ports, TCP/UDP, Segmentierung",
+      "t": "Ende-zu-Ende-Verbindung, Ports, Segmentierung (TCP/UDP)",
       "ok": true
      },
      {
-      "t": "Bitübertragung",
+      "t": "Übertragung roher Bits über Kupfer oder Glasfaser",
       "ok": false
      },
      {
-      "t": "Sitzungssteuerung",
+      "t": "Auf- und Abbau von Kommunikationssitzungen",
       "ok": false
      },
      {
-      "t": "MAC-Adressen",
+      "t": "Physische MAC-Adressierung im lokalen Segment",
       "ok": false
      }
     ],
@@ -3554,19 +3554,19 @@ const POOLS = {
     "q": "Was läuft auf Schicht 5 (Sitzungsschicht / Session)?",
     "o": [
      {
-      "t": "Auf-/Abbau und Steuerung von Sitzungen/Dialogen",
+      "t": "Auf-/Abbau und Steuerung von Sitzungen und Dialogen",
       "ok": true
      },
      {
-      "t": "Routing",
+      "t": "Wegfindung und Routing zwischen Netzen",
       "ok": false
      },
      {
-      "t": "Bitübertragung",
+      "t": "Übertragung einzelner Bits über das Medium",
       "ok": false
      },
      {
-      "t": "MAC-Adressierung",
+      "t": "MAC-Adressierung und Rahmenprüfung im LAN",
       "ok": false
      }
     ],
@@ -3576,19 +3576,19 @@ const POOLS = {
     "q": "Was läuft auf Schicht 6 (Darstellungsschicht / Presentation)?",
     "o": [
      {
-      "t": "Datenformat, Codierung, Verschlüsselung, Kompression",
+      "t": "Datenformat, Codierung, Verschlüsselung und Kompression",
       "ok": true
      },
      {
-      "t": "Routing",
+      "t": "Wegfindung und logische IP-Adressierung",
       "ok": false
      },
      {
-      "t": "Portzuordnung",
+      "t": "Zuordnung von Ports zu laufenden Anwendungen",
       "ok": false
      },
      {
-      "t": "Bitübertragung",
+      "t": "Übertragung roher Bits über das physische Medium",
       "ok": false
      }
     ],
@@ -3602,15 +3602,15 @@ const POOLS = {
       "ok": true
      },
      {
-      "t": "MAC-Adressierung",
+      "t": "MAC-Adressierung und Fehlerprüfung im lokalen Netz",
       "ok": false
      },
      {
-      "t": "Physische Übertragung",
+      "t": "Physische Übertragung einzelner Bits über das Medium",
       "ok": false
      },
      {
-      "t": "Segmentierung",
+      "t": "Segmentierung und Portzuordnung im Transport",
       "ok": false
      }
     ],
@@ -3624,15 +3624,15 @@ const POOLS = {
       "ok": true
      },
      {
-      "t": "Schicht 1",
+      "t": "Schicht 1 (Bitübertragung)",
       "ok": false
      },
      {
-      "t": "Schicht 2",
+      "t": "Schicht 2 (Sicherung)",
       "ok": false
      },
      {
-      "t": "Schicht 4",
+      "t": "Schicht 4 (Transport)",
       "ok": false
      }
     ],
@@ -3646,15 +3646,15 @@ const POOLS = {
       "ok": true
      },
      {
-      "t": "Schicht 1",
+      "t": "Schicht 1 (Bitübertragung)",
       "ok": false
      },
      {
-      "t": "Schicht 3",
+      "t": "Schicht 3 (Vermittlung)",
       "ok": false
      },
      {
-      "t": "Schicht 7",
+      "t": "Schicht 7 (Anwendung)",
       "ok": false
      }
     ],
@@ -3668,15 +3668,15 @@ const POOLS = {
       "ok": true
      },
      {
-      "t": "Schicht 2",
+      "t": "Schicht 2 (Sicherung)",
       "ok": false
      },
      {
-      "t": "Schicht 3",
+      "t": "Schicht 3 (Vermittlung)",
       "ok": false
      },
      {
-      "t": "Schicht 4",
+      "t": "Schicht 4 (Transport)",
       "ok": false
      }
     ],
@@ -3690,15 +3690,15 @@ const POOLS = {
       "ok": true
      },
      {
-      "t": "Schicht 2",
+      "t": "Schicht 2 (Sicherung)",
       "ok": false
      },
      {
-      "t": "Schicht 3",
+      "t": "Schicht 3 (Vermittlung)",
       "ok": false
      },
      {
-      "t": "Schicht 7",
+      "t": "Schicht 7 (Anwendung)",
       "ok": false
      }
     ],
@@ -3796,19 +3796,19 @@ const POOLS = {
     "q": "Auf welcher Schicht liegt IP?",
     "o": [
      {
-      "t": "Schicht 3",
+      "t": "Schicht 3 (Vermittlung)",
       "ok": true
      },
      {
-      "t": "Schicht 2",
+      "t": "Schicht 2 (Sicherung)",
       "ok": false
      },
      {
-      "t": "Schicht 4",
+      "t": "Schicht 4 (Transport)",
       "ok": false
      },
      {
-      "t": "Schicht 1",
+      "t": "Schicht 1 (Bitübertragung)",
       "ok": false
      }
     ],
@@ -3818,19 +3818,19 @@ const POOLS = {
     "q": "Auf welcher Schicht liegen TCP und UDP?",
     "o": [
      {
-      "t": "Schicht 4",
+      "t": "Schicht 4 (Transport)",
       "ok": true
      },
      {
-      "t": "Schicht 3",
+      "t": "Schicht 3 (Vermittlung)",
       "ok": false
      },
      {
-      "t": "Schicht 5",
+      "t": "Schicht 5 (Sitzung)",
       "ok": false
      },
      {
-      "t": "Schicht 7",
+      "t": "Schicht 7 (Anwendung)",
       "ok": false
      }
     ],
@@ -3844,15 +3844,15 @@ const POOLS = {
       "ok": true
      },
      {
-      "t": "Schicht 4",
+      "t": "Schicht 4 (Transport)",
       "ok": false
      },
      {
-      "t": "Schicht 3",
+      "t": "Schicht 3 (Vermittlung)",
       "ok": false
      },
      {
-      "t": "Schicht 1",
+      "t": "Schicht 1 (Bitübertragung)",
       "ok": false
      }
     ],
@@ -3862,19 +3862,19 @@ const POOLS = {
     "q": "Womit adressiert Schicht 2, womit Schicht 3?",
     "o": [
      {
-      "t": "L2 mit MAC-Adressen, L3 mit IP-Adressen",
+      "t": "L2 adressiert mit MAC-Adressen, L3 mit IP-Adressen",
       "ok": true
      },
      {
-      "t": "L2 mit IP, L3 mit MAC",
+      "t": "L2 adressiert mit IP-Adressen, L3 mit MAC-Adressen",
       "ok": false
      },
      {
-      "t": "Beide mit Ports",
+      "t": "Beide Schichten adressieren ausschließlich über Ports",
       "ok": false
      },
      {
-      "t": "Beide mit MAC",
+      "t": "Beide Schichten nutzen dieselben MAC-Adressen",
       "ok": false
      }
     ],
@@ -3888,15 +3888,15 @@ const POOLS = {
       "ok": true
      },
      {
-      "t": "Schicht 2",
+      "t": "Schicht 2 (Sicherung)",
       "ok": false
      },
      {
-      "t": "Schicht 4",
+      "t": "Schicht 4 (Transport)",
       "ok": false
      },
      {
-      "t": "Schicht 1",
+      "t": "Schicht 1 (Bitübertragung)",
       "ok": false
      }
     ],
@@ -3910,15 +3910,15 @@ const POOLS = {
       "ok": true
      },
      {
-      "t": "Schicht 3",
+      "t": "Schicht 3 (Vermittlung)",
       "ok": false
      },
      {
-      "t": "Schicht 7",
+      "t": "Schicht 7 (Anwendung)",
       "ok": false
      },
      {
-      "t": "Schicht 1",
+      "t": "Schicht 1 (Bitübertragung)",
       "ok": false
      }
     ],
@@ -3928,19 +3928,19 @@ const POOLS = {
     "q": "Was gehört zur Transportschicht?",
     "o": [
      {
-      "t": "Segmentierung, Flusskontrolle, Ports",
+      "t": "Segmentierung, Flusskontrolle und Portzuordnung",
       "ok": true
      },
      {
-      "t": "Routing zwischen Netzen",
+      "t": "Wegfindung und Routing zwischen Netzen",
       "ok": false
      },
      {
-      "t": "MAC-Adressierung",
+      "t": "MAC-Adressierung und Rahmenbildung im LAN",
       "ok": false
      },
      {
-      "t": "Bitcodierung",
+      "t": "Bitcodierung und physische Signalübertragung",
       "ok": false
      }
     ],
@@ -3954,15 +3954,15 @@ const POOLS = {
       "ok": true
      },
      {
-      "t": "Schicht 4",
+      "t": "Schicht 4 (Transport)",
       "ok": false
      },
      {
-      "t": "Schicht 3",
+      "t": "Schicht 3 (Vermittlung)",
       "ok": false
      },
      {
-      "t": "Schicht 5",
+      "t": "Schicht 5 (Sitzung)",
       "ok": false
      }
     ],
@@ -4016,19 +4016,19 @@ const POOLS = {
     "q": "Ein Frame enthält eine Ziel-MAC-Adresse. Auf welcher Schicht wird er verarbeitet?",
     "o": [
      {
-      "t": "Schicht 2",
+      "t": "Schicht 2 (Sicherung)",
       "ok": true
      },
      {
-      "t": "Schicht 3",
+      "t": "Schicht 3 (Vermittlung)",
       "ok": false
      },
      {
-      "t": "Schicht 4",
+      "t": "Schicht 4 (Transport)",
       "ok": false
      },
      {
-      "t": "Schicht 1",
+      "t": "Schicht 1 (Bitübertragung)",
       "ok": false
      }
     ],
@@ -4038,19 +4038,19 @@ const POOLS = {
     "q": "Welche Aussage über einen Layer-3-Switch ist korrekt?",
     "o": [
      {
-      "t": "Er kann zusätzlich zur MAC- auch IP-basiert weiterleiten (Routing)",
+      "t": "Er leitet zusätzlich zur MAC- auch IP-basiert weiter (Routing)",
       "ok": true
      },
      {
-      "t": "Er arbeitet nur auf Schicht 1",
+      "t": "Er arbeitet ausschließlich auf der Bitübertragungsschicht",
       "ok": false
      },
      {
-      "t": "Er kann keine VLANs",
+      "t": "Er kann grundsätzlich keine VLANs verwalten",
       "ok": false
      },
      {
-      "t": "Er ersetzt die Bitübertragung",
+      "t": "Er ersetzt die physische Verkabelung im Netz",
       "ok": false
      }
     ],
@@ -4060,19 +4060,19 @@ const POOLS = {
     "q": "Auf welcher OSI-Schicht arbeitet ARP?",
     "o": [
      {
-      "t": "Schicht 2 (Sicherung) mit Übergang zu Schicht 3",
+      "t": "Zwischen Schicht 2 und 3 (löst IP zu MAC auf)",
       "ok": true
      },
      {
-      "t": "Nur Schicht 3",
+      "t": "Ausschließlich auf Schicht 3 (Vermittlung)",
       "ok": false
      },
      {
-      "t": "Schicht 4",
+      "t": "Auf Schicht 4 (End-to-End-Kommunikation zwischen Anwendungen)",
       "ok": false
      },
      {
-      "t": "Schicht 1",
+      "t": "Auf Schicht 1 (Bitübertragung)",
       "ok": false
      }
     ],
@@ -4082,19 +4082,19 @@ const POOLS = {
     "q": "Was versteht man unter Kapselung beim Sendeprozess?",
     "o": [
      {
-      "t": "Jede Schicht fügt der Dateneinheit einen Header (und ggf. Trailer) hinzu",
+      "t": "Jede Schicht fügt der Dateneinheit einen eigenen Header hinzu",
       "ok": true
      },
      {
-      "t": "Daten werden verschlüsselt",
+      "t": "Jede Schicht verschlüsselt die Nutzdaten einzeln",
       "ok": false
      },
      {
-      "t": "Pakete werden komprimiert",
+      "t": "Jede Schicht komprimiert das Paket erneut",
       "ok": false
      },
      {
-      "t": "Der Header wird entfernt",
+      "t": "Jede Schicht entfernt einen Header vom Paket",
       "ok": false
      }
     ],
@@ -4104,19 +4104,19 @@ const POOLS = {
     "q": "Was passiert beim Empfänger mit den OSI-Schichten?",
     "o": [
      {
-      "t": "Entkapselung: jede Schicht liest und entfernt den eigenen Header",
+      "t": "Jede Schicht liest und entfernt ihren eigenen Header",
       "ok": true
      },
      {
-      "t": "Kapselung wie beim Sender",
+      "t": "Jede Schicht fügt wie beim Sender einen Header hinzu",
       "ok": false
      },
      {
-      "t": "Alle Header werden auf einmal entfernt",
+      "t": "Alle Header werden gleichzeitig auf einmal entfernt",
       "ok": false
      },
      {
-      "t": "Nichts — die Schichten sind egal",
+      "t": "Die Schichten werden beim Empfang übersprungen",
       "ok": false
      }
     ],
@@ -4192,19 +4192,19 @@ const POOLS = {
     "q": "Auf welcher Schicht arbeitet TLS?",
     "o": [
      {
-      "t": "Schicht 6 (Darstellung) / zwischen L4 und L7",
+      "t": "Schicht 6 (Darstellung)",
       "ok": true
      },
      {
-      "t": "Schicht 1",
+      "t": "Schicht 1 (Bitübertragung)",
       "ok": false
      },
      {
-      "t": "Schicht 2",
+      "t": "Schicht 2 (Sicherung)",
       "ok": false
      },
      {
-      "t": "Schicht 3",
+      "t": "Schicht 3 (Vermittlung)",
       "ok": false
      }
     ],
@@ -4258,7 +4258,7 @@ const POOLS = {
     "q": "Welches Protokoll arbeitet auf Schicht 3 und ermöglicht das Internet?",
     "o": [
      {
-      "t": "IP (Internet Protocol)",
+      "t": "IP",
       "ok": true
      },
      {
@@ -4280,19 +4280,19 @@ const POOLS = {
     "q": "Was unterscheidet eine Kollisionsdomäne von einer Broadcastdomäne?",
     "o": [
      {
-      "t": "Kollisionsdomäne betrifft L1/L2-Signalüberlagerungen, Broadcastdomäne L2/L3-Broadcast-Reichweite",
+      "t": "Kollisionsdomäne betrifft Signalüberlagerung, Broadcastdomäne die Broadcast-Reichweite",
       "ok": true
      },
      {
-      "t": "Beide sind identisch",
+      "t": "Beide beschreiben exakt denselben Netzbereich",
       "ok": false
      },
      {
-      "t": "Broadcastdomäne ist kleiner",
+      "t": "Die Broadcastdomäne ist immer kleiner als die Kollisionsdomäne",
       "ok": false
      },
      {
-      "t": "Kollisionsdomänen gibt es nur bei Glasfaser",
+      "t": "Kollisionsdomänen entstehen nur bei Glasfaserverkabelung",
       "ok": false
      }
     ],
@@ -4324,7 +4324,7 @@ const POOLS = {
     "q": "In welche Richtung durchläuft ein Datenpaket beim Empfang die Schichten?",
     "o": [
      {
-      "t": "Von Schicht 1 nach 7 (Entkapselung von unten nach oben)",
+      "t": "Von Schicht 1 nach 7",
       "ok": true
      },
      {
@@ -4350,15 +4350,15 @@ const POOLS = {
       "ok": true
      },
      {
-      "t": "Es hat 7 Schichten wie OSI",
+      "t": "Es besitzt wie OSI genau 7 getrennte Schichten",
       "ok": false
      },
      {
-      "t": "Es kennt keine Transportschicht",
+      "t": "Es verzichtet vollständig auf eine Transportschicht",
       "ok": false
      },
      {
-      "t": "OSI und TCP/IP sind identisch",
+      "t": "Es ist mit dem OSI-Modell vollkommen identisch",
       "ok": false
      }
     ],
@@ -4619,15 +4619,15 @@ const POOLS = {
       "ok": true
      },
      {
-      "t": "Nur einen Raum",
+      "t": "Nur einen einzelnen Raum (wenige Meter)",
       "ok": false
      },
      {
-      "t": "Ein ganzes Land",
+      "t": "Ein ganzes Land (hunderte km)",
       "ok": false
      },
      {
-      "t": "Weltweit",
+      "t": "Die gesamte Welt (global)",
       "ok": false
      }
     ],
@@ -4641,15 +4641,15 @@ const POOLS = {
       "ok": true
      },
      {
-      "t": "Wenige Meter",
+      "t": "Nur wenige Meter (Nahbereich)",
       "ok": false
      },
      {
-      "t": "Weltweit",
+      "t": "Weltweit (global vernetzt)",
       "ok": false
      },
      {
-      "t": "Nur ein Gebäude",
+      "t": "Nur ein einzelnes Gebäude (lokal)",
       "ok": false
      }
     ],
@@ -4813,19 +4813,19 @@ const POOLS = {
     "q": "Welche Ausdehnung liegt direkt zwischen LAN und MAN?",
     "o": [
      {
-      "t": "CAN (Campus)",
+      "t": "CAN (Campus Area Network)",
       "ok": true
      },
      {
-      "t": "PAN",
+      "t": "PAN (Personal Area Network)",
       "ok": false
      },
      {
-      "t": "BAN",
+      "t": "BAN (Body Area Network)",
       "ok": false
      },
      {
-      "t": "GAN",
+      "t": "GAN (Global Area Network)",
       "ok": false
      }
     ],
@@ -5218,15 +5218,15 @@ const POOLS = {
       "ok": true
      },
      {
-      "t": "Ein Hub",
+      "t": "Ein Hub (Schicht 1)",
       "ok": false
      },
      {
-      "t": "Ein Repeater",
+      "t": "Ein Repeater (Schicht 1)",
       "ok": false
      },
      {
-      "t": "Ein einzelnes Kabel",
+      "t": "Ein einzelnes Patchkabel",
       "ok": false
      }
     ],
@@ -5346,19 +5346,19 @@ const POOLS = {
     "q": "Welches Feld im Ethernet-Frame dient der Fehlererkennung?",
     "o": [
      {
-      "t": "FCS (Frame Check Sequence / CRC)",
+      "t": "Die FCS (Frame Check Sequence / CRC)",
       "ok": true
      },
      {
-      "t": "TTL",
+      "t": "Die TTL (Restlebenszeit)",
       "ok": false
      },
      {
-      "t": "Portnummer",
+      "t": "Die Portnummer des Dienstes",
       "ok": false
      },
      {
-      "t": "Präambel",
+      "t": "Die Präambel zur Synchronisation",
       "ok": false
      }
     ],
@@ -5632,19 +5632,19 @@ const POOLS = {
     "q": "Was ist ein VLAN-Tag nach IEEE 802.1Q?",
     "o": [
      {
-      "t": "Ein 4-Byte-Feld im Ethernet-Frame mit VLAN-ID und Priorität",
+      "t": "Ein 4-Byte-Feld im Frame mit VLAN-ID und Priorität",
       "ok": true
      },
      {
-      "t": "Ein IP-Header-Feld",
+      "t": "Ein zusätzliches Feld im IP-Header",
       "ok": false
      },
      {
-      "t": "Ein DNS-Eintrag",
+      "t": "Ein spezieller Eintrag im DNS",
       "ok": false
      },
      {
-      "t": "Eine Portbezeichnung",
+      "t": "Eine besondere Bezeichnung für einen Port",
       "ok": false
      }
     ],
@@ -5707,15 +5707,15 @@ const POOLS = {
       "ok": true
      },
      {
-      "t": "Universal Twisted Pair",
+      "t": "Universal Twisted Pair (universell)",
       "ok": false
      },
      {
-      "t": "Ultra Twisted Protocol",
+      "t": "Ultra Transfer Protocol (schnell)",
       "ok": false
      },
      {
-      "t": "Unshielded Transfer Port",
+      "t": "Unshielded Transfer Port (offen)",
       "ok": false
      }
     ],
@@ -5795,15 +5795,15 @@ const POOLS = {
       "ok": true
      },
      {
-      "t": "UTP-Kupfer",
+      "t": "UTP-Kupfer (ungeschirmt)",
       "ok": false
      },
      {
-      "t": "Koaxialkabel",
+      "t": "Koaxialkabel (geschirmt)",
       "ok": false
      },
      {
-      "t": "STP-Kupfer",
+      "t": "STP-Kupfer (geschirmt)",
       "ok": false
      }
     ],
@@ -5905,15 +5905,15 @@ const POOLS = {
       "ok": true
      },
      {
-      "t": "Network Internet Controller",
+      "t": "Network Internet Controller (Steuergerät)",
       "ok": false
      },
      {
-      "t": "Node Identification Code",
+      "t": "Node Identification Code (Kennung)",
       "ok": false
      },
      {
-      "t": "New Interface Connector",
+      "t": "New Interface Connector (Stecker)",
       "ok": false
      }
     ],
@@ -5993,15 +5993,15 @@ const POOLS = {
       "ok": true
      },
      {
-      "t": "DNS",
+      "t": "DNS (Domain Name System)",
       "ok": false
      },
      {
-      "t": "DHCP",
+      "t": "DHCP (Dynamic Host Configuration)",
       "ok": false
      },
      {
-      "t": "ICMP",
+      "t": "ICMP (Internet Control Message)",
       "ok": false
      }
     ],
@@ -6033,19 +6033,19 @@ const POOLS = {
     "q": "Welchen Anschluss nutzt ein LAN-Kabel am PC/Switch?",
     "o": [
      {
-      "t": "RJ45-Buchse (Ethernet-Port)",
+      "t": "Eine RJ45-Buchse (Ethernet-Port)",
       "ok": true
      },
      {
-      "t": "HDMI",
+      "t": "Ein HDMI-Anschluss (Bild/Ton)",
       "ok": false
      },
      {
-      "t": "USB-A",
+      "t": "Ein USB-A-Anschluss (Peripherie)",
       "ok": false
      },
      {
-      "t": "DisplayPort",
+      "t": "Ein DisplayPort (Monitor)",
       "ok": false
      }
     ],
@@ -6460,15 +6460,15 @@ const POOLS = {
       "ok": true
      },
      {
-      "t": "Er kann keine Frames lesen",
+      "t": "Er kann grundsätzlich keine Frames lesen (Schicht 1)",
       "ok": false
      },
      {
-      "t": "Broadcasts sind verschlüsselt",
+      "t": "Broadcasts sind verschlüsselt und nicht lesbar",
       "ok": false
      },
      {
-      "t": "Er hat keine Ports",
+      "t": "Ein Router besitzt keine eigenen Ports",
       "ok": false
      }
     ],
@@ -6482,15 +6482,15 @@ const POOLS = {
       "ok": true
      },
      {
-      "t": "Beide arbeiten mit IP-Adressen",
+      "t": "Beide arbeiten ausschließlich mit IP-Adressen (L3)",
       "ok": false
      },
      {
-      "t": "Switching verbindet Netze, Routing arbeitet lokal",
+      "t": "Switching verbindet Netze, Routing arbeitet nur lokal",
       "ok": false
      },
      {
-      "t": "Es gibt keinen Unterschied",
+      "t": "Zwischen beiden besteht technisch kein Unterschied",
       "ok": false
      }
     ],
@@ -6526,15 +6526,15 @@ const POOLS = {
       "ok": true
      },
      {
-      "t": "Es wird an alle Netze gesendet",
+      "t": "Das Paket wird an alle bekannten Netze gesendet",
       "ok": false
      },
      {
-      "t": "Der Router speichert es",
+      "t": "Der Router speichert das Paket dauerhaft zwischen",
       "ok": false
      },
      {
-      "t": "Die TTL wird verdoppelt",
+      "t": "Die TTL des Pakets wird automatisch verdoppelt",
       "ok": false
      }
     ],
@@ -6680,15 +6680,15 @@ const POOLS = {
       "ok": true
      },
      {
-      "t": "Die schnellste Route",
+      "t": "Die Route mit der geringsten Latenz zum Ziel",
       "ok": false
      },
      {
-      "t": "Eine Route für das lokale Netz",
+      "t": "Eine feste Route ausschließlich für das lokale Netz",
       "ok": false
      },
      {
-      "t": "Eine verschlüsselte Route",
+      "t": "Eine verschlüsselte Route über einen VPN-Tunnel",
       "ok": false
      }
     ],
@@ -6764,19 +6764,19 @@ const POOLS = {
     "q": "Was beschreibt 'Longest Prefix Match' beim Routing?",
     "o": [
      {
-      "t": "Der spezifischste (längste) passende Eintrag in der Routingtabelle wird verwendet",
+      "t": "Der spezifischste (längste) passende Eintrag wird verwendet",
       "ok": true
      },
      {
-      "t": "Die kürzeste Route wird bevorzugt",
+      "t": "Die Route mit dem kürzesten Präfix wird bevorzugt",
       "ok": false
      },
      {
-      "t": "Der erste Eintrag in der Tabelle gewinnt",
+      "t": "Der zuerst eingetragene Eintrag gewinnt immer",
       "ok": false
      },
      {
-      "t": "Es wird immer die Default-Route genutzt",
+      "t": "Es wird grundsätzlich die Default-Route genutzt",
       "ok": false
      }
     ],
@@ -6830,19 +6830,19 @@ const POOLS = {
     "q": "Was ist VLAN und welchen Vorteil hat es?",
     "o": [
      {
-      "t": "Logische Netztrennung auf einem Switch — trennt Broadcastdomänen ohne eigene Hardware",
+      "t": "Logische Netztrennung auf einem Switch, trennt Broadcastdomänen",
       "ok": true
      },
      {
-      "t": "Eine Verschlüsselungstechnik",
+      "t": "Ein Verfahren zur Verschlüsselung des Datenverkehrs",
       "ok": false
      },
      {
-      "t": "Ein Routingprotokoll",
+      "t": "Ein dynamisches Routingprotokoll für große Netze",
       "ok": false
      },
      {
-      "t": "Eine Kabeltechnologie",
+      "t": "Eine besondere Art der physischen Verkabelung",
       "ok": false
      }
     ],
@@ -6856,15 +6856,15 @@ const POOLS = {
       "ok": true
      },
      {
-      "t": "Direkt über den Switch",
+      "t": "Direkt über den Switch ohne weitere Geräte",
       "ok": false
      },
      {
-      "t": "Per Broadcast",
+      "t": "Ausschließlich per Broadcast an alle Ports",
       "ok": false
      },
      {
-      "t": "Gar nicht möglich",
+      "t": "Eine Kommunikation ist grundsätzlich nicht möglich",
       "ok": false
      }
     ],
@@ -6900,15 +6900,15 @@ const POOLS = {
       "ok": true
      },
      {
-      "t": "Der WLAN-Standard",
+      "t": "Der zentrale Standard für WLAN nach IEEE",
       "ok": false
      },
      {
-      "t": "Ein Routingprotokoll",
+      "t": "Ein dynamisches Routingprotokoll für IP-Netze",
       "ok": false
      },
      {
-      "t": "Ein Verschlüsselungsstandard",
+      "t": "Ein Verfahren zur Verschlüsselung von Frames",
       "ok": false
      }
     ],
@@ -6922,11 +6922,11 @@ const POOLS = {
       "ok": true
      },
      {
-      "t": "Die Default-Route",
+      "t": "Die Default-Route als allgemeinster Eintrag",
       "ok": false
      },
      {
-      "t": "Die zuerst eingetragene Route",
+      "t": "Die zuerst in die Tabelle eingetragene Route",
       "ok": false
      },
      {
@@ -6944,15 +6944,15 @@ const POOLS = {
       "ok": true
      },
      {
-      "t": "VLAN",
+      "t": "VLAN (Virtual Local Area Network)",
       "ok": false
      },
      {
-      "t": "OSPF",
+      "t": "OSPF (Open Shortest Path First)",
       "ok": false
      },
      {
-      "t": "NAT",
+      "t": "NAT (Network Address Translation)",
       "ok": false
      }
     ],
@@ -7037,15 +7037,15 @@ const POOLS = {
       "ok": true
      },
      {
-      "t": "Vier Dezimalzahlen mit Punkten",
+      "t": "Vier Dezimalzahlen, jeweils durch Punkte getrennt",
       "ok": false
      },
      {
-      "t": "Sechs Hex-Paare mit Bindestrich",
+      "t": "Sechs Hexadezimal-Paare, durch Bindestriche getrennt",
       "ok": false
      },
      {
-      "t": "Als reine Binärzahl",
+      "t": "Eine einzelne fortlaufende Binärzahl ohne Trenner",
       "ok": false
      }
     ],
@@ -7143,19 +7143,19 @@ const POOLS = {
     "q": "Was trennt bei IPv6 aufeinanderfolgende Nullblöcke abkürzend?",
     "o": [
      {
-      "t": "Ein doppelter Doppelpunkt ::",
+      "t": "Ein doppelter Doppelpunkt (::)",
       "ok": true
      },
      {
-      "t": "Ein Punkt .",
+      "t": "Ein einfacher Punkt (.)",
       "ok": false
      },
      {
-      "t": "Ein Bindestrich -",
+      "t": "Ein Bindestrich (-)",
       "ok": false
      },
      {
-      "t": "Ein Slash /",
+      "t": "Ein Schrägstrich (/)",
       "ok": false
      }
     ],
@@ -7169,15 +7169,15 @@ const POOLS = {
       "ok": true
      },
      {
-      "t": "Rund 4 Millionen",
+      "t": "Rund 4 Millionen (2²²)",
       "ok": false
      },
      {
-      "t": "Rund 2³²·² unendlich",
+      "t": "Praktisch unendlich viele (2⁶⁴)",
       "ok": false
      },
      {
-      "t": "Genau 1 Million",
+      "t": "Genau 1 Million (10⁶)",
       "ok": false
      }
     ],
@@ -7279,15 +7279,15 @@ const POOLS = {
       "ok": true
      },
      {
-      "t": "DHCP",
+      "t": "DHCP (Dynamic Host Configuration Protocol)",
       "ok": false
      },
      {
-      "t": "DNS",
+      "t": "DNS (Domain Name System)",
       "ok": false
      },
      {
-      "t": "RARP",
+      "t": "RARP (Reverse Address Resolution Protocol)",
       "ok": false
      }
     ],
@@ -7301,15 +7301,15 @@ const POOLS = {
       "ok": true
      },
      {
-      "t": "256",
+      "t": "256 (alle Adressen des Bereichs)",
       "ok": false
      },
      {
-      "t": "255",
+      "t": "255 (ohne die Netzadresse)",
       "ok": false
      },
      {
-      "t": "128",
+      "t": "128 (nur die halbe Range)",
       "ok": false
      }
     ],
@@ -7345,15 +7345,15 @@ const POOLS = {
       "ok": true
      },
      {
-      "t": "Er ist kleiner als IPv4",
+      "t": "Der Adressraum ist kleiner als bei IPv4 (2¹⁶)",
       "ok": false
      },
      {
-      "t": "Er nutzt nur Dezimalzahlen",
+      "t": "Adressen bestehen nur aus Dezimalzahlen (0–9)",
       "ok": false
      },
      {
-      "t": "Er kennt keine Loopback-Adresse",
+      "t": "Es existiert keine Loopback-Adresse (::1)",
       "ok": false
      }
     ],
@@ -7367,15 +7367,15 @@ const POOLS = {
       "ok": true
      },
      {
-      "t": "Eine öffentliche Adresse",
+      "t": "Eine öffentlich routbare Internetadresse",
       "ok": false
      },
      {
-      "t": "Die Broadcastadresse",
+      "t": "Die Broadcastadresse des lokalen Netzes",
       "ok": false
      },
      {
-      "t": "Eine IPv6-Adresse",
+      "t": "Eine gekürzte IPv6-Adresse (Link-Local)",
       "ok": false
      }
     ],
@@ -7411,15 +7411,15 @@ const POOLS = {
       "ok": true
      },
      {
-      "t": "Die Anzahl der Hosts",
+      "t": "Die Anzahl der nutzbaren Hosts im Netz",
       "ok": false
      },
      {
-      "t": "Die TTL des Netzes",
+      "t": "Die maximale TTL der Pakete im Netz",
       "ok": false
      },
      {
-      "t": "Die Anzahl der Router",
+      "t": "Die Anzahl der Router auf dem Weg",
       "ok": false
      }
     ],
@@ -7433,15 +7433,15 @@ const POOLS = {
       "ok": true
      },
      {
-      "t": "Durch ODER-Verknüpfung",
+      "t": "Durch bitweise ODER-Verknüpfung (OR)",
       "ok": false
      },
      {
-      "t": "Durch Addition",
+      "t": "Durch Addition der beiden Werte",
       "ok": false
      },
      {
-      "t": "Durch XOR",
+      "t": "Durch bitweise XOR-Verknüpfung (XOR)",
       "ok": false
      }
     ],
@@ -7543,15 +7543,15 @@ const POOLS = {
       "ok": true
      },
      {
-      "t": "Es bekommt sie komplett vom DHCP-Server",
+      "t": "Vollständig vom DHCP-Server zugewiesen bekommen",
       "ok": false
      },
      {
-      "t": "Es rät sie zufällig",
+      "t": "Durch zufälliges Raten einer freien Adresse",
       "ok": false
      },
      {
-      "t": "Über ARP",
+      "t": "Durch eine ARP-Anfrage an das Gateway",
       "ok": false
      }
     ],
@@ -7561,19 +7561,19 @@ const POOLS = {
     "q": "Wofür steht DHCPv6?",
     "o": [
      {
-      "t": "Die DHCP-Variante zur Konfiguration von IPv6-Adressen/Parametern",
+      "t": "Die DHCP-Variante zur Konfiguration von IPv6-Parametern",
       "ok": true
      },
      {
-      "t": "Ein Routingprotokoll",
+      "t": "Ein Routingprotokoll für IPv6-Netze",
       "ok": false
      },
      {
-      "t": "Ein Verschlüsselungsverfahren",
+      "t": "Ein Verschlüsselungsverfahren für IPv6",
       "ok": false
      },
      {
-      "t": "Eine Firewallregel",
+      "t": "Eine spezielle Firewallregel für IPv6",
       "ok": false
      }
     ],
@@ -7583,19 +7583,19 @@ const POOLS = {
     "q": "Was ist der Kernunterschied zwischen SLAAC und DHCPv6?",
     "o": [
      {
-      "t": "SLAAC ist zustandslos (Selbstkonfiguration), DHCPv6 kann zustandsbehaftet vergeben",
+      "t": "SLAAC ist zustandslos, DHCPv6 kann zustandsbehaftet vergeben",
       "ok": true
      },
      {
-      "t": "SLAAC braucht immer einen Server",
+      "t": "SLAAC benötigt zwingend immer einen Server",
       "ok": false
      },
      {
-      "t": "DHCPv6 funktioniert nur mit IPv4",
+      "t": "DHCPv6 funktioniert ausschließlich mit IPv4",
       "ok": false
      },
      {
-      "t": "Es gibt keinen Unterschied",
+      "t": "Zwischen beiden besteht kein Unterschied",
       "ok": false
      }
     ],
@@ -7605,19 +7605,19 @@ const POOLS = {
     "q": "Welche Rolle spielt das Router-Advertisement (RA) bei IPv6?",
     "o": [
      {
-      "t": "Der Router kündigt Präfix und Parameter für die Autokonfiguration an",
+      "t": "Der Router kündigt Präfix und Parameter zur Autokonfiguration an",
       "ok": true
      },
      {
-      "t": "Es vergibt MAC-Adressen",
+      "t": "Es vergibt physische MAC-Adressen an Geräte",
       "ok": false
      },
      {
-      "t": "Es verschlüsselt den Verkehr",
+      "t": "Es verschlüsselt den gesamten Netzverkehr",
       "ok": false
      },
      {
-      "t": "Es löst Namen auf",
+      "t": "Es löst Domainnamen in Adressen auf",
       "ok": false
      }
     ],
@@ -7913,19 +7913,19 @@ const POOLS = {
     "q": "Was bedeutet /30 in der Praxis?",
     "o": [
      {
-      "t": "2 nutzbare Hosts — typisch für Punkt-zu-Punkt-Verbindungen",
+      "t": "2 nutzbare Hosts — typisch für Punkt-zu-Punkt-Links",
       "ok": true
      },
      {
-      "t": "30 nutzbare Hosts",
+      "t": "30 nutzbare Hosts für kleine Abteilungen",
       "ok": false
      },
      {
-      "t": "254 nutzbare Hosts",
+      "t": "254 nutzbare Hosts wie bei einem /24",
       "ok": false
      },
      {
-      "t": "Kein Host möglich",
+      "t": "Kein einziger nutzbarer Host möglich",
       "ok": false
      }
     ],
@@ -7939,15 +7939,15 @@ const POOLS = {
       "ok": true
      },
      {
-      "t": "Die Anzahl der Hosts",
+      "t": "Die Anzahl der nutzbaren Hosts im Netz",
       "ok": false
      },
      {
-      "t": "Die Anzahl der Subnetze",
+      "t": "Die Anzahl der möglichen Subnetze",
       "ok": false
      },
      {
-      "t": "Die TTL",
+      "t": "Die Time-to-Live der Pakete (TTL)",
       "ok": false
      }
     ],
@@ -7984,19 +7984,19 @@ const POOLS = {
     "q": "Womit startet der Client die DHCP-Vergabe?",
     "o": [
      {
-      "t": "DHCP Discover (Broadcast)",
+      "t": "DHCP Discover (Broadcast ins Netz)",
       "ok": true
      },
      {
-      "t": "DHCP Offer",
+      "t": "DHCP Offer (Angebot des Servers)",
       "ok": false
      },
      {
-      "t": "DHCP Request",
+      "t": "DHCP Request (Annahme durch Client)",
       "ok": false
      },
      {
-      "t": "DHCP Acknowledge",
+      "t": "DHCP Acknowledge (Bestätigung des Servers)",
       "ok": false
      }
     ],
@@ -8054,15 +8054,15 @@ const POOLS = {
       "ok": true
      },
      {
-      "t": "DHCP Offer",
+      "t": "DHCP Offer (Adressvorschlag des Servers)",
       "ok": false
      },
      {
-      "t": "DHCP Discover",
+      "t": "DHCP Discover (erste Suche des Clients)",
       "ok": false
      },
      {
-      "t": "DHCP Release",
+      "t": "DHCP Release (Rückgabe der Adresse)",
       "ok": false
      }
     ],
@@ -8116,19 +8116,19 @@ const POOLS = {
     "q": "Warum nutzt DHCP Discover einen Broadcast?",
     "o": [
      {
-      "t": "Der Client kennt den Server (und seine eigene IP) noch nicht",
+      "t": "Der Client kennt den Server und seine eigene IP noch nicht",
       "ok": true
      },
      {
-      "t": "Broadcasts sind verschlüsselt",
+      "t": "Broadcasts werden grundsätzlich verschlüsselt übertragen",
       "ok": false
      },
      {
-      "t": "Um DNS zu umgehen",
+      "t": "Damit die DNS-Auflösung gezielt umgangen wird",
       "ok": false
      },
      {
-      "t": "Weil UDP das vorschreibt",
+      "t": "Weil das UDP-Protokoll Broadcast zwingend vorschreibt",
       "ok": false
      }
     ],
@@ -8428,15 +8428,15 @@ const POOLS = {
       "ok": true
      },
      {
-      "t": "Er bekommt eine öffentliche IP",
+      "t": "Der Client erhält automatisch eine öffentliche IP",
       "ok": false
      },
      {
-      "t": "Er nutzt die Router-IP",
+      "t": "Der Client übernimmt einfach die IP des Routers",
       "ok": false
      },
      {
-      "t": "Er fällt komplett aus",
+      "t": "Der Client fällt komplett aus und meldet Fehler",
       "ok": false
      }
     ],
@@ -8490,19 +8490,19 @@ const POOLS = {
     "q": "Was ist der Unterschied zwischen rekursiver und iterativer DNS-Auflösung?",
     "o": [
      {
-      "t": "Rekursiv: Resolver löst komplett auf; Iterativ: Server gibt nur Verweis auf nächsten Server",
+      "t": "Rekursiv löst der Resolver komplett, iterativ nur mit Verweisen",
       "ok": true
      },
      {
-      "t": "Beides identisch",
+      "t": "Beide Verfahren sind funktional völlig identisch",
       "ok": false
      },
      {
-      "t": "Iterativ ist schneller",
+      "t": "Iterativ ist grundsätzlich schneller und sicherer",
       "ok": false
      },
      {
-      "t": "Rekursiv nutzt nur UDP",
+      "t": "Rekursiv funktioniert ausschließlich über UDP",
       "ok": false
      }
     ],
@@ -8556,19 +8556,19 @@ const POOLS = {
     "q": "Wozu dient ein PTR-Record?",
     "o": [
      {
-      "t": "Reverse-Lookup: IP-Adresse → Domainname",
+      "t": "Reverse-Lookup: von der IP-Adresse zum Domainnamen",
       "ok": true
      },
      {
-      "t": "Mailserver-Eintrag",
+      "t": "Eintrag für den zuständigen Mailserver einer Domain",
       "ok": false
      },
      {
-      "t": "Alias auf anderen Namen",
+      "t": "Alias, der auf einen anderen Domainnamen zeigt",
       "ok": false
      },
      {
-      "t": "IPv6-Adresse",
+      "t": "Eintrag, der eine IPv6-Adresse einer Domain zuordnet",
       "ok": false
      }
     ],
@@ -8578,19 +8578,19 @@ const POOLS = {
     "q": "Was passiert nach Ablauf der DHCP Lease Time?",
     "o": [
      {
-      "t": "Der Client muss die Adresse erneuern (Renew) oder eine neue anfordern",
+      "t": "Der Client muss die Adresse erneuern oder neu anfordern",
       "ok": true
      },
      {
-      "t": "Die IP wird sofort freigegeben",
+      "t": "Die Adresse wird sofort und ersatzlos freigegeben",
       "ok": false
      },
      {
-      "t": "Der Client behält sie dauerhaft",
+      "t": "Der Client behält die Adresse dauerhaft ohne Renew",
       "ok": false
      },
      {
-      "t": "Der Server vergibt sie neu ohne Rückfrage",
+      "t": "Der Server vergibt sie ohne Rückfrage sofort neu",
       "ok": false
      }
     ],
@@ -8600,19 +8600,19 @@ const POOLS = {
     "q": "Wie nennt man eine fest zugewiesene IP über DHCP?",
     "o": [
      {
-      "t": "DHCP-Reservation (statische Zuweisung per MAC)",
+      "t": "DHCP-Reservation (feste Zuweisung per MAC-Adresse)",
       "ok": true
      },
      {
-      "t": "Statische IP",
+      "t": "Manuell konfigurierte statische IP am Gerät",
       "ok": false
      },
      {
-      "t": "APIPA",
+      "t": "APIPA-Adresse bei fehlendem DHCP-Server",
       "ok": false
      },
      {
-      "t": "Default Gateway",
+      "t": "Die Adresse des Default Gateways im Netz",
       "ok": false
      }
     ],
@@ -8688,19 +8688,19 @@ const POOLS = {
     "q": "Was ist DNS-Caching und warum ist es wichtig?",
     "o": [
      {
-      "t": "Zwischenspeichern von Antworten für die TTL-Dauer — spart Anfragen und beschleunigt Auflösung",
+      "t": "Zwischenspeichern von Antworten für die TTL-Dauer",
       "ok": true
      },
      {
-      "t": "Dauerhaftes Speichern aller DNS-Einträge",
+      "t": "Dauerhaftes Speichern aller DNS-Einträge weltweit",
       "ok": false
      },
      {
-      "t": "Backup aller Zonen",
+      "t": "Vollständiges Backup aller Zonen eines Servers",
       "ok": false
      },
      {
-      "t": "Verschlüsselung der DNS-Antworten",
+      "t": "Verschlüsselung sämtlicher DNS-Antworten im Netz",
       "ok": false
      }
     ],
@@ -8710,19 +8710,19 @@ const POOLS = {
     "q": "Was unterscheidet einen autoritativen von einem nicht-autoritativen DNS-Server?",
     "o": [
      {
-      "t": "Autoritativ verwaltet die Zone selbst; nicht-autoritativ hat gecachte Antworten",
+      "t": "Autoritativ verwaltet die Zone selbst, andere cachen nur",
       "ok": true
      },
      {
-      "t": "Autoritativ ist schneller",
+      "t": "Autoritative Server sind grundsätzlich schneller",
       "ok": false
      },
      {
-      "t": "Kein Unterschied",
+      "t": "Zwischen beiden besteht kein funktionaler Unterschied",
       "ok": false
      },
      {
-      "t": "Nicht-autoritativ ist sicherer",
+      "t": "Nicht-autoritative Server gelten als sicherer",
       "ok": false
      }
     ],
@@ -9204,19 +9204,19 @@ const POOLS = {
     "q": "Welches Transportprotokoll nutzt VoIP für die Sprachdaten typischerweise?",
     "o": [
      {
-      "t": "UDP (via RTP)",
+      "t": "UDP (über RTP transportiert)",
       "ok": true
      },
      {
-      "t": "TCP",
+      "t": "TCP (verbindungsorientiert)",
       "ok": false
      },
      {
-      "t": "ICMP",
+      "t": "ICMP (Steuermeldungen)",
       "ok": false
      },
      {
-      "t": "ARP",
+      "t": "ARP (Adressauflösung)",
       "ok": false
      }
     ],
@@ -9358,19 +9358,19 @@ const POOLS = {
     "q": "Was ist ein Codec bei VoIP?",
     "o": [
      {
-      "t": "Verfahren zum Kodieren/Komprimieren der Sprache (z. B. G.711)",
+      "t": "Ein Verfahren zum Kodieren/Komprimieren der Sprache (z. B. G.711)",
       "ok": true
      },
      {
-      "t": "Ein Verschlüsselungszertifikat",
+      "t": "Ein Zertifikat zur Verschlüsselung des Gesprächs",
       "ok": false
      },
      {
-      "t": "Ein Routingprotokoll",
+      "t": "Ein Protokoll zur Wegfindung im Netz",
       "ok": false
      },
      {
-      "t": "Ein WLAN-Kanal",
+      "t": "Ein bestimmter Funkkanal im WLAN",
       "ok": false
      }
     ],
@@ -9917,15 +9917,15 @@ const POOLS = {
       "ok": true
      },
      {
-      "t": "Er verschlüsselt die Nachricht",
+      "t": "Er verschlüsselt den gesamten Nachrichtentext",
       "ok": false
      },
      {
-      "t": "Er ersetzt den privaten Schlüssel",
+      "t": "Er ersetzt den privaten Schlüssel des Absenders",
       "ok": false
      },
      {
-      "t": "Er vergibt die IP",
+      "t": "Er vergibt die IP-Adresse des Empfängers",
       "ok": false
      }
     ],
@@ -10133,19 +10133,19 @@ const POOLS = {
     "q": "Welche Eigenschaft muss ein kryptografischer Hash haben?",
     "o": [
      {
-      "t": "Kollisionsresistenz: zwei verschiedene Eingaben sollen nicht denselben Hash erzeugen",
+      "t": "Kollisionsresistenz: verschiedene Eingaben ergeben verschiedene Hashes",
       "ok": true
      },
      {
-      "t": "Er muss umkehrbar sein",
+      "t": "Er muss jederzeit wieder umkehrbar sein",
       "ok": false
      },
      {
-      "t": "Er muss immer 8 Byte lang sein",
+      "t": "Er muss immer genau 8 Byte lang sein",
       "ok": false
      },
      {
-      "t": "Er muss verschlüsselt sein",
+      "t": "Er muss selbst verschlüsselt vorliegen",
       "ok": false
      }
     ],
@@ -10177,19 +10177,19 @@ const POOLS = {
     "q": "Was ist der Unterschied zwischen Verschlüsselung und Hashing?",
     "o": [
      {
-      "t": "Verschlüsselung ist umkehrbar (mit Schlüssel), Hashing ist einwegig",
+      "t": "Verschlüsselung ist mit Schlüssel umkehrbar, Hashing ist einwegig",
       "ok": true
      },
      {
-      "t": "Hashing ist sicherer als Verschlüsselung",
+      "t": "Hashing gilt grundsätzlich als sicherer als Verschlüsselung",
       "ok": false
      },
      {
-      "t": "Beides ist identisch",
+      "t": "Beide Verfahren sind funktional völlig identisch",
       "ok": false
      },
      {
-      "t": "Verschlüsselung ist nicht umkehrbar",
+      "t": "Verschlüsselung ist ein nicht umkehrbarer Vorgang",
       "ok": false
      }
     ],
@@ -10199,19 +10199,19 @@ const POOLS = {
     "q": "Wozu wird ein Salt beim Passwort-Hashing verwendet?",
     "o": [
      {
-      "t": "Um identische Passwörter unterschiedliche Hashes zu geben und Rainbow-Table-Angriffe zu erschweren",
+      "t": "Um gleiche Passwörter unterschiedlich zu hashen und Rainbow-Tables zu erschweren",
       "ok": true
      },
      {
-      "t": "Um das Passwort zu verschlüsseln",
+      "t": "Um das Passwort zusätzlich zu verschlüsseln",
       "ok": false
      },
      {
-      "t": "Um den Hash kürzer zu machen",
+      "t": "Um den erzeugten Hashwert kürzer zu machen",
       "ok": false
      },
      {
-      "t": "Um den Algorithmus zu wechseln",
+      "t": "Um den Hash-Algorithmus automatisch zu wechseln",
       "ok": false
      }
     ],
@@ -10247,15 +10247,15 @@ const POOLS = {
       "ok": true
      },
      {
-      "t": "Nur die IP-Adresse",
+      "t": "Ausschließlich die IP-Adresse des Servers",
       "ok": false
      },
      {
-      "t": "Nur den öffentlichen Schlüssel",
+      "t": "Nur den enthaltenen öffentlichen Schlüssel",
       "ok": false
      },
      {
-      "t": "Die Dateigröße",
+      "t": "Die Dateigröße des Zertifikats in Byte",
       "ok": false
      }
     ],
@@ -10287,19 +10287,19 @@ const POOLS = {
     "q": "Welches Verfahren nutzt HTTPS für den Schlüsselaustausch?",
     "o": [
      {
-      "t": "Asymmetrisch (z. B. RSA oder Diffie-Hellman) für den Austausch, dann symmetrisch (AES) für die Daten",
+      "t": "Asymmetrisch für den Austausch, dann symmetrisch (AES) für die Daten",
       "ok": true
      },
      {
-      "t": "Nur symmetrisch",
+      "t": "Ausschließlich symmetrische Verschlüsselung für alles",
       "ok": false
      },
      {
-      "t": "Nur asymmetrisch",
+      "t": "Ausschließlich asymmetrische Verschlüsselung für alles",
       "ok": false
      },
      {
-      "t": "Kein Schlüsselaustausch nötig",
+      "t": "Es ist gar kein Schlüsselaustausch erforderlich",
       "ok": false
      }
     ],
@@ -10353,23 +10353,83 @@ const POOLS = {
     "q": "Was ist ein Self-Signed Certificate?",
     "o": [
      {
-      "t": "Ein Zertifikat, das von seiner eigenen CA signiert wurde — kein externe Vertrauensanker",
+      "t": "Ein Zertifikat, das von seiner eigenen CA signiert wurde",
       "ok": true
      },
      {
-      "t": "Ein abgelaufenes Zertifikat",
+      "t": "Ein bereits abgelaufenes, ungültiges Zertifikat",
       "ok": false
      },
      {
-      "t": "Ein Zertifikat ohne Ablaufdatum",
+      "t": "Ein Zertifikat ganz ohne Ablaufdatum",
       "ok": false
      },
      {
-      "t": "Ein kostenloser Webserver",
+      "t": "Ein kostenloser, öffentlich gehosteter Webserver",
       "ok": false
      }
     ],
     "e": "Self-Signed Certs sind für Tests/intern nützlich, werden von Browsern standardmäßig nicht vertraut."
+   },
+   {
+    "q": "Was ist Verschlüsselung?",
+    "o": [
+     { "t": "Umwandlung von Klartext in unlesbaren Chiffretext, der nur mit dem passenden Schlüssel wieder lesbar wird", "ok": true },
+     { "t": "Das verlustfreie Komprimieren von Daten, um Speicherplatz und Übertragungszeit einzusparen", "ok": false },
+     { "t": "Das Berechnen einer festen Prüfsumme, aus der sich die Originaldaten wiederherstellen lassen", "ok": false },
+     { "t": "Das Kodieren von Daten in ein anderes Format wie Base64, um sie transportfähig zu machen", "ok": false }
+    ],
+    "e": "Verschlüsselung wandelt Klartext per Algorithmus und Schlüssel in Chiffretext um — umkehrbar nur mit Schlüssel. Kompression, Hashing und Encoding sind etwas anderes: Encoding (z. B. Base64) ist ohne Schlüssel umkehrbar, Hashing gar nicht."
+   },
+   {
+    "q": "Was ist eine PKI (Public-Key-Infrastruktur)?",
+    "o": [
+     { "t": "Ein System aus Rollen, Regeln und Komponenten zum Erstellen, Verteilen, Prüfen und Widerrufen digitaler Zertifikate", "ok": true },
+     { "t": "Ein zentraler Verzeichnisdienst, der alle privaten Schlüssel der Teilnehmer sicher speichert und verteilt", "ok": false },
+     { "t": "Ein symmetrisches Verschlüsselungsverfahren, das ohne Schlüsselaustausch zwischen den Parteien auskommt", "ok": false },
+     { "t": "Ein Netzwerkprotokoll, das öffentliche Schlüssel automatisch per Broadcast an alle Clients verteilt", "ok": false }
+    ],
+    "e": "Die PKI verwaltet den Lebenszyklus digitaler Zertifikate und bindet öffentliche Schlüssel vertrauenswürdig an Identitäten. Private Schlüssel verlassen ihren Besitzer nie — das ist der Kern des Modells."
+   },
+   {
+    "q": "Welche Komponenten umfasst eine PKI typischerweise?",
+    "o": [
+     { "t": "CA (Zertifizierungsstelle), RA (Registrierungsstelle), X.509-Zertifikate, Verzeichnisdienst und Sperrmechanismus (CRL/OCSP)", "ok": true },
+     { "t": "Schlüsselgenerator, Passwort-Tresor, zentrale Klartext-Datenbank und ein Backup-Server für private Schlüssel", "ok": false },
+     { "t": "RADIUS-Server, DHCP-Relay, DNS-Resolver und ein NTP-Zeitserver für die Zertifikatssynchronisation", "ok": false },
+     { "t": "Firewall, IDS, Proxy-Server und ein VPN-Gateway zur Absicherung der Zertifikatsübertragung", "ok": false }
+    ],
+    "e": "Kern der PKI: CA signiert Zertifikate, RA prüft die Identität der Antragsteller, X.509-Zertifikate binden Schlüssel an Identitäten, CRL/OCSP melden widerrufene Zertifikate."
+   },
+   {
+    "q": "Was ist ein PSK (Pre-Shared Key)?",
+    "o": [
+     { "t": "Ein im Voraus auf beiden Seiten hinterlegter gemeinsamer Schlüssel für symmetrische Authentifizierung und Verschlüsselung", "ok": true },
+     { "t": "Ein öffentlicher Schlüssel, der vor dem Verbindungsaufbau aus dem Zertifikat der Gegenstelle gelesen wird", "ok": false },
+     { "t": "Ein einmaliger Sitzungsschlüssel, den der Server bei jedem Verbindungsaufbau neu generiert und zusendet", "ok": false },
+     { "t": "Ein Algorithmus, der zwei Parteien ohne vorherigen Kontakt einen gemeinsamen Schlüssel aushandeln lässt", "ok": false }
+    ],
+    "e": "Ein PSK ist ein vorab geteiltes Geheimnis, das beide Seiten schon kennen — kein Zertifikat, kein Austausch zur Laufzeit. Eingesetzt z. B. bei WPA2/WPA3-Personal und IPsec-Authentifizierung. Der letzte Distraktor beschreibt Diffie-Hellman."
+   },
+   {
+    "q": "Was ist SSL/TLS und wofür wird es verwendet?",
+    "o": [
+     { "t": "Ein Protokoll zur verschlüsselten, authentifizierten Absicherung von Verbindungen — die Grundlage von HTTPS", "ok": true },
+     { "t": "Ein Verfahren zur Absicherung von E-Mails auf dem Server, das Nachrichten dauerhaft verschlüsselt ablegt", "ok": false },
+     { "t": "Ein Tunnelprotokoll auf Schicht 2, das komplette Netzwerke über das Internet miteinander koppelt", "ok": false },
+     { "t": "Ein Authentifizierungsdienst, der Benutzeranmeldungen zentral über einen Verzeichnisserver abwickelt", "ok": false }
+    ],
+    "e": "SSL ist der veraltete Vorgänger von TLS. TLS sichert Verbindungen per Verschlüsselung, Serverauthentifizierung (Zertifikat) und Integritätsschutz — Transportverschlüsselung, keine Speicherverschlüsselung."
+   },
+   {
+    "q": "Warum ist eine sichere HTTPS-Verbindung (TLS) wichtig?",
+    "o": [
+     { "t": "Sie schützt übertragene Daten vor Mitlesen und Manipulation und weist die Identität des Servers per Zertifikat nach", "ok": true },
+     { "t": "Sie verschlüsselt die Daten auch nach der Übertragung dauerhaft auf dem Server und schützt so vor Datenlecks", "ok": false },
+     { "t": "Sie anonymisiert die eigene IP-Adresse gegenüber dem Server und verhindert so jedes Tracking durch Webseiten", "ok": false },
+     { "t": "Sie prüft die aufgerufene Webseite automatisch auf Schadcode und blockiert infizierte Inhalte vor dem Laden", "ok": false }
+    ],
+    "e": "HTTPS sichert den Transportweg: kein Abhören, keine Manipulation, Servernachweis per Zertifikat. Es schützt nicht die Daten auf dem Server, anonymisiert nicht und prüft keinen Schadcode."
    }
   ]
  },
@@ -10406,15 +10466,15 @@ const POOLS = {
       "ok": true
      },
      {
-      "t": "Schicht 2",
+      "t": "Schicht 2 (Sicherung)",
       "ok": false
      },
      {
-      "t": "Schicht 4",
+      "t": "Schicht 4 (Transport)",
       "ok": false
      },
      {
-      "t": "Schicht 7",
+      "t": "Schicht 7 (Anwendung)",
       "ok": false
      }
     ],
@@ -10428,15 +10488,15 @@ const POOLS = {
       "ok": true
      },
      {
-      "t": "Das gesamte Paket inklusive neuem Header",
+      "t": "Das gesamte Paket samt einem neuen Header",
       "ok": false
      },
      {
-      "t": "Nur den Header",
+      "t": "Ausschließlich den ursprünglichen IP-Header",
       "ok": false
      },
      {
-      "t": "Gar nichts",
+      "t": "Gar nichts, es bleibt alles im Klartext",
       "ok": false
      }
     ],
@@ -10498,11 +10558,11 @@ const POOLS = {
       "ok": false
      },
      {
-      "t": "DHCP-Vergabe",
+      "t": "Automatische DHCP-Adressvergabe",
       "ok": false
      },
      {
-      "t": "MAC-Filterung",
+      "t": "Filterung anhand von MAC-Adressen",
       "ok": false
      }
     ],
@@ -10824,15 +10884,15 @@ const POOLS = {
       "ok": true
      },
      {
-      "t": "Zwei Rechenzentren werden gekoppelt",
+      "t": "Zwei Rechenzentren werden dauerhaft gekoppelt",
       "ok": false
      },
      {
-      "t": "Zwei Endgeräte direkt",
+      "t": "Zwei einzelne Endgeräte verbinden sich direkt",
       "ok": false
      },
      {
-      "t": "Ein reiner LAN-Broadcast",
+      "t": "Ein reiner LAN-Broadcast im lokalen Netz",
       "ok": false
      }
     ],
@@ -10890,15 +10950,15 @@ const POOLS = {
       "ok": true
      },
      {
-      "t": "TCP und UDP",
+      "t": "TCP (Transmission Control) und UDP (User Datagram)",
       "ok": false
      },
      {
-      "t": "TLS und DTLS",
+      "t": "TLS (Transport Layer) und DTLS (Datagram TLS)",
       "ok": false
      },
      {
-      "t": "L2TP und PPTP",
+      "t": "L2TP (Layer 2 Tunneling) und PPTP (Point-to-Point)",
       "ok": false
      }
     ],
@@ -10908,19 +10968,19 @@ const POOLS = {
     "q": "Was ist L2TP?",
     "o": [
      {
-      "t": "Layer 2 Tunneling Protocol — oft mit IPsec kombiniert (L2TP/IPsec)",
+      "t": "Layer 2 Tunneling Protocol, oft mit IPsec kombiniert",
       "ok": true
      },
      {
-      "t": "Ein Routingprotokoll",
+      "t": "Ein dynamisches Routingprotokoll für IP-Netze",
       "ok": false
      },
      {
-      "t": "Ein Verschlüsselungsalgorithmus",
+      "t": "Ein symmetrischer Verschlüsselungsalgorithmus",
       "ok": false
      },
      {
-      "t": "Ein WLAN-Standard",
+      "t": "Ein Sicherheitsstandard für WLAN-Netze",
       "ok": false
      }
     ],
@@ -11057,6 +11117,61 @@ const POOLS = {
      }
     ],
     "e": "ESP (Encapsulating Security Payload) liefert Vertraulichkeit (Verschlüsselung) und Integrität."
+   },
+   {
+    "q": "Welche Protokolle übernehmen das Key Management beim Aufbau einer IPsec-Verbindung?",
+    "o": [
+     { "t": "IKE auf Basis von ISAKMP — handelt Schlüssel und Security Associations aus, meist per Diffie-Hellman", "ok": true },
+     { "t": "Kerberos in Kombination mit LDAP — verteilt Tickets und Sitzungsschlüssel über den Verzeichnisdienst", "ok": false },
+     { "t": "TLS-Handshake mit OCSP-Abfrage — tauscht die Sitzungsschlüssel über das Serverzertifikat aus", "ok": false },
+     { "t": "RADIUS zusammen mit TACACS+ — übernimmt Authentifizierung und Schlüsselverteilung zentral", "ok": false }
+    ],
+    "e": "IKE (auf dem ISAKMP-Rahmenwerk aufbauend) handelt vor dem Datentransfer Schlüssel und Security Associations aus, typischerweise mit Diffie-Hellman. Kerberos/LDAP, TLS und RADIUS sind echte Protokolle — aber nicht das Key Management von IPsec."
+   }
+  ]
+ },
+ "vlan": {
+  "name": "VLAN-Segmentierung",
+  "q": [
+   {
+    "q": "Welche der folgenden Gründe sprechen für die Aufteilung eines physischen Netzes in mehrere VLANs?",
+    "o": [
+     { "t": "Eindämmung von Broadcast-Domänen, logische Trennung von Abteilungen und feinere Sicherheits-/Zugriffskontrolle", "ok": true },
+     { "t": "Höhere physische Kabelbandbreite, geringerer Stromverbrauch der Switches und automatische IP-Vergabe", "ok": false },
+     { "t": "Verzicht auf Router, direkte Layer-2-Kommunikation zwischen allen Segmenten und wegfallende MAC-Adressen", "ok": false },
+     { "t": "Automatische Verschlüsselung des Verkehrs, integrierter Virenschutz und redundante Stromversorgung", "ok": false }
+    ],
+    "e": "VLANs verkleinern Broadcast-Domänen, trennen Bereiche logisch ohne separate Hardware und erlauben gezielte Zugriffsregeln zwischen Segmenten. Bandbreite, Strom und Verschlüsselung gehören nicht dazu."
+   },
+   {
+    "q": "VLAN-Zuordnung kann statisch oder dynamisch erfolgen. Welche Gegenüberstellung von Vor- und Nachteil trifft zu?",
+    "o": [
+     { "t": "Statisch (portbasiert): einfach und vorhersehbar, aber pflegeaufwändig bei Umzügen. Dynamisch (MAC-/regelbasiert): flexibel bei wechselnden Endgeräten, aber komplexer und abhängig von einer zentralen Datenbank", "ok": true },
+     { "t": "Statisch (portbasiert): passt sich selbsttätig an jeden Gerätewechsel an, aber dadurch schwer kontrollierbar. Dynamisch (MAC-/regelbasiert): fest an den Switch-Port gebunden, dafür aber besonders wartungsarm und stabil", "ok": false },
+     { "t": "Statisch (portbasiert): benötigt zwingend einen zentralen RADIUS-Server, dafür sehr schnell. Dynamisch (MAC-/regelbasiert): läuft völlig ohne Konfiguration, ist aber im Durchsatz deutlich langsamer", "ok": false },
+     { "t": "Statisch (portbasiert): verschlüsselt den Verkehr automatisch, ist aber teuer im Betrieb. Dynamisch (MAC-/regelbasiert): überträgt unverschlüsselt, dafür aber kostenlos und lizenzfrei nutzbar", "ok": false }
+    ],
+    "e": "Statische (portbasierte) VLANs sind simpel und stabil, aber bei jedem Umzug muss der Port umkonfiguriert werden. Dynamische VLANs weisen anhand von MAC/Identität zu — flexibel für mobile Geräte, aber mit zentraler Datenbank (oft RADIUS) und mehr Komplexität als Preis."
+   },
+   {
+    "q": "Warum sind dynamische VLANs in sicherheitskritischen Bereichen problematisch?",
+    "o": [
+     { "t": "Die Zuordnung hängt an Merkmalen wie der MAC-Adresse, die sich fälschen lassen — ein Angreifer kann sich so in ein fremdes VLAN einordnen lassen", "ok": true },
+     { "t": "Der gesamte Verkehr wird bei dynamischen VLANs grundsätzlich unverschlüsselt übertragen, während statische VLANs ihn automatisch per AES absichern", "ok": false },
+     { "t": "Dynamische VLANs deaktivieren beim Zuweisen automatisch die Firewall des Switches und öffnen dabei alle gesperrten Ports für den Zeitraum", "ok": false },
+     { "t": "Dynamische VLANs erlauben technisch maximal zwei Endgeräte pro Segment und sind deshalb bei mehr Teilnehmern schnell überlastet und instabil", "ok": false }
+    ],
+    "e": "Die dynamische Zuordnung stützt sich auf fälschbare Merkmale (v. a. MAC-Adressen). Per MAC-Spoofing kann sich ein Gerät als berechtigt ausgeben und in ein geschütztes VLAN gelangen. In sensiblen Zonen ist statische, portgebundene Zuordnung robuster."
+   },
+   {
+    "q": "Was ist ein prinzipieller Nachteil der VLAN-Technologie?",
+    "o": [
+     { "t": "VLANs trennen nur auf Layer 2 — für Kommunikation zwischen VLANs braucht es Routing (L3), und Fehlkonfiguration oder VLAN-Hopping können die Trennung aushebeln", "ok": true },
+     { "t": "VLANs benötigen für jedes einzelne Segment ein eigenes physisches Kabel und einen dedizierten Switch, was den Verkabelungsaufwand drastisch erhöht", "ok": false },
+     { "t": "VLANs funktionieren ausschließlich in Verbindung mit IPv6 und sind zu bestehenden IPv4-Netzen grundsätzlich inkompatibel, was Migrationen blockiert", "ok": false },
+     { "t": "VLANs begrenzen ein gesamtes Netz technisch hart auf maximal 16 Endgeräte und eignen sich deshalb nur für sehr kleine Arbeitsgruppen", "ok": false }
+    ],
+    "e": "Die logische Trennung ersetzt keine physische: Inter-VLAN-Verkehr braucht Routing, und die Isolation ist nur so gut wie die Konfiguration — Angriffe wie VLAN-Hopping oder Fehlkonfigurationen können sie durchbrechen."
    }
   ]
  },
@@ -11265,19 +11380,19 @@ const POOLS = {
     "q": "Was bedeutet Authentifizierung?",
     "o": [
      {
-      "t": "Nachweis der Identität (z. B. per Passwort)",
+      "t": "Nachweis der eigenen Identität (z. B. per Passwort)",
       "ok": true
      },
      {
-      "t": "Vergabe von Berechtigungen",
+      "t": "Vergabe von Zugriffsrechten und Berechtigungen",
       "ok": false
      },
      {
-      "t": "Verschlüsselung von Daten",
+      "t": "Verschlüsselung der übertragenen Daten",
       "ok": false
      },
      {
-      "t": "Namensauflösung",
+      "t": "Auflösung von Namen in IP-Adressen",
       "ok": false
      }
     ],
@@ -11313,15 +11428,15 @@ const POOLS = {
       "ok": true
      },
      {
-      "t": "Zwei Passwörter hintereinander",
+      "t": "Zwei Passwörter direkt nacheinander eingeben",
       "ok": false
      },
      {
-      "t": "Zwei Firewalls",
+      "t": "Zwei Firewalls hintereinander schalten",
       "ok": false
      },
      {
-      "t": "Zwei IP-Adressen",
+      "t": "Zwei IP-Adressen gleichzeitig verwenden",
       "ok": false
      }
     ],
@@ -11397,19 +11512,19 @@ const POOLS = {
     "q": "Warum ist eine reine MAC-Filterung als Schutz schwach?",
     "o": [
      {
-      "t": "MAC-Adressen lassen sich fälschen (Spoofing)",
+      "t": "MAC-Adressen lassen sich leicht fälschen (Spoofing)",
       "ok": true
      },
      {
-      "t": "MAC-Adressen sind verschlüsselt",
+      "t": "MAC-Adressen sind grundsätzlich verschlüsselt",
       "ok": false
      },
      {
-      "t": "Es gibt zu wenige MAC-Adressen",
+      "t": "Es gibt weltweit zu wenige MAC-Adressen",
       "ok": false
      },
      {
-      "t": "MAC-Filter kosten zu viel",
+      "t": "MAC-Filter verursachen zu hohe Kosten",
       "ok": false
      }
     ],
@@ -11599,15 +11714,15 @@ const POOLS = {
       "ok": true
      },
      {
-      "t": "Passwort, PIN und weiteres Passwort",
+      "t": "Passwort, PIN und ein weiteres Passwort",
       "ok": false
      },
      {
-      "t": "IP-Adresse, MAC und Port",
+      "t": "IP-Adresse, MAC-Adresse und Portnummer",
       "ok": false
      },
      {
-      "t": "Benutzername, Passwort und E-Mail",
+      "t": "Benutzername, Passwort und E-Mail-Adresse",
       "ok": false
      }
     ],
@@ -11868,15 +11983,15 @@ const POOLS = {
       "ok": true
      },
      {
-      "t": "900 MHz und 1,8 GHz",
+      "t": "900 MHz und 1,8 GHz (Mobilfunkbänder)",
       "ok": false
      },
      {
-      "t": "nur 2,4 GHz",
+      "t": "Ausschließlich das 2,4-GHz-Band",
       "ok": false
      },
      {
-      "t": "10 GHz und 60 GHz",
+      "t": "10 GHz und 60 GHz (Richtfunkbänder)",
       "ok": false
      }
     ],
@@ -11934,15 +12049,15 @@ const POOLS = {
       "ok": true
      },
      {
-      "t": "IEEE 802.3",
+      "t": "IEEE 802.3 (kabelgebundenes Ethernet)",
       "ok": false
      },
      {
-      "t": "IEEE 802.15",
+      "t": "IEEE 802.15 (Bluetooth/PAN)",
       "ok": false
      },
      {
-      "t": "IEEE 802.1Q",
+      "t": "IEEE 802.1Q (VLAN-Tagging)",
       "ok": false
      }
     ],
@@ -11996,19 +12111,19 @@ const POOLS = {
     "q": "Welches WLAN-Sicherheitsverfahren ist heute Mindeststandard?",
     "o": [
      {
-      "t": "WPA2 (besser WPA3)",
+      "t": "WPA2 (besser noch WPA3)",
       "ok": true
      },
      {
-      "t": "WEP",
+      "t": "WEP (veraltet und unsicher)",
       "ok": false
      },
      {
-      "t": "Gar keine Verschlüsselung",
+      "t": "Gar keine Verschlüsselung (offen)",
       "ok": false
      },
      {
-      "t": "MAC-Filter allein",
+      "t": "MAC-Filter allein (ohne Verschlüsselung)",
       "ok": false
      }
     ],
@@ -12044,15 +12159,15 @@ const POOLS = {
       "ok": true
      },
      {
-      "t": "Er vergibt SSIDs",
+      "t": "Er vergibt die SSIDs an die Access Points",
       "ok": false
      },
      {
-      "t": "Er verstärkt das Funksignal",
+      "t": "Er verstärkt das Funksignal im Gebäude",
       "ok": false
      },
      {
-      "t": "Er ersetzt den Access Point",
+      "t": "Er ersetzt den Access Point vollständig",
       "ok": false
      }
     ],
@@ -12497,6 +12612,16 @@ const POOLS = {
      }
     ],
     "e": "Fast Roaming (802.11r) ermöglicht reibungslosen AP-Wechsel ohne erneute Authentifizierung."
+   },
+   {
+    "q": "Wie funktioniert die Anmeldung per Pre-Shared Key (PSK) in einem WLAN?",
+    "o": [
+     { "t": "Client und Access Point kennen dasselbe Passwort und leiten daraus die Schlüssel zur Verschlüsselung der Funkverbindung ab", "ok": true },
+     { "t": "Der Access Point sendet dem Client bei jeder Verbindung ein neues Passwort zu, das nur für diese Sitzung gültig ist", "ok": false },
+     { "t": "Jeder Client authentifiziert sich mit individuellen Zugangsdaten gegen einen zentralen Authentifizierungsserver", "ok": false },
+     { "t": "Der Client weist sich über ein digitales Zertifikat aus, das von der CA des Netzbetreibers signiert wurde", "ok": false }
+    ],
+    "e": "Bei WPA2/WPA3-Personal ist der PSK das WLAN-Passwort — beide Seiten kennen es vorab und leiten daraus die Sitzungsschlüssel ab (WPA3 nutzt dafür SAE). Individuelle Anmeldung pro Nutzer wäre Enterprise mit RADIUS, Zertifikate wären 802.1X/EAP-TLS."
    }
   ]
  },
@@ -13375,19 +13500,19 @@ const POOLS = {
     "q": "Wie viele Werte kann 1 Byte (8 Bit) darstellen?",
     "o": [
      {
-      "t": "256 (0–255)",
+      "t": "256 (die Werte 0 bis 255)",
       "ok": true
      },
      {
-      "t": "128",
+      "t": "128 (die Werte 0 bis 127)",
       "ok": false
      },
      {
-      "t": "255",
+      "t": "255 (die Werte 1 bis 255)",
       "ok": false
      },
      {
-      "t": "512",
+      "t": "512 (die Werte 0 bis 511)",
       "ok": false
      }
     ],
@@ -13511,15 +13636,15 @@ const POOLS = {
       "ok": true
      },
      {
-      "t": "8 Bit",
+      "t": "8 Bit (ein ganzes Byte)",
       "ok": false
      },
      {
-      "t": "2 Bit",
+      "t": "2 Bit (ein Dibit)",
       "ok": false
      },
      {
-      "t": "16 Bit",
+      "t": "16 Bit (ein Word)",
       "ok": false
      }
     ],
@@ -13643,15 +13768,15 @@ const POOLS = {
       "ok": true
      },
      {
-      "t": "64",
+      "t": "64 (2⁶)",
       "ok": false
      },
      {
-      "t": "256",
+      "t": "256 (2⁸)",
       "ok": false
      },
      {
-      "t": "255",
+      "t": "255 (2⁸ − 1)",
       "ok": false
      }
     ],
@@ -14132,15 +14257,15 @@ const POOLS = {
       "ok": true
      },
      {
-      "t": "Sie verknüpft zwei Eingänge",
+      "t": "Sie verknüpft zwei Eingänge zu einem",
       "ok": false
      },
      {
-      "t": "Sie liefert immer 1",
+      "t": "Sie liefert unabhängig vom Eingang immer 1",
       "ok": false
      },
      {
-      "t": "Sie addiert zwei Bits",
+      "t": "Sie addiert zwei Bits mit Übertrag",
       "ok": false
      }
     ],
@@ -14238,19 +14363,19 @@ const POOLS = {
     "q": "Was ist NAND?",
     "o": [
      {
-      "t": "Negiertes AND (NOT + AND)",
+      "t": "Negiertes AND (NOT nach AND)",
       "ok": true
      },
      {
-      "t": "Negiertes OR",
+      "t": "Negiertes OR (NOT nach OR)",
       "ok": false
      },
      {
-      "t": "Dasselbe wie XOR",
+      "t": "Funktional dasselbe wie XOR",
       "ok": false
      },
      {
-      "t": "Ein doppeltes AND",
+      "t": "Zwei AND-Gatter hintereinander",
       "ok": false
      }
     ],
@@ -14282,19 +14407,19 @@ const POOLS = {
     "q": "Was ist NOR?",
     "o": [
      {
-      "t": "Negiertes OR (NOT + OR)",
+      "t": "Negiertes OR (NOT nach OR)",
       "ok": true
      },
      {
-      "t": "Negiertes AND",
+      "t": "Negiertes AND (NOT nach AND)",
       "ok": false
      },
      {
-      "t": "Dasselbe wie XOR",
+      "t": "Funktional dasselbe wie XOR",
       "ok": false
      },
      {
-      "t": "Ein doppeltes OR",
+      "t": "Zwei OR-Gatter hintereinander",
       "ok": false
      }
     ],
@@ -15022,7 +15147,7 @@ function updateMeta(){
   progressFill.style.width = (done/runQuestions.length*100) + '%';
 }
 
-function finishRun(){
+function showResult(){
   const correct = runQuestions.filter(x => x.correct).length;
   const total = runQuestions.length;
   const pct = Math.round(correct/total*100);
@@ -15037,6 +15162,21 @@ function finishRun(){
   runnerEl.classList.remove('active');
   resultEl.classList.add('show');
   window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function finishRun(){
+  // Erst kurzes Loading-Overlay (3s), damit die zuletzt beantwortete Frage
+  // (richtig/falsch) noch sichtbar bleibt, bevor die Auswertung erscheint.
+  const overlay = document.getElementById('finishOverlay');
+  if(overlay){
+    overlay.classList.add('show');
+    setTimeout(() => {
+      overlay.classList.remove('show');
+      showResult();
+    }, 3000);
+  } else {
+    showResult();
+  }
 }
 
 function startQuiz(){
@@ -15351,7 +15491,18 @@ const GLOSSAR = [{"a":"2FA","f":"Zwei-Faktor-Authentifizierung","d":"Anmeldung m
 {"a":"Unicast","f":"Einzelsendung","d":"Nachricht an genau einen Empfänger (1:1). Der Normalfall der Netzwerkkommunikation."},
 {"a":"Uplink","f":"Uplink-Port","d":"Port, der einen Switch mit einem übergeordneten Gerät (Router, Core-Switch) verbindet, oft mit höherer Bandbreite."},
 {"a":"Wireless Controller","f":"WLAN-Controller (WLC)","d":"Zentrales Gerät zur Verwaltung mehrerer Access Points: Konfiguration, Roaming, Sicherheit."},
-{"a":"WPS","f":"Wi-Fi Protected Setup","d":"Vereinfachte WLAN-Einrichtung per PIN oder Knopfdruck. Die PIN-Methode ist unsicher und sollte deaktiviert werden."}];
+{"a":"WPS","f":"Wi-Fi Protected Setup","d":"Vereinfachte WLAN-Einrichtung per PIN oder Knopfdruck. Die PIN-Methode ist unsicher und sollte deaktiviert werden."},
+{"a":"RA","f":"Registration Authority (Registrierungsstelle)","d":"PKI-Komponente, die die Identität von Zertifikatsantragstellern prüft, bevor die CA das Zertifikat ausstellt."},
+{"a":"ISAKMP","f":"Internet Security Association and Key Management Protocol","d":"Rahmenwerk für Aushandlung und Verwaltung von Security Associations bei IPsec. IKE baut darauf auf."},
+{"a":"PPTP","f":"Point-to-Point Tunneling Protocol","d":"Veraltetes VPN-Tunnelprotokoll mit bekannten Sicherheitslücken. Nicht mehr einsetzen — heute IPsec, OpenVPN oder WireGuard."},
+{"a":"MITM","f":"Man-in-the-Middle-Angriff","d":"Angreifer schaltet sich unbemerkt zwischen zwei Kommunikationspartner und kann mitlesen oder manipulieren. Abwehr: Verschlüsselung mit Authentifizierung (z. B. TLS mit Zertifikatsprüfung)."},
+{"a":"VLAN-Hopping","f":"VLAN-Hopping-Angriff","d":"Angriff, der die VLAN-Trennung umgeht, z. B. per Switch-Spoofing (Trunk aushandeln) oder Double Tagging. Abwehr: ungenutzte Ports deaktivieren, kein automatisches Trunking, natives VLAN nicht für Nutzdaten."},
+{"a":"MAC-Spoofing","f":"MAC-Adressen-Fälschung","d":"Vortäuschen einer fremden MAC-Adresse, um MAC-Filter oder dynamische VLAN-Zuordnung auszuhebeln. Grund, warum MAC-basierte Sicherheit als schwach gilt."},
+{"a":"Kerberos","f":"Kerberos-Authentifizierungsprotokoll","d":"Ticketbasierte Authentifizierung in Netzwerken (Standard in Active Directory). Ein zentraler Server (KDC) stellt Tickets aus, Passwörter werden nie übertragen."},
+{"a":"TACACS+","f":"Terminal Access Controller Access-Control System Plus","d":"AAA-Protokoll (Authentifizierung, Autorisierung, Accounting) v. a. für die Verwaltung von Netzwerkgeräten. Alternative zu RADIUS, trennt die drei AAA-Funktionen sauberer."},
+{"a":"EAP","f":"Extensible Authentication Protocol","d":"Rahmenwerk für Authentifizierungsverfahren, u. a. im WLAN (WPA-Enterprise). Varianten wie EAP-TLS nutzen Zertifikate statt Passwörter."},
+{"a":"802.1X","f":"Portbasierte Netzwerk-Zugangskontrolle","d":"IEEE-Standard: Ein Gerät muss sich erst authentifizieren (via EAP gegen z. B. RADIUS), bevor der Switch-/WLAN-Port Verkehr durchlässt. Basis von WPA-Enterprise."},
+{"a":"Hash","f":"Hashwert (kryptografische Prüfsumme)","d":"Fester Fingerabdruck beliebiger Daten, nicht umkehrbar und kollisionsresistent. Grundlage von Signaturen, Passwortspeicherung und Integritätsprüfung. Bekannte Verfahren: SHA-256; MD5/SHA-1 gelten als gebrochen."}];
 
 // ---- Bibliothek: Render + Suche ----
 const libList = document.getElementById('libList');
@@ -15413,3 +15564,5 @@ renderLib(GLOSSAR_SORTED);
 // Beim Laden immer oben starten (ohne Animation), egal was der Browser cachen will.
 window.scrollTo(0, 0);
 window.addEventListener('load', () => { window.scrollTo(0, 0); });
+// pageshow greift auch beim Wiederherstellen aus dem Back-Forward-Cache (mobil häufig).
+window.addEventListener('pageshow', () => { window.scrollTo(0, 0); });

@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>NEINT1 Symbiose – Lernscript</title>
-<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="styles.css?v=202607061010">
 </head>
 <body>
 <header>
@@ -35,6 +35,7 @@
   <a href="#r-ethernet">Ethernet</a>
   <a href="#r-medien">Kabel/Hardware</a>
   <a href="#r-routing">Routing/Switching</a>
+  <a href="#r-vlan">VLAN</a>
   <a href="#r-ip">IPv4/IPv6</a>
   <a href="#r-dnsdhcp">DNS/DHCP</a>
   <a href="#r-api">API/REST</a>
@@ -296,6 +297,19 @@
 <p><span class="term">STP</span> (Spanning Tree Protocol): verhindert Switching-Loops in redundant verkabelten Netzen, indem es überzählige Verbindungen blockiert und erst bei Ausfall der aktiven Strecke aktiviert.</p>
 </section>
 
+<section id="r-vlan">
+<h2>VLAN-Segmentierung vertieft</h2>
+<p><strong>Warum segmentieren?</strong> Drei Kerngründe sprechen für die Aufteilung physischer Netze in VLANs: <strong>kleinere Broadcastdomänen</strong> (weniger Grundlast, Broadcast-Stürme bleiben lokal begrenzt), <strong>logische Trennung</strong> von Abteilungen, Gerätegruppen oder Gästen ohne separate Hardware und Verkabelung, sowie <strong>feinere Sicherheits- und Zugriffskontrolle</strong> — der Verkehr zwischen Segmenten läuft zwingend über einen Router/L3-Switch und kann dort gefiltert werden. Weitere Pluspunkte: Flexibilität bei Umzügen (logische statt physische Umverkabelung) und Priorisierung, z. B. ein eigenes Voice-VLAN für VoIP.</p>
+<table>
+<tr><th></th><th>Statische VLANs (portbasiert)</th><th>Dynamische VLANs (MAC-/regelbasiert)</th></tr>
+<tr><td>Zuordnung</td><td>fest am Switch-Port konfiguriert</td><td>anhand von Merkmalen (v. a. MAC-Adresse) aus einer zentralen Datenbank</td></tr>
+<tr><td>Vorteil</td><td>einfach, vorhersehbar, robust</td><td>Gerät behält sein VLAN an jedem Port — flexibel bei mobilen Endgeräten</td></tr>
+<tr><td>Nachteil</td><td>pflegeaufwändig: jeder Umzug erfordert Port-Umkonfiguration</td><td>komplexer, abhängig von zentraler Datenbank (z. B. RADIUS-gestützt)</td></tr>
+</table>
+<div class="callout"><span class="tag">Sicherheit</span><strong>Dynamische VLANs gehören nicht in sicherheitskritische Bereiche:</strong> Die Zuordnung stützt sich auf fälschbare Merkmale — per <strong>MAC-Spoofing</strong> kann sich ein Angreifer als berechtigtes Gerät ausgeben und in ein geschütztes VLAN eingeordnet werden. In sensiblen Zonen ist die statische, portgebundene Zuordnung robuster; noch stärker ist portbasierte Zugangskontrolle nach <strong>802.1X</strong> (Authentifizierung via EAP gegen einen RADIUS-Server, bevor der Port überhaupt Verkehr durchlässt).</div>
+<p><strong>Prinzipielle Grenzen der VLAN-Technik:</strong> Die Trennung ist rein <strong>logisch auf Layer 2</strong> — sie ersetzt keine physische Trennung. Kommunikation zwischen VLANs erfordert L3-Routing (zusätzliche Komplexität und ein möglicher Engpass), und die Isolation ist nur so gut wie die Konfiguration: Fehlkonfigurationen oder Angriffe wie <strong>VLAN-Hopping</strong> (Switch-Spoofing über automatisch ausgehandelte Trunks, Double Tagging über das native VLAN) können die Trennung aushebeln. Gegenmaßnahmen: ungenutzte Ports deaktivieren, kein automatisches Trunk-Aushandeln (DTP aus), natives VLAN nicht für Nutzdaten verwenden.</p>
+</section>
+
 <section id="r-dnsdhcp">
 <h2>DNS & DHCP im Detail</h2>
 <p><span class="term">DHCP</span> (Dynamic Host Configuration Protocol) vergibt automatisch IP-Konfiguration. Ablauf <strong>DORA</strong>: <code>Discover</code> (Client sucht per Broadcast) → <code>Offer</code> (Server bietet an) → <code>Request</code> (Client fordert an) → <code>Acknowledge</code> (Server bestätigt). Vergeben werden IP, Subnetzmaske, Gateway, DNS-Server und die <strong>Lease-Time</strong>. Ohne DHCP: APIPA (169.254.x.x). Ports: 67 (Server) / 68 (Client). Da DHCP-Broadcasts nicht über Router hinauskommen, leitet ein <strong>DHCP-Relay-Agent</strong> sie als Unicast an einen zentralen Server weiter — ein Server bedient so mehrere Subnetze.</p>
@@ -336,12 +350,14 @@
 <p><span class="term">Hybrid:</span> Daten werden symmetrisch mit einem Sitzungsschlüssel verschlüsselt (schnell), der Sitzungsschlüssel wird asymmetrisch mit dem Public Key des Empfängers übertragen (sicher). Genutzt bei HTTPS, VPN, PGP/S-MIME.</p>
 <p><span class="term">Digitale Signatur:</span> Der Absender verschlüsselt den <strong>Hashwert</strong> der Nachricht mit seinem <strong>privaten</strong> Schlüssel. Der Empfänger prüft mit dem <strong>öffentlichen</strong> Schlüssel und vergleicht die Hashes → <strong>Authentizität</strong> und <strong>Integrität</strong>. Ein Hash muss kollisionsresistent und nicht umkehrbar sein; beim Passwort-Hashing verhindert ein zufälliger <strong>Salt</strong> pro Passwort, dass vorberechnete Tabellen (Rainbow-Tables) funktionieren.</p>
 <p><span class="term">Diffie-Hellman:</span> Verfahren, mit dem zwei Parteien über einen unsicheren Kanal einen gemeinsamen geheimen Schlüssel vereinbaren, ohne ihn zu übertragen — Basis vieler Schlüsselaustausch-Verfahren bei HTTPS und VPN.</p>
+<p><span class="term">SSL/TLS:</span> Protokoll zur verschlüsselten, authentifizierten Absicherung von Verbindungen — die Grundlage von <strong>HTTPS</strong>. SSL ist der veraltete, gebrochene Vorgänger; heute wird ausschließlich <strong>TLS</strong> (aktuell 1.2/1.3) eingesetzt, der Name „SSL" hält sich nur umgangssprachlich. TLS liefert drei Dinge: <strong>Vertraulichkeit</strong> (Verkehr nicht mitlesbar), <strong>Integrität</strong> (Manipulation fällt auf) und <strong>Serverauthentifizierung</strong> per X.509-Zertifikat. Wichtig fürs Verständnis: TLS sichert nur den <em>Transportweg</em> — es verschlüsselt keine Daten auf dem Server, anonymisiert nicht und prüft keinen Schadcode.</p>
+<p><span class="term">PSK</span> (Pre-Shared Key): ein vorab auf beiden Seiten hinterlegtes gemeinsames Geheimnis für symmetrische Authentifizierung/Verschlüsselung — kein Zertifikat, kein Schlüsselaustausch zur Laufzeit nötig. Einsatz z. B. bei <strong>WPA2/WPA3-Personal</strong> (der PSK ist das WLAN-Passwort, daraus werden die Sitzungsschlüssel abgeleitet) und als Authentifizierungsvariante bei <strong>IPsec</strong>-Verbindungen. Schwäche: Ein geteiltes Geheimnis skaliert schlecht und muss bei Kompromittierung überall getauscht werden — deshalb setzen Firmen auf Zertifikate oder 802.1X/EAP.</p>
 <div class="callout"><span class="tag">PKI (Public Key Infrastructure)</span>Ein <strong>Zertifikat</strong> (Standard <strong>X.509</strong>) bindet einen Public Key an eine Identität, signiert von einer <strong>CA</strong>. Hierarchie: Root-CA → <strong>Intermediate-CA</strong> (stellt im Alltag die Endnutzerzertifikate aus, während die Root-CA offline bleibt) → End-Entity. Vertrauen: Clients vertrauen der Root-CA und damit allem, was sie signiert. Ein <strong>Self-Signed Certificate</strong> ist von seiner eigenen CA signiert — ohne externen Vertrauensanker, daher von Browsern standardmäßig nicht akzeptiert. Widerruf wird über <strong>CRL</strong> (Certificate Revocation List) oder <strong>OCSP</strong> (Online Certificate Status Protocol) geprüft.</div>
 </section>
 
 <section id="r-vpn">
 <h2>VPN & IPsec</h2>
-<p>Ein <span class="term">VPN</span> (Virtual Private Network) baut einen verschlüsselten Tunnel durch ein unsicheres Netz (z. B. Internet). <strong>IPsec</strong> arbeitet auf Schicht 3 und bietet Verschlüsselung, Authentifizierung und Integrität. Schlüssel werden über <strong>IKE</strong> (Internet Key Exchange) ausgehandelt — <strong>IKEv2</strong> ist die modernere, stabilere Variante, besonders bei Netzwerkwechseln (Mobilfunk↔WLAN); <strong>ESP</strong> (Encapsulating Security Payload) kapselt und schützt die Nutzdaten.</p>
+<p>Ein <span class="term">VPN</span> (Virtual Private Network) baut einen verschlüsselten Tunnel durch ein unsicheres Netz (z. B. Internet). <strong>IPsec</strong> arbeitet auf Schicht 3 und bietet Verschlüsselung, Authentifizierung und Integrität. Schlüssel werden über <strong>IKE</strong> (Internet Key Exchange, aufbauend auf dem <strong>ISAKMP</strong>-Rahmenwerk) ausgehandelt — typischerweise per Diffie-Hellman; <strong>IKEv2</strong> ist die modernere, stabilere Variante, besonders bei Netzwerkwechseln (Mobilfunk↔WLAN); <strong>ESP</strong> (Encapsulating Security Payload) kapselt und schützt die Nutzdaten.</p>
 <p>Neben IPsec gibt es weitere VPN-Protokolle: <strong>L2TP</strong> (Layer 2 Tunneling Protocol) baut den Tunnel, liefert aber selbst keine Verschlüsselung — daher meist als L2TP/IPsec kombiniert. <strong>OpenVPN</strong> ist ein Open-Source-Protokoll auf TLS-Basis, plattformunabhängig und flexibel konfigurierbar.</p>
 <table>
 <tr><th>Modus</th><th>Was wird geschützt</th><th>Einsatz</th></tr>
@@ -442,6 +458,15 @@
     </div>
   </div>
 
+  <!-- Übergangs-Overlay: hält die letzte Frage 3s sichtbar, bevor die Auswertung kommt -->
+  <div class="finish-overlay" id="finishOverlay">
+    <div class="finish-box">
+      <div class="finish-spinner"></div>
+      <div class="finish-text">Auswertung wird erstellt<span class="finish-dots"></span></div>
+      <div class="finish-sub">Letzte Antwort noch im Blick behalten</div>
+    </div>
+  </div>
+
   <!-- Ergebnis -->
   <div class="result" id="result">
     <div class="score" id="resScore">0%</div>
@@ -460,6 +485,6 @@
 NEINT1 Symbiose · IHK-Lernscript · <span id="footCats">–</span> Kategorien · <span id="footQs">–</span> Fragen · randomisiert · Rotation ohne Wiederholung<br>
 Fachinformatiker · Aura
 </div></footer>
-<script src="app.js"></script>
+<script src="app.js?v=202607061010"></script>
 </body>
 </html>
