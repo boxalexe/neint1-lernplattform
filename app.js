@@ -505,7 +505,7 @@ const POOLS = {
       "ok": false
      },
      {
-      "t": "Fest Port 22 wie bei einer SSH-Sitzung (22)",
+      "t": "Fest Port wie bei einer SSH-Sitzung (22)",
       "ok": false
      }
     ],
@@ -523,7 +523,7 @@ const POOLS = {
       "ok": false
      },
      {
-      "t": "Die MAC-Adresse",
+      "t": "Die IP / MAC-Adresse",
       "ok": false
      },
      {
@@ -554,28 +554,6 @@ const POOLS = {
      }
     ],
     "e": "Port 25 ist für SMTP-Server-to-Server-Verkehr. 587 = Submission (Client→Server)."
-   },
-   {
-    "q": "Was ist ein Socket?",
-    "o": [
-     {
-      "t": "Kombination aus IP-Adresse und Portnummer",
-      "ok": true
-     },
-     {
-      "t": "Nur die IP-Adresse",
-      "ok": false
-     },
-     {
-      "t": "Nur die Portnummer",
-      "ok": false
-     },
-     {
-      "t": "Ein physischer Netzwerkanschluss",
-      "ok": false
-     }
-    ],
-    "e": "Ein Socket ist der eindeutige Verbindungsendpunkt: IP + Port."
    },
    {
     "q": "Wie nennt man Ports, die vom Betriebssystem temporär für ausgehende Verbindungen vergeben werden?",
@@ -666,28 +644,6 @@ const POOLS = {
     "e": "Der Zielport ist bei allen 443. Eindeutig wird jede Verbindung erst durch das komplette Socket-Paar: Quell-IP:Quellport ↔ Ziel-IP:Zielport."
    },
    {
-    "q": "Was ist der maximale Wert einer Portnummer?",
-    "o": [
-     {
-      "t": "65535",
-      "ok": true
-     },
-     {
-      "t": "65536",
-      "ok": false
-     },
-     {
-      "t": "49151",
-      "ok": false
-     },
-     {
-      "t": "32767",
-      "ok": false
-     }
-    ],
-    "e": "16-Bit-Feld: 2^16 = 65536 Werte, Bereich 0–65535."
-   },
-   {
     "q": "Welcher Port gehört zu FTP-Steuerverbindungen?",
     "o": [
      {
@@ -708,6 +664,16 @@ const POOLS = {
      }
     ],
     "e": "FTP: 21 = Steuerkanal (Control), 20 = Datenübertragung (Data)."
+   },
+   {
+    "q": "Ein Server lauscht auf Port 443. Wie entsteht daraus pro verbundenem Client eine eigene Verbindung?",
+    "o": [
+     { "t": "Für jede Verbindung bildet das Vierertupel aus Quell-IP, Quellport, Ziel-IP und Zielport einen eindeutigen Socket", "ok": true },
+     { "t": "Der Server öffnet für jeden neuen Client automatisch einen weiteren freien Zielport oberhalb von 443", "ok": false },
+     { "t": "Jeder Client erhält beim Verbindungsaufbau vom Server eine eindeutige Session-ID statt eines eigenen Sockets", "ok": false },
+     { "t": "Der Server unterscheidet die Clients ausschließlich anhand ihrer jeweiligen MAC-Adresse", "ok": false }
+    ],
+    "e": "Der lauschende Port bleibt 443. Jede aktive Verbindung wird durch das Vierertupel (Quell-IP, Quellport, Ziel-IP, Zielport) eindeutig — deshalb können viele Clients denselben Serverport nutzen, ohne sich zu vermischen."
    }
   ]
  },
@@ -801,28 +767,6 @@ const POOLS = {
      }
     ],
     "e": "Telnet (23) = unverschlüsselte, unsichere Fernsteuerung."
-   },
-   {
-    "q": "Über welchen Port läuft DNS?",
-    "o": [
-     {
-      "t": "53",
-      "ok": true
-     },
-     {
-      "t": "52",
-      "ok": false
-     },
-     {
-      "t": "80",
-      "ok": false
-     },
-     {
-      "t": "25",
-      "ok": false
-     }
-    ],
-    "e": "DNS = Port 53 (UDP, bei Zonentransfer TCP)."
    },
    {
     "q": "Welche Ports nutzt DHCP?",
@@ -976,7 +920,7 @@ const POOLS = {
       "ok": false
      }
     ],
-    "e": "FTP: 20 überträgt Dateien, 21 die Steuerbefehle."
+    "e": "FTP (File Transfer Protocol): 20 überträgt Dateien, 21 die Steuerbefehle."
    },
    {
     "q": "Welches Protokoll auf Port 161 überwacht Netzwerkgeräte?",
@@ -1441,22 +1385,22 @@ const POOLS = {
     "e": "Port 1080 ist der klassische Standardport für SOCKS-Proxy-Verbindungen (z. B. bei Tor)."
    },
    {
-    "q": "Welcher Dienst nutzt Port 67 und 68?",
+    "q": "Welcher Netzwerkdienst verwendet standardmäßig die UDP-Ports 67 und 68?",
     "o": [
      {
-      "t": "DHCP (Server 67, Client 68)",
+      "t": "DHCP",
       "ok": true
      },
      {
-      "t": "DNS (Namensauflösung über 53)",
+      "t": "DNS",
       "ok": false
      },
      {
-      "t": "SNMP (Überwachung über 161)",
+      "t": "SNMP",
       "ok": false
      },
      {
-      "t": "NTP (Zeitsync über 123)",
+      "t": "NTP",
       "ok": false
      }
     ],
@@ -1536,24 +1480,12 @@ const POOLS = {
    {
     "q": "Was ist Multiplexing?",
     "o": [
-     {
-      "t": "Mehrere Signale werden zu einem kombiniert und über ein Medium übertragen",
-      "ok": true
-     },
-     {
-      "t": "Ein Signal wird verschlüsselt",
-      "ok": false
-     },
-     {
-      "t": "Ein Paket wird verworfen",
-      "ok": false
-     },
-     {
-      "t": "Eine IP wird vergeben",
-      "ok": false
-     }
+     { "t": "Mehrere Signale werden zu einem kombiniert und über ein Medium übertragen", "ok": true },
+     { "t": "Ein Signal wird auf mehrere Medien verteilt, um Ausfälle zu kompensieren", "ok": false },
+     { "t": "Ein Datenstrom wird dupliziert und parallel an mehrere Empfänger gesendet", "ok": false },
+     { "t": "Mehrere Medien werden gebündelt, um die Reichweite eines Signals zu erhöhen", "ok": false }
     ],
-    "e": "Multiplexing bündelt mehrere Datenströme über ein gemeinsames Medium."
+    "e": "Multiplexing bündelt mehrere Datenströme über ein gemeinsames Medium, wie ein Kabel, eine Glasfaser oder eine Funkverbindung."
    },
    {
     "q": "Welches Bauteil bündelt die Signale?",
@@ -1646,22 +1578,10 @@ const POOLS = {
    {
     "q": "Was ist das Ziel von Multiplexing?",
     "o": [
-     {
-      "t": "Effiziente Nutzung der Bandbreite, Kostenreduktion",
-      "ok": true
-     },
-     {
-      "t": "Verschlüsselung",
-      "ok": false
-     },
-     {
-      "t": "IP-Vergabe",
-      "ok": false
-     },
-     {
-      "t": "Fehlerkorrektur",
-      "ok": false
-     }
+     { "t": "Effiziente Nutzung der Bandbreite, Kostenreduktion", "ok": true },
+     { "t": "Höhere Abhörsicherheit durch verschachtelte Signale", "ok": false },
+     { "t": "Fehlerkorrektur durch redundante Übertragungswege", "ok": false },
+     { "t": "Größere Reichweite durch gebündelte Sendeleistung", "ok": false }
     ],
     "e": "Ein Medium wird optimal ausgelastet, statt viele Leitungen zu benötigen."
    },
@@ -1690,22 +1610,10 @@ const POOLS = {
    {
     "q": "Wozu dient der zufällige Quellport?",
     "o": [
-     {
-      "t": "Antwortpakete der richtigen App/dem richtigen Tab zuordnen",
-      "ok": true
-     },
-     {
-      "t": "Die Daten zu verschlüsseln",
-      "ok": false
-     },
-     {
-      "t": "Die Ziel-IP zu ersetzen",
-      "ok": false
-     },
-     {
-      "t": "Die TTL zu setzen",
-      "ok": false
-     }
+     { "t": "Antwortpakete der richtigen Anwendung zuordnen", "ok": true },
+     { "t": "Den angesprochenen Dienst auf dem Zielserver identifizieren", "ok": false },
+     { "t": "Port-Scans auf dem Client-System ins Leere laufen lassen", "ok": false },
+     { "t": "Firewalls das Erkennen der genutzten Anwendung erschweren", "ok": false }
     ],
     "e": "Der Quellport ermöglicht die Rückzuordnung zur richtigen Anwendung."
    },
@@ -1778,44 +1686,20 @@ const POOLS = {
    {
     "q": "Multiplexing auf der Transportschicht bedeutet konkret …",
     "o": [
-     {
-      "t": "Mehrere Anwendungen teilen sich über Ports eine Netzverbindung",
-      "ok": true
-     },
-     {
-      "t": "Mehrere Kabel werden zusammengeführt",
-      "ok": false
-     },
-     {
-      "t": "IP-Adressen werden gebündelt",
-      "ok": false
-     },
-     {
-      "t": "Frames werden verschlüsselt",
-      "ok": false
-     }
+     { "t": "Mehrere Anwendungen teilen sich über Ports eine Netzverbindung", "ok": true },
+     { "t": "Mehrere physische Leitungen werden zu einem logischen Link gebündelt", "ok": false },
+     { "t": "Mehrere private Adressen werden auf eine öffentliche übersetzt", "ok": false },
+     { "t": "Mehrere Frames werden zu einem größeren Übertragungsblock vereint", "ok": false }
     ],
     "e": "Ports erlauben, dass viele Anwendungen dieselbe Leitung parallel nutzen."
    },
    {
     "q": "Welche Rolle spielt der Demultiplexer beim Empfang?",
     "o": [
-     {
-      "t": "Er ordnet ankommende Daten der richtigen Anwendung/Port zu",
-      "ok": true
-     },
-     {
-      "t": "Er verschlüsselt die Daten",
-      "ok": false
-     },
-     {
-      "t": "Er erhöht die TTL",
-      "ok": false
-     },
-     {
-      "t": "Er vergibt IP-Adressen",
-      "ok": false
-     }
+     { "t": "Er ordnet ankommende Daten der richtigen Anwendung/Port zu", "ok": true },
+     { "t": "Er entfernt die Header aller Schichten bis zur Anwendung", "ok": false },
+     { "t": "Er prüft ankommende Daten und fordert Fehlendes erneut an", "ok": false },
+     { "t": "Er zerlegt große Segmente wieder in einzelne IP-Pakete", "ok": false }
     ],
     "e": "Der DEMUX verteilt die eintreffenden Ströme wieder an die Ziele."
    },
@@ -1844,22 +1728,10 @@ const POOLS = {
    {
     "q": "Welche Aussage über festen Zielport und variablen Quellport stimmt?",
     "o": [
-     {
-      "t": "Der Zielport identifiziert den Dienst, der Quellport die Client-Instanz",
-      "ok": true
-     },
-     {
-      "t": "Beide sind immer identisch",
-      "ok": false
-     },
-     {
-      "t": "Der Quellport ist immer 443",
-      "ok": false
-     },
-     {
-      "t": "Der Zielport wird zufällig gewählt",
-      "ok": false
-     }
+     { "t": "Der Zielport identifiziert den Dienst, der Quellport die Client-Instanz", "ok": true },
+     { "t": "Der Quellport identifiziert den Dienst, der Zielport die Client-Instanz", "ok": false },
+     { "t": "Der Zielport wechselt je Sitzung, der Quellport bleibt dauerhaft gleich", "ok": false },
+     { "t": "Beide Ports werden vom Server vorgegeben und dem Client mitgeteilt", "ok": false }
     ],
     "e": "Zielport = welcher Dienst; Quellport = welche konkrete Client-Verbindung."
    },
@@ -1935,28 +1807,6 @@ const POOLS = {
     "e": "TCP = Transmission Control Protocol."
    },
    {
-    "q": "Wofür steht IP?",
-    "o": [
-     {
-      "t": "Internet Protocol",
-      "ok": true
-     },
-     {
-      "t": "Internal Protocol",
-      "ok": false
-     },
-     {
-      "t": "Interface Protocol",
-      "ok": false
-     },
-     {
-      "t": "Integrated Packet",
-      "ok": false
-     }
-    ],
-    "e": "IP = Internet Protocol (Adressierung/Routing)."
-   },
-   {
     "q": "Welche Aussage über UDP ist korrekt?",
     "o": [
      {
@@ -2001,32 +1851,10 @@ const POOLS = {
     "e": "IP adressiert und routet; es ist selbst verbindungslos."
    },
    {
-    "q": "Welcher Dienst nutzt typischerweise UDP?",
-    "o": [
-     {
-      "t": "VoIP / Videostreaming",
-      "ok": true
-     },
-     {
-      "t": "Datei-Download per HTTPS",
-      "ok": false
-     },
-     {
-      "t": "E-Mail-Versand per SMTP",
-      "ok": false
-     },
-     {
-      "t": "SSH-Fernzugriff",
-      "ok": false
-     }
-    ],
-    "e": "Echtzeit bevorzugt UDP: Tempo vor Vollständigkeit."
-   },
-   {
     "q": "Was macht TCP mit einem fehlenden Paket?",
     "o": [
      {
-      "t": "Es fordert das Paket erneut an (Retransmission)",
+      "t": "Es fordert das Paket erneut an",
       "ok": true
      },
      {
@@ -2042,7 +1870,7 @@ const POOLS = {
       "ok": false
      }
     ],
-    "e": "TCP erkennt fehlende Bestätigungen und sendet erneut."
+    "e": "TCP erkennt fehlende Bestätigungen und sendet erneut. (Retransmission)"
    },
    {
     "q": "Welches Feld sichert bei TCP die richtige Reihenfolge der Pakete?",
@@ -2096,7 +1924,7 @@ const POOLS = {
       "ok": true
      },
      {
-      "t": "Es nutzt größere Pakete",
+      "t": "Es nutzt kleinere Pakete",
       "ok": false
      },
      {
@@ -2104,7 +1932,7 @@ const POOLS = {
       "ok": false
      },
      {
-      "t": "Es komprimiert alle Daten",
+      "t": "Weil es die Daten vor dem Senden stark komprimiert",
       "ok": false
      }
     ],
@@ -2184,7 +2012,7 @@ const POOLS = {
       "ok": true
      },
      {
-      "t": "Live-Gaming",
+      "t": "Die automatische Vergabe von IP-Adressen / DHCP",
       "ok": false
      },
      {
@@ -2201,22 +2029,10 @@ const POOLS = {
    {
     "q": "Welche Aussage über TCP/IP als Protokollfamilie ist korrekt?",
     "o": [
-     {
-      "t": "Sie regelt die Datenübertragung unabhängig von Hardware/Software",
-      "ok": true
-     },
-     {
-      "t": "Sie funktioniert nur mit Windows",
-      "ok": false
-     },
-     {
-      "t": "Sie ersetzt die IP-Adresse",
-      "ok": false
-     },
-     {
-      "t": "Sie ist ausschließlich verbindungslos",
-      "ok": false
-     }
+     { "t": "Sie regelt die Datenübertragung unabhängig von Hardware/Software", "ok": true },
+     { "t": "Sie definiert die physikalischen Eigenschaften der Übertragungsmedien", "ok": false },
+     { "t": "Sie arbeitet grundsätzlich verbindungsorientiert auf allen Schichten", "ok": false },
+     { "t": "Sie wurde durch das OSI-Modell abgelöst und gilt heute als veraltet", "ok": false }
     ],
     "e": "TCP/IP ist herstellerunabhängig und die Basis des Internets."
    },
@@ -2245,22 +2061,10 @@ const POOLS = {
    {
     "q": "Welches Protokoll prüft mit einer Prüfsumme auf Übertragungsfehler?",
     "o": [
-     {
-      "t": "Sowohl TCP als auch UDP nutzen eine Checksum",
-      "ok": true
-     },
-     {
-      "t": "Nur IP",
-      "ok": false
-     },
-     {
-      "t": "Nur ARP",
-      "ok": false
-     },
-     {
-      "t": "Kein Transportprotokoll",
-      "ok": false
-     }
+     { "t": "Sowohl TCP als auch UDP nutzen eine Checksum", "ok": true },
+     { "t": "Nur TCP — UDP verzichtet zugunsten des Tempos darauf", "ok": false },
+     { "t": "Nur UDP — TCP sichert stattdessen über Sequenznummern", "ok": false },
+     { "t": "Nur IP — die Transportprotokolle verlassen sich darauf", "ok": false }
     ],
     "e": "Beide besitzen eine Checksum; TCP reagiert aktiv, UDP verwirft nur fehlerhafte Pakete."
    },
@@ -2355,64 +2159,30 @@ const POOLS = {
    {
     "q": "Warum eignet sich TCP schlecht für Live-Videotelefonie?",
     "o": [
-     {
-      "t": "Erneutes Senden verspäteter Pakete stört den Echtzeitfluss",
-      "ok": true
-     },
-     {
-      "t": "TCP kann keine Bilder übertragen",
-      "ok": false
-     },
-     {
-      "t": "TCP ist verbindungslos",
-      "ok": false
-     },
-     {
-      "t": "TCP nutzt keine Ports",
-      "ok": false
-     }
+     { "t": "Erneutes Senden verspäteter Pakete stört den Echtzeitfluss", "ok": true },
+     { "t": "Der Handshake muss für jeden Videoframe neu durchlaufen werden", "ok": false },
+     { "t": "Die Segmentgröße von TCP ist für Videodaten grundsätzlich zu klein", "ok": false },
+     { "t": "TCP begrenzt die Bandbreite je Verbindung auf feste Höchstwerte", "ok": false }
     ],
     "e": "Retransmissions erzeugen Verzögerung; bei Echtzeit ist UDP besser."
-   },
-   {
-    "q": "Was ist die Aufgabe der Portnummern im Transportprotokoll?",
-    "o": [
-     {
-      "t": "Zuordnung der Daten zur richtigen Anwendung",
-      "ok": true
-     },
-     {
-      "t": "Wegfindung zwischen Netzen",
-      "ok": false
-     },
-     {
-      "t": "Physische Adressierung",
-      "ok": false
-     },
-     {
-      "t": "Verschlüsselung",
-      "ok": false
-     }
-    ],
-    "e": "Ports adressieren die Anwendung; IP adressiert das Gerät/Netz."
    },
    {
     "q": "Welche Reihenfolge beschreibt die Kapselung beim Senden korrekt?",
     "o": [
      {
-      "t": "Daten → Segment (TCP) → Paket (IP) → Frame",
+      "t": "Daten → Segment → Paket → Frame → Bits",
       "ok": true
      },
      {
-      "t": "Frame → Paket → Segment → Daten",
+      "t": "Bits → Frame → Paket → Segment → Daten",
       "ok": false
      },
      {
-      "t": "Paket → Frame → Segment → Daten",
+      "t": "Paket → Frame → Segment → Daten → Bits",
       "ok": false
      },
      {
-      "t": "Segment → Daten → Frame → Paket",
+      "t": "Segment → Daten → Bits → Frame → Paket",
       "ok": false
      }
     ],
@@ -2492,7 +2262,7 @@ const POOLS = {
       "ok": true
      },
      {
-      "t": "UDP ist bereits zuverlässig",
+      "t": "Weil UDP-Pakete im Internet immer Vorrang vor TCP haben",
       "ok": false
      },
      {
@@ -2509,66 +2279,30 @@ const POOLS = {
    {
     "q": "Ein Vorteil von QUIC ist der Wegfall des Head-of-Line-Blocking. Was heißt das?",
     "o": [
-     {
-      "t": "Ein verlorenes Paket blockiert nicht alle parallelen Datenströme",
-      "ok": true
-     },
-     {
-      "t": "Pakete werden nie mehr verloren",
-      "ok": false
-     },
-     {
-      "t": "Es gibt keine Reihenfolge mehr",
-      "ok": false
-     },
-     {
-      "t": "Der Header entfällt komplett",
-      "ok": false
-     }
+     { "t": "Ein verlorenes Paket blockiert nicht alle parallelen Datenströme", "ok": true },
+     { "t": "Verlorene Pakete werden vom nächsten Router statt vom Sender ersetzt", "ok": false },
+     { "t": "Der Empfänger bestätigt nur das letzte Paket statt jedes einzelne", "ok": false },
+     { "t": "Router leeren ihre Warteschlangen für QUIC-Pakete stets bevorzugt", "ok": false }
     ],
     "e": "QUIC trennt Streams, sodass ein Verlust in einem Stream die anderen nicht aufhält."
    },
    {
     "q": "Was passiert, wenn ein TCP-Segment auf dem Weg verloren geht?",
     "o": [
-     {
-      "t": "Der Sender erhält keine Bestätigung (ACK) und sendet das Segment nach Timeout erneut",
-      "ok": true
-     },
-     {
-      "t": "Es wird stillschweigend ignoriert",
-      "ok": false
-     },
-     {
-      "t": "Die Verbindung bricht sofort ab",
-      "ok": false
-     },
-     {
-      "t": "UDP übernimmt automatisch",
-      "ok": false
-     }
+     { "t": "Der Sender erhält keine Bestätigung (ACK) und sendet das Segment nach Timeout erneut", "ok": true },
+     { "t": "Der Empfänger fordert das fehlende Segment direkt beim letzten Router an", "ok": false },
+     { "t": "Die Verbindung wird neu aufgebaut und die Übertragung beginnt von vorn", "ok": false },
+     { "t": "Der Empfänger rekonstruiert das Segment aus den Prüfsummen der Nachbarpakete", "ok": false }
     ],
     "e": "Bleibt das ACK aus, erkennt der Sender per Timeout den Verlust und wiederholt die Übertragung (Retransmission)."
    },
    {
     "q": "Welche TCP-Eigenschaft verhindert, dass der Sender den Empfänger überflutet?",
     "o": [
-     {
-      "t": "Flusskontrolle (Flow Control) per Fenstergröße",
-      "ok": true
-     },
-     {
-      "t": "Checksumme",
-      "ok": false
-     },
-     {
-      "t": "TTL",
-      "ok": false
-     },
-     {
-      "t": "Die Sequenznummer",
-      "ok": false
-     }
+     { "t": "Flusskontrolle (Flow Control) per Fenstergröße", "ok": true },
+     { "t": "Staukontrolle (Congestion Control) per Slow Start", "ok": false },
+     { "t": "Priorisierung (QoS) über das DSCP-Feld im Header", "ok": false },
+     { "t": "Ratenbegrenzung über die maximale Segmentgröße (MSS)", "ok": false }
     ],
     "e": "Das TCP-Fenster begrenzt die Datenmenge, die vor einer Bestätigung gesendet werden darf."
    },
@@ -2597,44 +2331,20 @@ const POOLS = {
    {
     "q": "Was ist der Unterschied zwischen TCP-Segment und UDP-Datagramm?",
     "o": [
-     {
-      "t": "TCP-Segment enthält Sequenznummern und Bestätigungsfelder, UDP-Datagramm nicht",
-      "ok": true
-     },
-     {
-      "t": "UDP-Datagramm ist immer größer",
-      "ok": false
-     },
-     {
-      "t": "TCP-Segment hat keine Portnummern",
-      "ok": false
-     },
-     {
-      "t": "Beide sind identisch",
-      "ok": false
-     }
+     { "t": "TCP-Segment enthält Sequenznummern und Bestätigungsfelder, UDP-Datagramm nicht", "ok": true },
+     { "t": "UDP-Datagramme enthalten die Prüfsummen, TCP-Segmente sichern nur über ACKs", "ok": false },
+     { "t": "UDP-Datagramme werden nummeriert, damit der Empfänger sie sortieren kann", "ok": false },
+     { "t": "TCP-Segmente tragen keine Portnummern, weil die Verbindung sie ersetzt", "ok": false }
     ],
     "e": "TCP-Segmente tragen Sequenz- und ACK-Nummern für Zuverlässigkeit; UDP ist schlanker."
    },
    {
     "q": "Was überprüft die Checksumme in TCP und UDP?",
     "o": [
-     {
-      "t": "Ob die Daten auf dem Übertragungsweg beschädigt wurden",
-      "ok": true
-     },
-     {
-      "t": "Ob die IP-Adresse korrekt ist",
-      "ok": false
-     },
-     {
-      "t": "Die TTL",
-      "ok": false
-     },
-     {
-      "t": "Die Portnummer",
-      "ok": false
-     }
+     { "t": "Ob die Daten auf dem Übertragungsweg beschädigt wurden", "ok": true },
+     { "t": "Ob die Pakete in der richtigen Reihenfolge angekommen sind", "ok": false },
+     { "t": "Ob das Paket unterwegs dupliziert und doppelt zugestellt wurde", "ok": false },
+     { "t": "Ob der Absender berechtigt ist, den Zielport anzusprechen", "ok": false }
     ],
     "e": "Die Checksumme erkennt Bitfehler in Header und Daten — bei UDP wird ein fehlerhaftes Paket verworfen."
    },
@@ -2683,68 +2393,44 @@ const POOLS = {
     "e": "Ablauf: Client SYN → Server SYN-ACK → Client ACK. Danach steht die Verbindung."
    },
    {
-    "q": "Was initiiert beim TCP-Verbindungsabbau den Trennungswunsch?",
+    "q": "Wer initiiert beim TCP-Verbindungsabbau den Trennungswunsch?",
     "o": [
      {
-      "t": "Ein FIN-Segment vom Client oder Server",
+      "t": "Sowohl der Client als auch der Server können den Abbau starten",
       "ok": true
      },
      {
-      "t": "Ein SYN-Segment",
+      "t": "Ausschließlich der Client, der die Verbindung aufgebaut hat",
       "ok": false
      },
      {
-      "t": "Ein ACK-Segment",
+      "t": "Ausschließlich der Standard-Gateway-Router des Netzwerks",
       "ok": false
      },
      {
-      "t": "Ein RST-Segment",
+      "t": "Immer der Server, sobald alle Daten übertragen wurden",
       "ok": false
      }
     ],
-    "e": "Der geordnete Abbau beginnt mit FIN; RST hingegen bricht eine Verbindung sofort ab."
+    "e": "Jede der beiden Parteien kann den Verbindungsabbau durch das Senden eines FIN-Pakets einleiten."
    },
    {
     "q": "Warum eignet sich TCP schlecht für Live-Video-Calls bei instabiler Verbindung?",
     "o": [
-     {
-      "t": "Erneutes Senden verlorener Pakete verzögert den gesamten Datenstrom (Head-of-Line-Blocking)",
-      "ok": true
-     },
-     {
-      "t": "TCP kann keine Videodaten übertragen",
-      "ok": false
-     },
-     {
-      "t": "TCP verschlüsselt automatisch, was Latenz erzeugt",
-      "ok": false
-     },
-     {
-      "t": "TCP hat keine Ports für Video",
-      "ok": false
-     }
+     { "t": "Erneutes Senden verlorener Pakete verzögert den gesamten Datenstrom (Head-of-Line-Blocking)", "ok": true },
+     { "t": "Der dreistufige Handshake muss nach jedem Paketverlust vollständig wiederholt werden", "ok": false },
+     { "t": "Die Staukontrolle drosselt bei Verlusten dauerhaft auf die minimale Datenrate herunter", "ok": false },
+     { "t": "Die Prüfsummenberechnung erzeugt bei Videodatenmengen eine zu hohe Rechenlast", "ok": false }
     ],
     "e": "Ein verlorenes Paket blockiert bei TCP die Zustellung nachfolgender Daten, bis es erneut angekommen ist — bei Echtzeit spürbar störend."
    },
    {
     "q": "Wann ist UDP die bessere Wahl gegenüber TCP?",
     "o": [
-     {
-      "t": "Wenn geringe Latenz wichtiger ist als garantierte Zustellung",
-      "ok": true
-     },
-     {
-      "t": "Wenn jedes Paket ankommen muss",
-      "ok": false
-     },
-     {
-      "t": "Beim Datei-Download",
-      "ok": false
-     },
-     {
-      "t": "Bei verschlüsselten Verbindungen",
-      "ok": false
-     }
+     { "t": "Wenn geringe Latenz wichtiger ist als garantierte Zustellung", "ok": true },
+     { "t": "Wenn große Dateien möglichst schnell vollständig ankommen sollen", "ok": false },
+     { "t": "Wenn der Empfänger die Pakete in exakter Reihenfolge benötigt", "ok": false },
+     { "t": "Wenn die Verbindung über unsichere öffentliche Netze laufen muss", "ok": false }
     ],
     "e": "DNS, VoIP und Live-Video bevorzugen UDP: ein verlorenes Paket stört weniger als Verzögerung."
    },
@@ -3125,7 +2811,7 @@ const POOLS = {
       "ok": false
      }
     ],
-    "e": "Der erste Router setzt TTL auf 0, verwirft und identifiziert sich so als Hop 1."
+    "e": "Der erste Router senkt die TTL auf 0, verwirft das Paket und schickt eine ICMP-Fehlermeldung zurück. So erfährt Traceroute seine IP-Adresse."
    },
    {
     "q": "Was ist ein 'Hop' im Netzwerkkontext?",
@@ -3197,26 +2883,26 @@ const POOLS = {
     "q": "Welches Werkzeug zeigt den kompletten Pfad zu einem Server an?",
     "o": [
      {
-      "t": "traceroute / tracert",
+      "t": "traceroute (oder tracert)",
       "ok": true
      },
      {
-      "t": "ping",
+      "t": "ping (oder icmp-echo)",
       "ok": false
      },
      {
-      "t": "nslookup",
+      "t": "nslookup (oder dig)",
       "ok": false
      },
      {
-      "t": "ipconfig",
+      "t": "ipconfig (oder ifconfig)",
       "ok": false
      }
     ],
-    "e": "Traceroute listet jeden Hop; ping prüft nur Erreichbarkeit."
+    "e": "Traceroute zeigt den genauen Weg über alle Hops an. nslookup löst Namen auf, ping prüft nur die Erreichbarkeit und ipconfig zeigt die eigene Konfiguration."
    },
    {
-    "q": "Was enthält der IP-Header zwingend?",
+    "q": "Was enthält ein IPv4-Header zwingend?",
     "o": [
      {
       "t": "Quell-IP, Ziel-IP, TTL, Protokoll, Prüfsumme",
@@ -3227,11 +2913,11 @@ const POOLS = {
       "ok": false
      },
      {
-      "t": "MAC-Adressen",
+      "t": "MAC-Adressen, Portnummern und die Prüfsummen",
       "ok": false
      },
      {
-      "t": "Portnummern",
+      "t": "Die Quell- und Ziel-Portnummern der kommunizierenden Anwendungen.",
       "ok": false
      }
     ],
@@ -3284,30 +2970,18 @@ const POOLS = {
    {
     "q": "Was ist die Funktion der Sequence Number im TCP-Header?",
     "o": [
-     {
-      "t": "Nummeriert die Bytes zur korrekten Reihenfolge beim Empfänger",
-      "ok": true
-     },
-     {
-      "t": "Zählt die Hops",
-      "ok": false
-     },
-     {
-      "t": "Identifiziert den Port",
-      "ok": false
-     },
-     {
-      "t": "Prüft auf Fehler",
-      "ok": false
-     }
+     { "t": "Nummeriert die Bytes zur korrekten Reihenfolge beim Empfänger", "ok": true },
+     { "t": "Zählt die verbleibenden Weiterleitungen bis zum Verwerfen", "ok": false },
+     { "t": "Identifiziert die empfangende Anwendung auf dem Zielsystem", "ok": false },
+     { "t": "Sichert die Nutzdaten gegen Veränderung auf dem Übertragungsweg", "ok": false }
     ],
     "e": "Die Sequenznummer ermöglicht die Wiederzusammensetzung in richtiger Reihenfolge."
    },
    {
-    "q": "Was ist die Acknowledgement Number im TCP-Header?",
+    "q": "Was gibt die Acknowledgement Number im TCP-Header konkret an?",
     "o": [
      {
-      "t": "Das nächste erwartete Byte vom Sender",
+      "t": "Die Sequenznummer des nächsten Datenbytes, das der Empfänger erwartet",
       "ok": true
      },
      {
@@ -3315,15 +2989,15 @@ const POOLS = {
       "ok": false
      },
      {
-      "t": "Die Portnummer",
+      "t": "Die Portnummer der Anwendung, für die das Paket bestimmt ist",
       "ok": false
      },
      {
-      "t": "Die TTL",
+      "t": "Die Gesamtzahl aller Pakete, die während der Sitzung verloren gingen",
       "ok": false
      }
     ],
-    "e": "Die ACK-Nummer bestätigt empfangene Daten und fordert das nächste Byte an."
+    "e": "Die Bestätigungsnummer ist kumulativ und nennt immer die Nummer des nächsten erwarteten Bytes (z. B. Erhalten: 1–1000 -> ACK: 1001)."
    },
    {
     "q": "Welchen typischen Startwert hat die TTL unter Linux?",
@@ -3348,46 +3022,22 @@ const POOLS = {
     "e": "Linux = TTL 64, Windows = 128, einige Netzwerkgeräte = 255."
    },
    {
-    "q": "Warum hat ein Paket, das 12 Router passiert hat, eine TTL von mindestens 1 am Ziel?",
+    "q": "Ein Windows-PC sendet ein Paket mit einer TTL von 128. Welchen TTL-Wert hat das Paket am Ziel, wenn es 12 Router passiert hat?",
     "o": [
-     {
-      "t": "Weil jeder Router 1 abzieht und bei 0 verwirft, muss der Startwert > 12 sein",
-      "ok": true
-     },
-     {
-      "t": "Weil TTL bei jedem Router erhöht wird",
-      "ok": false
-     },
-     {
-      "t": "Weil der Zielrechner die TTL setzt",
-      "ok": false
-     },
-     {
-      "t": "TTL spielt keine Rolle",
-      "ok": false
-     }
+     { "t": "116", "ok": true },
+     { "t": "128", "ok": false },
+     { "t": "1", "ok": false },
+     { "t": "140", "ok": false }
     ],
-    "e": "Mit Startwert 13 überlebt das Paket 12 Router (jeder −1) und kommt mit TTL=1 an."
+    "e": "Jeder Router zieht genau 1 vom TTL-Wert ab. Da gängige Betriebssysteme mit Werten wie 64 oder 128 starten, bleibt nach 12 Hops reichlich Rest-TTL übrig (116)."
    },
    {
     "q": "Was zeigt traceroute durch schrittweise TTL-Erhöhung?",
     "o": [
-     {
-      "t": "Die Route mit allen Zwischen-Routern und deren Antwortzeiten",
-      "ok": true
-     },
-     {
-      "t": "Die Bandbreite auf dem Weg",
-      "ok": false
-     },
-     {
-      "t": "Die MAC-Adressen aller Hops",
-      "ok": false
-     },
-     {
-      "t": "Nur den letzten Router",
-      "ok": false
-     }
+     { "t": "Die Route mit allen Zwischen-Routern und deren Antwortzeiten", "ok": true },
+     { "t": "Die verfügbare Bandbreite auf jedem Teilstück des Weges", "ok": false },
+     { "t": "Die Paketverluste je Teilstrecke über einen Messzeitraum", "ok": false },
+     { "t": "Die MAC-Adressen aller Geräte entlang der Strecke", "ok": false }
     ],
     "e": "Traceroute erhöht TTL von 1 an: jeder Router, der das Paket verwirft, meldet sich zurück."
    },
@@ -3972,11 +3622,11 @@ const POOLS = {
     "q": "In welche Richtung durchläuft ein gesendetes Datenpaket die Schichten?",
     "o": [
      {
-      "t": "Von Schicht 7 nach Schicht 1 (Kapselung)",
+      "t": "Von Schicht 7 nach Schicht 1",
       "ok": true
      },
      {
-      "t": "Von Schicht 1 nach 7",
+      "t": "Von Schicht 1 nach Schicht 7",
       "ok": false
      },
      {
@@ -4125,22 +3775,10 @@ const POOLS = {
    {
     "q": "Welches Gerät arbeitet auf allen sieben Schichten?",
     "o": [
-     {
-      "t": "Gateway / Application-Layer-Firewall",
-      "ok": true
-     },
-     {
-      "t": "Switch",
-      "ok": false
-     },
-     {
-      "t": "Hub",
-      "ok": false
-     },
-     {
-      "t": "Repeater",
-      "ok": false
-     }
+     { "t": "Gateway / Application-Layer-Firewall", "ok": true },
+     { "t": "Layer-3-Switch mit Routingfunktion", "ok": false },
+     { "t": "Router mit aktivierter Paketfilterung", "ok": false },
+     { "t": "Managed Switch mit VLAN-Unterstützung", "ok": false }
     ],
     "e": "Ein Anwendungsschicht-Gateway (z. B. Proxy, WAF) kann alle 7 Schichten verarbeiten."
    },
@@ -4235,22 +3873,10 @@ const POOLS = {
    {
     "q": "Was ist die Aufgabe der Sitzungsschicht (L5)?",
     "o": [
-     {
-      "t": "Auf- und Abbau sowie Synchronisation von Kommunikationssitzungen",
-      "ok": true
-     },
-     {
-      "t": "Routing zwischen Netzen",
-      "ok": false
-     },
-     {
-      "t": "Bitübertragung",
-      "ok": false
-     },
-     {
-      "t": "Portzuordnung",
-      "ok": false
-     }
+     { "t": "Auf- und Abbau sowie Synchronisation von Kommunikationssitzungen", "ok": true },
+     { "t": "Umwandlung der Daten in ein einheitliches Übertragungsformat", "ok": false },
+     { "t": "Zuverlässige Ende-zu-Ende-Übertragung mit Fehlerbehandlung", "ok": false },
+     { "t": "Logische Adressierung und Wegewahl zwischen den Netzen", "ok": false }
     ],
     "e": "L5 verwaltet Sitzungen: Aufbau, Aufrechterhaltung, geordneter Abbau."
    },
@@ -4733,7 +4359,7 @@ const POOLS = {
       "ok": false
      },
      {
-      "t": "Broadband Area Node",
+      "t": "Body Area Node",
       "ok": false
      },
      {
@@ -4746,22 +4372,10 @@ const POOLS = {
    {
     "q": "Was ist ein typisches BAN-Beispiel?",
     "o": [
-     {
-      "t": "Smartwatch/Fitnesstracker/Medizinsensoren am Körper",
-      "ok": true
-     },
-     {
-      "t": "Ein Rechenzentrum",
-      "ok": false
-     },
-     {
-      "t": "Ein Stadtnetz",
-      "ok": false
-     },
-     {
-      "t": "Ein Satellitennetz",
-      "ok": false
-     }
+     { "t": "Smartwatch/Fitnesstracker/Medizinsensoren am Körper", "ok": true },
+     { "t": "Bluetooth-Kopplung zwischen Smartphone und Autoradio", "ok": false },
+     { "t": "Vernetzte Haustechnik innerhalb einer Wohnung", "ok": false },
+     { "t": "Funkverbindung zwischen Gebäuden auf einem Gelände", "ok": false }
     ],
     "e": "BAN vernetzt Wearables und Körpersensoren im unmittelbaren Nahbereich."
    },
@@ -4878,22 +4492,10 @@ const POOLS = {
    {
     "q": "Welche Technologie ist typisch für ein WAN?",
     "o": [
-     {
-      "t": "MPLS, Glasfaser-Weitverkehr, Leased Lines, VPN",
-      "ok": true
-     },
-     {
-      "t": "Bluetooth",
-      "ok": false
-     },
-     {
-      "t": "NFC",
-      "ok": false
-     },
-     {
-      "t": "USB",
-      "ok": false
-     }
+     { "t": "MPLS, Glasfaser-Weitverkehr, Leased Lines, VPN", "ok": true },
+     { "t": "Ethernet, Twisted Pair, Access Points", "ok": false },
+     { "t": "Bluetooth, ZigBee, NFC im Nahbereich", "ok": false },
+     { "t": "DECT, Powerline, USB-Direktverbindungen", "ok": false }
     ],
     "e": "WANs nutzen Weitverkehrstechnik wie MPLS, Glasfaser, gemietete Leitungen, VPN."
    },
@@ -4988,7 +4590,7 @@ const POOLS = {
       "ok": false
      }
     ],
-    "e": "Ethernet nutzt CSMA/CD (Collision Detection)."
+    "e": "Klassisches Ethernet (Halbduplex/Hubs) nutzt CSMA/CD zur Kollisionserkennung (Collision Detection). Modernes Ethernet im Vollduplex-Modus benötigt dies nicht mehr."
    },
    {
     "q": "Wofür steht CSMA/CD?",
@@ -5015,22 +4617,10 @@ const POOLS = {
    {
     "q": "Wie reagiert CSMA/CD auf eine erkannte Kollision?",
     "o": [
-     {
-      "t": "Senden stoppen, zufällige Wartezeit, erneut versuchen",
-      "ok": true
-     },
-     {
-      "t": "Kollision ignorieren",
-      "ok": false
-     },
-     {
-      "t": "Das Paket verschlüsseln",
-      "ok": false
-     },
-     {
-      "t": "Die MAC-Adresse ändern",
-      "ok": false
-     }
+     { "t": "Senden stoppen, zufällige Wartezeit, erneut versuchen", "ok": true },
+     { "t": "Sofort erneut senden, bevor andere Stationen zugreifen", "ok": false },
+     { "t": "Senden fortsetzen und das Paket am Ende doppelt sichern", "ok": false },
+     { "t": "Die Übertragung an den Switch zur Vermittlung übergeben", "ok": false }
     ],
     "e": "Nach Kollision: Abbruch, Backoff (zufällige Wartezeit), Neuversuch."
    },
@@ -5098,7 +4688,7 @@ const POOLS = {
       "ok": false
      }
     ],
-    "e": "Beim Token Passing sendet nur der Token-Inhaber → keine Kollisionen."
+    "e": "Beim Token Passing darf immer nur der aktuelle Besitzer des Tokens (eine Art digitaler Staffelstab) Daten senden. Dadurch sind Kollisionen technisch unmöglich."
    },
    {
     "q": "Welche Adressart nutzt Ethernet zur Zustellung im lokalen Netz?",
@@ -5147,24 +4737,12 @@ const POOLS = {
    {
     "q": "Was enthält ein Ethernet-Frame u. a.?",
     "o": [
-     {
-      "t": "Ziel-MAC, Quell-MAC, Nutzdaten und Prüfsumme (FCS)",
-      "ok": true
-     },
-     {
-      "t": "Nur die IP-Adressen",
-      "ok": false
-     },
-     {
-      "t": "Nur Portnummern",
-      "ok": false
-     },
-     {
-      "t": "Ausschließlich Nutzdaten",
-      "ok": false
-     }
+     { "t": "Ziel-MAC, Quell-MAC, Nutzdaten und Prüfsumme", "ok": true },
+     { "t": "Ziel-IP, Quell-IP, Nutzdaten und die TTL des Pakets", "ok": false },
+     { "t": "Quell- und Zielport, Sequenznummer und Prüfsumme", "ok": false },
+     { "t": "Hostnamen von Sender und Empfänger samt Zeitstempel", "ok": false }
     ],
-    "e": "Ein Frame trägt Ziel-/Quell-MAC, Typ/Länge, Nutzdaten und eine Prüfsumme (FCS/CRC)."
+    "e": "Ein Frame auf Schicht 2 transportiert die Hardware-Adressen (Ziel-/Quell-MAC), den Typ, die eigentlichen Nutzdaten und die Prüfsumme (FCS/CRC)"
    },
    {
     "q": "Was bezeichnet eine Kollisionsdomäne?",
@@ -5178,7 +4756,7 @@ const POOLS = {
       "ok": false
      },
      {
-      "t": "Ein einzelnes VLAN",
+      "t": "Ein Netzwerksegment, in dem alle Geräte dieselben DNS-Server verwenden",
       "ok": false
      },
      {
@@ -5230,7 +4808,7 @@ const POOLS = {
       "ok": false
      }
     ],
-    "e": "Broadcasts werden von Routern nicht weitergeleitet — sie begrenzen die Broadcastdomäne."
+    "e": "Broadcasts werden von Routern standardmäßig nicht über Subnetzgrenzen hinweg weitergeleitet — sie begrenzen somit die Broadcastdomäne."
    },
    {
     "q": "Ein Hub bildet für alle angeschlossenen Geräte …",
@@ -5296,7 +4874,7 @@ const POOLS = {
       "ok": false
      }
     ],
-    "e": "Gigabit Ethernet = 1 Gbit/s (1000BASE-T)."
+    "e": "Gigabit Ethernet liefert eine Datenrate von 1 Gbit/s (entspricht 1000 Mbit/s)."
    },
    {
     "q": "Was bedeutet Vollduplex bei Ethernet?",
@@ -5323,22 +4901,10 @@ const POOLS = {
    {
     "q": "Warum spielt CSMA/CD in modernen Switch-Netzen kaum noch eine Rolle?",
     "o": [
-     {
-      "t": "Vollduplex-Switch-Verbindungen erzeugen keine Kollisionen mehr",
-      "ok": true
-     },
-     {
-      "t": "CSMA/CD wurde verboten",
-      "ok": false
-     },
-     {
-      "t": "Alle Netze nutzen Token Passing",
-      "ok": false
-     },
-     {
-      "t": "Ethernet ist verschwunden",
-      "ok": false
-     }
+     { "t": "Vollduplex-Switch-Verbindungen erzeugen keine Kollisionen mehr", "ok": true },
+     { "t": "Die Kollisionsbehandlung wurde vollständig in die Switches verlagert", "ok": false },
+     { "t": "Moderne Netzwerkkarten erkennen Kollisionen bereits vor dem Senden", "ok": false },
+     { "t": "Glasfaserstrecken sind physikalisch immun gegen jede Kollision", "ok": false }
     ],
     "e": "Dedizierte Vollduplex-Links am Switch machen die Kollisionserkennung überflüssig."
    },
@@ -5372,11 +4938,11 @@ const POOLS = {
       "ok": true
      },
      {
-      "t": "Verschlüsselung",
+      "t": "Verschlüsselung von Ethernet-Frames",
       "ok": false
      },
      {
-      "t": "IP-Adressierung",
+      "t": "Sie signalisiert dem Empfänger die Länge des nachfolgenden Ethernet-Frames",
       "ok": false
      },
      {
@@ -5384,7 +4950,7 @@ const POOLS = {
       "ok": false
      }
     ],
-    "e": "Die Präambel dient der Bit-Synchronisation zu Beginn des Frames."
+    "e": "Die Präambel besteht aus einer festen Bitfolge und ermöglicht dem Empfänger die Synchronisation seines Takts mit dem eingehenden Signal."
    },
    {
     "q": "Welche Reihenfolge stimmt (Ethernet-Zustellung im LAN)?",
@@ -5450,7 +5016,7 @@ const POOLS = {
       "ok": false
      }
     ],
-    "e": "100 Meter ist das Standard-Limit für Fast Ethernet und Gigabit Ethernet über Kupfer."
+    "e": "100 Meter ist das Standard-Limit für die Übertragung über Kupfer (z. B. Fast Ethernet und Gigabit Ethernet). Es teilt sich meist in 90m Verlegekabel und 10m Patchkabel auf."
    },
    {
     "q": "Welche MAC-Adresse ist ein Broadcast?",
@@ -5477,44 +5043,20 @@ const POOLS = {
    {
     "q": "Was unterscheidet Unicast, Multicast und Broadcast?",
     "o": [
-     {
-      "t": "Unicast: an einen, Multicast: an eine Gruppe, Broadcast: an alle",
-      "ok": true
-     },
-     {
-      "t": "Alle senden an alle",
-      "ok": false
-     },
-     {
-      "t": "Unicast ist langsamer",
-      "ok": false
-     },
-     {
-      "t": "Multicast ist unverschlüsselt",
-      "ok": false
-     }
+     { "t": "Unicast: an einen, Multicast: an eine Gruppe, Broadcast: an alle", "ok": true },
+     { "t": "Unicast: an alle, Multicast: an einen, Broadcast: an eine Gruppe", "ok": false },
+     { "t": "Unicast: im LAN, Multicast: ins WAN, Broadcast: ins Internet", "ok": false },
+     { "t": "Unicast: per Kabel, Multicast: per Funk, Broadcast: auf beiden Wegen", "ok": false }
     ],
-    "e": "Unicast = 1:1, Multicast = 1:n (definierte Gruppe), Broadcast = 1:alle."
+    "e": "Unicast = 1 an 1. Multicast = 1 an eine Gruppe. Broadcast = 1 an alle."
    },
    {
     "q": "Welche Felder enthält ein Ethernet-Frame mindestens?",
     "o": [
-     {
-      "t": "Präambel, Ziel-MAC, Quell-MAC, Typ/Länge, Daten, FCS",
-      "ok": true
-     },
-     {
-      "t": "Nur IP-Adressen",
-      "ok": false
-     },
-     {
-      "t": "Portnummern und TTL",
-      "ok": false
-     },
-     {
-      "t": "Nur Nutzlast",
-      "ok": false
-     }
+     { "t": "Präambel, Ziel-MAC, Quell-MAC, Typ/Länge, Daten, FCS", "ok": true },
+     { "t": "Version, Header-Länge, TTL, Protokoll, Quell- und Ziel-IP", "ok": false },
+     { "t": "Quellport, Zielport, Sequenznummer, ACK-Nummer, Fenster", "ok": false },
+     { "t": "SSID, Kanal, Sendeleistung, MAC-Filter, Verschlüsselung", "ok": false }
     ],
     "e": "Der Ethernet-Frame-Aufbau: Präambel | Ziel-MAC | Quell-MAC | Typ/Länge | Daten | FCS."
    },
@@ -5522,11 +5064,11 @@ const POOLS = {
     "q": "Was macht ein Switch mit einem Frame, dessen Quell-MAC er noch nicht kennt?",
     "o": [
      {
-      "t": "Er trägt sie in die MAC-Tabelle ein (lernen)",
+      "t": "Er trägt sie in die MAC-Tabelle ein",
       "ok": true
      },
      {
-      "t": "Er verwirft den Frame",
+      "t": "Er verwirft den Frame aus Sicherheitsgründen sofort",
       "ok": false
      },
      {
@@ -5534,7 +5076,7 @@ const POOLS = {
       "ok": false
      },
      {
-      "t": "Er routet ihn weiter",
+      "t": "Er routet den Frame anhand der IP-Adresse in das richtige Subnetz weiter",
       "ok": false
      }
     ],
@@ -5543,66 +5085,30 @@ const POOLS = {
    {
     "q": "Was ist Auto-Negotiation bei Ethernet?",
     "o": [
-     {
-      "t": "Automatische Aushandlung von Geschwindigkeit und Duplex zwischen zwei Ports",
-      "ok": true
-     },
-     {
-      "t": "Automatische IP-Vergabe",
-      "ok": false
-     },
-     {
-      "t": "Automatische VLAN-Konfiguration",
-      "ok": false
-     },
-     {
-      "t": "Automatisches Patchen",
-      "ok": false
-     }
+     { "t": "Automatische Aushandlung von Geschwindigkeit und Duplex zwischen zwei Ports", "ok": true },
+     { "t": "Automatische Auswahl des kürzesten Pfads durch redundante Verbindungen", "ok": false },
+     { "t": "Automatische Zuweisung des Ports in das passende VLAN je Endgerät", "ok": false },
+     { "t": "Automatischer Wechsel auf eine Reserveleitung bei Verbindungsabbruch", "ok": false }
     ],
     "e": "Auto-Negotiation einigt sich auf die höchste gemeinsam unterstützte Geschwindigkeit und Duplex-Modus."
    },
    {
     "q": "Was ist ein Uplink-Port an einem Switch?",
     "o": [
-     {
-      "t": "Ein Port, der den Switch mit einem übergeordneten Gerät (Router, Core-Switch) verbindet",
-      "ok": true
-     },
-     {
-      "t": "Ein Port nur für Server",
-      "ok": false
-     },
-     {
-      "t": "Ein defekter Port",
-      "ok": false
-     },
-     {
-      "t": "Ein verschlüsselter Port",
-      "ok": false
-     }
+     { "t": "Ein Port, der den Switch mit einem übergeordneten Gerät (Router, Core-Switch) verbindet", "ok": true },
+     { "t": "Ein gespiegelter Port, der den gesamten Verkehr zur Analyse an ein Messgerät ausleitet", "ok": false },
+     { "t": "Ein Port mit erhöhter Priorität, an dem zeitkritische Endgeräte angeschlossen werden (Fax, Drucker)", "ok": false },
+     { "t": "Ein Port, über den die Konfiguration des Switches per Konsole zugänglich ist", "ok": false }
     ],
-    "e": "Uplinks verbinden Switches mit der nächsten Hierarchieebene — oft mit höherer Bandbreite."
+    "e": "Uplinks verbinden Switches mit der nächsten Hierarchieebene — oft mit höherer Bandbreite (z. B. 10 Gbit/s statt 1 Gbit/s)."
    },
    {
     "q": "Was ist PoE und welchen Vorteil bietet es?",
     "o": [
-     {
-      "t": "Power over Ethernet: Strom über das Netzwerkkabel — kein separates Netzteil nötig",
-      "ok": true
-     },
-     {
-      "t": "Ein Sicherheitsprotokoll",
-      "ok": false
-     },
-     {
-      "t": "Ein Verschlüsselungsverfahren",
-      "ok": false
-     },
-     {
-      "t": "Ein WLAN-Standard",
-      "ok": false
-     }
+     { "t": "Power over Ethernet: Strom über das Netzwerkkabel — kein separates Netzteil nötig", "ok": true },
+     { "t": "Point-to-Point over Ethernet: direkte Einwahlverbindung zum Internetprovider", "ok": false },
+     { "t": "Priority over Ethernet: bevorzugte Behandlung markierter Frames im Switch", "ok": false },
+     { "t": "Passive optical Ethernet: Glasfaseranbindung ohne aktive Zwischenkomponenten", "ok": false }
     ],
     "e": "PoE (IEEE 802.3af/at/bt) versorgt APs, IP-Telefone und Kameras direkt über das Ethernet-Kabel."
    },
@@ -5626,7 +5132,7 @@ const POOLS = {
       "ok": false
      }
     ],
-    "e": "10G über 55m: Cat 6 reicht. Für 100m: Cat 6A. Cat 5e ist für 1G ausgelegt."
+    "e": "Bis zu 55m reicht Cat 6 für 10G. Da die Frage aber nach einer Strecke ÜBER 55m verlangt, ist Cat 6A zwingend nötig."
    },
    {
     "q": "Was ist ein VLAN-Tag nach IEEE 802.1Q?",
@@ -5636,7 +5142,7 @@ const POOLS = {
       "ok": true
      },
      {
-      "t": "Ein zusätzliches Feld im IP-Header",
+      "t": "Ein zusätzliches Feld im IP-Header auf Schicht 3",
       "ok": false
      },
      {
@@ -5648,7 +5154,7 @@ const POOLS = {
       "ok": false
      }
     ],
-    "e": "802.1Q fügt nach der Quell-MAC einen 4-Byte-Tag ein: TPID (0x8100) + TCI mit VLAN-ID (12 Bit = 4096 VLANs)."
+    "e": "Der IEEE 802.1Q-Standard fügt ein 4-Byte-Feld direkt in den Ethernet-Frame (Schicht 2) ein, um Pakete einem bestimmten VLAN zuzuordnen."
    }
   ]
  },
@@ -5659,7 +5165,7 @@ const POOLS = {
     "q": "Welches Kupferkabel ist heute Standard in LANs?",
     "o": [
      {
-      "t": "Twisted-Pair (verdrillte Adernpaare)",
+      "t": "Twisted-Pair",
       "ok": true
      },
      {
@@ -5703,19 +5209,19 @@ const POOLS = {
     "q": "Was bedeutet UTP?",
     "o": [
      {
-      "t": "Unshielded Twisted Pair (ungeschirmt)",
+      "t": "Unshielded Twisted Pair",
       "ok": true
      },
      {
-      "t": "Universal Twisted Pair (universell)",
+      "t": "Universal Twisted Pair",
       "ok": false
      },
      {
-      "t": "Ultra Transfer Protocol (schnell)",
+      "t": "Ultra Transfer Protocol",
       "ok": false
      },
      {
-      "t": "Unshielded Transfer Port (offen)",
+      "t": "Unshielded Transfer Port",
       "ok": false
      }
     ],
@@ -5724,22 +5230,10 @@ const POOLS = {
    {
     "q": "Was ist der Vorteil von STP gegenüber UTP?",
     "o": [
-     {
-      "t": "Besserer Schutz vor elektromagnetischen Störungen durch Schirmung",
-      "ok": true
-     },
-     {
-      "t": "Geringeres Gewicht",
-      "ok": false
-     },
-     {
-      "t": "Niedrigerer Preis",
-      "ok": false
-     },
-     {
-      "t": "Höhere Reichweite bei Funk",
-      "ok": false
-     }
+     { "t": "Besserer Schutz vor elektromagnetischen Störungen durch Schirmung", "ok": true },
+     { "t": "Höhere Übertragungsraten durch dickere Kupferadern", "ok": false },
+     { "t": "Größere maximale Segmentlänge zwischen den Geräten", "ok": false },
+     { "t": "Einfachere Verlegung durch flexibleren Kabelaufbau", "ok": false }
     ],
     "e": "STP ist geschirmt und störungsresistenter, aber teurer/steifer."
    },
@@ -5817,7 +5311,7 @@ const POOLS = {
       "ok": true
      },
      {
-      "t": "Multimode ist immer schneller und weiter",
+      "t": "Monomode-Glasfaserkabel nutzen im Kern eine dünne Kupferader zur Stabilisierung.",
       "ok": false
      },
      {
@@ -6015,11 +5509,11 @@ const POOLS = {
       "ok": true
      },
      {
-      "t": "Immer günstiger",
+      "t": "Glasfaser hat auf kurzen Strecken eine deutlich höhere Dämpfung als Kupfer.",
       "ok": false
      },
      {
-      "t": "Leichter zu spleißen/verlegen",
+      "t": "Leichter zu spleißen / verlegen",
       "ok": false
      },
      {
@@ -6033,19 +5527,19 @@ const POOLS = {
     "q": "Welchen Anschluss nutzt ein LAN-Kabel am PC/Switch?",
     "o": [
      {
-      "t": "Eine RJ45-Buchse (Ethernet-Port)",
+      "t": "Eine RJ45-Buchse",
       "ok": true
      },
      {
-      "t": "Ein HDMI-Anschluss (Bild/Ton)",
+      "t": "Ein HDMI-Anschluss",
       "ok": false
      },
      {
-      "t": "Ein USB-A-Anschluss (Peripherie)",
+      "t": "Ein USB-A-Anschluss",
       "ok": false
      },
      {
-      "t": "Ein DisplayPort (Monitor)",
+      "t": "Ein DisplayPort",
       "ok": false
      }
     ],
@@ -6054,22 +5548,10 @@ const POOLS = {
    {
     "q": "Was beschreibt der Begriff 'Übersprechen' (Crosstalk)?",
     "o": [
-     {
-      "t": "Störende Signalübertragung zwischen benachbarten Adern",
-      "ok": true
-     },
-     {
-      "t": "Der Verlust der IP-Adresse",
-      "ok": false
-     },
-     {
-      "t": "Ein Kabelbruch",
-      "ok": false
-     },
-     {
-      "t": "Eine Kollision auf Schicht 3",
-      "ok": false
-     }
+     { "t": "Störende Signalübertragung zwischen benachbarten Adern", "ok": true },
+     { "t": "Signalabschwächung über die Länge der Leitung", "ok": false },
+     { "t": "Reflexion des Signals am offenen Kabelende", "ok": false },
+     { "t": "Zeitversatz zwischen den Adernpaaren beim Empfänger", "ok": false }
     ],
     "e": "Crosstalk = ungewolltes Einkoppeln von Signalen benachbarter Leitungen; die Verdrillung reduziert es."
    },
@@ -6099,7 +5581,7 @@ const POOLS = {
     "q": "Welche Hardware verbindet einen Rechner physisch mit dem Netzwerk?",
     "o": [
      {
-      "t": "Die Netzwerkkarte (NIC)",
+      "t": "Die Netzwerkkarte",
       "ok": true
      },
      {
@@ -6115,13 +5597,13 @@ const POOLS = {
       "ok": false
      }
     ],
-    "e": "Die NIC ist die Schnittstelle zwischen Gerät und Übertragungsmedium."
+    "e": "Die Netzwerkkarte (NIC) ist die Schnittstelle zwischen Gerät und Übertragungsmedium."
    },
    {
     "q": "Was gilt für ungeschirmtes UTP in Umgebungen mit starken Motoren/Maschinen?",
     "o": [
      {
-      "t": "Es ist störanfällig; besser STP oder Glasfaser",
+      "t": "Es ist störanfällig",
       "ok": true
      },
      {
@@ -6140,7 +5622,7 @@ const POOLS = {
     "e": "In störreichen Umgebungen (EMV) sind geschirmte Kabel oder Glasfaser sinnvoller."
    },
    {
-    "q": "Welche Kopplungselemente arbeiten auf welcher Schicht (korrekt)?",
+    "q": "Welche Zuordnung von Netzwerkkomponenten (Kopplungselementen) zu den Schichten des OSI-Modells ist korrekt?",
     "o": [
      {
       "t": "Hub L1, Switch L2, Router L3",
@@ -6164,22 +5646,10 @@ const POOLS = {
    {
     "q": "Was ist der Nachteil von Glasfaser gegenüber Kupfer?",
     "o": [
-     {
-      "t": "Höhere Kosten und empfindlichere Verlegung/Spleißung",
-      "ok": true
-     },
-     {
-      "t": "Geringere Bandbreite",
-      "ok": false
-     },
-     {
-      "t": "Anfälligkeit gegen EMV",
-      "ok": false
-     },
-     {
-      "t": "Kürzere Reichweite",
-      "ok": false
-     }
+     { "t": "Höhere Kosten und empfindlichere Verlegung/Spleißung", "ok": true },
+     { "t": "Störanfälligkeit in der Nähe elektrischer Anlagen", "ok": false },
+     { "t": "Begrenzte Übertragungsraten bei großen Distanzen", "ok": false },
+     { "t": "Regelmäßiger Austauschbedarf der Fasern durch Alterung", "ok": false }
     ],
     "e": "Glasfaser ist technisch überlegen, aber teurer und aufwendiger zu handhaben."
    }
@@ -6213,46 +5683,22 @@ const POOLS = {
    {
     "q": "Was steht in einer Routingtabelle?",
     "o": [
-     {
-      "t": "Zielnetze und der jeweils nächste Hop / Ausgangsinterface",
-      "ok": true
-     },
-     {
-      "t": "MAC-Adressen aller Geräte",
-      "ok": false
-     },
-     {
-      "t": "Portnummern der Anwendungen",
-      "ok": false
-     },
-     {
-      "t": "Nur die eigene IP",
-      "ok": false
-     }
+     { "t": "Zielnetze und der jeweils nächste Hop / Ausgangsinterface", "ok": true },
+     { "t": "Die MAC-Adressen aller Geräte samt zugehörigem Switch-Port", "ok": false },
+     { "t": "Die vollständige Liste aller MAC-Adressen und deren zugehörige Switch-Ports im lokalen Netzwerk", "ok": false },
+     { "t": "Die Zuordnung von Domainnamen zu den passenden IP-Adressen", "ok": false }
     ],
     "e": "Eine Routingtabelle bildet Zielnetze auf den nächsten Hop bzw. das Ausgangsinterface ab."
    },
    {
-    "q": "Wozu dient das Default Gateway?",
+    "q": "Welche Funktion hat das Default Gateway (Standard-Gateway) in einem IP-Netzwerk?",
     "o": [
-     {
-      "t": "Es ist der Weg für alle Ziele außerhalb des eigenen Netzes",
-      "ok": true
-     },
-     {
-      "t": "Es vergibt IP-Adressen",
-      "ok": false
-     },
-     {
-      "t": "Es löst Namen in IPs auf",
-      "ok": false
-     },
-     {
-      "t": "Es verschlüsselt den Verkehr",
-      "ok": false
-     }
+     { "t": "Es ist der nächste Hop für alle Pakete, deren Zieladresse nicht im lokalen Subnetz liegt und für die kein spezifischerer Routing-Eintrag existiert", "ok": true },
+     { "t": "Es fungiert als zentrale Vermittlungsstelle, die den Schicht-2-Datenverkehr innerhalb desselben LANs steuert", "ok": false },
+     { "t": "Es ist die Adresse, unter der das Netz von außen erreichbar ist", "ok": false },
+     { "t": "Es stellt die öffentliche IP-Adresse dar, über die ein lokales Netzwerk exklusiv aus dem Internet erreichbar ist", "ok": false }
     ],
-    "e": "Pakete an unbekannte/externe Netze gehen ans Default Gateway (meist der Router)."
+    "e": "Das Default Gateway ist die Standard-Anlaufstelle (der nächste Router), an die ein Gerät alle Pakete schickt, deren Ziel außerhalb des eigenen Netzwerks liegt und für die es keinen genauen Weg kennt."
    },
    {
     "q": "Was ist statisches Routing?",
@@ -6323,22 +5769,10 @@ const POOLS = {
    {
     "q": "Welcher Vorteil spricht für dynamisches Routing in großen Netzen?",
     "o": [
-     {
-      "t": "Automatische Anpassung an Topologieänderungen und Ausfälle",
-      "ok": true
-     },
-     {
-      "t": "Kein Protokoll-Overhead",
-      "ok": false
-     },
-     {
-      "t": "Absolute Vorhersehbarkeit",
-      "ok": false
-     },
-     {
-      "t": "Keine CPU-Last",
-      "ok": false
-     }
+     { "t": "Automatische Anpassung an Topologieänderungen und Ausfälle", "ok": true },
+     { "t": "Geringere CPU- und Speicherlast auf den beteiligten Routern", "ok": false },
+     { "t": "Vollständig vorhersehbare Pfade ohne unerwartete Umwege", "ok": false },
+     { "t": "Kein zusätzlicher Protokollverkehr zwischen den Routern", "ok": false }
     ],
     "e": "Dynamisch reagiert selbstständig auf Ausfälle/neue Wege, kostet aber Ressourcen."
    },
@@ -6384,7 +5818,7 @@ const POOLS = {
       "ok": false
      }
     ],
-    "e": "Der Switch merkt sich, welche MAC an welchem Port hängt (CAM-Table)."
+    "e": "Der Switch merkt sich, welche MAC an welchem Port hängt (Content Addressable Memory)."
    },
    {
     "q": "Wie lernt ein Switch, welche MAC an welchem Port hängt?",
@@ -6411,44 +5845,20 @@ const POOLS = {
    {
     "q": "Was macht ein Switch mit einem Frame, dessen Ziel-MAC er nicht kennt?",
     "o": [
-     {
-      "t": "Flooding: er sendet es an alle Ports außer dem Eingangsport",
-      "ok": true
-     },
-     {
-      "t": "Er verwirft es",
-      "ok": false
-     },
-     {
-      "t": "Er sendet es zurück zum Absender",
-      "ok": false
-     },
-     {
-      "t": "Er speichert es dauerhaft",
-      "ok": false
-     }
+     { "t": "Flooding: er sendet es an alle Ports außer dem Eingangsport", "ok": true },
+     { "t": "Er fragt per ARP-Broadcast nach dem Besitzer der Ziel-MAC", "ok": false },
+     { "t": "Er verwirft es und meldet dem Absender die Unzustellbarkeit", "ok": false },
+     { "t": "Er reicht es an das Default Gateway zur Weiterleitung durch", "ok": false }
     ],
     "e": "Unbekanntes Ziel → Flooding an alle Ports (außer Quellport), bis die MAC gelernt ist."
    },
    {
     "q": "Was macht ein Switch mit einem Broadcast-Frame (Ziel-MAC FF:FF:FF:FF:FF:FF)?",
     "o": [
-     {
-      "t": "Er leitet ihn an alle Ports außer dem Eingangsport weiter",
-      "ok": true
-     },
-     {
-      "t": "Er verwirft ihn",
-      "ok": false
-     },
-     {
-      "t": "Er beantwortet ihn selbst",
-      "ok": false
-     },
-     {
-      "t": "Er routet ihn ins nächste Netz",
-      "ok": false
-     }
+     { "t": "Er leitet ihn an alle Ports außer dem Eingangsport weiter", "ok": true },
+     { "t": "Er beantwortet ihn stellvertretend für alle angeschlossenen Geräte", "ok": false },
+     { "t": "Er reicht ihn an den Router weiter, der ihn ins nächste Netz trägt", "ok": false },
+     { "t": "Er leitet ihn nur an Ports mit aktuell aktiven Endgeräten weiter", "ok": false }
     ],
     "e": "Broadcasts werden vom Switch an alle Ports der Broadcastdomäne geflutet."
    },
@@ -6600,7 +6010,7 @@ const POOLS = {
       "ok": false
      },
      {
-      "t": "Zur Portvergabe",
+      "t": "Er legt die maximale Anzahl an erlaubten Geräte-Anschlüssen innerhalb eines Subnetzes fest",
       "ok": false
      }
     ],
@@ -6666,7 +6076,7 @@ const POOLS = {
       "ok": false
      },
      {
-      "t": "Es wird verworfen",
+      "t": "Der PC fordert beim DNS-Server die MAC-Adresse des entfernten Zielnetzwerks an",
       "ok": false
      }
     ],
@@ -6719,22 +6129,10 @@ const POOLS = {
    {
     "q": "Was passiert bei einem Switch mit einem Frame, dessen Ziel-MAC bekannt ist?",
     "o": [
-     {
-      "t": "Er leitet ihn gezielt nur an den bekannten Port weiter",
-      "ok": true
-     },
-     {
-      "t": "Er flutet ihn an alle Ports",
-      "ok": false
-     },
-     {
-      "t": "Er verwirft ihn",
-      "ok": false
-     },
-     {
-      "t": "Er sendet ihn zurück",
-      "ok": false
-     }
+     { "t": "Er leitet ihn gezielt nur an den bekannten Port weiter", "ok": true },
+     { "t": "Er flutet ihn zur Sicherheit dennoch an alle aktiven Ports", "ok": false },
+     { "t": "Er prüft zuerst per Ping, ob das Zielgerät erreichbar ist", "ok": false },
+     { "t": "Er sendet ihn an den Zielport und zusätzlich ans Gateway", "ok": false }
     ],
     "e": "Bekannte Ziel-MAC = gezielte Weiterleitung. Unbekannt = Flooding an alle außer dem Eingangsport."
    },
@@ -6785,44 +6183,20 @@ const POOLS = {
    {
     "q": "Wozu dient das Default Gateway am Client?",
     "o": [
-     {
-      "t": "Als Übergangspunkt für Pakete an Ziele außerhalb des eigenen Subnetzes",
-      "ok": true
-     },
-     {
-      "t": "Zur IP-Vergabe",
-      "ok": false
-     },
-     {
-      "t": "Zur Namensauflösung",
-      "ok": false
-     },
-     {
-      "t": "Zur MAC-Zuordnung",
-      "ok": false
-     }
+     { "t": "Als Übergangspunkt für Pakete an Ziele außerhalb des eigenen Subnetzes", "ok": true },
+     { "t": "Als erste Anlaufstelle für die Auflösung unbekannter Hostnamen", "ok": false },
+     { "t": "Als Vermittler, der dem Client seine IP-Konfiguration zuweist", "ok": false },
+     { "t": "Als Prüfinstanz, die ausgehende Verbindungen freigeben muss", "ok": false }
     ],
     "e": "Ohne Default Gateway kann der Client nur im eigenen Subnetz kommunizieren."
    },
    {
     "q": "Was ist der Unterschied zwischen einem L2- und einem L3-Switch?",
     "o": [
-     {
-      "t": "L3-Switch kann zusätzlich IP-basiert zwischen Subnetzen routen",
-      "ok": true
-     },
-     {
-      "t": "L2-Switch ist schneller",
-      "ok": false
-     },
-     {
-      "t": "L3-Switch arbeitet nur mit MAC",
-      "ok": false
-     },
-     {
-      "t": "Es gibt keinen Unterschied",
-      "ok": false
-     }
+     { "t": "L3-Switch kann zusätzlich IP-basiert zwischen Subnetzen routen", "ok": true },
+     { "t": "L3-Switch ersetzt die MAC-Tabelle vollständig durch die Routingtabelle", "ok": false },
+     { "t": "L2-Switch verbindet Endgeräte, L3-Switch ausschließlich andere Switches", "ok": false },
+     { "t": "L2-Switch arbeitet nur mit IPv4, L3-Switch zusätzlich mit IPv6", "ok": false }
     ],
     "e": "Ein L3-Switch kombiniert MAC-Switching (L2) mit IP-Routing (L3) in einem Gerät."
    },
@@ -6856,7 +6230,7 @@ const POOLS = {
       "ok": true
      },
      {
-      "t": "Direkt über den Switch ohne weitere Geräte",
+      "t": "Durch Konfiguration desselben IP-Subnetzes in beiden VLANs",
       "ok": false
      },
      {
@@ -6864,7 +6238,7 @@ const POOLS = {
       "ok": false
      },
      {
-      "t": "Eine Kommunikation ist grundsätzlich nicht möglich",
+      "t": "Eine Kommunikation ist grundsätzlich nicht möglich (Firewall blockiert)",
       "ok": false
      }
     ],
@@ -6930,7 +6304,7 @@ const POOLS = {
       "ok": false
      },
      {
-      "t": "Die Route mit dem höchsten Hop-Count",
+      "t": "Die Route mit der höchsten AD (Höchster Vertrauenswert des Protokolls)",
       "ok": false
      }
     ],
@@ -7011,7 +6385,7 @@ const POOLS = {
     "q": "Wie wird eine IPv4-Adresse üblicherweise dargestellt?",
     "o": [
      {
-      "t": "Vier Dezimalzahlen 0–255, durch Punkte getrennt",
+      "t": "Vier Dezimalzahlen, durch Punkte getrennt",
       "ok": true
      },
      {
@@ -7027,7 +6401,7 @@ const POOLS = {
       "ok": false
      }
     ],
-    "e": "Dotted decimal, z. B. 192.168.0.1."
+    "e": "Das Format nennt sich Dotted Decimal Notation (punktierte Dezimalschreibweise), wie zum Beispiel bei 192.168.0.1."
    },
    {
     "q": "Wie wird eine IPv6-Adresse dargestellt?",
@@ -7206,28 +6580,6 @@ const POOLS = {
     "e": "127.0.0.1 = localhost (Loopback). In IPv6: ::1."
    },
    {
-    "q": "Was bedeutet die Notation /24 bei einer IPv4-Adresse?",
-    "o": [
-     {
-      "t": "Die ersten 24 Bit sind der Netzanteil",
-      "ok": true
-     },
-     {
-      "t": "Es gibt 24 Hosts",
-      "ok": false
-     },
-     {
-      "t": "Die TTL ist 24",
-      "ok": false
-     },
-     {
-      "t": "24 Router liegen dazwischen",
-      "ok": false
-     }
-    ],
-    "e": "/24 = Präfixlänge; 24 Bit Netz, 8 Bit Host (Maske 255.255.255.0)."
-   },
-   {
     "q": "Welche Subnetzmaske entspricht /24?",
     "o": [
      {
@@ -7297,7 +6649,7 @@ const POOLS = {
     "q": "Wie viele Hosts sind in einem /24-Netz nutzbar?",
     "o": [
      {
-      "t": "254 (256 minus Netz- und Broadcastadresse)",
+      "t": "254 (minus Netz- und Broadcastadresse)",
       "ok": true
      },
      {
@@ -7341,19 +6693,19 @@ const POOLS = {
     "q": "Welche Aussage zu IPv6 stimmt?",
     "o": [
      {
-      "t": "Der Adressraum ist praktisch unerschöpflich (2¹²⁸)",
+      "t": "Der Adressraum ist praktisch unerschöpflich",
       "ok": true
      },
      {
-      "t": "Der Adressraum ist kleiner als bei IPv4 (2¹⁶)",
+      "t": "Der Adressraum ist kleiner als bei IPv4",
       "ok": false
      },
      {
-      "t": "Adressen bestehen nur aus Dezimalzahlen (0–9)",
+      "t": "Adressen bestehen nur aus Dezimalzahlen",
       "ok": false
      },
      {
-      "t": "Es existiert keine Loopback-Adresse (::1)",
+      "t": "Es existiert keine Loopback-Adresse",
       "ok": false
      }
     ],
@@ -7516,22 +6868,10 @@ const POOLS = {
    {
     "q": "Was leistet SLAAC bei IPv6?",
     "o": [
-     {
-      "t": "Zustandslose automatische Adresskonfiguration ohne Server",
-      "ok": true
-     },
-     {
-      "t": "Zentrale Adressvergabe über einen Server",
-      "ok": false
-     },
-     {
-      "t": "Namensauflösung",
-      "ok": false
-     },
-     {
-      "t": "Verschlüsselung",
-      "ok": false
-     }
+     { "t": "Zustandslose automatische Adresskonfiguration ohne Server", "ok": true },
+     { "t": "Zentrale Adressvergabe mit Lease-Verwaltung über einen Server", "ok": false },
+     { "t": "Automatische Übersetzung zwischen IPv4- und IPv6-Adressen", "ok": false },
+     { "t": "Verteilte Namensauflösung ohne zentrale DNS-Server", "ok": false }
     ],
     "e": "SLAAC (Stateless Address Autoconfiguration) erlaubt IPv6-Geräten, sich selbst eine Adresse zu bilden."
    },
@@ -7643,7 +6983,7 @@ const POOLS = {
       "ok": false
      }
     ],
-    "e": "/27 = 5 Hostbits → 2^5=32 Adressen − 2 (Netz+Broadcast) = 30 nutzbare Hosts."
+    "e": "/27 = 5 Hostbits → 2^5=32 Adressen − 2 (Netz und Broadcast) = 30 nutzbare Hosts."
    },
    {
     "q": "Wie viele nutzbare Hosts gibt es in einem /29-Netz?",
@@ -8146,7 +7486,7 @@ const POOLS = {
       "ok": false
      },
      {
-      "t": "Pakete verschlüsseln",
+      "t": "Die dynamische Zuweisung von IP-Adressen und Subnetzmasken an Endgeräte beim Systemstart.",
       "ok": false
      },
      {
@@ -8181,66 +7521,30 @@ const POOLS = {
    {
     "q": "Was macht ein rekursiver DNS-Resolver?",
     "o": [
-     {
-      "t": "Er fragt für den Client so lange nach, bis er die Antwort hat",
-      "ok": true
-     },
-     {
-      "t": "Er antwortet nur mit einem Verweis",
-      "ok": false
-     },
-     {
-      "t": "Er vergibt IP-Adressen",
-      "ok": false
-     },
-     {
-      "t": "Er verschlüsselt die Anfrage",
-      "ok": false
-     }
+     { "t": "Er fragt für den Client so lange nach, bis er die Antwort hat", "ok": true },
+     { "t": "Er antwortet mit einem Verweis auf den nächsten zuständigen Server", "ok": false },
+     { "t": "Er beantwortet nur Anfragen zu Zonen, die er selbst verwaltet", "ok": false },
+     { "t": "Er verteilt eingehende Anfragen gleichmäßig auf mehrere Server", "ok": false }
     ],
     "e": "Der rekursive Resolver arbeitet die komplette Auflösung für den Client ab."
    },
    {
     "q": "Was ist ein autoritativer DNS-Server?",
     "o": [
-     {
-      "t": "Er verwaltet die verbindlichen Einträge einer Zone/Domain",
-      "ok": true
-     },
-     {
-      "t": "Er ist immer der Root-Server",
-      "ok": false
-     },
-     {
-      "t": "Er cached nur fremde Antworten",
-      "ok": false
-     },
-     {
-      "t": "Er vergibt DHCP-Leases",
-      "ok": false
-     }
+     { "t": "Er verwaltet die verbindlichen Einträge einer Zone/Domain", "ok": true },
+     { "t": "Er speichert Antworten fremder Server zwischen und liefert sie aus", "ok": false },
+     { "t": "Er steht an der Spitze der Hierarchie und kennt alle TLD-Server", "ok": false },
+     { "t": "Er löst Anfragen stellvertretend für die Clients vollständig auf", "ok": false }
     ],
     "e": "Der autoritative Server hält die maßgeblichen Records seiner Domain."
    },
    {
     "q": "Wofür steht der TLD-Server?",
     "o": [
-     {
-      "t": "Top-Level-Domain-Server, zuständig z. B. für .de oder .com",
-      "ok": true
-     },
-     {
-      "t": "Transport-Layer-Domain",
-      "ok": false
-     },
-     {
-      "t": "Total-Load-Distribution",
-      "ok": false
-     },
-     {
-      "t": "Temporary-Lease-Directory",
-      "ok": false
-     }
+     { "t": "Top-Level-Domain-Server, zuständig z. B. für .de oder .com", "ok": true },
+     { "t": "Trusted-Lookup-Directory — signierte Zone für DNSSEC-Prüfungen", "ok": false },
+     { "t": "Transport-Level-DNS — beschleunigte Auflösung über UDP statt TCP", "ok": false },
+     { "t": "Top-Lease-Database — zentrale Verwaltung der DHCP-Adressbereiche", "ok": false }
     ],
     "e": "TLD-Server verwalten die Endungen wie .de, .com und verweisen auf autoritative Server."
    },
@@ -8335,44 +7639,20 @@ const POOLS = {
    {
     "q": "Warum nutzt DNS Caching?",
     "o": [
-     {
-      "t": "Um wiederholte Anfragen schneller zu beantworten und Last zu senken",
-      "ok": true
-     },
-     {
-      "t": "Um Adressen zu verschlüsseln",
-      "ok": false
-     },
-     {
-      "t": "Um MAC-Adressen zu lernen",
-      "ok": false
-     },
-     {
-      "t": "Um Broadcasts zu vermeiden",
-      "ok": false
-     }
+     { "t": "Um wiederholte Anfragen schneller zu beantworten und Last zu senken", "ok": true },
+     { "t": "Um Antworten gegen Manipulation auf dem Übertragungsweg zu sichern", "ok": false },
+     { "t": "Um bei Ausfall des autoritativen Servers dauerhaft antworten zu können", "ok": false },
+     { "t": "Um Clients unabhängig vom konfigurierten DNS-Server zu machen", "ok": false }
     ],
     "e": "Zwischengespeicherte Antworten sparen Zeit und entlasten die Server (TTL steuert die Dauer)."
    },
    {
     "q": "Was bewirkt die TTL eines DNS-Eintrags?",
     "o": [
-     {
-      "t": "Sie legt fest, wie lange die Antwort gecacht werden darf",
-      "ok": true
-     },
-     {
-      "t": "Sie zählt Router-Hops",
-      "ok": false
-     },
-     {
-      "t": "Sie verschlüsselt den Eintrag",
-      "ok": false
-     },
-     {
-      "t": "Sie vergibt die IP",
-      "ok": false
-     }
+     { "t": "Sie legt fest, wie lange die Antwort gecacht werden darf", "ok": true },
+     { "t": "Sie begrenzt, über wie viele Server eine Anfrage laufen darf", "ok": false },
+     { "t": "Sie bestimmt, wann die Domain-Registrierung verlängert werden muss", "ok": false },
+     { "t": "Sie gibt an, wie lange der Server für eine Antwort brauchen darf", "ok": false }
     ],
     "e": "Die DNS-TTL bestimmt die Cache-Gültigkeit des Records (nicht zu verwechseln mit der IP-TTL)."
    },
@@ -8401,22 +7681,10 @@ const POOLS = {
    {
     "q": "Wozu dient ein DHCP-Relay-Agent?",
     "o": [
-     {
-      "t": "Er leitet DHCP-Broadcasts über Netzgrenzen an einen zentralen Server weiter",
-      "ok": true
-     },
-     {
-      "t": "Er vergibt selbst IP-Adressen",
-      "ok": false
-     },
-     {
-      "t": "Er löst Domainnamen auf",
-      "ok": false
-     },
-     {
-      "t": "Er verschlüsselt DHCP-Pakete",
-      "ok": false
-     }
+     { "t": "Er leitet DHCP-Broadcasts über Netzgrenzen an einen zentralen Server weiter", "ok": true },
+     { "t": "Er beantwortet Anfragen aus einem lokalen Adresspool, wenn der Server ausfällt", "ok": false },
+     { "t": "Er übersetzt DHCP-Anfragen zwischen IPv4- und IPv6-Netzen in beide Richtungen", "ok": false },
+     { "t": "Er verteilt Anfragen abwechselnd auf mehrere DHCP-Server im selben Subnetz", "ok": false }
     ],
     "e": "DHCP-Broadcasts kommen nicht über Router hinaus. Der Relay-Agent wandelt sie in Unicast an den zentralen DHCP-Server um — so reicht ein Server für viele Subnetze."
    },
@@ -8445,22 +7713,10 @@ const POOLS = {
    {
     "q": "Warum ist DHCP in großen Netzen sinnvoller als manuelle IP-Vergabe?",
     "o": [
-     {
-      "t": "Zentrale, fehlerarme Verwaltung ohne Adresskonflikte",
-      "ok": true
-     },
-     {
-      "t": "Es ist verschlüsselt",
-      "ok": false
-     },
-     {
-      "t": "Es beschleunigt die Leitung",
-      "ok": false
-     },
-     {
-      "t": "Es ersetzt DNS",
-      "ok": false
-     }
+     { "t": "Zentrale, fehlerarme Verwaltung ohne Adresskonflikte", "ok": true },
+     { "t": "Feste Bindung jeder Adresse an die jeweilige Hardware", "ok": false },
+     { "t": "Kürzere Anmeldezeiten der Clients beim Netzwerkbeitritt", "ok": false },
+     { "t": "Automatischer Schutz vor fremden Geräten im Netzwerk", "ok": false }
     ],
     "e": "DHCP automatisiert die Vergabe und verhindert doppelte Adressen."
    },
@@ -8498,7 +7754,7 @@ const POOLS = {
       "ok": false
      },
      {
-      "t": "Iterativ ist grundsätzlich schneller und sicherer",
+      "t": "Rekursiv fragt die Server von oben nach unten ab, während iterativ die Nameserver von unten nach oben durchsucht.",
       "ok": false
      },
      {
@@ -8529,28 +7785,6 @@ const POOLS = {
      }
     ],
     "e": "13 Root-Server-Cluster (A–M) bilden die Spitze; sie kennen die TLD-Server-Adressen."
-   },
-   {
-    "q": "Welcher DNS-Record ordnet einem Namen eine IPv6-Adresse zu?",
-    "o": [
-     {
-      "t": "AAAA",
-      "ok": true
-     },
-     {
-      "t": "A",
-      "ok": false
-     },
-     {
-      "t": "MX",
-      "ok": false
-     },
-     {
-      "t": "PTR",
-      "ok": false
-     }
-    ],
-    "e": "AAAA (Quad-A) = IPv6-Adresse. A = IPv4. PTR = Reverse-Lookup (IP→Name)."
    },
    {
     "q": "Wozu dient ein PTR-Record?",
@@ -8600,7 +7834,7 @@ const POOLS = {
     "q": "Wie nennt man eine fest zugewiesene IP über DHCP?",
     "o": [
      {
-      "t": "DHCP-Reservation (feste Zuweisung per MAC-Adresse)",
+      "t": "DHCP-Reservation, feste Zuweisung per MAC-Adresse",
       "ok": true
      },
      {
@@ -8621,44 +7855,20 @@ const POOLS = {
    {
     "q": "Welchen Vorteil bietet ein DHCP-Relay?",
     "o": [
-     {
-      "t": "Ein DHCP-Server reicht für viele Subnetze statt einen pro Subnetz",
-      "ok": true
-     },
-     {
-      "t": "Schnellere IP-Vergabe",
-      "ok": false
-     },
-     {
-      "t": "Verschlüsselung der DHCP-Pakete",
-      "ok": false
-     },
-     {
-      "t": "Automatische DNS-Einträge",
-      "ok": false
-     }
+     { "t": "Ein DHCP-Server reicht für viele Subnetze statt einen pro Subnetz", "ok": true },
+     { "t": "Adresskonflikte werden erkannt, bevor die IP an den Client geht", "ok": false },
+     { "t": "Die Vergabe wird redundant, weil das Relay bei Ausfall einspringt", "ok": false },
+     { "t": "Die Lease-Zeiten lassen sich je Subnetz individuell verkürzen", "ok": false }
     ],
     "e": "Der Relay-Agent überbrückt die Subnetzgrenzen — Broadcasts werden als Unicast weitergeleitet."
    },
    {
     "q": "Was enthält das DHCP-Offer-Paket?",
     "o": [
-     {
-      "t": "Vorgeschlagene IP, Maske, Gateway, DNS, Lease-Dauer",
-      "ok": true
-     },
-     {
-      "t": "Nur die IP-Adresse",
-      "ok": false
-     },
-     {
-      "t": "Den Hostnamen des Clients",
-      "ok": false
-     },
-     {
-      "t": "Nur die MAC-Adresse",
-      "ok": false
-     }
+     { "t": "Vorgeschlagene IP, Maske, Gateway, DNS, Lease-Dauer", "ok": true },
+     { "t": "Die endgültige IP samt Bestätigung der Übernahme", "ok": false },
+     { "t": "Die Liste aller noch freien Adressen des Pools", "ok": false },
+     { "t": "Die MAC des Servers und den nächsten Anfragezeitpunkt", "ok": false }
     ],
     "e": "Das Offer enthält die komplette Netzwerkkonfiguration, die der Server vorschlägt."
    },
@@ -8666,7 +7876,7 @@ const POOLS = {
     "q": "Woran erkennt der DHCP-Server beim Discover den anfragenden Client?",
     "o": [
      {
-      "t": "An der MAC-Adresse in der Anfrage",
+      "t": "An der MAC-Adresse",
       "ok": true
      },
      {
@@ -8674,7 +7884,7 @@ const POOLS = {
       "ok": false
      },
      {
-      "t": "An der IP-Adresse (hat noch keine)",
+      "t": "An der IP-Adresse",
       "ok": false
      },
      {
@@ -8934,22 +8144,10 @@ const POOLS = {
    {
     "q": "Wie authentifiziert sich ein Client bei vielen APIs?",
     "o": [
-     {
-      "t": "Über einen geheimen Schlüssel (API-Key) im Header",
-      "ok": true
-     },
-     {
-      "t": "Über die MAC-Adresse",
-      "ok": false
-     },
-     {
-      "t": "Über die TTL",
-      "ok": false
-     },
-     {
-      "t": "Über den Quellport",
-      "ok": false
-     }
+     { "t": "Über einen geheimen Schlüssel (API-Key) im Header", "ok": true },
+     { "t": "Über eine fortlaufende Anfragenummer je Client", "ok": false },
+     { "t": "Über den User-Agent-Header des aufrufenden Programms", "ok": false },
+     { "t": "Über die MAC-Adresse, die im Request mitgesendet wird", "ok": false }
     ],
     "e": "Ein API-Key/Token im Header dient der Authentifizierung."
    },
@@ -9000,66 +8198,30 @@ const POOLS = {
    {
     "q": "Warum ist REST gut skalierbar?",
     "o": [
-     {
-      "t": "Wegen der Zustandslosigkeit können Anfragen unabhängig verteilt werden",
-      "ok": true
-     },
-     {
-      "t": "Weil es nur XML nutzt",
-      "ok": false
-     },
-     {
-      "t": "Weil der Server die Sitzung speichert",
-      "ok": false
-     },
-     {
-      "t": "Weil es UDP verwendet",
-      "ok": false
-     }
+     { "t": "Wegen der Zustandslosigkeit können Anfragen unabhängig verteilt werden", "ok": true },
+     { "t": "Weil der Server alle Sitzungen zentral zwischenspeichert und teilt", "ok": false },
+     { "t": "Weil Anfragen grundsätzlich asynchron über Warteschlangen laufen", "ok": false },
+     { "t": "Weil die Datenmenge je Antwort auf ein festes Maximum begrenzt ist", "ok": false }
     ],
     "e": "Stateless-Requests lassen sich beliebig auf Server verteilen (Loadbalancing)."
    },
    {
     "q": "Was ist ein 'Endpunkt' einer API?",
     "o": [
-     {
-      "t": "Eine definierte Adresse/URL, an die Anfragen gehen",
-      "ok": true
-     },
-     {
-      "t": "Der letzte Router auf dem Weg",
-      "ok": false
-     },
-     {
-      "t": "Der Quellport",
-      "ok": false
-     },
-     {
-      "t": "Das Ende der TTL",
-      "ok": false
-     }
+     { "t": "Eine definierte Adresse/URL, an die Anfragen gehen", "ok": true },
+     { "t": "Der Server, auf dem die Datenbank der API betrieben wird", "ok": false },
+     { "t": "Die Funktion im Client-Code, die die Antwort verarbeitet", "ok": false },
+     { "t": "Die Gegenstelle, die eine TCP-Verbindung ordnungsgemäß beendet", "ok": false }
     ],
     "e": "Ein Endpoint ist die adressierbare Schnittstelle für Requests."
    },
    {
     "q": "Welcher Vorteil ergibt sich durch Webhooks gegenüber Polling?",
     "o": [
-     {
-      "t": "Kein ständiges Nachfragen nötig, spart Ressourcen",
-      "ok": true
-     },
-     {
-      "t": "Höhere Verschlüsselung",
-      "ok": false
-     },
-     {
-      "t": "Größere Payload",
-      "ok": false
-     },
-     {
-      "t": "Feste IP-Adressen",
-      "ok": false
-     }
+     { "t": "Kein ständiges Nachfragen nötig, spart Ressourcen", "ok": true },
+     { "t": "Die Verbindung bleibt dauerhaft offen und reagiert sofort", "ok": false },
+     { "t": "Antworten kommen garantiert und in fester Reihenfolge an", "ok": false },
+     { "t": "Der Client bestimmt selbst, wann er die Daten abholt", "ok": false }
     ],
     "e": "Der Server informiert aktiv bei Events, Polling entfällt."
    },
@@ -9225,44 +8387,20 @@ const POOLS = {
    {
     "q": "Warum nutzt VoIP UDP statt TCP?",
     "o": [
-     {
-      "t": "Geringe Verzögerung ist wichtiger als das Nachliefern verlorener Pakete",
-      "ok": true
-     },
-     {
-      "t": "UDP ist immer sicherer",
-      "ok": false
-     },
-     {
-      "t": "TCP kann keine Sprache übertragen",
-      "ok": false
-     },
-     {
-      "t": "UDP verschlüsselt automatisch",
-      "ok": false
-     }
+     { "t": "Geringe Verzögerung ist wichtiger als das Nachliefern verlorener Pakete", "ok": true },
+     { "t": "UDP komprimiert Sprachdaten effizienter, als TCP es könnte", "ok": false },
+     { "t": "UDP garantiert eine feste Bandbreite für die Dauer des Gesprächs", "ok": false },
+     { "t": "UDP baut für jedes Gespräch mehrere parallele Kanäle gleichzeitig auf", "ok": false }
     ],
     "e": "Verspätete Nachlieferungen stören ein Gespräch mehr als ein kurzer Aussetzer – daher UDP."
    },
    {
     "q": "Welche Aufgabe hat das SIP-Protokoll bei VoIP?",
     "o": [
-     {
-      "t": "Auf-, Ab- und Verwaltung der Gesprächsverbindung (Signalisierung)",
-      "ok": true
-     },
-     {
-      "t": "Übertragung der eigentlichen Sprachdaten",
-      "ok": false
-     },
-     {
-      "t": "Verschlüsselung des Netzwerks",
-      "ok": false
-     },
-     {
-      "t": "Vergabe von IP-Adressen",
-      "ok": false
-     }
+     { "t": "Auf-, Ab- und Verwaltung der Gesprächsverbindung (Signalisierung)", "ok": true },
+     { "t": "Transport der digitalisierten Sprachpakete zwischen den Endgeräten", "ok": false },
+     { "t": "Priorisierung der Sprachpakete gegenüber normalem Datenverkehr", "ok": false },
+     { "t": "Umwandlung analoger Sprache in digitale Datenpakete", "ok": false }
     ],
     "e": "SIP (Session Initiation Protocol) steuert den Rufaufbau/-abbau, nicht die Sprachdaten selbst."
    },
@@ -9335,22 +8473,10 @@ const POOLS = {
    {
     "q": "Wozu dient QoS (Quality of Service) bei VoIP?",
     "o": [
-     {
-      "t": "Sprachpakete werden bevorzugt behandelt, um Qualität zu sichern",
-      "ok": true
-     },
-     {
-      "t": "Zur Verschlüsselung der Gespräche",
-      "ok": false
-     },
-     {
-      "t": "Zur Vergabe von Telefonnummern",
-      "ok": false
-     },
-     {
-      "t": "Zur MAC-Filterung",
-      "ok": false
-     }
+     { "t": "Sprachpakete werden bevorzugt behandelt, um Qualität zu sichern", "ok": true },
+     { "t": "Gespräche werden auf die am wenigsten ausgelastete Leitung gelegt", "ok": false },
+     { "t": "Verlorene Sprachpakete werden automatisch erneut angefordert", "ok": false },
+     { "t": "Die Sprachqualität wird gemessen und dem Anbieter gemeldet", "ok": false }
     ],
     "e": "QoS priorisiert zeitkritischen Sprachverkehr gegenüber unkritischem Datenverkehr."
    },
@@ -9401,22 +8527,10 @@ const POOLS = {
    {
     "q": "Welcher Vorteil spricht für VoIP gegenüber klassischer Telefonie?",
     "o": [
-     {
-      "t": "Nutzung der vorhandenen Dateninfrastruktur, geringere Kosten, Flexibilität",
-      "ok": true
-     },
-     {
-      "t": "Es ist völlig störungsfrei",
-      "ok": false
-     },
-     {
-      "t": "Es braucht kein Netzwerk",
-      "ok": false
-     },
-     {
-      "t": "Es funktioniert ohne Strom",
-      "ok": false
-     }
+     { "t": "Nutzung der vorhandenen Dateninfrastruktur, geringere Kosten, Flexibilität", "ok": true },
+     { "t": "Garantiert höhere Sprachqualität als jede klassische Telefonleitung", "ok": false },
+     { "t": "Abhörsichere Gespräche durch verpflichtende Ende-zu-Ende-Verschlüsselung", "ok": false },
+     { "t": "Vollständige Unabhängigkeit von der Internetanbindung des Standorts", "ok": false }
     ],
     "e": "VoIP nutzt das bestehende IP-Netz, spart eigene Telefonleitungen und ist flexibel."
    },
@@ -9445,88 +8559,40 @@ const POOLS = {
    {
     "q": "Was leistet ein Jitter-Buffer?",
     "o": [
-     {
-      "t": "Er puffert Pakete, um Laufzeitschwankungen auszugleichen",
-      "ok": true
-     },
-     {
-      "t": "Er verschlüsselt die Sprache",
-      "ok": false
-     },
-     {
-      "t": "Er vergibt IP-Adressen",
-      "ok": false
-     },
-     {
-      "t": "Er erhöht die Bandbreite",
-      "ok": false
-     }
+     { "t": "Er puffert Pakete, um Laufzeitschwankungen auszugleichen", "ok": true },
+     { "t": "Er fordert verlorene Sprachpakete beim Absender erneut an", "ok": false },
+     { "t": "Er komprimiert die Sprachdaten bei knapper Bandbreite stärker", "ok": false },
+     { "t": "Er verteilt die Sprachlast gleichmäßig auf mehrere Leitungen", "ok": false }
     ],
     "e": "Der Jitter-Buffer sammelt Pakete kurz, um sie gleichmäßig abzuspielen."
    },
    {
     "q": "Welche zwei Protokolltypen wirken bei VoIP zusammen?",
     "o": [
-     {
-      "t": "Signalisierung (SIP) und Medientransport (RTP)",
-      "ok": true
-     },
-     {
-      "t": "DNS und DHCP",
-      "ok": false
-     },
-     {
-      "t": "ARP und RARP",
-      "ok": false
-     },
-     {
-      "t": "HTTP und FTP",
-      "ok": false
-     }
+     { "t": "Signalisierung (SIP) und Medientransport (RTP)", "ok": true },
+     { "t": "Verbindungsaufbau (TCP) und Verschlüsselung (TLS)", "ok": false },
+     { "t": "Priorisierung (QoS) und Segmentierung (VLAN)", "ok": false },
+     { "t": "Adressauflösung (DNS) und Adressvergabe (DHCP)", "ok": false }
     ],
     "e": "SIP baut das Gespräch auf, RTP transportiert die Sprache."
    },
    {
     "q": "Warum ist VoIP anfällig für Netzwerkprobleme?",
     "o": [
-     {
-      "t": "Weil Sprache echtzeitkritisch ist und keine Verzögerung verträgt",
-      "ok": true
-     },
-     {
-      "t": "Weil sie TCP nutzt",
-      "ok": false
-     },
-     {
-      "t": "Weil sie keine Pakete nutzt",
-      "ok": false
-     },
-     {
-      "t": "Weil sie kein Netz braucht",
-      "ok": false
-     }
+     { "t": "Weil Sprache echtzeitkritisch ist und keine Verzögerung verträgt", "ok": true },
+     { "t": "Weil Sprachpakete größer sind als gewöhnliche Datenpakete", "ok": false },
+     { "t": "Weil die Codecs bei Störungen die Verbindung komplett trennen", "ok": false },
+     { "t": "Weil jedes Gespräch eine eigene physische Leitung belegt", "ok": false }
     ],
     "e": "Echtzeitkommunikation reagiert empfindlich auf Latenz, Jitter und Verluste."
    },
    {
     "q": "Was ist eine typische Anwendung von VoIP im Unternehmen?",
     "o": [
-     {
-      "t": "IP-Telefonanlage statt klassischer Telefonleitungen",
-      "ok": true
-     },
-     {
-      "t": "Ein Ersatz für die Firewall",
-      "ok": false
-     },
-     {
-      "t": "Ein DNS-Server",
-      "ok": false
-     },
-     {
-      "t": "Ein Backup-System",
-      "ok": false
-     }
+     { "t": "IP-Telefonanlage statt klassischer Telefonleitungen", "ok": true },
+     { "t": "Zentrale Videoüberwachung über das Datennetzwerk", "ok": false },
+     { "t": "Standortvernetzung über verschlüsselte VPN-Tunnel", "ok": false },
+     { "t": "Faxversand über das klassische analoge Telefonnetz", "ok": false }
     ],
     "e": "Firmen nutzen VoIP-Telefonanlagen über das vorhandene Datennetz."
    },
@@ -9577,44 +8643,20 @@ const POOLS = {
    {
     "q": "Warum wird VoIP-Verkehr oft in ein eigenes VLAN gelegt?",
     "o": [
-     {
-      "t": "Um Sprache zu priorisieren und von Datenverkehr zu trennen",
-      "ok": true
-     },
-     {
-      "t": "Um die Telefonnummern zu verstecken",
-      "ok": false
-     },
-     {
-      "t": "Um DNS zu umgehen",
-      "ok": false
-     },
-     {
-      "t": "Um die Reichweite zu erhöhen",
-      "ok": false
-     }
+     { "t": "Um Sprache zu priorisieren und von Datenverkehr zu trennen", "ok": true },
+     { "t": "Um Telefonate auch bei Ausfall des Datennetzes zu ermöglichen", "ok": false },
+     { "t": "Um Gespräche automatisch zu verschlüsseln und abzusichern", "ok": false },
+     { "t": "Um die Telefone ohne eigene IP-Adressen betreiben zu können", "ok": false }
     ],
     "e": "Ein Voice-VLAN trennt und priorisiert Sprachverkehr für gleichbleibende Qualität."
    },
    {
     "q": "Was ist ein Softphone?",
     "o": [
-     {
-      "t": "Eine Software, die Telefonie am Rechner/Smartphone ermöglicht",
-      "ok": true
-     },
-     {
-      "t": "Ein besonders leises Telefon",
-      "ok": false
-     },
-     {
-      "t": "Ein Hardware-Router",
-      "ok": false
-     },
-     {
-      "t": "Ein Verschlüsselungschip",
-      "ok": false
-     }
+     { "t": "Eine Software, die Telefonie am Rechner/Smartphone ermöglicht", "ok": true },
+     { "t": "Ein Adapter, der analoge Telefone ans IP-Netz anbindet", "ok": false },
+     { "t": "Ein IP-Telefon mit Touchdisplay statt physischer Tasten", "ok": false },
+     { "t": "Eine App zur Fernkonfiguration der IP-Telefonanlage", "ok": false }
     ],
     "e": "Ein Softphone ist eine VoIP-Anwendung ohne dediziertes Tischtelefon."
    }
@@ -9692,22 +8734,10 @@ const POOLS = {
    {
     "q": "Was kennzeichnet asymmetrische Verschlüsselung?",
     "o": [
-     {
-      "t": "Ein Schlüsselpaar: öffentlich verschlüsselt, privat entschlüsselt",
-      "ok": true
-     },
-     {
-      "t": "Ein gemeinsamer geheimer Schlüssel",
-      "ok": false
-     },
-     {
-      "t": "Gar kein Schlüssel",
-      "ok": false
-     },
-     {
-      "t": "Nur ein privater Schlüssel",
-      "ok": false
-     }
+     { "t": "Ein Schlüsselpaar: öffentlich verschlüsselt, privat entschlüsselt", "ok": true },
+     { "t": "Ein gemeinsamer Schlüssel, der vorab sicher ausgetauscht wird", "ok": false },
+     { "t": "Zwei identische Schlüssel, die auf beiden Seiten erzeugt werden", "ok": false },
+     { "t": "Ein Einmalschlüssel, der nach jeder Nachricht verworfen wird", "ok": false }
     ],
     "e": "Asymmetrisch = Public Key verschlüsselt, zugehöriger Private Key entschlüsselt."
    },
@@ -9734,28 +8764,6 @@ const POOLS = {
     "e": "RSA und ECC sind gängige asymmetrische Verfahren."
    },
    {
-    "q": "Welchen Vorteil bietet asymmetrische Verschlüsselung?",
-    "o": [
-     {
-      "t": "Sichere Kommunikation ohne vorherige Schlüsselverteilung",
-      "ok": true
-     },
-     {
-      "t": "Sie ist schneller als symmetrische",
-      "ok": false
-     },
-     {
-      "t": "Sie braucht keinen Schlüssel",
-      "ok": false
-     },
-     {
-      "t": "Sie funktioniert ohne Mathematik",
-      "ok": false
-     }
-    ],
-    "e": "Der öffentliche Schlüssel darf frei verteilt werden — kein sicherer Vorabkanal nötig."
-   },
-   {
     "q": "Warum ist rein asymmetrische Verschlüsselung für große Datenmengen ungeeignet?",
     "o": [
      {
@@ -9780,46 +8788,12 @@ const POOLS = {
    {
     "q": "Was kombiniert die hybride Verschlüsselung?",
     "o": [
-     {
-      "t": "Symmetrisch für die Daten, asymmetrisch für den Schlüsselaustausch",
-      "ok": true
-     },
-     {
-      "t": "Zwei symmetrische Schlüssel",
-      "ok": false
-     },
-     {
-      "t": "Zwei private Schlüssel",
-      "ok": false
-     },
-     {
-      "t": "Nur Hashing",
-      "ok": false
-     }
+     { "t": "Symmetrisch für die Daten, asymmetrisch für den Schlüsselaustausch", "ok": true },
+     { "t": "Asymmetrisch für die Daten, symmetrisch für den Schlüsselaustausch", "ok": false },
+     { "t": "Verschlüsselung für den Transport, Hashing für gespeicherte Daten", "ok": false },
+     { "t": "Zwei unabhängige symmetrische Verfahren mit getrennten Schlüsseln", "ok": false }
     ],
     "e": "Hybrid: schneller symmetrischer Sitzungsschlüssel, sicher per Asymmetrie übertragen."
-   },
-   {
-    "q": "Wie läuft hybride Verschlüsselung grob ab?",
-    "o": [
-     {
-      "t": "Sitzungsschlüssel erzeugen, Daten symmetrisch, Sitzungsschlüssel asymmetrisch übertragen",
-      "ok": true
-     },
-     {
-      "t": "Alles nur asymmetrisch",
-      "ok": false
-     },
-     {
-      "t": "Alles nur symmetrisch",
-      "ok": false
-     },
-     {
-      "t": "Nur Hashwerte austauschen",
-      "ok": false
-     }
-    ],
-    "e": "Der Sitzungsschlüssel verschlüsselt die Daten; er selbst wird mit dem Public Key des Empfängers geschützt."
    },
    {
     "q": "Wo wird hybride Verschlüsselung in der Praxis eingesetzt?",
@@ -9890,22 +8864,10 @@ const POOLS = {
    {
     "q": "Wie prüft der Empfänger eine digitale Signatur?",
     "o": [
-     {
-      "t": "Signatur mit dem öffentlichen Schlüssel entschlüsseln und Hash vergleichen",
-      "ok": true
-     },
-     {
-      "t": "Mit dem eigenen privaten Schlüssel entschlüsseln",
-      "ok": false
-     },
-     {
-      "t": "Er vergleicht nur die Dateigröße",
-      "ok": false
-     },
-     {
-      "t": "Er fragt den DHCP-Server",
-      "ok": false
-     }
+     { "t": "Signatur mit dem öffentlichen Schlüssel entschlüsseln und Hash vergleichen", "ok": true },
+     { "t": "Den Hash mit dem eigenen privaten Schlüssel verschlüsseln und beide Werte vergleichen", "ok": false },
+     { "t": "Die Signatur bei der CA einreichen, die sie gegen die Root-Signatur abgleicht", "ok": false },
+     { "t": "Das Dokument erneut signieren und prüfen, ob dieselbe Signatur entsteht", "ok": false }
     ],
     "e": "Mit dem Public Key des Absenders wird der Hash geprüft; stimmt er, ist alles echt/unverändert."
    },
@@ -9934,44 +8896,20 @@ const POOLS = {
    {
     "q": "Was enthält ein digitales Zertifikat?",
     "o": [
-     {
-      "t": "Öffentlichen Schlüssel, Inhaberdaten, Gültigkeit, CA-Signatur",
-      "ok": true
-     },
-     {
-      "t": "Nur den privaten Schlüssel",
-      "ok": false
-     },
-     {
-      "t": "Das Benutzerpasswort",
-      "ok": false
-     },
-     {
-      "t": "Die MAC-Adresse",
-      "ok": false
-     }
+     { "t": "Öffentlichen Schlüssel, Inhaberdaten, Gültigkeit, CA-Signatur", "ok": true },
+     { "t": "Öffentlichen und privaten Schlüssel als geschütztes Schlüsselpaar", "ok": false },
+     { "t": "Privaten Schlüssel, Inhaberdaten und die Signatur des Inhabers", "ok": false },
+     { "t": "Die Sperrliste der CA samt aller widerrufenen Seriennummern", "ok": false }
     ],
     "e": "Ein Zertifikat bindet einen Public Key an eine Identität, signiert von einer CA."
    },
    {
     "q": "Was ist eine Zertifizierungsstelle (CA)?",
     "o": [
-     {
-      "t": "Eine vertrauenswürdige Instanz, die Zertifikate signiert/ausstellt",
-      "ok": true
-     },
-     {
-      "t": "Ein Verschlüsselungsalgorithmus",
-      "ok": false
-     },
-     {
-      "t": "Ein DHCP-Server",
-      "ok": false
-     },
-     {
-      "t": "Ein Router",
-      "ok": false
-     }
+     { "t": "Eine vertrauenswürdige Instanz, die Zertifikate signiert/ausstellt", "ok": true },
+     { "t": "Ein Dienst, der private Schlüssel zentral erzeugt und verwahrt", "ok": false },
+     { "t": "Eine Behörde, die Verschlüsselungsverfahren prüft und zulässt", "ok": false },
+     { "t": "Ein Server, der ablaufende Zertifikate automatisch verlängert", "ok": false }
     ],
     "e": "Die CA bestätigt durch ihre Signatur die Echtheit eines Zertifikats."
    },
@@ -10000,22 +8938,10 @@ const POOLS = {
    {
     "q": "Worauf beruht das Vertrauensmodell einer PKI?",
     "o": [
-     {
-      "t": "Clients vertrauen der Root-CA und damit allem, was sie signiert",
-      "ok": true
-     },
-     {
-      "t": "Jeder Client signiert selbst",
-      "ok": false
-     },
-     {
-      "t": "Vertrauen ist zufällig",
-      "ok": false
-     },
-     {
-      "t": "Nur der Server entscheidet",
-      "ok": false
-     }
+     { "t": "Clients vertrauen der Root-CA und damit allem, was sie signiert", "ok": true },
+     { "t": "Jeder Teilnehmer signiert die Schlüssel anderer, denen er vertraut", "ok": false },
+     { "t": "Der Server entscheidet je Verbindung, welchen Clients er vertraut", "ok": false },
+     { "t": "Zertifikate gelten als vertrauenswürdig, sobald sie zweifach signiert sind", "ok": false }
     ],
     "e": "Wird der Root-CA vertraut, gelten alle von ihr (oder ihren Intermediates) signierten Zertifikate als vertrauenswürdig."
    },
@@ -10088,44 +9014,20 @@ const POOLS = {
    {
     "q": "Warum verschlüsselt man den Sitzungsschlüssel asymmetrisch statt ihn direkt zu senden?",
     "o": [
-     {
-      "t": "Damit nur der Empfänger ihn mit seinem privaten Schlüssel öffnen kann",
-      "ok": true
-     },
-     {
-      "t": "Weil er sonst zu groß wäre",
-      "ok": false
-     },
-     {
-      "t": "Weil DHCP das verlangt",
-      "ok": false
-     },
-     {
-      "t": "Damit er schneller ankommt",
-      "ok": false
-     }
+     { "t": "Damit nur der Empfänger ihn mit seinem privaten Schlüssel öffnen kann", "ok": true },
+     { "t": "Weil symmetrische Schlüssel für die direkte Übertragung zu lang wären", "ok": false },
+     { "t": "Damit die CA den Schlüsselaustausch protokollieren und prüfen kann", "ok": false },
+     { "t": "Weil er sonst bei jeder einzelnen Nachricht neu erzeugt werden müsste", "ok": false }
     ],
     "e": "Der mit dem Public Key geschützte Sitzungsschlüssel ist nur für den Inhaber des Private Keys lesbar."
    },
    {
     "q": "Was ist ein Hash-Wert?",
     "o": [
-     {
-      "t": "Eine Prüfsumme fester Länge, die aus beliebig langen Daten berechnet wird",
-      "ok": true
-     },
-     {
-      "t": "Ein verschlüsselter Schlüssel",
-      "ok": false
-     },
-     {
-      "t": "Eine IP-Adresse",
-      "ok": false
-     },
-     {
-      "t": "Ein Zertifikatsformat",
-      "ok": false
-     }
+     { "t": "Eine Prüfsumme fester Länge, die aus beliebig langen Daten berechnet wird", "ok": true },
+     { "t": "Ein komprimiertes Abbild der Daten, aus dem sie sich wiederherstellen lassen", "ok": false },
+     { "t": "Ein verschlüsselter Auszug der Daten, lesbar nur mit dem passenden Schlüssel", "ok": false },
+     { "t": "Ein zufällig erzeugter Wert, der jeder Datei bei Erstellung zugewiesen wird", "ok": false }
     ],
     "e": "Ein Hash-Algorithmus (z. B. SHA-256) erzeugt einen eindeutigen Fingerabdruck der Eingabedaten."
    },
@@ -10220,22 +9122,10 @@ const POOLS = {
    {
     "q": "Was ist Diffie-Hellman?",
     "o": [
-     {
-      "t": "Ein Verfahren zum sicheren Schlüsselaustausch über unsichere Kanäle",
-      "ok": true
-     },
-     {
-      "t": "Ein symmetrisches Verschlüsselungsverfahren",
-      "ok": false
-     },
-     {
-      "t": "Ein Hash-Algorithmus",
-      "ok": false
-     },
-     {
-      "t": "Ein Zertifikatsformat",
-      "ok": false
-     }
+     { "t": "Ein Verfahren zum sicheren Schlüsselaustausch über unsichere Kanäle", "ok": true },
+     { "t": "Ein asymmetrisches Verschlüsselungsverfahren für große Datenmengen", "ok": false },
+     { "t": "Ein Signaturverfahren zum Nachweis der Identität des Absenders", "ok": false },
+     { "t": "Ein Protokoll zur automatischen Verteilung von Zertifikaten", "ok": false }
     ],
     "e": "Diffie-Hellman ermöglicht zwei Parteien, über ein unsicheres Medium einen gemeinsamen Schlüssel zu vereinbaren — ohne ihn zu übertragen."
    },
@@ -10308,44 +9198,20 @@ const POOLS = {
    {
     "q": "Was ist eine Intermediate CA?",
     "o": [
-     {
-      "t": "Eine Zwischenzertifizierungsstelle zwischen Root-CA und End-Entity-Zertifikat",
-      "ok": true
-     },
-     {
-      "t": "Eine abgelaufene Root-CA",
-      "ok": false
-     },
-     {
-      "t": "Ein Benutzer-Zertifikat",
-      "ok": false
-     },
-     {
-      "t": "Ein Sperrlisten-Server",
-      "ok": false
-     }
+     { "t": "Eine Zwischenzertifizierungsstelle zwischen Root-CA und End-Entity-Zertifikat", "ok": true },
+     { "t": "Eine Ersatz-CA, die einspringt, wenn die Root-CA kompromittiert wurde", "ok": false },
+     { "t": "Eine Übergangs-CA, die abgelaufene Zertifikate bis zum Austausch verlängert", "ok": false },
+     { "t": "Eine externe Prüfstelle, die die Arbeit der Root-CA regelmäßig auditiert", "ok": false }
     ],
     "e": "Intermediate CAs ermöglichen skalierbare PKI: die Root-CA bleibt offline; Intermediate CAs stellen Endnutzerzertifikate aus."
    },
    {
     "q": "Welchen Vorteil hat asymmetrische Verschlüsselung gegenüber symmetrischer?",
     "o": [
-     {
-      "t": "Kein sicherer Vorkanal nötig — der öffentliche Schlüssel darf frei verteilt werden",
-      "ok": true
-     },
-     {
-      "t": "Sie ist schneller",
-      "ok": false
-     },
-     {
-      "t": "Sie nutzt denselben Schlüssel für alle",
-      "ok": false
-     },
-     {
-      "t": "Sie erzeugt keine Hashes",
-      "ok": false
-     }
+     { "t": "Kein sicherer Vorkanal nötig — der öffentliche Schlüssel darf frei verteilt werden", "ok": true },
+     { "t": "Deutlich schnellere Ver- und Entschlüsselung auch bei großen Datenmengen", "ok": false },
+     { "t": "Die Schlüssel sind kürzer und benötigen dadurch weniger Speicher und Rechenzeit", "ok": false },
+     { "t": "Kompromittierte Schlüssel lassen sich ohne Neuausstellung wieder absichern", "ok": false }
     ],
     "e": "Das zentrale Problem der Schlüsselverteilung entfällt: der Public Key kann offen geteilt werden."
    },
@@ -10439,22 +9305,10 @@ const POOLS = {
    {
     "q": "Was ist die Grundidee eines VPN?",
     "o": [
-     {
-      "t": "Ein verschlüsselter Tunnel durch ein unsicheres Netz",
-      "ok": true
-     },
-     {
-      "t": "Ein schnelleres LAN-Kabel",
-      "ok": false
-     },
-     {
-      "t": "Ein Ersatz für DNS",
-      "ok": false
-     },
-     {
-      "t": "Eine Firewall-Regel",
-      "ok": false
-     }
+     { "t": "Ein verschlüsselter Tunnel durch ein unsicheres Netz", "ok": true },
+     { "t": "Eine dedizierte Standleitung zwischen zwei Standorten", "ok": false },
+     { "t": "Ein Proxy, der Webanfragen stellvertretend ausführt", "ok": false },
+     { "t": "Ein getrenntes Funknetz für vertrauliche Endgeräte", "ok": false }
     ],
     "e": "VPN baut über ein öffentliches Netz einen sicheren, verschlüsselten Tunnel zum Zielnetz auf."
    },
@@ -10462,7 +9316,7 @@ const POOLS = {
     "q": "Auf welcher OSI-Schicht arbeitet IPsec?",
     "o": [
      {
-      "t": "Schicht 3 (Vermittlung/Netzwerk)",
+      "t": "Schicht 3 (Vermittlung)",
       "ok": true
      },
      {
@@ -10505,22 +9359,10 @@ const POOLS = {
    {
     "q": "Was verschlüsselt der IPsec-Tunnelmodus?",
     "o": [
-     {
-      "t": "Das komplette IP-Paket, verpackt in ein neues IP-Paket",
-      "ok": true
-     },
-     {
-      "t": "Nur die Payload",
-      "ok": false
-     },
-     {
-      "t": "Nur die Portnummer",
-      "ok": false
-     },
-     {
-      "t": "Nur den TCP-Header",
-      "ok": false
-     }
+     { "t": "Das komplette IP-Paket, verpackt in ein neues IP-Paket", "ok": true },
+     { "t": "Nur die Nutzdaten, der originale IP-Header bleibt sichtbar", "ok": false },
+     { "t": "Nur die Header-Informationen, die Nutzdaten bleiben lesbar", "ok": false },
+     { "t": "Die Aushandlungsdaten der Verbindung, nicht den Datenstrom", "ok": false }
     ],
     "e": "Tunnelmodus kapselt das gesamte Originalpaket und setzt einen neuen IP-Header davor."
    },
@@ -10550,7 +9392,7 @@ const POOLS = {
     "q": "Wofür wird der Tunnelmodus typischerweise eingesetzt?",
     "o": [
      {
-      "t": "Site-to-Site-VPN (Gateway zu Gateway)",
+      "t": "Site-to-Site-VPN Gateway zu Gateway",
       "ok": true
      },
      {
@@ -10747,88 +9589,40 @@ const POOLS = {
    {
     "q": "Welcher Nachteil spricht gegen Split Tunneling?",
     "o": [
-     {
-      "t": "Geringere Kontrolle/Sicherheit für den nicht getunnelten Verkehr",
-      "ok": true
-     },
-     {
-      "t": "Es ist immer langsamer",
-      "ok": false
-     },
-     {
-      "t": "Es funktioniert ohne Verschlüsselung gar nicht",
-      "ok": false
-     },
-     {
-      "t": "Es blockiert DNS",
-      "ok": false
-     }
+     { "t": "Geringere Kontrolle/Sicherheit für den nicht getunnelten Verkehr", "ok": true },
+     { "t": "Deutlich höhere Last auf dem VPN-Gateway durch doppelten Verkehr", "ok": false },
+     { "t": "Interne Dienste sind nur mit spürbarer Verzögerung erreichbar", "ok": false },
+     { "t": "Der Client benötigt für jeden Tunnel eine eigene Netzwerkkarte", "ok": false }
     ],
     "e": "Der direkt geroutete Verkehr entzieht sich der zentralen VPN-Kontrolle."
    },
    {
     "q": "Was ist RDP (Remote Desktop Protocol)?",
     "o": [
-     {
-      "t": "Ein Protokoll zur grafischen Fernsteuerung eines Rechners",
-      "ok": true
-     },
-     {
-      "t": "Ein Verschlüsselungsalgorithmus",
-      "ok": false
-     },
-     {
-      "t": "Ein Routingprotokoll",
-      "ok": false
-     },
-     {
-      "t": "Ein DNS-Record",
-      "ok": false
-     }
+     { "t": "Ein Protokoll zur grafischen Fernsteuerung eines Rechners", "ok": true },
+     { "t": "Ein Protokoll für textbasierte Fernwartung per Kommandozeile", "ok": false },
+     { "t": "Ein Protokoll zum verschlüsselten Dateitransfer zwischen Servern", "ok": false },
+     { "t": "Ein Verzeichnisdienst-Protokoll für zentrale Benutzeranmeldungen", "ok": false }
     ],
     "e": "RDP überträgt Bildschirm/Eingaben zur grafischen Fernwartung (Port 3389)."
    },
    {
     "q": "Welche Rolle hat ein Remote-Desktop-Gateway?",
     "o": [
-     {
-      "t": "Kontrollierter, gesicherter Zugangspunkt für RDP von außen",
-      "ok": true
-     },
-     {
-      "t": "Ein DHCP-Server",
-      "ok": false
-     },
-     {
-      "t": "Ein WLAN-Access-Point",
-      "ok": false
-     },
-     {
-      "t": "Ein DNS-Resolver",
-      "ok": false
-     }
+     { "t": "Kontrollierter, gesicherter Zugangspunkt für RDP von außen", "ok": true },
+     { "t": "Ein Lastverteiler, der Sitzungen auf mehrere Terminalserver verteilt", "ok": false },
+     { "t": "Ein Server, der RDP-Sitzungen aufzeichnet und revisionssicher archiviert", "ok": false },
+     { "t": "Ein Proxy, der RDP-Verkehr komprimiert und dadurch beschleunigt", "ok": false }
     ],
     "e": "Das RD-Gateway bündelt und sichert externe RDP-Zugriffe ins interne Netz."
    },
    {
     "q": "Warum ist ein VPN über öffentliches WLAN sinnvoll?",
     "o": [
-     {
-      "t": "Es verschlüsselt den Verkehr gegen Mitlesen im offenen Netz",
-      "ok": true
-     },
-     {
-      "t": "Es erhöht die WLAN-Reichweite",
-      "ok": false
-     },
-     {
-      "t": "Es beschleunigt das WLAN",
-      "ok": false
-     },
-     {
-      "t": "Es ersetzt das WLAN-Passwort",
-      "ok": false
-     }
+     { "t": "Es verschlüsselt den Verkehr gegen Mitlesen im offenen Netz", "ok": true },
+     { "t": "Es erzwingt WPA3-Verschlüsselung auch auf offenen Access Points", "ok": false },
+     { "t": "Es verbirgt das eigene Gerät vollständig vor dem Hotspot-Betreiber", "ok": false },
+     { "t": "Es verhindert, dass andere Clients das offene WLAN überlasten", "ok": false }
     ],
     "e": "Im offenen WLAN schützt der VPN-Tunnel vor Mitlesen/Manipulation."
    },
@@ -10857,22 +9651,10 @@ const POOLS = {
    {
     "q": "Was passiert im Tunnelmodus mit dem ursprünglichen IP-Header?",
     "o": [
-     {
-      "t": "Er wird mitverschlüsselt und durch einen neuen Header ersetzt",
-      "ok": true
-     },
-     {
-      "t": "Er bleibt unverändert sichtbar",
-      "ok": false
-     },
-     {
-      "t": "Er wird gelöscht",
-      "ok": false
-     },
-     {
-      "t": "Er wird zur Portnummer",
-      "ok": false
-     }
+     { "t": "Er wird mitverschlüsselt und durch einen neuen Header ersetzt", "ok": true },
+     { "t": "Er bleibt außen sichtbar, nur die Nutzdaten werden geschützt", "ok": false },
+     { "t": "Er wird verworfen und am Zielgateway aus der Routingtabelle neu erzeugt", "ok": false },
+     { "t": "Er wird in den ESP-Trailer kopiert und dort integritätsgesichert", "ok": false }
     ],
     "e": "Der Originalheader wird Teil der geschützten Nutzlast; außen sitzt ein neuer IP-Header."
    },
@@ -10901,46 +9683,12 @@ const POOLS = {
    {
     "q": "Was ist der Unterschied zwischen Site-to-Site und Remote-Access-VPN?",
     "o": [
-     {
-      "t": "Site-to-Site verbindet ganze Netze; Remote-Access einzelne Clients mit dem Firmennetz",
-      "ok": true
-     },
-     {
-      "t": "Remote-Access ist sicherer",
-      "ok": false
-     },
-     {
-      "t": "Site-to-Site ist immer unverschlüsselt",
-      "ok": false
-     },
-     {
-      "t": "Beide sind identisch",
-      "ok": false
-     }
+     { "t": "Site-to-Site verbindet ganze Netze; Remote-Access einzelne Clients mit dem Firmennetz", "ok": true },
+     { "t": "Site-to-Site verbindet einzelne Clients; Remote-Access koppelt komplette Standortnetze", "ok": false },
+     { "t": "Site-to-Site braucht auf jedem Endgerät einen Client; Remote-Access nur ein Gateway", "ok": false },
+     { "t": "Site-to-Site läuft unverschlüsselt im eigenen WAN; Remote-Access verschlüsselt im Internet", "ok": false }
     ],
     "e": "Site-to-Site: Netz↔Netz (z. B. Zentrale↔Filiale). Remote Access: Außendienstler ins Firmennetz."
-   },
-   {
-    "q": "Welche Aussage zu IPsec im Transportmodus stimmt?",
-    "o": [
-     {
-      "t": "Der originale IP-Header bleibt sichtbar, nur die Payload wird geschützt",
-      "ok": true
-     },
-     {
-      "t": "Das gesamte Paket inkl. Header wird verschlüsselt",
-      "ok": false
-     },
-     {
-      "t": "Kein neuer Header wird erzeugt",
-      "ok": false
-     },
-     {
-      "t": "Nur der Header wird verschlüsselt",
-      "ok": false
-     }
-    ],
-    "e": "Transportmodus = Payload geschützt, IP-Header sichtbar. Tunnelmodus = alles eingekapselt."
    },
    {
     "q": "Welche Protokolle bilden zusammen den IPsec-Standard?",
@@ -10989,110 +9737,50 @@ const POOLS = {
    {
     "q": "Was ist OpenVPN?",
     "o": [
-     {
-      "t": "Ein Open-Source-VPN-Protokoll auf TLS-Basis, sehr flexibel und weit verbreitet",
-      "ok": true
-     },
-     {
-      "t": "Eine proprietäre Cisco-Lösung",
-      "ok": false
-     },
-     {
-      "t": "Ein IPsec-Profil",
-      "ok": false
-     },
-     {
-      "t": "Ein WLAN-Sicherheitsstandard",
-      "ok": false
-     }
+     { "t": "Ein Open-Source-VPN-Protokoll auf TLS-Basis, sehr flexibel und weit verbreitet", "ok": true },
+     { "t": "Ein herstellergebundenes Protokoll, das nur mit passender Hardware-Appliance läuft", "ok": false },
+     { "t": "Ein Betriebsmodus von IPsec, der ohne Zertifikate und Schlüsselaustausch auskommt", "ok": false },
+     { "t": "Ein Browser-Plugin, das Webverkehr über wechselnde Proxyserver umleitet", "ok": false }
     ],
     "e": "OpenVPN nutzt TLS für den Tunnel und ist plattformunabhängig und sehr konfigurierbar."
    },
    {
     "q": "Welchen Vorteil bietet Full Tunneling gegenüber Split Tunneling?",
     "o": [
-     {
-      "t": "Aller Verkehr läuft durch das VPN — maximale Kontrolle und Sicherheit",
-      "ok": true
-     },
-     {
-      "t": "Schnelleres Internet durch direkten Weg",
-      "ok": false
-     },
-     {
-      "t": "Geringere Last auf dem VPN-Server",
-      "ok": false
-     },
-     {
-      "t": "Keine Verschlüsselung nötig",
-      "ok": false
-     }
+     { "t": "Aller Verkehr läuft durch das VPN — maximale Kontrolle und Sicherheit", "ok": true },
+     { "t": "Nur Firmenverkehr wird getunnelt — das Gateway bleibt dauerhaft entlastet", "ok": false },
+     { "t": "Internetzugriffe werden schneller, weil Anfragen direkt ins Netz gehen", "ok": false },
+     { "t": "Die Verschlüsselung entfällt für interne Ziele — weniger Rechenaufwand", "ok": false }
     ],
     "e": "Full Tunnel bietet vollständige Überwachung und Filterung — aber höhere Last auf dem VPN-Gateway."
    },
    {
     "q": "Was ist ein Kill Switch bei einem VPN-Client?",
     "o": [
-     {
-      "t": "Blockiert automatisch den Internetzugriff, falls die VPN-Verbindung abbricht",
-      "ok": true
-     },
-     {
-      "t": "Beendet das VPN nach fester Zeit",
-      "ok": false
-     },
-     {
-      "t": "Schaltet zwischen mehreren Servern um",
-      "ok": false
-     },
-     {
-      "t": "Trennt WLAN und LAN",
-      "ok": false
-     }
+     { "t": "Blockiert automatisch den Internetzugriff, falls die VPN-Verbindung abbricht", "ok": true },
+     { "t": "Trennt die VPN-Verbindung automatisch nach einer festgelegten Leerlaufzeit", "ok": false },
+     { "t": "Wechselt bei Ausfall eines VPN-Servers selbstständig auf den nächsten Standort", "ok": false },
+     { "t": "Beendet verdächtige Anwendungen, die den Tunnel zu umgehen versuchen", "ok": false }
     ],
     "e": "Der Kill Switch verhindert, dass bei VPN-Abbruch unverschlüsselter Verkehr unbemerkt ins offene Netz geht."
    },
    {
     "q": "Was beschreibt 'Split DNS' im VPN-Kontext?",
     "o": [
-     {
-      "t": "Interne Domainnamen werden intern aufgelöst, externe über den normalen DNS",
-      "ok": true
-     },
-     {
-      "t": "DNS wird vollständig deaktiviert",
-      "ok": false
-     },
-     {
-      "t": "Alle DNS-Anfragen gehen durch den VPN-Tunnel",
-      "ok": false
-     },
-     {
-      "t": "Ein Backup-DNS",
-      "ok": false
-     }
+     { "t": "Interne Domainnamen werden intern aufgelöst, externe über den normalen DNS", "ok": true },
+     { "t": "DNS-Anfragen werden auf zwei Server verteilt, um Ausfälle abzufangen", "ok": false },
+     { "t": "Sämtliche DNS-Anfragen laufen grundsätzlich durch den VPN-Tunnel", "ok": false },
+     { "t": "Interne Namen werden im Klartext, externe verschlüsselt aufgelöst", "ok": false }
     ],
     "e": "Split DNS kombiniert sich oft mit Split Tunneling: interne Namen werden über den Tunnel aufgelöst."
    },
    {
     "q": "Was ist IKEv2?",
     "o": [
-     {
-      "t": "Eine modernere, schnellere Version des IKE-Schlüsselaustauschprotokolls für IPsec",
-      "ok": true
-     },
-     {
-      "t": "Ein WLAN-Sicherheitsstandard",
-      "ok": false
-     },
-     {
-      "t": "Ein Routing-Protokoll",
-      "ok": false
-     },
-     {
-      "t": "Ein Firewall-Typ",
-      "ok": false
-     }
+     { "t": "Eine modernere, schnellere Version des IKE-Schlüsselaustauschprotokolls für IPsec", "ok": true },
+     { "t": "Die zweite Verschlüsselungsschicht, die IPsec zusätzlich über ESP legt", "ok": false },
+     { "t": "Ein Nachfolger von OpenVPN, der TLS durch eigene Verfahren ersetzt", "ok": false },
+     { "t": "Ein Kompatibilitätsmodus, der IPsec-Tunnel über reine TCP-Verbindungen führt", "ok": false }
     ],
     "e": "IKEv2 ist stabiler, schneller bei Verbindungswechseln (Mobility) und gilt als sicherer als IKEv1."
    },
@@ -11136,7 +9824,7 @@ const POOLS = {
    {
     "q": "Welche der folgenden Gründe sprechen für die Aufteilung eines physischen Netzes in mehrere VLANs?",
     "o": [
-     { "t": "Eindämmung von Broadcast-Domänen, logische Trennung von Abteilungen und feinere Sicherheits-/Zugriffskontrolle", "ok": true },
+     { "t": "Eindämmung von Broadcast-Domänen, logische Trennung von Abteilungen, feinere Sicherheits und Zugriffskontrolle", "ok": true },
      { "t": "Höhere physische Kabelbandbreite, geringerer Stromverbrauch der Switches und automatische IP-Vergabe", "ok": false },
      { "t": "Verzicht auf Router, direkte Layer-2-Kommunikation zwischen allen Segmenten und wegfallende MAC-Adressen", "ok": false },
      { "t": "Automatische Verschlüsselung des Verkehrs, integrierter Virenschutz und redundante Stromversorgung", "ok": false }
@@ -11156,7 +9844,7 @@ const POOLS = {
    {
     "q": "Warum sind dynamische VLANs in sicherheitskritischen Bereichen problematisch?",
     "o": [
-     { "t": "Die Zuordnung hängt an Merkmalen wie der MAC-Adresse, die sich fälschen lassen — ein Angreifer kann sich so in ein fremdes VLAN einordnen lassen", "ok": true },
+     { "t": "Die Zuordnung hängt an Merkmalen wie der MAC-Adresse, die sich fälschen lassen, ein Angreifer kann sich so in ein fremdes VLAN einordnen lassen", "ok": true },
      { "t": "Der gesamte Verkehr wird bei dynamischen VLANs grundsätzlich unverschlüsselt übertragen, während statische VLANs ihn automatisch per AES absichern", "ok": false },
      { "t": "Dynamische VLANs deaktivieren beim Zuweisen automatisch die Firewall des Switches und öffnen dabei alle gesperrten Ports für den Zeitraum", "ok": false },
      { "t": "Dynamische VLANs erlauben technisch maximal zwei Endgeräte pro Segment und sind deshalb bei mehr Teilnehmern schnell überlastet und instabil", "ok": false }
@@ -11166,7 +9854,7 @@ const POOLS = {
    {
     "q": "Was ist ein prinzipieller Nachteil der VLAN-Technologie?",
     "o": [
-     { "t": "VLANs trennen nur auf Layer 2 — für Kommunikation zwischen VLANs braucht es Routing (L3), und Fehlkonfiguration oder VLAN-Hopping können die Trennung aushebeln", "ok": true },
+     { "t": "VLANs trennen nur auf Layer 2 für Kommunikation zwischen VLANs braucht es Routing, und Fehlkonfiguration oder VLAN-Hopping können die Trennung aushebeln", "ok": true },
      { "t": "VLANs benötigen für jedes einzelne Segment ein eigenes physisches Kabel und einen dedizierten Switch, was den Verkabelungsaufwand drastisch erhöht", "ok": false },
      { "t": "VLANs funktionieren ausschließlich in Verbindung mit IPv6 und sind zu bestehenden IPv4-Netzen grundsätzlich inkompatibel, was Migrationen blockiert", "ok": false },
      { "t": "VLANs begrenzen ein gesamtes Netz technisch hart auf maximal 16 Endgeräte und eignen sich deshalb nur für sehr kleine Arbeitsgruppen", "ok": false }
@@ -11181,22 +9869,10 @@ const POOLS = {
    {
     "q": "Was ist die Hauptaufgabe einer Firewall?",
     "o": [
-     {
-      "t": "Netzwerkverkehr nach Regeln filtern und kontrollieren",
-      "ok": true
-     },
-     {
-      "t": "IP-Adressen vergeben",
-      "ok": false
-     },
-     {
-      "t": "Namen auflösen",
-      "ok": false
-     },
-     {
-      "t": "Kabel verbinden",
-      "ok": false
-     }
+     { "t": "Netzwerkverkehr nach Regeln filtern und kontrollieren", "ok": true },
+     { "t": "Schadsoftware auf den Endgeräten erkennen und entfernen", "ok": false },
+     { "t": "Datenverkehr komprimieren und Übertragungen beschleunigen", "ok": false },
+     { "t": "Netzwerkgeräte zentral konfigurieren und überwachen", "ok": false }
     ],
     "e": "Eine Firewall erlaubt oder blockiert Verkehr anhand definierter Regeln."
    },
@@ -11225,22 +9901,10 @@ const POOLS = {
    {
     "q": "Was kann eine Stateful-Firewall zusätzlich?",
     "o": [
-     {
-      "t": "Sie verfolgt den Verbindungszustand und lässt Antworten passieren",
-      "ok": true
-     },
-     {
-      "t": "Sie betrachtet jedes Paket isoliert",
-      "ok": false
-     },
-     {
-      "t": "Sie ersetzt den Router",
-      "ok": false
-     },
-     {
-      "t": "Sie vergibt IP-Adressen",
-      "ok": false
-     }
+     { "t": "Sie verfolgt den Verbindungszustand und lässt Antworten passieren", "ok": true },
+     { "t": "Sie entschlüsselt den Datenverkehr und prüft Inhalte auf Schadcode", "ok": false },
+     { "t": "Sie erkennt Angriffe per Signatur und sperrt die Quell-IP dauerhaft", "ok": false },
+     { "t": "Sie authentifiziert jeden Benutzer, bevor Pakete weitergeleitet werden", "ok": false }
     ],
     "e": "Stateful Inspection kennt bestehende Verbindungen und erlaubt zugehörige Rückpakete gezielt."
    },
@@ -11278,7 +9942,7 @@ const POOLS = {
       "ok": false
      },
      {
-      "t": "Ja, es verschlüsselt den Verkehr",
+      "t": "Nein, weil NAT nur die Datenübertragung beschleunigt und im lokalen LAN-Verkehr keine Funktion besitzt.",
       "ok": false
      },
      {
@@ -11291,22 +9955,10 @@ const POOLS = {
    {
     "q": "Wozu dient eine DMZ (Demilitarized Zone)?",
     "o": [
-     {
-      "t": "Ein abgetrennter Bereich für öffentlich erreichbare Server",
-      "ok": true
-     },
-     {
-      "t": "Ein Verschlüsselungsverfahren",
-      "ok": false
-     },
-     {
-      "t": "Ein WLAN-Kanal",
-      "ok": false
-     },
-     {
-      "t": "Ein DNS-Record",
-      "ok": false
-     }
+     { "t": "Ein abgetrennter Bereich für öffentlich erreichbare Server", "ok": true },
+     { "t": "Ein isoliertes Testnetz für noch nicht freigegebene Software", "ok": false },
+     { "t": "Ein Netzbereich, in dem Verkehr ungefiltert erlaubt ist", "ok": false },
+     { "t": "Ein Reservesegment, das bei Ausfall des Hauptnetzes übernimmt", "ok": false }
     ],
     "e": "In der DMZ stehen z. B. Webserver, getrennt vom internen Netz — ein Angriff bleibt eingedämmt."
    },
@@ -11401,22 +10053,10 @@ const POOLS = {
    {
     "q": "Was bedeutet Autorisierung?",
     "o": [
-     {
-      "t": "Festlegen, worauf eine authentifizierte Identität zugreifen darf",
-      "ok": true
-     },
-     {
-      "t": "Der Nachweis der Identität",
-      "ok": false
-     },
-     {
-      "t": "Die Verschlüsselung",
-      "ok": false
-     },
-     {
-      "t": "Die IP-Vergabe",
-      "ok": false
-     }
+     { "t": "Festlegen, worauf eine authentifizierte Identität zugreifen darf", "ok": true },
+     { "t": "Der Nachweis einer Identität durch Passwort, Token oder Biometrie", "ok": false },
+     { "t": "Das Protokollieren aller Zugriffe für spätere Nachvollziehbarkeit", "ok": false },
+     { "t": "Das Anlegen eines neuen Benutzerkontos durch den Administrator", "ok": false }
     ],
     "e": "Autorisierung regelt die Rechte nach erfolgreicher Authentifizierung."
    },
@@ -11489,22 +10129,10 @@ const POOLS = {
    {
     "q": "Was ist eine Blacklist bei der Zugriffskontrolle?",
     "o": [
-     {
-      "t": "Alles ist erlaubt außer den ausdrücklich gesperrten Elementen",
-      "ok": true
-     },
-     {
-      "t": "Nur Erlaubtes wird zugelassen",
-      "ok": false
-     },
-     {
-      "t": "Eine Liste der Administratoren",
-      "ok": false
-     },
-     {
-      "t": "Eine Sperrliste für Zertifikate",
-      "ok": false
-     }
+     { "t": "Alles ist erlaubt außer den ausdrücklich gesperrten Elementen", "ok": true },
+     { "t": "Alles ist gesperrt außer den ausdrücklich freigegebenen Elementen", "ok": false },
+     { "t": "Eine Liste kompromittierter Passwörter, die beim Login geprüft wird", "ok": false },
+     { "t": "Eine Liste widerrufener Zertifikate, die Browser regelmäßig abrufen", "ok": false }
     ],
     "e": "Blacklist = 'default allow', nur Gelistetes wird blockiert."
    },
@@ -11533,44 +10161,20 @@ const POOLS = {
    {
     "q": "Was ist Social Engineering?",
     "o": [
-     {
-      "t": "Manipulation von Menschen zur Preisgabe von Informationen",
-      "ok": true
-     },
-     {
-      "t": "Ein Verschlüsselungsverfahren",
-      "ok": false
-     },
-     {
-      "t": "Ein Routingprotokoll",
-      "ok": false
-     },
-     {
-      "t": "Eine Firewall-Technik",
-      "ok": false
-     }
+     { "t": "Manipulation von Menschen zur Preisgabe von Informationen", "ok": true },
+     { "t": "Automatisiertes Durchprobieren von Passwörtern per Wörterbuch", "ok": false },
+     { "t": "Das Ausnutzen technischer Schwachstellen in Serverdiensten", "ok": false },
+     { "t": "Das Abfangen von Datenverkehr in ungesicherten Netzwerken", "ok": false }
     ],
     "e": "Social Engineering zielt auf den Menschen, nicht auf die Technik (z. B. Phishing)."
    },
    {
     "q": "Was ist das Ziel von Netzwerksegmentierung?",
     "o": [
-     {
-      "t": "Bereiche trennen, um Angriffe einzudämmen und Zugriffe zu steuern",
-      "ok": true
-     },
-     {
-      "t": "Die Bandbreite erhöhen",
-      "ok": false
-     },
-     {
-      "t": "IP-Adressen zu sparen",
-      "ok": false
-     },
-     {
-      "t": "DNS zu beschleunigen",
-      "ok": false
-     }
+     { "t": "Bereiche trennen, um Angriffe einzudämmen und Zugriffe zu steuern", "ok": true },
+     { "t": "Datenverkehr bündeln, um die Bandbreite besser auszunutzen", "ok": false },
+     { "t": "Redundante Wege schaffen, damit Ausfälle kompensiert werden", "ok": false },
+     { "t": "Alle Geräte in eine gemeinsame Broadcastdomäne zusammenführen", "ok": false }
     ],
     "e": "Segmentierung (z. B. via VLAN) begrenzt die Ausbreitung und trennt sensible Bereiche."
    },
@@ -11643,66 +10247,30 @@ const POOLS = {
    {
     "q": "Was ist der Unterschied zwischen Authentifizierung und Autorisierung?",
     "o": [
-     {
-      "t": "Authentifizierung prüft die Identität; Autorisierung prüft die Berechtigung",
-      "ok": true
-     },
-     {
-      "t": "Beide bedeuten dasselbe",
-      "ok": false
-     },
-     {
-      "t": "Autorisierung kommt vor der Authentifizierung",
-      "ok": false
-     },
-     {
-      "t": "Authentifizierung vergibt Rechte",
-      "ok": false
-     }
+     { "t": "Authentifizierung prüft die Identität; Autorisierung prüft die Berechtigung", "ok": true },
+     { "t": "Authentifizierung vergibt die Rechte; Autorisierung weist die Identität nach", "ok": false },
+     { "t": "Authentifizierung gilt für Personen; Autorisierung nur für Geräte und Dienste", "ok": false },
+     { "t": "Authentifizierung erfolgt einmalig; Autorisierung muss je Sitzung erneuert werden", "ok": false }
     ],
     "e": "Erst Identität beweisen (Authentifizierung), dann Rechte prüfen (Autorisierung). AAA = Authentication, Authorization, Accounting."
    },
    {
     "q": "Was ist ein Penetrationstest?",
     "o": [
-     {
-      "t": "Ein autorisierter, simulierter Angriff zur Aufdeckung von Schwachstellen",
-      "ok": true
-     },
-     {
-      "t": "Ein automatischer Virenscan",
-      "ok": false
-     },
-     {
-      "t": "Eine Firewall-Konfiguration",
-      "ok": false
-     },
-     {
-      "t": "Ein Backup-Test",
-      "ok": false
-     }
+     { "t": "Ein autorisierter, simulierter Angriff zur Aufdeckung von Schwachstellen", "ok": true },
+     { "t": "Ein automatisierter Scan, der bekannte Malware auf allen Systemen sucht", "ok": false },
+     { "t": "Ein Lasttest, der die Belastbarkeit der Server unter Spitzenlast misst", "ok": false },
+     { "t": "Ein Audit, das die Einhaltung interner Sicherheitsrichtlinien dokumentiert", "ok": false }
     ],
     "e": "Pentests simulieren echte Angriffstechniken mit Erlaubnis des Betreibers, um Schwachstellen vor echten Angreifern zu finden."
    },
    {
     "q": "Was ist eine Stateful Firewall gegenüber einem Paketfilter?",
     "o": [
-     {
-      "t": "Sie verfolgt Verbindungszustände und lässt legitime Antwortpakete automatisch durch",
-      "ok": true
-     },
-     {
-      "t": "Sie analysiert Anwendungsinhalte",
-      "ok": false
-     },
-     {
-      "t": "Sie ist langsamer und unsicherer",
-      "ok": false
-     },
-     {
-      "t": "Sie filtert nur eingehenden Verkehr",
-      "ok": false
-     }
+     { "t": "Sie verfolgt Verbindungszustände und lässt legitime Antwortpakete automatisch durch", "ok": true },
+     { "t": "Sie prüft zusätzlich die Anwendungsinhalte und entfernt Schadcode direkt aus den Paketen", "ok": false },
+     { "t": "Sie arbeitet ohne festes Regelwerk und entscheidet selbstlernend über jede Verbindung", "ok": false },
+     { "t": "Sie filtert ausschließlich eingehenden Verkehr und lässt ausgehenden ungeprüft passieren", "ok": false }
     ],
     "e": "Stateful Inspection kennt den Verbindungskontext — ein Antwortpaket auf eine erlaubte Anfrage wird automatisch zugelassen."
    },
@@ -11710,7 +10278,7 @@ const POOLS = {
     "q": "Welche drei Faktoren kann 2FA kombinieren?",
     "o": [
      {
-      "t": "Wissen (Passwort), Besitz (Token), Biometrie (Fingerabdruck)",
+      "t": "Passwort, Token, Biometrie",
       "ok": true
      },
      {
@@ -11753,22 +10321,10 @@ const POOLS = {
    {
     "q": "Was schützt eine DMZ vor allem?",
     "o": [
-     {
-      "t": "Das interne Netz, falls ein öffentlicher Server kompromittiert wird",
-      "ok": true
-     },
-     {
-      "t": "Den öffentlichen Server vor Angriffen",
-      "ok": false
-     },
-     {
-      "t": "Die Internetverbindung",
-      "ok": false
-     },
-     {
-      "t": "Den DNS-Server",
-      "ok": false
-     }
+     { "t": "Das interne Netz, falls ein öffentlicher Server kompromittiert wird", "ok": true },
+     { "t": "Den öffentlichen Server selbst, indem sie Angriffe von außen abblockt", "ok": false },
+     { "t": "Die Internetanbindung vor Überlastung durch eingehende Anfragen", "ok": false },
+     { "t": "Die Verwaltungszugänge, indem Administratoren separat angemeldet werden", "ok": false }
     ],
     "e": "Ein Angreifer, der den DMZ-Server übernimmt, hat damit keinen direkten Zugriff auf das interne Netz."
    },
@@ -11797,132 +10353,50 @@ const POOLS = {
    {
     "q": "Was ist ein Honeypot?",
     "o": [
-     {
-      "t": "Ein absichtlich verwundbares System, das Angreifer anlocken und ihr Verhalten analysieren soll",
-      "ok": true
-     },
-     {
-      "t": "Ein Passwort-Safe",
-      "ok": false
-     },
-     {
-      "t": "Eine Firewall-Regel",
-      "ok": false
-     },
-     {
-      "t": "Ein Backup-System",
-      "ok": false
-     }
+     { "t": "Ein absichtlich verwundbares System, das Angreifer anlocken und ihr Verhalten analysieren soll", "ok": true },
+     { "t": "Ein besonders gehärteter Server, der die sensibelsten Daten des Unternehmens isoliert aufbewahrt", "ok": false },
+     { "t": "Ein verstecktes Backup-System, das nach einem Ransomware-Befall die Daten automatisch zurückspielt", "ok": false },
+     { "t": "Ein Überwachungsdienst, der fehlgeschlagene Anmeldungen zählt und bei Häufung Alarm auslöst", "ok": false }
     ],
     "e": "Ein Honeypot simuliert ein echtes System, um Angreifer abzulenken und deren Methoden zu beobachten."
    },
    {
     "q": "Was ist Phishing?",
     "o": [
-     {
-      "t": "Täuschende E-Mails oder Webseiten, die Zugangsdaten stehlen wollen",
-      "ok": true
-     },
-     {
-      "t": "Ein Netzwerkscan",
-      "ok": false
-     },
-     {
-      "t": "Ein Verschlüsselungsangriff",
-      "ok": false
-     },
-     {
-      "t": "Ein DoS-Angriff",
-      "ok": false
-     }
+     { "t": "Täuschende E-Mails oder Webseiten, die Zugangsdaten stehlen wollen", "ok": true },
+     { "t": "Massenhafte Anfragen, die einen Dienst gezielt überlasten sollen", "ok": false },
+     { "t": "Schadprogramme, die sich selbstständig über Netzwerke verbreiten", "ok": false },
+     { "t": "Das heimliche Mitschneiden von Tastatureingaben am Rechner", "ok": false }
     ],
     "e": "Phishing ist eine Form des Social Engineering per E-Mail oder gefälschter Website."
    },
    {
     "q": "Was unterscheidet IDS von IPS?",
     "o": [
-     {
-      "t": "IDS erkennt und meldet; IPS greift zusätzlich aktiv ein und blockiert",
-      "ok": true
-     },
-     {
-      "t": "IPS erkennt nur, IDS blockiert",
-      "ok": false
-     },
-     {
-      "t": "Beide sind identisch",
-      "ok": false
-     },
-     {
-      "t": "IDS ist neuer",
-      "ok": false
-     }
+     { "t": "IDS erkennt und meldet; IPS greift zusätzlich aktiv ein und blockiert", "ok": true },
+     { "t": "IDS blockiert Angriffe direkt; IPS analysiert sie nur im Nachhinein", "ok": false },
+     { "t": "IDS schützt einzelne Hosts; IPS ist ausschließlich für ganze Netze gedacht", "ok": false },
+     { "t": "IDS arbeitet nur signaturbasiert; IPS erkennt ausschließlich Anomalien", "ok": false }
     ],
     "e": "IDS = Intrusion Detection System (passiv). IPS = Intrusion Prevention System (aktiv eingreifend)."
    },
    {
     "q": "Was ist ein Zero-Day-Exploit?",
     "o": [
-     {
-      "t": "Ein Angriff auf eine noch nicht öffentlich bekannte oder gepatchte Schwachstelle",
-      "ok": true
-     },
-     {
-      "t": "Ein Angriff, der an Tag 0 gestartet wird",
-      "ok": false
-     },
-     {
-      "t": "Ein täglich wiederkehrender Angriff",
-      "ok": false
-     },
-     {
-      "t": "Ein Angriff ohne Schaden",
-      "ok": false
-     }
+     { "t": "Ein Angriff auf eine noch nicht öffentlich bekannte oder gepatchte Schwachstelle", "ok": true },
+     { "t": "Ein Angriff, der am Tag der Patch-Veröffentlichung startet, bevor alle updaten", "ok": false },
+     { "t": "Ein Angriff, der ein System innerhalb von 24 Stunden vollständig übernimmt", "ok": false },
+     { "t": "Eine Schwachstelle, die der Hersteller kennt, aber bewusst nicht schließt", "ok": false }
     ],
     "e": "Zero-Day bedeutet: der Hersteller hat 0 Tage Zeit gehabt, einen Patch bereitzustellen."
    },
    {
-    "q": "Warum ist regelmäßiges Patching ein Sicherheitsgrundpfeiler?",
-    "o": [
-     {
-      "t": "Es schließt bekannte Schwachstellen, bevor sie ausgenutzt werden",
-      "ok": true
-     },
-     {
-      "t": "Es erhöht die Übertragungsgeschwindigkeit",
-      "ok": false
-     },
-     {
-      "t": "Es ersetzt die Firewall",
-      "ok": false
-     },
-     {
-      "t": "Es verhindert Social Engineering",
-      "ok": false
-     }
-    ],
-    "e": "Ungepatchte Systeme sind das häufigste Einfallstor für Angreifer — Patching ist die effektivste Basismaßnahme."
-   },
-   {
     "q": "Was ist Ransomware?",
     "o": [
-     {
-      "t": "Schadsoftware, die Daten verschlüsselt und Lösegeld fordert",
-      "ok": true
-     },
-     {
-      "t": "Ein Spionageprogramm",
-      "ok": false
-     },
-     {
-      "t": "Ein Netzwerkscanner",
-      "ok": false
-     },
-     {
-      "t": "Eine Firewall-Umgehung",
-      "ok": false
-     }
+     { "t": "Schadsoftware, die Daten verschlüsselt und Lösegeld fordert", "ok": true },
+     { "t": "Schadsoftware, die Tastatureingaben und Passwörter mitschneidet", "ok": false },
+     { "t": "Schadsoftware, die Rechner heimlich für Krypto-Mining missbraucht", "ok": false },
+     { "t": "Schadsoftware, die sich als nützliches Programm tarnt und Hintertüren öffnet", "ok": false }
     ],
     "e": "Ransomware verschlüsselt Dateien und droht mit Datenverlust, bis ein Lösegeld bezahlt wird."
    }
@@ -11935,7 +10409,7 @@ const POOLS = {
     "q": "Wofür steht SSID?",
     "o": [
      {
-      "t": "Service Set Identifier – der Name des WLANs",
+      "t": "Service Set Identifier",
       "ok": true
      },
      {
@@ -11956,22 +10430,10 @@ const POOLS = {
    {
     "q": "Welche Aufgabe hat ein Access Point (AP)?",
     "o": [
-     {
-      "t": "Er stellt das WLAN bereit und verbindet Funkgeräte mit dem Netz",
-      "ok": true
-     },
-     {
-      "t": "Er vergibt öffentliche IP-Adressen",
-      "ok": false
-     },
-     {
-      "t": "Er ersetzt den DNS-Server",
-      "ok": false
-     },
-     {
-      "t": "Er routet zwischen Providern",
-      "ok": false
-     }
+     { "t": "Er stellt das WLAN bereit und verbindet Funkgeräte mit dem Netz", "ok": true },
+     { "t": "Er routet den Verkehr zwischen dem lokalen Netz und dem Internet", "ok": false },
+     { "t": "Er weist allen Funkgeräten automatisch ihre IP-Adressen zu", "ok": false },
+     { "t": "Er verstärkt das Signal vorhandener Netze und erweitert die Reichweite", "ok": false }
     ],
     "e": "Der AP ist die Funkzentrale und bindet WLAN-Geräte ans (meist kabelgebundene) Netz an."
    },
@@ -11979,7 +10441,7 @@ const POOLS = {
     "q": "Welche Frequenzbänder nutzt WLAN klassisch?",
     "o": [
      {
-      "t": "2,4 GHz und 5 GHz (neu: 6 GHz mit Wi-Fi 6E)",
+      "t": "2,4 GHz und 5 GHz",
       "ok": true
      },
      {
@@ -11996,28 +10458,6 @@ const POOLS = {
      }
     ],
     "e": "Üblich sind 2,4 und 5 GHz; Wi-Fi 6E ergänzt das 6-GHz-Band."
-   },
-   {
-    "q": "Welcher Vorteil kennzeichnet das 2,4-GHz-Band?",
-    "o": [
-     {
-      "t": "Höhere Reichweite und bessere Wanddurchdringung",
-      "ok": true
-     },
-     {
-      "t": "Höchste Geschwindigkeit",
-      "ok": false
-     },
-     {
-      "t": "Keine Störungen",
-      "ok": false
-     },
-     {
-      "t": "Mehr Kanäle ohne Überlappung",
-      "ok": false
-     }
-    ],
-    "e": "2,4 GHz reicht weiter und durchdringt Wände besser, ist aber langsamer und störanfälliger."
    },
    {
     "q": "Welcher Vorteil kennzeichnet das 5-GHz-Band?",
@@ -12045,19 +10485,19 @@ const POOLS = {
     "q": "Welche Standardfamilie beschreibt WLAN?",
     "o": [
      {
-      "t": "IEEE 802.11 (z. B. n, ac, ax)",
+      "t": "IEEE 802.11",
       "ok": true
      },
      {
-      "t": "IEEE 802.3 (kabelgebundenes Ethernet)",
+      "t": "IEEE 802.3",
       "ok": false
      },
      {
-      "t": "IEEE 802.15 (Bluetooth/PAN)",
+      "t": "IEEE 802.15",
       "ok": false
      },
      {
-      "t": "IEEE 802.1Q (VLAN-Tagging)",
+      "t": "IEEE 802.1Q",
       "ok": false
      }
     ],
@@ -12066,44 +10506,20 @@ const POOLS = {
    {
     "q": "Was kennzeichnet den Infrastrukturmodus?",
     "o": [
-     {
-      "t": "Geräte kommunizieren über einen zentralen Access Point",
-      "ok": true
-     },
-     {
-      "t": "Geräte kommunizieren direkt ohne AP",
-      "ok": false
-     },
-     {
-      "t": "Es gibt keine SSID",
-      "ok": false
-     },
-     {
-      "t": "Nur Kabelbetrieb",
-      "ok": false
-     }
+     { "t": "Geräte kommunizieren über einen zentralen Access Point", "ok": true },
+     { "t": "Geräte kommunizieren direkt miteinander, ohne zentrale Instanz", "ok": false },
+     { "t": "Mehrere Access Points teilen sich automatisch eine gemeinsame SSID", "ok": false },
+     { "t": "Clients verbinden sich abwechselnd mit dem jeweils stärksten Endgerät", "ok": false }
     ],
     "e": "Infrastrukturmodus: alle Geräte laufen über den AP (typisch für Heim/Firma)."
    },
    {
     "q": "Was kennzeichnet den Ad-hoc-Modus?",
     "o": [
-     {
-      "t": "Geräte kommunizieren direkt miteinander, ohne Access Point",
-      "ok": true
-     },
-     {
-      "t": "Alles läuft über einen zentralen AP",
-      "ok": false
-     },
-     {
-      "t": "Es ist immer verschlüsselt",
-      "ok": false
-     },
-     {
-      "t": "Nur mit Kabel möglich",
-      "ok": false
-     }
+     { "t": "Geräte kommunizieren direkt miteinander, ohne Access Point", "ok": true },
+     { "t": "Geräte kommunizieren ausschließlich über einen zentralen Access Point", "ok": false },
+     { "t": "Ein Gerät übernimmt dauerhaft die Rolle eines vollwertigen Routers", "ok": false },
+     { "t": "Die Verbindung läuft bei Bedarf über das Mobilfunknetz statt über Funk", "ok": false }
     ],
     "e": "Ad-hoc verbindet Geräte direkt, z. B. für temporäre Verbindungen."
    },
@@ -12111,11 +10527,11 @@ const POOLS = {
     "q": "Welches WLAN-Sicherheitsverfahren ist heute Mindeststandard?",
     "o": [
      {
-      "t": "WPA2 (besser noch WPA3)",
+      "t": "WPA2, WPA3",
       "ok": true
      },
      {
-      "t": "WEP (veraltet und unsicher)",
+      "t": "WEP",
       "ok": false
      },
      {
@@ -12123,7 +10539,7 @@ const POOLS = {
       "ok": false
      },
      {
-      "t": "MAC-Filter allein (ohne Verschlüsselung)",
+      "t": "MAC-Filter allein",
       "ok": false
      }
     ],
@@ -12132,22 +10548,10 @@ const POOLS = {
    {
     "q": "Was unterscheidet WPA2-Personal von WPA2-Enterprise?",
     "o": [
-     {
-      "t": "Personal nutzt einen gemeinsamen PSK, Enterprise authentifiziert je Nutzer über RADIUS",
-      "ok": true
-     },
-     {
-      "t": "Enterprise ist unverschlüsselt",
-      "ok": false
-     },
-     {
-      "t": "Personal braucht einen RADIUS-Server",
-      "ok": false
-     },
-     {
-      "t": "Es gibt keinen Unterschied",
-      "ok": false
-     }
+     { "t": "Personal nutzt einen gemeinsamen PSK, Enterprise authentifiziert je Nutzer über RADIUS", "ok": true },
+     { "t": "Personal nutzt Zertifikate je Gerät, Enterprise ein gemeinsames Passwort für alle Nutzer", "ok": false },
+     { "t": "Personal verschlüsselt nur die Anmeldung, Enterprise den gesamten Verkehr im Funknetz", "ok": false },
+     { "t": "Personal ist auf wenige Geräte begrenzt, Enterprise erlaubt beliebig viele Clients", "ok": false }
     ],
     "e": "Personal = ein Passwort für alle (PSK); Enterprise = individuelle Anmeldung über RADIUS."
    },
@@ -12155,7 +10559,7 @@ const POOLS = {
     "q": "Welche Rolle spielt ein RADIUS-Server im WLAN?",
     "o": [
      {
-      "t": "Zentrale Authentifizierung einzelner Nutzer (Enterprise)",
+      "t": "Zentrale Authentifizierung einzelner Nutzer",
       "ok": true
      },
      {
@@ -12176,22 +10580,10 @@ const POOLS = {
    {
     "q": "Welchen Vorteil bietet WPA3 gegenüber WPA2?",
     "o": [
-     {
-      "t": "Besserer Schutz gegen Wörterbuch-/Brute-Force-Angriffe",
-      "ok": true
-     },
-     {
-      "t": "Größere Reichweite",
-      "ok": false
-     },
-     {
-      "t": "Höhere Sendeleistung",
-      "ok": false
-     },
-     {
-      "t": "Keine Verschlüsselung nötig",
-      "ok": false
-     }
+     { "t": "Besserer Schutz gegen Wörterbuch-/Brute-Force-Angriffe", "ok": true },
+     { "t": "Höhere Übertragungsraten durch effizientere Kanalnutzung", "ok": false },
+     { "t": "Größere Reichweite durch stärkere zulässige Sendeleistung", "ok": false },
+     { "t": "Verzicht auf Passwörter durch reine Zertifikatsanmeldung", "ok": false }
     ],
     "e": "WPA3 erschwert Offline-Angriffe und verschlüsselt individueller."
    },
@@ -12243,7 +10635,7 @@ const POOLS = {
     "q": "Wie trennt man ein Gäste-WLAN sinnvoll vom Firmennetz?",
     "o": [
      {
-      "t": "Über ein eigenes VLAN / getrenntes Netzsegment",
+      "t": "Über ein eigenes VLAN",
       "ok": true
      },
      {
@@ -12264,44 +10656,20 @@ const POOLS = {
    {
     "q": "Warum ist die Kanalwahl besonders im 2,4-GHz-Band wichtig?",
     "o": [
-     {
-      "t": "Um Überlappungen und Störungen mit Nachbarnetzen zu vermeiden",
-      "ok": true
-     },
-     {
-      "t": "Um die SSID zu verstecken",
-      "ok": false
-     },
-     {
-      "t": "Um IP-Adressen zu sparen",
-      "ok": false
-     },
-     {
-      "t": "Um WPA3 zu aktivieren",
-      "ok": false
-     }
+     { "t": "Um Überlappungen und Störungen mit Nachbarnetzen zu vermeiden", "ok": true },
+     { "t": "Um die maximale Sendeleistung des Access Points auszuschöpfen", "ok": false },
+     { "t": "Um mehr Clients gleichzeitig im selben Funknetz zu versorgen", "ok": false },
+     { "t": "Um die Verschlüsselungsstärke an den Kanal anpassen zu können", "ok": false }
     ],
     "e": "Im engen 2,4-GHz-Band überlappen Kanäle leicht; saubere Kanalwahl reduziert Störungen."
    },
    {
     "q": "Was ist ein Mesh-WLAN?",
     "o": [
-     {
-      "t": "Mehrere APs bilden ein nahtloses Funknetz mit gemeinsamer SSID",
-      "ok": true
-     },
-     {
-      "t": "Ein einzelner sehr starker Router",
-      "ok": false
-     },
-     {
-      "t": "Ein Kabelnetz ohne Funk",
-      "ok": false
-     },
-     {
-      "t": "Ein VPN-Typ",
-      "ok": false
-     }
+     { "t": "Mehrere APs bilden ein nahtloses Funknetz mit gemeinsamer SSID", "ok": true },
+     { "t": "Ein Funknetz ohne zentrale Instanz, direkt zwischen den Endgeräten", "ok": false },
+     { "t": "Mehrere Netze mit eigenen SSIDs, zwischen denen Clients manuell wechseln", "ok": false },
+     { "t": "Ein einzelner AP, der über Richtantennen mehrere Gebäude versorgt", "ok": false }
     ],
     "e": "Mesh-Systeme verteilen mehrere APs, zwischen denen Geräte nahtlos wechseln."
    },
@@ -12335,11 +10703,11 @@ const POOLS = {
       "ok": true
      },
      {
-      "t": "Höhere Sicherheit von Haus aus",
+      "t": "Über WLAN lassen sich prinzipiell keine verschlüsselten VPN-Tunnel aufbauen, da die Funkverschlüsselung (WPA3) IPsec blockiert",
       "ok": false
      },
      {
-      "t": "Immer höhere Geschwindigkeit",
+      "t": "WLAN-Signale verändern die Struktur der Datenpakete auf Schicht 3",
       "ok": false
      },
      {
@@ -12353,7 +10721,7 @@ const POOLS = {
     "q": "Welcher Faktor beeinflusst die WLAN-Reichweite am stärksten?",
     "o": [
      {
-      "t": "Hindernisse/Wände, Störquellen und Frequenzband",
+      "t": "Hindernisse, Störquellen und Frequenzband",
       "ok": true
      },
      {
@@ -12365,7 +10733,7 @@ const POOLS = {
       "ok": false
      },
      {
-      "t": "Die IP-Adresse",
+      "t": "Größere Downloads von Dateien",
       "ok": false
      }
     ],
@@ -12374,88 +10742,40 @@ const POOLS = {
    {
     "q": "Warum sollte ein Access Point möglichst zentral und hoch platziert werden?",
     "o": [
-     {
-      "t": "Für gleichmäßige Ausleuchtung und weniger Abschattung",
-      "ok": true
-     },
-     {
-      "t": "Um die SSID zu verbergen",
-      "ok": false
-     },
-     {
-      "t": "Um Strom zu sparen",
-      "ok": false
-     },
-     {
-      "t": "Um die MAC zu ändern",
-      "ok": false
-     }
+     { "t": "Für gleichmäßige Ausleuchtung und weniger Abschattung", "ok": true },
+     { "t": "Um das Signal gezielt nach unten zu den Endgeräten zu bündeln", "ok": false },
+     { "t": "Um Reflexionen an Wänden zu verstärken und so Reichweite zu gewinnen", "ok": false },
+     { "t": "Um die gesetzlich zulässige Sendeleistung voll ausnutzen zu dürfen", "ok": false }
     ],
     "e": "Zentrale, hohe Platzierung minimiert Funklöcher und Hindernisse."
    },
    {
     "q": "Was ist WPS und warum ist es problematisch?",
     "o": [
-     {
-      "t": "Wi-Fi Protected Setup — vereinfacht WLAN-Einrichtung, hat aber bekannte Sicherheitslücken",
-      "ok": true
-     },
-     {
-      "t": "Ein neuer Verschlüsselungsstandard",
-      "ok": false
-     },
-     {
-      "t": "Ein WLAN-Kanal",
-      "ok": false
-     },
-     {
-      "t": "Ein Zugriffsprotokoll",
-      "ok": false
-     }
+     { "t": "Wi-Fi Protected Setup — vereinfacht WLAN-Einrichtung, hat aber bekannte Sicherheitslücken", "ok": true },
+     { "t": "Wi-Fi Protected Standard — der Vorgänger von WPA, gilt heute als vollständig gebrochen", "ok": false },
+     { "t": "Wireless Priority Service — priorisiert einzelne Geräte, belegt aber dauerhaft Bandbreite", "ok": false },
+     { "t": "Wireless Positioning System — ortet Clients im Funknetz, wirft aber Datenschutzfragen auf", "ok": false }
     ],
     "e": "WPS PIN-Methode ist durch Brute-Force-Angriffe kompromittiert — sollte deaktiviert sein."
    },
    {
     "q": "Was ist der Unterschied zwischen 2,4 GHz und 5 GHz WLAN?",
     "o": [
-     {
-      "t": "2,4 GHz: größere Reichweite, störanfälliger; 5 GHz: schneller, kürzere Reichweite",
-      "ok": true
-     },
-     {
-      "t": "5 GHz hat größere Reichweite",
-      "ok": false
-     },
-     {
-      "t": "Beide sind identisch",
-      "ok": false
-     },
-     {
-      "t": "2,4 GHz ist immer schneller",
-      "ok": false
-     }
+     { "t": "2,4 GHz: größere Reichweite, störanfälliger; 5 GHz: schneller, kürzere Reichweite", "ok": true },
+     { "t": "2,4 GHz: kürzere Reichweite bei mehr Tempo; 5 GHz: größere Reichweite bei weniger Tempo", "ok": false },
+     { "t": "2,4 GHz: nur für ältere Geräte nutzbar; 5 GHz: der einzige Standard aktueller Clients", "ok": false },
+     { "t": "2,4 GHz: schneller, aber teurer in der Hardware; 5 GHz: langsamer, dafür überall erlaubt", "ok": false }
     ],
     "e": "2,4 GHz durchdringt Wände besser; 5 GHz bietet mehr Kanäle und höhere Datenraten."
    },
    {
     "q": "Was ist ein Wireless Controller?",
     "o": [
-     {
-      "t": "Zentrales Gerät zur Verwaltung mehrerer Access Points",
-      "ok": true
-     },
-     {
-      "t": "Ein WLAN-Router für Heimnetze",
-      "ok": false
-     },
-     {
-      "t": "Ein WLAN-Verstärker",
-      "ok": false
-     },
-     {
-      "t": "Ein Frequenzfilter",
-      "ok": false
-     }
+     { "t": "Zentrales Gerät zur Verwaltung mehrerer Access Points", "ok": true },
+     { "t": "Ein Messgerät zur Analyse der Kanalbelegung im Funkfeld", "ok": false },
+     { "t": "Ein Verstärker, der die Reichweite eines einzelnen APs erhöht", "ok": false },
+     { "t": "Eine Funktion, die Clients automatisch auf die Bänder verteilt", "ok": false }
     ],
     "e": "Ein WLAN-Controller (WLC) verwaltet APs zentral: Konfiguration, Roaming, Sicherheitsrichtlinien."
    },
@@ -12484,44 +10804,20 @@ const POOLS = {
    {
     "q": "Was ist das Hidden-Node-Problem?",
     "o": [
-     {
-      "t": "Zwei Clients können sich gegenseitig nicht hören und senden gleichzeitig zum AP — Kollision",
-      "ok": true
-     },
-     {
-      "t": "Ein verstecktes WLAN",
-      "ok": false
-     },
-     {
-      "t": "Ein unsichtbarer Access Point",
-      "ok": false
-     },
-     {
-      "t": "Eine versteckte SSID",
-      "ok": false
-     }
+     { "t": "Zwei Clients können sich gegenseitig nicht hören und senden gleichzeitig zum AP", "ok": true },
+     { "t": "Ein Access Point strahlt seine SSID nicht aus und ist für neue Geräte nicht auffindbar", "ok": false },
+     { "t": "Ein fremdes Gerät hängt sich unbemerkt ins Netz und leitet den Verkehr über sich um", "ok": false },
+     { "t": "Ein Client sendet mit gefälschter MAC-Adresse und umgeht so die Filterliste des AP", "ok": false }
     ],
     "e": "Beim Hidden-Node-Problem kollidieren Pakete am AP, weil die Sender sich nicht gegenseitig wahrnehmen. CSMA/CA mit RTS/CTS lindert das."
    },
    {
     "q": "Was ist Band Steering?",
     "o": [
-     {
-      "t": "Automatische Umleitung dual-band-fähiger Clients auf das 5-GHz-Band",
-      "ok": true
-     },
-     {
-      "t": "Verstärken des Signals",
-      "ok": false
-     },
-     {
-      "t": "Kanalwechsel bei Störung",
-      "ok": false
-     },
-     {
-      "t": "Eine Sicherheitsfunktion",
-      "ok": false
-     }
+     { "t": "Automatische Umleitung dual-band-fähiger Clients auf das 5-GHz-Band", "ok": true },
+     { "t": "Automatischer Kanalwechsel des Access Points bei erkannter Störung", "ok": false },
+     { "t": "Bündelung beider Frequenzbänder zu einer gemeinsamen Verbindung", "ok": false },
+     { "t": "Drosselung einzelner Clients, die zu viel Bandbreite beanspruchen", "ok": false }
     ],
     "e": "Band Steering lenkt Clients auf das weniger ausgelastete/schnellere 5-GHz-Band."
    },
@@ -12550,44 +10846,20 @@ const POOLS = {
    {
     "q": "Was ist SSID-Hiding und welchen Schutz bietet es wirklich?",
     "o": [
-     {
-      "t": "Die SSID wird nicht gesendet — bietet minimalen Schutz, da sie per Sniffer auslesbar ist",
-      "ok": true
-     },
-     {
-      "t": "Macht das Netz vollständig unsichtbar und sicher",
-      "ok": false
-     },
-     {
-      "t": "Ersetzt WPA3",
-      "ok": false
-     },
-     {
-      "t": "Verhindert MAC-Spoofing",
-      "ok": false
-     }
+     { "t": "Die SSID wird nicht gesendet — bietet minimalen Schutz, da sie per Sniffer auslesbar ist", "ok": true },
+     { "t": "Die SSID wird verschlüsselt übertragen — nur Geräte mit Schlüssel können das Netz finden", "ok": false },
+     { "t": "Die SSID wird nur an registrierte MAC-Adressen gesendet — fremde Geräte sehen nichts", "ok": false },
+     { "t": "Die SSID wechselt in festen Intervallen — Scanner verlieren das Netz beim Suchen", "ok": false }
     ],
     "e": "SSID-Hiding ist Security through Obscurity — ein Sniffer findet das Netz trotzdem in Probe-Requests."
    },
    {
     "q": "Was ist der Unterschied zwischen WPA2-Personal und WPA3-Personal?",
     "o": [
-     {
-      "t": "WPA3 nutzt SAE statt PSK — besser gegen Wörterbuchangriffe",
-      "ok": true
-     },
-     {
-      "t": "WPA2 ist sicherer",
-      "ok": false
-     },
-     {
-      "t": "WPA3 benötigt einen RADIUS-Server",
-      "ok": false
-     },
-     {
-      "t": "Beide sind identisch",
-      "ok": false
-     }
+     { "t": "WPA3 nutzt SAE statt PSK — besser gegen Wörterbuchangriffe", "ok": true },
+     { "t": "WPA3 verlangt Zertifikate statt Passwörter für die Anmeldung", "ok": false },
+     { "t": "WPA3 verlagert die Verschlüsselung vom Client auf den Router", "ok": false },
+     { "t": "WPA3 erzwingt längere Passwörter, ist sonst identisch zu WPA2", "ok": false }
     ],
     "e": "WPA3-Personal nutzt SAE (Simultaneous Authentication of Equals) statt PSK — kein Offline-Brute-Force möglich."
    },
@@ -12695,46 +10967,12 @@ const POOLS = {
     "e": "FDDI lieferte 100 Mbit/s — damals sehr schnell."
    },
    {
-    "q": "Wie viele Ringe nutzt FDDI physisch?",
-    "o": [
-     {
-      "t": "Zwei gegenläufige Ringe",
-      "ok": true
-     },
-     {
-      "t": "Einen Ring",
-      "ok": false
-     },
-     {
-      "t": "Drei Ringe",
-      "ok": false
-     },
-     {
-      "t": "Keinen Ring, nur Sterne",
-      "ok": false
-     }
-    ],
-    "e": "Haupt- und Hilfsring laufen in entgegengesetzte Richtungen."
-   },
-   {
     "q": "Was passiert bei FDDI im Fehlerfall (Kabelbruch)?",
     "o": [
-     {
-      "t": "Wrap: beide Ringe werden kurzgeschlossen, Betrieb läuft weiter",
-      "ok": true
-     },
-     {
-      "t": "Das gesamte Netz fällt sofort aus",
-      "ok": false
-     },
-     {
-      "t": "Alle Pakete werden neu verschlüsselt",
-      "ok": false
-     },
-     {
-      "t": "Der Token wird gelöscht",
-      "ok": false
-     }
+     { "t": "Wrap: beide Ringe werden kurzgeschlossen, Betrieb läuft weiter", "ok": true },
+     { "t": "Failover: der Sekundärring übernimmt allein den vollen Verkehr", "ok": false },
+     { "t": "Reroute: die Stationen bauen den Ring über Ersatzleitungen neu auf", "ok": false },
+     { "t": "Reset: alle Stationen handeln den Token neu aus und starten den Ring", "ok": false }
     ],
     "e": "Beim Wrap entsteht aus zwei Ringen ein langer Ring — ohne Datenverlust."
    },
@@ -12808,7 +11046,7 @@ const POOLS = {
     "q": "Wozu dient der zweite (Hilfs-)Ring im Normalbetrieb?",
     "o": [
      {
-      "t": "Reserve/zusätzliche Kapazität, läuft leer mit",
+      "t": "Zusätzliche Kapazität, läuft leer mit",
       "ok": true
      },
      {
@@ -12829,44 +11067,20 @@ const POOLS = {
    {
     "q": "Was ist der 'Token' bei FDDI bildlich?",
     "o": [
-     {
-      "t": "Ein elektronischer Stafettenstab, der im Kreis wandert",
-      "ok": true
-     },
-     {
-      "t": "Eine IP-Adresse",
-      "ok": false
-     },
-     {
-      "t": "Eine Prüfsumme",
-      "ok": false
-     },
-     {
-      "t": "Ein Zeitstempel",
-      "ok": false
-     }
+     { "t": "Ein elektronischer Stafettenstab, der im Kreis wandert", "ok": true },
+     { "t": "Ein Schlüssel, der die Daten auf dem Ring entschlüsselt", "ok": false },
+     { "t": "Eine Eintrittskarte, die jede Station einmalig erhält", "ok": false },
+     { "t": "Ein Zähler, der die Runden jedes Datenpakets protokolliert", "ok": false }
     ],
     "e": "Der Token zirkuliert; nur wer ihn hält, darf senden."
    },
    {
     "q": "Warum galt FDDI als sehr ausfallsicher?",
     "o": [
-     {
-      "t": "Durch die Doppelring-Struktur mit Wrap-Mechanismus",
-      "ok": true
-     },
-     {
-      "t": "Durch Verschlüsselung",
-      "ok": false
-     },
-     {
-      "t": "Durch hohe TTL-Werte",
-      "ok": false
-     },
-     {
-      "t": "Durch Broadcasts",
-      "ok": false
-     }
+     { "t": "Durch die Doppelring-Struktur mit Wrap-Mechanismus", "ok": true },
+     { "t": "Durch redundante Token, die parallel im Ring kreisen", "ok": false },
+     { "t": "Durch die kollisionsfreie Vergabe fester Sendezeitfenster", "ok": false },
+     { "t": "Durch Glasfaser, die Übertragungsfehler physikalisch ausschließt", "ok": false }
     ],
     "e": "Der Doppelring kann Brüche durch Kurzschließen kompensieren."
    },
@@ -13098,22 +11312,10 @@ const POOLS = {
    {
     "q": "Worin liegt der Vorteil der Sterntopologie?",
     "o": [
-     {
-      "t": "Ausfall eines Endgeräts betrifft die anderen nicht; einfache Fehlersuche",
-      "ok": true
-     },
-     {
-      "t": "Geringster Kabelaufwand",
-      "ok": false
-     },
-     {
-      "t": "Kein zentrales Gerät nötig",
-      "ok": false
-     },
-     {
-      "t": "Keine Kollisionen möglich",
-      "ok": false
-     }
+     { "t": "Ausfall eines Endgeräts betrifft die anderen nicht; einfache Fehlersuche", "ok": true },
+     { "t": "Kein zentraler Knoten nötig; jedes Gerät vermittelt selbstständig weiter", "ok": false },
+     { "t": "Minimaler Kabelaufwand, da alle Geräte eine Leitung gemeinsam nutzen", "ok": false },
+     { "t": "Garantierte Laufzeiten, da ein Token die Sendereihenfolge vorgibt", "ok": false }
     ],
     "e": "Fällt ein Gerät/Kabel aus, läuft der Rest weiter; Fehler sind gut lokalisierbar."
    },
@@ -13186,22 +11388,10 @@ const POOLS = {
    {
     "q": "Wie sind Geräte in der Ringtopologie verbunden?",
     "o": [
-     {
-      "t": "Jedes mit genau zwei Nachbarn zu einem geschlossenen Kreis",
-      "ok": true
-     },
-     {
-      "t": "Alle an einem zentralen Switch",
-      "ok": false
-     },
-     {
-      "t": "Jeder mit jedem",
-      "ok": false
-     },
-     {
-      "t": "An einem gemeinsamen Buskabel",
-      "ok": false
-     }
+     { "t": "Jedes mit genau zwei Nachbarn zu einem geschlossenen Kreis", "ok": true },
+     { "t": "Jedes Gerät direkt mit jedem anderen über eigene Leitungen", "ok": false },
+     { "t": "Alle Geräte an einer gemeinsamen zentralen Vermittlungsstelle", "ok": false },
+     { "t": "Alle Geräte an einem durchgehenden gemeinsamen Leitungsstrang", "ok": false }
     ],
     "e": "Im Ring ist jede Station mit zwei Nachbarn verbunden."
    },
@@ -13873,22 +12063,10 @@ const POOLS = {
    {
     "q": "Warum nutzt man Hexadezimal in der IT gern statt Binär?",
     "o": [
-     {
-      "t": "Kürzere Schreibweise, 4 Bit pro Stelle, leicht umrechenbar",
-      "ok": true
-     },
-     {
-      "t": "Weil es Basis 10 ist",
-      "ok": false
-     },
-     {
-      "t": "Weil Computer intern hex rechnen",
-      "ok": false
-     },
-     {
-      "t": "Weil es keine Buchstaben nutzt",
-      "ok": false
-     }
+     { "t": "Kürzere Schreibweise, 4 Bit pro Stelle, leicht umrechenbar", "ok": true },
+     { "t": "Direkte Verarbeitung durch Prozessoren ohne weitere Umwandlung", "ok": false },
+     { "t": "Verlustfreie Darstellung von Kommazahlen ohne Rundungsfehler", "ok": false },
+     { "t": "Eindeutigere Darstellung, da Ziffern und Buchstaben getrennt bleiben", "ok": false }
     ],
     "e": "Hex fasst Bitgruppen kompakt zusammen und ist leicht zu Binär umrechenbar."
    },
@@ -15148,6 +13326,8 @@ function updateMeta(){
 }
 
 function showResult(){
+  const overlay = document.getElementById('finishOverlay');
+  if(overlay) overlay.classList.remove('show');
   const correct = runQuestions.filter(x => x.correct).length;
   const total = runQuestions.length;
   const pct = Math.round(correct/total*100);
@@ -15164,16 +13344,20 @@ function showResult(){
   window.scrollTo({top:0,behavior:'smooth'});
 }
 
+function reviewQuestions(){
+  // Overlay schließen, Runner mit den beantworteten Fragen sichtbar lassen.
+  // Zurück zu den Kategorien geht dann über den bereits vorhandenen Button unten.
+  const overlay = document.getElementById('finishOverlay');
+  if(overlay) overlay.classList.remove('show');
+  runnerEl.classList.add('active');
+}
+
 function finishRun(){
-  // Erst kurzes Loading-Overlay (3s), damit die zuletzt beantwortete Frage
-  // (richtig/falsch) noch sichtbar bleibt, bevor die Auswertung erscheint.
+  // Kein Auto-Timeout mehr: Das Overlay bleibt stehen, bis der Nutzer wählt —
+  // Auswertung anzeigen, Fragen nochmal ansehen, oder wegklicken (= ansehen).
   const overlay = document.getElementById('finishOverlay');
   if(overlay){
     overlay.classList.add('show');
-    setTimeout(() => {
-      overlay.classList.remove('show');
-      showResult();
-    }, 3000);
   } else {
     showResult();
   }
@@ -15205,6 +13389,64 @@ startBtn.addEventListener('click', () => {
 document.getElementById('againBtn').addEventListener('click', startQuiz); // rotates: pointer advanced
 document.getElementById('backBtn').addEventListener('click', backToSelector);
 document.getElementById('abortBtn').addEventListener('click', backToSelector);
+
+// Übergangs-Overlay: Auswertung anzeigen / Fragen ansehen / wegklicken
+document.getElementById('finishResultBtn').addEventListener('click', showResult);
+document.getElementById('finishReviewBtn').addEventListener('click', reviewQuestions);
+document.getElementById('finishOverlay').addEventListener('click', (e) => {
+  // Klick auf die Box selbst (Buttons) nicht als "wegklicken" werten,
+  // nur Klick auf den dunklen Hintergrund öffnet die Fragenansicht.
+  if(e.target.id === 'finishOverlay') reviewQuestions();
+});
+
+// Pixel-8 im Overlay aufbauen: 8x9-Bitmap der Ziffer 8. Jedes Pixel erhält
+// per CSS-Variablen einen zufälligen Anflugvektor (--sx/--sy, von außen) und
+// einen Explosionsvektor (--ex/--ey). Dazu je ein statisches Schatten-Pixel
+// mit versetztem Funkel-Delay. Da das Overlay display:none ist, startet die
+// Animation bei jedem Öffnen frisch mit der Formations-Phase.
+(function buildPixel8(){
+  const host = document.getElementById('pixel8');
+  if(!host) return;
+  const MAP = [
+    '.######.',
+    '##....##',
+    '##....##',
+    '##....##',
+    '.######.',
+    '##....##',
+    '##....##',
+    '##....##',
+    '.######.'
+  ];
+  const frag = document.createDocumentFragment();
+  MAP.forEach((row, y) => {
+    [...row].forEach((ch, x) => {
+      if(ch !== '#') return;
+      // Schatten-Pixel (statisch, funkelt mit eigenem Delay)
+      const s = document.createElement('div');
+      s.className = 'p8s ' + (Math.random() < 0.5 ? 'p8sc' : 'p8sg');
+      s.style.setProperty('--x', x);
+      s.style.setProperty('--y', y);
+      // Delay-Liste: 1. Wert für die Hüllkurve (synchron), 2. fürs Funkeln (versetzt)
+      s.style.animationDelay = '0s,' + (Math.random() * 1.3).toFixed(2) + 's';
+      frag.appendChild(s);
+      // Flug-Pixel (Cyan oder Grün)
+      const d = document.createElement('div');
+      d.className = 'p8p ' + (Math.random() < 0.5 ? 'p8c' : 'p8g');
+      d.style.setProperty('--x', x);
+      d.style.setProperty('--y', y);
+      const a1 = Math.random() * Math.PI * 2, r1 = 140 + Math.random() * 160;
+      const a2 = Math.random() * Math.PI * 2, r2 = 120 + Math.random() * 180;
+      d.style.setProperty('--sx', (Math.cos(a1) * r1).toFixed(0) + 'px');
+      d.style.setProperty('--sy', (Math.sin(a1) * r1).toFixed(0) + 'px');
+      d.style.setProperty('--ex', (Math.cos(a2) * r2).toFixed(0) + 'px');
+      d.style.setProperty('--ey', (Math.sin(a2) * r2).toFixed(0) + 'px');
+      d.style.animationDelay = (Math.random() * 0.18).toFixed(2) + 's';
+      frag.appendChild(d);
+    });
+  });
+  host.appendChild(frag);
+})();
 
 // Wackelkandidaten üben: eigener Modus, unabhängig von Kategorieauswahl.
 document.getElementById('wrongStartBtn').addEventListener('click', () => {
@@ -15502,7 +13744,24 @@ const GLOSSAR = [{"a":"2FA","f":"Zwei-Faktor-Authentifizierung","d":"Anmeldung m
 {"a":"TACACS+","f":"Terminal Access Controller Access-Control System Plus","d":"AAA-Protokoll (Authentifizierung, Autorisierung, Accounting) v. a. für die Verwaltung von Netzwerkgeräten. Alternative zu RADIUS, trennt die drei AAA-Funktionen sauberer."},
 {"a":"EAP","f":"Extensible Authentication Protocol","d":"Rahmenwerk für Authentifizierungsverfahren, u. a. im WLAN (WPA-Enterprise). Varianten wie EAP-TLS nutzen Zertifikate statt Passwörter."},
 {"a":"802.1X","f":"Portbasierte Netzwerk-Zugangskontrolle","d":"IEEE-Standard: Ein Gerät muss sich erst authentifizieren (via EAP gegen z. B. RADIUS), bevor der Switch-/WLAN-Port Verkehr durchlässt. Basis von WPA-Enterprise."},
-{"a":"Hash","f":"Hashwert (kryptografische Prüfsumme)","d":"Fester Fingerabdruck beliebiger Daten, nicht umkehrbar und kollisionsresistent. Grundlage von Signaturen, Passwortspeicherung und Integritätsprüfung. Bekannte Verfahren: SHA-256; MD5/SHA-1 gelten als gebrochen."}];
+{"a":"Hash","f":"Hashwert (kryptografische Prüfsumme)","d":"Fester Fingerabdruck beliebiger Daten, nicht umkehrbar und kollisionsresistent. Grundlage von Signaturen, Passwortspeicherung und Integritätsprüfung. Bekannte Verfahren: SHA-256; MD5/SHA-1 gelten als gebrochen."},
+{"a":"STARTTLS","f":"Opportunistische TLS-Verschlüsselung","d":"Erweiterung, die eine zunächst unverschlüsselte Klartextverbindung nachträglich auf eine TLS-verschlüsselte umschaltet — auf demselben Port. Genutzt bei SMTP (587), IMAP (143) und POP3 (110). Vorteil: keine getrennten Klartext-/Verschlüsselungsports nötig. Schwäche: anfällig für STARTTLS-Stripping, wenn nicht per Policy erzwungen."},
+{"a":"Trap","f":"SNMP-Trap","d":"Unaufgeforderte Benachrichtigung, die ein überwachtes Gerät (Agent) von sich aus an die Managementstation sendet, sobald ein Ereignis eintritt (z. B. Schnittstelle down, Schwellwert überschritten). Gegenstück zum Polling, bei dem die Station aktiv abfragt. Läuft über UDP-Port 162, während normale SNMP-Abfragen auf 161 gehen."},
+{"a":"RTT","f":"Round Trip Time (Paketumlaufzeit)","d":"Zeit, die ein Paket vom Sender zum Ziel und die Antwort wieder zurück braucht. Wird u. a. per ping gemessen und geht in die Berechnung des TCP-Timeouts ein. Hohe RTT bedeutet spürbare Latenz — kritisch für Echtzeitanwendungen wie VoIP und Videotelefonie."},
+{"a":"DEMUX","f":"Demultiplexer","d":"Gegenstück zum Multiplexer: trennt einen kombinierten Datenstrom beim Empfänger wieder auf und ordnet die Teile der richtigen Anwendung zu. Auf der Transportschicht geschieht das anhand der Portnummern, die den ankommenden Verkehr dem passenden Socket zuweisen."},
+{"a":"RPC","f":"Remote Procedure Call (entfernter Prozeduraufruf)","d":"Verfahren, bei dem ein Programm eine Funktion auf einem anderen Rechner aufruft, als wäre sie lokal — die Netzwerkkommunikation läuft im Hintergrund. Im OSI-Modell auf der Sitzungsschicht (Schicht 5) angesiedelt. Grundlage vieler verteilter Systeme; moderne Varianten sind z. B. gRPC und JSON-RPC."},
+{"a":"EMV","f":"Elektromagnetische Verträglichkeit","d":"Fähigkeit eines Geräts, im elektromagnetischen Umfeld störungsfrei zu arbeiten, ohne selbst andere Geräte unzulässig zu stören. Das Störphänomen selbst heißt EMI (Electromagnetic Interference). In der Netzwerktechnik relevant bei der Kabelwahl: geschirmte Leitungen (STP) und Glasfaser sind gegen elektromagnetische Einstreuung robuster als ungeschirmtes Kupfer (UTP)."},
+{"a":"Crosstalk","f":"Übersprechen","d":"Ungewolltes Überkoppeln eines Signals von einer Ader auf eine benachbarte im selben Kabel, wodurch Störungen entstehen. Verdrillung der Adernpaare (Twisted Pair) und Schirmung reduzieren den Effekt. Kenngrößen: NEXT (Near-End Crosstalk) misst das Übersprechen am selben Kabelende wie der Sender, FEXT (Far-End Crosstalk) am entfernten Ende."},
+{"a":"AND","f":"UND-Verknüpfung (Konjunktion)","d":"Logikgatter: Ausgang ist 1, nur wenn beide Eingänge 1 sind. In der Netzwerktechnik zentral beim Subnetting — die Netzadresse entsteht durch bitweises AND aus IP-Adresse und Subnetzmaske."},
+{"a":"OR","f":"ODER-Verknüpfung (Disjunktion)","d":"Logikgatter: Ausgang ist 1, sobald mindestens ein Eingang 1 ist. Nur bei 0/0 ergibt sich 0. Nicht zu verwechseln mit XOR, das bei gleichen Eingängen 0 liefert."},
+{"a":"NOT","f":"Negation (Inverter)","d":"Logikgatter mit nur einem Eingang: kehrt den Wert um (0 wird 1, 1 wird 0). Baustein der negierten Gatter — NAND, NOR und XNOR sind AND, OR und XOR mit nachgeschaltetem NOT."},
+{"a":"NAND","f":"NICHT-UND-Verknüpfung","d":"Negiertes AND: Ausgang ist 0, nur wenn beide Eingänge 1 sind — in allen anderen Fällen 1. NAND gilt als Universalgatter: Aus NAND-Gattern allein lässt sich jede andere Logikfunktion aufbauen."},
+{"a":"NOR","f":"NICHT-ODER-Verknüpfung","d":"Negiertes OR: Ausgang ist 1, nur wenn beide Eingänge 0 sind. Wie NAND ein Universalgatter, aus dem sich alle anderen Verknüpfungen konstruieren lassen."},
+{"a":"CDM","f":"Code Division Multiplexing (Codemultiplex)","d":"Multiplexverfahren: Alle Teilnehmer senden gleichzeitig auf derselben Frequenz, getrennt durch eindeutige Codes. Der Empfänger filtert das gewünschte Signal über den passenden Code heraus. Basis von CDMA im Mobilfunk. Abgrenzung: TDM trennt über Zeit, FDM über Frequenz, WDM über Lichtwellenlänge."},
+{"a":"RARP","f":"Reverse Address Resolution Protocol","d":"Umkehrung von ARP: ermittelt zu einer bekannten MAC-Adresse die zugehörige IP-Adresse. Historisch von plattenlosen Stationen zum Beziehen ihrer IP genutzt — heute veraltet und durch DHCP ersetzt."},
+{"a":"RJ11","f":"Registered Jack 11","d":"Kleiner Steckverbinder mit 4–6 Kontakten, klassisch für analoge Telefonleitungen und DSL-Anschlüsse. Nicht zu verwechseln mit dem breiteren 8-poligen RJ45 für Ethernet-Netzwerkkabel."},
+{"a":"MSS","f":"Maximum Segment Size","d":"Größte Nutzdatenmenge, die ein TCP-Segment tragen darf — ohne TCP-/IP-Header. Wird beim Verbindungsaufbau ausgehandelt und leitet sich aus der MTU des Übertragungswegs ab (typisch: MTU 1500 minus 40 Byte Header = MSS 1460)."},
+{"a":"DSCP","f":"Differentiated Services Code Point","d":"6-Bit-Feld im IP-Header zur Klassifizierung von Paketen für Quality of Service: Router lesen den Wert und behandeln markierten Verkehr bevorzugt — z. B. VoIP-Pakete vor Downloads. Nachfolger des älteren ToS-Felds."}];
 
 // ---- Bibliothek: Render + Suche ----
 const libList = document.getElementById('libList');

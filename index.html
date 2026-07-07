@@ -3,13 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>NEINT1 Symbiose – Lernscript</title>
+<title>Layer 8 Academy</title>
 <link rel="stylesheet" href="styles.css?v=202607061010">
 </head>
 <body>
 <header>
   <div class="wrap">
-    <h1><span class="mono">&gt;</span> <span class="t-neint">NEINT1</span> <span class="t-symb">Symbiose</span></h1>
+    <h1><span class="t-neint">Layer 8</span> <span class="t-symb">Academy</span></h1>
     <p>Netzwerke &amp; Internettechnologien · OSI · Routing/Switching · IP · DNS/DHCP · Sicherheit · VPN · WLAN · VoIP — Nachschlagewerk + Prüfungstrainer</p>
   </div>
 </header>
@@ -76,7 +76,8 @@
 <tr><td>69</td><td>TFTP</td><td>UDP</td><td>Dateitransfer ohne Login (PXE)</td></tr>
 <tr><td>80</td><td>HTTP</td><td>TCP</td><td>Web, unverschlüsselt</td></tr>
 <tr><td>110/143</td><td>POP3/IMAP</td><td>TCP</td><td>Mailabruf (löscht / behält)</td></tr>
-<tr><td>161/162</td><td>SNMP/Trap</td><td>UDP</td><td>Geräteüberwachung/Meldungen</td></tr>
+<tr><td>161</td><td>SNMP</td><td>UDP</td><td>Geräteabfrage durch die Managementstation (Polling)</td></tr>
+<tr><td>162</td><td>SNMP-Trap</td><td>UDP</td><td>Unaufgeforderte Ereignismeldung vom Gerät an die Station</td></tr>
 <tr><td>389/636</td><td>LDAP/LDAPS</td><td>TCP/UDP</td><td>Verzeichnisdienst (unv./verschl.)</td></tr>
 <tr><td>443</td><td>HTTPS</td><td>TCP</td><td>Web über TLS/SSL</td></tr>
 <tr><td>465/587</td><td>SMTPS/Submission</td><td>TCP</td><td>Mailversand verschlüsselt</td></tr>
@@ -87,7 +88,7 @@
 <tr><td>445</td><td>SMB</td><td>TCP</td><td>Windows-Datei-/Druckerfreigabe</td></tr>
 <tr><td>3306</td><td>MySQL</td><td>TCP</td><td>Datenbankserver</td></tr>
 </table>
-<div class="callout"><span class="tag">Merkhilfe</span>Verschlüsselte Varianten enden auf „S" und liegen höher: HTTP 80 → HTTPS 443, IMAP 143 → IMAPS 993, POP3 110 → POP3S 995.</div>
+<div class="callout"><span class="tag">Merkhilfe</span>Verschlüsselte Varianten enden auf „S" und liegen höher: HTTP 80 → HTTPS 443, IMAP 143 → IMAPS 993, POP3 110 → POP3S 995. Alternativ hebt <strong>STARTTLS</strong> eine bestehende Klartextverbindung auf demselben Port auf TLS an (z. B. SMTP 587, IMAP 143), statt einen eigenen verschlüsselten Port zu nutzen.</div>
 </section>
 
 <section id="r-mux">
@@ -97,6 +98,7 @@
 <li><strong>TDM (Zeitmultiplex):</strong> Signale nacheinander in Zeitschlitzen.</li>
 <li><strong>FDM (Frequenzmultiplex):</strong> Signale gleichzeitig auf verschiedenen Frequenzen.</li>
 <li><strong>WDM (Wellenlängenmultiplex):</strong> FDM-Prinzip über Lichtwellenlängen in Glasfaser.</li>
+<li><strong>CDM (Codemultiplex):</strong> Signale gleichzeitig auf derselben Frequenz, getrennt durch eindeutige Codes je Teilnehmer (Basis von CDMA im Mobilfunk).</li>
 </ul>
 <p>Auf der Transportschicht ist die Portvergabe eine Form des Multiplexings: viele Anwendungen teilen sich eine Netzverbindung, unterschieden durch Ports.</p>
 </section>
@@ -129,7 +131,7 @@
 <li><strong>Bestätigungsnummer (Acknowledgement Number):</strong> gibt das nächste erwartete Byte an und bestätigt so den Empfang.</li>
 <li><strong>Prüfsumme (Checksum):</strong> erkennt Übertragungsfehler in Header und Daten; ein fehlerhaftes Paket wird verworfen.</li>
 </ul>
-<p><strong>traceroute</strong> (Linux) / <strong>tracert</strong> (Windows) nutzt die TTL: erst TTL=1 (erster Router meldet sich), dann 2, 3 … bis das Ziel erreicht ist — so wird jeder Hop sichtbar. Reine Erreichbarkeit prüft man dagegen mit <strong>ping</strong> (ICMP Echo Request/Reply).</p>
+<p><strong>traceroute</strong> (Linux) / <strong>tracert</strong> (Windows) nutzt die TTL: erst TTL=1 (erster Router meldet sich), dann 2, 3 … bis das Ziel erreicht ist — so wird jeder Hop sichtbar. Reine Erreichbarkeit prüft man dagegen mit <strong>ping</strong> (ICMP Echo Request/Reply); die dabei gemessene <span class="term">RTT (Round Trip Time)</span> ist die Umlaufzeit hin und zurück und damit ein direktes Maß für die Latenz.</p>
 </section>
 
 <section id="r-osi">
@@ -458,12 +460,15 @@
     </div>
   </div>
 
-  <!-- Übergangs-Overlay: hält die letzte Frage 3s sichtbar, bevor die Auswertung kommt -->
+  <!-- Übergangs-Overlay: bleibt stehen, bis der Nutzer entscheidet -->
   <div class="finish-overlay" id="finishOverlay">
     <div class="finish-box">
-      <div class="finish-spinner"></div>
-      <div class="finish-text">Auswertung wird erstellt<span class="finish-dots"></span></div>
-      <div class="finish-sub">Letzte Antwort noch im Blick behalten</div>
+      <div class="pixel8" id="pixel8" aria-hidden="true"></div>
+      <div class="finish-text">Durchlauf beendet</div>
+      <div class="finish-actions">
+        <button class="finish-btn finish-btn-primary" id="finishResultBtn">Auswertung anzeigen</button>
+        <button class="finish-btn" id="finishReviewBtn">Fragen nochmal ansehen</button>
+      </div>
     </div>
   </div>
 
@@ -482,7 +487,7 @@
 </div><!-- /.wrap -->
 
 <footer><div class="wrap">
-NEINT1 Symbiose · IHK-Lernscript · <span id="footCats">–</span> Kategorien · <span id="footQs">–</span> Fragen · randomisiert · Rotation ohne Wiederholung<br>
+Layer 8 Academy · Lernbegleiter · Prüfungsvorbereitung · Systemintegration · Anwendungsentwicklung · <span id="footCats">–</span> Kategorien · <span id="footQs">–</span> Fragen · randomisiert · Rotation ohne Wiederholung<br>
 Fachinformatiker · Aura
 </div></footer>
 <script src="app.js?v=202607061010"></script>
