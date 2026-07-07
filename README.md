@@ -1,6 +1,6 @@
-# NEINT1 Symbiose
+# Layer 8 Academy
 
-Interaktives Lern- und Prüfungstool für **NEINT1 – Netzwerke und Internettechnologien Grundlagen** (IHK-Vorbereitung, Fachinformatiker).
+Interaktives Lern- und Prüfungstool für **Netzwerke und Internettechnologien Grundlagen** (IHK-Vorbereitung, Fachinformatiker).
 
 Kein Framework, kein Build-Schritt, keine Abhängigkeiten. Reines HTML, CSS und JavaScript – läuft in jedem modernen Browser und lässt sich statisch (z. B. über Cloudflare Pages oder GitHub Pages) ausliefern.
 
