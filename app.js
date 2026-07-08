@@ -12269,28 +12269,6 @@ const POOLS = {
     "e": "A0₁₆ = 10×16 + 0 = 160."
    },
    {
-    "q": "Wie viele Bit hat ein 32-Bit-Wert wie eine IPv4-Adresse?",
-    "o": [
-     {
-      "t": "32",
-      "ok": true
-     },
-     {
-      "t": "16",
-      "ok": false
-     },
-     {
-      "t": "64",
-      "ok": false
-     },
-     {
-      "t": "8",
-      "ok": false
-     }
-    ],
-    "e": "IPv4 = 32 Bit = 4 Byte = 4 Oktette."
-   },
-   {
     "q": "Was ergibt binär 1000 dezimal?",
     "o": [
      {
@@ -12431,7 +12409,7 @@ const POOLS = {
     "q": "Was macht die NICHT-Verknüpfung (NOT)?",
     "o": [
      {
-      "t": "Sie kehrt den Eingang um (0→1, 1→0)",
+      "t": "Sie kehrt den Eingangswert um: aus 0 wird 1 und aus 1 wird 0",
       "ok": true
      },
      {
@@ -12739,19 +12717,19 @@ const POOLS = {
     "q": "Warum nutzt man beim Subnetting AND und nicht OR?",
     "o": [
      {
-      "t": "AND filtert mit der Maske gezielt den Netzanteil heraus",
+      "t": "AND setzt mit der 1-Maske gezielt den Netzanteil durch",
       "ok": true
      },
      {
-      "t": "OR wäre zu langsam",
+      "t": "OR würde alle Hostbits auf 1 setzen statt sie auszublenden",
       "ok": false
      },
      {
-      "t": "AND verschlüsselt die Adresse",
+      "t": "AND liefert direkt die Broadcast-Adresse des Subnetzes",
       "ok": false
      },
      {
-      "t": "OR funktioniert nur mit IPv6",
+      "t": "OR ermittelt zuverlässiger den Hostanteil der Adresse",
       "ok": false
      }
     ],
@@ -13022,10 +13000,10 @@ const POOLS = {
     "e": "AND(1,0) = 0, NOT(0) = 1. NAND gibt nur bei 1/1 eine 0 aus."
    },
    {
-    "q": "Welche logische Verknüpfung prüft auf Parität (gerade Anzahl von Einsen)?",
+    "q": "Welche Verknüpfung liefert über mehrere Bits verkettet eine Paritätsprüfung (erkennt gerade/ungerade Anzahl von Einsen)?",
     "o": [
      {
-      "t": "XOR (mehrere Eingänge)",
+      "t": "XOR",
       "ok": true
      },
      {
@@ -13041,7 +13019,902 @@ const POOLS = {
       "ok": false
      }
     ],
-    "e": "XOR über mehrere Bits ergibt 1 bei ungerader Einsenanzahl — Grundlage der Paritätsprüfung."
+    "e": "XOR über mehrere Bits verkettet ergibt 1 bei ungerader Einsenanzahl — Grundlage der Paritätsprüfung."
+   }
+  ]
+ },
+ "virt": {
+  "name": "Virtualisierung Grundlagen",
+  "q": [
+   {
+    "q": "Was bedeutet \"virtuell\" im IT-Kontext?",
+    "o": [
+     { "t": "Die flexible Nachbildung physischer Systeme, die real erscheint, aber nicht echt ist", "ok": true },
+     { "t": "Die dauerhafte Stilllegung physischer Hardware zugunsten reiner Software", "ok": false },
+     { "t": "Die Verschlüsselung sämtlicher Daten auf einem physischen Server", "ok": false },
+     { "t": "Die Vernetzung mehrerer physischer Rechner zu einem Cluster", "ok": false }
+    ],
+    "e": "Virtuell heißt: nicht real vorhanden, aber real erscheinend. Die virtuelle Infrastruktur läuft dabei stets auf echter, traditioneller Hardware."
+   },
+   {
+    "q": "Was ist Virtualisierung von Betriebssystemen im Kern?",
+    "o": [
+     { "t": "Die gleichzeitige Nutzung mehrerer Betriebssysteme auf einer gemeinsamen Hardwarebasis", "ok": true },
+     { "t": "Der Austausch eines Betriebssystems gegen eine neuere Version ohne Datenverlust", "ok": false },
+     { "t": "Die Trennung eines Netzwerks in mehrere logisch isolierte Bereiche", "ok": false },
+     { "t": "Die automatische Verteilung von Software-Updates auf alle Endgeräte", "ok": false }
+    ],
+    "e": "Ein leistungsfähiger Computer dient als gemeinsame Basis, auf der mehrere Betriebssysteme parallel betrieben werden."
+   },
+   {
+    "q": "Was bezeichnet Simulation im Unterschied zu Virtualisierung?",
+    "o": [
+     { "t": "Die vollständige softwareseitige Nachbildung eines Systems, ohne dass reale Ergebnisse entstehen", "ok": true },
+     { "t": "Den direkten Betrieb eines Gastsystems auf der Hardware-Architektur des Hosts", "ok": false },
+     { "t": "Die Aufteilung physischer Ressourcen auf mehrere gleichwertige Nutzer", "ok": false },
+     { "t": "Die Übersetzung von Prozessorbefehlen zwischen zwei unterschiedlichen CPU-Architekturen", "ok": false }
+    ],
+    "e": "Simulation bildet ein System komplett softwareseitig nach, führt aber zu keinem realen Ergebnis — im Unterschied zur Virtualisierung, die echte Betriebssysteme echt ausführt."
+   },
+   {
+    "q": "Ein Flugsimulator ist ein klassisches Beispiel wofür?",
+    "o": [
+     { "t": "Simulation: er bildet den Flug nach, bringt den Piloten aber nicht wirklich ans Ziel", "ok": true },
+     { "t": "Emulation: er übersetzt reale Flugdaten in ein anderes Datenformat", "ok": false },
+     { "t": "Virtualisierung: er teilt die Rechenleistung eines Flugzeugs auf mehrere Systeme auf", "ok": false },
+     { "t": "Live-Migration: er verschiebt den Trainingsbetrieb auf ein anderes Gerät", "ok": false }
+    ],
+    "e": "Der Simulator bildet den Flug nach, ohne dass am Ende ein reales Ziel erreicht wird — genau das unterscheidet Simulation von echtem Betrieb."
+   },
+   {
+    "q": "Was passiert bei einer Hardware-Emulation?",
+    "o": [
+     { "t": "Sämtliche Hardware-Komponenten werden softwareseitig nachgebildet, inklusive der CPU", "ok": true },
+     { "t": "Nur die CPU wird nachgebildet, alle anderen Komponenten bleiben real", "ok": false },
+     { "t": "Die vorhandene Hardware wird auf mehrere Gastsysteme gleichmäßig aufgeteilt", "ok": false },
+     { "t": "Ein bestehendes System wird unverändert auf neuere Hardware übertragen", "ok": false }
+    ],
+    "e": "Bei der Hardware-Emulation wird jede Komponente softwareseitig nachgebildet, einschließlich der CPU selbst."
+   },
+   {
+    "q": "Warum verursacht CPU-Emulation typischerweise einen großen Overhead?",
+    "o": [
+     { "t": "Weil Hardware-Instruktionen erst auf die native CPU übersetzt werden müssen", "ok": true },
+     { "t": "Weil dabei grundsätzlich mehrere Betriebssysteme parallel laufen müssen", "ok": false },
+     { "t": "Weil die emulierte CPU immer mit voller Taktrate arbeitet, egal ob nötig", "ok": false },
+     { "t": "Weil jede emulierte Komponente eine eigene Netzwerkverbindung benötigt", "ok": false }
+    ],
+    "e": "Jede Instruktion muss erst in eine Instruktion der nativen CPU übersetzt werden, bevor sie ausgeführt werden kann — das kostet Performance."
+   },
+   {
+    "q": "Worin unterscheidet sich Virtualisierung von Hardware-Emulation?",
+    "o": [
+     { "t": "Bei Virtualisierung wird die CPU nicht nachgebildet, das Gastsystem nutzt die Architektur des Hosts direkt", "ok": true },
+     { "t": "Bei Virtualisierung wird zusätzlich zur CPU auch das Netzwerk komplett emuliert", "ok": false },
+     { "t": "Virtualisierung funktioniert ausschließlich ohne jede Art von Hypervisor", "ok": false },
+     { "t": "Virtualisierung erfordert immer eine andere CPU-Architektur als die des Hosts", "ok": false }
+    ],
+    "e": "Bei Virtualisierung entfällt die CPU-Emulation: Das Gastsystem nutzt direkt die CPU-Architektur des Hosts, was deutlich mehr Performance bringt."
+   },
+   {
+    "q": "Was kennzeichnet Servervirtualisierung grundlegend?",
+    "o": [
+     { "t": "Jeder virtuelle Server erhält ein festgelegtes Volumen der Host-Ressourcen zugewiesen", "ok": true },
+     { "t": "Alle virtuellen Server teilen sich zwingend ein einziges gemeinsames Betriebssystem", "ok": false },
+     { "t": "Jeder virtuelle Server benötigt zwingend eigene physische Netzwerkhardware", "ok": false },
+     { "t": "Virtuelle Server können ausschließlich auf mobilen Endgeräten betrieben werden", "ok": false }
+    ],
+    "e": "Die verfügbaren Host-Ressourcen werden auf mehrere virtuelle Server mit jeweils festem Volumen aufgeteilt."
+   },
+   {
+    "q": "Welches Grundproblem ohne Servervirtualisierung dient als Motivation für deren Einsatz?",
+    "o": [
+     { "t": "Auf einem physischen Server läuft nur ein Betriebssystem, ungenutzte Ressourcen bleiben liegen", "ok": true },
+     { "t": "Physische Server können grundsätzlich keine Netzwerkdienste bereitstellen", "ok": false },
+     { "t": "Physische Server benötigen für jeden Dienst eine eigene Stromversorgung", "ok": false },
+     { "t": "Physische Server lassen sich ohne Virtualisierung nicht mit dem Internet verbinden", "ok": false }
+    ],
+    "e": "Ohne Virtualisierung läuft pro physischem Server nur ein Betriebssystem — für jeden weiteren Dienst wäre ein weiterer Server nötig."
+   },
+   {
+    "q": "Welcher Vorteil wird der Servervirtualisierung zugeschrieben?",
+    "o": [
+     { "t": "Bessere Hardwareauslastung sowie schnelleres Backup und schnellere Bereitstellung", "ok": true },
+     { "t": "Vollständiger Wegfall jeglicher Lizenzkosten für Betriebssysteme", "ok": false },
+     { "t": "Garantierte Immunität gegenüber jeder Art von Hardwareausfall", "ok": false },
+     { "t": "Automatische Kompatibilität mit sämtlicher bestehender Software", "ok": false }
+    ],
+    "e": "Neben besserer Auslastung nennt der Kurs u. a. zentrale Verwaltung, Skalierbarkeit und geringere Hardwarekosten."
+   },
+   {
+    "q": "Welcher Nachteil wird der Servervirtualisierung zugeschrieben?",
+    "o": [
+     { "t": "Ein Hardwareausfall auf dem Host hat gravierende Folgen für alle virtuellen Server", "ok": true },
+     { "t": "Es kann grundsätzlich nur noch ein einziger Dienst pro Host betrieben werden", "ok": false },
+     { "t": "Die Bereitstellung neuer Server dauert dadurch spürbar länger als vorher", "ok": false },
+     { "t": "Zentrale Verwaltung mehrerer Server wird dadurch grundsätzlich unmöglich", "ok": false }
+    ],
+    "e": "Weil mehrere virtuelle Server auf einem Host laufen, wirkt sich ein Hardwarefehler auf alle gleichzeitig aus."
+   },
+   {
+    "q": "Was bedeutet Überprovisionierung (Overcommitment) bei virtuellen Maschinen?",
+    "o": [
+     { "t": "Den virtuellen Maschinen wird in Summe mehr Ressourcen zugewiesen, als physisch vorhanden ist", "ok": true },
+     { "t": "Jeder virtuellen Maschine wird dauerhaft weniger zugewiesen, als sie tatsächlich benötigt", "ok": false },
+     { "t": "Virtuelle Maschinen erhalten grundsätzlich exakt gleich viele Ressourcen wie der Host besitzt", "ok": false },
+     { "t": "Die Anzahl virtueller Maschinen wird technisch auf einen festen Höchstwert begrenzt", "ok": false }
+    ],
+    "e": "Es werden mehr Ressourcen zugeteilt, als in Summe physisch existieren — solange nicht alle VMs gleichzeitig voll zugreifen, funktioniert das."
+   },
+   {
+    "q": "Wann wird Überprovisionierung zum praktischen Problem?",
+    "o": [
+     { "t": "Wenn mehrere virtuelle Maschinen ihre zugewiesenen Ressourcen gleichzeitig tatsächlich abrufen", "ok": true },
+     { "t": "Wenn eine virtuelle Maschine dauerhaft weniger Ressourcen nutzt, als ihr zugewiesen wurde", "ok": false },
+     { "t": "Wenn der Host über deutlich mehr physische Ressourcen verfügt als benötigt", "ok": false },
+     { "t": "Wenn nur eine einzige virtuelle Maschine auf dem Host betrieben wird", "ok": false }
+    ],
+    "e": "Erst wenn der gleichzeitige tatsächliche Bedarf die physisch vorhandenen Ressourcen übersteigt, entstehen Engpässe."
+   },
+   {
+    "q": "Welche Lösungsansätze gibt es gegen Engpässe durch Überprovisionierung?",
+    "o": [
+     { "t": "Monitoring der Auslastung, Prognosen und wenn nötig Live-Migration einzelner VMs", "ok": true },
+     { "t": "Grundsätzlicher Verzicht auf jede Form der Ressourcenzuteilung an VMs", "ok": false },
+     { "t": "Dauerhafte Abschaltung aller virtuellen Maschinen außerhalb der Kernarbeitszeit", "ok": false },
+     { "t": "Feste Begrenzung auf maximal eine virtuelle Maschine je physischem Server", "ok": false }
+    ],
+    "e": "Monitoring und Auslastungsprognosen erkennen Engpässe frühzeitig, Live-Migration kann im Ernstfall entlasten."
+   },
+   {
+    "q": "Was versteht man unter Live-Migration einer virtuellen Maschine?",
+    "o": [
+     { "t": "Die Verschiebung einer laufenden VM auf einen anderen Host, ohne den Betrieb zu unterbrechen", "ok": true },
+     { "t": "Das dauerhafte Löschen einer VM samt aller zugehörigen Daten", "ok": false },
+     { "t": "Die einmalige Sicherung einer VM auf ein externes Speichermedium", "ok": false },
+     { "t": "Den Neustart einer VM nach einem Absturz mit Werkseinstellungen", "ok": false }
+    ],
+    "e": "Die VM wird im laufenden Betrieb auf einen anderen Host portiert, ohne dass der Dienst unterbrochen wird."
+   },
+   {
+    "q": "Welchen praktischen Nutzen bringt Live-Migration?",
+    "o": [
+     { "t": "Sie vereinfacht Wartungsarbeiten und den Lastenausgleich zwischen Hosts", "ok": true },
+     { "t": "Sie verhindert dauerhaft jede Form von Überprovisionierung im Cluster", "ok": false },
+     { "t": "Sie ersetzt vollständig die Notwendigkeit regelmäßiger Backups", "ok": false },
+     { "t": "Sie erhöht automatisch die einer VM zugewiesene Rechenleistung", "ok": false }
+    ],
+    "e": "Wartungsarbeiten am Host und Lastenausgleich zwischen mehreren Hosts lassen sich dadurch ohne Ausfallzeit durchführen."
+   },
+   {
+    "q": "Was ist der Kerngedanke der Anwendungsvirtualisierung?",
+    "o": [
+     { "t": "Die Installation einer Anwendung wird vom Client-Computer getrennt, der auf sie zugreift", "ok": true },
+     { "t": "Jede Anwendung erhält ein eigenes vollständiges Betriebssystem als Laufzeitumgebung", "ok": false },
+     { "t": "Anwendungen werden dauerhaft auf jedem einzelnen Client neu installiert", "ok": false },
+     { "t": "Der komplette Client-Computer wird als virtuelle Maschine auf einem Server nachgebildet", "ok": false }
+    ],
+    "e": "Die Anwendung läuft getrennt vom Client, der sie nutzt — Teile werden bei Bedarf geladen, installiert wird lokal nichts."
+   },
+   {
+    "q": "Welcher Vorteil spricht für Anwendungsvirtualisierung?",
+    "o": [
+     { "t": "Die Anwendung muss nur einmal installiert werden und lässt sich einfach austauschen", "ok": true },
+     { "t": "Grafikintensive Anwendungen laufen dadurch grundsätzlich performanter", "ok": false },
+     { "t": "Eine Netzwerkverbindung wird für den Betrieb dadurch überflüssig", "ok": false },
+     { "t": "Die Lizenzierung wird dadurch in jedem Fall einfacher als bei lokaler Installation", "ok": false }
+    ],
+    "e": "Zentrale Pflege einer einzigen Installation vereinfacht Austausch, Updates und Verlagerung auf andere Clients."
+   },
+   {
+    "q": "Welcher Nachteil wird der Anwendungsvirtualisierung zugeschrieben?",
+    "o": [
+     { "t": "Grafikintensive Anwendungen können spürbar beeinträchtigt sein, zudem ist eine stabile Verbindung nötig", "ok": true },
+     { "t": "Anwendungen müssen dadurch auf jedem Client einzeln neu installiert werden", "ok": false },
+     { "t": "Updates und Patches werden dadurch grundsätzlich komplizierter als sonst", "ok": false },
+     { "t": "Die Zugriffskontrolle auf die Anwendung wird dadurch erheblich erschwert", "ok": false }
+    ],
+    "e": "Da die Anwendung über das Netzwerk bereitgestellt wird, leiden grafiklastige Programme und die Verbindung muss stabil sein."
+   },
+   {
+    "q": "Was kennzeichnet Betriebssystem- bzw. Containervirtualisierung?",
+    "o": [
+     { "t": "Sie läuft als Anwendung innerhalb des Host-Betriebssystems, ganz ohne eigenen Hypervisor", "ok": true },
+     { "t": "Sie benötigt zwingend einen Typ-1-Hypervisor direkt auf der Hardware", "ok": false },
+     { "t": "Jeder Container erhält ein vollständig eigenständiges Betriebssystem samt Kernel", "ok": false },
+     { "t": "Sie ist ausschließlich für die Virtualisierung ganzer Desktop-Umgebungen gedacht", "ok": false }
+    ],
+    "e": "Ohne eigenen Hypervisor teilen sich alle Container den Kernel des Host-Betriebssystems."
+   },
+   {
+    "q": "Woraus besteht ein Container?",
+    "o": [
+     { "t": "Aus der Anwendung mit ihren Abhängigkeiten, Programmbibliotheken und Konfigurationsdateien", "ok": true },
+     { "t": "Ausschließlich aus einem vollständigen eigenen Betriebssystem-Kernel", "ok": false },
+     { "t": "Nur aus der ausführbaren Datei der Anwendung ohne weitere Bestandteile", "ok": false },
+     { "t": "Aus einer virtuellen Festplatte mit dem kompletten Host-Dateisystem ohne Betriebssystem", "ok": false }
+    ],
+    "e": "Ein Container bündelt Anwendung, Abhängigkeiten, Bibliotheken, Konfiguration und weitere Werkzeuge in einer Laufzeitumgebung."
+   },
+   {
+    "q": "Welcher Vorteil wird Containern gegenüber klassischen VMs zugeschrieben?",
+    "o": [
+     { "t": "Geringerer Ressourcenverbrauch sowie schnellere Bereitstellung und gute Skalierbarkeit", "ok": true },
+     { "t": "Vollständige Isolation durch einen eigenen, vom Host getrennten Kernel", "ok": false },
+     { "t": "Grundsätzliche Unabhängigkeit von jeglicher Host-Konfiguration", "ok": false },
+     { "t": "Automatischer Verzicht auf jede Form von Fehlerisolierung zwischen Containern", "ok": false }
+    ],
+    "e": "Weil kein eigener Betriebssystem-Kernel mitläuft, sind Container ressourcenschonender und lassen sich schneller bereitstellen."
+   },
+   {
+    "q": "Welcher Nachteil wird Containern zugeschrieben?",
+    "o": [
+     { "t": "Einrichtung und Verwaltung sind komplizierter und erfordern entsprechendes Fachwissen", "ok": true },
+     { "t": "Sie verbrauchen grundsätzlich mehr Ressourcen als klassische virtuelle Maschinen", "ok": false },
+     { "t": "Sie lassen sich grundsätzlich nicht auf unterschiedlicher Hardware betreiben", "ok": false },
+     { "t": "Bereitstellung neuer Container dauert grundsätzlich länger als bei klassischen VMs", "ok": false }
+    ],
+    "e": "Die geteilte Kernel-Nutzung macht Einrichtung und Betrieb anspruchsvoller als bei klassischen VMs."
+   },
+   {
+    "q": "Was beschreibt Virtual Desktop Infrastructure (VDI)?",
+    "o": [
+     { "t": "Individuell konfigurierte Betriebssysteminstanzen für Arbeitsplätze werden zentral auf einem Server bereitgestellt", "ok": true },
+     { "t": "Mehrere Nutzer teilen sich dauerhaft dieselbe Desktop-Sitzung auf einem lokalen Rechner", "ok": false },
+     { "t": "Jeder Arbeitsplatzrechner erhält eine eigene physische Festplatte im Server-Rack", "ok": false },
+     { "t": "Desktop-Anwendungen werden ausschließlich lokal auf leistungsstarken Clients ausgeführt", "ok": false }
+    ],
+    "e": "Statt lokaler Installation läuft jeder Arbeitsplatz als eigene Betriebssysteminstanz zentral auf einem Server."
+   },
+   {
+    "q": "Welcher Vorteil wird VDI zugeschrieben?",
+    "o": [
+     { "t": "Hohe Datensicherheit, da die Daten auf dem Server verbleiben, sowie einfachere Administration", "ok": true },
+     { "t": "Deutlich geringere Anschaffungskosten gegenüber klassischen Arbeitsplatzrechnern", "ok": false },
+     { "t": "Vollständige Unabhängigkeit vom Netzwerk während des laufenden Betriebs", "ok": false },
+     { "t": "Grundsätzlich höhere Leistung als bei lokal installierten Betriebssystemen", "ok": false }
+    ],
+    "e": "Da die Daten zentral auf dem Server bleiben, sind sie besser geschützt, zudem lassen sich Desktops leichter administrieren."
+   },
+   {
+    "q": "Welcher Nachteil wird VDI zugeschrieben?",
+    "o": [
+     { "t": "Hohe Anfangskosten, zudem legt ein Server-Ausfall den kompletten Betrieb lahm", "ok": true },
+     { "t": "Clients werden dadurch grundsätzlich anfälliger für Schadsoftware als zuvor", "ok": false },
+     { "t": "Die Administration der Arbeitsplätze wird dadurch erheblich aufwendiger", "ok": false },
+     { "t": "Eine Netzwerkverbindung wird für den laufenden Betrieb überflüssig", "ok": false }
+    ],
+    "e": "VDI lohnt sich erst ab einer gewissen Clientzahl wirtschaftlich, und ein Serverausfall betrifft sofort alle Arbeitsplätze."
+   }
+  ]
+ },
+ "hyperv": {
+  "name": "Hypervisor & Virtualisierungstechnik",
+  "q": [
+   {
+    "q": "Welche Aufgabe hat ein Hypervisor?",
+    "o": [
+     { "t": "Er erstellt und verwaltet die virtuelle Hardware und stellt eine Abstraktionsschicht bereit", "ok": true },
+     { "t": "Er übernimmt ausschließlich die Netzwerkverbindung zwischen mehreren physischen Servern", "ok": false },
+     { "t": "Er verschlüsselt sämtliche Daten, die zwischen Host und Gastsystem ausgetauscht werden", "ok": false },
+     { "t": "Er ersetzt dauerhaft das Betriebssystem auf jedem einzelnen Client-Rechner", "ok": false }
+    ],
+    "e": "Der Hypervisor bildet die Abstraktionsschicht zwischen physischer Hardware und den virtuellen Maschinen, die auf ihr laufen."
+   },
+   {
+    "q": "Was kennzeichnet einen Typ-1-Hypervisor?",
+    "o": [
+     { "t": "Er läuft direkt auf der Hardware, ganz ohne zugrundeliegendes Betriebssystem", "ok": true },
+     { "t": "Er setzt zwingend auf einem vollständig installierten Betriebssystem auf", "ok": false },
+     { "t": "Er kann ausschließlich eine einzige virtuelle Maschine gleichzeitig verwalten", "ok": false },
+     { "t": "Er wird ausschließlich für die Virtualisierung einzelner Anwendungen genutzt", "ok": false }
+    ],
+    "e": "Auch Baremetal-Hypervisor genannt: Er läuft selbst wie ein Betriebssystem direkt auf der Hardware, ohne ein weiteres OS darunter."
+   },
+   {
+    "q": "Welche Produkte sind typische Beispiele für einen Typ-1-Hypervisor?",
+    "o": [
+     { "t": "Microsoft Hyper-V, VMware ESXi, Citrix Xen und KVM", "ok": true },
+     { "t": "VirtualBox, VMware Workstation und Parallels Desktop", "ok": false },
+     { "t": "Docker, BSD Jails und Solaris Zones", "ok": false },
+     { "t": "Microsoft Virtual PC und VMware Fusion", "ok": false }
+    ],
+    "e": "Alle vier laufen direkt auf der Hardware, ohne dass darunter ein vollständiges Betriebssystem installiert sein muss."
+   },
+   {
+    "q": "Was kennzeichnet einen Typ-2-Hypervisor?",
+    "o": [
+     { "t": "Er setzt auf einem bereits vollständig installierten Betriebssystem auf und läuft darüber", "ok": true },
+     { "t": "Er läuft direkt auf der Hardware, ganz ohne zugrundeliegendes Betriebssystem", "ok": false },
+     { "t": "Er wird ausschließlich in Rechenzentren für Cloud-Angebote eingesetzt", "ok": false },
+     { "t": "Er benötigt zwingend eine hardwareseitige Erweiterung wie Intel VT", "ok": false }
+    ],
+    "e": "Auch Hosted-Hypervisor genannt: Er wird wie eine gewöhnliche Anwendung innerhalb eines bereits laufenden Betriebssystems gestartet."
+   },
+   {
+    "q": "Welche Produkte sind typische Beispiele für einen Typ-2-Hypervisor?",
+    "o": [
+     { "t": "VirtualBox, VMware Workstation und Microsoft Virtual PC", "ok": true },
+     { "t": "Microsoft Hyper-V, VMware ESXi, Citrix Xen und KVM", "ok": false },
+     { "t": "Docker, Microsoft Hyper-V Container, BSD Jails und Solaris Zones", "ok": false },
+     { "t": "KVM, Citrix XenApp und Microsoft App-V", "ok": false }
+    ],
+    "e": "Alle drei setzen auf einem vollständig installierten Host-Betriebssystem auf, statt direkt auf der Hardware zu laufen."
+   },
+   {
+    "q": "Warum laufen die privilegierten Befehle eines Gastsystems im Ring-Schema trotzdem stabil, obwohl sie eigentlich Ring 0 bräuchten?",
+    "o": [
+     { "t": "Der Hypervisor analysiert diese Befehle und baut sie bei Bedarf passend um", "ok": true },
+     { "t": "Das Gastsystem erhält vom Hypervisor dauerhaft vollen Zugriff auf Ring 0", "ok": false },
+     { "t": "Die CPU schaltet für virtuelle Maschinen grundsätzlich komplett in Ring 0 um", "ok": false },
+     { "t": "Der Host verzichtet für virtuelle Maschinen vollständig auf das Ring-Schema", "ok": false }
+    ],
+    "e": "Damit virtuelle Systeme trotzdem in Ring 3 laufen können, fängt der Hypervisor kritische Befehle ab und ersetzt sie durch passende Alternativen."
+   },
+   {
+    "q": "Warum bereiten ältere Hypervisor-Versionen mit neueren Betriebssystemen manchmal Probleme?",
+    "o": [
+     { "t": "Weil Betriebssysteme Anpassungen brauchen, damit Ring-0-Befehle korrekt in Ring 3 laufen", "ok": true },
+     { "t": "Weil neuere Betriebssysteme grundsätzlich keine Treiber für virtuelle Hardware mehr mitbringen", "ok": false },
+     { "t": "Weil ältere Hypervisor-Versionen keine Netzwerkverbindung mehr unterstützen", "ok": false },
+     { "t": "Weil neuere Betriebssysteme zwingend einen Typ-1-Hypervisor voraussetzen", "ok": false }
+    ],
+    "e": "Betriebssysteme verlangen unterschiedliche Anpassungen, damit ihre eigentlich für Ring 0 gedachten Befehle korrekt in Ring 3 funktionieren."
+   },
+   {
+    "q": "Was ist die Grundidee der Para-Virtualisierung?",
+    "o": [
+     { "t": "Statt Hardware zu emulieren, stellt der Hypervisor eine API bereit, die der Gast direkt nutzen muss", "ok": true },
+     { "t": "Sämtliche Hardware-Komponenten werden für den Gast vollständig emuliert", "ok": false },
+     { "t": "Der Gast läuft komplett unabhängig vom Hypervisor auf eigener physischer Hardware", "ok": false },
+     { "t": "Zwei Gastsysteme teilen sich direkt denselben Arbeitsspeicherbereich ohne Trennung", "ok": false }
+    ],
+    "e": "Statt aufwendiger Emulation nutzt der Gast eine vom Hypervisor bereitgestellte Schnittstelle direkt — dafür muss er sie aber kennen."
+   },
+   {
+    "q": "Welcher Vorteil spricht für Para-Virtualisierung gegenüber klassischer Emulation?",
+    "o": [
+     { "t": "Die Kommunikation über die API ist schneller und es entsteht kein Verlust durch Befehlsübersetzung", "ok": true },
+     { "t": "Der Kern des Gast-Betriebssystems muss dafür überhaupt nicht angepasst werden", "ok": false },
+     { "t": "Sie lässt sich ohne jede Anpassung auf beliebiger vorhandener Hardware einsetzen", "ok": false },
+     { "t": "Sie kommt vollständig ohne einen installierten Hypervisor aus", "ok": false }
+    ],
+    "e": "Da keine Befehle übersetzt werden müssen, läuft die Kommunikation über die API mit deutlich weniger Overhead."
+   },
+   {
+    "q": "Welcher Nachteil spricht gegen Para-Virtualisierung?",
+    "o": [
+     { "t": "Der Kernel des Gastsystems muss angepasst oder bereits vom Hersteller modifiziert sein", "ok": true },
+     { "t": "Sie verursacht durch die Befehlsübersetzung einen spürbar größeren Overhead", "ok": false },
+     { "t": "Sie lässt sich ausschließlich auf Typ-2-Hypervisoren betreiben", "ok": false },
+     { "t": "Sie benötigt zwingend eine hardwareseitige Erweiterung wie Intel VT oder AMD-V", "ok": false }
+    ],
+    "e": "Der Gast muss die bereitgestellte API tatsächlich nutzen können — das erfordert einen angepassten oder bereits vorbereiteten Kernel."
+   },
+   {
+    "q": "In welchen Bereichen wird Para-Virtualisierung typischerweise eingesetzt?",
+    "o": [
+     { "t": "In Rechenzentren und bei Anbietern von Cloud-Computing-Lösungen", "ok": true },
+     { "t": "Ausschließlich auf privaten Heim-PCs für den gelegentlichen Testbetrieb", "ok": false },
+     { "t": "Nur auf mobilen Endgeräten mit eingeschränkter Rechenleistung", "ok": false },
+     { "t": "Ausschließlich für die reine Anwendungsvirtualisierung ohne Betriebssystem", "ok": false }
+    ],
+    "e": "Der geringere Overhead macht sie besonders für große, professionell betriebene Umgebungen attraktiv."
+   },
+   {
+    "q": "Was bewirken Erweiterungen wie Intel VT und AMD-V?",
+    "o": [
+     { "t": "Der Prozessor kann VM-Befehle direkt übersetzen, ganz ohne Anpassung am Gast-Kernel", "ok": true },
+     { "t": "Sie ersetzen den Hypervisor vollständig durch reine Hardwarefunktionen", "ok": false },
+     { "t": "Sie ermöglichen erstmals den Betrieb mehrerer Betriebssysteme auf einer Hardware", "ok": false },
+     { "t": "Sie machen Para-Virtualisierung auf jeder beliebigen Hardware nutzbar", "ok": false }
+    ],
+    "e": "Mit Hardwareunterstützung entfällt die softwareseitige Befehlsübersetzung — der Prozessor übernimmt das selbst, ohne den Gast-Kernel anzufassen."
+   },
+   {
+    "q": "Sind Intel VT und AMD-V untereinander kompatibel?",
+    "o": [
+     { "t": "Nein, beide Erweiterungen der Ring-Topologie sind nicht miteinander kompatibel", "ok": true },
+     { "t": "Ja, beide folgen exakt demselben offenen Industriestandard", "ok": false },
+     { "t": "Ja, aber nur bei Verwendung eines Typ-1-Hypervisors", "ok": false },
+     { "t": "Nur bei Prozessoren desselben Herstellers ist Kompatibilität möglich", "ok": false }
+    ],
+    "e": "Beide Hersteller erweitern die Ring-Topologie auf eigene, zueinander inkompatible Weise."
+   },
+   {
+    "q": "Welchen allgemeinen Vorteile gibt es für Virtualisierung insgesamt?",
+    "o": [
+     { "t": "Kostengünstiger, da weniger Hardware benötigt wird, und ideal als Test- und Entwicklungsumgebung", "ok": true },
+     { "t": "Vollständige Immunität gegenüber jeder Form von Malware-Angriffen", "ok": false },
+     { "t": "Grundsätzlich höhere Leistung als beim Betrieb auf physischer Hardware", "ok": false },
+     { "t": "Kompletter Wegfall jeglicher Wartungsarbeiten am Gesamtsystem", "ok": false }
+    ],
+    "e": "Weniger benötigte Hardware spart Kosten, zudem eignet sich Virtualisierung besonders gut für Test- und Entwicklungsumgebungen."
+   },
+   {
+    "q": "Welchen allgemeinen Nachteil gibt es für Virtualisierung insgesamt?",
+    "o": [
+     { "t": "Durch Fehler in der Virtualisierungssoftware können Angreifer aus VMs ausbrechen", "ok": true },
+     { "t": "Es lässt sich grundsätzlich immer nur eine einzige VM je Host betreiben", "ok": false },
+     { "t": "Neue Server lassen sich dadurch grundsätzlich nur langsamer bereitstellen", "ok": false },
+     { "t": "Backups virtueller Maschinen sind grundsätzlich nicht möglich", "ok": false }
+    ],
+    "e": "Schwachstellen in der Virtualisierungssoftware selbst können einem Angreifer den Ausbruch aus der isolierten VM ermöglichen."
+   },
+   {
+    "q": "Was setzt die eigentliche Grenze der Virtualisierung auf einem System?",
+    "o": [
+     { "t": "Die vorhandene physische Hardware des Hosts selbst", "ok": true },
+     { "t": "Eine feste Obergrenze von genau zwei virtuellen Maschinen pro Host", "ok": false },
+     { "t": "Die Lizenzbedingungen des jeweiligen Hypervisor-Herstellers", "ok": false },
+     { "t": "Die Anzahl der am Host angeschlossenen Netzwerkkabel", "ok": false }
+    ],
+    "e": "Beliebig viele VMs sind theoretisch möglich — begrenzt wird das Ganze allein durch die tatsächlich vorhandene Hardware."
+   },
+   {
+    "q": "Wie viele virtuelle CPUs ergeben sich nach Microsofts Hyper-V-Empfehlung bei einem Quad-Core-Prozessor?",
+    "o": [
+     { "t": "32, da bis zu 8 virtuelle CPUs je physischem Kern empfohlen werden", "ok": true },
+     { "t": "4, da genau eine virtuelle CPU je physischem Kern zulässig ist", "ok": false },
+     { "t": "8, unabhängig von der tatsächlichen Kernanzahl des Prozessors", "ok": false },
+     { "t": "16, da maximal 4 virtuelle CPUs je physischem Kern empfohlen werden", "ok": false }
+    ],
+    "e": "Microsoft empfiehlt maximal 8 virtuelle CPUs je physischem Kern; bei vier Kernen ergibt das 4 × 8 = 32."
+   },
+   {
+    "q": "Welche zwei typischen Einsatzgebiete gibt es für Simulatoren und Emulatoren?",
+    "o": [
+     { "t": "Nachbildung einer Hardware-Umgebung oder Nachbildung eines Betriebssystems", "ok": true },
+     { "t": "Ausschließlich die Nachbildung von Netzwerkverbindungen zwischen Servern", "ok": false },
+     { "t": "Ausschließlich die Nachbildung von Benutzeroberflächen für Schulungszwecke", "ok": false },
+     { "t": "Nachbildung physischer Tastaturen sowie Nachbildung von Bildschirmen", "ok": false }
+    ],
+    "e": "In der Praxis wird entweder eine komplette Hardware-Umgebung oder ein Betriebssystem nachgebildet."
+   },
+   {
+    "q": "Welche zwei Hypervisor-Typen unterscheiden sich grundsätzlich?",
+    "o": [
+     { "t": "Typ-1-Hypervisor, der direkt auf der Hardware läuft, und Typ-2-Hypervisor, der auf einem Betriebssystem aufsetzt", "ok": true },
+     { "t": "Physischen Hypervisor, der Hardware direkt steuert, und logischen Hypervisor, der nur virtuell existiert", "ok": false },
+     { "t": "Server-Hypervisor für Rechenzentren und Desktop-Hypervisor für einzelne Arbeitsplätze", "ok": false },
+     { "t": "Öffentlichen Hypervisor mit offener Lizenz und privaten Hypervisor mit proprietärer Lizenz", "ok": false }
+    ],
+    "e": "Die Unterscheidung läuft entlang der Frage, ob der Hypervisor direkt auf der Hardware oder auf einem Betriebssystem aufsetzt."
+   },
+   {
+    "q": "Was unterscheidet einen Typ-1- von einem Typ-2-Hypervisor in der Praxis am deutlichsten?",
+    "o": [
+     { "t": "Typ 1 läuft direkt auf der Hardware, Typ 2 benötigt darunter ein vollständiges Betriebssystem", "ok": true },
+     { "t": "Typ 1 kann nur eine VM verwalten, Typ 2 beliebig viele gleichzeitig", "ok": false },
+     { "t": "Typ 1 wird ausschließlich für Desktop-Virtualisierung eingesetzt, Typ 2 nur für Server", "ok": false },
+     { "t": "Typ 1 benötigt zwingend Intel VT, Typ 2 kommt ohne jede Hardwareunterstützung aus", "ok": false }
+    ],
+    "e": "Der fehlende bzw. vorhandene Unterbau in Form eines vollständigen Betriebssystems ist der zentrale praktische Unterschied."
+   },
+   {
+    "q": "Welche Rolle spielt die Abstraktionsschicht, die ein Hypervisor bereitstellt?",
+    "o": [
+     { "t": "Sie entkoppelt das Gastsystem von der realen Hardware und stellt ihm virtuelle Hardware bereit", "ok": true },
+     { "t": "Sie verschlüsselt sämtlichen Datenverkehr zwischen mehreren Gastsystemen", "ok": false },
+     { "t": "Sie ersetzt die Notwendigkeit eines Betriebssystems im Gastsystem vollständig", "ok": false },
+     { "t": "Sie verbindet mehrere physische Hosts zu einem gemeinsamen Netzwerkspeicher", "ok": false }
+    ],
+    "e": "Das Gastsystem sieht nur virtuelle Hardware und bleibt dadurch von der realen Beschaffenheit des Hosts unabhängig."
+   },
+   {
+    "q": "Ohne Hardwareunterstützung wie Intel VT oder AMD-V: Wie behalf man sich früher bei der Befehlsübersetzung?",
+    "o": [
+     { "t": "Die Übersetzung wurde ausschließlich über Software durch den Hypervisor erledigt", "ok": true },
+     { "t": "Man verzichtete grundsätzlich auf jede Form der Virtualisierung von Betriebssystemen", "ok": false },
+     { "t": "Jedes Gastsystem benötigte zwingend eine eigene zusätzliche physische CPU", "ok": false },
+     { "t": "Die Befehle wurden unverändert an die reale Hardware durchgereicht", "ok": false }
+    ],
+    "e": "Bevor es hardwareseitige Unterstützung gab, musste der Hypervisor die Befehlsübersetzung komplett per Software erledigen."
+   }
+  ]
+ },
+ "raid": {
+  "name": "Backup & RAID",
+  "q": [
+   {
+    "q": "Wofür steht die Abkürzung RAID?",
+    "o": [
+     { "t": "Redundant Array of Independent Disks", "ok": true },
+     { "t": "Rapid Access to Integrated Data", "ok": false },
+     { "t": "Remote Array of Internal Drives", "ok": false },
+     { "t": "Redundant Allocation of Indexed Data", "ok": false }
+    ],
+    "e": "RAID steht für Redundant Array of Independent Disks — ein Verbund mehrerer Festplatten, der als eine logische Einheit arbeitet. Früher stand das I für Inexpensive."
+   },
+   {
+    "q": "Welche zwei Hauptziele verfolgt ein RAID-Verbund grundsätzlich?",
+    "o": [
+     { "t": "Erhöhung von Ausfallsicherheit und/oder Leistung durch Plattenverbund", "ok": true },
+     { "t": "Verschlüsselung der Daten und Komprimierung des Speicherplatzes", "ok": false },
+     { "t": "Automatische Erstellung von Backups auf externe Medien", "ok": false },
+     { "t": "Beschleunigung des Netzwerkzugriffs auf entfernte Server", "ok": false }
+    ],
+    "e": "Je nach Level zielt RAID auf höhere Ausfallsicherheit (Redundanz), auf mehr Leistung (Striping) oder auf beides. Es ersetzt aber kein Backup."
+   },
+   {
+    "q": "Warum ersetzt ein RAID-System kein Backup?",
+    "o": [
+     { "t": "Es schützt vor Plattenausfall, nicht vor versehentlichem Löschen, Viren oder Totalschaden", "ok": true },
+     { "t": "Es speichert die Daten grundsätzlich nur verschlüsselt und damit unlesbar ab", "ok": false },
+     { "t": "Es kann immer nur eine einzige Datei gleichzeitig sichern", "ok": false },
+     { "t": "Es funktioniert ausschließlich mit externen USB-Festplatten", "ok": false }
+    ],
+    "e": "RAID schützt vor Hardwareausfall einzelner Platten. Gegen gelöschte Dateien, Ransomware, Überspannung oder Diebstahl des ganzen Geräts hilft nur ein echtes Backup."
+   },
+   {
+    "q": "Was bezeichnet der Begriff Striping bei RAID?",
+    "o": [
+     { "t": "Die Verteilung der Daten in Blöcken über mehrere Platten hinweg", "ok": true },
+     { "t": "Die vollständige Spiegelung aller Daten auf eine zweite Platte", "ok": false },
+     { "t": "Die Berechnung von Prüfsummen zur Fehlerkorrektur", "ok": false },
+     { "t": "Die automatische Verschlüsselung jedes einzelnen Datenblocks", "ok": false }
+    ],
+    "e": "Striping verteilt Daten blockweise auf mehrere Platten, sodass parallel gelesen und geschrieben werden kann — das erhöht die Leistung, bietet aber allein keine Redundanz."
+   },
+   {
+    "q": "Was bezeichnet der Begriff Mirroring bei RAID?",
+    "o": [
+     { "t": "Die vollständige Spiegelung der Daten auf eine oder mehrere weitere Platten", "ok": true },
+     { "t": "Die blockweise Verteilung der Daten über mehrere Platten", "ok": false },
+     { "t": "Die Auslagerung selten genutzter Daten auf langsamere Platten", "ok": false },
+     { "t": "Die Zusammenfassung mehrerer Platten zu einem großen Volume", "ok": false }
+    ],
+    "e": "Beim Mirroring werden identische Kopien der Daten auf mehreren Platten gehalten. Fällt eine aus, stehen die Daten auf der Spiegelplatte weiter bereit."
+   },
+   {
+    "q": "Was versteht man unter Parität im RAID-Kontext?",
+    "o": [
+     { "t": "Eine berechnete Prüfinformation, mit der sich ausgefallene Daten rekonstruieren lassen", "ok": true },
+     { "t": "Eine identische Kopie sämtlicher Daten auf einer Reserveplatte", "ok": false },
+     { "t": "Die gleichmäßige Verteilung der Schreiblast auf alle Platten", "ok": false },
+     { "t": "Die Anzahl der Platten, die gleichzeitig lesen dürfen", "ok": false }
+    ],
+    "e": "Parität ist eine per XOR berechnete Prüfsumme. Fällt eine Platte aus, lassen sich deren Daten aus den übrigen Daten und der Parität wiederherstellen."
+   },
+   {
+    "q": "Welches RAID-Level bietet Striping ganz ohne Redundanz?",
+    "o": [
+     { "t": "RAID 0", "ok": true },
+     { "t": "RAID 1", "ok": false },
+     { "t": "RAID 5", "ok": false },
+     { "t": "RAID 6", "ok": false }
+    ],
+    "e": "RAID 0 verteilt Daten nur per Striping — maximale Leistung und volle Kapazität, aber keinerlei Ausfallsicherheit."
+   },
+   {
+    "q": "Wie viele Festplatten fallen bei RAID 0 mindestens aus, bis alle Daten verloren sind?",
+    "o": [
+     { "t": "Eine einzige Platte genügt für den Totalverlust", "ok": true },
+     { "t": "Erst der Ausfall aller Platten führt zum Datenverlust", "ok": false },
+     { "t": "Zwei Platten müssen gleichzeitig ausfallen", "ok": false },
+     { "t": "Die Hälfte der Platten muss ausfallen", "ok": false }
+    ],
+    "e": "Da RAID 0 die Daten ohne Redundanz über alle Platten verteilt, reißt schon der Ausfall einer einzigen Platte den gesamten Verbund und damit alle Daten mit."
+   },
+   {
+    "q": "Welches RAID-Level arbeitet mit reiner Spiegelung (Mirroring)?",
+    "o": [
+     { "t": "RAID 1", "ok": true },
+     { "t": "RAID 0", "ok": false },
+     { "t": "RAID 5", "ok": false },
+     { "t": "RAID 10", "ok": false }
+    ],
+    "e": "RAID 1 spiegelt die Daten identisch auf zwei Platten. Fällt eine aus, läuft der Betrieb ohne Datenverlust weiter."
+   },
+   {
+    "q": "Wie viele Platten dürfen bei einem RAID 1 aus zwei Platten ausfallen, ohne dass Daten verloren gehen?",
+    "o": [
+     { "t": "Eine Platte", "ok": true },
+     { "t": "Keine Platte", "ok": false },
+     { "t": "Beide Platten", "ok": false },
+     { "t": "Die Hälfte einer Platte", "ok": false }
+    ],
+    "e": "Bei RAID 1 mit zwei Platten hält jede eine vollständige Kopie. Eine darf ausfallen, die zweite trägt weiterhin alle Daten."
+   },
+   {
+    "q": "Wie viel nutzbare Kapazität liefert RAID 1 aus zwei 4-TB-Platten?",
+    "o": [
+     { "t": "4 TB", "ok": true },
+     { "t": "8 TB", "ok": false },
+     { "t": "6 TB", "ok": false },
+     { "t": "2 TB", "ok": false }
+    ],
+    "e": "Da die Daten gespiegelt werden, steht nur die Kapazität einer Platte zur Verfügung: 4 TB. Die zweite Platte hält die identische Kopie."
+   },
+   {
+    "q": "Wie viele Festplatten benötigt RAID 5 mindestens?",
+    "o": [
+     { "t": "Drei", "ok": true },
+     { "t": "Zwei", "ok": false },
+     { "t": "Vier", "ok": false },
+     { "t": "Fünf", "ok": false }
+    ],
+    "e": "RAID 5 verteilt Daten und Parität über mindestens drei Platten. Weniger geht nicht, weil sonst kein Platz für die verteilte Parität bliebe."
+   },
+   {
+    "q": "Wie viele Platten darf ein RAID 5 verkraften, ohne Daten zu verlieren?",
+    "o": [
+     { "t": "Genau eine Platte", "ok": true },
+     { "t": "Genau zwei Platten", "ok": false },
+     { "t": "Keine einzige Platte", "ok": false },
+     { "t": "Die Hälfte aller Platten", "ok": false }
+    ],
+    "e": "RAID 5 verteilt eine einfache Parität. Damit lässt sich der Ausfall genau einer Platte überbrücken — fällt eine zweite aus, sind die Daten verloren."
+   },
+   {
+    "q": "Wie berechnet sich die nutzbare Kapazität eines RAID 5 aus n gleich großen Platten?",
+    "o": [
+     { "t": "(n − 1) mal Plattenkapazität", "ok": true },
+     { "t": "n mal Plattenkapazität", "ok": false },
+     { "t": "(n − 2) mal Plattenkapazität", "ok": false },
+     { "t": "n halbe mal Plattenkapazität", "ok": false }
+    ],
+    "e": "Bei RAID 5 geht der Speicherplatz einer Platte für die verteilte Parität verloren. Nutzbar ist die Kapazität von (n − 1) Platten."
+   },
+   {
+    "q": "Wie viel Nettokapazität hat ein RAID 5 aus vier 2-TB-Platten?",
+    "o": [
+     { "t": "6 TB", "ok": true },
+     { "t": "8 TB", "ok": false },
+     { "t": "4 TB", "ok": false },
+     { "t": "2 TB", "ok": false }
+    ],
+    "e": "Nach der Formel (n − 1) × Kapazität: (4 − 1) × 2 TB = 6 TB. Der Gegenwert einer Platte entfällt auf die Parität."
+   },
+   {
+    "q": "Wie viele Platten darf ein RAID 6 gleichzeitig verlieren?",
+    "o": [
+     { "t": "Zwei Platten", "ok": true },
+     { "t": "Eine Platte", "ok": false },
+     { "t": "Drei Platten", "ok": false },
+     { "t": "Keine Platte", "ok": false }
+    ],
+    "e": "RAID 6 hält eine doppelte Parität vor und übersteht daher den gleichzeitigen Ausfall von zwei Platten — der entscheidende Vorteil gegenüber RAID 5."
+   },
+   {
+    "q": "Wie viele Festplatten benötigt RAID 6 mindestens?",
+    "o": [
+     { "t": "Vier", "ok": true },
+     { "t": "Drei", "ok": false },
+     { "t": "Zwei", "ok": false },
+     { "t": "Fünf", "ok": false }
+    ],
+    "e": "RAID 6 braucht mindestens vier Platten: zwei für die doppelte Parität, mindestens zwei für die Nutzdaten."
+   },
+   {
+    "q": "Wie berechnet sich die Nettokapazität eines RAID 6 aus n gleich großen Platten?",
+    "o": [
+     { "t": "(n − 2) mal Plattenkapazität", "ok": true },
+     { "t": "(n − 1) mal Plattenkapazität", "ok": false },
+     { "t": "n mal Plattenkapazität", "ok": false },
+     { "t": "n halbe mal Plattenkapazität", "ok": false }
+    ],
+    "e": "RAID 6 verbraucht den Speicherplatz von zwei Platten für die doppelte Parität. Nutzbar bleibt die Kapazität von (n − 2) Platten."
+   },
+   {
+    "q": "Welchen entscheidenden Vorteil bietet RAID 6 gegenüber RAID 5?",
+    "o": [
+     { "t": "Es verkraftet den gleichzeitigen Ausfall von zwei statt nur einer Platte", "ok": true },
+     { "t": "Es liefert grundsätzlich eine höhere nutzbare Kapazität", "ok": false },
+     { "t": "Es kommt mit weniger Festplatten als RAID 5 aus", "ok": false },
+     { "t": "Es benötigt überhaupt keine Paritätsberechnung mehr", "ok": false }
+    ],
+    "e": "Durch die doppelte Parität übersteht RAID 6 zwei gleichzeitige Plattenausfälle — wichtig bei großen Platten, deren Rebuild lange dauert und in der ein zweiter Ausfall droht."
+   },
+   {
+    "q": "Aus welchen zwei Basis-Leveln setzt sich RAID 10 zusammen?",
+    "o": [
+     { "t": "Aus gespiegelten RAID-1-Paaren, die zusätzlich per RAID 0 gestript werden", "ok": true },
+     { "t": "Aus zwei RAID-5-Verbünden mit einer gemeinsam genutzten Parität", "ok": false },
+     { "t": "Aus einem RAID 0 und einem einzelnen zusätzlichen Paritätslaufwerk", "ok": false },
+     { "t": "Aus zwei RAID-6-Verbünden mit jeweils doppelter Parität", "ok": false }
+    ],
+    "e": "RAID 10 (auch 1+0) spiegelt zuerst Plattenpaare (RAID 1) und verteilt die Daten dann über diese Spiegel per Striping (RAID 0) — Kombination aus Sicherheit und Leistung."
+   },
+   {
+    "q": "Wie viele Festplatten benötigt RAID 10 mindestens?",
+    "o": [
+     { "t": "Vier", "ok": true },
+     { "t": "Zwei", "ok": false },
+     { "t": "Drei", "ok": false },
+     { "t": "Sechs", "ok": false }
+    ],
+    "e": "RAID 10 braucht mindestens vier Platten: zwei gespiegelte Paare, über die dann gestript wird."
+   },
+   {
+    "q": "Wie viel nutzbare Kapazität bietet RAID 10 aus vier 2-TB-Platten?",
+    "o": [
+     { "t": "4 TB", "ok": true },
+     { "t": "8 TB", "ok": false },
+     { "t": "6 TB", "ok": false },
+     { "t": "2 TB", "ok": false }
+    ],
+    "e": "RAID 10 spiegelt jeweils die Hälfte der Platten. Nutzbar ist die halbe Bruttokapazität: 4 × 2 TB / 2 = 4 TB."
+   },
+   {
+    "q": "Worin unterscheiden sich RAID 10 und RAID 01 im Aufbau?",
+    "o": [
+     { "t": "RAID 10 spiegelt zuerst und stript dann, RAID 01 stript zuerst und spiegelt dann", "ok": true },
+     { "t": "RAID 10 nutzt Parität, RAID 01 arbeitet ausschließlich mit Spiegelung", "ok": false },
+     { "t": "RAID 10 braucht drei Platten, RAID 01 kommt mit zwei aus", "ok": false },
+     { "t": "RAID 10 ist unverschlüsselt, RAID 01 verschlüsselt alle Blöcke", "ok": false }
+    ],
+    "e": "Die Reihenfolge unterscheidet sie: RAID 10 = gespiegelte Paare, dann Striping (1+0). RAID 01 = Stripe-Sets, dann gespiegelt (0+1)."
+   },
+   {
+    "q": "Warum gilt RAID 10 in der Praxis als ausfallsicherer als RAID 01?",
+    "o": [
+     { "t": "Bei RAID 10 darf je Spiegelpaar eine Platte ausfallen, ohne den Verbund zu verlieren", "ok": true },
+     { "t": "RAID 10 nutzt eine doppelte Parität, die RAID 01 vollständig fehlt", "ok": false },
+     { "t": "RAID 10 besteht immer aus deutlich mehr Festplatten als RAID 01", "ok": false },
+     { "t": "RAID 10 schreibt die Daten langsamer und dadurch grundsätzlich sicherer", "ok": false }
+    ],
+    "e": "Bei RAID 10 überlebt der Verbund, solange in keinem Spiegelpaar beide Platten ausfallen. Bei RAID 01 kann schon der Ausfall je einer Platte in beiden Stripe-Sets den Verbund killen."
+   },
+   {
+    "q": "Was beschreibt RAID 50?",
+    "o": [
+     { "t": "Mehrere RAID-5-Verbünde, die per übergeordnetem Striping zusammengefasst werden", "ok": true },
+     { "t": "Einen einzelnen RAID-5-Verbund mit genau fünfzig Festplatten darin", "ok": false },
+     { "t": "Eine Kombination aus RAID 5 und zusätzlicher doppelter Parität", "ok": false },
+     { "t": "Einen vollständig auf eine Reserve gespiegelten RAID-5-Verbund", "ok": false }
+    ],
+    "e": "RAID 50 kombiniert mehrere RAID-5-Gruppen über ein übergeordnetes Striping. Das steigert Leistung und Kapazität gegenüber einem einzelnen großen RAID 5."
+   },
+   {
+    "q": "Was passiert während eines RAID-Rebuilds nach einem Plattentausch?",
+    "o": [
+     { "t": "Die Daten der ersetzten Platte werden aus den übrigen Platten wiederhergestellt", "ok": true },
+     { "t": "Der gesamte Verbund wird gelöscht und komplett neu formatiert", "ok": false },
+     { "t": "Alle Platten werden gleichzeitig gegen neue ausgetauscht", "ok": false },
+     { "t": "Die Daten werden vom Backup-Band zurückgespielt", "ok": false }
+    ],
+    "e": "Beim Rebuild rekonstruiert der Controller die Inhalte der neuen Platte aus Daten und Parität der verbliebenen Platten. Bei großen Platten kann das Stunden dauern."
+   },
+   {
+    "q": "Warum ist gerade während eines RAID-5-Rebuilds das Risiko besonders hoch?",
+    "o": [
+     { "t": "Fällt in dieser Phase eine weitere Platte aus, sind alle Daten verloren", "ok": true },
+     { "t": "Der Verbund lässt sich während des Rebuilds grundsätzlich nicht mehr lesen", "ok": false },
+     { "t": "Der Controller verschlüsselt die Daten dabei versehentlich", "ok": false },
+     { "t": "Alle Platten werden dabei gleichzeitig stark abgenutzt und fallen aus", "ok": false }
+    ],
+    "e": "RAID 5 verträgt nur einen Ausfall. Während des Rebuilds ist die Redundanz aufgebraucht — ein zweiter Ausfall in dieser Zeit bedeutet Totalverlust. Genau hier punktet RAID 6."
+   },
+   {
+    "q": "Wozu dient eine Hot-Spare-Platte in einem RAID-Verbund?",
+    "o": [
+     { "t": "Sie springt bei einem Plattenausfall automatisch ein und startet den Rebuild", "ok": true },
+     { "t": "Sie erhöht im Normalbetrieb dauerhaft die Schreibgeschwindigkeit", "ok": false },
+     { "t": "Sie speichert eine zusätzliche verschlüsselte Kopie aller Daten", "ok": false },
+     { "t": "Sie übernimmt die Paritätsberechnung für den gesamten Verbund", "ok": false }
+    ],
+    "e": "Eine Hot-Spare läuft als Reserve mit und ersetzt bei einem Ausfall automatisch die defekte Platte, ohne dass ein Techniker sofort eingreifen muss."
+   },
+   {
+    "q": "Was bedeutet Hot-Swap bei Festplatten?",
+    "o": [
+     { "t": "Der Austausch einer Platte im laufenden Betrieb, ohne das System herunterzufahren", "ok": true },
+     { "t": "Das Übertakten der Platten für höhere Zugriffsgeschwindigkeit", "ok": false },
+     { "t": "Das gleichzeitige Beschreiben aller Platten mit denselben Daten", "ok": false },
+     { "t": "Das automatische Löschen defekter Sektoren im Betrieb", "ok": false }
+    ],
+    "e": "Hot-Swap erlaubt es, eine defekte Platte bei laufendem System zu ziehen und zu ersetzen — Voraussetzung für Wartung ohne Ausfallzeit."
+   },
+   {
+    "q": "Was unterscheidet Hardware-RAID von Software-RAID?",
+    "o": [
+     { "t": "Hardware-RAID nutzt einen eigenen Controller, Software-RAID rechnet auf der Haupt-CPU", "ok": true },
+     { "t": "Hardware-RAID kennt nur RAID 0, Software-RAID beherrscht alle Level", "ok": false },
+     { "t": "Hardware-RAID arbeitet ohne Redundanz, Software-RAID immer mit", "ok": false },
+     { "t": "Hardware-RAID ist grundsätzlich langsamer als Software-RAID", "ok": false }
+    ],
+    "e": "Hardware-RAID entlastet die CPU über einen dedizierten Controller (oft mit eigenem Cache und Akku). Software-RAID ist günstiger, belastet aber die Haupt-CPU."
+   },
+   {
+    "q": "Was ist der Kern einer Vollsicherung (Full Backup)?",
+    "o": [
+     { "t": "Es werden bei jedem Durchlauf alle ausgewählten Daten vollständig gesichert", "ok": true },
+     { "t": "Es werden nur die seit der letzten Sicherung geänderten Daten gesichert", "ok": false },
+     { "t": "Es wird nur die Struktur der Ordner ohne Dateiinhalte gesichert", "ok": false },
+     { "t": "Es werden ausschließlich Systemdateien, aber keine Nutzdaten gesichert", "ok": false }
+    ],
+    "e": "Die Vollsicherung kopiert jedes Mal den kompletten Datenbestand. Vorteil: einfache, schnelle Wiederherstellung. Nachteil: hoher Speicher- und Zeitbedarf."
+   },
+   {
+    "q": "Was kennzeichnet eine inkrementelle Sicherung gegenüber der Vollsicherung?",
+    "o": [
+     { "t": "Sie sichert nur die seit dem letzten Backup beliebiger Art geänderten Daten", "ok": true },
+     { "t": "Sie sichert bei jedem Durchlauf erneut den kompletten Datenbestand", "ok": false },
+     { "t": "Sie sichert alle seit der letzten Vollsicherung geänderten Daten", "ok": false },
+     { "t": "Sie sichert neu angelegte, aber keine nachträglich geänderten Dateien", "ok": false }
+    ],
+    "e": "Die inkrementelle Sicherung erfasst nur die Änderungen seit dem letzten Backup beliebiger Art. Sie ist schnell und sparsam, die Wiederherstellung braucht aber die Vollsicherung plus alle folgenden Inkremente."
+   },
+   {
+    "q": "Was kennzeichnet eine differenzielle Sicherung?",
+    "o": [
+     { "t": "Sie sichert alle seit der letzten Vollsicherung geänderten Daten", "ok": true },
+     { "t": "Sie sichert nur die seit der letzten Sicherung geänderten Daten", "ok": false },
+     { "t": "Sie sichert bei jedem Lauf den kompletten Datenbestand", "ok": false },
+     { "t": "Sie sichert ausschließlich die Daten des laufenden Tages", "ok": false }
+    ],
+    "e": "Die differenzielle Sicherung erfasst alle Änderungen seit der letzten Vollsicherung. Sie wächst bis zur nächsten Vollsicherung an, die Wiederherstellung braucht aber nur Vollsicherung plus die letzte Differenz."
+   },
+   {
+    "q": "Wie läuft eine Wiederherstellung bei inkrementeller Sicherung ab?",
+    "o": [
+     { "t": "Zuerst die Vollsicherung, dann alle Inkremente in der richtigen Reihenfolge", "ok": true },
+     { "t": "Es genügt allein das letzte inkrementelle Backup", "ok": false },
+     { "t": "Nur die Vollsicherung wird benötigt, die Inkremente sind überflüssig", "ok": false },
+     { "t": "Es genügen die Vollsicherung und das jeweils letzte Inkrement", "ok": false }
+    ],
+    "e": "Da jedes Inkrement nur die Änderungen zum Vorgänger enthält, braucht die Wiederherstellung die Vollsicherung und lückenlos alle folgenden Inkremente."
+   },
+   {
+    "q": "Welchen Vorteil hat die differenzielle gegenüber der inkrementellen Sicherung bei der Wiederherstellung?",
+    "o": [
+     { "t": "Es werden nur die Vollsicherung und die letzte Differenz benötigt", "ok": true },
+     { "t": "Sie benötigt grundsätzlich weniger Speicherplatz je Sicherungslauf", "ok": false },
+     { "t": "Sie läuft bei jedem Sicherungsvorgang schneller ab", "ok": false },
+     { "t": "Sie kommt bei der Wiederherstellung ganz ohne Vollsicherung aus", "ok": false }
+    ],
+    "e": "Zur Wiederherstellung reichen bei differenzieller Sicherung zwei Elemente: die Vollsicherung und die jüngste Differenz. Das ist einfacher als die inkrementelle Kette, kostet aber mehr Speicher je Lauf."
+   },
+   {
+    "q": "Was besagt die 3-2-1-Backup-Regel?",
+    "o": [
+     { "t": "Drei Kopien der Daten auf zwei verschiedenen Medien, davon eine außer Haus", "ok": true },
+     { "t": "Drei Vollsicherungen pro Woche auf zwei Servern an einem Standort", "ok": false },
+     { "t": "Drei Festplatten im RAID, zwei als Spiegel, eine als Parität", "ok": false },
+     { "t": "Drei Sicherungsläufe täglich mit zwei Stunden Abstand einmal pro Nacht", "ok": false }
+    ],
+    "e": "Die 3-2-1-Regel: drei Datenkopien insgesamt, auf zwei unterschiedlichen Speichermedien, und mindestens eine davon räumlich getrennt (offsite) — Schutz auch bei Brand oder Diebstahl."
+   },
+   {
+    "q": "Was gibt der RPO (Recovery Point Objective) an?",
+    "o": [
+     { "t": "Den maximal tolerierbaren Datenverlust, gemessen als Zeitspanne bis zur letzten Sicherung", "ok": true },
+     { "t": "Die maximale Zeitspanne, bis ein System nach Ausfall wieder laufen muss", "ok": false },
+     { "t": "Die Anzahl der Festplatten, die ein RAID verkraften darf", "ok": false },
+     { "t": "Den Zeitpunkt, zu dem das nächste Voll-Backup geplant ist", "ok": false }
+    ],
+    "e": "Der RPO beschreibt, wie viel Datenverlust maximal akzeptabel ist — praktisch der Abstand zwischen zwei Sicherungen. Ein RPO von 1 Stunde bedeutet: höchstens 1 Stunde Daten dürfen verloren gehen."
+   },
+   {
+    "q": "Was gibt der RTO (Recovery Time Objective) an?",
+    "o": [
+     { "t": "Die maximal tolerierbare Zeit, bis ein System nach einem Ausfall wieder verfügbar ist", "ok": true },
+     { "t": "Den maximal tolerierbaren Datenverlust als Zeitspanne", "ok": false },
+     { "t": "Die durchschnittliche Lebensdauer einer Festplatte im Betrieb", "ok": false },
+     { "t": "Die Zeit, die ein Voll-Backup zur Fertigstellung braucht", "ok": false }
+    ],
+    "e": "Der RTO legt fest, wie lange ein System nach einem Ausfall maximal offline sein darf, bevor es wiederhergestellt sein muss. RPO betrifft die Daten, RTO die Ausfallzeit."
+   },
+   {
+    "q": "Warum sollte ein Backup regelmäßig durch eine Testwiederherstellung geprüft werden?",
+    "o": [
+     { "t": "Nur eine erfolgreiche Rücksicherung beweist, dass das Backup im Ernstfall brauchbar ist", "ok": true },
+     { "t": "Weil Backups sich sonst nach kurzer Zeit von selbst löschen", "ok": false },
+     { "t": "Weil dadurch die Sicherung beim nächsten Mal schneller läuft", "ok": false },
+     { "t": "Weil ungetestete Backups automatisch mehr Speicher belegen", "ok": false }
+    ],
+    "e": "Ein Backup, das sich nicht zurückspielen lässt, ist wertlos. Nur die regelmäßige Testwiederherstellung deckt defekte Medien, unvollständige Sicherungen oder fehlerhafte Konfigurationen rechtzeitig auf."
+   },
+   {
+    "q": "Was ist ein wesentlicher Vorteil einer Offsite-Lagerung von Backups?",
+    "o": [
+     { "t": "Bei Brand, Diebstahl oder Wasserschaden am Standort bleiben die Daten erhalten", "ok": true },
+     { "t": "Die Sicherung läuft dadurch bei jedem Durchlauf deutlich schneller", "ok": false },
+     { "t": "Offsite-Backups benötigen grundsätzlich keinerlei Verschlüsselung", "ok": false },
+     { "t": "Die Daten müssen dadurch nur noch einmal im Jahr gesichert werden", "ok": false }
+    ],
+    "e": "Eine räumlich getrennte Kopie schützt gegen lokale Katastrophen, die alle Kopien am selben Ort gleichzeitig treffen würden — Kern des '1' in der 3-2-1-Regel."
    }
   ]
  }
@@ -13507,23 +14380,39 @@ zenToggle.addEventListener('click', (e) => {
   });
 });
 
-// ---- Navbar: beim Runterscrollen nach oben wegschieben, beim Hochscrollen zeigen ----
-// Kein Höhenwechsel -> kein Layout-Sprung -> kein Zittern. Die Leiste ist fixed und
-// wird per transform komplett aus dem Sichtfeld geschoben.
+// ---- Navbar: beim Runterscrollen flüssig ausblenden (Slide + Auflösen),
+// beim Hochscrollen wieder zeigen. Gegen Mobil-Zittern dreifach abgesichert:
+// 1) Overscroll-Klammer: Gummiband-Bereiche (iOS/Android) werden komplett
+//    ignoriert, sonst ploppt die Leiste am Seitenende rein und raus.
+// 2) Richtungs-Akkumulator mit Hysterese: erst nach 14px Weg in EINE Richtung
+//    wird versteckt (ein Swipe = 100px+, greift also sofort), nach 10px hoch
+//    wieder gezeigt. Mikro-Richtungswechsel beim Finger-Lupfen resetten nur
+//    den Zähler und starten die Transition nicht neu.
+// 3) rAF-Drosselung: maximal ein Update pro Frame.
 let lastScrollY = window.scrollY;
+let scrollDir = 0;   // 1 = runter, -1 = hoch
+let scrollAcc = 0;   // akkumulierter Weg in aktueller Richtung
 let ticking = false;
-const HIDE_THRESHOLD = 10; // Mindest-Scrollweg, bevor umgeschaltet wird (gegen Mikro-Jitter)
+const HIDE_AFTER = 14;
+const SHOW_AFTER = 10;
 function onScroll(){
-  const y = Math.max(0, window.scrollY);
-  const delta = y - lastScrollY;
-  if(Math.abs(delta) < HIDE_THRESHOLD){ ticking = false; return; }
-  if(delta > 0 && y > 60){
-    tabBar.classList.add('hidden');    // runter -> wegschieben
-  } else if(delta < 0){
-    tabBar.classList.remove('hidden'); // hoch -> wieder zeigen
-  }
-  lastScrollY = y;
   ticking = false;
+  const maxY = document.documentElement.scrollHeight - window.innerHeight;
+  const y = window.scrollY;
+  // Gummiband oben/unten: nichts tun, lastScrollY nicht mitziehen
+  if(y < 0 || y > maxY) return;
+  const delta = y - lastScrollY;
+  lastScrollY = y;
+  if(delta === 0) return;
+  const d = delta > 0 ? 1 : -1;
+  if(d !== scrollDir){ scrollDir = d; scrollAcc = 0; }
+  scrollAcc += Math.abs(delta);
+  if(y < 60){ tabBar.classList.remove('hidden'); return; } // oben immer sichtbar
+  if(scrollDir === 1 && scrollAcc > HIDE_AFTER){
+    tabBar.classList.add('hidden');
+  } else if(scrollDir === -1 && scrollAcc > SHOW_AFTER){
+    tabBar.classList.remove('hidden');
+  }
 }
 window.addEventListener('scroll', () => {
   if(!ticking){ window.requestAnimationFrame(onScroll); ticking = true; }
@@ -13761,7 +14650,20 @@ const GLOSSAR = [{"a":"2FA","f":"Zwei-Faktor-Authentifizierung","d":"Anmeldung m
 {"a":"RARP","f":"Reverse Address Resolution Protocol","d":"Umkehrung von ARP: ermittelt zu einer bekannten MAC-Adresse die zugehörige IP-Adresse. Historisch von plattenlosen Stationen zum Beziehen ihrer IP genutzt — heute veraltet und durch DHCP ersetzt."},
 {"a":"RJ11","f":"Registered Jack 11","d":"Kleiner Steckverbinder mit 4–6 Kontakten, klassisch für analoge Telefonleitungen und DSL-Anschlüsse. Nicht zu verwechseln mit dem breiteren 8-poligen RJ45 für Ethernet-Netzwerkkabel."},
 {"a":"MSS","f":"Maximum Segment Size","d":"Größte Nutzdatenmenge, die ein TCP-Segment tragen darf — ohne TCP-/IP-Header. Wird beim Verbindungsaufbau ausgehandelt und leitet sich aus der MTU des Übertragungswegs ab (typisch: MTU 1500 minus 40 Byte Header = MSS 1460)."},
-{"a":"DSCP","f":"Differentiated Services Code Point","d":"6-Bit-Feld im IP-Header zur Klassifizierung von Paketen für Quality of Service: Router lesen den Wert und behandeln markierten Verkehr bevorzugt — z. B. VoIP-Pakete vor Downloads. Nachfolger des älteren ToS-Felds."}];
+{"a":"DSCP","f":"Differentiated Services Code Point","d":"6-Bit-Feld im IP-Header zur Klassifizierung von Paketen für Quality of Service: Router lesen den Wert und behandeln markierten Verkehr bevorzugt — z. B. VoIP-Pakete vor Downloads. Nachfolger des älteren ToS-Felds."},
+{"a":"Hypervisor","f":"Virtual Machine Monitor","d":"Software- oder Firmwareschicht, die virtuelle Maschinen erstellt und verwaltet. Stellt jedem Gastsystem virtuelle Hardware bereit und trennt es von der realen Hardware und den anderen Gästen. Typ 1 läuft direkt auf der Hardware (Baremetal), Typ 2 setzt auf einem vollständigen Host-Betriebssystem auf (Hosted)."},
+{"a":"Baremetal","f":"Baremetal-Virtualisierung","d":"Bezeichnung für einen Typ-1-Hypervisor, der direkt auf der Hardware läuft, ohne ein darunterliegendes Betriebssystem. Beispiele: VMware ESXi, Microsoft Hyper-V, Citrix Xen, KVM."},
+{"a":"Hosted","f":"Hosted-Virtualisierung","d":"Bezeichnung für einen Typ-2-Hypervisor, der wie eine gewöhnliche Anwendung auf einem bereits installierten Betriebssystem läuft. Beispiele: VirtualBox, VMware Workstation, Parallels Desktop."},
+{"a":"VDI","f":"Virtual Desktop Infrastructure","d":"Bereitstellung individuell konfigurierter Betriebssysteminstanzen für Arbeitsplätze zentral auf einem Server statt lokal auf jedem Rechner. Vorteile: höhere Datensicherheit, einfachere Administration, Einsatz von Thin Clients. Nachteil: Serverausfall legt alle Arbeitsplätze gleichzeitig lahm."},
+{"a":"Thin Client","f":"Thin Client","d":"Einfacher Endgeräte-Rechner mit minimaler eigener Rechenleistung, der im Wesentlichen nur Bildschirminhalte von einem Server empfängt und Eingaben zurücksendet. Typischer Client-Baustein einer VDI-Umgebung."},
+{"a":"Overcommitment","f":"Überprovisionierung","d":"Virtuellen Maschinen wird in Summe mehr Arbeitsspeicher oder Rechenleistung zugewiesen, als auf dem Host physisch vorhanden ist. Solange nicht alle VMs gleichzeitig ihr volles Kontingent abrufen, funktioniert das — bei gleichzeitigem Spitzenbedarf drohen Engpässe. Gegenmaßnahmen: Monitoring, Auslastungsprognosen, Live-Migration."},
+{"a":"Live-Migration","f":"Live-Migration","d":"Verschiebung einer laufenden virtuellen Maschine auf einen anderen Host im laufenden Betrieb, ohne den Dienst zu unterbrechen. Vereinfacht Wartungsarbeiten und Lastenausgleich zwischen mehreren Hosts."},
+{"a":"Para-Virtualisierung","f":"Para-Virtualisierung","d":"Virtualisierungsform, bei der keine Hardware emuliert wird. Stattdessen stellt der Hypervisor eine API als Schnittstelle bereit, die das Gastsystem direkt nutzen muss — dafür muss dessen Kernel angepasst oder bereits vorbereitet sein. Vorteil: kein Overhead durch Befehlsübersetzung. Typischer Einsatz: Rechenzentren, Cloud-Anbieter."},
+{"a":"Hot-Spare","f":"Hot-Spare-Platte","d":"Reservefestplatte, die in einem RAID-Verbund mitläuft und bei Ausfall einer Platte automatisch einspringt. Der Rebuild startet sofort, ohne dass ein Techniker eingreifen muss."},
+{"a":"Hot-Swap","f":"Hot-Swap","d":"Austausch einer Festplatte im laufenden Betrieb, ohne das System herunterzufahren. Voraussetzung für Wartung und Plattentausch ohne Ausfallzeit, üblich in Servern und Storage-Systemen."},
+{"a":"RPO","f":"Recovery Point Objective","d":"Maximal tolerierbarer Datenverlust, ausgedrückt als Zeitspanne bis zur letzten Sicherung. Ein RPO von 1 Stunde bedeutet: im Ernstfall darf höchstens 1 Stunde an Daten verloren gehen. Bestimmt die Sicherungshäufigkeit."},
+{"a":"RTO","f":"Recovery Time Objective","d":"Maximal tolerierbare Ausfallzeit, bis ein System nach einer Störung wieder verfügbar sein muss. Während RPO den akzeptablen Datenverlust beschreibt, betrifft RTO die Dauer der Wiederherstellung."},
+{"a":"Parity","f":"Parität (RAID)","d":"Per XOR berechnete Prüfinformation, aus der sich die Daten einer ausgefallenen Platte rekonstruieren lassen. Grundlage von RAID 5 (einfache Parität) und RAID 6 (doppelte Parität)."}];
 
 // ---- Bibliothek: Render + Suche ----
 const libList = document.getElementById('libList');

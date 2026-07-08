@@ -48,6 +48,9 @@
   <a href="#r-topo">Topologien</a>
   <a href="#r-zahlen">Zahlensysteme</a>
   <a href="#r-logik">Logik/Gatter</a>
+  <a href="#r-virt">Virtualisierung</a>
+  <a href="#r-hyperv">Hypervisor</a>
+  <a href="#r-raid">Backup/RAID</a>
 </nav>
 
 <section id="r-ports">
@@ -401,6 +404,62 @@
 <p><strong>Wi-Fi 6</strong> (IEEE <strong>802.11ax</strong>) ist der aktuelle Standard nach Wi-Fi 5 (802.11ac) und Wi-Fi 4 (802.11n). <strong>WPA3-Personal</strong> nutzt statt PSK das Verfahren <strong>SAE</strong> (Simultaneous Authentication of Equals) — macht Offline-Brute-Force-Angriffe auf das Passwort praktisch unmöglich.</p>
 <div class="callout"><span class="tag">Schwachstellen</span><strong>WPS</strong> (Wi-Fi Protected Setup) vereinfacht die Einrichtung, ist aber durch PIN-Brute-Force angreifbar und sollte deaktiviert werden. Das <strong>Hidden-Node-Problem</strong>: zwei Clients hören sich gegenseitig nicht und senden gleichzeitig zum AP — es kollidiert, obwohl beide CSMA/CA korrekt anwenden.</div>
 </section>
+
+<section id="r-virt">
+<h2>Virtualisierung Grundlagen</h2>
+<p><strong>Virtuell</strong> heißt: nicht real vorhanden, aber real erscheinend. Die virtuelle Infrastruktur läuft dabei immer auf echter Hardware — <strong>Virtualisierung von Betriebssystemen</strong> bedeutet, mehrere Betriebssysteme gleichzeitig auf einer gemeinsamen Hardwarebasis zu betreiben.</p>
+<table>
+<tr><th>Begriff</th><th>Kernaussage</th></tr>
+<tr><td>Simulation</td><td>vollständige Software-Nachbildung eines Systems, kein reales Ergebnis (Flugsimulator bringt den Piloten nicht ans Ziel)</td></tr>
+<tr><td>Emulation</td><td>alle Hardware-Komponenten inkl. CPU werden nachgebildet — CPU-Emulation übersetzt Befehle, großer Overhead</td></tr>
+<tr><td>Virtualisierung</td><td>wie Emulation, nur die CPU wird nicht nachgebildet — der Gast nutzt die Host-CPU-Architektur direkt, deutlich mehr Performance</td></tr>
+</table>
+<p><strong>Servervirtualisierung:</strong> Jeder virtuelle Server erhält ein festes Ressourcenvolumen des Hosts. Vorteile: bessere Auslastung, schnelleres Backup, zentrale Verwaltung, Skalierbarkeit. Nachteile: ein Hardwareausfall trifft alle VMs gleichzeitig, nicht jede Software läuft virtualisiert.</p>
+<div class="callout"><span class="tag">Ressourcen</span><strong>Überprovisionierung (Overcommitment):</strong> VMs wird in Summe mehr zugewiesen, als physisch existiert. Solange nicht alle gleichzeitig ihr volles Kontingent abrufen, funktioniert das — bei Spitzenlast drohen Engpässe. Gegenmittel: Monitoring, Auslastungsprognosen, im Ernstfall <strong>Live-Migration</strong> — die Verschiebung einer laufenden VM auf einen anderen Host, ohne den Betrieb zu unterbrechen.</div>
+<p><strong>Anwendungsvirtualisierung:</strong> Die Installation wird vom Client getrennt, der die Anwendung nutzt — Teile werden bei Bedarf geladen, lokal installiert wird nichts. Vorteil: eine zentrale Installation, einfacher Austausch. Nachteil: grafiklastige Anwendungen leiden, stabile Verbindung nötig.</p>
+<p><strong>Betriebssystem-/Containervirtualisierung:</strong> läuft als Anwendung innerhalb des Host-Betriebssystems, kein eigener Hypervisor nötig — alle Container teilen sich den Host-Kernel. Ein Container bündelt Anwendung, Abhängigkeiten, Bibliotheken und Konfiguration. Vorteil: geringer Ressourcenverbrauch, schnelle Bereitstellung. Nachteil: Einrichtung und Betrieb erfordern mehr Fachwissen. Beispiele: Docker, Microsoft Hyper-V Container, BSD Jails, Solaris Zones.</p>
+<p><strong>VDI</strong> (Virtual Desktop Infrastructure): individuell konfigurierte Betriebssysteminstanzen laufen zentral auf einem Server statt lokal. Vorteil: hohe Datensicherheit, einfache Administration, Einsatz von <strong>Thin Clients</strong> möglich. Nachteil: hohe Anfangskosten, Serverausfall legt alle Arbeitsplätze gleichzeitig lahm.</p>
+</section>
+
+<section id="r-hyperv">
+<h2>Hypervisor & Virtualisierungstechnik</h2>
+<p>Ein <strong>Hypervisor</strong> erstellt und verwaltet virtuelle Maschinen und stellt ihnen eine Abstraktionsschicht aus virtueller Hardware bereit.</p>
+<table>
+<tr><th>Typ</th><th>Merkmal</th><th>Beispiele</th></tr>
+<tr><td>Typ 1 (Baremetal)</td><td>läuft direkt auf der Hardware, kein Host-Betriebssystem nötig</td><td>Hyper-V, VMware ESXi, Citrix Xen, KVM</td></tr>
+<tr><td>Typ 2 (Hosted)</td><td>setzt auf einem vollständig installierten Betriebssystem auf</td><td>VirtualBox, VMware Workstation, Virtual PC, Parallels</td></tr>
+</table>
+<div class="callout"><span class="tag">Ring-Schema</span>Privilegierte Befehle einer VM bräuchten eigentlich Ring 0, laufen aber aus Sicherheitsgründen in Ring 3. Der Hypervisor fängt diese Befehle ab und baut sie passend um, damit das Gastsystem trotzdem stabil läuft. Ältere Hypervisor-Versionen brauchen dafür Anpassungen an neue Betriebssysteme — daher laufen manche Systeme auf veralteten Hypervisoren schlecht.</div>
+<p><strong>Para-Virtualisierung</strong> (Typ 1): Statt Hardware zu emulieren, stellt der Hypervisor eine API bereit, die der Gast direkt nutzen muss. Vorteil: kein Overhead durch Befehlsübersetzung, dadurch schnellere Kommunikation. Nachteil: der Gast-Kernel muss angepasst oder bereits vorbereitet sein. Einsatz: Rechenzentren, Cloud-Anbieter.</p>
+<p><strong>Hardwareunterstützung:</strong> Intel VT und AMD-V erweitern die Ring-Topologie des Prozessors direkt — keine Anpassung am Gast-Kernel nötig, kein Overhead durch Software-Übersetzung. Beide Erweiterungen sind zueinander nicht kompatibel. Vor dieser Hardwareunterstützung musste die Befehlsübersetzung komplett per Software erledigt werden.</p>
+<div class="callout"><span class="tag">Grenzen</span>Auf einem Host können beliebig viele VMs laufen — die Grenze setzt allein die vorhandene physische Hardware. Microsoft empfiehlt bei Hyper-V maximal 8 virtuelle CPUs je physischem Kern: bei einem Quad-Core-Prozessor macht das 4 × 8 = <strong>32 virtuelle CPUs</strong>. Vorteile der Virtualisierung insgesamt: kostengünstig, flexibel, ideal für Test-/Entwicklungsumgebungen. Nachteil: Fehler in der Virtualisierungssoftware können einem Angreifer den Ausbruch aus der VM ermöglichen.</div>
+</section>
+
+<section id="r-raid">
+<h2>Backup & RAID</h2>
+<p><strong>RAID</strong> (Redundant Array of Independent Disks) fasst mehrere Festplatten zu einem logischen Verbund zusammen — für mehr Ausfallsicherheit, mehr Leistung oder beides. Drei Grundtechniken: <strong>Striping</strong> verteilt Daten blockweise über mehrere Platten (Tempo), <strong>Mirroring</strong> spiegelt sie identisch (Sicherheit), <strong>Parität</strong> ist eine per XOR berechnete Prüfinformation, aus der sich ausgefallene Daten rekonstruieren lassen.</p>
+<div class="callout"><span class="tag">Wichtig</span>RAID ist <strong>kein Backup</strong>. Es schützt vor dem Ausfall einzelner Platten — nicht vor versehentlichem Löschen, Ransomware, Überspannung oder Diebstahl des ganzen Geräts. Dagegen hilft nur eine echte, getrennte Sicherung.</div>
+<table>
+<tr><th>Level</th><th>Prinzip</th><th>Min. Platten</th><th>Nettokapazität</th><th>Ausfalltoleranz</th></tr>
+<tr><td>RAID 0</td><td>Striping</td><td>2</td><td>n × Kapazität</td><td>keine — 1 Ausfall = Totalverlust</td></tr>
+<tr><td>RAID 1</td><td>Mirroring</td><td>2</td><td>Kapazität einer Platte</td><td>1 Platte</td></tr>
+<tr><td>RAID 5</td><td>Striping + Parität</td><td>3</td><td>(n − 1) × Kapazität</td><td>1 Platte</td></tr>
+<tr><td>RAID 6</td><td>Striping + doppelte Parität</td><td>4</td><td>(n − 2) × Kapazität</td><td>2 Platten</td></tr>
+<tr><td>RAID 10</td><td>Mirroring, dann Striping (1+0)</td><td>4</td><td>n / 2 × Kapazität</td><td>1 je Spiegelpaar</td></tr>
+</table>
+<p><strong>RAID 10 vs. RAID 01:</strong> Bei RAID 10 werden zuerst Plattenpaare gespiegelt und dann gestript, bei RAID 01 zuerst gestript und dann gespiegelt. RAID 10 gilt als robuster, weil je Spiegelpaar eine Platte ausfallen darf. <strong>RAID 50</strong> fasst mehrere RAID-5-Gruppen per übergeordnetem Striping zusammen.</p>
+<div class="callout"><span class="tag">Rebuild-Risiko</span>Nach einem Plattentausch rekonstruiert der Controller die Daten aus den übrigen Platten. Bei RAID 5 ist die Redundanz während des Rebuilds aufgebraucht — ein zweiter Ausfall in dieser Phase bedeutet Totalverlust. Genau hier punktet RAID 6. Eine <strong>Hot-Spare</strong> springt automatisch ein, <strong>Hot-Swap</strong> erlaubt den Plattentausch im laufenden Betrieb.</div>
+<h3>Backup-Strategien</h3>
+<table>
+<tr><th>Art</th><th>Sichert</th><th>Wiederherstellung braucht</th></tr>
+<tr><td>Vollsicherung</td><td>immer den kompletten Datenbestand</td><td>nur die Vollsicherung</td></tr>
+<tr><td>Inkrementell</td><td>Änderungen seit dem letzten Backup (beliebiger Art)</td><td>Vollsicherung + alle Inkremente</td></tr>
+<tr><td>Differenziell</td><td>Änderungen seit der letzten Vollsicherung</td><td>Vollsicherung + letzte Differenz</td></tr>
+</table>
+<div class="callout"><span class="tag">3-2-1-Regel</span>Drei Kopien der Daten, auf zwei verschiedenen Medien, davon eine räumlich getrennt (offsite). Schützt auch bei Brand, Diebstahl oder Wasserschaden am Standort. <strong>RPO</strong> (Recovery Point Objective) = maximal tolerierbarer Datenverlust als Zeitspanne. <strong>RTO</strong> (Recovery Time Objective) = maximal tolerierbare Ausfallzeit bis zur Wiederherstellung. Ein Backup ist erst brauchbar, wenn die Testwiederherstellung funktioniert.</div>
+</section>
+
+
 
 </div>
 <!-- ============ VIEW: BIBLIOTHEK ============ -->
