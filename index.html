@@ -37,6 +37,7 @@
   <a href="#r-routing">Routing/Switching</a>
   <a href="#r-vlan">VLAN</a>
   <a href="#r-ip">IPv4/IPv6</a>
+  <a href="#r-subnetting">Subnetting</a>
   <a href="#r-dnsdhcp">DNS/DHCP</a>
   <a href="#r-api">API/REST</a>
   <a href="#r-voip">VoIP</a>
@@ -55,14 +56,14 @@
 
 <section id="r-ports">
 <h2>Ports & Sockets</h2>
-<p>Ein <span class="term">Port</span> ist eine 16-Bit-Nummer zwischen <code>0</code> und <code>65535</code>, die einen Dienst auf einem Server identifiziert. Zusammen mit der IP bildet er einen <strong>Socket</strong> (<code>IP:Port</code>). Ports gehören zur Transportschicht und werden von <span class="term">TCP</span> (Transmission Control Protocol) und <span class="term">UDP</span> (User Datagram Protocol) genutzt.</p>
+<p>Ein <span class="term">Port</span> ist eine 16-Bit-Nummer zwischen <code>0</code> und <code>65535</code>, die einen Dienst auf einem Server identifiziert. Eine TCP-Verbindung wird eindeutig durch das Vierertupel aus <strong>Quell-IP, Quellport, Ziel-IP und Zielport</strong> identifiziert — die verbreitete Schreibweise <code>IP:Port</code> für einen <strong>Socket</strong> ist dabei eine vereinfachte Darstellung, die nur eine Seite dieses Tupels zeigt. Ports gehören zur Transportschicht und werden von <span class="term">TCP</span> (Transmission Control Protocol) und <span class="term">UDP</span> (User Datagram Protocol) genutzt.</p>
 <table>
 <tr><th>Bereich</th><th>Bezeichnung</th><th>Verwendung</th></tr>
 <tr><td>0 – 1023</td><td>Well-Known</td><td>Standarddienste (HTTP, SSH, DNS …)</td></tr>
 <tr><td>1024 – 49151</td><td>Registered</td><td>Registrierte Anwendungen (RDP 3389, MySQL 3306)</td></tr>
 <tr><td>49152 – 65535</td><td>Dynamic / Ephemeral</td><td>Temporäre Quellports, vom OS vergeben</td></tr>
 </table>
-<p><strong>Quellport:</strong> Der Zielport ist fest (z. B. 443), der Quellport wird zufällig aus dem dynamischen Bereich gewählt. Dadurch kann der Server die Antwort exakt der richtigen Anwendung bzw. dem richtigen Tab zuordnen.</p>
+<p><strong>Quellport:</strong> Der Zielport ist fest (z. B. 443), der Quellport wird zufällig aus dem dynamischen Bereich gewählt. Vor allem der <strong>Client</strong> nutzt seinen eigenen Quellport, um eingehende Antworten dem richtigen Socket bzw. Prozess zuzuordnen — er weiß, welche Anwendung unter diesem Port auf eine Antwort wartet.</p>
 <div class="callout"><span class="tag">Weitere Ports</span><strong>8443</strong> liegt im Registered-Bereich und dient häufig als alternativer HTTPS-Port für Web-Interfaces. <strong>SOCKS</strong>-Proxys nutzen standardmäßig Port <strong>1080</strong> (z. B. bei Tor). Ein <strong>Proxy</strong> vermittelt Verbindungen stellvertretend und kann filtern, cachen oder anonymisieren.</div>
 </section>
 
@@ -78,10 +79,10 @@
 <tr><td>67/68</td><td>DHCP</td><td>UDP</td><td>Auto-IP (Server/Client)</td></tr>
 <tr><td>69</td><td>TFTP</td><td>UDP</td><td>Dateitransfer ohne Login (PXE)</td></tr>
 <tr><td>80</td><td>HTTP</td><td>TCP</td><td>Web, unverschlüsselt</td></tr>
-<tr><td>110/143</td><td>POP3/IMAP</td><td>TCP</td><td>Mailabruf (löscht / behält)</td></tr>
+<tr><td>110/143</td><td>POP3/IMAP</td><td>TCP</td><td>Mailabruf (bei POP3 optional löschend, IMAP behält auf dem Server)</td></tr>
 <tr><td>161</td><td>SNMP</td><td>UDP</td><td>Geräteabfrage durch die Managementstation (Polling)</td></tr>
 <tr><td>162</td><td>SNMP-Trap</td><td>UDP</td><td>Unaufgeforderte Ereignismeldung vom Gerät an die Station</td></tr>
-<tr><td>389/636</td><td>LDAP/LDAPS</td><td>TCP/UDP</td><td>Verzeichnisdienst (unv./verschl.)</td></tr>
+<tr><td>389/636</td><td>LDAP/LDAPS</td><td>TCP (meist), UDP möglich</td><td>Verzeichnisdienst (unv./verschl.)</td></tr>
 <tr><td>443</td><td>HTTPS</td><td>TCP</td><td>Web über TLS/SSL</td></tr>
 <tr><td>465/587</td><td>SMTPS/Submission</td><td>TCP</td><td>Mailversand verschlüsselt</td></tr>
 <tr><td>993/995</td><td>IMAPS/POP3S</td><td>TCP</td><td>Mailabruf verschlüsselt</td></tr>
@@ -91,7 +92,7 @@
 <tr><td>445</td><td>SMB</td><td>TCP</td><td>Windows-Datei-/Druckerfreigabe</td></tr>
 <tr><td>3306</td><td>MySQL</td><td>TCP</td><td>Datenbankserver</td></tr>
 </table>
-<div class="callout"><span class="tag">Merkhilfe</span>Verschlüsselte Varianten enden auf „S" und liegen höher: HTTP 80 → HTTPS 443, IMAP 143 → IMAPS 993, POP3 110 → POP3S 995. Alternativ hebt <strong>STARTTLS</strong> eine bestehende Klartextverbindung auf demselben Port auf TLS an (z. B. SMTP 587, IMAP 143), statt einen eigenen verschlüsselten Port zu nutzen.</div>
+<div class="callout"><span class="tag">Merkhilfe</span>Verschlüsselte Varianten enden auf „S" und liegen höher: HTTP 80 → HTTPS 443, IMAP 143 → IMAPS 993, POP3 110 → POP3S 995. Alternativ hebt <strong>STARTTLS</strong> eine bestehende Klartextverbindung auf demselben Port auf TLS an (z. B. SMTP 587, IMAP 143), statt einen eigenen verschlüsselten Port zu nutzen. <strong>Port 25</strong> wird heute überwiegend für den Mailtransport zwischen Mailservern genutzt — Mail-Clients liefern ausgehende Nachrichten stattdessen in der Regel über Port <strong>587</strong> (Submission) oder <strong>465</strong> (SMTPS) ein.</div>
 </section>
 
 <section id="r-mux">
@@ -108,7 +109,7 @@
 
 <section id="r-tcpip">
 <h2>TCP/IP & UDP</h2>
-<p><span class="term">TCP/IP</span> ist die herstellerunabhängige Protokollfamilie des Internets. <strong>IP</strong> (Internet Protocol) übernimmt Adressierung und Routing (verbindungslos, unzuverlässig). <strong>TCP</strong> liefert die Zuverlässigkeit.</p>
+<p><span class="term">TCP/IP</span> ist die herstellerunabhängige Protokollfamilie des Internets. <strong>IP</strong> (Internet Protocol) übernimmt Adressierung und Routing (verbindungslos, unzuverlässig). <strong>TCP</strong> sorgt für eine zuverlässige Übertragung, solange die Verbindung besteht.</p>
 <div class="callout"><span class="tag">Three-Way-Handshake</span>1. <code>SYN</code> (Client fragt an) → 2. <code>SYN-ACK</code> (Server bestätigt/fragt zurück) → 3. <code>ACK</code> (Client bestätigt) → Verbindung steht. Geordneter Abbau über <code>FIN/ACK</code>; ein <code>RST</code>-Segment bricht die Verbindung dagegen sofort und ungeordnet ab (z. B. bei Fehlern).</div>
 <p><strong>Staukontrolle</strong> (Congestion Control): TCP interpretiert Paketverluste als Zeichen von Netzüberlastung und reduziert automatisch die Senderate, bevor sie wieder ansteigt — schützt das Netz vor Überlastungskollaps. Die <strong>Flusskontrolle</strong> (Flow Control) dagegen schützt den einzelnen Empfänger: über die Fenstergröße signalisiert er, wie viele Daten er noch aufnehmen kann, damit der Sender ihn nicht überflutet. Eine <strong>Prüfsumme</strong> (Checksumme) in beiden Protokollen erkennt beschädigte Pakete.</p>
 <p><strong>UDP</strong> ist verbindungslos: Datagramme werden ohne Handshake und ohne Bestätigung verschickt — schnell, aber ohne Garantie.</p>
@@ -125,14 +126,19 @@
 
 <section id="r-header">
 <h2>Header, TTL & Traceroute</h2>
-<p>Ein Paket besteht aus <strong>Header</strong> (Steuerdaten) und <strong>Payload</strong> (Nutzdaten). Wichtige Header-Felder:</p>
+<p>Ein Paket besteht aus <strong>Header</strong> (Steuerdaten) und <strong>Payload</strong> (Nutzdaten). Die Felder verteilen sich auf mehrere Header verschiedener Schichten:</p>
+<p><strong>IP-Header</strong> (Vermittlungsschicht):</p>
 <ul>
-<li><strong>Quell-/Ziel-IP</strong> und Portnummern.</li>
+<li><strong>Quell-/Ziel-IP-Adresse.</strong></li>
 <li><strong>TTL (Time to Live):</strong> Zähler (z. B. 64/128). Jeder Router zieht 1 ab; bei <code>0</code> wird das Paket verworfen (ICMP Time Exceeded; ICMP = Internet Control Message Protocol) — verhindert Endlosschleifen.</li>
 <li><strong>Protokollfeld:</strong> gibt an, welches Transportprotokoll in der Payload steckt (6 = TCP, 17 = UDP, 1 = ICMP). So weiß der Empfänger, wie er die Daten interpretieren muss.</li>
+</ul>
+<p><strong>TCP-Header</strong> (Transportschicht):</p>
+<ul>
+<li><strong>Quell-/Zielport.</strong></li>
 <li><strong>Sequenznummer (Sequence Number):</strong> nummeriert die Bytes, damit zerlegte Segmente beim Empfänger in richtiger Reihenfolge zusammengesetzt werden.</li>
 <li><strong>Bestätigungsnummer (Acknowledgement Number):</strong> gibt das nächste erwartete Byte an und bestätigt so den Empfang.</li>
-<li><strong>Prüfsumme (Checksum):</strong> erkennt Übertragungsfehler in Header und Daten; ein fehlerhaftes Paket wird verworfen.</li>
+<li><strong>Prüfsumme (Checksum):</strong> erkennt Übertragungsfehler in Header und Daten; ein fehlerhaftes Paket wird verworfen. Auch der IP-Header trägt eine eigene Prüfsumme.</li>
 </ul>
 <p><strong>traceroute</strong> (Linux) / <strong>tracert</strong> (Windows) nutzt die TTL: erst TTL=1 (erster Router meldet sich), dann 2, 3 … bis das Ziel erreicht ist — so wird jeder Hop sichtbar. Reine Erreichbarkeit prüft man dagegen mit <strong>ping</strong> (ICMP Echo Request/Reply); die dabei gemessene <span class="term">RTT (Round Trip Time)</span> ist die Umlaufzeit hin und zurück und damit ein direktes Maß für die Latenz.</p>
 </section>
@@ -172,11 +178,11 @@
 
 <section id="r-api">
 <h2>API, REST, SOAP & Webhook</h2>
-<p>Eine <span class="term">API</span> ist eine vertragliche Schnittstelle zwischen Software-Systemen. Der Client sendet an einen Endpunkt (oft mit API-Key im Header), der Server verarbeitet gekapselt und antwortet standardisiert in <strong>JSON</strong> (JavaScript Object Notation) oder <strong>XML</strong> (Extensible Markup Language).</p>
+<p>Eine <span class="term">API</span> ist eine vertragliche Schnittstelle zwischen Software-Systemen. Der Client sendet an einen Endpunkt, der Server verarbeitet gekapselt und antwortet standardisiert in <strong>JSON</strong> (JavaScript Object Notation) oder <strong>XML</strong> (Extensible Markup Language). Zur Authentifizierung dient neben einem einfachen <strong>API-Key</strong> im Header heute häufig auch <strong>OAuth</strong> oder ein <strong>Bearer-Token</strong> — beide erlauben eine feinere, zeitlich begrenzte Rechtevergabe als ein statischer Key.</p>
 <table>
 <tr><th>Typ</th><th>Merkmale</th></tr>
 <tr><td>REST (Representational State Transfer)</td><td>Web-Standard, HTTP-Methoden GET/POST/PUT/DELETE, zustandslos → skalierbar</td></tr>
-<tr><td>SOAP (Simple Object Access Protocol)</td><td>Älter, schwerfällig, nur XML, hohe Sicherheitsstandards (Banking)</td></tr>
+<tr><td>SOAP (Simple Object Access Protocol)</td><td>Älter, schwerfällig, nur XML, unterstützt umfangreiche Sicherheitsmechanismen (WS-Security), verbreitet im Banking</td></tr>
 <tr><td>Webhook</td><td>„Umgedrehte API": Server pusht bei Event, kein Polling</td></tr>
 </table>
 <div class="callout"><span class="tag">HTTP-Methoden</span><code>GET</code> lesen · <code>POST</code> anlegen · <code>PUT</code> ersetzen/aktualisieren · <code>DELETE</code> löschen. Zustandslos = jede Anfrage enthält alle nötigen Infos, kein Sitzungszustand am Server.</div>
@@ -214,12 +220,18 @@
 <tr><td>Dezimal</td><td>10</td><td>0–9</td></tr>
 <tr><td>Hexadezimal</td><td>16</td><td>0–9, A–F</td></tr>
 </table>
-<p><strong>Bitwertigkeiten im Byte:</strong> <code>128 64 32 16 8 4 2 1</code>. Ein Byte (8 Bit) fasst 256 Werte (0–255). Eine Hex-Ziffer = 4 Bit (Nibble).</p>
-<ul>
-<li>Binär <code>1010</code> = 8+2 = <strong>10</strong> · <code>1111</code> = <strong>15</strong> · <code>11111111</code> = <strong>255</strong></li>
-<li>Hex <code>FF</code> = <strong>255</strong> · <code>1A</code> = 16+10 = <strong>26</strong> · <code>10</code> = <strong>16</strong></li>
-<li>Hex <code>A</code>=10, <code>B</code>=11, <code>C</code>=12, <code>D</code>=13, <code>E</code>=14, <code>F</code>=15</li>
-</ul>
+<p><strong>Bitwertigkeiten im Byte:</strong> <code>128 64 32 16 8 4 2 1</code>. Ein Byte (8 Bit) fasst 256 Werte (0–255). Eine Hex-Ziffer entspricht genau 4 Bit (Nibble).</p>
+<table>
+<tr><th>System</th><th>Wert</th><th>Rechnung</th><th>Ergebnis</th></tr>
+<tr><td>Binär</td><td><code>1010</code></td><td>8 + 2</td><td><strong>10</strong></td></tr>
+<tr><td>Binär</td><td><code>1111</code></td><td>8 + 4 + 2 + 1</td><td><strong>15</strong></td></tr>
+<tr><td>Binär</td><td><code>11111111</code></td><td>128+64+32+16+8+4+2+1</td><td><strong>255</strong></td></tr>
+<tr><td>Hex</td><td><code>10</code></td><td>1×16 + 0</td><td><strong>16</strong></td></tr>
+<tr><td>Hex</td><td><code>1A</code></td><td>1×16 + 10</td><td><strong>26</strong></td></tr>
+<tr><td>Hex</td><td><code>FF</code></td><td>15×16 + 15</td><td><strong>255</strong></td></tr>
+</table>
+<p>Bei Hex zählt die <strong>linke Ziffer × 16</strong> plus die <strong>rechte Ziffer</strong> — genau wie bei Dezimalzahlen die Zehnerstelle × 10 plus die Einerstelle zählt, nur eben mit der Basis 16 statt 10.</p>
+<p><code>A</code>=10, <code>B</code>=11, <code>C</code>=12, <code>D</code>=13, <code>E</code>=14, <code>F</code>=15 — Hex braucht für die Werte 10–15 eigene Buchstaben, weil eine einzelne Ziffernstelle sonst nicht ausreicht.</p>
 <p>Hexadezimal wird in der IT genutzt, weil es Bitgruppen kompakt darstellt und leicht in Binär umrechenbar ist.</p>
 </section>
 
@@ -260,15 +272,16 @@
 <tr><th>Medium</th><th>Merkmale</th><th>Max. Länge</th><th>Stecker</th></tr>
 <tr><td>Twisted-Pair (UTP/STP)</td><td>Kupfer, verdrillt gegen Störungen; UTP (Unshielded Twisted Pair) ungeschirmt, STP (Shielded) geschirmt</td><td>100 m</td><td>RJ45</td></tr>
 <tr><td>Koaxialkabel</td><td>alt, frühere Bus-Netze</td><td>—</td><td>BNC</td></tr>
-<tr><td>Glasfaser Multimode</td><td>Licht, LED, kürzere Strecken</td><td>bis ~550 m</td><td>SC, LC, ST</td></tr>
+<tr><td>Glasfaser Multimode</td><td>Licht, LED, kürzere Strecken</td><td>bis ~550 m*</td><td>SC, LC, ST</td></tr>
 <tr><td>Glasfaser Monomode</td><td>Licht, Laser, große Distanzen</td><td>viele km</td><td>SC, LC</td></tr>
 </table>
+<p style="color:var(--muted);font-size:0.85rem">* Die maximale Reichweite hängt vom verwendeten Standard ab — die 550 m gelten beispielsweise für 10GBase-SR. Andere Standards und Wellenlängen erlauben andere Distanzen.</p>
 <p><strong>Twisted-Pair-Kategorien:</strong> Cat 5e (Gigabit-Minimum), Cat 6/6a (mehr Reserve, 10G auf kurzer Distanz), Cat 7. Die Verdrillung reduziert <span class="term">Übersprechen (Crosstalk)</span>. Glasfaser ist immun gegen elektromagnetische Störungen, aber teurer und empfindlicher beim Verlegen.</p>
 <div class="callout"><span class="tag">Hardware & MAC</span>Die <strong>Netzwerkkarte (NIC)</strong> verbindet das Gerät physisch mit dem Netz und trägt ab Werk eine weltweit eindeutige <strong>MAC-Adresse</strong> (48 Bit, 6 Hex-Paare). Die ersten 24 Bit (OUI, Organizationally Unique Identifier) kennzeichnen den Hersteller. <strong>ARP</strong> (Address Resolution Protocol) löst im LAN eine IP-Adresse in die zugehörige MAC auf. Kopplungselemente nach Schicht: Hub = L1, Switch = L2, Router = L3.</div>
 </section>
 
 <section id="r-ip">
-<h2>IPv4 & IPv6 (Auffrischung)</h2>
+<h2>IPv4 & IPv6</h2>
 <table>
 <tr><th></th><th>IPv4</th><th>IPv6</th></tr>
 <tr><td>Länge</td><td>32 Bit</td><td>128 Bit</td></tr>
@@ -280,16 +293,104 @@
 <ul>
 <li><strong>Private Bereiche (IPv4):</strong> <code>10.0.0.0/8</code>, <code>172.16.0.0/12</code>, <code>192.168.0.0/16</code>.</li>
 <li><strong>APIPA</strong> (Automatic Private IP Addressing) / Link-Local: <code>169.254.0.0/16</code> (automatisch bei fehlendem DHCP).</li>
+<li><strong>IPv6 Link-Local:</strong> theoretisch als <code>fe80::/10</code> definiert — in der Praxis wird aber immer <code>fe80::/64</code> verwendet, da die Bits 11 bis 64 bei der automatischen Adressbildung durch das Endgerät standardmäßig mit Nullen aufgefüllt werden. Gültig nur im lokalen Segment, nicht routbar. Basis für NDP und SLAAC, unabhängig von einer globalen Adresse vorhanden.</li>
 <li><strong>CIDR</strong> (Classless Inter-Domain Routing): Präfix-Schreibweise wie <strong>/24</strong> = 24 Bit Netz, Maske <code>255.255.255.0</code>, 254 nutzbare Hosts (256 minus Netz- und Broadcastadresse).</li>
-<li><strong>IPv6-Kürzung:</strong> <code>::</code> ersetzt einmalig eine Folge von Nullblöcken.</li>
 </ul>
+<div class="callout"><span class="tag">IPv6-Kürzung</span>Innerhalb jedes 16-Bit-Blocks dürfen führende Nullen weggelassen werden — aus <code>0042</code> wird <code>42</code>. Der doppelte Doppelpunkt <code>::</code> geht einen Schritt weiter und ersetzt die <strong>längste zusammenhängende Folge von Nullblöcken</strong> — und das genau <strong>einmal</strong> im gesamten Adressstring, da eine zweite Kürzung nicht mehr eindeutig auflösbar wäre, wie viele Nullblöcke an welcher Stelle fehlen. Beispiel: <code>2001:0db8:0000:0000:0000:ff00:0042:8329</code> wird durch Weglassen führender Nullen zu <code>2001:db8:0:0:0:ff00:42:8329</code> und durch <code>::</code> für die drei aufeinanderfolgenden Nullblöcke schließlich zu <code>2001:db8::ff00:42:8329</code>.</div>
 <div class="callout"><span class="tag">IPv6-Autokonfiguration</span><strong>SLAAC</strong> (zustandslos): Der Router kündigt per <strong>Router-Advertisement</strong> ein Präfix an, das Gerät bildet den hinteren Adressteil selbst — kein Server nötig. <strong>DHCPv6</strong> (kann zustandsbehaftet): zentrale Vergabe/Verwaltung wie bei DHCPv4. Beide können auch kombiniert werden.</div>
+</section>
+
+<section id="r-subnetting">
+<h2>Subnetting – Schritt für Schritt</h2>
+
+<h3>1. Was Subnetting überhaupt macht</h3>
+<p>Jede IP-Adresse besteht aus zwei Teilen: einem <strong>Netzwerkanteil</strong> (welches Netz?) und einem <strong>Hostanteil</strong> (welches Gerät innerhalb des Netzes?). Die <strong>Subnetzmaske</strong> legt fest, wo genau die Grenze zwischen beiden Teilen verläuft.</p>
+<p><strong>Subnetting</strong> bedeutet: ein großes Netz wird in mehrere kleinere Netze aufgeteilt, indem diese Grenze verschoben wird. Der Grund dafür ist meist einer von drei: kleinere <strong>Broadcastdomänen</strong> (weniger Störverkehr), keine Verschwendung von Adressen, oder eine saubere Trennung von Abteilungen, Standorten oder Gerätegruppen.</p>
+
+<h3>2. Die Subnetzmaske verstehen</h3>
+<p>Die Maske ist genau wie die IP-Adresse 32 Bit lang. Sie besteht immer aus einer Folge von <strong>1-Bits</strong>, gefolgt von einer Folge von <strong>0-Bits</strong> — nie gemischt. Eine 1 bedeutet „dieses Bit gehört zum Netzwerkanteil", eine 0 bedeutet „dieses Bit gehört zum Hostanteil".</p>
+<p>Beispiel: Die Maske <code>255.255.255.0</code> sieht binär so aus: <code>11111111.11111111.11111111.00000000</code>. Die ersten 24 Bit sind 1 — das ist der Netzanteil. Die letzten 8 Bit sind 0 — das ist der Hostanteil.</p>
+<p>Die <strong>CIDR-Schreibweise</strong> (z. B. <code>/24</code>) ist nichts anderes als die Anzahl der 1-Bits in der Maske durchgezählt. <code>/24</code> und <code>255.255.255.0</code> sagen exakt dasselbe, nur in zwei verschiedenen Schreibweisen.</p>
+
+<h3>3. Die Grundidee: Bits leihen</h3>
+<p>Um aus einem Netz mehrere kleinere zu machen, „leiht" man sich Bits vom Hostanteil und gibt sie dem Netzanteil dazu. Der wichtige Merksatz dazu: <strong>jedes geliehene Bit verdoppelt die Anzahl der Subnetze — und halbiert gleichzeitig die Anzahl der Adressen, die in jedem einzelnen Subnetz übrig bleiben.</strong></p>
+<table>
+<tr><th>Geliehene Bits</th><th>Anzahl Subnetze</th><th>Verbleibende Hostbits (Beispiel ab /24)</th></tr>
+<tr><td>1 Bit</td><td>2 Subnetze</td><td>7 Hostbits übrig</td></tr>
+<tr><td>2 Bit</td><td>4 Subnetze</td><td>6 Hostbits übrig</td></tr>
+<tr><td>3 Bit</td><td>8 Subnetze</td><td>5 Hostbits übrig</td></tr>
+</table>
+<p>Das Muster: Mit jedem weiteren geliehenen Bit verdoppelt sich die linke Spalte, während die rechte Spalte um 1 sinkt. Genau dieses Muster steckt hinter der Formel im nächsten Schritt.</p>
+
+<h3>4. Die Formeln (jetzt, als Werkzeug — nicht als Einstieg)</h3>
+<p>Sobald das Prinzip aus Schritt 3 sitzt, lässt sich das Verdoppeln/Halbieren als Formel schreiben:</p>
+<div class="callout"><span class="tag">Formeln</span>Anzahl Subnetze = <span class="sn-op">2</span><sup>geliehene Bits</sup><br>Nutzbare Hosts je Subnetz = <span class="sn-op">2</span><sup>verbleibende Hostbits</sup> <span class="sn-op">−</span> <span class="sn-num">2</span></div>
+<p>Das <strong>−2</strong> in der zweiten Formel ist keine willkürliche Korrektur, sondern hat einen konkreten Grund: Jedes Subnetz braucht selbst eine <strong>Netzadresse</strong> (die allererste Adresse — identifiziert das Subnetz als Ganzes, kein Gerät darf sie tragen) und eine <strong>Broadcastadresse</strong> (die allerletzte Adresse — steht für „alle Geräte in diesem Subnetz gleichzeitig"). Beide sind für einzelne Geräte nicht nutzbar, daher werden sie von der Gesamtzahl abgezogen.</p>
+
+<h3>5. Praxisbeispiel — Schritt für Schritt durchgerechnet</h3>
+<p><strong>Aufgabe:</strong> Gegeben ist das Netz <code>192.168.1.0/24</code>. Gesucht sind mindestens 4 Subnetze. Wie sehen die neue Maske und die einzelnen Subnetze aus?</p>
+
+<div class="sn-step"><div class="sn-badge">1</div><div class="sn-step-body">Wie viele Subnetze werden gebraucht? → <span class="sn-num">4</span></div></div>
+<div class="sn-step"><div class="sn-badge">2</div><div class="sn-step-body">Wie viele Bits muss ich leihen, damit 2<sup>Bits</sup> mindestens 4 ergibt? 2<sup>2</sup> = <span class="sn-num">4</span> passt exakt → <span class="sn-num">2 Bit</span> leihen.</div></div>
+<div class="sn-step"><div class="sn-badge">3</div><div class="sn-step-body">Neue Präfixlänge = altes Präfix + geliehene Bits = 24 <span class="sn-op">+</span> 2 = <span class="sn-num">/26</span></div></div>
+<div class="sn-step"><div class="sn-badge">4</div><div class="sn-step-body">Die neue Maske im letzten Oktett: 2 zusätzliche 1-Bits ergeben <code>11000000</code> = <span class="sn-num">192</span>. Die volle Maske lautet <code>255.255.255.192</code>.</div></div>
+<div class="sn-step"><div class="sn-badge">5</div><div class="sn-step-body">Die <strong>Blockgröße</strong> (der Abstand zwischen den Subnetzen) ist 256 <span class="sn-op">−</span> 192 = <span class="sn-num">64</span>.</div></div>
+<div class="sn-step"><div class="sn-badge">6</div><div class="sn-step-body">Ab der ursprünglichen Netzadresse in <span class="sn-num">64er</span>-Schritten hochzählen — das ergibt alle vier Subnetze.</div></div>
+
+<table>
+<tr><th>Subnetz</th><th>Netzadresse</th><th>Erste nutzbare Adresse</th><th>Letzte nutzbare Adresse</th><th>Broadcastadresse</th></tr>
+<tr><td>1</td><td>192.168.1.0</td><td>192.168.1.1</td><td>192.168.1.62</td><td>192.168.1.63</td></tr>
+<tr><td>2</td><td>192.168.1.64</td><td>192.168.1.65</td><td>192.168.1.126</td><td>192.168.1.127</td></tr>
+<tr><td>3</td><td>192.168.1.128</td><td>192.168.1.129</td><td>192.168.1.190</td><td>192.168.1.191</td></tr>
+<tr><td>4</td><td>192.168.1.192</td><td>192.168.1.193</td><td>192.168.1.254</td><td>192.168.1.255</td></tr>
+</table>
+<p>Zur Kontrolle mit der Formel aus Schritt 4: 6 verbleibende Hostbits ergeben 2<sup>6</sup> − 2 = <strong>62 nutzbare Adressen</strong> je Subnetz — genau die Differenz zwischen erster und letzter nutzbarer Adresse in jeder Zeile oben.</p>
+
+<h3>6. Der Schnelltrick für die Prüfung</h3>
+<div class="callout"><span class="tag">Blockgröße-Methode</span>1. Blockgröße = 256 − Maskenwert im „interessanten" Oktett (dem Oktett, das weder 0 noch 255 ist).<br>2. Ab der Netzadresse in Blockgröße-Schritten hochzählen → jede Zahl ist die nächste Subnetz-Adresse.<br>3. In jedem Subnetz gilt: erste Adresse = Netzadresse (nicht nutzbar), letzte Adresse = Broadcast (nicht nutzbar), alles dazwischen ist vergebbar.</div>
+
+<h3>7. Referenztabelle — das Cheat-Sheet</h3>
+<p>Diese Tabelle deckt die gängigen Prüfungsfälle ab, ausgehend von einem ursprünglichen <code>/24</code>-Netz. Cyan markiert die Präfixlänge (die „Frage"), Grün die daraus berechneten Werte (die „Antwort").</p>
+<table class="sn-cheat">
+<tr><th>Präfix</th><th>Maske (letztes Oktett)</th><th>Hostbits</th><th>Nutzbare Hosts</th><th>Subnetze aus /24</th></tr>
+<tr><td>/24</td><td>0 → 255.255.255.0</td><td>8</td><td>254</td><td>1 (Ausgangsnetz)</td></tr>
+<tr><td>/25</td><td>128 → 255.255.255.128</td><td>7</td><td>126</td><td>2</td></tr>
+<tr><td>/26</td><td>192 → 255.255.255.192</td><td>6</td><td>62</td><td>4</td></tr>
+<tr><td>/27</td><td>224 → 255.255.255.224</td><td>5</td><td>30</td><td>8</td></tr>
+<tr><td>/28</td><td>240 → 255.255.255.240</td><td>4</td><td>14</td><td>16</td></tr>
+<tr><td>/29</td><td>248 → 255.255.255.248</td><td>3</td><td>6</td><td>32</td></tr>
+<tr><td>/30</td><td>252 → 255.255.255.252</td><td>2</td><td>2</td><td>64</td></tr>
+</table>
+<div class="callout"><span class="tag">Sonderfälle</span><strong>/31:</strong> 0 nutzbare Adressen nach der Standardformel — wird aber gezielt für reine Punkt-zu-Punkt-Verbindungen genutzt (z. B. zwischen zwei Routern), bei denen beide der zwei Adressen als Hosts zählen, ohne separate Netz-/Broadcastadresse (RFC 3021). <strong>/32:</strong> eine einzelne, exakte Host-Adresse — typisch für Routen zu einem ganz bestimmten Einzelgerät.</div>
+
+<h3>8. IPv6-Subnetting</h3>
+<p>Bei IPv6 gilt dieselbe Grundlogik wie bei IPv4 — pro geliehenem Bit verdoppelt sich die Anzahl der Subnetze —, aber die Praxis sieht anders aus: Der Adressraum ist so riesig, dass niemand Adressen sparen muss. IPv6-Subnetting ist eine reine <strong>Organisationsfrage</strong>, keine Sparfrage.</p>
+<p>Eine IPv6-Adresse hat 128 Bit, geschrieben als 8 Blöcke zu je 16 Bit (Hex). In der Praxis bekommt praktisch jedes Endgeräte-Netz einen <strong>/64</strong>-Präfix — hier wird, anders als bei IPv4, so gut wie nie bis auf einzelne Host-Bits heruntergerechnet, weil ein einzelnes /64 bereits 2<sup>64</sup> Adressen bereithält.</p>
+<p>Subnetting bedeutet bei IPv6 also meist: Ein Provider vergibt z. B. ein <strong>/48</strong>-Präfix. Der Bereich zwischen <code>/48</code> und <code>/64</code> — also 16 Bit — steht komplett zur freien Aufteilung in einzelne /64-Subnetze zur Verfügung.</p>
+<div class="callout"><span class="tag">Formel bleibt gleich</span>Mögliche /64-Subnetze aus einem /48 = 2<sup>64−48</sup> = 2<sup>16</sup> = <strong>65 536 Subnetze</strong> — für praktisch jede Organisation mehr als genug.</div>
+<p><strong>Praktisches Beispiel:</strong> Aus dem zugeteilten Präfix <code>2001:db8:abcd::/48</code> entstehen die einzelnen /64-Subnetze, indem man den passenden Hex-Block zwischen Präfix und Interface-Teil einfach hochzählt:</p>
+<table>
+<tr><th>Subnetz-Nr.</th><th>Vollständiges Präfix</th></tr>
+<tr><td>0</td><td>2001:db8:abcd:0000::/64</td></tr>
+<tr><td>1</td><td>2001:db8:abcd:0001::/64</td></tr>
+<tr><td>2</td><td>2001:db8:abcd:0002::/64</td></tr>
+<tr><td>…</td><td>…</td></tr>
+<tr><td>65535</td><td>2001:db8:abcd:ffff::/64</td></tr>
+</table>
+<table>
+<tr><th>Zugeteiltes Präfix</th><th>Bits bis /64</th><th>Mögliche /64-Subnetze</th></tr>
+<tr><td>/48 (typische Standortzuteilung)</td><td>16</td><td>2¹⁶ = 65 536</td></tr>
+<tr><td>/56 (kleinere Zuteilung, z. B. Heimanschluss)</td><td>8</td><td>2⁸ = 256</td></tr>
+<tr><td>/60</td><td>4</td><td>2⁴ = 16</td></tr>
+</table>
+<div class="callout"><span class="tag">Warum kein „−2" bei IPv6?</span>IPv6 kennt kein Broadcast mehr, nur <strong>Multicast</strong>. Die einzige reservierte Sonderadresse je Subnetz ist die Subnet-Router-Anycast-Adresse — praktisch bedeutungslos für die Hostzahl, da ein /64 ohnehin 2<sup>64</sup> Adressen bereitstellt. Die „minus 2"-Rechnung aus dem IPv4-Teil entfällt bei IPv6 dadurch komplett.</div>
 </section>
 
 <section id="r-routing">
 <h2>Routing & Switching</h2>
 <p><strong>Switching</strong> arbeitet innerhalb eines Netzes auf Schicht 2 (MAC), <strong>Routing</strong> verbindet Netze auf Schicht 3 (IP).</p>
 <p><span class="term">Switch:</span> lernt aus der Quell-MAC eingehender Frames, welche MAC an welchem Port hängt (MAC-Adresstabelle / CAM-Table, Content Addressable Memory). Unbekannte Ziel-MAC → <strong>Flooding</strong> an alle Ports außer dem Eingangsport. Broadcasts werden innerhalb der Broadcastdomäne geflutet.</p>
+<div class="callout"><span class="tag">Switching-Verfahren</span><strong>Store-and-Forward:</strong> Der Switch empfängt den kompletten Frame, prüft die Prüfsumme und verwirft fehlerhafte Frames, bevor er weiterleitet — sicherer, aber mit etwas höherer Latenz. <strong>Cut-Through:</strong> Der Switch beginnt die Weiterleitung bereits, sobald die Ziel-MAC-Adresse gelesen ist, ohne den ganzen Frame abzuwarten — schneller, leitet aber auch fehlerhafte Frames weiter. Ergänzend hält jedes Gerät einen <strong>ARP-Cache</strong>: eine temporäre Tabelle bereits aufgelöster IP-zu-MAC-Zuordnungen, die wiederholte ARP-Anfragen im selben Netz erspart.</div>
 <p><span class="term">Router:</span> entscheidet anhand der Ziel-IP und seiner <strong>Routingtabelle</strong> über den nächsten Hop. Ziele außerhalb des eigenen Netzes gehen ans <strong>Default Gateway</strong>. Router begrenzen die Broadcastdomäne.</p>
 <table>
 <tr><th></th><th>Statisches Routing</th><th>Dynamisches Routing</th></tr>
@@ -298,13 +399,13 @@
 <tr><td>Einsatz</td><td>kleine Netze</td><td>große, dynamische Netze</td></tr>
 </table>
 <div class="callout"><span class="tag">Zustellung</span>Ziel im selben Subnetz → direkt per MAC über den Switch (kein Router). Ziel in fremdem Netz → ans Default Gateway zum Weiterrouten. Hat die Routingtabelle mehrere passende Einträge, gewinnt der spezifischste (<strong>Longest Prefix Match</strong>) — ein /28-Eintrag schlägt einen /24-Eintrag.</div>
-<p><span class="term">VLAN</span> (Virtual Local Area Network): trennt einen physischen Switch logisch in mehrere Broadcastdomänen — z. B. Gäste-WLAN vom Firmennetz, ohne separate Hardware. Zwei VLANs kommunizieren nur über einen Router oder L3-Switch (Inter-VLAN-Routing). Ein <strong>Trunk-Port</strong> transportiert Frames mehrerer VLANs gleichzeitig, markiert nach <strong>IEEE 802.1Q</strong> mit einem 4-Byte-VLAN-Tag (12 Bit VLAN-ID, bis zu 4096 VLANs). Ein normaler (Access-)Port trägt dagegen nur ein VLAN, untagged.</p>
+<p><span class="term">VLAN</span> (Virtual Local Area Network): trennt einen physischen Switch logisch in mehrere Broadcastdomänen — z. B. Gäste-WLAN vom Firmennetz, ohne separate Hardware. Zwei VLANs kommunizieren nur über einen Router oder L3-Switch (Inter-VLAN-Routing). Ein <strong>Trunk-Port</strong> transportiert Frames mehrerer VLANs gleichzeitig, markiert nach <strong>IEEE 802.1Q</strong> mit einem 4-Byte-VLAN-Tag (12 Bit VLAN-ID, theoretisch 4096 Werte). Nutzbar sind davon 4094, da die IDs <code>0</code> und <code>4095</code> reserviert sind. Ein normaler (Access-)Port trägt dagegen nur ein VLAN, untagged.</p>
 <p><span class="term">STP</span> (Spanning Tree Protocol): verhindert Switching-Loops in redundant verkabelten Netzen, indem es überzählige Verbindungen blockiert und erst bei Ausfall der aktiven Strecke aktiviert.</p>
 </section>
 
 <section id="r-vlan">
 <h2>VLAN-Segmentierung vertieft</h2>
-<p><strong>Warum segmentieren?</strong> Drei Kerngründe sprechen für die Aufteilung physischer Netze in VLANs: <strong>kleinere Broadcastdomänen</strong> (weniger Grundlast, Broadcast-Stürme bleiben lokal begrenzt), <strong>logische Trennung</strong> von Abteilungen, Gerätegruppen oder Gästen ohne separate Hardware und Verkabelung, sowie <strong>feinere Sicherheits- und Zugriffskontrolle</strong> — der Verkehr zwischen Segmenten läuft zwingend über einen Router/L3-Switch und kann dort gefiltert werden. Weitere Pluspunkte: Flexibilität bei Umzügen (logische statt physische Umverkabelung) und Priorisierung, z. B. ein eigenes Voice-VLAN für VoIP.</p>
+<p><strong>Warum segmentieren?</strong> Drei Kerngründe sprechen für die Aufteilung physischer Netze in VLANs: <strong>kleinere Broadcastdomänen</strong> (weniger Grundlast, Broadcast-Stürme bleiben lokal begrenzt), <strong>logische Trennung</strong> von Abteilungen, Gerätegruppen oder Gästen ohne separate Hardware und Verkabelung, sowie <strong>feinere Sicherheits- und Zugriffskontrolle</strong> — der Verkehr zwischen Segmenten läuft über einen Router bzw. L3-Switch und kann dort gefiltert werden. Weitere Pluspunkte: Flexibilität bei Umzügen (logische statt physische Umverkabelung) und Priorisierung, z. B. ein eigenes Voice-VLAN für VoIP.</p>
 <table>
 <tr><th></th><th>Statische VLANs (portbasiert)</th><th>Dynamische VLANs (MAC-/regelbasiert)</th></tr>
 <tr><td>Zuordnung</td><td>fest am Switch-Port konfiguriert</td><td>anhand von Merkmalen (v. a. MAC-Adresse) aus einer zentralen Datenbank</td></tr>
@@ -320,6 +421,7 @@
 <p><span class="term">DHCP</span> (Dynamic Host Configuration Protocol) vergibt automatisch IP-Konfiguration. Ablauf <strong>DORA</strong>: <code>Discover</code> (Client sucht per Broadcast) → <code>Offer</code> (Server bietet an) → <code>Request</code> (Client fordert an) → <code>Acknowledge</code> (Server bestätigt). Vergeben werden IP, Subnetzmaske, Gateway, DNS-Server und die <strong>Lease-Time</strong>. Ohne DHCP: APIPA (169.254.x.x). Ports: 67 (Server) / 68 (Client). Da DHCP-Broadcasts nicht über Router hinauskommen, leitet ein <strong>DHCP-Relay-Agent</strong> sie als Unicast an einen zentralen Server weiter — ein Server bedient so mehrere Subnetze.</p>
 <p><span class="term">DNS</span> (Domain Name System) löst Namen in IP-Adressen auf. Ablauf: der <strong>Resolver</strong> fragt <strong>Root</strong> → <strong>TLD</strong> (.de, .com) → <strong>autoritativen Server</strong> (verbindliche Zone). Ein rekursiver Resolver erledigt das komplett für den Client; Antworten werden per <strong>TTL</strong> gecacht. Port 53.</p>
 <p>Bei der <strong>rekursiven</strong> Auflösung übernimmt der Resolver die gesamte Kette und liefert dem Client die fertige Antwort. Bei der <strong>iterativen</strong> Auflösung gibt jeder gefragte Server nur einen Verweis auf den nächsten zurück, und der Resolver fragt selbst Schritt für Schritt weiter.</p>
+<div class="callout"><span class="tag">Ablaufkette</span><code>Client</code> → <code>Rekursiver Resolver</code> → <code>Root-Server</code> → <code>TLD-Server</code> → <code>autoritativer DNS-Server</code> — der Resolver durchläuft diese Kette stellvertretend für den Client und gibt am Ende nur die fertige Antwort zurück.</div>
 <table>
 <tr><th>Record</th><th>Bedeutung</th></tr>
 <tr><td>A</td><td>Name → IPv4</td></tr>
@@ -355,9 +457,9 @@
 <p><span class="term">Hybrid:</span> Daten werden symmetrisch mit einem Sitzungsschlüssel verschlüsselt (schnell), der Sitzungsschlüssel wird asymmetrisch mit dem Public Key des Empfängers übertragen (sicher). Genutzt bei HTTPS, VPN, PGP/S-MIME.</p>
 <p><span class="term">Digitale Signatur:</span> Der Absender verschlüsselt den <strong>Hashwert</strong> der Nachricht mit seinem <strong>privaten</strong> Schlüssel. Der Empfänger prüft mit dem <strong>öffentlichen</strong> Schlüssel und vergleicht die Hashes → <strong>Authentizität</strong> und <strong>Integrität</strong>. Ein Hash muss kollisionsresistent und nicht umkehrbar sein; beim Passwort-Hashing verhindert ein zufälliger <strong>Salt</strong> pro Passwort, dass vorberechnete Tabellen (Rainbow-Tables) funktionieren.</p>
 <p><span class="term">Diffie-Hellman:</span> Verfahren, mit dem zwei Parteien über einen unsicheren Kanal einen gemeinsamen geheimen Schlüssel vereinbaren, ohne ihn zu übertragen — Basis vieler Schlüsselaustausch-Verfahren bei HTTPS und VPN.</p>
-<p><span class="term">SSL/TLS:</span> Protokoll zur verschlüsselten, authentifizierten Absicherung von Verbindungen — die Grundlage von <strong>HTTPS</strong>. SSL ist der veraltete, gebrochene Vorgänger; heute wird ausschließlich <strong>TLS</strong> (aktuell 1.2/1.3) eingesetzt, der Name „SSL" hält sich nur umgangssprachlich. TLS liefert drei Dinge: <strong>Vertraulichkeit</strong> (Verkehr nicht mitlesbar), <strong>Integrität</strong> (Manipulation fällt auf) und <strong>Serverauthentifizierung</strong> per X.509-Zertifikat. Wichtig fürs Verständnis: TLS sichert nur den <em>Transportweg</em> — es verschlüsselt keine Daten auf dem Server, anonymisiert nicht und prüft keinen Schadcode.</p>
+<p><span class="term">SSL/TLS:</span> Protokoll zur verschlüsselten, authentifizierten Absicherung von Verbindungen — die Grundlage von <strong>HTTPS</strong>. SSL ist der veraltete, gebrochene Vorgänger; heute wird praktisch nur noch <strong>TLS</strong> (aktuell 1.2/1.3) eingesetzt, der Name „SSL" hält sich nur umgangssprachlich. TLS liefert drei Dinge: <strong>Vertraulichkeit</strong> (Verkehr nicht mitlesbar), <strong>Integrität</strong> (Manipulation fällt auf) und <strong>Serverauthentifizierung</strong> per X.509-Zertifikat. Wichtig fürs Verständnis: TLS sichert nur den <em>Transportweg</em> — es verschlüsselt keine Daten auf dem Server, anonymisiert nicht und prüft keinen Schadcode.</p>
 <p><span class="term">PSK</span> (Pre-Shared Key): ein vorab auf beiden Seiten hinterlegtes gemeinsames Geheimnis für symmetrische Authentifizierung/Verschlüsselung — kein Zertifikat, kein Schlüsselaustausch zur Laufzeit nötig. Einsatz z. B. bei <strong>WPA2/WPA3-Personal</strong> (der PSK ist das WLAN-Passwort, daraus werden die Sitzungsschlüssel abgeleitet) und als Authentifizierungsvariante bei <strong>IPsec</strong>-Verbindungen. Schwäche: Ein geteiltes Geheimnis skaliert schlecht und muss bei Kompromittierung überall getauscht werden — deshalb setzen Firmen auf Zertifikate oder 802.1X/EAP.</p>
-<div class="callout"><span class="tag">PKI (Public Key Infrastructure)</span>Ein <strong>Zertifikat</strong> (Standard <strong>X.509</strong>) bindet einen Public Key an eine Identität, signiert von einer <strong>CA</strong>. Hierarchie: Root-CA → <strong>Intermediate-CA</strong> (stellt im Alltag die Endnutzerzertifikate aus, während die Root-CA offline bleibt) → End-Entity. Vertrauen: Clients vertrauen der Root-CA und damit allem, was sie signiert. Ein <strong>Self-Signed Certificate</strong> ist von seiner eigenen CA signiert — ohne externen Vertrauensanker, daher von Browsern standardmäßig nicht akzeptiert. Widerruf wird über <strong>CRL</strong> (Certificate Revocation List) oder <strong>OCSP</strong> (Online Certificate Status Protocol) geprüft.</div>
+<div class="callout"><span class="tag">PKI (Public Key Infrastructure)</span>Ein <strong>Zertifikat</strong> (Standard <strong>X.509</strong>) bindet einen Public Key an eine Identität, signiert von einer <strong>CA</strong>. Hierarchie: Root-CA → <strong>Intermediate-CA</strong> (stellt im Alltag die Endnutzerzertifikate aus, während die Root-CA offline bleibt) → End-Entity. Vertrauen: Clients vertrauen der Root-CA und damit allem, was sie signiert. Beantragt wird ein Zertifikat über einen <strong>CSR</strong> (Certificate Signing Request) — er enthält den Public Key und die Identitätsdaten des Antragstellers, den die CA prüft und signiert. Ein <strong>Self-Signed Certificate</strong> ist von seiner eigenen CA signiert — ohne externen Vertrauensanker, daher von Browsern standardmäßig nicht akzeptiert. Widerruf wird über <strong>CRL</strong> (Certificate Revocation List) oder <strong>OCSP</strong> (Online Certificate Status Protocol) geprüft.</div>
 </section>
 
 <section id="r-vpn">
@@ -401,23 +503,23 @@
 <tr><td>versteckte SSID</td><td>schwach (auslesbar)</td></tr>
 </table>
 <div class="callout"><span class="tag">Planung</span>Gäste-WLAN per <strong>VLAN</strong> vom Firmennetz trennen. <strong>Kanalwahl</strong> besonders bei 2,4 GHz wichtig — nur die Kanäle 1, 6 und 11 überlappen sich in Europa nicht. <strong>Mesh</strong>: mehrere APs, gemeinsame SSID, nahtloses <strong>Roaming</strong> (mit <strong>802.11r</strong> ohne erneute Anmeldung). Ein <strong>Wireless Controller</strong> verwaltet mehrere APs zentral. <strong>Band Steering</strong> lenkt Dual-Band-Geräte automatisch aufs schnellere 5-GHz-Band. AP zentral und hoch platzieren.</div>
-<p><strong>Wi-Fi 6</strong> (IEEE <strong>802.11ax</strong>) ist der aktuelle Standard nach Wi-Fi 5 (802.11ac) und Wi-Fi 4 (802.11n). <strong>WPA3-Personal</strong> nutzt statt PSK das Verfahren <strong>SAE</strong> (Simultaneous Authentication of Equals) — macht Offline-Brute-Force-Angriffe auf das Passwort praktisch unmöglich.</p>
+<p><strong>Wi-Fi 6</strong> (IEEE <strong>802.11ax</strong>) ist der aktuelle Standard nach Wi-Fi 5 (802.11ac) und Wi-Fi 4 (802.11n). <strong>WPA3-Personal</strong> nutzt statt PSK das Verfahren <strong>SAE</strong> (Simultaneous Authentication of Equals) — macht Offline-Brute-Force-Angriffe auf das Passwort praktisch unmöglich. Ergänzend zu 802.11r verbessern auch <strong>802.11k</strong> (liefert dem Client eine Nachbarschaftsliste verfügbarer APs) und <strong>802.11v</strong> (Netzwerk-unterstütztes Roaming-Management) das Wechseln zwischen Access Points — für die Prüfung eher Zusatzwissen als Pflichtstoff.</p>
 <div class="callout"><span class="tag">Schwachstellen</span><strong>WPS</strong> (Wi-Fi Protected Setup) vereinfacht die Einrichtung, ist aber durch PIN-Brute-Force angreifbar und sollte deaktiviert werden. Das <strong>Hidden-Node-Problem</strong>: zwei Clients hören sich gegenseitig nicht und senden gleichzeitig zum AP — es kollidiert, obwohl beide CSMA/CA korrekt anwenden.</div>
 </section>
 
 <section id="r-virt">
 <h2>Virtualisierung Grundlagen</h2>
-<p><strong>Virtuell</strong> heißt: nicht real vorhanden, aber real erscheinend. Die virtuelle Infrastruktur läuft dabei immer auf echter Hardware — <strong>Virtualisierung von Betriebssystemen</strong> bedeutet, mehrere Betriebssysteme gleichzeitig auf einer gemeinsamen Hardwarebasis zu betreiben.</p>
+<p><strong>Virtuell</strong> heißt: nicht real vorhanden, aber real erscheinend. Die virtuelle Infrastruktur läuft dabei auf echter Hardware — <strong>Virtualisierung von Betriebssystemen</strong> bedeutet, mehrere Betriebssysteme gleichzeitig auf einer gemeinsamen Hardwarebasis zu betreiben.</p>
 <table>
 <tr><th>Begriff</th><th>Kernaussage</th></tr>
-<tr><td>Simulation</td><td>vollständige Software-Nachbildung eines Systems, kein reales Ergebnis (Flugsimulator bringt den Piloten nicht ans Ziel)</td></tr>
+<tr><td>Simulation</td><td>bildet das Verhalten eines Systems softwareseitig nach, ohne das reale System zu ersetzen (Flugsimulator bringt den Piloten nicht ans Ziel)</td></tr>
 <tr><td>Emulation</td><td>alle Hardware-Komponenten inkl. CPU werden nachgebildet — CPU-Emulation übersetzt Befehle, großer Overhead</td></tr>
 <tr><td>Virtualisierung</td><td>wie Emulation, nur die CPU wird nicht nachgebildet — der Gast nutzt die Host-CPU-Architektur direkt, deutlich mehr Performance</td></tr>
 </table>
-<p><strong>Servervirtualisierung:</strong> Jeder virtuelle Server erhält ein festes Ressourcenvolumen des Hosts. Vorteile: bessere Auslastung, schnelleres Backup, zentrale Verwaltung, Skalierbarkeit. Nachteile: ein Hardwareausfall trifft alle VMs gleichzeitig, nicht jede Software läuft virtualisiert.</p>
+<p><strong>Servervirtualisierung:</strong> Jeder virtuelle Server erhält virtuelle Ressourcen, die der Hypervisor dynamisch verwaltet — die Zuteilung kann fest reserviert oder je nach Bedarf flexibel angepasst werden. Vorteile: bessere Auslastung, schnelleres Backup, zentrale Verwaltung, Skalierbarkeit. Nachteile: ein Hardwareausfall trifft alle VMs gleichzeitig, nicht jede Software läuft virtualisiert.</p>
 <div class="callout"><span class="tag">Ressourcen</span><strong>Überprovisionierung (Overcommitment):</strong> VMs wird in Summe mehr zugewiesen, als physisch existiert. Solange nicht alle gleichzeitig ihr volles Kontingent abrufen, funktioniert das — bei Spitzenlast drohen Engpässe. Gegenmittel: Monitoring, Auslastungsprognosen, im Ernstfall <strong>Live-Migration</strong> — die Verschiebung einer laufenden VM auf einen anderen Host, ohne den Betrieb zu unterbrechen.</div>
 <p><strong>Anwendungsvirtualisierung:</strong> Die Installation wird vom Client getrennt, der die Anwendung nutzt — Teile werden bei Bedarf geladen, lokal installiert wird nichts. Vorteil: eine zentrale Installation, einfacher Austausch. Nachteil: grafiklastige Anwendungen leiden, stabile Verbindung nötig.</p>
-<p><strong>Betriebssystem-/Containervirtualisierung:</strong> läuft als Anwendung innerhalb des Host-Betriebssystems, kein eigener Hypervisor nötig — alle Container teilen sich den Host-Kernel. Ein Container bündelt Anwendung, Abhängigkeiten, Bibliotheken und Konfiguration. Vorteil: geringer Ressourcenverbrauch, schnelle Bereitstellung. Nachteil: Einrichtung und Betrieb erfordern mehr Fachwissen. Beispiele: Docker, Microsoft Hyper-V Container, BSD Jails, Solaris Zones.</p>
+<p><strong>Betriebssystem-/Containervirtualisierung:</strong> Container nutzen den Kernel des Host-Betriebssystems gemeinsam und benötigen dafür keinen eigenen Hypervisor. Ein Container bündelt Anwendung, Abhängigkeiten, Bibliotheken und Konfiguration. Vorteil: geringer Ressourcenverbrauch, schnelle Bereitstellung. Nachteil: Einrichtung und Betrieb erfordern mehr Fachwissen. Beispiele: Docker, Microsoft Hyper-V Container, BSD Jails, Solaris Zones.</p>
 <p><strong>VDI</strong> (Virtual Desktop Infrastructure): individuell konfigurierte Betriebssysteminstanzen laufen zentral auf einem Server statt lokal. Vorteil: hohe Datensicherheit, einfache Administration, Einsatz von <strong>Thin Clients</strong> möglich. Nachteil: hohe Anfangskosten, Serverausfall legt alle Arbeitsplätze gleichzeitig lahm.</p>
 </section>
 
@@ -429,10 +531,10 @@
 <tr><td>Typ 1 (Baremetal)</td><td>läuft direkt auf der Hardware, kein Host-Betriebssystem nötig</td><td>Hyper-V, VMware ESXi, Citrix Xen, KVM</td></tr>
 <tr><td>Typ 2 (Hosted)</td><td>setzt auf einem vollständig installierten Betriebssystem auf</td><td>VirtualBox, VMware Workstation, Virtual PC, Parallels</td></tr>
 </table>
-<div class="callout"><span class="tag">Ring-Schema</span>Privilegierte Befehle einer VM bräuchten eigentlich Ring 0, laufen aber aus Sicherheitsgründen in Ring 3. Der Hypervisor fängt diese Befehle ab und baut sie passend um, damit das Gastsystem trotzdem stabil läuft. Ältere Hypervisor-Versionen brauchen dafür Anpassungen an neue Betriebssysteme — daher laufen manche Systeme auf veralteten Hypervisoren schlecht.</div>
-<p><strong>Para-Virtualisierung</strong> (Typ 1): Statt Hardware zu emulieren, stellt der Hypervisor eine API bereit, die der Gast direkt nutzen muss. Vorteil: kein Overhead durch Befehlsübersetzung, dadurch schnellere Kommunikation. Nachteil: der Gast-Kernel muss angepasst oder bereits vorbereitet sein. Einsatz: Rechenzentren, Cloud-Anbieter.</p>
-<p><strong>Hardwareunterstützung:</strong> Intel VT und AMD-V erweitern die Ring-Topologie des Prozessors direkt — keine Anpassung am Gast-Kernel nötig, kein Overhead durch Software-Übersetzung. Beide Erweiterungen sind zueinander nicht kompatibel. Vor dieser Hardwareunterstützung musste die Befehlsübersetzung komplett per Software erledigt werden.</p>
-<div class="callout"><span class="tag">Grenzen</span>Auf einem Host können beliebig viele VMs laufen — die Grenze setzt allein die vorhandene physische Hardware. Microsoft empfiehlt bei Hyper-V maximal 8 virtuelle CPUs je physischem Kern: bei einem Quad-Core-Prozessor macht das 4 × 8 = <strong>32 virtuelle CPUs</strong>. Vorteile der Virtualisierung insgesamt: kostengünstig, flexibel, ideal für Test-/Entwicklungsumgebungen. Nachteil: Fehler in der Virtualisierungssoftware können einem Angreifer den Ausbruch aus der VM ermöglichen.</div>
+<div class="callout"><span class="tag">Ring-Schema</span>Bei rein softwarebasierter Virtualisierung ohne Hardwareunterstützung wollten Gastsysteme eigentlich privilegierte Befehle in Ring 0 ausführen, liefen aber nur in Ring 3. Ältere Hypervisoren lösten das per <strong>Binary Translation</strong>: Der Hypervisor erkannte solche Befehle zur Laufzeit und ersetzte sie durch sichere Äquivalente. Kompatibilitätsprobleme mit neuen Gast-Betriebssystemen entstehen bei alten Hypervisor-Versionen meist durch fehlende Treiber oder fehlende Unterstützung neuer Virtualisierungsfunktionen und CPU-Erweiterungen.</div>
+<p><strong>Para-Virtualisierung</strong> (Typ 1): Statt Hardware zu emulieren, stellt der Hypervisor eine API bereit, die der Gast direkt nutzen muss. Vorteil: deutlich weniger Overhead als bei voller Befehlsübersetzung, dadurch schnellere Kommunikation. Nachteil: der Gast-Kernel muss angepasst oder bereits vorbereitet sein. Einsatz: Rechenzentren, Cloud-Anbieter.</p>
+<p><strong>Hardwareunterstützung:</strong> Intel VT und AMD-V stellen einen eigenen CPU-Modus bereit, in dem privilegierte Befehle des Gastsystems direkt und hardwareunterstützt laufen — keine Anpassung am Gast-Kernel nötig, deutlich weniger Overhead als bei reiner Software-Übersetzung. Beide sind herstellerspezifische Erweiterungen, die denselben Zweck erfüllen, aber nicht direkt kompatibel sind: Ein Prozessor unterstützt jeweils nur die Erweiterung seines eigenen Herstellers.</p>
+<div class="callout"><span class="tag">Grenzen</span>Auf einem Host können viele VMs gleichzeitig laufen — die Grenze setzt allein die vorhandene physische Hardware (CPU, Arbeitsspeicher, Storage). Feste, allgemeingültige Verhältniszahlen wie "X virtuelle CPUs pro physischem Kern" gibt es dafür nicht, die Empfehlungen der Hersteller ändern sich mit neuer Hardware und neuen Hypervisor-Versionen. Vorteile der Virtualisierung insgesamt: kostengünstig, flexibel, ideal für Test-/Entwicklungsumgebungen. Nachteil: Fehler in der Virtualisierungssoftware können einem Angreifer den Ausbruch aus der VM ermöglichen.</div>
 </section>
 
 <section id="r-raid">
@@ -452,11 +554,12 @@
 <h3>Backup-Strategien</h3>
 <table>
 <tr><th>Art</th><th>Sichert</th><th>Wiederherstellung braucht</th></tr>
-<tr><td>Vollsicherung</td><td>immer den kompletten Datenbestand</td><td>nur die Vollsicherung</td></tr>
-<tr><td>Inkrementell</td><td>Änderungen seit dem letzten Backup (beliebiger Art)</td><td>Vollsicherung + alle Inkremente</td></tr>
+<tr><td>Vollsicherung</td><td>bei jedem Lauf den kompletten Datenbestand</td><td>nur die Vollsicherung</td></tr>
+<tr><td>Inkrementell</td><td>Änderungen seit dem letzten Backup, unabhängig von dessen Art</td><td>Vollsicherung + alle Inkremente</td></tr>
 <tr><td>Differenziell</td><td>Änderungen seit der letzten Vollsicherung</td><td>Vollsicherung + letzte Differenz</td></tr>
 </table>
-<div class="callout"><span class="tag">3-2-1-Regel</span>Drei Kopien der Daten, auf zwei verschiedenen Medien, davon eine räumlich getrennt (offsite). Schützt auch bei Brand, Diebstahl oder Wasserschaden am Standort. <strong>RPO</strong> (Recovery Point Objective) = maximal tolerierbarer Datenverlust als Zeitspanne. <strong>RTO</strong> (Recovery Time Objective) = maximal tolerierbare Ausfallzeit bis zur Wiederherstellung. Ein Backup ist erst brauchbar, wenn die Testwiederherstellung funktioniert.</div>
+<div class="callout"><span class="tag">3-2-1-Regel</span>Drei Kopien der Daten — die Originaldaten plus zwei Sicherungskopien —, auf zwei verschiedenen Medien, davon eine räumlich getrennt (offsite). Schützt auch bei Brand, Diebstahl oder Wasserschaden am Standort. <strong>RPO</strong> (Recovery Point Objective) = maximal tolerierbarer Datenverlust als Zeitspanne. <strong>RTO</strong> (Recovery Time Objective) = maximal tolerierbare Ausfallzeit bis zur Wiederherstellung. Ein Backup ist erst brauchbar, wenn die Testwiederherstellung funktioniert.</div>
+<p><strong>Grandfather-Father-Son (GFS)</strong> ist ein klassisches Rotationskonzept für Sicherungsmedien: <strong>Son</strong> = tägliche Sicherungen, <strong>Father</strong> = wöchentliche Sicherungen, <strong>Grandfather</strong> = monatliche Sicherungen. Ältere Medien werden nach einem festen Rhythmus wiederverwendet, sodass mehrere Zeitpunkte in der Vergangenheit verfügbar bleiben, ohne für jeden Tag ein eigenes Medium vorzuhalten.</p>
 </section>
 
 
@@ -548,7 +651,13 @@
 <footer><div class="wrap">
 Layer 8 Academy · Lernbegleiter · Prüfungsvorbereitung · Systemintegration · Anwendungsentwicklung · <span id="footCats">–</span> Kategorien · <span id="footQs">–</span> Fragen · randomisiert · Rotation ohne Wiederholung<br>
 Fachinformatiker · Aura
+<div class="footer-copy">© 2026 boxberger.app</div>
 </div></footer>
+
+<button id="scrollTopBtn" aria-label="Nach oben scrollen" title="Nach oben">
+  <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="19" x2="12" y2="5"></line><polyline points="6 11 12 5 18 11"></polyline></svg>
+</button>
+
 <script src="app.js?v=202607061010"></script>
 </body>
 </html>

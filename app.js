@@ -365,15 +365,15 @@ const POOLS = {
       "ok": true
      },
      {
-      "t": "Die IP-Adresse würde ungültig",
+      "t": "Die IP-Adresse des Servers würde dadurch ihre Gültigkeit verlieren",
       "ok": false
      },
      {
-      "t": "Die Verbindung würde automatisch verschlüsselt",
+      "t": "Sämtliche Verbindungen würden automatisch verschlüsselt aufgebaut",
       "ok": false
      },
      {
-      "t": "Die MAC-Adresse ändert sich",
+      "t": "Die MAC-Adresse der Netzwerkkarte würde sich fortlaufend ändern",
       "ok": false
      }
     ],
@@ -674,6 +674,56 @@ const POOLS = {
      { "t": "Der Server unterscheidet die Clients ausschließlich anhand ihrer jeweiligen MAC-Adresse", "ok": false }
     ],
     "e": "Der lauschende Port bleibt 443. Jede aktive Verbindung wird durch das Vierertupel (Quell-IP, Quellport, Ziel-IP, Zielport) eindeutig — deshalb können viele Clients denselben Serverport nutzen, ohne sich zu vermischen."
+   },
+   {
+    "q": "Was kennzeichnet einen Socket im Listening-Zustand?",
+    "o": [
+     { "t": "Er ist an lokale IP und Port gebunden und wartet auf eingehende Verbindungen, ohne Gegenstelle", "ok": true },
+     { "t": "Er hat bereits eine feste Gegenstelle und tauscht aktiv Daten mit ihr aus", "ok": false },
+     { "t": "Er wurde vom Betriebssystem geschlossen und wartet auf seine Freigabe", "ok": false },
+     { "t": "Er sendet in festen Intervallen Broadcasts, um Clients im Netz zu finden", "ok": false }
+    ],
+    "e": "Ein lauschender Socket kennt nur seine lokale Seite. Erst wenn ein Client sich verbindet, entsteht daraus ein verbundener Socket mit vollständigem Adresspaar aus beiden Seiten."
+   },
+   {
+    "q": "Worin unterscheiden sich Stream-Sockets und Datagram-Sockets?",
+    "o": [
+     { "t": "Stream-Sockets arbeiten verbindungsorientiert über TCP, Datagram-Sockets verbindungslos über UDP", "ok": true },
+     { "t": "Stream-Sockets übertragen nur Text, Datagram-Sockets ausschließlich Binärdaten", "ok": false },
+     { "t": "Stream-Sockets laufen nur auf Servern, Datagram-Sockets nur auf Clients", "ok": false },
+     { "t": "Stream-Sockets nutzen IPv6, Datagram-Sockets sind auf IPv4 beschränkt", "ok": false }
+    ],
+    "e": "Der Socket-Typ legt das Transportverhalten fest: Stream-Sockets liefern einen zuverlässigen, geordneten Datenstrom per TCP, Datagram-Sockets verschicken einzelne Pakete per UDP ohne Zustellgarantie."
+   },
+   {
+    "q": "Welche Aufgabe erfüllt das Binden eines Sockets auf einem Server?",
+    "o": [
+     { "t": "Es legt fest, unter welcher lokalen IP-Adresse und welchem Port der Socket erreichbar ist", "ok": true },
+     { "t": "Es baut die Verbindung zu einem bestimmten Client vollständig auf", "ok": false },
+     { "t": "Es verschlüsselt den künftigen Datenverkehr auf diesem Socket", "ok": false },
+     { "t": "Es reserviert dauerhaft Arbeitsspeicher für die spätere Datenübertragung", "ok": false }
+    ],
+    "e": "Das Binden verknüpft den Socket mit einer lokalen Adresse und einem Port. Erst danach kann der Server auf diesem Endpunkt lauschen und Verbindungen annehmen."
+   },
+   {
+    "q": "Können TCP und UDP denselben Port gleichzeitig auf einem System nutzen?",
+    "o": [
+     { "t": "Ja, beide Protokolle haben getrennte Portbereiche und stören sich nicht", "ok": true },
+     { "t": "Nein, jeder Port kann systemweit nur von einem Protokoll belegt werden", "ok": false },
+     { "t": "Nur, wenn beide Dienste vom selben Programm gestartet wurden", "ok": false },
+     { "t": "Nur bei Ports oberhalb von 1024, darunter ist es gesperrt", "ok": false }
+    ],
+    "e": "TCP-Port 53 und UDP-Port 53 sind zwei verschiedene Endpunkte — die Portnummernräume der Protokolle sind unabhängig. DNS nutzt genau deshalb beide parallel."
+   },
+   {
+    "q": "Was bewirkt es, wenn ein Server-Socket an die Adresse 0.0.0.0 gebunden wird?",
+    "o": [
+     { "t": "Der Dienst nimmt Verbindungen auf allen Netzwerkschnittstellen des Systems an", "ok": true },
+     { "t": "Der Dienst ist ausschließlich vom lokalen Rechner selbst erreichbar", "ok": false },
+     { "t": "Der Dienst antwortet nur auf Anfragen aus dem eigenen Subnetz", "ok": false },
+     { "t": "Der Dienst wird deaktiviert, bis eine echte Adresse eingetragen ist", "ok": false }
+    ],
+    "e": "0.0.0.0 ist die Wildcard-Adresse: Der Socket lauscht auf sämtlichen Interfaces gleichzeitig. Wer den Dienst nur lokal anbieten will, bindet stattdessen an 127.0.0.1."
    }
   ]
  },
@@ -6337,50 +6387,8 @@ const POOLS = {
  "ip": {
   "name": "IPv4 & IPv6 (Auffrischung)",
   "q": [
-   {
-    "q": "Wie viele Bit hat eine IPv4-Adresse?",
-    "o": [
-     {
-      "t": "32 Bit",
-      "ok": true
-     },
-     {
-      "t": "64 Bit",
-      "ok": false
-     },
-     {
-      "t": "128 Bit",
-      "ok": false
-     },
-     {
-      "t": "16 Bit",
-      "ok": false
-     }
-    ],
-    "e": "IPv4 = 32 Bit, meist als 4 Oktette dezimal geschrieben."
-   },
-   {
-    "q": "Wie viele Bit hat eine IPv6-Adresse?",
-    "o": [
-     {
-      "t": "128 Bit",
-      "ok": true
-     },
-     {
-      "t": "32 Bit",
-      "ok": false
-     },
-     {
-      "t": "64 Bit",
-      "ok": false
-     },
-     {
-      "t": "256 Bit",
-      "ok": false
-     }
-    ],
-    "e": "IPv6 = 128 Bit → gewaltig größerer Adressraum."
-   },
+   
+   
    {
     "q": "Wie wird eine IPv4-Adresse üblicherweise dargestellt?",
     "o": [
@@ -6426,28 +6434,6 @@ const POOLS = {
     "e": "z. B. 2001:0db8:85a3:0000:0000:8a2e:0370:7334."
    },
    {
-    "q": "Welchen maximalen Wert kann ein IPv4-Oktett haben?",
-    "o": [
-     {
-      "t": "255",
-      "ok": true
-     },
-     {
-      "t": "256",
-      "ok": false
-     },
-     {
-      "t": "254",
-      "ok": false
-     },
-     {
-      "t": "128",
-      "ok": false
-     }
-    ],
-    "e": "Ein Oktett = 8 Bit → 0 bis 255."
-   },
-   {
     "q": "Was ist der Hauptgrund für die Einführung von IPv6?",
     "o": [
      {
@@ -6490,50 +6476,6 @@ const POOLS = {
      }
     ],
     "e": "Privat: 10.0.0.0/8, 172.16.0.0/12, 192.168.0.0/16."
-   },
-   {
-    "q": "Wie viele Oktette hat eine IPv4-Adresse?",
-    "o": [
-     {
-      "t": "4",
-      "ok": true
-     },
-     {
-      "t": "6",
-      "ok": false
-     },
-     {
-      "t": "8",
-      "ok": false
-     },
-     {
-      "t": "2",
-      "ok": false
-     }
-    ],
-    "e": "IPv4 = 4 Oktette à 8 Bit = 32 Bit."
-   },
-   {
-    "q": "Was trennt bei IPv6 aufeinanderfolgende Nullblöcke abkürzend?",
-    "o": [
-     {
-      "t": "Ein doppelter Doppelpunkt (::)",
-      "ok": true
-     },
-     {
-      "t": "Ein einfacher Punkt (.)",
-      "ok": false
-     },
-     {
-      "t": "Ein Bindestrich (-)",
-      "ok": false
-     },
-     {
-      "t": "Ein Schrägstrich (/)",
-      "ok": false
-     }
-    ],
-    "e": ":: ersetzt einmalig eine Folge von Null-Blöcken."
    },
    {
     "q": "Wie viele Adressen bietet IPv4 theoretisch ungefähr?",
@@ -6898,28 +6840,6 @@ const POOLS = {
     "e": "Das Router-Advertisement liefert das Präfix; den hinteren Teil bildet das Gerät selbst."
    },
    {
-    "q": "Wofür steht DHCPv6?",
-    "o": [
-     {
-      "t": "Die DHCP-Variante zur Konfiguration von IPv6-Parametern",
-      "ok": true
-     },
-     {
-      "t": "Ein Routingprotokoll für IPv6-Netze",
-      "ok": false
-     },
-     {
-      "t": "Ein Verschlüsselungsverfahren für IPv6",
-      "ok": false
-     },
-     {
-      "t": "Eine spezielle Firewallregel für IPv6",
-      "ok": false
-     }
-    ],
-    "e": "DHCPv6 vergibt bzw. ergänzt IPv6-Konfiguration (zustandsbehaftet oder -los)."
-   },
-   {
     "q": "Was ist der Kernunterschied zwischen SLAAC und DHCPv6?",
     "o": [
      {
@@ -7206,28 +7126,6 @@ const POOLS = {
     "e": "/26 statt /24 = 2 zusätzliche Netzbits → 2^2 = 4 Subnetze."
    },
    {
-    "q": "Was ist die Loopback-Adresse in IPv4?",
-    "o": [
-     {
-      "t": "127.0.0.1",
-      "ok": true
-     },
-     {
-      "t": "192.168.0.1",
-      "ok": false
-     },
-     {
-      "t": "0.0.0.0",
-      "ok": false
-     },
-     {
-      "t": "255.255.255.255",
-      "ok": false
-     }
-    ],
-    "e": "127.0.0.1 = localhost; Pakete an diese Adresse verlassen nie die Netzwerkkarte."
-   },
-   {
     "q": "Welche Adresse erreicht alle Hosts im lokalen Netz (begrenzt Broadcast)?",
     "o": [
      {
@@ -7292,6 +7190,96 @@ const POOLS = {
      }
     ],
     "e": "CIDR-Notation /n = n Bits für den Netzanteil, Rest = Hostbits."
+   },
+   {
+    "q": "Welche Subnetzmaske entspricht der Präfixlänge /27?",
+    "o": [
+     { "t": "255.255.255.224", "ok": true },
+     { "t": "255.255.255.192", "ok": false },
+     { "t": "255.255.255.240", "ok": false },
+     { "t": "255.255.255.248", "ok": false }
+    ],
+    "e": "Bei /27 bleiben 5 Hostbits übrig. Im letzten Oktett ergeben die 3 gesetzten Netzbits 11100000 = 224, also 255.255.255.224."
+   },
+   {
+    "q": "Wie viele nutzbare Host-Adressen bietet ein /25-Netz?",
+    "o": [
+     { "t": "126", "ok": true },
+     { "t": "128", "ok": false },
+     { "t": "124", "ok": false },
+     { "t": "62", "ok": false }
+    ],
+    "e": "Bei /25 bleiben 7 Hostbits übrig: 2⁷ − 2 = 128 − 2 = 126 nutzbare Adressen, nach Abzug von Netz- und Broadcastadresse."
+   },
+   {
+    "q": "In welchem Subnetz liegt die Adresse 10.0.5.20/28, und wie lautet dessen Broadcastadresse?",
+    "o": [
+     { "t": "Das Subnetz reicht von 10.0.5.16 bis .31, Broadcast ist 10.0.5.31", "ok": true },
+     { "t": "Das Subnetz reicht von 10.0.5.0 bis .15, Broadcast ist 10.0.5.15", "ok": false },
+     { "t": "Das Subnetz reicht von 10.0.5.20 bis .35, Broadcast ist 10.0.5.35", "ok": false },
+     { "t": "Das Subnetz reicht von 10.0.5.16 bis .31, Broadcast ist 10.0.5.30", "ok": false }
+    ],
+    "e": "/28 ergibt eine Blockgröße von 16. Die Adresse .20 liegt im zweiten Block (16–31), dessen letzte Adresse .31 die Broadcastadresse ist."
+   },
+   {
+    "q": "Ein Techniker benötigt mindestens 100 nutzbare Host-Adressen in einem Subnetz. Welche Präfixlänge liefert dafür bei möglichst vielen Subnetzen gerade noch genug Kapazität?",
+    "o": [
+     { "t": "/25 mit 126 nutzbaren Hosts", "ok": true },
+     { "t": "/26 mit 62 nutzbaren Hosts", "ok": false },
+     { "t": "/24 mit 254 nutzbaren Hosts", "ok": false },
+     { "t": "/27 mit 30 nutzbaren Hosts", "ok": false }
+    ],
+    "e": "/26 reicht mit 62 Hosts nicht aus. /25 liefert 126 Hosts und erfüllt die Anforderung bei der kleinstmöglichen, also meiste Subnetze erlaubenden Präfixlänge."
+   },
+   {
+    "q": "Zwei Geräte tragen die Adressen 192.168.1.60 und 192.168.1.70, beide mit der Maske 255.255.255.192 (/26). Befinden sie sich im selben Subnetz?",
+    "o": [
+     { "t": "Nein, .60 liegt im Block 0–63 und .70 im Block 64–127 — unterschiedliche Subnetze", "ok": true },
+     { "t": "Ja, beide Adressen liegen im selben durchgehenden Adressblock von 0 bis 127 und teilen sich denselben Netzanteil", "ok": false },
+     { "t": "Ja, da beide Adressen mit derselben Maske konfiguriert wurden", "ok": false },
+     { "t": "Das lässt sich ohne die Angabe des Default Gateways nicht bestimmen", "ok": false }
+    ],
+    "e": "Die Blockgröße bei /26 ist 64. .60 fällt in den ersten Block (0–63), .70 bereits in den zweiten (64–127) — trotz gleicher Maske zwei verschiedene Subnetze."
+   },
+   {
+    "q": "Ein Unternehmen möchte das Netz 192.168.10.0/24 in vier gleich große Teilnetze mit jeweils mindestens 50 nutzbaren Hosts aufteilen. Welche Präfixlänge erfüllt beide Bedingungen gleichzeitig?",
+    "o": [
+     { "t": "/26 — genau 4 Subnetze mit je 62 nutzbaren Hosts", "ok": true },
+     { "t": "/25 — nur 2 Subnetze, obwohl 126 Hosts je Subnetz möglich wären", "ok": false },
+     { "t": "/27 — 8 Subnetze, aber nur 30 nutzbare Hosts je Subnetz", "ok": false },
+     { "t": "/28 — 16 Subnetze mit lediglich 14 nutzbaren Hosts je Subnetz", "ok": false }
+    ],
+    "e": "2 geliehene Bits ergeben aus /24 genau 4 Subnetze (/26) mit je 6 Hostbits, also 62 nutzbaren Adressen — beide Vorgaben werden exakt getroffen."
+   },
+   {
+    "q": "Die Broadcastadresse eines Subnetzes lautet 172.16.4.63, die Maske ist 255.255.255.192 (/26). Wie lautet die zugehörige Netzadresse?",
+    "o": [
+     { "t": "172.16.4.0", "ok": true },
+     { "t": "172.16.4.32", "ok": false },
+     { "t": "172.16.4.62", "ok": false },
+     { "t": "172.16.4.64", "ok": false }
+    ],
+    "e": "Die Blockgröße bei /26 ist 64. Die Broadcastadresse .63 gehört zum ersten Block (0–63), dessen Netzadresse folglich .0 ist."
+   },
+   {
+    "q": "Wie viele /64-Subnetze lassen sich aus einem zugeteilten /60-IPv6-Präfix bilden?",
+    "o": [
+     { "t": "16", "ok": true },
+     { "t": "8", "ok": false },
+     { "t": "32", "ok": false },
+     { "t": "256", "ok": false }
+    ],
+    "e": "Zwischen /60 und /64 liegen 4 Bit zur freien Aufteilung: 2⁴ = 16 mögliche /64-Subnetze."
+   },
+   {
+    "q": "Wie viele /64-Subnetze lassen sich aus einem zugeteilten /56-IPv6-Präfix bilden?",
+    "o": [
+     { "t": "256", "ok": true },
+     { "t": "64", "ok": false },
+     { "t": "1024", "ok": false },
+     { "t": "65536", "ok": false }
+    ],
+    "e": "Zwischen /56 und /64 liegen 8 Bit zur freien Aufteilung: 2⁸ = 256 mögliche /64-Subnetze — deutlich mehr als ein /60-Präfix, aber weniger als ein /48."
    }
   ]
  },
@@ -13029,120 +13017,120 @@ const POOLS = {
    {
     "q": "Was bedeutet \"virtuell\" im IT-Kontext?",
     "o": [
-     { "t": "Die flexible Nachbildung physischer Systeme, die real erscheint, aber nicht echt ist", "ok": true },
-     { "t": "Die dauerhafte Stilllegung physischer Hardware zugunsten reiner Software", "ok": false },
-     { "t": "Die Verschlüsselung sämtlicher Daten auf einem physischen Server", "ok": false },
-     { "t": "Die Vernetzung mehrerer physischer Rechner zu einem Cluster", "ok": false }
+     { "t": "Eine Nachbildung, die real erscheint, ohne selbst die physische Hardware zu sein", "ok": true },
+     { "t": "Die dauerhafte Stilllegung physischer Hardware zugunsten reiner Software, sodass keine Geräte mehr benötigt werden", "ok": false },
+     { "t": "Ein Datenformat, das nur auf Cloud-Servern gelesen werden kann", "ok": false },
+     { "t": "Eine besonders schnelle Variante der Datenübertragung im Netzwerk", "ok": false }
     ],
-    "e": "Virtuell heißt: nicht real vorhanden, aber real erscheinend. Die virtuelle Infrastruktur läuft dabei stets auf echter, traditioneller Hardware."
+    "e": "Virtuell heißt: nicht die physische Hardware selbst, aber für den Nutzer real erscheinend. Die virtuelle Umgebung läuft dabei stets auf echter Hardware."
    },
    {
     "q": "Was ist Virtualisierung von Betriebssystemen im Kern?",
     "o": [
-     { "t": "Die gleichzeitige Nutzung mehrerer Betriebssysteme auf einer gemeinsamen Hardwarebasis", "ok": true },
-     { "t": "Der Austausch eines Betriebssystems gegen eine neuere Version ohne Datenverlust", "ok": false },
-     { "t": "Die Trennung eines Netzwerks in mehrere logisch isolierte Bereiche", "ok": false },
-     { "t": "Die automatische Verteilung von Software-Updates auf alle Endgeräte", "ok": false }
+     { "t": "Mehrere Betriebssysteme teilen sich eine gemeinsame Hardwarebasis und laufen darauf parallel", "ok": true },
+     { "t": "Ein bestehendes Betriebssystem wird gegen eine neuere Version ausgetauscht, ohne dass dabei Daten verloren gehen", "ok": false },
+     { "t": "Ein bestehendes Netzwerk wird in mehrere voneinander isolierte Bereiche mit eigenen Regeln unterteilt", "ok": false },
+     { "t": "Software-Updates werden zentral gebündelt und an alle Endgeräte verteilt", "ok": false }
     ],
-    "e": "Ein leistungsfähiger Computer dient als gemeinsame Basis, auf der mehrere Betriebssysteme parallel betrieben werden."
+    "e": "Ein leistungsfähiger Computer dient als gemeinsame Basis, auf der mehrere Betriebssysteme gleichzeitig betrieben werden."
    },
    {
     "q": "Was bezeichnet Simulation im Unterschied zu Virtualisierung?",
     "o": [
-     { "t": "Die vollständige softwareseitige Nachbildung eines Systems, ohne dass reale Ergebnisse entstehen", "ok": true },
-     { "t": "Den direkten Betrieb eines Gastsystems auf der Hardware-Architektur des Hosts", "ok": false },
-     { "t": "Die Aufteilung physischer Ressourcen auf mehrere gleichwertige Nutzer", "ok": false },
-     { "t": "Die Übersetzung von Prozessorbefehlen zwischen zwei unterschiedlichen CPU-Architekturen", "ok": false }
+     { "t": "Simulation bildet das Verhalten eines Systems softwareseitig nach, ersetzt das reale System dabei aber nicht", "ok": true },
+     { "t": "Simulation betreibt ein vollständig echtes Gastsystem direkt auf der Hardware-Architektur des zugrundeliegenden Hosts", "ok": false },
+     { "t": "Simulation verteilt reale, produktive Arbeitslasten gleichmäßig auf mehrere physische Server im Verbund", "ok": false },
+     { "t": "Simulation übersetzt laufende Prozessorbefehle in Echtzeit zwischen zwei CPU-Architekturen", "ok": false }
     ],
-    "e": "Simulation bildet ein System komplett softwareseitig nach, führt aber zu keinem realen Ergebnis — im Unterschied zur Virtualisierung, die echte Betriebssysteme echt ausführt."
+    "e": "Simulation bildet Verhalten nach, ohne das reale System zu ersetzen — Virtualisierung führt dagegen ein echtes, lauffähiges Gastsystem aus."
    },
    {
     "q": "Ein Flugsimulator ist ein klassisches Beispiel wofür?",
     "o": [
-     { "t": "Simulation: er bildet den Flug nach, bringt den Piloten aber nicht wirklich ans Ziel", "ok": true },
-     { "t": "Emulation: er übersetzt reale Flugdaten in ein anderes Datenformat", "ok": false },
-     { "t": "Virtualisierung: er teilt die Rechenleistung eines Flugzeugs auf mehrere Systeme auf", "ok": false },
-     { "t": "Live-Migration: er verschiebt den Trainingsbetrieb auf ein anderes Gerät", "ok": false }
+     { "t": "Simulation: er bildet den Flug realitätsnah nach, ohne dass ein echter Flug stattfindet", "ok": true },
+     { "t": "Emulation: er übersetzt reale Flugdaten in ein anderes Speicherformat", "ok": false },
+     { "t": "Virtualisierung: er verteilt die komplette Steuerungssoftware gleichzeitig auf mehrere unabhängige Cockpit-Systeme", "ok": false },
+     { "t": "Live-Migration: er verlagert das laufende Training nahtlos und ohne Unterbrechung auf ein anderes Trainingsgerät", "ok": false }
     ],
-    "e": "Der Simulator bildet den Flug nach, ohne dass am Ende ein reales Ziel erreicht wird — genau das unterscheidet Simulation von echtem Betrieb."
+    "e": "Der Simulator bildet den Flug realitätsnah nach, ohne dass am Ende ein echter Flug stattgefunden hat — genau das unterscheidet Simulation von echtem Betrieb."
    },
    {
     "q": "Was passiert bei einer Hardware-Emulation?",
     "o": [
-     { "t": "Sämtliche Hardware-Komponenten werden softwareseitig nachgebildet, inklusive der CPU", "ok": true },
-     { "t": "Nur die CPU wird nachgebildet, alle anderen Komponenten bleiben real", "ok": false },
-     { "t": "Die vorhandene Hardware wird auf mehrere Gastsysteme gleichmäßig aufgeteilt", "ok": false },
-     { "t": "Ein bestehendes System wird unverändert auf neuere Hardware übertragen", "ok": false }
+     { "t": "Die Hardware-Komponenten werden softwareseitig nachgebildet, darunter auch die CPU", "ok": true },
+     { "t": "Nur die CPU wird nachgebildet, alle anderen Komponenten bleiben unverändert real", "ok": false },
+     { "t": "Die vorhandene physische Hardware wird nach einem festen Schlüssel gleichmäßig auf mehrere Gastsysteme verteilt", "ok": false },
+     { "t": "Ein bestehendes System wird unverändert und ohne Anpassung auf deutlich leistungsfähigere Hardware übertragen", "ok": false }
     ],
     "e": "Bei der Hardware-Emulation wird jede Komponente softwareseitig nachgebildet, einschließlich der CPU selbst."
    },
    {
-    "q": "Warum verursacht CPU-Emulation typischerweise einen großen Overhead?",
+    "q": "Warum verursacht CPU-Emulation typischerweise einen spürbaren Overhead?",
     "o": [
-     { "t": "Weil Hardware-Instruktionen erst auf die native CPU übersetzt werden müssen", "ok": true },
-     { "t": "Weil dabei grundsätzlich mehrere Betriebssysteme parallel laufen müssen", "ok": false },
-     { "t": "Weil die emulierte CPU immer mit voller Taktrate arbeitet, egal ob nötig", "ok": false },
-     { "t": "Weil jede emulierte Komponente eine eigene Netzwerkverbindung benötigt", "ok": false }
+     { "t": "Weil Befehle für die fremde Ziel-CPU erst in Befehle der tatsächlich vorhandenen CPU übersetzt werden", "ok": true },
+     { "t": "Weil dabei zwangsläufig mehrere vollständige Betriebssysteme gleichzeitig gestartet werden müssen", "ok": false },
+     { "t": "Weil die emulierte CPU dabei mit reduzierter Taktrate arbeitet", "ok": false },
+     { "t": "Weil jede einzelne emulierte Hardware-Komponente dafür zusätzlich eine eigene, separate Netzwerkverbindung aufbauen und pflegen muss", "ok": false }
     ],
-    "e": "Jede Instruktion muss erst in eine Instruktion der nativen CPU übersetzt werden, bevor sie ausgeführt werden kann — das kostet Performance."
+    "e": "Jede Instruktion muss erst in eine Instruktion der tatsächlich vorhandenen CPU übersetzt werden, bevor sie ausgeführt werden kann — das kostet Performance."
    },
    {
     "q": "Worin unterscheidet sich Virtualisierung von Hardware-Emulation?",
     "o": [
-     { "t": "Bei Virtualisierung wird die CPU nicht nachgebildet, das Gastsystem nutzt die Architektur des Hosts direkt", "ok": true },
-     { "t": "Bei Virtualisierung wird zusätzlich zur CPU auch das Netzwerk komplett emuliert", "ok": false },
-     { "t": "Virtualisierung funktioniert ausschließlich ohne jede Art von Hypervisor", "ok": false },
-     { "t": "Virtualisierung erfordert immer eine andere CPU-Architektur als die des Hosts", "ok": false }
+     { "t": "Bei Virtualisierung entfällt die CPU-Nachbildung, das Gastsystem nutzt die Prozessorarchitektur des Hosts direkt", "ok": true },
+     { "t": "Bei Virtualisierung wird zusätzlich zur CPU auch das komplette Netzwerk inklusive aller Kabelverbindungen nachgebildet", "ok": false },
+     { "t": "Virtualisierung kommt ohne jede Form von Steuerungssoftware aus", "ok": false },
+     { "t": "Virtualisierung setzt eine andere CPU-Architektur als die des Hosts voraus", "ok": false }
     ],
     "e": "Bei Virtualisierung entfällt die CPU-Emulation: Das Gastsystem nutzt direkt die CPU-Architektur des Hosts, was deutlich mehr Performance bringt."
    },
    {
-    "q": "Was kennzeichnet Servervirtualisierung grundlegend?",
+    "q": "Was kennzeichnet Servervirtualisierung im Kern?",
     "o": [
-     { "t": "Jeder virtuelle Server erhält ein festgelegtes Volumen der Host-Ressourcen zugewiesen", "ok": true },
-     { "t": "Alle virtuellen Server teilen sich zwingend ein einziges gemeinsames Betriebssystem", "ok": false },
-     { "t": "Jeder virtuelle Server benötigt zwingend eigene physische Netzwerkhardware", "ok": false },
-     { "t": "Virtuelle Server können ausschließlich auf mobilen Endgeräten betrieben werden", "ok": false }
+     { "t": "Die Ressourcen eines physischen Servers werden unter mehreren, voneinander unabhängigen virtuellen Servern aufgeteilt", "ok": true },
+     { "t": "Sämtliche virtuellen Server auf dem Host teilen sich dauerhaft ein einziges gemeinsames Betriebssystem", "ok": false },
+     { "t": "Jeder einzelne virtuelle Server erhält dafür zwangsläufig eine eigene, separate physische Netzwerkkarte direkt im Host-System", "ok": false },
+     { "t": "Virtuelle Server lassen sich technisch nur auf mobilen Endgeräten betreiben", "ok": false }
     ],
-    "e": "Die verfügbaren Host-Ressourcen werden auf mehrere virtuelle Server mit jeweils festem Volumen aufgeteilt."
+    "e": "Die verfügbaren Host-Ressourcen werden auf mehrere virtuelle Server aufgeteilt, die unabhängig voneinander laufen — die konkrete Verteilung kann fest oder dynamisch erfolgen."
    },
    {
-    "q": "Welches Grundproblem ohne Servervirtualisierung dient als Motivation für deren Einsatz?",
+    "q": "Welches Grundproblem physischer Server motiviert den Einsatz von Servervirtualisierung?",
     "o": [
-     { "t": "Auf einem physischen Server läuft nur ein Betriebssystem, ungenutzte Ressourcen bleiben liegen", "ok": true },
-     { "t": "Physische Server können grundsätzlich keine Netzwerkdienste bereitstellen", "ok": false },
-     { "t": "Physische Server benötigen für jeden Dienst eine eigene Stromversorgung", "ok": false },
-     { "t": "Physische Server lassen sich ohne Virtualisierung nicht mit dem Internet verbinden", "ok": false }
+     { "t": "Auf einem physischen Server läuft meist nur ein Betriebssystem, während dessen Kapazität oft nicht ausgeschöpft wird", "ok": true },
+     { "t": "Physische Server können ohne zusätzliche Software von sich aus keinerlei Netzwerkdienste anbieten", "ok": false },
+     { "t": "Physische Server benötigen für jeden zusätzlichen angebotenen Dienst angeblich eine eigene, separate Stromleitung im Serverraum", "ok": false },
+     { "t": "Physische Server lassen sich technisch nicht mit dem Internet verbinden", "ok": false }
     ],
-    "e": "Ohne Virtualisierung läuft pro physischem Server nur ein Betriebssystem — für jeden weiteren Dienst wäre ein weiterer Server nötig."
+    "e": "Ohne Virtualisierung läuft pro physischem Server meist nur ein Betriebssystem, während dessen Kapazität oft nicht ausgeschöpft wird."
    },
    {
-    "q": "Welcher Vorteil wird der Servervirtualisierung zugeschrieben?",
+    "q": "Welcher Vorteil spricht für den Einsatz von Servervirtualisierung?",
     "o": [
-     { "t": "Bessere Hardwareauslastung sowie schnelleres Backup und schnellere Bereitstellung", "ok": true },
-     { "t": "Vollständiger Wegfall jeglicher Lizenzkosten für Betriebssysteme", "ok": false },
-     { "t": "Garantierte Immunität gegenüber jeder Art von Hardwareausfall", "ok": false },
-     { "t": "Automatische Kompatibilität mit sämtlicher bestehender Software", "ok": false }
+     { "t": "Bessere Auslastung der Hardware sowie schnelleres Bereitstellen und Sichern der Server", "ok": true },
+     { "t": "Ein vollständiger und dauerhafter Wegfall aller Lizenzkosten für die auf dem Host eingesetzten Betriebssysteme", "ok": false },
+     { "t": "Eine gegenüber physischen Servern deutlich geringere Angriffsfläche gegenüber jeder erdenklichen Form von Schadsoftware", "ok": false },
+     { "t": "Eine automatische Kompatibilität mit sämtlicher bereits vorhandener Software", "ok": false }
     ],
-    "e": "Neben besserer Auslastung nennt der Kurs u. a. zentrale Verwaltung, Skalierbarkeit und geringere Hardwarekosten."
+    "e": "Neben besserer Auslastung zählen schnelleres Bereitstellen, einfachere Sicherung und zentrale Verwaltung zu den typischen Vorteilen."
    },
    {
-    "q": "Welcher Nachteil wird der Servervirtualisierung zugeschrieben?",
+    "q": "Welcher Nachteil ist mit Servervirtualisierung verbunden?",
     "o": [
-     { "t": "Ein Hardwareausfall auf dem Host hat gravierende Folgen für alle virtuellen Server", "ok": true },
-     { "t": "Es kann grundsätzlich nur noch ein einziger Dienst pro Host betrieben werden", "ok": false },
-     { "t": "Die Bereitstellung neuer Server dauert dadurch spürbar länger als vorher", "ok": false },
-     { "t": "Zentrale Verwaltung mehrerer Server wird dadurch grundsätzlich unmöglich", "ok": false }
+     { "t": "Ein Hardwarefehler auf dem Host kann mehrere virtuelle Server gleichzeitig beeinträchtigen", "ok": true },
+     { "t": "Auf einem Host lässt sich technisch nur ein einziger Dienst gleichzeitig betreiben", "ok": false },
+     { "t": "Die Bereitstellung neuer Server dauert dadurch in der Praxis spürbar länger als ohne den Einsatz von Virtualisierung", "ok": false },
+     { "t": "Eine zentrale Verwaltung mehrerer Server wird dadurch erschwert", "ok": false }
     ],
-    "e": "Weil mehrere virtuelle Server auf einem Host laufen, wirkt sich ein Hardwarefehler auf alle gleichzeitig aus."
+    "e": "Weil mehrere virtuelle Server denselben Host teilen, kann sich ein Hardwarefehler auf mehrere von ihnen gleichzeitig auswirken."
    },
    {
     "q": "Was bedeutet Überprovisionierung (Overcommitment) bei virtuellen Maschinen?",
     "o": [
-     { "t": "Den virtuellen Maschinen wird in Summe mehr Ressourcen zugewiesen, als physisch vorhanden ist", "ok": true },
-     { "t": "Jeder virtuellen Maschine wird dauerhaft weniger zugewiesen, als sie tatsächlich benötigt", "ok": false },
-     { "t": "Virtuelle Maschinen erhalten grundsätzlich exakt gleich viele Ressourcen wie der Host besitzt", "ok": false },
-     { "t": "Die Anzahl virtueller Maschinen wird technisch auf einen festen Höchstwert begrenzt", "ok": false }
+     { "t": "Den virtuellen Maschinen wird in Summe mehr Ressourcen zugewiesen, als der Host physisch besitzt", "ok": true },
+     { "t": "Jeder virtuellen Maschine wird dabei dauerhaft weniger an Ressourcen zugewiesen, als sie im laufenden Betrieb tatsächlich benötigt", "ok": false },
+     { "t": "Jede einzelne virtuelle Maschine erhält dabei exakt so viele Ressourcen zugewiesen, wie der Host insgesamt physisch besitzt", "ok": false },
+     { "t": "Die Anzahl gleichzeitig laufender virtueller Maschinen wird technisch fest begrenzt", "ok": false }
     ],
     "e": "Es werden mehr Ressourcen zugeteilt, als in Summe physisch existieren — solange nicht alle VMs gleichzeitig voll zugreifen, funktioniert das."
    },
@@ -13150,141 +13138,141 @@ const POOLS = {
     "q": "Wann wird Überprovisionierung zum praktischen Problem?",
     "o": [
      { "t": "Wenn mehrere virtuelle Maschinen ihre zugewiesenen Ressourcen gleichzeitig tatsächlich abrufen", "ok": true },
-     { "t": "Wenn eine virtuelle Maschine dauerhaft weniger Ressourcen nutzt, als ihr zugewiesen wurde", "ok": false },
-     { "t": "Wenn der Host über deutlich mehr physische Ressourcen verfügt als benötigt", "ok": false },
-     { "t": "Wenn nur eine einzige virtuelle Maschine auf dem Host betrieben wird", "ok": false }
+     { "t": "Wenn eine einzelne virtuelle Maschine über einen längeren Zeitraum weniger Ressourcen nutzt, als ihr ursprünglich zugewiesen wurde", "ok": false },
+     { "t": "Wenn der zugrundeliegende Host über spürbar mehr physische Ressourcen verfügt, als im Moment tatsächlich benötigt wird", "ok": false },
+     { "t": "Wenn nur eine einzige virtuelle Maschine auf dem Host läuft", "ok": false }
     ],
     "e": "Erst wenn der gleichzeitige tatsächliche Bedarf die physisch vorhandenen Ressourcen übersteigt, entstehen Engpässe."
    },
    {
-    "q": "Welche Lösungsansätze gibt es gegen Engpässe durch Überprovisionierung?",
+    "q": "Welche Lösungsansätze helfen gegen Engpässe durch Überprovisionierung?",
     "o": [
-     { "t": "Monitoring der Auslastung, Prognosen und wenn nötig Live-Migration einzelner VMs", "ok": true },
-     { "t": "Grundsätzlicher Verzicht auf jede Form der Ressourcenzuteilung an VMs", "ok": false },
-     { "t": "Dauerhafte Abschaltung aller virtuellen Maschinen außerhalb der Kernarbeitszeit", "ok": false },
-     { "t": "Feste Begrenzung auf maximal eine virtuelle Maschine je physischem Server", "ok": false }
+     { "t": "Monitoring der Auslastung, realistische Prognosen und bei Bedarf Live-Migration einzelner VMs", "ok": true },
+     { "t": "Ein vollständiger und dauerhafter Verzicht auf jede Form der Ressourcenzuteilung an einzelne virtuelle Maschinen", "ok": false },
+     { "t": "Eine feste, automatisierte Abschaltung sämtlicher virtueller Maschinen außerhalb der täglichen Kernarbeitszeit", "ok": false },
+     { "t": "Eine feste Obergrenze von genau einer virtuellen Maschine je physischem Server", "ok": false }
     ],
-    "e": "Monitoring und Auslastungsprognosen erkennen Engpässe frühzeitig, Live-Migration kann im Ernstfall entlasten."
+    "e": "Monitoring und realistische Auslastungsprognosen erkennen Engpässe frühzeitig, Live-Migration kann im Ernstfall entlasten."
    },
    {
     "q": "Was versteht man unter Live-Migration einer virtuellen Maschine?",
     "o": [
      { "t": "Die Verschiebung einer laufenden VM auf einen anderen Host, ohne den Betrieb zu unterbrechen", "ok": true },
-     { "t": "Das dauerhafte Löschen einer VM samt aller zugehörigen Daten", "ok": false },
-     { "t": "Die einmalige Sicherung einer VM auf ein externes Speichermedium", "ok": false },
-     { "t": "Den Neustart einer VM nach einem Absturz mit Werkseinstellungen", "ok": false }
+     { "t": "Das dauerhafte und unwiderrufliche Löschen einer virtuellen Maschine samt sämtlicher zugehöriger Daten", "ok": false },
+     { "t": "Die einmalige, manuell angestoßene Sicherung einer VM auf ein externes, separat verwaltetes Speichermedium", "ok": false },
+     { "t": "Den Neustart einer VM nach einem Absturz mit den Werkseinstellungen", "ok": false }
     ],
     "e": "Die VM wird im laufenden Betrieb auf einen anderen Host portiert, ohne dass der Dienst unterbrochen wird."
    },
    {
-    "q": "Welchen praktischen Nutzen bringt Live-Migration?",
+    "q": "Welchen praktischen Nutzen bietet die Live-Migration virtueller Maschinen?",
     "o": [
-     { "t": "Sie vereinfacht Wartungsarbeiten und den Lastenausgleich zwischen Hosts", "ok": true },
-     { "t": "Sie verhindert dauerhaft jede Form von Überprovisionierung im Cluster", "ok": false },
-     { "t": "Sie ersetzt vollständig die Notwendigkeit regelmäßiger Backups", "ok": false },
-     { "t": "Sie erhöht automatisch die einer VM zugewiesene Rechenleistung", "ok": false }
+     { "t": "Sie erleichtert Wartungsarbeiten am Host und den Lastenausgleich zwischen mehreren Hosts", "ok": true },
+     { "t": "Sie verhindert dauerhaft und zuverlässig jede Form von Überprovisionierung im gesamten Virtualisierungscluster", "ok": false },
+     { "t": "Sie ersetzt in der Praxis vollständig die Notwendigkeit regelmäßiger, separat durchgeführter Backups", "ok": false },
+     { "t": "Sie erhöht automatisch die einer VM dauerhaft zugewiesene Rechenleistung", "ok": false }
     ],
     "e": "Wartungsarbeiten am Host und Lastenausgleich zwischen mehreren Hosts lassen sich dadurch ohne Ausfallzeit durchführen."
    },
    {
     "q": "Was ist der Kerngedanke der Anwendungsvirtualisierung?",
     "o": [
-     { "t": "Die Installation einer Anwendung wird vom Client-Computer getrennt, der auf sie zugreift", "ok": true },
+     { "t": "Die Installation der Anwendung wird vom Client getrennt, der sie letztlich nutzt", "ok": true },
      { "t": "Jede Anwendung erhält ein eigenes vollständiges Betriebssystem als Laufzeitumgebung", "ok": false },
-     { "t": "Anwendungen werden dauerhaft auf jedem einzelnen Client neu installiert", "ok": false },
+     { "t": "Die Anwendung wird auf jedem einzelnen Client separat neu installiert", "ok": false },
      { "t": "Der komplette Client-Computer wird als virtuelle Maschine auf einem Server nachgebildet", "ok": false }
     ],
     "e": "Die Anwendung läuft getrennt vom Client, der sie nutzt — Teile werden bei Bedarf geladen, installiert wird lokal nichts."
    },
    {
-    "q": "Welcher Vorteil spricht für Anwendungsvirtualisierung?",
+    "q": "Welcher Vorteil spricht für den Einsatz von Anwendungsvirtualisierung?",
     "o": [
-     { "t": "Die Anwendung muss nur einmal installiert werden und lässt sich einfach austauschen", "ok": true },
-     { "t": "Grafikintensive Anwendungen laufen dadurch grundsätzlich performanter", "ok": false },
-     { "t": "Eine Netzwerkverbindung wird für den Betrieb dadurch überflüssig", "ok": false },
+     { "t": "Eine zentrale Installation genügt, der Austausch und die Pflege der Anwendung werden einfacher", "ok": true },
+     { "t": "Grafikintensive Anwendungen laufen dadurch in der Praxis spürbar performanter als bei einer klassischen lokalen Installation", "ok": false },
+     { "t": "Eine stabile und durchgehende Netzwerkverbindung wird für den laufenden Betrieb dadurch vollständig überflüssig", "ok": false },
      { "t": "Die Lizenzierung wird dadurch in jedem Fall einfacher als bei lokaler Installation", "ok": false }
     ],
-    "e": "Zentrale Pflege einer einzigen Installation vereinfacht Austausch, Updates und Verlagerung auf andere Clients."
+    "e": "Zentrale Pflege einer einzigen Installation vereinfacht Austausch, Updates und Verteilung auf andere Clients."
    },
    {
-    "q": "Welcher Nachteil wird der Anwendungsvirtualisierung zugeschrieben?",
+    "q": "Welcher Nachteil ist mit Anwendungsvirtualisierung verbunden?",
     "o": [
-     { "t": "Grafikintensive Anwendungen können spürbar beeinträchtigt sein, zudem ist eine stabile Verbindung nötig", "ok": true },
-     { "t": "Anwendungen müssen dadurch auf jedem Client einzeln neu installiert werden", "ok": false },
-     { "t": "Updates und Patches werden dadurch grundsätzlich komplizierter als sonst", "ok": false },
-     { "t": "Die Zugriffskontrolle auf die Anwendung wird dadurch erheblich erschwert", "ok": false }
+     { "t": "Grafikintensive Anwendungen können beeinträchtigt sein, zudem ist eine stabile Verbindung zum Server nötig", "ok": true },
+     { "t": "Die Anwendung muss dadurch auf jedem einzelnen Client separat und wiederholt neu installiert werden", "ok": false },
+     { "t": "Updates und Sicherheitspatches werden dadurch in der Praxis spürbar komplizierter als bei einer klassischen lokalen Installation", "ok": false },
+     { "t": "Der Zugriffsschutz auf die Anwendung lässt sich dadurch kaum noch steuern", "ok": false }
     ],
-    "e": "Da die Anwendung über das Netzwerk bereitgestellt wird, leiden grafiklastige Programme und die Verbindung muss stabil sein."
+    "e": "Da die Anwendung über das Netzwerk bereitgestellt wird, leiden grafiklastige Programme mitunter und die Verbindung muss stabil sein."
    },
    {
     "q": "Was kennzeichnet Betriebssystem- bzw. Containervirtualisierung?",
     "o": [
-     { "t": "Sie läuft als Anwendung innerhalb des Host-Betriebssystems, ganz ohne eigenen Hypervisor", "ok": true },
-     { "t": "Sie benötigt zwingend einen Typ-1-Hypervisor direkt auf der Hardware", "ok": false },
-     { "t": "Jeder Container erhält ein vollständig eigenständiges Betriebssystem samt Kernel", "ok": false },
-     { "t": "Sie ist ausschließlich für die Virtualisierung ganzer Desktop-Umgebungen gedacht", "ok": false }
+     { "t": "Sie läuft als Prozess innerhalb des Host-Betriebssystems und nutzt dessen Kernel mit", "ok": true },
+     { "t": "Sie benötigt einen Typ-1-Hypervisor, der direkt auf der Hardware läuft", "ok": false },
+     { "t": "Jeder Container bringt einen vollständig eigenständigen Betriebssystem-Kernel mit", "ok": false },
+     { "t": "Sie eignet sich in erster Linie für die Virtualisierung kompletter Desktop-Umgebungen", "ok": false }
     ],
     "e": "Ohne eigenen Hypervisor teilen sich alle Container den Kernel des Host-Betriebssystems."
    },
    {
-    "q": "Woraus besteht ein Container?",
+    "q": "Woraus besteht ein Container bei der Containervirtualisierung?",
     "o": [
      { "t": "Aus der Anwendung mit ihren Abhängigkeiten, Programmbibliotheken und Konfigurationsdateien", "ok": true },
-     { "t": "Ausschließlich aus einem vollständigen eigenen Betriebssystem-Kernel", "ok": false },
-     { "t": "Nur aus der ausführbaren Datei der Anwendung ohne weitere Bestandteile", "ok": false },
-     { "t": "Aus einer virtuellen Festplatte mit dem kompletten Host-Dateisystem ohne Betriebssystem", "ok": false }
+     { "t": "Aus einem vollständigen, eigenständigen Betriebssystem-Kernel, den jeder einzelne Container separat mitbringt", "ok": false },
+     { "t": "Nur aus der ausführbaren Datei der Anwendung, ohne weitere Bestandteile", "ok": false },
+     { "t": "Aus einer virtuellen Festplatte mit einer vollständigen Kopie des gesamten Host-Dateisystems inklusive Systemdateien", "ok": false }
     ],
-    "e": "Ein Container bündelt Anwendung, Abhängigkeiten, Bibliotheken, Konfiguration und weitere Werkzeuge in einer Laufzeitumgebung."
+    "e": "Ein Container bündelt Anwendung, Abhängigkeiten, Bibliotheken und Konfiguration in einer eigenen Laufzeitumgebung."
    },
    {
     "q": "Welcher Vorteil wird Containern gegenüber klassischen VMs zugeschrieben?",
     "o": [
      { "t": "Geringerer Ressourcenverbrauch sowie schnellere Bereitstellung und gute Skalierbarkeit", "ok": true },
-     { "t": "Vollständige Isolation durch einen eigenen, vom Host getrennten Kernel", "ok": false },
-     { "t": "Grundsätzliche Unabhängigkeit von jeglicher Host-Konfiguration", "ok": false },
-     { "t": "Automatischer Verzicht auf jede Form von Fehlerisolierung zwischen Containern", "ok": false }
+     { "t": "Eine vollständige Isolation durch einen eigenen, vom Host in jeder Hinsicht komplett getrennten Betriebssystem-Kernel", "ok": false },
+     { "t": "Eine weitgehende Unabhängigkeit von der genauen Konfiguration und installierten Version des zugrundeliegenden Host-Systems", "ok": false },
+     { "t": "Ein Verzicht auf jede Form von Fehlerisolierung zwischen den Containern", "ok": false }
     ],
     "e": "Weil kein eigener Betriebssystem-Kernel mitläuft, sind Container ressourcenschonender und lassen sich schneller bereitstellen."
    },
    {
-    "q": "Welcher Nachteil wird Containern zugeschrieben?",
+    "q": "Welcher Nachteil ist mit dem Einsatz von Containern verbunden?",
     "o": [
-     { "t": "Einrichtung und Verwaltung sind komplizierter und erfordern entsprechendes Fachwissen", "ok": true },
-     { "t": "Sie verbrauchen grundsätzlich mehr Ressourcen als klassische virtuelle Maschinen", "ok": false },
-     { "t": "Sie lassen sich grundsätzlich nicht auf unterschiedlicher Hardware betreiben", "ok": false },
-     { "t": "Bereitstellung neuer Container dauert grundsätzlich länger als bei klassischen VMs", "ok": false }
+     { "t": "Einrichtung und Verwaltung sind komplexer und setzen entsprechendes Fachwissen voraus", "ok": true },
+     { "t": "Sie verbrauchen im Regelfall spürbar mehr Ressourcen als vergleichbare klassische virtuelle Maschinen", "ok": false },
+     { "t": "Sie lassen sich kaum auf unterschiedlicher Server-Hardware betreiben", "ok": false },
+     { "t": "Die Bereitstellung eines neuen Containers dauert in der Praxis deutlich länger als bei einer klassischen virtuellen Maschine", "ok": false }
     ],
     "e": "Die geteilte Kernel-Nutzung macht Einrichtung und Betrieb anspruchsvoller als bei klassischen VMs."
    },
    {
     "q": "Was beschreibt Virtual Desktop Infrastructure (VDI)?",
     "o": [
-     { "t": "Individuell konfigurierte Betriebssysteminstanzen für Arbeitsplätze werden zentral auf einem Server bereitgestellt", "ok": true },
-     { "t": "Mehrere Nutzer teilen sich dauerhaft dieselbe Desktop-Sitzung auf einem lokalen Rechner", "ok": false },
-     { "t": "Jeder Arbeitsplatzrechner erhält eine eigene physische Festplatte im Server-Rack", "ok": false },
-     { "t": "Desktop-Anwendungen werden ausschließlich lokal auf leistungsstarken Clients ausgeführt", "ok": false }
+     { "t": "Individuell konfigurierte Betriebssysteminstanzen für Arbeitsplätze laufen zentral auf einem Server", "ok": true },
+     { "t": "Mehrere Nutzer teilen sich dabei dauerhaft dieselbe aktive Desktop-Sitzung auf einem gemeinsamen lokalen Rechner", "ok": false },
+     { "t": "Jeder einzelne Arbeitsplatzrechner erhält dafür eine eigene, dedizierte physische Festplatte im zentralen Server-Rack", "ok": false },
+     { "t": "Desktop-Anwendungen laufen überwiegend lokal auf leistungsstarken Clients", "ok": false }
     ],
     "e": "Statt lokaler Installation läuft jeder Arbeitsplatz als eigene Betriebssysteminstanz zentral auf einem Server."
    },
    {
-    "q": "Welcher Vorteil wird VDI zugeschrieben?",
+    "q": "Welcher Vorteil spricht für den Einsatz einer VDI-Lösung?",
     "o": [
-     { "t": "Hohe Datensicherheit, da die Daten auf dem Server verbleiben, sowie einfachere Administration", "ok": true },
-     { "t": "Deutlich geringere Anschaffungskosten gegenüber klassischen Arbeitsplatzrechnern", "ok": false },
-     { "t": "Vollständige Unabhängigkeit vom Netzwerk während des laufenden Betriebs", "ok": false },
-     { "t": "Grundsätzlich höhere Leistung als bei lokal installierten Betriebssystemen", "ok": false }
+     { "t": "Höhere Datensicherheit, da Daten auf dem Server bleiben, sowie einfachere zentrale Administration", "ok": true },
+     { "t": "Deutlich geringere Anschaffungskosten gegenüber vergleichbar ausgestatteten klassischen Arbeitsplatzrechnern", "ok": false },
+     { "t": "Ein laufender Betrieb an jedem Arbeitsplatz, der komplett unabhängig von einer bestehenden Netzwerkverbindung funktioniert", "ok": false },
+     { "t": "Eine höhere Leistung als bei lokal installierten Betriebssystemen", "ok": false }
     ],
     "e": "Da die Daten zentral auf dem Server bleiben, sind sie besser geschützt, zudem lassen sich Desktops leichter administrieren."
    },
    {
-    "q": "Welcher Nachteil wird VDI zugeschrieben?",
+    "q": "Welcher Nachteil ist mit einer VDI-Lösung verbunden?",
     "o": [
-     { "t": "Hohe Anfangskosten, zudem legt ein Server-Ausfall den kompletten Betrieb lahm", "ok": true },
-     { "t": "Clients werden dadurch grundsätzlich anfälliger für Schadsoftware als zuvor", "ok": false },
-     { "t": "Die Administration der Arbeitsplätze wird dadurch erheblich aufwendiger", "ok": false },
-     { "t": "Eine Netzwerkverbindung wird für den laufenden Betrieb überflüssig", "ok": false }
+     { "t": "Hohe Anfangsinvestitionen, zudem kann ein Server-Ausfall viele Arbeitsplätze gleichzeitig betreffen", "ok": true },
+     { "t": "Clients werden dadurch in der Praxis spürbar anfälliger für Schadsoftware als bei einer klassischen lokalen Installation", "ok": false },
+     { "t": "Die tägliche Administration der einzelnen Arbeitsplätze wird dadurch in der Praxis erheblich aufwendiger als zuvor", "ok": false },
+     { "t": "Eine stabile Netzwerkverbindung wird für den laufenden Betrieb überflüssig", "ok": false }
     ],
-    "e": "VDI lohnt sich erst ab einer gewissen Clientzahl wirtschaftlich, und ein Serverausfall betrifft sofort alle Arbeitsplätze."
+    "e": "VDI erfordert hohe Anfangsinvestitionen, zudem betrifft ein Serverausfall potenziell viele Arbeitsplätze gleichzeitig."
    }
   ]
  },
@@ -13294,25 +13282,25 @@ const POOLS = {
    {
     "q": "Welche Aufgabe hat ein Hypervisor?",
     "o": [
-     { "t": "Er erstellt und verwaltet die virtuelle Hardware und stellt eine Abstraktionsschicht bereit", "ok": true },
-     { "t": "Er übernimmt ausschließlich die Netzwerkverbindung zwischen mehreren physischen Servern", "ok": false },
-     { "t": "Er verschlüsselt sämtliche Daten, die zwischen Host und Gastsystem ausgetauscht werden", "ok": false },
-     { "t": "Er ersetzt dauerhaft das Betriebssystem auf jedem einzelnen Client-Rechner", "ok": false }
+     { "t": "Er erstellt und verwaltet virtuelle Maschinen und stellt ihnen eine Abstraktionsschicht zur Hardware bereit", "ok": true },
+     { "t": "Er übernimmt eigenständig die komplette Netzwerkverbindung zwischen mehreren physischen Servern im Rechenzentrum", "ok": false },
+     { "t": "Er verschlüsselt fortlaufend den gesamten Datenverkehr, der zwischen Host und Gastsystem ausgetauscht wird", "ok": false },
+     { "t": "Er ersetzt das Betriebssystem auf jedem angeschlossenen Client-Rechner", "ok": false }
     ],
     "e": "Der Hypervisor bildet die Abstraktionsschicht zwischen physischer Hardware und den virtuellen Maschinen, die auf ihr laufen."
    },
    {
     "q": "Was kennzeichnet einen Typ-1-Hypervisor?",
     "o": [
-     { "t": "Er läuft direkt auf der Hardware, ganz ohne zugrundeliegendes Betriebssystem", "ok": true },
-     { "t": "Er setzt zwingend auf einem vollständig installierten Betriebssystem auf", "ok": false },
-     { "t": "Er kann ausschließlich eine einzige virtuelle Maschine gleichzeitig verwalten", "ok": false },
-     { "t": "Er wird ausschließlich für die Virtualisierung einzelner Anwendungen genutzt", "ok": false }
+     { "t": "Er läuft direkt auf der Hardware, ein zusätzliches Host-Betriebssystem ist dafür nicht nötig", "ok": true },
+     { "t": "Er setzt dabei auf einem vollständig installierten Betriebssystem auf, das ihn als gewöhnliche Anwendung ausführt", "ok": false },
+     { "t": "Er kann zu jedem Zeitpunkt nur eine einzige virtuelle Maschine verwalten", "ok": false },
+     { "t": "Er wird in der Praxis überwiegend für einzelne, kurzlebige Testanwendungen auf gewöhnlichen Arbeitsplatzrechnern eingesetzt", "ok": false }
     ],
-    "e": "Auch Baremetal-Hypervisor genannt: Er läuft selbst wie ein Betriebssystem direkt auf der Hardware, ohne ein weiteres OS darunter."
+    "e": "Auch Baremetal-Hypervisor genannt: Er läuft selbst wie ein Betriebssystem direkt auf der Hardware."
    },
    {
-    "q": "Welche Produkte sind typische Beispiele für einen Typ-1-Hypervisor?",
+    "q": "Welche Produkte sind typische Vertreter eines Typ-1-Hypervisors?",
     "o": [
      { "t": "Microsoft Hyper-V, VMware ESXi, Citrix Xen und KVM", "ok": true },
      { "t": "VirtualBox, VMware Workstation und Parallels Desktop", "ok": false },
@@ -13324,15 +13312,15 @@ const POOLS = {
    {
     "q": "Was kennzeichnet einen Typ-2-Hypervisor?",
     "o": [
-     { "t": "Er setzt auf einem bereits vollständig installierten Betriebssystem auf und läuft darüber", "ok": true },
-     { "t": "Er läuft direkt auf der Hardware, ganz ohne zugrundeliegendes Betriebssystem", "ok": false },
-     { "t": "Er wird ausschließlich in Rechenzentren für Cloud-Angebote eingesetzt", "ok": false },
-     { "t": "Er benötigt zwingend eine hardwareseitige Erweiterung wie Intel VT", "ok": false }
+     { "t": "Er setzt auf einem bereits installierten Betriebssystem auf und läuft dort wie eine Anwendung", "ok": true },
+     { "t": "Er läuft dabei direkt auf der Hardware, ohne dass darunter ein weiteres Betriebssystem installiert sein muss", "ok": false },
+     { "t": "Er wird überwiegend in Rechenzentren für produktive Cloud-Angebote eingesetzt", "ok": false },
+     { "t": "Er setzt eine hardwareseitige Erweiterung wie Intel VT voraus, um zu starten", "ok": false }
     ],
     "e": "Auch Hosted-Hypervisor genannt: Er wird wie eine gewöhnliche Anwendung innerhalb eines bereits laufenden Betriebssystems gestartet."
    },
    {
-    "q": "Welche Produkte sind typische Beispiele für einen Typ-2-Hypervisor?",
+    "q": "Welche Produkte sind typische Vertreter eines Typ-2-Hypervisors?",
     "o": [
      { "t": "VirtualBox, VMware Workstation und Microsoft Virtual PC", "ok": true },
      { "t": "Microsoft Hyper-V, VMware ESXi, Citrix Xen und KVM", "ok": false },
@@ -13342,174 +13330,154 @@ const POOLS = {
     "e": "Alle drei setzen auf einem vollständig installierten Host-Betriebssystem auf, statt direkt auf der Hardware zu laufen."
    },
    {
-    "q": "Warum laufen die privilegierten Befehle eines Gastsystems im Ring-Schema trotzdem stabil, obwohl sie eigentlich Ring 0 bräuchten?",
+    "q": "Wie lösten rein softwarebasierte Hypervisoren vor Erweiterungen wie Intel VT und AMD-V das Problem, dass Gastsysteme privilegierte Befehle nur in Ring 3 statt in Ring 0 ausführen konnten?",
     "o": [
-     { "t": "Der Hypervisor analysiert diese Befehle und baut sie bei Bedarf passend um", "ok": true },
-     { "t": "Das Gastsystem erhält vom Hypervisor dauerhaft vollen Zugriff auf Ring 0", "ok": false },
-     { "t": "Die CPU schaltet für virtuelle Maschinen grundsätzlich komplett in Ring 0 um", "ok": false },
-     { "t": "Der Host verzichtet für virtuelle Maschinen vollständig auf das Ring-Schema", "ok": false }
+     { "t": "Der Hypervisor erkannte diese Befehle zur Laufzeit und ersetzte sie per Binary Translation durch sichere Äquivalente", "ok": true },
+     { "t": "Der Prozessor schaltete dabei für das gesamte Gastsystem bei Bedarf komplett und dauerhaft in einen reinen Ring-0-Modus um", "ok": false },
+     { "t": "Das Gastsystem erhielt dabei vom Hypervisor dauerhaft und uneingeschränkt direkten Zugriff auf den privilegierten Ring 0", "ok": false },
+     { "t": "Der Host verzichtete für virtuelle Maschinen vollständig auf jede Form von Speicherschutz", "ok": false }
     ],
-    "e": "Damit virtuelle Systeme trotzdem in Ring 3 laufen können, fängt der Hypervisor kritische Befehle ab und ersetzt sie durch passende Alternativen."
+    "e": "Dieses historische Verfahren war vor der Hardware-Virtualisierung üblich. Moderne Hypervisoren mit Intel VT oder AMD-V lösen dasselbe Problem heute überwiegend hardwareseitig, ganz ohne diese Befehlsübersetzung."
    },
    {
-    "q": "Warum bereiten ältere Hypervisor-Versionen mit neueren Betriebssystemen manchmal Probleme?",
+    "q": "Warum kann es bei älteren Hypervisor-Versionen mit neuen Gast-Betriebssystemen zu Kompatibilitätsproblemen kommen?",
     "o": [
-     { "t": "Weil Betriebssysteme Anpassungen brauchen, damit Ring-0-Befehle korrekt in Ring 3 laufen", "ok": true },
-     { "t": "Weil neuere Betriebssysteme grundsätzlich keine Treiber für virtuelle Hardware mehr mitbringen", "ok": false },
-     { "t": "Weil ältere Hypervisor-Versionen keine Netzwerkverbindung mehr unterstützen", "ok": false },
-     { "t": "Weil neuere Betriebssysteme zwingend einen Typ-1-Hypervisor voraussetzen", "ok": false }
+     { "t": "Dem älteren Hypervisor fehlen oft passende Treiber oder die Unterstützung neuer Virtualisierungsfunktionen und CPU-Erweiterungen", "ok": true },
+     { "t": "Neuere Betriebssysteme unterstützen aus Sicherheitsgründen keine virtuelle Hardware mehr", "ok": false },
+     { "t": "Ältere Hypervisor-Versionen verlieren im laufenden Betrieb nach einiger Zeit automatisch und dauerhaft ihre volle Netzwerkfähigkeit", "ok": false },
+     { "t": "Neuere Betriebssysteme benötigen für den Start einen Typ-1-Hypervisor", "ok": false }
     ],
-    "e": "Betriebssysteme verlangen unterschiedliche Anpassungen, damit ihre eigentlich für Ring 0 gedachten Befehle korrekt in Ring 3 funktionieren."
+    "e": "Häufige Ursachen sind fehlende oder veraltete Treiber, nicht unterstützte neue Virtualisierungsfunktionen sowie neuere CPU-Erweiterungen, die der ältere Hypervisor noch nicht kennt."
    },
    {
     "q": "Was ist die Grundidee der Para-Virtualisierung?",
     "o": [
-     { "t": "Statt Hardware zu emulieren, stellt der Hypervisor eine API bereit, die der Gast direkt nutzen muss", "ok": true },
-     { "t": "Sämtliche Hardware-Komponenten werden für den Gast vollständig emuliert", "ok": false },
-     { "t": "Der Gast läuft komplett unabhängig vom Hypervisor auf eigener physischer Hardware", "ok": false },
-     { "t": "Zwei Gastsysteme teilen sich direkt denselben Arbeitsspeicherbereich ohne Trennung", "ok": false }
+     { "t": "Statt Hardware aufwendig nachzubilden, stellt der Hypervisor eine Schnittstelle bereit, die der angepasste Gast direkt anspricht", "ok": true },
+     { "t": "Sämtliche Hardware-Komponenten werden dabei für den Gast vollständig, detailgetreu und ohne jede Vereinfachung emuliert", "ok": false },
+     { "t": "Der Gast läuft dabei komplett unabhängig vom Hypervisor auf eigener, ihm dediziert zugewiesener physischer Hardware ohne jede gemeinsame Nutzung", "ok": false },
+     { "t": "Zwei Gastsysteme greifen direkt auf denselben Arbeitsspeicherbereich zu, ohne Trennung", "ok": false }
     ],
-    "e": "Statt aufwendiger Emulation nutzt der Gast eine vom Hypervisor bereitgestellte Schnittstelle direkt — dafür muss er sie aber kennen."
+    "e": "Statt aufwendiger Emulation nutzt der Gast eine vom Hypervisor bereitgestellte Schnittstelle direkt — dafür muss er sie aber unterstützen."
    },
    {
-    "q": "Welcher Vorteil spricht für Para-Virtualisierung gegenüber klassischer Emulation?",
+    "q": "Welcher Vorteil spricht für Para-Virtualisierung gegenüber klassischer Hardware-Emulation?",
     "o": [
-     { "t": "Die Kommunikation über die API ist schneller und es entsteht kein Verlust durch Befehlsübersetzung", "ok": true },
-     { "t": "Der Kern des Gast-Betriebssystems muss dafür überhaupt nicht angepasst werden", "ok": false },
-     { "t": "Sie lässt sich ohne jede Anpassung auf beliebiger vorhandener Hardware einsetzen", "ok": false },
-     { "t": "Sie kommt vollständig ohne einen installierten Hypervisor aus", "ok": false }
+     { "t": "Die Kommunikation über die Schnittstelle spart den Aufwand für eine Befehlsübersetzung und ist dadurch effizienter", "ok": true },
+     { "t": "Der Kernel des Gast-Betriebssystems muss dafür in keiner Weise angepasst oder vorbereitet werden", "ok": false },
+     { "t": "Sie lässt sich angeblich ohne jede vorherige Vorbereitung auf praktisch beliebiger, bereits vorhandener Hardware einsetzen und konfigurieren", "ok": false },
+     { "t": "Sie kommt vollständig ohne eine zusätzliche Hypervisor-Instanz aus", "ok": false }
     ],
-    "e": "Da keine Befehle übersetzt werden müssen, läuft die Kommunikation über die API mit deutlich weniger Overhead."
+    "e": "Da keine Befehle übersetzt werden müssen, läuft die Kommunikation über die Schnittstelle mit weniger Overhead."
    },
    {
     "q": "Welcher Nachteil spricht gegen Para-Virtualisierung?",
     "o": [
-     { "t": "Der Kernel des Gastsystems muss angepasst oder bereits vom Hersteller modifiziert sein", "ok": true },
-     { "t": "Sie verursacht durch die Befehlsübersetzung einen spürbar größeren Overhead", "ok": false },
-     { "t": "Sie lässt sich ausschließlich auf Typ-2-Hypervisoren betreiben", "ok": false },
-     { "t": "Sie benötigt zwingend eine hardwareseitige Erweiterung wie Intel VT oder AMD-V", "ok": false }
+     { "t": "Der Kernel des Gastsystems muss angepasst oder vom Hersteller bereits dafür vorbereitet sein", "ok": true },
+     { "t": "Sie verursacht durch eine aufwendige, fortlaufende Befehlsübersetzung im Hintergrund einen deutlich größeren Overhead", "ok": false },
+     { "t": "Sie lässt sich in der praktischen Anwendung überwiegend mit einem klassischen Typ-2-Hypervisor sinnvoll kombinieren", "ok": false },
+     { "t": "Sie benötigt eine hardwareseitige Erweiterung wie Intel VT oder AMD-V", "ok": false }
     ],
-    "e": "Der Gast muss die bereitgestellte API tatsächlich nutzen können — das erfordert einen angepassten oder bereits vorbereiteten Kernel."
+    "e": "Der Gast muss die bereitgestellte Schnittstelle tatsächlich nutzen können — das setzt einen angepassten oder bereits vorbereiteten Kernel voraus."
    },
    {
     "q": "In welchen Bereichen wird Para-Virtualisierung typischerweise eingesetzt?",
     "o": [
      { "t": "In Rechenzentren und bei Anbietern von Cloud-Computing-Lösungen", "ok": true },
-     { "t": "Ausschließlich auf privaten Heim-PCs für den gelegentlichen Testbetrieb", "ok": false },
-     { "t": "Nur auf mobilen Endgeräten mit eingeschränkter Rechenleistung", "ok": false },
-     { "t": "Ausschließlich für die reine Anwendungsvirtualisierung ohne Betriebssystem", "ok": false }
+     { "t": "Vor allem auf privaten Heim-PCs für gelegentliche, kurzzeitige Testinstallationen neuer Software", "ok": false },
+     { "t": "In erster Linie auf mobilen Endgeräten mit spürbar eingeschränkter Rechenleistung und begrenztem Speicher", "ok": false },
+     { "t": "In erster Linie zur Virtualisierung einzelner Anwendungen ohne ein eigenes, vollständiges Betriebssystem", "ok": false }
     ],
     "e": "Der geringere Overhead macht sie besonders für große, professionell betriebene Umgebungen attraktiv."
    },
    {
-    "q": "Was bewirken Erweiterungen wie Intel VT und AMD-V?",
+    "q": "Was bewirken hardwareseitige Erweiterungen wie Intel VT und AMD-V?",
     "o": [
-     { "t": "Der Prozessor kann VM-Befehle direkt übersetzen, ganz ohne Anpassung am Gast-Kernel", "ok": true },
-     { "t": "Sie ersetzen den Hypervisor vollständig durch reine Hardwarefunktionen", "ok": false },
-     { "t": "Sie ermöglichen erstmals den Betrieb mehrerer Betriebssysteme auf einer Hardware", "ok": false },
-     { "t": "Sie machen Para-Virtualisierung auf jeder beliebigen Hardware nutzbar", "ok": false }
+     { "t": "Privilegierte Befehle des Gastsystems lassen sich dank eines eigenen CPU-Modus direkt und hardwareunterstützt ausführen", "ok": true },
+     { "t": "Sie übersetzen dabei sämtliche Befehle des Gastsystems fortlaufend in Befehle einer vollständig anderen CPU-Architektur", "ok": false },
+     { "t": "Sie ersetzen den Hypervisor dabei vollständig durch eine rein hardwarebasierte, softwareunabhängige Steuerung", "ok": false },
+     { "t": "Sie machen Para-Virtualisierung auch ohne jede Anpassung des Gast-Kernels nutzbar", "ok": false }
     ],
-    "e": "Mit Hardwareunterstützung entfällt die softwareseitige Befehlsübersetzung — der Prozessor übernimmt das selbst, ohne den Gast-Kernel anzufassen."
+    "e": "Mit Hardwareunterstützung entfällt die softwareseitige Befehlsübersetzung: Der Prozessor stellt einen eigenen Modus bereit, in dem privilegierte Gast-Befehle direkt ausgeführt und bei Bedarf an den Hypervisor übergeben werden."
    },
    {
-    "q": "Sind Intel VT und AMD-V untereinander kompatibel?",
+    "q": "Wie verhalten sich Intel VT und AMD-V zueinander?",
     "o": [
-     { "t": "Nein, beide Erweiterungen der Ring-Topologie sind nicht miteinander kompatibel", "ok": true },
-     { "t": "Ja, beide folgen exakt demselben offenen Industriestandard", "ok": false },
-     { "t": "Ja, aber nur bei Verwendung eines Typ-1-Hypervisors", "ok": false },
-     { "t": "Nur bei Prozessoren desselben Herstellers ist Kompatibilität möglich", "ok": false }
+     { "t": "Beide sind herstellerspezifische Virtualisierungserweiterungen, die denselben Zweck erfüllen, aber nicht direkt kompatibel sind", "ok": true },
+     { "t": "Beide folgen dabei exakt demselben offenen Industriestandard und lassen sich in der betrieblichen Praxis beliebig miteinander kombinieren", "ok": false },
+     { "t": "Sie sind überwiegend nur bei gleichzeitiger Verwendung eines klassischen Typ-2-Hypervisors überhaupt miteinander kompatibel", "ok": false },
+     { "t": "AMD-V ist eine direkte Lizenzvariante von Intel VT für andere Prozessoren", "ok": false }
     ],
-    "e": "Beide Hersteller erweitern die Ring-Topologie auf eigene, zueinander inkompatible Weise."
+    "e": "Beide Hersteller lösen dieselbe Aufgabe auf eigene, technisch unterschiedliche Weise — ein Prozessor unterstützt jeweils nur die Erweiterung seines eigenen Herstellers."
    },
    {
-    "q": "Welchen allgemeinen Vorteile gibt es für Virtualisierung insgesamt?",
+    "q": "Welcher allgemeine Vorteil spricht für den Einsatz von Virtualisierung?",
     "o": [
-     { "t": "Kostengünstiger, da weniger Hardware benötigt wird, und ideal als Test- und Entwicklungsumgebung", "ok": true },
-     { "t": "Vollständige Immunität gegenüber jeder Form von Malware-Angriffen", "ok": false },
-     { "t": "Grundsätzlich höhere Leistung als beim Betrieb auf physischer Hardware", "ok": false },
-     { "t": "Kompletter Wegfall jeglicher Wartungsarbeiten am Gesamtsystem", "ok": false }
+     { "t": "Geringerer Hardwarebedarf spart Kosten, zudem eignet sie sich gut für Test- und Entwicklungsumgebungen", "ok": true },
+     { "t": "Eine vollständige und dauerhafte Immunität gegenüber praktisch sämtlichen bekannten Formen von Schadsoftware", "ok": false },
+     { "t": "Eine durchgehend spürbar höhere Leistung als beim vergleichbaren Betrieb direkt auf physischer Hardware", "ok": false },
+     { "t": "Ein kompletter Wegfall jeglicher Wartungsarbeiten am Gesamtsystem", "ok": false }
     ],
     "e": "Weniger benötigte Hardware spart Kosten, zudem eignet sich Virtualisierung besonders gut für Test- und Entwicklungsumgebungen."
    },
    {
-    "q": "Welchen allgemeinen Nachteil gibt es für Virtualisierung insgesamt?",
+    "q": "Welcher allgemeine Nachteil ist mit Virtualisierung verbunden?",
     "o": [
-     { "t": "Durch Fehler in der Virtualisierungssoftware können Angreifer aus VMs ausbrechen", "ok": true },
-     { "t": "Es lässt sich grundsätzlich immer nur eine einzige VM je Host betreiben", "ok": false },
-     { "t": "Neue Server lassen sich dadurch grundsätzlich nur langsamer bereitstellen", "ok": false },
-     { "t": "Backups virtueller Maschinen sind grundsätzlich nicht möglich", "ok": false }
+     { "t": "Schwachstellen in der Virtualisierungssoftware können einem Angreifer unter Umständen den Ausbruch aus einer VM ermöglichen", "ok": true },
+     { "t": "Auf einem einzelnen Host lässt sich in der Praxis meist nur eine einzige VM dauerhaft stabil betreiben", "ok": false },
+     { "t": "Neue Server lassen sich dadurch in der betrieblichen Praxis in der Regel nur spürbar langsamer bereitstellen als ohne jede Virtualisierung", "ok": false },
+     { "t": "Backups virtueller Maschinen sind technisch nicht möglich", "ok": false }
     ],
-    "e": "Schwachstellen in der Virtualisierungssoftware selbst können einem Angreifer den Ausbruch aus der isolierten VM ermöglichen."
+    "e": "Schwachstellen in der Virtualisierungssoftware selbst können einem Angreifer unter Umständen den Ausbruch aus der isolierten VM ermöglichen."
    },
    {
-    "q": "Was setzt die eigentliche Grenze der Virtualisierung auf einem System?",
+    "q": "Was setzt die eigentliche Grenze für die Anzahl virtueller Maschinen auf einem System?",
     "o": [
-     { "t": "Die vorhandene physische Hardware des Hosts selbst", "ok": true },
-     { "t": "Eine feste Obergrenze von genau zwei virtuellen Maschinen pro Host", "ok": false },
-     { "t": "Die Lizenzbedingungen des jeweiligen Hypervisor-Herstellers", "ok": false },
-     { "t": "Die Anzahl der am Host angeschlossenen Netzwerkkabel", "ok": false }
+     { "t": "Letztlich die tatsächlich vorhandene physische Hardware des Hosts", "ok": true },
+     { "t": "Eine feste, herstellerübergreifend einheitliche Obergrenze von zwei VMs pro Host", "ok": false },
+     { "t": "Allein die Lizenzbedingungen des jeweiligen Hypervisor-Herstellers", "ok": false },
+     { "t": "Die Anzahl der am Host physisch angeschlossenen Netzwerkkabel", "ok": false }
     ],
-    "e": "Beliebig viele VMs sind theoretisch möglich — begrenzt wird das Ganze allein durch die tatsächlich vorhandene Hardware."
+    "e": "Wie viele VMs sinnvoll laufen, hängt von CPU, Arbeitsspeicher und Storage des Hosts ab — feste, allgemeingültige Verhältniszahlen gibt es dafür nicht."
    },
    {
-    "q": "Wie viele virtuelle CPUs ergeben sich nach Microsofts Hyper-V-Empfehlung bei einem Quad-Core-Prozessor?",
+    "q": "Welche zwei Einsatzgebiete haben Simulatoren und Emulatoren in der Praxis vor allem?",
     "o": [
-     { "t": "32, da bis zu 8 virtuelle CPUs je physischem Kern empfohlen werden", "ok": true },
-     { "t": "4, da genau eine virtuelle CPU je physischem Kern zulässig ist", "ok": false },
-     { "t": "8, unabhängig von der tatsächlichen Kernanzahl des Prozessors", "ok": false },
-     { "t": "16, da maximal 4 virtuelle CPUs je physischem Kern empfohlen werden", "ok": false }
-    ],
-    "e": "Microsoft empfiehlt maximal 8 virtuelle CPUs je physischem Kern; bei vier Kernen ergibt das 4 × 8 = 32."
-   },
-   {
-    "q": "Welche zwei typischen Einsatzgebiete gibt es für Simulatoren und Emulatoren?",
-    "o": [
-     { "t": "Nachbildung einer Hardware-Umgebung oder Nachbildung eines Betriebssystems", "ok": true },
-     { "t": "Ausschließlich die Nachbildung von Netzwerkverbindungen zwischen Servern", "ok": false },
-     { "t": "Ausschließlich die Nachbildung von Benutzeroberflächen für Schulungszwecke", "ok": false },
-     { "t": "Nachbildung physischer Tastaturen sowie Nachbildung von Bildschirmen", "ok": false }
+     { "t": "Die Nachbildung einer Hardware-Umgebung oder die Nachbildung eines Betriebssystems", "ok": true },
+     { "t": "Vor allem die detailgetreue Nachbildung von Netzwerkverbindungen zwischen mehreren physischen Servern", "ok": false },
+     { "t": "Vor allem die vereinfachte Nachbildung von Benutzeroberflächen zu reinen internen Schulungszwecken", "ok": false },
+     { "t": "Die Nachbildung physischer Eingabegeräte sowie angeschlossener Bildschirme", "ok": false }
     ],
     "e": "In der Praxis wird entweder eine komplette Hardware-Umgebung oder ein Betriebssystem nachgebildet."
    },
    {
-    "q": "Welche zwei Hypervisor-Typen unterscheiden sich grundsätzlich?",
+    "q": "Welche zwei Hypervisor-Typen werden grundlegend unterschieden?",
     "o": [
      { "t": "Typ-1-Hypervisor, der direkt auf der Hardware läuft, und Typ-2-Hypervisor, der auf einem Betriebssystem aufsetzt", "ok": true },
-     { "t": "Physischen Hypervisor, der Hardware direkt steuert, und logischen Hypervisor, der nur virtuell existiert", "ok": false },
-     { "t": "Server-Hypervisor für Rechenzentren und Desktop-Hypervisor für einzelne Arbeitsplätze", "ok": false },
-     { "t": "Öffentlichen Hypervisor mit offener Lizenz und privaten Hypervisor mit proprietärer Lizenz", "ok": false }
+     { "t": "Ein physischer Hypervisor, der Hardware direkt steuert, und ein rein logischer Hypervisor ganz ohne eigene Hardware", "ok": false },
+     { "t": "Ein spezieller Server-Hypervisor für Rechenzentren und ein davon getrennter Desktop-Hypervisor für einzelne Arbeitsplätze", "ok": false },
+     { "t": "Ein offen lizenzierter Hypervisor und ein rein proprietär lizenzierter Hypervisor", "ok": false }
     ],
     "e": "Die Unterscheidung läuft entlang der Frage, ob der Hypervisor direkt auf der Hardware oder auf einem Betriebssystem aufsetzt."
    },
    {
     "q": "Was unterscheidet einen Typ-1- von einem Typ-2-Hypervisor in der Praxis am deutlichsten?",
     "o": [
-     { "t": "Typ 1 läuft direkt auf der Hardware, Typ 2 benötigt darunter ein vollständiges Betriebssystem", "ok": true },
-     { "t": "Typ 1 kann nur eine VM verwalten, Typ 2 beliebig viele gleichzeitig", "ok": false },
-     { "t": "Typ 1 wird ausschließlich für Desktop-Virtualisierung eingesetzt, Typ 2 nur für Server", "ok": false },
-     { "t": "Typ 1 benötigt zwingend Intel VT, Typ 2 kommt ohne jede Hardwareunterstützung aus", "ok": false }
+     { "t": "Ob darunter ein vollständiges Betriebssystem läuft oder der Hypervisor direkt auf der Hardware sitzt", "ok": true },
+     { "t": "Typ 1 kann dabei nur eine einzige VM verwalten, während Typ 2 beliebig viele davon gleichzeitig verwaltet", "ok": false },
+     { "t": "Typ 1 dient nur der Desktop-Virtualisierung, Typ 2 überwiegend der Servervirtualisierung", "ok": false },
+     { "t": "Typ 1 benötigt Intel VT, Typ 2 kommt ganz ohne Hardwareunterstützung aus", "ok": false }
     ],
     "e": "Der fehlende bzw. vorhandene Unterbau in Form eines vollständigen Betriebssystems ist der zentrale praktische Unterschied."
    },
    {
     "q": "Welche Rolle spielt die Abstraktionsschicht, die ein Hypervisor bereitstellt?",
     "o": [
-     { "t": "Sie entkoppelt das Gastsystem von der realen Hardware und stellt ihm virtuelle Hardware bereit", "ok": true },
-     { "t": "Sie verschlüsselt sämtlichen Datenverkehr zwischen mehreren Gastsystemen", "ok": false },
-     { "t": "Sie ersetzt die Notwendigkeit eines Betriebssystems im Gastsystem vollständig", "ok": false },
+     { "t": "Sie entkoppelt das Gastsystem von der realen Hardware und stellt ihm stattdessen virtuelle Hardware bereit", "ok": true },
+     { "t": "Sie verschlüsselt dabei automatisch und fortlaufend den gesamten Datenverkehr zwischen mehreren Gastsystemen", "ok": false },
+     { "t": "Sie macht ein eigenes, separates Betriebssystem innerhalb des Gastsystems dadurch vollständig überflüssig", "ok": false },
      { "t": "Sie verbindet mehrere physische Hosts zu einem gemeinsamen Netzwerkspeicher", "ok": false }
     ],
     "e": "Das Gastsystem sieht nur virtuelle Hardware und bleibt dadurch von der realen Beschaffenheit des Hosts unabhängig."
-   },
-   {
-    "q": "Ohne Hardwareunterstützung wie Intel VT oder AMD-V: Wie behalf man sich früher bei der Befehlsübersetzung?",
-    "o": [
-     { "t": "Die Übersetzung wurde ausschließlich über Software durch den Hypervisor erledigt", "ok": true },
-     { "t": "Man verzichtete grundsätzlich auf jede Form der Virtualisierung von Betriebssystemen", "ok": false },
-     { "t": "Jedes Gastsystem benötigte zwingend eine eigene zusätzliche physische CPU", "ok": false },
-     { "t": "Die Befehle wurden unverändert an die reale Hardware durchgereicht", "ok": false }
-    ],
-    "e": "Bevor es hardwareseitige Unterstützung gab, musste der Hypervisor die Befehlsübersetzung komplett per Software erledigen."
    }
   ]
  },
@@ -13915,6 +13883,231 @@ const POOLS = {
      { "t": "Die Daten müssen dadurch nur noch einmal im Jahr gesichert werden", "ok": false }
     ],
     "e": "Eine räumlich getrennte Kopie schützt gegen lokale Katastrophen, die alle Kopien am selben Ort gleichzeitig treffen würden — Kern des '1' in der 3-2-1-Regel."
+   }
+  ]
+ },
+ "drill": {
+  "name": "Ports Drill",
+  "q": [
+   {
+    "q": "Welcher Dienst läuft standardmäßig auf Port 21?",
+    "o": [
+     { "t": "FTP", "ok": true },
+     { "t": "SSH", "ok": false },
+     { "t": "Telnet", "ok": false },
+     { "t": "SMTP", "ok": false }
+    ],
+    "e": "Port 21 ist der FTP-Steuerkanal. Der Datenkanal im aktiven Modus nutzt Port 20."
+   },
+   {
+    "q": "Welcher Dienst läuft standardmäßig auf Port 23?",
+    "o": [
+     { "t": "Telnet", "ok": true },
+     { "t": "SSH", "ok": false },
+     { "t": "FTP", "ok": false },
+     { "t": "SMTP", "ok": false }
+    ],
+    "e": "Port 23 gehört zu Telnet — unverschlüsselte Fernwartung. Die sichere Alternative SSH läuft auf Port 22."
+   },
+   {
+    "q": "Welcher Dienst läuft standardmäßig auf Port 25?",
+    "o": [
+     { "t": "SMTP", "ok": true },
+     { "t": "POP3", "ok": false },
+     { "t": "IMAP", "ok": false },
+     { "t": "Telnet", "ok": false }
+    ],
+    "e": "Port 25 ist SMTP für den Mailversand zwischen Servern. Client-Einlieferung läuft heute über 587."
+   },
+   {
+    "q": "Welcher Dienst läuft standardmäßig auf Port 80?",
+    "o": [
+     { "t": "HTTP", "ok": true },
+     { "t": "HTTPS", "ok": false },
+     { "t": "DNS", "ok": false },
+     { "t": "FTP", "ok": false }
+    ],
+    "e": "Port 80 ist unverschlüsseltes HTTP. Die verschlüsselte Variante HTTPS liegt auf 443."
+   },
+   {
+    "q": "Welcher Dienst läuft standardmäßig auf Port 110?",
+    "o": [
+     { "t": "POP3", "ok": true },
+     { "t": "IMAP", "ok": false },
+     { "t": "SMTP", "ok": false },
+     { "t": "SNMP", "ok": false }
+    ],
+    "e": "Port 110 ist POP3 zum Abholen von Mails. IMAP nutzt 143, die verschlüsselte POP3-Variante 995."
+   },
+   {
+    "q": "Welcher Dienst läuft standardmäßig auf Port 143?",
+    "o": [
+     { "t": "IMAP", "ok": true },
+     { "t": "POP3", "ok": false },
+     { "t": "LDAP", "ok": false },
+     { "t": "NTP", "ok": false }
+    ],
+    "e": "Port 143 ist IMAP — Mails bleiben auf dem Server. Die verschlüsselte Variante IMAPS liegt auf 993."
+   },
+   {
+    "q": "Welcher Dienst läuft standardmäßig auf Port 443?",
+    "o": [
+     { "t": "HTTPS", "ok": true },
+     { "t": "HTTP", "ok": false },
+     { "t": "SMB", "ok": false },
+     { "t": "RDP", "ok": false }
+    ],
+    "e": "Port 443 ist HTTPS — HTTP über TLS. Das unverschlüsselte HTTP liegt auf 80."
+   },
+   {
+    "q": "Welcher Dienst läuft standardmäßig auf Port 445?",
+    "o": [
+     { "t": "SMB", "ok": true },
+     { "t": "RDP", "ok": false },
+     { "t": "LDAP", "ok": false },
+     { "t": "MySQL", "ok": false }
+    ],
+    "e": "Port 445 gehört zu SMB — Datei- und Druckerfreigaben in Windows-Netzen."
+   },
+   {
+    "q": "Welcher Dienst läuft standardmäßig auf Port 161?",
+    "o": [
+     { "t": "SNMP", "ok": true },
+     { "t": "NTP", "ok": false },
+     { "t": "LDAP", "ok": false },
+     { "t": "Syslog", "ok": false }
+    ],
+    "e": "Port 161 ist SNMP für die Geräteabfrage. Traps vom Gerät zur Managementstation laufen über 162."
+   },
+   {
+    "q": "Welcher Dienst läuft standardmäßig auf Port 993?",
+    "o": [
+     { "t": "IMAPS", "ok": true },
+     { "t": "POP3S", "ok": false },
+     { "t": "SMTPS", "ok": false },
+     { "t": "LDAPS", "ok": false }
+    ],
+    "e": "Port 993 ist IMAPS — IMAP über TLS. POP3S liegt auf 995, SMTPS auf 465."
+   },
+   {
+    "q": "Welcher Dienst läuft standardmäßig auf Port 3306?",
+    "o": [
+     { "t": "MySQL", "ok": true },
+     { "t": "RDP", "ok": false },
+     { "t": "SMB", "ok": false },
+     { "t": "LDAP", "ok": false }
+    ],
+    "e": "Port 3306 ist der Standardport des MySQL-Datenbankservers."
+   },
+   {
+    "q": "Welcher Dienst läuft standardmäßig auf Port 3389?",
+    "o": [
+     { "t": "RDP", "ok": true },
+     { "t": "MySQL", "ok": false },
+     { "t": "SMB", "ok": false },
+     { "t": "VNC", "ok": false }
+    ],
+    "e": "Port 3389 gehört zu RDP — grafische Fernsteuerung von Windows-Systemen."
+   },
+   {
+    "q": "Auf welchem Port läuft SSH standardmäßig?",
+    "o": [
+     { "t": "22", "ok": true },
+     { "t": "23", "ok": false },
+     { "t": "21", "ok": false },
+     { "t": "25", "ok": false }
+    ],
+    "e": "SSH nutzt Port 22 — verschlüsselte Fernwartung und Basis für SFTP und SCP."
+   },
+   {
+    "q": "Auf welchem Port läuft DNS standardmäßig?",
+    "o": [
+     { "t": "53", "ok": true },
+     { "t": "67", "ok": false },
+     { "t": "80", "ok": false },
+     { "t": "25", "ok": false }
+    ],
+    "e": "DNS nutzt Port 53 — Anfragen per UDP, Zonentransfers und große Antworten per TCP."
+   },
+   {
+    "q": "Auf welchem Port empfängt ein DHCP-Server Anfragen?",
+    "o": [
+     { "t": "67", "ok": true },
+     { "t": "68", "ok": false },
+     { "t": "53", "ok": false },
+     { "t": "69", "ok": false }
+    ],
+    "e": "Der DHCP-Server lauscht auf 67, der Client empfängt Antworten auf 68."
+   },
+   {
+    "q": "Auf welchem Port empfängt ein DHCP-Client die Antwort des Servers?",
+    "o": [
+     { "t": "68", "ok": true },
+     { "t": "67", "ok": false },
+     { "t": "66", "ok": false },
+     { "t": "69", "ok": false }
+    ],
+    "e": "Der Client nutzt Port 68 für den Empfang, der Server lauscht auf 67."
+   },
+   {
+    "q": "Auf welchem Port läuft der FTP-Datenkanal im aktiven Modus?",
+    "o": [
+     { "t": "20", "ok": true },
+     { "t": "21", "ok": false },
+     { "t": "22", "ok": false },
+     { "t": "23", "ok": false }
+    ],
+    "e": "Im aktiven Modus überträgt FTP die Daten über Port 20, die Steuerung läuft über 21."
+   },
+   {
+    "q": "Auf welchem Port läuft NTP standardmäßig?",
+    "o": [
+     { "t": "123", "ok": true },
+     { "t": "143", "ok": false },
+     { "t": "161", "ok": false },
+     { "t": "110", "ok": false }
+    ],
+    "e": "NTP zur Zeitsynchronisation nutzt Port 123 über UDP."
+   },
+   {
+    "q": "Auf welchem Port läuft LDAP standardmäßig?",
+    "o": [
+     { "t": "389", "ok": true },
+     { "t": "443", "ok": false },
+     { "t": "636", "ok": false },
+     { "t": "445", "ok": false }
+    ],
+    "e": "LDAP nutzt Port 389, die TLS-gesicherte Variante LDAPS läuft auf 636."
+   },
+   {
+    "q": "Auf welchem Port läuft POP3S standardmäßig?",
+    "o": [
+     { "t": "995", "ok": true },
+     { "t": "993", "ok": false },
+     { "t": "110", "ok": false },
+     { "t": "587", "ok": false }
+    ],
+    "e": "POP3S ist POP3 über TLS auf Port 995. IMAPS liegt auf 993, das unverschlüsselte POP3 auf 110."
+   },
+   {
+    "q": "Auf welchem Port liefern Mail-Clients ausgehende Mails per Submission ein?",
+    "o": [
+     { "t": "587", "ok": true },
+     { "t": "25", "ok": false },
+     { "t": "465", "ok": false },
+     { "t": "110", "ok": false }
+    ],
+    "e": "Port 587 ist der Submission-Port für die authentifizierte Einlieferung vom Client. Server-zu-Server-Versand läuft über 25."
+   },
+   {
+    "q": "Auf welchem Port läuft SMTPS standardmäßig?",
+    "o": [
+     { "t": "465", "ok": true },
+     { "t": "587", "ok": false },
+     { "t": "25", "ok": false },
+     { "t": "995", "ok": false }
+    ],
+    "e": "SMTPS ist SMTP über TLS auf Port 465 — im Unterschied zu 587, wo per STARTTLS hochgestuft wird."
    }
   ]
  }
@@ -14343,6 +14536,12 @@ document.querySelectorAll('.tab').forEach(tab => {
     document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
     tab.classList.add('active');
     document.getElementById('view-' + tab.dataset.view).classList.add('active');
+    // Der "Multiple Choice"-Tab führt immer zur Kategorieauswahl zurück,
+    // genau wie der Abbrechen-Button — auch wenn gerade ein Durchgang läuft
+    // oder die Auswertung offen ist. Kein stiller Wiedereinstieg mitten im Quiz.
+    if(tab.dataset.view === 'quiz' && (runnerEl.classList.contains('active') || resultEl.classList.contains('show'))){
+      backToSelector();
+    }
     window.scrollTo({top:0,behavior:'smooth'});
   });
 });
@@ -14417,6 +14616,25 @@ function onScroll(){
 window.addEventListener('scroll', () => {
   if(!ticking){ window.requestAnimationFrame(onScroll); ticking = true; }
 }, {passive:true});
+
+// ---- Scroll-to-Top-Button: eigener, schlanker Handler ----
+// Bewusst getrennt vom Navbar-Scroll-Handler oben, damit dessen fein
+// abgestimmte Hysterese/Overscroll-Logik unangetastet bleibt.
+const scrollTopBtn = document.getElementById('scrollTopBtn');
+if(scrollTopBtn){
+  let topBtnTicking = false;
+  function updateScrollTopBtn(){
+    topBtnTicking = false;
+    if(window.scrollY > 400) scrollTopBtn.classList.add('show');
+    else scrollTopBtn.classList.remove('show');
+  }
+  window.addEventListener('scroll', () => {
+    if(!topBtnTicking){ window.requestAnimationFrame(updateScrollTopBtn); topBtnTicking = true; }
+  }, {passive:true});
+  scrollTopBtn.addEventListener('click', () => {
+    window.scrollTo({top:0, behavior:'smooth'});
+  });
+}
 
 refreshSelState();
 const GLOSSAR = [{"a":"2FA","f":"Zwei-Faktor-Authentifizierung","d":"Anmeldung mit zwei unabhängigen Nachweisen, z. B. Passwort plus Einmalcode. Erhöht die Sicherheit deutlich."},
@@ -14663,7 +14881,14 @@ const GLOSSAR = [{"a":"2FA","f":"Zwei-Faktor-Authentifizierung","d":"Anmeldung m
 {"a":"Hot-Swap","f":"Hot-Swap","d":"Austausch einer Festplatte im laufenden Betrieb, ohne das System herunterzufahren. Voraussetzung für Wartung und Plattentausch ohne Ausfallzeit, üblich in Servern und Storage-Systemen."},
 {"a":"RPO","f":"Recovery Point Objective","d":"Maximal tolerierbarer Datenverlust, ausgedrückt als Zeitspanne bis zur letzten Sicherung. Ein RPO von 1 Stunde bedeutet: im Ernstfall darf höchstens 1 Stunde an Daten verloren gehen. Bestimmt die Sicherungshäufigkeit."},
 {"a":"RTO","f":"Recovery Time Objective","d":"Maximal tolerierbare Ausfallzeit, bis ein System nach einer Störung wieder verfügbar sein muss. Während RPO den akzeptablen Datenverlust beschreibt, betrifft RTO die Dauer der Wiederherstellung."},
-{"a":"Parity","f":"Parität (RAID)","d":"Per XOR berechnete Prüfinformation, aus der sich die Daten einer ausgefallenen Platte rekonstruieren lassen. Grundlage von RAID 5 (einfache Parität) und RAID 6 (doppelte Parität)."}];
+{"a":"Parity","f":"Parität (RAID)","d":"Per XOR berechnete Prüfinformation, aus der sich die Daten einer ausgefallenen Platte rekonstruieren lassen. Grundlage von RAID 5 (einfache Parität) und RAID 6 (doppelte Parität)."},
+{"a":"CSR","f":"Certificate Signing Request","d":"Antrag auf ein digitales Zertifikat: enthält den öffentlichen Schlüssel und die Identitätsdaten des Antragstellers. Die CA prüft die Angaben und signiert daraus das fertige Zertifikat — der private Schlüssel verlässt dabei nie den Antragsteller."},
+{"a":"ARP-Cache","f":"ARP-Tabelle","d":"Temporärer Zwischenspeicher eines Geräts mit bereits aufgelösten IP-zu-MAC-Zuordnungen. Erspart wiederholte ARP-Anfragen im selben Netzsegment; Einträge verfallen nach einer gewissen Zeit automatisch."},
+{"a":"Store-and-Forward","f":"Store-and-Forward-Switching","d":"Switching-Verfahren: Der Switch empfängt den kompletten Frame, prüft die Prüfsumme und verwirft fehlerhafte Frames, bevor er weiterleitet. Sicherer als Cut-Through, dafür mit etwas höherer Latenz."},
+{"a":"Cut-Through","f":"Cut-Through-Switching","d":"Switching-Verfahren: Der Switch beginnt die Weiterleitung, sobald die Ziel-MAC-Adresse gelesen ist, ohne den ganzen Frame abzuwarten. Schneller als Store-and-Forward, leitet aber auch fehlerhafte Frames weiter."},
+{"a":"GFS","f":"Grandfather-Father-Son","d":"Klassisches Rotationskonzept für Backup-Medien: tägliche (Son), wöchentliche (Father) und monatliche (Grandfather) Sicherungen. Ältere Medien werden nach festem Rhythmus wiederverwendet, sodass mehrere Zeitpunkte in der Vergangenheit verfügbar bleiben."},
+{"a":"OAuth","f":"Open Authorization","d":"Offener Standard zur delegierten Autorisierung: Ein Nutzer erlaubt einer Anwendung Zugriff auf seine Daten bei einem Dienst, ohne dass die Anwendung sein Passwort erhält. Liefert dabei typischerweise ein zeitlich begrenztes Access-Token."},
+{"a":"Bearer-Token","f":"Bearer Token","d":"Zugriffstoken, das im HTTP-Header mitgesendet wird — wer es besitzt (\"bearer\"), gilt als berechtigt. Meist zeitlich begrenzt gültig, oft im Rahmen von OAuth ausgestellt. Muss daher wie ein Passwort geschützt werden."}];
 
 // ---- Bibliothek: Render + Suche ----
 const libList = document.getElementById('libList');
