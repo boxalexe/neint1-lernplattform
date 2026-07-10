@@ -3,6 +3,20 @@
   --text:#c9d6e0; --muted:#7d94a6; --cyan:#22d3ee; --green:#3ddc84;
   --amber:#f5b642; --red:#ff5f6b; --code-bg:#060a0e;
 }
+/* Theme: Hoher Kontrast — maximale Helligkeitsdifferenz für Kontrastempfindlichkeit,
+   nicht CVD-spezifisch, sondern für allgemein reduziertes Kontrastsehen. */
+html[data-theme="hc"]{
+  --bg:#000000; --panel:#0d0d0d; --panel-2:#070707; --border:#3d3d3d;
+  --text:#ffffff; --muted:#c2c2c2; --cyan:#00eaff; --green:#00ff6a;
+  --amber:#ffd400; --red:#ff3344; --code-bg:#000000;
+}
+/* Theme: Blau/Orange — Palette nach Okabe-Ito, speziell für Rot-Grün-Sehschwäche
+   (Protanopie/Deuteranopie) rechnerisch gegen das Original geprüft und verbessert. */
+html[data-theme="cvd"]{
+  --bg:#0a0e14; --panel:#111a24; --panel-2:#0d1620; --border:#1e2c3a;
+  --text:#eef1f6; --muted:#9aa8bb; --cyan:#56b4e9; --green:#009e73;
+  --amber:#f0e442; --red:#d55e00; --code-bg:#060a10;
+}
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:auto}
 /* Custom Cursor: Regeln stehen am DATEIENDE mit !important,
@@ -33,7 +47,7 @@ header p{color:var(--muted);font-size:0.95rem}
 .tab:hover{color:var(--cyan);border-color:var(--cyan)}
 .tab.active{color:var(--bg);background:var(--cyan);border-color:var(--cyan);font-weight:600}
 /* Zen Mode Toggle */
-.zen-toggle{display:flex;align-items:center;gap:7px;background:var(--panel-2);border:1px solid var(--border);color:var(--muted);font-family:'DM Mono',monospace;font-size:0.85rem;padding:9px 16px;border-radius:8px;cursor:pointer;transition:all .15s;white-space:nowrap}
+.zen-toggle{display:flex;align-items:center;justify-content:center;gap:7px;background:var(--panel-2);border:1px solid var(--border);color:var(--muted);font-family:'DM Mono',monospace;font-size:0.85rem;padding:9px 16px;border-radius:8px;cursor:pointer;transition:all .15s;white-space:nowrap}
 .zen-toggle:hover{color:var(--green);border-color:var(--green)}
 .zen-icon{font-size:0.9rem;line-height:1}
 body.zen .zen-toggle{color:var(--green);border-color:var(--green);background:rgba(61,220,132,0.08)}
@@ -115,8 +129,10 @@ tr:hover td{background:rgba(34,211,238,0.03)}
 .q-text .num{color:var(--cyan);font-family:'DM Mono',monospace;margin-right:8px}
 .opt{display:flex;align-items:flex-start;gap:10px;background:var(--panel-2);border:1px solid var(--border);border-radius:7px;padding:11px 14px;margin-bottom:8px;cursor:pointer;transition:all .12s;font-size:0.93rem}
 .opt:hover{border-color:var(--cyan);background:rgba(34,211,238,0.05)}
-.opt.correct{border-color:var(--green);background:rgba(61,220,132,0.12);color:#eaf2f8}
-.opt.wrong{border-color:var(--red);background:rgba(255,95,107,0.12)}
+.opt.correct{border-color:var(--green);background:rgba(61,220,132,0.12);color:#eaf2f8;position:relative}
+.opt.wrong{border-color:var(--red);background:rgba(255,95,107,0.12);position:relative}
+.opt.correct::after{content:'✓';position:absolute;right:14px;top:50%;transform:translateY(-50%);color:var(--green);font-weight:700;font-size:1.1rem}
+.opt.wrong::after{content:'✕';position:absolute;right:14px;top:50%;transform:translateY(-50%);color:var(--red);font-weight:700;font-size:1.1rem}
 .opt.disabled{cursor:default}
 .opt .mk{font-family:'DM Mono',monospace;color:var(--muted);flex-shrink:0}
 .explain{margin-top:10px;padding:11px 14px;border-radius:7px;background:var(--code-bg);border-left:3px solid var(--green);font-size:0.87rem;color:var(--muted);display:none}
@@ -218,3 +234,26 @@ table.sn-cheat td:nth-child(4),table.sn-cheat td:nth-child(5){color:var(--green)
 
 /* Dezente Copyright-Zeile unter dem eigentlichen Footer-Inhalt */
 .footer-copy{margin-top:10px;font-size:0.7rem;opacity:0.45;letter-spacing:0.5px}
+
+/* ============================================
+   BARRIEREFREIHEIT: Kontrast-Umschalter
+   ============================================ */
+.a11y-wrap{display:flex;justify-content:center;margin-top:10px;position:relative}
+.a11y-toggle{background:transparent;border:none;padding:6px;cursor:pointer;display:flex;align-items:center;justify-content:center;border-radius:50%;transition:background .15s;opacity:0.55}
+.a11y-toggle:hover{opacity:1;background:rgba(255,255,255,0.06)}
+.a11y-toggle svg{width:17px;height:17px;color:#fff;animation:a11yHue 9s linear infinite}
+@keyframes a11yHue{
+  0%{filter:hue-rotate(0deg) saturate(2.2)}
+  100%{filter:hue-rotate(360deg) saturate(2.2)}
+}
+@media (prefers-reduced-motion: reduce){
+  .a11y-toggle svg{animation:none;color:var(--cyan)}
+}
+.a11y-menu{position:absolute;top:calc(100% + 8px);left:50%;transform:translateX(-50%) translateY(-6px);background:var(--panel);border:1px solid var(--border);border-radius:10px;padding:6px;min-width:230px;box-shadow:0 12px 32px rgba(0,0,0,0.45);opacity:0;pointer-events:none;transition:opacity .15s,transform .15s;z-index:50}
+.a11y-menu.open{opacity:1;pointer-events:auto;transform:translateX(-50%) translateY(0)}
+.a11y-opt{display:flex;align-items:center;gap:10px;width:100%;background:transparent;border:none;color:var(--text);font-family:'DM Mono',monospace;font-size:0.78rem;padding:9px 12px;border-radius:7px;cursor:pointer;text-align:left;transition:background .12s}
+.a11y-opt:hover{background:var(--panel-2)}
+.a11y-opt.active{color:var(--cyan)}
+.a11y-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0;border:1px solid rgba(255,255,255,0.25)}
+.a11y-check{margin-left:auto;color:var(--cyan);opacity:0;font-size:0.85rem}
+.a11y-opt.active .a11y-check{opacity:1}

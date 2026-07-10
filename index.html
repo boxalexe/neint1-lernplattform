@@ -4,6 +4,12 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Layer 8 Academy</title>
+<script>
+  try {
+    var t = localStorage.getItem('l8a_theme');
+    if (t && t !== 'default') document.documentElement.setAttribute('data-theme', t);
+  } catch (e) {}
+</script>
 <link rel="stylesheet" href="styles.css?v=202607061010">
 </head>
 <body>
@@ -11,6 +17,28 @@
   <div class="wrap">
     <h1><span class="t-neint">Layer 8</span> <span class="t-symb">Academy</span></h1>
     <p>Netzwerke &amp; Internettechnologien · OSI · Routing/Switching · IP · DNS/DHCP · Sicherheit · VPN · WLAN · VoIP — Nachschlagewerk + Prüfungstrainer</p>
+    <div class="a11y-wrap">
+      <button class="a11y-toggle" id="a11yToggle" aria-haspopup="true" aria-expanded="false" aria-label="Kontrasteinstellungen öffnen" title="Kontrasteinstellungen">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7Z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+      </button>
+      <div class="a11y-menu" id="a11yMenu" role="menu" aria-label="Kontrastmodus wählen">
+        <button class="a11y-opt" data-theme="default" role="menuitemradio">
+          <span class="a11y-dot" style="background:#22d3ee"></span>
+          <span>Original</span>
+          <span class="a11y-check">✓</span>
+        </button>
+        <button class="a11y-opt" data-theme="hc" role="menuitemradio">
+          <span class="a11y-dot" style="background:#ffffff"></span>
+          <span>Hoher Kontrast</span>
+          <span class="a11y-check">✓</span>
+        </button>
+        <button class="a11y-opt" data-theme="cvd" role="menuitemradio">
+          <span class="a11y-dot" style="background:#56b4e9"></span>
+          <span>Blau/Orange (farbenblind-sicher)</span>
+          <span class="a11y-check">✓</span>
+        </button>
+      </div>
+    </div>
   </div>
 </header>
 
@@ -213,6 +241,47 @@
 
 <section id="r-zahlen">
 <h2>Zahlensysteme</h2>
+
+<h3>Schritt für Schritt: Wie man zwischen den Systemen umrechnet</h3>
+<p>Der wichtigste Merksatz zuerst, weil er alles andere vereinfacht: <strong>Man muss im Grunde nur zwei Systeme wirklich beherrschen — Dezimal und Binär.</strong> Hexadezimal und Oktal sind keine eigenständigen neuen Fähigkeiten. Beide sind nichts anderes als Binärzahlen, nur in kleine Blöcke aufgeteilt und nebeneinander geschrieben. Wer Binär versteht, kann Hex und Oktal fast geschenkt mitnehmen.</p>
+
+<h3>1. Hexadezimal — einfach Binär in 4er-Blöcken</h3>
+<p>Jede einzelne Hex-Ziffer steht für genau 4 Bit (ein sogenanntes Nibble). Der Trick beim Umrechnen: Man wandelt <strong>jede Hex-Ziffer für sich</strong> in ihre 4-Bit-Binärform um, schreibt alle Blöcke einfach nebeneinander ab — und hat damit schon die komplette Binärzahl. Erst danach rechnet man diese eine lange Binärzahl ganz normal in Dezimal um.</p>
+
+<p><strong>Beispiel: Hex <code>3F12</code> in Dezimal umrechnen</strong></p>
+<div class="sn-step"><div class="sn-badge">1</div><div class="sn-step-body">Jede Ziffer einzeln in 4 Bit wandeln: <code>3</code> → <span class="sn-num">0011</span>, <code>F</code> → <span class="sn-num">1111</span>, <code>1</code> → <span class="sn-num">0001</span>, <code>2</code> → <span class="sn-num">0010</span></div></div>
+<div class="sn-step"><div class="sn-badge">2</div><div class="sn-step-body">Die vier Blöcke einfach nebeneinander abschreiben: <span class="sn-num">0011 1111 0001 0010</span> — das ist jetzt die vollständige Binärzahl.</div></div>
+<div class="sn-step"><div class="sn-badge">3</div><div class="sn-step-body">Diese Binärzahl ganz normal über die Bitwertigkeiten aufsummieren (nur die Einsen zählen): 8192+4096+2048+1024+512+256+16+2 = <span class="sn-num">16146</span></div></div>
+<p>Ergebnis: Hex <code>3F12</code> = Dezimal <strong>16146</strong>. Der einzige neue Schritt gegenüber reinem Binär-Rechnen war das Nebeneinanderschreiben der 4er-Blöcke — die eigentliche Rechnung am Ende ist dieselbe wie bei jeder anderen Binärzahl auch.</p>
+
+<h3>2. Oktal — dasselbe Prinzip, nur in 3er-Blöcken</h3>
+<p>Oktal funktioniert genau nach demselben Muster wie Hex — nur dass eine Oktalziffer nicht für ein ganzes Nibble (4 Bit) steht, sondern nur für <strong>3 Bit</strong> (manchmal Tribit genannt). Der Grund: Oktal hat die Basis 8, und 8 lässt sich mit genau 3 Bit vollständig abdecken (2³ = 8). Innerhalb eines solchen 3-Bit-Blocks zählt man deshalb nicht mit den großen Bitwertigkeiten 128-64-32…, sondern nur mit den drei kleinsten: <strong>4 – 2 – 1</strong>.</p>
+
+<p><strong>Einfaches Beispiel: Binär <code>101011100</code> in Oktal umrechnen</strong></p>
+<div class="sn-step"><div class="sn-badge">1</div><div class="sn-step-body">Die Binärzahl in 3er-Blöcke aufteilen: <span class="sn-num">101</span> <span class="sn-num">011</span> <span class="sn-num">100</span></div></div>
+<div class="sn-step"><div class="sn-badge">2</div><div class="sn-step-body">Jeden Block einzeln mit 4-2-1 abzählen (nur die gesetzten Einsen zusammenzählen): <span class="sn-num">101</span> → 4+1=<span class="sn-num">5</span>, <span class="sn-num">011</span> → 2+1=<span class="sn-num">3</span>, <span class="sn-num">100</span> → 4=<span class="sn-num">4</span></div></div>
+<div class="sn-step"><div class="sn-badge">3</div><div class="sn-step-body">Die drei Ergebnisse nebeneinander abschreiben: Oktal <span class="sn-num">534</span></div></div>
+
+<div class="callout"><span class="tag">Praktischer Zusammenhang</span>Wer schon eine Hex-Zahl in Binär gewandelt hat (wie im Beispiel oben), muss für Oktal <strong>nicht neu anfangen</strong>. Dieselbe Binärzahl lässt sich einfach anders aufteilen — statt in 4er-Blöcken (für Hex) eben in 3er-Blöcken (für Oktal). Aus <code>3F12</code> wurde oben die Binärzahl <code>0011111100010010</code> (16 Bit). Da 16 nicht glatt durch 3 teilbar ist, ergänzt man links so viele Nullen, bis es passt (hier 2 Nullen → 18 Bit): <code>000011111100010010</code>. In 3er-Blöcken aufgeteilt und je mit 4-2-1 abgezählt: <span class="sn-num">000 011 111 100 010 010</span> → <span class="sn-num">0 3 7 4 2 2</span> → Oktal <strong>37422</strong>. Zur Kontrolle: Auch <code>37422</code> (oktal) ergibt umgerechnet wieder <strong>16146</strong> — dieselbe Zahl wie beim Hex-Weg, nur anders geschrieben.</div>
+
+<h3>3. Der Rückweg: Eine große Dezimalzahl in Binär umrechnen</h3>
+<p>Für die andere Richtung — von Dezimal zurück nach Binär — gibt es einen einfachen, mechanischen Trick: <strong>immer wieder durch 2 teilen</strong>. Nach jeder Division schaut man nur auf eines: Bleibt eine Nachkommazahl übrig oder nicht?</p>
+<div class="callout"><span class="tag">Die Regel</span>Ergibt die Division eine <strong>Nachkommazahl</strong> (also endet sie auf „,5"), war die Ausgangszahl ungerade — dann notiert man eine <strong>1</strong>. Geht die Division <strong>glatt auf</strong> (keine Nachkommazahl), war sie gerade — dann notiert man eine <strong>0</strong>. Man rechnet dabei immer nur mit dem ganzzahligen Anteil weiter (die Nachkommazahl war ja bereits die notierte 1 und wird verworfen), bis am Ende die 0 erreicht ist.</div>
+
+<p><strong>Beispiel: Dezimal <code>345</code> in Binär umrechnen</strong></p>
+<div class="sn-step"><div class="sn-badge">1</div><div class="sn-step-body">345 ÷ 2 = 172,5 → Nachkommazahl vorhanden → <span class="sn-num">1</span> notieren, weiter mit 172</div></div>
+<div class="sn-step"><div class="sn-badge">2</div><div class="sn-step-body">172 ÷ 2 = 86,0 → keine Nachkommazahl → <span class="sn-num">0</span> notieren, weiter mit 86</div></div>
+<div class="sn-step"><div class="sn-badge">3</div><div class="sn-step-body">86 ÷ 2 = 43,0 → keine Nachkommazahl → <span class="sn-num">0</span> notieren, weiter mit 43</div></div>
+<div class="sn-step"><div class="sn-badge">4</div><div class="sn-step-body">43 ÷ 2 = 21,5 → Nachkommazahl vorhanden → <span class="sn-num">1</span> notieren, weiter mit 21</div></div>
+<div class="sn-step"><div class="sn-badge">5</div><div class="sn-step-body">21 ÷ 2 = 10,5 → Nachkommazahl vorhanden → <span class="sn-num">1</span> notieren, weiter mit 10</div></div>
+<div class="sn-step"><div class="sn-badge">6</div><div class="sn-step-body">10 ÷ 2 = 5,0 → keine Nachkommazahl → <span class="sn-num">0</span> notieren, weiter mit 5</div></div>
+<div class="sn-step"><div class="sn-badge">7</div><div class="sn-step-body">5 ÷ 2 = 2,5 → Nachkommazahl vorhanden → <span class="sn-num">1</span> notieren, weiter mit 2</div></div>
+<div class="sn-step"><div class="sn-badge">8</div><div class="sn-step-body">2 ÷ 2 = 1,0 → keine Nachkommazahl → <span class="sn-num">0</span> notieren, weiter mit 1</div></div>
+<div class="sn-step"><div class="sn-badge">9</div><div class="sn-step-body">1 ÷ 2 = 0,5 → Nachkommazahl vorhanden → <span class="sn-num">1</span> notieren, weiter mit 0 → <strong>Schluss, die 0 ist erreicht</strong></div></div>
+
+<div class="callout"><span class="tag">Wichtig: die Ableserichtung</span>Die notierten Ziffern stehen jetzt in der Reihenfolge, in der sie berechnet wurden: 1,0,0,1,1,0,1,0,1. Das ist <strong>nicht</strong> die fertige Binärzahl! Man muss sie <strong>von unten nach oben</strong> ablesen — also in der genau umgekehrten Reihenfolge, in der sie notiert wurden. Von unten nach oben gelesen ergibt sich: <span class="sn-op">101011001</span>. Das ist die fertige Binärzahl.</div>
+<p>Ergebnis: Dezimal <strong>345</strong> = Binär <strong class="sn-op">101011001</strong>. Die letzte notierte Ziffer (aus dem letzten Schritt, kurz vor der 0) wird beim Ablesen zur führenden, also ersten Ziffer der Binärzahl — die allererste notierte Ziffer landet ganz am Ende.</p>
+
 <table>
 <tr><th>System</th><th>Basis</th><th>Ziffern</th></tr>
 <tr><td>Dual (binär)</td><td>2</td><td>0, 1</td></tr>

@@ -13737,7 +13737,7 @@ const POOLS = {
    {
     "q": "Was passiert während eines RAID-Rebuilds nach einem Plattentausch?",
     "o": [
-     { "t": "Die Daten der ersetzten Platte werden aus den übrigen Platten wiederhergestellt", "ok": true },
+     { "t": "Die Daten der zu ersetzenden Platte werden aus den übrigen Platten wiederhergestellt", "ok": true },
      { "t": "Der gesamte Verbund wird gelöscht und komplett neu formatiert", "ok": false },
      { "t": "Alle Platten werden gleichzeitig gegen neue ausgetauscht", "ok": false },
      { "t": "Die Daten werden vom Backup-Band zurückgespielt", "ok": false }
@@ -13745,7 +13745,7 @@ const POOLS = {
     "e": "Beim Rebuild rekonstruiert der Controller die Inhalte der neuen Platte aus Daten und Parität der verbliebenen Platten. Bei großen Platten kann das Stunden dauern."
    },
    {
-    "q": "Warum ist gerade während eines RAID-5-Rebuilds das Risiko besonders hoch?",
+    "q": "Warum ist das Risiko eines vollständigen Datenverlusts gerade während eines RAID-5-Rebuilds besonders hoch?",
     "o": [
      { "t": "Fällt in dieser Phase eine weitere Platte aus, sind alle Daten verloren", "ok": true },
      { "t": "Der Verbund lässt sich während des Rebuilds grundsätzlich nicht mehr lesen", "ok": false },
@@ -14536,12 +14536,6 @@ document.querySelectorAll('.tab').forEach(tab => {
     document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
     tab.classList.add('active');
     document.getElementById('view-' + tab.dataset.view).classList.add('active');
-    // Der "Multiple Choice"-Tab führt immer zur Kategorieauswahl zurück,
-    // genau wie der Abbrechen-Button — auch wenn gerade ein Durchgang läuft
-    // oder die Auswertung offen ist. Kein stiller Wiedereinstieg mitten im Quiz.
-    if(tab.dataset.view === 'quiz' && (runnerEl.classList.contains('active') || resultEl.classList.contains('show'))){
-      backToSelector();
-    }
     window.scrollTo({top:0,behavior:'smooth'});
   });
 });
@@ -14952,3 +14946,52 @@ window.scrollTo(0, 0);
 window.addEventListener('load', () => { window.scrollTo(0, 0); });
 // pageshow greift auch beim Wiederherstellen aus dem Back-Forward-Cache (mobil häufig).
 window.addEventListener('pageshow', () => { window.scrollTo(0, 0); });
+
+// ---- Barrierefreiheit: Kontrast-Umschalter ----
+(function(){
+  const toggle = document.getElementById('a11yToggle');
+  const menu = document.getElementById('a11yMenu');
+  if(!toggle || !menu) return;
+  const opts = menu.querySelectorAll('.a11y-opt');
+  const STORE_KEY = 'l8a_theme';
+
+  function currentTheme(){
+    try { return localStorage.getItem(STORE_KEY) || 'default'; } catch(e){ return 'default'; }
+  }
+  function markActive(theme){
+    opts.forEach(o => o.classList.toggle('active', o.dataset.theme === theme));
+  }
+  function applyTheme(theme){
+    if(theme === 'default') document.documentElement.removeAttribute('data-theme');
+    else document.documentElement.setAttribute('data-theme', theme);
+    try { localStorage.setItem(STORE_KEY, theme); } catch(e){}
+    markActive(theme);
+  }
+  function openMenu(){
+    menu.classList.add('open');
+    toggle.setAttribute('aria-expanded','true');
+  }
+  function closeMenu(){
+    menu.classList.remove('open');
+    toggle.setAttribute('aria-expanded','false');
+  }
+
+  markActive(currentTheme());
+
+  toggle.addEventListener('click', (e) => {
+    e.stopPropagation();
+    menu.classList.contains('open') ? closeMenu() : openMenu();
+  });
+  opts.forEach(o => {
+    o.addEventListener('click', () => {
+      applyTheme(o.dataset.theme);
+      closeMenu();
+    });
+  });
+  document.addEventListener('click', (e) => {
+    if(!menu.contains(e.target) && e.target !== toggle) closeMenu();
+  });
+  document.addEventListener('keydown', (e) => {
+    if(e.key === 'Escape') closeMenu();
+  });
+})();
