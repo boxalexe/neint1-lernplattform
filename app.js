@@ -47,7 +47,7 @@ const POOLS = {
       "ok": false
      }
     ],
-    "e": "IP:Port = Socket, der eindeutige Kommunikationsendpunkt."
+    "e": "IP:Port = Socket, der eindeutige Kommunikationsendpunkt. Genauer betrachtet wird ein Socket durch IP-Adresse, Portnummer und Transportprotokoll (z. B. TCP oder UDP) definiert — je nachdem, wie spezifisch die Frage gestellt ist, kann auch das Protokoll mit abgefragt werden."
    },
    {
     "q": "In welchem Bereich liegen die Well-Known Ports?",
@@ -270,28 +270,6 @@ const POOLS = {
     "e": "80 ist Well-Known; Quellports stammen aus dem dynamischen Bereich."
    },
    {
-    "q": "Was beschreibt der Begriff 'Socket' technisch am genauesten?",
-    "o": [
-     {
-      "t": "Endpunkt einer Netzwerkverbindung aus IP und Port",
-      "ok": true
-     },
-     {
-      "t": "Das physische Netzwerkkabel",
-      "ok": false
-     },
-     {
-      "t": "Ein Verschlüsselungsverfahren",
-      "ok": false
-     },
-     {
-      "t": "Die MAC-Adresse einer Netzwerkkarte",
-      "ok": false
-     }
-    ],
-    "e": "Ein Socket ist der Verbindungsendpunkt, definiert durch IP + Port."
-   },
-   {
     "q": "Ein Dienst 'lauscht' auf einem festen Port. Wie nennt man diesen Port?",
     "o": [
      {
@@ -383,7 +361,7 @@ const POOLS = {
     "q": "Welche Kombination beschreibt eine vollständige Ende-zu-Ende-Verbindung?",
     "o": [
      {
-      "t": "Quell-IP mit Quellport und Ziel-IP mit Zielport",
+      "t": "Quell-IP mit Quellport, Ziel-IP mit Zielport und dem verwendeten Transportprotokoll, z. B. TCP oder UDP",
       "ok": true
      },
      {
@@ -395,7 +373,7 @@ const POOLS = {
       "ok": false
      },
      {
-      "t": "Die MAC-Adresse zusammen mit einer Portnummer",
+      "t": "Zielport und das verwendete Transportprotokoll, jedoch vollständig ohne Angabe einer IP-Adresse auf beiden Seiten",
       "ok": false
      }
     ],
@@ -466,28 +444,6 @@ const POOLS = {
      }
     ],
     "e": "8443 liegt zwischen 1024 und 49151 — Registered-Bereich, häufig für alternative HTTPS-Interfaces genutzt."
-   },
-   {
-    "q": "Ein Server lauscht auf Port 8080. In welchem Bereich liegt dieser Port?",
-    "o": [
-     {
-      "t": "Registered Ports",
-      "ok": true
-     },
-     {
-      "t": "Well-Known Ports",
-      "ok": false
-     },
-     {
-      "t": "Dynamic Ports",
-      "ok": false
-     },
-     {
-      "t": "Broadcast-Ports",
-      "ok": false
-     }
-    ],
-    "e": "8080 liegt im Registered-Bereich (zwischen 1024 und 49151) — häufig als alternativer HTTP-Port genutzt."
    },
    {
     "q": "Welcher Port wird für einen ausgehenden HTTPS-Request typischerweise als Quellport genutzt?",
@@ -676,21 +632,11 @@ const POOLS = {
     "e": "Der lauschende Port bleibt 443. Jede aktive Verbindung wird durch das Vierertupel (Quell-IP, Quellport, Ziel-IP, Zielport) eindeutig — deshalb können viele Clients denselben Serverport nutzen, ohne sich zu vermischen."
    },
    {
-    "q": "Was kennzeichnet einen Socket im Listening-Zustand?",
-    "o": [
-     { "t": "Er ist an lokale IP und Port gebunden und wartet auf eingehende Verbindungen, ohne Gegenstelle", "ok": true },
-     { "t": "Er hat bereits eine feste Gegenstelle und tauscht aktiv Daten mit ihr aus", "ok": false },
-     { "t": "Er wurde vom Betriebssystem geschlossen und wartet auf seine Freigabe", "ok": false },
-     { "t": "Er sendet in festen Intervallen Broadcasts, um Clients im Netz zu finden", "ok": false }
-    ],
-    "e": "Ein lauschender Socket kennt nur seine lokale Seite. Erst wenn ein Client sich verbindet, entsteht daraus ein verbundener Socket mit vollständigem Adresspaar aus beiden Seiten."
-   },
-   {
     "q": "Worin unterscheiden sich Stream-Sockets und Datagram-Sockets?",
     "o": [
      { "t": "Stream-Sockets arbeiten verbindungsorientiert über TCP, Datagram-Sockets verbindungslos über UDP", "ok": true },
-     { "t": "Stream-Sockets übertragen nur Text, Datagram-Sockets ausschließlich Binärdaten", "ok": false },
-     { "t": "Stream-Sockets laufen nur auf Servern, Datagram-Sockets nur auf Clients", "ok": false },
+     { "t": "Stream-Sockets übertragen nur Text, Datagram-Sockets dagegen nur Binärdaten", "ok": false },
+     { "t": "Stream-Sockets garantieren Verschlüsselung, Datagram-Sockets übertragen dagegen stets im Klartext", "ok": false },
      { "t": "Stream-Sockets nutzen IPv6, Datagram-Sockets sind auf IPv4 beschränkt", "ok": false }
     ],
     "e": "Der Socket-Typ legt das Transportverhalten fest: Stream-Sockets liefern einen zuverlässigen, geordneten Datenstrom per TCP, Datagram-Sockets verschicken einzelne Pakete per UDP ohne Zustellgarantie."
@@ -699,7 +645,7 @@ const POOLS = {
     "q": "Welche Aufgabe erfüllt das Binden eines Sockets auf einem Server?",
     "o": [
      { "t": "Es legt fest, unter welcher lokalen IP-Adresse und welchem Port der Socket erreichbar ist", "ok": true },
-     { "t": "Es baut die Verbindung zu einem bestimmten Client vollständig auf", "ok": false },
+     { "t": "Es baut die Verbindung zu einem bestimmten Client vollständig auf und tauscht ab diesem Zeitpunkt aktiv Daten mit ihm aus", "ok": false },
      { "t": "Es verschlüsselt den künftigen Datenverkehr auf diesem Socket", "ok": false },
      { "t": "Es reserviert dauerhaft Arbeitsspeicher für die spätere Datenübertragung", "ok": false }
     ],
@@ -2033,28 +1979,6 @@ const POOLS = {
     "e": "Die Zuverlässigkeit liefert TCP, nicht IP selbst."
    },
    {
-    "q": "Welche Schritte gehören zum Verbindungsaufbau bei TCP?",
-    "o": [
-     {
-      "t": "SYN, SYN-ACK, ACK",
-      "ok": true
-     },
-     {
-      "t": "HELLO, ACK, FIN",
-      "ok": false
-     },
-     {
-      "t": "GET, POST, PUT",
-      "ok": false
-     },
-     {
-      "t": "REQUEST, GRANT, CLOSE",
-      "ok": false
-     }
-    ],
-    "e": "Der Three-Way-Handshake nutzt SYN / SYN-ACK / ACK."
-   },
-   {
     "q": "Welche Anwendung braucht die Zuverlässigkeit von TCP?",
     "o": [
      {
@@ -2090,7 +2014,7 @@ const POOLS = {
     "q": "Wie wird bei TCP eine Verbindung sauber beendet?",
     "o": [
      {
-      "t": "Über eine FIN/ACK-Sequenz (geordneter Abbau)",
+      "t": "Über eine FIN/ACK-Sequenz",
       "ok": true
      },
      {
@@ -2174,7 +2098,7 @@ const POOLS = {
       "ok": false
      },
      {
-      "t": "Beide besitzen keine",
+      "t": "Beide besitzen Flusskontrolle, allerdings in unterschiedlicher Ausprägung",
       "ok": false
      },
      {
@@ -2500,7 +2424,7 @@ const POOLS = {
       "ok": false
      },
      {
-      "t": "Die Staukontrolle liegt beim Router",
+      "t": "Die Staukontrolle liegt beim Router und wird über ICMP signalisiert",
       "ok": false
      }
     ],
@@ -3210,7 +3134,7 @@ const POOLS = {
     "q": "Was läuft auf Schicht 3 (Vermittlungsschicht / Network)?",
     "o": [
      {
-      "t": "Logische Adressierung (IP) und Wegfindung/Routing",
+      "t": "Logische Adressierung und Wegfindung/Routing",
       "ok": true
      },
      {
@@ -3232,7 +3156,7 @@ const POOLS = {
     "q": "Was läuft auf Schicht 4 (Transportschicht / Transport)?",
     "o": [
      {
-      "t": "Ende-zu-Ende-Verbindung, Ports, Segmentierung (TCP/UDP)",
+      "t": "Ende-zu-Ende-Verbindung, Ports, Segmentierung",
       "ok": true
      },
      {
@@ -3606,19 +3530,19 @@ const POOLS = {
     "q": "Welche Schicht baut Sitzungen zwischen Anwendungen auf?",
     "o": [
      {
-      "t": "Schicht 5 (Sitzung)",
+      "t": "Schicht 5",
       "ok": true
      },
      {
-      "t": "Schicht 3 (Vermittlung)",
+      "t": "Schicht 3",
       "ok": false
      },
      {
-      "t": "Schicht 7 (Anwendung)",
+      "t": "Schicht 7",
       "ok": false
      },
      {
-      "t": "Schicht 1 (Bitübertragung)",
+      "t": "Schicht 1",
       "ok": false
      }
     ],
@@ -3738,15 +3662,15 @@ const POOLS = {
     "q": "Welche Aussage über einen Layer-3-Switch ist korrekt?",
     "o": [
      {
-      "t": "Er leitet zusätzlich zur MAC- auch IP-basiert weiter (Routing)",
+      "t": "Er leitet zusätzlich zur MAC- auch IP-basiert weiter",
       "ok": true
      },
      {
-      "t": "Er arbeitet ausschließlich auf der Bitübertragungsschicht",
+      "t": "Er arbeitet nur auf der untersten Bitübertragungsschicht ohne jede höhere Funktion",
       "ok": false
      },
      {
-      "t": "Er kann grundsätzlich keine VLANs verwalten",
+      "t": "Er kann VLANs technisch nicht verwalten oder voneinander trennen",
       "ok": false
      },
      {
@@ -3801,7 +3725,7 @@ const POOLS = {
     "e": "Beim Senden kapselt jede Schicht die Daten der oberen Schicht: L4 → Segment, L3 → Paket, L2 → Frame."
    },
    {
-    "q": "Was passiert beim Empfänger mit den OSI-Schichten?",
+    "q": "Wie werden die Daten beim Empfänger durch die OSI-Schichten verarbeitet?",
     "o": [
      {
       "t": "Jede Schicht liest und entfernt ihren eigenen Header",
@@ -3825,34 +3749,12 @@ const POOLS = {
    {
     "q": "Welches Gerät arbeitet auf allen sieben Schichten?",
     "o": [
-     { "t": "Gateway / Application-Layer-Firewall", "ok": true },
+     { "t": "Gateway", "ok": true },
      { "t": "Layer-3-Switch mit Routingfunktion", "ok": false },
      { "t": "Router mit aktivierter Paketfilterung", "ok": false },
      { "t": "Managed Switch mit VLAN-Unterstützung", "ok": false }
     ],
     "e": "Ein Anwendungsschicht-Gateway (z. B. Proxy, WAF) kann alle 7 Schichten verarbeiten."
-   },
-   {
-    "q": "Welche PDU gehört zur Schicht 2?",
-    "o": [
-     {
-      "t": "Frame",
-      "ok": true
-     },
-     {
-      "t": "Paket",
-      "ok": false
-     },
-     {
-      "t": "Segment",
-      "ok": false
-     },
-     {
-      "t": "Bit",
-      "ok": false
-     }
-    ],
-    "e": "L2 = Frame, L3 = Paket, L4 = Segment/Datagramm, L1 = Bit."
    },
    {
     "q": "Welche PDU gehört zur Schicht 3?",
@@ -4022,7 +3924,7 @@ const POOLS = {
     "q": "Welche Aussage zum TCP/IP-Modell stimmt?",
     "o": [
      {
-      "t": "Es hat 4 Schichten: Netzzugang, Internet, Transport, Anwendung",
+      "t": "Es fasst die OSI-Schichten in vier Ebenen zusammen: Netzzugang, Internet, Transport, Anwendung",
       "ok": true
      },
      {
@@ -4034,7 +3936,7 @@ const POOLS = {
       "ok": false
      },
      {
-      "t": "Es ist mit dem OSI-Modell vollkommen identisch",
+      "t": "Es besteht aus genau fünf klar voneinander getrennten Schichten, ähnlich wie eine vereinfachte Version von OSI",
       "ok": false
      }
     ],
@@ -4137,11 +4039,11 @@ const POOLS = {
     "q": "Welche typische Reichweite hat ein PAN?",
     "o": [
      {
-      "t": "Wenige Meter (ca. bis 10 m)",
+      "t": "Wenige Meter",
       "ok": true
      },
      {
-      "t": "Bis 1 km",
+      "t": "Bis etwa 100 Meter, vergleichbar mit einem LAN",
       "ok": false
      },
      {
@@ -4171,7 +4073,7 @@ const POOLS = {
       "ok": false
      },
      {
-      "t": "MPLS",
+      "t": "WLAN nach IEEE 802.11",
       "ok": false
      }
     ],
@@ -4288,14 +4190,14 @@ const POOLS = {
     "e": "Im Ausdehnungskontext: Campus Area Network (mehrere Gebäude eines Geländes). (Im KFZ-Bereich meint CAN den Controller Area Network Bus — anderer Kontext.)"
    },
    {
-    "q": "Welche Ausdehnung deckt ein CAN (Campus) typischerweise ab?",
+    "q": "Welche Ausdehnung deckt ein CAN typischerweise ab?",
     "o": [
      {
       "t": "Mehrere Gebäude auf einem Gelände (bis wenige km)",
       "ok": true
      },
      {
-      "t": "Nur einen einzelnen Raum (wenige Meter)",
+      "t": "Nur einen einzelnen Raum oder ein einzelnes Stockwerk auf wenige Meter Reichweite",
       "ok": false
      },
      {
@@ -5733,7 +5635,7 @@ const POOLS = {
    {
     "q": "Was steht in einer Routingtabelle?",
     "o": [
-     { "t": "Zielnetze und der jeweils nächste Hop / Ausgangsinterface", "ok": true },
+     { "t": "Zielnetze und der jeweils nächste Hop bzw. das Ausgangsinterface", "ok": true },
      { "t": "Die MAC-Adressen aller Geräte samt zugehörigem Switch-Port", "ok": false },
      { "t": "Die vollständige Liste aller MAC-Adressen und deren zugehörige Switch-Ports im lokalen Netzwerk", "ok": false },
      { "t": "Die Zuordnung von Domainnamen zu den passenden IP-Adressen", "ok": false }
@@ -5860,7 +5762,7 @@ const POOLS = {
       "ok": false
      },
      {
-      "t": "Tabelle der offenen Ports",
+      "t": "Zuordnung von Zielnetzen zu dem jeweiligen Ausgangsinterface",
       "ok": false
      },
      {
@@ -5938,11 +5840,11 @@ const POOLS = {
     "q": "Was ist der Unterschied zwischen Routing und Switching?",
     "o": [
      {
-      "t": "Routing verbindet Netze (L3/IP), Switching arbeitet im Netz (L2/MAC)",
+      "t": "Routing verbindet Netze, Switching arbeitet innerhalb eines Netzes",
       "ok": true
      },
      {
-      "t": "Beide arbeiten ausschließlich mit IP-Adressen (L3)",
+      "t": "Beide Verfahren arbeiten in der Praxis stets nur mit IP-Adressen auf Schicht 3",
       "ok": false
      },
      {
@@ -6136,7 +6038,7 @@ const POOLS = {
     "q": "Was ist eine Default-Route?",
     "o": [
      {
-      "t": "Eine Route für alle Ziele ohne spezifischeren Eintrag (0.0.0.0/0)",
+      "t": "Eine Route für alle Ziele, für die kein spezifischerer Eintrag existiert",
       "ok": true
      },
      {
@@ -6144,11 +6046,11 @@ const POOLS = {
       "ok": false
      },
      {
-      "t": "Eine feste Route ausschließlich für das lokale Netz",
+      "t": "Eine feste Route, die nur innerhalb des lokalen Netzes gilt",
       "ok": false
      },
      {
-      "t": "Eine verschlüsselte Route über einen VPN-Tunnel",
+      "t": "Eine temporäre Route, die nach jedem Neustart automatisch wieder gelöscht wird",
       "ok": false
      }
     ],
@@ -6202,7 +6104,7 @@ const POOLS = {
       "ok": false
      },
      {
-      "t": "DNS",
+      "t": "STP (Spanning Tree Protocol) — verhindert Schleifen im LAN",
       "ok": false
      }
     ],
@@ -6212,7 +6114,7 @@ const POOLS = {
     "q": "Was beschreibt 'Longest Prefix Match' beim Routing?",
     "o": [
      {
-      "t": "Der spezifischste (längste) passende Eintrag wird verwendet",
+      "t": "Der spezifischste, also am längsten passende Eintrag wird verwendet",
       "ok": true
      },
      {
@@ -6220,11 +6122,11 @@ const POOLS = {
       "ok": false
      },
      {
-      "t": "Der zuerst eingetragene Eintrag gewinnt immer",
+      "t": "Der zuerst eingetragene Eintrag gewinnt in jedem Fall",
       "ok": false
      },
      {
-      "t": "Es wird grundsätzlich die Default-Route genutzt",
+      "t": "Bei mehreren passenden Einträgen wird stets die Default-Route bevorzugt genutzt",
       "ok": false
      }
     ],
@@ -6342,7 +6244,7 @@ const POOLS = {
     "q": "Welcher Eintrag hat in der Routingtabelle die höchste Priorität?",
     "o": [
      {
-      "t": "Die spezifischste Route (Longest Prefix Match)",
+      "t": "Die spezifischste Route mit dem längsten passenden Präfix",
       "ok": true
      },
      {
@@ -6381,6 +6283,16 @@ const POOLS = {
      }
     ],
     "e": "STP deaktiviert redundante Links und aktiviert sie nur bei Ausfall, um Loops zu verhindern."
+   },
+   {
+    "q": "Was ist Routing?",
+    "o": [
+     { "t": "Die Wegewahl und Weiterleitung von Paketen zwischen unterschiedlichen Netzen", "ok": true },
+     { "t": "Die Weiterleitung von Frames innerhalb desselben Netzes anhand der MAC-Adresse", "ok": false },
+     { "t": "Die automatische Vergabe von IP-Adressen an neue Geräte im Netz", "ok": false },
+     { "t": "Die Verschlüsselung von Datenverkehr beim Verlassen des lokalen Netzes", "ok": false }
+    ],
+    "e": "Routing verbindet unterschiedliche Netze über Router und wählt anhand der Ziel-IP den passenden Weg. Die Weiterleitung innerhalb eines Netzes per MAC-Adresse ist dagegen Switching."
    }
   ]
  },
@@ -6441,7 +6353,7 @@ const POOLS = {
       "ok": true
      },
      {
-      "t": "IPv4 ist zu schnell",
+      "t": "IPv4 ist zu langsam",
       "ok": false
      },
      {
@@ -6569,7 +6481,7 @@ const POOLS = {
     "q": "Welches Protokoll ersetzt in IPv6 weitgehend das ARP von IPv4?",
     "o": [
      {
-      "t": "NDP (Neighbor Discovery Protocol) via ICMPv6",
+      "t": "NDP (Neighbor Discovery Protocol)",
       "ok": true
      },
      {
@@ -6657,7 +6569,7 @@ const POOLS = {
     "q": "Was ist 169.254.x.x für eine Adresse?",
     "o": [
      {
-      "t": "APIPA/Link-Local (automatisch bei fehlendem DHCP)",
+      "t": "APIPA/Link-Local",
       "ok": true
      },
      {
@@ -6696,28 +6608,6 @@ const POOLS = {
      }
     ],
     "e": ":: darf nur einmal vorkommen; 2001:db8::1 ist korrekt gekürzt."
-   },
-   {
-    "q": "Was gibt die CIDR-Notation wie /26 an?",
-    "o": [
-     {
-      "t": "Die Anzahl der Bits, die zum Netzanteil gehören",
-      "ok": true
-     },
-     {
-      "t": "Die Anzahl der nutzbaren Hosts im Netz",
-      "ok": false
-     },
-     {
-      "t": "Die maximale TTL der Pakete im Netz",
-      "ok": false
-     },
-     {
-      "t": "Die Anzahl der Router auf dem Weg",
-      "ok": false
-     }
-    ],
-    "e": "Die Präfixlänge (z. B. /26) zählt die 1-Bits der Maske = Netzanteil."
    },
    {
     "q": "Wie erhält man die Netzadresse aus IP und Subnetzmaske?",
@@ -7126,7 +7016,7 @@ const POOLS = {
     "e": "/26 statt /24 = 2 zusätzliche Netzbits → 2^2 = 4 Subnetze."
    },
    {
-    "q": "Welche Adresse erreicht alle Hosts im lokalen Netz (begrenzt Broadcast)?",
+    "q": "Welche Adresse erreicht alle Hosts im lokalen Netz?",
     "o": [
      {
       "t": "255.255.255.255",
@@ -7163,7 +7053,7 @@ const POOLS = {
       "ok": false
      },
      {
-      "t": "Kein einziger nutzbarer Host möglich",
+      "t": "4 nutzbare Hosts, da /30 insgesamt vier verschiedene IP-Adressen umfasst",
       "ok": false
      }
     ],
@@ -7173,7 +7063,7 @@ const POOLS = {
     "q": "Was gibt die Präfixlänge in CIDR an?",
     "o": [
      {
-      "t": "Die Anzahl der Einsen in der Subnetzmaske (Netzanteil)",
+      "t": "Die Anzahl der Einsen in der Subnetzmaske, also den Netzanteil",
       "ok": true
      },
      {
@@ -7185,7 +7075,7 @@ const POOLS = {
       "ok": false
      },
      {
-      "t": "Die Time-to-Live der Pakete (TTL)",
+      "t": "Die Anzahl der Router, die ein Paket auf dem Weg zum Ziel maximal passieren darf, bevor es verworfen wird",
       "ok": false
      }
     ],
@@ -7404,7 +7294,7 @@ const POOLS = {
       "ok": true
      },
      {
-      "t": "Nur die MAC-Adresse",
+      "t": "Nur die MAC-Adresse des Clients, damit der Server ihn beim nächsten Mal wiedererkennt",
       "ok": false
      },
      {
@@ -7596,7 +7486,7 @@ const POOLS = {
       "ok": false
      },
      {
-      "t": "Er speichert das Passwort",
+      "t": "Er verweist per Alias auf einen anderen Domainnamen",
       "ok": false
      }
     ],
@@ -7680,7 +7570,7 @@ const POOLS = {
     "q": "Was passiert, wenn kein DHCP-Server erreichbar ist?",
     "o": [
      {
-      "t": "Der Client vergibt sich eine APIPA-Adresse (169.254.x.x)",
+      "t": "Der Client vergibt sich eine APIPA-Adresse",
       "ok": true
      },
      {
@@ -8340,11 +8230,11 @@ const POOLS = {
       "ok": false
      },
      {
-      "t": "Virtual Online IP",
+      "t": "Voice over Internet Provider",
       "ok": false
      },
      {
-      "t": "Voice Optimized Internet Path",
+      "t": "Voice Optimized Internet Path — ein optimierter Übertragungsweg für Sprachdaten",
       "ok": false
      }
     ],
@@ -8385,7 +8275,7 @@ const POOLS = {
    {
     "q": "Welche Aufgabe hat das SIP-Protokoll bei VoIP?",
     "o": [
-     { "t": "Auf-, Ab- und Verwaltung der Gesprächsverbindung (Signalisierung)", "ok": true },
+     { "t": "Auf-, Ab- und Verwaltung der Gesprächsverbindung", "ok": true },
      { "t": "Transport der digitalisierten Sprachpakete zwischen den Endgeräten", "ok": false },
      { "t": "Priorisierung der Sprachpakete gegenüber normalem Datenverkehr", "ok": false },
      { "t": "Umwandlung analoger Sprache in digitale Datenpakete", "ok": false }
@@ -8426,7 +8316,7 @@ const POOLS = {
       "ok": false
      },
      {
-      "t": "Die Lautstärke",
+      "t": "Die konstante Verzögerung zwischen Sprechen und Hören",
       "ok": false
      },
      {
@@ -8452,7 +8342,7 @@ const POOLS = {
       "ok": false
      },
      {
-      "t": "Die MAC-Adresse",
+      "t": "Schwankungen in der Laufzeit aufeinanderfolgender Pakete",
       "ok": false
      }
     ],
@@ -8472,7 +8362,7 @@ const POOLS = {
     "q": "Was ist ein Codec bei VoIP?",
     "o": [
      {
-      "t": "Ein Verfahren zum Kodieren/Komprimieren der Sprache (z. B. G.711)",
+      "t": "Ein Verfahren zum Kodieren und Komprimieren der Sprache, etwa G.711 oder Opus",
       "ok": true
      },
      {
@@ -8484,7 +8374,7 @@ const POOLS = {
       "ok": false
      },
      {
-      "t": "Ein bestimmter Funkkanal im WLAN",
+      "t": "Ein Hardware-Baustein im IP-Telefon zur Rauschunterdrückung und Echokompensation",
       "ok": false
      }
     ],
@@ -8534,7 +8424,7 @@ const POOLS = {
       "ok": false
      },
      {
-      "t": "Von der Kabelfarbe",
+      "t": "Von der Verschlüsselungsstärke des Gesprächs",
       "ok": false
      },
      {
@@ -8592,7 +8482,7 @@ const POOLS = {
       "ok": true
      },
      {
-      "t": "Bandbreite ist irrelevant",
+      "t": "Bandbreite muss mindestens so hoch wie die Downloadgeschwindigkeit sein",
       "ok": false
      },
      {
@@ -8618,7 +8508,7 @@ const POOLS = {
       "ok": false
      },
      {
-      "t": "DNS überträgt die Sprache",
+      "t": "Die Firewall öffnet automatisch und ohne Prüfung alle nötigen Ports",
       "ok": false
      },
      {
@@ -8641,10 +8531,10 @@ const POOLS = {
    {
     "q": "Was ist ein Softphone?",
     "o": [
-     { "t": "Eine Software, die Telefonie am Rechner/Smartphone ermöglicht", "ok": true },
+     { "t": "Eine Software, die Telefonie am Computer oder Smartphone ermöglicht", "ok": true },
      { "t": "Ein Adapter, der analoge Telefone ans IP-Netz anbindet", "ok": false },
      { "t": "Ein IP-Telefon mit Touchdisplay statt physischer Tasten", "ok": false },
-     { "t": "Eine App zur Fernkonfiguration der IP-Telefonanlage", "ok": false }
+     { "t": "Eine App zur Fernkonfiguration und Wartung der zentralen IP-Telefonanlage", "ok": false }
     ],
     "e": "Ein Softphone ist eine VoIP-Anwendung ohne dediziertes Tischtelefon."
    }
@@ -13887,7 +13777,7 @@ const POOLS = {
   ]
  },
  "drill": {
-  "name": "Ports Drill",
+  "name": "Ports Only",
   "q": [
    {
     "q": "Welcher Dienst läuft standardmäßig auf Port 21?",
@@ -14882,7 +14772,8 @@ const GLOSSAR = [{"a":"2FA","f":"Zwei-Faktor-Authentifizierung","d":"Anmeldung m
 {"a":"Cut-Through","f":"Cut-Through-Switching","d":"Switching-Verfahren: Der Switch beginnt die Weiterleitung, sobald die Ziel-MAC-Adresse gelesen ist, ohne den ganzen Frame abzuwarten. Schneller als Store-and-Forward, leitet aber auch fehlerhafte Frames weiter."},
 {"a":"GFS","f":"Grandfather-Father-Son","d":"Klassisches Rotationskonzept für Backup-Medien: tägliche (Son), wöchentliche (Father) und monatliche (Grandfather) Sicherungen. Ältere Medien werden nach festem Rhythmus wiederverwendet, sodass mehrere Zeitpunkte in der Vergangenheit verfügbar bleiben."},
 {"a":"OAuth","f":"Open Authorization","d":"Offener Standard zur delegierten Autorisierung: Ein Nutzer erlaubt einer Anwendung Zugriff auf seine Daten bei einem Dienst, ohne dass die Anwendung sein Passwort erhält. Liefert dabei typischerweise ein zeitlich begrenztes Access-Token."},
-{"a":"Bearer-Token","f":"Bearer Token","d":"Zugriffstoken, das im HTTP-Header mitgesendet wird — wer es besitzt (\"bearer\"), gilt als berechtigt. Meist zeitlich begrenzt gültig, oft im Rahmen von OAuth ausgestellt. Muss daher wie ein Passwort geschützt werden."}];
+{"a":"Bearer-Token","f":"Bearer Token","d":"Zugriffstoken, das im HTTP-Header mitgesendet wird — wer es besitzt (\"bearer\"), gilt als berechtigt. Meist zeitlich begrenzt gültig, oft im Rahmen von OAuth ausgestellt. Muss daher wie ein Passwort geschützt werden."},
+{"a":"Overhead","f":"Zusatzaufwand / Mehraufwand","d":"Zusätzlicher Ressourcenverbrauch (Zeit, Bandbreite, Rechenleistung), der neben den eigentlichen Nutzdaten für Steuerung, Verschlüsselung oder Protokoll-Header anfällt. Weniger Overhead bedeutet mehr Effizienz, aber oft auch weniger Sicherheit oder Fehlertoleranz — ein klassischer Kompromiss in der Netzwerktechnik."}];
 
 // ---- Bibliothek: Render + Suche ----
 const libList = document.getElementById('libList');
