@@ -6297,7 +6297,7 @@ const POOLS = {
   ]
  },
  "ip": {
-  "name": "IPv4 & IPv6 (Auffrischung)",
+  "name": "IPv4 & IPv6",
   "q": [
    
    
@@ -6503,19 +6503,19 @@ const POOLS = {
     "q": "Wie viele Hosts sind in einem /24-Netz nutzbar?",
     "o": [
      {
-      "t": "254 (minus Netz- und Broadcastadresse)",
+      "t": "254",
       "ok": true
      },
      {
-      "t": "256 (alle Adressen des Bereichs)",
+      "t": "256",
       "ok": false
      },
      {
-      "t": "255 (ohne die Netzadresse)",
+      "t": "255",
       "ok": false
      },
      {
-      "t": "128 (nur die halbe Range)",
+      "t": "128",
       "ok": false
      }
     ],
@@ -7114,17 +7114,17 @@ const POOLS = {
    {
     "q": "Ein Techniker benötigt mindestens 100 nutzbare Host-Adressen in einem Subnetz. Welche Präfixlänge liefert dafür bei möglichst vielen Subnetzen gerade noch genug Kapazität?",
     "o": [
-     { "t": "/25 mit 126 nutzbaren Hosts", "ok": true },
-     { "t": "/26 mit 62 nutzbaren Hosts", "ok": false },
-     { "t": "/24 mit 254 nutzbaren Hosts", "ok": false },
-     { "t": "/27 mit 30 nutzbaren Hosts", "ok": false }
+     { "t": "/25", "ok": true },
+     { "t": "/26", "ok": false },
+     { "t": "/24", "ok": false },
+     { "t": "/27", "ok": false }
     ],
     "e": "/26 reicht mit 62 Hosts nicht aus. /25 liefert 126 Hosts und erfüllt die Anforderung bei der kleinstmöglichen, also meiste Subnetze erlaubenden Präfixlänge."
    },
    {
     "q": "Zwei Geräte tragen die Adressen 192.168.1.60 und 192.168.1.70, beide mit der Maske 255.255.255.192 (/26). Befinden sie sich im selben Subnetz?",
     "o": [
-     { "t": "Nein, .60 liegt im Block 0–63 und .70 im Block 64–127 — unterschiedliche Subnetze", "ok": true },
+     { "t": "Nein, sie liegen nicht im selben Subnetz", "ok": true },
      { "t": "Ja, beide Adressen liegen im selben durchgehenden Adressblock von 0 bis 127 und teilen sich denselben Netzanteil", "ok": false },
      { "t": "Ja, da beide Adressen mit derselben Maske konfiguriert wurden", "ok": false },
      { "t": "Das lässt sich ohne die Angabe des Default Gateways nicht bestimmen", "ok": false }
@@ -10281,7 +10281,7 @@ const POOLS = {
   ]
  },
  "wlan": {
-  "name": "WLAN vertieft",
+  "name": "WLAN",
   "q": [
    {
     "q": "Wofür steht SSID?",
@@ -10589,7 +10589,7 @@ const POOLS = {
       "ok": false
      },
      {
-      "t": "Unbegrenzte Reichweite",
+      "t": "WLAN unterstützt keine automatische IP-Adressvergabe per DHCP, Adressen müssen manuell vergeben werden",
       "ok": false
      }
     ],
@@ -12989,7 +12989,7 @@ const POOLS = {
     "o": [
      { "t": "Auf einem physischen Server läuft meist nur ein Betriebssystem, während dessen Kapazität oft nicht ausgeschöpft wird", "ok": true },
      { "t": "Physische Server können ohne zusätzliche Software von sich aus keinerlei Netzwerkdienste anbieten", "ok": false },
-     { "t": "Physische Server benötigen für jeden zusätzlichen angebotenen Dienst angeblich eine eigene, separate Stromleitung im Serverraum", "ok": false },
+     { "t": "Physische Server benötigen für jeden zusätzlichen angebotenen Dienst eine eigene, separate Stromleitung im Serverraum", "ok": false },
      { "t": "Physische Server lassen sich technisch nicht mit dem Internet verbinden", "ok": false }
     ],
     "e": "Ohne Virtualisierung läuft pro physischem Server meist nur ein Betriebssystem, während dessen Kapazität oft nicht ausgeschöpft wird."
@@ -13095,7 +13095,7 @@ const POOLS = {
     "e": "Da die Anwendung über das Netzwerk bereitgestellt wird, leiden grafiklastige Programme mitunter und die Verbindung muss stabil sein."
    },
    {
-    "q": "Was kennzeichnet Betriebssystem- bzw. Containervirtualisierung?",
+    "q": "Welches Merkmal unterscheidet Containervirtualisierung von klassischer Virtualisierung mit virtuellen Maschinen?",
     "o": [
      { "t": "Sie läuft als Prozess innerhalb des Host-Betriebssystems und nutzt dessen Kernel mit", "ok": true },
      { "t": "Sie benötigt einen Typ-1-Hypervisor, der direkt auf der Hardware läuft", "ok": false },
@@ -13125,14 +13125,14 @@ const POOLS = {
     "e": "Weil kein eigener Betriebssystem-Kernel mitläuft, sind Container ressourcenschonender und lassen sich schneller bereitstellen."
    },
    {
-    "q": "Welcher Nachteil ist mit dem Einsatz von Containern verbunden?",
+    "q": "Welcher technische Nachteil ist mit Containervirtualisierung verbunden?",
     "o": [
-     { "t": "Einrichtung und Verwaltung sind komplexer und setzen entsprechendes Fachwissen voraus", "ok": true },
-     { "t": "Sie verbrauchen im Regelfall spürbar mehr Ressourcen als vergleichbare klassische virtuelle Maschinen", "ok": false },
-     { "t": "Sie lassen sich kaum auf unterschiedlicher Server-Hardware betreiben", "ok": false },
-     { "t": "Die Bereitstellung eines neuen Containers dauert in der Praxis deutlich länger als bei einer klassischen virtuellen Maschine", "ok": false }
+     { "t": "Container benötigen für jede Instanz ein eigenes Gastbetriebssystem", "ok": false },
+     { "t": "Container teilen sich den Kernel des Host-Betriebssystems und bieten daher eine geringere Isolation als klassische virtuelle Maschinen", "ok": true },
+     { "t": "Container können nur Anwendungen desselben Betriebssystemtyps wie der Host ausführen", "ok": false },
+     { "t": "Container benötigen grundsätzlich mehr Arbeitsspeicher als virtuelle Maschinen", "ok": false }
     ],
-    "e": "Die geteilte Kernel-Nutzung macht Einrichtung und Betrieb anspruchsvoller als bei klassischen VMs."
+    "e": "Durch die gemeinsame Nutzung des Host-Kernels ist die Isolation geringer als bei klassischen virtuellen Maschinen."
    },
    {
     "q": "Was beschreibt Virtual Desktop Infrastructure (VDI)?",
