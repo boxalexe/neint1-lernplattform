@@ -590,6 +590,7 @@
 <p><strong>Anwendungsvirtualisierung:</strong> Die Installation wird vom Client getrennt, der die Anwendung nutzt — Teile werden bei Bedarf geladen, lokal installiert wird nichts. Vorteil: eine zentrale Installation, einfacher Austausch. Nachteil: grafiklastige Anwendungen leiden, stabile Verbindung nötig.</p>
 <p><strong>Betriebssystem-/Containervirtualisierung:</strong> Container nutzen den Kernel des Host-Betriebssystems gemeinsam und benötigen dafür keinen eigenen Hypervisor. Ein Container bündelt Anwendung, Abhängigkeiten, Bibliotheken und Konfiguration. Vorteil: geringer Ressourcenverbrauch, schnelle Bereitstellung. Nachteil: Einrichtung und Betrieb erfordern mehr Fachwissen. Beispiele: Docker, Microsoft Hyper-V Container, BSD Jails, Solaris Zones.</p>
 <p><strong>VDI</strong> (Virtual Desktop Infrastructure): individuell konfigurierte Betriebssysteminstanzen laufen zentral auf einem Server statt lokal. Vorteil: hohe Datensicherheit, einfache Administration, Einsatz von <strong>Thin Clients</strong> möglich. Nachteil: hohe Anfangskosten, Serverausfall legt alle Arbeitsplätze gleichzeitig lahm.</p>
+<p><strong>Thin Client</strong> gegenüber <strong>Thick Client (Fat Client):</strong> Ein Thin Client ist ein minimal ausgestattetes Endgerät ohne nennenswerte lokale Rechenleistung oder Speicherung — Anwendungen und Daten liegen zentral auf dem Server, das Gerät stellt im Wesentlichen nur die Oberfläche dar (typisch für VDI). Ein Thick Client verarbeitet und speichert dagegen lokal, arbeitet weitgehend eigenständig und ist auch ohne ständige Serververbindung nutzbar. Thin Clients senken Wartungsaufwand und Stromverbrauch, hängen aber vollständig von Server und Netz ab.</p>
 </section>
 
 <section id="r-hyperv">
@@ -604,6 +605,7 @@
 <p><strong>Para-Virtualisierung</strong> (Typ 1): Statt Hardware zu emulieren, stellt der Hypervisor eine API bereit, die der Gast direkt nutzen muss. Vorteil: deutlich weniger Overhead als bei voller Befehlsübersetzung, dadurch schnellere Kommunikation. Nachteil: der Gast-Kernel muss angepasst oder bereits vorbereitet sein. Einsatz: Rechenzentren, Cloud-Anbieter.</p>
 <p><strong>Hardwareunterstützung:</strong> Intel VT und AMD-V stellen einen eigenen CPU-Modus bereit, in dem privilegierte Befehle des Gastsystems direkt und hardwareunterstützt laufen — keine Anpassung am Gast-Kernel nötig, deutlich weniger Overhead als bei reiner Software-Übersetzung. Beide sind herstellerspezifische Erweiterungen, die denselben Zweck erfüllen, aber nicht direkt kompatibel sind: Ein Prozessor unterstützt jeweils nur die Erweiterung seines eigenen Herstellers.</p>
 <div class="callout"><span class="tag">Grenzen</span>Auf einem Host können viele VMs gleichzeitig laufen — die Grenze setzt allein die vorhandene physische Hardware (CPU, Arbeitsspeicher, Storage). Feste, allgemeingültige Verhältniszahlen wie "X virtuelle CPUs pro physischem Kern" gibt es dafür nicht, die Empfehlungen der Hersteller ändern sich mit neuer Hardware und neuen Hypervisor-Versionen. Vorteile der Virtualisierung insgesamt: kostengünstig, flexibel, ideal für Test-/Entwicklungsumgebungen. Nachteil: Fehler in der Virtualisierungssoftware können einem Angreifer den Ausbruch aus der VM ermöglichen.</div>
+<p><strong>Hyper-V Export/Import:</strong> Über die Export-Funktion lässt sich eine komplette VM samt Konfiguration, virtuellen Festplatten und Prüfpunkten als in sich geschlossenes Paket sichern und später auf demselben oder einem anderen Host wieder importieren. Positive Nebeneffekte: Das Paket dient zugleich als konsistentes Backup, lässt sich zum Klonen einer VM nutzen und erlaubt die einfache Übertragung auf andere Hardware, ohne die VM neu aufsetzen zu müssen.</p>
 </section>
 
 <section id="r-raid">
@@ -652,14 +654,13 @@
   <!-- Kategorieauswahl -->
   <div class="selector" id="selector">
     <h2>Multiple Choice</h2>
-    <p class="sel-sub">Wähle bis zu 3 Kategorien und den Umfang: 15 oder 30 Fragen pro Kategorie (rotierend, ohne Wiederholung bis der Pool durch ist) oder „Alle" für den kompletten Pool. Fragen- und Antwortreihenfolge werden bei jedem Start neu gemischt. Falsch beantwortete Fragen werden automatisch als „Wackelkandidaten" gesammelt und lassen sich unten gezielt wiederholen. Diese Ergebnisse werden nur lokal im jeweiligen Browser und auf dem jeweiligen Gerät gespeichert – wer das Gerät oder den Browser wechselt, beginnt mit einer leeren Sammlung.</p>
+    <p class="sel-sub">Wähle bis zu 3 Kategorien und stelle den Umfang über den Regler ein: von 10 bis 50 Fragen pro Kategorie in 5er-Schritten (rotierend, ohne Wiederholung bis der Pool durch ist) oder ganz rechts „Alle" für den kompletten Pool. Fragen- und Antwortreihenfolge werden bei jedem Start neu gemischt. Falsch beantwortete Fragen werden automatisch als „Wackelkandidaten" gesammelt und lassen sich unten gezielt wiederholen. Diese Ergebnisse werden nur lokal im jeweiligen Browser und auf dem jeweiligen Gerät gespeichert – wer das Gerät oder den Browser wechselt, beginnt mit einer leeren Sammlung.</p>
     <div class="cat-grid" id="catGrid"></div>
     <div class="scope-row">
       <span class="scope-label">Fragen pro Kategorie:</span>
-      <div class="scope-btns">
-        <button type="button" class="scope-btn active" data-scope="15">15</button>
-        <button type="button" class="scope-btn" data-scope="30">30</button>
-        <button type="button" class="scope-btn" data-scope="all">Alle</button>
+      <div class="scope-slider-wrap">
+        <input type="range" id="scopeSlider" class="scope-slider" min="0" max="9" step="1" value="1" aria-label="Fragen pro Kategorie" />
+        <output class="scope-value" id="scopeValue">15</output>
       </div>
     </div>
     <div class="sel-bar">

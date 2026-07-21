@@ -3090,7 +3090,7 @@ const POOLS = {
     "q": "Was läuft auf Schicht 1 (Bitübertragungsschicht / Physical)?",
     "o": [
      {
-      "t": "Übertragung roher Bits über das Medium (Kabel, Funk)",
+      "t": "Übertragung roher Bits über das Medium",
       "ok": true
      },
      {
@@ -3134,7 +3134,7 @@ const POOLS = {
     "q": "Was läuft auf Schicht 3 (Vermittlungsschicht / Network)?",
     "o": [
      {
-      "t": "Logische Adressierung und Wegfindung/Routing",
+      "t": "Logische Adressierung und Routing",
       "ok": true
      },
      {
@@ -3222,7 +3222,7 @@ const POOLS = {
     "q": "Was läuft auf Schicht 7 (Anwendungsschicht / Application)?",
     "o": [
      {
-      "t": "Anwendungsnahe Protokolle wie HTTP, FTP, SMTP, DNS",
+      "t": "Protokolle wie HTTP, FTP, SMTP, DNS",
       "ok": true
      },
      {
@@ -3263,7 +3263,7 @@ const POOLS = {
     "e": "Der Router trifft Weiterleitungsentscheidungen anhand von IP → Layer 3."
    },
    {
-    "q": "Auf welcher Schicht arbeitet ein Switch primär?",
+    "q": "Auf welcher Schicht arbeitet ein Layer-2-Switch primär?",
     "o": [
      {
       "t": "Schicht 2 (Sicherung)",
@@ -3282,7 +3282,7 @@ const POOLS = {
       "ok": false
      }
     ],
-    "e": "Ein klassischer Switch schaltet anhand von MAC-Adressen → Layer 2."
+    "e": "Ein klassischer Switch schaltet anhand von MAC-Adressen → Layer 2. Layer-2-Switch = MAC-Adressen, Layer-3-Switch = IP-Adressen + Routing."
    },
    {
     "q": "Auf welcher Schicht arbeitet ein Hub/Repeater?",
@@ -3590,7 +3590,7 @@ const POOLS = {
       "ok": false
      }
     ],
-    "e": "DNS ist ein Anwendungsprotokoll (Layer 7)."
+    "e": "DNS ist ein Anwendungsprotokoll (Layer 7). DNS definiert die Anwendungslogik: Namensauflösung (www.beispiel.com → 192.x.x.x)."
    },
    {
     "q": "In welche Richtung durchläuft ein gesendetes Datenpaket die Schichten?",
@@ -3747,12 +3747,12 @@ const POOLS = {
     "e": "Beim Empfangen wird die Kapselung umgekehrt: L1 bis L7 nehmen je ihren Header heraus."
    },
    {
-    "q": "Welches Gerät arbeitet auf allen sieben Schichten?",
+    "q": "Welches Netzwerkgerät kann Funktionen auf allen sieben Schichten des OSI-Modells übernehmen?",
     "o": [
-     { "t": "Gateway", "ok": true },
-     { "t": "Layer-3-Switch mit Routingfunktion", "ok": false },
-     { "t": "Router mit aktivierter Paketfilterung", "ok": false },
-     { "t": "Managed Switch mit VLAN-Unterstützung", "ok": false }
+     { "t": "Gateway mit Protokoll- und Anwendungsumsetzung", "ok": true },
+     { "t": "Layer-3-Switch mit integrierter Routingfunktion", "ok": false },
+     { "t": "Managed Layer-2-Switch mit VLAN-Unterstützung", "ok": false },
+     { "t": "Router mit zustandsbehafteter Paketfilterung", "ok": false }
     ],
     "e": "Ein Anwendungsschicht-Gateway (z. B. Proxy, WAF) kann alle 7 Schichten verarbeiten."
    },
@@ -3870,7 +3870,7 @@ const POOLS = {
       "ok": false
      },
      {
-      "t": "Kollisionsdomänen entstehen nur bei Glasfaserverkabelung",
+      "t": "Die Kollisionsdomäne wird durch Router begrenzt, während die Broadcastdomäne bereits an jedem Switch-Port endet",
       "ok": false
      }
     ],
@@ -6178,7 +6178,7 @@ const POOLS = {
     "q": "Wie kommunizieren zwei VLANs miteinander?",
     "o": [
      {
-      "t": "Über einen Router oder L3-Switch (Inter-VLAN-Routing)",
+      "t": "Über einen Router oder L3-Switch",
       "ok": true
      },
      {
@@ -6569,7 +6569,7 @@ const POOLS = {
     "q": "Was ist 169.254.x.x für eine Adresse?",
     "o": [
      {
-      "t": "APIPA/Link-Local",
+      "t": "APIPA",
       "ok": true
      },
      {
@@ -7041,7 +7041,7 @@ const POOLS = {
     "q": "Was bedeutet /30 in der Praxis?",
     "o": [
      {
-      "t": "2 nutzbare Hosts — typisch für Punkt-zu-Punkt-Links",
+      "t": "2 nutzbare Hosts, typisch für Punkt-zu-Punkt-Links",
       "ok": true
      },
      {
@@ -7134,12 +7134,12 @@ const POOLS = {
    {
     "q": "Ein Unternehmen möchte das Netz 192.168.10.0/24 in vier gleich große Teilnetze mit jeweils mindestens 50 nutzbaren Hosts aufteilen. Welche Präfixlänge erfüllt beide Bedingungen gleichzeitig?",
     "o": [
-     { "t": "/26 — genau 4 Subnetze mit je 62 nutzbaren Hosts", "ok": true },
-     { "t": "/25 — nur 2 Subnetze, obwohl 126 Hosts je Subnetz möglich wären", "ok": false },
-     { "t": "/27 — 8 Subnetze, aber nur 30 nutzbare Hosts je Subnetz", "ok": false },
-     { "t": "/28 — 16 Subnetze mit lediglich 14 nutzbaren Hosts je Subnetz", "ok": false }
+     { "t": "/26", "ok": true },
+     { "t": "/25", "ok": false },
+     { "t": "/27", "ok": false },
+     { "t": "/28", "ok": false }
     ],
-    "e": "2 geliehene Bits ergeben aus /24 genau 4 Subnetze (/26) mit je 6 Hostbits, also 62 nutzbaren Adressen — beide Vorgaben werden exakt getroffen."
+    "e": "2 geliehene Bits ergeben aus /24 genau 4 Subnetze (/26) mit je 6 Hostbits, also 62 nutzbaren Adressen — beide Vorgaben werden exakt getroffen. /25 liefert nur 2 Subnetze, /27 nur 30 Hosts je Subnetz."
    },
    {
     "q": "Die Broadcastadresse eines Subnetzes lautet 172.16.4.63, die Maske ist 255.255.255.192 (/26). Wie lautet die zugehörige Netzadresse?",
@@ -7170,6 +7170,16 @@ const POOLS = {
      { "t": "65536", "ok": false }
     ],
     "e": "Zwischen /56 und /64 liegen 8 Bit zur freien Aufteilung: 2⁸ = 256 mögliche /64-Subnetze — deutlich mehr als ein /60-Präfix, aber weniger als ein /48."
+   },
+   {
+    "q": "Ein Computer soll mit einer statischen IP-Adresse konfiguriert werden und Zugriff auf das Internet erhalten. Welche Angabe stellt eine vollständige, funktionierende IP-Konfiguration dar?",
+    "o": [
+     { "t": "IP-Adresse, Subnetzmaske, Standardgateway und DNS-Server", "ok": true },
+     { "t": "IP-Adresse und Subnetzmaske", "ok": false },
+     { "t": "IP-Adresse, Subnetzmaske und Standardgateway", "ok": false },
+     { "t": "IP-Adresse und Standardgateway", "ok": false }
+    ],
+    "e": "Ohne Gateway gäbe es keinen Weg aus dem eigenen Netz, ohne DNS keine Namensauflösung — für Internetzugriff werden alle vier Angaben benötigt."
    }
   ]
  },
@@ -9216,7 +9226,7 @@ const POOLS = {
     "q": "Was verschlüsselt der IPsec-Transportmodus?",
     "o": [
      {
-      "t": "Nur den Dateninhalt (Payload) des IP-Pakets",
+      "t": "Nur den Dateninhalt des IP-Pakets",
       "ok": true
      },
      {
@@ -9237,7 +9247,7 @@ const POOLS = {
    {
     "q": "Was verschlüsselt der IPsec-Tunnelmodus?",
     "o": [
-     { "t": "Das komplette IP-Paket, verpackt in ein neues IP-Paket", "ok": true },
+     { "t": "Das IP-Paket, verpackt in ein neues IP-Paket", "ok": true },
      { "t": "Nur die Nutzdaten, der originale IP-Header bleibt sichtbar", "ok": false },
      { "t": "Nur die Header-Informationen, die Nutzdaten bleiben lesbar", "ok": false },
      { "t": "Die Aushandlungsdaten der Verbindung, nicht den Datenstrom", "ok": false }
@@ -9248,7 +9258,7 @@ const POOLS = {
     "q": "Wofür wird der Transportmodus typischerweise eingesetzt?",
     "o": [
      {
-      "t": "Ende-zu-Ende / Host-zu-Host-Verbindungen",
+      "t": "Host-zu-Host-Verbindungen",
       "ok": true
      },
      {
@@ -9336,7 +9346,7 @@ const POOLS = {
     "q": "Was verbindet ein Site-to-Site-VPN (LAN-to-LAN)?",
     "o": [
      {
-      "t": "Zwei komplette Netzwerke über das Internet",
+      "t": "Zwei Netzwerke über das Internet",
       "ok": true
      },
      {
@@ -9380,19 +9390,19 @@ const POOLS = {
     "q": "Wie authentifizieren sich Clients bei einem VPN typischerweise?",
     "o": [
      {
-      "t": "Über Benutzername/Passwort oder Zertifikate",
+      "t": "Nutzerdaten oder Zertifikate",
       "ok": true
      },
      {
-      "t": "Über die TTL",
+      "t": "Über die MAC-Adresse des Endgeräts",
       "ok": false
      },
      {
-      "t": "Über die Portnummer",
+      "t": "Über die Portnummer der Verbindung",
       "ok": false
      },
      {
-      "t": "Gar nicht",
+      "t": "Über die öffentliche IP-Adresse des Clients allein",
       "ok": false
      }
     ],
@@ -9414,7 +9424,7 @@ const POOLS = {
       "ok": false
      },
      {
-      "t": "Der Tunnel wird geteilt verschlüsselt",
+      "t": "Der Verkehr wird auf mehrere VPN-Server verteilt, um die Bandbreite gleichmäßig auszulasten",
       "ok": false
      }
     ],
@@ -9540,7 +9550,7 @@ const POOLS = {
     "q": "Welche Verbindung ist typisch für Site-to-End (z. B. Homeoffice)?",
     "o": [
      {
-      "t": "Ein Client verbindet sich mit einer festen Gegenstelle (Firmenrouter)",
+      "t": "Ein Client verbindet sich mit einer festen Gegenstelle",
       "ok": true
      },
      {
@@ -9615,7 +9625,7 @@ const POOLS = {
    {
     "q": "Was ist OpenVPN?",
     "o": [
-     { "t": "Ein Open-Source-VPN-Protokoll auf TLS-Basis, sehr flexibel und weit verbreitet", "ok": true },
+     { "t": "Ein Open-Source-VPN-Protokoll auf TLS-Basis", "ok": true },
      { "t": "Ein herstellergebundenes Protokoll, das nur mit passender Hardware-Appliance läuft", "ok": false },
      { "t": "Ein Betriebsmodus von IPsec, der ohne Zertifikate und Schlüsselaustausch auskommt", "ok": false },
      { "t": "Ein Browser-Plugin, das Webverkehr über wechselnde Proxyserver umleitet", "ok": false }
@@ -9678,7 +9688,7 @@ const POOLS = {
       "ok": false
      },
      {
-      "t": "Routing der Pakete",
+      "t": "Komprimierung der Nutzdaten zur Bandbreiteneinsparung",
       "ok": false
      }
     ],
@@ -9775,16 +9785,6 @@ const POOLS = {
      }
     ],
     "e": "Der statische Paketfilter entscheidet pro Paket nach Kopfdaten (IP/Port/Protokoll)."
-   },
-   {
-    "q": "Was kann eine Stateful-Firewall zusätzlich?",
-    "o": [
-     { "t": "Sie verfolgt den Verbindungszustand und lässt Antworten passieren", "ok": true },
-     { "t": "Sie entschlüsselt den Datenverkehr und prüft Inhalte auf Schadcode", "ok": false },
-     { "t": "Sie erkennt Angriffe per Signatur und sperrt die Quell-IP dauerhaft", "ok": false },
-     { "t": "Sie authentifiziert jeden Benutzer, bevor Pakete weitergeleitet werden", "ok": false }
-    ],
-    "e": "Stateful Inspection kennt bestehende Verbindungen und erlaubt zugehörige Rückpakete gezielt."
    },
    {
     "q": "Was macht NAT (Network Address Translation)?",
@@ -10190,7 +10190,7 @@ const POOLS = {
       "ok": false
      },
      {
-      "t": "Es ist immer strafbar und daher selten",
+      "t": "Es lässt sich durch Firewalls und Virenscanner kaum zuverlässig verhindern",
       "ok": false
      }
     ],
@@ -10454,16 +10454,6 @@ const POOLS = {
      }
     ],
     "e": "RADIUS prüft Benutzeranmeldungen zentral, z. B. per Login oder Zertifikat."
-   },
-   {
-    "q": "Welchen Vorteil bietet WPA3 gegenüber WPA2?",
-    "o": [
-     { "t": "Besserer Schutz gegen Wörterbuch-/Brute-Force-Angriffe", "ok": true },
-     { "t": "Höhere Übertragungsraten durch effizientere Kanalnutzung", "ok": false },
-     { "t": "Größere Reichweite durch stärkere zulässige Sendeleistung", "ok": false },
-     { "t": "Verzicht auf Passwörter durch reine Zertifikatsanmeldung", "ok": false }
-    ],
-    "e": "WPA3 erschwert Offline-Angriffe und verschlüsselt individueller."
    },
    {
     "q": "Wie schwach ist MAC-Filterung als WLAN-Schutz einzustufen?",
@@ -10734,7 +10724,7 @@ const POOLS = {
    {
     "q": "Was ist der Unterschied zwischen WPA2-Personal und WPA3-Personal?",
     "o": [
-     { "t": "WPA3 nutzt SAE statt PSK — besser gegen Wörterbuchangriffe", "ok": true },
+     { "t": "WPA3 nutzt SAE statt PSK und ist besser gegen Wörterbuchangriffe", "ok": true },
      { "t": "WPA3 verlangt Zertifikate statt Passwörter für die Anmeldung", "ok": false },
      { "t": "WPA3 verlagert die Verschlüsselung vom Client auf den Router", "ok": false },
      { "t": "WPA3 erzwingt längere Passwörter, ist sonst identisch zu WPA2", "ok": false }
@@ -11054,7 +11044,7 @@ const POOLS = {
     "q": "Wie viele Stationen dürfen bei Token-Passing gleichzeitig senden?",
     "o": [
      {
-      "t": "Genau eine (Token-Inhaber)",
+      "t": "Genau eine",
       "ok": true
      },
      {
@@ -12147,7 +12137,7 @@ const POOLS = {
     "e": "A0₁₆ = 10×16 + 0 = 160."
    },
    {
-    "q": "Was ergibt binär 1000 dezimal?",
+    "q": "Was ergibt Binär 1000 als Dezimalzahl?",
     "o": [
      {
       "t": "8",
@@ -13368,6 +13358,56 @@ const POOLS = {
      { "t": "Sie verbindet mehrere physische Hosts zu einem gemeinsamen Netzwerkspeicher", "ok": false }
     ],
     "e": "Das Gastsystem sieht nur virtuelle Hardware und bleibt dadurch von der realen Beschaffenheit des Hosts unabhängig."
+   },
+   {
+    "q": "Welche der Virtualisierungsarten benötigt kein vollwertiges Host-Betriebssystem?",
+    "o": [
+     { "t": "Der Typ-1-Hypervisor (Baremetal), der direkt auf der Hardware läuft", "ok": true },
+     { "t": "Der Typ-2-Hypervisor, der als Anwendung auf einem installierten Betriebssystem aufsetzt", "ok": false },
+     { "t": "Die Anwendungsvirtualisierung, die einzelne Programme vom Client trennt", "ok": false },
+     { "t": "Die Hardware-Emulation, die eine fremde Architektur vollständig nachbildet", "ok": false }
+    ],
+    "e": "Ein Typ-1-Hypervisor läuft direkt auf der Hardware und braucht darunter kein vollständiges Host-Betriebssystem."
+   },
+   {
+    "q": "Welche positiven Nebeneffekte bringt die Nutzung der Export-Funktion in Hyper-V bei der Sicherung einer VM mit sich?",
+    "o": [
+     { "t": "Das Exportpaket dient zugleich als konsistentes Backup und lässt sich zum Klonen oder Übertragen auf andere Hardware nutzen", "ok": true },
+     { "t": "Die exportierte VM erhält automatisch eine höhere CPU-Priorität und läuft nach dem Import spürbar schneller", "ok": false },
+     { "t": "Der Export verschlüsselt die virtuellen Festplatten dauerhaft und macht ein separates Backup überflüssig", "ok": false },
+     { "t": "Die exportierte VM wird beim Import automatisch auf die neueste Betriebssystemversion aktualisiert", "ok": false }
+    ],
+    "e": "Der Hyper-V-Export sichert die komplette VM als geschlossenes Paket — nutzbar als Backup, zum Klonen und zur Übertragung auf andere Hardware."
+   },
+   {
+    "q": "Was kennzeichnet einen Thin Client?",
+    "o": [
+     { "t": "Ein minimal ausgestattetes Endgerät, dessen Anwendungen und Daten zentral auf dem Server liegen", "ok": true },
+     { "t": "Ein voll ausgestatteter Rechner, der Anwendungen und Daten überwiegend lokal verarbeitet", "ok": false },
+     { "t": "Ein Server, der mehrere virtuelle Desktops gleichzeitig bereitstellt", "ok": false },
+     { "t": "Ein Endgerät, das ausschließlich ohne Netzwerkverbindung betrieben werden kann", "ok": false }
+    ],
+    "e": "Der Thin Client stellt im Wesentlichen nur die Oberfläche dar; Rechenleistung und Daten liegen zentral auf dem Server (typisch für VDI)."
+   },
+   {
+    "q": "Worin unterscheidet sich ein Thick Client von einem Thin Client?",
+    "o": [
+     { "t": "Er verarbeitet und speichert lokal und arbeitet auch ohne ständige Serververbindung weitgehend eigenständig", "ok": true },
+     { "t": "Er verzichtet vollständig auf lokale Rechenleistung und zeigt nur die Serveroberfläche an", "ok": false },
+     { "t": "Er kann grundsätzlich nur innerhalb einer VDI-Umgebung betrieben werden", "ok": false },
+     { "t": "Er benötigt für jede Anwendung eine dauerhafte, unterbrechungsfreie Netzverbindung", "ok": false }
+    ],
+    "e": "Ein Thick Client (Fat Client) rechnet und speichert lokal und ist damit weniger vom Server abhängig als ein Thin Client."
+   },
+   {
+    "q": "Welcher Vorteil spricht für den Einsatz von Thin Clients?",
+    "o": [
+     { "t": "Geringerer Wartungsaufwand und niedrigerer Stromverbrauch durch zentrale Bereitstellung", "ok": true },
+     { "t": "Vollständige Unabhängigkeit vom Server und vom Netzwerk", "ok": false },
+     { "t": "Höhere lokale Rechenleistung für grafikintensive Anwendungen", "ok": false },
+     { "t": "Wegfall jeglicher zentraler Administration im Rechenzentrum", "ok": false }
+    ],
+    "e": "Da Rechenleistung und Daten zentral liegen, sinken Wartungsaufwand und Energieverbrauch am Arbeitsplatz — der Preis ist die Abhängigkeit von Server und Netz."
    }
   ]
  },
@@ -14005,7 +14045,7 @@ const POOLS = {
 /* ============ ENGINE ============ */
 const MAX_CATS = 3;
 const PER_CAT = 15;
-let quizScope = 15; // 15 | 30 | 'all'
+let quizScope = 15; // 10..50 (5er-Schritte) | 'all' | 'wrong'
 const LETTERS = ['A','B','C','D','E','F'];
 
 function shuffle(arr){
@@ -14098,14 +14138,21 @@ const catGrid = document.getElementById('catGrid');
 const startBtn = document.getElementById('startBtn');
 const selHint = document.getElementById('selHint');
 
-document.querySelectorAll('.scope-btn').forEach(btn => {
-  btn.addEventListener('click', () => {
-    document.querySelectorAll('.scope-btn').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-    quizScope = btn.dataset.scope === 'all' ? 'all' : parseInt(btn.dataset.scope, 10);
-    refreshSelState();
-  });
-});
+const SCOPE_STEPS = [10, 15, 20, 25, 30, 35, 40, 45, 50, 'all'];
+const scopeSlider = document.getElementById('scopeSlider');
+const scopeValueEl = document.getElementById('scopeValue');
+
+function applyScopeFromSlider(){
+  const step = SCOPE_STEPS[parseInt(scopeSlider.value, 10)];
+  quizScope = step === 'all' ? 'all' : step;
+  scopeValueEl.textContent = step === 'all' ? 'Alle' : step;
+  const pct = (parseInt(scopeSlider.value, 10) / (SCOPE_STEPS.length - 1)) * 100;
+  scopeSlider.style.setProperty('--fill', pct + '%');
+  refreshSelState();
+}
+
+scopeSlider.addEventListener('input', applyScopeFromSlider);
+applyScopeFromSlider();
 
 Object.keys(POOLS).forEach(key => {
   const chip = document.createElement('div');
@@ -14337,9 +14384,9 @@ function backToSelector(){
 }
 
 startBtn.addEventListener('click', () => {
-  // Normaler Start: aktueller Scope kommt vom aktiven scope-btn (nie 'wrong')
-  const activeScope = document.querySelector('.scope-btn.active');
-  quizScope = activeScope.dataset.scope === 'all' ? 'all' : parseInt(activeScope.dataset.scope, 10);
+  // Normaler Start: aktueller Scope kommt vom Slider (nie 'wrong')
+  const step = SCOPE_STEPS[parseInt(scopeSlider.value, 10)];
+  quizScope = step === 'all' ? 'all' : step;
   startQuiz();
 });
 document.getElementById('againBtn').addEventListener('click', startQuiz); // rotates: pointer advanced
