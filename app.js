@@ -138,7 +138,7 @@ const POOLS = {
     "e": "Von 0 bis 65535 sind das 65536 Werte (2¹⁶)."
    },
    {
-    "q": "Welchem Bereich gehört Port 3389 (RDP) an?",
+    "q": "Welchem Bereich gehört Port 3389 an?",
     "o": [
      {
       "t": "Registered Ports",
@@ -1661,7 +1661,7 @@ const POOLS = {
     "q": "Wie kann ein PC mehrere Browser-Tabs gleichzeitig zum selben Server offen halten?",
     "o": [
      {
-      "t": "Durch unterschiedliche Quellports je Verbindung",
+      "t": "Durch unterschiedliche Quellports",
       "ok": true
      },
      {
@@ -1707,15 +1707,15 @@ const POOLS = {
       "ok": true
      },
      {
-      "t": "Es erhöht die Fehlerrate",
+      "t": "Es verdoppelt die nutzbare Bandbreite jeder physischen Leitung",
       "ok": false
      },
      {
-      "t": "Es verlangsamt die Übertragung bewusst",
+      "t": "Es garantiert jeder Anwendung eine fest reservierte Bandbreite",
       "ok": false
      },
      {
-      "t": "Es ersetzt die Verschlüsselung",
+      "t": "Es macht zusätzliche Fehlerkorrektur auf der Leitung überflüssig",
       "ok": false
      }
     ],
@@ -3134,7 +3134,7 @@ const POOLS = {
     "q": "Was läuft auf Schicht 3 (Vermittlungsschicht / Network)?",
     "o": [
      {
-      "t": "Logische Adressierung und Routing",
+      "t": "Logische Adressierung und Wegfindung/Routing",
       "ok": true
      },
      {
@@ -3263,26 +3263,26 @@ const POOLS = {
     "e": "Der Router trifft Weiterleitungsentscheidungen anhand von IP → Layer 3."
    },
    {
-    "q": "Auf welcher Schicht arbeitet ein Layer-2-Switch primär?",
+    "q": "Auf welcher Schicht arbeitet ein klassischer Switch primär?",
     "o": [
      {
-      "t": "Schicht 2 (Sicherung)",
+      "t": "Sicherung",
       "ok": true
      },
      {
-      "t": "Schicht 1 (Bitübertragung)",
+      "t": "Bitübertragung",
       "ok": false
      },
      {
-      "t": "Schicht 3 (Vermittlung)",
+      "t": "Vermittlung",
       "ok": false
      },
      {
-      "t": "Schicht 7 (Anwendung)",
+      "t": "Anwendung",
       "ok": false
      }
     ],
-    "e": "Ein klassischer Switch schaltet anhand von MAC-Adressen → Layer 2. Layer-2-Switch = MAC-Adressen, Layer-3-Switch = IP-Adressen + Routing."
+    "e": "Ein klassischer Switch schaltet anhand von MAC-Adressen → Layer 2 (Sicherung). Layer-2-Switch = MAC-Adressen, Layer-3-Switch = IP-Adressen + Routing."
    },
    {
     "q": "Auf welcher Schicht arbeitet ein Hub/Repeater?",
@@ -3744,7 +3744,7 @@ const POOLS = {
       "ok": false
      }
     ],
-    "e": "Beim Empfangen wird die Kapselung umgekehrt: L1 bis L7 nehmen je ihren Header heraus."
+    "e": "Beim Empfangen wird die Kapselung umgekehrt: L1 bis L7 nehmen je ihren Header heraus. Kleine Anmerkung: Ganz streng genommen entfernt Schicht 1 keinen Header, da sie die Bits auf dem Medium überträgt. In Prüfungen wird die vereinfachte Aussage „Entkapselung von Schicht 1 bis 7\" aber häufig akzeptiert. Technisch sauberer wäre: Ab Schicht 2 werden die jeweiligen Header (und ggf. Trailer) entfernt."
    },
    {
     "q": "Welches Netzwerkgerät kann Funktionen auf allen sieben Schichten des OSI-Modells übernehmen?",
@@ -8032,7 +8032,7 @@ const POOLS = {
    {
     "q": "Wie authentifiziert sich ein Client bei vielen APIs?",
     "o": [
-     { "t": "Über einen geheimen Schlüssel (API-Key) im Header", "ok": true },
+     { "t": "Über einen geheimen Schlüssel im Header", "ok": true },
      { "t": "Über eine fortlaufende Anfragenummer je Client", "ok": false },
      { "t": "Über den User-Agent-Header des aufrufenden Programms", "ok": false },
      { "t": "Über die MAC-Adresse, die im Request mitgesendet wird", "ok": false }
@@ -8096,8 +8096,8 @@ const POOLS = {
    {
     "q": "Was ist ein 'Endpunkt' einer API?",
     "o": [
-     { "t": "Eine definierte Adresse/URL, an die Anfragen gehen", "ok": true },
-     { "t": "Der Server, auf dem die Datenbank der API betrieben wird", "ok": false },
+     { "t": "Eine konkrete Adresse bzw. Schnittstelle, über die ein Client mit einer API kommuniziert", "ok": true },
+     { "t": "Die zentrale Basis-Adresse, unter der die gesamte API insgesamt erreichbar ist", "ok": false },
      { "t": "Die Funktion im Client-Code, die die Antwort verarbeitet", "ok": false },
      { "t": "Die Gegenstelle, die eine TCP-Verbindung ordnungsgemäß beendet", "ok": false }
     ],
@@ -8139,7 +8139,7 @@ const POOLS = {
     "q": "Was ist eine API im Kern?",
     "o": [
      {
-      "t": "Eine vertragliche Schnittstelle zwischen Software-Systemen",
+      "t": "Eine Schnittstelle zwischen Software-Systemen",
       "ok": true
      },
      {
@@ -8173,7 +8173,7 @@ const POOLS = {
       "ok": false
      },
      {
-      "t": "Nur für Bilder geeignet",
+      "t": "Ein Format, das sich ausschließlich mit JavaScript verarbeiten lässt",
       "ok": false
      }
     ],
@@ -8205,7 +8205,7 @@ const POOLS = {
     "q": "Welche Reihenfolge beschreibt einen typischen API-Aufruf?",
     "o": [
      {
-      "t": "Client sendet Request an Endpoint → Server prüft/verarbeitet → Antwort als JSON/XML",
+      "t": "Client sendet Request an Endpoint → Server verarbeitet → Antwort als JSON/XML",
       "ok": true
      },
      {
@@ -8213,7 +8213,7 @@ const POOLS = {
       "ok": false
      },
      {
-      "t": "Client verschlüsselt IP → Server ändert TTL",
+      "t": "Client baut die Verbindung auf → Server sendet fortlaufend Daten → Client beendet die Sitzung",
       "ok": false
      },
      {
