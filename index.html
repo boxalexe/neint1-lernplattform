@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Layer 8 Academy</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120'%3E%3Cpath d='M60,60 C34,60 24,26 60,26 C96,26 86,60 60,60 Z' fill='none' stroke='%2322d3ee' stroke-width='11' stroke-linecap='round'/%3E%3Cpath d='M60,94 C86,94 96,60 60,60 C24,60 34,94 60,94 Z' fill='none' stroke='%233ddc84' stroke-width='11' stroke-linecap='round'/%3E%3C/svg%3E">
 <script>
   try {
     var t = localStorage.getItem('l8a_theme');
@@ -15,7 +16,16 @@
 <body>
 <header>
   <div class="wrap">
-    <h1><span class="t-neint">Layer 8</span> <span class="t-symb">Academy</span></h1>
+    <div class="brand-row">
+      <svg class="brand-mark" viewBox="0 0 120 120" aria-hidden="true">
+        <path d="M60,60 C34,60 24,26 60,26 C96,26 86,60 60,60 Z" fill="none" stroke="#22d3ee" stroke-width="6" stroke-linecap="round"/>
+        <path d="M60,94 C86,94 96,60 60,60 C24,60 34,94 60,94 Z" fill="none" stroke="#3ddc84" stroke-width="6" stroke-linecap="round"/>
+        <line x1="18" y1="26" x2="18" y2="52" stroke="#22d3ee" stroke-width="6" stroke-linecap="round"/>
+        <line x1="18" y1="52" x2="30" y2="52" stroke="#22d3ee" stroke-width="6" stroke-linecap="round"/>
+        <path d="M102,68 L92,94 M102,68 L112,94 M95,86 L107,86" stroke="#3ddc84" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+      </svg>
+      <h1><span class="t-neint">Layer 8</span> <span class="t-symb">Academy</span></h1>
+    </div>
     <p>Netzwerke &amp; Internettechnologien · OSI · Routing/Switching · IP · DNS/DHCP · Sicherheit · VPN · WLAN · VoIP · Nachschlagewerk + Prüfungstrainer</p>
     <div class="a11y-wrap">
       <button class="a11y-toggle" id="a11yToggle" aria-haspopup="true" aria-expanded="false" aria-label="Kontrasteinstellungen öffnen" title="Kontrasteinstellungen">
@@ -46,6 +56,7 @@
   <div class="tab active" data-view="lesen" data-short="Lesen">Nachschlagen</div>
   <div class="tab" data-view="lib" data-short="Biblio">Bibliothek</div>
   <div class="tab" data-view="quiz" data-short="Quiz">Multiple Choice</div>
+  <a class="tab" href="subtrainer/" data-short="Subnetting"><svg class="tab-icon" width="15" height="15" viewBox="0 0 120 120" aria-hidden="true"><path d="M60,60 C34,60 24,26 60,26 C96,26 86,60 60,60 Z" fill="none" stroke="#22d3ee" stroke-width="11" stroke-linecap="round"/><path d="M60,94 C86,94 96,60 60,60 C24,60 34,94 60,94 Z" fill="none" stroke="#3ddc84" stroke-width="11" stroke-linecap="round"/></svg> Subnetting Trainer</a>
   <button class="zen-toggle" id="zenToggle" title="Zen Mode: Vollbild &amp; Fokus" aria-label="Zen Mode umschalten"><span class="zen-icon">&#9673;</span><span class="zen-label">Zen</span></button>
 </div></div>
 
@@ -716,6 +727,7 @@
   </div>
 
 </div>
+
 </div><!-- /.wrap -->
 
 <footer><div class="wrap">

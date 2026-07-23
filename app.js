@@ -3282,7 +3282,7 @@ const POOLS = {
       "ok": false
      }
     ],
-    "e": "Ein klassischer Switch schaltet anhand von MAC-Adressen → Layer 2 (Sicherung). Layer-2-Switch = MAC-Adressen, Layer-3-Switch = IP-Adressen + Routing."
+    "e": "Ein klassischer Switch schaltet anhand von MAC-Adressen → Layer 2 (Sicherung). Layer-2-Switch = MAC-Adressen, Layer-3-Switch = MAC-Adressen/IP-Adressen + Routing."
    },
    {
     "q": "Auf welcher Schicht arbeitet ein Hub/Repeater?",
@@ -14468,6 +14468,7 @@ document.getElementById('wrongResetBtn').addEventListener('click', () => {
 
 // ---- Tab switching ----
 document.querySelectorAll('.tab').forEach(tab => {
+  if(!tab.dataset.view) return; // echter Navigations-Link (z.B. Subnetting Trainer) — Browser übernimmt
   tab.addEventListener('click', () => {
     document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
     document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
