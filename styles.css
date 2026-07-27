@@ -30,10 +30,9 @@ nav.jump a{scroll-behavior:smooth}
 body{background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,-apple-system,sans-serif;line-height:1.6;padding:0 0 90px}
 .wrap{max-width:940px;margin:0 auto;padding:0 24px}
 header{border-bottom:1px solid var(--border);padding:40px 0 26px;margin-bottom:28px;background:linear-gradient(180deg,rgba(34,211,238,0.04),transparent);text-align:center}
-header h1{font-family:'DM Mono','Consolas',monospace;font-size:2.7rem;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:#eaf2f8;margin-bottom:8px;animation:titleGlitch 5.5s steps(1,end) infinite}
-.brand-row{display:flex;align-items:center;justify-content:center;gap:16px}
-.brand-mark{width:52px;height:52px;flex-shrink:0}
-@media(max-width:560px){.brand-mark{width:38px;height:38px}}
+header h1{font-family:'DM Mono','Consolas',monospace;font-size:2.7rem;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:#eaf2f8;margin-bottom:8px;animation:titleGlitch 5.5s steps(1,end) infinite;display:inline-flex;align-items:center;gap:0.25em}
+.title-8{height:1.05em;width:1.05em;vertical-align:-0.15em;flex-shrink:0;animation:titleGlitch 5.5s steps(1,end) infinite;filter:drop-shadow(0 0 8px color-mix(in srgb,var(--cyan) 45%,transparent))}
+@media(max-width:560px){.title-8{width:0.95em;height:0.95em}}
 .t-neint{color:var(--green);text-shadow:0 0 6px color-mix(in srgb,var(--green) 90%,transparent),0 0 18px color-mix(in srgb,var(--green) 55%,transparent),0 0 40px color-mix(in srgb,var(--green) 25%,transparent);animation:glowGreen 2.6s ease-in-out infinite}
 .t-symb{color:var(--cyan);text-shadow:0 0 6px color-mix(in srgb,var(--cyan) 90%,transparent),0 0 18px color-mix(in srgb,var(--cyan) 55%,transparent),0 0 40px color-mix(in srgb,var(--cyan) 25%,transparent);animation:glowCyan 2.6s ease-in-out infinite;animation-delay:1.3s}
 @keyframes glowGreen{0%,100%{text-shadow:0 0 6px color-mix(in srgb,var(--green) 90%,transparent),0 0 18px color-mix(in srgb,var(--green) 55%,transparent),0 0 40px color-mix(in srgb,var(--green) 25%,transparent)}50%{text-shadow:0 0 9px color-mix(in srgb,var(--green) 100%,transparent),0 0 28px color-mix(in srgb,var(--green) 75%,transparent),0 0 60px color-mix(in srgb,var(--green) 40%,transparent)}}

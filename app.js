@@ -6297,7 +6297,7 @@ const POOLS = {
   ]
  },
  "ip": {
-  "name": "IPv4 & IPv6",
+  "name": "Subnetting IPv4 & IPv6",
   "q": [
    
    
@@ -6719,7 +6719,7 @@ const POOLS = {
       "ok": false
      },
      {
-      "t": "Durch zufälliges Raten einer freien Adresse",
+      "t": "Der DHCPv6-Server bildet den Interface-Teil und sendet ihn zurück",
       "ok": false
      },
      {
@@ -6745,7 +6745,7 @@ const POOLS = {
       "ok": false
      },
      {
-      "t": "Zwischen beiden besteht kein Unterschied",
+      "t": "SLAAC vergibt zusätzlich DNS-Server und Domain, DHCPv6 kann das grundsätzlich nicht",
       "ok": false
      }
     ],
@@ -6763,7 +6763,7 @@ const POOLS = {
       "ok": false
      },
      {
-      "t": "Es verschlüsselt den gesamten Netzverkehr",
+      "t": "Es weist jedem Gerät zentral eine vollständige Adresse fest zu",
       "ok": false
      },
      {
@@ -7180,6 +7180,386 @@ const POOLS = {
      { "t": "IP-Adresse und Standardgateway", "ok": false }
     ],
     "e": "Ohne Gateway gäbe es keinen Weg aus dem eigenen Netz, ohne DNS keine Namensauflösung — für Internetzugriff werden alle vier Angaben benötigt."
+   },
+   {
+    "q": "Wie lassen sich die IP-Klassen A, B und C am einfachsten anhand ihrer ersten Bits (Binärpräfix) im ersten Oktett unterscheiden?",
+    "o": [
+     { "t": "Klasse A beginnt mit 0, Klasse B mit 10 und Klasse C mit 110", "ok": true },
+     { "t": "Klasse A beginnt mit 110, Klasse B mit 10 und Klasse C mit 0", "ok": false },
+     { "t": "Klasse A beginnt mit 10, Klasse B mit 110 und Klasse C mit 0", "ok": false },
+     { "t": "Alle Klassen beginnen einheitlich mit der Binärzahl 1", "ok": false }
+    ],
+    "e": "Das führende Bitmuster wächst mit der Klasse: A = 0 (0–127), B = 10 (128–191), C = 110 (192–223). Je mehr führende Einsen, desto höher die Klasse."
+   },
+   {
+    "q": "Eine Subnetzmaske endet im vierten Oktett auf den Wert 192. Wie groß ist die Sprungweite der Adressblöcke?",
+    "o": [
+     { "t": "64", "ok": true },
+     { "t": "32", "ok": false },
+     { "t": "128", "ok": false },
+     { "t": "16", "ok": false }
+    ],
+    "e": "Sprungweite = 256 minus Maskenwert. 256 minus 192 ergibt 64. Die Blöcke starten bei 0, 64, 128, 192."
+   },
+   {
+    "q": "Warum zieht man den Maskenwert eines Oktetts von 256 ab, um die Sprungweite zu erhalten?",
+    "o": [
+     { "t": "Weil ein Oktett 256 mögliche Werte von 0 bis 255 umfasst", "ok": true },
+     { "t": "Weil 256 die höchste gültige Hostzahl eines Oktetts ist", "ok": false },
+     { "t": "Weil damit die Zahl der belegten Netzbits entsteht", "ok": false },
+     { "t": "Weil 256 der feste Startwert jeder Subnetzmaske ist", "ok": false }
+    ],
+    "e": "Die Differenz zu 256 entspricht der Wertigkeit des letzten gesetzten Bits und damit der Blockgröße."
+   },
+   {
+    "q": "Welcher Maskenwert im letzten Oktett gehört zu einer Präfixlänge von /26?",
+    "o": [
+     { "t": "192", "ok": true },
+     { "t": "128", "ok": false },
+     { "t": "224", "ok": false },
+     { "t": "240", "ok": false }
+    ],
+    "e": "Ein /26 nutzt 2 Bits im vierten Oktett mit den Wertigkeiten 128 und 64. Summe: 192."
+   },
+   {
+    "q": "Wenn die Sprungweite eines Subnetzes 32 beträgt, wie viele IP-Adressen umfasst ein Block insgesamt?",
+    "o": [
+     { "t": "32", "ok": true },
+     { "t": "30", "ok": false },
+     { "t": "64", "ok": false },
+     { "t": "16", "ok": false }
+    ],
+    "e": "Die Sprungweite gibt die Gesamtzahl aller Adressen eines Blocks an: von .0 bis .31 sind das genau 32."
+   },
+   {
+    "q": "Wie groß ist die Sprungweite bei einem /22-Netz und in welchem Oktett liegt sie?",
+    "o": [
+     { "t": "4, im dritten Oktett", "ok": true },
+     { "t": "8, im dritten Oktett", "ok": false },
+     { "t": "2, im vierten Oktett", "ok": false },
+     { "t": "64, im zweiten Oktett", "ok": false }
+    ],
+    "e": "Die Maske zu /22 lautet 255.255.252.0. Im dritten Oktett gilt 256 minus 252 ergibt 4."
+   },
+   {
+    "q": "Eine Maske endet auf den Wert 248. Welche Sprungweite ergibt sich daraus?",
+    "o": [
+     { "t": "8", "ok": true },
+     { "t": "4", "ok": false },
+     { "t": "16", "ok": false },
+     { "t": "6", "ok": false }
+    ],
+    "e": "256 minus 248 ergibt 8. Die Netze starten bei 0, 8, 16, 24 und so weiter."
+   },
+   {
+    "q": "Bei der Adresse 172.16.144.20/18 liegt die Netzgrenze in welchem Oktett?",
+    "o": [
+     { "t": "Im dritten Oktett", "ok": true },
+     { "t": "Im vierten Oktett", "ok": false },
+     { "t": "Im zweiten Oktett", "ok": false },
+     { "t": "Im ersten Oktett", "ok": false }
+    ],
+    "e": "Bis Bit 16 ist die Maske voll auf 255. Die restlichen 2 Bits von /18 liegen im dritten Oktett, dort verläuft die Grenze."
+   },
+   {
+    "q": "Woran erkennt man das für die Berechnung entscheidende Oktett einer Subnetzmaske?",
+    "o": [
+     { "t": "Es ist das erste Oktett, dessen Wert weder 0 noch 255 ist", "ok": true },
+     { "t": "Es ist immer das vierte Oktett der Adresse", "ok": false },
+     { "t": "Es ist das erste Oktett mit dem Wert 255", "ok": false },
+     { "t": "Es ist das Oktett mit dem höchsten Zahlenwert", "ok": false }
+    ],
+    "e": "Nur im teilweise gefüllten Oktett verläuft die Grenze zwischen Netz- und Hostanteil, dort wird gerechnet."
+   },
+   {
+    "q": "Ein Netz arbeitet mit Sprungweite 32. Zu welcher Netzadresse gehört die Client-Adresse 192.168.7.50?",
+    "o": [
+     { "t": "192.168.7.32", "ok": true },
+     { "t": "192.168.7.0", "ok": false },
+     { "t": "192.168.7.64", "ok": false },
+     { "t": "192.168.7.48", "ok": false }
+    ],
+    "e": "Blöcke: 0 bis 31, 32 bis 63, 64 bis 95. Die 50 fällt in den Block ab 32."
+   },
+   {
+    "q": "Ein Subnetz beginnt bei 10.0.0.0 und hat die Sprungweite 16. Wie lautet die Broadcastadresse?",
+    "o": [
+     { "t": "10.0.0.15", "ok": true },
+     { "t": "10.0.0.16", "ok": false },
+     { "t": "10.0.0.14", "ok": false },
+     { "t": "10.0.0.31", "ok": false }
+    ],
+    "e": "Das nächste Netz startet bei 16. Da Netze nahtlos aneinandergrenzen, endet dieses eine Adresse davor, bei 15."
+   },
+   {
+    "q": "Zu welchem Netz gehört die Adresse 192.168.3.100 bei der Maske 255.255.255.192?",
+    "o": [
+     { "t": "192.168.3.64", "ok": true },
+     { "t": "192.168.3.0", "ok": false },
+     { "t": "192.168.3.96", "ok": false },
+     { "t": "192.168.3.128", "ok": false }
+    ],
+    "e": "Sprungweite 64. Blöcke: 0 bis 63, 64 bis 127. Die 100 fällt in den Block ab 64."
+   },
+   {
+    "q": "Wie lautet die Broadcastadresse zur Adresse 10.0.9.130 bei einem /25-Netz?",
+    "o": [
+     { "t": "10.0.9.255", "ok": true },
+     { "t": "10.0.9.127", "ok": false },
+     { "t": "10.0.9.254", "ok": false },
+     { "t": "10.0.10.0", "ok": false }
+    ],
+    "e": "Sprungweite 128. Der zweite Block reicht von 128 bis 255, sein Broadcast ist 255."
+   },
+   {
+    "q": "Wie lautet die letzte nutzbare Hostadresse im Netz 172.20.32.0/20?",
+    "o": [
+     { "t": "172.20.47.254", "ok": true },
+     { "t": "172.20.47.255", "ok": false },
+     { "t": "172.20.48.254", "ok": false },
+     { "t": "172.20.63.254", "ok": false }
+    ],
+    "e": "Sprungweite 16 im dritten Oktett. Der Block endet bei 172.20.47.255, der letzte Host liegt eine Adresse davor."
+   },
+   {
+    "q": "Zwei Hosts nutzen die Adressen 192.168.4.60 und 192.168.4.70 mit einem /27. Was trifft zu?",
+    "o": [
+     { "t": "Sie liegen in zwei verschiedenen Subnetzen", "ok": true },
+     { "t": "Sie liegen im selben Subnetz mit gleicher Netz-ID", "ok": false },
+     { "t": "Sie teilen sich dieselbe Broadcastadresse 95", "ok": false },
+     { "t": "Sie bilden gemeinsam den ersten Block ab 32", "ok": false }
+    ],
+    "e": "Sprungweite 32. Die 60 liegt im Block 32 bis 63, die 70 im Block 64 bis 95, also getrennte Subnetze."
+   },
+   {
+    "q": "Welche Adresse ist bei einem /28-Netz eine gültige Netz-ID?",
+    "o": [
+     { "t": "192.168.10.48", "ok": true },
+     { "t": "192.168.10.20", "ok": false },
+     { "t": "192.168.10.36", "ok": false },
+     { "t": "192.168.10.40", "ok": false }
+    ],
+    "e": "Sprungweite 16. Gültige Netzstarts sind nur Vielfache von 16: 0, 16, 32, 48, 64."
+   },
+   {
+    "q": "Welche Adresse eines Subnetzes ist als Netz-ID reserviert?",
+    "o": [
+     { "t": "Die erste, also niedrigste Adresse des Blocks", "ok": true },
+     { "t": "Die zweite Adresse des Blocks", "ok": false },
+     { "t": "Die letzte Adresse des Blocks", "ok": false },
+     { "t": "Die mittlere Adresse des Blocks", "ok": false }
+    ],
+    "e": "Im Hostanteil stehen alle Bits auf 0, das ergibt den niedrigsten Wert des Blocks."
+   },
+   {
+    "q": "Wie prüft ein Host, ob ein Ziel im eigenen Subnetz liegt?",
+    "o": [
+     { "t": "Er verknüpft eigene und Zieladresse per UND mit der Maske", "ok": true },
+     { "t": "Er vergleicht die letzten beiden Ziffern beider Adressen", "ok": false },
+     { "t": "Er sendet einen Rundruf und wartet auf Antwort", "ok": false },
+     { "t": "Er prüft die Länge der Zieladresse gegen die eigene Maske", "ok": false }
+    ],
+    "e": "Gleiche Netz-ID nach der UND-Verknüpfung bedeutet direkte Zustellung, sonst läuft es über das Gateway."
+   },
+   {
+    "q": "Welche Rolle spielt das Standard-Gateway innerhalb eines Subnetzes?",
+    "o": [
+     { "t": "Es leitet Pakete an Ziele außerhalb des Subnetzes weiter", "ok": true },
+     { "t": "Es berechnet für jeden Host die passende Subnetzmaske", "ok": false },
+     { "t": "Es verbindet zwei Hosts im selben Subnetz direkt", "ok": false },
+     { "t": "Es vergibt allen Hosts im Subnetz ihre Adressen", "ok": false }
+    ],
+    "e": "Der Router am Gateway ist der einzige Ausgang aus dem lokalen Adressbereich."
+   },
+   {
+    "q": "Welche Präfixlänge entspricht der Maske 255.255.240.0?",
+    "o": [
+     { "t": "/20", "ok": true },
+     { "t": "/19", "ok": false },
+     { "t": "/21", "ok": false },
+     { "t": "/22", "ok": false }
+    ],
+    "e": "240 ist binär 11110000, also 4 Bits. Zusammen mit den ersten 16 Bits ergibt das 20."
+   },
+   {
+    "q": "Eine Maske endet auf den Wert 248. Welche Präfixlänge liegt vor?",
+    "o": [
+     { "t": "/29", "ok": true },
+     { "t": "/27", "ok": false },
+     { "t": "/28", "ok": false },
+     { "t": "/30", "ok": false }
+    ],
+    "e": "248 ist binär 11111000, also 5 gesetzte Bits im letzten Oktett. 24 plus 5 ergibt 29."
+   },
+   {
+    "q": "Ein IPv4-Netz besitzt 5 Hostbits. Welche Präfixlänge hat es?",
+    "o": [
+     { "t": "/27", "ok": true },
+     { "t": "/26", "ok": false },
+     { "t": "/28", "ok": false },
+     { "t": "/29", "ok": false }
+    ],
+    "e": "32 minus 5 Hostbits ergibt 27 Netzbits."
+   },
+   {
+    "q": "Ein Subnetz umfasst insgesamt 64 Adressen. Wie viele davon sind als Hosts nutzbar?",
+    "o": [
+     { "t": "62", "ok": true },
+     { "t": "64", "ok": false },
+     { "t": "60", "ok": false },
+     { "t": "63", "ok": false }
+    ],
+    "e": "Gesamtzahl minus Netz-ID und Broadcast: 64 minus 2 ergibt 62."
+   },
+   {
+    "q": "Welcher Effekt tritt ein, wenn die Präfixlänge um ein Bit wächst, etwa von /25 auf /26?",
+    "o": [
+     { "t": "Die Zahl der Adressen im Subnetz halbiert sich", "ok": true },
+     { "t": "Die Zahl der Adressen im Subnetz verdoppelt sich", "ok": false },
+     { "t": "Die Zahl der Adressen sinkt pauschal um den Wert 2", "ok": false },
+     { "t": "Die Adressanzahl bleibt gleich, die Maske verschiebt sich", "ok": false }
+    ],
+    "e": "Jedes zusätzliche Netzbit teilt den Adressraum exakt in zwei Hälften."
+   },
+   {
+    "q": "In wie viele /24-Netze lässt sich ein /16-Netz zerlegen?",
+    "o": [
+     { "t": "256", "ok": true },
+     { "t": "128", "ok": false },
+     { "t": "254", "ok": false },
+     { "t": "512", "ok": false }
+    ],
+    "e": "Es werden 8 Bits geliehen, 2 hoch 8 ergibt 256 Subnetze."
+   },
+   {
+    "q": "Eine IP mit CIDR-Präfix ist gegeben, gesucht ist die Netzadresse. Was bestimmt man zuerst?",
+    "o": [
+     { "t": "Das durch die Maske betroffene Oktett", "ok": true },
+     { "t": "Direkt die Broadcastadresse durch Ausprobieren", "ok": false },
+     { "t": "Die Anzahl nutzbarer Hosts", "ok": false },
+     { "t": "Die Anzahl möglicher Subnetze", "ok": false }
+    ],
+    "e": "Ohne das betroffene Oktett lässt sich weder Sprungweite noch Blockgrenze bestimmen."
+   },
+   {
+    "q": "Das betroffene Oktett steht fest. Welcher Schritt folgt als Nächstes?",
+    "o": [
+     { "t": "Der Maskenwert dieses Oktetts wird bestimmt", "ok": true },
+     { "t": "Die Netzadresse wird direkt abgelesen", "ok": false },
+     { "t": "Die Anzahl der Hostbits wird berechnet", "ok": false },
+     { "t": "Die Broadcastadresse wird berechnet", "ok": false }
+    ],
+    "e": "Erst aus dem Maskenwert lässt sich die Sprungweite ableiten."
+   },
+   {
+    "q": "Die Sprungweite ist bekannt. Wie findet man die Netzadresse zu einer gegebenen Host-IP?",
+    "o": [
+     { "t": "Ab 0 in Sprungweiten zählen, bis der Wert knapp unter dem Oktettwert der IP liegt", "ok": true },
+     { "t": "Die Sprungweite einmal auf die IP addieren", "ok": false },
+     { "t": "Die Sprungweite von 255 abziehen", "ok": false },
+     { "t": "Den Oktettwert der IP durch die Sprungweite teilen", "ok": false }
+    ],
+    "e": "Der letzte erreichte Sprungweitenwert unterhalb der IP markiert den Blockstart."
+   },
+   {
+    "q": "Die Netzadresse steht fest. Wie berechnet man die Broadcastadresse, ohne erneut zu zählen?",
+    "o": [
+     { "t": "Sprungweite auf die Netzadresse addieren, dann eine Adresse zurückgehen", "ok": true },
+     { "t": "Sprungweite von der Netzadresse abziehen", "ok": false },
+     { "t": "Netzadresse plus 2 rechnen", "ok": false },
+     { "t": "Netzadresse plus die Anzahl der Hostbits rechnen", "ok": false }
+    ],
+    "e": "Der nächste Blockstart minus eins ist immer der Broadcast des aktuellen Blocks."
+   },
+   {
+    "q": "Wofür wird die Anzahl der Hostbits benötigt?",
+    "o": [
+     { "t": "Für die Formel 2 hoch Hostbits minus 2", "ok": true },
+     { "t": "Für die Berechnung der Broadcastadresse", "ok": false },
+     { "t": "Für die Bestimmung des betroffenen Oktetts", "ok": false },
+     { "t": "Für die Berechnung der Sprungweite", "ok": false }
+    ],
+    "e": "Die Hostbit-Zahl geht direkt in die Formel für nutzbare Adressen ein."
+   },
+   {
+    "q": "Wofür wird die Differenz zwischen neuem und ursprünglichem Präfix benötigt?",
+    "o": [
+     { "t": "Für die Formel 2 hoch geliehene Bits, also die Anzahl der Subnetze", "ok": true },
+     { "t": "Für die Berechnung der Broadcastadresse", "ok": false },
+     { "t": "Für die Berechnung der Sprungweite", "ok": false },
+     { "t": "Für die Bestimmung der letzten Hostadresse", "ok": false }
+    ],
+    "e": "Geliehene Bits bestimmen, in wie viele Subnetze das Ursprungsnetz zerfällt."
+   },
+   {
+    "q": "Ein Segment braucht mindestens 100 nutzbare Hosts. Was bestimmt man zuerst?",
+    "o": [
+     { "t": "Die minimale Anzahl an Hostbits, die den Bedarf deckt", "ok": true },
+     { "t": "Die Sprungweite des Zielnetzes", "ok": false },
+     { "t": "Die Netzadresse des Zielnetzes", "ok": false },
+     { "t": "Die Anzahl der Subnetze im übergeordneten Netz", "ok": false }
+    ],
+    "e": "Ohne bekannte Hostbit-Zahl lässt sich weder Präfix noch Maske ableiten."
+   },
+   {
+    "q": "Wie viele Hostbits werden für mindestens 100 nutzbare Hosts benötigt?",
+    "o": [
+     { "t": "7", "ok": true },
+     { "t": "6", "ok": false },
+     { "t": "8", "ok": false },
+     { "t": "5", "ok": false }
+    ],
+    "e": "2 hoch 6 minus 2 ergibt nur 62, zu wenig. 2 hoch 7 minus 2 ergibt 126, das reicht."
+   },
+   {
+    "q": "Ein Segment benötigt mindestens 50 Hosts. Welche Präfixlänge ist die kleinste passende?",
+    "o": [
+     { "t": "/26", "ok": true },
+     { "t": "/24", "ok": false },
+     { "t": "/25", "ok": false },
+     { "t": "/27", "ok": false }
+    ],
+    "e": "Ein /26 bietet 62 nutzbare Adressen, ein /27 nur 30. /26 ist die knappste ausreichende Wahl."
+   },
+   {
+    "q": "Wie viele Bits stellt ein einzelnes hexadezimales Zeichen einer IPv6-Adresse dar?",
+    "o": [
+     { "t": "4 Bits", "ok": true },
+     { "t": "2 Bits", "ok": false },
+     { "t": "8 Bits", "ok": false },
+     { "t": "16 Bits", "ok": false }
+    ],
+    "e": "Ein Hex-Zeichen hat 16 Zustände, dafür braucht es 4 Bits. Vier Hex-Zeichen bilden einen 16-Bit-Block."
+   },
+   {
+    "q": "Welches IPv6-Subnetz folgt beim fortlaufenden Hochzählen direkt auf das Netz mit der Subnetzstelle a9?",
+    "o": [
+     { "t": "Die Stelle aa", "ok": true },
+     { "t": "Die Stelle a10", "ok": false },
+     { "t": "Die Stelle b0", "ok": false },
+     { "t": "Die Stelle b1", "ok": false }
+    ],
+    "e": "Hexadezimal zählt nach 9 mit Buchstaben weiter: 8, 9, a, b. Nach a9 folgt aa."
+   },
+   {
+    "q": "Wie viele Adressen werden in einem IPv6-Subnetz mit /64 für Netz-ID und Broadcast abgezogen?",
+    "o": [
+     { "t": "0, da IPv6 kein klassisches Broadcast kennt", "ok": true },
+     { "t": "2, exakt wie im IPv4-Standard", "ok": false },
+     { "t": "1, da nur die Netz-ID gesperrt ist", "ok": false },
+     { "t": "4, da Anycast die ersten Plätze belegt", "ok": false }
+    ],
+    "e": "IPv6 nutzt Multicast statt Broadcast, daher entfällt die minus-2-Regel bei der Hostberechnung."
+   },
+   {
+    "q": "Welche Präfixlänge stellt genau 16 Subnetze der Größe /64 bereit?",
+    "o": [
+     { "t": "/60", "ok": true },
+     { "t": "/58", "ok": false },
+     { "t": "/61", "ok": false },
+     { "t": "/62", "ok": false }
+    ],
+    "e": "16 ist 2 hoch 4, also werden 4 Bits vor dem /64 benötigt: 64 minus 4 ergibt /60."
    }
   ]
  },
@@ -9468,7 +9848,7 @@ const POOLS = {
       "ok": false
      },
      {
-      "t": "Es verschlüsselt doppelt",
+      "t": "Der gesamte Verkehr wird zwangsweise über das Firmen-Gateway geprüft",
       "ok": false
      }
     ],
@@ -9665,12 +10045,12 @@ const POOLS = {
    {
     "q": "Was ist IKEv2?",
     "o": [
-     { "t": "Eine modernere, schnellere Version des IKE-Schlüsselaustauschprotokolls für IPsec", "ok": true },
+     { "t": "Das Protokoll, das bei IPsec Schlüssel aushandelt und die Sicherheitsverbindung (SA) aufbaut", "ok": true },
      { "t": "Die zweite Verschlüsselungsschicht, die IPsec zusätzlich über ESP legt", "ok": false },
      { "t": "Ein Nachfolger von OpenVPN, der TLS durch eigene Verfahren ersetzt", "ok": false },
-     { "t": "Ein Kompatibilitätsmodus, der IPsec-Tunnel über reine TCP-Verbindungen führt", "ok": false }
+     { "t": "Das Verfahren, das bei IPsec die eigentlichen Nutzdaten verschlüsselt", "ok": false }
     ],
-    "e": "IKEv2 ist stabiler, schneller bei Verbindungswechseln (Mobility) und gilt als sicherer als IKEv1."
+    "e": "IKEv2 (Internet Key Exchange v2) handelt Schlüssel und Parameter aus und baut die IPsec-SA auf. Gegenüber IKEv1 ist es schlanker, stabiler bei Verbindungswechseln (Mobility) und gilt als sicherer. Die Nutzdaten selbst verschlüsselt anschließend ESP."
    },
    {
     "q": "Was ist der Hauptzweck von ESP in IPsec?",
@@ -9703,6 +10083,26 @@ const POOLS = {
      { "t": "RADIUS zusammen mit TACACS+ — übernimmt Authentifizierung und Schlüsselverteilung zentral", "ok": false }
     ],
     "e": "IKE (auf dem ISAKMP-Rahmenwerk aufbauend) handelt vor dem Datentransfer Schlüssel und Security Associations aus, typischerweise mit Diffie-Hellman. Kerberos/LDAP, TLS und RADIUS sind echte Protokolle — aber nicht das Key Management von IPsec."
+   },
+   {
+    "q": "Welche VPN-Arten lassen sich mit IPsec umsetzen?",
+    "o": [
+     { "t": "Site-to-Site-VPN und Remote-Access-VPN", "ok": true },
+     { "t": "Ausschließlich Site-to-Site-VPN zwischen festen Standorten", "ok": false },
+     { "t": "Ausschließlich Remote-Access-VPN für einzelne Clients", "ok": false },
+     { "t": "Nur browserbasierte Clientless-VPN-Verbindungen ohne Software", "ok": false }
+    ],
+    "e": "IPsec deckt beides ab: Site-to-Site verbindet ganze Standortnetze, Remote-Access bindet einzelne Nutzer sicher ans Firmennetz an."
+   },
+   {
+    "q": "Warum wird in Unternehmensumgebungen oft Full Tunneling gegenüber Split Tunneling bevorzugt?",
+    "o": [
+     { "t": "Der gesamte Verkehr läuft über kontrollierte Firmen-Gateways und wird einheitlich geprüft", "ok": true },
+     { "t": "Es spart Bandbreite, weil privater Verkehr am VPN vorbeigeleitet wird", "ok": false },
+     { "t": "Es benötigt keine zentrale Verwaltung und keine Firewall am Übergang", "ok": false },
+     { "t": "Es beschleunigt den allgemeinen Internetzugriff der Clients spürbar", "ok": false }
+    ],
+    "e": "Beim Full Tunneling geht sämtlicher Verkehr durch das VPN, sodass Firmen-Gateways alles filtern und protokollieren können — konsistente Sicherheit auf Kosten von etwas Geschwindigkeit."
    }
   ]
  },
@@ -9942,7 +10342,7 @@ const POOLS = {
     "q": "Was ist Zwei-Faktor-Authentifizierung (2FA)?",
     "o": [
      {
-      "t": "Kombination zweier unabhängiger Nachweise (z. B. Passwort + Code)",
+      "t": "Kombination zweier unabhängiger Nachweise",
       "ok": true
      },
      {
@@ -10018,7 +10418,7 @@ const POOLS = {
     "q": "Warum ist eine reine MAC-Filterung als Schutz schwach?",
     "o": [
      {
-      "t": "MAC-Adressen lassen sich leicht fälschen (Spoofing)",
+      "t": "MAC-Adressen lassen sich leicht fälschen",
       "ok": true
      },
      {
@@ -10210,7 +10610,7 @@ const POOLS = {
     "q": "Was beschreibt das Prinzip 'Need to Know'?",
     "o": [
      {
-      "t": "Zugriff nur auf Informationen, die für die Aufgabe nötig sind",
+      "t": "Zugriff nur auf nötige Informationen",
       "ok": true
      },
      {
@@ -11191,7 +11591,7 @@ const POOLS = {
     "q": "Was ist der Nachteil der Sterntopologie?",
     "o": [
      {
-      "t": "Hoher Kabelaufwand (jede Leitung zum Zentrum)",
+      "t": "Hoher Kabelaufwand",
       "ok": true
      },
      {
@@ -11267,7 +11667,7 @@ const POOLS = {
     "q": "Was ist die Schwachstelle einer einfachen Ringtopologie?",
     "o": [
      {
-      "t": "Ein Kabelbruch/PC-Ausfall unterbricht den ganzen Ring",
+      "t": "Ein Kabelbruch oder PC-Ausfall unterbricht den ganzen Ring",
       "ok": true
      },
      {
@@ -11389,7 +11789,7 @@ const POOLS = {
       "ok": false
      },
      {
-      "t": "Sie haben keinen Vorteil",
+      "t": "Der Verkabelungsaufwand wächst mit jeder Station überproportional",
       "ok": false
      }
     ],
@@ -11443,7 +11843,7 @@ const POOLS = {
     "q": "Wie fängt ein FDDI-Doppelring einen Kabelbruch im Ring ab?",
     "o": [
      {
-      "t": "Durch Kurzschließen (Wrap) der beiden Ringe",
+      "t": "Durch Kurzschließen der beiden Ringe",
       "ok": true
      },
      {
@@ -11484,7 +11884,7 @@ const POOLS = {
     "e": "Der Bus nutzt eine einzige durchgehende Leitung → minimaler Kabelaufwand."
    },
    {
-    "q": "Was bringt der zentrale Switch der Sterntopologie für die Wartung?",
+    "q": "Welchen Vorteil bringt der zentrale Switch der Sterntopologie für die Wartung?",
     "o": [
      {
       "t": "Einfache, schnelle Fehlersuche",
@@ -14656,7 +15056,7 @@ const GLOSSAR = [{"a":"2FA","f":"Zwei-Faktor-Authentifizierung","d":"Anmeldung m
 {"a":"NTP","f":"Network Time Protocol","d":"Synchronisiert Systemuhren über das Netzwerk mit Zeitservern. Port 123."},
 {"a":"OCSP","f":"Online Certificate Status Protocol","d":"Prüft den Widerrufsstatus eines Zertifikats online in Echtzeit — Alternative zur CRL."},
 {"a":"OOP","f":"Objektorientierte Programmierung","d":"Programmierparadigma mit Klassen und Objekten: Kapselung, Vererbung, Polymorphie."},
-{"a":"OSI","f":"Open Systems Interconnection","d":"Das 7-Schichten-Referenzmodell der Netzwerkkommunikation, von Bitübertragung (1) bis Anwendung (7)."},
+{"a":"OSI","f":"Open Systems Interconnection","d":"7-Schichten-Referenzmodell der Netzwerkkommunikation. Deutsch: 1 Bitübertragung, 2 Sicherung, 3 Vermittlung, 4 Transport, 5 Sitzung, 6 Darstellung, 7 Anwendung. Englisch: 1 Physical, 2 Data Link, 3 Network, 4 Transport, 5 Session, 6 Presentation, 7 Application."},
 {"a":"OSPF","f":"Open Shortest Path First","d":"Dynamisches Routingprotokoll, das den kürzesten Weg anhand von Link-Kosten berechnet."},
 {"a":"OUI","f":"Organizationally Unique Identifier","d":"Die ersten 24 Bit einer MAC-Adresse, kennzeichnen den Hersteller der Netzwerkkarte."},
 {"a":"PaaS","f":"Platform as a Service","d":"Cloud-Modell: Anbieter stellt Entwicklungs- und Laufzeitumgebung; Kunde bringt nur die Anwendung."},
@@ -14821,7 +15221,15 @@ const GLOSSAR = [{"a":"2FA","f":"Zwei-Faktor-Authentifizierung","d":"Anmeldung m
 {"a":"GFS","f":"Grandfather-Father-Son","d":"Klassisches Rotationskonzept für Backup-Medien: tägliche (Son), wöchentliche (Father) und monatliche (Grandfather) Sicherungen. Ältere Medien werden nach festem Rhythmus wiederverwendet, sodass mehrere Zeitpunkte in der Vergangenheit verfügbar bleiben."},
 {"a":"OAuth","f":"Open Authorization","d":"Offener Standard zur delegierten Autorisierung: Ein Nutzer erlaubt einer Anwendung Zugriff auf seine Daten bei einem Dienst, ohne dass die Anwendung sein Passwort erhält. Liefert dabei typischerweise ein zeitlich begrenztes Access-Token."},
 {"a":"Bearer-Token","f":"Bearer Token","d":"Zugriffstoken, das im HTTP-Header mitgesendet wird — wer es besitzt (\"bearer\"), gilt als berechtigt. Meist zeitlich begrenzt gültig, oft im Rahmen von OAuth ausgestellt. Muss daher wie ein Passwort geschützt werden."},
-{"a":"Overhead","f":"Zusatzaufwand / Mehraufwand","d":"Zusätzlicher Ressourcenverbrauch (Zeit, Bandbreite, Rechenleistung), der neben den eigentlichen Nutzdaten für Steuerung, Verschlüsselung oder Protokoll-Header anfällt. Weniger Overhead bedeutet mehr Effizienz, aber oft auch weniger Sicherheit oder Fehlertoleranz — ein klassischer Kompromiss in der Netzwerktechnik."}];
+{"a":"Overhead","f":"Zusatzaufwand / Mehraufwand","d":"Zusätzlicher Ressourcenverbrauch (Zeit, Bandbreite, Rechenleistung), der neben den eigentlichen Nutzdaten für Steuerung, Verschlüsselung oder Protokoll-Header anfällt. Weniger Overhead bedeutet mehr Effizienz, aber oft auch weniger Sicherheit oder Fehlertoleranz — ein klassischer Kompromiss in der Netzwerktechnik."},
+{"a":"gRPC","f":"gRPC Remote Procedure Call","d":"Modernes, leistungsstarkes RPC-Framework von Google auf Basis von HTTP/2 und Protocol Buffers. Ermöglicht effiziente, typsichere Kommunikation zwischen verteilten Diensten, häufig in Microservice-Architekturen."},
+{"a":"JSON-RPC","f":"JSON Remote Procedure Call","d":"Leichtgewichtiges RPC-Protokoll, das Anfragen und Antworten im JSON-Format überträgt. Einfach aufgebaut und transportunabhängig (oft über HTTP)."},
+{"a":"403","f":"HTTP 403 Forbidden","d":"HTTP-Statuscode: Der Server hat die Anfrage verstanden, verweigert aber die Ausführung. Anders als 401 hilft hier keine Authentifizierung — der Zugriff ist grundsätzlich untersagt."},
+{"a":"RTS","f":"Request to Send","d":"Steuersignal, mit dem eine Station den Wunsch anmeldet, Daten zu senden. Teil des RTS/CTS-Verfahrens im WLAN gegen das Hidden-Node-Problem."},
+{"a":"CTS","f":"Clear to Send","d":"Antwort auf ein RTS: Der Access Point gibt den Kanal für die anfragende Station frei. Zusammen mit RTS reduziert es Kollisionen bei versteckten Endgeräten."},
+{"a":"DHCPv4","f":"Dynamic Host Configuration Protocol für IPv4","d":"Vergibt IPv4-Adressen samt Maske, Gateway und DNS automatisch. Ablauf: Discover, Offer, Request, Acknowledge (DORA)."},
+{"a":"DHCPv6","f":"Dynamic Host Configuration Protocol für IPv6","d":"IPv6-Variante von DHCP. Arbeitet stateful (vergibt Adressen zentral) oder stateless (liefert nur Zusatzinfos wie DNS, während die Adresse per SLAAC entsteht). Ablauf: Solicit, Advertise, Request, Reply."},
+{"a":"TCP/IP-Modell","f":"TCP/IP-Referenzmodell","d":"Praxismodell mit 4 Schichten. Deutsch: Netzzugang (OSI 1+2), Internet (OSI 3), Transport (OSI 4), Anwendung (OSI 5+6+7). Englisch: Network Access, Internet, Transport, Application."}];
 
 // ---- Bibliothek: Render + Suche ----
 const libList = document.getElementById('libList');

@@ -848,27 +848,27 @@
     <div class="field-grid">
       <div class="field">
         <label>Subnetzmaske (dezimal)</label>
-        <input id="inMask" autocomplete="off" placeholder="z.B. 255.255.255.0" inputmode="numeric">
+        <input id="inMask" autocomplete="off" placeholder="z.B. 255.255.255.0" inputmode="text">
       </div>
       <div class="field">
         <label>Netzadresse</label>
-        <input id="inNet" autocomplete="off" placeholder="z.B. 192.168.1.0" inputmode="numeric">
+        <input id="inNet" autocomplete="off" placeholder="z.B. 192.168.1.0" inputmode="text">
       </div>
       <div class="field">
         <label>Erster nutzbarer Host</label>
-        <input id="inFirst" autocomplete="off" placeholder="z.B. 192.168.1.1" inputmode="numeric">
+        <input id="inFirst" autocomplete="off" placeholder="z.B. 192.168.1.1" inputmode="text">
       </div>
       <div class="field">
         <label>Letzter nutzbarer Host</label>
-        <input id="inLast" autocomplete="off" placeholder="z.B. 192.168.1.254" inputmode="numeric">
+        <input id="inLast" autocomplete="off" placeholder="z.B. 192.168.1.254" inputmode="text">
       </div>
       <div class="field">
         <label>Broadcast-Adresse</label>
-        <input id="inBroad" autocomplete="off" placeholder="z.B. 192.168.1.255" inputmode="numeric">
+        <input id="inBroad" autocomplete="off" placeholder="z.B. 192.168.1.255" inputmode="text">
       </div>
       <div class="field">
         <label>Nutzbare Hosts (Anzahl)</label>
-        <input id="inHosts" autocomplete="off" placeholder="z.B. 254 oder 2^8-2" inputmode="numeric">
+        <input id="inHosts" autocomplete="off" placeholder="z.B. 254 oder 2^8-2" inputmode="text">
       </div>
     </div>
 
@@ -914,7 +914,7 @@
 
     <div class="field" style="max-width:260px; margin-top:16px;">
       <label>Neue Präfixlänge (CIDR)</label>
-      <input id="subInPrefix" autocomplete="off" placeholder="z.B. /26 oder 26" inputmode="numeric">
+      <input id="subInPrefix" autocomplete="off" placeholder="z.B. /26 oder 26" inputmode="text">
     </div>
 
     <div class="btn-row">
@@ -1060,7 +1060,7 @@
       </div>
       <div class="field">
         <label>Präfixlänge des Interface-Anteils</label>
-        <input id="V6inHostBits" autocomplete="off" placeholder="Bits für Hosts/Interface" inputmode="numeric">
+        <input id="V6inHostBits" autocomplete="off" placeholder="Bits für Hosts/Interface" inputmode="text">
       </div>
       <div class="field">
         <label>Anzahl /64-Subnetze in diesem Präfix</label>
@@ -1105,7 +1105,7 @@
 
     <div class="field" style="max-width:280px; margin-top:16px;">
       <label>Neue Präfixlänge</label>
-      <input id="V6subInPrefix" autocomplete="off" placeholder="z.B. /52 oder 52" inputmode="numeric">
+      <input id="V6subInPrefix" autocomplete="off" placeholder="z.B. /52 oder 52" inputmode="text">
     </div>
 
     <div class="btn-row">
@@ -1207,7 +1207,7 @@
 const $ = id => document.getElementById(id);
 let mode = 'easy';
 let current = null;
-let scoreRight = 0, streak = 0;
+let scoreRight = 0, streak = 0, taskSolved = false;
 
 // ---------- Bit / IP helpers ----------
 function maskFromPrefix(p){
@@ -1283,6 +1283,7 @@ function interestingOctet(prefix){
 // ---------- render task ----------
 function renderTask(){
   current = makeTask();
+  taskSolved = false;
   $('taskTarget').innerHTML = `${current.baseStr}<span class="cidr">/${current.prefix}</span>`;
   ['inMask','inNet','inFirst','inLast','inBroad','inHosts'].forEach(id=>{
     const el = $(id); el.value=''; el.classList.remove('ok','bad');
@@ -1350,9 +1351,12 @@ function checkAnswers(){
   if(allGood){
     fb.className = 'feedback show win';
     fb.textContent = '✓ Alles korrekt. Sauber gerechnet.';
-    scoreRight++; streak++;
-    $('scoreRight').textContent = scoreRight;
-    $('scoreStreak').textContent = streak;
+    if(!taskSolved){
+      taskSolved = true;
+      scoreRight++; streak++;
+      $('scoreRight').textContent = scoreRight;
+      $('scoreStreak').textContent = streak;
+    }
     fireConfetti();
   } else if(anyFilled){
     fb.className = 'feedback show miss';
@@ -1576,10 +1580,10 @@ function renderVlsm(){
     <div class="subnet-row">
       <div class="sr-head">Anforderung ${i+1}: ${t.reqs[i]} Hosts</div>
       <div class="sr-grid">
-        <div class="field"><label>Netzadresse</label><input data-vrow="${i}" data-vkey="net" autocomplete="off" inputmode="numeric"></div>
-        <div class="field"><label>Präfix (CIDR)</label><input data-vrow="${i}" data-vkey="prefix" autocomplete="off" inputmode="numeric" placeholder="z.B. 26"></div>
-        <div class="field"><label>Broadcast</label><input data-vrow="${i}" data-vkey="broad" autocomplete="off" inputmode="numeric"></div>
-        <div class="field"><label>Nutzbare Hosts</label><input data-vrow="${i}" data-vkey="usable" autocomplete="off" inputmode="numeric"></div>
+        <div class="field"><label>Netzadresse</label><input data-vrow="${i}" data-vkey="net" autocomplete="off" inputmode="text"></div>
+        <div class="field"><label>Präfix (CIDR)</label><input data-vrow="${i}" data-vkey="prefix" autocomplete="off" inputmode="text" placeholder="z.B. 26"></div>
+        <div class="field"><label>Broadcast</label><input data-vrow="${i}" data-vkey="broad" autocomplete="off" inputmode="text"></div>
+        <div class="field"><label>Nutzbare Hosts</label><input data-vrow="${i}" data-vkey="usable" autocomplete="off" inputmode="text"></div>
       </div>
     </div>`;
   }
@@ -1883,10 +1887,10 @@ function renderSubnet(){
     <div class="subnet-row">
       <div class="sr-head">Subnetz ${i+1}</div>
       <div class="sr-grid">
-        <div class="field"><label>Netzadresse</label><input data-srow="${i}" data-skey="net" autocomplete="off" inputmode="numeric"></div>
-        <div class="field"><label>Broadcast</label><input data-srow="${i}" data-skey="broad" autocomplete="off" inputmode="numeric"></div>
-        <div class="field"><label>Erster Host</label><input data-srow="${i}" data-skey="first" autocomplete="off" inputmode="numeric"></div>
-        <div class="field"><label>Letzter Host</label><input data-srow="${i}" data-skey="last" autocomplete="off" inputmode="numeric"></div>
+        <div class="field"><label>Netzadresse</label><input data-srow="${i}" data-skey="net" autocomplete="off" inputmode="text"></div>
+        <div class="field"><label>Broadcast</label><input data-srow="${i}" data-skey="broad" autocomplete="off" inputmode="text"></div>
+        <div class="field"><label>Erster Host</label><input data-srow="${i}" data-skey="first" autocomplete="off" inputmode="text"></div>
+        <div class="field"><label>Letzter Host</label><input data-srow="${i}" data-skey="last" autocomplete="off" inputmode="text"></div>
       </div>
     </div>`;
   }
@@ -2095,25 +2099,25 @@ function renderExam(){
     wrap.innerHTML = `<p class="exam-task">${scenarios[randInt(scenarios.length)]}</p>`;
     fields.innerHTML = `
       <div class="field-grid">
-        <div class="field"><label>Subnetzmaske (dezimal)</label><input id="exMask" autocomplete="off" inputmode="numeric"></div>
-        <div class="field"><label>Netzadresse</label><input id="exNet" autocomplete="off" inputmode="numeric"></div>
-        <div class="field"><label>Erster Host</label><input id="exFirst" autocomplete="off" inputmode="numeric"></div>
-        <div class="field"><label>Letzter Host</label><input id="exLast" autocomplete="off" inputmode="numeric"></div>
-        <div class="field"><label>Broadcast</label><input id="exBroad" autocomplete="off" inputmode="numeric"></div>
-        <div class="field"><label>Nutzbare Hosts</label><input id="exHosts" autocomplete="off" inputmode="numeric"></div>
+        <div class="field"><label>Subnetzmaske (dezimal)</label><input id="exMask" autocomplete="off" inputmode="text"></div>
+        <div class="field"><label>Netzadresse</label><input id="exNet" autocomplete="off" inputmode="text"></div>
+        <div class="field"><label>Erster Host</label><input id="exFirst" autocomplete="off" inputmode="text"></div>
+        <div class="field"><label>Letzter Host</label><input id="exLast" autocomplete="off" inputmode="text"></div>
+        <div class="field"><label>Broadcast</label><input id="exBroad" autocomplete="off" inputmode="text"></div>
+        <div class="field"><label>Nutzbare Hosts</label><input id="exHosts" autocomplete="off" inputmode="text"></div>
       </div>`;
   } else {
     const t = examCurrent.data;
     wrap.innerHTML = `<p class="exam-task">Dein Standort bekommt das Netz <span class="net">${t.baseStr}<span class="cidr">/${t.basePrefix}</span></span>. Du sollst es in <b>${t.need} gleich große Subnetze</b> aufteilen. Gib das neue Präfix sowie Netz- und Broadcastadresse der ersten beiden Subnetze an.</p>`;
     fields.innerHTML = `
-      <div class="field" style="max-width:260px;"><label>Neues Präfix (CIDR)</label><input id="exNewPrefix" autocomplete="off" inputmode="numeric"></div>
+      <div class="field" style="max-width:260px;"><label>Neues Präfix (CIDR)</label><input id="exNewPrefix" autocomplete="off" inputmode="text"></div>
       <div class="subnet-row"><div class="sr-head">Subnetz 1</div><div class="sr-grid">
-        <div class="field"><label>Netzadresse</label><input id="exS0net" autocomplete="off" inputmode="numeric"></div>
-        <div class="field"><label>Broadcast</label><input id="exS0broad" autocomplete="off" inputmode="numeric"></div>
+        <div class="field"><label>Netzadresse</label><input id="exS0net" autocomplete="off" inputmode="text"></div>
+        <div class="field"><label>Broadcast</label><input id="exS0broad" autocomplete="off" inputmode="text"></div>
       </div></div>
       <div class="subnet-row"><div class="sr-head">Subnetz 2</div><div class="sr-grid">
-        <div class="field"><label>Netzadresse</label><input id="exS1net" autocomplete="off" inputmode="numeric"></div>
-        <div class="field"><label>Broadcast</label><input id="exS1broad" autocomplete="off" inputmode="numeric"></div>
+        <div class="field"><label>Netzadresse</label><input id="exS1net" autocomplete="off" inputmode="text"></div>
+        <div class="field"><label>Broadcast</label><input id="exS1broad" autocomplete="off" inputmode="text"></div>
       </div></div>`;
   }
   // Enter-Handler
@@ -2234,7 +2238,7 @@ const $ = id => document.getElementById(id);
 let mode = 'easy';
 let taskType = 'calc';
 let current = null;
-let scoreRight = 0, streak = 0;
+let scoreRight = 0, streak = 0, taskSolved = false;
 
 // ---------- IPv6 BigInt helpers ----------
 function ipv6ToBig(str){
@@ -2341,6 +2345,7 @@ function makeTask(){
 
 function renderTask(){
   current = makeTask();
+  taskSolved = false;
   $('V6taskTarget').innerHTML = `${current.addrStr}<span class="cidr">/${current.prefix}</span>`;
   ['V6inNetC','V6inNetF','V6inHostBits','V6inSubCount'].forEach(id=>{
     const el=$(id); el.value=''; el.classList.remove('ok','bad');
@@ -2403,7 +2408,7 @@ function checkAnswers(){
   const fb=$('V6feedback'); fb.classList.add('show');
   if(allGood){
     fb.className='feedback show win'; fb.textContent='✓ Alles korrekt. Sauber durchgerechnet.';
-    scoreRight++; streak++; $('V6scoreRight').textContent=scoreRight; $('V6scoreStreak').textContent=streak;
+    if(!taskSolved){ taskSolved = true; scoreRight++; streak++; $('V6scoreRight').textContent=scoreRight; $('V6scoreStreak').textContent=streak; }
     fireConfetti();
   } else if(anyFilled){
     fb.className='feedback show miss'; fb.textContent='Noch nicht ganz. Rote Felder stimmen nicht — grüne sind richtig. Hilfestellung oder Lösung nutzen.';
@@ -2904,14 +2909,14 @@ function renderExam(){
       <div class="field-grid">
         <div class="field full"><label>Netzadresse — komprimiert</label><input id="V6exNetC" autocomplete="off" spellcheck="false"></div>
         <div class="field full"><label>Netzadresse — voll (8 Gruppen)</label><input id="V6exNetF" autocomplete="off" spellcheck="false"></div>
-        <div class="field"><label>Interface-Bits</label><input id="V6exHostBits" autocomplete="off" inputmode="numeric"></div>
+        <div class="field"><label>Interface-Bits</label><input id="V6exHostBits" autocomplete="off" inputmode="text"></div>
         <div class="field"><label>/64-Subnetze</label><input id="V6exSubCount" autocomplete="off" spellcheck="false"></div>
       </div>`;
   } else {
     const t=examCurrent.data;
     wrap.innerHTML = `<p class="exam-task">Dein Standort bekommt <span class="net">${t.baseC}<span class="cidr">/${t.basePrefix}</span></span> und soll es in <b>${t.need} gleich große Subnetze</b> teilen. Gib das neue Präfix und die ersten beiden Subnetz-Netzadressen an.</p>`;
     fields.innerHTML = `
-      <div class="field" style="max-width:260px;"><label>Neues Präfix</label><input id="V6exNewPrefix" autocomplete="off" inputmode="numeric"></div>
+      <div class="field" style="max-width:260px;"><label>Neues Präfix</label><input id="V6exNewPrefix" autocomplete="off" inputmode="text"></div>
       <div class="subnet-row"><div class="sr-head">Subnetz 1</div><div class="sr-grid"><div class="field full"><label>Netzadresse (komprimiert)</label><input id="V6exS0" autocomplete="off" spellcheck="false"></div></div></div>
       <div class="subnet-row"><div class="sr-head">Subnetz 2</div><div class="sr-grid"><div class="field full"><label>Netzadresse (komprimiert)</label><input id="V6exS1" autocomplete="off" spellcheck="false"></div></div></div>`;
   }

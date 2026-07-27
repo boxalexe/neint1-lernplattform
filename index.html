@@ -16,16 +16,7 @@
 <body>
 <header>
   <div class="wrap">
-    <div class="brand-row">
-      <svg class="brand-mark" viewBox="0 0 120 120" aria-hidden="true">
-        <path d="M60,60 C34,60 24,26 60,26 C96,26 86,60 60,60 Z" fill="none" stroke="#22d3ee" stroke-width="6" stroke-linecap="round"/>
-        <path d="M60,94 C86,94 96,60 60,60 C24,60 34,94 60,94 Z" fill="none" stroke="#3ddc84" stroke-width="6" stroke-linecap="round"/>
-        <line x1="18" y1="26" x2="18" y2="52" stroke="#22d3ee" stroke-width="6" stroke-linecap="round"/>
-        <line x1="18" y1="52" x2="30" y2="52" stroke="#22d3ee" stroke-width="6" stroke-linecap="round"/>
-        <path d="M102,68 L92,94 M102,68 L112,94 M95,86 L107,86" stroke="#3ddc84" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-      </svg>
-      <h1><span class="t-neint">Layer 8</span> <span class="t-symb">Academy</span></h1>
-    </div>
+    <h1><span class="t-neint">Layer</span> <svg class="title-8" viewBox="0 0 120 120" aria-label="L8A" role="img"><path d="M60,60 C34,60 24,26 60,26 C96,26 86,60 60,60 Z" fill="none" stroke="#3ddc84" stroke-width="7" stroke-linecap="round"/><path d="M60,94 C86,94 96,60 60,60 C24,60 34,94 60,94 Z" fill="none" stroke="#22d3ee" stroke-width="7" stroke-linecap="round"/><line x1="18" y1="26" x2="18" y2="52" stroke="#22d3ee" stroke-width="7" stroke-linecap="round"/><line x1="18" y1="52" x2="30" y2="52" stroke="#22d3ee" stroke-width="7" stroke-linecap="round"/><path d="M102,68 L92,94 M102,68 L112,94 M95,86 L107,86" stroke="#3ddc84" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg> <span class="t-symb">Academy</span></h1>
     <p>Netzwerke &amp; Internettechnologien · OSI · Routing/Switching · IP · DNS/DHCP · Sicherheit · VPN · WLAN · VoIP · Nachschlagewerk + Prüfungstrainer</p>
     <div class="a11y-wrap">
       <button class="a11y-toggle" id="a11yToggle" aria-haspopup="true" aria-expanded="false" aria-label="Kontrasteinstellungen öffnen" title="Kontrasteinstellungen">
@@ -195,6 +186,7 @@
 <tr><td>2</td><td>Sicherung</td><td>Data Link</td><td>MAC-Adressen, Frames, Fehlererkennung</td><td>Frame</td><td>Switch, Bridge, Ethernet</td></tr>
 <tr><td>1</td><td>Bitübertragung</td><td>Physical</td><td>Rohe Bits über das Medium</td><td>Bit</td><td>Hub, Repeater, Kabel</td></tr>
 </table>
+<div class="callout"><span class="tag">Hinweis zur Praxis</span>Im klassischen OSI-Modell hat die Sitzungsschicht eine eigene Funktion. In der Praxis des TCP/IP-Modells werden ihre Aufgaben jedoch oft von der Anwendungsschicht oder direkt von Anwendungen und Protokollen übernommen. Deshalb existiert für Schicht 5 heute häufig kein eigenes Protokoll in modernen Netzwerken.</div>
 <div class="callout"><span class="tag">Merkhilfe 1→7</span>„Please Do Not Throw Salami Pizza Away" — von Schicht 1 nach 7: <strong>P</strong>hysical, <strong>D</strong>ata Link, <strong>N</strong>etwork, <strong>T</strong>ransport, <strong>S</strong>ession, <strong>P</strong>resentation, <strong>A</strong>pplication. Achtung auf die Richtung: Der Satz läuft von unten (1) nach oben (7). Das TCP/IP-Modell hat 4 Schichten: Netzzugang (OSI 1+2), Internet (OSI 3), Transport (OSI 4), Anwendung (OSI 5+6+7).</div>
 </section>
 
@@ -377,6 +369,7 @@
 <li><strong>CIDR</strong> (Classless Inter-Domain Routing): Präfix-Schreibweise wie <strong>/24</strong> = 24 Bit Netz, Maske <code>255.255.255.0</code>, 254 nutzbare Hosts (256 minus Netz- und Broadcastadresse).</li>
 </ul>
 <div class="callout"><span class="tag">IPv6-Kürzung</span>Innerhalb jedes 16-Bit-Blocks dürfen führende Nullen weggelassen werden — aus <code>0042</code> wird <code>42</code>. Der doppelte Doppelpunkt <code>::</code> geht einen Schritt weiter und ersetzt die <strong>längste zusammenhängende Folge von Nullblöcken</strong> — und das genau <strong>einmal</strong> im gesamten Adressstring, da eine zweite Kürzung nicht mehr eindeutig auflösbar wäre, wie viele Nullblöcke an welcher Stelle fehlen. Beispiel: <code>2001:0db8:0000:0000:0000:ff00:0042:8329</code> wird durch Weglassen führender Nullen zu <code>2001:db8:0:0:0:ff00:42:8329</code> und durch <code>::</code> für die drei aufeinanderfolgenden Nullblöcke schließlich zu <code>2001:db8::ff00:42:8329</code>.</div>
+<div class="callout"><span class="tag">DHCP</span><strong>DHCPv4</strong> vergibt IPv4-Adressen automatisch samt Maske, Gateway und DNS. Ablauf per DORA: <strong>D</strong>iscover (Client sucht), <strong>O</strong>ffer (Server bietet an), <strong>R</strong>equest (Client wählt), <strong>A</strong>cknowledge (Server bestätigt). <strong>DHCPv6</strong> ist das Pendant für IPv6: entweder zustandsbehaftet (Server vergibt die Adresse) oder zustandslos (Server liefert nur Zusatzinfos wie DNS, die Adresse entsteht per SLAAC).</div>
 <div class="callout"><span class="tag">IPv6-Autokonfiguration</span><strong>SLAAC</strong> (zustandslos): Der Router kündigt per <strong>Router-Advertisement</strong> ein Präfix an, das Gerät bildet den hinteren Adressteil selbst — kein Server nötig. <strong>DHCPv6</strong> (kann zustandsbehaftet): zentrale Vergabe/Verwaltung wie bei DHCPv4. Beide können auch kombiniert werden.</div>
 </section>
 
