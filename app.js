@@ -1651,7 +1651,7 @@ const POOLS = {
       "ok": false
      },
      {
-      "t": "Ganz ohne Ports, ausschließlich über die IP",
+      "t": "Von einem festen, für die Sitzung reservierten Port an einen vom Server dynamisch zugewiesenen Port",
       "ok": false
      }
     ],
@@ -5686,7 +5686,7 @@ const POOLS = {
       "ok": false
      },
      {
-      "t": "Es gibt keine Routingtabelle",
+      "t": "Router leiten Pakete ausschließlich anhand der Ziel-MAC-Adresse weiter",
       "ok": false
      },
      {
@@ -5936,7 +5936,7 @@ const POOLS = {
       "ok": false
      },
      {
-      "t": "Ein reiner Repeater",
+      "t": "Ein Switch, der VLAN-Tags auswertet, aber keine IP-Pakete zwischen Netzen weiterleitet",
       "ok": false
      },
      {
@@ -5980,7 +5980,7 @@ const POOLS = {
       "ok": false
      },
      {
-      "t": "Ein WLAN-Passwort",
+      "t": "Eine Softwarekomponente, die Datenverkehr innerhalb desselben Subnetzes direkt zwischen zwei Hosts vermittelt",
       "ok": false
      },
      {
@@ -8778,7 +8778,7 @@ const POOLS = {
       "ok": true
      },
      {
-      "t": "Höhere Sicherheit",
+      "t": "Automatischer Wechsel auf ein Codec mit geringerer Bandbreite",
       "ok": false
      },
      {
@@ -8993,7 +8993,7 @@ const POOLS = {
       "ok": false
      },
      {
-      "t": "Sie funktioniert nur lokal",
+      "t": "Sie lässt sich nicht mit einem Hash kombinieren, um Integrität sicherzustellen",
       "ok": false
      }
     ],
@@ -9303,7 +9303,7 @@ const POOLS = {
     "q": "Welche Eigenschaft muss ein kryptografischer Hash haben?",
     "o": [
      {
-      "t": "Kollisionsresistenz: verschiedene Eingaben ergeben verschiedene Hashes",
+      "t": "Verschiedene Eingaben müssen zu unterschiedlichen Hashwerten führen",
       "ok": true
      },
      {
@@ -9381,7 +9381,7 @@ const POOLS = {
       "ok": false
      },
      {
-      "t": "Um den Hash-Algorithmus automatisch zu wechseln",
+      "t": "Um die Zeit zu verkürzen, die der Algorithmus zur Berechnung braucht",
       "ok": false
      }
     ],
@@ -9401,7 +9401,7 @@ const POOLS = {
     "q": "Was prüft man bei einem Zertifikat, bevor man ihm vertraut?",
     "o": [
      {
-      "t": "Gültigkeit, CA-Signatur und Widerrufsstatus (CRL/OCSP)",
+      "t": "Gültigkeit, CA-Signatur und Widerrufsstatus",
       "ok": true
      },
      {
@@ -9445,7 +9445,7 @@ const POOLS = {
     "q": "Welches Verfahren nutzt HTTPS für den Schlüsselaustausch?",
     "o": [
      {
-      "t": "Asymmetrisch für den Austausch, dann symmetrisch (AES) für die Daten",
+      "t": "Asymmetrisch für den Schlüsselaustausch, danach symmetrisch für die eigentlichen Daten",
       "ok": true
      },
      {
@@ -9476,7 +9476,7 @@ const POOLS = {
    {
     "q": "Welchen Vorteil hat asymmetrische Verschlüsselung gegenüber symmetrischer?",
     "o": [
-     { "t": "Kein sicherer Vorkanal nötig — der öffentliche Schlüssel darf frei verteilt werden", "ok": true },
+     { "t": "Es ist kein vorheriger sicherer Kanal zum Schlüsselaustausch nötig", "ok": true },
      { "t": "Deutlich schnellere Ver- und Entschlüsselung auch bei großen Datenmengen", "ok": false },
      { "t": "Die Schlüssel sind kürzer und benötigen dadurch weniger Speicher und Rechenzeit", "ok": false },
      { "t": "Kompromittierte Schlüssel lassen sich ohne Neuausstellung wieder absichern", "ok": false }
@@ -9716,7 +9716,7 @@ const POOLS = {
       "ok": false
      },
      {
-      "t": "Namensauflösung",
+      "t": "Aufbau des verschlüsselten Kanals für den eigentlichen Nutzverkehr",
       "ok": false
      }
     ],
@@ -9756,7 +9756,7 @@ const POOLS = {
       "ok": false
      },
      {
-      "t": "Es ist immer unverschlüsselt",
+      "t": "Es baut ausschließlich feste Standleitungen über MPLS auf",
       "ok": false
      },
      {
@@ -9826,7 +9826,7 @@ const POOLS = {
       "ok": false
      },
      {
-      "t": "Nur DNS geht durch den Tunnel",
+      "t": "Nur der Verkehr zu vorab als vertrauenswürdig eingestuften Zielnetzen wird getunnelt",
       "ok": false
      }
     ],
@@ -9906,7 +9906,7 @@ const POOLS = {
       "ok": false
      },
      {
-      "t": "Geschwindigkeit, Reichweite, Kosten",
+      "t": "Adressierung, Fragmentierung, Priorisierung",
       "ok": false
      },
      {
@@ -9984,7 +9984,7 @@ const POOLS = {
     "q": "Was ist L2TP?",
     "o": [
      {
-      "t": "Layer 2 Tunneling Protocol, oft mit IPsec kombiniert",
+      "t": "Tunnelprotokoll auf Sicherungsschicht, meist zusammen mit IPsec zur Verschlüsselung genutzt",
       "ok": true
      },
      {
@@ -10038,7 +10038,7 @@ const POOLS = {
      { "t": "Interne Domainnamen werden intern aufgelöst, externe über den normalen DNS", "ok": true },
      { "t": "DNS-Anfragen werden auf zwei Server verteilt, um Ausfälle abzufangen", "ok": false },
      { "t": "Sämtliche DNS-Anfragen laufen grundsätzlich durch den VPN-Tunnel", "ok": false },
-     { "t": "Interne Namen werden im Klartext, externe verschlüsselt aufgelöst", "ok": false }
+     { "t": "Alle DNS-Anfragen werden zuerst extern und danach zusätzlich intern aufgelöst", "ok": false }
     ],
     "e": "Split DNS kombiniert sich oft mit Split Tunneling: interne Namen werden über den Tunnel aufgelöst."
    },
@@ -10047,7 +10047,7 @@ const POOLS = {
     "o": [
      { "t": "Das Protokoll, das bei IPsec Schlüssel aushandelt und die Sicherheitsverbindung (SA) aufbaut", "ok": true },
      { "t": "Die zweite Verschlüsselungsschicht, die IPsec zusätzlich über ESP legt", "ok": false },
-     { "t": "Ein Nachfolger von OpenVPN, der TLS durch eigene Verfahren ersetzt", "ok": false },
+     { "t": "Ein Zusatzprotokoll, das nur die Zertifikatsprüfung übernimmt, aber keine Schlüssel aushandelt", "ok": false },
      { "t": "Das Verfahren, das bei IPsec die eigentlichen Nutzdaten verschlüsselt", "ok": false }
     ],
     "e": "IKEv2 (Internet Key Exchange v2) handelt Schlüssel und Parameter aus und baut die IPsec-SA auf. Gegenüber IKEv1 ist es schlanker, stabiler bei Verbindungswechseln (Mobility) und gilt als sicherer. Die Nutzdaten selbst verschlüsselt anschließend ESP."
@@ -10099,7 +10099,7 @@ const POOLS = {
     "o": [
      { "t": "Der gesamte Verkehr läuft über kontrollierte Firmen-Gateways und wird einheitlich geprüft", "ok": true },
      { "t": "Es spart Bandbreite, weil privater Verkehr am VPN vorbeigeleitet wird", "ok": false },
-     { "t": "Es benötigt keine zentrale Verwaltung und keine Firewall am Übergang", "ok": false },
+     { "t": "Es reduziert den Konfigurationsaufwand, weil auf den Clients keine Routingregeln gepflegt werden müssen", "ok": false },
      { "t": "Es beschleunigt den allgemeinen Internetzugriff der Clients spürbar", "ok": false }
     ],
     "e": "Beim Full Tunneling geht sämtlicher Verkehr durch das VPN, sodass Firmen-Gateways alles filtern und protokollieren können — konsistente Sicherheit auf Kosten von etwas Geschwindigkeit."
@@ -10198,7 +10198,7 @@ const POOLS = {
       "ok": false
      },
      {
-      "t": "Es signiert Pakete",
+      "t": "Es vergibt anhand der MAC-Adresse feste interne IP-Adressen an jedes Gerät",
       "ok": false
      },
      {
@@ -10310,7 +10310,7 @@ const POOLS = {
     "q": "Was bedeutet Authentifizierung?",
     "o": [
      {
-      "t": "Nachweis der eigenen Identität (z. B. per Passwort)",
+      "t": "Der Nachweis der eigenen Identität gegenüber einem System",
       "ok": true
      },
      {
@@ -10516,7 +10516,7 @@ const POOLS = {
       "ok": false
      },
      {
-      "t": "Kein Schutz nötig",
+      "t": "Der Fokus liegt auf einer möglichst starken Verschlüsselung, alle anderen Maßnahmen sind zweitrangig",
       "ok": false
      }
     ],
@@ -10680,6 +10680,391 @@ const POOLS = {
    }
   ]
  },
+ "datenschutz": {
+  "name": "Informationssicherheit & Datenschutz",
+  "q": [
+   {
+    "q": "Was ist die Aufgabe des Datenschutzes?",
+    "o": [
+     { "t": "Personenbezogene Daten vor unbefugter Erhebung, Verarbeitung und Weitergabe schützen", "ok": true },
+     { "t": "Sämtliche Unternehmensdaten unabhängig vom Personenbezug technisch absichern", "ok": false },
+     { "t": "Ausschließlich Zugangsdaten wie Passwörter vor Diebstahl schützen", "ok": false },
+     { "t": "Die technische Verfügbarkeit und Ausfallsicherheit von IT-Systemen im Störungsfall sicherstellen", "ok": false }
+    ],
+    "e": "Datenschutz sichert die informationelle Selbstbestimmung: Personen sollen kontrollieren können, was mit ihren Daten geschieht."
+   },
+   {
+    "q": "Worin unterscheidet sich Datenschutz von Datensicherheit?",
+    "o": [
+     { "t": "Datenschutz regelt, welche Daten verarbeitet werden dürfen, Datensicherheit schützt sie technisch", "ok": true },
+     { "t": "Datenschutz ist rein technisch, Datensicherheit rein rechtlich geregelt", "ok": false },
+     { "t": "Beide Begriffe bezeichnen denselben Sachverhalt und sind austauschbar", "ok": false },
+     { "t": "Datensicherheit gilt ausschließlich für personenbezogene Daten, Datenschutz dagegen für alle Arten von Daten", "ok": false }
+    ],
+    "e": "Datenschutz und Datensicherheit greifen ineinander, sind aber nicht dasselbe: ohne funktionierende Datensicherheit lässt sich kein Datenschutz gewährleisten."
+   },
+   {
+    "q": "Was regelt die DSGVO?",
+    "o": [
+     { "t": "EU-weit einheitliche Standards für die Verarbeitung personenbezogener Daten", "ok": true },
+     { "t": "Ausschließlich die Datenverarbeitung durch deutsche Behörden und Ämter", "ok": false },
+     { "t": "Die technische Norm für die Verschlüsselung von Datenbanken", "ok": false },
+     { "t": "Die Haftung von Internetanbietern für rechtswidrige Inhalte Dritter", "ok": false }
+    ],
+    "e": "Die Datenschutz-Grundverordnung gilt unmittelbar in allen EU-Mitgliedsstaaten und schafft ein einheitliches Schutzniveau."
+   },
+   {
+    "q": "Welche Funktion hat das BDSG gegenüber der DSGVO?",
+    "o": [
+     { "t": "Es setzt die DSGVO in Deutschland um und ergänzt sie u. a. für öffentliche Stellen", "ok": true },
+     { "t": "Es ersetzt die DSGVO vollständig durch eigenständiges, unabhängiges nationales Recht", "ok": false },
+     { "t": "Es regelt ausschließlich den Datenschutz bei Telekommunikationsanbietern", "ok": false },
+     { "t": "Es ist eine freiwillige Selbstverpflichtung der deutschen Wirtschaft", "ok": false }
+    ],
+    "e": "Das Bundesdatenschutzgesetz füllt die Öffnungsklauseln der DSGVO aus und enthält Sonderregeln, etwa für öffentliche Stellen."
+   },
+   {
+    "q": "Wofür steht das TDDDG (vormals TTDSG)?",
+    "o": [
+     { "t": "Datenschutzregeln für digitale Dienste wie Websites und Apps", "ok": true },
+     { "t": "Ein technisches Protokoll zur verschlüsselten Datenübertragung", "ok": false },
+     { "t": "Die Meldepflicht für Datenschutzverletzungen gegenüber Aufsichtsbehörden", "ok": false },
+     { "t": "Ausschließlich Regeln für die Videoüberwachung öffentlicher Plätze", "ok": false }
+    ],
+    "e": "Das TDDDG regelt Datenschutz speziell für digitale Dienste und ersetzte das frühere TTDSG."
+   },
+   {
+    "q": "Welche älteren Regelungen ersetzt das TDDDG im Kern?",
+    "o": [
+     { "t": "Das frühere Telemediengesetz und das Datenschutzkapitel des TKG", "ok": true },
+     { "t": "Die komplette Datenschutz-Grundverordnung samt aller Öffnungsklauseln", "ok": false },
+     { "t": "Das Bundesdatenschutzgesetz in vollem Umfang", "ok": false },
+     { "t": "Sämtliche Landesdatenschutzgesetze der Bundesländer", "ok": false }
+    ],
+    "e": "Das TDDDG fasst den bisherigen Datenschutz für digitale Dienste zusammen, der vorher auf TMG und TKG verteilt war."
+   },
+   {
+    "q": "Was setzt das DDG (Digitale-Dienste-Gesetz) auf EU-Ebene um?",
+    "o": [
+     { "t": "Den Digital Services Act (DSA)", "ok": true },
+     { "t": "Die Datenschutz-Grundverordnung", "ok": false },
+     { "t": "Die e-Privacy-Verordnung", "ok": false },
+     { "t": "Den Digital Markets Act (DMA)", "ok": false }
+    ],
+    "e": "Das DDG ist die deutsche Umsetzung des Digital Services Act und sorgt für mehr Transparenz bei digitalen Plattformen."
+   },
+   {
+    "q": "Wen betrifft das DDG vor allem?",
+    "o": [
+     { "t": "Anbieter digitaler Plattformen wie soziale Netzwerke und Suchmaschinen", "ok": true },
+     { "t": "Ausschließlich Behörden bei der Digitalisierung interner Prozesse", "ok": false },
+     { "t": "Nur Hersteller vernetzter IoT-Hardware für den privaten Haushaltsgebrauch", "ok": false },
+     { "t": "Ausschließlich Banken beim Online-Banking", "ok": false }
+    ],
+    "e": "Das DDG ergänzt die DSGVO speziell für Plattformbetreiber und soll Kontrolle über persönliche Daten stärken."
+   },
+   {
+    "q": "Was regelt das TKG im Datenschutzkontext?",
+    "o": [
+     { "t": "Fernmeldegeheimnis und Speicherung von Verbindungsdaten bei Telekommunikationsanbietern", "ok": true },
+     { "t": "Die Meldefristen bei Datenschutzverletzungen", "ok": false },
+     { "t": "Die Zulässigkeit von Cookies und Tracking-Technologien auf Webseiten und in Apps", "ok": false },
+     { "t": "Die Kennzeichnungspflicht für Werbe-E-Mails", "ok": false }
+    ],
+    "e": "Das Telekommunikationsgesetz enthält spezielle Datenschutzbestimmungen für Telekommunikationsanbieter."
+   },
+   {
+    "q": "Was bedeutet der Grundsatz der Transparenz im Datenschutz?",
+    "o": [
+     { "t": "Betroffene müssen wissen, welche Daten zu welchem Zweck erhoben werden", "ok": true },
+     { "t": "Alle erhobenen Daten müssen öffentlich einsehbar sein", "ok": false },
+     { "t": "Unternehmen müssen ihren Quellcode offenlegen", "ok": false },
+     { "t": "Datenverarbeitung darf nur mit Zustimmung der Aufsichtsbehörde beginnen", "ok": false }
+    ],
+    "e": "Transparenz bedeutet Informationspflicht gegenüber der betroffenen Person, nicht Offenlegung gegenüber der Allgemeinheit."
+   },
+   {
+    "q": "Was fordert der Grundsatz der Zweckbindung?",
+    "o": [
+     { "t": "Daten dürfen nur für den vorher festgelegten Zweck genutzt werden", "ok": true },
+     { "t": "Daten dürfen für beliebige spätere Zwecke weiterverwendet werden, sobald sie einmal erhoben sind", "ok": false },
+     { "t": "Jede Datenverarbeitung braucht zwingend einen wirtschaftlichen Zweck", "ok": false },
+     { "t": "Der Zweck der Verarbeitung darf nachträglich frei geändert werden", "ok": false }
+    ],
+    "e": "Zweckbindung verhindert, dass einmal erhobene Daten stillschweigend für andere Zwecke weiterverwendet werden."
+   },
+   {
+    "q": "Was verlangt der Grundsatz der Datenminimierung?",
+    "o": [
+     { "t": "Nur die Daten erheben, die für den jeweiligen Zweck wirklich erforderlich sind", "ok": true },
+     { "t": "Möglichst viele Daten sammeln, um spätere Auswertungen zu ermöglichen", "ok": false },
+     { "t": "Daten grundsätzlich nach spätestens 30 Tagen vollständig löschen", "ok": false },
+     { "t": "Personenbezogene Daten technisch komprimieren, um Speicherplatz zu sparen", "ok": false }
+    ],
+    "e": "Datenminimierung begrenzt die Erhebung auf das für den Zweck Notwendige, unabhängig von Speicherplatz oder Löschfristen."
+   },
+   {
+    "q": "Was bedeutet der Grundsatz der Richtigkeit?",
+    "o": [
+     { "t": "Gespeicherte Daten müssen korrekt und aktuell gehalten werden", "ok": true },
+     { "t": "Daten dürfen nur von zertifizierten Fachkräften eingegeben werden", "ok": false },
+     { "t": "Jede Dateneingabe muss digital signiert werden", "ok": false },
+     { "t": "Fehlerhafte Daten dürfen bis zur nächsten Systemwartung bestehen bleiben", "ok": false }
+    ],
+    "e": "Wer personenbezogene Daten speichert, muss sie bei Bedarf berichtigen oder aktualisieren."
+   },
+   {
+    "q": "Worauf zielt der Grundsatz der Vertraulichkeit im Datenschutz?",
+    "o": [
+     { "t": "Daten müssen vor unbefugtem Zugriff geschützt werden", "ok": true },
+     { "t": "Daten dürfen niemals gelöscht werden", "ok": false },
+     { "t": "Alle Mitarbeiter sollen Zugriff auf alle Daten haben, um Transparenz zu schaffen", "ok": false },
+     { "t": "Verarbeitung darf ausschließlich innerhalb der EU stattfinden", "ok": false }
+    ],
+    "e": "Vertraulichkeit verlangt, den Zugriff auf personenbezogene Daten auf Berechtigte zu beschränken."
+   },
+   {
+    "q": "Was meint der Grundsatz der (informationellen) Selbstbestimmung?",
+    "o": [
+     { "t": "Jede Person soll Kontrolle über die eigenen Daten haben", "ok": true },
+     { "t": "Unternehmen bestimmen eigenständig, wie sie mit Kundendaten verfahren", "ok": false },
+     { "t": "Nur der Staat darf über die Verwendung personenbezogener Daten entscheiden", "ok": false },
+     { "t": "Daten gehören automatisch dem Unternehmen, das sie zuerst erhoben hat", "ok": false }
+    ],
+    "e": "Informationelle Selbstbestimmung ist der Kerngedanke des Datenschutzes: die betroffene Person entscheidet mit."
+   },
+   {
+    "q": "Was umfasst das Auskunftsrecht?",
+    "o": [
+     { "t": "Einsicht in die gespeicherten Daten und deren Verwendungszweck", "ok": true },
+     { "t": "Das Recht, sämtliche Daten sofort vollständig löschen zu lassen", "ok": false },
+     { "t": "Das Recht, der Verarbeitung vollständig zu widersprechen", "ok": false },
+     { "t": "Das Recht, eigene Daten in einem strukturierten Format zu erhalten", "ok": false }
+    ],
+    "e": "Auskunft ist meist der erste Schritt: erst wissen, was gespeichert ist, dann ggf. Berichtigung oder Löschung verlangen."
+   },
+   {
+    "q": "Was ermöglicht das Berichtigungsrecht?",
+    "o": [
+     { "t": "Die Korrektur unrichtiger oder unvollständiger Daten", "ok": true },
+     { "t": "Die vorübergehende Begrenzung der Verarbeitung", "ok": false },
+     { "t": "Die Übertragung der Daten zu einem anderen Anbieter", "ok": false },
+     { "t": "Den Widerruf einer bereits erteilten Einwilligung", "ok": false }
+    ],
+    "e": "Berichtigung betrifft die inhaltliche Korrektheit der Daten, nicht deren Verarbeitung oder Übertragung."
+   },
+   {
+    "q": "Wann greift das Löschungsrecht?",
+    "o": [
+     { "t": "Bei unrechtmäßig gespeicherten oder nicht mehr benötigten Daten", "ok": true },
+     { "t": "Nur bei Daten, die älter als zehn Jahre sind", "ok": false },
+     { "t": "Ausschließlich bei Daten von Minderjährigen", "ok": false },
+     { "t": "Nur nach ausdrücklicher schriftlicher Genehmigung durch die zuständige Aufsichtsbehörde", "ok": false }
+    ],
+    "e": "Das Löschungsrecht (Recht auf Vergessenwerden) greift, sobald der Zweck der Speicherung entfällt oder die Speicherung unrechtmäßig war."
+   },
+   {
+    "q": "Wann kann das Recht auf Einschränkung der Verarbeitung genutzt werden?",
+    "o": [
+     { "t": "Bei vorübergehend strittiger Datenlage, etwa während der Prüfung der Richtigkeit", "ok": true },
+     { "t": "Immer dann, wenn die betroffene Person innerhalb der EU an einen neuen Wohnort umzieht", "ok": false },
+     { "t": "Nur wenn ein Vertrag vollständig beendet wurde", "ok": false },
+     { "t": "Ausschließlich bei Verarbeitung durch ausländische Unternehmen", "ok": false }
+    ],
+    "e": "Die Einschränkung friert die Verarbeitung vorübergehend ein, statt Daten sofort zu löschen oder freizugeben."
+   },
+   {
+    "q": "Wogegen richtet sich das Widerspruchsrecht besonders häufig?",
+    "o": [
+     { "t": "Gegen die Verarbeitung zu Zwecken der Direktwerbung", "ok": true },
+     { "t": "Gegen die technische Speicherung auf Servern innerhalb der EU", "ok": false },
+     { "t": "Gegen die Nutzung verschlüsselter Übertragungswege", "ok": false },
+     { "t": "Gegen die Vergabe von Kundennummern", "ok": false }
+    ],
+    "e": "Bei Direktwerbung kann der Verarbeitung ohne besondere Begründung widersprochen werden."
+   },
+   {
+    "q": "Was ermöglicht das Recht auf Datenübertragbarkeit?",
+    "o": [
+     { "t": "Die eigenen Daten in einem strukturierten, gängigen Format zu erhalten und weiterzugeben", "ok": true },
+     { "t": "Die eigenen Daten vollständig anonymisiert im Internet veröffentlichen zu lassen", "ok": false },
+     { "t": "Die Datenverarbeitung an einen selbst gewählten Dienstleister zu delegieren", "ok": false },
+     { "t": "Die eigenen Daten dauerhaft aus allen Systemen entfernen zu lassen", "ok": false }
+    ],
+    "e": "Datenübertragbarkeit erleichtert den Anbieterwechsel, etwa den Umzug zu einem anderen Dienst."
+   },
+   {
+    "q": "Was bewirkt das Widerrufsrecht?",
+    "o": [
+     { "t": "Eine zuvor erteilte Einwilligung kann jederzeit zurückgenommen werden", "ok": true },
+     { "t": "Ein bereits abgeschlossener Vertrag wird automatisch rückabgewickelt", "ok": false },
+     { "t": "Alle bisher verarbeiteten Daten werden rückwirkend ungültig", "ok": false },
+     { "t": "Die verantwortliche Stelle muss die Geschäftsbeziehung sofort beenden", "ok": false }
+    ],
+    "e": "Der Widerruf wirkt für die Zukunft; bereits erfolgte, rechtmäßige Verarbeitung bleibt davon unberührt."
+   },
+   {
+    "q": "Wo kann eine Beschwerde über unzulässige Datenverarbeitung eingereicht werden?",
+    "o": [
+     { "t": "Bei der zuständigen Datenschutzaufsichtsbehörde", "ok": true },
+     { "t": "Ausschließlich direkt beim Bundesverfassungsgericht", "ok": false },
+     { "t": "Bei der Industrie- und Handelskammer (IHK)", "ok": false },
+     { "t": "Nur beim Hersteller der eingesetzten Software", "ok": false }
+    ],
+    "e": "Betroffene können sich jederzeit an die zuständige Landesdatenschutzbehörde oder den BfDI wenden."
+   },
+   {
+    "q": "Ab wann besteht in einem Unternehmen grundsätzlich die Pflicht, einen Datenschutzbeauftragten zu bestellen?",
+    "o": [
+     { "t": "Wenn mindestens 20 Personen ständig automatisiert personenbezogene Daten verarbeiten", "ok": true },
+     { "t": "Sobald das Unternehmen eine eigene Website betreibt", "ok": false },
+     { "t": "Ab einem Jahresumsatz von einer Million Euro", "ok": false },
+     { "t": "Erst wenn tatsächlich ein nachweisbarer Datenschutzverstoß aufgetreten ist und gemeldet wurde", "ok": false }
+    ],
+    "e": "Die Personenzahl-Schwelle ist einer von mehreren möglichen Auslösern für die DSB-Pflicht."
+   },
+   {
+    "q": "Unabhängig von der Mitarbeiterzahl: wann ist ein DSB ebenfalls Pflicht?",
+    "o": [
+     { "t": "Bei sensiblen Daten als Kerntätigkeit oder bei Behörden, unabhängig von der Personenzahl", "ok": true },
+     { "t": "Wenn das Unternehmen mehr als eine Filiale betreibt", "ok": false },
+     { "t": "Wenn sämtliche Kundendaten ausschließlich in Papierform und ganz ohne IT-System geführt werden", "ok": false },
+     { "t": "Wenn das Unternehmen regelmäßig Produkte in Länder außerhalb der EU exportiert", "ok": false }
+    ],
+    "e": "Kerntätigkeit mit sensiblen Daten (z. B. Gesundheitsdaten) oder Behördenstatus lösen die Pflicht unabhängig von der Mitarbeiterzahl aus."
+   },
+   {
+    "q": "Auf welcher Rechtsgrundlage beruht die DSB-Pflicht?",
+    "o": [
+     { "t": "Art. 37 DSGVO und § 38 BDSG", "ok": true },
+     { "t": "Art. 6 DSGVO und § 1 TKG", "ok": false },
+     { "t": "Ausschließlich auf betrieblichen Vereinbarungen ohne gesetzliche Grundlage", "ok": false },
+     { "t": "§ 203 Strafgesetzbuch", "ok": false }
+    ],
+    "e": "Art. 37 DSGVO regelt die Benennungspflicht EU-weit, § 38 BDSG ergänzt sie für Deutschland."
+   },
+   {
+    "q": "Wer gilt datenschutzrechtlich als Verantwortlicher?",
+    "o": [
+     { "t": "Wer über Zwecke und Mittel der Datenverarbeitung entscheidet", "ok": true },
+     { "t": "Wer die Daten rein technisch auf dem Server speichert", "ok": false },
+     { "t": "Wer die Daten ursprünglich erhoben hat, unabhängig von weiteren Entscheidungen", "ok": false },
+     { "t": "Der Datenschutzbeauftragte des Unternehmens", "ok": false }
+    ],
+    "e": "Der Verantwortliche trifft die Entscheidungen über Zweck und Mittel — der DSB berät nur, entscheidet aber nicht selbst."
+   },
+   {
+    "q": "Was kennzeichnet einen Auftragsverarbeiter?",
+    "o": [
+     { "t": "Er verarbeitet Daten weisungsgebunden im Auftrag des Verantwortlichen, etwa als externer Cloud-Anbieter", "ok": true },
+     { "t": "Er entscheidet eigenständig über Zwecke und Mittel der Verarbeitung und trägt dafür die Hauptverantwortung", "ok": false },
+     { "t": "Er ist immer eine Behörde oder öffentliche Stelle", "ok": false },
+     { "t": "Er haftet niemals für Verstöße gegen den Datenschutz", "ok": false }
+    ],
+    "e": "Der Auftragsverarbeiter handelt strikt nach Weisung und trägt trotzdem eine eigene Verantwortung für die Datensicherheit."
+   },
+   {
+    "q": "Wozu dient eine AVV (Auftragsverarbeitungsvertrag)?",
+    "o": [
+     { "t": "Sie regelt vertraglich die Pflichten zwischen Verantwortlichem und Auftragsverarbeiter", "ok": true },
+     { "t": "Sie ersetzt die Einwilligung der betroffenen Person vollständig", "ok": false },
+     { "t": "Sie ist nur bei internationalen Datentransfers außerhalb der EU nötig", "ok": false },
+     { "t": "Sie regelt ausschließlich die Bezahlung und Vertragslaufzeit des externen Dienstleisters", "ok": false }
+    ],
+    "e": "Eine AVV ist immer nötig, sobald ein Dritter im Auftrag personenbezogene Daten verarbeitet — auch innerhalb Deutschlands."
+   },
+   {
+    "q": "Was sind TOM im Datenschutzkontext?",
+    "o": [
+     { "t": "Technische und organisatorische Maßnahmen zum Schutz personenbezogener Daten", "ok": true },
+     { "t": "Ein Verfahren zur automatisierten Löschung abgelaufener Daten", "ok": false },
+     { "t": "Die Kurzbezeichnung für die zuständige Aufsichtsbehörde", "ok": false },
+     { "t": "Ein behördliches Standardformular zur Beantragung von Auskunftsersuchen", "ok": false }
+    ],
+    "e": "TOM umfassen z. B. Zugriffskontrollen, Verschlüsselung und Zutrittsregelungen — die praktische Umsetzung des Datenschutzes."
+   },
+   {
+    "q": "Was bedeutet Privacy by Design?",
+    "o": [
+     { "t": "Datenschutz wird von Anfang an in die Entwicklung von Systemen und Prozessen eingeplant", "ok": true },
+     { "t": "Nutzer müssen den Datenschutz jederzeit manuell in den Einstellungen aktivieren", "ok": false },
+     { "t": "Ein grafisches Gütesiegel, das datenschutzkonforme Webseiten und Apps kennzeichnet", "ok": false },
+     { "t": "Die nachträgliche Anpassung bestehender Systeme nach einem Datenschutzverstoß", "ok": false }
+    ],
+    "e": "Privacy by Design verlangt, Datenschutz schon in der Konzeptionsphase mitzudenken, nicht erst nachträglich nachzurüsten."
+   },
+   {
+    "q": "Was bedeutet Privacy by Default?",
+    "o": [
+     { "t": "Datenschutzfreundliche Voreinstellungen sind der Standard, ohne dass Nutzer aktiv werden müssen", "ok": true },
+     { "t": "Nutzer müssen bei jeder Registrierung aktiv allen Datenverarbeitungen zustimmen", "ok": false },
+     { "t": "Voreingestellt ist grundsätzlich immer die maximale Datenfreigabe für Werbe- und Analysezwecke", "ok": false },
+     { "t": "Jede App muss standardmäßig ohne Internetzugriff ausgeliefert werden", "ok": false }
+    ],
+    "e": "Privacy by Default sorgt dafür, dass ohne Zutun der Nutzer stets die datensparsamste Einstellung aktiv ist."
+   },
+   {
+    "q": "Innerhalb welcher Frist muss eine Datenschutzverletzung in der Regel der Aufsichtsbehörde gemeldet werden?",
+    "o": [
+     { "t": "Innerhalb von 72 Stunden nach Bekanntwerden", "ok": true },
+     { "t": "Innerhalb von 24 Stunden nach Bekanntwerden", "ok": false },
+     { "t": "Innerhalb von 30 Tagen nach Bekanntwerden", "ok": false },
+     { "t": "Erst zum Ende des laufenden Geschäftsjahres", "ok": false }
+    ],
+    "e": "Die 72-Stunden-Frist beginnt mit dem Bekanntwerden der Verletzung, nicht mit ihrem tatsächlichen Eintritt."
+   },
+   {
+    "q": "Wann ist eine Datenschutz-Folgenabschätzung (DSFA) vorab durchzuführen?",
+    "o": [
+     { "t": "Wenn eine geplante Verarbeitung voraussichtlich ein hohes Risiko für Betroffene birgt", "ok": true },
+     { "t": "Bei jeder, auch der kleinsten Verarbeitung personenbezogener Daten", "ok": false },
+     { "t": "Nur auf ausdrückliche schriftliche Anforderung der jeweils betroffenen Person hin", "ok": false },
+     { "t": "Ausschließlich einmalig bei der Gründung eines Unternehmens", "ok": false }
+    ],
+    "e": "Die DSFA ist ein Risikobewertungsverfahren vor Beginn einer riskanten Verarbeitung, nicht eine allgemeine Pflicht für jede Datenverarbeitung."
+   },
+   {
+    "q": "Eine Notiz-App verlangt beim Download Zugriff auf Kontakte, Kamera und Standort. Welcher Grundsatz wird dadurch verletzt?",
+    "o": [
+     { "t": "Datenminimierung, da die App diese Berechtigungen für ihre Funktion nicht benötigt", "ok": true },
+     { "t": "Vertraulichkeit, weil die Berechtigungsabfrage öffentlich sichtbar ist", "ok": false },
+     { "t": "Richtigkeit, weil die abgefragten Kontakt- und Standortdaten schnell veralten könnten", "ok": false },
+     { "t": "Beschwerderecht, weil sich Nutzer dagegen nicht wehren können", "ok": false }
+    ],
+    "e": "Eine reine Notiz-App braucht für ihre Kernfunktion weder Kontakte noch Kamera oder Standort — klassischer Verstoß gegen Datenminimierung und Zweckbindung."
+   },
+   {
+    "q": "Welche Mitarbeiterdaten darf ein Arbeitgeber grundsätzlich ohne ausdrückliche Zustimmung erfassen?",
+    "o": [
+     { "t": "Nur berufsrelevante Daten, die für das Arbeitsverhältnis notwendig sind", "ok": true },
+     { "t": "Beliebige private Interessen, sofern sie in der Personalakte vermerkt werden", "ok": false },
+     { "t": "Gesundheitsdaten, solange sie nur dem direkten Vorgesetzten bekannt sind", "ok": false },
+     { "t": "Alle Daten, die über soziale Netzwerke öffentlich einsehbar sind", "ok": false }
+    ],
+    "e": "Private Interessen oder Gesundheitszustände sind ohne ausdrückliche Zustimmung tabu, auch wenn sie irgendwo öffentlich einsehbar wären."
+   },
+   {
+    "q": "Worin unterscheiden sich Verantwortlicher und Auftragsverarbeiter vor allem?",
+    "o": [
+     { "t": "Der Verantwortliche entscheidet über Zweck und Mittel, der Auftragsverarbeiter handelt nur nach dessen Weisung", "ok": true },
+     { "t": "Der Auftragsverarbeiter trägt in jedem Fall die alleinige rechtliche Verantwortung", "ok": false },
+     { "t": "Nur der Verantwortliche unterliegt vollständig der DSGVO, der Auftragsverarbeiter bleibt außen vor", "ok": false },
+     { "t": "Beide Rollen dürfen laut DSGVO nicht gleichzeitig in einem Vertragsverhältnis existieren", "ok": false }
+    ],
+    "e": "Beide Rollen unterliegen der DSGVO; die Verantwortung ist aufgeteilt, aber nicht einseitig beim Auftragsverarbeiter."
+   },
+   {
+    "q": "Was unterscheidet die 72-Stunden-Meldepflicht von der Datenschutz-Folgenabschätzung (DSFA)?",
+    "o": [
+     { "t": "Die Meldepflicht reagiert auf einen bereits eingetretenen Vorfall, die DSFA prüft vorab das Risiko", "ok": true },
+     { "t": "Beide Verfahren betreffen ausschließlich bereits abgeschlossene und vollständig aufgeklärte Vorfälle", "ok": false },
+     { "t": "Die DSFA ersetzt die Meldepflicht bei besonders schweren Vorfällen", "ok": false },
+     { "t": "Die Meldepflicht ist freiwillig, die DSFA ist immer verpflichtend", "ok": false }
+    ],
+    "e": "Meldepflicht = Reaktion auf einen Vorfall. DSFA = vorbeugende Risikoprüfung, bevor eine riskante Verarbeitung überhaupt startet."
+   }
+  ]
+ },
  "wlan": {
   "name": "WLAN",
   "q": [
@@ -10753,7 +11138,7 @@ const POOLS = {
       "ok": false
      },
      {
-      "t": "Funktioniert ohne AP",
+      "t": "Ist automatisch vor MAC-Spoofing geschützt",
       "ok": false
      }
     ],
@@ -10867,7 +11252,7 @@ const POOLS = {
       "ok": false
      },
      {
-      "t": "Ersetzt jede Verschlüsselung",
+      "t": "Stark genug, wenn zusätzlich die SSID versteckt wird",
       "ok": false
      },
      {
@@ -10881,7 +11266,7 @@ const POOLS = {
     "q": "Welchen Schutzwert hat eine versteckte SSID?",
     "o": [
      {
-      "t": "Gering – der Name lässt sich trotzdem ermitteln",
+      "t": "Gering, der Name lässt sich trotzdem ermitteln",
       "ok": true
      },
      {
@@ -10889,7 +11274,7 @@ const POOLS = {
       "ok": false
      },
      {
-      "t": "Ersetzt WPA2",
+      "t": "Verhindert automatische Verbindungen unbekannter Geräte vollständig",
       "ok": false
      },
      {
@@ -10993,7 +11378,7 @@ const POOLS = {
       "ok": true
      },
      {
-      "t": "Die Farbe des Routers",
+      "t": "Die Anzahl der eingerichteten Gastnetzwerke",
       "ok": false
      },
      {
@@ -11147,7 +11532,7 @@ const POOLS = {
       "ok": false
      },
      {
-      "t": "Automatische SSID-Änderung",
+      "t": "Automatische Anmeldung an öffentlichen Hotspots ohne erneute Passworteingabe",
       "ok": false
      }
     ],
@@ -11567,7 +11952,7 @@ const POOLS = {
       "ok": false
      },
      {
-      "t": "Sie vergeben IP-Adressen",
+      "t": "Sie regeln, welches Gerät als nächstes senden darf",
       "ok": false
      },
      {
@@ -11625,7 +12010,7 @@ const POOLS = {
       "ok": false
      },
      {
-      "t": "Jeder mit jedem",
+      "t": "Jedes Gerät ist direkt mit jedem anderen Gerät verbunden",
       "ok": false
      }
     ],
@@ -11647,7 +12032,7 @@ const POOLS = {
       "ok": false
      },
      {
-      "t": "Das Netz wird schneller",
+      "t": "Nur die direkt angeschlossenen Endgeräte der Wurzel sind betroffen, alle Äste bleiben online",
       "ok": false
      }
     ],
@@ -11689,7 +12074,7 @@ const POOLS = {
     "q": "Welche Topologie kommt ohne zentralen Verteiler aus?",
     "o": [
      {
-      "t": "Ring (und Bus)",
+      "t": "Ring und Bus",
       "ok": true
      },
      {
@@ -13859,7 +14244,7 @@ const POOLS = {
     "o": [
      { "t": "Die vollständige Spiegelung der Daten auf eine oder mehrere weitere Platten", "ok": true },
      { "t": "Die blockweise Verteilung der Daten über mehrere Platten", "ok": false },
-     { "t": "Die Auslagerung selten genutzter Daten auf langsamere Platten", "ok": false },
+     { "t": "Die automatische Auslagerung selten genutzter Daten auf langsamere, günstigere Speichermedien", "ok": false },
      { "t": "Die Zusammenfassung mehrerer Platten zu einem großen Volume", "ok": false }
     ],
     "e": "Beim Mirroring werden identische Kopien der Daten auf mehreren Platten gehalten. Fällt eine aus, stehen die Daten auf der Spiegelplatte weiter bereit."
@@ -13870,7 +14255,7 @@ const POOLS = {
      { "t": "Eine berechnete Prüfinformation, mit der sich ausgefallene Daten rekonstruieren lassen", "ok": true },
      { "t": "Eine identische Kopie sämtlicher Daten auf einer Reserveplatte", "ok": false },
      { "t": "Die gleichmäßige Verteilung der Schreiblast auf alle Platten", "ok": false },
-     { "t": "Die Anzahl der Platten, die gleichzeitig lesen dürfen", "ok": false }
+     { "t": "Die maximale Anzahl gleichzeitig ausgefallener Platten, die ein Verbund toleriert", "ok": false }
     ],
     "e": "Parität ist eine per XOR berechnete Prüfsumme. Fällt eine Platte aus, lassen sich deren Daten aus den übrigen Daten und der Parität wiederherstellen."
    },
@@ -14000,7 +14385,7 @@ const POOLS = {
      { "t": "Es verkraftet den gleichzeitigen Ausfall von zwei statt nur einer Platte", "ok": true },
      { "t": "Es liefert grundsätzlich eine höhere nutzbare Kapazität", "ok": false },
      { "t": "Es kommt mit weniger Festplatten als RAID 5 aus", "ok": false },
-     { "t": "Es benötigt überhaupt keine Paritätsberechnung mehr", "ok": false }
+     { "t": "Es schreibt Daten ausschließlich sequenziell und dadurch spürbar schneller", "ok": false }
     ],
     "e": "Durch die doppelte Parität übersteht RAID 6 zwei gleichzeitige Plattenausfälle — wichtig bei großen Platten, deren Rebuild lange dauert und in der ein zweiter Ausfall droht."
    },
@@ -14050,7 +14435,7 @@ const POOLS = {
      { "t": "Bei RAID 10 darf je Spiegelpaar eine Platte ausfallen, ohne den Verbund zu verlieren", "ok": true },
      { "t": "RAID 10 nutzt eine doppelte Parität, die RAID 01 vollständig fehlt", "ok": false },
      { "t": "RAID 10 besteht immer aus deutlich mehr Festplatten als RAID 01", "ok": false },
-     { "t": "RAID 10 schreibt die Daten langsamer und dadurch grundsätzlich sicherer", "ok": false }
+     { "t": "RAID 10 verteilt zusätzlich eine Parität über alle beteiligten Platten", "ok": false }
     ],
     "e": "Bei RAID 10 überlebt der Verbund, solange in keinem Spiegelpaar beide Platten ausfallen. Bei RAID 01 kann schon der Ausfall je einer Platte in beiden Stripe-Sets den Verbund killen."
    },
@@ -14058,7 +14443,7 @@ const POOLS = {
     "q": "Was beschreibt RAID 50?",
     "o": [
      { "t": "Mehrere RAID-5-Verbünde, die per übergeordnetem Striping zusammengefasst werden", "ok": true },
-     { "t": "Einen einzelnen RAID-5-Verbund mit genau fünfzig Festplatten darin", "ok": false },
+     { "t": "Einen RAID-5-Verbund, der zusätzlich per Mirroring an einen zweiten Standort gespiegelt wird", "ok": false },
      { "t": "Eine Kombination aus RAID 5 und zusätzlicher doppelter Parität", "ok": false },
      { "t": "Einen vollständig auf eine Reserve gespiegelten RAID-5-Verbund", "ok": false }
     ],
@@ -14069,7 +14454,7 @@ const POOLS = {
     "o": [
      { "t": "Die Daten der zu ersetzenden Platte werden aus den übrigen Platten wiederhergestellt", "ok": true },
      { "t": "Der gesamte Verbund wird gelöscht und komplett neu formatiert", "ok": false },
-     { "t": "Alle Platten werden gleichzeitig gegen neue ausgetauscht", "ok": false },
+     { "t": "Der Verbund schaltet vorübergehend in einen reinen Lesemodus, bis alle Platten synchron sind", "ok": false },
      { "t": "Die Daten werden vom Backup-Band zurückgespielt", "ok": false }
     ],
     "e": "Beim Rebuild rekonstruiert der Controller die Inhalte der neuen Platte aus Daten und Parität der verbliebenen Platten. Bei großen Platten kann das Stunden dauern."
@@ -14098,7 +14483,7 @@ const POOLS = {
     "q": "Was bedeutet Hot-Swap bei Festplatten?",
     "o": [
      { "t": "Der Austausch einer Platte im laufenden Betrieb, ohne das System herunterzufahren", "ok": true },
-     { "t": "Das Übertakten der Platten für höhere Zugriffsgeschwindigkeit", "ok": false },
+     { "t": "Das Aktivieren einer zweiten Platte als Hot-Spare direkt beim Ausfall", "ok": false },
      { "t": "Das gleichzeitige Beschreiben aller Platten mit denselben Daten", "ok": false },
      { "t": "Das automatische Löschen defekter Sektoren im Betrieb", "ok": false }
     ],
@@ -14108,7 +14493,7 @@ const POOLS = {
     "q": "Was unterscheidet Hardware-RAID von Software-RAID?",
     "o": [
      { "t": "Hardware-RAID nutzt einen eigenen Controller, Software-RAID rechnet auf der Haupt-CPU", "ok": true },
-     { "t": "Hardware-RAID kennt nur RAID 0, Software-RAID beherrscht alle Level", "ok": false },
+     { "t": "Hardware-RAID lässt sich nur mit SSDs betreiben, Software-RAID nur mit HDDs", "ok": false },
      { "t": "Hardware-RAID arbeitet ohne Redundanz, Software-RAID immer mit", "ok": false },
      { "t": "Hardware-RAID ist grundsätzlich langsamer als Software-RAID", "ok": false }
     ],
@@ -14149,7 +14534,7 @@ const POOLS = {
     "o": [
      { "t": "Zuerst die Vollsicherung, dann alle Inkremente in der richtigen Reihenfolge", "ok": true },
      { "t": "Es genügt allein das letzte inkrementelle Backup", "ok": false },
-     { "t": "Nur die Vollsicherung wird benötigt, die Inkremente sind überflüssig", "ok": false },
+     { "t": "Es genügt die Vollsicherung zusammen mit einer beliebigen Auswahl an Inkrementen", "ok": false },
      { "t": "Es genügen die Vollsicherung und das jeweils letzte Inkrement", "ok": false }
     ],
     "e": "Da jedes Inkrement nur die Änderungen zum Vorgänger enthält, braucht die Wiederherstellung die Vollsicherung und lückenlos alle folgenden Inkremente."
@@ -14179,7 +14564,7 @@ const POOLS = {
     "o": [
      { "t": "Den maximal tolerierbaren Datenverlust, gemessen als Zeitspanne bis zur letzten Sicherung", "ok": true },
      { "t": "Die maximale Zeitspanne, bis ein System nach Ausfall wieder laufen muss", "ok": false },
-     { "t": "Die Anzahl der Festplatten, die ein RAID verkraften darf", "ok": false },
+     { "t": "Den Zeitraum, den der Support für die telefonische Störungsannahme garantiert", "ok": false },
      { "t": "Den Zeitpunkt, zu dem das nächste Voll-Backup geplant ist", "ok": false }
     ],
     "e": "Der RPO beschreibt, wie viel Datenverlust maximal akzeptabel ist — praktisch der Abstand zwischen zwei Sicherungen. Ein RPO von 1 Stunde bedeutet: höchstens 1 Stunde Daten dürfen verloren gehen."
@@ -14189,7 +14574,7 @@ const POOLS = {
     "o": [
      { "t": "Die maximal tolerierbare Zeit, bis ein System nach einem Ausfall wieder verfügbar ist", "ok": true },
      { "t": "Den maximal tolerierbaren Datenverlust als Zeitspanne", "ok": false },
-     { "t": "Die durchschnittliche Lebensdauer einer Festplatte im Betrieb", "ok": false },
+     { "t": "Die Zeitspanne, für die Ersatzteile der eingesetzten Hardware vorgehalten werden müssen", "ok": false },
      { "t": "Die Zeit, die ein Voll-Backup zur Fertigstellung braucht", "ok": false }
     ],
     "e": "Der RTO legt fest, wie lange ein System nach einem Ausfall maximal offline sein darf, bevor es wiederhergestellt sein muss. RPO betrifft die Daten, RTO die Ausfallzeit."
@@ -14198,7 +14583,7 @@ const POOLS = {
     "q": "Warum sollte ein Backup regelmäßig durch eine Testwiederherstellung geprüft werden?",
     "o": [
      { "t": "Nur eine erfolgreiche Rücksicherung beweist, dass das Backup im Ernstfall brauchbar ist", "ok": true },
-     { "t": "Weil Backups sich sonst nach kurzer Zeit von selbst löschen", "ok": false },
+     { "t": "Weil sich dadurch der Zeitplan künftiger Sicherungen automatisch optimiert", "ok": false },
      { "t": "Weil dadurch die Sicherung beim nächsten Mal schneller läuft", "ok": false },
      { "t": "Weil ungetestete Backups automatisch mehr Speicher belegen", "ok": false }
     ],
@@ -14209,7 +14594,7 @@ const POOLS = {
     "o": [
      { "t": "Bei Brand, Diebstahl oder Wasserschaden am Standort bleiben die Daten erhalten", "ok": true },
      { "t": "Die Sicherung läuft dadurch bei jedem Durchlauf deutlich schneller", "ok": false },
-     { "t": "Offsite-Backups benötigen grundsätzlich keinerlei Verschlüsselung", "ok": false },
+     { "t": "Offsite-Kopien lassen sich auch ganz ohne Internetverbindung sofort einspielen", "ok": false },
      { "t": "Die Daten müssen dadurch nur noch einmal im Jahr gesichert werden", "ok": false }
     ],
     "e": "Eine räumlich getrennte Kopie schützt gegen lokale Katastrophen, die alle Kopien am selben Ort gleichzeitig treffen würden — Kern des '1' in der 3-2-1-Regel."
@@ -14562,6 +14947,37 @@ Object.keys(POOLS).forEach(key => {
   chip.addEventListener('click', () => toggleCat(key, chip));
   catGrid.appendChild(chip);
 });
+
+// ---- Kategorie-Suche: nur Buchstaben/Zahlen erlaubt, filtert die Chips live ----
+const catSearch = document.getElementById('catSearch');
+const catSearchCount = document.getElementById('catSearchCount');
+const ALLOWED_SEARCH_CHARS = /[^a-zA-Z0-9äöüÄÖÜß]/g;
+
+function normalizeForSearch(s){
+  return s.toLowerCase().replace(/[^a-z0-9äöüß]/gi, '');
+}
+
+function filterCats(rawQuery){
+  const query = normalizeForSearch(rawQuery);
+  let visible = 0;
+  const total = Object.keys(POOLS).length;
+  document.querySelectorAll('.cat-chip').forEach(chip => {
+    const key = chip.dataset.key;
+    const normName = normalizeForSearch(POOLS[key].name);
+    const match = query === '' || normName.includes(query);
+    chip.classList.toggle('cat-hidden', !match);
+    if(match) visible++;
+  });
+  catSearchCount.textContent = query === '' ? '' : (visible + ' / ' + total + ' Kategorien');
+}
+
+if(catSearch){
+  catSearch.addEventListener('input', () => {
+    const cleaned = catSearch.value.replace(ALLOWED_SEARCH_CHARS, '');
+    if(cleaned !== catSearch.value) catSearch.value = cleaned;
+    filterCats(cleaned);
+  });
+}
 
 function toggleCat(key, chip){
   if(selected.has(key)){
@@ -15004,6 +15420,18 @@ const GLOSSAR = [{"a":"2FA","f":"Zwei-Faktor-Authentifizierung","d":"Anmeldung m
 {"a":"DORA","f":"Discover, Offer, Request, Acknowledge","d":"Die vier Schritte der DHCP-Adressvergabe zwischen Client und Server."},
 {"a":"DoS","f":"Denial of Service","d":"Angriff, der einen Dienst durch Überlastung unbenutzbar macht. Verteilt = DDoS."},
 {"a":"DSGVO","f":"Datenschutz-Grundverordnung","d":"EU-Verordnung zum Schutz personenbezogener Daten. Regelt Verarbeitung, Speicherung und Rechte der Betroffenen."},
+{"a":"DSA","f":"Digital Services Act","d":"EU-Verordnung für digitale Plattformen (soziale Netzwerke, Suchmaschinen). Wird in Deutschland durch das DDG umgesetzt."},
+{"a":"DMA","f":"Digital Markets Act","d":"EU-Verordnung gegen Marktmacht großer Plattformbetreiber (Gatekeeper). Verwandt mit dem DSA, aber ein eigenständiges Regelwerk mit anderem Fokus."},
+{"a":"TMG","f":"Telemediengesetz","d":"Frühere deutsche Regelung für Telemedien wie Websites. Wurde im Datenschutzbereich vom TDDDG abgelöst."},
+{"a":"TTDSG","f":"Telekommunikation-Telemedien-Datenschutz-Gesetz","d":"Vorgänger des TDDDG, gleicher Regelungsbereich unter altem Namen."},
+{"a":"BDSG","f":"Bundesdatenschutzgesetz","d":"Setzt die DSGVO in Deutschland um und ergänzt sie, u. a. mit Sonderregeln für öffentliche Stellen."},
+{"a":"TDDDG","f":"Telekommunikation-Digitale-Dienste-Datenschutz-Gesetz","d":"Regelt den Datenschutz für digitale Dienste wie Websites und Apps. Vormals TTDSG, ersetzt das alte TMG und das Datenschutzkapitel des TKG."},
+{"a":"DDG","f":"Digitale-Dienste-Gesetz","d":"Setzt den Digital Services Act (DSA) der EU um. Ergänzt die DSGVO für Plattformbetreiber wie soziale Netzwerke und Suchmaschinen."},
+{"a":"TKG","f":"Telekommunikationsgesetz","d":"Enthält Datenschutzbestimmungen für Telekommunikationsanbieter, u. a. zum Fernmeldegeheimnis und zur Speicherung von Verbindungsdaten."},
+{"a":"DSB","f":"Datenschutzbeauftragter","d":"Überwacht die Einhaltung der Datenschutzvorschriften im Unternehmen. Pflicht ab 20 Personen in der automatisierten Datenverarbeitung, bei Kerntätigkeit mit sensiblen Daten oder bei Behörden (Art. 37 DSGVO, § 38 BDSG)."},
+{"a":"TOM","f":"Technische und organisatorische Maßnahmen","d":"Konkrete Schutzmaßnahmen für personenbezogene Daten, z. B. Zugriffskontrollen und Verschlüsselung (Art. 32 DSGVO)."},
+{"a":"AVV","f":"Auftragsverarbeitungsvertrag","d":"Regelt vertraglich die Pflichten zwischen Verantwortlichem und Auftragsverarbeiter, etwa bei einem externen Cloud-Anbieter."},
+{"a":"DSFA","f":"Datenschutz-Folgenabschätzung","d":"Risikobewertung vor Beginn einer Verarbeitung, die voraussichtlich ein hohes Risiko für die Rechte betroffener Personen mit sich bringt (Art. 35 DSGVO)."},
 {"a":"DSL","f":"Digital Subscriber Line","d":"Breitband-Internetzugang über die Telefonleitung (Kupfer-Doppelader)."},
 {"a":"ECC","f":"Elliptic Curve Cryptography","d":"Asymmetrisches Verschlüsselungsverfahren auf Basis elliptischer Kurven. Kürzere Schlüssel bei gleicher Sicherheit als RSA."},
 {"a":"ERP","f":"Enterprise Resource Planning","d":"Software zur Steuerung zentraler Unternehmensprozesse: Einkauf, Lager, Produktion, Finanzen."},

@@ -74,6 +74,7 @@
   <a href="#r-krypto">Verschlüsselung/PKI</a>
   <a href="#r-vpn">VPN/IPsec</a>
   <a href="#r-security">IT-Sicherheit</a>
+  <a href="#r-datenschutz">Datenschutz/InfoSec</a>
   <a href="#r-wlan">WLAN</a>
   <a href="#r-fddi">FDDI</a>
   <a href="#r-topo">Topologien</a>
@@ -564,6 +565,47 @@
 <p><span class="term">Gegenmaßnahmen:</span> Ein <strong>Honeypot</strong> ist ein absichtlich verwundbares Lockvogel-System, das Angreifer ablenkt und ihr Vorgehen sichtbar macht. Ein <strong>Penetrationstest</strong> (Pentest) simuliert autorisiert echte Angriffstechniken, um Schwachstellen vor echten Angreifern zu finden.</p>
 </section>
 
+<section id="r-datenschutz">
+<h2>Informationssicherheit &amp; Datenschutz</h2>
+<p><span class="term">Datenschutz</span> schützt personenbezogene Daten vor unbefugter Erhebung, Verarbeitung und Weitergabe und sichert die informationelle Selbstbestimmung jeder Person. Das ist etwas anderes als <span class="term">Datensicherheit</span>: Datenschutz regelt, <em>welche</em> Daten überhaupt verarbeitet werden dürfen — rechtlich und organisatorisch. Datensicherheit sorgt <em>technisch</em> dafür, dass Daten nicht verloren gehen, manipuliert oder unbefugt eingesehen werden. Beides hängt zusammen: ohne funktionierende Datensicherheit lässt sich kein Datenschutz gewährleisten.</p>
+
+<h3>Gesetzliche Grundlagen</h3>
+<table>
+<tr><th>Gesetz</th><th>Regelt</th></tr>
+<tr><td>DSGVO (Datenschutz-Grundverordnung)</td><td>EU-weit einheitliche Standards für die Verarbeitung personenbezogener Daten</td></tr>
+<tr><td>BDSG (Bundesdatenschutzgesetz)</td><td>setzt die DSGVO in Deutschland um, ergänzende Regeln u. a. für öffentliche Stellen</td></tr>
+<tr><td>TDDDG (vormals TTDSG)</td><td>Datenschutz für digitale Dienste, Websites und Apps; löst das alte TMG sowie das Datenschutzkapitel des TKG ab</td></tr>
+<tr><td>DDG (Digitale-Dienste-Gesetz)</td><td>setzt den Digital Services Act (DSA) der EU um, betrifft Plattformen wie soziale Netzwerke und Suchmaschinen</td></tr>
+<tr><td>TKG (Telekommunikationsgesetz)</td><td>Fernmeldegeheimnis und Speicherung von Verbindungsdaten bei Telekommunikationsanbietern</td></tr>
+</table>
+<p>Nicht verwechseln: Der <strong>DSA</strong> regelt Plattforminhalte und -pflichten (Basis des deutschen DDG). Der <strong>DMA</strong> (Digital Markets Act) ist ein eigenständiges EU-Regelwerk gegen die Marktmacht großer Gatekeeper-Plattformen — verwandtes Thema, aber ein anderes Gesetz mit anderem Fokus.</p>
+
+<h3>Grundsätze der Verarbeitung</h3>
+<p><strong>Transparenz</strong> (wissen, welche Daten zu welchem Zweck erhoben werden), <strong>Zweckbindung</strong> (Nutzung nur für den festgelegten Zweck), <strong>Datenminimierung</strong> (nur erheben, was wirklich nötig ist), <strong>Richtigkeit</strong> (Daten aktuell und korrekt halten), <strong>Vertraulichkeit</strong> (Schutz vor unbefugtem Zugriff) und <strong>Selbstbestimmung</strong> (Kontrolle der betroffenen Person über die eigenen Daten).</p>
+
+<h3>Rechte der Betroffenen</h3>
+<table>
+<tr><th>Recht</th><th>Bedeutung</th></tr>
+<tr><td>Auskunft</td><td>Einsicht in gespeicherte Daten und deren Zweck</td></tr>
+<tr><td>Berichtigung</td><td>Korrektur unrichtiger oder unvollständiger Daten</td></tr>
+<tr><td>Löschung</td><td>Entfernung unrechtmäßig gespeicherter oder nicht mehr benötigter Daten</td></tr>
+<tr><td>Einschränkung</td><td>vorübergehende Begrenzung der Verarbeitung, z. B. bei strittiger Datenlage</td></tr>
+<tr><td>Widerspruch</td><td>Ablehnung der Verarbeitung, insbesondere bei Direktwerbung</td></tr>
+<tr><td>Datenübertragbarkeit</td><td>Übermittlung der eigenen Daten in strukturiertem, gängigem Format</td></tr>
+<tr><td>Widerruf</td><td>jederzeitiger Widerruf einer erteilten Einwilligung</td></tr>
+<tr><td>Beschwerde</td><td>Meldung unzulässiger Verarbeitung bei der Aufsichtsbehörde</td></tr>
+</table>
+
+<h3>Rollen &amp; Pflichten</h3>
+<div class="callout"><span class="tag">DSB-Pflicht</span><strong>Datenschutzbeauftragter (DSB):</strong> Pflicht, wenn mindestens 20 Personen ständig automatisiert personenbezogene Daten verarbeiten, wenn die Kerntätigkeit in umfangreicher Verarbeitung sensibler Daten oder systematischer Überwachung besteht, oder grundsätzlich bei Behörden (außer Gerichte in ihrer justiziellen Tätigkeit). Rechtsgrundlage: Art. 37 DSGVO und § 38 BDSG.</div>
+<p>Der <span class="term">Verantwortliche</span> entscheidet über Zwecke und Mittel der Verarbeitung. Der <span class="term">Auftragsverarbeiter</span> verarbeitet Daten dagegen ausschließlich weisungsgebunden im Auftrag des Verantwortlichen, etwa ein externer Cloud-Anbieter — er trifft keine eigenen Entscheidungen über Zweck oder Mittel. Diese Beziehung wird über eine <strong>AVV (Auftragsverarbeitungsvertrag)</strong> geregelt.</p>
+<p>Zu den organisatorischen Pflichten zählen <strong>TOM</strong> (Technische und organisatorische Maßnahmen) — konkrete Schutzmaßnahmen wie Zugriffskontrollen oder Verschlüsselung — sowie <strong>Privacy by Design/Default</strong>: Datenschutz wird von Anfang an mitgeplant, datenschutzfreundliche Voreinstellungen sind Standard.</p>
+<p>Zwei Fristen/Verfahren, die oft verwechselt werden: Die <strong>Meldepflicht</strong> ist reaktiv — sie greift erst <em>nach</em> einer bereits eingetretenen Datenschutzverletzung und verlangt eine Meldung an die Aufsichtsbehörde innerhalb von 72 Stunden. Die <strong>DSFA</strong> (Datenschutz-Folgenabschätzung) ist proaktiv — sie erfolgt <em>vorab</em>, bevor eine geplante Verarbeitung mit voraussichtlich hohem Risiko für die Betroffenen überhaupt startet.</p>
+
+<h3>Beispiele aus der Praxis</h3>
+<p>Eine Notiz-App, die beim Download Zugriff auf Kontakte, Kamera und Standort verlangt, verstößt gegen Datenminimierung und Zweckbindung — diese Daten werden für die Kernfunktion nicht gebraucht. Arbeitgeber dürfen von Mitarbeitern nur berufsrelevante Daten erfassen; private Interessen oder Gesundheitszustände sind ohne ausdrückliche Zustimmung tabu.</p>
+</section>
+
 <section id="r-wlan">
 <h2>WLAN</h2>
 <p><span class="term">SSID</span> = Netzname, <strong>Access Point</strong> stellt das WLAN bereit (IEEE 802.11). Modi: <strong>Infrastruktur</strong> (über AP) vs. <strong>Ad-hoc</strong> (Geräte direkt). Bänder: 2,4 GHz (Reichweite) · 5 GHz (Tempo) · 6 GHz (Wi-Fi 6E).</p>
@@ -659,6 +701,10 @@
   <div class="selector" id="selector">
     <h2>Multiple Choice</h2>
     <p class="sel-sub">Wähle bis zu 3 Kategorien und stelle den Umfang über den Regler ein: von 10 bis 50 Fragen pro Kategorie in 5er-Schritten (rotierend, ohne Wiederholung bis der Pool durch ist) oder ganz rechts „Alle" für den kompletten Pool. Fragen- und Antwortreihenfolge werden bei jedem Start neu gemischt. Falsch beantwortete Fragen werden automatisch als „Wackelkandidaten" gesammelt und lassen sich unten gezielt wiederholen. Diese Ergebnisse werden nur lokal im jeweiligen Browser und auf dem jeweiligen Gerät gespeichert – wer das Gerät oder den Browser wechselt, beginnt mit einer leeren Sammlung.</p>
+    <div class="cat-searchrow">
+      <input type="text" id="catSearch" class="cat-search" placeholder="Kategorie suchen … z. B. Datenschutz" autocomplete="off" inputmode="search" enterkeyhint="search" aria-label="Kategorie suchen">
+      <span class="cat-search-count" id="catSearchCount"></span>
+    </div>
     <div class="cat-grid" id="catGrid"></div>
     <div class="scope-row">
       <span class="scope-label">Fragen pro Kategorie:</span>
