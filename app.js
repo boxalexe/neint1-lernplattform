@@ -2,6 +2,1912 @@
 if('scrollRestoration' in history){ history.scrollRestoration = 'manual'; }
 
 const POOLS = {
+ "ap1": {
+  "name": "AP1",
+  "gold": true,
+  "q": [
+   {
+    "q": "Ein Betrieb will seine manuelle Geräteverwaltung durch eine zentrale Software ersetzen. Welche Tätigkeit gehört zur Ist-Analyse?",
+    "o": [
+     { "t": "Erfassung der aktuell eingesetzten Geräte und Prozesse", "ok": true },
+     { "t": "Installation der neuen Verwaltungssoftware im Rechenzentrum", "ok": false },
+     { "t": "Schulung der Beschäftigten an der neuen Oberfläche", "ok": false },
+     { "t": "Abnahme und Produktivsetzung des fertigen Systems", "ok": false }
+    ],
+    "e": "Die Ist-Analyse dokumentiert den aktuellen Zustand: bestehende Systeme, Prozesse, Probleme und organisatorische Rahmenbedingungen."
+   },
+   {
+    "q": "Was beschreibt ein Soll-Konzept?",
+    "o": [
+     { "t": "Den angestrebten künftigen Zustand mit Anforderungen und Zielen", "ok": true },
+     { "t": "Den dokumentierten aktuellen Zustand der Systeme und Prozesse", "ok": false },
+     { "t": "Die konkrete technische Umsetzung durch den Auftragnehmer", "ok": false },
+     { "t": "Die abschließende Bewertung des erreichten Projekterfolgs", "ok": false }
+    ],
+    "e": "Das Soll-Konzept beschreibt den angestrebten Zielzustand mit Anforderungen, gewünschten Funktionen und Zielvorgaben."
+   },
+   {
+    "q": "Welcher Vorgang gehört typischerweise zur Projektinitiierung?",
+    "o": [
+     { "t": "Identifikation eines Problems oder Handlungsbedarfs", "ok": true },
+     { "t": "Produktivsetzung der fertig getesteten Lösung", "ok": false },
+     { "t": "Durchführung der formalen Projektabnahme", "ok": false },
+     { "t": "Archivierung der vollständigen Projektdokumentation", "ok": false }
+    ],
+    "e": "In der Initiierung werden Projektanlass, grundlegende Ziele und betroffene Bereiche bestimmt."
+   },
+   {
+    "q": "Welche Formulierung stellt ein messbares Projektziel dar?",
+    "o": [
+     { "t": "Die Bearbeitungszeit sinkt bis 30.11. von zwölf auf acht Minuten", "ok": true },
+     { "t": "Die neue Anwendung soll spürbar besser und runder als bisher laufen", "ok": false },
+     { "t": "Die Beschäftigten sollen mit dem System zufriedener sein", "ok": false },
+     { "t": "Das Projekt soll möglichst zügig abgeschlossen werden", "ok": false }
+    ],
+    "e": "Ein messbares Ziel nennt Ausgangswert, Zielwert und Termin (SMART-Prinzip)."
+   },
+   {
+    "q": "Welches Interesse verfolgt typischerweise der Betriebsrat bei Einführung einer Arbeitszeiterfassung?",
+    "o": [
+     { "t": "Einhaltung der Mitbestimmungs- und Datenschutzrechte", "ok": true },
+     { "t": "Möglichst niedrige Lizenzkosten der neuen Software", "ok": false },
+     { "t": "Kürzere Reaktionszeiten im externen Kundensupport", "ok": false },
+     { "t": "Höhere Taktfrequenz der eingesetzten Server", "ok": false }
+    ],
+    "e": "Der Betriebsrat achtet auf Mitbestimmung und Datenschutz der Beschäftigten; andere Stakeholder haben andere Interessen."
+   },
+   {
+    "q": "Was ist ein typischer Vorteil des Einsatzes eines externen Projektberaters?",
+    "o": [
+     { "t": "Neutrale Sicht und zusätzliche Projekterfahrung", "ok": true },
+     { "t": "Vollständige Unabhängigkeit von jeder Terminplanung", "ok": false },
+     { "t": "Garantierter Projekterfolg ohne eigenes Zutun", "ok": false },
+     { "t": "Dauerhaft kostenlose Betreuung des Projekts", "ok": false }
+    ],
+    "e": "Externe bringen Fachwissen, Erfahrung und eine neutrale Außensicht ein und entlasten interne Kräfte."
+   },
+   {
+    "q": "Was ist ein möglicher Nachteil eines externen Projektberaters?",
+    "o": [
+     { "t": "Zusätzliche Kosten und Einarbeitungsaufwand", "ok": true },
+     { "t": "Vollständiger Verzicht auf jede Dokumentation", "ok": false },
+     { "t": "Automatischer Verlust aller Gewährleistungsrechte", "ok": false },
+     { "t": "Zwingende Abschaltung der internen IT-Abteilung", "ok": false }
+    ],
+    "e": "Externe verursachen Kosten und müssen sich einarbeiten; zudem kann Abhängigkeit und Wissensabfluss entstehen."
+   },
+   {
+    "q": "Welche Aussage beschreibt ein Lastenheft richtig?",
+    "o": [
+     { "t": "Es enthält die Anforderungen des Auftraggebers", "ok": true },
+     { "t": "Es beschreibt die technische Umsetzung des Auftragnehmers", "ok": false },
+     { "t": "Es enthält ausschließlich die reinen Projektkosten", "ok": false },
+     { "t": "Es wird erst nach der Abnahme des Systems erstellt", "ok": false }
+    ],
+    "e": "Das Lastenheft beschreibt aus Sicht des Auftraggebers, was geliefert oder erreicht werden soll."
+   },
+   {
+    "q": "Welche Aufgabe hat das Pflichtenheft?",
+    "o": [
+     { "t": "Es beschreibt, wie die Anforderungen umgesetzt werden", "ok": true },
+     { "t": "Es sammelt die Wünsche des Auftraggebers ungeordnet", "ok": false },
+     { "t": "Es dient allein der Erfassung des Ist-Zustands", "ok": false },
+     { "t": "Es regelt ausschließlich die Zahlungsbedingungen", "ok": false }
+    ],
+    "e": "Das Pflichtenheft beschreibt aus Sicht des Auftragnehmers, wie und womit die Lastenheft-Anforderungen umgesetzt werden."
+   },
+   {
+    "q": "Welche Tätigkeit gehört zum Projektabschluss?",
+    "o": [
+     { "t": "Abnahme und Dokumentation der Projektergebnisse", "ok": true },
+     { "t": "Ermittlung des ursprünglichen Projektbedarfs im Betrieb", "ok": false },
+     { "t": "Auswahl der beteiligten Stakeholder", "ok": false },
+     { "t": "Erstellung des ersten Projektauftrags", "ok": false }
+    ],
+    "e": "Zum Abschluss gehören die Abnahme durch den Auftraggeber und die abschließende Dokumentation."
+   },
+   {
+    "q": "Ein Dienstleister soll eine lauffähige Software mit festgelegten Funktionen bis zu einem Termin liefern. Welche Vertragsart passt besonders?",
+    "o": [
+     { "t": "Werkvertrag", "ok": true },
+     { "t": "Dienstvertrag", "ok": false },
+     { "t": "Mietvertrag", "ok": false },
+     { "t": "Leasingvertrag", "ok": false }
+    ],
+    "e": "Beim Werkvertrag wird ein konkreter Erfolg bzw. ein bestimmtes Arbeitsergebnis geschuldet."
+   },
+   {
+    "q": "Ein Beratungshaus unterstützt eine IT-Abteilung 100 Stunden bei einer Cloud-Migration, ohne einen bestimmten Erfolg zu garantieren. Welche Vertragsart liegt nahe?",
+    "o": [
+     { "t": "Dienstvertrag", "ok": true },
+     { "t": "Werkvertrag", "ok": false },
+     { "t": "Kaufvertrag", "ok": false },
+     { "t": "Schenkungsvertrag", "ok": false }
+    ],
+    "e": "Beim Dienstvertrag wird die vereinbarte Tätigkeit geschuldet, nicht zwingend ein bestimmter Erfolg."
+   },
+   {
+    "q": "Bestellung am 4. Mai, keine Auftragsbestätigung, Lieferung und Annahme am 12. Mai. Wann kommt der Kaufvertrag spätestens zustande?",
+    "o": [
+     { "t": "Mit Lieferung und Annahme der Ware", "ok": true },
+     { "t": "Bereits mit dem Absenden der Bestellung", "ok": false },
+     { "t": "Erst mit Bezahlung der Rechnung", "ok": false },
+     { "t": "Erst nach Ablauf der Gewährleistung", "ok": false }
+    ],
+    "e": "Die Lieferung kann als konkludente Annahme der Bestellung gewertet werden; spätestens dann besteht der Vertrag."
+   },
+   {
+    "q": "Was gehört typischerweise zum Inhalt eines Kaufvertrags?",
+    "o": [
+     { "t": "Art, Menge und Preis der Ware", "ok": true },
+     { "t": "Allein die private Handynummer des Käufers", "ok": false },
+     { "t": "Ausschließlich die Farbe der Verpackung", "ok": false },
+     { "t": "Nur der Name des zuständigen Sachbearbeiters", "ok": false }
+    ],
+    "e": "Typische Inhalte sind Art und Menge der Ware, Kaufpreis, Liefer- und Zahlungsbedingungen sowie Gewährleistung."
+   },
+   {
+    "q": "Ein Lieferant liefert bestellte Computer zwei Wochen nach dem vereinbarten Termin. Welche Kaufvertragsstörung liegt vor?",
+    "o": [
+     { "t": "Lieferungsverzug", "ok": true },
+     { "t": "Zahlungsverzug", "ok": false },
+     { "t": "Annahmeverzug", "ok": false },
+     { "t": "Mangelhafte Lieferung", "ok": false }
+    ],
+    "e": "Kommt die Ware zu spät, liegt Lieferungsverzug des Verkäufers vor."
+   },
+   {
+    "q": "Zwei von zehn gelieferten Notebooks haben beschädigte Displays. Welches Recht steht dem Käufer zunächst zu?",
+    "o": [
+     { "t": "Nacherfüllung durch Nachbesserung oder Ersatz", "ok": true },
+     { "t": "Sofortige Strafanzeige gegen den Lieferanten", "ok": false },
+     { "t": "Automatische Verdopplung der Bestellmenge", "ok": false },
+     { "t": "Verzicht auf jede weitere Gewährleistung", "ok": false }
+    ],
+    "e": "Vorrang hat die Nacherfüllung; erst bei deren Scheitern folgen Minderung oder Rücktritt."
+   },
+   {
+    "q": "Warum eignet sich eine Nutzwertanalyse für den Vergleich mehrerer Anbieter?",
+    "o": [
+     { "t": "Sie vergleicht Alternativen anhand gewichteter Kriterien", "ok": true },
+     { "t": "Sie betrachtet ausschließlich den niedrigsten Angebotspreis", "ok": false },
+     { "t": "Sie ersetzt jede technische Prüfung vollständig", "ok": false },
+     { "t": "Sie bewertet nur ein einziges festes Kriterium", "ok": false }
+    ],
+    "e": "Die Nutzwertanalyse vergleicht Alternativen anhand unterschiedlich gewichteter quantitativer und qualitativer Kriterien."
+   },
+   {
+    "q": "Bewertung: Preis (Gewicht 40, Note 3), Qualität (Gewicht 35, Note 4), Lieferzeit (Gewicht 25, Note 2). Wie hoch ist der Gesamtnutzwert?",
+    "o": [
+     { "t": "310 Punkte", "ok": true },
+     { "t": "290 Punkte", "ok": false },
+     { "t": "330 Punkte", "ok": false },
+     { "t": "300 Punkte", "ok": false }
+    ],
+    "e": "Formel: Summe aus Gewicht × Bewertung. 40×3 = 120, 35×4 = 140, 25×2 = 50. Gesamtnutzwert = 120 + 140 + 50 = 310 Punkte."
+   },
+   {
+    "q": "Eine interne Fachkraft verursacht Jahreskosten von 96.000 Euro bei 210 produktiven Tagen à 8 Stunden. Wie hoch ist der effektive Stundensatz?",
+    "o": [
+     { "t": "57,14 Euro pro Stunde", "ok": true },
+     { "t": "48,00 Euro pro Stunde", "ok": false },
+     { "t": "60,00 Euro pro Stunde", "ok": false },
+     { "t": "52,17 Euro pro Stunde", "ok": false }
+    ],
+    "e": "Formel: Jahreskosten ÷ produktive Stunden. Produktive Stunden = 210 × 8 = 1.680 h. 96.000 € ÷ 1.680 h = 57,14 €/h (gerundet auf zwei Stellen)."
+   },
+   {
+    "q": "Fremdbezug kostet 30 Euro je Benutzer und Monat. Eine Eigenentwicklung kostet einmalig 180.000 Euro plus 24.000 Euro Wartung im Jahr. Ab welcher Benutzerzahl ist die Eigenentwicklung im ersten Jahr günstiger?",
+    "o": [
+     { "t": "Ab 567 Benutzern", "ok": true },
+     { "t": "Ab 500 Benutzern", "ok": false },
+     { "t": "Ab 634 Benutzern", "ok": false },
+     { "t": "Ab 425 Benutzern", "ok": false }
+    ],
+    "e": "Fremdbezug pro Benutzer und Jahr: 30 € × 12 = 360 €. Eigenentwicklung erstes Jahr: 180.000 € + 24.000 € = 204.000 €. Break-even: 204.000 € ÷ 360 € = 566,67 → ab 567 Benutzern günstiger."
+   },
+   {
+    "q": "Welche Aussage beschreibt Software as a Service?",
+    "o": [
+     { "t": "Die Software wird als Dienst über ein Netzwerk bereitgestellt", "ok": true },
+     { "t": "Der Kunde entwickelt und betreibt die Software komplett selbst", "ok": false },
+     { "t": "Der Kunde betreibt dafür zwingend nur eigene Server", "ok": false },
+     { "t": "Der Kunde kauft ausschließlich die Hardware ein", "ok": false }
+    ],
+    "e": "Bei SaaS stellt der Anbieter die Software als Dienst über ein Netz bereit; Installation und Wartung liegen bei ihm."
+   },
+   {
+    "q": "Was ist ein typischer Vorteil einer SaaS-Lösung?",
+    "o": [
+     { "t": "Schnelle Bereitstellung und geringer Wartungsaufwand", "ok": true },
+     { "t": "Vollständige Unabhängigkeit von jeder Internetverbindung", "ok": false },
+     { "t": "Uneingeschränkte Anpassung des Quellcodes durch den Kunden", "ok": false },
+     { "t": "Einmalige Zahlung ganz ohne laufende Kosten", "ok": false }
+    ],
+    "e": "SaaS bietet schnelle Bereitstellung, geringen Wartungsaufwand, Updates durch den Anbieter und gute Skalierbarkeit."
+   },
+   {
+    "q": "Was ist ein typischer Nachteil einer SaaS-Lösung?",
+    "o": [
+     { "t": "Abhängigkeit von Anbieter und Internetverbindung", "ok": true },
+     { "t": "Zwingend eigener Serverraum im Unternehmen", "ok": false },
+     { "t": "Vollständiger Verlust jeder Skalierbarkeit", "ok": false },
+     { "t": "Keinerlei automatische Aktualisierungen durch den Anbieter", "ok": false }
+    ],
+    "e": "Nachteile sind Anbieter- und Internetabhängigkeit, eingeschränkte Anpassbarkeit sowie laufende Abokosten."
+   },
+   {
+    "q": "Ein Betrieb verarbeitet sensible Konstruktionsdaten und will volle Kontrolle über Server und Daten behalten. Welche Betriebsform passt dafür besonders?",
+    "o": [
+     { "t": "On-Premises", "ok": true },
+     { "t": "Öffentliches WLAN", "ok": false },
+     { "t": "SaaS ohne Vertragsprüfung", "ok": false },
+     { "t": "Unverschlüsselter Cloud-Speicher", "ok": false }
+    ],
+    "e": "On-Premises bedeutet Betrieb im eigenen Haus mit voller Kontrolle über Hardware und Daten."
+   },
+   {
+    "q": "In welcher Reihenfolge wird eine CPU korrekt in den Sockel eingebaut?",
+    "o": [
+     { "t": "Hebel öffnen, ausrichten, einsetzen, Hebel schließen", "ok": true },
+     { "t": "Hebel schließen, einsetzen, ausrichten, Hebel öffnen", "ok": false },
+     { "t": "Einsetzen, Hebel öffnen, Hebel schließen, ausrichten", "ok": false },
+     { "t": "Ausrichten, Hebel schließen, einsetzen, Hebel öffnen", "ok": false }
+    ],
+    "e": "Reihenfolge: Verriegelungshebel öffnen, CPU an der Markierung ausrichten, vorsichtig einsetzen, Hebel schließen."
+   },
+   {
+    "q": "Warum darf eine CPU beim Einsetzen nicht mit Kraft in den Sockel gedrückt werden?",
+    "o": [
+     { "t": "Kontakte an Sockel oder CPU können verbiegen", "ok": true },
+     { "t": "Der Sockel wird sonst magnetisch aufgeladen", "ok": false },
+     { "t": "Die Taktfrequenz sinkt sonst dauerhaft ab", "ok": false },
+     { "t": "Die CPU verliert sonst ihren Cache-Inhalt", "ok": false }
+    ],
+    "e": "Bei falscher Ausrichtung verbiegen empfindliche Kontakte. Richtig ausgerichtet lässt sich die CPU nahezu kraftlos einsetzen."
+   },
+   {
+    "q": "Welche Aufgabe hat Wärmeleitpaste?",
+    "o": [
+     { "t": "Verbessert die Wärmeübertragung zwischen CPU und Kühler", "ok": true },
+     { "t": "Versorgt die CPU zuverlässig mit elektrischer Spannung", "ok": false },
+     { "t": "Befestigt das Mainboard fest im Gehäuse", "ok": false },
+     { "t": "Erhöht dauerhaft die Taktfrequenz der CPU", "ok": false }
+    ],
+    "e": "Die Paste gleicht mikroskopische Unebenheiten aus und verbessert so die Wärmeübertragung an den Kühler."
+   },
+   {
+    "q": "Welche Aufgabe hat der CPU-Cache?",
+    "o": [
+     { "t": "Häufig benötigte Daten prozessornah bereithalten", "ok": true },
+     { "t": "Dauerhafte Speicherung aller installierten Programmdateien", "ok": false },
+     { "t": "Kühlung der Rechenkerne im laufenden Betrieb", "ok": false },
+     { "t": "Verwaltung der offenen Netzwerkverbindungen", "ok": false }
+    ],
+    "e": "Der Cache hält häufig oder kurzfristig benötigte Daten und Befehle prozessornah, damit die CPU schneller zugreifen kann."
+   },
+   {
+    "q": "Ein Prozessor hat acht physische Kerne und 16 logische Prozessoren. Wodurch entstehen die logischen Prozessoren?",
+    "o": [
+     { "t": "Durch Simultaneous Multithreading je Kern", "ok": true },
+     { "t": "Durch nachträgliches Übertakten der Kerne", "ok": false },
+     { "t": "Durch Verdopplung des Arbeitsspeichers", "ok": false },
+     { "t": "Durch eine zweite eingebaute Grafikkarte", "ok": false }
+    ],
+    "e": "Mit Simultaneous Multithreading verarbeitet ein Kern mehrere Ausführungsstränge; das OS erkennt so mehr logische als physische Prozessoren."
+   },
+   {
+    "q": "Wie viel Hertz sind 3,6 GHz?",
+    "o": [
+     { "t": "3.600.000.000 Hz", "ok": true },
+     { "t": "3.600.000 Hz", "ok": false },
+     { "t": "360.000.000 Hz", "ok": false },
+     { "t": "36.000.000.000 Hz", "ok": false }
+    ],
+    "e": "Formel: GHz × 1.000.000.000. 3,6 × 10^9 Hz = 3.600.000.000 Hz."
+   },
+   {
+    "q": "Zwei identische Speichermodule sollen im Dual-Channel-Modus laufen. Was ist zu beachten?",
+    "o": [
+     { "t": "Einsatz in zusammengehörigen Kanälen laut Handbuch", "ok": true },
+     { "t": "Module immer in direkt benachbarte Steckplätze setzen", "ok": false },
+     { "t": "Module mit unterschiedlicher Kapazität kombinieren", "ok": false },
+     { "t": "Ausschließlich den ersten Steckplatz A1 bestücken", "ok": false }
+    ],
+    "e": "Die Module gehören in zusammengehörige Kanäle laut Mainboard-Doku (z. B. A2/B2) und sollten gleiche Kapazität, Takt und Spezifikation haben."
+   },
+   {
+    "q": "Was ist ein Vorteil einer M.2-NVMe-SSD gegenüber einer SATA-SSD?",
+    "o": [
+     { "t": "Höhere Datenübertragungsrate über PCIe", "ok": true },
+     { "t": "Grundsätzlich geringere Wärmeentwicklung", "ok": false },
+     { "t": "Immer deutlich niedrigerer Kaufpreis", "ok": false },
+     { "t": "Kompatibilität zu jedem alten IDE-Anschluss", "ok": false }
+    ],
+    "e": "NVMe nutzt PCIe und erreicht höhere Datenraten als SATA. Nachteilig können je nach Modell mehr Wärme oder höhere Kosten sein."
+   },
+   {
+    "q": "Welche Schnittstelle überträgt digitale Bild- und Tonsignale und ist an Monitoren und Fernsehern verbreitet?",
+    "o": [
+     { "t": "HDMI", "ok": true },
+     { "t": "PS/2", "ok": false },
+     { "t": "RJ45", "ok": false },
+     { "t": "SATA", "ok": false }
+    ],
+    "e": "HDMI überträgt digital Bild und Ton und ist an Displays und Fernsehern Standard."
+   },
+   {
+    "q": "Was ist ein Vorteil von USB-C gegenüber älteren USB-Steckverbindungen?",
+    "o": [
+     { "t": "Verpolungssicher und hohe Datenraten möglich", "ok": true },
+     { "t": "Funktioniert grundsätzlich nur mit Adapter", "ok": false },
+     { "t": "Überträgt ausschließlich Ladestrom, keine Daten", "ok": false },
+     { "t": "Ist zu jedem alten PS/2-Anschluss kompatibel", "ok": false }
+    ],
+    "e": "USB-C ist beidseitig steckbar, unterstützt je nach Standard hohe Datenraten, Bildsignale und hohe Ladeleistung per Power Delivery."
+   },
+   {
+    "q": "Wozu kann ein gekennzeichneter BIOS-Flashback-Anschluss dienen?",
+    "o": [
+     { "t": "BIOS aktualisieren, teils ohne CPU und Betriebssystem", "ok": true },
+     { "t": "Zum Anschluss eines zweiten Monitors", "ok": false },
+     { "t": "Zur Stromversorgung externer USB-Festplatten am Board", "ok": false },
+     { "t": "Zum Zurücksetzen des Windows-Passworts", "ok": false }
+    ],
+    "e": "BIOS-Flashback ermöglicht Update oder Wiederherstellung des BIOS, bei manchen Boards ohne installiertes OS und sogar ohne eingesetzte CPU."
+   },
+   {
+    "q": "Komponenten: Mainboard 35 W, CPU 180 W, GPU 320 W, RAM 4×5 W, SSD 2×6 W, Lüfter 3×8 W. Mit 10 % Puffer und Netzteilen in 50-W-Schritten: welches Netzteil ist erforderlich?",
+    "o": [
+     { "t": "700-W-Netzteil", "ok": true },
+     { "t": "650-W-Netzteil", "ok": false },
+     { "t": "600-W-Netzteil", "ok": false },
+     { "t": "750-W-Netzteil", "ok": false }
+    ],
+    "e": "Summe: 35 + 180 + 320 + (4×5) + (2×6) + (3×8) = 591 W. Mit Puffer: 591 × 1,10 = 650,1 W. Das nächste ausreichende Netzteil im 50-W-Raster ist 700 W."
+   },
+   {
+    "q": "Welche Eigenschaft besitzt RAID 0?",
+    "o": [
+     { "t": "Verteilung der Daten ohne Redundanz", "ok": true },
+     { "t": "Hohe Sicherheit durch vollständige Spiegelung", "ok": false },
+     { "t": "Parität mit Verkraften eines Plattenausfalls", "ok": false },
+     { "t": "Automatische tägliche Datensicherung", "ok": false }
+    ],
+    "e": "RAID 0 verteilt Daten (Striping) und bündelt Kapazität und Leistung, bietet aber keine Fehlertoleranz."
+   },
+   {
+    "q": "Zwei Festplatten mit je 4 TB laufen als RAID 1. Wie groß ist die nutzbare Kapazität?",
+    "o": [
+     { "t": "4 TB", "ok": true },
+     { "t": "8 TB", "ok": false },
+     { "t": "2 TB", "ok": false },
+     { "t": "6 TB", "ok": false }
+    ],
+    "e": "RAID 1 spiegelt die Daten. Nutzbar ist die Kapazität einer Platte: 4 TB."
+   },
+   {
+    "q": "Sechs Festplatten mit je 8 TB laufen als RAID 5. Wie groß ist die nutzbare Nettokapazität?",
+    "o": [
+     { "t": "40 TB", "ok": true },
+     { "t": "48 TB", "ok": false },
+     { "t": "32 TB", "ok": false },
+     { "t": "24 TB", "ok": false }
+    ],
+    "e": "Formel: (Anzahl − 1) × kleinste Kapazität. (6 − 1) × 8 TB = 40 TB; eine Platte entfällt für Parität."
+   },
+   {
+    "q": "Ein RAID 5 nutzt zwei Platten mit je 4 TB und vier Platten mit je 3 TB. Wie groß ist die nutzbare Kapazität?",
+    "o": [
+     { "t": "15 TB", "ok": true },
+     { "t": "18 TB", "ok": false },
+     { "t": "20 TB", "ok": false },
+     { "t": "12 TB", "ok": false }
+    ],
+    "e": "Die kleinste Platte bestimmt die Kapazität aller Laufwerke. (6 − 1) × 3 TB = 15 TB."
+   },
+   {
+    "q": "Welche Aussage trifft auf JBOD zu?",
+    "o": [
+     { "t": "Bündelt verschieden große Platten ohne Redundanz", "ok": true },
+     { "t": "Spiegelt alle Daten automatisch auf zwei Platten", "ok": false },
+     { "t": "Verteilt Parität gleichmäßig über alle Platten", "ok": false },
+     { "t": "Erhöht die Ausfallsicherheit gegenüber RAID 1", "ok": false }
+    ],
+    "e": "JBOD fasst unterschiedlich große Laufwerke zu einem logischen Bereich zusammen, bietet aber keine Redundanz."
+   },
+   {
+    "q": "Welche Aussage trifft auf ein SAN zu?",
+    "o": [
+     { "t": "Es stellt Speicher meist auf Blockebene bereit", "ok": true },
+     { "t": "Es ist ausschließlich ein einfacher USB-Speicher", "ok": false },
+     { "t": "Es kann grundsätzlich keine Redundanz bieten", "ok": false },
+     { "t": "Es ersetzt jede Form der Datensicherung", "ok": false }
+    ],
+    "e": "Ein SAN stellt Speicher typischerweise auf Blockebene über ein dediziertes Netz bereit."
+   },
+   {
+    "q": "Welcher Fehler ist der Bitübertragungsschicht (OSI-Schicht 1) zuzuordnen?",
+    "o": [
+     { "t": "Nicht angeschlossenes Netzwerkkabel", "ok": true },
+     { "t": "Fehlerhafte DNS-Auflösung", "ok": false },
+     { "t": "Geschlossener TCP-Port", "ok": false },
+     { "t": "Falscher Benutzername bei der Anmeldung am System", "ok": false }
+    ],
+    "e": "Schicht 1 betrifft die physische Übertragung; ein nicht gestecktes Kabel ist ein typischer Fehler dieser Ebene."
+   },
+   {
+    "q": "Welcher Adresstyp wird hauptsächlich der Sicherungsschicht (OSI-Schicht 2) zugeordnet?",
+    "o": [
+     { "t": "MAC-Adresse", "ok": true },
+     { "t": "IP-Adresse", "ok": false },
+     { "t": "Portnummer", "ok": false },
+     { "t": "URL", "ok": false }
+    ],
+    "e": "Die MAC-Adresse adressiert Geräte auf Schicht 2."
+   },
+   {
+    "q": "Welche Angabe gehört zur Vermittlungsschicht (OSI-Schicht 3)?",
+    "o": [
+     { "t": "IP-Adresse", "ok": true },
+     { "t": "MAC-Adresse", "ok": false },
+     { "t": "USB-Anschluss", "ok": false },
+     { "t": "Dateiname", "ok": false }
+    ],
+    "e": "Die IP-Adresse ermöglicht die Vermittlung (Routing) zwischen Netzen auf Schicht 3."
+   },
+   {
+    "q": "Welche Protokolle werden typischerweise der Transportschicht (OSI-Schicht 4) zugeordnet?",
+    "o": [
+     { "t": "TCP und UDP", "ok": true },
+     { "t": "IP und ARP", "ok": false },
+     { "t": "HTTP und DNS", "ok": false },
+     { "t": "Ethernet und WLAN", "ok": false }
+    ],
+    "e": "TCP und UDP sind die klassischen Transportprotokolle auf Schicht 4."
+   },
+   {
+    "q": "In welche Reihenfolge gehört eine vereinfachte Bottom-up-Netzwerkfehlersuche?",
+    "o": [
+     { "t": "Kabel/Link, IP-Konfiguration, Gateway, DNS", "ok": true },
+     { "t": "DNS, Gateway, IP-Konfiguration, Kabel/Link", "ok": false },
+     { "t": "IP-Konfiguration, Kabel/Link, DNS, Gateway", "ok": false },
+     { "t": "Gateway, DNS, Kabel/Link, IP-Konfiguration", "ok": false }
+    ],
+    "e": "Bottom-up prüft von unten nach oben: erst physische Verbindung, dann IP-Konfiguration, dann Gateway, zuletzt DNS-Namensauflösung."
+   },
+   {
+    "q": "An der Netzwerkkarte leuchtet eine LED dauerhaft, eine zweite blinkt unregelmäßig. Was zeigt das unregelmäßige Blinken typischerweise an?",
+    "o": [
+     { "t": "Gesendete oder empfangene Daten", "ok": true },
+     { "t": "Einen dauerhaften Kabeldefekt", "ok": false },
+     { "t": "Eine fehlende IP-Adresse", "ok": false },
+     { "t": "Einen gerade laufenden Virenscan", "ok": false }
+    ],
+    "e": "Dauerlicht steht meist für eine bestehende Verbindung (Link), unregelmäßiges Blinken für Datenverkehr. Die genaue Bedeutung hängt vom Gerät ab."
+   },
+   {
+    "q": "Welche Information kann ein DHCP-Server einem Client zuweisen?",
+    "o": [
+     { "t": "IP-Adresse, Subnetzmaske, Gateway und DNS", "ok": true },
+     { "t": "Nur den Hostnamen des Zielservers", "ok": false },
+     { "t": "Ausschließlich die MAC-Adresse der Karte", "ok": false },
+     { "t": "Allein das Betriebssystem des Clients", "ok": false }
+    ],
+    "e": "DHCP liefert u. a. IPv4-Adresse, Subnetzmaske, Standardgateway, DNS-Server und die Gültigkeitsdauer der Zuweisung."
+   },
+   {
+    "q": "Ein Client hat 192.168.20.77 mit Subnetzmaske 255.255.255.0. Wie lautet die Netzadresse?",
+    "o": [
+     { "t": "192.168.20.0", "ok": true },
+     { "t": "192.168.20.77", "ok": false },
+     { "t": "192.168.20.255", "ok": false },
+     { "t": "192.168.0.0", "ok": false }
+    ],
+    "e": "Bei /24 (255.255.255.0) bilden die ersten drei Oktette den Netzanteil, das letzte wird 0: 192.168.20.0."
+   },
+   {
+    "q": "Wie lautet die Broadcastadresse des Netzes 192.168.20.0/24?",
+    "o": [
+     { "t": "192.168.20.255", "ok": true },
+     { "t": "192.168.20.0", "ok": false },
+     { "t": "192.168.20.1", "ok": false },
+     { "t": "192.168.255.255", "ok": false }
+    ],
+    "e": "Bei /24 ist das letzte Oktett voll gesetzt (255): Broadcast = 192.168.20.255."
+   },
+   {
+    "q": "Ein Host hat die Adresse 10.15.8.42/24. Wie lautet der Hostanteil in dezimaler Schreibweise?",
+    "o": [
+     { "t": "42", "ok": true },
+     { "t": "8", "ok": false },
+     { "t": "15", "ok": false },
+     { "t": "10", "ok": false }
+    ],
+    "e": "Bei /24 ist das letzte Oktett der Hostanteil: 42."
+   },
+   {
+    "q": "Welche Aufgabe hat das Standardgateway?",
+    "o": [
+     { "t": "Pakete in andere Netze weiterleiten", "ok": true },
+     { "t": "IP-Adressen im lokalen Netz vergeben", "ok": false },
+     { "t": "Domainnamen in IP-Adressen auflösen", "ok": false },
+     { "t": "Den gesamten WLAN-Verkehr verschlüsseln", "ok": false }
+    ],
+    "e": "Das Standardgateway nimmt Pakete für Ziele außerhalb des lokalen Netzes an und leitet sie weiter."
+   },
+   {
+    "q": "Ein Rechner kennt die IPv4-Adresse 192.168.1.1, braucht für die lokale Übertragung aber die zugehörige MAC-Adresse. Welches Protokoll wird genutzt?",
+    "o": [
+     { "t": "ARP", "ok": true },
+     { "t": "DHCP", "ok": false },
+     { "t": "DNS", "ok": false },
+     { "t": "SMTP", "ok": false }
+    ],
+    "e": "ARP löst im lokalen Netz eine IPv4-Adresse in die zugehörige MAC-Adresse auf."
+   },
+   {
+    "q": "Der Befehl ping liefert vier Antworten mit null Prozent Paketverlust. Was lässt sich daraus ableiten?",
+    "o": [
+     { "t": "Das Ziel war über das Netzwerk erreichbar", "ok": true },
+     { "t": "Alle Anwendungsdienste laufen garantiert", "ok": false },
+     { "t": "Die Firewall ist vollständig deaktiviert", "ok": false },
+     { "t": "Das Ziel hat kein Standardgateway gesetzt", "ok": false }
+    ],
+    "e": "Erfolgreiche ICMP-Antworten belegen die Erreichbarkeit, aber nicht, dass alle Anwendungsdienste auf dem Ziel funktionieren."
+   },
+   {
+    "q": "Wie lang ist eine IPv6-Adresse?",
+    "o": [
+     { "t": "128 Bit", "ok": true },
+     { "t": "32 Bit", "ok": false },
+     { "t": "48 Bit", "ok": false },
+     { "t": "64 Bit", "ok": false }
+    ],
+    "e": "Eine IPv6-Adresse ist 128 Bit lang; IPv4 hat 32 Bit."
+   },
+   {
+    "q": "Welche Adressart liegt bei fe80::52a1:c5ff:fef2:38b7 vor?",
+    "o": [
+     { "t": "Link-Local-Adresse", "ok": true },
+     { "t": "Global-Unicast-Adresse", "ok": false },
+     { "t": "Loopback-Adresse", "ok": false },
+     { "t": "IPv4-Broadcastadresse", "ok": false }
+    ],
+    "e": "Adressen aus fe80::/10 sind Link-Local und nur im lokalen Segment gültig."
+   },
+   {
+    "q": "Wie lautet die IPv6-Loopbackadresse?",
+    "o": [
+     { "t": "::1", "ok": true },
+     { "t": "::0", "ok": false },
+     { "t": "127.0.0.1", "ok": false },
+     { "t": "fe80::1", "ok": false }
+    ],
+    "e": "Die IPv6-Loopbackadresse ist ::1 (entspricht 127.0.0.1 in IPv4)."
+   },
+   {
+    "q": "Wie lautet 2001:db8:4::25 vollständig ausgeschrieben?",
+    "o": [
+     { "t": "2001:0db8:0004:0000:0000:0000:0000:0025", "ok": true },
+     { "t": "2001:0db8:0040:0000:0000:0000:0000:0025", "ok": false },
+     { "t": "2001:db80:0004:0000:0000:0000:0000:2500", "ok": false },
+     { "t": "2001:0db8:0000:0004:0000:0000:0000:0025", "ok": false }
+    ],
+    "e": "Jede Gruppe wird auf vier Stellen mit führenden Nullen aufgefüllt, :: steht für die ausgelassenen Nullgruppen."
+   },
+   {
+    "q": "Ein Betrieb bestellt 15 Notebooks zu je 720 Euro. Auf die Gesamtsumme gewährt der Händler 12 Prozent Rabatt. Welcher Rechenweg liefert den zu zahlenden Endpreis?",
+    "o": [
+     { "t": "15 × 720 × 0,88", "ok": true },
+     { "t": "15 × 720 × 0,12", "ok": false },
+     { "t": "15 × 720 × 1,12", "ok": false },
+     { "t": "15 + 720 × 0,88", "ok": false }
+    ],
+    "e": "Nettosumme: 15 × 720 Euro = 10.800 Euro. Bei 12 Prozent Rabatt sind 88 Prozent zu zahlen: 10.800 × 0,88 = 9.504 Euro."
+   },
+   {
+    "q": "Eine Softwarelizenz kostet netto 2.400 Euro. Darauf kommen 19 Prozent Umsatzsteuer. Welcher Rechenweg liefert den Bruttopreis?",
+    "o": [
+     { "t": "2400 × 1,19", "ok": true },
+     { "t": "2400 × 0,19", "ok": false },
+     { "t": "2400 × 0,81", "ok": false },
+     { "t": "2400 ÷ 1,19", "ok": false }
+    ],
+    "e": "Brutto = netto × 1,19, weil 100 Prozent plus 19 Prozent. 2.400 × 1,19 = 2.856 Euro."
+   },
+   {
+    "q": "Für Peripherie stehen 3.150 Euro bereit. Ein Gerät kostet 175 Euro. Welcher Rechenweg liefert die Anzahl beschaffbarer Geräte?",
+    "o": [
+     { "t": "3150 ÷ 175", "ok": true },
+     { "t": "3150 × 175", "ok": false },
+     { "t": "175 ÷ 3150", "ok": false },
+     { "t": "3150 − 175", "ok": false }
+    ],
+    "e": "Anzahl = Budget ÷ Stückpreis. 3.150 ÷ 175 = 18 Geräte."
+   },
+   {
+    "q": "Fünf gleiche Switches kosten zusammen 1.100 Euro. Wie viele Switches erhält man bei gleichem Stückpreis für 1.760 Euro? Welcher Rechenweg passt?",
+    "o": [
+     { "t": "5 × 1760 ÷ 1100", "ok": true },
+     { "t": "5 × 1100 ÷ 1760", "ok": false },
+     { "t": "1760 ÷ 1100 ÷ 5", "ok": false },
+     { "t": "5 × 1760 × 1100", "ok": false }
+    ],
+    "e": "Dreisatz: 5 Switches entsprechen 1.100 Euro, gesucht die Stückzahl bei 1.760 Euro. x = 5 × 1.760 ÷ 1.100 = 8 Switches."
+   },
+   {
+    "q": "Ein Monitor wird von 320 Euro auf 272 Euro reduziert. Welcher Rechenweg liefert den Rabatt in Prozent?",
+    "o": [
+     { "t": "(320 − 272) ÷ 320 × 100", "ok": true },
+     { "t": "(320 − 272) ÷ 272 × 100", "ok": false },
+     { "t": "272 ÷ 320 × 100", "ok": false },
+     { "t": "(320 − 272) × 100 ÷ 48", "ok": false }
+    ],
+    "e": "Rabatt in Prozent = Differenz ÷ Grundwert × 100. (320 − 272) ÷ 320 × 100 = 48 ÷ 320 × 100 = 15 Prozent."
+   },
+   {
+    "q": "Von 250 gelieferten Kabeln sind 30 fehlerhaft. Welcher Rechenweg liefert die Ausschussquote in Prozent?",
+    "o": [
+     { "t": "30 ÷ 250 × 100", "ok": true },
+     { "t": "250 ÷ 30 × 100", "ok": false },
+     { "t": "30 × 250 ÷ 100", "ok": false },
+     { "t": "30 ÷ 250 ÷ 100", "ok": false }
+    ],
+    "e": "Anteil in Prozent = Teil ÷ Gesamt × 100. 30 ÷ 250 × 100 = 12 Prozent."
+   },
+   {
+    "q": "Auf eine Rechnung von 4.500 Euro werden 3 Prozent Skonto gewährt. Welcher Rechenweg liefert den Skontobetrag?",
+    "o": [
+     { "t": "4500 × 0,03", "ok": true },
+     { "t": "4500 ÷ 0,03", "ok": false },
+     { "t": "4500 × 1,03", "ok": false },
+     { "t": "4500 × 0,30", "ok": false }
+    ],
+    "e": "Skontobetrag = Rechnungssumme × Prozentsatz. 4.500 × 0,03 = 135 Euro."
+   },
+   {
+    "q": "Ein Projektbudget von 60.000 Euro wird zu 35 Prozent für Hardware verwendet. Welcher Rechenweg liefert den Hardware-Anteil in Euro?",
+    "o": [
+     { "t": "60000 × 0,35", "ok": true },
+     { "t": "60000 ÷ 0,35", "ok": false },
+     { "t": "60000 × 1,35", "ok": false },
+     { "t": "60000 × 35", "ok": false }
+    ],
+    "e": "Prozentwert = Grundwert × Prozentsatz. 60.000 × 0,35 = 21.000 Euro."
+   },
+   {
+    "q": "Nach 20 Prozent Rabatt zahlt ein Kunde 960 Euro für ein Gerät. Welcher Rechenweg liefert den ursprünglichen Preis?",
+    "o": [
+     { "t": "960 ÷ 0,80", "ok": true },
+     { "t": "960 × 0,80", "ok": false },
+     { "t": "960 × 1,20", "ok": false },
+     { "t": "960 ÷ 0,20", "ok": false }
+    ],
+    "e": "960 Euro entsprechen 80 Prozent des Ausgangspreises. Grundwert = 960 ÷ 0,80 = 1.200 Euro."
+   },
+   {
+    "q": "15 Prozent der Lizenzkosten entsprechen 450 Euro. Welcher Rechenweg liefert die gesamten Lizenzkosten?",
+    "o": [
+     { "t": "450 ÷ 0,15", "ok": true },
+     { "t": "450 × 0,15", "ok": false },
+     { "t": "450 × 1,15", "ok": false },
+     { "t": "450 × 0,85", "ok": false }
+    ],
+    "e": "Grundwert = Prozentwert ÷ Prozentsatz. 450 ÷ 0,15 = 3.000 Euro."
+   },
+   {
+    "q": "Eine Datei von 900 MB wird über eine Leitung mit 30 MB/s übertragen. Welcher Rechenweg liefert die Übertragungszeit?",
+    "o": [
+     { "t": "900 ÷ 30", "ok": true },
+     { "t": "900 × 30", "ok": false },
+     { "t": "30 ÷ 900", "ok": false },
+     { "t": "900 + 30", "ok": false }
+    ],
+    "e": "Zeit = Datenmenge ÷ Übertragungsrate. 900 MB ÷ 30 MB/s = 30 s."
+   },
+   {
+    "q": "Eine 500-MB-Datei wird über eine 100-Mbit/s-Leitung übertragen. Welcher Rechenweg liefert die Zeit in Sekunden?",
+    "o": [
+     { "t": "500 × 8 ÷ 100", "ok": true },
+     { "t": "500 ÷ 100", "ok": false },
+     { "t": "500 ÷ 8 ÷ 100", "ok": false },
+     { "t": "500 × 8 × 100", "ok": false }
+    ],
+    "e": "Einheiten beachten: 500 MB = 500 × 8 = 4.000 Mbit. Zeit = 4.000 Mbit ÷ 100 Mbit/s = 40 s."
+   },
+   {
+    "q": "Eine Übertragung läuft 45 s lang konstant mit 20 MB/s. Welcher Rechenweg liefert die übertragene Datenmenge?",
+    "o": [
+     { "t": "45 × 20", "ok": true },
+     { "t": "45 ÷ 20", "ok": false },
+     { "t": "20 ÷ 45", "ok": false },
+     { "t": "45 + 20", "ok": false }
+    ],
+    "e": "Datenmenge = Rate × Zeit. 20 MB/s × 45 s = 900 MB."
+   },
+   {
+    "q": "Ein Backup läuft 2 Minuten lang mit durchschnittlich 50 MB/s. Welcher Rechenweg liefert das gesicherte Datenvolumen?",
+    "o": [
+     { "t": "2 × 60 × 50", "ok": true },
+     { "t": "2 × 50", "ok": false },
+     { "t": "50 ÷ (2 × 60)", "ok": false },
+     { "t": "2 × 60 ÷ 50", "ok": false }
+    ],
+    "e": "Zeit erst in Sekunden: 2 min = 120 s. Datenmenge = 120 s × 50 MB/s = 6.000 MB."
+   },
+   {
+    "q": "3 GB werden in 40 s übertragen. Welcher Rechenweg liefert die durchschnittliche Rate in MB/s?",
+    "o": [
+     { "t": "3 × 1000 ÷ 40", "ok": true },
+     { "t": "3 ÷ 40", "ok": false },
+     { "t": "40 ÷ (3 × 1000)", "ok": false },
+     { "t": "3 × 1000 × 40", "ok": false }
+    ],
+    "e": "3 GB = 3.000 MB. Rate = Datenmenge ÷ Zeit = 3.000 MB ÷ 40 s = 75 MB/s."
+   },
+   {
+    "q": "Eine 1,5-GB-Datei wird in 120 s hochgeladen. Welcher Rechenweg liefert die Uploadrate in Mbit/s?",
+    "o": [
+     { "t": "1,5 × 8 × 1000 ÷ 120", "ok": true },
+     { "t": "1,5 × 1000 ÷ 120", "ok": false },
+     { "t": "1,5 × 8 ÷ 120", "ok": false },
+     { "t": "120 ÷ (1,5 × 8000)", "ok": false }
+    ],
+    "e": "1,5 GB = 1,5 × 8 × 1000 = 12.000 Mbit. Rate = 12.000 Mbit ÷ 120 s = 100 Mbit/s."
+   },
+   {
+    "q": "Wie viele nutzbare Hostadressen bietet ein Subnetz mit Präfixlänge /26? Welcher Rechenweg ist korrekt?",
+    "o": [
+     { "t": "2^(32 − 26) − 2", "ok": true },
+     { "t": "2^(32 − 26) ÷ 2", "ok": false },
+     { "t": "2^(32 − 26) + 2", "ok": false },
+     { "t": "2^26 − 2", "ok": false }
+    ],
+    "e": "Hostbits = 32 − 26 = 6. Nutzbare Hosts = 2^6 − 2 = 64 − 2 = 62. Abgezogen werden Netz- und Broadcastadresse."
+   },
+   {
+    "q": "Ein /28-Netz wird benötigt. Welcher Rechenweg liefert die Zahl nutzbarer Hosts?",
+    "o": [
+     { "t": "2^(32 − 28) − 2", "ok": true },
+     { "t": "2^(32 − 28) × 2", "ok": false },
+     { "t": "2^(28 − 4) − 2", "ok": false },
+     { "t": "2^(32 − 28) + 2", "ok": false }
+    ],
+    "e": "Hostbits = 32 − 28 = 4. Nutzbare Hosts = 2^4 − 2 = 16 − 2 = 14."
+   },
+   {
+    "q": "Ein /24-Netz wird in /27-Subnetze zerlegt. Welcher Rechenweg liefert die Anzahl der Subnetze?",
+    "o": [
+     { "t": "2^(27 − 24)", "ok": true },
+     { "t": "2^(32 − 27) − 2", "ok": false },
+     { "t": "2^(32 − 24)", "ok": false },
+     { "t": "27 − 24 × 2", "ok": false }
+    ],
+    "e": "Geliehene Bits = 27 − 24 = 3. Anzahl Subnetze = 2^3 = 8."
+   },
+   {
+    "q": "Welche Subnetzmaske gehört zur Präfixlänge /26?",
+    "o": [
+     { "t": "255.255.255.192", "ok": true },
+     { "t": "255.255.255.224", "ok": false },
+     { "t": "255.255.255.128", "ok": false },
+     { "t": "255.255.255.240", "ok": false }
+    ],
+    "e": "/26 hat im vierten Oktett zwei Netzbits: 11000000 = 192. Maske = 255.255.255.192."
+   },
+   {
+    "q": "Wie ermittelt man aus IP-Adresse und Subnetzmaske die Netzadresse?",
+    "o": [
+     { "t": "Bitweise UND-Verknüpfung beider Werte", "ok": true },
+     { "t": "Bitweise ODER-Verknüpfung beider Werte", "ok": false },
+     { "t": "Addition beider Werte je Oktett", "ok": false },
+     { "t": "Bitweise XOR-Verknüpfung beider Werte", "ok": false }
+    ],
+    "e": "Die Netzadresse ergibt sich aus der bitweisen UND-Verknüpfung von IP-Adresse und Subnetzmaske."
+   },
+   {
+    "q": "Betrachtet wird das Subnetz 192.168.1.64/26. Welche Adresse ist dessen Broadcastadresse?",
+    "o": [
+     { "t": "192.168.1.127", "ok": true },
+     { "t": "192.168.1.128", "ok": false },
+     { "t": "192.168.1.126", "ok": false },
+     { "t": "192.168.1.255", "ok": false }
+    ],
+    "e": "Blockgröße bei /26 = 256 − 192 = 64. Das Subnetz .64 reicht bis .127, also Broadcast = 192.168.1.127."
+   },
+   {
+    "q": "Ein Standort erhält ein IPv6-Präfix /48. Welcher Rechenweg liefert die Anzahl möglicher /64-Subnetze?",
+    "o": [
+     { "t": "2^(64 − 48)", "ok": true },
+     { "t": "2^(128 − 64)", "ok": false },
+     { "t": "64 − 48 × 2", "ok": false },
+     { "t": "2^(64 − 48) − 2", "ok": false }
+    ],
+    "e": "Subnetzbits = 64 − 48 = 16. Anzahl der /64-Netze = 2^16 = 65.536."
+   },
+   {
+    "q": "Wie lautet 2001:0db8:0000:0000:0000:ff00:0042:8329 in gekürzter Schreibweise?",
+    "o": [
+     { "t": "2001:db8::ff00:42:8329", "ok": true },
+     { "t": "2001:db8:0:0:0:ff00:42:8329", "ok": false },
+     { "t": "2001:db8::ff00:0042:8329", "ok": false },
+     { "t": "2001::db8:ff00:42:8329", "ok": false }
+    ],
+    "e": "Führende Nullen je Gruppe entfallen, eine zusammenhängende Nullfolge wird einmalig durch :: ersetzt: 2001:db8::ff00:42:8329."
+   },
+   {
+    "q": "Aus wie vielen 16-Bit-Blöcken besteht eine IPv6-Adresse? Welcher Rechenweg passt?",
+    "o": [
+     { "t": "128 ÷ 16", "ok": true },
+     { "t": "128 ÷ 8", "ok": false },
+     { "t": "128 × 16", "ok": false },
+     { "t": "64 ÷ 16", "ok": false }
+    ],
+    "e": "IPv6 hat 128 Bit, je Block 16 Bit: 128 ÷ 16 = 8 Blöcke, auch Hextets genannt."
+   },
+   {
+    "q": "Welche Formel liefert die nutzbare Nettokapazität eines RAID 5?",
+    "o": [
+     { "t": "Plattenzahl minus 1, mal kleinste Platte", "ok": true },
+     { "t": "Plattenzahl minus 2, mal kleinste Platte", "ok": false },
+     { "t": "Plattenzahl mal kleinste Platte", "ok": false },
+     { "t": "Kapazität einer einzelnen Platte", "ok": false }
+    ],
+    "e": "RAID 5 opfert rechnerisch eine Platte für die verteilte Parität: (n − 1) × kleinste Plattenkapazität."
+   },
+   {
+    "q": "Welche Formel beschreibt die Nettokapazität eines RAID 6?",
+    "o": [
+     { "t": "Plattenzahl minus 2, mal kleinste Platte", "ok": true },
+     { "t": "Plattenzahl minus 1, mal kleinste Platte", "ok": false },
+     { "t": "Plattenzahl mal kleinste Platte", "ok": false },
+     { "t": "Kapazität von zwei einzelnen Platten", "ok": false }
+    ],
+    "e": "RAID 6 hält doppelte Parität vor, zwei Platten entfallen rechnerisch: (n − 2) × kleinste Plattenkapazität."
+   },
+   {
+    "q": "Wie wird der Gesamtnutzwert in einer Nutzwertanalyse gebildet?",
+    "o": [
+     { "t": "Summe aus Gewichtung mal Bewertung je Kriterium", "ok": true },
+     { "t": "Summe aller Gewichtungen ohne Bewertung", "ok": false },
+     { "t": "Gewichtung geteilt durch Bewertung je Kriterium", "ok": false },
+     { "t": "Nur die höchste Einzelbewertung zählt", "ok": false }
+    ],
+    "e": "Je Kriterium Gewichtung × Bewertung, dann alle Teilwerte summieren."
+   },
+   {
+    "q": "Welche Formel liefert den effektiven internen Stundensatz?",
+    "o": [
+     { "t": "Jahreskosten geteilt durch produktive Stunden", "ok": true },
+     { "t": "Jahreskosten mal produktive Stunden", "ok": false },
+     { "t": "Produktive Stunden geteilt durch Jahreskosten", "ok": false },
+     { "t": "Jahreskosten geteilt durch Kalendertage", "ok": false }
+    ],
+    "e": "Stundensatz = Jahreskosten ÷ produktive Stunden. Produktive Stunden = Arbeitstage × Stunden pro Tag."
+   },
+   {
+    "q": "Auf die Summe der Komponentenleistungen soll ein Puffer von 10 Prozent aufgeschlagen werden. Welcher Rechenweg ist korrekt?",
+    "o": [
+     { "t": "Summe × 1,10", "ok": true },
+     { "t": "Summe × 0,10", "ok": false },
+     { "t": "Summe × 0,90", "ok": false },
+     { "t": "Summe + 10", "ok": false }
+    ],
+    "e": "10 Prozent Puffer bedeutet 110 Prozent der Summe: Gesamtsumme × 1,10."
+   },
+   {
+    "q": "Welche Formel liefert die Zahl nutzbarer Hosts in einem IPv4-Subnetz?",
+    "o": [
+     { "t": "Zwei hoch Hostbits, minus 2", "ok": true },
+     { "t": "Zwei hoch Hostbits, ohne Abzug", "ok": false },
+     { "t": "Zwei hoch Netzbits, minus 2", "ok": false },
+     { "t": "Hostbits minus 2, ohne Potenz", "ok": false }
+    ],
+    "e": "2^(Hostbits) − 2. Die zwei Abzüge sind Netz- und Broadcastadresse."
+   },
+   {
+    "q": "Welche Formel liefert die Übertragungszeit einer Datei?",
+    "o": [
+     { "t": "Datenmenge geteilt durch Übertragungsrate", "ok": true },
+     { "t": "Datenmenge mal Übertragungsrate", "ok": false },
+     { "t": "Übertragungsrate geteilt durch Datenmenge", "ok": false },
+     { "t": "Datenmenge plus Übertragungsrate", "ok": false }
+    ],
+    "e": "Zeit = Datenmenge ÷ Übertragungsrate. Bit und Byte nicht verwechseln: 1 Byte = 8 Bit."
+   },
+   {
+    "q": "Wie ermittelt man die Break-even-Menge zwischen Eigenentwicklung und Fremdbezug?",
+    "o": [
+     { "t": "Fixkosten geteilt durch Kosten je Einheit im Fremdbezug", "ok": true },
+     { "t": "Kosten je Einheit im Fremdbezug geteilt durch die Fixkosten", "ok": false },
+     { "t": "Summe aus Fixkosten und Fremdbezugskosten", "ok": false },
+     { "t": "Differenz aus Fixkosten und Fremdbezugskosten", "ok": false }
+    ],
+    "e": "Break-even-Menge = Fixkosten der Eigenentwicklung ÷ Kosten pro Einheit beim Fremdbezug. Oberhalb lohnt die Eigenentwicklung."
+   },
+   {
+    "q": "Die Tabelle Employee hat die Spalten EmployeeID, FirstName, LastName und Department. Welche Anweisung gibt ausschließlich Vor- und Nachname aus?",
+    "o": [
+     { "t": "SELECT FirstName, LastName FROM Employee;", "ok": true },
+     { "t": "SELECT * FROM Employee;", "ok": false },
+     { "t": "SELECT Employee FROM FirstName, LastName;", "ok": false },
+     { "t": "GET FirstName, LastName FROM Employee;", "ok": false }
+    ],
+    "e": "Hinter SELECT werden die auszugebenden Spalten angegeben."
+   },
+   {
+    "q": "Welche Abfrage gibt alle Geräte aus, deren Anschaffungspreis über 1.000 Euro liegt?",
+    "o": [
+     { "t": "SELECT * FROM Device WHERE PurchasePrice > 1000;", "ok": true },
+     { "t": "SELECT * FROM Device IF PurchasePrice > 1000;", "ok": false },
+     { "t": "SELECT Device WHERE PurchasePrice = 1000;", "ok": false },
+     { "t": "SELECT * FROM PurchasePrice > 1000;", "ok": false }
+    ],
+    "e": "Die WHERE-Klausel schränkt die Ergebnismenge anhand einer Bedingung ein."
+   },
+   {
+    "q": "Welche Abfrage gibt Geräte der Abteilung Entwicklung aus, deren Preis unter 2.000 Euro liegt?",
+    "o": [
+     { "t": "SELECT * FROM Device WHERE Department = 'Entwicklung' AND PurchasePrice < 2000;", "ok": true },
+     { "t": "SELECT * FROM Device WHERE Department = 'Entwicklung' OR PurchasePrice < 2000;", "ok": false },
+     { "t": "SELECT * FROM Device WHERE Department = 'Entwicklung' XOR PurchasePrice < 2000;", "ok": false },
+     { "t": "SELECT * FROM Device WHERE Department = 'Entwicklung' NOT PurchasePrice < 2000;", "ok": false }
+    ],
+    "e": "Beide Bedingungen müssen gleichzeitig erfüllt sein, deshalb AND."
+   },
+   {
+    "q": "Welche Abfrage gibt Geräte aus den Abteilungen Support oder Entwicklung aus?",
+    "o": [
+     { "t": "SELECT * FROM Device WHERE Department = 'Support' OR Department = 'Entwicklung';", "ok": true },
+     { "t": "SELECT * FROM Device WHERE Department = 'Support' AND Department = 'Entwicklung';", "ok": false },
+     { "t": "SELECT * FROM Device WHERE Department = 'Support' XOR Department = 'Entwicklung';", "ok": false },
+     { "t": "SELECT * FROM Device WHERE Department = 'Support' NOR Department = 'Entwicklung';", "ok": false }
+    ],
+    "e": "Ein Gerät darf zu einer der beiden Abteilungen gehören, deshalb OR."
+   },
+   {
+    "q": "Welche Anweisung ermittelt die Anzahl aller Datensätze in OrderData?",
+    "o": [
+     { "t": "SELECT COUNT(*) FROM OrderData;", "ok": true },
+     { "t": "SELECT SUM(*) FROM OrderData;", "ok": false },
+     { "t": "SELECT NUMBER(*) FROM OrderData;", "ok": false },
+     { "t": "SELECT ROWS(*) FROM OrderData;", "ok": false }
+    ],
+    "e": "COUNT(*) zählt alle Datensätze der Ergebnismenge."
+   },
+   {
+    "q": "Welche Abfrage berechnet die Summe der Spalte Quantity?",
+    "o": [
+     { "t": "SELECT SUM(Quantity) FROM OrderData;", "ok": true },
+     { "t": "SELECT COUNT(Quantity) FROM OrderData;", "ok": false },
+     { "t": "SELECT AVG(Quantity) FROM OrderData;", "ok": false },
+     { "t": "SELECT TOTAL(Quantity) FROM OrderData;", "ok": false }
+    ],
+    "e": "SUM() addiert die numerischen Werte einer Spalte."
+   },
+   {
+    "q": "Welche Funktion berechnet den durchschnittlichen Anschaffungspreis?",
+    "o": [
+     { "t": "AVG(PurchasePrice)", "ok": true },
+     { "t": "COUNT(PurchasePrice)", "ok": false },
+     { "t": "SUM(PurchasePrice)", "ok": false },
+     { "t": "MAX(PurchasePrice)", "ok": false }
+    ],
+    "e": "AVG() berechnet das arithmetische Mittel."
+   },
+   {
+    "q": "Welche Abfrage ermittelt den niedrigsten Anschaffungspreis?",
+    "o": [
+     { "t": "SELECT MIN(PurchasePrice) FROM Device;", "ok": true },
+     { "t": "SELECT LOW(PurchasePrice) FROM Device;", "ok": false },
+     { "t": "SELECT FIRST(PurchasePrice) FROM Device;", "ok": false },
+     { "t": "SELECT AVG(PurchasePrice) FROM Device;", "ok": false }
+    ],
+    "e": "MIN() liefert den kleinsten Wert."
+   },
+   {
+    "q": "Welche Abfrage ermittelt die höchste gespeicherte Bestellmenge?",
+    "o": [
+     { "t": "SELECT MAX(Quantity) FROM OrderData;", "ok": true },
+     { "t": "SELECT HIGH(Quantity) FROM OrderData;", "ok": false },
+     { "t": "SELECT TOP(Quantity) FROM OrderData;", "ok": false },
+     { "t": "SELECT SUM(Quantity) FROM OrderData;", "ok": false }
+    ],
+    "e": "MAX() liefert den größten Wert einer Spalte."
+   },
+   {
+    "q": "Welche Abfrage sortiert Geräte nach dem Preis, beginnend mit dem höchsten Wert?",
+    "o": [
+     { "t": "SELECT * FROM Device ORDER BY PurchasePrice DESC;", "ok": true },
+     { "t": "SELECT * FROM Device ORDER BY PurchasePrice ASC;", "ok": false },
+     { "t": "SELECT * FROM Device GROUP BY PurchasePrice;", "ok": false },
+     { "t": "SELECT * FROM Device SORT BY PurchasePrice HIGH;", "ok": false }
+    ],
+    "e": "DESC steht für eine absteigende Sortierung."
+   },
+   {
+    "q": "Welche Abfrage gibt jeden Abteilungsnamen nur einmal aus?",
+    "o": [
+     { "t": "SELECT DISTINCT Department FROM Employee;", "ok": true },
+     { "t": "SELECT UNIQUE Department FROM Employee;", "ok": false },
+     { "t": "SELECT COUNT Department FROM Employee;", "ok": false },
+     { "t": "SELECT Department ONCE FROM Employee;", "ok": false }
+    ],
+    "e": "DISTINCT entfernt doppelte Werte aus der Ausgabe."
+   },
+   {
+    "q": "Welche Anweisung fügt eine neue Abteilung ein?",
+    "o": [
+     { "t": "INSERT INTO Department (DepartmentID, Name) VALUES (4, 'Support');", "ok": true },
+     { "t": "ADD Department (DepartmentID, Name) VALUES (4, 'Support');", "ok": false },
+     { "t": "UPDATE Department (DepartmentID, Name) VALUES (4, 'Support');", "ok": false },
+     { "t": "CREATE Department (DepartmentID, Name) VALUES (4, 'Support');", "ok": false }
+    ],
+    "e": "Neue Datensätze werden mit INSERT INTO eingefügt."
+   },
+   {
+    "q": "Der Gerätename mit der DeviceID 18 soll geändert werden. Welche Anweisung ist korrekt?",
+    "o": [
+     { "t": "UPDATE Device SET DeviceName = 'CAD-PC-18' WHERE DeviceID = 18;", "ok": true },
+     { "t": "CHANGE Device SET DeviceName = 'CAD-PC-18' WHERE DeviceID = 18;", "ok": false },
+     { "t": "UPDATE Device WHERE DeviceID = 18 VALUES 'CAD-PC-18';", "ok": false },
+     { "t": "INSERT Device SET DeviceName = 'CAD-PC-18' WHERE DeviceID = 18;", "ok": false }
+    ],
+    "e": "SET legt den neuen Wert fest, WHERE wählt den Datensatz aus."
+   },
+   {
+    "q": "Welche Folge hat die Anweisung UPDATE Device SET Status = 'inaktiv'; ohne WHERE-Klausel?",
+    "o": [
+     { "t": "Alle Datensätze erhalten den Status inaktiv.", "ok": true },
+     { "t": "Nur der erste Datensatz wird geändert.", "ok": false },
+     { "t": "Die Tabelle wird vollständig gelöscht.", "ok": false },
+     { "t": "Die Anweisung enthält einen Syntaxfehler.", "ok": false }
+    ],
+    "e": "Ohne WHERE wird jeder Datensatz der Tabelle geändert."
+   },
+   {
+    "q": "Welche Anweisung löscht das Gerät mit der DeviceID 27?",
+    "o": [
+     { "t": "DELETE FROM Device WHERE DeviceID = 27;", "ok": true },
+     { "t": "REMOVE FROM Device WHERE DeviceID = 27;", "ok": false },
+     { "t": "DROP FROM Device WHERE DeviceID = 27;", "ok": false },
+     { "t": "DELETE Device SET DeviceID = 27;", "ok": false }
+    ],
+    "e": "DELETE FROM löscht Datensätze, WHERE begrenzt die Auswahl."
+   },
+   {
+    "q": "Was bewirkt die Anweisung DELETE FROM Device; ohne WHERE-Klausel?",
+    "o": [
+     { "t": "Alle Datensätze der Tabelle werden gelöscht.", "ok": true },
+     { "t": "Nur der jeweils erste Datensatz der Tabelle wird gelöscht.", "ok": false },
+     { "t": "Die Tabellenstruktur wird entfernt.", "ok": false },
+     { "t": "Die Tabelle wird umbenannt.", "ok": false }
+    ],
+    "e": "Ohne WHERE betrifft DELETE alle Datensätze, die Tabellenstruktur bleibt erhalten."
+   },
+   {
+    "q": "Welche Eigenschaft muss ein Primärschlüssel besitzen?",
+    "o": [
+     { "t": "Er identifiziert jeden Datensatz eindeutig.", "ok": true },
+     { "t": "Sein Wert darf mehrfach vorkommen.", "ok": false },
+     { "t": "Er muss immer aus einem Namen bestehen.", "ok": false },
+     { "t": "Er darf nur in Zuordnungstabellen stehen.", "ok": false }
+    ],
+    "e": "Primärschlüsselwerte identifizieren Datensätze eindeutig."
+   },
+   {
+    "q": "Welche Aufgabe besitzt ein Fremdschlüssel?",
+    "o": [
+     { "t": "Er stellt die Beziehung zu einem Datensatz einer anderen Tabelle her.", "ok": true },
+     { "t": "Er verschlüsselt die gesamten Inhalte einer Tabelle dauerhaft und vollständig.", "ok": false },
+     { "t": "Er sortiert die Tabelle bei jeder Abfrage automatisch.", "ok": false },
+     { "t": "Er verhindert jede weitere Änderung an Datensätzen.", "ok": false }
+    ],
+    "e": "Ein Fremdschlüssel verweist typischerweise auf einen Primärschlüssel."
+   },
+   {
+    "q": "Ein Kunde kann mehrere Aufträge erteilen, jeder Auftrag gehört genau einem Kunden. Welche Kardinalität liegt vor?",
+    "o": [
+     { "t": "1:n", "ok": true },
+     { "t": "1:1", "ok": false },
+     { "t": "n:m", "ok": false },
+     { "t": "n:0", "ok": false }
+    ],
+    "e": "Ein Kunde kann mit mehreren Aufträgen verbunden sein, jeder Auftrag aber nur mit einem Kunden."
+   },
+   {
+    "q": "Mehrere Beschäftigte können an mehreren Projekten arbeiten. Wie wird diese Beziehung üblicherweise umgesetzt?",
+    "o": [
+     { "t": "Durch eine zusätzliche Zuordnungstabelle", "ok": true },
+     { "t": "Durch Löschen einer der Haupttabellen", "ok": false },
+     { "t": "Durch Entfernen aller Primärschlüssel", "ok": false },
+     { "t": "Durch Ablage aller Werte in einer Textspalte", "ok": false }
+    ],
+    "e": "Eine n:m-Beziehung wird durch eine Zwischentabelle aufgelöst."
+   },
+   {
+    "q": "Eine Abteilung hat mehrere Beschäftigte. In welcher Tabelle wird die DepartmentID als Fremdschlüssel gespeichert?",
+    "o": [
+     { "t": "In der Tabelle Employee", "ok": true },
+     { "t": "Ausschließlich in der Tabelle Department", "ok": false },
+     { "t": "In gar keiner der beiden Tabellen", "ok": false },
+     { "t": "In einer Tabelle ohne Bezug zu beiden", "ok": false }
+    ],
+    "e": "Der Fremdschlüssel wird auf der n-Seite gespeichert, also bei Employee."
+   },
+   {
+    "q": "Wozu dient ein JOIN?",
+    "o": [
+     { "t": "Zum Verknüpfen zusammengehöriger Datensätze mehrerer Tabellen", "ok": true },
+     { "t": "Zum vollständigen Verschlüsseln einer einzelnen ausgewählten Tabelle", "ok": false },
+     { "t": "Zum Entfernen doppelter Datenbanken vom Server", "ok": false },
+     { "t": "Zum Erstellen eines neuen Betriebssystems", "ok": false }
+    ],
+    "e": "JOIN-Operationen verbinden Datensätze anhand gemeinsamer Werte."
+   },
+   {
+    "q": "Was liefert ein INNER JOIN?",
+    "o": [
+     { "t": "Nur Datensätze mit passenden Werten in beiden Tabellen", "ok": true },
+     { "t": "Grundsätzlich alle Datensätze der linken Tabelle", "ok": false },
+     { "t": "Alle Datensätze beider Tabellen ohne jede Beziehung", "ok": false },
+     { "t": "Ausschließlich Datensätze ohne jede Übereinstimmung", "ok": false }
+    ],
+    "e": "Ein INNER JOIN beschränkt das Ergebnis auf übereinstimmende Datensätze."
+   },
+   {
+    "q": "Was bedeutet der Wert NULL in einer Datenbank?",
+    "o": [
+     { "t": "Der Wert ist nicht vorhanden oder unbekannt.", "ok": true },
+     { "t": "Der Wert ist immer die Zahl null.", "ok": false },
+     { "t": "Der Wert ist eine leere Zeichenkette.", "ok": false },
+     { "t": "Der Datensatz wurde automatisch gelöscht.", "ok": false }
+    ],
+    "e": "NULL ist ein besonderer Zustand und nicht mit 0 oder einer leeren Zeichenkette gleichzusetzen."
+   },
+   {
+    "q": "Welche Bedingung prüft, ob in einer Spalte kein Wert gespeichert ist?",
+    "o": [
+     { "t": "WHERE Value IS NULL", "ok": true },
+     { "t": "WHERE Value = NULL", "ok": false },
+     { "t": "WHERE Value == EMPTY", "ok": false },
+     { "t": "WHERE Value = 0", "ok": false }
+    ],
+    "e": "NULL wird mit IS NULL beziehungsweise IS NOT NULL geprüft, nicht mit dem Gleichheitszeichen."
+   },
+   {
+    "q": "Welcher Datentyp eignet sich für die Anzahl installierter Programme?",
+    "o": [
+     { "t": "Integer", "ok": true },
+     { "t": "Boolean", "ok": false },
+     { "t": "String", "ok": false },
+     { "t": "Date", "ok": false }
+    ],
+    "e": "Anzahlen sind Ganzzahlen und werden als Integer gespeichert."
+   },
+   {
+    "q": "Welche Werte kann eine boolesche Variable typischerweise annehmen?",
+    "o": [
+     { "t": "Wahr und falsch", "ok": true },
+     { "t": "Positiv und negativ", "ok": false },
+     { "t": "Zahl und Text", "ok": false },
+     { "t": "Datum und Uhrzeit", "ok": false }
+    ],
+    "e": "Boolesche Variablen bilden logische Zustände ab."
+   },
+   {
+    "q": "Welcher Datentyp eignet sich für einen Messwert wie 18,75?",
+    "o": [
+     { "t": "Gleitkommazahl", "ok": true },
+     { "t": "Boolean", "ok": false },
+     { "t": "Integer", "ok": false },
+     { "t": "Character", "ok": false }
+    ],
+    "e": "Gleitkommatypen können Werte mit Nachkommastellen speichern."
+   },
+   {
+    "q": "Ein Array enthält fünf Elemente und beginnt bei Index null. Welchen Index besitzt das letzte Element?",
+    "o": [
+     { "t": "4", "ok": true },
+     { "t": "3", "ok": false },
+     { "t": "5", "ok": false },
+     { "t": "6", "ok": false }
+    ],
+    "e": "Die Indizes lauten 0 bis 4, das letzte Element hat Index 4."
+   },
+   {
+    "q": "Ein Array besitzt die Indizes 0 bis 3. Was kann beim Zugriff auf array[4] auftreten?",
+    "o": [
+     { "t": "Ein Fehler wegen eines ungültigen Index", "ok": true },
+     { "t": "Das erste Element wird ausgewählt.", "ok": false },
+     { "t": "Das Array wird automatisch vergrößert.", "ok": false },
+     { "t": "Alle Elemente werden gleichzeitig ausgegeben.", "ok": false }
+    ],
+    "e": "Index 4 liegt außerhalb des gültigen Bereichs 0 bis 3."
+   },
+   {
+    "q": "Pseudocode: sum = 0; für i von 1 bis 4 wird jeweils sum = sum + i berechnet. Welchen Wert hat sum am Ende?",
+    "o": [
+     { "t": "10", "ok": true },
+     { "t": "4", "ok": false },
+     { "t": "6", "ok": false },
+     { "t": "16", "ok": false }
+    ],
+    "e": "1 + 2 + 3 + 4 = 10."
+   },
+   {
+    "q": "Pseudocode: values = [3, 8, 5, 12]; result = 0; für jedes Element wird result um den Wert erhöht, wenn dieser größer als 5 ist. Welchen Wert hat result?",
+    "o": [
+     { "t": "20", "ok": true },
+     { "t": "8", "ok": false },
+     { "t": "12", "ok": false },
+     { "t": "28", "ok": false }
+    ],
+    "e": "Nur 8 und 12 sind größer als 5: 8 + 12 = 20."
+   },
+   {
+    "q": "Pseudocode: counter = 0; solange counter < 5 wird counter = counter + 1 ausgeführt. Wie oft läuft der Schleifenrumpf?",
+    "o": [
+     { "t": "Fünfmal", "ok": true },
+     { "t": "Viermal", "ok": false },
+     { "t": "Sechsmal", "ok": false },
+     { "t": "Unendlich oft", "ok": false }
+    ],
+    "e": "Die Schleife läuft für die Werte 0 bis 4, also fünfmal."
+   },
+   {
+    "q": "Pseudocode: i = 0; solange i < 10 wird ausgabe(i) aufgerufen. Welche Ergänzung verhindert eine Endlosschleife?",
+    "o": [
+     { "t": "i = i + 1 innerhalb der Schleife", "ok": true },
+     { "t": "i in eine Zeichenkette umwandeln", "ok": false },
+     { "t": "Die Bedingung im Kopf verdoppeln", "ok": false },
+     { "t": "Die Ausgabe aus dem Rumpf entfernen", "ok": false }
+    ],
+    "e": "Die Laufvariable muss sich in Richtung der Abbruchbedingung verändern."
+   },
+   {
+    "q": "Eine Anmeldung ist nur erlaubt, wenn das Passwort korrekt und das Konto aktiv ist. Welche Bedingung passt?",
+    "o": [
+     { "t": "passwordCorrect AND accountActive", "ok": true },
+     { "t": "passwordCorrect OR accountActive", "ok": false },
+     { "t": "passwordCorrect XOR accountActive", "ok": false },
+     { "t": "NOT passwordCorrect AND accountActive", "ok": false }
+    ],
+    "e": "Beide Bedingungen müssen erfüllt sein, deshalb AND."
+   },
+   {
+    "q": "Eine Warnung soll erscheinen, wenn der Speicher knapp ist oder ein Datenträgerfehler vorliegt. Welcher Operator wird benötigt?",
+    "o": [
+     { "t": "OR", "ok": true },
+     { "t": "AND", "ok": false },
+     { "t": "NOT", "ok": false },
+     { "t": "MODULO", "ok": false }
+    ],
+    "e": "Bereits eine erfüllte Bedingung soll die Warnung auslösen, deshalb OR."
+   },
+   {
+    "q": "getEmergencyStop() liefert true, wenn der Notausschalter betätigt wurde. Welche Bedingung erlaubt den Start?",
+    "o": [
+     { "t": "NOT getEmergencyStop()", "ok": true },
+     { "t": "getEmergencyStop() only", "ok": false },
+     { "t": "getEmergencyStop() OR true", "ok": false },
+     { "t": "getEmergencyStop() AND true", "ok": false }
+    ],
+    "e": "Der Start ist nur erlaubt, wenn der Notausschalter nicht betätigt ist."
+   },
+   {
+    "q": "Welche Aufgabe besitzen die Parameter einer Funktion?",
+    "o": [
+     { "t": "Sie übergeben Werte an die Funktion.", "ok": true },
+     { "t": "Sie beenden sofort das gesamte Programm.", "ok": false },
+     { "t": "Sie löschen alle vorhandenen Variablen.", "ok": false },
+     { "t": "Sie speichern ausschließlich Fehlermeldungen.", "ok": false }
+    ],
+    "e": "Parameter stellen Eingaben für die Verarbeitung innerhalb der Funktion bereit."
+   },
+   {
+    "q": "Welche Anweisung gibt einen Wert aus einer Funktion an den Aufrufer zurück?",
+    "o": [
+     { "t": "return", "ok": true },
+     { "t": "break", "ok": false },
+     { "t": "continue", "ok": false },
+     { "t": "import", "ok": false }
+    ],
+    "e": "return liefert einen Wert an den aufrufenden Programmteil."
+   },
+   {
+    "q": "Zehn Computer erhalten jeweils fünf Programme über zwei verschachtelte Schleifen. Wie oft wird der Installationsaufruf ausgeführt?",
+    "o": [
+     { "t": "50-mal", "ok": true },
+     { "t": "5-mal", "ok": false },
+     { "t": "10-mal", "ok": false },
+     { "t": "15-mal", "ok": false }
+    ],
+    "e": "Verschachtelte Schleifen multiplizieren die Durchläufe: 10 × 5 = 50."
+   },
+   {
+    "q": "Software soll auf Zielrechnern verteilt werden. Welche Reihenfolge der Schritte ist sinnvoll?",
+    "o": [
+     { "t": "Computerliste laden, Computer wählen, Softwareliste laden, Programme installieren", "ok": true },
+     { "t": "Programme installieren, danach Computerliste laden, Datenbank löschen und beenden", "ok": false },
+     { "t": "Softwareliste löschen, Computer herunterfahren, danach installieren", "ok": false },
+     { "t": "Installation starten, bevor überhaupt ein Zielcomputer feststeht", "ok": false }
+    ],
+    "e": "Zuerst werden Zielsysteme und zugehörige Programme ermittelt, dann installiert."
+   },
+   {
+    "q": "Warum wird eine Summenvariable häufig mit null initialisiert?",
+    "o": [
+     { "t": "Null ist das neutrale Element der Addition.", "ok": true },
+     { "t": "Null beendet automatisch jede Schleife.", "ok": false },
+     { "t": "Null verhindert grundsätzlich jeden Überlauf.", "ok": false },
+     { "t": "Null wandelt Text selbstständig in Zahlen um.", "ok": false }
+    ],
+    "e": "Die Addition von null verändert den ersten hinzugefügten Wert nicht."
+   },
+   {
+    "q": "Welche Anweisung beendet eine Schleife vorzeitig?",
+    "o": [
+     { "t": "break", "ok": true },
+     { "t": "include", "ok": false },
+     { "t": "define", "ok": false },
+     { "t": "import", "ok": false }
+    ],
+    "e": "break beendet die aktuell ausgeführte Schleife."
+   },
+   {
+    "q": "Welche Wirkung besitzt continue typischerweise innerhalb einer Schleife?",
+    "o": [
+     { "t": "Der aktuelle Durchlauf wird übersprungen, die Schleife läuft weiter.", "ok": true },
+     { "t": "Das gesamte Programm wird ohne weitere Meldung sofort vollständig beendet.", "ok": false },
+     { "t": "Die Schleifenbedingung wird dauerhaft gelöscht.", "ok": false },
+     { "t": "Alle Variablen der Schleife werden zurückgesetzt.", "ok": false }
+    ],
+    "e": "continue springt zum nächsten Schleifendurchlauf."
+   },
+   {
+    "q": "Welche Bedingung prüft, ob quantity mindestens 100 beträgt?",
+    "o": [
+     { "t": "quantity >= 100", "ok": true },
+     { "t": "quantity > 100", "ok": false },
+     { "t": "quantity <= 100", "ok": false },
+     { "t": "quantity <> 100", "ok": false }
+    ],
+    "e": "Mindestens schließt den Grenzwert ein, deshalb größer oder gleich."
+   },
+   {
+    "q": "Welche der folgenden Anforderungen ist funktional?",
+    "o": [
+     { "t": "Das System muss neue Supporttickets anlegen können.", "ok": true },
+     { "t": "Die Antwortzeit darf zwei Sekunden nicht überschreiten.", "ok": false },
+     { "t": "Die Verfügbarkeit muss 99,5 Prozent im Jahr betragen.", "ok": false },
+     { "t": "Die Oberfläche muss den Kontrastvorgaben entsprechen.", "ok": false }
+    ],
+    "e": "Funktionale Anforderungen beschreiben, was ein System tun soll."
+   },
+   {
+    "q": "Welche der folgenden Anforderungen ist nichtfunktional?",
+    "o": [
+     { "t": "Eine Suchanfrage muss in unter zwei Sekunden beantwortet werden.", "ok": true },
+     { "t": "Benutzer können jederzeit ein neues Kundenkonto mit Stammdaten anlegen.", "ok": false },
+     { "t": "Administratoren können Benutzerkonten sperren.", "ok": false },
+     { "t": "Beschäftigte können ihre Stammdaten anzeigen.", "ok": false }
+    ],
+    "e": "Die Antwortzeit beschreibt eine Qualitätseigenschaft, keine Funktion."
+   },
+   {
+    "q": "Was kennzeichnet eine Muss-Anforderung?",
+    "o": [
+     { "t": "Sie muss für die Akzeptanz der Lösung erfüllt sein.", "ok": true },
+     { "t": "Sie darf im Projekt ausdrücklich gar nicht umgesetzt werden.", "ok": false },
+     { "t": "Sie ist grundsätzlich völlig unverbindlich.", "ok": false },
+     { "t": "Sie wird erst nach der Abnahme festgelegt.", "ok": false }
+    ],
+    "e": "Muss-Anforderungen sind zwingend zu erfüllen."
+   },
+   {
+    "q": "Was kennzeichnet eine Kann-Anforderung?",
+    "o": [
+     { "t": "Sie ist eine optionale Erweiterung.", "ok": true },
+     { "t": "Sie muss zwingend erfüllt werden.", "ok": false },
+     { "t": "Sie ist ein bekannter technischer Fehler.", "ok": false },
+     { "t": "Sie ersetzt sämtliche Muss-Anforderungen.", "ok": false }
+    ],
+    "e": "Kann-Anforderungen werden umgesetzt, wenn Zeit und Ressourcen es erlauben."
+   },
+   {
+    "q": "Welches Abnahmekriterium ist eindeutig überprüfbar?",
+    "o": [
+     { "t": "Eine Suche über 1.000 Datensätze muss in unter zwei Sekunden fertig sein.", "ok": true },
+     { "t": "Die Anwendung soll insgesamt spürbar schnell und flüssig auf Eingaben reagieren.", "ok": false },
+     { "t": "Die Oberfläche soll modern und aufgeräumt wirken.", "ok": false },
+     { "t": "Die Software soll möglichst stabil laufen.", "ok": false }
+    ],
+    "e": "Das Kriterium nennt eine Testbedingung und einen konkreten Grenzwert."
+   },
+   {
+    "q": "Welche Bestandteile gehören zu einem nachvollziehbaren Testfall?",
+    "o": [
+     { "t": "Ausgangszustand, Eingabedaten, Testschritte und erwartetes Ergebnis", "ok": true },
+     { "t": "Ausschließlich der Name der testenden Person", "ok": false },
+     { "t": "Nur der vollständige Quellcode der Anwendung inklusive aller Kommentare", "ok": false },
+     { "t": "Ausschließlich das tatsächlich beobachtete Ergebnis", "ok": false }
+    ],
+    "e": "Ein Test muss reproduzierbar und bewertbar sein."
+   },
+   {
+    "q": "Ein Eingabefeld akzeptiert ganze Zahlen von 1 bis 100. Welche Eingabe eignet sich für einen positiven Test?",
+    "o": [
+     { "t": "50", "ok": true },
+     { "t": "0", "ok": false },
+     { "t": "101", "ok": false },
+     { "t": "ABC", "ok": false }
+    ],
+    "e": "Ein positiver Test verwendet gültige Eingabedaten aus dem erlaubten Bereich."
+   },
+   {
+    "q": "Ein Eingabefeld akzeptiert ganze Zahlen von 1 bis 100. Welche Eingabe eignet sich für einen negativen Test?",
+    "o": [
+     { "t": "101", "ok": true },
+     { "t": "50", "ok": false },
+     { "t": "75", "ok": false },
+     { "t": "100", "ok": false }
+    ],
+    "e": "101 liegt außerhalb des erlaubten Wertebereichs."
+   },
+   {
+    "q": "Welche Werte eignen sich besonders für eine Grenzwertanalyse des Bereichs 1 bis 100?",
+    "o": [
+     { "t": "0, 1, 100 und 101", "ok": true },
+     { "t": "1, 50 und 100", "ok": false },
+     { "t": "25, 50 und 75", "ok": false },
+     { "t": "10, 20 und 30", "ok": false }
+    ],
+    "e": "Geprüft werden die Grenzen und die unmittelbar angrenzenden ungültigen Werte."
+   },
+   {
+    "q": "Welche Angabe ist für einen Fehlerbericht besonders wichtig?",
+    "o": [
+     { "t": "Die Schritte zur Reproduktion des Fehlers", "ok": true },
+     { "t": "Die Lieblingsfarbe der testenden Person", "ok": false },
+     { "t": "Der Standort des Schreibtischs im Büro", "ok": false },
+     { "t": "Die Gesamtzahl aller Beschäftigten", "ok": false }
+    ],
+    "e": "Ohne Reproduktionsschritte lässt sich der Fehler schwer nachvollziehen."
+   },
+   {
+    "q": "Warum sollten erwartetes und tatsächliches Ergebnis in einem Fehlerbericht stehen?",
+    "o": [
+     { "t": "Damit die Abweichung eindeutig erkennbar wird", "ok": true },
+     { "t": "Damit der Quellcode automatisch gelöscht wird", "ok": false },
+     { "t": "Damit kein erneuter Test mehr möglich ist", "ok": false },
+     { "t": "Damit die Hardware getauscht werden muss", "ok": false }
+    ],
+    "e": "Ein Fehler liegt in der Abweichung zwischen Soll- und Ist-Verhalten."
+   },
+   {
+    "q": "Welches Ziel verfolgt ein Regressionstest?",
+    "o": [
+     { "t": "Prüfen, ob Änderungen funktionierende Teile beeinträchtigt haben", "ok": true },
+     { "t": "Ausschließlich die Netzwerkgeschwindigkeit im Rechenzentrum messen", "ok": false },
+     { "t": "Eine Datenbank dauerhaft und vollständig löschen", "ok": false },
+     { "t": "Nur den allerersten Programmstart einmal testen", "ok": false }
+    ],
+    "e": "Regressionstests erkennen unbeabsichtigte Nebenwirkungen von Änderungen."
+   },
+   {
+    "q": "Welchen Vorteil bietet eine Versionsverwaltung?",
+    "o": [
+     { "t": "Änderungen sind nachvollziehbar und frühere Stände wiederherstellbar.", "ok": true },
+     { "t": "Programmfehler im Projekt werden dadurch praktisch vollständig verhindert.", "ok": false },
+     { "t": "Datenbanken werden im Projekt komplett überflüssig.", "ok": false },
+     { "t": "Es kann nur noch eine Person am Projekt arbeiten.", "ok": false }
+    ],
+    "e": "Eine Versionsverwaltung dokumentiert Änderungen und unterstützt die Zusammenarbeit."
+   },
+   {
+    "q": "Was ist ein Commit in der Versionsverwaltung?",
+    "o": [
+     { "t": "Ein gespeicherter Änderungsstand mit Beschreibung", "ok": true },
+     { "t": "Ein physischer Netzwerkanschluss am Server", "ok": false },
+     { "t": "Eine vollständige Datensicherung des Servers", "ok": false },
+     { "t": "Ein Fremdschlüssel in einer SQL-Tabelle", "ok": false }
+    ],
+    "e": "Ein Commit fasst Änderungen mit einer Beschreibung zusammen."
+   },
+   {
+    "q": "Wozu dient ein Branch in der Versionsverwaltung?",
+    "o": [
+     { "t": "Zur getrennten, parallelen Entwicklung von Änderungen", "ok": true },
+     { "t": "Zum unwiderruflichen Löschen der gesamten Versionshistorie im Projekt", "ok": false },
+     { "t": "Zum Erhöhen des verfügbaren Arbeitsspeichers", "ok": false },
+     { "t": "Zum Verschlüsseln einer angebundenen Datenbank", "ok": false }
+    ],
+    "e": "Ein Branch ermöglicht parallele Entwicklungsarbeiten ohne den Hauptstand zu stören."
+   },
+   {
+    "q": "Wann kann ein Merge-Konflikt entstehen?",
+    "o": [
+     { "t": "Wenn dieselbe Stelle unterschiedlich geändert und nicht automatisch zusammengeführt wird", "ok": true },
+     { "t": "Wenn eine Datei zuvor nur gelesen und danach ohne jede inhaltliche Änderung wieder eingecheckt wurde", "ok": false },
+     { "t": "Wenn ein Computer neu mit dem Netzwerk verbunden wird", "ok": false },
+     { "t": "Wenn ein Backup erfolgreich abgeschlossen wurde", "ok": false }
+    ],
+    "e": "Die Versionsverwaltung kann dann nicht eindeutig entscheiden, welche Änderung gelten soll."
+   },
+   {
+    "q": "Nur eine einzige Person kennt die zentrale Datenbank. Welches Projektrisiko besteht?",
+    "o": [
+     { "t": "Abhängigkeit von einer einzelnen Person", "ok": true },
+     { "t": "Zu hohe Wissensredundanz im Team", "ok": false },
+     { "t": "Zu viele parallele Vertretungsmöglichkeiten", "ok": false },
+     { "t": "Zu kurze interne Kommunikationswege", "ok": false }
+    ],
+    "e": "Der Ausfall dieser Person kann das Projekt blockieren."
+   },
+   {
+    "q": "Nur eine Person kennt die zentrale Datenbank. Welche Maßnahme reduziert dieses Risiko?",
+    "o": [
+     { "t": "Wissen dokumentieren und an weitere Personen übertragen", "ok": true },
+     { "t": "Vorhandene Dokumentationen im Projekt konsequent und vollständig löschen", "ok": false },
+     { "t": "Die Person von allen Besprechungen ausschließen", "ok": false },
+     { "t": "Sämtliche Vertretungsregelungen abschaffen", "ok": false }
+    ],
+    "e": "Dokumentation und Wissenstransfer schaffen Vertretungsmöglichkeiten."
+   },
+   {
+    "q": "Was beschreibt ein Meilenstein im Projekt?",
+    "o": [
+     { "t": "Ein wichtiges Ereignis oder überprüfbares Zwischenergebnis", "ok": true },
+     { "t": "Eine regelmäßig wiederkehrende Stromrechnung des Rechenzentrums", "ok": false },
+     { "t": "Einen zufällig aufgetretenen Netzwerkfehler", "ok": false },
+     { "t": "Einen elementaren Datentyp im Programm", "ok": false }
+    ],
+    "e": "Meilensteine dienen der Fortschrittskontrolle."
+   },
+   {
+    "q": "Wer gilt als Stakeholder eines Projekts?",
+    "o": [
+     { "t": "Jede Person oder Gruppe mit Interesse am oder Betroffenheit vom Projekt", "ok": true },
+     { "t": "Ausschließlich die verantwortliche Projektleitung und deren direkte Vorgesetzte", "ok": false },
+     { "t": "Ausschließlich der beauftragte externe Lieferant", "ok": false },
+     { "t": "Nur die oberste Geschäftsführung des Betriebs", "ok": false }
+    ],
+    "e": "Stakeholder können intern oder extern sein."
+   },
+   {
+    "q": "Welche abschließende Prüfung gehört zum Projektabschluss?",
+    "o": [
+     { "t": "Soll-Ist-Vergleich der erreichten Projektergebnisse", "ok": true },
+     { "t": "Erstmalige Ermittlung des gesamten Projektbedarfs im Betrieb", "ok": false },
+     { "t": "Definition des ursprünglichen Problems", "ok": false },
+     { "t": "Auswahl eines passenden Projektnamens", "ok": false }
+    ],
+    "e": "Am Ende wird geprüft, ob die gesetzten Ziele erreicht wurden."
+   },
+   {
+    "q": "Der Auftraggeber fordert mitten im Projekt eine weitere Funktion. Was sollte zuerst erfolgen?",
+    "o": [
+     { "t": "Auswirkungen auf Aufwand, Zeit, Risiken und Technik prüfen", "ok": true },
+     { "t": "Die gewünschte Änderung sofort und völlig ungeprüft direkt umsetzen", "ok": false },
+     { "t": "Die bisherige Projektdokumentation löschen", "ok": false },
+     { "t": "Alle bisherigen Anforderungen komplett verwerfen", "ok": false }
+    ],
+    "e": "Änderungen können mehrere Projektgrößen gleichzeitig beeinflussen."
+   },
+   {
+    "q": "Welche Aussage zu M.2 und NVMe ist korrekt?",
+    "o": [
+     { "t": "M.2 ist eine Bauform, eine M.2-SSD kann SATA oder NVMe nutzen.", "ok": true },
+     { "t": "Jede M.2-SSD verwendet zwingend das NVMe-Protokoll.", "ok": false },
+     { "t": "NVMe bezeichnet ausschließlich die Länge einer SSD.", "ok": false },
+     { "t": "SATA kann grundsätzlich nur von Festplatten genutzt werden.", "ok": false }
+    ],
+    "e": "Formfaktor und Übertragungsprotokoll müssen getrennt betrachtet werden."
+   },
+   {
+    "q": "Ein Mainboard unterstützt ausschließlich DDR5. Welche Aussage ist korrekt?",
+    "o": [
+     { "t": "DDR4-Module lassen sich normalerweise nicht einsetzen.", "ok": true },
+     { "t": "DDR4 und DDR5 sind mechanisch und elektrisch völlig identisch.", "ok": false },
+     { "t": "Ein Treiber wandelt DDR4 im Betrieb in DDR5 um.", "ok": false },
+     { "t": "Der RAM-Typ hängt allein vom Betriebssystem ab.", "ok": false }
+    ],
+    "e": "DDR-Generationen unterscheiden sich mechanisch und elektrisch."
+   },
+   {
+    "q": "Ein PC benötigt intern 450 Watt, das Netzteil hat 90 Prozent Wirkungsgrad. Welcher Rechenweg liefert die aufgenommene Leistung?",
+    "o": [
+     { "t": "450 ÷ 0,90", "ok": true },
+     { "t": "450 × 0,90", "ok": false },
+     { "t": "450 × 1,90", "ok": false },
+     { "t": "450 + 0,90", "ok": false }
+    ],
+    "e": "Aufgenommene Leistung = Nutzleistung ÷ Wirkungsgrad. 450 W ÷ 0,90 = 500 W."
+   },
+   {
+    "q": "Warum wird bei der Netzteilauswahl eine Leistungsreserve eingeplant?",
+    "o": [
+     { "t": "Um Lastspitzen und spätere Erweiterungen abzudecken", "ok": true },
+     { "t": "Um den Arbeitsspeicher vollständig zu ersetzen", "ok": false },
+     { "t": "Um jede aktive Kühlung überflüssig zu machen", "ok": false },
+     { "t": "Um die CPU dauerhaft übertakten zu können", "ok": false }
+    ],
+    "e": "Das Netzteil sollte nicht dauerhaft an seiner Leistungsgrenze arbeiten."
+   },
+   {
+    "q": "Welcher Vorteil spricht für DisplayPort?",
+    "o": [
+     { "t": "Hohe Auflösungen sowie digitale Bild- und Tonsignale", "ok": true },
+     { "t": "Ausschließlich rein analoge Bildübertragung gänzlich ohne Ton", "ok": false },
+     { "t": "Keinerlei Unterstützung digitaler Signale", "ok": false },
+     { "t": "Verwendung ausschließlich an Druckern", "ok": false }
+    ],
+    "e": "DisplayPort ist eine digitale Multimedia-Schnittstelle."
+   },
+   {
+    "q": "Welche Maßnahme verbessert die Ergonomie am Bildschirmarbeitsplatz?",
+    "o": [
+     { "t": "Bildschirmoberkante etwa auf Augenhöhe ausrichten", "ok": true },
+     { "t": "Bildschirm direkt vor ein spiegelndes Fenster stellen", "ok": false },
+     { "t": "Tastatur außerhalb des Greifbereichs platzieren", "ok": false },
+     { "t": "Bildschirm dauerhaft auf maximale Helligkeit stellen", "ok": false }
+    ],
+    "e": "Eine geeignete Monitorposition unterstützt eine natürliche Körperhaltung."
+   },
+   {
+    "q": "Welche Aussage zu ASCII- und Binärdateien ist korrekt?",
+    "o": [
+     { "t": "ASCII-Dateien enthalten lesbare Zeichen, Binärdateien werden per Format interpretiert.", "ok": true },
+     { "t": "Binärdateien können auf modernen Systemen gar nicht erst dauerhaft gespeichert werden.", "ok": false },
+     { "t": "ASCII-Dateien sind grundsätzlich immer kleiner als Binärdateien.", "ok": false },
+     { "t": "Binärdateien enthalten ausschließlich Bilddaten.", "ok": false }
+    ],
+    "e": "Binärformate speichern viele Datentypen kompakt, sind aber nicht direkt als Text lesbar."
+   },
+   {
+    "q": "Welche Quelle eignet sich zur Untersuchung eines standardisierten Dateiformats?",
+    "o": [
+     { "t": "Die offizielle Formatspezifikation", "ok": true },
+     { "t": "Ausschließlich die Farbe des Dateisymbols", "ok": false },
+     { "t": "Nur die Länge des Dateinamens", "ok": false },
+     { "t": "Die Größe des Papierkorbs im System", "ok": false }
+    ],
+    "e": "Die Spezifikation beschreibt Aufbau und Bedeutung der Daten."
+   },
+   {
+    "q": "Ein CAD-System kann eine Datei nicht öffnen. Welche Maßnahme ist sinnvoll?",
+    "o": [
+     { "t": "Mit einem geeigneten Konverter in ein unterstütztes Format wandeln", "ok": true },
+     { "t": "Lediglich die Dateiendung von Hand ändern, ohne die interne Struktur anzupassen", "ok": false },
+     { "t": "Die Datei als Betriebssystem installieren", "ok": false },
+     { "t": "Die Datei ungeprüft sofort löschen", "ok": false }
+    ],
+    "e": "Eine echte Konvertierung passt die interne Datenstruktur an."
+   },
+   {
+    "q": "Ein Messpunkt besitzt drei 32-Bit-Koordinaten. Welcher Rechenweg liefert den Speicherbedarf?",
+    "o": [
+     { "t": "3 × 32", "ok": true },
+     { "t": "3 + 32", "ok": false },
+     { "t": "32 ÷ 3", "ok": false },
+     { "t": "3 × 32 × 8", "ok": false }
+    ],
+    "e": "3 × 32 Bit = 96 Bit."
+   },
+   {
+    "q": "Ein RGB-Wert verwendet acht Bit pro Farbkanal. Welcher Rechenweg liefert die gesamte Farbtiefe?",
+    "o": [
+     { "t": "3 × 8", "ok": true },
+     { "t": "8 + 8", "ok": false },
+     { "t": "8 ÷ 3", "ok": false },
+     { "t": "8 × 8", "ok": false }
+    ],
+    "e": "Drei Farbkanäle mit je acht Bit ergeben 3 × 8 = 24 Bit."
+   },
+   {
+    "q": "Wie viele Farben können mit 24 Bit dargestellt werden? Welcher Rechenweg ist korrekt?",
+    "o": [
+     { "t": "2^24", "ok": true },
+     { "t": "24^2", "ok": false },
+     { "t": "24 × 2", "ok": false },
+     { "t": "2 × 24", "ok": false }
+    ],
+    "e": "2^24 = 16.777.216 Farben."
+   },
+   {
+    "q": "Welche Aussage beschreibt eine verlustfreie Kompression?",
+    "o": [
+     { "t": "Die ursprünglichen Daten sind vollständig rekonstruierbar.", "ok": true },
+     { "t": "Ein Teil der Informationen wird dabei unwiderruflich entfernt.", "ok": false },
+     { "t": "Die Datei lässt sich danach nicht mehr öffnen.", "ok": false },
+     { "t": "Die Dateigröße steigt nach der Kompression immer.", "ok": false }
+    ],
+    "e": "Verlustfreie Verfahren erhalten sämtliche Informationen."
+   },
+   {
+    "q": "Ein Notebook mit vertraulichen Daten geht verloren. Welche Maßnahme schützt die Daten besonders wirksam?",
+    "o": [
+     { "t": "Vollständige Verschlüsselung des Datenträgers", "ok": true },
+     { "t": "Dauerhaftes Verstecken der WLAN-SSID direkt am Gerät", "ok": false },
+     { "t": "Reduzierung der Bildschirmhelligkeit", "ok": false },
+     { "t": "Ändern des Desktop-Hintergrundbilds", "ok": false }
+    ],
+    "e": "Die Verschlüsselung verhindert das unmittelbare Auslesen des Datenträgers."
+   },
+   {
+    "q": "Welches Risiko reduziert eine Blickschutzfolie am Bildschirm?",
+    "o": [
+     { "t": "Unbefugtes Mitlesen des Bildschirminhalts", "ok": true },
+     { "t": "Eingeschleuste Schadsoftware durch geöffnete E-Mail-Anhänge", "ok": false },
+     { "t": "Den Ausfall des Prozessorkühlers", "ok": false },
+     { "t": "Den Verlust der IP-Adresse im Netz", "ok": false }
+    ],
+    "e": "Der seitliche Einblick auf vertrauliche Inhalte wird eingeschränkt."
+   },
+   {
+    "q": "Welche Maßnahme ist beim Zugriff auf betriebliche Systeme über öffentliches WLAN sinnvoll?",
+    "o": [
+     { "t": "Eine abgesicherte VPN-Verbindung verwenden", "ok": true },
+     { "t": "Sämtliche Sicherheitsupdates deaktivieren", "ok": false },
+     { "t": "Alle lokalen Ordner im Netz freigeben", "ok": false },
+     { "t": "Ein Administratorkonto ohne Passwort nutzen", "ok": false }
+    ],
+    "e": "Ein VPN schützt die Übertragung in einem fremden Netz."
+   },
+   {
+    "q": "Was bedeutet das Prinzip der minimalen Rechte?",
+    "o": [
+     { "t": "Benutzer erhalten nur die für ihre Aufgaben nötigen Berechtigungen.", "ok": true },
+     { "t": "Alle Benutzer erhalten pauschal volle Administratorrechte auf allen Systemen.", "ok": false },
+     { "t": "Vergebene Berechtigungen werden grundsätzlich nie geprüft.", "ok": false },
+     { "t": "Benutzerkonten werden von mehreren Personen geteilt.", "ok": false }
+    ],
+    "e": "Begrenzte Rechte reduzieren mögliche Schäden im Fehler- oder Angriffsfall."
+   },
+   {
+    "q": "Welche Eigenschaft ist für Phishing typisch?",
+    "o": [
+     { "t": "Ein Täuschungsversuch zur Erlangung vertraulicher Informationen", "ok": true },
+     { "t": "Eine automatische und dauerhafte Verbesserung der gesamten Systemsicherheit", "ok": false },
+     { "t": "Die Durchführung einer geplanten Datensicherung", "ok": false },
+     { "t": "Die Installation offiziell geprüfter Updates", "ok": false }
+    ],
+    "e": "Phishing nutzt häufig gefälschte Nachrichten und Webseiten."
+   },
+   {
+    "q": "Eine unerwartete E-Mail fordert zum Aktivieren von Makros auf. Welche Reaktion ist angemessen?",
+    "o": [
+     { "t": "Makros nicht aktivieren und die Nachricht prüfen oder melden", "ok": true },
+     { "t": "Die enthaltenen Makros sofort und völlig ungeprüft im Dokument aktivieren", "ok": false },
+     { "t": "Das Dokument an alle Kollegen weiterleiten", "ok": false },
+     { "t": "Den Virenschutz für den Vorgang deaktivieren", "ok": false }
+    ],
+    "e": "Makros können Schadcode enthalten und dürfen nicht unbedacht aktiviert werden."
+   },
+   {
+    "q": "Welche Maßnahme sollte beim Ausscheiden eines Beschäftigten erfolgen?",
+    "o": [
+     { "t": "Konto sperren und Berechtigungen entziehen", "ok": true },
+     { "t": "Das Passwort an die Nachfolgeperson weitergeben", "ok": false },
+     { "t": "Alle bisherigen Rechte dauerhaft bestehen lassen", "ok": false },
+     { "t": "Das private Konto zum Firmenkonto erklären", "ok": false }
+    ],
+    "e": "Nicht mehr benötigte Zugänge müssen zeitnah entfernt werden."
+   },
+   {
+    "q": "Welches Beispiel stellt eine echte Mehrfaktor-Authentifizierung dar?",
+    "o": [
+     { "t": "Passwort und Authenticator-App", "ok": true },
+     { "t": "Passwort und Sicherheitsfrage", "ok": false },
+     { "t": "Zwei verschiedene Passwörter", "ok": false },
+     { "t": "Benutzername und Passwort", "ok": false }
+    ],
+    "e": "Kombiniert werden die Faktoren Wissen und Besitz."
+   },
+   {
+    "q": "Was wird bei einer Vollsicherung gespeichert?",
+    "o": [
+     { "t": "Der gesamte definierte Datenbestand", "ok": true },
+     { "t": "Nur Änderungen seit der letzten Sicherung", "ok": false },
+     { "t": "Ausschließlich zuvor gelöschte Dateien", "ok": false },
+     { "t": "Nur die Einstellungen des Betriebssystems", "ok": false }
+    ],
+    "e": "Eine Vollsicherung umfasst alle ausgewählten Daten."
+   },
+   {
+    "q": "Was sichert ein inkrementelles Backup?",
+    "o": [
+     { "t": "Änderungen seit der letzten Sicherung", "ok": true },
+     { "t": "Immer den kompletten Datenbestand", "ok": false },
+     { "t": "Nur Änderungen seit der letzten Vollsicherung", "ok": false },
+     { "t": "Ausschließlich reine Systemdateien", "ok": false }
+    ],
+    "e": "Ein inkrementelles Backup vergleicht mit der letzten Voll- oder inkrementellen Sicherung."
+   },
+   {
+    "q": "Was sichert ein differentielles Backup?",
+    "o": [
+     { "t": "Änderungen seit der letzten Vollsicherung", "ok": true },
+     { "t": "Änderungen seit der letzten beliebigen Sicherung", "ok": false },
+     { "t": "Ausschließlich reine Datenbankdateien", "ok": false },
+     { "t": "Immer den kompletten Datenbestand", "ok": false }
+    ],
+    "e": "Jede differentielle Sicherung wächst bis zur nächsten Vollsicherung an."
+   },
+   {
+    "q": "Warum muss eine Datensicherung testweise wiederhergestellt werden?",
+    "o": [
+     { "t": "Um die tatsächliche Wiederherstellbarkeit zu prüfen", "ok": true },
+     { "t": "Um die CPU-Taktfrequenz im laufenden Betrieb spürbar zu erhöhen", "ok": false },
+     { "t": "Um die Datenträgerkapazität zu verdoppeln", "ok": false },
+     { "t": "Um die Originaldaten automatisch zu löschen", "ok": false }
+    ],
+    "e": "Eine vorhandene Sicherungsdatei ist noch kein Nachweis für eine funktionierende Wiederherstellung."
+   },
+   {
+    "q": "Welche Aussage beschreibt die 3-2-1-Regel korrekt?",
+    "o": [
+     { "t": "Drei Kopien, zwei verschiedene Medien, eine Kopie außer Haus", "ok": true },
+     { "t": "Drei Benutzerkonten, zwei Passwörter und ein einziger zentraler Server", "ok": false },
+     { "t": "Drei RAID-Systeme, zwei Router, eine Firewall", "ok": false },
+     { "t": "Drei Vollsicherungen je Stunde auf einem Datenträger", "ok": false }
+    ],
+    "e": "Die Verteilung schützt vor mehreren gemeinsamen Ausfallursachen."
+   },
+   {
+    "q": "Was beschreibt das Recovery Point Objective?",
+    "o": [
+     { "t": "Den maximal akzeptierten Datenverlust als Zeitraum", "ok": true },
+     { "t": "Die maximale Schreibgeschwindigkeit der Festplatte", "ok": false },
+     { "t": "Die zulässige Anzahl der Benutzerkonten", "ok": false },
+     { "t": "Die geplante Lebensdauer eines Netzteils", "ok": false }
+    ],
+    "e": "Das RPO bestimmt, wie aktuell der wiederhergestellte Datenstand sein muss."
+   },
+   {
+    "q": "Was beschreibt das Recovery Time Objective?",
+    "o": [
+     { "t": "Die maximal akzeptierte Wiederherstellungs- oder Ausfallzeit", "ok": true },
+     { "t": "Den gesamten Speicherbedarf einer einzelnen vollständigen Vollsicherung", "ok": false },
+     { "t": "Die durchschnittliche Zahl täglicher Anmeldungen", "ok": false },
+     { "t": "Die erwartete Lebensdauer eines Datenträgers", "ok": false }
+    ],
+    "e": "Das RTO legt fest, wie schnell der Betrieb wieder laufen muss."
+   },
+   {
+    "q": "Was kennzeichnet eine Silent Installation?",
+    "o": [
+     { "t": "Sie läuft ohne Benutzereingaben ab.", "ok": true },
+     { "t": "Sie benötigt überhaupt keinen Speicherplatz.", "ok": false },
+     { "t": "Die Anwendung ist nur nachts nutzbar.", "ok": false },
+     { "t": "Für sie wird keine Lizenz benötigt.", "ok": false }
+    ],
+    "e": "Unbeaufsichtigte Installationen sind Voraussetzung für automatisierte Verteilung."
+   },
+   {
+    "q": "Welches Ziel verfolgt ein zentrales Patchmanagement?",
+    "o": [
+     { "t": "Sicherheits- und Softwareaktualisierungen kontrolliert verteilen", "ok": true },
+     { "t": "Alle Benutzer im Betrieb dauerhaft zu vollwertigen Administratoren machen", "ok": false },
+     { "t": "Regelmäßige Datensicherungen vollständig ersetzen", "ok": false },
+     { "t": "Den gesamten Netzwerkverkehr unverschlüsselt führen", "ok": false }
+    ],
+    "e": "Updates werden geplant, getestet, verteilt und überwacht."
+   },
+   {
+    "q": "Welche Aufgabe besitzt ein Lizenzmanagement?",
+    "o": [
+     { "t": "Vorhandene und genutzte Softwarelizenzen erfassen und abgleichen", "ok": true },
+     { "t": "Vorhandene Software ohne jede Prüfung beliebig oft vervielfältigen", "ok": false },
+     { "t": "Alle bestehenden Lizenzverträge automatisch kündigen", "ok": false },
+     { "t": "Ausschließlich Hardwarefehler an Geräten reparieren", "ok": false }
+    ],
+    "e": "Lizenzmanagement hilft, Unter- und unnötige Überlizenzierung zu vermeiden."
+   }
+  ]
+ },
  "ports": {
   "name": "Ports & Sockets",
   "q": [
@@ -14941,7 +16847,7 @@ applyScopeFromSlider();
 
 Object.keys(POOLS).forEach(key => {
   const chip = document.createElement('div');
-  chip.className = 'cat-chip';
+  chip.className = 'cat-chip' + (POOLS[key].gold ? ' cat-gold' : '');
   chip.dataset.key = key;
   chip.innerHTML = '<div class="cat-box">&#10003;</div><span class="cat-name">'+POOLS[key].name+'</span><span class="cat-count">'+POOLS[key].q.length+' Fragen</span>';
   chip.addEventListener('click', () => toggleCat(key, chip));
@@ -15158,6 +17064,8 @@ function showResult(){
   else if(pct >= 60) v = 'Solide, aber Lücken. Nochmal rotieren.';
   else v = 'Da fehlt Substanz. Zurück ins Nachschlagewerk.';
   document.getElementById('resVerdict').textContent = v;
+  const rb = document.getElementById('resultBtn');
+  if(rb) rb.style.display = 'none';
   runnerEl.classList.remove('active');
   resultEl.classList.add('show');
   window.scrollTo({top:0,behavior:'smooth'});
@@ -15174,6 +17082,10 @@ function reviewQuestions(){
 function finishRun(){
   // Kein Auto-Timeout mehr: Das Overlay bleibt stehen, bis der Nutzer wählt —
   // Auswertung anzeigen, Fragen nochmal ansehen, oder wegklicken (= ansehen).
+  // Ab jetzt ist der Durchlauf komplett: Auswertungs-Button im Runner freischalten,
+  // damit man auch ohne Overlay (weggeklickt / Fragen erneut angesehen) zur Auswertung kommt.
+  const rb = document.getElementById('resultBtn');
+  if(rb) rb.style.display = '';
   const overlay = document.getElementById('finishOverlay');
   if(overlay){
     overlay.classList.add('show');
@@ -15185,6 +17097,8 @@ function finishRun(){
 function startQuiz(){
   buildRun();
   renderRun();
+  const rb = document.getElementById('resultBtn');
+  if(rb) rb.style.display = 'none';
   selectorEl.style.display = 'none';
   resultEl.classList.remove('show');
   runnerEl.classList.add('active');
@@ -15192,6 +17106,8 @@ function startQuiz(){
 }
 
 function backToSelector(){
+  const rb = document.getElementById('resultBtn');
+  if(rb) rb.style.display = 'none';
   runnerEl.classList.remove('active');
   resultEl.classList.remove('show');
   selectorEl.style.display = 'block';
@@ -15208,6 +17124,7 @@ startBtn.addEventListener('click', () => {
 document.getElementById('againBtn').addEventListener('click', startQuiz); // rotates: pointer advanced
 document.getElementById('backBtn').addEventListener('click', backToSelector);
 document.getElementById('abortBtn').addEventListener('click', backToSelector);
+document.getElementById('resultBtn').addEventListener('click', showResult);
 
 // Übergangs-Overlay: Auswertung anzeigen / Fragen ansehen / wegklicken
 document.getElementById('finishResultBtn').addEventListener('click', showResult);
@@ -15461,6 +17378,12 @@ const GLOSSAR = [{"a":"2FA","f":"Zwei-Faktor-Authentifizierung","d":"Anmeldung m
 {"a":"IPsec","f":"Internet Protocol Security","d":"Sicherheitserweiterung auf IP-Ebene: Verschlüsselung, Authentifizierung, Integrität. Transport- und Tunnelmodus, Standard für VPNs."},
 {"a":"IPv4","f":"Internet Protocol Version 4","d":"32-Bit-Adressen als vier Dezimal-Oktette (z. B. 192.168.0.1), ca. 4,3 Mrd. Adressen — knapp geworden."},
 {"a":"IPv6","f":"Internet Protocol Version 6","d":"128-Bit-Adressen in acht Hex-Blöcken (z. B. 2001:db8::1). Praktisch unerschöpflicher Adressraum."},
+{"a":"JBOD","f":"Just a Bunch Of Disks","d":"Bündelt mehrere, auch verschieden große Laufwerke zu einem logischen Speicherbereich. Keine Redundanz: Ausfall eines Datenträgers kann Daten kosten."},
+{"a":"NVMe","f":"Non-Volatile Memory Express","d":"Protokoll für SSDs, das direkt über PCIe angebunden wird. Deutlich höhere Datenraten und geringere Latenz als SATA."},
+{"a":"PCIe","f":"Peripheral Component Interconnect Express","d":"Serielles Bussystem für Erweiterungskarten und NVMe-SSDs. Bandbreite skaliert über die Anzahl der Lanes (x1, x4, x16)."},
+{"a":"SMT","f":"Simultaneous Multithreading","d":"Ein physischer CPU-Kern verarbeitet mehrere Threads gleichzeitig. Das Betriebssystem sieht dadurch mehr logische als physische Prozessoren."},
+{"a":"GPU","f":"Graphics Processing Unit","d":"Grafikprozessor. Übernimmt die Bildberechnung und ist oft der leistungshungrigste Verbraucher bei der Netzteilauslegung."},
+{"a":"PD","f":"Power Delivery","d":"USB-Standard für hohe Ladeleistungen über USB-C, aushandelbar bis in den dreistelligen Watt-Bereich."},
 {"a":"ISO","f":"International Organization for Standardization","d":"Internationale Normungsorganisation, u. a. Urheber des OSI-Referenzmodells."},
 {"a":"ISP","f":"Internet Service Provider","d":"Anbieter des Internetzugangs, z. B. Telekom oder Vodafone."},
 {"a":"JSON","f":"JavaScript Object Notation","d":"Leichtgewichtiges, textbasiertes Datenformat. Standard für API-Antworten."},
@@ -15769,4 +17692,18 @@ window.addEventListener('pageshow', () => { window.scrollTo(0, 0); });
   document.addEventListener('keydown', (e) => {
     if(e.key === 'Escape') closeMenu();
   });
+})();
+
+// ---- Impressum & Datenschutz Modal ----
+(function(){
+  const modal = document.getElementById('infoModal');
+  const link = document.getElementById('imprintLink');
+  const closeBtn = document.getElementById('infoClose');
+  if(!modal || !link) return;
+  function open(e){ if(e) e.preventDefault(); modal.classList.add('show'); }
+  function close(){ modal.classList.remove('show'); }
+  link.addEventListener('click', open);
+  if(closeBtn) closeBtn.addEventListener('click', close);
+  modal.addEventListener('click', (e) => { if(e.target === modal) close(); });
+  document.addEventListener('keydown', (e) => { if(e.key === 'Escape' && modal.classList.contains('show')) close(); });
 })();
