@@ -1905,6 +1905,346 @@ const POOLS = {
      { "t": "Ausschließlich Hardwarefehler an Geräten reparieren", "ok": false }
     ],
     "e": "Lizenzmanagement hilft, Unter- und unnötige Überlizenzierung zu vermeiden."
+   },
+   {
+    "q": "Welchen Vorteil bietet SLAAC in einem IPv6-Netz?",
+    "o": [
+     { "t": "Endgeräte konfigurieren ihre Adresse automatisch ohne Server", "ok": true },
+     { "t": "Festplatten werden automatisch zu einem Verbund zusammengefasst", "ok": false },
+     { "t": "DNS-Einträge werden automatisch auf mehrere Server verteilt", "ok": false },
+     { "t": "Der gesamte Datenverkehr wird automatisch verschlüsselt", "ok": false }
+    ],
+    "e": "SLAAC (Stateless Address Autoconfiguration) erlaubt Geräten, sich ihre IPv6-Adresse selbst zu vergeben, ohne dass ein DHCP-Server nötig ist."
+   },
+   {
+    "q": "Was beschreibt der Betrieb im Dual-Stack?",
+    "o": [
+     { "t": "Ein Gerät nutzt IPv4 und IPv6 gleichzeitig nebeneinander", "ok": true },
+     { "t": "Ein Gerät wechselt stündlich zwischen zwei IP-Adressen hin und her", "ok": false },
+     { "t": "Zwei Geräte teilen sich eine gemeinsame MAC-Adresse im Netz", "ok": false },
+     { "t": "Ein Server hält zwei vollständig gespiegelte Festplatten vor", "ok": false }
+    ],
+    "e": "Beim Dual-Stack laufen IPv4 und IPv6 parallel auf demselben Gerät, das dadurch über beide Protokolle kommunizieren kann."
+   },
+   {
+    "q": "Was geschieht beim Tunneling von IPv6 über ein IPv4-Netz?",
+    "o": [
+     { "t": "IPv6-Pakete werden in IPv4-Pakete eingekapselt und so transportiert", "ok": true },
+     { "t": "IPv6-Adressen werden dauerhaft in MAC-Adressen umgewandelt", "ok": false },
+     { "t": "Der Router verwirft alle eingehenden IPv6-Pakete und nutzt ausschließlich IPv4", "ok": false },
+     { "t": "Die IPv4-Adresse wird bitweise an die IPv6-Adresse angehängt", "ok": false }
+    ],
+    "e": "Beim Tunneling, etwa mit 6to4, werden IPv6-Pakete in IPv4-Pakete verpackt und über ein reines IPv4-Netz übertragen."
+   },
+   {
+    "q": "Warum sind Adressen aus dem Bereich 192.168.0.0/16 nicht direkt aus dem Internet erreichbar?",
+    "o": [
+     { "t": "Es sind private Adressen, die im Internet nicht geroutet werden", "ok": true },
+     { "t": "Sie sind für die Zukunft reserviert und noch nicht vergeben", "ok": false },
+     { "t": "Sie funktionieren ausschließlich mit IPv6-fähiger Hardware", "ok": false },
+     { "t": "Sie werden von Firewalls grundsätzlich sofort verworfen", "ok": false }
+    ],
+    "e": "Private Adressbereiche wie 10.0.0.0/8, 172.16.0.0/12 und 192.168.0.0/16 werden im Internet nicht geroutet und sind nur im lokalen Netz gültig."
+   },
+   {
+    "q": "Auf welchem IEEE-Standard basiert Wi-Fi 6?",
+    "o": [
+     { "t": "802.11ax", "ok": true },
+     { "t": "802.11ac", "ok": false },
+     { "t": "802.11n", "ok": false },
+     { "t": "802.11g", "ok": false }
+    ],
+    "e": "Wi-Fi 6 ist die Marketingbezeichnung für den Standard 802.11ax."
+   },
+   {
+    "q": "Warum wird für WLAN-Clients häufig ein eigenes Subnetz oder VLAN eingerichtet?",
+    "o": [
+     { "t": "Um WLAN-Geräte logisch vom kabelgebundenen LAN zu trennen", "ok": true },
+     { "t": "Weil WLAN-Karten grundsätzlich andere Treiber als LAN-Karten brauchen", "ok": false },
+     { "t": "Weil WLAN-Geräte keine eigene MAC-Adresse besitzen", "ok": false },
+     { "t": "Weil WLAN ausschließlich mit IPv6-Adressen funktioniert", "ok": false }
+    ],
+    "e": "Ein eigenes Subnetz oder VLAN trennt die WLAN-Clients logisch vom LAN und verbessert so Sicherheit und Verwaltbarkeit."
+   },
+   {
+    "q": "Wozu dient Power over Ethernet in einem Netzwerk?",
+    "o": [
+     { "t": "Ein Gerät wird über das Netzwerkkabel mit Strom versorgt", "ok": true },
+     { "t": "Der Datendurchsatz eines Ports wird dauerhaft verdoppelt", "ok": false },
+     { "t": "Die Reichweite eines WLAN-Signals wird deutlich erhöht", "ok": false },
+     { "t": "Mehrere IP-Adressen werden auf einen Port zusammengefasst", "ok": false }
+    ],
+    "e": "Power over Ethernet überträgt neben den Daten auch die Stromversorgung über dieselbe Netzwerkleitung, etwa für Access Points oder IP-Kameras."
+   },
+   {
+    "q": "Welche IEEE-Norm beschreibt PoE+ mit erhöhter Leistung?",
+    "o": [
+     { "t": "802.3at", "ok": true },
+     { "t": "802.3af", "ok": false },
+     { "t": "802.1Q", "ok": false },
+     { "t": "802.11ax", "ok": false }
+    ],
+    "e": "PoE+ ist in 802.3at genormt und liefert mehr Leistung als das ältere 802.3af."
+   },
+   {
+    "q": "Ein PoE+-Gerät benötigt 30 Watt und wird mit 50 Volt versorgt. Welcher Rechenweg liefert die Stromstärke?",
+    "o": [
+     { "t": "30 ÷ 50", "ok": true },
+     { "t": "30 × 50", "ok": false },
+     { "t": "50 ÷ 30", "ok": false },
+     { "t": "30 + 50", "ok": false }
+    ],
+    "e": "Stromstärke = Leistung ÷ Spannung. 30 W ÷ 50 V = 0,6 A = 600 mA."
+   },
+   {
+    "q": "Welcher Windows-Befehl zeigt die vollständige Netzwerkkonfiguration mit Gateway und DNS-Server?",
+    "o": [
+     { "t": "ipconfig /all", "ok": true },
+     { "t": "netsh interface ip show config", "ok": false },
+     { "t": "format", "ok": false },
+     { "t": "ping", "ok": false }
+    ],
+    "e": "ipconfig /all gibt die komplette Netzwerkkonfiguration aus, darunter Standardgateway und DNS-Server."
+   },
+   {
+    "q": "Welcher Befehl eignet sich zur gezielten Überprüfung der DNS-Auflösung?",
+    "o": [
+     { "t": "nslookup", "ok": true },
+     { "t": "mkdir", "ok": false },
+     { "t": "shutdown", "ok": false },
+     { "t": "chkdsk", "ok": false }
+    ],
+    "e": "Mit nslookup lassen sich DNS-Einträge gezielt abfragen und die Namensauflösung prüfen."
+   },
+   {
+    "q": "Der Ping auf eine IP-Adresse gelingt, der Ping auf den Hostnamen schlägt fehl. Was ist die wahrscheinlichste Ursache?",
+    "o": [
+     { "t": "Die Namensauflösung über DNS funktioniert nicht", "ok": true },
+     { "t": "Der Arbeitsspeicher des Rechners ist defekt", "ok": false },
+     { "t": "Das Netzwerkkabel ist vollständig getrennt", "ok": false },
+     { "t": "Die CPU ist überlastet und antwortet verzögert", "ok": false }
+    ],
+    "e": "Da die IP erreichbar ist, steht die Verbindung. Nur der Hostname scheitert, also liegt das Problem bei der DNS-Namensauflösung."
+   },
+   {
+    "q": "Die Link-LED einer Netzwerkkarte bleibt dunkel. Was ist die wahrscheinlichste Ursache?",
+    "o": [
+     { "t": "Ein Problem auf der physischen Ebene wie ein defektes Kabel", "ok": true },
+     { "t": "Ein falsch eingetragener DNS-Server in der Netzwerkkonfiguration", "ok": false },
+     { "t": "Eine falsch gesetzte Standardgateway-Adresse", "ok": false },
+     { "t": "Ein deaktivierter DHCP-Dienst auf dem Server", "ok": false }
+    ],
+    "e": "Eine dauerhaft dunkle Link-LED deutet auf ein Problem der Bitübertragungsschicht hin, meist ein defektes oder nicht gestecktes Kabel."
+   },
+   {
+    "q": "Ein RAID 5 besteht aus sechs Festplatten mit je 20 TB. Welcher Rechenweg liefert die nutzbare Kapazität?",
+    "o": [
+     { "t": "(6 − 1) × 20", "ok": true },
+     { "t": "6 × 20", "ok": false },
+     { "t": "(6 − 2) × 20", "ok": false },
+     { "t": "6 × 20 ÷ 2", "ok": false }
+    ],
+    "e": "RAID 5 opfert eine Platte für die Parität. (6 − 1) × 20 TB = 100 TB nutzbar."
+   },
+   {
+    "q": "Ein RAID 10 besteht aus sechs Festplatten mit je 20 TB. Welcher Rechenweg liefert die nutzbare Kapazität?",
+    "o": [
+     { "t": "6 × 20 ÷ 2", "ok": true },
+     { "t": "(6 − 1) × 20", "ok": false },
+     { "t": "6 × 20", "ok": false },
+     { "t": "(6 − 2) × 20", "ok": false }
+    ],
+    "e": "RAID 10 spiegelt die Daten, dadurch steht die halbe Gesamtkapazität zur Verfügung. 6 × 20 TB ÷ 2 = 60 TB."
+   },
+   {
+    "q": "Warum erhöht RAID 10 die Verfügbarkeit gegenüber einer einzelnen Platte?",
+    "o": [
+     { "t": "Es kombiniert Spiegelung für Redundanz mit Striping für Leistung", "ok": true },
+     { "t": "Es verzichtet vollständig auf zusätzliche Festplatten", "ok": false },
+     { "t": "Es macht eine getrennte Datensicherung endgültig überflüssig", "ok": false },
+     { "t": "Es arbeitet ausschließlich mit verteilter Parität statt Spiegelung", "ok": false }
+    ],
+    "e": "RAID 10 spiegelt Plattenpaare und verteilt die Daten zusätzlich. Die Spiegelung sorgt für Ausfallsicherheit, das Striping für Tempo."
+   },
+   {
+    "q": "Welche Aussage zum Verhältnis von RAID und Backup ist korrekt?",
+    "o": [
+     { "t": "RAID erhöht die Verfügbarkeit, ersetzt aber kein Backup", "ok": true },
+     { "t": "RAID macht eine getrennte Datensicherung vollständig überflüssig", "ok": false },
+     { "t": "RAID schützt zuverlässig vor versehentlichem Löschen von Dateien", "ok": false },
+     { "t": "RAID verhindert wirksam jede Form von Ransomware-Befall", "ok": false }
+    ],
+    "e": "RAID schützt vor dem Ausfall einzelner Platten, aber nicht vor Löschen, Verschlüsselung oder logischen Fehlern. Ein Backup bleibt nötig."
+   },
+   {
+    "q": "Ein Server soll eine Verfügbarkeit von 99,9 Prozent im Jahr erreichen. Welcher Rechenweg liefert die maximale jährliche Ausfallzeit in Stunden?",
+    "o": [
+     { "t": "8760 × 0,001", "ok": true },
+     { "t": "8760 × 0,999", "ok": false },
+     { "t": "8760 ÷ 0,001", "ok": false },
+     { "t": "8760 × 0,01", "ok": false }
+    ],
+    "e": "Ein Jahr hat 8760 Stunden. Bei 99,9 Prozent Verfügbarkeit sind 0,1 Prozent Ausfall erlaubt: 8760 × 0,001 = 8,76 Stunden."
+   },
+   {
+    "q": "Welche Maßnahme erhöht die Verfügbarkeit eines Servers am wirksamsten?",
+    "o": [
+     { "t": "Redundante Netzteile gegen den Ausfall einer einzelnen Komponente", "ok": true },
+     { "t": "Ein größerer Monitor am Arbeitsplatz des Administrators", "ok": false },
+     { "t": "Eine höhere Auflösung der eingesetzten Bildschirme", "ok": false },
+     { "t": "Das dauerhafte Deaktivieren aller automatischen Systemupdates am Server", "ok": false }
+    ],
+    "e": "Redundante Komponenten wie doppelte Netzteile beseitigen einzelne Ausfallpunkte und halten den Server auch beim Defekt eines Teils am Laufen."
+   },
+   {
+    "q": "Was bezeichnet ein Single Point of Failure?",
+    "o": [
+     { "t": "Eine Komponente, deren Ausfall das ganze System lahmlegt", "ok": true },
+     { "t": "Eine Festplatte, die ausschließlich Sicherungen speichert", "ok": false },
+     { "t": "Ein Benutzerkonto mit besonders vielen Berechtigungen", "ok": false },
+     { "t": "Ein Netzwerkport, der nur eingehenden Verkehr zulässt", "ok": false }
+    ],
+    "e": "Ein Single Point of Failure ist eine Stelle ohne Redundanz, deren Ausfall den Betrieb des Gesamtsystems stoppt."
+   },
+   {
+    "q": "Welche Maßnahme ist bei einer Videoüberwachung datenschutzrechtlich geboten?",
+    "o": [
+     { "t": "Betroffene durch ein Hinweisschild über die Überwachung informieren", "ok": true },
+     { "t": "Aufnahmen ohne zeitliche Begrenzung dauerhaft speichern", "ok": false },
+     { "t": "Auch rein private Bereiche vollständig mit erfassen", "ok": false },
+     { "t": "Vollständig auf jede Dokumentation des festgelegten Überwachungszwecks verzichten", "ok": false }
+    ],
+    "e": "Betroffene müssen erkennen können, dass sie gefilmt werden. Ein deutliches Hinweisschild ist dafür Pflicht."
+   },
+   {
+    "q": "Welche Aussage zur Speicherung von Videoaufnahmen trifft zu?",
+    "o": [
+     { "t": "Zulässige Aufbewahrungsfristen müssen eingehalten werden", "ok": true },
+     { "t": "Die Speicherdauer darf beliebig lang gewählt werden", "ok": false },
+     { "t": "Einmal erstellte Aufnahmen dürfen nie gelöscht werden", "ok": false },
+     { "t": "Videomaterial muss grundsätzlich dauerhaft archiviert werden", "ok": false }
+    ],
+    "e": "Videoaufnahmen dürfen nur so lange gespeichert werden, wie es der Zweck erfordert. Danach sind sie zu löschen."
+   },
+   {
+    "q": "Welches Konzept zählt zu den Grundprinzipien der objektorientierten Programmierung?",
+    "o": [
+     { "t": "Kapselung", "ok": true },
+     { "t": "Subnetting", "ok": false },
+     { "t": "Striping", "ok": false },
+     { "t": "Broadcast", "ok": false }
+    ],
+    "e": "Kapselung gehört neben Vererbung, Polymorphismus und Abstraktion zu den Grundprinzipien der OOP."
+   },
+   {
+    "q": "Was beschreibt Vererbung in der objektorientierten Programmierung?",
+    "o": [
+     { "t": "Eine Klasse übernimmt Eigenschaften und Methoden einer Basisklasse", "ok": true },
+     { "t": "Zwei Objekte tauschen ihre Attribute zur Laufzeit vollständig aus", "ok": false },
+     { "t": "Attribute einer Klasse werden verschlüsselt auf der Platte abgelegt", "ok": false },
+     { "t": "Eine Klasse wird nach Gebrauch automatisch aus dem Speicher entfernt", "ok": false }
+    ],
+    "e": "Bei der Vererbung übernimmt eine abgeleitete Klasse Eigenschaften und Methoden ihrer Basisklasse und kann sie erweitern."
+   },
+   {
+    "q": "Was ermöglicht Polymorphismus in der objektorientierten Programmierung?",
+    "o": [
+     { "t": "Dieselbe Methode kann in verschiedenen Klassen unterschiedlich umgesetzt sein", "ok": true },
+     { "t": "Eine einzelne Klasse darf zur Laufzeit immer nur ein einziges Objekt gleichzeitig besitzen", "ok": false },
+     { "t": "Alle Klassen eines Programms müssen exakt gleich aufgebaut sein", "ok": false },
+     { "t": "Attribute einer Klasse werden bei Zugriff automatisch verschlüsselt", "ok": false }
+    ],
+    "e": "Polymorphismus erlaubt es, über eine gemeinsame Schnittstelle unterschiedliche Implementierungen derselben Methode aufzurufen."
+   },
+   {
+    "q": "Welcher Vorteil wird der objektorientierten Programmierung häufig zugeschrieben?",
+    "o": [
+     { "t": "Bessere Wartbarkeit durch klare Strukturierung und Wiederverwendung", "ok": true },
+     { "t": "Ein spürbar geringerer Verbrauch an Arbeitsspeicher zur Laufzeit", "ok": false },
+     { "t": "Eine automatisch niedrigere Latenz bei Netzwerkverbindungen", "ok": false },
+     { "t": "Ein deutlich reduzierter Bedarf an IPv6-Adressen im Netz", "ok": false }
+    ],
+    "e": "Durch Strukturierung, Kapselung und Wiederverwendbarkeit lässt sich objektorientierter Code leichter pflegen und erweitern."
+   },
+   {
+    "q": "Welchen Vorteil bringt die Kapselung in der objektorientierten Programmierung?",
+    "o": [
+     { "t": "Interne Datenstrukturen sind geschützt und nur über Methoden zugänglich", "ok": true },
+     { "t": "Auf alle Variablen kann jederzeit direkt und ungeprüft von außen zugegriffen werden", "ok": false },
+     { "t": "Datenbanken werden beim Start automatisch neu erzeugt", "ok": false },
+     { "t": "Netzwerkverbindungen werden dadurch spürbar beschleunigt", "ok": false }
+    ],
+    "e": "Kapselung verbirgt den inneren Zustand eines Objekts und erlaubt den Zugriff nur über definierte Methoden."
+   },
+   {
+    "q": "Wie wird in einem UML-Klassendiagramm ein privates Attribut gekennzeichnet?",
+    "o": [
+     { "t": "Mit einem Minuszeichen vor dem Attributnamen", "ok": true },
+     { "t": "Mit einem Pluszeichen vor dem Attributnamen", "ok": false },
+     { "t": "Mit einem Rautezeichen vor dem Attributnamen", "ok": false },
+     { "t": "Mit einem Sternchen hinter dem Attributnamen", "ok": false }
+    ],
+    "e": "In UML steht ein Minuszeichen für private Sichtbarkeit, ein Pluszeichen für public und eine Raute für protected."
+   },
+   {
+    "q": "Was gibt der früheste Anfangszeitpunkt (FAZ) eines Vorgangs im Netzplan an?",
+    "o": [
+     { "t": "Den frühestmöglichen Startzeitpunkt des Vorgangs", "ok": true },
+     { "t": "Den spätesten erlaubten Endzeitpunkt des Vorgangs", "ok": false },
+     { "t": "Die reine Dauer des Vorgangs in Tagen", "ok": false },
+     { "t": "Die Zahl der direkt nachfolgenden Vorgänge", "ok": false }
+    ],
+    "e": "Der FAZ ergibt sich aus der Vorwärtsrechnung und markiert, wann ein Vorgang frühestens beginnen kann."
+   },
+   {
+    "q": "Wie berechnet man den Gesamtpuffer eines Vorgangs im Netzplan?",
+    "o": [
+     { "t": "Spätester Anfangszeitpunkt minus frühester Anfangszeitpunkt", "ok": true },
+     { "t": "Frühester Anfangszeitpunkt plus die Dauer des Vorgangs", "ok": false },
+     { "t": "Summe der Dauern aller nachfolgenden Vorgänge", "ok": false },
+     { "t": "Anzahl der Vorgänger multipliziert mit der Dauer", "ok": false }
+    ],
+    "e": "Der Gesamtpuffer ist die Differenz aus spätester und frühester Lage: GP = SAZ − FAZ (gleichwertig SEZ − FEZ)."
+   },
+   {
+    "q": "Wodurch ist der kritische Pfad in einem Netzplan gekennzeichnet?",
+    "o": [
+     { "t": "Die Vorgänge auf ihm haben einen Gesamtpuffer von null", "ok": true },
+     { "t": "Er enthält immer die wenigsten Vorgänge im gesamten Plan", "ok": false },
+     { "t": "Seine Vorgänge besitzen den größten Puffer aller Wege", "ok": false },
+     { "t": "Er verläuft stets über die kürzeste Gesamtdauer", "ok": false }
+    ],
+    "e": "Der kritische Pfad besteht aus den Vorgängen mit Puffer null. Eine Verzögerung dort verschiebt das gesamte Projektende."
+   },
+   {
+    "q": "Welche Technik erlaubt es, mehrere Monitore per Daisy-Chain an einen DisplayPort- oder Thunderbolt-Ausgang zu hängen?",
+    "o": [
+     { "t": "Multi-Stream Transport", "ok": true },
+     { "t": "Power over Ethernet", "ok": false },
+     { "t": "Wake on LAN", "ok": false },
+     { "t": "Simultaneous Multithreading", "ok": false }
+    ],
+    "e": "Multi-Stream Transport (MST) überträgt mehrere unabhängige Bildsignale über eine Leitung und ermöglicht so das Reihenschalten von Monitoren."
+   },
+   {
+    "q": "Eine unkomprimierte Videoübertragung nutzt 1280×720 Pixel, 24 Bit Farbtiefe und 25 Bilder pro Sekunde. Welcher Rechenweg liefert die Rohdatenrate?",
+    "o": [
+     { "t": "1280 × 720 × 24 × 25", "ok": true },
+     { "t": "1280 × 720 × 24 ÷ 25", "ok": false },
+     { "t": "1280 × 720 + 24 × 25", "ok": false },
+     { "t": "1280 × 720 × 25 ÷ 24", "ok": false }
+    ],
+    "e": "Rohdatenrate = Pixelzahl × Farbtiefe × Bildrate. 1280 × 720 × 24 × 25 = 552.960.000 Bit/s, also rund 553 Mbit/s."
+   },
+   {
+    "q": "Drei Pakete kosten 15, 12 und 18 Euro. Ab einer Zwischensumme über 40 Euro gibt es 12,5 Prozent Rabatt. Welcher Rechenweg liefert den Endpreis?",
+    "o": [
+     { "t": "(15 + 12 + 18) × 0,875", "ok": true },
+     { "t": "(15 + 12 + 18) × 0,125", "ok": false },
+     { "t": "(15 + 12 + 18) × 1,125", "ok": false },
+     { "t": "(15 + 12 + 18) − 40", "ok": false }
+    ],
+    "e": "Zwischensumme 45 Euro liegt über 40 Euro, also 12,5 Prozent Rabatt: 45 × 0,875 = 39,38 Euro."
    }
   ]
  },
@@ -12968,6 +13308,26 @@ const POOLS = {
      { "t": "Die Meldepflicht ist freiwillig, die DSFA ist immer verpflichtend", "ok": false }
     ],
     "e": "Meldepflicht = Reaktion auf einen Vorfall. DSFA = vorbeugende Risikoprüfung, bevor eine riskante Verarbeitung überhaupt startet."
+   },
+   {
+    "q": "Welche Maßnahme ist bei einer Videoüberwachung datenschutzrechtlich geboten?",
+    "o": [
+     { "t": "Betroffene durch ein Hinweisschild über die Überwachung informieren", "ok": true },
+     { "t": "Aufnahmen ohne zeitliche Begrenzung dauerhaft speichern", "ok": false },
+     { "t": "Auch rein private Bereiche vollständig mit erfassen", "ok": false },
+     { "t": "Vollständig auf jede Dokumentation des festgelegten Überwachungszwecks verzichten", "ok": false }
+    ],
+    "e": "Betroffene müssen erkennen können, dass sie gefilmt werden. Ein deutliches Hinweisschild ist dafür Pflicht (Transparenz, Art. 13 DSGVO)."
+   },
+   {
+    "q": "Welche Aussage zur Speicherung von Videoaufnahmen trifft zu?",
+    "o": [
+     { "t": "Zulässige Aufbewahrungsfristen müssen eingehalten werden", "ok": true },
+     { "t": "Die Speicherdauer darf beliebig lang gewählt werden", "ok": false },
+     { "t": "Einmal erstellte Aufnahmen dürfen nie gelöscht werden", "ok": false },
+     { "t": "Videomaterial muss grundsätzlich dauerhaft archiviert werden", "ok": false }
+    ],
+    "e": "Videoaufnahmen dürfen nur so lange gespeichert werden, wie es der Zweck erfordert. Danach sind sie zu löschen (Speicherbegrenzung)."
    }
   ]
  },
@@ -16845,7 +17205,16 @@ function applyScopeFromSlider(){
 scopeSlider.addEventListener('input', applyScopeFromSlider);
 applyScopeFromSlider();
 
-Object.keys(POOLS).forEach(key => {
+// Reihenfolge: AP1 immer zuerst, dann alphabetisch nach Name; Zufällig ganz am Ende.
+function orderedCatKeys(){
+  const collator = new Intl.Collator('de', {sensitivity:'base'});
+  return Object.keys(POOLS).sort((a,b)=>{
+    if(a==='ap1') return -1;
+    if(b==='ap1') return 1;
+    return collator.compare(POOLS[a].name, POOLS[b].name);
+  });
+}
+orderedCatKeys().forEach(key => {
   const chip = document.createElement('div');
   chip.className = 'cat-chip' + (POOLS[key].gold ? ' cat-gold' : '');
   chip.dataset.key = key;
@@ -16853,6 +17222,16 @@ Object.keys(POOLS).forEach(key => {
   chip.addEventListener('click', () => toggleCat(key, chip));
   catGrid.appendChild(chip);
 });
+// Sonderkategorie "Zufällig": zieht quer über alle Pools, immer als letzter Chip.
+(function(){
+  const totalAll = Object.keys(POOLS).reduce((s,k)=>s+POOLS[k].q.length,0);
+  const chip = document.createElement('div');
+  chip.className = 'cat-chip cat-random';
+  chip.dataset.key = '__random__';
+  chip.innerHTML = '<div class="cat-box">&#10003;</div><span class="cat-name">Zufällig</span><span class="cat-count">quer über alle '+totalAll+'</span>';
+  chip.addEventListener('click', () => toggleCat('__random__', chip));
+  catGrid.appendChild(chip);
+})();
 
 // ---- Kategorie-Suche: nur Buchstaben/Zahlen erlaubt, filtert die Chips live ----
 const catSearch = document.getElementById('catSearch');
@@ -16866,15 +17245,16 @@ function normalizeForSearch(s){
 function filterCats(rawQuery){
   const query = normalizeForSearch(rawQuery);
   let visible = 0;
-  const total = Object.keys(POOLS).length;
-  document.querySelectorAll('.cat-chip').forEach(chip => {
+  const chips = document.querySelectorAll('.cat-chip');
+  chips.forEach(chip => {
     const key = chip.dataset.key;
-    const normName = normalizeForSearch(POOLS[key].name);
+    const name = key === '__random__' ? 'zufällig' : POOLS[key].name;
+    const normName = normalizeForSearch(name);
     const match = query === '' || normName.includes(query);
     chip.classList.toggle('cat-hidden', !match);
     if(match) visible++;
   });
-  catSearchCount.textContent = query === '' ? '' : (visible + ' / ' + total + ' Kategorien');
+  catSearchCount.textContent = query === '' ? '' : (visible + ' / ' + chips.length + ' Kategorien');
 }
 
 if(catSearch){
@@ -16886,6 +17266,25 @@ if(catSearch){
 }
 
 function toggleCat(key, chip){
+  if(key === '__random__'){
+    if(selected.has('__random__')){
+      selected.delete('__random__');
+      chip.classList.remove('sel');
+    } else {
+      document.querySelectorAll('.cat-chip.sel').forEach(c => c.classList.remove('sel'));
+      selected.clear();
+      selected.add('__random__');
+      chip.classList.add('sel');
+    }
+    refreshSelState();
+    return;
+  }
+  // Normale Kategorie: eine ggf. aktive Zufällig-Auswahl wird verworfen.
+  if(selected.has('__random__')){
+    selected.delete('__random__');
+    const rc = document.querySelector('.cat-chip[data-key="__random__"]');
+    if(rc) rc.classList.remove('sel');
+  }
   if(selected.has(key)){
     selected.delete(key);
     chip.classList.remove('sel');
@@ -16899,9 +17298,12 @@ function toggleCat(key, chip){
 
 function refreshSelState(){
   const n = selected.size;
+  const randomActive = selected.has('__random__');
   document.querySelectorAll('.cat-chip').forEach(chip => {
     const key = chip.dataset.key;
-    if(!selected.has(key) && n >= MAX_CATS){
+    if(randomActive || key === '__random__'){
+      chip.classList.remove('disabled');
+    } else if(!selected.has(key) && n >= MAX_CATS){
       chip.classList.add('disabled');
     } else {
       chip.classList.remove('disabled');
@@ -16909,6 +17311,12 @@ function refreshSelState(){
   });
   startBtn.disabled = n === 0;
   if(n === 0){ selHint.textContent = 'Keine Kategorie gewählt'; selHint.classList.remove('warn'); }
+  else if(randomActive){
+    const totalAll = Object.keys(POOLS).reduce((s,k)=>s+POOLS[k].q.length,0);
+    const qc = quizScope === 'all' ? totalAll : Math.min(quizScope, totalAll);
+    selHint.textContent = 'Zufällig · ' + qc + ' Fragen quer über alle Kategorien';
+    selHint.classList.remove('warn');
+  }
   else {
     let qcount = 0;
     selected.forEach(k => { qcount += (quizScope === 'all' ? POOLS[k].q.length : Math.min(quizScope, POOLS[k].q.length)); });
@@ -16967,6 +17375,25 @@ function buildRun(){
     return;
   }
   activeCats = Array.from(selected);
+  if(selected.has('__random__')){
+    let pool = [];
+    Object.keys(POOLS).forEach(key => {
+      POOLS[key].q.forEach(qObj => pool.push({ catName: POOLS[key].name, obj: qObj }));
+    });
+    pool = shuffle(pool);
+    const take = quizScope === 'all' ? pool.length : Math.min(quizScope, pool.length);
+    pool.slice(0, take).forEach(entry => {
+      runQuestions.push({
+        cat: entry.catName,
+        q: entry.obj.q,
+        opts: shuffle(entry.obj.o),
+        e: entry.obj.e,
+        done: false,
+        correct: false
+      });
+    });
+    return;
+  }
   activeCats.forEach(key => {
     const scopeN = quizScope === 'all' ? POOLS[key].q.length : quizScope;
     const drawn = drawFromCategory(key, scopeN);
@@ -16989,6 +17416,8 @@ function renderRun(){
   qArea.innerHTML = '';
   if(quizScope === 'wrong'){
     runTitle.textContent = 'Wackelkandidaten';
+  } else if(activeCats[0] === '__random__'){
+    runTitle.textContent = 'Zufälliges Quiz';
   } else {
     runTitle.textContent = activeCats.length === 1 ? POOLS[Array.from(selected)[0]].name : 'Gemischtes Quiz';
   }
@@ -17253,6 +17682,8 @@ zenToggle.addEventListener('click', (e) => {
 //    wieder gezeigt. Mikro-Richtungswechsel beim Finger-Lupfen resetten nur
 //    den Zähler und starten die Transition nicht neu.
 // 3) rAF-Drosselung: maximal ein Update pro Frame.
+let menuOpenGrace = false;   // kurze Schonzeit nach dem Öffnen gegen Layout-Sprung
+let menuCloseHandler = null; // wird von der Menü-Logik gesetzt
 let lastScrollY = window.scrollY;
 let scrollDir = 0;   // 1 = runter, -1 = hoch
 let scrollAcc = 0;   // akkumulierter Weg in aktueller Richtung
@@ -17271,6 +17702,15 @@ function onScroll(){
   const d = delta > 0 ? 1 : -1;
   if(d !== scrollDir){ scrollDir = d; scrollAcc = 0; }
   scrollAcc += Math.abs(delta);
+  // Ist das Mobile-Menü offen, bleibt die Leiste sichtbar. Erst ein echtes
+  // Runterscrollen (nach der Schonzeit) klappt das Menü wieder zu.
+  if(tabBar.classList.contains('menu-open')){
+    tabBar.classList.remove('hidden');
+    if(!menuOpenGrace && scrollDir === 1 && scrollAcc > HIDE_AFTER && menuCloseHandler){
+      menuCloseHandler();
+    }
+    return;
+  }
   if(y < 60){ tabBar.classList.remove('hidden'); return; } // oben immer sichtbar
   if(scrollDir === 1 && scrollAcc > HIDE_AFTER){
     tabBar.classList.add('hidden');
@@ -17629,14 +18069,17 @@ libSearch.addEventListener('input', () => {
 
 renderLib(GLOSSAR_SORTED);
 
-// ---- Footer: Kategorien-/Fragenzahl dynamisch ----
+// ---- Footer + Header-Specs: Kategorien-/Fragen-/Begriffszahl dynamisch ----
 (function(){
   const cats = Object.keys(POOLS).length;
   const qs = Object.keys(POOLS).reduce((s,k)=>s+POOLS[k].q.length,0);
-  const fc = document.getElementById('footCats');
-  const fq = document.getElementById('footQs');
-  if(fc) fc.textContent = cats;
-  if(fq) fq.textContent = qs;
+  const gloss = (typeof GLOSSAR !== 'undefined' && GLOSSAR.length) ? GLOSSAR.length : 0;
+  const set = (id,val)=>{ const el=document.getElementById(id); if(el) el.textContent = val; };
+  set('footCats', cats);
+  set('footQs', qs);
+  set('specCats', cats);
+  set('specQs', qs);
+  set('specGloss', gloss);
 })();
 
 // Beim Laden immer oben starten (ohne Animation), egal was der Browser cachen will.
@@ -17706,4 +18149,80 @@ window.addEventListener('pageshow', () => { window.scrollTo(0, 0); });
   if(closeBtn) closeBtn.addEventListener('click', close);
   modal.addEventListener('click', (e) => { if(e.target === modal) close(); });
   document.addEventListener('keydown', (e) => { if(e.key === 'Escape' && modal.classList.contains('show')) close(); });
+})();
+
+// ---- Mobile-Menü: Tab-Leiste ein-/ausklappen ----
+(function(){
+  const bar = document.getElementById('tabBar');
+  const btn = document.getElementById('menuToggle');
+  if(!bar || !btn) return;
+  function close(){ bar.classList.remove('menu-open'); btn.textContent = 'Menü öffnen'; btn.setAttribute('aria-expanded','false'); }
+  menuCloseHandler = close;
+  btn.addEventListener('click', () => {
+    const open = bar.classList.toggle('menu-open');
+    btn.textContent = open ? 'Menü schließen' : 'Menü öffnen';
+    btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    if(open){
+      // Layout-Sprung durch das Ausklappen neutralisieren, damit die
+      // Scroll-Hysterese das frisch geöffnete Menü nicht sofort wieder zumacht.
+      bar.classList.remove('hidden');
+      lastScrollY = window.scrollY;
+      scrollAcc = 0;
+      menuOpenGrace = true;
+      setTimeout(() => { menuOpenGrace = false; }, 450);
+    }
+  });
+  bar.querySelectorAll('.tab, .zen-toggle').forEach(el => {
+    el.addEventListener('click', () => { if(window.innerWidth <= 560) close(); });
+  });
+})();
+
+// ---- Schnellsuche (Lupe im Header): filtert die Nachschlage-Stichwörter ----
+(function(){
+  const wrap = document.getElementById('quickSearch');
+  const toggle = document.getElementById('qsToggle');
+  const input = document.getElementById('qsInput');
+  const results = document.getElementById('qsResults');
+  if(!wrap || !toggle || !input || !results) return;
+  // Datenquelle: die Sprungmarken des Nachschlagewerks (Label + Ziel-Anker).
+  const NAV = Array.from(document.querySelectorAll('.jump a')).map(a => ({
+    label: a.textContent.trim(),
+    hash: a.getAttribute('href')
+  }));
+  function esc(s){ return String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])); }
+  function norm(s){ return s.toLowerCase().replace(/[^a-z0-9äöüß]/gi,''); }
+  function open(){ wrap.classList.add('open'); toggle.setAttribute('aria-expanded','true'); setTimeout(()=>input.focus(), 60); }
+  function close(){ wrap.classList.remove('open'); toggle.setAttribute('aria-expanded','false'); results.classList.remove('has'); results.innerHTML=''; input.value=''; }
+  function goTo(hash){
+    const lesenTab = document.querySelector('.tab[data-view="lesen"]');
+    if(lesenTab) lesenTab.click();
+    close();
+    setTimeout(() => {
+      const el = document.getElementById(hash.slice(1));
+      if(el) el.scrollIntoView({behavior:'smooth', block:'start'});
+    }, 80);
+  }
+  toggle.addEventListener('click', (e) => { e.stopPropagation(); wrap.classList.contains('open') ? close() : open(); });
+  input.addEventListener('input', () => {
+    const q = norm(input.value.trim());
+    if(!q){ results.classList.remove('has'); results.innerHTML=''; return; }
+    const hits = NAV.filter(n => norm(n.label).includes(q)).slice(0, 12);
+    if(hits.length === 0){
+      results.innerHTML = '<div class="qs-empty">Kein Stichwort gefunden.</div>';
+    } else {
+      results.innerHTML = hits.map(n => '<button class="qs-navhit" data-hash="'+esc(n.hash)+'">'+esc(n.label)+'</button>').join('');
+      results.querySelectorAll('.qs-navhit').forEach(btn => {
+        btn.addEventListener('click', () => goTo(btn.dataset.hash));
+      });
+    }
+    results.classList.add('has');
+  });
+  input.addEventListener('keydown', (e) => {
+    if(e.key === 'Escape'){ close(); return; }
+    if(e.key === 'Enter'){
+      const first = results.querySelector('.qs-navhit');
+      if(first) goTo(first.dataset.hash);
+    }
+  });
+  document.addEventListener('click', (e) => { if(!wrap.contains(e.target)) close(); });
 })();
