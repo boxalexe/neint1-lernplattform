@@ -49,6 +49,11 @@ header h1{font-family:'DM Mono','Consolas',monospace;font-size:2.7rem;font-weigh
 header h1 .mono{font-family:'DM Mono','Consolas',monospace;color:var(--cyan)}
 .header-specs{font-family:'DM Mono','Consolas',monospace;font-size:0.82rem;color:var(--muted);letter-spacing:0.5px;margin-bottom:8px}
 .header-specs span{color:var(--cyan)}
+.grade{font-family:'DM Mono','Consolas',monospace;font-size:1.5rem;font-weight:700;color:var(--text);margin:8px 0 2px}
+.grade .g-num{color:var(--cyan)}
+.grade.fail .g-num{color:var(--red)}
+.grade-scale{font-family:'DM Mono','Consolas',monospace;font-size:0.72rem;color:var(--muted);margin-top:16px;line-height:1.8;opacity:0.85}
+.grade-scale b{color:var(--text);font-weight:500}
 header p{color:var(--muted);font-size:0.95rem}
 .tabs{position:sticky;top:0;z-index:30;background:rgba(10,14,18,0.94);backdrop-filter:blur(8px);border-bottom:1px solid var(--border);padding:10px 0;margin-bottom:32px;will-change:transform,opacity;transition:transform 0.28s cubic-bezier(0.4,0,0.2,1),opacity 0.22s ease}
 .tabs.hidden{transform:translateY(-110%);opacity:0;pointer-events:none}

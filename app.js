@@ -17487,12 +17487,39 @@ function showResult(){
   const pct = Math.round(correct/total*100);
   document.getElementById('resScore').textContent = pct + '%';
   document.getElementById('resDetail').textContent = correct + ' von ' + total + ' Fragen richtig';
-  let v;
-  if(pct === 100) v = 'Sitzt. Alles richtig.';
-  else if(pct >= 80) v = 'Stark. Nur Feinschliff nötig.';
-  else if(pct >= 60) v = 'Solide, aber Lücken. Nochmal rotieren.';
-  else v = 'Da fehlt Substanz. Zurück ins Nachschlagewerk.';
-  document.getElementById('resVerdict').textContent = v;
+
+  // Notenschema: Schwelle = Fragenzahl × Faktor, kaufmännisch gerundet.
+  // Note 4 (Ausreichend) ist die Bestehensgrenze, ab Note 5 nicht bestanden.
+  const grades = [
+    { min: 0.90, num: 1, label: 'Sehr gut',    note: 'Sitzt sicher.' },
+    { min: 0.75, num: 2, label: 'Gut',          note: 'Kleiner Feinschliff.' },
+    { min: 0.60, num: 3, label: 'Befriedigend', note: 'Lücken gezielt schließen.' },
+    { min: 0.50, num: 4, label: 'Ausreichend',  note: 'Bestanden, aber knapp.' },
+    { min: 0.30, num: 5, label: 'Mangelhaft',   note: 'Zurück ins Nachschlagewerk.' },
+    { min: 0.00, num: 6, label: 'Ungenügend',   note: 'Grundlagen fehlen noch.' }
+  ];
+  let g = grades[grades.length - 1];
+  for(const cand of grades){ if(correct >= Math.round(cand.min * total)){ g = cand; break; } }
+
+  const gradeEl = document.getElementById('resGrade');
+  gradeEl.innerHTML = '<span class="g-num">Note ' + g.num + '</span> · ' + g.label;
+  gradeEl.classList.toggle('fail', g.num >= 5);
+  document.getElementById('resVerdict').textContent = g.note;
+
+  // Notenschlüssel passend zur gewählten Fragenzahl.
+  const scale = document.getElementById('resScale');
+  if(scale){
+    const t = (f) => Math.round(f * total);
+    scale.innerHTML =
+      'Notenschlüssel für ' + total + ' Fragen — ' +
+      '1 ab <b>' + t(0.90) + '</b> · ' +
+      '2 ab <b>' + t(0.75) + '</b> · ' +
+      '3 ab <b>' + t(0.60) + '</b> · ' +
+      '4 ab <b>' + t(0.50) + '</b> · ' +
+      '5 ab <b>' + t(0.30) + '</b> · ' +
+      '6 darunter';
+  }
+
   const rb = document.getElementById('resultBtn');
   if(rb) rb.style.display = 'none';
   runnerEl.classList.remove('active');

@@ -98,6 +98,7 @@
 <h2>AP1</h2>
 <p>Die AP1 ist keine reine Wissensabfrage, sondern eine zusammenhängende Handlungssituation aus einem Betrieb. Die Teilaufgaben bauen aufeinander auf: Ergebnisse aus einer Aufgabe werden in der nächsten weiterverwendet. Anders als im Multiple-Choice-Training musst du Antworten selbst formulieren, Rechenwege zeigen und Entscheidungen begründen. Dieser Abschnitt nennt jedes Thema aus dem AP1-Pool mit Stichpunkten und einer Beispielaufgabe, wie sie in der echten Prüfung aussehen könnte.</p>
 <div class="callout"><span class="tag">Aufbauendes Denken</span>Typische Kette: erst die Ausgangslage analysieren, dann Alternativen bewerten, dann rechnen, dann eine begründete Entscheidung treffen. Beispiel: Nutzwertanalyse aufstellen &rarr; Angebote punkten &rarr; günstigsten Anbieter ermitteln &rarr; passende Vertragsart wählen &rarr; Beschaffung dokumentieren.</div>
+<div class="callout"><span class="tag">Prüfungssprache</span>Die eigentliche Hürde ist oft nicht der Inhalt, sondern die Formulierung. IHK-Aufgabentexte sind bewusst verklausuliert — selbst Muttersprachler müssen manche Sätze dreimal lesen und verstehen den Kern trotzdem nicht, obwohl die Lösung einfach wäre. Lies gezielt alte Prüfungen, um diese Sprachmuster zu erkennen. Ein Trick: Wörter, die die Aufgabe nur künstlich aufblähen, statt etwas zu definieren, gedanklich streichen, dann bleibt der eigentliche Kern der Frage übrig.</div>
 
 <h3>Projektmanagement &amp; Projektplanung</h3>
 <p>Themen: Ist-Analyse und Soll-Konzept, Projektinitiierung, messbare (SMART-)Ziele, Stakeholder, Lasten- und Pflichtenheft, Meilensteine, Projektrisiken und Gegenmaßnahmen, Änderungsanforderungen, Projektabschluss mit Soll-Ist-Vergleich.</p>
@@ -158,6 +159,10 @@
 <h3>IT-Sicherheit &amp; mobiles Arbeiten</h3>
 <p>Themen: Datenträgerverschlüsselung, Blickschutz, Zugriff über öffentliches WLAN und VPN, Prinzip der minimalen Rechte, Phishing, Umgang mit Makros, Offboarding, Mehrfaktor-Authentifizierung.</p>
 <p class="ap1-ex"><strong>Beispielaufgabe</strong> Ein Beschäftigter arbeitet mit dem Notebook in einem Café. a) Nennen Sie zwei Maßnahmen, die den Zugriff auf betriebliche Systeme absichern. b) Erklären Sie, warum ein Passwort plus Authenticator-App eine echte Mehrfaktor-Authentifizierung ist.</p>
+
+<h3>Datenschutz &amp; DSGVO im Betrieb</h3>
+<p>Themen: Grundsätze der DSGVO, gängige Artikel und Paragraphen wie Art. 6 zur Rechtsgrundlage, Art. 32 zu technischen und organisatorischen Maßnahmen, Art. 33 zur Meldepflicht binnen 72 Stunden und § 26 BDSG zum Beschäftigtendatenschutz, der Umgang mit sensiblen Kundendaten sowie der sichere Zugriff aus dem Homeoffice. Die Abkürzungen DSGVO, BDSG, TOM, AVV und DSB stehen mit Erklärung im Glossar.</p>
+<p class="ap1-ex"><strong>Beispielaufgabe</strong> Ein Mitarbeiter soll aus dem Homeoffice auf eine Kundendatenbank zugreifen. a) Nennen Sie zwei technische Maßnahmen, die eine sichere Verbindung gewährleisten. b) Erklären Sie anhand eines DSGVO-Grundsatzes, warum ihm nur die für seine Aufgabe nötigen Kundendaten angezeigt werden sollten.</p>
 
 <h3>Backup &amp; Wiederherstellung</h3>
 <p>Themen: Voll-, inkrementelle und differentielle Sicherung, Testwiederherstellung, 3-2-1-Regel, Recovery Point Objective und Recovery Time Objective.</p>
@@ -886,8 +891,10 @@
   <!-- Ergebnis -->
   <div class="result" id="result">
     <div class="score" id="resScore">0%</div>
+    <div class="grade" id="resGrade"></div>
     <div class="verdict" id="resVerdict"></div>
     <div class="detail" id="resDetail"></div>
+    <div class="grade-scale" id="resScale"></div>
     <div class="result-actions">
       <button class="start-btn" id="againBtn">Neue Runde (rotiert)</button>
       <button class="btn-sec" id="backBtn">Zurück zur Auswahl</button>

@@ -741,11 +741,13 @@
      unabhaengigen Hinweis. Gegen das Original CVD-simuliert geprueft und verbessert. */
   html[data-theme="cvd"]{
     --bg:#0a0e14; --panel:#111a24; --panel-2:#0d1620; --line:#1e2c3a;
-    --text:#eef1f6; --dim:#9aa8bb; --cyan:#56b4e9; --green:#22c55e;
-    --amber:#f0e442; --red:#ff9500;
+    --text:#eef1f6; --dim:#9aa8bb; --cyan:#56b4e9; --green:#2e9bff;
+    --amber:#f0e442; --red:#ff8000;
     --net-bit:#56b4e9; --host-bit:#22c55e;
-    --ok-border:#2f7bf0; --scrolltop-color:#2f7bf0;
+    --ok-border:#2e9bff; --scrolltop-color:#2e9bff;
   }
+  html[data-theme="cvd"] .field input.ok { box-shadow: 0 0 0 3px rgba(46,155,255,0.18); }
+  html[data-theme="cvd"] .feedback.win { background: rgba(46,155,255,0.10); border-color: rgba(46,155,255,0.42); }
 
   .h1row { display: flex; align-items: center; gap: 14px; }
   .a11y-wrap{display:flex;justify-content:center;margin-top:10px;position:relative}
