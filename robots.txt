@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://layer8academy.boxberger.app/sitemap.xml

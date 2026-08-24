@@ -2465,7 +2465,7 @@ const POOLS = {
       "ok": false
      },
      {
-      "t": "Sie sind nur für UDP reserviert",
+      "t": "Sie sind ausschließlich für UDP reserviert",
       "ok": false
      }
     ],
@@ -3102,23 +3102,23 @@ const POOLS = {
     "q": "Was unterscheidet POP3 von IMAP grundlegend?",
     "o": [
      {
-      "t": "POP3 lädt herunter und löscht, IMAP belässt Mails am Server",
+      "t": "POP3 lädt Mails zum Client herunter, IMAP belässt sie am Server",
       "ok": true
      },
      {
-      "t": "POP3 ist grundsätzlich verschlüsselt, IMAP nicht",
+      "t": "POP3 überträgt grundsätzlich verschlüsselt, IMAP dagegen unverschlüsselt",
       "ok": false
      },
      {
-      "t": "IMAP nutzt UDP, POP3 nutzt TCP",
+      "t": "IMAP überträgt die Mails per UDP, POP3 dagegen ausschließlich per TCP",
       "ok": false
      },
      {
-      "t": "POP3 ist der neuere Nachfolgestandard von IMAP",
+      "t": "POP3 wurde als neuerer Nachfolgestandard von IMAP eingeführt",
       "ok": false
      }
     ],
-    "e": "POP3 holt Mails lokal (löscht meist), IMAP synchronisiert und belässt sie am Server."
+    "e": "POP3 holt Mails zum Client — ob sie am Server gelöscht werden, ist Konfigurationssache. IMAP synchronisiert und belässt sie am Server."
    },
    {
     "q": "Welcher Port gehört zu RDP?",
@@ -3250,7 +3250,7 @@ const POOLS = {
       "ok": false
      }
     ],
-    "e": "587 = SMTP-Submission (Client→Server, verschlüsselt)."
+    "e": "587 = SMTP-Submission (Client→Server), in der Regel per STARTTLS gesichert."
    },
    {
     "q": "Welches Protokoll überträgt Dateien ohne Login via UDP (PXE-Boot)?",
@@ -3404,7 +3404,7 @@ const POOLS = {
       "ok": false
      }
     ],
-    "e": "TCP garantiert Zustellung und Reihenfolge."
+    "e": "TCP sichert Zustellung und Reihenfolge über Bestätigungen und erneutes Senden ab."
    },
    {
     "q": "Welcher Port gehört zu POP3S?",
@@ -3652,19 +3652,19 @@ const POOLS = {
     "q": "Was ist der Unterschied zwischen POP3 und IMAP?",
     "o": [
      {
-      "t": "POP3 lädt herunter und löscht, IMAP synchronisiert am Server",
+      "t": "POP3 lädt Mails zum Client herunter, IMAP synchronisiert sie am Server",
       "ok": true
      },
      {
-      "t": "POP3 ist verschlüsselt, IMAP grundsätzlich nicht",
+      "t": "POP3 arbeitet immer verschlüsselt, IMAP dagegen grundsätzlich unverschlüsselt",
       "ok": false
      },
      {
-      "t": "IMAP nutzt UDP statt TCP für den Abruf",
+      "t": "IMAP nutzt für den Abruf der Nachrichten UDP statt des üblichen TCP",
       "ok": false
      },
      {
-      "t": "POP3 ist der modernere Standard von beiden",
+      "t": "POP3 ist von beiden Protokollen der deutlich modernere Standard",
       "ok": false
      }
     ],
@@ -3867,15 +3867,15 @@ const POOLS = {
       "ok": true
      },
      {
-      "t": "Well-Known 0–1023",
+      "t": "Well-Known-Ports von 0 bis 1023",
       "ok": false
      },
      {
-      "t": "Immer 80",
+      "t": "Den Standard-HTTP-Port 80",
       "ok": false
      },
      {
-      "t": "Immer 443",
+      "t": "Den Standard-HTTPS-Port 443",
       "ok": false
      }
     ],
@@ -4078,7 +4078,7 @@ const POOLS = {
       "ok": true
      },
      {
-      "t": "Verschlüsselung der Nutzdaten",
+      "t": "Verschlüsselung der übertragenen Nutzdaten",
       "ok": false
      },
      {
@@ -4144,7 +4144,7 @@ const POOLS = {
       "ok": true
      },
      {
-      "t": "Es wird keine Verbindung benötigt",
+      "t": "Es wird vor dem Senden keine Verbindung benötigt",
       "ok": false
      },
      {
@@ -4188,7 +4188,7 @@ const POOLS = {
       "ok": true
      },
      {
-      "t": "Einschreiben mit Rückschein",
+      "t": "Einschreiben mit Rückschein bei der Post",
       "ok": false
      },
      {
@@ -4210,7 +4210,7 @@ const POOLS = {
       "ok": true
      },
      {
-      "t": "Ja, IP garantiert die Zustellung",
+      "t": "Ja, IP garantiert die Zustellung jedes Pakets",
       "ok": false
      },
      {
@@ -4534,7 +4534,7 @@ const POOLS = {
       "ok": true
      },
      {
-      "t": "HTTP, SMTP, FTP",
+      "t": "HTTP, SMTP, FTP und Datenbankzugriffe",
       "ok": false
      },
      {
@@ -4829,7 +4829,7 @@ const POOLS = {
       "ok": false
      },
      {
-      "t": "Durch Vergrößern der Payload",
+      "t": "Durch schrittweises Vergrößern der Payload",
       "ok": false
      }
     ],
@@ -4865,15 +4865,15 @@ const POOLS = {
       "ok": true
      },
      {
-      "t": "Quell-IP",
+      "t": "Die Quell-IP-Adresse des Absenders",
       "ok": false
      },
      {
-      "t": "Ziel-IP",
+      "t": "Die Ziel-IP-Adresse des Empfängers",
       "ok": false
      },
      {
-      "t": "TTL",
+      "t": "Die verbleibende Lebensdauer (TTL)",
       "ok": false
      }
     ],
@@ -4887,7 +4887,7 @@ const POOLS = {
       "ok": true
      },
      {
-      "t": "Die Zieladresse",
+      "t": "Die Zieladresse des Pakets",
       "ok": false
      },
      {
@@ -4997,15 +4997,15 @@ const POOLS = {
       "ok": true
      },
      {
-      "t": "Zur Verschlüsselung",
+      "t": "Zur Verschlüsselung der übertragenen Nutzdaten",
       "ok": false
      },
      {
-      "t": "Zur Portzuordnung",
+      "t": "Zur Zuordnung der Daten zu den Anwendungsports",
       "ok": false
      },
      {
-      "t": "Zur MAC-Adressierung",
+      "t": "Zur Adressierung der Netzwerkkarte (MAC)",
       "ok": false
      }
     ],
@@ -5023,7 +5023,7 @@ const POOLS = {
       "ok": false
      },
      {
-      "t": "Um die schnellste Route zu erzwingen",
+      "t": "Um von Beginn an die schnellste Route zu erzwingen",
       "ok": false
      },
      {
@@ -5049,7 +5049,7 @@ const POOLS = {
       "ok": false
      },
      {
-      "t": "Eine verschlüsselte Verbindung",
+      "t": "Eine verschlüsselte Teilstrecke der Verbindung",
       "ok": false
      }
     ],
@@ -5173,7 +5173,7 @@ const POOLS = {
       "ok": true
      },
      {
-      "t": "Die Versionsnummer des IP-Protokolls (4 oder 6)",
+      "t": "Die Versionsnummer des verwendeten IP-Protokolls (4 oder 6)",
       "ok": false
      },
      {
@@ -5299,7 +5299,7 @@ const POOLS = {
       "ok": false
      },
      {
-      "t": "Die TTL wird auf 0 gesetzt und das Paket wartet",
+      "t": "Die TTL wird auf 0 gesetzt und das Paket wartet auf eine neue Route",
       "ok": false
      }
     ],
@@ -5956,7 +5956,7 @@ const POOLS = {
       "ok": true
      },
      {
-      "t": "Jede Schicht verschlüsselt die Nutzdaten einzeln",
+      "t": "Jede Schicht verschlüsselt die Nutzdaten noch einmal einzeln",
       "ok": false
      },
      {
@@ -6187,6 +6187,36 @@ const POOLS = {
      }
     ],
     "e": "TCP/IP fasst OSI-Schichten zusammen: 1+2 → Netzzugang, 3 → Internet, 4 → Transport, 5+6+7 → Anwendung."
+   },
+   {
+    "q": "Welche Schicht übernimmt die Fehlererkennung zwischen zwei direkt verbundenen Geräten?",
+    "o": [
+     { "t": "Die Sicherungsschicht (Schicht 2)", "ok": true },
+     { "t": "Die Bitübertragungsschicht (Schicht 1)", "ok": false },
+     { "t": "Die Vermittlungsschicht (Schicht 3)", "ok": false },
+     { "t": "Die Transportschicht (Schicht 4)", "ok": false }
+    ],
+    "e": "Die Sicherungsschicht sichert die Übertragung zwischen direkt verbundenen Geräten und erkennt Fehler über Prüfsummen im Frame (FCS). Die Transportschicht prüft dagegen Ende-zu-Ende zwischen Anwendungen."
+   },
+   {
+    "q": "Ein Techniker prüft Kabel, Stecker und die Link-LED eines Ports. Auf welcher Schicht setzt er an?",
+    "o": [
+     { "t": "Schicht 1 (Bitübertragung)", "ok": true },
+     { "t": "Schicht 2 (Sicherung)", "ok": false },
+     { "t": "Schicht 3 (Vermittlung)", "ok": false },
+     { "t": "Schicht 7 (Anwendung)", "ok": false }
+    ],
+    "e": "Kabel, Steckverbindungen und Link-Status gehören zur physikalischen Übertragung — der Startpunkt der Bottom-up-Fehlersuche."
+   },
+   {
+    "q": "Welche Schicht wandelt Zeichencodierungen wie UTF-8 um, damit die Empfänger-Anwendung die Daten verarbeiten kann?",
+    "o": [
+     { "t": "Die Darstellungsschicht (Schicht 6)", "ok": true },
+     { "t": "Die Sitzungsschicht (Schicht 5)", "ok": false },
+     { "t": "Die Anwendungsschicht (Schicht 7)", "ok": false },
+     { "t": "Die Transportschicht (Schicht 4)", "ok": false }
+    ],
+    "e": "Formatierung, Zeichencodierung, Kompression und Verschlüsselung sind Aufgaben der Darstellungsschicht — sie macht Daten für die Anwendung verarbeitbar."
    }
   ]
  },
@@ -6531,7 +6561,7 @@ const POOLS = {
       "ok": true
      },
      {
-      "t": "Bluetooth",
+      "t": "Bluetooth-Verbindungen im Nahbereich",
       "ok": false
      },
      {
@@ -6539,7 +6569,7 @@ const POOLS = {
       "ok": false
      },
      {
-      "t": "NFC",
+      "t": "NFC-Übertragung über wenige Zentimeter",
       "ok": false
      }
     ],
@@ -6740,6 +6770,56 @@ const POOLS = {
      }
     ],
     "e": "Stadtweite Vernetzung = Metropolitan Area Network."
+   },
+   {
+    "q": "Ein Büro-LAN soll gegen unbefugten Zugriff geschützt werden. Welche Maßnahmen sind dafür typisch?",
+    "o": [
+     { "t": "Firewall und Zugangskontrollen am Netzwerk", "ok": true },
+     { "t": "SSID-Hiding und MAC-Filter als Hauptschutz", "ok": false },
+     { "t": "RAID-Verbund und tägliche Vollsicherung", "ok": false },
+     { "t": "Roaming-Profile und Band Steering im WLAN", "ok": false }
+    ],
+    "e": "Zugriffsschutz im LAN leisten Firewalls und Zugangskontrollen (z. B. Port-Security, 802.1X). RAID und Backup sichern Daten gegen Verlust, nicht gegen unbefugten Zugriff; SSID-Hiding und MAC-Filter gelten nur als schwache Zusatzhürden."
+   },
+   {
+    "q": "Mehrere Unternehmensstandorte innerhalb einer Stadt sollen mit hoher Bandbreite vernetzt werden. Was ist dafür typisch?",
+    "o": [
+     { "t": "Ein MAN auf Basis von Glasfaserverbindungen", "ok": true },
+     { "t": "Ein WAN auf Basis redundanter Satellitenstrecken", "ok": false },
+     { "t": "Ein LAN auf Basis strukturierter Kupferverkabelung", "ok": false },
+     { "t": "Ein CAN auf Basis gekoppelter Etagenverteiler", "ok": false }
+    ],
+    "e": "Stadtweite Vernetzung ist das klassische MAN-Szenario — meist über Glasfaser eines Carriers. LAN und CAN sind räumlich zu klein, ein WAN überbrückt deutlich größere Distanzen."
+   },
+   {
+    "q": "Welche Sicherheitsmaßnahmen sind für die Standortkopplung über ein WAN typisch?",
+    "o": [
+     { "t": "Verschlüsselte VPN-Tunnel, Firewalls und IDS", "ok": true },
+     { "t": "SSID-Hiding, MAC-Filter und WPS-Verfahren", "ok": false },
+     { "t": "RAID 6, Hot Spare und tägliche Sicherungen", "ok": false },
+     { "t": "Auto-Negotiation, Duplex-Abgleich und LACP", "ok": false }
+    ],
+    "e": "WAN-Verkehr läuft über fremde Infrastruktur — verschlüsselte VPNs, Firewalls und Intrusion-Detection-Systeme sichern ihn ab. Die anderen Kombinationen betreffen WLAN-Komfort, Datensicherung und Ethernet-Betrieb."
+   },
+   {
+    "q": "Smartphone, Kopfhörer und Smartwatch einer Person verbinden sich drahtlos untereinander. Welcher Netztyp liegt vor und wie wird er gesichert?",
+    "o": [
+     { "t": "Ein PAN — gesichert über Verschlüsselung und Authentifizierung beim Koppeln", "ok": true },
+     { "t": "Ein WLAN — gesichert über eine individuelle RADIUS-Anmeldung je Endgerät", "ok": false },
+     { "t": "Ein LAN — gesichert über Port-Security am zentralen Etagen-Switch", "ok": false },
+     { "t": "Ein MAN — gesichert über die Carrier-Verschlüsselung des Stadtnetzes", "ok": false }
+    ],
+    "e": "Geräte im unmittelbaren Umkreis einer Person bilden ein PAN (typisch Bluetooth). Beim Pairing sichern Verschlüsselung und Authentifizierung die Verbindung."
+   },
+   {
+    "q": "Womit wird der Datenverkehr in einem Global Area Network typischerweise abgesichert?",
+    "o": [
+     { "t": "Mit starker Verschlüsselung und globalen VPN-Verbindungen", "ok": true },
+     { "t": "Mit Port-Security an den Zugangs-Switches der Gebäude", "ok": false },
+     { "t": "Mit versteckten SSIDs auf sämtlichen Access Points", "ok": false },
+     { "t": "Mit MAC-Filterlisten auf allen beteiligten Endgeräten", "ok": false }
+    ],
+    "e": "Weltumspannender Verkehr läuft über viele fremde Netze — starke Verschlüsselung und globale VPNs sind die tragenden Schutzmaßnahmen. Lokale Maßnahmen wie Port-Security greifen dort nicht."
    }
   ]
  },
@@ -6860,7 +6940,7 @@ const POOLS = {
       "ok": false
      },
      {
-      "t": "CD funktioniert nur mit Glasfaser",
+      "t": "CD funktioniert technisch nur mit Glasfaserleitungen",
       "ok": false
      }
     ],
@@ -7166,7 +7246,7 @@ const POOLS = {
       "ok": false
      },
      {
-      "t": "Segment mit Port → Bridge verschlüsselt",
+      "t": "Segment mit Portnummer → die Bridge verschlüsselt es",
       "ok": false
      }
     ],
@@ -7184,7 +7264,7 @@ const POOLS = {
       "ok": false
      },
      {
-      "t": "Der Router greift ein",
+      "t": "Der übergeordnete Router greift regelnd ein",
       "ok": false
      },
      {
@@ -7330,7 +7410,7 @@ const POOLS = {
       "ok": false
      }
     ],
-    "e": "Bis zu 55m reicht Cat 6 für 10G. Da die Frage aber nach einer Strecke ÜBER 55m verlangt, ist Cat 6A zwingend nötig."
+    "e": "Bis zu 55m reicht Cat 6 für 10G. Da die Frage aber nach einer Strecke ÜBER 55m verlangt, ist mindestens Cat 6A nötig."
    },
    {
     "q": "Was ist ein VLAN-Tag nach IEEE 802.1Q?",
@@ -7393,7 +7473,7 @@ const POOLS = {
       "ok": false
      },
      {
-      "t": "Für höhere Spannung",
+      "t": "Für eine höhere Spannungsfestigkeit der Adern",
       "ok": false
      },
      {
@@ -7429,7 +7509,7 @@ const POOLS = {
     "q": "Was ist der Vorteil von STP gegenüber UTP?",
     "o": [
      { "t": "Besserer Schutz vor elektromagnetischen Störungen durch Schirmung", "ok": true },
-     { "t": "Höhere Übertragungsraten durch dickere Kupferadern", "ok": false },
+     { "t": "Deutlich höhere Übertragungsraten durch dickere Kupferadern im Kabel", "ok": false },
      { "t": "Größere maximale Segmentlänge zwischen den Geräten", "ok": false },
      { "t": "Einfachere Verlegung durch flexibleren Kabelaufbau", "ok": false }
     ],
@@ -7612,22 +7692,22 @@ const POOLS = {
     "e": "NIC = Netzwerkkarte, die Schnittstelle des Geräts zum Netz."
    },
    {
-    "q": "Welches unveränderliche Merkmal besitzt jede Netzwerkkarte ab Werk?",
+    "q": "Welches Merkmal trägt jede Netzwerkkarte ab Werk?",
     "o": [
      {
-      "t": "Eine weltweit eindeutige MAC-Adresse",
+      "t": "Eine vom Hersteller vergebene MAC-Adresse",
       "ok": true
      },
      {
-      "t": "Eine feste IP-Adresse",
+      "t": "Eine fest zugewiesene öffentliche IP-Adresse",
       "ok": false
      },
      {
-      "t": "Eine feste Portnummer",
+      "t": "Eine fest reservierte eigene Portnummer",
       "ok": false
      },
      {
-      "t": "Einen Hostnamen",
+      "t": "Einen weltweit registrierten Hostnamen",
       "ok": false
      }
     ],
@@ -7671,7 +7751,7 @@ const POOLS = {
       "ok": false
      },
      {
-      "t": "Das Betriebssystem",
+      "t": "Das installierte Betriebssystem",
       "ok": false
      }
     ],
@@ -7868,7 +7948,7 @@ const POOLS = {
       "ok": false
      },
      {
-      "t": "Er liest die MAC-Adresse und verschlüsselt",
+      "t": "Er liest nur die MAC-Adresse aus und verschlüsselt die Nutzdaten",
       "ok": false
      },
      {
@@ -7892,7 +7972,7 @@ const POOLS = {
     "q": "Welche Funktion hat das Default Gateway (Standard-Gateway) in einem IP-Netzwerk?",
     "o": [
      { "t": "Es ist der nächste Hop für alle Pakete, deren Zieladresse nicht im lokalen Subnetz liegt und für die kein spezifischerer Routing-Eintrag existiert", "ok": true },
-     { "t": "Es fungiert als zentrale Vermittlungsstelle, die den Schicht-2-Datenverkehr innerhalb desselben LANs steuert", "ok": false },
+     { "t": "Es fungiert als zentrale Vermittlungsstelle, die den gesamten Schicht-2-Datenverkehr innerhalb desselben lokalen Netzes steuert und weiterleitet", "ok": false },
      { "t": "Es ist die Adresse, unter der das Netz von außen erreichbar ist", "ok": false },
      { "t": "Es stellt die öffentliche IP-Adresse dar, über die ein lokales Netzwerk exklusiv aus dem Internet erreichbar ist", "ok": false }
     ],
@@ -8034,7 +8114,7 @@ const POOLS = {
       "ok": false
      },
      {
-      "t": "Er bekommt sie per DHCP",
+      "t": "Er bekommt sie vom DHCP-Server mitgeteilt",
       "ok": false
      }
     ],
@@ -8120,7 +8200,7 @@ const POOLS = {
       "ok": false
      },
      {
-      "t": "Der langsamste Router",
+      "t": "Der langsamste Router auf der gesamten Strecke",
       "ok": false
      }
     ],
@@ -8138,7 +8218,7 @@ const POOLS = {
       "ok": false
      },
      {
-      "t": "Der Router speichert das Paket dauerhaft zwischen",
+      "t": "Der Router speichert das Paket dauerhaft im Zwischenspeicher",
       "ok": false
      },
      {
@@ -8244,7 +8324,7 @@ const POOLS = {
       "ok": true
      },
      {
-      "t": "Das Paket geht zwingend über das Gateway",
+      "t": "Das Paket geht zwingend über das Standard-Gateway des Netzes",
       "ok": false
      },
      {
@@ -8406,7 +8486,7 @@ const POOLS = {
       "ok": true
      },
      {
-      "t": "Ein Verfahren zur Verschlüsselung des Datenverkehrs",
+      "t": "Ein Verfahren zur Verschlüsselung des gesamten Datenverkehrs",
       "ok": false
      },
      {
@@ -8911,7 +8991,7 @@ const POOLS = {
       "ok": false
      },
      {
-      "t": "Sie sind für DNS reserviert",
+      "t": "Sie sind für den DNS-Server reserviert",
       "ok": false
      },
      {
@@ -9262,7 +9342,7 @@ const POOLS = {
     "e": "/26 statt /24 = 2 zusätzliche Netzbits → 2^2 = 4 Subnetze."
    },
    {
-    "q": "Welche Adresse erreicht alle Hosts im lokalen Netz?",
+    "q": "Welche Adresse ist der Limited Broadcast?",
     "o": [
      {
       "t": "255.255.255.255",
@@ -9422,7 +9502,7 @@ const POOLS = {
     "o": [
      { "t": "IP-Adresse, Subnetzmaske, Standardgateway und DNS-Server", "ok": true },
      { "t": "IP-Adresse und Subnetzmaske", "ok": false },
-     { "t": "IP-Adresse, Subnetzmaske und Standardgateway", "ok": false },
+     { "t": "IP-Adresse, Subnetzmaske und Standardgateway des Netzes", "ok": false },
      { "t": "IP-Adresse und Standardgateway", "ok": false }
     ],
     "e": "Ohne Gateway gäbe es keinen Weg aus dem eigenen Netz, ohne DNS keine Namensauflösung — für Internetzugriff werden alle vier Angaben benötigt."
@@ -9513,7 +9593,7 @@ const POOLS = {
      { "t": "Es ist das erste Oktett, dessen Wert weder 0 noch 255 ist", "ok": true },
      { "t": "Es ist immer das vierte Oktett der Adresse", "ok": false },
      { "t": "Es ist das erste Oktett mit dem Wert 255", "ok": false },
-     { "t": "Es ist das Oktett mit dem höchsten Zahlenwert", "ok": false }
+     { "t": "Es ist das Oktett mit dem höchsten Zahlenwert der Maske", "ok": false }
     ],
     "e": "Nur im teilweise gefüllten Oktett verläuft die Grenze zwischen Netz- und Hostanteil, dort wird gerechnet."
    },
@@ -9593,7 +9673,7 @@ const POOLS = {
      { "t": "Die erste, also niedrigste Adresse des Blocks", "ok": true },
      { "t": "Die zweite Adresse des Blocks", "ok": false },
      { "t": "Die letzte Adresse des Blocks", "ok": false },
-     { "t": "Die mittlere Adresse des Blocks", "ok": false }
+     { "t": "Die exakt in der Mitte liegende Adresse des Blocks", "ok": false }
     ],
     "e": "Im Hostanteil stehen alle Bits auf 0, das ergibt den niedrigsten Wert des Blocks."
    },
@@ -9703,7 +9783,7 @@ const POOLS = {
      { "t": "Ab 0 in Sprungweiten zählen, bis der Wert knapp unter dem Oktettwert der IP liegt", "ok": true },
      { "t": "Die Sprungweite einmal auf die IP addieren", "ok": false },
      { "t": "Die Sprungweite von 255 abziehen", "ok": false },
-     { "t": "Den Oktettwert der IP durch die Sprungweite teilen", "ok": false }
+     { "t": "Den Oktettwert der IP durch die Sprungweite teilen und mit dem Rest weiterrechnen", "ok": false }
     ],
     "e": "Der letzte erreichte Sprungweitenwert unterhalb der IP markiert den Blockstart."
    },
@@ -9713,7 +9793,7 @@ const POOLS = {
      { "t": "Sprungweite auf die Netzadresse addieren, dann eine Adresse zurückgehen", "ok": true },
      { "t": "Sprungweite von der Netzadresse abziehen", "ok": false },
      { "t": "Netzadresse plus 2 rechnen", "ok": false },
-     { "t": "Netzadresse plus die Anzahl der Hostbits rechnen", "ok": false }
+     { "t": "Zur Netzadresse die Anzahl der Hostbits addieren und eine Adresse weitergehen", "ok": false }
     ],
     "e": "Der nächste Blockstart minus eins ist immer der Broadcast des aktuellen Blocks."
    },
@@ -9733,7 +9813,7 @@ const POOLS = {
      { "t": "Für die Formel 2 hoch geliehene Bits, also die Anzahl der Subnetze", "ok": true },
      { "t": "Für die Berechnung der Broadcastadresse", "ok": false },
      { "t": "Für die Berechnung der Sprungweite", "ok": false },
-     { "t": "Für die Bestimmung der letzten Hostadresse", "ok": false }
+     { "t": "Für die Bestimmung der letzten nutzbaren Hostadresse im Subnetz", "ok": false }
     ],
     "e": "Geliehene Bits bestimmen, in wie viele Subnetze das Ursprungsnetz zerfällt."
    },
@@ -9872,7 +9952,7 @@ const POOLS = {
       "ok": false
      },
      {
-      "t": "Eine DNS-Antwort",
+      "t": "Eine DNS-Antwort mit der Zieladresse",
       "ok": false
      }
     ],
@@ -9886,7 +9966,7 @@ const POOLS = {
       "ok": true
      },
      {
-      "t": "Dass er die Adresse ablehnt",
+      "t": "Dass er das erhaltene Adressangebot ablehnt",
       "ok": false
      },
      {
@@ -9952,7 +10032,7 @@ const POOLS = {
       "ok": true
      },
      {
-      "t": "Die Übertragungsgeschwindigkeit",
+      "t": "Die maximale Übertragungsgeschwindigkeit im Netz",
       "ok": false
      },
      {
@@ -10018,7 +10098,7 @@ const POOLS = {
       "ok": true
      },
      {
-      "t": "TLD → Root → Resolver → Client",
+      "t": "TLD → Root → Resolver → autoritativer Server",
       "ok": false
      },
      {
@@ -10070,7 +10150,7 @@ const POOLS = {
       "ok": true
      },
      {
-      "t": "Zuordnung zu einer MAC-Adresse",
+      "t": "Zuordnung eines Namens zu einer MAC-Adresse",
       "ok": false
      },
      {
@@ -10136,7 +10216,7 @@ const POOLS = {
       "ok": true
      },
      {
-      "t": "Er speichert eine IPv6-Adresse",
+      "t": "Er speichert die zugehörige IPv6-Adresse der Domain",
       "ok": false
      },
      {
@@ -10286,7 +10366,7 @@ const POOLS = {
       "ok": true
      },
      {
-      "t": "Der Server mit allen IP-Adressen weltweit",
+      "t": "Der zentrale Server, der alle IP-Adressen weltweit speichert",
       "ok": false
      },
      {
@@ -10513,7 +10593,7 @@ const POOLS = {
       "ok": false
      },
      {
-      "t": "Server ruft Client bei Events auf",
+      "t": "Der Server ruft den Client bei Events auf",
       "ok": false
      },
      {
@@ -10531,7 +10611,7 @@ const POOLS = {
       "ok": true
      },
      {
-      "t": "Der Client fragt ständig aktiv nach (Polling)",
+      "t": "Der Client fragt in kurzen Abständen ständig aktiv nach (Polling)",
       "ok": false
      },
      {
@@ -10543,7 +10623,7 @@ const POOLS = {
       "ok": false
      }
     ],
-    "e": "Webhook = 'umgedrehte API': Server pusht bei Ereignis."
+    "e": "Ein Webhook ist ein ereignisgesteuerter HTTP-Aufruf an eine hinterlegte Ziel-URL. Merkhilfe: umgedrehte API, weil der Server bei einem Ereignis pusht."
    },
    {
     "q": "Welches HTTP-Verb dient dem Abrufen von Daten?",
@@ -10619,7 +10699,7 @@ const POOLS = {
       "ok": true
      },
      {
-      "t": "Der Server merkt sich jede Sitzung dauerhaft",
+      "t": "Der Server merkt sich jede einzelne Sitzung dauerhaft im Arbeitsspeicher",
       "ok": false
      },
      {
@@ -10673,7 +10753,7 @@ const POOLS = {
       "ok": true
      },
      {
-      "t": "Die IP-Adresse des Clients",
+      "t": "Die öffentliche IP-Adresse des anfragenden Clients",
       "ok": false
      },
      {
@@ -10813,7 +10893,7 @@ const POOLS = {
       "ok": true
      },
      {
-      "t": "Weil es das schnellste Protokoll ist",
+      "t": "Weil es das mit Abstand schnellste Web-Protokoll ist",
       "ok": false
      },
      {
@@ -11187,7 +11267,7 @@ const POOLS = {
       "ok": true
      },
      {
-      "t": "Ein öffentlicher und ein privater Schlüssel",
+      "t": "Ein öffentlicher und ein zugehöriger privater Schlüssel",
       "ok": false
      },
      {
@@ -11339,7 +11419,7 @@ const POOLS = {
       "ok": true
      },
      {
-      "t": "Zur Verschlüsselung der Nutzdaten",
+      "t": "Zur Verschlüsselung der gesamten Nutzdaten",
       "ok": false
      },
      {
@@ -11357,19 +11437,19 @@ const POOLS = {
     "q": "Wie wird eine digitale Signatur erzeugt?",
     "o": [
      {
-      "t": "Hashwert der Nachricht wird mit dem privaten Schlüssel verschlüsselt",
+      "t": "Über den Hashwert der Nachricht wird mit dem privaten Schlüssel eine Signatur erzeugt",
       "ok": true
      },
      {
-      "t": "Nachricht wird mit dem öffentlichen Schlüssel gehasht",
+      "t": "Die Nachricht wird vollständig mit dem öffentlichen Schlüssel des Empfängers gehasht",
       "ok": false
      },
      {
-      "t": "Der Klartext wird symmetrisch verschlüsselt",
+      "t": "Der Klartext wird mit einem gemeinsamen Schlüssel symmetrisch verschlüsselt und angehängt",
       "ok": false
      },
      {
-      "t": "Es wird nur ein Passwort angehängt",
+      "t": "An die Nachricht wird ein geheimes Passwort des Absenders als Nachweis angehängt",
       "ok": false
      }
     ],
@@ -11435,7 +11515,7 @@ const POOLS = {
       "ok": true
      },
      {
-      "t": "End-Entity → Root → Client",
+      "t": "End-Entity-Zertifikat → Intermediate-CA → Root-CA",
       "ok": false
      },
      {
@@ -11467,7 +11547,7 @@ const POOLS = {
       "ok": true
      },
      {
-      "t": "Über die MAC-Adresse",
+      "t": "Über die MAC-Adresse des Servers",
       "ok": false
      },
      {
@@ -11549,19 +11629,19 @@ const POOLS = {
     "q": "Welche Eigenschaft muss ein kryptografischer Hash haben?",
     "o": [
      {
-      "t": "Verschiedene Eingaben müssen zu unterschiedlichen Hashwerten führen",
+      "t": "Zwei Eingaben mit demselben Hashwert dürfen praktisch nicht auffindbar sein",
       "ok": true
      },
      {
-      "t": "Er muss jederzeit wieder umkehrbar sein",
+      "t": "Er muss sich mit einem passenden Schlüssel jederzeit wieder umkehren lassen",
       "ok": false
      },
      {
-      "t": "Er muss immer genau 8 Byte lang sein",
+      "t": "Er muss unabhängig von der Eingabelänge immer genau 8 Byte lang sein",
       "ok": false
      },
      {
-      "t": "Er muss selbst verschlüsselt vorliegen",
+      "t": "Er muss vor der Übertragung selbst noch einmal verschlüsselt werden",
       "ok": false
      }
     ],
@@ -11627,7 +11707,7 @@ const POOLS = {
       "ok": false
      },
      {
-      "t": "Um die Zeit zu verkürzen, die der Algorithmus zur Berechnung braucht",
+      "t": "Um die Zeit zu verkürzen, die der Algorithmus für die Berechnung des Hashes braucht",
       "ok": false
      }
     ],
@@ -11699,7 +11779,7 @@ const POOLS = {
       "ok": false
      },
      {
-      "t": "Ausschließlich asymmetrische Verschlüsselung für alles",
+      "t": "Ausschließlich asymmetrische Verschlüsselung für den Schlüsselaustausch und alle Nutzdaten",
       "ok": false
      },
      {
@@ -11756,7 +11836,7 @@ const POOLS = {
     "o": [
      { "t": "Umwandlung von Klartext in unlesbaren Chiffretext, der nur mit dem passenden Schlüssel wieder lesbar wird", "ok": true },
      { "t": "Das verlustfreie Komprimieren von Daten, um Speicherplatz und Übertragungszeit einzusparen", "ok": false },
-     { "t": "Das Berechnen einer festen Prüfsumme, aus der sich die Originaldaten wiederherstellen lassen", "ok": false },
+     { "t": "Das Berechnen einer festen Prüfsumme, aus der sich die ursprünglichen Originaldaten wiederherstellen lassen", "ok": false },
      { "t": "Das Kodieren von Daten in ein anderes Format wie Base64, um sie transportfähig zu machen", "ok": false }
     ],
     "e": "Verschlüsselung wandelt Klartext per Algorithmus und Schlüssel in Chiffretext um — umkehrbar nur mit Schlüssel. Kompression, Hashing und Encoding sind etwas anderes: Encoding (z. B. Base64) ist ohne Schlüssel umkehrbar, Hashing gar nicht."
@@ -11775,7 +11855,7 @@ const POOLS = {
     "q": "Welche Komponenten umfasst eine PKI typischerweise?",
     "o": [
      { "t": "CA (Zertifizierungsstelle), RA (Registrierungsstelle), X.509-Zertifikate, Verzeichnisdienst und Sperrmechanismus (CRL/OCSP)", "ok": true },
-     { "t": "Schlüsselgenerator, Passwort-Tresor, zentrale Klartext-Datenbank und ein Backup-Server für private Schlüssel", "ok": false },
+     { "t": "Schlüsselgenerator, Passwort-Tresor, zentrale Klartext-Datenbank und ein separater Backup-Server für private Schlüssel", "ok": false },
      { "t": "RADIUS-Server, DHCP-Relay, DNS-Resolver und ein NTP-Zeitserver für die Zertifikatssynchronisation", "ok": false },
      { "t": "Firewall, IDS, Proxy-Server und ein VPN-Gateway zur Absicherung der Zertifikatsübertragung", "ok": false }
     ],
@@ -11785,7 +11865,7 @@ const POOLS = {
     "q": "Was ist ein PSK (Pre-Shared Key)?",
     "o": [
      { "t": "Ein im Voraus auf beiden Seiten hinterlegter gemeinsamer Schlüssel für symmetrische Authentifizierung und Verschlüsselung", "ok": true },
-     { "t": "Ein öffentlicher Schlüssel, der vor dem Verbindungsaufbau aus dem Zertifikat der Gegenstelle gelesen wird", "ok": false },
+     { "t": "Ein öffentlicher Schlüssel, der vor dem Verbindungsaufbau direkt aus dem Zertifikat der Gegenstelle ausgelesen wird", "ok": false },
      { "t": "Ein einmaliger Sitzungsschlüssel, den der Server bei jedem Verbindungsaufbau neu generiert und zusendet", "ok": false },
      { "t": "Ein Algorithmus, der zwei Parteien ohne vorherigen Kontakt einen gemeinsamen Schlüssel aushandeln lässt", "ok": false }
     ],
@@ -12216,7 +12296,7 @@ const POOLS = {
       "ok": false
      },
      {
-      "t": "TLS (Transport Layer) und DTLS (Datagram TLS)",
+      "t": "TLS (Transport Layer Security) und DTLS (Datagram Transport Layer)",
       "ok": false
      },
      {
@@ -12230,23 +12310,23 @@ const POOLS = {
     "q": "Was ist L2TP?",
     "o": [
      {
-      "t": "Tunnelprotokoll auf Sicherungsschicht, meist zusammen mit IPsec zur Verschlüsselung genutzt",
+      "t": "Tunnelprotokoll, das Schicht-2-Verbindungen tunnelt und meist mit IPsec kombiniert wird",
       "ok": true
      },
      {
-      "t": "Ein dynamisches Routingprotokoll für IP-Netze",
+      "t": "Ein dynamisches Routingprotokoll, das Routen zwischen benachbarten Netzen austauscht",
       "ok": false
      },
      {
-      "t": "Ein symmetrischer Verschlüsselungsalgorithmus",
+      "t": "Ein symmetrischer Verschlüsselungsalgorithmus für den Schutz gespeicherter Daten",
       "ok": false
      },
      {
-      "t": "Ein Sicherheitsstandard für WLAN-Netze",
+      "t": "Ein Sicherheitsstandard für Verschlüsselung und Anmeldung in drahtlosen Netzen",
       "ok": false
      }
     ],
-    "e": "L2TP erstellt den Tunnel (Layer 2), IPsec liefert die Verschlüsselung — oft kombiniert für VPN-Clients."
+    "e": "L2TP tunnelt Schicht-2-Verbindungen, IPsec liefert die Verschlüsselung — oft kombiniert für VPN-Clients."
    },
    {
     "q": "Was ist OpenVPN?",
@@ -12418,7 +12498,7 @@ const POOLS = {
       "ok": true
      },
      {
-      "t": "Er merkt sich komplette Verbindungszustände",
+      "t": "Er merkt sich die kompletten Verbindungszustände aller Sitzungen",
       "ok": false
      },
      {
@@ -12516,7 +12596,7 @@ const POOLS = {
       "ok": true
      },
      {
-      "t": "Alle haben Administratorrechte",
+      "t": "Alle Mitarbeiter erhalten volle Administratorrechte",
       "ok": false
      },
      {
@@ -12538,7 +12618,7 @@ const POOLS = {
       "ok": true
      },
      {
-      "t": "Routing, Switching, Bridging",
+      "t": "Routing, Switching und Bridging im Netz",
       "ok": false
      },
      {
@@ -12560,7 +12640,7 @@ const POOLS = {
       "ok": true
      },
      {
-      "t": "Vergabe von Zugriffsrechten und Berechtigungen",
+      "t": "Die Vergabe von Zugriffsrechten und weiteren Berechtigungen",
       "ok": false
      },
      {
@@ -12636,7 +12716,7 @@ const POOLS = {
       "ok": true
      },
      {
-      "t": "Alles ist erlaubt außer Gesperrtes",
+      "t": "Alles ist erlaubt außer den ausdrücklich gesperrten Elementen",
       "ok": false
      },
      {
@@ -12710,7 +12790,7 @@ const POOLS = {
       "ok": true
      },
      {
-      "t": "Verkehr aktiv blockieren",
+      "t": "Schädlichen Datenverkehr aktiv blockieren",
       "ok": false
      },
      {
@@ -12732,7 +12812,7 @@ const POOLS = {
       "ok": true
      },
      {
-      "t": "Sie erhöhen die Bandbreite",
+      "t": "Sie erhöhen die verfügbare Bandbreite",
       "ok": false
      },
      {
@@ -13294,7 +13374,7 @@ const POOLS = {
     "o": [
      { "t": "Der Verantwortliche entscheidet über Zweck und Mittel, der Auftragsverarbeiter handelt nur nach dessen Weisung", "ok": true },
      { "t": "Der Auftragsverarbeiter trägt in jedem Fall die alleinige rechtliche Verantwortung", "ok": false },
-     { "t": "Nur der Verantwortliche unterliegt vollständig der DSGVO, der Auftragsverarbeiter bleibt außen vor", "ok": false },
+     { "t": "Nur der Verantwortliche unterliegt vollständig der DSGVO, der Auftragsverarbeiter bleibt dagegen außen vor", "ok": false },
      { "t": "Beide Rollen dürfen laut DSGVO nicht gleichzeitig in einem Vertragsverhältnis existieren", "ok": false }
     ],
     "e": "Beide Rollen unterliegen der DSGVO; die Verantwortung ist aufgeteilt, aber nicht einseitig beim Auftragsverarbeiter."
@@ -13925,7 +14005,7 @@ const POOLS = {
       "ok": true
      },
      {
-      "t": "Token Ring über Koax",
+      "t": "Token Ring über Koaxialverkabelung",
       "ok": false
      },
      {
@@ -14059,7 +14139,7 @@ const POOLS = {
       "ok": false
      },
      {
-      "t": "Einfachere Verkabelung",
+      "t": "Eine deutlich einfachere Verlegung der Kabel",
       "ok": false
      },
      {
@@ -14077,7 +14157,7 @@ const POOLS = {
       "ok": true
      },
      {
-      "t": "Zu geringe Ausfallsicherheit",
+      "t": "Eine zu geringe Ausfallsicherheit im Ring",
       "ok": false
      },
      {
@@ -14121,7 +14201,7 @@ const POOLS = {
       "ok": true
      },
      {
-      "t": "Die Verschlüsselung des Tokens",
+      "t": "Die Verschlüsselung des im Ring kreisenden Tokens",
       "ok": false
      },
      {
@@ -14170,7 +14250,7 @@ const POOLS = {
       "ok": true
      },
      {
-      "t": "Ein Kabelbruch stoppt alle Geräte",
+      "t": "Ein einzelner Kabelbruch stoppt sämtliche Geräte",
       "ok": false
      },
      {
@@ -14322,15 +14402,15 @@ const POOLS = {
       "ok": true
      },
      {
-      "t": "Der zentrale Switch fällt aus",
+      "t": "Der Ausfall des zentralen Verteilers legt das gesamte Netz lahm",
       "ok": false
      },
      {
-      "t": "Terminatoren fehlen",
+      "t": "Fehlende Terminatoren an den Leitungsenden",
       "ok": false
      },
      {
-      "t": "Zu viele alternative Wege",
+      "t": "Zu viele redundante Wege erzeugen ständige Schleifen",
       "ok": false
      }
     ],
@@ -15288,7 +15368,7 @@ const POOLS = {
       "ok": true
      },
      {
-      "t": "Nur wenn beide 1 sind",
+      "t": "Nur wenn beide Eingänge 1 sind",
       "ok": false
      },
      {
@@ -15336,7 +15416,7 @@ const POOLS = {
       "ok": false
      },
      {
-      "t": "Sie liefert unabhängig vom Eingang immer 1",
+      "t": "Sie liefert unabhängig vom Eingangswert grundsätzlich eine 1",
       "ok": false
      },
      {
@@ -15376,7 +15456,7 @@ const POOLS = {
       "ok": true
      },
      {
-      "t": "Wenn beide gleich sind",
+      "t": "Wenn beide Eingänge denselben Wert haben",
       "ok": false
      },
      {
@@ -15578,7 +15658,7 @@ const POOLS = {
       "ok": false
      },
      {
-      "t": "XOR von IP und Maske",
+      "t": "XOR von IP-Adresse und Subnetzmaske",
       "ok": false
      },
      {
@@ -16168,7 +16248,7 @@ const POOLS = {
    {
     "q": "Welcher technische Nachteil ist mit Containervirtualisierung verbunden?",
     "o": [
-     { "t": "Container benötigen für jede Instanz ein eigenes Gastbetriebssystem", "ok": false },
+     { "t": "Container benötigen für jede einzelne Instanz ein vollständiges eigenes Gastbetriebssystem und starten dadurch spürbar langsamer", "ok": false },
      { "t": "Container teilen sich den Kernel des Host-Betriebssystems und bieten daher eine geringere Isolation als klassische virtuelle Maschinen", "ok": true },
      { "t": "Container können nur Anwendungen desselben Betriebssystemtyps wie der Host ausführen", "ok": false },
      { "t": "Container benötigen grundsätzlich mehr Arbeitsspeicher als virtuelle Maschinen", "ok": false }
@@ -16424,7 +16504,7 @@ const POOLS = {
     "q": "Welche positiven Nebeneffekte bringt die Nutzung der Export-Funktion in Hyper-V bei der Sicherung einer VM mit sich?",
     "o": [
      { "t": "Das Exportpaket dient zugleich als konsistentes Backup und lässt sich zum Klonen oder Übertragen auf andere Hardware nutzen", "ok": true },
-     { "t": "Die exportierte VM erhält automatisch eine höhere CPU-Priorität und läuft nach dem Import spürbar schneller", "ok": false },
+     { "t": "Die exportierte VM erhält beim Import automatisch eine höhere CPU-Priorität und läuft danach dauerhaft spürbar schneller", "ok": false },
      { "t": "Der Export verschlüsselt die virtuellen Festplatten dauerhaft und macht ein separates Backup überflüssig", "ok": false },
      { "t": "Die exportierte VM wird beim Import automatisch auf die neueste Betriebssystemversion aktualisiert", "ok": false }
     ],
@@ -16444,7 +16524,7 @@ const POOLS = {
     "q": "Worin unterscheidet sich ein Thick Client von einem Thin Client?",
     "o": [
      { "t": "Er verarbeitet und speichert lokal und arbeitet auch ohne ständige Serververbindung weitgehend eigenständig", "ok": true },
-     { "t": "Er verzichtet vollständig auf lokale Rechenleistung und zeigt nur die Serveroberfläche an", "ok": false },
+     { "t": "Er verzichtet vollständig auf lokale Rechenleistung und zeigt ausschließlich die Oberfläche des Servers an", "ok": false },
      { "t": "Er kann grundsätzlich nur innerhalb einer VDI-Umgebung betrieben werden", "ok": false },
      { "t": "Er benötigt für jede Anwendung eine dauerhafte, unterbrechungsfreie Netzverbindung", "ok": false }
     ],
@@ -16455,7 +16535,7 @@ const POOLS = {
     "o": [
      { "t": "Geringerer Wartungsaufwand und niedrigerer Stromverbrauch durch zentrale Bereitstellung", "ok": true },
      { "t": "Vollständige Unabhängigkeit vom Server und vom Netzwerk", "ok": false },
-     { "t": "Höhere lokale Rechenleistung für grafikintensive Anwendungen", "ok": false },
+     { "t": "Höhere lokale Rechenleistung für besonders grafikintensive Anwendungen am Arbeitsplatz", "ok": false },
      { "t": "Wegfall jeglicher zentraler Administration im Rechenzentrum", "ok": false }
     ],
     "e": "Da Rechenleistung und Daten zentral liegen, sinken Wartungsaufwand und Energieverbrauch am Arbeitsplatz — der Preis ist die Abhängigkeit von Server und Netz."
@@ -16489,7 +16569,7 @@ const POOLS = {
     "q": "Warum ersetzt ein RAID-System kein Backup?",
     "o": [
      { "t": "Es schützt vor Plattenausfall, nicht vor versehentlichem Löschen, Viren oder Totalschaden", "ok": true },
-     { "t": "Es speichert die Daten grundsätzlich nur verschlüsselt und damit unlesbar ab", "ok": false },
+     { "t": "Es speichert sämtliche Daten grundsätzlich nur verschlüsselt und damit unlesbar ab", "ok": false },
      { "t": "Es kann immer nur eine einzige Datei gleichzeitig sichern", "ok": false },
      { "t": "Es funktioniert ausschließlich mit externen USB-Festplatten", "ok": false }
     ],
@@ -16689,7 +16769,7 @@ const POOLS = {
     "q": "Worin unterscheiden sich RAID 10 und RAID 01 im Aufbau?",
     "o": [
      { "t": "RAID 10 spiegelt zuerst und stript dann, RAID 01 stript zuerst und spiegelt dann", "ok": true },
-     { "t": "RAID 10 nutzt Parität, RAID 01 arbeitet ausschließlich mit Spiegelung", "ok": false },
+     { "t": "RAID 10 nutzt eine Parität, RAID 01 arbeitet ausschließlich mit Spiegelung", "ok": false },
      { "t": "RAID 10 braucht drei Platten, RAID 01 kommt mit zwei aus", "ok": false },
      { "t": "RAID 10 ist unverschlüsselt, RAID 01 verschlüsselt alle Blöcke", "ok": false }
     ],
@@ -16701,7 +16781,7 @@ const POOLS = {
      { "t": "Bei RAID 10 darf je Spiegelpaar eine Platte ausfallen, ohne den Verbund zu verlieren", "ok": true },
      { "t": "RAID 10 nutzt eine doppelte Parität, die RAID 01 vollständig fehlt", "ok": false },
      { "t": "RAID 10 besteht immer aus deutlich mehr Festplatten als RAID 01", "ok": false },
-     { "t": "RAID 10 verteilt zusätzlich eine Parität über alle beteiligten Platten", "ok": false }
+     { "t": "RAID 10 verteilt zusätzlich eine doppelte Parität über alle beteiligten Platten", "ok": false }
     ],
     "e": "Bei RAID 10 überlebt der Verbund, solange in keinem Spiegelpaar beide Platten ausfallen. Bei RAID 01 kann schon der Ausfall je einer Platte in beiden Stripe-Sets den Verbund killen."
    },
@@ -16739,7 +16819,7 @@ const POOLS = {
     "q": "Wozu dient eine Hot-Spare-Platte in einem RAID-Verbund?",
     "o": [
      { "t": "Sie springt bei einem Plattenausfall automatisch ein und startet den Rebuild", "ok": true },
-     { "t": "Sie erhöht im Normalbetrieb dauerhaft die Schreibgeschwindigkeit", "ok": false },
+     { "t": "Sie erhöht im Normalbetrieb dauerhaft die Schreibgeschwindigkeit des Verbunds", "ok": false },
      { "t": "Sie speichert eine zusätzliche verschlüsselte Kopie aller Daten", "ok": false },
      { "t": "Sie übernimmt die Paritätsberechnung für den gesamten Verbund", "ok": false }
     ],
@@ -16749,7 +16829,7 @@ const POOLS = {
     "q": "Was bedeutet Hot-Swap bei Festplatten?",
     "o": [
      { "t": "Der Austausch einer Platte im laufenden Betrieb, ohne das System herunterzufahren", "ok": true },
-     { "t": "Das Aktivieren einer zweiten Platte als Hot-Spare direkt beim Ausfall", "ok": false },
+     { "t": "Das automatische Aktivieren einer zweiten Platte als Hot-Spare direkt beim Ausfall", "ok": false },
      { "t": "Das gleichzeitige Beschreiben aller Platten mit denselben Daten", "ok": false },
      { "t": "Das automatische Löschen defekter Sektoren im Betrieb", "ok": false }
     ],
@@ -16830,7 +16910,7 @@ const POOLS = {
     "o": [
      { "t": "Den maximal tolerierbaren Datenverlust, gemessen als Zeitspanne bis zur letzten Sicherung", "ok": true },
      { "t": "Die maximale Zeitspanne, bis ein System nach Ausfall wieder laufen muss", "ok": false },
-     { "t": "Den Zeitraum, den der Support für die telefonische Störungsannahme garantiert", "ok": false },
+     { "t": "Den Zeitraum, den der Hersteller-Support für die telefonische Störungsannahme garantiert", "ok": false },
      { "t": "Den Zeitpunkt, zu dem das nächste Voll-Backup geplant ist", "ok": false }
     ],
     "e": "Der RPO beschreibt, wie viel Datenverlust maximal akzeptabel ist — praktisch der Abstand zwischen zwei Sicherungen. Ein RPO von 1 Stunde bedeutet: höchstens 1 Stunde Daten dürfen verloren gehen."
@@ -16849,7 +16929,7 @@ const POOLS = {
     "q": "Warum sollte ein Backup regelmäßig durch eine Testwiederherstellung geprüft werden?",
     "o": [
      { "t": "Nur eine erfolgreiche Rücksicherung beweist, dass das Backup im Ernstfall brauchbar ist", "ok": true },
-     { "t": "Weil sich dadurch der Zeitplan künftiger Sicherungen automatisch optimiert", "ok": false },
+     { "t": "Weil sich dadurch der Zeitplan aller künftigen Sicherungen automatisch optimiert", "ok": false },
      { "t": "Weil dadurch die Sicherung beim nächsten Mal schneller läuft", "ok": false },
      { "t": "Weil ungetestete Backups automatisch mehr Speicher belegen", "ok": false }
     ],
@@ -17089,6 +17169,416 @@ const POOLS = {
      { "t": "995", "ok": false }
     ],
     "e": "SMTPS ist SMTP über TLS auf Port 465 — im Unterschied zu 587, wo per STARTTLS hochgestuft wird."
+   }
+  ]
+ },
+ "sql": {
+  "name": "SQL & Datenbanken",
+  "q": [
+   {
+    "q": "Welche SQL-Klausel filtert die Gruppen nach der Aggregation?",
+    "o": [
+     { "t": "HAVING", "ok": true },
+     { "t": "WHERE", "ok": false },
+     { "t": "GROUP BY", "ok": false },
+     { "t": "ORDER BY", "ok": false }
+    ],
+    "e": "HAVING filtert die fertigen Gruppen (z. B. HAVING COUNT(*) > 10). WHERE filtert dagegen einzelne Zeilen, bevor gruppiert wird."
+   },
+   {
+    "q": "Worin unterscheiden sich WHERE und HAVING?",
+    "o": [
+     { "t": "WHERE filtert einzelne Zeilen vor der Gruppierung, HAVING filtert die gebildeten Gruppen", "ok": true },
+     { "t": "HAVING filtert einzelne Zeilen vor der Gruppierung, WHERE filtert die gebildeten Gruppen", "ok": false },
+     { "t": "WHERE wirkt in Abfragen mit JOIN, HAVING wirkt nur in Abfragen ohne Tabellenverknüpfung", "ok": false },
+     { "t": "WHERE prüft ausschließlich Zahlenwerte, HAVING prüft ausschließlich Text und Datumswerte", "ok": false }
+    ],
+    "e": "Reihenfolge der Verarbeitung: erst WHERE (Zeilen), dann GROUP BY, dann HAVING (Gruppen). Die Verwechslung der beiden ist eine klassische Prüfungsfalle."
+   },
+   {
+    "q": "Was bewirkt GROUP BY in einer SQL-Abfrage?",
+    "o": [
+     { "t": "Es fasst Zeilen mit gleichen Werten zu Gruppen für Aggregatfunktionen zusammen", "ok": true },
+     { "t": "Es sortiert die Ergebniszeilen aufsteigend nach der angegebenen Spalte", "ok": false },
+     { "t": "Es verbindet zwei Tabellen über eine gemeinsame Schlüsselspalte miteinander", "ok": false },
+     { "t": "Es entfernt alle doppelten Zeilen dauerhaft aus der gespeicherten Tabelle", "ok": false }
+    ],
+    "e": "GROUP BY bildet Gruppen, auf die dann COUNT, SUM, AVG, MIN oder MAX angewendet werden. Sortieren übernimmt ORDER BY, Verknüpfen der JOIN."
+   },
+   {
+    "q": "Was liefert ein LEFT JOIN?",
+    "o": [
+     { "t": "Alle Zeilen der linken Tabelle, bei fehlendem Treffer rechts stehen NULL-Werte", "ok": true },
+     { "t": "Nur die Zeilen, die in beiden beteiligten Tabellen einen passenden Treffer haben", "ok": false },
+     { "t": "Alle Zeilen beider Tabellen, auch wenn auf keiner Seite ein Treffer existiert", "ok": false },
+     { "t": "Alle Zeilen der rechten Tabelle, bei fehlendem Treffer links stehen NULL-Werte", "ok": false }
+    ],
+    "e": "LEFT JOIN behält die linke Tabelle vollständig. Nur-Treffer wäre der INNER JOIN, beide Seiten vollständig der FULL JOIN, die Gegenrichtung der RIGHT JOIN."
+   },
+   {
+    "q": "Alle Kunden ohne eine einzige Bestellung sollen ermittelt werden. Welcher Ansatz passt?",
+    "o": [
+     { "t": "LEFT JOIN von Kunden auf Bestellungen und Filter auf NULL in der Bestellspalte", "ok": true },
+     { "t": "INNER JOIN beider Tabellen und anschließende Gruppierung über die Kundennummer", "ok": false },
+     { "t": "RIGHT JOIN von Kunden auf Bestellungen und Filter auf doppelte Bestellnummern", "ok": false },
+     { "t": "Zwei getrennte SELECT-Abfragen, deren Ergebnisse mit UNION zusammengefügt werden", "ok": false }
+    ],
+    "e": "Der LEFT JOIN behält alle Kunden; wo keine Bestellung existiert, bleibt die rechte Seite NULL — genau darauf wird gefiltert (IS NULL). Ein INNER JOIN würde bestelllose Kunden von vornherein ausschließen."
+   },
+   {
+    "q": "Wozu dient ein Index auf einer Tabellenspalte?",
+    "o": [
+     { "t": "Er beschleunigt die Suche, kostet aber Speicher und bremst Schreibzugriffe leicht", "ok": true },
+     { "t": "Er beschleunigt Lese- und Schreibzugriffe auf der Spalte im exakt gleichen Maße", "ok": false },
+     { "t": "Er erzwingt automatisch eindeutige Werte in der indizierten Tabellenspalte", "ok": false },
+     { "t": "Er komprimiert die gespeicherten Daten und senkt so den Speicherverbrauch", "ok": false }
+    ],
+    "e": "Ein Index wirkt wie ein Stichwortverzeichnis: Suchen wird schnell, aber jede Änderung muss den Index mitpflegen. Eindeutigkeit erzwingt erst ein UNIQUE-Index, kein gewöhnlicher."
+   },
+   {
+    "q": "Was fordert die erste Normalform (1NF)?",
+    "o": [
+     { "t": "Alle Attributwerte sind atomar — keine Listen oder Mehrfachangaben in einem Feld", "ok": true },
+     { "t": "Kein Nichtschlüsselattribut hängt nur von einem Teil des zusammengesetzten Schlüssels ab", "ok": false },
+     { "t": "Kein Nichtschlüsselattribut hängt von einem anderen Nichtschlüsselattribut ab", "ok": false },
+     { "t": "Jede Tabelle besitzt einen zusammengesetzten Schlüssel aus mindestens zwei Spalten", "ok": false }
+    ],
+    "e": "1NF = atomare Werte. Die Teilschlüssel-Regel ist die 2NF, das Verbot transitiver Abhängigkeiten die 3NF."
+   },
+   {
+    "q": "Wogegen richtet sich die zweite Normalform (2NF)?",
+    "o": [
+     { "t": "Gegen Abhängigkeiten von nur einem Teil eines zusammengesetzten Schlüssels", "ok": true },
+     { "t": "Gegen Listen und Mehrfachangaben innerhalb eines einzelnen Attributfelds", "ok": false },
+     { "t": "Gegen Abhängigkeiten zwischen zwei Nichtschlüsselattributen einer Tabelle", "ok": false },
+     { "t": "Gegen Fremdschlüssel, die auf Tabellen ohne eigenen Primärschlüssel zeigen", "ok": false }
+    ],
+    "e": "2NF: Jedes Nichtschlüsselattribut muss vom ganzen Schlüssel abhängen. Beispiel: Der Artikelname in einer Bestellpositionstabelle hängt nur von der ArtikelNr — er gehört in die Artikeltabelle."
+   },
+   {
+    "q": "Was verlangt die dritte Normalform (3NF)?",
+    "o": [
+     { "t": "Kein Nichtschlüsselattribut darf von einem anderen Nichtschlüsselattribut abhängen", "ok": true },
+     { "t": "Jedes Attribut muss direkt von einem Teil des zusammengesetzten Schlüssels abhängen", "ok": false },
+     { "t": "Alle Attributwerte müssen atomar sein und dürfen keine Mehrfachangaben enthalten", "ok": false },
+     { "t": "Jede häufig durchsuchte Spalte der Tabelle muss einen eigenen Index besitzen", "ok": false }
+    ],
+    "e": "3NF verbietet transitive Abhängigkeiten: Der Abteilungsname hängt über die AbteilungsNr am Schlüssel und gehört daher in die Abteilungstabelle."
+   },
+   {
+    "q": "Die Abteilungsbezeichnung steht bei jedem Mitarbeiter direkt in der Tabelle. Beim Umbenennen der Abteilung müssen viele Zeilen geändert werden. Wie heißt dieses Problem?",
+    "o": [
+     { "t": "Änderungsanomalie als Folge redundanter Speicherung", "ok": true },
+     { "t": "Einfügeanomalie durch fehlende abhängige Datensätze", "ok": false },
+     { "t": "Löschanomalie durch den Verlust verknüpfter Daten", "ok": false },
+     { "t": "Verletzung der ersten Normalform durch Mehrfachwerte", "ok": false }
+    ],
+    "e": "Dieselbe Information liegt vielfach vor (Redundanz) — eine Änderung muss überall nachgezogen werden, sonst werden die Daten inkonsistent. Genau das behebt die Normalisierung."
+   },
+   {
+    "q": "Welche Gefahr beschreibt die Löschanomalie?",
+    "o": [
+     { "t": "Mit dem letzten Datensatz gehen ungewollt auch andere Informationen verloren", "ok": true },
+     { "t": "Beim Löschen bleiben verwaiste Fremdschlüsselwerte dauerhaft in der Tabelle zurück", "ok": false },
+     { "t": "Gelöschte Zeilen belegen weiterhin Speicherplatz, bis die Tabelle reorganisiert wird", "ok": false },
+     { "t": "Das Löschen einer Zeile sperrt die gesamte Tabelle für alle anderen Benutzer", "ok": false }
+    ],
+    "e": "Beispiel: Der letzte Mitarbeiter einer Abteilung wird gelöscht — und mit ihm verschwinden Abteilungsname und -daten, weil sie nur in seiner Zeile standen."
+   },
+   {
+    "q": "Was bewirkt SELECT DISTINCT?",
+    "o": [
+     { "t": "Es entfernt doppelte Zeilen aus dem Abfrageergebnis", "ok": true },
+     { "t": "Es löscht doppelte Zeilen endgültig aus der Tabelle", "ok": false },
+     { "t": "Es sortiert das Abfrageergebnis aufsteigend nach allen Spalten", "ok": false },
+     { "t": "Es begrenzt das Ergebnis auf die jeweils erste gefundene Zeile", "ok": false }
+    ],
+    "e": "DISTINCT wirkt nur auf die Ausgabe — die gespeicherten Daten bleiben unverändert. Der Unterschied zwischen Ergebnis und Tabelle ist die eigentliche Prüfungsfalle."
+   }
+  ]
+ },
+ "oop": {
+  "name": "OOP & UML",
+  "q": [
+   {
+    "q": "Welches UML-Zeichen kennzeichnet die Sichtbarkeit package?",
+    "o": [
+     { "t": "Die Tilde (~)", "ok": true },
+     { "t": "Die Raute (#)", "ok": false },
+     { "t": "Das Pluszeichen (+)", "ok": false },
+     { "t": "Das Minuszeichen (-)", "ok": false }
+    ],
+    "e": "Die vier UML-Sichtbarkeiten: + public, - private, # protected, ~ package (Zugriff innerhalb desselben Pakets)."
+   },
+   {
+    "q": "Wofür steht die Raute an einer UML-Beziehungslinie?",
+    "o": [
+     { "t": "Für eine Aggregation oder Komposition zwischen zwei Klassen", "ok": true },
+     { "t": "Für die Sichtbarkeit protected des dort notierten Attributs", "ok": false },
+     { "t": "Für eine Vererbungsbeziehung zur übergeordneten Oberklasse", "ok": false },
+     { "t": "Für eine gerichtete Abhängigkeit zwischen zwei Paketen", "ok": false }
+    ],
+    "e": "Die Raute an der Linie zeigt eine Teil-Ganzes-Beziehung: leer = Aggregation, gefüllt = Komposition. Als Zeichen # vor einem Attribut bedeutet die Raute dagegen protected — zwei völlig verschiedene Dinge."
+   },
+   {
+    "q": "Was unterscheidet die Komposition von der Aggregation?",
+    "o": [
+     { "t": "Bei der Komposition existieren die Teile nicht ohne das Ganze, bei der Aggregation schon", "ok": true },
+     { "t": "Bei der Aggregation existieren die Teile nicht ohne das Ganze, bei der Komposition schon", "ok": false },
+     { "t": "Die Komposition verbindet nur Klassen desselben Pakets, die Aggregation paketübergreifend", "ok": false },
+     { "t": "Die Komposition erlaubt höchstens zwei beteiligte Klassen, die Aggregation beliebig viele", "ok": false }
+    ],
+    "e": "Komposition (gefüllte Raute): Räume existieren nicht ohne ihr Gebäude. Aggregation (leere Raute): Spieler existieren auch ohne ihr Team."
+   },
+   {
+    "q": "Was bedeutet die Multiplizität 1..* an einem Assoziationsende?",
+    "o": [
+     { "t": "Mindestens ein Objekt, nach oben beliebig viele", "ok": true },
+     { "t": "Genau ein einziges Objekt, nicht mehr und nicht weniger", "ok": false },
+     { "t": "Kein Objekt oder höchstens ein einzelnes Objekt", "ok": false },
+     { "t": "Beliebig viele Objekte, ausdrücklich auch gar keines", "ok": false }
+    ],
+    "e": "1..* = mindestens eins. Genau eins wäre 1, kein oder ein Objekt 0..1, beliebig viele inklusive null 0..* bzw. *."
+   },
+   {
+    "q": "Was ist der Unterschied zwischen Klasse und Objekt?",
+    "o": [
+     { "t": "Die Klasse ist der Bauplan, das Objekt eine konkrete Instanz davon", "ok": true },
+     { "t": "Das Objekt ist der Bauplan, die Klasse eine konkrete Instanz davon", "ok": false },
+     { "t": "Klassen existieren nur zur Laufzeit, Objekte nur im Quellcode des Programms", "ok": false },
+     { "t": "Objekte enthalten nur Methoden, Klassen enthalten ausschließlich Attribute", "ok": false }
+    ],
+    "e": "Aus einer Klasse (z. B. Auto) können beliebig viele Objekte erzeugt werden (meinGolf, deinTesla) — jedes mit eigenen Attributwerten."
+   },
+   {
+    "q": "Wozu dient ein Konstruktor?",
+    "o": [
+     { "t": "Er initialisiert ein neues Objekt bei dessen Erzeugung", "ok": true },
+     { "t": "Er gibt die Ressourcen eines Objekts bei Programmende wieder frei", "ok": false },
+     { "t": "Er vergleicht zwei bestehende Objekte auf inhaltliche Gleichheit", "ok": false },
+     { "t": "Er erzeugt automatisch eine Kopie eines bereits bestehenden Objekts", "ok": false }
+    ],
+    "e": "Der Konstruktor trägt den Namen der Klasse und läuft genau einmal beim Erzeugen — typischerweise, um Attributen ihre Startwerte zu geben."
+   },
+   {
+    "q": "Was beschreibt Abstraktion in der objektorientierten Programmierung?",
+    "o": [
+     { "t": "Wesentliche Eigenschaften modellieren und unwichtige Details weglassen", "ok": true },
+     { "t": "Interne Daten hinter kontrollierten Zugriffsmethoden verstecken", "ok": false },
+     { "t": "Attribute und Methoden einer Oberklasse an Unterklassen weitergeben", "ok": false },
+     { "t": "Denselben Methodenaufruf je nach Objekttyp unterschiedlich ausführen", "ok": false }
+    ],
+    "e": "Abstraktion reduziert das Modell auf das Wesentliche. Die Distraktoren beschreiben Kapselung, Vererbung und Polymorphie — die drei anderen Grundprinzipien."
+   },
+   {
+    "q": "Was zeigt ein Anwendungsfalldiagramm (Use-Case-Diagramm)?",
+    "o": [
+     { "t": "Welche Akteure welche Funktionen des Systems nutzen", "ok": true },
+     { "t": "Den zeitlichen Ablauf der Methodenaufrufe zwischen Objekten", "ok": false },
+     { "t": "Den inneren Aufbau der Klassen mit Attributen und Methoden", "ok": false },
+     { "t": "Die Verteilung der Softwarekomponenten auf die Hardware", "ok": false }
+    ],
+    "e": "Use-Case-Diagramme zeigen die Außensicht: Strichmännchen (Akteure) und Ellipsen (Anwendungsfälle). Klasseninterna zeigt das Klassendiagramm, Abläufe das Sequenz- oder Aktivitätsdiagramm."
+   },
+   {
+    "q": "Welche UML-Beziehung stellt der geschlossene, nicht ausgefüllte Dreieckspfeil dar?",
+    "o": [
+     { "t": "Die Generalisierung beziehungsweise Vererbung", "ok": true },
+     { "t": "Eine einfache Assoziation zwischen zwei Klassen", "ok": false },
+     { "t": "Eine Komposition mit existenzabhängigen Teilen", "ok": false },
+     { "t": "Eine gestrichelte Abhängigkeit zwischen Klassen", "ok": false }
+    ],
+    "e": "Der leere Dreieckspfeil zeigt von der Unterklasse zur Oberklasse. Assoziationen sind einfache Linien, Kompositionen tragen die gefüllte Raute, Abhängigkeiten gestrichelte Pfeile."
+   }
+  ]
+ },
+ "projekt": {
+  "name": "Projektmanagement",
+  "q": [
+   {
+    "q": "Welche drei Rollen kennt Scrum?",
+    "o": [
+     { "t": "Product Owner, Scrum Master und Entwicklungsteam", "ok": true },
+     { "t": "Projektleiter, Auftraggeber und Lenkungsausschuss", "ok": false },
+     { "t": "Product Owner, Projektleiter und Testmanager", "ok": false },
+     { "t": "Scrum Master, Abteilungsleiter und Product Manager", "ok": false }
+    ],
+    "e": "Scrum kennt genau diese drei Rollen. Einen klassischen Projektleiter gibt es in Scrum bewusst nicht — die Verantwortung ist auf die drei Rollen verteilt."
+   },
+   {
+    "q": "Wofür ist der Product Owner verantwortlich?",
+    "o": [
+     { "t": "Für das Product Backlog und die fachliche Priorisierung der Anforderungen", "ok": true },
+     { "t": "Für die Beseitigung von Hindernissen und die Moderation der Scrum-Events", "ok": false },
+     { "t": "Für die disziplinarische Führung der Mitglieder des Entwicklungsteams", "ok": false },
+     { "t": "Für die technische Umsetzung der Aufgaben innerhalb des laufenden Sprints", "ok": false }
+    ],
+    "e": "Der PO verantwortet das Was und dessen Reihenfolge. Hindernisse beseitigt der Scrum Master, die Umsetzung organisiert das Team selbst — disziplinarische Führung gehört zu keiner Scrum-Rolle."
+   },
+   {
+    "q": "Welche drei Artefakte kennt Scrum?",
+    "o": [
+     { "t": "Product Backlog, Sprint Backlog und Inkrement", "ok": true },
+     { "t": "Daily Scrum, Sprint Review und Retrospektive", "ok": false },
+     { "t": "Lastenheft, Pflichtenheft und Abnahmeprotokoll", "ok": false },
+     { "t": "Projektstrukturplan, Arbeitspaket und Meilenstein", "ok": false }
+    ],
+    "e": "Backlogs und Inkrement sind die Artefakte. Daily, Review und Retrospektive sind dagegen Events — eine beliebte Verwechslung in Prüfungen."
+   },
+   {
+    "q": "Was ist der Kerngedanke von Kanban?",
+    "o": [
+     { "t": "Arbeit visualisieren und parallele Aufgaben je Spalte per WIP-Limit begrenzen", "ok": true },
+     { "t": "Feste Sprints mit einem auslieferbaren Inkrement an jedem Sprintende", "ok": false },
+     { "t": "Sequenzielle Phasen, die jeweils vollständig abgeschlossen werden müssen", "ok": false },
+     { "t": "Tägliche Statusmeetings mit verbindlicher Aufwandsschätzung je Aufgabe", "ok": false }
+    ],
+    "e": "Kanban arbeitet ohne Sprint-Rhythmus: Das Board macht Arbeit sichtbar, WIP-Limits verhindern Überlastung. Sprints gehören zu Scrum, sequenzielle Phasen zum Wasserfall."
+   },
+   {
+    "q": "Wann eignet sich das Wasserfallmodell besonders gut?",
+    "o": [
+     { "t": "Bei stabilen Anforderungen, die sich vorab klar definieren lassen", "ok": true },
+     { "t": "Bei Anforderungen, die sich während der Laufzeit häufig ändern", "ok": false },
+     { "t": "Wenn schon nach wenigen Wochen nutzbare Teilergebnisse gebraucht werden", "ok": false },
+     { "t": "Wenn der Kunde in jede tägliche Entwicklungsentscheidung eingebunden ist", "ok": false }
+    ],
+    "e": "Der Wasserfall spielt seine Stärken bei planbaren, stabilen Anforderungen aus. Häufige Änderungen und frühe Teillieferungen sprechen für agile Modelle."
+   },
+   {
+    "q": "Was kennzeichnet einen Sprint in Scrum?",
+    "o": [
+     { "t": "Ein festes Zeitfenster, an dessen Ende ein nutzbares Inkrement steht", "ok": true },
+     { "t": "Eine flexible Phase, die erst mit der Fertigstellung aller Aufgaben endet", "ok": false },
+     { "t": "Ein Planungszeitraum, in dem ausschließlich Anforderungen dokumentiert werden", "ok": false },
+     { "t": "Eine Testphase, die nach der vollständigen Entwicklung des Produkts beginnt", "ok": false }
+    ],
+    "e": "Sprints haben eine feste Länge (typisch 2 bis 4 Wochen) und enden mit einem auslieferbaren Zwischenstand — sie werden nicht verlängert, wenn Aufgaben offen bleiben."
+   },
+   {
+    "q": "Was unterscheidet ein Projekt von einer Linienaufgabe?",
+    "o": [
+     { "t": "Es ist einmalig, zeitlich begrenzt und verfolgt ein definiertes Ziel", "ok": true },
+     { "t": "Es ist dauerhaft angelegt und wiederholt sich nach festen Abläufen", "ok": false },
+     { "t": "Es wird ausschließlich von externen Dienstleistern durchgeführt", "ok": false },
+     { "t": "Es benötigt weder ein eigenes Budget noch feste Verantwortliche", "ok": false }
+    ],
+    "e": "Einmaligkeit, Befristung und Zieldefinition machen das Projekt aus. Das dauerhaft Wiederkehrende ist die Linienaufgabe bzw. der Prozess."
+   },
+   {
+    "q": "Was gibt der freie Puffer eines Vorgangs im Netzplan an?",
+    "o": [
+     { "t": "Die mögliche Verschiebung, ohne den frühesten Start eines Nachfolgers zu verzögern", "ok": true },
+     { "t": "Die mögliche Verschiebung, ohne den Endtermin des Gesamtprojekts zu verzögern", "ok": false },
+     { "t": "Die Zeitspanne zwischen dem Projektstart und dem Beginn des kritischen Pfads", "ok": false },
+     { "t": "Die Summe aller Pufferzeiten sämtlicher Vorgänge entlang des kritischen Pfads", "ok": false }
+    ],
+    "e": "Freier Puffer schont die Nachfolger, Gesamtpuffer nur das Projektende. Ein Vorgang kann Gesamtpuffer besitzen, aber freien Puffer 0 — dann wandert bei Verschiebung der Nachfolger sofort mit."
+   },
+   {
+    "q": "Was ist ein Projektstrukturplan (PSP)?",
+    "o": [
+     { "t": "Die hierarchische Gliederung des Projekts in Teilaufgaben und Arbeitspakete", "ok": true },
+     { "t": "Die Darstellung aller Vorgänge als Balken entlang einer Zeitachse", "ok": false },
+     { "t": "Die grafische Berechnung von Anfangszeitpunkten und Pufferzeiten", "ok": false },
+     { "t": "Die tabellarische Auflistung sämtlicher Projektrisiken mit Gegenmaßnahmen", "ok": false }
+    ],
+    "e": "Der PSP gliedert das Was, ohne Zeitachse. Balken auf der Zeitachse zeigt das Gantt-Diagramm, Zeitpunkte und Puffer berechnet der Netzplan."
+   },
+   {
+    "q": "Wozu dienen Lessons Learned am Ende eines Projekts?",
+    "o": [
+     { "t": "Erfahrungen festhalten, damit künftige Projekte davon profitieren", "ok": true },
+     { "t": "Das verbleibende Restbudget dokumentieren und an die Buchhaltung übergeben", "ok": false },
+     { "t": "Die Verantwortlichen für aufgetretene Verzögerungen offiziell benennen", "ok": false },
+     { "t": "Die formale Abnahme des Werks durch den Auftraggeber protokollieren", "ok": false }
+    ],
+    "e": "Lessons Learned sind Wissenssicherung, keine Schuldzuweisung und kein Abnahmeprotokoll — was lief gut, was künftig anders."
+   }
+  ]
+ },
+ "diagnose": {
+  "name": "Diagnose & Fehlersuche",
+  "q": [
+   {
+    "q": "Welcher Befehl zeigt unter Windows die aktuelle IP-Konfiguration an?",
+    "o": [
+     { "t": "ipconfig", "ok": true },
+     { "t": "tracert", "ok": false },
+     { "t": "netstat", "ok": false },
+     { "t": "nslookup", "ok": false }
+    ],
+    "e": "ipconfig zeigt IP-Adresse, Subnetzmaske und Gateway (Linux: ip a). tracert verfolgt Routen, netstat zeigt Verbindungen, nslookup testet DNS."
+   },
+   {
+    "q": "Welcher Befehl verfolgt unter Windows den Weg eines Pakets über alle Router?",
+    "o": [
+     { "t": "tracert", "ok": true },
+     { "t": "ping", "ok": false },
+     { "t": "arp", "ok": false },
+     { "t": "route", "ok": false }
+    ],
+    "e": "tracert (Linux: traceroute) zeigt jeden Hop auf dem Weg zum Ziel — per schrittweise erhöhter TTL. ping prüft nur die Erreichbarkeit des Endziels."
+   },
+   {
+    "q": "Womit prüft man gezielt die DNS-Auflösung eines Namens?",
+    "o": [
+     { "t": "Mit nslookup oder dig", "ok": true },
+     { "t": "Mit ping und ipconfig", "ok": false },
+     { "t": "Mit arp und route print", "ok": false },
+     { "t": "Mit netstat und ss", "ok": false }
+    ],
+    "e": "nslookup und dig fragen den DNS-Server direkt und zeigen die zurückgelieferten Records — so lässt sich die Namensauflösung isoliert vom restlichen Netz testen."
+   },
+   {
+    "q": "Was zeigt der Befehl arp -a?",
+    "o": [
+     { "t": "Die Zuordnungstabelle von IP-Adressen zu MAC-Adressen im lokalen Netz", "ok": true },
+     { "t": "Die offenen TCP-Verbindungen mit ihren jeweiligen Gegenstellen", "ok": false },
+     { "t": "Die lokale Routingtabelle mit sämtlichen bekannten Zielnetzen", "ok": false },
+     { "t": "Den zwischengespeicherten DNS-Cache mit sämtlichen aufgelösten Namen", "ok": false }
+    ],
+    "e": "Der ARP-Cache verrät, welche MAC-Adresse zu welcher lokalen IP gehört. Verbindungen zeigt netstat, Routen zeigt route print, den DNS-Cache ipconfig /displaydns."
+   },
+   {
+    "q": "Wozu dienen die Befehle netstat und ss?",
+    "o": [
+     { "t": "Sie zeigen offene Ports und aktive Netzwerkverbindungen an", "ok": true },
+     { "t": "Sie messen die verfügbare Bandbreite zur Gegenstelle", "ok": false },
+     { "t": "Sie konfigurieren die Firewall-Regeln des Betriebssystems", "ok": false },
+     { "t": "Sie starten die Netzwerkschnittstellen nach einem Fehler neu", "ok": false }
+    ],
+    "e": "netstat (klassisch) und ss (moderner Linux-Nachfolger) listen, welche Ports lauschen und welche Verbindungen bestehen — wichtig, um zu prüfen, ob ein Dienst überhaupt erreichbar angeboten wird."
+   },
+   {
+    "q": "Ein Arbeitsplatz erreicht keine Webseiten. Welche Prüfreihenfolge ist sinnvoll?",
+    "o": [
+     { "t": "Link-Status, IP-Konfiguration, Gateway-Ping, externer Ping, DNS-Auflösung", "ok": true },
+     { "t": "DNS-Auflösung, externer Ping, Gateway-Ping, IP-Konfiguration, Link-Status", "ok": false },
+     { "t": "Externer Ping, DNS-Auflösung, Link-Status, IP-Konfiguration, Gateway-Ping", "ok": false },
+     { "t": "Gateway-Ping, DNS-Auflösung, Link-Status, externer Ping, IP-Konfiguration", "ok": false }
+    ],
+    "e": "Bottom-up: erst Physik und lokale Konfiguration, dann das eigene Netz (Gateway), dann Routing (externe IP), zuletzt die Namensauflösung. So grenzt jeder Schritt die Fehlerquelle weiter ein."
+   },
+   {
+    "q": "Ein Ping auf 127.0.0.1 ist erfolgreich. Was ist damit belegt?",
+    "o": [
+     { "t": "Der lokale TCP/IP-Stack des Rechners arbeitet", "ok": true },
+     { "t": "Die Netzwerkkarte sendet Frames korrekt ins lokale Netz", "ok": false },
+     { "t": "Das Standardgateway des Netzes ist erreichbar", "ok": false },
+     { "t": "Die Namensauflösung über den DNS-Server funktioniert", "ok": false }
+    ],
+    "e": "127.0.0.1 verlässt den Rechner nie — der Ping testet nur den eigenen Protokollstapel. Netzwerkkarte, Gateway und DNS werden in den nächsten Schritten separat geprüft."
+   },
+   {
+    "q": "Ein Server antwortet auf Ping, seine Webseite lädt aber nicht. Was folgt daraus?",
+    "o": [
+     { "t": "Der Host ist per ICMP erreichbar, der Webdienst selbst kann trotzdem gestört sein", "ok": true },
+     { "t": "Die Firewall des Servers blockiert grundsätzlich sämtlichen eingehenden Datenverkehr", "ok": false },
+     { "t": "Der DNS-Eintrag des Servers wurde gelöscht oder falsch konfiguriert", "ok": false },
+     { "t": "Die Routing-Verbindung zwischen Client und Server ist unterbrochen", "ok": false }
+    ],
+    "e": "Ping bestätigt nur ICMP-Erreichbarkeit — keine Aussage über den TCP-Dienst dahinter. Wäre Routing oder die komplette Firewall das Problem, würde auch der Ping scheitern."
    }
   ]
  }
@@ -17932,7 +18422,7 @@ const GLOSSAR = [{"a":"2FA","f":"Zwei-Faktor-Authentifizierung","d":"Anmeldung m
 {"a":"UTP","f":"Unshielded Twisted Pair","d":"Ungeschirmtes Twisted-Pair-Kabel: Standard im LAN, günstig, aber störanfälliger als STP."},
 {"a":"VLAN","f":"Virtual Local Area Network","d":"Logische Netztrennung auf einem physischen Switch: trennt Broadcastdomänen, z. B. Gäste-WLAN vom Firmennetz."},
 {"a":"VLSM","f":"Variable Length Subnet Masking","d":"Subnetting mit unterschiedlich großen Subnetzen je nach Bedarf, statt einheitlicher Maskenlänge."},
-{"a":"VM","f":"Virtuelle Maschine","d":"Software-emulierter Rechner, der auf physischer Hardware läuft. Mehrere VMs teilen sich einen Host."},
+{"a":"VM","f":"Virtuelle Maschine","d":"Software-virtualisierter Rechner, der auf physischer Hardware läuft. Mehrere VMs teilen sich einen Host."},
 {"a":"VoIP","f":"Voice over IP","d":"Telefonie über das IP-Netz. Signalisierung per SIP, Sprachtransport per RTP über UDP."},
 {"a":"VPN","f":"Virtual Private Network","d":"Verschlüsselter Tunnel durch ein unsicheres Netz, z. B. für Homeoffice-Zugriff aufs Firmennetz. Häufig mit IPsec."},
 {"a":"WAN","f":"Wide Area Network","d":"Weitverkehrsnetz über große Distanzen — das Internet ist das größte WAN."},
@@ -17946,6 +18436,7 @@ const GLOSSAR = [{"a":"2FA","f":"Zwei-Faktor-Authentifizierung","d":"Anmeldung m
 {"a":"XOR","f":"Exclusive Or (Exklusiv-Oder)","d":"Logische Verknüpfung: Ausgang 1, wenn die Eingänge verschieden sind. Erkennt Bit-Änderungen."},
 {"a":"XNOR","f":"Exclusive Not Or","d":"Negiertes XOR: Ausgang 1, wenn beide Eingänge gleich sind — die Gleichheitsprüfung."},
 {"a":"802.1Q","f":"VLAN-Tagging-Standard","d":"IEEE-Norm, die einen 4-Byte-Tag mit VLAN-ID in den Ethernet-Frame einfügt. Grundlage für VLANs über Trunk-Ports."},
+{"a":"IEEE 802.11","f":"WLAN-Standardfamilie","d":"Standardfamilie für drahtlose WLAN-Netzwerke. Buchstaben-Zusätze wie ax oder r bezeichnen konkrete Ausbaustufen und Erweiterungen."},
 {"a":"802.11ax","f":"Wi-Fi 6","d":"WLAN-Standard nach 802.11ac. Höhere Effizienz und Durchsatz, besonders in dichten Umgebungen mit vielen Geräten."},
 {"a":"802.11r","f":"Fast BSS Transition (Fast Roaming)","d":"WLAN-Erweiterung für nahtlosen Wechsel zwischen Access Points ohne erneute vollständige Anmeldung."},
 {"a":"AH","f":"Authentication Header","d":"IPsec-Protokoll, das Authentizität und Integrität sichert, aber nicht verschlüsselt. Gegenstück: ESP."},
