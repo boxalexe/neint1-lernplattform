@@ -94,9 +94,9 @@
 <a href="#r-osi">OSI-Modell</a>
   <a href="#r-ports">Ports</a>
   <a href="#r-projekt">Projektmanagement</a>
-<a href="#r-protokolle">Protokolle</a>
   <a href="#r-routing">Routing/Switching</a>
   <a href="#r-sql">SQL & Datenbanken</a>
+<a href="#r-verkabelung">Strukturierte Verkabelung</a>
 <a href="#r-subnetting">Subnetting</a>
   <a href="#r-tcpip">TCP/IP & UDP</a>
   <a href="#r-topo">Topologien</a>
@@ -502,6 +502,10 @@
 <h3>IPv6-Adressarten & Autokonfigurations-Ablauf</h3>
 <p><strong>Global Unicast</strong> (2000::/3) ist weltweit routbar, <strong>Link-Local</strong> (fe80::/10, praktisch als /64 genutzt) gilt nur im eigenen Segment und existiert auf jeder IPv6-Schnittstelle, <strong>Unique Local</strong> (fc00::/7) ist das Gegenstück zu privaten IPv4-Adressen, <strong>Multicast</strong> (ff00::/8) ersetzt den Broadcast, <strong>Anycast</strong> adressiert den jeweils nächstgelegenen von mehreren Anbietern derselben Adresse. Statt TTL heißt das Feld bei IPv6 <strong>Hop Limit</strong>.</p>
 <p>Der typische Ablauf beim Netzbeitritt: Das Gerät bildet seine Link-Local-Adresse, sendet eine <strong>Router Solicitation</strong>, der Router antwortet mit einem <strong>Router Advertisement</strong> (Präfix + Konfigurationshinweise). Je nach RA-Flags konfiguriert sich das Gerät per <strong>SLAAC</strong> selbst und/oder holt Details per <strong>DHCPv6</strong>. Die Nachbarauflösung übernimmt durchgehend <strong>NDP</strong> statt ARP.</p>
+
+<h3>Adressauflösung: ARP und NDP</h3>
+<p>Damit ein Frame im lokalen Netz zugestellt werden kann, muss zur bekannten IP-Adresse die passende MAC-Adresse gefunden werden. In IPv4 leistet das <strong>ARP</strong>. Der <strong>ARP-Request</strong> geht als <strong>Broadcast</strong> an alle im Segment und fragt sinngemäß, wer die gesuchte IP besitzt. Nur der betroffene Host antwortet, und zwar mit einem <strong>ARP-Reply</strong> als gezieltem <strong>Unicast</strong> zurück an den Fragenden. Gelernte Zuordnungen landen im <strong>ARP-Cache</strong>, einer Tabelle mit befristeten Einträgen, damit nicht bei jedem Frame neu gefragt werden muss.</p>
+<p>In IPv6 übernimmt das <strong>NDP</strong> diese Aufgabe und nutzt dafür ICMPv6-Nachrichten statt Broadcasts. Die <strong>Neighbor Solicitation</strong> fragt per Multicast nach der MAC-Adresse zu einer IPv6-Adresse, das <strong>Neighbor Advertisement</strong> liefert die Antwort. Vor der ersten Nutzung einer selbst gebildeten Adresse prüft ein Gerät mit der <strong>Duplicate Address Detection (DAD)</strong>, ob die Adresse im Netz bereits vergeben ist. Dazu sendet es eine Neighbor Solicitation auf die eigene geplante Adresse. Antwortet jemand, liegt eine Kollision vor und die Adresse wird nicht verwendet.</p>
 </section>
 
 <section id="r-security">
@@ -537,6 +541,9 @@
 <p style="color:var(--muted);font-size:0.85rem">* Die maximale Reichweite hängt vom verwendeten Standard ab, die 550 m gelten beispielsweise für 10GBase-SR. Andere Standards und Wellenlängen erlauben andere Distanzen.</p>
 <p><strong>Twisted-Pair-Kategorien:</strong> Cat 5e (Gigabit-Minimum), Cat 6/6a (mehr Reserve, 10G auf kurzer Distanz), Cat 7. Die Verdrillung reduziert <span class="term">Übersprechen (Crosstalk)</span>. Glasfaser (auch Lichtwellenleiter, LWL) ist immun gegen elektromagnetische Störungen, aber teurer und empfindlicher beim Verlegen.</p>
 <div class="callout"><span class="tag">Hardware & MAC</span>Die <strong>Netzwerkkarte (NIC)</strong> verbindet das Gerät physisch mit dem Netz und trägt ab Werk eine vom Hersteller vergebene, in der Regel weltweit eindeutige <strong>MAC-Adresse</strong> (48 Bit, 6 Hex-Paare). Die ersten 24 Bit (OUI, Organizationally Unique Identifier) kennzeichnen den Hersteller. <strong>ARP</strong> (Address Resolution Protocol) löst im LAN eine IP-Adresse in die zugehörige MAC auf. Kopplungselemente nach Schicht: Hub = L1, Switch = L2, Router = L3.</div>
+
+<h3>Multi-Stream Transport (MST)</h3>
+<p><strong>MST</strong> ist eine Funktion von DisplayPort und Thunderbolt, mit der sich mehrere Monitore über einen einzigen Ausgang betreiben lassen. Die Bildsignale werden dabei als getrennte Datenströme über eine Leitung geführt und lassen sich per <strong>Daisy-Chain</strong> von Monitor zu Monitor durchschleifen oder über einen MST-Hub aufteilen. So genügt ein Anschluss am Rechner für mehrere Displays, sofern die verfügbare Bandbreite für die gewünschten Auflösungen ausreicht.</p>
 </section>
 
 <section id="r-logik">
@@ -651,25 +658,8 @@
 </table>
 <p><strong>Quellport:</strong> Der Zielport ist fest (z. B. 443), der Quellport wird zufällig aus dem dynamischen Bereich gewählt. Vor allem der <strong>Client</strong> nutzt seinen eigenen Quellport, um eingehende Antworten dem richtigen Socket bzw. Prozess zuzuordnen, er weiß, welche Anwendung unter diesem Port auf eine Antwort wartet.</p>
 <div class="callout"><span class="tag">Weitere Ports</span><strong>8443</strong> liegt im Registered-Bereich und dient häufig als alternativer HTTPS-Port für Web-Interfaces. <strong>SOCKS</strong>-Proxys nutzen standardmäßig Port <strong>1080</strong> (z. B. bei Tor). Ein <strong>Proxy</strong> vermittelt Verbindungen stellvertretend und kann filtern, cachen oder anonymisieren.</div>
-</section>
 
-<section id="r-projekt">
-<h2>Projektmanagement</h2>
-<p>Ein <strong>Projekt</strong> ist einmalig, zeitlich begrenzt und verfolgt ein definiertes Ziel mit begrenzten Ressourcen. Ein <strong>Prozess</strong> ist dagegen ein wiederkehrender Ablauf nach festem Muster, eine <strong>Linienaufgabe</strong> das dauerhafte Tagesgeschäft einer Abteilung. Wichtige Planungswerkzeuge: Der <strong>Projektstrukturplan (PSP)</strong> gliedert das Projekt hierarchisch in Teilaufgaben und <strong>Arbeitspakete</strong> (kleinste planbare Einheit mit Verantwortlichem). Das <strong>Gantt-Diagramm</strong> zeigt Vorgänge als Balken auf der Zeitachse. <strong>Änderungsmanagement</strong> regelt, wie Anforderungsänderungen kontrolliert bewertet und eingearbeitet werden. <strong>Lessons Learned</strong> halten am Projektende Erfahrungen fest, damit Folgeprojekte davon profitieren.</p>
-<h3>Vorgehensmodelle</h3>
-<p><strong>Wasserfallmodell:</strong> Sequenzielle Phasen (Anforderung &rarr; Entwurf &rarr; Implementierung &rarr; Test &rarr; Betrieb), jede Phase wird abgeschlossen, bevor die nächste beginnt. Stärke: klare Struktur und Dokumentation bei stabilen, vorab definierbaren Anforderungen. Schwäche: späte Ergebnisse, Änderungen sind teuer.</p>
-<p><strong>Scrum:</strong> Agiles Rahmenwerk mit festen <strong>Sprints</strong> (typisch 2–4 Wochen), an deren Ende ein nutzbares <strong>Inkrement</strong> steht. Drei Rollen: Der <strong>Product Owner</strong> verantwortet das Product Backlog und priorisiert fachlich. Der <strong>Scrum Master</strong> beseitigt Hindernisse und sorgt für den Prozess, er ist kein Vorgesetzter. Das <strong>Entwicklungsteam</strong> organisiert die Umsetzung selbst. Drei Artefakte: <strong>Product Backlog</strong> (priorisierte Gesamtanforderungen), <strong>Sprint Backlog</strong> (Aufgaben des laufenden Sprints), <strong>Inkrement</strong> (das fertige Teilprodukt). Nicht verwechseln: Daily, Review und Retrospektive sind <em>Events</em>, keine Artefakte.</p>
-<p><strong>Kanban:</strong> Arbeit wird auf einem Board visualisiert (z. B. To do / In Arbeit / Fertig), die Zahl paralleler Aufgaben je Spalte wird durch <strong>WIP-Limits</strong> begrenzt. Kein Sprint-Rhythmus. Aufgaben fließen kontinuierlich. Gut für Betrieb und Support mit laufend eintreffenden Aufgaben.</p>
-<h3>Netzplantechnik, ein vollständiges Beispiel</h3>
-<p>Sechs Vorgänge mit Dauer in Tagen: A(3) startet. B(4) und C(2) folgen auf A. D(5) folgt auf B, E(1) folgt auf C. F(2) folgt auf D <em>und</em> E.</p>
-<p><strong>Vorwärtsrechnung</strong> (FEZ = FAZ + Dauer, bei mehreren Vorgängern zählt das späteste FEZ): A: 0&rarr;3. B: 3&rarr;7. C: 3&rarr;5. D: 7&rarr;12. E: 5&rarr;6. F wartet auf D und E: FAZ = max(12, 6) = 12 &rarr; FEZ 14. Projektdauer: <strong>14 Tage</strong>.</p>
-<p><strong>Rückwärtsrechnung</strong> (SAZ = SEZ &minus; Dauer, bei mehreren Nachfolgern zählt das früheste SAZ): F: 14&rarr;12. D: 12&rarr;7. E: 12&rarr;11. B: 7&rarr;3. C muss vor E fertig sein: SEZ = 11 &rarr; SAZ 9. A: SEZ = min(3, 9) = 3 &rarr; SAZ 0.</p>
-<p><strong>Puffer:</strong> Gesamtpuffer GP = SAZ &minus; FAZ. A, B, D, F: GP = 0, sie bilden den <strong>kritischen Pfad</strong> A&ndash;B&ndash;D&ndash;F. C und E haben je GP = 6.</p>
-<div class="callout"><span class="tag">Freier vs. Gesamtpuffer</span>Der <strong>Gesamtpuffer</strong> gibt an, wie weit sich ein Vorgang verschieben darf, ohne das <em>Projektende</em> zu gefährden. Der <strong>freie Puffer</strong> (FP = frühester Start des Nachfolgers &minus; eigenes FEZ) gibt an, wie weit er sich verschieben darf, ohne auch nur den <em>frühesten Start des Nachfolgers</em> anzutasten. Im Beispiel: C hat GP = 6, aber FP = 0, verschiebt sich C, muss E sofort mitwandern. E dagegen hat FP = 6, denn F wartet ohnehin bis Tag 12 auf D. Genau diese Unterscheidung ist eine beliebte Prüfungsfrage.</div>
-</section>
-
-<section id="r-protokolle">
-<h2>Wichtige Protokolle & Ports</h2>
+<h3>Wichtige Protokolle & Ports</h3>
 <table>
 <tr><th>Port</th><th>Dienst</th><th>Transport</th><th>Funktion</th></tr>
 <tr><td>20/21</td><td>FTP Data/Control</td><td>TCP</td><td>Dateien / Steuerbefehle</td></tr>
@@ -696,6 +686,21 @@
 <div class="callout"><span class="tag">Merkhilfe</span>Verschlüsselte Varianten enden auf „S" und liegen höher: HTTP 80 → HTTPS 443, IMAP 143 → IMAPS 993, POP3 110 → POP3S 995. Alternativ hebt <strong>STARTTLS</strong> eine bestehende Klartextverbindung auf demselben Port auf TLS an (z. B. SMTP 587, IMAP 143), statt einen eigenen verschlüsselten Port zu nutzen. <strong>Port 25</strong> wird heute überwiegend für den Mailtransport zwischen Mailservern genutzt. Mail-Clients liefern ausgehende Nachrichten stattdessen in der Regel über Port <strong>587</strong> (Submission) oder <strong>465</strong> (SMTPS) ein.</div>
 </section>
 
+<section id="r-projekt">
+<h2>Projektmanagement</h2>
+<p>Ein <strong>Projekt</strong> ist einmalig, zeitlich begrenzt und verfolgt ein definiertes Ziel mit begrenzten Ressourcen. Ein <strong>Prozess</strong> ist dagegen ein wiederkehrender Ablauf nach festem Muster, eine <strong>Linienaufgabe</strong> das dauerhafte Tagesgeschäft einer Abteilung. Wichtige Planungswerkzeuge: Der <strong>Projektstrukturplan (PSP)</strong> gliedert das Projekt hierarchisch in Teilaufgaben und <strong>Arbeitspakete</strong> (kleinste planbare Einheit mit Verantwortlichem). Das <strong>Gantt-Diagramm</strong> zeigt Vorgänge als Balken auf der Zeitachse. <strong>Änderungsmanagement</strong> regelt, wie Anforderungsänderungen kontrolliert bewertet und eingearbeitet werden. <strong>Lessons Learned</strong> halten am Projektende Erfahrungen fest, damit Folgeprojekte davon profitieren.</p>
+<h3>Vorgehensmodelle</h3>
+<p><strong>Wasserfallmodell:</strong> Sequenzielle Phasen (Anforderung &rarr; Entwurf &rarr; Implementierung &rarr; Test &rarr; Betrieb), jede Phase wird abgeschlossen, bevor die nächste beginnt. Stärke: klare Struktur und Dokumentation bei stabilen, vorab definierbaren Anforderungen. Schwäche: späte Ergebnisse, Änderungen sind teuer.</p>
+<p><strong>Scrum:</strong> Agiles Rahmenwerk mit festen <strong>Sprints</strong> (typisch 2–4 Wochen), an deren Ende ein nutzbares <strong>Inkrement</strong> steht. Drei Rollen: Der <strong>Product Owner</strong> verantwortet das Product Backlog und priorisiert fachlich. Der <strong>Scrum Master</strong> beseitigt Hindernisse und sorgt für den Prozess, er ist kein Vorgesetzter. Das <strong>Entwicklungsteam</strong> organisiert die Umsetzung selbst. Drei Artefakte: <strong>Product Backlog</strong> (priorisierte Gesamtanforderungen), <strong>Sprint Backlog</strong> (Aufgaben des laufenden Sprints), <strong>Inkrement</strong> (das fertige Teilprodukt). Nicht verwechseln: Daily, Review und Retrospektive sind <em>Events</em>, keine Artefakte.</p>
+<p><strong>Kanban:</strong> Arbeit wird auf einem Board visualisiert (z. B. To do / In Arbeit / Fertig), die Zahl paralleler Aufgaben je Spalte wird durch <strong>WIP-Limits</strong> begrenzt. Kein Sprint-Rhythmus. Aufgaben fließen kontinuierlich. Gut für Betrieb und Support mit laufend eintreffenden Aufgaben.</p>
+<h3>Netzplantechnik, ein vollständiges Beispiel</h3>
+<p>Sechs Vorgänge mit Dauer in Tagen: A(3) startet. B(4) und C(2) folgen auf A. D(5) folgt auf B, E(1) folgt auf C. F(2) folgt auf D <em>und</em> E.</p>
+<p><strong>Vorwärtsrechnung</strong> (FEZ = FAZ + Dauer, bei mehreren Vorgängern zählt das späteste FEZ): A: 0&rarr;3. B: 3&rarr;7. C: 3&rarr;5. D: 7&rarr;12. E: 5&rarr;6. F wartet auf D und E: FAZ = max(12, 6) = 12 &rarr; FEZ 14. Projektdauer: <strong>14 Tage</strong>.</p>
+<p><strong>Rückwärtsrechnung</strong> (SAZ = SEZ &minus; Dauer, bei mehreren Nachfolgern zählt das früheste SAZ): F: 14&rarr;12. D: 12&rarr;7. E: 12&rarr;11. B: 7&rarr;3. C muss vor E fertig sein: SEZ = 11 &rarr; SAZ 9. A: SEZ = min(3, 9) = 3 &rarr; SAZ 0.</p>
+<p><strong>Puffer:</strong> Gesamtpuffer GP = SAZ &minus; FAZ. A, B, D, F: GP = 0, sie bilden den <strong>kritischen Pfad</strong> A&ndash;B&ndash;D&ndash;F. C und E haben je GP = 6.</p>
+<div class="callout"><span class="tag">Freier vs. Gesamtpuffer</span>Der <strong>Gesamtpuffer</strong> gibt an, wie weit sich ein Vorgang verschieben darf, ohne das <em>Projektende</em> zu gefährden. Der <strong>freie Puffer</strong> (FP = frühester Start des Nachfolgers &minus; eigenes FEZ) gibt an, wie weit er sich verschieben darf, ohne auch nur den <em>frühesten Start des Nachfolgers</em> anzutasten. Im Beispiel: C hat GP = 6, aber FP = 0, verschiebt sich C, muss E sofort mitwandern. E dagegen hat FP = 6, denn F wartet ohnehin bis Tag 12 auf D. Genau diese Unterscheidung ist eine beliebte Prüfungsfrage.</div>
+</section>
+
 <section id="r-routing">
 <h2>Routing & Switching</h2>
 <p><strong>Switching</strong> arbeitet innerhalb eines Netzes auf Schicht 2 (MAC), <strong>Routing</strong> verbindet Netze auf Schicht 3 (IP).</p>
@@ -716,6 +721,11 @@
 <p><strong>NAT</strong> übersetzt Netzwerkadressen (privat &harr; öffentlich). <strong>PAT</strong> (Port Address Translation, auch NAT-Overload) unterscheidet viele interne Verbindungen zusätzlich über Portnummern, so teilen sich hunderte Geräte eine öffentliche IP; das ist der Normalfall im Heimrouter. <strong>Portweiterleitung</strong> arbeitet umgekehrt: Eingehender Verkehr auf einem bestimmten Port wird gezielt an ein internes Ziel geleitet. Kurz einzuordnen: <strong>Source NAT</strong> ändert die Absenderadresse (ausgehend), <strong>Destination NAT</strong> die Zieladresse (eingehend), <strong>Carrier-Grade NAT</strong> ist NAT beim Provider für viele Kunden gleichzeitig. NAT bleibt dabei kein Sicherheitsmechanismus, es ersetzt keine Firewall.</p>
 <h3>Routen-Auswahl & Routingprotokolle im Vergleich</h3>
 <p>Die <strong>Default Route</strong> (0.0.0.0/0) greift, wenn kein spezifischerer Eintrag passt. Konkurrieren mehrere Routen zum selben Ziel, entscheidet innerhalb eines Protokolls die <strong>Metrik</strong> (Wegkosten), zwischen verschiedenen Protokollen die <strong>Administrative Distance</strong> (Vertrauenswürdigkeit der Quelle). <strong>RIP</strong> zählt schlicht Hops (max. 15), konvergiert langsam und eignet sich nur für kleine Netze. <strong>OSPF</strong> ist ein Link-State-Protokoll: Metrik nach Leitungskosten/Bandbreite, schnelle Reaktion auf Änderungen, Standard in größeren Firmennetzen. <strong>BGP</strong> verbindet als Pfadvektor-Protokoll autonome Systeme im Internet, für die AP1 reicht die Einordnung als Zusatzwissen.</p>
+
+<h3>Spanning Tree Protocol (STP)</h3>
+<p>Redundante Verbindungen zwischen Switches erhöhen die Ausfallsicherheit, erzeugen aber Schleifen, in denen Broadcasts endlos kreisen und das Netz lahmlegen. Das <strong>Spanning Tree Protocol</strong> verhindert das, indem es überzählige Wege gezielt in den Standby versetzt und so einen schleifenfreien Baum aufspannt.</p>
+<p>Zunächst wählen die Switches eine <strong>Root Bridge</strong>, den Wurzelpunkt des Baums. Entscheidend ist die <strong>Bridge-ID</strong> aus Priorität und MAC-Adresse: Die niedrigste Bridge-ID gewinnt. Ihre Zustandsinformationen tauschen die Switches über <strong>BPDUs</strong> (Bridge Protocol Data Units) aus. Anschließend erhält jeder Port eine Rolle. Der <strong>Root-Port</strong> zeigt auf dem kürzesten Weg zur Root Bridge, je Switch genau einer. Der <strong>Designated-Port</strong> ist der zuständige, weiterleitende Port je Segment. Der <strong>Alternate-Port</strong> ist ein blockierter Ersatzweg, der bei Ausfall des Root-Ports einspringt.</p>
+<p>Das klassische STP braucht nach einer Topologieänderung relativ lange, bis wieder alles weiterleitet. Sein Nachfolger <strong>RSTP</strong> (Rapid Spanning Tree Protocol) reagiert deutlich schneller und ist heute Standard, bleibt aber zum klassischen STP abwärtskompatibel.</p>
 </section>
 
 <section id="r-sql">
@@ -740,6 +750,28 @@
 <p><strong>2. Normalform:</strong> 1NF erfüllt, und kein Nichtschlüsselattribut hängt nur von einem <em>Teil</em> eines zusammengesetzten Schlüssels ab. In einer Bestellpositionstabelle mit Schlüssel (BestellNr, ArtikelNr) darf der Artikelname nicht stehen, er hängt nur von ArtikelNr ab und gehört in die Artikeltabelle.</p>
 <p><strong>3. Normalform:</strong> 2NF erfüllt, und kein Nichtschlüsselattribut hängt von einem <em>anderen Nichtschlüsselattribut</em> ab (keine transitive Abhängigkeit). Steht in der Mitarbeitertabelle neben der AbteilungsNr auch der Abteilungsname, hängt dieser transitiv über die AbteilungsNr am Schlüssel, er gehört in die Abteilungstabelle.</p>
 <div class="callout"><span class="tag">Merkhilfe</span>"The key, the whole key, and nothing but the key": 1NF = atomare Werte, 2NF = vom ganzen Schlüssel abhängig, 3NF = nur vom Schlüssel abhängig.</div>
+</section>
+
+<section id="r-verkabelung">
+<h2>Strukturierte Verkabelung</h2>
+<p>Die strukturierte Verkabelung ist ein herstellerunabhängiges, anwendungsneutrales Konzept für die Netzverkabelung von Gebäuden. Dasselbe Kabelnetz trägt Sprache, Daten und weitere Dienste, ist auf lange Nutzungsdauer ausgelegt und in klare Ebenen gegliedert. Geregelt wird es international durch die <strong>ISO/IEC 11801</strong> und europäisch durch die <strong>EN 50173</strong>.</p>
+<h3>Die drei Bereiche</h3>
+<p>Die Verkabelung wird in drei aufeinander aufbauende Ebenen unterteilt:</p>
+<table>
+<tr><th>Bereich</th><th>Verbindet</th><th>Typische Länge</th></tr>
+<tr><td>Primärbereich (Geländeverkabelung)</td><td>Gebäude untereinander auf einem Gelände</td><td>bis 1500 m</td></tr>
+<tr><td>Sekundärbereich (Gebäudeverkabelung)</td><td>Etagen innerhalb eines Gebäudes</td><td>bis 500 m</td></tr>
+<tr><td>Tertiärbereich (Etagenverkabelung)</td><td>Etagenverteiler bis zur Datendose am Arbeitsplatz</td><td>bis 90 m</td></tr>
+</table>
+<p>Der Primärbereich ist meist mit Glasfaser ausgeführt, weil er die größten Entfernungen überbrückt. Der Tertiärbereich ist die klassische Kupfer-Etagenverkabelung zum Arbeitsplatz.</p>
+<h3>Die Verteiler</h3>
+<p>An den Grenzen der Bereiche sitzen die Verteiler. Der <strong>Standort- oder Campusverteiler</strong> ist der zentrale Knoten der Geländeverkabelung und speist die einzelnen Gebäude. Der <strong>Gebäudeverteiler</strong> verteilt innerhalb eines Gebäudes auf die Etagen. Der <strong>Etagenverteiler</strong> versorgt von dort die Anschlüsse einer Etage. Die Hierarchie lautet also Campusverteiler, dann Gebäudeverteiler, dann Etagenverteiler.</p>
+<h3>Komponenten der Strecke</h3>
+<p>Vom Verteiler zum Arbeitsplatz reihen sich feste und flexible Teile aneinander. Das <strong>Patchpanel</strong> im Verteilerschrank ist das feste Rangierfeld, auf das die Verlegekabel aufgelegt werden. Das <strong>Verlegekabel</strong> ist das starre, fest in Wand und Decke installierte Kabel zwischen Patchpanel und Datendose. Die <strong>Datendose</strong> ist der Anschlusspunkt in der Wand am Arbeitsplatz. Das <strong>Patchkabel</strong> schließlich ist das flexible, kurze Kabel, das Gerät und Datendose beziehungsweise im Schrank Patchpanel und aktive Technik verbindet.</p>
+<h3>Permanent Link und Channel</h3>
+<p>Für die Abnahmemessung der Kupferstrecke gibt es zwei Messgrößen. Der <strong>Permanent Link</strong> ist die fest installierte Strecke ohne die flexiblen Patchkabel, also von Patchpanel bis Datendose, und darf höchstens <strong>90 m</strong> lang sein. Der <strong>Channel</strong> ist die vollständige Verbindung inklusive der Patchkabel an beiden Enden und darf höchstens <strong>100 m</strong> betragen. Die Differenz von 10 m ist für die Patchkabel reserviert, klassisch aufgeteilt in zweimal 5 m an den beiden Enden. Diese 90 m fest plus zweimal 5 m flexibel sind ein häufiger Prüfungswert.</p>
+<h3>T568A und T568B</h3>
+<p>Die beiden Standards legen die Belegung der acht Adern im RJ45-Stecker fest. Sie unterscheiden sich nur darin, dass die Adernpaare Grün und Orange vertauscht sind. Innerhalb einer Installation muss durchgängig <em>ein</em> Schema verwendet werden, in der Praxis meist T568B. Gleiches Schema an beiden Enden ergibt ein normales Patchkabel (1:1), zwei verschiedene Schemata ergeben das historische Crossover-Kabel.</p>
 </section>
 
 <section id="r-subnetting">

@@ -8619,6 +8619,76 @@ const POOLS = {
      { "t": "Die Verschlüsselung von Datenverkehr beim Verlassen des lokalen Netzes", "ok": false }
     ],
     "e": "Routing verbindet unterschiedliche Netze über Router und wählt anhand der Ziel-IP den passenden Weg. Die Weiterleitung innerhalb eines Netzes per MAC-Adresse ist dagegen Switching."
+   },
+   {
+    "q": "Welche Aufgabe hat das Spanning Tree Protocol?",
+    "o": [
+     { "t": "Es verhindert Schleifen in Netzen mit redundanten Switch-Verbindungen", "ok": true },
+     { "t": "Es verschlüsselt den gesamten Datenverkehr zwischen zwei benachbarten Switches", "ok": false },
+     { "t": "Es verteilt IP-Adressen und Gateway automatisch an alle Endgeräte im Segment", "ok": false },
+     { "t": "Es beschleunigt die Namensauflösung im lokalen Netz", "ok": false }
+    ],
+    "e": "STP legt überzählige Wege in den Standby und spannt einen schleifenfreien Baum auf. Ohne STP würden Broadcasts in redundanten Topologien endlos kreisen."
+   },
+   {
+    "q": "Was ist die Root Bridge in einem Spanning Tree?",
+    "o": [
+     { "t": "Der zentrale Wurzel-Switch, auf den der Baum ausgerichtet wird", "ok": true },
+     { "t": "Der Switch mit der höchsten Portanzahl im gesamten geswitchten Netz", "ok": false },
+     { "t": "Der Router am zentralen Übergang zum Internet", "ok": false },
+     { "t": "Der langsamste Switch im gesamten Netz", "ok": false }
+    ],
+    "e": "Die Root Bridge ist der Bezugspunkt des Baums. Alle Pfadberechnungen richten sich nach ihr. Gewählt wird sie über die Bridge-ID."
+   },
+   {
+    "q": "Wie wird die Root Bridge bestimmt?",
+    "o": [
+     { "t": "Der Switch mit der niedrigsten Bridge-ID wird Root Bridge", "ok": true },
+     { "t": "Der Switch mit der höchsten Bridge-ID wird Root Bridge", "ok": false },
+     { "t": "Der zuerst eingeschaltete Switch wird immer Root Bridge", "ok": false },
+     { "t": "Der Switch mit den meisten aktiven Ports wird Root Bridge", "ok": false }
+    ],
+    "e": "Die Bridge-ID aus Priorität und MAC-Adresse entscheidet, die niedrigste gewinnt. Über die Priorität lässt sich die Wahl gezielt beeinflussen."
+   },
+   {
+    "q": "Woraus setzt sich die Bridge-ID zusammen?",
+    "o": [
+     { "t": "Aus Priorität und MAC-Adresse des Switches", "ok": true },
+     { "t": "Aus IP-Adresse und Subnetzmaske des Switches", "ok": false },
+     { "t": "Aus Portnummer und VLAN-ID des Uplinks", "ok": false },
+     { "t": "Aus Seriennummer und Firmwarestand des Geräts", "ok": false }
+    ],
+    "e": "Die Bridge-ID besteht aus dem Prioritätswert und der MAC-Adresse. Bei gleicher Priorität entscheidet die niedrigere MAC-Adresse."
+   },
+   {
+    "q": "Wozu dienen BPDUs im Spanning Tree?",
+    "o": [
+     { "t": "Zum Austausch der Zustandsinformationen zwischen den Switches", "ok": true },
+     { "t": "Zur Übertragung der eigentlichen Nutzdaten der Endgeräte", "ok": false },
+     { "t": "Zur Verschlüsselung der Verbindung zwischen zwei Switches", "ok": false },
+     { "t": "Zur Vergabe von IP-Adressen an angeschlossene Clients", "ok": false }
+    ],
+    "e": "BPDUs (Bridge Protocol Data Units) transportieren die STP-Informationen, mit denen die Switches Root Bridge und Portrollen aushandeln."
+   },
+   {
+    "q": "Welche Rolle hat der Root-Port eines Switches?",
+    "o": [
+     { "t": "Er zeigt auf dem kürzesten Weg zur Root Bridge", "ok": true },
+     { "t": "Er ist der blockierte Ersatzweg bei Ausfall", "ok": false },
+     { "t": "Er verbindet den Switch mit den Endgeräten", "ok": false },
+     { "t": "Er ist immer dauerhaft deaktiviert", "ok": false }
+    ],
+    "e": "Der Root-Port ist der Port mit dem günstigsten Pfad zur Root Bridge, je Switch genau einer. Der blockierte Ersatzweg ist der Alternate-Port."
+   },
+   {
+    "q": "Worin liegt der wesentliche Vorteil von RSTP gegenüber klassischem STP?",
+    "o": [
+     { "t": "Es stellt nach einer Topologieänderung deutlich schneller wieder her", "ok": true },
+     { "t": "Es verschlüsselt zusätzlich den gesamten Datenverkehr zwischen den Switches", "ok": false },
+     { "t": "Es verzichtet vollständig auf die Wahl einer Root Bridge", "ok": false },
+     { "t": "Es ersetzt das Routing zwischen verschiedenen Netzen", "ok": false }
+    ],
+    "e": "RSTP (Rapid Spanning Tree) konvergiert nach Änderungen viel schneller als klassisches STP und ist heute Standard, bleibt aber abwärtskompatibel."
    }
   ]
  },
@@ -9886,6 +9956,76 @@ const POOLS = {
      { "t": "/62", "ok": false }
     ],
     "e": "16 ist 2 hoch 4, also werden 4 Bits vor dem /64 benötigt: 64 minus 4 ergibt /60."
+   },
+   {
+    "q": "Wie wird ein ARP-Request im lokalen Netz versendet?",
+    "o": [
+     { "t": "Als Broadcast an alle Geräte im Segment", "ok": true },
+     { "t": "Als Unicast direkt an das Standardgateway", "ok": false },
+     { "t": "Als Multicast an eine feste Gruppenadresse", "ok": false },
+     { "t": "Als verschlüsselter Unicast an den DNS-Server", "ok": false }
+    ],
+    "e": "Der ARP-Request geht als Broadcast an alle, da der Fragende die Ziel-MAC noch nicht kennt. Nur der betroffene Host antwortet."
+   },
+   {
+    "q": "Wie antwortet der gesuchte Host auf einen ARP-Request?",
+    "o": [
+     { "t": "Mit einem ARP-Reply als Unicast an den Fragenden", "ok": true },
+     { "t": "Mit einem ARP-Reply als Broadcast an alle Geräte", "ok": false },
+     { "t": "Mit einem ICMP-Echo an das Standardgateway", "ok": false },
+     { "t": "Mit einem DNS-Eintrag für die gesuchte Adresse", "ok": false }
+    ],
+    "e": "Der ARP-Reply geht als gezielter Unicast zurück an den Fragenden, denn dessen MAC ist aus dem Request bereits bekannt. Request Broadcast, Reply Unicast ist der Kernpunkt."
+   },
+   {
+    "q": "Wozu dient der ARP-Cache?",
+    "o": [
+     { "t": "Er speichert gelernte IP-zu-MAC-Zuordnungen befristet zwischen", "ok": true },
+     { "t": "Er speichert dauerhaft alle IP-Adressen des gesamten Netzes", "ok": false },
+     { "t": "Er puffert eingehende Frames bei überlastetem Switch", "ok": false },
+     { "t": "Er hält die Routingtabelle des Standardgateways vor", "ok": false }
+    ],
+    "e": "Der ARP-Cache merkt sich aufgelöste Zuordnungen mit Zeitlimit, damit nicht bei jedem Frame neu gefragt werden muss. Die Einträge verfallen nach Ablauf."
+   },
+   {
+    "q": "Welche NDP-Nachricht fragt in IPv6 nach der MAC-Adresse zu einer IPv6-Adresse?",
+    "o": [
+     { "t": "Die Neighbor Solicitation", "ok": true },
+     { "t": "Das Neighbor Advertisement", "ok": false },
+     { "t": "Die Router Solicitation", "ok": false },
+     { "t": "Das Router Advertisement", "ok": false }
+    ],
+    "e": "Die Neighbor Solicitation fragt per Multicast nach der Ziel-MAC. Das Neighbor Advertisement ist die Antwort. Die Router-Varianten dienen dem Auffinden von Routern, nicht der Nachbarauflösung."
+   },
+   {
+    "q": "Welche NDP-Nachricht liefert die Antwort auf eine Neighbor Solicitation?",
+    "o": [
+     { "t": "Das Neighbor Advertisement", "ok": true },
+     { "t": "Die Router Solicitation", "ok": false },
+     { "t": "Der ARP-Reply", "ok": false },
+     { "t": "Das DHCPv6-Offer", "ok": false }
+    ],
+    "e": "Das Neighbor Advertisement enthält die gesuchte MAC-Adresse. Einen ARP-Reply gibt es nur in IPv4, NDP nutzt stattdessen ICMPv6."
+   },
+   {
+    "q": "Wozu dient die Duplicate Address Detection (DAD) in IPv6?",
+    "o": [
+     { "t": "Zu prüfen, ob eine selbst gebildete Adresse im Netz schon vergeben ist", "ok": true },
+     { "t": "Zwei Standardgateways gegeneinander auf Ausfall zu überwachen", "ok": false },
+     { "t": "Doppelte DNS-Einträge auf dem Nameserver zu erkennen", "ok": false },
+     { "t": "Kollisionen auf dem physischen Übertragungsmedium zu zählen", "ok": false }
+    ],
+    "e": "Vor der ersten Nutzung prüft ein Gerät per DAD mit einer Neighbor Solicitation auf die geplante Adresse, ob diese bereits existiert. Antwortet jemand, wird sie verworfen."
+   },
+   {
+    "q": "Warum nutzt NDP in IPv6 keine Broadcasts wie ARP in IPv4?",
+    "o": [
+     { "t": "IPv6 kennt keinen Broadcast und ersetzt ihn durch Multicast über ICMPv6", "ok": true },
+     { "t": "IPv6 verzichtet vollständig auf jede Form der Adressauflösung", "ok": false },
+     { "t": "Broadcasts sind in IPv6 ausschließlich dem Router vorbehalten", "ok": false },
+     { "t": "NDP arbeitet grundsätzlich ohne Nachrichten im Netz", "ok": false }
+    ],
+    "e": "IPv6 hat den Broadcast abgeschafft. NDP nutzt gezielte Multicast-Nachrichten über ICMPv6, was das Netz weniger belastet als der ARP-Broadcast."
    }
   ]
  },
@@ -14175,7 +14315,7 @@ const POOLS = {
     "q": "Wie viele Stationen dürfen bei Token-Passing gleichzeitig senden?",
     "o": [
      {
-      "t": "Genau eine",
+      "t": "Eine",
       "ok": true
      },
      {
@@ -17581,6 +17721,191 @@ const POOLS = {
     "e": "Ping bestätigt nur ICMP-Erreichbarkeit — keine Aussage über den TCP-Dienst dahinter. Wäre Routing oder die komplette Firewall das Problem, würde auch der Ping scheitern."
    }
   ]
+ },
+ "verkabelung": {
+  "name": "Strukturierte Verkabelung",
+  "q": [
+   {
+    "q": "Welche Norm regelt die strukturierte Verkabelung international?",
+    "o": [
+     { "t": "ISO/IEC 11801", "ok": true },
+     { "t": "IEEE 802.3", "ok": false },
+     { "t": "DIN 5008", "ok": false },
+     { "t": "RFC 2616", "ok": false }
+    ],
+    "e": "Die ISO/IEC 11801 regelt die anwendungsneutrale strukturierte Verkabelung international, europäisch entspricht ihr die EN 50173. IEEE 802.3 normt Ethernet, nicht die Verkabelungsstruktur."
+   },
+   {
+    "q": "Welche europäische Norm entspricht der ISO/IEC 11801?",
+    "o": [
+     { "t": "EN 50173", "ok": true },
+     { "t": "EN 60950", "ok": false },
+     { "t": "EN 301549", "ok": false },
+     { "t": "EN 50600", "ok": false }
+    ],
+    "e": "Die EN 50173 ist die europäische Entsprechung der ISO/IEC 11801 für strukturierte Verkabelung. EN 50600 betrifft Rechenzentren allgemein."
+   },
+   {
+    "q": "Welche drei Bereiche unterscheidet die strukturierte Verkabelung?",
+    "o": [
+     { "t": "Primär-, Sekundär- und Tertiärbereich", "ok": true },
+     { "t": "Kern-, Verteilungs- und Zugangsbereich", "ok": false },
+     { "t": "Backbone-, Horizontal- und Vertikalbereich", "ok": false },
+     { "t": "Innen-, Außen- und Übergangsbereich", "ok": false }
+    ],
+    "e": "Primärbereich (Gelände), Sekundärbereich (Gebäude) und Tertiärbereich (Etage) sind die drei genormten Ebenen. Kern/Verteilung/Zugang ist ein Modell aus dem Switch-Design, nicht der Verkabelungsnorm."
+   },
+   {
+    "q": "Was verbindet der Primärbereich der strukturierten Verkabelung?",
+    "o": [
+     { "t": "Mehrere Gebäude untereinander auf einem Gelände", "ok": true },
+     { "t": "Die Etagen innerhalb eines einzelnen Gebäudes", "ok": false },
+     { "t": "Den Etagenverteiler mit der Datendose am Platz", "ok": false },
+     { "t": "Zwei Endgeräte direkt über ein Patchkabel", "ok": false }
+    ],
+    "e": "Der Primärbereich ist die Geländeverkabelung zwischen Gebäuden. Etagen innerhalb eines Gebäudes sind der Sekundärbereich, die Strecke zur Datendose der Tertiärbereich."
+   },
+   {
+    "q": "Welcher Bereich umfasst die Verkabelung von der Etage bis zur Datendose am Arbeitsplatz?",
+    "o": [
+     { "t": "Der Tertiärbereich", "ok": true },
+     { "t": "Der Primärbereich", "ok": false },
+     { "t": "Der Sekundärbereich", "ok": false },
+     { "t": "Der Backbone-Bereich", "ok": false }
+    ],
+    "e": "Der Tertiärbereich ist die Etagenverkabelung vom Etagenverteiler zur Datendose. Er unterliegt der bekannten 90-Meter-Grenze für den Permanent Link."
+   },
+   {
+    "q": "Welche maximale Länge nennt die Norm typischerweise für den Primärbereich?",
+    "o": [
+     { "t": "1500 m", "ok": true },
+     { "t": "500 m", "ok": false },
+     { "t": "100 m", "ok": false },
+     { "t": "90 m", "ok": false }
+    ],
+    "e": "Der Primärbereich darf bis etwa 1500 m überbrücken, meist per Glasfaser. 500 m gelten für den Sekundärbereich, 90 m für den Tertiärbereich."
+   },
+   {
+    "q": "Welche maximale Länge ist für den Sekundärbereich typisch?",
+    "o": [
+     { "t": "500 m", "ok": true },
+     { "t": "1500 m", "ok": false },
+     { "t": "250 m", "ok": false },
+     { "t": "90 m", "ok": false }
+    ],
+    "e": "Der Sekundärbereich (Gebäudeverkabelung zwischen den Etagen) reicht typischerweise bis 500 m. 1500 m betreffen das Gelände, 90 m die Etage."
+   },
+   {
+    "q": "Wie lang darf der Permanent Link einer Kupferstrecke höchstens sein?",
+    "o": [
+     { "t": "90 m", "ok": true },
+     { "t": "100 m", "ok": false },
+     { "t": "10 m", "ok": false },
+     { "t": "305 m", "ok": false }
+    ],
+    "e": "Der Permanent Link ist die fest installierte Strecke ohne Patchkabel und ist auf 90 m begrenzt. Die 100 m gelten für den Channel inklusive Patchkabel."
+   },
+   {
+    "q": "Wie lang darf der Channel einer Kupferstrecke höchstens sein?",
+    "o": [
+     { "t": "100 m", "ok": true },
+     { "t": "90 m", "ok": false },
+     { "t": "120 m", "ok": false },
+     { "t": "55 m", "ok": false }
+    ],
+    "e": "Der Channel umfasst die komplette Verbindung inklusive der Patchkabel an beiden Enden und darf 100 m betragen. Ohne Patchkabel (Permanent Link) sind es 90 m."
+   },
+   {
+    "q": "Wie verteilen sich die 100 m eines Channels klassisch auf fest und flexibel?",
+    "o": [
+     { "t": "90 m fest installiert plus zweimal 5 m Patchkabel", "ok": true },
+     { "t": "80 m fest installiert plus zweimal 10 m Patchkabel", "ok": false },
+     { "t": "95 m fest installiert plus einmal 5 m Patchkabel", "ok": false },
+     { "t": "70 m fest installiert plus zweimal 15 m Patchkabel", "ok": false }
+    ],
+    "e": "Der Permanent Link stellt 90 m fester Strecke, für die Patchkabel an beiden Enden bleiben 10 m, klassisch zweimal 5 m. Zusammen ergibt das den 100-m-Channel."
+   },
+   {
+    "q": "Was ist die Aufgabe eines Patchpanels?",
+    "o": [
+     { "t": "Es ist das feste Rangierfeld, auf das die Verlegekabel aufgelegt werden", "ok": true },
+     { "t": "Es ist die einzelne Anschlussdose in der Wand direkt am Arbeitsplatz", "ok": false },
+     { "t": "Es verstärkt und regeneriert das Signal auf langen Kabelstrecken aktiv", "ok": false },
+     { "t": "Es wandelt elektrische Signale in Lichtsignale um", "ok": false }
+    ],
+    "e": "Das Patchpanel im Verteilerschrank ist das feste Rangierfeld für die aufgelegten Verlegekabel. Die Anschlussdose am Platz ist die Datendose."
+   },
+   {
+    "q": "Wodurch unterscheidet sich ein Verlegekabel von einem Patchkabel?",
+    "o": [
+     { "t": "Das Verlegekabel ist starr und fest installiert, das Patchkabel flexibel und kurz", "ok": true },
+     { "t": "Das Verlegekabel ist flexibel und kurz, das Patchkabel starr und fest installiert", "ok": false },
+     { "t": "Beide sind baugleich, nur die Steckertypen an den Enden unterscheiden sich", "ok": false },
+     { "t": "Das Verlegekabel führt Glasfaser, das Patchkabel grundsätzlich nur Kupfer", "ok": false }
+    ],
+    "e": "Verlegekabel sind die starr in Wand und Decke installierten Kabel, Patchkabel die flexiblen kurzen Verbindungskabel zu Geräten und aktiver Technik."
+   },
+   {
+    "q": "Was bezeichnet die Datendose in der strukturierten Verkabelung?",
+    "o": [
+     { "t": "Den Anschlusspunkt in der Wand am Arbeitsplatz", "ok": true },
+     { "t": "Das zentrale Rangierfeld im Verteilerschrank", "ok": false },
+     { "t": "Den Verteiler zwischen zwei Gebäuden", "ok": false },
+     { "t": "Das flexible Kabel zwischen Gerät und Wand", "ok": false }
+    ],
+    "e": "Die Datendose ist der Endpunkt der festen Verkabelung am Arbeitsplatz. Über ein Patchkabel wird von dort das Endgerät angeschlossen."
+   },
+   {
+    "q": "Welcher Verteiler bildet den zentralen Knoten der Geländeverkabelung?",
+    "o": [
+     { "t": "Der Standort- oder Campusverteiler", "ok": true },
+     { "t": "Der Etagenverteiler", "ok": false },
+     { "t": "Der Gebäudeverteiler", "ok": false },
+     { "t": "Die Datendose am Arbeitsplatz", "ok": false }
+    ],
+    "e": "Der Standort- bzw. Campusverteiler ist der oberste Knoten und speist die Gebäude. Darunter folgen Gebäude- und Etagenverteiler."
+   },
+   {
+    "q": "Welche Reihenfolge der Verteiler ist von zentral nach dezentral korrekt?",
+    "o": [
+     { "t": "Campusverteiler, Gebäudeverteiler, Etagenverteiler", "ok": true },
+     { "t": "Etagenverteiler, Gebäudeverteiler, Campusverteiler", "ok": false },
+     { "t": "Gebäudeverteiler, Campusverteiler, Etagenverteiler", "ok": false },
+     { "t": "Campusverteiler, Etagenverteiler, Gebäudeverteiler", "ok": false }
+    ],
+    "e": "Von zentral nach dezentral: Campusverteiler (Gelände), dann Gebäudeverteiler (Gebäude), dann Etagenverteiler (Etage)."
+   },
+   {
+    "q": "Wozu dienen die Standards T568A und T568B?",
+    "o": [
+     { "t": "Sie legen die Belegung der acht Adern im RJ45-Stecker fest", "ok": true },
+     { "t": "Sie definieren die maximal zulässige Länge einer Kupferstrecke", "ok": false },
+     { "t": "Sie regeln die Brandschutzklasse von Verlegekabeln", "ok": false },
+     { "t": "Sie bestimmen die Übertragungsrate einer Glasfaser", "ok": false }
+    ],
+    "e": "T568A und T568B beschreiben zwei Belegungsschemata für die acht Adern im RJ45-Stecker. Sie unterscheiden sich nur durch die vertauschten Paare Grün und Orange."
+   },
+   {
+    "q": "Worin unterscheiden sich T568A und T568B?",
+    "o": [
+     { "t": "Die Adernpaare Grün und Orange sind vertauscht", "ok": true },
+     { "t": "Die Anzahl der belegten Adern ist unterschiedlich", "ok": false },
+     { "t": "T568A ist für Glasfaser, T568B für Kupfer gedacht", "ok": false },
+     { "t": "T568A erlaubt 100 m, T568B nur 90 m Kabellänge", "ok": false }
+    ],
+    "e": "Der einzige Unterschied ist die vertauschte Lage der Paare Grün und Orange. Beide belegen alle acht Adern und gelten für dieselbe Kupferverkabelung."
+   },
+   {
+    "q": "Ein Kabel ist an einem Ende nach T568A, am anderen nach T568B belegt. Was entsteht?",
+    "o": [
+     { "t": "Ein Crossover-Kabel", "ok": true },
+     { "t": "Ein normales 1:1-Patchkabel", "ok": false },
+     { "t": "Ein Glasfaser-Patchkabel", "ok": false },
+     { "t": "Ein unbrauchbares, totes Kabel", "ok": false }
+    ],
+    "e": "Zwei verschiedene Schemata an den Enden ergeben das historische Crossover-Kabel. Gleiches Schema an beiden Enden ergibt ein normales 1:1-Kabel."
+   }
+  ]
  }
 };
 /* ============ ENGINE ============ */
@@ -18533,12 +18858,30 @@ const GLOSSAR = [{"a":"2FA","f":"Zwei-Faktor-Authentifizierung","d":"Anmeldung m
 {"a":"Overhead","f":"Zusatzaufwand / Mehraufwand","d":"Zusätzlicher Ressourcenverbrauch (Zeit, Bandbreite, Rechenleistung), der neben den eigentlichen Nutzdaten für Steuerung, Verschlüsselung oder Protokoll-Header anfällt. Weniger Overhead bedeutet mehr Effizienz, aber oft auch weniger Sicherheit oder Fehlertoleranz — ein klassischer Kompromiss in der Netzwerktechnik."},
 {"a":"gRPC","f":"gRPC Remote Procedure Call","d":"Modernes, leistungsstarkes RPC-Framework von Google auf Basis von HTTP/2 und Protocol Buffers. Ermöglicht effiziente, typsichere Kommunikation zwischen verteilten Diensten, häufig in Microservice-Architekturen."},
 {"a":"JSON-RPC","f":"JSON Remote Procedure Call","d":"Leichtgewichtiges RPC-Protokoll, das Anfragen und Antworten im JSON-Format überträgt. Einfach aufgebaut und transportunabhängig (oft über HTTP)."},
-{"a":"403","f":"HTTP 403 Forbidden","d":"HTTP-Statuscode: Der Server hat die Anfrage verstanden, verweigert aber die Ausführung. Anders als 401 hilft hier keine Authentifizierung — der Zugriff ist grundsätzlich untersagt."},
+{"a":"HTTP 403","f":"HTTP 403 Forbidden","d":"HTTP-Statuscode: Der Server hat die Anfrage verstanden, verweigert aber die Ausführung. Anders als 401 hilft hier keine Authentifizierung — der Zugriff ist grundsätzlich untersagt."},
 {"a":"RTS","f":"Request to Send","d":"Steuersignal, mit dem eine Station den Wunsch anmeldet, Daten zu senden. Teil des RTS/CTS-Verfahrens im WLAN gegen das Hidden-Node-Problem."},
 {"a":"CTS","f":"Clear to Send","d":"Antwort auf ein RTS: Der Access Point gibt den Kanal für die anfragende Station frei. Zusammen mit RTS reduziert es Kollisionen bei versteckten Endgeräten."},
 {"a":"DHCPv4","f":"Dynamic Host Configuration Protocol für IPv4","d":"Vergibt IPv4-Adressen samt Maske, Gateway und DNS automatisch. Ablauf: Discover, Offer, Request, Acknowledge (DORA)."},
 {"a":"DHCPv6","f":"Dynamic Host Configuration Protocol für IPv6","d":"IPv6-Variante von DHCP. Arbeitet stateful (vergibt Adressen zentral) oder stateless (liefert nur Zusatzinfos wie DNS, während die Adresse per SLAAC entsteht). Ablauf: Solicit, Advertise, Request, Reply."},
-{"a":"TCP/IP-Modell","f":"TCP/IP-Referenzmodell","d":"Praxismodell mit 4 Schichten. Deutsch: Netzzugang (OSI 1+2), Internet (OSI 3), Transport (OSI 4), Anwendung (OSI 5+6+7). Englisch: Network Access, Internet, Transport, Application."}];
+{"a":"TCP/IP-Modell","f":"TCP/IP-Referenzmodell","d":"Praxismodell mit 4 Schichten. Deutsch: Netzzugang (OSI 1+2), Internet (OSI 3), Transport (OSI 4), Anwendung (OSI 5+6+7). Englisch: Network Access, Internet, Transport, Application."},
+{"a":"Proxy","f":"Proxy-Server","d":"Vermittler zwischen Client und Zielserver. Leitet Anfragen stellvertretend weiter, kann filtern, zwischenspeichern (Cache) und die interne Struktur verbergen."},
+{"a":"PUT","f":"HTTP-Methode PUT","d":"Ersetzt eine Ressource üblicherweise vollständig oder legt sie unter bekannter Adresse an. Idempotent: mehrfaches Senden führt zum selben Ergebnis."},
+{"a":"PATCH","f":"HTTP-Methode PATCH","d":"Ändert gezielt einzelne Teile einer Ressource, nicht die gesamte. Im Gegensatz zu PUT wird nur das Übermittelte angepasst."},
+{"a":"MST","f":"Multi-Stream Transport","d":"Funktion von DisplayPort und Thunderbolt, um mehrere Monitore über einen Ausgang zu betreiben, per Daisy-Chain oder MST-Hub."},
+{"a":"HTTP 200","f":"200 OK","d":"Erfolgreiche Anfrage, die Antwort enthält das gewünschte Ergebnis."},
+{"a":"HTTP 201","f":"201 Created","d":"Anfrage erfolgreich, dabei wurde eine neue Ressource angelegt."},
+{"a":"HTTP 204","f":"204 No Content","d":"Erfolgreich, aber ohne Inhalt in der Antwort. Häufig nach einem erfolgreichen DELETE."},
+{"a":"HTTP 400","f":"400 Bad Request","d":"Fehlerhafte oder ungültige Anfrage, der Server kann sie nicht verarbeiten."},
+{"a":"HTTP 401","f":"401 Unauthorized","d":"Authentifizierung fehlt oder ist ungültig. Die Identität ist nicht nachgewiesen."},
+{"a":"HTTP 404","f":"404 Not Found","d":"Die angeforderte Ressource wurde nicht gefunden."},
+{"a":"HTTP 409","f":"409 Conflict","d":"Die Anfrage steht im Konflikt mit dem aktuellen Zustand der Ressource."},
+{"a":"HTTP 500","f":"500 Internal Server Error","d":"Allgemeiner Serverfehler bei der Verarbeitung der Anfrage."},
+{"a":"FAZ","f":"Frühester Anfangszeitpunkt","d":"Netzplantechnik: der früheste Zeitpunkt, zu dem ein Vorgang beginnen kann. Ergibt sich in der Vorwärtsrechnung aus dem spätesten FEZ aller Vorgänger."},
+{"a":"FEZ","f":"Frühester Endzeitpunkt","d":"Netzplantechnik: FAZ plus Vorgangsdauer. Der früheste Zeitpunkt, zu dem ein Vorgang beendet sein kann."},
+{"a":"SAZ","f":"Spätester Anfangszeitpunkt","d":"Netzplantechnik: SEZ minus Vorgangsdauer. Der späteste Start, ohne das Projektende zu verzögern."},
+{"a":"SEZ","f":"Spätester Endzeitpunkt","d":"Netzplantechnik: der späteste Zeitpunkt, zu dem ein Vorgang enden darf. Ergibt sich in der Rückwärtsrechnung aus dem frühesten SAZ aller Nachfolger."},
+{"a":"GP","f":"Gesamtpuffer","d":"Netzplantechnik: SAZ minus FAZ. Zeitspanne, um die ein Vorgang verschoben werden darf, ohne das Projektende zu gefährden. GP=0 kennzeichnet den kritischen Pfad."},
+{"a":"FP","f":"Freier Puffer","d":"Netzplantechnik: frühester Anfang des Nachfolgers minus eigenes FEZ. Verschiebung, ohne den frühesten Start eines Nachfolgers anzutasten."}];
 
 // ---- Bibliothek: Render + Suche ----
 const libList = document.getElementById('libList');
@@ -18586,6 +18929,106 @@ libSearch.addEventListener('input', () => {
 });
 
 renderLib(GLOSSAR_SORTED);
+
+// ---- Glossar-Bubbles im Reader (Hover/Tap) ----
+// Kuratierte Kernbegriffe je Sektion: markiert wird nur, was fürs Thema des Abschnitts zentral ist.
+(function(){
+  var reader = document.getElementById('view-lesen');
+  if (!reader || typeof GLOSSAR === 'undefined') return;
+
+  var CURATED = {
+    "r-ap1": ["FAZ","FEZ","SAZ","SEZ","USV","TOM","AVV","RPO","RTO"],
+    "r-api": ["REST","PUT","PATCH","OAuth","Bearer-Token","SOAP"],
+    "r-raid": ["RAID","Hot-Spare","Hot-Swap","RPO","RTO","GFS"],
+    "r-datenschutz": ["DSGVO","BDSG","TOM","AVV","DSFA","DSB"],
+    "r-diagnose": ["ICMP","DNS","MAC"],
+    "r-dnsdhcp": ["DORA","Resolver","APIPA","TLD","TTL"],
+    "r-ethernet": ["Auto-Negotiation","CSMA/CD","CSMA/CA","MTU","FCS","Uplink"],
+    "r-fddi": ["FDDI"],
+    "r-header": ["TTL","RTT","ICMP"],
+    "r-hyperv": ["Hypervisor","Baremetal","Hosted","Para-Virtualisierung"],
+    "r-ip": ["ARP","NDP","SLAAC","APIPA","ARP-Cache","Multicast","Broadcast"],
+    "r-security": ["CIA","2FA","DMZ","IDS","IPS","Honeypot","Phishing","Pentest"],
+    "r-medien": ["UTP","STP","MST","LWL","OUI","BNC","Crosstalk"],
+    "r-logik": ["AND","OR","XOR","NAND","NOR","XNOR"],
+    "r-mux": ["MUX","DEMUX","TDM","FDM","WDM","CDM"],
+    "r-ausdehnung": ["BAN","PAN","CAN","MAN","GAN","MPLS"],
+    "r-oop": [],
+    "r-osi": ["OSI","PDU","ASCII","TLS"],
+    "r-ports": ["Proxy","SOCKS","RDP","HTTPS","POP3","IMAP","STARTTLS","SMTP","TLS","SSL"],
+    "r-projekt": ["FAZ","FEZ","SAZ","SEZ","GP","FP"],
+    
+    "r-routing": ["STP","NAT","CAM","OSPF","RIP","Trunk","Longest Prefix Match","Cut-Through"],
+    "r-sql": ["SQL"],
+    "r-verkabelung": ["RJ45","ISO"],
+    "r-subnetting": ["CIDR","Broadcast","RFC"],
+    "r-tcpip": ["QUIC","Congestion Control"],
+    "r-topo": ["FDDI"],
+    "r-krypto": ["RSA","ECC","Diffie-Hellman","PKI","X.509","CRL","OCSP","CSR","Hash","Salt"],
+    "r-virt": ["Hypervisor","Overcommitment","Live-Migration","Thin Client","VDI"],
+    "r-vlan": ["VLAN","Trunk","VLAN-Hopping","MAC-Spoofing","802.1X"],
+    "r-voip": ["VoIP","SIP","RTP","QoS"],
+    "r-vpn": ["IPsec","IKE","IKEv2","ISAKMP","ESP","AH","L2TP","OpenVPN","Diffie-Hellman"],
+    "r-wlan": ["SSID","PSK","SAE","Roaming","Band Steering","IEEE 802.11","Wireless Controller"],
+    "r-zahlen": ["MSB","LSB","Nibble"]
+  };
+
+  var defByKey = {};
+  GLOSSAR.forEach(function(g){ if(!(g.a in defByKey)) defByKey[g.a] = g; });
+
+  function escapeReg(s){ return s.replace(/[.*+?^${}()|[\]\\]/g,'\\$&'); }
+
+  function rejectNode(node){
+    var p = node.parentNode;
+    if(!p) return true;
+    var tag = p.nodeName.toLowerCase();
+    if(tag==='h2'||tag==='h3'||tag==='code'||tag==='a') return true;
+    if(p.classList && p.classList.contains('gloss-term')) return true;
+    if(p.closest && p.closest('.gloss-term')) return true;
+    if(!node.nodeValue || !node.nodeValue.trim()) return true;
+    return false;
+  }
+
+  function markTerm(sec, term){
+    var g = defByKey[term];
+    if(!g) return;
+    var re = new RegExp('(^|[^A-Za-z0-9])(' + escapeReg(term) + ')(?![A-Za-z0-9])');
+    var walker = document.createTreeWalker(sec, NodeFilter.SHOW_TEXT, {
+      acceptNode: function(node){ return rejectNode(node) ? NodeFilter.FILTER_REJECT : NodeFilter.FILTER_ACCEPT; }
+    });
+    var node;
+    while((node = walker.nextNode())){
+      var m = re.exec(node.nodeValue);
+      if(!m) continue;
+      var idx = m.index + m[1].length;
+      var text = node.nodeValue;
+      var before = text.slice(0, idx);
+      var match  = text.slice(idx, idx + term.length);
+      var after  = text.slice(idx + term.length);
+
+      var frag = document.createDocumentFragment();
+      if(before) frag.appendChild(document.createTextNode(before));
+      var span = document.createElement('span');
+      span.className = 'gloss-term';
+      span.setAttribute('tabindex','0');
+      span.textContent = match;
+      var bub = document.createElement('span');
+      bub.className = 'gloss-bubble';
+      bub.textContent = (g.f ? g.f + ' — ' : '') + g.d;
+      span.appendChild(bub);
+      frag.appendChild(span);
+      if(after) frag.appendChild(document.createTextNode(after));
+      node.parentNode.replaceChild(frag, node);
+      return; // nur erstes Vorkommen je Begriff
+    }
+  }
+
+  Object.keys(CURATED).forEach(function(sid){
+    var sec = document.getElementById(sid);
+    if(!sec) return;
+    CURATED[sid].forEach(function(term){ markTerm(sec, term); });
+  });
+})();
 
 // ---- Footer + Header-Specs: Kategorien-/Fragen-/Begriffszahl dynamisch ----
 (function(){

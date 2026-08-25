@@ -337,3 +337,48 @@ table.sn-cheat td:nth-child(4),table.sn-cheat td:nth-child(5){color:var(--green)
 .a11y-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0;border:1px solid rgba(255,255,255,0.25)}
 .a11y-check{margin-left:auto;color:var(--cyan);opacity:0;font-size:0.85rem}
 .a11y-opt.active .a11y-check{opacity:1}
+
+/* ---- Glossar-Bubbles im Reader ---- */
+.gloss-term{
+  border-bottom:1px dotted var(--muted);
+  cursor:help;
+  position:relative;
+  outline:none;
+}
+.gloss-term:hover,
+.gloss-term:focus{
+  border-bottom-color:var(--cyan);
+}
+.gloss-bubble{
+  position:absolute;
+  left:0;
+  bottom:calc(100% + 8px);
+  z-index:40;
+  width:max-content;
+  max-width:300px;
+  background:var(--panel);
+  color:var(--text);
+  border:1px solid var(--border);
+  border-left:3px solid var(--cyan);
+  border-radius:6px;
+  padding:9px 12px;
+  font-size:0.85rem;
+  line-height:1.45;
+  font-weight:400;
+  box-shadow:0 6px 22px rgba(0,0,0,0.45);
+  opacity:0;
+  visibility:hidden;
+  transform:translateY(4px);
+  transition:opacity .14s ease, transform .14s ease, visibility .14s;
+  pointer-events:none;
+  white-space:normal;
+}
+.gloss-term:hover .gloss-bubble,
+.gloss-term:focus .gloss-bubble{
+  opacity:1;
+  visibility:visible;
+  transform:translateY(0);
+}
+@media (max-width:640px){
+  .gloss-bubble{ max-width:230px; }
+}

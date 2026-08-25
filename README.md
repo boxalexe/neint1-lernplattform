@@ -1,38 +1,34 @@
-# Layer 8 Academy
+# Layer 8 Academy (L8A)
 
-Interaktives Lern- und Prüfungstool für **Netzwerke und Internettechnologien Grundlagen** (IHK-Vorbereitung, Fachinformatiker).
+Kostenlose, werbefreie Übungsplattform für die **IHK-Abschlussprüfung Teil 1 (AP1)** der IT-Berufe.
 
-Kein Framework, kein Build-Schritt, keine Abhängigkeiten. Reines HTML, CSS und JavaScript – läuft in jedem modernen Browser und lässt sich statisch (z. B. über Cloudflare Pages oder GitHub Pages) ausliefern.
+🔗 **Live:** https://layer8academy.boxberger.app/
 
-## Funktionen
+## Was es ist
 
-- **Nachschlagen** – strukturiertes Nachschlagewerk zu allen Modulthemen: OSI-Modell, TCP/IP, Ports & Protokolle, Subnetting, Routing & Switching, DNS/DHCP, Verschlüsselung/PKI, VPN, WLAN, IT-Sicherheit u. a.
-- **Bibliothek** – über 200 IT-Abkürzungen und Begriffe, alphabetisch, mit Live-Suche.
-- **Multiple Choice** – 665 Fragen in 22 Kategorien. Bis zu 3 Kategorien gleichzeitig, Umfang pro Durchlauf wählbar (15 / 30 / alle), Fragen rotieren ohne Wiederholung. Jede Frage mit kurzer Erklärung nach der Antwort.
+- **Multiple-Choice-Trainer** — 1160 Fragen in 34 Themenpools (Netzwerke, IT-Sicherheit, SQL, Projektmanagement, Verschlüsselung, Verkabelung u. v. m.)
+- **Nachschlagewerk** — 34 Reader-Kapitel mit Erklärtexten, Tabellen und Rechenbeispielen (Subnetting, Netzplantechnik, RAID, Break-even …)
+- **Glossar** — 298 Begriffe, durchsuchbar, im Reader per Hover/Tap als Infobubble bei thematisch zentralen Begriffen
+- Läuft **komplett clientseitig**, kein Server, kein Tracking, alles im `localStorage` des Browsers
 
-Leitprinzip: Jede Quizfrage ist über das Nachschlagewerk herleitbar – Fragen, Reader und Bibliothek bilden eine zusammenhängende Lerneinheit.
+## Tech-Stack
 
-## Struktur
+Reines HTML/CSS/JavaScript, keine Frameworks, kein Build-Schritt.
 
 ```
-index.html    Markup
-styles.css    Styling
-app.js        Daten (Fragen + Glossar) und Logik
+index.html   Struktur, Reader-Inhalte, Navigation
+app.js       Fragenpools, Glossar, Quiz-Logik, Bubble-Rendering
+styles.css   Theming (mehrere Farbschemata über CSS-Variablen)
 ```
 
-## Lokal starten
+## Deploy
 
-Da CSS und JS ausgelagert sind, blockieren manche Browser das direkte Öffnen per `file://`. Einfachster Weg über einen lokalen Server:
+Gehostet als Cloudflare Worker. Push auf `main` im Repo `boxalexe/neint1-lernplattform` deployed automatisch.
 
-```bash
-python3 -m http.server
-# dann http://localhost:8000 öffnen
-```
+## Stand
 
-## Deployment
+34 Sektionen · 34 Fragenpools · 1160 Fragen · 298 Glossarbegriffe
 
-Statisches Hosting genügt. Bei Cloudflare Pages
+## Hinweis
 
-## Lizenz / Nutzung
-
-Erstellt zur Prüfungsvorbereitung und zur freien Nutzung
+L8A ist ein privates Lernprojekt, kein amtliches Angebot. Für verbindliche Auskünfte zur Prüfung: [IHK-Finder](https://www.dihk.de/ihk-finder).
