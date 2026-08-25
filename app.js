@@ -19136,6 +19136,21 @@ window.addEventListener('pageshow', () => { window.scrollTo(0, 0); });
   bar.querySelectorAll('.tab, .zen-toggle').forEach(el => {
     el.addEventListener('click', () => { if(window.innerWidth <= 560) close(); });
   });
+
+  // Die Leiste ist fixed (aus dem Fluss). Ein Spacer hält ihren Platz frei,
+  // damit der Inhalt nicht darunter rutscht. Höhe folgt der echten Leistenhöhe,
+  // auch wenn das Menü auf dem Handy auf-/zuklappt.
+  const spacer = document.getElementById('tabsSpacer');
+  function syncSpacer(){
+    if(!spacer) return;
+    spacer.style.height = bar.offsetHeight + 'px';
+  }
+  syncSpacer();
+  window.addEventListener('resize', syncSpacer, { passive:true });
+  window.addEventListener('load', syncSpacer);
+  // Nach dem Auf-/Zuklappen (Transition) neu messen
+  btn.addEventListener('click', () => setTimeout(syncSpacer, 60));
+  bar.addEventListener('transitionend', syncSpacer);
 })();
 
 // ---- Schnellsuche (Lupe im Header): filtert die Nachschlage-Stichwörter ----
