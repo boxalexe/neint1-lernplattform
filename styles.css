@@ -23,12 +23,16 @@ html[data-theme="cvd"]{
   --ok-border:#2e9bff; --scrolltop-color:#2e9bff;
 }
 *{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:auto}
+html{scroll-behavior:auto;overflow-x:hidden}
 /* Custom Cursor: Regeln stehen am DATEIENDE mit !important,
    damit keine spätere cursor:pointer-Regel den nativen Handcursor durchschlagen lässt */
 nav.jump a{scroll-behavior:smooth}
-body{background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,-apple-system,sans-serif;line-height:1.6;padding:0 0 90px}
+body{background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,-apple-system,sans-serif;line-height:1.6;padding:0 0 90px;overflow-x:hidden;max-width:100%}
 .wrap{max-width:940px;margin:0 auto;padding:0 24px}
+/* Sicherheitsnetz: kein Reader-Element darf breiter als sein Container werden */
+#view-lesen{max-width:100%;overflow-wrap:break-word}
+#view-lesen img,#view-lesen pre{max-width:100%}
+#view-lesen table{max-width:100%;display:block;overflow-x:auto;-webkit-overflow-scrolling:touch}
 header{border-bottom:1px solid var(--border);padding:40px 0 26px;margin-bottom:28px;background:linear-gradient(180deg,rgba(34,211,238,0.04),transparent);text-align:center}
 header h1{font-family:'DM Mono','Consolas',monospace;font-size:2.7rem;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:#eaf2f8;margin-bottom:8px;animation:titleGlitch 5.5s steps(1,end) infinite;display:inline-flex;align-items:center;gap:0.25em}
 .title-8{height:1.05em;width:1.05em;vertical-align:-0.15em;flex-shrink:0;animation:titleGlitch 5.5s steps(1,end) infinite, l8aGlow 2.6s ease-in-out infinite}
