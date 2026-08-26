@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AP1-Prüfungssimulation — Layer 8 Academy</title>
+<meta name="description" content="Übungssimulation für die IHK-Abschlussprüfung Teil 1 der IT-Berufe. 90 Minuten, 100 Punkte, offene Aufgaben mit Lösungsbogen zur Selbsteinschätzung.">
+<link rel="stylesheet" href="styles.css?v=4">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<!-- BARRIEREFREIHEIT -->
+<div class="a11y-wrap">
+  <button class="a11y-toggle" id="a11yToggle" aria-haspopup="true" aria-expanded="false" aria-label="Kontrasteinstellungen" title="Kontrasteinstellungen">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7Z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+  </button>
+  <div class="a11y-menu" id="a11yMenu" role="menu" aria-label="Kontrastmodus wählen">
+    <button class="a11y-opt" data-theme="default" role="menuitemradio"><span class="a11y-dot" style="background:#22d3ee"></span><span>Original</span><span class="a11y-check">&#10003;</span></button>
+    <button class="a11y-opt" data-theme="hc" role="menuitemradio"><span class="a11y-dot" style="background:#ffffff"></span><span>Hoher Kontrast</span><span class="a11y-check">&#10003;</span></button>
+    <button class="a11y-opt" data-theme="cvd" role="menuitemradio"><span class="a11y-dot" style="background:#56b4e9"></span><span>Blau/Orange</span><span class="a11y-check">&#10003;</span></button>
+  </div>
+</div>
+
+<!-- ===== KOPFLEISTE (nur während der Prüfung) ===== -->
+<div class="examhead" id="examHead" hidden>
+  <div class="wrap examhead-inner">
+    <span class="eh-id" id="ehId">AP1-SIM</span>
+    <span class="eh-progress" id="ehProgress">0 / 0 Felder</span>
+    <span class="eh-timer" id="ehTimer">90:00</span>
+  </div>
+</div>
+
+<main class="wrap">
+
+<!-- ===== SETUP ===== -->
+<section class="view active" id="viewSetup">
+  <header class="hero">
+    <h1>AP1&#8209;Prüfungssimulation</h1>
+    <p class="sub">Teil 1 der Abschlussprüfung &middot; 4 Aufgaben &middot; 100 Punkte &middot; 90 Minuten</p>
+  </header>
+
+  <div class="card">
+    <h2>Angaben zum Prüfling</h2>
+    <div class="frow2">
+      <label class="field"><span>Vorname <i>*</i></span><input type="text" id="fVorname" autocomplete="given-name"></label>
+      <label class="field"><span>Nachname <i>*</i></span><input type="text" id="fNachname" autocomplete="family-name"></label>
+    </div>
+    <label class="field"><span>Prüflingskennung oder frei gewählter Prüfcode <i>*</i></span><input type="text" id="fCode" placeholder="z. B. FIAE-2026-01"></label>
+  </div>
+
+  <div class="card">
+    <h2>Prüfung wählen <i>*</i></h2>
+    <p class="hint" style="margin-top:0;margin-bottom:12px">Fünf eigenständige Simulationen mit je eigener Ausgangssituation, eigenen Zahlen und unterschiedlichen Aufgabenformaten. Jede umfasst 4 Aufgaben, 100 Punkte und 90 Minuten.</p>
+    <div id="examChoices" class="choices"></div>
+    <button class="btn" id="btnRandom" style="margin-top:12px">Zufällig auswählen</button>
+  </div>
+
+  <div class="card">
+    <label class="check"><input type="checkbox" id="fAck"><span>Ich weiß, dass dies keine offizielle IHK&#8209;Prüfung ist.</span></label>
+    <p class="hint" id="setupHint"></p>
+    <button class="btn primary" id="btnStart" disabled>Prüfung starten</button>
+  </div>
+</section>
+
+<!-- ===== PRÜFUNG ===== -->
+<section class="view" id="viewRun">
+  <div class="card scenario">
+    <h2 id="runTitle"></h2>
+    <p class="eyebrow">Ausgangssituation</p>
+    <p id="runScenario"></p>
+  </div>
+  <div id="taskArea"></div>
+  <div class="card submitbar">
+    <p class="hint" id="submitHint"></p>
+    <button class="btn primary" id="btnSubmit">Prüfung abgeben</button>
+  </div>
+</section>
+
+<!-- ===== LÖSUNGSBOGEN ===== -->
+<section class="view" id="viewReview">
+  <div class="card">
+    <h2>Lösungsbogen</h2>
+    <p class="warn">Unverbindliche Selbsteinschätzung, keine IHK&#8209;Bewertung.</p>
+    <p id="reviewMeta" class="meta"></p>
+    <p class="hint">Setzen Sie je Kriterium selbst das Häkchen. Fachlich vertretbare Alternativen zur Musterlösung sind möglich und zählen als erfüllt.</p>
+  </div>
+  <div id="reviewArea"></div>
+  <div class="card submitbar">
+    <p class="hint" id="reviewHint"></p>
+    <button class="btn primary" id="btnFinish">Auswertung anzeigen</button>
+  </div>
+</section>
+
+<!-- ===== AUSWERTUNG ===== -->
+<section class="view" id="viewResult">
+  <div class="card result-head">
+    <h2>Auswertung</h2>
+    <div class="score" id="scoreBig">0</div>
+    <p class="score-sub" id="scoreSub"></p>
+    <p class="warn">Unverbindliche Selbsteinschätzung, keine IHK&#8209;Bewertung. Fachlich vertretbare Alternativen sind möglich.</p>
+  </div>
+  <div class="card"><h2>Punkte je Aufgabe</h2><div id="perTask"></div></div>
+  <div class="card"><h2>Nicht erfüllte Kriterien</h2><div id="missedList"></div></div>
+  <div class="card"><h2>Wiederholungsbedarf</h2><div id="weakList"></div></div>
+  <div class="card submitbar">
+    <button class="btn" id="btnReopen">Lösungsbogen erneut ansehen</button>
+    <button class="btn primary" id="btnReset">Neue Prüfung beginnen</button>
+    <a class="btn" href="../">Zurück zur Startseite</a>
+  </div>
+</section>
+
+</main>
+
+<footer><div class="wrap">AP1&#8209;Prüfungssimulation &middot; Übungsangebot ohne amtlichen Charakter &middot; eigenständig erstellte Aufgaben</div></footer>
+
+<div class="modal" id="modal" hidden>
+  <div class="modal-box">
+    <h3 id="modalTitle"></h3>
+    <p id="modalText"></p>
+    <div class="modal-btns">
+      <button class="btn" id="modalCancel">Abbrechen</button>
+      <button class="btn primary" id="modalOk">Bestätigen</button>
+    </div>
+  </div>
+</div>
+
+<button id="scrollTopBtn" aria-label="Nach oben scrollen" title="Nach oben">
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+</button>
+
+<script src="exams.js?v=4"></script>
+<script src="app.js?v=4"></script>
+</body>
+</html>
