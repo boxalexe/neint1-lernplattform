@@ -18528,18 +18528,6 @@ let menuOpenGrace = false;   // kurze Schonzeit nach dem Öffnen gegen Layout-Sp
 let menuCloseHandler = null; // wird von der Menü-Logik gesetzt
 let lastScrollY = window.scrollY;
 let scrollDir = 0;   // 1 = runter, -1 = hoch
-// dockPoint: Scroll-Position, ab der die Leiste oben andockt. Entspricht ihrer
-// natürlichen Oberkante (Abstand vom Seitenanfang). Wird gemessen, solange die
-// Leiste NICHT gedockt ist, damit der Wert die echte Fluss-Position widerspiegelt.
-let dockPoint = 0;
-function measureDockPoint(){
-  if(tabBar.classList.contains('docked')) return; // im Fluss messen
-  const rect = tabBar.getBoundingClientRect();
-  dockPoint = rect.top + window.scrollY;
-}
-measureDockPoint();
-window.addEventListener('load', measureDockPoint);
-window.addEventListener('resize', () => { measureDockPoint(); }, { passive:true });
 let scrollAcc = 0;   // akkumulierter Weg in aktueller Richtung
 let ticking = false;
 const HIDE_AFTER = 14;
@@ -18550,33 +18538,12 @@ function onScroll(){
   const y = window.scrollY;
   // Gummiband oben/unten: nichts tun, lastScrollY nicht mitziehen
   if(y < 0 || y > maxY) return;
-
-  // ---- Docked-Modus umschalten ----
-  // Solange die Leiste ihren natürlichen Platz (zwischen Überschrift und Chips)
-  // noch im Bild hat, bleibt sie im Fluss und zeigt alle Tabs. Erst wenn man
-  // darüber hinaus scrollt, dockt sie oben an und komprimiert zum Menü-Button.
-  if(y > dockPoint){
-    if(!tabBar.classList.contains('docked')) tabBar.classList.add('docked');
-  } else {
-    if(tabBar.classList.contains('docked')){
-      tabBar.classList.remove('docked');
-      tabBar.classList.remove('hidden');
-      if(menuCloseHandler) menuCloseHandler(); // beim Auftauchen oben Menü zuklappen
-    }
-  }
-
   const delta = y - lastScrollY;
   lastScrollY = y;
   if(delta === 0) return;
   const d = delta > 0 ? 1 : -1;
   if(d !== scrollDir){ scrollDir = d; scrollAcc = 0; }
   scrollAcc += Math.abs(delta);
-
-  // Auto-hide nur im gedockten Zustand. Im Fluss (oben) nie verstecken.
-  if(!tabBar.classList.contains('docked')){
-    tabBar.classList.remove('hidden');
-    return;
-  }
   // Ist das Mobile-Menü offen, bleibt die Leiste sichtbar. Erst ein echtes
   // Runterscrollen (nach der Schonzeit) klappt das Menü wieder zu.
   if(tabBar.classList.contains('menu-open')){
@@ -18586,6 +18553,7 @@ function onScroll(){
     }
     return;
   }
+  if(y < 60){ tabBar.classList.remove('hidden'); return; } // oben immer sichtbar
   if(scrollDir === 1 && scrollAcc > HIDE_AFTER){
     tabBar.classList.add('hidden');
   } else if(scrollDir === -1 && scrollAcc > SHOW_AFTER){
@@ -19060,6 +19028,24 @@ renderLib(GLOSSAR_SORTED);
     if(!sec) return;
     CURATED[sid].forEach(function(term){ markTerm(sec, term); });
   });
+
+  // Würde eine Bubble rechts aus dem Bild ragen, öffnet sie stattdessen nach
+  // links. Verhindert, dass sie die Seite seitlich breiter macht.
+  function placeBubble(term){
+    term.classList.remove('gloss-flip');
+    var bub = term.querySelector('.gloss-bubble');
+    if(!bub) return;
+    var r = bub.getBoundingClientRect();
+    if(r.right > window.innerWidth - 8) term.classList.add('gloss-flip');
+  }
+  reader.addEventListener('mouseover', function(e){
+    var t = e.target.closest ? e.target.closest('.gloss-term') : null;
+    if(t) placeBubble(t);
+  });
+  reader.addEventListener('focusin', function(e){
+    var t = e.target.closest ? e.target.closest('.gloss-term') : null;
+    if(t) placeBubble(t);
+  });
 })();
 
 // ---- Footer + Header-Specs: Kategorien-/Fragen-/Begriffszahl dynamisch ----
@@ -19168,21 +19154,6 @@ window.addEventListener('pageshow', () => { window.scrollTo(0, 0); });
   bar.querySelectorAll('.tab, .zen-toggle').forEach(el => {
     el.addEventListener('click', () => { if(window.innerWidth <= 560) close(); });
   });
-
-  // Die Leiste ist fixed (aus dem Fluss). Ein Spacer hält ihren Platz frei,
-  // damit der Inhalt nicht darunter rutscht. Höhe folgt der echten Leistenhöhe,
-  // auch wenn das Menü auf dem Handy auf-/zuklappt.
-  const spacer = document.getElementById('tabsSpacer');
-  function syncSpacer(){
-    if(!spacer) return;
-    spacer.style.height = bar.offsetHeight + 'px';
-  }
-  syncSpacer();
-  window.addEventListener('resize', syncSpacer, { passive:true });
-  window.addEventListener('load', syncSpacer);
-  // Nach dem Auf-/Zuklappen (Transition) neu messen
-  btn.addEventListener('click', () => setTimeout(syncSpacer, 60));
-  bar.addEventListener('transitionend', syncSpacer);
 })();
 
 // ---- Schnellsuche (Lupe im Header): filtert die Nachschlage-Stichwörter ----
