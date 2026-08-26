@@ -19033,6 +19033,8 @@ renderLib(GLOSSAR_SORTED);
   // links. Verhindert, dass sie die Seite seitlich breiter macht.
   function placeBubble(term){
     term.classList.remove('gloss-flip');
+    // Am Handy erscheint die Bubble mittig als Fenster — keine Flip-Korrektur nötig.
+    if(window.matchMedia('(max-width:640px)').matches) return;
     var bub = term.querySelector('.gloss-bubble');
     if(!bub) return;
     var r = bub.getBoundingClientRect();
@@ -19046,6 +19048,14 @@ renderLib(GLOSSAR_SORTED);
     var t = e.target.closest ? e.target.closest('.gloss-term') : null;
     if(t) placeBubble(t);
   });
+
+  // Am Handy: Tipp außerhalb schließt das mittige Lesefenster wieder.
+  document.addEventListener('click', function(e){
+    var active = document.activeElement;
+    if(!active || !active.classList || !active.classList.contains('gloss-term')) return;
+    var inside = e.target.closest ? e.target.closest('.gloss-term') : null;
+    if(inside !== active) active.blur();
+  }, true);
 })();
 
 // ---- Footer + Header-Specs: Kategorien-/Fragen-/Begriffszahl dynamisch ----
