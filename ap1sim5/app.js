@@ -415,6 +415,15 @@ $('btnFinish').addEventListener('click', function () {
 });
 
 $('btnReopen').addEventListener('click', function () { showView('viewReview'); });
+
+// Beim Verlassen über einen Zurück-Link den Prüfungsstand verwerfen,
+// damit beim nächsten Öffnen wieder die Auswahl erscheint.
+Array.prototype.forEach.call(document.querySelectorAll('a.btn[href="../"], a.backlink[href="../"]'), function (a) {
+  a.addEventListener('click', function () {
+    try { window.localStorage.removeItem(KEY); } catch (e) {}
+    state = null;
+  });
+});
 $('btnReset').addEventListener('click', function () {
   askConfirm('Neue Prüfung beginnen?',
     'Die aktuelle Prüfung wird verworfen und Sie kehren zur Auswahl zurück. Die Auswertung geht dabei verloren.',
@@ -455,7 +464,12 @@ function boot() {
     } else {
       startRun();
     }
-  } else if (state.status === 'submitted' || state.status === 'review' || state.status === 'completed') {
+  } else if (state.status === 'completed') {
+    // Abgeschlossene Prüfung: Stand verwerfen und mit der Auswahl beginnen
+    try { window.localStorage.removeItem(KEY); } catch (e) {}
+    state = null;
+    showView('viewSetup');
+  } else if (state.status === 'submitted' || state.status === 'review') {
     renderReview();
   }
 }
@@ -511,7 +525,20 @@ boot();
   var btn = document.getElementById('scrollTopBtn');
   if (!btn) return;
   var ticking = false;
-  function upd() { ticking = false; btn.classList.toggle('show', window.scrollY > 400); }
+  var a11y = document.getElementById('a11yToggle');
+  var a11yWrap = a11y ? a11y.parentNode : null;
+  var a11yMenu = document.getElementById('a11yMenu');
+  function upd() {
+    ticking = false;
+    var y = window.scrollY;
+    btn.classList.toggle('show', y > 400);
+    // Auge ausblenden, sobald gescrollt wird: es überlagert sonst die Kopfleiste
+    if (a11yWrap) {
+      var hide = y > 40;
+      a11yWrap.classList.toggle('scrolled-away', hide);
+      if (hide && a11yMenu) a11yMenu.classList.remove('open');
+    }
+  }
   window.addEventListener('scroll', function () {
     if (!ticking) { window.requestAnimationFrame(upd); ticking = true; }
   }, { passive: true });
