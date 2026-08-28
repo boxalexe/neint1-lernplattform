@@ -22,7 +22,7 @@
     if (t && t !== 'default') document.documentElement.setAttribute('data-theme', t);
   } catch (e) {}
 </script>
-<link rel="stylesheet" href="styles.css?v=20260826c">
+<link rel="stylesheet" href="styles.css?v=20260827b">
 </head>
 <body>
 <header>
@@ -79,17 +79,22 @@
   <a href="#r-ap1">AP1</a>
   <a href="#r-api">API/REST</a>
   <a href="#r-raid">Backup/RAID</a>
+  <a href="#r-grundschutz">BSI-Grundschutz</a>
   <a href="#r-datenschutz">Datenschutz/InfoSec</a>
   <a href="#r-diagnose">Diagnose & Fehlersuche</a>
 <a href="#r-dnsdhcp">DNS/DHCP</a>
+  <a href="#r-mailsec">E-Mail-Sicherheit</a>
   <a href="#r-ethernet">Ethernet</a>
   <a href="#r-fddi">FDDI</a>
   <a href="#r-header">Header/TTL</a>
   <a href="#r-hyperv">Hypervisor</a>
   <a href="#r-ip">IPv4/IPv6</a>
   <a href="#r-security">IT-Sicherheit</a>
+  <a href="#r-itil">ITIL &amp; Service</a>
   <a href="#r-medien">Kabel/Hardware</a>
+  <a href="#r-kalkulation">Kaufmännisches Rechnen</a>
   <a href="#r-logik">Logik/Gatter</a>
+  <a href="#r-markt">Markt &amp; Wirtschaft</a>
   <a href="#r-mux">Multiplexing</a>
   <a href="#r-ausdehnung">Netzausdehnung</a>
   <a href="#r-oop">OOP & UML</a>
@@ -97,12 +102,15 @@
   <a href="#r-ports">Ports</a>
   <a href="#r-projekt">Projektmanagement</a>
   <a href="#r-routing">Routing/Switching</a>
+  <a href="#r-malware">Schadsoftware &amp; Angriffe</a>
   <a href="#r-sql">SQL & Datenbanken</a>
-<a href="#r-verkabelung">Strukturierte Verkabelung</a>
+  <a href="#r-storage">Storage-Systeme</a>
+  <a href="#r-verkabelung">Strukturierte Verkabelung</a>
 <a href="#r-subnetting">Subnetting</a>
   <a href="#r-tcpip">TCP/IP & UDP</a>
   <a href="#r-topo">Topologien</a>
   <a href="#r-krypto">Verschlüsselung/PKI</a>
+  <a href="#r-vertraege">Verträge &amp; Recht</a>
   <a href="#r-virt">Virtualisierung</a>
   <a href="#r-vlan">VLAN</a>
   <a href="#r-voip">VoIP</a>
@@ -290,6 +298,41 @@
 <h3>RAID 50 rechnen & RPO/RTO am Szenario</h3>
 <p><strong>RAID 50</strong> kombiniert mehrere RAID-5-Gruppen per Striping. Beispiel: 2 Gruppen à 4 Platten zu je 4 TB, je Gruppe entfällt eine Platte auf Parität: 2 &times; (4&minus;1) &times; 4 TB = <strong>24 TB</strong> netto von 32 TB brutto; je Gruppe darf eine Platte ausfallen. RAID 60 rechnet analog mit (n&minus;2) je Gruppe.</p>
 <p><strong>Szenario:</strong> Eine Firma sichert täglich um 22 Uhr, der definierte <strong>RPO</strong> beträgt 24 Stunden, der <strong>RTO</strong> 4 Stunden. Fällt der Server um 15 Uhr aus, sind die Daten seit 22 Uhr des Vortags verloren (17 Stunden, innerhalb des RPO), und die Wiederherstellung muss bis 19 Uhr laufen. Wer einen kleineren RPO braucht, muss häufiger sichern. RPO bestimmt die Sicherungsfrequenz, RTO die nötige Wiederherstellungstechnik.</p>
+
+<h3>Rotationsverfahren und Aufbewahrung</h3>
+<p>Ein Sicherungskonzept legt nicht nur fest, <em>was</em> gesichert wird, sondern auch, wie lange Stände vorgehalten und wie Medien wiederverwendet werden.</p>
+<p><strong>Generationenprinzip (Großvater-Vater-Sohn, GFS):</strong> Das gebräuchlichste Rotationsverfahren. Die <strong>Sohn</strong>-Sicherungen laufen täglich und werden meist innerhalb der Woche überschrieben. Die <strong>Vater</strong>-Sicherungen entstehen wöchentlich, typischerweise als Vollsicherung am Wochenende, und werden einige Wochen aufbewahrt. Die <strong>Großvater</strong>-Sicherungen laufen monatlich und werden lange archiviert, oft ein Jahr oder länger. So bleibt eine feine Abstufung: kurzfristig viele Stände, langfristig wenige, aber weit zurückreichende.</p>
+<p><strong>Tower of Hanoi:</strong> Ein Rotationsverfahren, das seinen Namen dem gleichnamigen Knobelspiel verdankt. Die Medien werden nach einem festen, gestaffelten Muster eingesetzt: Ein Medium wird jeden zweiten Tag genutzt, das nächste jeden vierten, das übernächste jeden achten und so weiter. Dadurch entsteht mit wenigen Medien eine breite Abdeckung: Es existieren viele junge Sicherungsstände und zugleich einzelne sehr alte. Der Vorteil ist die effiziente Medienausnutzung, der Nachteil die vergleichsweise komplizierte Verwaltung und die Fehleranfälligkeit bei manueller Handhabung.</p>
+<p><strong>Aufbewahrungskonzepte:</strong> Neben der Rotation ist festzulegen, wie lange Stände vorgehalten werden müssen. Dabei wirken zwei Anforderungen gegeneinander: Handels- und steuerrechtliche Aufbewahrungsfristen verlangen langes Vorhalten, die DSGVO dagegen die Löschung personenbezogener Daten, sobald der Zweck entfällt. Ein Löschkonzept muss beides zusammenbringen. Zusätzlich sind Aufbewahrungsort (mindestens eine Kopie außer Haus), Schutz vor nachträglicher Veränderung und die regelmäßige <strong>Rücksicherungsprobe</strong> festzulegen, denn nur eine getestete Sicherung ist eine echte Sicherung.</p>
+</section>
+
+<section id="r-grundschutz">
+<h2>BSI-Grundschutz &amp; Schutzbedarf</h2>
+<p>Das <strong>BSI</strong> (Bundesamt für Sicherheit in der Informationstechnik) gibt mit dem <strong>IT-Grundschutz</strong> ein standardisiertes Vorgehen vor, mit dem Behörden und Unternehmen ein angemessenes Sicherheitsniveau erreichen, ohne für jedes System eine vollständige Risikoanalyse führen zu müssen.</p>
+<h3>Schutzziele</h3>
+<p>Die drei klassischen Schutzziele sind <strong>Vertraulichkeit</strong>, <strong>Integrität</strong> und <strong>Verfügbarkeit</strong>. Häufig wird als viertes Ziel die <strong>Authentizität</strong> ergänzt; aus diesen vier ergibt sich die Merkhilfe <strong>VIVA</strong>.</p>
+<table>
+<tr><th>Ziel</th><th>Bedeutung</th><th>Typische Maßnahme</th></tr>
+<tr><td>Vertraulichkeit</td><td>Nur Berechtigte können die Daten einsehen</td><td>Verschlüsselung, Berechtigungskonzept</td></tr>
+<tr><td>Integrität</td><td>Daten sind unverändert und vollständig</td><td>Hashwerte, Prüfsummen, Signaturen</td></tr>
+<tr><td>Verfügbarkeit</td><td>Daten und Dienste sind nutzbar, wenn sie gebraucht werden</td><td>Redundanz, USV, Backup</td></tr>
+<tr><td>Authentizität</td><td>Die Herkunft ist zweifelsfrei nachgewiesen</td><td>Digitale Signatur, Zertifikate, sichere Anmeldung</td></tr>
+</table>
+<p>Ergänzend werden je nach Kontext <strong>Verbindlichkeit</strong> (Nichtabstreitbarkeit einer Handlung) und <strong>Zurechenbarkeit</strong> genannt.</p>
+
+<h3>Schutzbedarfskategorien</h3>
+<p>Für jedes Objekt wird der Schutzbedarf getrennt nach den Schutzzielen eingestuft:</p>
+<table>
+<tr><th>Kategorie</th><th>Schadensauswirkung</th><th>Beispiel</th></tr>
+<tr><td><strong>normal</strong></td><td>Auswirkungen sind begrenzt und überschaubar</td><td>Interner Speiseplan, allgemeine Aushänge</td></tr>
+<tr><td><strong>hoch</strong></td><td>Auswirkungen können beträchtlich sein</td><td>Kundendaten, Angebotskalkulationen</td></tr>
+<tr><td><strong>sehr hoch</strong></td><td>Auswirkungen können existenziell bedrohlich sein</td><td>Gesundheitsdaten, Steuerungssysteme kritischer Anlagen</td></tr>
+</table>
+<p>Bei der <strong>Schutzbedarfsfeststellung</strong> gelten zwei Prinzipien: Nach dem <strong>Maximumprinzip</strong> übernimmt ein System den höchsten Schutzbedarf aller Anwendungen, die darauf laufen. Der <strong>Kumulationseffekt</strong> kann den Bedarf zusätzlich anheben, wenn viele für sich unkritische Daten zusammenkommen und in Summe ein größerer Schaden entstünde. Umgekehrt kann der <strong>Verteilungseffekt</strong> ihn senken, wenn eine Anwendung auf mehrere Systeme verteilt ist und der Ausfall eines einzelnen wenig bewirkt.</p>
+
+<h3>Vorgehen und Bausteine</h3>
+<p>Der Ablauf nach IT-Grundschutz: Zunächst wird der <strong>Geltungsbereich</strong> festgelegt, dann eine <strong>Strukturanalyse</strong> erstellt, die alle Anwendungen, Systeme, Räume und Netze erfasst. Darauf folgt die <strong>Schutzbedarfsfeststellung</strong>, anschließend die <strong>Modellierung</strong>: Den erfassten Objekten werden passende <strong>Bausteine</strong> aus dem IT-Grundschutz-Kompendium zugeordnet, die jeweils konkrete Anforderungen enthalten. Ein <strong>IT-Grundschutz-Check</strong> vergleicht Soll und Ist. Bei hohem oder sehr hohem Schutzbedarf schließt sich eine ergänzende <strong>Risikoanalyse</strong> an. Alles mündet in ein <strong>Sicherheitskonzept</strong>, das regelmäßig überprüft und fortgeschrieben wird.</p>
+<p>Für wiederkehrende Situationen stellt das BSI <strong>Profile</strong> bereit, also vorgefertigte Muster-Sicherheitskonzepte für bestimmte Branchen oder Einrichtungsarten, die als Vorlage dienen und den Aufwand deutlich senken.</p>
 </section>
 
 <section id="r-datenschutz">
@@ -405,6 +448,24 @@
 <p><strong>NS</strong> benennt die zuständigen Nameserver einer Zone, <strong>SOA</strong> enthält die Zonenverwaltungsdaten (primärer Server, Seriennummer, Timer), <strong>TXT</strong> transportiert Freitext, praktisch wichtig für SPF/DKIM und Domain-Verifizierungen, <strong>SRV</strong> verweist auf Dienste mit Host und Port. <strong>DNSSEC</strong> signiert DNS-Antworten, damit Manipulationen auffallen. Port 53 gehört dabei <strong>TCP und UDP</strong>: Normale Anfragen laufen per UDP, große Antworten und Zonentransfers (<strong>AXFR</strong> = komplett, <strong>IXFR</strong> = inkrementell, beides Vertiefungswissen) per TCP.</p>
 <h3>DHCP über DORA hinaus</h3>
 <p>Nach der Vergabe versucht der Client bei <strong>T1</strong> (50 % der Lease) ein <strong>Renewal</strong> direkt beim bekannten Server; scheitert das, fragt er bei <strong>T2</strong> (87,5 %) per Broadcast beliebige Server. Läuft die Lease komplett ab, beginnt DORA von vorn. <strong>DHCP Snooping</strong> schützt am Switch vor nicht autorisierten DHCP-Servern: Nur vertrauenswürdige Ports dürfen Server-Antworten senden, ein Rogue-Server im Netz kann Clients sonst falsche Gateways unterschieben.</p>
+</section>
+
+<section id="r-mailsec">
+<h2>E-Mail-Sicherheit: SPF, DKIM &amp; DMARC</h2>
+<p>Das ursprüngliche Mailprotokoll SMTP prüft nicht, ob ein Absender wirklich der ist, der er zu sein vorgibt. Jeder kann eine beliebige Absenderadresse eintragen. Drei aufeinander aufbauende Verfahren schließen diese Lücke. Alle drei werden als <strong>DNS-Einträge</strong> der eigenen Domain hinterlegt, meist als TXT-Record.</p>
+
+<table>
+<tr><th>Verfahren</th><th>Prüft</th><th>Kernidee</th></tr>
+<tr><td><strong>SPF</strong> (Sender Policy Framework)</td><td>Den sendenden <em>Server</em></td><td>Die Domain veröffentlicht im DNS, welche Server für sie Mails versenden dürfen. Der Empfänger vergleicht die IP des einliefernden Servers mit dieser Liste.</td></tr>
+<tr><td><strong>DKIM</strong> (DomainKeys Identified Mail)</td><td>Die <em>Unverfälschtheit</em> der Nachricht</td><td>Der sendende Server signiert Kopfzeilen und Inhalt kryptografisch. Der öffentliche Schlüssel liegt im DNS. Der Empfänger prüft die Signatur und erkennt Änderungen auf dem Transportweg.</td></tr>
+<tr><td><strong>DMARC</strong></td><td>Was bei Fehlschlag geschehen soll</td><td>Baut auf SPF und DKIM auf, verlangt zusätzlich die Übereinstimmung mit der sichtbaren Absenderdomain (Alignment) und legt die Behandlung fest: nichts tun, in den Spam-Ordner, oder abweisen.</td></tr>
+</table>
+
+<h3>Wie die drei zusammenspielen</h3>
+<p>SPF allein hat eine Lücke: Wird eine Mail weitergeleitet, ändert sich der einliefernde Server und die Prüfung schlägt fehl, obwohl die Mail echt ist. DKIM allein hat eine andere Lücke: Die Signatur kann von einer ganz anderen Domain stammen als der, die im Absenderfeld steht.</p>
+<p>Genau hier setzt <strong>DMARC</strong> an. Es fordert, dass die geprüfte Domain zur sichtbaren Absenderadresse passt (<strong>Alignment</strong>), und akzeptiert die Mail, wenn <em>mindestens eines</em> der beiden Verfahren mit passender Ausrichtung erfolgreich ist. Zusätzlich legt die Richtlinie fest, was sonst passiert:</p>
+<p><code>p=none</code> beobachtet nur und meldet, <code>p=quarantine</code> stuft verdächtige Mails als Spam ein, <code>p=reject</code> weist sie ganz ab. Über eine Berichtsadresse erhält der Domaininhaber Auswertungen darüber, wer in seinem Namen versendet. Der übliche Weg ist deshalb: mit <code>p=none</code> starten, Berichte auswerten, alle legitimen Versandwege aufnehmen und erst dann auf <code>quarantine</code> und schließlich <code>reject</code> verschärfen.</p>
+<div class="callout"><span class="tag">Merksatz</span><strong>SPF</strong> = wer <em>darf</em> senden. <strong>DKIM</strong> = wurde unterwegs <em>verändert</em>. <strong>DMARC</strong> = was <em>tun</em>, wenn es nicht passt. Alle drei stehen im DNS und schützen vor Absenderfälschung, wie sie bei Phishing und CEO-Fraud verwendet wird.</div>
 </section>
 
 <section id="r-ethernet">
@@ -531,6 +592,31 @@
 <p>Passwörter werden nie im Klartext und nie nur "verschlüsselt" gespeichert, sondern gehasht, mit modernen, absichtlich langsamen Verfahren wie <strong>Argon2</strong>, <strong>bcrypt</strong> oder <strong>scrypt</strong>, die Brute-Force massiv verteuern. Schnelle Hashes wie MD5 oder reines SHA-256 sind dafür ungeeignet. Ein <strong>Salt</strong> verhindert nicht jeden Angriff, er sorgt dafür, dass gleiche Passwörter unterschiedliche Hashes ergeben, und macht vorberechnete Tabellen (Rainbow Tables) wertlos. Zur Erkennung und Reaktion im Betrieb: <strong>SIEM</strong> sammelt und korreliert Logdaten zentral, <strong>EDR</strong> überwacht Endgeräte auf verdächtiges Verhalten, <strong>Incident Response</strong> ist der geplante Ablauf für den Ernstfall (erkennen, eindämmen, bereinigen, wiederherstellen, auswerten).</p>
 </section>
 
+<section id="r-itil">
+<h2>ITIL &amp; IT-Servicemanagement</h2>
+<p><strong>ITIL</strong> (IT Infrastructure Library) ist kein Gesetz und keine Norm, sondern eine Sammlung bewährter Praktiken für den Betrieb von IT-Services. Der Grundgedanke: IT wird nicht als Technik verstanden, sondern als <strong>Service</strong>, der für den Kunden einen Wert erzeugt. Gemessen wird deshalb nicht, ob ein Server läuft, sondern ob der Nutzer arbeiten kann.</p>
+
+<h3>Zentrale Begriffe</h3>
+<table>
+<tr><th>Begriff</th><th>Bedeutung</th></tr>
+<tr><td><strong>Incident</strong> (Störung)</td><td>Eine ungeplante Unterbrechung oder Qualitätsminderung eines Service. Ziel ist die <em>schnellstmögliche Wiederherstellung</em> des Betriebs, notfalls per Umgehungslösung.</td></tr>
+<tr><td><strong>Problem</strong></td><td>Die zugrunde liegende Ursache eines oder mehrerer Incidents. Ziel ist die dauerhafte Beseitigung, auch wenn das länger dauert.</td></tr>
+<tr><td><strong>Known Error</strong></td><td>Ein Problem mit bekannter Ursache und dokumentierter Umgehungslösung (Workaround).</td></tr>
+<tr><td><strong>Change</strong></td><td>Eine geplante Änderung an einem Service oder der Infrastruktur. Wird bewertet, genehmigt und dokumentiert, um Risiken zu begrenzen.</td></tr>
+<tr><td><strong>Service Request</strong></td><td>Eine Standardanfrage des Nutzers ohne Störung, etwa ein neues Benutzerkonto oder zusätzlicher Speicher.</td></tr>
+<tr><td><strong>SLA</strong> (Service Level Agreement)</td><td>Vereinbarung zwischen Anbieter und Kunde über Leistungsumfang, Verfügbarkeit und Reaktionszeiten.</td></tr>
+<tr><td><strong>OLA</strong> (Operational Level Agreement)</td><td>Interne Vereinbarung zwischen Abteilungen desselben Anbieters, damit das SLA nach außen eingehalten werden kann.</td></tr>
+<tr><td><strong>Underpinning Contract</strong></td><td>Vertrag mit einem externen Zulieferer, der das SLA nach außen absichert.</td></tr>
+<tr><td><strong>CMDB</strong></td><td>Configuration Management Database: Verzeichnis aller Konfigurationselemente und ihrer Beziehungen zueinander.</td></tr>
+<tr><td><strong>Service Desk</strong></td><td>Zentrale Anlaufstelle (Single Point of Contact) für alle Anliegen der Nutzer.</td></tr>
+</table>
+<div class="callout"><span class="tag">Incident oder Problem?</span>Die häufigste Prüfungsfrage. Ein <strong>Incident</strong> ist die <em>Auswirkung</em> beim Nutzer: „Der Drucker druckt nicht." Ein <strong>Problem</strong> ist die <em>Ursache</em> dahinter: „Der Druckertreiber ist in Version 3.2 fehlerhaft." Beim Incident zählt Geschwindigkeit, notfalls mit Workaround. Beim Problem zählt die dauerhafte Lösung. Mehrere gleichartige Incidents sind ein starker Hinweis auf ein dahinterliegendes Problem.</div>
+
+<h3>Eskalation und Priorisierung</h3>
+<p>Die <strong>Priorität</strong> eines Incidents ergibt sich aus zwei Größen: der <strong>Auswirkung</strong> (wie viele Nutzer oder wie kritische Prozesse sind betroffen) und der <strong>Dringlichkeit</strong> (wie schnell muss es behoben sein). Ein ausgefallener Einzelarbeitsplatz hat geringe Auswirkung, ein ausgefallener Fertigungsserver sehr hohe.</p>
+<p>Bei der <strong>funktionalen Eskalation</strong> wird ein Incident an eine fachlich höhere Stufe weitergereicht, etwa vom First Level an den Second Level Support. Bei der <strong>hierarchischen Eskalation</strong> wird die Führungsebene einbezogen, weil Fristen zu reißen drohen oder Entscheidungen nötig sind. Der Support ist üblicherweise in Stufen gegliedert: <strong>First Level</strong> nimmt an und löst Standardfälle, <strong>Second Level</strong> übernimmt fachlich Anspruchsvolles, <strong>Third Level</strong> sind Spezialisten oder der Hersteller.</p>
+</section>
+
 <section id="r-medien">
 <h2>Kabel, Medien & Hardware</h2>
 <table>
@@ -546,6 +632,59 @@
 
 <h3>Multi-Stream Transport (MST)</h3>
 <p><strong>MST</strong> ist eine Funktion von DisplayPort und Thunderbolt, mit der sich mehrere Monitore über einen einzigen Ausgang betreiben lassen. Die Bildsignale werden dabei als getrennte Datenströme über eine Leitung geführt und lassen sich per <strong>Daisy-Chain</strong> von Monitor zu Monitor durchschleifen oder über einen MST-Hub aufteilen. So genügt ein Anschluss am Rechner für mehrere Displays, sofern die verfügbare Bandbreite für die gewünschten Auflösungen ausreicht.</p>
+
+<h3>DSL-Anschlussarten</h3>
+<p><strong>DSL</strong> (Digital Subscriber Line) überträgt Daten über die vorhandene Kupfer-Telefonleitung, indem Frequenzbereiche oberhalb der Sprache genutzt werden. Telefonie und Daten laufen dadurch parallel über dieselbe Leitung.</p>
+<table>
+<tr><th>Variante</th><th>Merkmal</th><th>Typischer Einsatz</th></tr>
+<tr><td><strong>ADSL</strong> (asymmetrisch)</td><td>Downstream deutlich schneller als Upstream</td><td>Privatanschlüsse, bei denen überwiegend geladen wird</td></tr>
+<tr><td><strong>SDSL</strong> (symmetrisch)</td><td>Gleiche Rate in beide Richtungen</td><td>Firmen mit eigenen Servern, VPN-Kopplung, viel Upload</td></tr>
+<tr><td><strong>VDSL</strong> (very high speed)</td><td>Deutlich höhere Raten als ADSL, meist mit Glasfaser bis zum Verteiler und Kupfer auf dem letzten Stück</td><td>Heutiger Standardanschluss in Ausbaugebieten</td></tr>
+</table>
+<p>Allen Kupfervarianten gemeinsam ist die <strong>Entfernungsabhängigkeit</strong>: Je länger die Kupferstrecke zur Vermittlungsstelle oder zum Verteiler, desto stärker die Dämpfung und desto niedriger die erreichbare Rate. Die beworbene Rate ist deshalb eine Höchstrate, keine Zusicherung.</p>
+<p><strong>Unterschied zur Glasfaser:</strong> Glasfaser überträgt Lichtsignale statt elektrischer Signale. Daraus ergeben sich die entscheidenden Vorteile: sehr geringe Dämpfung und dadurch hohe Reichweite ohne Ratenverlust, deutlich höhere und symmetrische Bandbreiten, keine Störung durch elektromagnetische Felder und keine Abstrahlung. Nachteilig sind der aufwendige Neubau der Leitungswege und die empfindlichere Handhabung beim Spleißen. Wird Glasfaser bis ins Gebäude oder in die Wohnung geführt (FTTB/FTTH), entfällt die Kupferstrecke und damit die Entfernungsabhängigkeit weitgehend.</p>
+</section>
+
+<section id="r-kalkulation">
+<h2>Kaufmännisches Rechnen</h2>
+<h3>Bezugskalkulation</h3>
+<p>Die Bezugskalkulation ermittelt, was eine Ware am Ende <em>wirklich</em> kostet. Sie wird strikt von oben nach unten gerechnet, jede Stufe baut auf der vorherigen auf.</p>
+<table>
+<tr><th>Stufe</th><th>Rechenschritt</th></tr>
+<tr><td>Listeneinkaufspreis</td><td>Ausgangspreis laut Preisliste des Lieferanten</td></tr>
+<tr><td>&minus; Liefererrabatt</td><td>Nachlass, meist in Prozent vom Listeneinkaufspreis</td></tr>
+<tr><td>= <strong>Zieleinkaufspreis</strong></td><td>Preis bei Zahlung zum vereinbarten Zahlungsziel</td></tr>
+<tr><td>&minus; Liefererskonto</td><td>Nachlass für schnelle Zahlung, in Prozent vom <em>Zieleinkaufspreis</em></td></tr>
+<tr><td>= <strong>Bareinkaufspreis</strong></td><td>Preis bei sofortiger Zahlung</td></tr>
+<tr><td>+ Bezugskosten</td><td>Fracht, Verpackung, Versicherung, Zoll</td></tr>
+<tr><td>= <strong>Bezugspreis</strong> (Einstandspreis)</td><td>Tatsächliche Kosten der Ware im Lager</td></tr>
+</table>
+<div class="callout"><span class="tag">Rechenbeispiel</span>Listeneinkaufspreis 4.000,00 EUR, 15 % Rabatt, 2 % Skonto, Bezugskosten 120,00 EUR.<br>
+Rabatt: 4.000,00 &times; 0,15 = 600,00 EUR &rarr; Zieleinkaufspreis 3.400,00 EUR<br>
+Skonto: 3.400,00 &times; 0,02 = 68,00 EUR &rarr; Bareinkaufspreis 3.332,00 EUR<br>
++ Bezugskosten 120,00 EUR &rarr; <strong>Bezugspreis 3.452,00 EUR</strong></div>
+<div class="callout"><span class="tag">Prüfungsfalle</span>Skonto wird <strong>nicht</strong> vom Listeneinkaufspreis berechnet, sondern vom Zieleinkaufspreis, also nach Abzug des Rabatts. Wer beide Prozentsätze addiert und in einem Schritt abzieht, rechnet falsch. Und die Bezugskosten werden <em>addiert</em>, nachdem alle Abzüge erfolgt sind; sie sind kein Nachlass.</div>
+
+<h3>Rentabilitätsrechnung</h3>
+<p>Rentabilitätskennzahlen setzen den Erfolg ins Verhältnis zum eingesetzten Mittel. Sie machen unterschiedlich große Investitionen vergleichbar.</p>
+<table>
+<tr><th>Kennzahl</th><th>Formel</th><th>Aussage</th></tr>
+<tr><td>Eigenkapitalrentabilität</td><td>Gewinn &divide; Eigenkapital &times; 100 %</td><td>Wie hat sich das Kapital der Eigentümer verzinst?</td></tr>
+<tr><td>Gesamtkapitalrentabilität</td><td>(Gewinn + Fremdkapitalzinsen) &divide; Gesamtkapital &times; 100 %</td><td>Wie rentabel arbeitet das gesamte eingesetzte Kapital, unabhängig von der Finanzierung?</td></tr>
+<tr><td>Umsatzrentabilität</td><td>Gewinn &divide; Umsatz &times; 100 %</td><td>Wie viel Gewinn bleibt von jedem Euro Umsatz übrig?</td></tr>
+<tr><td>ROI (Return on Investment)</td><td>Umsatzrentabilität &times; Kapitalumschlag</td><td>Gesamtbild aus Gewinnspanne und Kapitaleinsatz</td></tr>
+</table>
+<p><strong>Abgrenzung zum ROI:</strong> Die drei Rentabilitäten betrachten jeweils eine einzelne Bezugsgröße. Der ROI verbindet zwei davon: Er zerlegt die Kapitalrendite in die Frage, wie viel an jedem Umsatzeuro verdient wird (Umsatzrentabilität) und wie oft das Kapital im Umsatz umgeschlagen wird (Kapitalumschlag = Umsatz &divide; Gesamtkapital). Rechnerisch führt das zurück auf Gewinn &divide; Gesamtkapital. In IT-Aufgaben wird der ROI häufig vereinfacht als Gewinn geteilt durch eingesetztes Kapital verwendet, etwa um eine Investition in neue Hardware zu bewerten.</p>
+<div class="callout"><span class="tag">Bei den Fremdkapitalzinsen aufpassen</span>Bei der Gesamtkapitalrentabilität werden die Fremdkapitalzinsen zum Gewinn <em>hinzugerechnet</em>. Grund: Sie sind die Vergütung für das Fremdkapital und wurden vom Gewinn bereits abgezogen. Da die Kennzahl die Verzinsung des <em>gesamten</em> Kapitals misst, müssen sie wieder eingerechnet werden, sonst wäre der Vergleich verzerrt.</div>
+
+<h3>Ratendarlehen</h3>
+<p>Beim <strong>Ratendarlehen</strong> (Tilgungsdarlehen) bleibt die <strong>Tilgung konstant</strong>: Die Darlehenssumme wird durch die Laufzeit geteilt. Die Zinsen werden jeweils auf die noch offene Restschuld berechnet und sinken daher von Jahr zu Jahr. Die Gesamtbelastung (Annuität aus Tilgung plus Zinsen) sinkt dadurch ebenfalls.</p>
+<div class="callout"><span class="tag">Rechenbeispiel</span>Darlehen 30.000,00 EUR, Laufzeit 3 Jahre, Zinssatz 5 % pro Jahr. Tilgung: 30.000 &divide; 3 = 10.000,00 EUR jährlich.<br>
+Jahr 1: Zinsen 30.000 &times; 5 % = 1.500,00 EUR, Rate 11.500,00 EUR, Restschuld danach 20.000,00 EUR<br>
+Jahr 2: Zinsen 20.000 &times; 5 % = 1.000,00 EUR, Rate 11.000,00 EUR, Restschuld danach 10.000,00 EUR<br>
+Jahr 3: Zinsen 10.000 &times; 5 % = 500,00 EUR, Rate 10.500,00 EUR, Restschuld danach 0,00 EUR<br>
+Zinsen insgesamt: 3.000,00 EUR</div>
+<p><strong>Unterschied zum Annuitätendarlehen:</strong> Dort bleibt die <em>Gesamtrate</em> über die Laufzeit konstant. Innerhalb der Rate verschiebt sich das Verhältnis: Der Zinsanteil sinkt mit der Restschuld, der Tilgungsanteil steigt entsprechend an. Merkhilfe: Beim Ratendarlehen ist die <strong>Tilgung</strong> gleich, beim Annuitätendarlehen die <strong>Rate</strong>.</p>
 </section>
 
 <section id="r-logik">
@@ -562,6 +701,32 @@
 </table>
 <p><strong>NOT (Negation):</strong> ein Eingang, kehrt ihn um (0→1, 1→0). NAND/NOR/XNOR sind die negierten Varianten von AND/OR/XOR.</p>
 <div class="callout"><span class="tag">Brücke zum Subnetting</span>Die Netzadresse entsteht durch bitweises <strong>AND</strong> aus IP-Adresse UND Subnetzmaske. Die 1-Bits der Maske lassen den Netzanteil durch, die 0-Bits blenden den Hostanteil aus (Wert AND 1 = Wert, Wert AND 0 = 0). <strong>XOR</strong> erkennt Bit-Unterschiede, <strong>XNOR</strong> prüft auf Gleichheit.</div>
+</section>
+
+<section id="r-markt">
+<h2>Markt &amp; Wirtschaftssektoren</h2>
+<h3>Marktformen</h3>
+<p>Die Marktform ergibt sich aus der Zahl der Anbieter und Nachfrager. Sie bestimmt, wie viel Einfluss ein einzelner Marktteilnehmer auf den Preis hat.</p>
+<table>
+<tr><th>Marktform</th><th>Anbieter</th><th>Nachfrager</th><th>Beispiel</th></tr>
+<tr><td>Polypol</td><td>viele</td><td>viele</td><td>Markt für Webhosting oder PC-Zubehör</td></tr>
+<tr><td>Angebotsoligopol</td><td>wenige</td><td>viele</td><td>Mobilfunknetzbetreiber, große Cloud-Anbieter</td></tr>
+<tr><td>Angebotsmonopol</td><td>einer</td><td>viele</td><td>Alleiniger Anbieter einer patentierten Spezialsoftware</td></tr>
+<tr><td>Monopson (Nachfragemonopol)</td><td>viele</td><td>einer</td><td>Ein einziger staatlicher Abnehmer für ein Spezialsystem</td></tr>
+<tr><td>Nachfrageoligopol</td><td>viele</td><td>wenige</td><td>Wenige Großabnehmer bei vielen Zulieferern</td></tr>
+</table>
+<p><strong>Preisbildung:</strong> Im Polypol bildet sich der Preis durch Angebot und Nachfrage; der einzelne Anbieter ist Preisnehmer und muss den Marktpreis akzeptieren. Im Oligopol beobachten die wenigen Anbieter einander genau, Preissenkungen werden schnell nachgezogen, was zu starrer Preisbildung oder Preiskämpfen führt. Im Monopol setzt der Anbieter den Preis weitgehend selbst und ist Preissetzer, begrenzt nur durch die Zahlungsbereitschaft der Nachfrager und staatliche Aufsicht.</p>
+<p><strong>Marktmacht</strong> beschreibt die Fähigkeit, den Preis oder die Bedingungen einseitig zu beeinflussen. Sie steigt, je weniger Anbieter es gibt und je schwerer die Leistung austauschbar ist. Deshalb greifen Kartell- und Wettbewerbsrecht ein, wenn Marktmacht missbraucht wird.</p>
+
+<h3>Wirtschaftssektoren</h3>
+<table>
+<tr><th>Sektor</th><th>Inhalt</th><th>Beispiele</th></tr>
+<tr><td>Primärer Sektor</td><td>Gewinnung von Rohstoffen (Urproduktion)</td><td>Landwirtschaft, Forstwirtschaft, Fischerei, Bergbau</td></tr>
+<tr><td>Sekundärer Sektor</td><td>Verarbeitung von Rohstoffen zu Gütern</td><td>Industrie, Handwerk, Bauwirtschaft, Hardwarefertigung</td></tr>
+<tr><td>Tertiärer Sektor</td><td>Dienstleistungen</td><td>Handel, Banken, Logistik, IT-Support, Softwarehaus</td></tr>
+<tr><td>Quartärer Sektor</td><td>Information und Wissen, oft als Abspaltung des tertiären Sektors betrachtet</td><td>Forschung, Beratung, Datenanalyse, Bildung</td></tr>
+</table>
+<p>In der Einordnung liegt die typische Prüfungsfrage: Ein Betrieb, der Software entwickelt und betreut, gehört zum tertiären Sektor, weil er eine Dienstleistung erbringt. Ein Betrieb, der Rechner zusammenbaut, gehört zum sekundären Sektor. Über die Zeit hat sich die Beschäftigung in Industrieländern deutlich vom primären zum tertiären Sektor verschoben, was als sektoraler Strukturwandel bezeichnet wird.</p>
 </section>
 
 <section id="r-mux">
@@ -620,6 +785,27 @@
 <p><strong>Assoziation:</strong> Eine allgemeine Verbindung ("kennt", "nutzt"), dargestellt als einfache Linie. <strong>Aggregation</strong> (leere Raute am Ganzen): Teile gehören zum Ganzen, existieren aber auch ohne es, ein Team besteht aus Spielern, die Spieler existieren auch ohne das Team. <strong>Komposition</strong> (gefüllte Raute): Die Teile existieren nicht ohne das Ganze. Räume existieren nicht ohne ihr Gebäude. <strong>Generalisierung/Vererbung:</strong> geschlossener, nicht ausgefüllter Dreieckspfeil zur Oberklasse.</p>
 <p><strong>Multiplizitäten</strong> geben an, wie viele Objekte an einer Beziehung beteiligt sind: <code>1</code> = genau eins, <code>0..1</code> = keins oder eins, <code>*</code> oder <code>0..*</code> = beliebig viele, <code>1..*</code> = mindestens eins.</p>
 <p>Neben dem <strong>Klassendiagramm</strong> (statischer Aufbau) sind zwei weitere UML-Diagramme prüfungsrelevant: Das <strong>Anwendungsfalldiagramm</strong> (Use Case) zeigt, welche Akteure welche Funktionen des Systems nutzen. Das <strong>Aktivitätsdiagramm</strong> beschreibt Abläufe mit Verzweigungen, vergleichbar einem Flussdiagramm.</p>
+
+<h3>Sequenzdiagramm</h3>
+<p>Während das Klassendiagramm den <em>statischen</em> Aufbau zeigt, stellt das <strong>Sequenzdiagramm</strong> den <em>zeitlichen Ablauf</em> einer Interaktion dar: Wer schickt wann welche Nachricht an wen?</p>
+<p>Der Aufbau folgt festen Regeln. Am oberen Rand stehen nebeneinander die beteiligten <strong>Akteure und Objekte</strong>, jeweils in einem Kasten. Von jedem geht senkrecht nach unten eine gestrichelte <strong>Lebenslinie</strong> ab; die Zeit läuft also von oben nach unten. Auf der Lebenslinie markieren schmale Balken die <strong>Aktivierung</strong>, also den Zeitraum, in dem das Objekt gerade arbeitet.</p>
+<p>Zwischen den Lebenslinien verlaufen waagerechte Pfeile, die <strong>Nachrichten</strong>:</p>
+<table>
+<tr><th>Pfeilart</th><th>Bedeutung</th></tr>
+<tr><td>Durchgezogener Pfeil mit gefüllter Spitze</td><td>Synchroner Aufruf: Der Sender wartet auf die Antwort</td></tr>
+<tr><td>Durchgezogener Pfeil mit offener Spitze</td><td>Asynchrone Nachricht: Der Sender arbeitet sofort weiter</td></tr>
+<tr><td>Gestrichelter Pfeil</td><td>Antwort beziehungsweise Rückgabe</td></tr>
+<tr><td>Pfeil auf die eigene Lebenslinie</td><td>Selbstaufruf</td></tr>
+<tr><td>Kreuz am Ende der Lebenslinie</td><td>Das Objekt wird zerstört</td></tr>
+</table>
+<p>Wiederholungen und Verzweigungen werden in Rahmen gesetzt, die als <strong>kombinierte Fragmente</strong> bezeichnet werden: <code>loop</code> für Schleifen, <code>alt</code> für Alternativen mit Bedingung, <code>opt</code> für einen optionalen Teil.</p>
+<div class="callout"><span class="tag">Beispiel Anmeldung</span>Benutzer &rarr; Anmeldemaske: Zugangsdaten eingeben (synchron)<br>
+Anmeldemaske &rarr; Benutzerverwaltung: pruefeAnmeldung(kennung, passwort)<br>
+Benutzerverwaltung &rarr; Datenbank: sucheBenutzer(kennung)<br>
+Datenbank ‑ ‑ &rarr; Benutzerverwaltung: Benutzerdatensatz (gestrichelt, Rückgabe)<br>
+Benutzerverwaltung ‑ ‑ &rarr; Anmeldemaske: true oder false<br>
+Ein <code>alt</code>-Fragment trennt danach den Fall „Anmeldung erfolgreich" vom Fall „Fehlermeldung anzeigen".</div>
+<p>Für die Prüfung wichtig ist die Abgrenzung: Das <strong>Klassendiagramm</strong> zeigt Struktur und Beziehungen, das <strong>Aktivitätsdiagramm</strong> einen Ablauf mit Verzweigungen ohne festen Bezug zu Objekten, und das <strong>Sequenzdiagramm</strong> den Nachrichtenaustausch zwischen konkreten Objekten über die Zeit.</p>
 </section>
 
 <section id="r-osi">
@@ -701,6 +887,65 @@
 <p><strong>Rückwärtsrechnung</strong> (SAZ = SEZ &minus; Dauer, bei mehreren Nachfolgern zählt das früheste SAZ): F: 14&rarr;12. D: 12&rarr;7. E: 12&rarr;11. B: 7&rarr;3. C muss vor E fertig sein: SEZ = 11 &rarr; SAZ 9. A: SEZ = min(3, 9) = 3 &rarr; SAZ 0.</p>
 <p><strong>Puffer:</strong> Gesamtpuffer GP = SAZ &minus; FAZ. A, B, D, F: GP = 0, sie bilden den <strong>kritischen Pfad</strong> A&ndash;B&ndash;D&ndash;F. C und E haben je GP = 6.</p>
 <div class="callout"><span class="tag">Freier vs. Gesamtpuffer</span>Der <strong>Gesamtpuffer</strong> gibt an, wie weit sich ein Vorgang verschieben darf, ohne das <em>Projektende</em> zu gefährden. Der <strong>freie Puffer</strong> (FP = frühester Start des Nachfolgers &minus; eigenes FEZ) gibt an, wie weit er sich verschieben darf, ohne auch nur den <em>frühesten Start des Nachfolgers</em> anzutasten. Im Beispiel: C hat GP = 6, aber FP = 0, verschiebt sich C, muss E sofort mitwandern. E dagegen hat FP = 6, denn F wartet ohnehin bis Tag 12 auf D. Genau diese Unterscheidung ist eine beliebte Prüfungsfrage.</div>
+
+<h3>Weitere Vorgehensmodelle</h3>
+<p><strong>V-Modell:</strong> Eine Weiterentwicklung des Wasserfalls. Die linke Seite des „V" beschreibt die Spezifikation von grob nach fein, die rechte Seite die zugehörigen Teststufen von fein nach grob. Jeder Planungsstufe steht dabei genau eine Teststufe gegenüber:</p>
+<table>
+<tr><th>Linke Seite (Spezifikation)</th><th>Rechte Seite (Test)</th><th>Prüft</th></tr>
+<tr><td>Anforderungsdefinition</td><td>Abnahmetest</td><td>Erfüllt das System die Kundenanforderungen?</td></tr>
+<tr><td>Funktionaler Systementwurf</td><td>Systemtest</td><td>Funktioniert das Gesamtsystem wie spezifiziert?</td></tr>
+<tr><td>Technischer Systementwurf</td><td>Integrationstest</td><td>Arbeiten die Komponenten korrekt zusammen?</td></tr>
+<tr><td>Komponentenspezifikation</td><td>Modul- oder Unittest</td><td>Arbeitet der einzelne Baustein korrekt?</td></tr>
+</table>
+<p>Unten in der Spitze des „V" liegt die Programmierung. Der wesentliche <strong>Unterschied zum Wasserfallmodell</strong>: Beim Wasserfall ist der Test eine einzelne Phase am Ende. Im V-Modell wird jede Teststufe bereits parallel zur zugehörigen Spezifikationsstufe geplant, Fehler in den Anforderungen fallen dadurch früher auf. Beide Modelle bleiben aber sequenziell und wenig änderungsfreundlich.</p>
+
+<p><strong>Spiralmodell:</strong> Ein iteratives Modell, das die Entwicklung in wiederholte Zyklen aufteilt. Jeder Zyklus durchläuft dieselben vier Schritte: Ziele festlegen, <strong>Alternativen bewerten und Risiken analysieren</strong>, entwickeln und testen, Ergebnis prüfen und den nächsten Zyklus planen. Mit jeder Runde wächst das Produkt, und ein Prototyp macht den Stand greifbar. Das Besondere ist die feste Verankerung der <strong>Risikoanalyse</strong> in jedem Zyklus: Das größte Risiko wird zuerst angegangen. Eingesetzt wird es bei großen, langlaufenden Vorhaben mit hoher Unsicherheit; für kleine Projekte ist der Aufwand zu hoch.</p>
+
+<p><strong>Extreme Programming (XP):</strong> Ein agiles Vorgehen mit starkem Fokus auf Codequalität und enger Zusammenarbeit. Kernpraktiken:</p>
+<p><strong>Pair Programming</strong> bedeutet, dass zwei Personen gemeinsam an einem Rechner arbeiten: Einer schreibt den Code, der andere denkt mit und prüft laufend. Das erhöht die Qualität und verteilt Wissen im Team. <strong>Test Driven Development (TDD)</strong> dreht die übliche Reihenfolge um: Erst wird der Test geschrieben, der zunächst fehlschlägt, dann der Code, der ihn erfüllt, danach wird aufgeräumt. <strong>Refactoring</strong> verbessert die innere Struktur des Codes, ohne sein Verhalten nach außen zu verändern. <strong>Continuous Integration</strong> führt Änderungen mehrmals täglich zusammen und lässt automatisch bauen und testen, damit Integrationsprobleme sofort auffallen. Ergänzend gehören kurze Releasezyklen, gemeinsame Codeverantwortung und ein ständig erreichbarer Kundenvertreter dazu.</p>
+
+<h3>SMART-Ziele</h3>
+<p>Projektziele müssen überprüfbar formuliert sein. Die Merkhilfe <strong>SMART</strong> nennt fünf Kriterien:</p>
+<table>
+<tr><th>Buchstabe</th><th>Bedeutung</th><th>Prüffrage</th></tr>
+<tr><td>S</td><td>Spezifisch</td><td>Ist eindeutig beschrieben, was erreicht werden soll?</td></tr>
+<tr><td>M</td><td>Messbar</td><td>Woran lässt sich die Zielerreichung objektiv festmachen?</td></tr>
+<tr><td>A</td><td>Attraktiv (auch: akzeptiert, angemessen)</td><td>Wird das Ziel von den Beteiligten mitgetragen?</td></tr>
+<tr><td>R</td><td>Realistisch</td><td>Ist es mit den vorhandenen Mitteln erreichbar?</td></tr>
+<tr><td>T</td><td>Terminiert</td><td>Bis wann soll es erreicht sein?</td></tr>
+</table>
+<div class="callout"><span class="tag">Beispiel für die Prüfung</span>Nicht SMART: „Wir wollen die Geräteverwaltung verbessern." Weder messbar noch terminiert.<br>
+SMART: „Bis zum 30.09.2026 werden alle 240 Endgeräte in einer zentralen Verwaltung erfasst, sodass der Inventurbericht ohne manuelle Nacharbeit erzeugt werden kann."<br>
+Prüfen Sie in Aufgaben immer alle fünf Kriterien einzeln durch: Genau daran hängen die Punkte.</div>
+
+<h3>Phasen der Teamentwicklung nach Tuckman</h3>
+<table>
+<tr><th>Phase</th><th>Was im Team passiert</th></tr>
+<tr><td><strong>Forming</strong> (Orientierung)</td><td>Die Mitglieder lernen sich kennen, sind höflich und zurückhaltend. Rollen und Ziele sind noch unklar, die Führung wird stark gebraucht.</td></tr>
+<tr><td><strong>Storming</strong> (Konflikt)</td><td>Unterschiedliche Vorstellungen prallen aufeinander, es entstehen Reibungen um Rollen, Einfluss und Vorgehen. Die Leistung ist oft vorübergehend niedrig.</td></tr>
+<tr><td><strong>Norming</strong> (Regelung)</td><td>Das Team einigt sich auf Spielregeln und Rollen, die Zusammenarbeit wird verbindlicher und vertrauensvoller.</td></tr>
+<tr><td><strong>Performing</strong> (Leistung)</td><td>Das Team arbeitet eingespielt und weitgehend selbstorganisiert, die Energie fließt in die Sache statt in die Beziehungsklärung.</td></tr>
+<tr><td><strong>Adjourning</strong> (Auflösung)</td><td>Das Projekt endet, das Team wird aufgelöst. Ergebnisse werden gesichert, Erfahrungen ausgewertet, der Abschied gestaltet.</td></tr>
+</table>
+<p>Das Modell geht auf Bruce Tuckman zurück. Für die Prüfung wichtig: Die Storming-Phase ist normal und kein Führungsversagen. Wer sie unterdrückt, verschiebt die Konflikte nur. Die Phasen können bei Änderungen in der Besetzung erneut durchlaufen werden.</p>
+
+<h3>RACI-Matrix</h3>
+<p>Die <strong>RACI-Matrix</strong> klärt Zuständigkeiten. In den Zeilen stehen die Aufgaben oder Arbeitspakete, in den Spalten die beteiligten Rollen. In jedem Feld steht, welche Art von Beteiligung besteht:</p>
+<table>
+<tr><th>Buchstabe</th><th>Bedeutung</th><th>Erklärung</th></tr>
+<tr><td><strong>R</strong></td><td>Responsible (durchführend)</td><td>Führt die Aufgabe tatsächlich aus. Kann mehrfach vergeben werden.</td></tr>
+<tr><td><strong>A</strong></td><td>Accountable (verantwortlich)</td><td>Trägt die Ergebnisverantwortung und entscheidet. Genau <em>einmal</em> je Aufgabe.</td></tr>
+<tr><td><strong>C</strong></td><td>Consulted (beratend)</td><td>Wird vorher um fachlichen Rat gefragt, Kommunikation in beide Richtungen.</td></tr>
+<tr><td><strong>I</strong></td><td>Informed (zu informieren)</td><td>Wird über Ergebnisse unterrichtet, Kommunikation in eine Richtung.</td></tr>
+</table>
+<p>Beispiel für die Einführung einer neuen Software:</p>
+<table>
+<tr><th>Aufgabe</th><th>Projektleitung</th><th>IT-Administration</th><th>Fachabteilung</th><th>Geschäftsführung</th></tr>
+<tr><td>Anforderungen erheben</td><td>A</td><td>C</td><td>R</td><td>I</td></tr>
+<tr><td>Server bereitstellen</td><td>A</td><td>R</td><td>I</td><td>I</td></tr>
+<tr><td>Budget freigeben</td><td>C</td><td>I</td><td>I</td><td>A</td></tr>
+</table>
+<div class="callout"><span class="tag">Prüfungsfalle</span>Pro Zeile darf es <strong>genau ein A</strong> geben. Zwei Verantwortliche bedeuten in der Praxis, dass sich niemand verantwortlich fühlt. <strong>R</strong> kann dagegen mehrfach vorkommen, wenn mehrere gemeinsam ausführen. Und der Unterschied zwischen C und I ist die Richtung: <em>Consulted</em> wird vorher gefragt und antwortet, <em>Informed</em> bekommt hinterher Bescheid.</div>
 </section>
 
 <section id="r-routing">
@@ -730,6 +975,31 @@
 <p>Das klassische STP braucht nach einer Topologieänderung relativ lange, bis wieder alles weiterleitet. Sein Nachfolger <strong>RSTP</strong> (Rapid Spanning Tree Protocol) reagiert deutlich schneller und ist heute Standard, bleibt aber zum klassischen STP abwärtskompatibel.</p>
 </section>
 
+<section id="r-malware">
+<h2>Schadsoftware &amp; Angriffsarten</h2>
+<p>Schadsoftware wird nach ihrem Verbreitungsweg und ihrer Wirkung unterschieden. Die Prüfung fragt vor allem die saubere Abgrenzung ab.</p>
+<table>
+<tr><th>Art</th><th>Merkmal</th></tr>
+<tr><td><strong>Virus</strong></td><td>Hängt sich an eine vorhandene Datei oder ein Programm an und verbreitet sich erst, wenn diese ausgeführt wird. Braucht also eine Wirtsdatei und eine Nutzeraktion.</td></tr>
+<tr><td><strong>Wurm</strong></td><td>Verbreitet sich <em>selbstständig</em> über Netzwerke, ohne Wirtsdatei und ohne Zutun des Nutzers, oft über offene Dienste oder Sicherheitslücken.</td></tr>
+<tr><td><strong>Trojaner</strong></td><td>Tarnt sich als nützliches Programm und schleust im Hintergrund eine Schadfunktion ein. Verbreitet sich nicht selbst, sondern wird vom Nutzer installiert.</td></tr>
+<tr><td><strong>Rootkit</strong></td><td>Nistet sich tief im System ein, oft auf Kernel-Ebene, und verbirgt seine eigene Anwesenheit sowie die anderer Schadsoftware vor dem Betriebssystem und dem Virenscanner.</td></tr>
+<tr><td><strong>Ransomware</strong></td><td>Verschlüsselt Daten und fordert Lösegeld für die Freigabe. Häufig wird vorher zusätzlich abgezogen und mit Veröffentlichung gedroht (doppelte Erpressung).</td></tr>
+<tr><td><strong>Spyware</strong></td><td>Sammelt unbemerkt Informationen über Nutzer und System und leitet sie weiter.</td></tr>
+<tr><td><strong>Keylogger</strong></td><td>Zeichnet Tastatureingaben auf, um Zugangsdaten abzugreifen. Existiert als Software und als Hardware-Aufsatz am Anschluss.</td></tr>
+<tr><td><strong>Backdoor</strong></td><td>Öffnet einen versteckten Zugang, über den ein Angreifer später erneut ins System gelangt, auch nachdem die ursprüngliche Lücke geschlossen wurde.</td></tr>
+<tr><td><strong>Botnetz</strong></td><td>Verbund gekaperter Rechner, die von außen ferngesteuert werden, etwa für DDoS-Angriffe oder Spamversand.</td></tr>
+</table>
+<div class="callout"><span class="tag">Virus, Wurm oder Trojaner?</span>Die drei werden in der Prüfung gern vertauscht. Der Unterschied liegt allein in der Verbreitung: Der <strong>Virus</strong> braucht eine Wirtsdatei, der <strong>Wurm</strong> verbreitet sich selbstständig über das Netz, der <strong>Trojaner</strong> verbreitet sich gar nicht selbst, sondern wird durch Täuschung freiwillig installiert. Ransomware beschreibt dagegen keine Verbreitungsart, sondern die <em>Wirkung</em> und kann über jeden dieser Wege ins System kommen.</div>
+
+<h3>Social Engineering</h3>
+<p>Nicht jeder Angriff ist technisch. Beim <strong>Social Engineering</strong> wird der Mensch manipuliert, weil er oft die einfachste Schwachstelle ist. Typische Formen:</p>
+<p><strong>Phishing:</strong> Massenhafte gefälschte Nachrichten, die zur Eingabe von Zugangsdaten auf einer nachgebauten Seite verleiten. <strong>Spear-Phishing</strong> ist die gezielte Variante auf eine bestimmte Person mit persönlichem Bezug, <strong>Whaling</strong> zielt auf die Führungsebene. Beim <strong>CEO-Fraud</strong> gibt sich der Angreifer als Geschäftsführung aus und weist eine eilige Überweisung an. <strong>Pretexting</strong> arbeitet mit einer erfundenen Rolle, etwa als Techniker oder Kollege der IT. <strong>Baiting</strong> ködert mit einem präparierten Datenträger, der bewusst gefunden werden soll. <strong>Tailgating</strong> nutzt Höflichkeit aus, um ohne Ausweis durch eine gesicherte Tür mitzugehen.</p>
+<p>Die wirksamste Gegenmaßnahme ist nicht technisch, sondern organisatorisch: Schulung und Sensibilisierung, klare Rückrufverfahren bei Zahlungsanweisungen, das Vier-Augen-Prinzip bei kritischen Vorgängen und eine Kultur, in der Nachfragen ausdrücklich erwünscht ist.</p>
+
+<h3>Weitere Angriffsarten</h3>
+<p><strong>DoS und DDoS:</strong> Überlastung eines Dienstes durch eine Flut von Anfragen, beim verteilten Angriff (DDoS) aus vielen Quellen gleichzeitig. <strong>Man-in-the-Middle:</strong> Der Angreifer schaltet sich unbemerkt in die Verbindung und kann mitlesen oder verändern. <strong>SQL-Injection:</strong> Über ungeprüfte Eingabefelder wird eigener Datenbankcode eingeschleust; Gegenmaßnahme sind vorbereitete Anweisungen mit Parametern und Eingabevalidierung. <strong>Cross-Site-Scripting (XSS):</strong> Fremder Skriptcode wird in eine Webseite eingebettet und im Browser anderer Nutzer ausgeführt. <strong>Brute Force:</strong> Systematisches Durchprobieren von Passwörtern; Gegenmaßnahmen sind Sperrmechanismen, lange Passwörter und ein zweiter Faktor. <strong>Zero-Day:</strong> Ausnutzung einer Lücke, für die es noch keinen Patch gibt.</p>
+</section>
 <section id="r-sql">
 <h2>SQL & Datenbanken</h2>
 <p><strong>SQL</strong> (Structured Query Language) ist die Standardsprache für relationale Datenbanken. Die Grundbefehle: <code>SELECT</code> liest, <code>INSERT</code> fügt ein, <code>UPDATE</code> ändert, <code>DELETE</code> löscht. <code>WHERE</code> filtert Zeilen, <code>ORDER BY</code> sortiert die Ausgabe, <code>SELECT DISTINCT</code> entfernt Duplikate <em>aus dem Ergebnis</em>, die Tabelle selbst bleibt unverändert.</p>
@@ -752,6 +1022,24 @@
 <p><strong>2. Normalform:</strong> 1NF erfüllt, und kein Nichtschlüsselattribut hängt nur von einem <em>Teil</em> eines zusammengesetzten Schlüssels ab. In einer Bestellpositionstabelle mit Schlüssel (BestellNr, ArtikelNr) darf der Artikelname nicht stehen, er hängt nur von ArtikelNr ab und gehört in die Artikeltabelle.</p>
 <p><strong>3. Normalform:</strong> 2NF erfüllt, und kein Nichtschlüsselattribut hängt von einem <em>anderen Nichtschlüsselattribut</em> ab (keine transitive Abhängigkeit). Steht in der Mitarbeitertabelle neben der AbteilungsNr auch der Abteilungsname, hängt dieser transitiv über die AbteilungsNr am Schlüssel, er gehört in die Abteilungstabelle.</p>
 <div class="callout"><span class="tag">Merkhilfe</span>"The key, the whole key, and nothing but the key": 1NF = atomare Werte, 2NF = vom ganzen Schlüssel abhängig, 3NF = nur vom Schlüssel abhängig.</div>
+</section>
+
+
+<section id="r-storage">
+<h2>Storage-Systeme</h2>
+<h3>Anbindungsarten</h3>
+<table>
+<tr><th>Art</th><th>Anbindung</th><th>Zugriff</th><th>Typischer Einsatz</th></tr>
+<tr><td><strong>DAS</strong> (Direct Attached Storage)</td><td>Direkt am Server über SAS, SATA oder USB</td><td>Blockbasiert, nur für diesen einen Server</td><td>Interne Platten, direkt angeschlossenes Plattengehäuse</td></tr>
+<tr><td><strong>NAS</strong> (Network Attached Storage)</td><td>Über das vorhandene LAN per Ethernet</td><td>Dateibasiert über SMB oder NFS</td><td>Gemeinsame Dateiablage für Abteilungen</td></tr>
+<tr><td><strong>SAN</strong> (Storage Area Network)</td><td>Eigenes Speichernetz über Fibre Channel oder iSCSI</td><td>Blockbasiert, Server sieht das Ziel wie eine lokale Platte</td><td>Datenbanken, Virtualisierungscluster im Rechenzentrum</td></tr>
+</table>
+<div class="callout"><span class="tag">NAS oder SAN?</span>Die Abgrenzung ist der Prüfungsklassiker. Ein <strong>NAS</strong> stellt <em>Dateien</em> über das normale Netz bereit und wird als Netzlaufwerk eingebunden. Ein <strong>SAN</strong> stellt <em>Blöcke</em> über ein eigenes, meist getrenntes Speichernetz bereit; das Betriebssystem des Servers formatiert diesen Speicher selbst und behandelt ihn wie eine eigene Festplatte. Daraus folgt auch der Kostenunterschied: NAS ist günstig und schnell eingerichtet, SAN ist aufwendiger und teurer, dafür leistungsfähiger und besser für hohe Lasten geeignet.</div>
+
+<h3>Zugriffsmodelle</h3>
+<p><strong>Block-Storage:</strong> Der Speicher wird in gleich große Blöcke aufgeteilt und ohne eigene Struktur bereitgestellt. Das Dateisystem legt erst das darüberliegende System an. Sehr schnell und flexibel, ideal für Datenbanken und virtuelle Maschinen.</p>
+<p><strong>File-Storage:</strong> Die Daten liegen in einer Ordnerhierarchie mit Pfaden und Dateinamen. Einfach zu verstehen und gemeinsam nutzbar, wird aber bei sehr großen Datenmengen mit vielen Ebenen zunehmend unhandlich.</p>
+<p><strong>Objekt-Storage:</strong> Jede Datei wird als Objekt mit eindeutiger Kennung und ausführlichen Metadaten abgelegt, ohne Ordnerbaum. Der Zugriff erfolgt in der Regel über eine Programmierschnittstelle (HTTP/REST). Sehr gut skalierbar über riesige Datenmengen hinweg, dafür nicht für ständige Änderungen an einzelnen Dateien gedacht. Typisch für Cloudspeicher, Archive, Backups und Medienbibliotheken.</p>
 </section>
 
 <section id="r-verkabelung">
@@ -924,6 +1212,36 @@
 <p><span class="term">SSL/TLS:</span> Protokoll zur verschlüsselten, authentifizierten Absicherung von Verbindungen, die Grundlage von <strong>HTTPS</strong>. SSL ist der veraltete, gebrochene Vorgänger; heute wird praktisch nur noch <strong>TLS</strong> (aktuell 1.2/1.3) eingesetzt, der Name „SSL" hält sich nur umgangssprachlich. TLS liefert drei Dinge: <strong>Vertraulichkeit</strong> (Verkehr nicht mitlesbar), <strong>Integrität</strong> (Manipulation fällt auf) und <strong>Serverauthentifizierung</strong> per X.509-Zertifikat. Wichtig fürs Verständnis: TLS sichert nur den <em>Transportweg</em>, es verschlüsselt keine Daten auf dem Server, anonymisiert nicht und prüft keinen Schadcode.</p>
 <p><span class="term">PSK</span> (Pre-Shared Key): ein vorab auf beiden Seiten hinterlegtes gemeinsames Geheimnis für symmetrische Authentifizierung/Verschlüsselung, kein Zertifikat, kein Schlüsselaustausch zur Laufzeit nötig. Einsatz z. B. bei <strong>WPA2/WPA3-Personal</strong> (der PSK ist das WLAN-Passwort, daraus werden die Sitzungsschlüssel abgeleitet) und als Authentifizierungsvariante bei <strong>IPsec</strong>-Verbindungen. Schwäche: Ein geteiltes Geheimnis skaliert schlecht und muss bei Kompromittierung überall getauscht werden, deshalb setzen Firmen auf Zertifikate oder 802.1X/EAP.</p>
 <div class="callout"><span class="tag">PKI (Public Key Infrastructure)</span>Ein <strong>Zertifikat</strong> (Standard <strong>X.509</strong>) bindet einen Public Key an eine Identität, signiert von einer <strong>CA</strong>. Hierarchie: Root-CA → <strong>Intermediate-CA</strong> (stellt im Alltag die Endnutzerzertifikate aus, während die Root-CA offline bleibt) → End-Entity. Vertrauen: Clients vertrauen der Root-CA und damit allem, was sie signiert. Beantragt wird ein Zertifikat über einen <strong>CSR</strong> (Certificate Signing Request), er enthält den Public Key und die Identitätsdaten des Antragstellers, den die CA prüft und signiert. Ein <strong>Self-Signed Certificate</strong> ist von seiner eigenen CA signiert, ohne externen Vertrauensanker, daher von Browsern standardmäßig nicht akzeptiert. Widerruf wird über <strong>CRL</strong> (Certificate Revocation List) oder <strong>OCSP</strong> (Online Certificate Status Protocol) geprüft.</div>
+</section>
+
+<section id="r-vertraege">
+<h2>Verträge &amp; Rechtsgeschäfte</h2>
+<p>Ein Vertrag kommt durch zwei übereinstimmende Willenserklärungen zustande: <strong>Angebot</strong> und <strong>Annahme</strong>. Beide müssen inhaltlich deckungsgleich sein. Weicht die Annahme vom Angebot ab, gilt sie als Ablehnung verbunden mit einem neuen Angebot.</p>
+<div class="callout"><span class="tag">Prüfungsfalle</span>Der Kaufvertrag entsteht bereits mit der Annahme der Bestellung, nicht erst mit der Lieferung oder der Zahlung. Die Werbung im Katalog oder Onlineshop ist noch kein Angebot, sondern nur eine unverbindliche Aufforderung zur Abgabe eines Angebots (<em>invitatio ad offerendum</em>). Die Bestellung des Kunden ist das Angebot, erst die Bestätigung des Händlers die Annahme.</p></div>
+
+<h3>Die wichtigsten Vertragsarten</h3>
+<table>
+<tr><th>Vertragsart</th><th>Geschuldet wird</th><th>Typisches IT-Beispiel</th></tr>
+<tr><td><strong>Kaufvertrag</strong></td><td>Übergabe und Eigentumsübertragung einer Sache gegen Zahlung</td><td>Kauf von 20 Notebooks</td></tr>
+<tr><td><strong>Werkvertrag</strong></td><td>Ein bestimmter <em>Erfolg</em>, also ein fertiges Werk</td><td>Erstellung einer Individualsoftware bis zum Abnahmetermin</td></tr>
+<tr><td><strong>Dienstvertrag</strong></td><td>Ein <em>Tätigwerden</em>, kein bestimmter Erfolg</td><td>IT-Support nach Aufwand, Beratung, Schulung</td></tr>
+<tr><td><strong>Mietvertrag</strong></td><td>Gebrauchsüberlassung gegen Miete, Eigentum bleibt beim Vermieter</td><td>Angemieteter Server im Rechenzentrum</td></tr>
+<tr><td><strong>Leasing</strong></td><td>Nutzungsüberlassung über feste Laufzeit, oft mit Kaufoption am Ende</td><td>Geleaste Firmenrechner über 36 Monate</td></tr>
+</table>
+<div class="callout"><span class="tag">Werkvertrag oder Dienstvertrag?</span>Die Abgrenzung ist der Klassiker in der AP1. Entscheidend ist, ob ein <strong>Erfolg</strong> geschuldet wird oder nur die <strong>Tätigkeit</strong>. Wer eine lauffähige Software zu einem festen Termin liefern muss, schuldet einen Erfolg: Werkvertrag, mit Abnahme und Gewährleistung. Wer stundenweise Support leistet, schuldet nur sorgfältiges Tätigwerden: Dienstvertrag, ohne Erfolgshaftung. Signalwörter im Aufgabentext sind „lauffähig", „bis zum …", „vereinbarte Funktionen" für den Werkvertrag und „nach Aufwand", „laufende Betreuung" für den Dienstvertrag.</div>
+
+<h3>Miete oder Leasing</h3>
+<p>Beide überlassen die Nutzung, ohne dass Eigentum übergeht. Beim <strong>Mietvertrag</strong> trägt in der Regel der Vermieter Wartung und Instandhaltung, die Laufzeit ist oft kürzer und flexibler kündbar. Beim <strong>Leasing</strong> ist die Laufzeit fest vereinbart, der Leasingnehmer trägt meist Wartung und Risiko, dafür sind die Raten kalkulierbar und als Betriebsausgabe absetzbar. Am Laufzeitende steht je nach Vertrag Rückgabe, Verlängerung oder Kauf zum Restwert.</p>
+
+<h3>Vertragsstörungen</h3>
+<table>
+<tr><th>Störung</th><th>Sachverhalt</th><th>Rechte der geschädigten Seite</th></tr>
+<tr><td>Lieferverzug</td><td>Der Liefertermin wird überschritten</td><td>Auf Lieferung bestehen, Verzugsschaden ersetzt verlangen, nach angemessener Nachfrist zurücktreten</td></tr>
+<tr><td>Mangelhafte Lieferung</td><td>Ware weicht in Menge oder Beschaffenheit ab</td><td>Nacherfüllung (Reparatur oder Ersatz), danach Minderung, Rücktritt oder Schadensersatz</td></tr>
+<tr><td>Annahmeverzug</td><td>Der Käufer nimmt die ordnungsgemäße Lieferung nicht an</td><td>Verkäufer kann einlagern und die Kosten weiterberechnen</td></tr>
+<tr><td>Zahlungsverzug</td><td>Rechnung wird nicht fristgerecht beglichen</td><td>Mahnung, Verzugszinsen, gerichtliches Mahnverfahren</td></tr>
+</table>
+<p>Wichtig für die Prüfung: Bei Mängeln hat die <strong>Nacherfüllung Vorrang</strong>. Erst wenn sie fehlschlägt, verweigert wird oder unzumutbar ist, kommen Minderung, Rücktritt oder Schadensersatz in Betracht.</p>
 </section>
 
 <section id="r-virt">
@@ -1226,6 +1544,6 @@ Fachinformatiker · Aura
   <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="19" x2="12" y2="5"></line><polyline points="6 11 12 5 18 11"></polyline></svg>
 </button>
 
-<script src="app.js?v=20260826c"></script>
+<script src="app.js?v=20260827b"></script>
 </body>
 </html>

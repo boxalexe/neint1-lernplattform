@@ -314,7 +314,12 @@ table.sn-cheat td:nth-child(4),table.sn-cheat td:nth-child(5){color:var(--green)
 .quick-search.open .qs-results.has{display:block}
 .qs-hit{padding:9px 13px;border-bottom:1px solid var(--border)}
 .qs-hit:last-child{border-bottom:none}
-.qs-navhit{display:block;width:100%;text-align:left;background:transparent;border:none;border-bottom:1px solid var(--border);color:var(--cyan);font-family:'DM Mono','Consolas',monospace;font-size:0.88rem;padding:11px 13px;cursor:pointer;transition:background .12s,color .12s}
+.qs-navhit{display:block;width:100%;text-align:left;background:transparent;border:none;border-bottom:1px solid var(--border);color:var(--cyan);font-family:'DM Mono','Consolas',monospace;font-size:0.88rem;padding:11px 13px;cursor:pointer;transition:background .12s,color .12s;overflow:hidden}
+/* Trefferzeile: erst die Kategorie, darunter der Begriff im Satzkontext.
+   Beide einzeilig mit Auslassung, damit die Breite des Menüs fix bleibt. */
+.qs-navhit .qs-cat{display:block;font-size:0.68rem;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);margin-bottom:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.qs-navhit .qs-snip{display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.qs-navhit:hover .qs-cat{color:var(--amber)}
 .qs-navhit:last-child{border-bottom:none}
 .qs-navhit:hover{background:var(--panel-2);color:var(--text)}
 .qs-abbr{color:var(--cyan);font-family:'DM Mono',monospace;font-weight:700;font-size:0.85rem}

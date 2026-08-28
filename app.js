@@ -18881,7 +18881,80 @@ const GLOSSAR = [{"a":"2FA","f":"Zwei-Faktor-Authentifizierung","d":"Anmeldung m
 {"a":"SAZ","f":"Spätester Anfangszeitpunkt","d":"Netzplantechnik: SEZ minus Vorgangsdauer. Der späteste Start, ohne das Projektende zu verzögern."},
 {"a":"SEZ","f":"Spätester Endzeitpunkt","d":"Netzplantechnik: der späteste Zeitpunkt, zu dem ein Vorgang enden darf. Ergibt sich in der Rückwärtsrechnung aus dem frühesten SAZ aller Nachfolger."},
 {"a":"GP","f":"Gesamtpuffer","d":"Netzplantechnik: SAZ minus FAZ. Zeitspanne, um die ein Vorgang verschoben werden darf, ohne das Projektende zu gefährden. GP=0 kennzeichnet den kritischen Pfad."},
-{"a":"FP","f":"Freier Puffer","d":"Netzplantechnik: frühester Anfang des Nachfolgers minus eigenes FEZ. Verschiebung, ohne den frühesten Start eines Nachfolgers anzutasten."}];
+{"a":"FP","f":"Freier Puffer","d":"Netzplantechnik: frühester Anfang des Nachfolgers minus eigenes FEZ. Verschiebung, ohne den frühesten Start eines Nachfolgers anzutasten."},
+{"a":"Werkvertrag","f":"Werkvertrag","d":"Vertrag über einen geschuldeten Erfolg, also ein fertiges Werk. Mit Abnahme und Gewährleistung, z. B. Erstellung einer Individualsoftware."},
+{"a":"Dienstvertrag","f":"Dienstvertrag","d":"Vertrag über ein Tätigwerden ohne geschuldeten Erfolg, z. B. IT-Support nach Aufwand oder Beratung."},
+{"a":"Kaufvertrag","f":"Kaufvertrag","d":"Vertrag über Übergabe und Eigentumsübertragung einer Sache gegen Zahlung. Kommt durch Angebot und Annahme zustande, nicht erst durch Lieferung."},
+{"a":"Leasing","f":"Leasing","d":"Nutzungsüberlassung über feste Laufzeit gegen Rate, oft mit Kaufoption am Ende. Eigentum bleibt beim Leasinggeber."},
+{"a":"Lieferverzug","f":"Lieferverzug","d":"Vertragsstörung durch Überschreiten des Liefertermins. Rechte: Erfüllung verlangen, Verzugsschaden, nach Nachfrist Rücktritt."},
+{"a":"Annahmeverzug","f":"Annahmeverzug","d":"Der Käufer nimmt die ordnungsgemäße Lieferung nicht an. Der Verkäufer kann einlagern und die Kosten weiterberechnen."},
+{"a":"Nacherfüllung","f":"Nacherfüllung","d":"Vorrangiges Recht bei Mängeln: Reparatur oder Ersatzlieferung. Erst bei Fehlschlagen folgen Minderung, Rücktritt oder Schadensersatz."},
+{"a":"Polypol","f":"Polypol","d":"Marktform mit vielen Anbietern und vielen Nachfragern. Der einzelne Anbieter ist Preisnehmer."},
+{"a":"Oligopol","f":"Oligopol","d":"Marktform mit wenigen Anbietern und vielen Nachfragern. Anbieter reagieren stark aufeinander."},
+{"a":"Monopol","f":"Monopol","d":"Marktform mit nur einem Anbieter. Er ist Preissetzer, begrenzt durch Zahlungsbereitschaft und Aufsicht."},
+{"a":"Monopson","f":"Nachfragemonopol","d":"Marktform mit nur einem Nachfrager bei vielen Anbietern. Die Marktmacht liegt auf der Nachfrageseite."},
+{"a":"Primärer Sektor","f":"Urproduktion","d":"Wirtschaftssektor der Rohstoffgewinnung: Land- und Forstwirtschaft, Fischerei, Bergbau."},
+{"a":"Sekundärer Sektor","f":"Produzierendes Gewerbe","d":"Wirtschaftssektor der Verarbeitung: Industrie, Handwerk, Bau, Hardwarefertigung."},
+{"a":"Tertiärer Sektor","f":"Dienstleistungssektor","d":"Wirtschaftssektor der Dienstleistungen: Handel, Logistik, Banken, IT-Support, Softwarehäuser."},
+{"a":"Quartärer Sektor","f":"Informationssektor","d":"Abspaltung des tertiären Sektors für wissensbasierte Tätigkeiten: Forschung, Beratung, Datenanalyse."},
+{"a":"Bezugskalkulation","f":"Bezugskalkulation","d":"Stufenrechnung vom Listeneinkaufspreis über Rabatt und Skonto zuzüglich Bezugskosten zum Bezugspreis."},
+{"a":"Zieleinkaufspreis","f":"Zieleinkaufspreis","d":"Listeneinkaufspreis abzüglich Rabatt. Grundlage für die Skontoberechnung."},
+{"a":"Bareinkaufspreis","f":"Bareinkaufspreis","d":"Zieleinkaufspreis abzüglich Skonto. Preis bei sofortiger Zahlung."},
+{"a":"Bezugspreis","f":"Bezugspreis / Einstandspreis","d":"Bareinkaufspreis zuzüglich Bezugskosten wie Fracht und Verpackung. Die tatsächlichen Kosten der Ware im Lager."},
+{"a":"Ratendarlehen","f":"Tilgungsdarlehen","d":"Darlehen mit gleichbleibender Tilgung. Zinsen auf die sinkende Restschuld, dadurch fallende Gesamtrate."},
+{"a":"Annuitätendarlehen","f":"Annuitätendarlehen","d":"Darlehen mit gleichbleibender Gesamtrate. Zinsanteil sinkt, Tilgungsanteil steigt über die Laufzeit."},
+{"a":"Eigenkapitalrentabilität","f":"Eigenkapitalrentabilität","d":"Gewinn geteilt durch Eigenkapital mal 100 %. Zeigt die Verzinsung des Eigentümerkapitals."},
+{"a":"Gesamtkapitalrentabilität","f":"Gesamtkapitalrentabilität","d":"(Gewinn plus Fremdkapitalzinsen) geteilt durch Gesamtkapital mal 100 %. Unabhängig von der Finanzierungsart."},
+{"a":"Umsatzrentabilität","f":"Umsatzrentabilität","d":"Gewinn geteilt durch Umsatz mal 100 %. Zeigt, wie viel Gewinn je Umsatzeuro bleibt."},
+{"a":"Block-Storage","f":"Blockspeicher","d":"Speicher in gleich großen Blöcken ohne eigene Struktur. Das Dateisystem legt der Nutzer an. Schnell, für Datenbanken und VMs."},
+{"a":"File-Storage","f":"Dateispeicher","d":"Speicher mit Ordnerhierarchie und Dateinamen. Einfach gemeinsam nutzbar, bei sehr großen Mengen unhandlich."},
+{"a":"Objekt-Storage","f":"Objektspeicher","d":"Ablage als Objekte mit eindeutiger Kennung und Metadaten, ohne Ordnerbaum. Zugriff per HTTP/REST, stark skalierbar."},
+{"a":"Tower of Hanoi","f":"Tower-of-Hanoi-Rotation","d":"Medienrotation nach gestaffeltem Muster (jeden 2., 4., 8. Tag). Wenige Medien decken viele junge und einzelne sehr alte Stände ab."},
+{"a":"Generationenprinzip","f":"Großvater-Vater-Sohn","d":"Rotationsverfahren mit täglichen (Sohn), wöchentlichen (Vater) und monatlichen (Großvater) Sicherungen unterschiedlicher Aufbewahrungsdauer."},
+{"a":"ADSL","f":"Asymmetric Digital Subscriber Line","d":"DSL-Variante mit deutlich höherem Downstream als Upstream. Typisch für Privatanschlüsse."},
+{"a":"SDSL","f":"Symmetric Digital Subscriber Line","d":"DSL-Variante mit gleicher Rate in beide Richtungen. Für Firmen mit hohem Upload-Bedarf."},
+{"a":"VDSL","f":"Very High Speed Digital Subscriber Line","d":"Schnelle DSL-Variante, meist Glasfaser bis zum Verteiler und Kupfer auf dem letzten Stück."},
+{"a":"Wurm","f":"Computerwurm","d":"Schadsoftware, die sich selbstständig über Netzwerke verbreitet, ohne Wirtsdatei und ohne Nutzeraktion."},
+{"a":"Trojaner","f":"Trojanisches Pferd","d":"Getarnt als nützliches Programm, schleust im Hintergrund eine Schadfunktion ein. Verbreitet sich nicht selbst."},
+{"a":"Rootkit","f":"Rootkit","d":"Schadsoftware, die sich tief im System einnistet und ihre eigene Anwesenheit sowie die anderer Schadsoftware verbirgt."},
+{"a":"Keylogger","f":"Keylogger","d":"Zeichnet Tastatureingaben auf, um Zugangsdaten abzugreifen. Als Software oder als Hardware am Anschluss."},
+{"a":"Backdoor","f":"Hintertür","d":"Versteckter Zugang, über den ein Angreifer später erneut ins System gelangt, auch nach Schließen der ursprünglichen Lücke."},
+{"a":"Spear-Phishing","f":"Spear-Phishing","d":"Gezielte Phishing-Variante auf eine bestimmte Person mit persönlichem Bezug, dadurch deutlich glaubwürdiger."},
+{"a":"CEO-Fraud","f":"Chef-Betrug","d":"Social-Engineering-Angriff, bei dem sich der Täter als Geschäftsführung ausgibt und eine eilige Überweisung anweist."},
+{"a":"Zero-Day","f":"Zero-Day-Schwachstelle","d":"Sicherheitslücke, die ausgenutzt wird, bevor ein Patch verfügbar ist."},
+{"a":"VIVA","f":"Vertraulichkeit, Integrität, Verfügbarkeit, Authentizität","d":"Merkhilfe für die vier Schutzziele der Informationssicherheit."},
+{"a":"IT-Grundschutz","f":"BSI IT-Grundschutz","d":"Standardisiertes Vorgehen des BSI mit Bausteinen und Anforderungen, um ohne volle Risikoanalyse ein angemessenes Sicherheitsniveau zu erreichen."},
+{"a":"Maximumprinzip","f":"Maximumprinzip","d":"Bei der Schutzbedarfsfeststellung übernimmt ein System den höchsten Schutzbedarf aller darauf laufenden Anwendungen."},
+{"a":"Kumulationseffekt","f":"Kumulationseffekt","d":"Der Schutzbedarf steigt, weil viele für sich unkritische Daten zusammenkommen und in Summe größeren Schaden verursachen könnten."},
+{"a":"V-Modell","f":"V-Modell","d":"Vorgehensmodell, das jeder Spezifikationsstufe eine Teststufe gegenüberstellt: Anforderung/Abnahmetest, Systementwurf/Systemtest, Technikentwurf/Integrationstest, Komponente/Modultest."},
+{"a":"Spiralmodell","f":"Spiralmodell","d":"Iteratives Modell mit wiederholten Zyklen aus Zielsetzung, Risikoanalyse, Entwicklung und Bewertung. Risikoanalyse ist fester Bestandteil jedes Zyklus."},
+{"a":"XP","f":"Extreme Programming","d":"Agiles Vorgehen mit Pair Programming, testgetriebener Entwicklung, Refactoring und Continuous Integration."},
+{"a":"Pair Programming","f":"Pair Programming","d":"Zwei Personen arbeiten gemeinsam an einem Rechner: einer schreibt, einer prüft mit. Erhöht Qualität und verteilt Wissen."},
+{"a":"Refactoring","f":"Refactoring","d":"Verbesserung der inneren Struktur des Codes, ohne das Verhalten nach außen zu verändern."},
+{"a":"Tuckman","f":"Phasenmodell nach Tuckman","d":"Teamentwicklung in fünf Phasen: Forming, Storming, Norming, Performing, Adjourning."},
+{"a":"Modultest","f":"Unit-Test","d":"Teststufe, die einen einzelnen Baustein isoliert prüft. Im V-Modell der Komponentenspezifikation zugeordnet."},
+{"a":"Integrationstest","f":"Integrationstest","d":"Teststufe, die das Zusammenspiel mehrerer Komponenten prüft."},
+{"a":"Abnahmetest","f":"Abnahmetest","d":"Teststufe, die aus Sicht des Auftraggebers prüft, ob die Anforderungen erfüllt sind. Grundlage der Abnahme."},
+{"a":"SMART","f":"Spezifisch, Messbar, Attraktiv, Realistisch, Terminiert","d":"Kriterien für überprüfbar formulierte Projektziele. In der Prüfung alle fünf einzeln durchgehen."},
+{"a":"ROI","f":"Return on Investment","d":"Kapitalrendite aus Umsatzrentabilität mal Kapitalumschlag; vereinfacht Gewinn geteilt durch eingesetztes Kapital mal 100 %."},
+{"a":"BSI","f":"Bundesamt für Sicherheit in der Informationstechnik","d":"Deutsche Behörde für IT-Sicherheit. Gibt den IT-Grundschutz mit Bausteinen, Schutzbedarfskategorien und Profilen heraus."},
+{"a":"DAS","f":"Direct Attached Storage","d":"Speicher, der direkt an einen Server angeschlossen ist (SAS, SATA, USB). Blockbasiert und nur für diesen Server nutzbar."},
+{"a":"ITIL","f":"IT Infrastructure Library","d":"Sammlung bewährter Praktiken für IT-Servicemanagement. Kein Gesetz und keine Norm, sondern ein Rahmenwerk."},
+{"a":"Incident","f":"Störung","d":"Ungeplante Unterbrechung oder Qualitätsminderung eines Service. Ziel: schnellstmögliche Wiederherstellung, notfalls per Workaround."},
+{"a":"Problem","f":"Problem (ITIL)","d":"Die zugrunde liegende Ursache eines oder mehrerer Incidents. Ziel ist die dauerhafte Beseitigung."},
+{"a":"Known Error","f":"Bekannter Fehler","d":"Problem mit bekannter Ursache und dokumentierter Umgehungslösung (Workaround)."},
+{"a":"Change","f":"Änderung (ITIL)","d":"Geplante Änderung an Service oder Infrastruktur. Wird bewertet, genehmigt und dokumentiert."},
+{"a":"OLA","f":"Operational Level Agreement","d":"Interne Vereinbarung zwischen Abteilungen desselben Anbieters, damit das SLA nach außen eingehalten werden kann."},
+{"a":"CMDB","f":"Configuration Management Database","d":"Verzeichnis aller Konfigurationselemente einer IT-Landschaft und ihrer Beziehungen zueinander."},
+{"a":"Service Desk","f":"Service Desk","d":"Zentrale Anlaufstelle (Single Point of Contact) für alle Anliegen der Nutzer."},
+{"a":"Workaround","f":"Umgehungslösung","d":"Vorläufige Maßnahme, die den Betrieb wiederherstellt, ohne die Ursache zu beseitigen."},
+{"a":"RACI","f":"Responsible, Accountable, Consulted, Informed","d":"Matrix zur Klärung von Zuständigkeiten je Aufgabe. Genau ein A je Zeile, R kann mehrfach vergeben werden."},
+{"a":"Sequenzdiagramm","f":"UML-Sequenzdiagramm","d":"Zeigt den zeitlichen Ablauf des Nachrichtenaustauschs zwischen Objekten mit Lebenslinien und Aktivierungsbalken."},
+{"a":"Lebenslinie","f":"Lifeline","d":"Senkrechte gestrichelte Linie im Sequenzdiagramm, die die Existenz eines Objekts über die Zeit darstellt."},
+{"a":"SPF","f":"Sender Policy Framework","d":"DNS-Eintrag, der festlegt, welche Server für eine Domain Mails versenden dürfen. Prüft den sendenden Server."},
+{"a":"DKIM","f":"DomainKeys Identified Mail","d":"Kryptografische Signatur der Mail durch den sendenden Server. Der öffentliche Schlüssel liegt im DNS, erkennt Änderungen am Transportweg."},
+{"a":"DMARC","f":"Domain-based Message Authentication, Reporting and Conformance","d":"Baut auf SPF und DKIM auf, fordert Übereinstimmung mit der sichtbaren Absenderdomain und legt die Behandlung fest: none, quarantine oder reject."},
+{"a":"Alignment","f":"Domain-Alignment","d":"DMARC-Anforderung, dass die per SPF oder DKIM geprüfte Domain zur sichtbaren Absenderadresse passt."}];
 
 // ---- Bibliothek: Render + Suche ----
 const libList = document.getElementById('libList');
@@ -18939,7 +19012,7 @@ renderLib(GLOSSAR_SORTED);
   var CURATED = {
     "r-ap1": ["FAZ","FEZ","SAZ","SEZ","USV","TOM","AVV","RPO","RTO"],
     "r-api": ["REST","PUT","PATCH","OAuth","Bearer-Token","SOAP"],
-    "r-raid": ["RAID","Hot-Spare","Hot-Swap","RPO","RTO","GFS"],
+    "r-raid": ["RAID","Hot-Spare","RPO","RTO","GFS","Generationenprinzip","Tower of Hanoi"],
     "r-datenschutz": ["DSGVO","BDSG","TOM","AVV","DSFA","DSB"],
     "r-diagnose": ["ICMP","DNS","MAC"],
     "r-dnsdhcp": ["DORA","Resolver","APIPA","TLD","TTL"],
@@ -18949,14 +19022,14 @@ renderLib(GLOSSAR_SORTED);
     "r-hyperv": ["Hypervisor","Baremetal","Hosted","Para-Virtualisierung"],
     "r-ip": ["ARP","NDP","SLAAC","APIPA","ARP-Cache","Multicast","Broadcast"],
     "r-security": ["CIA","2FA","DMZ","IDS","IPS","Honeypot","Phishing","Pentest"],
-    "r-medien": ["UTP","STP","MST","LWL","OUI","BNC","Crosstalk"],
+    "r-medien": ["UTP","STP","MST","LWL","OUI","ADSL","SDSL","VDSL"],
     "r-logik": ["AND","OR","XOR","NAND","NOR","XNOR"],
     "r-mux": ["MUX","DEMUX","TDM","FDM","WDM","CDM"],
     "r-ausdehnung": ["BAN","PAN","CAN","MAN","GAN","MPLS"],
     "r-oop": [],
     "r-osi": ["OSI","PDU","ASCII","TLS"],
     "r-ports": ["Proxy","SOCKS","RDP","HTTPS","POP3","IMAP","STARTTLS","SMTP","TLS","SSL"],
-    "r-projekt": ["FAZ","FEZ","SAZ","SEZ","GP","FP"],
+    "r-projekt": ["FAZ","FEZ","V-Modell","Spiralmodell","XP","SMART","Tuckman","RACI"],
     
     "r-routing": ["STP","NAT","CAM","OSPF","RIP","Trunk","Longest Prefix Match","Cut-Through"],
     "r-sql": ["SQL"],
@@ -18970,7 +19043,15 @@ renderLib(GLOSSAR_SORTED);
     "r-voip": ["VoIP","SIP","RTP","QoS"],
     "r-vpn": ["IPsec","IKE","IKEv2","ISAKMP","ESP","AH","L2TP","OpenVPN","Diffie-Hellman"],
     "r-wlan": ["SSID","PSK","SAE","Roaming","Band Steering","IEEE 802.11","Wireless Controller"],
-    "r-zahlen": ["MSB","LSB","Nibble"]
+    "r-zahlen": ["MSB","LSB","Nibble"],
+    "r-vertraege": ["Kaufvertrag","Werkvertrag","Dienstvertrag","Leasing","Lieferverzug","Nacherfüllung"],
+    "r-markt": ["Polypol","Oligopol","Monopol","Monopson","Primärer Sektor","Tertiärer Sektor"],
+    "r-kalkulation": ["Bezugskalkulation","Zieleinkaufspreis","Bareinkaufspreis","Bezugspreis","Ratendarlehen","ROI"],
+    "r-malware": ["Wurm","Trojaner","Rootkit","Ransomware","Keylogger","Phishing","Zero-Day"],
+    "r-grundschutz": ["BSI","VIVA","IT-Grundschutz","Maximumprinzip","Kumulationseffekt"],
+    "r-storage": ["DAS","NAS","SAN","Block-Storage","File-Storage","Objekt-Storage"],
+    "r-itil": ["ITIL","Incident","Problem","Known Error","Change","SLA","OLA","CMDB"],
+    "r-mailsec": ["SPF","DKIM","DMARC","Alignment"]
   };
 
   var defByKey = {};
@@ -19173,13 +19254,76 @@ window.addEventListener('pageshow', () => { window.scrollTo(0, 0); });
   const input = document.getElementById('qsInput');
   const results = document.getElementById('qsResults');
   if(!wrap || !toggle || !input || !results) return;
-  // Datenquelle: die Sprungmarken des Nachschlagewerks (Label + Ziel-Anker).
+
+  function esc(s){ return String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])); }
+  function norm(s){ return s.toLowerCase().replace(/[^a-z0-9äöüß]/gi,''); }
+
+  // ---- Suchindex ----
+  // Ebene 1: die Kategorien selbst (Sprungmarken des Nachschlagewerks)
+  // Ebene 2: Hauptbegriffe innerhalb jeder Kategorie (Zwischenüberschriften und
+  //          hervorgehobene Fachbegriffe) mit kurzem Kontext und eigenem Sprungziel.
   const NAV = Array.from(document.querySelectorAll('.jump a')).map(a => ({
     label: a.textContent.trim(),
     hash: a.getAttribute('href')
   }));
-  function esc(s){ return String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])); }
-  function norm(s){ return s.toLowerCase().replace(/[^a-z0-9äöüß]/gi,''); }
+
+  const INDEX = [];
+  let anchorCount = 0;
+
+  // Kontext bauen: Begriff plus die nächsten Wörter, danach Auslassungszeichen
+  function snippet(term, rest){
+    const words = String(rest || '').trim().split(/\s+/).filter(Boolean).slice(0, 5);
+    let s = term;
+    if(words.length) s += ' ' + words.join(' ');
+    return s + ' …';
+  }
+
+  // Text ohne die eingebetteten Glossar-Bubbles lesen: diese werden vorher in den
+  // Reader eingefügt und würden den Begriff sonst um ihre Erklärung verlängern.
+  function cleanText(el){
+    if(!el) return '';
+    if(!el.querySelector || !el.querySelector('.gloss-bubble')){
+      return (el.textContent || '').trim().replace(/\s+/g,' ');
+    }
+    const copy = el.cloneNode(true);
+    Array.prototype.forEach.call(copy.querySelectorAll('.gloss-bubble'), b => b.parentNode.removeChild(b));
+    return (copy.textContent || '').trim().replace(/\s+/g,' ');
+  }
+
+  NAV.forEach(nav => {
+    const sec = document.getElementById(nav.hash.slice(1));
+    if(!sec) return;
+    // Die Kategorie selbst bleibt als Treffer erhalten
+    INDEX.push({ cat: nav.label, term: nav.label, text: nav.label, hash: nav.hash, top: true });
+
+    const seen = {};
+    // Zwischenüberschriften, hervorgehobene Fachbegriffe und die Begriffsspalte von Tabellen
+    const elems = sec.querySelectorAll('h3, strong, table tr > td:first-child, table tr > th:first-child');
+    Array.prototype.forEach.call(elems, function(el){
+      // führende Aufzählungs- und Rechenzeichen abschneiden
+      const term = cleanText(el).replace(/^[\u2212\u2013\u2014+\-=•·\s]+/, '').trim();
+      // unbrauchbare Kandidaten aussortieren
+      if(term.length < 3 || term.length > 42) return;
+      if(/^[0-9.,%\s]+$/.test(term)) return;
+      const key = norm(term);
+      if(!key || seen[key]) return;
+      seen[key] = true;
+
+      // Sprungziel: eigene Kennung vergeben, damit direkt zur Fundstelle gescrollt wird
+      let target = el.id;
+      if(!target){
+        target = 'qsx' + (++anchorCount);
+        el.id = target;
+      }
+      // Kontext: Text nach dem Begriff innerhalb desselben Absatzes
+      const host = el.closest('p, li, td, div, h3') || el;
+      const full = cleanText(host);
+      const pos = full.indexOf(term);
+      const rest = pos >= 0 ? full.slice(pos + term.length) : '';
+      INDEX.push({ cat: nav.label, term: term, text: snippet(term, rest), hash: '#' + target, top: false });
+    });
+  });
+
   function open(){ wrap.classList.add('open'); toggle.setAttribute('aria-expanded','true'); setTimeout(()=>input.focus(), 60); }
   function close(){ wrap.classList.remove('open'); toggle.setAttribute('aria-expanded','false'); results.classList.remove('has'); results.innerHTML=''; input.value=''; }
   function goTo(hash){
@@ -19195,11 +19339,39 @@ window.addEventListener('pageshow', () => { window.scrollTo(0, 0); });
   input.addEventListener('input', () => {
     const q = norm(input.value.trim());
     if(!q){ results.classList.remove('has'); results.innerHTML=''; return; }
-    const hits = NAV.filter(n => norm(n.label).includes(q)).slice(0, 12);
+    // Treffer bewerten: Kategorie vor Begriff, Wortanfang vor Vorkommen in der Mitte
+    const scored = [];
+    INDEX.forEach(e => {
+      const n = norm(e.term);
+      if(!n.includes(q)) return;
+      // Bei kurzen Eingaben nur Wortanfänge zeigen, sonst findet "SPF" auch "OSPF"
+      const wortAnfang = e.term.toLowerCase().split(/[^a-z0-9äöüß]+/)
+        .some(w => norm(w).indexOf(q) === 0);
+      if(q.length <= 4 && !wortAnfang) return;
+      let score = n.startsWith(q) ? 0 : (wortAnfang ? 1 : 2);
+      if(e.top) score -= 1;
+      if(n === q) score -= 2;
+      scored.push({ e: e, score: score });
+    });
+    scored.sort((a,b) => a.score - b.score || a.e.term.length - b.e.term.length);
+    // Gleiche Anzeige in derselben Kategorie nur einmal zeigen
+    const gesehen = {};
+    const hits = [];
+    for(let i = 0; i < scored.length && hits.length < 12; i++){
+      const e = scored[i].e;
+      const key = norm(e.cat) + '|' + norm(e.top ? e.term : e.text);
+      if(gesehen[key]) continue;
+      gesehen[key] = true;
+      hits.push(e);
+    }
     if(hits.length === 0){
       results.innerHTML = '<div class="qs-empty">Kein Stichwort gefunden.</div>';
     } else {
-      results.innerHTML = hits.map(n => '<button class="qs-navhit" data-hash="'+esc(n.hash)+'">'+esc(n.label)+'</button>').join('');
+      results.innerHTML = hits.map(n =>
+        '<button class="qs-navhit" data-hash="'+esc(n.hash)+'">' +
+        '<span class="qs-cat">'+esc(n.cat)+'</span>' +
+        '<span class="qs-snip">'+esc(n.top ? n.term : n.text)+'</span>' +
+        '</button>').join('');
       results.querySelectorAll('.qs-navhit').forEach(btn => {
         btn.addEventListener('click', () => goTo(btn.dataset.hash));
       });
