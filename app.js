@@ -12614,6 +12614,106 @@ const POOLS = {
      { "t": "VLANs begrenzen ein gesamtes Netz technisch hart auf maximal 16 Endgeräte und eignen sich deshalb nur für sehr kleine Arbeitsgruppen", "ok": false }
     ],
     "e": "Die logische Trennung ersetzt keine physische: Inter-VLAN-Verkehr braucht Routing, und die Isolation ist nur so gut wie die Konfiguration — Angriffe wie VLAN-Hopping oder Fehlkonfigurationen können sie durchbrechen."
+   },
+   {
+    "q": "Ein Switch empfängt einen Frame mit VLAN-Kennung 30 auf einem Trunk-Port. Wie verfährt er mit dieser Information?",
+    "o": [
+     { "t": "Er leitet den Frame nur an Ports weiter, die diesem VLAN zugeordnet sind", "ok": true },
+     { "t": "Er entfernt die Kennung und flutet den Frame an alle vorhandenen Ports", "ok": false },
+     { "t": "Er verwirft den Frame, sofern der Empfängerport kein Trunk-Port ist", "ok": false },
+     { "t": "Er wandelt die Kennung in eine IP-Adresse des Zielnetzes um", "ok": false }
+    ],
+    "e": "Die Kennung ordnet den Frame einem VLAN zu. Der Switch stellt ihn nur innerhalb dieser Broadcastdomäne zu, an Zugangsports ohne Kennung."
+   },
+   {
+    "q": "Warum verringert eine VLAN-Segmentierung die Netzlast?",
+    "o": [
+     { "t": "Weil Broadcasts nur noch innerhalb des jeweiligen VLANs verteilt werden", "ok": true },
+     { "t": "Weil die Übertragungsrate der einzelnen Ports angehoben wird", "ok": false },
+     { "t": "Weil jeder Frame auf dem Trunk automatisch komprimiert wird", "ok": false },
+     { "t": "Weil sämtliche Pakete zwischengespeichert und gebündelt werden", "ok": false }
+    ],
+    "e": "Jedes VLAN bildet eine eigene Broadcastdomäne. Broadcast- und Multicast-Verkehr bleibt darin, statt das gesamte Netz zu belasten."
+   },
+   {
+    "q": "Welche Aussage zum nativen VLAN trifft zu?",
+    "o": [
+     { "t": "Sein Verkehr wird auf dem Trunk ohne Kennung übertragen", "ok": true },
+     { "t": "Sein Verkehr wird auf dem Trunk doppelt gekennzeichnet", "ok": false },
+     { "t": "Es kann als einziges VLAN keine Endgeräte aufnehmen", "ok": false },
+     { "t": "Es wird für jeden Trunk zwingend neu ausgehandelt", "ok": false }
+    ],
+    "e": "Das native VLAN läuft ungetaggt über den Trunk. Stimmen die Einstellungen beider Seiten nicht überein, entstehen Fehlzuordnungen und Sicherheitslücken."
+   },
+   {
+    "q": "Welche Folge hat eine fehlerhafte VLAN-Konfiguration häufig?",
+    "o": [
+     { "t": "Geräte erreichen ihr Gateway oder andere Dienste nicht mehr", "ok": true },
+     { "t": "Die Übertragungsrate aller Ports halbiert sich dauerhaft", "ok": false },
+     { "t": "Der Switch startet in regelmäßigen Abständen selbstständig neu", "ok": false },
+     { "t": "Die MAC-Adressen der Endgeräte werden dauerhaft überschrieben", "ok": false }
+    ],
+    "e": "Falsche Portzuordnung oder abweichende Trunk-Einstellungen führen dazu, dass Geräte im falschen oder in keinem VLAN landen und dadurch isoliert sind."
+   },
+   {
+    "q": "Warum wird der Verkehr zwischen VLANs meist zentral über einen Router oder Layer-3-Switch geführt?",
+    "o": [
+     { "t": "Weil VLANs getrennte Broadcastdomänen sind und eine Vermittlung auf Schicht 3 benötigen", "ok": true },
+     { "t": "Weil Switches Frames zwischen zwei Ports grundsätzlich nicht weiterleiten können", "ok": false },
+     { "t": "Weil die VLAN-Kennung nur von Routern gelesen werden kann", "ok": false },
+     { "t": "Weil andernfalls die Zahl möglicher VLANs begrenzt wäre", "ok": false }
+    ],
+    "e": "Ein Switch verbindet nur innerhalb eines VLANs. Der Übergang zwischen VLANs erfordert Routing und lässt sich dort zugleich mit Regeln kontrollieren."
+   },
+   {
+    "q": "Welcher Vorteil entsteht durch VLANs bei einem Umzug innerhalb desselben Gebäudes?",
+    "o": [
+     { "t": "Die Zuordnung folgt dem Arbeitsplatz durch Umkonfiguration statt durch Umverkabelung", "ok": true },
+     { "t": "Die vorhandenen Kabelwege müssen für jeden Umzug vollständig neu verlegt werden", "ok": false },
+     { "t": "Alle betroffenen Endgeräte erhalten zwingend neue MAC-Adressen", "ok": false },
+     { "t": "Die Anzahl der benötigten Switches verringert sich automatisch", "ok": false }
+    ],
+    "e": "Die Netzzugehörigkeit ist logisch, nicht physisch. Ein Portwechsel in der Konfiguration genügt, die Verkabelung bleibt unverändert."
+   },
+   {
+    "q": "Welche Aufgabe erfüllt die VLAN-Kennung im Frame?",
+    "o": [
+     { "t": "Sie ordnet den Frame einem bestimmten logischen Netz zu", "ok": true },
+     { "t": "Sie legt die Übertragungsrate für diesen Frame fest", "ok": false },
+     { "t": "Sie ersetzt die Ziel-MAC-Adresse innerhalb des Trunks", "ok": false },
+     { "t": "Sie bestimmt die Lebensdauer des Frames im Netz", "ok": false }
+    ],
+    "e": "Die Kennung nach IEEE 802.1Q wird im Frame ergänzt und erlaubt es, mehrere logische Netze über eine gemeinsame Leitung zu führen."
+   },
+   {
+    "q": "Warum werden ungenutzte Switch-Ports in sicherheitskritischen Umgebungen deaktiviert?",
+    "o": [
+     { "t": "Damit sich niemand unbemerkt über eine freie Buchse ins Netz einklinken kann", "ok": true },
+     { "t": "Damit der Switch weniger elektrische Leistung aufnimmt", "ok": false },
+     { "t": "Damit die Anzahl der gelernten MAC-Adressen je Port unbegrenzt bleibt", "ok": false },
+     { "t": "Damit die Kennung des nativen VLANs erhalten bleibt", "ok": false }
+    ],
+    "e": "Ein offener Port ist ein unkontrollierter Zugang. Ergänzend werden ungenutzte Ports einem isolierten VLAN zugewiesen."
+   },
+   {
+    "q": "Welche Aussage über VLANs und die physische Hardware ist zutreffend?",
+    "o": [
+     { "t": "Mehrere VLANs können dieselbe physische Infrastruktur nutzen", "ok": true },
+     { "t": "Jedes VLAN benötigt einen eigenen physischen Switch", "ok": false },
+     { "t": "Jedes VLAN benötigt eine eigene Verkabelung zum Endgerät", "ok": false },
+     { "t": "VLANs lassen sich ausschließlich über Glasfaser betreiben", "ok": false }
+    ],
+    "e": "Die Trennung ist logisch. Genau darin liegt der wirtschaftliche Vorteil: getrennte Netze ohne getrennte Verkabelung."
+   },
+   {
+    "q": "Welcher Zweck wird mit der Aufteilung von Mitarbeitern, Servern und Gästen in getrennte VLANs verfolgt?",
+    "o": [
+     { "t": "Zugriffe zwischen den Bereichen lassen sich gezielt einschränken", "ok": true },
+     { "t": "Die Übertragungsrate für jeden Bereich wird garantiert erhöht", "ok": false },
+     { "t": "Die Anzahl benötigter IP-Adressen sinkt in jedem Bereich", "ok": false },
+     { "t": "Alle Bereiche erhalten automatisch denselben Schutzbedarf", "ok": false }
+    ],
+    "e": "Durch die Trennung erreicht das Gästenetz das Servernetz nicht mehr direkt. Der Übergang läuft kontrolliert über Router und Regelwerk."
    }
   ]
  },
@@ -17906,6 +18006,1246 @@ const POOLS = {
     "e": "Zwei verschiedene Schemata an den Enden ergeben das historische Crossover-Kabel. Gleiches Schema an beiden Enden ergibt ein normales 1:1-Kabel."
    }
   ]
+ },
+ "vertraege": {
+  "name": "Verträge & Recht",
+  "q": [
+   {
+    "q": "Wann kommt ein Kaufvertrag zustande?",
+    "o": [
+     { "t": "Mit zwei übereinstimmenden Willenserklärungen, also Angebot und Annahme", "ok": true },
+     { "t": "Mit der körperlichen Übergabe der Ware an den Käufer", "ok": false },
+     { "t": "Mit dem vollständigen Eingang der Zahlung auf dem Konto des Verkäufers", "ok": false },
+     { "t": "Mit dem Versand der Rechnung durch den Verkäufer", "ok": false }
+    ],
+    "e": "Der Vertrag entsteht bereits durch Angebot und Annahme. Lieferung und Zahlung sind die Erfüllung des bereits geschlossenen Vertrags."
+   },
+   {
+    "q": "Ein Onlineshop zeigt einen Artikel mit Preis an. Wie ist diese Darstellung rechtlich einzuordnen?",
+    "o": [
+     { "t": "Als unverbindliche Aufforderung zur Abgabe eines Angebots", "ok": true },
+     { "t": "Als verbindliches Angebot des Händlers an den Kunden", "ok": false },
+     { "t": "Als Annahme eines zuvor abgegebenen Kundenangebots", "ok": false },
+     { "t": "Als bereits geschlossener Vertrag zum angezeigten Preis", "ok": false }
+    ],
+    "e": "Die Warenpräsentation ist eine invitatio ad offerendum. Erst die Bestellung des Kunden ist das Angebot, die Bestätigung des Händlers die Annahme."
+   },
+   {
+    "q": "Welche Bedeutung hat die Abnahme beim Werkvertrag?",
+    "o": [
+     { "t": "Mit ihr wird die Vergütung fällig und die Gewährleistungsfrist beginnt", "ok": true },
+     { "t": "Mit ihr geht das Eigentum an der gelieferten Sache auf den Besteller über", "ok": false },
+     { "t": "Mit ihr endet jede weitere Verantwortung des Auftragnehmers vollständig", "ok": false },
+     { "t": "Mit ihr wird der zuvor ausgehandelte Vertrag überhaupt erst wirksam", "ok": false }
+    ],
+    "e": "Die Abnahme ist die Bestätigung, dass das Werk im Wesentlichen vertragsgemäß erbracht wurde. Sie löst die Zahlungspflicht aus und startet die Gewährleistungsfrist."
+   },
+   {
+    "q": "Worin unterscheiden sich Werkvertrag und Dienstvertrag?",
+    "o": [
+     { "t": "Der Werkvertrag schuldet einen Erfolg, der Dienstvertrag nur das Tätigwerden", "ok": true },
+     { "t": "Der Dienstvertrag schuldet einen Erfolg, der Werkvertrag nur das Tätigwerden", "ok": false },
+     { "t": "Der Werkvertrag gilt nur für Sachen, der Dienstvertrag nur für Software", "ok": false },
+     { "t": "Der Werkvertrag ist stets befristet, der Dienstvertrag stets unbefristet", "ok": false }
+    ],
+    "e": "Entscheidend ist der geschuldete Erfolg. Beim Werkvertrag folgen daraus Abnahme und Gewährleistung, beim Dienstvertrag nicht."
+   },
+   {
+    "q": "Welche Aussage zum Leasing trifft zu?",
+    "o": [
+     { "t": "Die Nutzung wird über eine feste Laufzeit überlassen, das Eigentum bleibt beim Leasinggeber", "ok": true },
+     { "t": "Das Eigentum geht bereits mit der ersten Rate auf den Leasingnehmer über", "ok": false },
+     { "t": "Der Leasinggeber trägt in jedem Fall sämtliche anfallenden Wartungs- und Reparaturkosten", "ok": false },
+     { "t": "Der Vertrag ist für beide Seiten jederzeit fristlos kündbar", "ok": false }
+    ],
+    "e": "Leasing überlässt die Nutzung über eine feste Laufzeit. Das Eigentum verbleibt beim Leasinggeber, am Ende steht Rückgabe, Verlängerung oder Kauf."
+   },
+   {
+    "q": "Eine bestellte Ware trifft zwei Wochen nach dem vereinbarten Termin ein. Welche Vertragsstörung liegt vor?",
+    "o": [
+     { "t": "Lieferverzug", "ok": true },
+     { "t": "Annahmeverzug", "ok": false },
+     { "t": "Zahlungsverzug", "ok": false },
+     { "t": "Sachmangel", "ok": false }
+    ],
+    "e": "Der Schuldner überschreitet den vereinbarten Liefertermin. Der Besteller kann auf Erfüllung bestehen, Verzugsschaden verlangen oder nach Nachfrist zurücktreten."
+   },
+   {
+    "q": "Welches Recht steht bei einer mangelhaften Lieferung an erster Stelle?",
+    "o": [
+     { "t": "Die Nacherfüllung durch Reparatur oder Ersatzlieferung", "ok": true },
+     { "t": "Der sofortige Rücktritt vom gesamten Kaufvertrag", "ok": false },
+     { "t": "Die sofortige Minderung des vereinbarten Kaufpreises", "ok": false },
+     { "t": "Der unmittelbare Schadensersatz statt der Leistung", "ok": false }
+    ],
+    "e": "Die Nacherfüllung hat Vorrang. Erst wenn sie fehlschlägt, verweigert wird oder unzumutbar ist, kommen Minderung, Rücktritt oder Schadensersatz in Betracht."
+   },
+   {
+    "q": "Ein Betrieb mietet Serverkapazität in einem Rechenzentrum an. Welche Vertragsart liegt vor?",
+    "o": [
+     { "t": "Ein Mietvertrag", "ok": true },
+     { "t": "Ein Kaufvertrag", "ok": false },
+     { "t": "Ein Werkvertrag", "ok": false },
+     { "t": "Ein Darlehensvertrag", "ok": false }
+    ],
+    "e": "Überlassen wird der Gebrauch gegen Entgelt, das Eigentum bleibt beim Anbieter. Das kennzeichnet den Mietvertrag."
+   },
+   {
+    "q": "Ein Kunde nimmt eine ordnungsgemäß angelieferte Ware nicht an. Wie wird dieser Fall bezeichnet?",
+    "o": [
+     { "t": "Annahmeverzug", "ok": true },
+     { "t": "Lieferverzug", "ok": false },
+     { "t": "Zahlungsverzug", "ok": false },
+     { "t": "Schlechtleistung", "ok": false }
+    ],
+    "e": "Beim Annahmeverzug kann der Verkäufer die Ware einlagern und die dadurch entstehenden Kosten weiterberechnen."
+   },
+   {
+    "q": "Welche Leistung schuldet ein Dienstvertrag über laufenden IT-Support nach Aufwand?",
+    "o": [
+     { "t": "Sorgfältiges Tätigwerden ohne Zusage eines bestimmten Ergebnisses", "ok": true },
+     { "t": "Die Behebung jeder gemeldeten Störung innerhalb der Vertragslaufzeit", "ok": false },
+     { "t": "Die Übergabe eines abnahmefähigen Werks am Ende der Laufzeit", "ok": false },
+     { "t": "Die Übertragung des Eigentums an der eingesetzten Software", "ok": false }
+    ],
+    "e": "Der Dienstvertrag schuldet die Tätigkeit, nicht den Erfolg. Eine Erfolgshaftung entsteht daraus nicht."
+   }
+  ]
+ },
+ "markt": {
+  "name": "Markt & Wirtschaft",
+  "q": [
+   {
+    "q": "Wie wird eine Marktform mit vielen Anbietern und vielen Nachfragern bezeichnet?",
+    "o": [
+     { "t": "Polypol", "ok": true },
+     { "t": "Oligopol", "ok": false },
+     { "t": "Monopol", "ok": false },
+     { "t": "Monopson", "ok": false }
+    ],
+    "e": "Im Polypol stehen viele Anbieter vielen Nachfragern gegenüber. Der einzelne Anbieter ist Preisnehmer."
+   },
+   {
+    "q": "Auf einem Markt gibt es viele Anbieter, aber nur einen einzigen Nachfrager. Welche Marktform liegt vor?",
+    "o": [
+     { "t": "Monopson", "ok": true },
+     { "t": "Angebotsmonopol", "ok": false },
+     { "t": "Angebotsoligopol", "ok": false },
+     { "t": "Polypol", "ok": false }
+    ],
+    "e": "Das Monopson ist das Nachfragemonopol. Die Marktmacht liegt hier auf der Seite des einzigen Abnehmers."
+   },
+   {
+    "q": "Welche Aussage zur Preisbildung im Polypol trifft zu?",
+    "o": [
+     { "t": "Der einzelne Anbieter ist Preisnehmer und muss sich am Marktpreis orientieren", "ok": true },
+     { "t": "Der einzelne Anbieter setzt den geltenden Preis weitgehend selbst fest", "ok": false },
+     { "t": "Der Preis wird von den wenigen großen Anbietern gemeinsam abgestimmt", "ok": false },
+     { "t": "Der Preis wird ausschließlich durch staatliche Vorgaben bestimmt", "ok": false }
+    ],
+    "e": "Im Polypol bildet sich der Preis aus Angebot und Nachfrage. Der einzelne Anbieter hat zu wenig Gewicht, um ihn zu beeinflussen."
+   },
+   {
+    "q": "Warum reagieren Anbieter im Oligopol besonders stark aufeinander?",
+    "o": [
+     { "t": "Weil die geringe Anbieterzahl jede Preisänderung für alle spürbar macht", "ok": true },
+     { "t": "Weil der Staat im Oligopol jede Preisänderung vorher genehmigen muss", "ok": false },
+     { "t": "Weil im Oligopol jeder Anbieter nur einen einzigen Kunden beliefert", "ok": false },
+     { "t": "Weil die Produkte im Oligopol grundsätzlich nicht austauschbar sind", "ok": false }
+    ],
+    "e": "Bei wenigen Anbietern wirkt sich das Verhalten eines Einzelnen unmittelbar auf die anderen aus. Preissenkungen werden schnell nachgezogen."
+   },
+   {
+    "q": "Was beschreibt der Begriff Marktmacht?",
+    "o": [
+     { "t": "Die Fähigkeit, Preis oder Bedingungen einseitig zu beeinflussen", "ok": true },
+     { "t": "Die absolute Höhe des erzielten Jahresumsatzes eines Anbieters", "ok": false },
+     { "t": "Die Anzahl der Beschäftigten eines marktführenden Unternehmens", "ok": false },
+     { "t": "Die gesetzlich festgelegte Obergrenze für jede Preiserhöhung", "ok": false }
+    ],
+    "e": "Marktmacht steigt, je weniger Anbieter es gibt und je schwerer die Leistung ersetzbar ist. Ihr Missbrauch unterliegt dem Wettbewerbsrecht."
+   },
+   {
+    "q": "Welchem Wirtschaftssektor ist ein Softwarehaus zuzuordnen?",
+    "o": [
+     { "t": "Dem tertiären Sektor", "ok": true },
+     { "t": "Dem primären Sektor", "ok": false },
+     { "t": "Dem sekundären Sektor", "ok": false },
+     { "t": "Dem quartären Sektor", "ok": false }
+    ],
+    "e": "Softwareentwicklung und Betreuung sind Dienstleistungen und gehören damit zum tertiären Sektor."
+   },
+   {
+    "q": "Welche Tätigkeit gehört zum sekundären Sektor?",
+    "o": [
+     { "t": "Die Fertigung von Rechnern in einer Produktionsstätte", "ok": true },
+     { "t": "Die Beratung eines Kunden zur passenden Systemauswahl", "ok": false },
+     { "t": "Der Abbau von Rohstoffen im Tagebau eines Reviers", "ok": false },
+     { "t": "Die Auswertung von Forschungsdaten in einem Institut", "ok": false }
+    ],
+    "e": "Der sekundäre Sektor umfasst die Verarbeitung von Rohstoffen zu Gütern, also Industrie, Handwerk und Bau."
+   },
+   {
+    "q": "Welche Bereiche zählen zum primären Sektor?",
+    "o": [
+     { "t": "Land- und Forstwirtschaft, Fischerei und Bergbau", "ok": true },
+     { "t": "Handel, Logistik und Bankwesen", "ok": false },
+     { "t": "Industrie, Handwerk und Bauwirtschaft mit Fertigung", "ok": false },
+     { "t": "Forschung, Beratung und Datenanalyse", "ok": false }
+    ],
+    "e": "Der primäre Sektor ist die Urproduktion, also die Gewinnung von Rohstoffen aus der Natur."
+   },
+   {
+    "q": "Wie hat sich die Beschäftigung in Industrieländern über die Zeit zwischen den Sektoren verschoben?",
+    "o": [
+     { "t": "Vom primären über den sekundären hin zum tertiären Sektor", "ok": true },
+     { "t": "Vom tertiären über den sekundären hin zum primären Sektor", "ok": false },
+     { "t": "Vom sekundären über den tertiären hin zum primären Sektor", "ok": false },
+     { "t": "Sie ist über die Jahrzehnte hinweg weitgehend unverändert geblieben", "ok": false }
+    ],
+    "e": "Diese Verschiebung wird als sektoraler Strukturwandel bezeichnet. Heute arbeitet der überwiegende Teil der Beschäftigten im Dienstleistungsbereich."
+   },
+   {
+    "q": "Ein Anbieter besitzt als Einziger die Lizenz für eine bestimmte Spezialsoftware. Welche Marktform liegt vor?",
+    "o": [
+     { "t": "Ein Angebotsmonopol", "ok": true },
+     { "t": "Ein Nachfragemonopol", "ok": false },
+     { "t": "Ein Angebotsoligopol", "ok": false },
+     { "t": "Ein Polypol", "ok": false }
+    ],
+    "e": "Ein einziger Anbieter steht vielen Nachfragern gegenüber. Er ist Preissetzer, begrenzt durch Zahlungsbereitschaft und Aufsicht."
+   }
+  ]
+ },
+ "kalkulation": {
+  "name": "Kaufmännisches Rechnen",
+  "q": [
+   {
+    "q": "Wovon wird das Skonto in der Bezugskalkulation berechnet?",
+    "o": [
+     { "t": "Vom Zieleinkaufspreis", "ok": true },
+     { "t": "Vom Listeneinkaufspreis", "ok": false },
+     { "t": "Vom Bareinkaufspreis", "ok": false },
+     { "t": "Vom Bezugspreis einschließlich Bezugskosten", "ok": false }
+    ],
+    "e": "Reihenfolge: Listeneinkaufspreis minus Rabatt ergibt den Zieleinkaufspreis. Erst davon wird das Skonto abgezogen."
+   },
+   {
+    "q": "Welche Größe ergibt sich, wenn zum Bareinkaufspreis die Bezugskosten hinzugerechnet werden?",
+    "o": [
+     { "t": "Der Bezugspreis", "ok": true },
+     { "t": "Der Zieleinkaufspreis", "ok": false },
+     { "t": "Der Listeneinkaufspreis", "ok": false },
+     { "t": "Der Nettoverkaufspreis", "ok": false }
+    ],
+    "e": "Der Bezugspreis, auch Einstandspreis genannt, gibt die tatsächlichen Kosten der Ware im Lager an."
+   },
+   {
+    "q": "Der Listeneinkaufspreis beträgt 2.000,00 EUR, der Rabatt 10 Prozent. Wie hoch ist der Zieleinkaufspreis?",
+    "o": [
+     { "t": "1.800,00 EUR", "ok": true },
+     { "t": "2.200,00 EUR", "ok": false },
+     { "t": "1.980,00 EUR", "ok": false },
+     { "t": "1.600,00 EUR", "ok": false }
+    ],
+    "e": "2.000,00 EUR minus 10 Prozent Rabatt, also 200,00 EUR, ergibt einen Zieleinkaufspreis von 1.800,00 EUR."
+   },
+   {
+    "q": "Wie werden Bezugskosten wie Fracht und Verpackung in der Bezugskalkulation behandelt?",
+    "o": [
+     { "t": "Sie werden nach allen Abzügen hinzugerechnet", "ok": true },
+     { "t": "Sie werden vom Listeneinkaufspreis vorab abgezogen", "ok": false },
+     { "t": "Sie werden wie ein zusätzlicher Rabatt behandelt", "ok": false },
+     { "t": "Sie bleiben in der Bezugskalkulation unberücksichtigt", "ok": false }
+    ],
+    "e": "Bezugskosten sind kein Nachlass, sondern zusätzliche Kosten. Sie werden auf den Bareinkaufspreis addiert und ergeben den Bezugspreis."
+   },
+   {
+    "q": "Wie wird die Eigenkapitalrentabilität berechnet?",
+    "o": [
+     { "t": "Gewinn geteilt durch Eigenkapital mal 100 Prozent", "ok": true },
+     { "t": "Gewinn geteilt durch Gesamtkapital mal 100 Prozent", "ok": false },
+     { "t": "Gewinn geteilt durch Umsatzerlöse mal 100 Prozent", "ok": false },
+     { "t": "Umsatz geteilt durch Eigenkapital mal 100 Prozent", "ok": false }
+    ],
+    "e": "Die Eigenkapitalrentabilität zeigt, wie sich das von den Eigentümern eingesetzte Kapital verzinst hat."
+   },
+   {
+    "q": "Warum werden bei der Gesamtkapitalrentabilität die Fremdkapitalzinsen zum Gewinn hinzugerechnet?",
+    "o": [
+     { "t": "Weil die Kennzahl die Verzinsung des gesamten Kapitals unabhängig von der Finanzierung misst", "ok": true },
+     { "t": "Weil Fremdkapitalzinsen steuerlich grundsätzlich nicht abzugsfähig sind", "ok": false },
+     { "t": "Weil Fremdkapitalzinsen einen wesentlichen Teil des Umsatzes eines Betriebs darstellen", "ok": false },
+     { "t": "Weil ohne diese Korrektur das Eigenkapital doppelt erfasst würde", "ok": false }
+    ],
+    "e": "Die Zinsen sind die Vergütung des Fremdkapitals und wurden bereits vom Gewinn abgezogen. Für die Betrachtung des gesamten Kapitals müssen sie wieder eingerechnet werden."
+   },
+   {
+    "q": "Was gibt die Umsatzrentabilität an?",
+    "o": [
+     { "t": "Wie viel Gewinn von jedem Euro Umsatz übrig bleibt", "ok": true },
+     { "t": "Wie oft das eingesetzte Kapital im Umsatz umgeschlagen wird", "ok": false },
+     { "t": "Wie hoch der Umsatz im Verhältnis zum Eigenkapital liegt", "ok": false },
+     { "t": "Wie stark der Umsatz gegenüber dem Vorjahr gewachsen ist", "ok": false }
+    ],
+    "e": "Die Umsatzrentabilität setzt den Gewinn ins Verhältnis zum Umsatz und zeigt damit die Gewinnspanne."
+   },
+   {
+    "q": "Welches Merkmal kennzeichnet ein Ratendarlehen?",
+    "o": [
+     { "t": "Die Tilgung bleibt gleich, die Gesamtrate sinkt über die Laufzeit", "ok": true },
+     { "t": "Die Gesamtrate bleibt gleich, die Tilgung steigt über die Laufzeit", "ok": false },
+     { "t": "Tilgung und Zinsen bleiben über die gesamte Laufzeit unverändert", "ok": false },
+     { "t": "Die Zinsen werden erst am Ende der Laufzeit vollständig fällig", "ok": false }
+    ],
+    "e": "Beim Ratendarlehen ist die Tilgung konstant. Da die Zinsen auf die sinkende Restschuld berechnet werden, fällt die Gesamtrate von Periode zu Periode."
+   },
+   {
+    "q": "Ein Darlehen über 24.000,00 EUR wird über 4 Jahre mit gleichbleibender Tilgung zurückgezahlt. Der Zinssatz beträgt 5 Prozent. Wie hoch sind die Zinsen im ersten Jahr?",
+    "o": [
+     { "t": "1.200,00 EUR", "ok": true },
+     { "t": "1.000,00 EUR", "ok": false },
+     { "t": "1.500,00 EUR", "ok": false },
+     { "t": "600,00 EUR", "ok": false }
+    ],
+    "e": "Im ersten Jahr sind die Zinsen auf die volle Darlehenssumme zu zahlen: 24.000,00 EUR mal 5 Prozent ergibt 1.200,00 EUR."
+   },
+   {
+    "q": "Worin unterscheidet sich das Annuitätendarlehen vom Ratendarlehen?",
+    "o": [
+     { "t": "Beim Annuitätendarlehen bleibt die Gesamtrate konstant, beim Ratendarlehen die Tilgung", "ok": true },
+     { "t": "Beim Annuitätendarlehen bleibt die Tilgung konstant, beim Ratendarlehen die Gesamtrate", "ok": false },
+     { "t": "Beim Annuitätendarlehen entfallen die Zinsen im letzten Jahr der Laufzeit", "ok": false },
+     { "t": "Beim Annuitätendarlehen wird die Restschuld erst am Laufzeitende getilgt", "ok": false }
+    ],
+    "e": "Merkhilfe: Beim Ratendarlehen ist die Tilgung gleich, beim Annuitätendarlehen die Rate. Innerhalb der Annuität sinkt der Zinsanteil, der Tilgungsanteil steigt."
+   }
+  ]
+ },
+ "malware": {
+  "name": "Schadsoftware & Angriffe",
+  "q": [
+   {
+    "q": "Wodurch unterscheidet sich ein Wurm von einem Virus?",
+    "o": [
+     { "t": "Der Wurm verbreitet sich selbstständig über das Netz ohne Wirtsdatei", "ok": true },
+     { "t": "Der Wurm benötigt zwingend eine Wirtsdatei zur Verbreitung", "ok": false },
+     { "t": "Der Wurm wird ausschließlich über Wechseldatenträger übertragen", "ok": false },
+     { "t": "Der Wurm verschlüsselt stets die Daten des befallenen Systems", "ok": false }
+    ],
+    "e": "Der Virus hängt sich an eine Wirtsdatei und braucht deren Ausführung. Der Wurm verbreitet sich eigenständig über Netzverbindungen."
+   },
+   {
+    "q": "Wie gelangt ein Trojaner typischerweise auf ein System?",
+    "o": [
+     { "t": "Er wird als scheinbar nützliches Programm vom Nutzer selbst installiert", "ok": true },
+     { "t": "Er verbreitet sich selbstständig über offene Netzwerkdienste", "ok": false },
+     { "t": "Er hängt sich unbemerkt an bereits vorhandene Programmdateien", "ok": false },
+     { "t": "Er wird über eine ungepatchte Lücke automatisch nachgeladen", "ok": false }
+    ],
+    "e": "Der Trojaner tarnt sich als nützliche Anwendung. Er verbreitet sich nicht selbst, sondern nutzt die Täuschung des Anwenders."
+   },
+   {
+    "q": "Welche Eigenschaft kennzeichnet ein Rootkit?",
+    "o": [
+     { "t": "Es verbirgt seine Anwesenheit und die anderer Schadsoftware vor dem System", "ok": true },
+     { "t": "Es verschlüsselt gezielt Dateien und fordert anschließend Lösegeld", "ok": false },
+     { "t": "Es zeichnet sämtliche Tastatureingaben des Anwenders auf", "ok": false },
+     { "t": "Es überflutet ein Zielsystem mit einer Vielzahl von Anfragen", "ok": false }
+    ],
+    "e": "Rootkits nisten sich tief im System ein, oft auf Kernel-Ebene, und machen sich für Betriebssystem und Virenscanner unsichtbar."
+   },
+   {
+    "q": "Was beschreibt der Begriff Ransomware?",
+    "o": [
+     { "t": "Schadsoftware, die Daten verschlüsselt und Lösegeld für die Freigabe fordert", "ok": true },
+     { "t": "Schadsoftware, die sich selbstständig über Netzwerke verbreitet", "ok": false },
+     { "t": "Schadsoftware, die unbemerkt Informationen sammelt und weiterleitet", "ok": false },
+     { "t": "Schadsoftware, die einen versteckten Zugang zum System offen hält", "ok": false }
+    ],
+    "e": "Ransomware beschreibt die Wirkung, nicht den Verbreitungsweg. Sie kann über Anhänge, Lücken oder gekaperte Zugänge ins System kommen."
+   },
+   {
+    "q": "Welche Aufgabe erfüllt eine Backdoor?",
+    "o": [
+     { "t": "Sie hält einen versteckten Zugang für spätere Zugriffe offen", "ok": true },
+     { "t": "Sie verschlüsselt den gesamten Datenverkehr einer Verbindung", "ok": false },
+     { "t": "Sie prüft eingehende Dateien auf bekannte Schadsignaturen", "ok": false },
+     { "t": "Sie beschleunigt den Systemstart durch Umgehung von Prüfungen", "ok": false }
+    ],
+    "e": "Über eine Backdoor gelangt ein Angreifer erneut ins System, auch nachdem die ursprünglich genutzte Lücke geschlossen wurde."
+   },
+   {
+    "q": "Ein Mitarbeiter erhält eine Mail, die scheinbar von der Geschäftsführung stammt und eine eilige Überweisung anweist. Um welchen Angriff handelt es sich?",
+    "o": [
+     { "t": "Um CEO-Fraud", "ok": true },
+     { "t": "Um einen Wurmangriff", "ok": false },
+     { "t": "Um eine SQL-Injection", "ok": false },
+     { "t": "Um einen Brute-Force-Angriff", "ok": false }
+    ],
+    "e": "Beim CEO-Fraud gibt sich der Täter als Führungskraft aus und nutzt Autoritätsdruck. Wirksame Gegenmaßnahme ist ein verbindliches Rückrufverfahren."
+   },
+   {
+    "q": "Worin unterscheidet sich Spear-Phishing vom klassischen Phishing?",
+    "o": [
+     { "t": "Es richtet sich gezielt an eine bestimmte Person mit persönlichem Bezug", "ok": true },
+     { "t": "Es wird ausschließlich über soziale Netzwerke statt per Mail verbreitet", "ok": false },
+     { "t": "Es verzichtet auf gefälschte Links und nutzt nur Dateianhänge", "ok": false },
+     { "t": "Es zielt allein auf technische Lücken statt auf den Menschen", "ok": false }
+    ],
+    "e": "Spear-Phishing nutzt persönliche Details und wirkt dadurch glaubwürdiger. Die Variante gegen die Führungsebene heißt Whaling."
+   },
+   {
+    "q": "Welche Maßnahme wirkt am unmittelbarsten gegen Social Engineering?",
+    "o": [
+     { "t": "Schulung und Sensibilisierung der Beschäftigten", "ok": true },
+     { "t": "Der Einsatz eines zusätzlichen Paketfilters am Übergang", "ok": false },
+     { "t": "Die Erhöhung der Schlüssellänge bei der Verschlüsselung", "ok": false },
+     { "t": "Die Verkürzung der Gültigkeitsdauer von Zertifikaten", "ok": false }
+    ],
+    "e": "Social Engineering zielt auf den Menschen, nicht auf die Technik. Deshalb wirken organisatorische Maßnahmen wie Schulung und Vier-Augen-Prinzip am besten."
+   },
+   {
+    "q": "Was kennzeichnet eine Zero-Day-Schwachstelle?",
+    "o": [
+     { "t": "Sie wird ausgenutzt, bevor ein Sicherheitsupdate verfügbar ist", "ok": true },
+     { "t": "Sie betrifft ausschließlich Systeme ohne Virenschutzprogramm", "ok": false },
+     { "t": "Sie tritt nur am Tag der Erstinstallation eines Systems auf", "ok": false },
+     { "t": "Sie lässt sich durch ein einfaches Zurücksetzen dauerhaft beheben", "ok": false }
+    ],
+    "e": "Bei einer Zero-Day-Lücke hatte der Hersteller null Tage Zeit, sie zu schließen. Schutz bieten Segmentierung, Rechtebeschränkung und Erkennungssysteme."
+   },
+   {
+    "q": "Welche Gegenmaßnahme verhindert eine SQL-Injection am wirksamsten?",
+    "o": [
+     { "t": "Vorbereitete Anweisungen mit Parametern und geprüfte Eingaben", "ok": true },
+     { "t": "Eine längere Gültigkeitsdauer der Sitzungskennungen", "ok": false },
+     { "t": "Die Speicherung der Datenbank auf einem separaten Datenträger", "ok": false },
+     { "t": "Die Erhöhung der maximalen Feldlänge in der Eingabemaske", "ok": false }
+    ],
+    "e": "Bei vorbereiteten Anweisungen werden Eingaben als Daten und nie als Befehl behandelt. Eingeschleuster Code kann dadurch nicht ausgeführt werden."
+   }
+  ]
+ },
+ "storage": {
+  "name": "Storage-Systeme",
+  "q": [
+   {
+    "q": "Wie ist ein Direct Attached Storage angebunden?",
+    "o": [
+     { "t": "Direkt am Server über Schnittstellen wie SAS, SATA oder USB", "ok": true },
+     { "t": "Über das vorhandene LAN mit Zugriff per SMB oder NFS", "ok": false },
+     { "t": "Über ein eigenes Speichernetz mit Fibre Channel", "ok": false },
+     { "t": "Ausschließlich über eine verschlüsselte Internetverbindung", "ok": false }
+    ],
+    "e": "DAS ist direkt an einen Server angeschlossen und nur für diesen nutzbar. Der Zugriff erfolgt blockbasiert."
+   },
+   {
+    "q": "Worin unterscheidet sich ein NAS von einem SAN?",
+    "o": [
+     { "t": "Das NAS stellt Dateien über das LAN bereit, das SAN Blöcke über ein eigenes Speichernetz", "ok": true },
+     { "t": "Das NAS stellt Blöcke über ein eigenes Speichernetz bereit, das SAN Dateien über das LAN", "ok": false },
+     { "t": "Das NAS arbeitet ausschließlich mit Bandlaufwerken, das SAN nur mit Festplatten", "ok": false },
+     { "t": "Das NAS ist grundsätzlich verschlüsselt, das SAN überträgt stets im Klartext", "ok": false }
+    ],
+    "e": "Der Kernunterschied ist der Zugriff: dateibasiert beim NAS über SMB oder NFS, blockbasiert beim SAN. Daraus folgen auch Kosten und Leistungsfähigkeit."
+   },
+   {
+    "q": "Ein Server soll Speicher wie eine lokale Festplatte einbinden und selbst formatieren. Welche Bereitstellung passt?",
+    "o": [
+     { "t": "Block-Storage", "ok": true },
+     { "t": "File-Storage", "ok": false },
+     { "t": "Objekt-Storage", "ok": false },
+     { "t": "Ein Netzlaufwerk per SMB", "ok": false }
+    ],
+    "e": "Block-Storage liefert unstrukturierte Blöcke. Das Dateisystem legt der Server selbst an, was für Datenbanken und virtuelle Maschinen nötig ist."
+   },
+   {
+    "q": "Welche Eigenschaft kennzeichnet Objekt-Storage?",
+    "o": [
+     { "t": "Ablage als Objekte mit eindeutiger Kennung und Metadaten ohne Ordnerbaum", "ok": true },
+     { "t": "Ablage in einer klassischen Ordnerhierarchie mit vollständigen Pfadangaben", "ok": false },
+     { "t": "Ablage in gleich großen Blöcken ohne jede Zusatzinformation", "ok": false },
+     { "t": "Ablage ausschließlich auf lokal angeschlossenen Datenträgern", "ok": false }
+    ],
+    "e": "Der Zugriff erfolgt meist über eine Schnittstelle per HTTP. Objekt-Storage skaliert sehr gut, eignet sich aber schlecht für ständige Änderungen einzelner Dateien."
+   },
+   {
+    "q": "Für welchen Einsatz ist ein NAS typischerweise die passende Wahl?",
+    "o": [
+     { "t": "Für die gemeinsame Dateiablage mehrerer Abteilungen", "ok": true },
+     { "t": "Für die Anbindung eines Virtualisierungsclusters mit hoher Last", "ok": false },
+     { "t": "Für den internen Datenträger eines einzelnen Arbeitsplatzrechners", "ok": false },
+     { "t": "Für die Archivierung sehr großer Datenmengen über eine Programmierschnittstelle", "ok": false }
+    ],
+    "e": "Das NAS wird über das vorhandene Netz als Laufwerk eingebunden und ist günstig sowie schnell eingerichtet. Für hohe Lasten im Rechenzentrum ist ein SAN geeigneter."
+   },
+   {
+    "q": "Welche Aussage zum File-Storage trifft zu?",
+    "o": [
+     { "t": "Die Daten liegen in einer Ordnerhierarchie mit Pfaden und Dateinamen", "ok": true },
+     { "t": "Die Daten liegen als Objekte mit umfangreichen Metadaten vor", "ok": false },
+     { "t": "Die Daten werden in gleich große Blöcke ohne Struktur zerlegt", "ok": false },
+     { "t": "Die Daten sind ausschließlich über eine REST-Schnittstelle erreichbar", "ok": false }
+    ],
+    "e": "File-Storage ist leicht verständlich und gut gemeinsam nutzbar, wird bei sehr großen Datenmengen mit vielen Ebenen aber zunehmend unhandlich."
+   },
+   {
+    "q": "Warum wird ein SAN häufig über ein eigenes, getrenntes Netz betrieben?",
+    "o": [
+     { "t": "Weil Speicherzugriffe hohe Bandbreite und geringe Verzögerung benötigen", "ok": true },
+     { "t": "Weil Speicherzugriffe grundsätzlich nicht verschlüsselt werden dürfen", "ok": false },
+     { "t": "Weil Speichersysteme keine IP-basierte Übertragung unterstützen", "ok": false },
+     { "t": "Weil das Betriebssystem sonst keine Laufwerksbuchstaben vergeben kann", "ok": false }
+    ],
+    "e": "Ein eigenes Speichernetz hält den Speicherverkehr vom übrigen Datenverkehr fern und sichert so gleichbleibende Leistung."
+   },
+   {
+    "q": "Welcher Speicherzugriff eignet sich am besten für ein wachsendes Archiv mit sehr vielen Dateien?",
+    "o": [
+     { "t": "Objekt-Storage", "ok": true },
+     { "t": "Block-Storage", "ok": false },
+     { "t": "Direct Attached Storage", "ok": false },
+     { "t": "Ein einzelnes Netzlaufwerk", "ok": false }
+    ],
+    "e": "Objekt-Storage skaliert praktisch unbegrenzt und hält Metadaten je Objekt vor. Genau das brauchen Archive und Backups."
+   }
+  ]
+ },
+ "itil": {
+  "name": "ITIL & Service",
+  "q": [
+   {
+    "q": "Wie wird eine ungeplante Unterbrechung eines Service in ITIL bezeichnet?",
+    "o": [
+     { "t": "Als Incident", "ok": true },
+     { "t": "Als Problem", "ok": false },
+     { "t": "Als Change", "ok": false },
+     { "t": "Als Service Request", "ok": false }
+    ],
+    "e": "Der Incident ist die Störung beim Nutzer. Ziel ist die schnellstmögliche Wiederherstellung des Betriebs, notfalls über eine Umgehungslösung."
+   },
+   {
+    "q": "Worin unterscheidet sich ein Problem von einem Incident?",
+    "o": [
+     { "t": "Das Problem ist die zugrunde liegende Ursache, der Incident die Auswirkung", "ok": true },
+     { "t": "Der Incident ist die zugrunde liegende Ursache, das Problem die Auswirkung", "ok": false },
+     { "t": "Das Problem betrifft nur Hardware, der Incident ausschließlich Software", "ok": false },
+     { "t": "Das Problem wird vom Nutzer gemeldet, der Incident nur intern erfasst", "ok": false }
+    ],
+    "e": "Beim Incident zählt Geschwindigkeit, beim Problem die dauerhafte Lösung. Mehrere gleichartige Incidents deuten auf ein dahinterliegendes Problem hin."
+   },
+   {
+    "q": "Was kennzeichnet einen Known Error?",
+    "o": [
+     { "t": "Ein Problem mit bekannter Ursache und dokumentierter Umgehungslösung", "ok": true },
+     { "t": "Eine Störung, deren Ursache noch vollständig unbekannt ist", "ok": false },
+     { "t": "Eine geplante Änderung, die noch nicht genehmigt wurde", "ok": false },
+     { "t": "Eine Standardanfrage ohne jede Störung des Betriebs", "ok": false }
+    ],
+    "e": "Der Known Error erlaubt es, gleichartige Incidents sofort mit dem bekannten Workaround zu beantworten, während die dauerhafte Lösung noch aussteht."
+   },
+   {
+    "q": "Ein Mitarbeiter beantragt zusätzlichen Speicherplatz. Wie wird dieser Vorgang eingeordnet?",
+    "o": [
+     { "t": "Als Service Request", "ok": true },
+     { "t": "Als Incident", "ok": false },
+     { "t": "Als Problem", "ok": false },
+     { "t": "Als Known Error", "ok": false }
+    ],
+    "e": "Ein Service Request ist eine Standardanfrage ohne Störung. Er folgt einem festgelegten, meist genehmigungspflichtigen Ablauf."
+   },
+   {
+    "q": "Wozu dient ein Operational Level Agreement?",
+    "o": [
+     { "t": "Es regelt die interne Zusammenarbeit zwischen Abteilungen desselben Anbieters", "ok": true },
+     { "t": "Es regelt die zugesagten Leistungen gegenüber dem externen Kunden", "ok": false },
+     { "t": "Es regelt die Verträge mit externen Zulieferern", "ok": false },
+     { "t": "Es regelt die Aufbewahrungsfristen für sämtliche Kundendaten des Anbieters", "ok": false }
+    ],
+    "e": "Das OLA sichert intern ab, was im SLA nach außen zugesagt wurde. Externe Zulieferer werden über Underpinning Contracts eingebunden."
+   },
+   {
+    "q": "Welche Angaben bestimmen die Priorität eines Incidents?",
+    "o": [
+     { "t": "Die Auswirkung und die Dringlichkeit", "ok": true },
+     { "t": "Die Meldereihenfolge und die Tageszeit", "ok": false },
+     { "t": "Die Abteilung des Melders und dessen Position", "ok": false },
+     { "t": "Die geschätzten Kosten und der zuständige Dienstleister", "ok": false }
+    ],
+    "e": "Aus Auswirkung, also der Zahl betroffener Nutzer oder Prozesse, und Dringlichkeit ergibt sich die Priorität und damit die Reihenfolge der Bearbeitung."
+   },
+   {
+    "q": "Was geschieht bei einer funktionalen Eskalation?",
+    "o": [
+     { "t": "Der Vorgang wird an eine fachlich höhere Supportstufe weitergegeben", "ok": true },
+     { "t": "Der Vorgang wird an die Führungsebene der Institution übergeben", "ok": false },
+     { "t": "Der Vorgang wird ohne Bearbeitung geschlossen und archiviert", "ok": false },
+     { "t": "Der Vorgang wird an den meldenden Nutzer zurückgegeben", "ok": false }
+    ],
+    "e": "Die funktionale Eskalation geht in die fachliche Tiefe, etwa vom First zum Second Level. Die hierarchische Eskalation bezieht dagegen die Führung ein."
+   },
+   {
+    "q": "Welchen Zweck erfüllt eine Configuration Management Database?",
+    "o": [
+     { "t": "Sie verzeichnet alle Konfigurationselemente und deren Beziehungen zueinander", "ok": true },
+     { "t": "Sie speichert sämtliche Kennwörter der Administratoren zentral", "ok": false },
+     { "t": "Sie protokolliert ausschließlich fehlgeschlagene Anmeldeversuche der Nutzer", "ok": false },
+     { "t": "Sie enthält die Sicherungskopien aller betriebenen Systeme", "ok": false }
+    ],
+    "e": "Die CMDB macht Abhängigkeiten sichtbar. Dadurch lässt sich vor einer Änderung abschätzen, welche Services betroffen sein könnten."
+   },
+   {
+    "q": "Was ist die Aufgabe des Service Desk?",
+    "o": [
+     { "t": "Er ist die zentrale Anlaufstelle für alle Anliegen der Nutzer", "ok": true },
+     { "t": "Er entwickelt die eingesetzten Fachanwendungen weiter", "ok": false },
+     { "t": "Er entscheidet allein über die Genehmigung aller Changes", "ok": false },
+     { "t": "Er betreibt ausschließlich die Netzwerkinfrastruktur", "ok": false }
+    ],
+    "e": "Der Service Desk ist der Single Point of Contact. Er nimmt Meldungen auf, löst Standardfälle und steuert die Weitergabe."
+   },
+   {
+    "q": "Warum wird ein Change vor der Umsetzung bewertet und genehmigt?",
+    "o": [
+     { "t": "Weil ungeplante Änderungen ein wesentliches Risiko für den laufenden Betrieb sind", "ok": true },
+     { "t": "Weil jede Änderung gesetzlich genehmigungspflichtig ist", "ok": false },
+     { "t": "Weil ohne Genehmigung keine Rechnung gestellt werden darf", "ok": false },
+     { "t": "Weil Changes ausschließlich außerhalb der regulären Arbeitszeit erlaubt sind", "ok": false }
+    ],
+    "e": "Viele Störungen entstehen durch Änderungen. Bewertung, Genehmigung und Dokumentation begrenzen dieses Risiko und machen Ursachen später nachvollziehbar."
+   }
+  ]
+ },
+ "mailsec": {
+  "name": "E-Mail-Sicherheit",
+  "q": [
+   {
+    "q": "Was legt ein SPF-Eintrag fest?",
+    "o": [
+     { "t": "Welche Server für eine Domain Mails versenden dürfen", "ok": true },
+     { "t": "Mit welchem Schlüssel die Nachricht signiert wurde", "ok": false },
+     { "t": "Wie mit Nachrichten bei fehlgeschlagener Prüfung zu verfahren ist", "ok": false },
+     { "t": "Welche Empfänger Nachrichten der Domain annehmen dürfen", "ok": false }
+    ],
+    "e": "SPF prüft den einliefernden Server anhand einer im DNS veröffentlichten Liste zulässiger Absendeserver."
+   },
+   {
+    "q": "Was prüft DKIM?",
+    "o": [
+     { "t": "Ob die Nachricht auf dem Transportweg unverändert geblieben ist", "ok": true },
+     { "t": "Ob der einliefernde Server auf einer Positivliste steht", "ok": false },
+     { "t": "Ob der Empfänger zum Empfang berechtigt ist", "ok": false },
+     { "t": "Ob die Nachricht innerhalb der Gültigkeitsdauer zugestellt wurde", "ok": false }
+    ],
+    "e": "Der sendende Server signiert die Nachricht kryptografisch. Der öffentliche Schlüssel liegt im DNS, sodass der Empfänger Änderungen erkennt."
+   },
+   {
+    "q": "Welche Aufgabe erfüllt DMARC zusätzlich zu SPF und DKIM?",
+    "o": [
+     { "t": "Es fordert Übereinstimmung mit der sichtbaren Absenderdomain und legt die Behandlung fest", "ok": true },
+     { "t": "Es verschlüsselt den Inhalt der Nachricht Ende zu Ende", "ok": false },
+     { "t": "Es ersetzt die Prüfungen von SPF und DKIM vollständig", "ok": false },
+     { "t": "Es speichert eine vollständige Kopie jeder geprüften Nachricht dauerhaft beim Anbieter", "ok": false }
+    ],
+    "e": "DMARC baut auf beiden Verfahren auf. Über das Alignment stellt es sicher, dass die geprüfte Domain zur angezeigten Absenderadresse passt."
+   },
+   {
+    "q": "Wo werden SPF, DKIM und DMARC hinterlegt?",
+    "o": [
+     { "t": "Als Einträge im DNS der jeweiligen Domain", "ok": true },
+     { "t": "In der Konfigurationsdatei des empfangenden Mailclients", "ok": false },
+     { "t": "In der Signatur am Ende jeder versendeten Nachricht", "ok": false },
+     { "t": "In einem zentralen Verzeichnis des Internetdienstanbieters", "ok": false }
+    ],
+    "e": "Alle drei Verfahren werden als DNS-Einträge veröffentlicht, meist als TXT-Record, und sind dadurch für jeden Empfänger abrufbar."
+   },
+   {
+    "q": "Welche DMARC-Richtlinie weist nicht bestandene Nachrichten vollständig ab?",
+    "o": [
+     { "t": "p=reject", "ok": true },
+     { "t": "p=none", "ok": false },
+     { "t": "p=quarantine", "ok": false },
+     { "t": "p=monitor", "ok": false }
+    ],
+    "e": "Mit p=reject werden Nachrichten abgewiesen. Üblich ist der schrittweise Weg von p=none über p=quarantine bis p=reject."
+   },
+   {
+    "q": "Warum wird bei der Einführung von DMARC zunächst mit p=none begonnen?",
+    "o": [
+     { "t": "Weil so über Berichte erkannt wird, welche legitimen Versandwege noch fehlen", "ok": true },
+     { "t": "Weil p=none technisch die einzige zulässige Einstiegsstufe für neue Domains ist", "ok": false },
+     { "t": "Weil p=none die Zustellgeschwindigkeit der Nachrichten erhöht", "ok": false },
+     { "t": "Weil erst nach einem Jahr strengere Richtlinien erlaubt sind", "ok": false }
+    ],
+    "e": "Bei p=none wird nur beobachtet und gemeldet. So lassen sich alle berechtigten Absender erfassen, bevor schärfer eingestellt wird."
+   },
+   {
+    "q": "Welche Schwäche von SPF gleicht DKIM aus?",
+    "o": [
+     { "t": "SPF schlägt bei Weiterleitungen fehl, obwohl die Nachricht echt ist", "ok": true },
+     { "t": "SPF kann die zulässige Absenderdomain nicht im DNS veröffentlichen", "ok": false },
+     { "t": "SPF prüft ausschließlich verschlüsselte Verbindungen", "ok": false },
+     { "t": "SPF erkennt keine Nachrichten ohne Betreffzeile", "ok": false }
+    ],
+    "e": "Bei einer Weiterleitung ändert sich der einliefernde Server, wodurch die SPF-Prüfung scheitert. Die DKIM-Signatur bleibt dagegen erhalten."
+   },
+   {
+    "q": "Welches Problem lösen SPF, DKIM und DMARC gemeinsam?",
+    "o": [
+     { "t": "Die Fälschung des Absenders, wie sie bei Phishing genutzt wird", "ok": true },
+     { "t": "Das unbemerkte Mitlesen der Nachricht auf dem Transportweg", "ok": false },
+     { "t": "Die Überlastung des Mailservers durch zu viele Anfragen", "ok": false },
+     { "t": "Den Verlust von Nachrichten durch fehlerhafte Postfächer", "ok": false }
+    ],
+    "e": "SMTP prüft von sich aus keine Absenderangaben. Die drei Verfahren schließen diese Lücke und erschweren Absenderfälschung erheblich."
+   }
+  ]
+ },
+ "grundschutz": {
+  "name": "BSI-Grundschutz",
+  "q": [
+   {
+    "q": "Wer sollte üblicherweise prüfen, ob eine Sicherheitsmaßnahme wie geplant umgesetzt ist?",
+    "o": [
+     { "t": "Eine von der Umsetzung unabhängige Stelle wie der ISB oder die Revision", "ok": true },
+     { "t": "Die Person, die die Maßnahme selbst umgesetzt hat", "ok": false },
+     { "t": "Ausschließlich der Hersteller der jeweils eingesetzten Technik", "ok": false },
+     { "t": "Jeder Anwender im Rahmen seiner täglichen Arbeit", "ok": false }
+    ],
+    "e": "Wer prüft, darf nicht sich selbst prüfen. Üblich sind der Informationssicherheitsbeauftragte, die interne Revision oder eine externe Prüfung."
+   },
+   {
+    "q": "Wann bietet es sich an, IT-Systeme bei der Strukturanalyse zu gruppieren?",
+    "o": [
+     { "t": "Wenn sie gleichen Typs, ähnlich konfiguriert und gleichen Schutzbedarfs sind", "ok": true },
+     { "t": "Wenn sie im selben Raum stehen, unabhängig von ihrer Konfiguration", "ok": false },
+     { "t": "Wenn sie vom selben Hersteller stammen, unabhängig vom Einsatzzweck", "ok": false },
+     { "t": "Wenn sie im selben Jahr beschafft wurden, unabhängig vom Schutzbedarf", "ok": false }
+    ],
+    "e": "Die Gruppierung senkt den Aufwand erheblich, setzt aber voraus, dass Typ, Konfiguration, Einbindung, Rahmenbedingungen und Schutzbedarf übereinstimmen."
+   },
+   {
+    "q": "Die Leitung ist nicht bereit, den Aufwand für eine Sicherheitsmaßnahme zu tragen. Wie verhalten Sie sich als Informationssicherheitsbeauftragter?",
+    "o": [
+     { "t": "Restrisiko dokumentieren, der Leitung vorlegen und die Übernahme schriftlich bestätigen lassen", "ok": true },
+     { "t": "Die Maßnahme eigenständig aus dem laufenden Budget umsetzen", "ok": false },
+     { "t": "Die Anforderung im Sicherheitskonzept ohne Begründung ersatzlos als entbehrlich streichen", "ok": false },
+     { "t": "Die Entscheidung ohne weitere Dokumentation hinnehmen", "ok": false }
+    ],
+    "e": "Die Gesamtverantwortung liegt bei der Leitung. Der ISB macht das Risiko transparent und lässt die Entscheidung nachweisbar dokumentieren."
+   },
+   {
+    "q": "Aus welchem Grund kann es gerechtfertigt sein, auch ein hohes Risiko zu akzeptieren?",
+    "o": [
+     { "t": "Wenn der Aufwand für Gegenmaßnahmen in keinem Verhältnis zum möglichen Schaden steht", "ok": true },
+     { "t": "Wenn die Maßnahme technisch besonders aufwendig zu dokumentieren und zu pflegen wäre", "ok": false },
+     { "t": "Wenn bisher noch kein Sicherheitsvorfall eingetreten ist", "ok": false },
+     { "t": "Wenn die zuständige Fachabteilung die Maßnahme ablehnt", "ok": false }
+    ],
+    "e": "Weitere Gründe sind fehlende wirksame Gegenmaßnahmen oder Unvermeidbarkeit für den Geschäftszweck. Die Entscheidung trifft die Leitung und wird dokumentiert."
+   },
+   {
+    "q": "Welche Angaben sind für IT-Systeme bei der Strukturanalyse zu erfassen?",
+    "o": [
+     { "t": "Bezeichnung, Typ, Plattform, Aufstellungsort, Status und zuständige Person", "ok": true },
+     { "t": "Ausschließlich Anschaffungspreis und die vorgesehene Abschreibungsdauer", "ok": false },
+     { "t": "Ausschließlich Seriennummer und Garantiezeitraum", "ok": false },
+     { "t": "Ausschließlich die Anzahl der angeschlossenen Endgeräte", "ok": false }
+    ],
+    "e": "Zusätzlich werden die Anwendungen erfasst, die auf dem System laufen. Erst diese Zuordnung ermöglicht später die Ableitung des Schutzbedarfs."
+   },
+   {
+    "q": "Welche Informationen sind Bestandteil eines IT-Grundschutz-Bausteins?",
+    "o": [
+     { "t": "Beschreibung, spezifische Gefährdungslage und gestufte Anforderungen", "ok": true },
+     { "t": "Preislisten der empfohlenen Produkte und Hersteller", "ok": false },
+     { "t": "Vollständige Konfigurationsdateien für alle Systeme", "ok": false },
+     { "t": "Namentliche Zuweisung der Aufgaben an einzelne Beschäftigte", "ok": false }
+    ],
+    "e": "Die Anforderungen sind nach Basis, Standard und erhöhtem Schutzbedarf gestuft. Jeder Anforderung ist eine zuständige Rolle zugeordnet."
+   },
+   {
+    "q": "Welches Kriterium sollten Sie bei der Überprüfung Ihres Sicherheitskonzepts berücksichtigen?",
+    "o": [
+     { "t": "Ob die Maßnahmen vollständig, wirksam und praxistauglich sind", "ok": true },
+     { "t": "Ob die Maßnahmen möglichst viele Seiten Dokumentation umfassen", "ok": false },
+     { "t": "Ob die Maßnahmen von einem bekannten Hersteller stammen", "ok": false },
+     { "t": "Ob die Maßnahmen seit der Einführung unverändert geblieben sind", "ok": false }
+    ],
+    "e": "Zu prüfen sind außerdem Wirtschaftlichkeit, Benutzerfreundlichkeit, die Passung zur aktuellen Struktur und die Aktualität der Dokumentation."
+   },
+   {
+    "q": "Welche Voraussetzung muss für ein ISO 27001-Zertifikat auf Basis von IT-Grundschutz erfüllt sein?",
+    "o": [
+     { "t": "Ein Audit durch einen beim BSI zertifizierten Auditor", "ok": true },
+     { "t": "Eine Selbsterklärung der Leitung ohne externe Prüfung", "ok": false },
+     { "t": "Der Nachweis eines Mindestumsatzes der Institution", "ok": false },
+     { "t": "Die ausschließliche Verwendung zertifizierter Hardware", "ok": false }
+    ],
+    "e": "Erforderlich sind zudem ein festgelegter Geltungsbereich, ein umgesetztes Sicherheitskonzept mit erfüllten Basis- und Standard-Anforderungen sowie die Risikoanalysen."
+   },
+   {
+    "q": "Welche Information sollte ein Netzplan für die Strukturanalyse enthalten?",
+    "o": [
+     { "t": "Die IT-Systeme mit Kennung sowie Art und Technik ihrer Verbindungen", "ok": true },
+     { "t": "Die Anschaffungskosten aller eingesetzten aktiven Netzkomponenten", "ok": false },
+     { "t": "Die Urlaubsvertretung der jeweils zuständigen Person", "ok": false },
+     { "t": "Die farbliche Gestaltung der verlegten Kabelstränge", "ok": false }
+    ],
+    "e": "Ebenso gehören Außenverbindungen und die Netzsegmentierung dazu. Ein veralteter Plan führt zu falschen Ableitungen beim Schutzbedarf."
+   },
+   {
+    "q": "Worauf sollten Sie bei der Auswahl und Anpassung von Sicherheitsmaßnahmen achten?",
+    "o": [
+     { "t": "Dass sie wirksam, angemessen, praxistauglich und benutzerfreundlich sind", "ok": true },
+     { "t": "Dass sie möglichst viele technische Systeme gleichzeitig betreffen", "ok": false },
+     { "t": "Dass sie ohne Abstimmung mit den Fachabteilungen umsetzbar sind", "ok": false },
+     { "t": "Dass sie unabhängig vom ermittelten Schutzbedarf einheitlich gelten", "ok": false }
+    ],
+    "e": "Maßnahmen müssen zum Schutzbedarf passen. Sind sie unpraktikabel, werden sie umgangen und verlieren damit ihre Wirkung."
+   },
+   {
+    "q": "Warum sollte ein Sicherheitskonzept regelmäßig überprüft werden?",
+    "o": [
+     { "t": "Weil sich Bedrohungslage, Technik und Prozesse fortlaufend ändern", "ok": true },
+     { "t": "Weil die Aufbewahrungsfrist für Konzepte gesetzlich begrenzt ist", "ok": false },
+     { "t": "Weil ein Konzept nach der Erstellung automatisch ungültig wird", "ok": false },
+     { "t": "Weil die Zahl der Maßnahmen jährlich erhöht werden muss", "ok": false }
+    ],
+    "e": "Maßnahmen verlieren an Wirksamkeit, wenn sich Umfeld oder Struktur ändern. Auch eingetretene Sicherheitsvorfälle fließen in die Überprüfung ein."
+   },
+   {
+    "q": "Wann bewerten Sie beim IT-Grundschutz-Check eine Anforderung als erfüllt?",
+    "o": [
+     { "t": "Wenn sie vollständig und wirksam umgesetzt ist", "ok": true },
+     { "t": "Wenn ihre Umsetzung bereits fest eingeplant ist", "ok": false },
+     { "t": "Wenn sie in wesentlichen Teilen umgesetzt wurde", "ok": false },
+     { "t": "Wenn die zuständige Rolle benannt worden ist", "ok": false }
+    ],
+    "e": "Teilweise umgesetzte oder nur geplante Maßnahmen gelten nicht als erfüllt. Der Status lautet dann teilweise oder nein."
+   },
+   {
+    "q": "Wodurch verlagern Sie ein Risiko?",
+    "o": [
+     { "t": "Durch Übertragung auf Dritte, etwa per Versicherung oder Auslagerung", "ok": true },
+     { "t": "Durch zusätzliche technische Maßnahmen im eigenen Haus", "ok": false },
+     { "t": "Durch vollständigen Verzicht auf die betroffene Tätigkeit", "ok": false },
+     { "t": "Durch dokumentierte Übernahme des verbleibenden Restrisikos", "ok": false }
+    ],
+    "e": "Die vier Optionen der Risikobehandlung sind vermeiden, reduzieren, verlagern und akzeptieren. Das Verlagern überträgt die Last auf einen Dritten."
+   },
+   {
+    "q": "Auf welches Zielobjekt ist bei der Modellierung der Baustein ISMS.1 Sicherheitsmanagement anzuwenden?",
+    "o": [
+     { "t": "Genau einmal auf den gesamten Informationsverbund", "ok": true },
+     { "t": "Auf jedes einzelne IT-System des Verbunds", "ok": false },
+     { "t": "Auf jeden Raum, in dem Technik betrieben wird", "ok": false },
+     { "t": "Auf jede Anwendung mit erhöhtem Schutzbedarf", "ok": false }
+    ],
+    "e": "ISMS.1 ist ein Prozessbaustein und betrifft die Institution als Ganzes. Systembausteine werden dagegen je Zielobjekt oder Gruppe modelliert."
+   },
+   {
+    "q": "Welches Ziel verfolgt die Strukturanalyse im Rahmen der IT-Grundschutz-Methodik?",
+    "o": [
+     { "t": "Eine vollständige Übersicht über alle Objekte des Informationsverbunds zu schaffen", "ok": true },
+     { "t": "Die Beschaffungskosten der eingesetzten Technik vollständig zu ermitteln", "ok": false },
+     { "t": "Den Marktwert der Institution zu bestimmen", "ok": false },
+     { "t": "Die Auslastung der Netzkomponenten zu messen", "ok": false }
+    ],
+    "e": "Erst wenn Prozesse, Anwendungen, Systeme, Räume und Netze erfasst sind, lassen sich Schutzbedarf und Maßnahmen sinnvoll ableiten."
+   },
+   {
+    "q": "Welche Aussage zum IT-Grundschutz-Check trifft zu?",
+    "o": [
+     { "t": "Er vergleicht den Soll-Zustand der Anforderungen mit dem tatsächlichen Ist-Zustand", "ok": true },
+     { "t": "Er ersetzt die Schutzbedarfsfeststellung vollständig", "ok": false },
+     { "t": "Er wird ausschließlich von unabhängigen externen Auditoren durchgeführt", "ok": false },
+     { "t": "Er betrachtet allein die Anforderungen für einen erhöhten Schutzbedarf der Systeme", "ok": false }
+    ],
+    "e": "Erhoben wird über Befragung, Einsicht in Unterlagen und Kontrolle vor Ort. Der Umsetzungsstatus lautet ja, teilweise, nein oder entbehrlich."
+   },
+   {
+    "q": "Mit welchem Hilfsmittel des IT-Grundschutz-Kompendiums verdeutlichen Sie der Leitung die Risiken nicht erfüllter Anforderungen?",
+    "o": [
+     { "t": "Mit der Kreuzreferenztabelle des jeweiligen Bausteins", "ok": true },
+     { "t": "Mit der Übersicht der Umsetzungskosten je Maßnahme", "ok": false },
+     { "t": "Mit dem Verzeichnis der Verarbeitungstätigkeiten", "ok": false },
+     { "t": "Mit dem Netzplan des betroffenen Informationsverbunds", "ok": false }
+    ],
+    "e": "Die Kreuzreferenztabelle ordnet jeder Anforderung die Gefährdungen zu, gegen die sie wirkt. Damit wird der Verzicht in seinen Folgen sichtbar."
+   },
+   {
+    "q": "Wie verfahren Sie beim ersten IT-Grundschutz-Check mit Anforderungen für erhöhten Schutzbedarf?",
+    "o": [
+     { "t": "Sie bleiben zunächst unberücksichtigt und werden erst in der Risikoanalyse betrachtet", "ok": true },
+     { "t": "Sie werden vorrangig noch vor allen Basis- und Standard-Anforderungen geprüft", "ok": false },
+     { "t": "Sie werden pauschal als entbehrlich eingestuft", "ok": false },
+     { "t": "Sie werden ohne Prüfung als nicht erfüllt vermerkt", "ok": false }
+    ],
+    "e": "Der erste Check betrachtet Basis- und Standard-Anforderungen. Anforderungen bei erhöhtem Schutzbedarf werden in der anschließenden Risikoanalyse gezielt ausgewählt."
+   },
+   {
+    "q": "Welche Schutzziele fasst die Merkhilfe VIVA zusammen?",
+    "o": [
+     { "t": "Vertraulichkeit, Integrität, Verfügbarkeit und Authentizität", "ok": true },
+     { "t": "Verfügbarkeit, Integration, Vertraulichkeit und Aktualität", "ok": false },
+     { "t": "Vertraulichkeit, Isolation, Verschlüsselung und Anonymität", "ok": false },
+     { "t": "Verlässlichkeit, Integrität, Verschlüsselung und Authentizität", "ok": false }
+    ],
+    "e": "Die drei klassischen Ziele sind Vertraulichkeit, Integrität und Verfügbarkeit. Die Authentizität wird häufig als viertes Ziel ergänzt."
+   },
+   {
+    "q": "Ein Fachverfahren mit hohem Schutzbedarf läuft auf einem Server zusammen mit unkritischen Anwendungen. Welchen Schutzbedarf erhält der Server?",
+    "o": [
+     { "t": "Hoch, da nach dem Maximumprinzip der höchste Bedarf maßgeblich ist", "ok": true },
+     { "t": "Normal, da die Mehrheit der Anwendungen unkritisch ist", "ok": false },
+     { "t": "Den Durchschnitt aus den Schutzbedarfen aller Anwendungen", "ok": false },
+     { "t": "Sehr hoch, da mehrere Anwendungen gemeinsam betrieben werden", "ok": false }
+    ],
+    "e": "Nach dem Maximumprinzip übernimmt das System den höchsten Schutzbedarf aller darauf laufenden Anwendungen."
+   }
+  ]
+ },
+ "qm": {
+  "name": "Qualitätsmanagement",
+  "q": [
+   {
+    "q": "Worin unterscheiden sich Qualitätssicherung und Qualitätskontrolle?",
+    "o": [
+     { "t": "Die Sicherung wirkt vorbeugend auf den Prozess, die Kontrolle prüft das fertige Produkt", "ok": true },
+     { "t": "Die Kontrolle wirkt vorbeugend auf den Prozess, die Sicherung prüft das fertige Produkt", "ok": false },
+     { "t": "Die Sicherung betrifft nur Software, die Kontrolle ausschließlich Hardware", "ok": false },
+     { "t": "Die Sicherung erfolgt intern, die Kontrolle stets durch einen externen Prüfer", "ok": false }
+    ],
+    "e": "Merksatz: Die Sicherung baut den Zaun, die Kontrolle zählt die Schafe. Die eine verhindert Fehler, die andere findet sie."
+   },
+   {
+    "q": "In welcher Reihenfolge durchläuft der PDCA-Zyklus seine Phasen?",
+    "o": [
+     { "t": "Plan, Do, Check, Act", "ok": true },
+     { "t": "Plan, Check, Do, Act", "ok": false },
+     { "t": "Do, Plan, Act, Check", "ok": false },
+     { "t": "Check, Plan, Do, Act", "ok": false }
+    ],
+    "e": "Planen, begrenzt umsetzen, Ergebnis prüfen, bei Erfolg zum Standard machen. Nach Act beginnt der nächste Zyklus."
+   },
+   {
+    "q": "Was geschieht in der Phase Act des PDCA-Zyklus?",
+    "o": [
+     { "t": "Die erfolgreiche Maßnahme wird zum Standard erklärt und ausgerollt", "ok": true },
+     { "t": "Die geplante Maßnahme wird erstmals im Pilotbereich erprobt", "ok": false },
+     { "t": "Das Ergebnis wird gemessen und mit dem Ziel verglichen", "ok": false },
+     { "t": "Die Ursachen des Problems werden erstmals systematisch analysiert", "ok": false }
+    ],
+    "e": "Act schreibt das Erreichte fest. Bleibt der Erfolg aus, wird nachgebessert und der Zyklus erneut durchlaufen."
+   },
+   {
+    "q": "Welche Tätigkeit gehört zur Qualitätsplanung?",
+    "o": [
+     { "t": "Messbare Qualitätskriterien für das Projekt festlegen", "ok": true },
+     { "t": "Den fertigen Programmcode auf Fehler durchsuchen", "ok": false },
+     { "t": "Die Ladezeit der fertigen Anwendung messen", "ok": false },
+     { "t": "Aufgetretene Fehler nach Häufigkeit auswerten", "ok": false }
+    ],
+    "e": "Die Planung legt fest, was Qualität im konkreten Vorhaben überhaupt bedeutet. Ohne messbare Kriterien lässt sich später nichts prüfen."
+   },
+   {
+    "q": "Welcher Inhalt gehört in einen Qualitätsmanagementplan?",
+    "o": [
+     { "t": "Die geplanten Prüfungen mit Zeitpunkt und Verantwortlichen", "ok": true },
+     { "t": "Die Gehaltsstruktur der eingesetzten Projektmitarbeiter", "ok": false },
+     { "t": "Die Anschaffungskosten sämtlicher Netzkomponenten", "ok": false },
+     { "t": "Die Urlaubsplanung des gesamten Entwicklungsteams", "ok": false }
+    ],
+    "e": "Der Plan hält Qualitätsziele, anzuwendende Normen, Prüfungen, Verantwortlichkeiten und das Vorgehen bei Abweichungen fest."
+   },
+   {
+    "q": "Ein Code-Review vor jedem Zusammenführen von Änderungen ist eine Maßnahme welcher Art?",
+    "o": [
+     { "t": "Der Qualitätssicherung", "ok": true },
+     { "t": "Der Qualitätskontrolle", "ok": false },
+     { "t": "Der Qualitätsplanung", "ok": false },
+     { "t": "Der Risikoanalyse", "ok": false }
+    ],
+    "e": "Das Review setzt am Prozess an und verhindert, dass fehlerhafter Code überhaupt in den gemeinsamen Stand gelangt."
+   },
+   {
+    "q": "Warum werden Fehler umso teurer, je später sie entdeckt werden?",
+    "o": [
+     { "t": "Weil bereits darauf aufgebaute Arbeit ebenfalls angepasst werden muss", "ok": true },
+     { "t": "Weil die gesetzlichen Gewährleistungsfristen dann bereits abgelaufen sind", "ok": false },
+     { "t": "Weil Testwerkzeuge in späteren Projektphasen mehr kosten", "ok": false },
+     { "t": "Weil späte Fehler stets von externen Prüfern gemeldet werden", "ok": false }
+    ],
+    "e": "Ein Fehler im Anforderungsdokument ist mit einer Korrektur behoben. Derselbe Fehler nach der Auslieferung betrifft Code, Tests, Dokumentation und Anwender."
+   },
+   {
+    "q": "Welche Größen bilden zusammen mit der Qualität das magische Dreieck im Projekt?",
+    "o": [
+     { "t": "Zeit und Kosten", "ok": true },
+     { "t": "Umfang und Risiko", "ok": false },
+     { "t": "Personal und Technik", "ok": false },
+     { "t": "Aufwand und Nutzen", "ok": false }
+    ],
+    "e": "Wird an einer Ecke gezogen, verändern sich die anderen. Wer Termin und Budget hält, geht bei gleichem Umfang bei der Qualität ins Risiko."
+   }
+  ]
+ },
+ "epk": {
+  "name": "EPK & Prozesse",
+  "q": [
+   {
+    "q": "Womit beginnt und endet eine ereignisgesteuerte Prozesskette?",
+    "o": [
+     { "t": "Mit einem Ereignis", "ok": true },
+     { "t": "Mit einer Funktion", "ok": false },
+     { "t": "Mit einem Konnektor", "ok": false },
+     { "t": "Mit einer Organisationseinheit", "ok": false }
+    ],
+    "e": "Die EPK beginnt und endet stets mit einem Ereignis. Dazwischen wechseln sich Ereignisse und Funktionen ab."
+   },
+   {
+    "q": "Wie wird ein Ereignis in einer EPK üblicherweise formuliert?",
+    "o": [
+     { "t": "Passiv als eingetretener Zustand, etwa Bestellung ist eingegangen", "ok": true },
+     { "t": "Aktiv mit einem Tätigkeitswort, etwa Bestellung prüfen", "ok": false },
+     { "t": "Als Frage an den Bearbeiter, etwa Bestellung vollständig", "ok": false },
+     { "t": "Als Zeitangabe mit Frist, etwa innerhalb von zwei Tagen", "ok": false }
+    ],
+    "e": "Das Ereignis beschreibt einen Zustand und verbraucht weder Zeit noch Ressourcen. Es wird als Sechseck dargestellt."
+   },
+   {
+    "q": "Welche Aussage zur Funktion in einer EPK trifft zu?",
+    "o": [
+     { "t": "Sie beschreibt eine Tätigkeit und benötigt Zeit und Ressourcen", "ok": true },
+     { "t": "Sie beschreibt einen Zustand und benötigt weder Zeit noch Ressourcen", "ok": false },
+     { "t": "Sie darf ausschließlich am Anfang der Prozesskette stehen", "ok": false },
+     { "t": "Sie wird stets als Sechseck in der Kette dargestellt", "ok": false }
+    ],
+    "e": "Die Funktion ist die aktive Bearbeitung, dargestellt als abgerundetes Rechteck und formuliert mit einem Tätigkeitswort."
+   },
+   {
+    "q": "Welcher Konnektor wird verwendet, wenn genau ein Zweig durchlaufen werden soll?",
+    "o": [
+     { "t": "Der XOR-Konnektor", "ok": true },
+     { "t": "Der UND-Konnektor", "ok": false },
+     { "t": "Der ODER-Konnektor", "ok": false },
+     { "t": "Der Verbindungskonnektor", "ok": false }
+    ],
+    "e": "XOR steht für entweder-oder. UND öffnet parallele Zweige, die alle durchlaufen werden, ODER einen oder mehrere."
+   },
+   {
+    "q": "Warum darf nach einem Ereignis kein XOR-Konnektor stehen?",
+    "o": [
+     { "t": "Weil ein Ereignis keine Entscheidung treffen kann", "ok": true },
+     { "t": "Weil ein Ereignis immer nur einen Nachfolger haben darf", "ok": false },
+     { "t": "Weil der XOR ausschließlich am Ende einer Kette zulässig ist", "ok": false },
+     { "t": "Weil ein Ereignis grundsätzlich nicht verzweigen darf", "ok": false }
+    ],
+    "e": "Entscheidungen trifft immer eine Funktion. Ein Ereignis stellt nur einen bereits eingetretenen Zustand fest."
+   },
+   {
+    "q": "Welcher Aufbau verstößt gegen die Regeln einer EPK?",
+    "o": [
+     { "t": "Zwei Funktionen folgen unmittelbar aufeinander", "ok": true },
+     { "t": "Auf ein Ereignis folgt eine Funktion", "ok": false },
+     { "t": "Ein UND-Konnektor wird mit einem UND-Konnektor geschlossen", "ok": false },
+     { "t": "Die Kette endet mit einem Ereignis", "ok": false }
+    ],
+    "e": "Ereignisse und Funktionen müssen sich abwechseln. Zwischen zwei Funktionen fehlt das verbindende Ereignis."
+   },
+   {
+    "q": "Worin unterscheidet sich BPMN von der EPK?",
+    "o": [
+     { "t": "BPMN ist umfangreicher und kennt Bahnen sowie technisch ausführbare Modelle", "ok": true },
+     { "t": "BPMN ist einfacher und kennt ausschließlich Ereignisse und Funktionen", "ok": false },
+     { "t": "BPMN wird nur im deutschsprachigen Raum als Standard verwendet", "ok": false },
+     { "t": "BPMN verzichtet vollständig auf die Darstellung von Verzweigungen", "ok": false }
+    ],
+    "e": "Die EPK ist schneller lesbar und gut für die fachliche Abstimmung. BPMN ist genauer und für die technische Umsetzung gedacht."
+   },
+   {
+    "q": "Welchen Zweck erfüllt eine EPK im Geschäftsprozessmanagement?",
+    "o": [
+     { "t": "Abläufe sichtbar machen, um Schwachstellen erkennen zu können", "ok": true },
+     { "t": "Die Hardwareausstattung einer Abteilung dokumentieren", "ok": false },
+     { "t": "Die Zugriffsrechte der Beschäftigten festlegen", "ok": false },
+     { "t": "Die Netzwerktopologie eines Standorts darstellen", "ok": false }
+    ],
+    "e": "Erst der sichtbare Ablauf macht Doppelarbeit, Medienbrüche, Wartezeiten und unklare Zuständigkeiten erkennbar."
+   }
+  ]
+ },
+ "doku": {
+  "name": "IT-Dokumentation",
+  "q": [
+   {
+    "q": "Welche Dokumentationsart enthält Netzpläne, Schnittstellen und das Datenmodell?",
+    "o": [
+     { "t": "Die Systemdokumentation", "ok": true },
+     { "t": "Die Betriebsdokumentation", "ok": false },
+     { "t": "Die Benutzerdokumentation", "ok": false },
+     { "t": "Die Projektdokumentation", "ok": false }
+    ],
+    "e": "Die Systemdokumentation beantwortet die Frage, wie ein System aufgebaut ist. Zielgruppe sind Administration und Entwicklung."
+   },
+   {
+    "q": "Wo ist die Anleitung zur nächtlichen Datensicherung einzuordnen?",
+    "o": [
+     { "t": "In der Betriebsdokumentation", "ok": true },
+     { "t": "In der Systemdokumentation", "ok": false },
+     { "t": "In der Benutzerdokumentation", "ok": false },
+     { "t": "In der Projektdokumentation", "ok": false }
+    ],
+    "e": "Die Betriebsdokumentation beantwortet die Frage, was im laufenden Betrieb zu tun ist. Dazu gehören Sicherung, Wiederanlauf und Notfallpläne."
+   },
+   {
+    "q": "Welcher Inhalt gehört in die Projektdokumentation?",
+    "o": [
+     { "t": "Das Abnahmeprotokoll und die Lessons Learned", "ok": true },
+     { "t": "Die Bedienschritte für die tägliche Arbeit am System", "ok": false },
+     { "t": "Der Ablaufplan für die wöchentliche Wartung", "ok": false },
+     { "t": "Das Schema der eingesetzten Datenbanktabellen", "ok": false }
+    ],
+    "e": "Die Projektdokumentation begleitet das Vorhaben von der Anforderung bis zur Abnahme, einschließlich Entscheidungen und Änderungsanträgen."
+   },
+   {
+    "q": "Warum ist eine veraltete Dokumentation gefährlicher als gar keine?",
+    "o": [
+     { "t": "Weil man sich auf sie verlässt und dadurch in die Irre geführt wird", "ok": true },
+     { "t": "Weil sie zusätzlichen Speicherplatz auf dem Server belegt", "ok": false },
+     { "t": "Weil sie die Bearbeitungszeit von Störungsmeldungen verlängert", "ok": false },
+     { "t": "Weil sie regelmäßig neu ausgedruckt werden muss", "ok": false }
+    ],
+    "e": "Bei fehlender Dokumentation prüft man selbst nach. Eine falsche Angabe wird dagegen übernommen und führt zu Fehlentscheidungen."
+   },
+   {
+    "q": "Wie lässt sich die Aktualität der Dokumentation am wirksamsten sicherstellen?",
+    "o": [
+     { "t": "Die Aktualisierung wird fester Bestandteil des Änderungsprozesses", "ok": true },
+     { "t": "Die Dokumentation wird einmal jährlich vollständig neu erstellt", "ok": false },
+     { "t": "Die Dokumentation wird ausschließlich vom Hersteller gepflegt", "ok": false },
+     { "t": "Die Dokumentation wird erst nach Projektabschluss angelegt", "ok": false }
+    ],
+    "e": "Eine Änderung gilt erst als abgeschlossen, wenn die Dokumentation nachgezogen wurde. So altert sie nicht unbemerkt."
+   },
+   {
+    "q": "An welcher Zielgruppe orientiert sich eine Benutzerdokumentation?",
+    "o": [
+     { "t": "An den Anwendern im Fachbereich", "ok": true },
+     { "t": "An der Systemadministration", "ok": false },
+     { "t": "An den Entwicklern der Anwendung", "ok": false },
+     { "t": "An den externen Auditoren", "ok": false }
+    ],
+    "e": "Sie beschreibt in Handlungsschritten, wie die Anwendung bedient wird, meist mit Bildschirmabbildungen und häufigen Fragen."
+   },
+   {
+    "q": "Warum sollte Dokumentation versioniert und mit Datum versehen werden?",
+    "o": [
+     { "t": "Damit erkennbar ist, welcher Stand gilt und wer ihn verantwortet", "ok": true },
+     { "t": "Damit die Datei beim Öffnen schneller geladen wird", "ok": false },
+     { "t": "Damit sie automatisch an alle Beschäftigten verteilt wird", "ok": false },
+     { "t": "Damit sie von Suchmaschinen besser gefunden werden kann", "ok": false }
+    ],
+    "e": "Ohne Version und Datum lässt sich nicht unterscheiden, welcher von mehreren Ständen aktuell ist."
+   },
+   {
+    "q": "Warum unterliegt IT-Dokumentation einem Zugriffsschutz?",
+    "o": [
+     { "t": "Weil Netzpläne und Konfigurationen für Angreifer wertvolle Informationen sind", "ok": true },
+     { "t": "Weil sie urheberrechtlich in jedem Fall dem Hersteller des Systems gehört", "ok": false },
+     { "t": "Weil sie ausschließlich in Papierform aufbewahrt werden darf", "ok": false },
+     { "t": "Weil sie andernfalls nicht revisionssicher archiviert wird", "ok": false }
+    ],
+    "e": "Eine vollständige Dokumentation erleichtert Angreifern die Vorbereitung erheblich. Sie ist deshalb selbst schützenswert."
+   }
+  ]
+ },
+ "haertung": {
+  "name": "Systemhärtung",
+  "q": [
+   {
+    "q": "Was ist das Ziel der Systemhärtung?",
+    "o": [
+     { "t": "Die Angriffsfläche eines Systems zu verkleinern", "ok": true },
+     { "t": "Die Rechenleistung des Systems dauerhaft zu erhöhen", "ok": false },
+     { "t": "Die Anzahl installierter Anwendungen zu vergrößern", "ok": false },
+     { "t": "Die Datenübertragungsrate im Netz zu verbessern", "ok": false }
+    ],
+    "e": "Was nicht vorhanden oder nicht aktiv ist, kann auch nicht angegriffen werden. Jeder überflüssige Dienst ist ein möglicher Einstiegspunkt."
+   },
+   {
+    "q": "Warum werden nicht benötigte Dienste auf einem Server deaktiviert?",
+    "o": [
+     { "t": "Weil jeder laufende Dienst eine mögliche Schwachstelle darstellt", "ok": true },
+     { "t": "Weil dadurch die laufenden Lizenzkosten des Systems deutlich sinken", "ok": false },
+     { "t": "Weil das Betriebssystem sonst nicht startfähig ist", "ok": false },
+     { "t": "Weil andernfalls keine Protokollierung möglich wäre", "ok": false }
+    ],
+    "e": "Weniger lauschende Prozesse bedeuten weniger angreifbare Software und weniger Pflegeaufwand durch Aktualisierungen."
+   },
+   {
+    "q": "Warum müssen Standardpasswörter unbedingt geändert werden?",
+    "o": [
+     { "t": "Weil sie öffentlich bekannt sind und automatisiert durchprobiert werden", "ok": true },
+     { "t": "Weil sie technisch nach kurzer Zeit ihre Gültigkeit verlieren", "ok": false },
+     { "t": "Weil sie den Systemstart merklich verlangsamen", "ok": false },
+     { "t": "Weil sie sich nicht gemeinsam mit dem System sichern lassen", "ok": false }
+    ],
+    "e": "Werkseinstellungen stehen in Handbüchern und Listen im Netz. Angreifer probieren sie systematisch bei erreichbaren Geräten durch."
+   },
+   {
+    "q": "Warum werden Testzugänge nach der Inbetriebnahme eines Systems entfernt?",
+    "o": [
+     { "t": "Weil sie oft schwache Kennwörter haben und niemandem mehr auffallen", "ok": true },
+     { "t": "Weil sie den Startvorgang des Systems spürbar verlangsamen", "ok": false },
+     { "t": "Weil sie zusätzliche Lizenzgebühren je Konto verursachen", "ok": false },
+     { "t": "Weil sie die Protokollierung der Anmeldungen unterbinden", "ok": false }
+    ],
+    "e": "Testzugänge entstehen unter Zeitdruck, tragen einfache Kennwörter und werden nach dem Projekt vergessen. Genau solche vergessenen Konten sind ein beliebter Einstiegspunkt."
+   },
+   {
+    "q": "Worin unterscheidet sich Härtung vom Patchmanagement?",
+    "o": [
+     { "t": "Die Härtung ist die sichere Grundkonfiguration, das Patchmanagement der dauerhafte Prozess", "ok": true },
+     { "t": "Das Patchmanagement ist die Grundkonfiguration, die Härtung der dauerhafte Prozess", "ok": false },
+     { "t": "Die Härtung betrifft nur Anwendungen, das Patchmanagement nur Betriebssysteme", "ok": false },
+     { "t": "Beide Begriffe bezeichnen denselben Vorgang mit unterschiedlichem Namen", "ok": false }
+    ],
+    "e": "Die Härtung stellt das System sicher auf, das Patchmanagement hält es sicher. Erst beides zusammen schützt wirksam."
+   },
+   {
+    "q": "Was bedeutet Security by Default?",
+    "o": [
+     { "t": "Das System ist bereits im Auslieferungszustand sicher eingestellt", "ok": true },
+     { "t": "Sicherheit wird erst nach der Inbetriebnahme durch den Nutzer aktiviert", "ok": false },
+     { "t": "Sicherheit wird ausschließlich durch nachträgliche Zusatzsoftware erreicht", "ok": false },
+     { "t": "Das System prüft selbstständig alle Passwörter auf ihre Länge", "ok": false }
+    ],
+    "e": "Der Nutzer muss Sicherheit nicht erst einschalten, sondern sie bewusst lockern. Security by Design meint dagegen die Planung von Anfang an."
+   },
+   {
+    "q": "Warum wird ein Patch vor der Verteilung in einer Testumgebung geprüft?",
+    "o": [
+     { "t": "Weil eine Aktualisierung den laufenden Betrieb stören kann", "ok": true },
+     { "t": "Weil Patches ohne Test rechtlich nicht eingespielt werden dürfen", "ok": false },
+     { "t": "Weil der Test die Übertragungszeit im Netz verkürzt", "ok": false },
+     { "t": "Weil sich Patches sonst nicht dokumentieren lassen", "ok": false }
+    ],
+    "e": "Zu langes Warten lässt Lücken offen, ungeprüftes Einspielen gefährdet den Betrieb. Für kritische Lücken gibt es ein verkürztes Notfallverfahren."
+   },
+   {
+    "q": "Welche Maßnahme gehört nicht zur Systemhärtung?",
+    "o": [
+     { "t": "Die Übertragungsrate der Netzwerkkarte erhöhen", "ok": true },
+     { "t": "Nicht benötigte Benutzerkonten deaktivieren", "ok": false },
+     { "t": "Die lokale Firewall des Systems aktivieren", "ok": false },
+     { "t": "Rechte nach dem Prinzip der geringsten Rechte vergeben", "ok": false }
+    ],
+    "e": "Härtung zielt auf Sicherheit, nicht auf Leistung. Die Übertragungsrate hat keinen Bezug zur Angriffsfläche."
+   }
+  ]
  }
 };
 /* ============ ENGINE ============ */
@@ -18954,7 +20294,27 @@ const GLOSSAR = [{"a":"2FA","f":"Zwei-Faktor-Authentifizierung","d":"Anmeldung m
 {"a":"SPF","f":"Sender Policy Framework","d":"DNS-Eintrag, der festlegt, welche Server für eine Domain Mails versenden dürfen. Prüft den sendenden Server."},
 {"a":"DKIM","f":"DomainKeys Identified Mail","d":"Kryptografische Signatur der Mail durch den sendenden Server. Der öffentliche Schlüssel liegt im DNS, erkennt Änderungen am Transportweg."},
 {"a":"DMARC","f":"Domain-based Message Authentication, Reporting and Conformance","d":"Baut auf SPF und DKIM auf, fordert Übereinstimmung mit der sichtbaren Absenderdomain und legt die Behandlung fest: none, quarantine oder reject."},
-{"a":"Alignment","f":"Domain-Alignment","d":"DMARC-Anforderung, dass die per SPF oder DKIM geprüfte Domain zur sichtbaren Absenderadresse passt."}];
+{"a":"Alignment","f":"Domain-Alignment","d":"DMARC-Anforderung, dass die per SPF oder DKIM geprüfte Domain zur sichtbaren Absenderadresse passt."},
+{"a":"PDCA","f":"Plan, Do, Check, Act","d":"Zyklus der kontinuierlichen Verbesserung: planen, begrenzt umsetzen, Ergebnis prüfen, bei Erfolg zum Standard machen."},
+{"a":"Qualitätssicherung","f":"Qualitätssicherung","d":"Vorbeugende Maßnahmen am Prozess, damit Fehler gar nicht erst entstehen, etwa Reviews und Standards."},
+{"a":"Qualitätskontrolle","f":"Qualitätskontrolle","d":"Nachgelagerte Prüfung am fertigen Produkt, ob die Vorgaben eingehalten wurden, etwa durch Tests und Messungen."},
+{"a":"Qualitätsplanung","f":"Qualitätsplanung","d":"Festlegung, was Qualität im konkreten Projekt bedeutet, mit messbaren Kriterien."},
+{"a":"Qualitätsmanagementplan","f":"Qualitätsmanagementplan","d":"Dokument mit Qualitätszielen, anzuwendenden Normen, geplanten Prüfungen und dem Vorgehen bei Abweichungen."},
+{"a":"EPK","f":"Ereignisgesteuerte Prozesskette","d":"Darstellung eines Geschäftsprozesses als Abfolge von Ereignissen und Funktionen. Beginnt und endet mit einem Ereignis."},
+{"a":"Ereignis","f":"Ereignis (EPK)","d":"Eingetretener Zustand im Prozess, als Sechseck dargestellt und passiv formuliert. Verbraucht keine Zeit und keine Ressourcen."},
+{"a":"Funktion","f":"Funktion (EPK)","d":"Tätigkeit im Prozess, als abgerundetes Rechteck dargestellt und mit einem Tätigkeitswort formuliert. Benötigt Zeit und Ressourcen."},
+{"a":"Konnektor","f":"Konnektor","d":"Verknüpfungsoperator in der EPK: UND für parallele Zweige, ODER für einen oder mehrere, XOR für genau einen Zweig."},
+{"a":"BPMN","f":"Business Process Model and Notation","d":"Umfangreiche internationale Notation für Geschäftsprozesse mit Bahnen, Ereignistypen und technisch ausführbaren Modellen."},
+{"a":"Systemdokumentation","f":"Systemdokumentation","d":"Beschreibt den Aufbau: Architektur, Netzpläne, Schnittstellen, Datenmodell und Konfigurationen. Zielgruppe ist die Administration."},
+{"a":"Betriebsdokumentation","f":"Betriebsdokumentation","d":"Beschreibt das Handeln im laufenden Betrieb: Ablaufpläne, Sicherung und Wiederherstellung, Notfallpläne, Zuständigkeiten."},
+{"a":"Benutzerdokumentation","f":"Benutzerdokumentation","d":"Anleitung für Anwender in Handlungsschritten, mit Bildschirmabbildungen und häufigen Fragen."},
+{"a":"Projektdokumentation","f":"Projektdokumentation","d":"Unterlagen des Projekts: Lasten- und Pflichtenheft, Protokolle, Entscheidungen, Abnahme und Lessons Learned."},
+{"a":"Härtung","f":"Hardening","d":"Reduktion eines Systems auf das Notwendige und sichere Konfiguration, um die Angriffsfläche zu verkleinern."},
+{"a":"Angriffsfläche","f":"Angriffsfläche","d":"Summe aller Punkte, an denen ein System angegriffen werden kann: Dienste, Konten, offene Ports, installierte Software."},
+{"a":"Patchmanagement","f":"Patchmanagement","d":"Geregelter Ablauf zum Erfassen, Bewerten, Testen, Verteilen und Kontrollieren von Aktualisierungen."},
+{"a":"Security by Design","f":"Security by Design","d":"Sicherheit wird von Anfang an in Architektur und Entwurf eingeplant statt nachträglich aufgesetzt."},
+{"a":"Security by Default","f":"Security by Default","d":"Das System ist im Auslieferungszustand bereits sicher eingestellt; Sicherheit muss nicht erst aktiviert werden."},
+{"a":"Least Privilege","f":"Prinzip der geringsten Rechte","d":"Jedes Konto und jeder Dienst erhält nur die Rechte, die zur Aufgabenerfüllung nötig sind."}];
 
 // ---- Bibliothek: Render + Suche ----
 const libList = document.getElementById('libList');
@@ -19051,7 +20411,11 @@ renderLib(GLOSSAR_SORTED);
     "r-grundschutz": ["BSI","VIVA","IT-Grundschutz","Maximumprinzip","Kumulationseffekt"],
     "r-storage": ["DAS","NAS","SAN","Block-Storage","File-Storage","Objekt-Storage"],
     "r-itil": ["ITIL","Incident","Problem","Known Error","Change","SLA","OLA","CMDB"],
-    "r-mailsec": ["SPF","DKIM","DMARC","Alignment"]
+    "r-mailsec": ["SPF","DKIM","DMARC","Alignment"],
+    "r-qm": ["PDCA","Qualitätssicherung","Qualitätskontrolle","Qualitätsplanung","Qualitätsmanagementplan"],
+    "r-epk": ["EPK","Ereignis","Funktion","Konnektor","BPMN"],
+    "r-doku": ["Systemdokumentation","Betriebsdokumentation","Benutzerdokumentation","Projektdokumentation"],
+    "r-haertung": ["Härtung","Angriffsfläche","Patchmanagement","Least Privilege","Security by Design","Security by Default"]
   };
 
   var defByKey = {};

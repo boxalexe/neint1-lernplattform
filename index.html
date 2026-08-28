@@ -22,7 +22,7 @@
     if (t && t !== 'default') document.documentElement.setAttribute('data-theme', t);
   } catch (e) {}
 </script>
-<link rel="stylesheet" href="styles.css?v=20260827b">
+<link rel="stylesheet" href="styles.css?v=20260827d">
 </head>
 <body>
 <header>
@@ -84,11 +84,13 @@
   <a href="#r-diagnose">Diagnose & Fehlersuche</a>
 <a href="#r-dnsdhcp">DNS/DHCP</a>
   <a href="#r-mailsec">E-Mail-Sicherheit</a>
+  <a href="#r-epk">EPK &amp; Prozesse</a>
   <a href="#r-ethernet">Ethernet</a>
   <a href="#r-fddi">FDDI</a>
   <a href="#r-header">Header/TTL</a>
   <a href="#r-hyperv">Hypervisor</a>
   <a href="#r-ip">IPv4/IPv6</a>
+  <a href="#r-doku">IT-Dokumentation</a>
   <a href="#r-security">IT-Sicherheit</a>
   <a href="#r-itil">ITIL &amp; Service</a>
   <a href="#r-medien">Kabel/Hardware</a>
@@ -101,12 +103,14 @@
 <a href="#r-osi">OSI-Modell</a>
   <a href="#r-ports">Ports</a>
   <a href="#r-projekt">Projektmanagement</a>
+  <a href="#r-qm">Qualitätsmanagement</a>
   <a href="#r-routing">Routing/Switching</a>
   <a href="#r-malware">Schadsoftware &amp; Angriffe</a>
   <a href="#r-sql">SQL & Datenbanken</a>
   <a href="#r-storage">Storage-Systeme</a>
   <a href="#r-verkabelung">Strukturierte Verkabelung</a>
 <a href="#r-subnetting">Subnetting</a>
+  <a href="#r-haertung">Systemhärtung</a>
   <a href="#r-tcpip">TCP/IP & UDP</a>
   <a href="#r-topo">Topologien</a>
   <a href="#r-krypto">Verschlüsselung/PKI</a>
@@ -333,6 +337,38 @@
 <h3>Vorgehen und Bausteine</h3>
 <p>Der Ablauf nach IT-Grundschutz: Zunächst wird der <strong>Geltungsbereich</strong> festgelegt, dann eine <strong>Strukturanalyse</strong> erstellt, die alle Anwendungen, Systeme, Räume und Netze erfasst. Darauf folgt die <strong>Schutzbedarfsfeststellung</strong>, anschließend die <strong>Modellierung</strong>: Den erfassten Objekten werden passende <strong>Bausteine</strong> aus dem IT-Grundschutz-Kompendium zugeordnet, die jeweils konkrete Anforderungen enthalten. Ein <strong>IT-Grundschutz-Check</strong> vergleicht Soll und Ist. Bei hohem oder sehr hohem Schutzbedarf schließt sich eine ergänzende <strong>Risikoanalyse</strong> an. Alles mündet in ein <strong>Sicherheitskonzept</strong>, das regelmäßig überprüft und fortgeschrieben wird.</p>
 <p>Für wiederkehrende Situationen stellt das BSI <strong>Profile</strong> bereit, also vorgefertigte Muster-Sicherheitskonzepte für bestimmte Branchen oder Einrichtungsarten, die als Vorlage dienen und den Aufwand deutlich senken.</p>
+
+<h3>Rollen und Verantwortung</h3>
+<p>Die <strong>Leitung</strong> der Institution trägt die Gesamtverantwortung für die Informationssicherheit; sie kann diese nicht delegieren. Der <strong>Informationssicherheitsbeauftragte (ISB)</strong> steuert den Prozess, berät und berichtet, entscheidet aber nicht über Budget und Risikoakzeptanz. Trägt die Leitung eine Maßnahme aus Aufwandsgründen nicht mit, dokumentiert der ISB das Restrisiko, legt es der Leitung nachvollziehbar zur Entscheidung vor und lässt die Übernahme des Risikos schriftlich bestätigen. Die Verantwortung bleibt damit dort, wo sie hingehört.</p>
+
+<h3>Strukturanalyse im Detail</h3>
+<p>Erfasst werden Geschäftsprozesse, Anwendungen, IT-Systeme, Räume, Netze und Kommunikationsverbindungen. Für jedes <strong>IT-System</strong> gehören dazu mindestens: eindeutige Bezeichnung, Beschreibung und Typ, Plattform beziehungsweise Betriebssystem, Aufstellungsort, Status und die zuständige Person sowie die Anwendungen, die darauf laufen.</p>
+<p>Gleichartige Objekte dürfen zu einer <strong>Gruppe</strong> zusammengefasst werden, wenn sie vom gleichen Typ sind, ähnlich konfiguriert und in gleicher Weise eingebunden sind, denselben Rahmenbedingungen unterliegen und den gleichen Schutzbedarf aufweisen. Das reduziert den Aufwand erheblich, etwa bei 200 identischen Arbeitsplatzrechnern.</p>
+<p><strong>Netzpläne</strong> für die Strukturanalyse sollten enthalten: alle IT-Systeme mit Kennung, die Verbindungen zwischen ihnen einschließlich Art und Übertragungstechnik, die Außenverbindungen sowie die Netzsegmentierung. Ein aktueller Plan ist Voraussetzung, veraltete Pläne führen zu falschen Schutzbedarfsableitungen.</p>
+
+<h3>Bausteine und Modellierung</h3>
+<p>Ein <strong>Baustein</strong> des IT-Grundschutz-Kompendiums beschreibt eine typische Situation und enthält: eine Beschreibung mit Zielsetzung und Abgrenzung, die <strong>spezifische Gefährdungslage</strong> sowie die <strong>Anforderungen</strong>, getrennt nach Basis-Anforderungen (müssen vorrangig umgesetzt werden), Standard-Anforderungen (Regelfall für normalen Schutzbedarf) und Anforderungen bei <strong>erhöhtem Schutzbedarf</strong>. Zu jeder Anforderung ist eine Rolle als zuständig benannt.</p>
+<p>Prozessbausteine wie <strong>ISMS.1 Sicherheitsmanagement</strong> werden nicht einzelnen Geräten zugeordnet, sondern genau einmal auf den <strong>gesamten Informationsverbund</strong> angewendet. Systembausteine dagegen werden je Zielobjekt oder Gruppe modelliert.</p>
+<p>Die <strong>Kreuzreferenztabelle</strong> jedes Bausteins listet die Anforderungen zusammen mit den zugehörigen Gefährdungen. Damit lässt sich der Leitung anschaulich zeigen, welche konkreten Gefährdungen schlagend werden, wenn eine Anforderung nicht umgesetzt wird.</p>
+
+<h3>IT-Grundschutz-Check</h3>
+<p>Der Check vergleicht Soll und Ist. Der Umsetzungsstatus je Anforderung lautet <strong>ja</strong>, <strong>teilweise</strong>, <strong>nein</strong> oder <strong>entbehrlich</strong>. Als <em>erfüllt</em> gilt eine Anforderung erst, wenn sie <strong>vollständig und wirksam</strong> umgesetzt ist; eine geplante oder nur teilweise umgesetzte Maßnahme zählt nicht. <em>Entbehrlich</em> ist sie, wenn sie im konkreten Fall nicht zutrifft oder ihre Wirkung nachweislich anders erreicht wird, was jeweils zu begründen ist. Erhoben wird über Befragung, Einsichtnahme in Unterlagen und Kontrolle vor Ort, das Ergebnis wird dokumentiert.</p>
+<p>Beim <strong>ersten</strong> Check, also vor den Risikoanalysen, werden Basis- und Standard-Anforderungen geprüft. Anforderungen für erhöhten Schutzbedarf bleiben zunächst außen vor; sie werden erst in der anschließenden Risikoanalyse betrachtet und dort gezielt ausgewählt.</p>
+<p>Die Prüfung, ob eine Maßnahme tatsächlich wie geplant umgesetzt ist, erfolgt durch eine <strong>unabhängige Stelle</strong>, also nicht durch die Person, die sie selbst umgesetzt hat. Üblich sind der ISB, die interne Revision oder eine externe Prüfung.</p>
+
+<h3>Risikobehandlung</h3>
+<table>
+<tr><th>Option</th><th>Vorgehen</th></tr>
+<tr><td>Vermeiden</td><td>Die risikobehaftete Tätigkeit oder Technik wird aufgegeben oder anders gestaltet.</td></tr>
+<tr><td>Reduzieren</td><td>Zusätzliche Maßnahmen senken Eintrittswahrscheinlichkeit oder Schadenshöhe.</td></tr>
+<tr><td>Verlagern (Transfer)</td><td>Das Risiko wird auf Dritte übertragen, etwa durch eine Versicherung oder die Auslagerung an einen Dienstleister mit vertraglicher Zusicherung.</td></tr>
+<tr><td>Akzeptieren</td><td>Das Restrisiko wird bewusst getragen und dokumentiert.</td></tr>
+</table>
+<p>Ein hohes Risiko zu <strong>akzeptieren</strong> kann gerechtfertigt sein, wenn keine wirksame Gegenmaßnahme verfügbar ist, der Aufwand in keinem Verhältnis zum Schaden stünde, das Risiko zur Erreichung des Geschäftszwecks unvermeidbar ist oder die Eintrittswahrscheinlichkeit nachvollziehbar sehr gering ist. Die Entscheidung trifft immer die Leitung und sie ist zu dokumentieren.</p>
+
+<h3>Überprüfung und Zertifizierung</h3>
+<p>Ein Sicherheitskonzept ist kein einmaliges Dokument. Es wird <strong>regelmäßig und anlassbezogen</strong> überprüft, weil sich Bedrohungslage, Technik, Prozesse und Rechtslage ändern und Maßnahmen an Wirksamkeit verlieren. Geprüft wird unter anderem, ob Maßnahmen vollständig, wirksam, wirtschaftlich, praxistauglich und benutzerfreundlich sind, ob sie noch zur aktuellen Struktur passen und ob die Dokumentation aktuell ist. Auch aufgetretene Sicherheitsvorfälle fließen ein.</p>
+<p>Für ein <strong>ISO 27001-Zertifikat auf Basis von IT-Grundschutz</strong> sind erforderlich: ein festgelegter Geltungsbereich (Informationsverbund), ein vollständiges und umgesetztes Sicherheitskonzept nach IT-Grundschutz mit erfüllten Basis- und Standard-Anforderungen, durchgeführte Risikoanalysen für Objekte mit erhöhtem Schutzbedarf, die vollständigen Referenzdokumente sowie ein Audit durch einen beim BSI zertifizierten Auditor. Das Zertifikat ist befristet und wird durch Überwachungsaudits aufrechterhalten.</p>
 </section>
 
 <section id="r-datenschutz">
@@ -468,6 +504,44 @@
 <div class="callout"><span class="tag">Merksatz</span><strong>SPF</strong> = wer <em>darf</em> senden. <strong>DKIM</strong> = wurde unterwegs <em>verändert</em>. <strong>DMARC</strong> = was <em>tun</em>, wenn es nicht passt. Alle drei stehen im DNS und schützen vor Absenderfälschung, wie sie bei Phishing und CEO-Fraud verwendet wird.</div>
 </section>
 
+<section id="r-epk">
+<h2>EPK &amp; Geschäftsprozesse</h2>
+<p>Die <strong>ereignisgesteuerte Prozesskette (EPK)</strong> stellt einen Geschäftsprozess als Abfolge von Ereignissen und Funktionen dar. Ihr Zweck ist es, Abläufe für alle Beteiligten verständlich sichtbar zu machen: als Grundlage für Analyse, Verbesserung, Schulung und für die spätere Umsetzung in Software.</p>
+
+<h3>Die beiden Grundelemente</h3>
+<table>
+<tr><th>Element</th><th>Darstellung</th><th>Bedeutung</th><th>Formulierung</th></tr>
+<tr><td><strong>Ereignis</strong></td><td>Sechseck</td><td>Ein eingetretener Zustand. Passiv, verbraucht keine Zeit und keine Ressourcen.</td><td>Partizip: „Bestellung ist eingegangen"</td></tr>
+<tr><td><strong>Funktion</strong></td><td>Abgerundetes Rechteck</td><td>Eine Tätigkeit, die etwas bewirkt. Aktiv, benötigt Zeit und Ressourcen.</td><td>Verb im Infinitiv: „Bestellung prüfen"</td></tr>
+</table>
+<div class="callout"><span class="tag">Ereignis oder Funktion?</span>Ein <strong>Ereignis</strong> beschreibt einen Zustand, der bereits eingetreten ist, und wird passiv formuliert. Eine <strong>Funktion</strong> beschreibt eine Handlung und wird mit einem Tätigkeitswort formuliert. Faustregel: Steht ein „ist" oder „wurde" darin, ist es ein Ereignis. Beginnt es mit einem Tätigkeitswort, ist es eine Funktion.</div>
+
+<h3>Regeln einer EPK</h3>
+<p>Die EPK folgt festen Regeln, die in Prüfungen gezielt abgefragt werden:</p>
+<p>Eine EPK <strong>beginnt und endet immer mit einem Ereignis</strong>. Ereignisse und Funktionen <strong>wechseln sich ab</strong>, zwei Ereignisse oder zwei Funktionen dürfen nie direkt aufeinanderfolgen. Verzweigt oder vereinigt wird über <strong>Konnektoren</strong>: das <strong>UND</strong> für parallele Zweige, die alle durchlaufen werden, das <strong>ODER</strong> für einen oder mehrere Zweige und das <strong>XOR</strong> als entweder-oder für genau einen Zweig. Jeder geöffnete Konnektor wird wieder <strong>geschlossen</strong>, und zwar mit demselben Typ. Entscheidend ist außerdem: <strong>Nach einem Ereignis darf kein XOR- oder ODER-Konnektor stehen</strong>, denn ein Ereignis kann nicht entscheiden. Entscheidungen trifft immer eine Funktion.</p>
+<div class="callout"><span class="tag">Typische Prüfungsfallen</span>Zwei Funktionen direkt hintereinander ohne verbindendes Ereignis. Eine EPK, die mit einer Funktion beginnt oder endet. Ein XOR direkt nach einem Ereignis. Ein mit UND geöffneter Zweig, der mit XOR geschlossen wird. Und die Verwechslung der Formulierungen, etwa „Rechnung prüfen" als Ereignis statt als Funktion.</div>
+
+<h3>Vollständiges Mini-Beispiel</h3>
+<p>Prozess „Urlaubsantrag bearbeiten", von oben nach unten gelesen:</p>
+<p>Ereignis: <em>Urlaubsantrag ist eingegangen</em><br>
+Funktion: <em>Antrag auf Vollständigkeit prüfen</em><br>
+Ereignis: <em>Antrag ist geprüft</em><br>
+Funktion: <em>Über Antrag entscheiden</em><br>
+XOR-Konnektor öffnet zwei Zweige:<br>
+&nbsp;&nbsp;Zweig 1 &rarr; Ereignis: <em>Antrag ist genehmigt</em> &rarr; Funktion: <em>Urlaub im System eintragen</em> &rarr; Ereignis: <em>Urlaub ist eingetragen</em><br>
+&nbsp;&nbsp;Zweig 2 &rarr; Ereignis: <em>Antrag ist abgelehnt</em> &rarr; Funktion: <em>Ablehnung begründen</em> &rarr; Ereignis: <em>Ablehnung ist mitgeteilt</em><br>
+XOR-Konnektor schließt beide Zweige<br>
+Funktion: <em>Antragsteller benachrichtigen</em><br>
+Ereignis: <em>Antragsteller ist benachrichtigt</em></p>
+<p>Beachten Sie: Der XOR steht nach der <em>Funktion</em> „Über Antrag entscheiden", nicht nach einem Ereignis. Der Wechsel Ereignis, Funktion, Ereignis ist durchgehend eingehalten, und die Kette beginnt und endet mit einem Ereignis.</p>
+
+<h3>EPK und BPMN im Vergleich</h3>
+<p>Die <strong>BPMN</strong> (Business Process Model and Notation) ist die international verbreitete, deutlich umfangreichere Notation. Sie kennt zusätzlich Rollen in Form von Bahnen (Pools und Lanes), unterschiedliche Ereignistypen wie Zeit- und Nachrichtenereignisse sowie Elemente für Fehlerbehandlung. BPMN ist zudem so genau festgelegt, dass Modelle technisch ausgeführt werden können.</p>
+<p>Die <strong>EPK</strong> ist einfacher und schneller zu lesen, im deutschsprachigen Raum weit verbreitet und für die fachliche Abstimmung mit Anwendern gut geeignet. Kurz gefasst: EPK für die verständliche fachliche Sicht, BPMN für die genaue, technisch verwertbare Modellierung.</p>
+<p>Im <strong>Geschäftsprozessmanagement</strong> ist die EPK ein Werkzeug der Ist-Aufnahme und der Soll-Konzeption. Erst wenn der Ablauf sichtbar ist, lassen sich Doppelarbeit, Medienbrüche, Wartezeiten und unklare Zuständigkeiten erkennen und gezielt beseitigen.</p>
+</section>
+
+
 <section id="r-ethernet">
 <h2>Ethernet & Zugriffsverfahren</h2>
 <p><span class="term">Ethernet</span> (IEEE 802.3) ist die dominierende LAN-Technik. Adressierung über MAC (Schicht 2), Dateneinheit ist der <strong>Frame</strong> (Ziel-MAC, Quell-MAC, Nutzdaten, Prüfsumme FCS/CRC (Frame Check Sequence / Cyclic Redundancy Check), Präambel zur Synchronisation).</p>
@@ -571,6 +645,29 @@
 <p>In IPv6 übernimmt das <strong>NDP</strong> diese Aufgabe und nutzt dafür ICMPv6-Nachrichten statt Broadcasts. Die <strong>Neighbor Solicitation</strong> fragt per Multicast nach der MAC-Adresse zu einer IPv6-Adresse, das <strong>Neighbor Advertisement</strong> liefert die Antwort. Vor der ersten Nutzung einer selbst gebildeten Adresse prüft ein Gerät mit der <strong>Duplicate Address Detection (DAD)</strong>, ob die Adresse im Netz bereits vergeben ist. Dazu sendet es eine Neighbor Solicitation auf die eigene geplante Adresse. Antwortet jemand, liegt eine Kollision vor und die Adresse wird nicht verwendet.</p>
 </section>
 
+<section id="r-doku">
+<h2>IT-Dokumentation</h2>
+<p>Dokumentation ist kein lästiger Anhang, sondern Teil der Leistung. Sie sichert Wissen unabhängig von einzelnen Personen, macht Entscheidungen nachvollziehbar, verkürzt die Einarbeitung, verkürzt Ausfallzeiten im Störungsfall und ist bei Prüfungen und Zertifizierungen der geforderte Nachweis. Fehlt sie, entsteht Abhängigkeit von Einzelpersonen, und im Notfall kostet jede Rekonstruktion Zeit, die niemand hat.</p>
+
+<h3>Zielgruppenorientierung</h3>
+<p>Der wichtigste Grundsatz: Dokumentation wird <strong>für eine bestimmte Zielgruppe</strong> geschrieben, nicht für den Verfasser. Wer das ignoriert, produziert entweder für Anwender unlesbare Technikbeschreibungen oder für Administratoren nutzlose Bedienhinweise.</p>
+<table>
+<tr><th>Art</th><th>Zielgruppe</th><th>Typische Inhalte</th></tr>
+<tr><td><strong>Systemdokumentation</strong></td><td>Administration, Entwicklung</td><td>Architektur, Netzpläne, IP-Konzept, Schnittstellen, Datenmodell, Konfigurationen, Abhängigkeiten</td></tr>
+<tr><td><strong>Betriebsdokumentation</strong></td><td>IT-Betrieb, Service Desk</td><td>Betriebshandbuch, Ablaufpläne, Sicherungs- und Wiederherstellungsverfahren, Notfallpläne, Wartungsfenster, Zuständigkeiten</td></tr>
+<tr><td><strong>Benutzerdokumentation</strong></td><td>Anwender im Fachbereich</td><td>Anleitungen in Handlungsschritten, Bildschirmabbildungen, häufige Fragen, Ansprechpartner</td></tr>
+<tr><td><strong>Projektdokumentation</strong></td><td>Projektbeteiligte, Auftraggeber</td><td>Lasten- und Pflichtenheft, Projektplan, Protokolle, Entscheidungen, Änderungsanträge, Abnahmeprotokoll, Lessons Learned</td></tr>
+</table>
+<div class="callout"><span class="tag">Prüfungsfalle</span>System- und Betriebsdokumentation werden gern verwechselt. Die <strong>Systemdokumentation</strong> beantwortet die Frage „<em>Wie ist es aufgebaut?</em>", die <strong>Betriebsdokumentation</strong> die Frage „<em>Was ist im laufenden Betrieb zu tun?</em>". Ein Netzplan gehört zur Systemdokumentation, die Anleitung zur nächtlichen Sicherung zur Betriebsdokumentation.</div>
+
+<h3>Anforderungen an gute Dokumentation</h3>
+<p>Sie muss <strong>vollständig</strong> sein, aber nicht ausufernd. Sie muss <strong>aktuell</strong> sein, denn eine veraltete Dokumentation ist gefährlicher als gar keine: Man verlässt sich auf sie und wird in die Irre geführt. Sie muss <strong>verständlich</strong> für ihre Zielgruppe formuliert, <strong>nachvollziehbar</strong> gegliedert und <strong>auffindbar</strong> abgelegt sein. Dazu kommen <strong>Versionierung</strong> mit Datum und Verantwortlichem sowie ein geregelter <strong>Zugriffsschutz</strong>, denn Netzpläne und Konfigurationen sind für Angreifer hochinteressant.</p>
+
+<h3>Pflege und Aktualisierung</h3>
+<p>Dokumentation altert mit jeder Änderung am System. Wirksam ist deshalb nur die Kopplung an bestehende Abläufe: Die Aktualisierung wird fester Bestandteil des Änderungsprozesses, eine Änderung gilt erst als abgeschlossen, wenn die Dokumentation nachgezogen wurde. Ergänzend hilft eine benannte Verantwortlichkeit je Dokument und eine regelmäßige Überprüfung in festem Rhythmus.</p>
+<div class="callout"><span class="tag">Häufige Fehler</span>Dokumentation erst am Projektende erstellen, wenn Details längst vergessen sind. Alles in einem Dokument für alle Zielgruppen mischen. Nach Änderungen nicht nachziehen. Wissen nur im Kopf einzelner Personen belassen. Keine Version und kein Datum angeben. Und die Ablage so wählen, dass sie ausgerechnet bei einem Ausfall des Systems nicht erreichbar ist.</div>
+<div class="callout"><span class="tag">AP1-Beispiel</span>Ein Betrieb führt eine neue Warenwirtschaft ein. Zu erstellen sind: eine <strong>Systemdokumentation</strong> mit Serverarchitektur, Datenbankschema und Schnittstellen für die IT, eine <strong>Betriebsdokumentation</strong> mit Sicherungskonzept und Wiederanlaufplan für den Betrieb, eine <strong>Benutzerdokumentation</strong> mit bebilderten Anleitungen für die Lagermitarbeitenden sowie eine <strong>Projektdokumentation</strong> mit Pflichtenheft, Protokollen und Abnahme für den Auftraggeber. Typische Prüfungsfrage: Ordnen Sie drei Inhalte der jeweils richtigen Dokumentationsart zu und begründen Sie die Zuordnung über die Zielgruppe.</div>
+</section>
 <section id="r-security">
 <h2>IT-Sicherheit Grundlagen</h2>
 <p>Schutzziele (<span class="term">CIA</span>): Vertraulichkeit, Integrität, Verfügbarkeit. <strong>Authentifizierung</strong> = Identität nachweisen; <strong>Autorisierung</strong> = Rechte festlegen. <strong>2FA</strong> kombiniert zwei unabhängige Faktoren.</p>
@@ -948,6 +1045,44 @@ Prüfen Sie in Aufgaben immer alle fünf Kriterien einzeln durch: Genau daran h�
 <div class="callout"><span class="tag">Prüfungsfalle</span>Pro Zeile darf es <strong>genau ein A</strong> geben. Zwei Verantwortliche bedeuten in der Praxis, dass sich niemand verantwortlich fühlt. <strong>R</strong> kann dagegen mehrfach vorkommen, wenn mehrere gemeinsam ausführen. Und der Unterschied zwischen C und I ist die Richtung: <em>Consulted</em> wird vorher gefragt und antwortet, <em>Informed</em> bekommt hinterher Bescheid.</div>
 </section>
 
+<section id="r-qm">
+<h2>Qualitätsmanagement</h2>
+<p><strong>Qualität</strong> ist der Grad, in dem eine Leistung die vereinbarten und vorausgesetzten Anforderungen erfüllt. Entscheidend ist damit nicht, was technisch machbar wäre, sondern was zugesagt wurde. In der IT bedeutet gute Qualität weniger Nacharbeit, weniger Störungen im Betrieb, zufriedenere Anwender und niedrigere Gesamtkosten, weil Fehler umso teurer werden, je später sie auffallen.</p>
+<p>Das <strong>Qualitätsmanagement (QM)</strong> umfasst alle Tätigkeiten, mit denen Qualität geplant, gesichert, geprüft und verbessert wird. Es gliedert sich in vier Bereiche:</p>
+<table>
+<tr><th>Bereich</th><th>Frage</th><th>Beispiel im IT-Projekt</th></tr>
+<tr><td><strong>Qualitätsplanung</strong></td><td>Was heißt Qualität in diesem Projekt konkret?</td><td>Festlegen, dass eine Seite in unter zwei Sekunden laden muss</td></tr>
+<tr><td><strong>Qualitätssicherung</strong></td><td>Welche Prozesse verhindern, dass Fehler entstehen?</td><td>Verbindliche Code-Reviews und Programmierrichtlinien einführen</td></tr>
+<tr><td><strong>Qualitätskontrolle</strong></td><td>Erfüllt das fertige Ergebnis die Vorgaben?</td><td>Ladezeit im Test messen und mit der Vorgabe vergleichen</td></tr>
+<tr><td><strong>Qualitätsverbesserung</strong></td><td>Wie wird es beim nächsten Mal besser?</td><td>Häufigste Fehlerursachen auswerten und Richtlinien anpassen</td></tr>
+</table>
+<div class="callout"><span class="tag">Qualitätssicherung oder Qualitätskontrolle?</span>Die häufigste Verwechslung. Die <strong>Qualitätssicherung</strong> ist <em>vorbeugend</em> und richtet sich auf den <em>Prozess</em>: Sie sorgt dafür, dass Fehler gar nicht erst entstehen, etwa durch Reviews, Standards und Schulung. Die <strong>Qualitätskontrolle</strong> ist <em>nachgelagert</em> und richtet sich auf das <em>Produkt</em>: Sie prüft am fertigen Ergebnis, ob die Vorgaben eingehalten wurden, etwa durch Tests und Messungen. Merksatz: Sicherung baut den Zaun, Kontrolle zählt die Schafe.</div>
+
+<h3>PDCA-Zyklus</h3>
+<p>Der <strong>PDCA-Zyklus</strong> ist das Grundmuster der kontinuierlichen Verbesserung. Er läuft nicht einmalig ab, sondern immer wieder, weshalb er als Kreis dargestellt wird.</p>
+<table>
+<tr><th>Phase</th><th>Inhalt</th></tr>
+<tr><td><strong>Plan</strong></td><td>Ist-Zustand erfassen, Ursachen analysieren, messbares Ziel und Maßnahmen festlegen</td></tr>
+<tr><td><strong>Do</strong></td><td>Die Maßnahme zunächst begrenzt umsetzen, etwa als Pilot in einer Abteilung</td></tr>
+<tr><td><strong>Check</strong></td><td>Ergebnis messen und mit dem geplanten Ziel vergleichen</td></tr>
+<tr><td><strong>Act</strong></td><td>Bei Erfolg zum Standard machen und ausrollen, sonst nachbessern und erneut beginnen</td></tr>
+</table>
+<div class="callout"><span class="tag">Merkschema</span><strong>P</strong>lanen, <strong>D</strong>urchführen, <strong>C</strong>heck also prüfen, <strong>A</strong>gieren also festschreiben. Der Zyklus endet nie: Nach Act beginnt der nächste Plan auf höherem Niveau.</div>
+<div class="callout"><span class="tag">Praxisbeispiel</span>In einem Betrieb dauert die Einrichtung eines neuen Arbeitsplatzes im Schnitt vier Stunden.<br>
+<strong>Plan:</strong> Ziel ist eine Reduktion auf zwei Stunden. Ursachenanalyse ergibt, dass jede Installation von Hand erfolgt.<br>
+<strong>Do:</strong> Für eine Abteilung wird ein einheitliches Systemabbild erstellt und erprobt.<br>
+<strong>Check:</strong> Die Messung ergibt 1,5 Stunden je Arbeitsplatz, das Ziel ist übertroffen.<br>
+<strong>Act:</strong> Das Abbild wird für alle Abteilungen zum Standard erklärt und dokumentiert. Der nächste Zyklus nimmt sich die Softwareverteilung vor.</div>
+
+<h3>Qualitätsmanagementplan</h3>
+<p>Der <strong>Qualitätsmanagementplan</strong> hält für ein Projekt schriftlich fest, was Qualität hier bedeutet und wie sie erreicht wird. Typische Inhalte: die Qualitätsziele mit messbaren Kriterien, die anzuwendenden Normen und Richtlinien, die vorgesehenen Prüfungen mit Zeitpunkt und Verantwortlichen, die Vorgehensweise bei Abweichungen sowie die Regeln für Dokumentation und Freigabe.</p>
+
+<h3>Qualitätsmanagement in Projekt und Betrieb</h3>
+<p>Im <strong>Projekt</strong> ist Qualität eine der drei Größen des magischen Dreiecks neben Zeit und Kosten: Wird an einer Ecke gezogen, verändern sich die anderen. Wer den Termin hält und das Budget nicht erhöht, geht bei gleichbleibendem Umfang zwangsläufig bei der Qualität ins Risiko.</p>
+<p>Im <strong>IT-Betrieb</strong> zeigt sich Qualität in messbaren Servicegrößen wie Verfügbarkeit, Reaktions- und Lösungszeiten, die im Service Level Agreement vereinbart sind. Der Übergang ist fließend: Was im Projekt an Qualität versäumt wurde, erzeugt im Betrieb dauerhaft Störungen und Aufwand.</p>
+<div class="callout"><span class="tag">Typische AP1-Fragen</span>Abgrenzung von Qualitätssicherung und Qualitätskontrolle, die vier Phasen des PDCA-Zyklus in richtiger Reihenfolge, Anwendung des Zyklus auf ein vorgegebenes Szenario, Inhalte eines Qualitätsmanagementplans sowie die Einordnung von Qualität ins magische Dreieck.</div>
+</section>
+
 <section id="r-routing">
 <h2>Routing & Switching</h2>
 <p><strong>Switching</strong> arbeitet innerhalb eines Netzes auf Schicht 2 (MAC), <strong>Routing</strong> verbindet Netze auf Schicht 3 (IP).</p>
@@ -1148,6 +1283,43 @@ Prüfen Sie in Aufgaben immer alle fünf Kriterien einzeln durch: Genau daran h�
 <tr><td>/60</td><td>4</td><td>2⁴ = 16</td></tr>
 </table>
 <div class="callout"><span class="tag">Warum kein „−2" bei IPv6?</span>IPv6 kennt kein Broadcast mehr, nur <strong>Multicast</strong>. Die einzige reservierte Sonderadresse je Subnetz ist die Subnet-Router-Anycast-Adresse, sie schränkt die praktisch verfügbare Hostzahl aber nicht relevant ein, da ein /64 ohnehin 2<sup>64</sup> Adressen bereitstellt. Die „minus 2"-Rechnung aus dem IPv4-Teil entfällt bei IPv6 dadurch komplett.</div>
+</section>
+
+<section id="r-haertung">
+<h2>Systemhärtung</h2>
+<p><strong>Härtung</strong> (englisch <em>Hardening</em>) bezeichnet alle Maßnahmen, mit denen ein System auf das für seinen Zweck Notwendige reduziert und sicher konfiguriert wird. Ziel ist die Verkleinerung der <strong>Angriffsfläche</strong>: Jeder Dienst, jedes Konto, jeder offene Port und jede installierte Komponente, die nicht gebraucht wird, ist ein möglicher Einstiegspunkt und muss gepflegt werden. Was nicht vorhanden ist, kann auch nicht angegriffen werden.</p>
+
+<h3>Maßnahmen der Härtung</h3>
+<table>
+<tr><th>Maßnahme</th><th>Wirkung</th></tr>
+<tr><td>Nicht benötigte <strong>Dienste deaktivieren</strong></td><td>Weniger lauschende Prozesse, weniger angreifbare Software</td></tr>
+<tr><td>Nicht benötigte Software entfernen</td><td>Weniger Schwachstellen und weniger Pflegeaufwand</td></tr>
+<tr><td><strong>Standardkonten</strong> absichern</td><td>Vorgegebene Konten deaktivieren oder umbenennen, Gastkonto abschalten</td></tr>
+<tr><td><strong>Standardpasswörter ändern</strong></td><td>Werkseinstellungen sind öffentlich bekannt und werden automatisiert durchprobiert</td></tr>
+<tr><td>Rechte nach <strong>Least Privilege</strong></td><td>Jedes Konto nur mit den nötigen Rechten, getrennte Konten für administrative Aufgaben</td></tr>
+<tr><td><strong>Lokale Firewall</strong> aktivieren</td><td>Eingehende Verbindungen auf das Nötige begrenzen, auch im internen Netz</td></tr>
+<tr><td><strong>Patchmanagement</strong></td><td>Bekannte Lücken zeitnah und geordnet schließen</td></tr>
+<tr><td>Protokollierung aktivieren</td><td>Auffälligkeiten werden nachvollziehbar und auswertbar</td></tr>
+<tr><td>Verschlüsselung nutzen</td><td>Datenträger und Übertragungswege absichern</td></tr>
+<tr><td><strong>Endpoint-Schutz</strong></td><td>Schadsoftware erkennen und verhaltensauffällige Prozesse blockieren</td></tr>
+</table>
+
+<h3>Patch- und Updatemanagement</h3>
+<p><strong>Patchmanagement</strong> ist der geregelte Ablauf, mit dem Aktualisierungen erfasst, bewertet, getestet, verteilt und kontrolliert werden. Ungeprüftes sofortiges Einspielen kann den Betrieb stören, zu langes Warten lässt bekannte Lücken offen. Der übliche Weg: Sicherheitsrelevanz bewerten, im Testsystem prüfen, im Wartungsfenster verteilen, Erfolg kontrollieren und dokumentieren. Für kritische Lücken gibt es ein verkürztes Notfallverfahren.</p>
+<div class="callout"><span class="tag">Prüfungsfalle</span>Härtung und Patchmanagement werden gern gleichgesetzt. Die <strong>Härtung</strong> ist die einmalige sichere Grundkonfiguration eines Systems, das <strong>Patchmanagement</strong> der dauerhafte Prozess, der es sicher hält. Beides zusammen ergibt erst ein wirksam geschütztes System.</div>
+
+<h3>Security by Design und Security by Default</h3>
+<p><strong>Security by Design</strong> bedeutet, Sicherheit von Anfang an mitzuentwerfen statt nachträglich aufzusetzen. Sicherheitsanforderungen fließen bereits in Architektur und Entwurf ein, weil nachträgliche Absicherung teurer und lückenhafter ist.</p>
+<p><strong>Security by Default</strong> bedeutet, dass ein System <em>im Auslieferungszustand</em> bereits sicher eingestellt ist: unnötige Dienste aus, kein voreingestelltes Standardpasswort, restriktive Rechte. Der Nutzer muss Sicherheit nicht erst aktivieren, sondern bewusst lockern, wenn er sie senken will.</p>
+
+<h3>Praxisbeispiele</h3>
+<p><strong>Windows:</strong> Gastkonto deaktivieren und das Administratorkonto umbenennen, Gruppenrichtlinien für Kennwortlänge und Sperrung setzen, nicht benötigte Rollen und Features entfernen, Windows-Firewall je Profil konfigurieren, automatische Ausführung von Wechseldatenträgern abschalten, BitLocker für die Datenträgerverschlüsselung, Anmeldeprotokollierung aktivieren.</p>
+<p><strong>Linux:</strong> Anmeldung als root über SSH unterbinden und stattdessen Schlüsselauthentifizierung nutzen, nicht benötigte Dienste über die Dienstverwaltung abschalten, Paketauswahl auf das Nötige beschränken, lokale Firewall über nftables oder ufw einrichten, Dateirechte und Eigentümer prüfen, Aktualisierungen über die Paketverwaltung geregelt einspielen, Protokolle zentral sammeln.</p>
+<div class="callout"><span class="tag">Typische Fehlkonfigurationen</span>Standardpasswort belassen, etwa an Druckern, Kameras oder Netzkomponenten. Ein Dienst läuft mit administrativen Rechten, obwohl er sie nicht braucht. Testzugänge bleiben nach der Inbetriebnahme bestehen. Ein Verwaltungszugang ist aus dem Internet erreichbar. Die lokale Firewall wird zur Fehlersuche abgeschaltet und nie wieder eingeschaltet. Und Protokollierung ist zwar aktiv, wird aber von niemandem ausgewertet.</div>
+
+<h3>Einordnung</h3>
+<p>Härtung ist keine freiwillige Kür: Im <strong>IT-Grundschutz</strong> des BSI enthalten die Bausteine für Betriebssysteme und Anwendungen genau solche Anforderungen, etwa zur Deaktivierung nicht benötigter Dienste, zur Rechtevergabe und zur sicheren Grundkonfiguration. Zusammen mit Patchmanagement, Protokollierung und Berechtigungskonzept bildet sie die technische Umsetzung der Schutzziele Vertraulichkeit, Integrität und Verfügbarkeit auf Systemebene.</p>
+<div class="callout"><span class="tag">AP1-Beispiel</span>Ein neu beschaffter Webserver soll in Betrieb gehen. Nennen Sie vier Härtungsmaßnahmen und begründen Sie sie. Erwartet werden etwa: nicht benötigte Dienste abschalten, weil jeder laufende Dienst angreifbar ist; Standardkonten und Standardpasswörter ändern, weil diese öffentlich bekannt sind; Rechte nach dem Prinzip der geringsten Rechte vergeben, um den Schaden bei einem kompromittierten Konto zu begrenzen; aktuelle Sicherheitsaktualisierungen einspielen, um bekannte Lücken zu schließen.</div>
 </section>
 
 <section id="r-tcpip">
@@ -1544,6 +1716,6 @@ Fachinformatiker · Aura
   <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="19" x2="12" y2="5"></line><polyline points="6 11 12 5 18 11"></polyline></svg>
 </button>
 
-<script src="app.js?v=20260827b"></script>
+<script src="app.js?v=20260827d"></script>
 </body>
 </html>
