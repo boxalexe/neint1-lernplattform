@@ -1092,7 +1092,7 @@ const POOLS = {
      { "t": "Er identifiziert jeden Datensatz eindeutig.", "ok": true },
      { "t": "Sein Wert darf mehrfach vorkommen.", "ok": false },
      { "t": "Er muss immer aus einem Namen bestehen.", "ok": false },
-     { "t": "Er darf nur in Zuordnungstabellen stehen.", "ok": false }
+     { "t": "Er darf einzig und allein in Zuordnungstabellen stehen.", "ok": false }
     ],
     "e": "Primärschlüsselwerte identifizieren Datensätze eindeutig."
    },
@@ -1602,7 +1602,7 @@ const POOLS = {
      { "t": "M.2 ist eine Bauform, eine M.2-SSD kann SATA oder NVMe nutzen.", "ok": true },
      { "t": "Jede M.2-SSD verwendet zwingend das NVMe-Protokoll.", "ok": false },
      { "t": "NVMe bezeichnet ausschließlich die Länge einer SSD.", "ok": false },
-     { "t": "SATA kann grundsätzlich nur von Festplatten genutzt werden.", "ok": false }
+     { "t": "SATA kann grundsätzlich ausschließlich von Festplatten genutzt werden.", "ok": false }
     ],
     "e": "Formfaktor und Übertragungsprotokoll müssen getrennt betrachtet werden."
    },
@@ -1940,7 +1940,7 @@ const POOLS = {
     "q": "Warum sind Adressen aus dem Bereich 192.168.0.0/16 nicht direkt aus dem Internet erreichbar?",
     "o": [
      { "t": "Es sind private Adressen, die im Internet nicht geroutet werden", "ok": true },
-     { "t": "Sie sind für die Zukunft reserviert und noch nicht vergeben", "ok": false },
+     { "t": "Sie sind für die Zukunft reserviert und noch grundsätzlich nicht vergeben", "ok": false },
      { "t": "Sie funktionieren ausschließlich mit IPv6-fähiger Hardware", "ok": false },
      { "t": "Sie werden von Firewalls grundsätzlich sofort verworfen", "ok": false }
     ],
@@ -2901,7 +2901,7 @@ const POOLS = {
     "q": "Können TCP und UDP denselben Port gleichzeitig auf einem System nutzen?",
     "o": [
      { "t": "Ja, beide Protokolle haben getrennte Portbereiche und stören sich nicht", "ok": true },
-     { "t": "Nein, jeder Port kann systemweit nur von einem Protokoll belegt werden", "ok": false },
+     { "t": "Nein, jeder Port kann systemweit einzig und allein von einem Protokoll belegt werden", "ok": false },
      { "t": "Nur, wenn beide Dienste vom selben Programm gestartet wurden", "ok": false },
      { "t": "Nur bei Ports oberhalb von 1024, darunter ist es gesperrt", "ok": false }
     ],
@@ -3528,7 +3528,7 @@ const POOLS = {
       "ok": false
      },
      {
-      "t": "587 ist unverschlüsselt, 25 immer verschlüsselt",
+      "t": "587 ist unverschlüsselt, 25 ausnahmslos immer verschlüsselt",
       "ok": false
      },
      {
@@ -4144,7 +4144,7 @@ const POOLS = {
       "ok": true
      },
      {
-      "t": "Es wird vor dem Senden keine Verbindung benötigt",
+      "t": "Es wird vor dem Senden grundsätzlich keine Verbindung benötigt",
       "ok": false
      },
      {
@@ -4482,7 +4482,7 @@ const POOLS = {
       "ok": true
      },
      {
-      "t": "Weil UDP-Pakete im Internet immer Vorrang vor TCP haben",
+      "t": "Weil UDP-Pakete im Internet grundsätzlich immer Vorrang vor TCP haben",
       "ok": false
      },
      {
@@ -4552,7 +4552,7 @@ const POOLS = {
     "q": "Was ist der Unterschied zwischen TCP-Segment und UDP-Datagramm?",
     "o": [
      { "t": "TCP-Segment enthält Sequenznummern und Bestätigungsfelder, UDP-Datagramm nicht", "ok": true },
-     { "t": "UDP-Datagramme enthalten die Prüfsummen, TCP-Segmente sichern nur über ACKs", "ok": false },
+     { "t": "UDP-Datagramme enthalten die Prüfsummen, TCP-Segmente sichern einzig und allein über ACKs", "ok": false },
      { "t": "UDP-Datagramme werden nummeriert, damit der Empfänger sie sortieren kann", "ok": false },
      { "t": "TCP-Segmente tragen keine Portnummern, weil die Verbindung sie ersetzt", "ok": false }
     ],
@@ -5173,7 +5173,7 @@ const POOLS = {
       "ok": true
      },
      {
-      "t": "Die Versionsnummer des verwendeten IP-Protokolls (4 oder 6)",
+      "t": "Die Versionsnummer des verwendeten IP-Protokolls (4 beziehungsweise 6)",
       "ok": false
      },
      {
@@ -6681,7 +6681,7 @@ const POOLS = {
       "ok": true
      },
      {
-      "t": "Es ist immer schneller als Kabel-LAN",
+      "t": "Es ist grundsätzlich immer schneller als Kabel-LAN",
       "ok": false
      },
      {
@@ -8530,7 +8530,7 @@ const POOLS = {
       "ok": true
      },
      {
-      "t": "Ein Port nur für einen einzelnen VLAN (untagged)",
+      "t": "Ein Port ausschließlich für einen einzelnen VLAN (untagged)",
       "ok": false
      },
      {
@@ -9981,7 +9981,7 @@ const POOLS = {
     "q": "Wozu dient der ARP-Cache?",
     "o": [
      { "t": "Er speichert gelernte IP-zu-MAC-Zuordnungen befristet zwischen", "ok": true },
-     { "t": "Er speichert dauerhaft alle IP-Adressen des gesamten Netzes", "ok": false },
+     { "t": "Er speichert dauerhaft sämtliche IP-Adressen des gesamten Netzes", "ok": false },
      { "t": "Er puffert eingehende Frames bei überlastetem Switch", "ok": false },
      { "t": "Er hält die Routingtabelle des Standardgateways vor", "ok": false }
     ],
@@ -10462,7 +10462,7 @@ const POOLS = {
       "ok": true
      },
      {
-      "t": "Ein Server, der nur auf Anfragen aus seiner eigenen Zone antwortet",
+      "t": "Ein Server, der einzig und allein auf Anfragen aus seiner eigenen Zone antwortet",
       "ok": false
      },
      {
@@ -10933,7 +10933,7 @@ const POOLS = {
     "q": "Warum ist REST gut skalierbar?",
     "o": [
      { "t": "Wegen der Zustandslosigkeit können Anfragen unabhängig verteilt werden", "ok": true },
-     { "t": "Weil der Server alle Sitzungen zentral zwischenspeichert und teilt", "ok": false },
+     { "t": "Weil der Server ausnahmslos alle Sitzungen zentral zwischenspeichert und teilt", "ok": false },
      { "t": "Weil Anfragen grundsätzlich asynchron über Warteschlangen laufen", "ok": false },
      { "t": "Weil die Datenmenge je Antwort auf ein festes Maximum begrenzt ist", "ok": false }
     ],
@@ -11893,7 +11893,7 @@ const POOLS = {
       "ok": true
      },
      {
-      "t": "Daten werden nur auf dem Server verschlüsselt",
+      "t": "Daten werden einzig und allein auf dem Server verschlüsselt",
       "ok": false
      },
      {
@@ -12619,7 +12619,7 @@ const POOLS = {
     "q": "Ein Switch empfängt einen Frame mit VLAN-Kennung 30 auf einem Trunk-Port. Wie verfährt er mit dieser Information?",
     "o": [
      { "t": "Er leitet den Frame nur an Ports weiter, die diesem VLAN zugeordnet sind", "ok": true },
-     { "t": "Er entfernt die Kennung und flutet den Frame an alle vorhandenen Ports", "ok": false },
+     { "t": "Er entfernt die Kennung und flutet den Frame an sämtliche vorhandenen Ports", "ok": false },
      { "t": "Er verwirft den Frame, sofern der Empfängerport kein Trunk-Port ist", "ok": false },
      { "t": "Er wandelt die Kennung in eine IP-Adresse des Zielnetzes um", "ok": false }
     ],
@@ -12631,7 +12631,7 @@ const POOLS = {
      { "t": "Weil Broadcasts nur noch innerhalb des jeweiligen VLANs verteilt werden", "ok": true },
      { "t": "Weil die Übertragungsrate der einzelnen Ports angehoben wird", "ok": false },
      { "t": "Weil jeder Frame auf dem Trunk automatisch komprimiert wird", "ok": false },
-     { "t": "Weil sämtliche Pakete zwischengespeichert und gebündelt werden", "ok": false }
+     { "t": "Weil sämtliche Pakete vor dem Versand zwischengespeichert und gebündelt werden", "ok": false }
     ],
     "e": "Jedes VLAN bildet eine eigene Broadcastdomäne. Broadcast- und Multicast-Verkehr bleibt darin, statt das gesamte Netz zu belasten."
    },
@@ -12639,7 +12639,7 @@ const POOLS = {
     "q": "Welche Aussage zum nativen VLAN trifft zu?",
     "o": [
      { "t": "Sein Verkehr wird auf dem Trunk ohne Kennung übertragen", "ok": true },
-     { "t": "Sein Verkehr wird auf dem Trunk doppelt gekennzeichnet", "ok": false },
+     { "t": "Sein Verkehr wird auf dem Trunk stets doppelt gekennzeichnet", "ok": false },
      { "t": "Es kann als einziges VLAN keine Endgeräte aufnehmen", "ok": false },
      { "t": "Es wird für jeden Trunk zwingend neu ausgehandelt", "ok": false }
     ],
@@ -12659,7 +12659,7 @@ const POOLS = {
     "q": "Warum wird der Verkehr zwischen VLANs meist zentral über einen Router oder Layer-3-Switch geführt?",
     "o": [
      { "t": "Weil VLANs getrennte Broadcastdomänen sind und eine Vermittlung auf Schicht 3 benötigen", "ok": true },
-     { "t": "Weil Switches Frames zwischen zwei Ports grundsätzlich nicht weiterleiten können", "ok": false },
+     { "t": "Weil Switches Frames zwischen zwei beliebigen Ports grundsätzlich nicht weiterleiten können", "ok": false },
      { "t": "Weil die VLAN-Kennung nur von Routern gelesen werden kann", "ok": false },
      { "t": "Weil andernfalls die Zahl möglicher VLANs begrenzt wäre", "ok": false }
     ],
@@ -12669,7 +12669,7 @@ const POOLS = {
     "q": "Welcher Vorteil entsteht durch VLANs bei einem Umzug innerhalb desselben Gebäudes?",
     "o": [
      { "t": "Die Zuordnung folgt dem Arbeitsplatz durch Umkonfiguration statt durch Umverkabelung", "ok": true },
-     { "t": "Die vorhandenen Kabelwege müssen für jeden Umzug vollständig neu verlegt werden", "ok": false },
+     { "t": "Die vorhandenen Kabelwege müssen für jeden einzelnen Umzug vollständig neu verlegt werden", "ok": false },
      { "t": "Alle betroffenen Endgeräte erhalten zwingend neue MAC-Adressen", "ok": false },
      { "t": "Die Anzahl der benötigten Switches verringert sich automatisch", "ok": false }
     ],
@@ -12680,7 +12680,7 @@ const POOLS = {
     "o": [
      { "t": "Sie ordnet den Frame einem bestimmten logischen Netz zu", "ok": true },
      { "t": "Sie legt die Übertragungsrate für diesen Frame fest", "ok": false },
-     { "t": "Sie ersetzt die Ziel-MAC-Adresse innerhalb des Trunks", "ok": false },
+     { "t": "Sie ersetzt die Ziel-MAC-Adresse innerhalb des gesamten Trunks", "ok": false },
      { "t": "Sie bestimmt die Lebensdauer des Frames im Netz", "ok": false }
     ],
     "e": "Die Kennung nach IEEE 802.1Q wird im Frame ergänzt und erlaubt es, mehrere logische Netze über eine gemeinsame Leitung zu führen."
@@ -12690,7 +12690,7 @@ const POOLS = {
     "o": [
      { "t": "Damit sich niemand unbemerkt über eine freie Buchse ins Netz einklinken kann", "ok": true },
      { "t": "Damit der Switch weniger elektrische Leistung aufnimmt", "ok": false },
-     { "t": "Damit die Anzahl der gelernten MAC-Adressen je Port unbegrenzt bleibt", "ok": false },
+     { "t": "Damit die Anzahl der gelernten MAC-Adressen je einzelnem Port unbegrenzt bleibt", "ok": false },
      { "t": "Damit die Kennung des nativen VLANs erhalten bleibt", "ok": false }
     ],
     "e": "Ein offener Port ist ein unkontrollierter Zugang. Ergänzend werden ungenutzte Ports einem isolierten VLAN zugewiesen."
@@ -12701,7 +12701,7 @@ const POOLS = {
      { "t": "Mehrere VLANs können dieselbe physische Infrastruktur nutzen", "ok": true },
      { "t": "Jedes VLAN benötigt einen eigenen physischen Switch", "ok": false },
      { "t": "Jedes VLAN benötigt eine eigene Verkabelung zum Endgerät", "ok": false },
-     { "t": "VLANs lassen sich ausschließlich über Glasfaser betreiben", "ok": false }
+     { "t": "VLANs lassen sich ausschließlich über Glasfaserleitungen betreiben", "ok": false }
     ],
     "e": "Die Trennung ist logisch. Genau darin liegt der wirtschaftliche Vorteil: getrennte Netze ohne getrennte Verkabelung."
    },
@@ -12709,7 +12709,7 @@ const POOLS = {
     "q": "Welcher Zweck wird mit der Aufteilung von Mitarbeitern, Servern und Gästen in getrennte VLANs verfolgt?",
     "o": [
      { "t": "Zugriffe zwischen den Bereichen lassen sich gezielt einschränken", "ok": true },
-     { "t": "Die Übertragungsrate für jeden Bereich wird garantiert erhöht", "ok": false },
+     { "t": "Die Übertragungsrate für jeden einzelnen Bereich wird garantiert erhöht", "ok": false },
      { "t": "Die Anzahl benötigter IP-Adressen sinkt in jedem Bereich", "ok": false },
      { "t": "Alle Bereiche erhalten automatisch denselben Schutzbedarf", "ok": false }
     ],
@@ -13228,7 +13228,7 @@ const POOLS = {
     "q": "Was ist ein Zero-Day-Exploit?",
     "o": [
      { "t": "Ein Angriff auf eine noch nicht öffentlich bekannte oder gepatchte Schwachstelle", "ok": true },
-     { "t": "Ein Angriff, der am Tag der Patch-Veröffentlichung startet, bevor alle updaten", "ok": false },
+     { "t": "Ein Angriff, der am Tag der Patch-Veröffentlichung startet, bevor sämtliche updaten", "ok": false },
      { "t": "Ein Angriff, der ein System innerhalb von 24 Stunden vollständig übernimmt", "ok": false },
      { "t": "Eine Schwachstelle, die der Hersteller kennt, aber bewusst nicht schließt", "ok": false }
     ],
@@ -13564,7 +13564,7 @@ const POOLS = {
     "o": [
      { "t": "Datenschutzfreundliche Voreinstellungen sind der Standard, ohne dass Nutzer aktiv werden müssen", "ok": true },
      { "t": "Nutzer müssen bei jeder Registrierung aktiv allen Datenverarbeitungen zustimmen", "ok": false },
-     { "t": "Voreingestellt ist grundsätzlich immer die maximale Datenfreigabe für Werbe- und Analysezwecke", "ok": false },
+     { "t": "Voreingestellt ist grundsätzlich ausnahmslos immer die maximale Datenfreigabe für Werbe- und Analysezwecke", "ok": false },
      { "t": "Jede App muss standardmäßig ohne Internetzugriff ausgeliefert werden", "ok": false }
     ],
     "e": "Privacy by Default sorgt dafür, dass ohne Zutun der Nutzer stets die datensparsamste Einstellung aktiv ist."
@@ -14128,7 +14128,7 @@ const POOLS = {
     "q": "Wie funktioniert die Anmeldung per Pre-Shared Key (PSK) in einem WLAN?",
     "o": [
      { "t": "Client und Access Point kennen dasselbe Passwort und leiten daraus die Schlüssel zur Verschlüsselung der Funkverbindung ab", "ok": true },
-     { "t": "Der Access Point sendet dem Client bei jeder Verbindung ein neues Passwort zu, das nur für diese Sitzung gültig ist", "ok": false },
+     { "t": "Der Access Point sendet dem Client bei jeder Verbindung ein neues Passwort zu, das einzig und allein für diese Sitzung gültig ist", "ok": false },
      { "t": "Jeder Client authentifiziert sich mit individuellen Zugangsdaten gegen einen zentralen Authentifizierungsserver", "ok": false },
      { "t": "Der Client weist sich über ein digitales Zertifikat aus, das von der CA des Netzbetreibers signiert wurde", "ok": false }
     ],
@@ -16809,7 +16809,7 @@ const POOLS = {
     "q": "Warum ersetzt ein RAID-System kein Backup?",
     "o": [
      { "t": "Es schützt vor Plattenausfall, nicht vor versehentlichem Löschen, Viren oder Totalschaden", "ok": true },
-     { "t": "Es speichert sämtliche Daten grundsätzlich nur verschlüsselt und damit unlesbar ab", "ok": false },
+     { "t": "Es speichert sämtliche Daten grundsätzlich einzig und allein verschlüsselt und damit unlesbar ab", "ok": false },
      { "t": "Es kann immer nur eine einzige Datei gleichzeitig sichern", "ok": false },
      { "t": "Es funktioniert ausschließlich mit externen USB-Festplatten", "ok": false }
     ],
@@ -17021,7 +17021,7 @@ const POOLS = {
      { "t": "Bei RAID 10 darf je Spiegelpaar eine Platte ausfallen, ohne den Verbund zu verlieren", "ok": true },
      { "t": "RAID 10 nutzt eine doppelte Parität, die RAID 01 vollständig fehlt", "ok": false },
      { "t": "RAID 10 besteht immer aus deutlich mehr Festplatten als RAID 01", "ok": false },
-     { "t": "RAID 10 verteilt zusätzlich eine doppelte Parität über alle beteiligten Platten", "ok": false }
+     { "t": "RAID 10 verteilt zusätzlich eine doppelte Parität über ausnahmslos alle beteiligten Platten", "ok": false }
     ],
     "e": "Bei RAID 10 überlebt der Verbund, solange in keinem Spiegelpaar beide Platten ausfallen. Bei RAID 01 kann schon der Ausfall je einer Platte in beiden Stripe-Sets den Verbund killen."
    },
@@ -17079,7 +17079,7 @@ const POOLS = {
     "q": "Was unterscheidet Hardware-RAID von Software-RAID?",
     "o": [
      { "t": "Hardware-RAID nutzt einen eigenen Controller, Software-RAID rechnet auf der Haupt-CPU", "ok": true },
-     { "t": "Hardware-RAID lässt sich nur mit SSDs betreiben, Software-RAID nur mit HDDs", "ok": false },
+     { "t": "Hardware-RAID lässt sich ausschließlich mit SSDs betreiben, Software-RAID nur mit HDDs", "ok": false },
      { "t": "Hardware-RAID arbeitet ohne Redundanz, Software-RAID immer mit", "ok": false },
      { "t": "Hardware-RAID ist grundsätzlich langsamer als Software-RAID", "ok": false }
     ],
@@ -17089,7 +17089,7 @@ const POOLS = {
     "q": "Was ist der Kern einer Vollsicherung (Full Backup)?",
     "o": [
      { "t": "Es werden bei jedem Durchlauf alle ausgewählten Daten vollständig gesichert", "ok": true },
-     { "t": "Es werden nur die seit der letzten Sicherung geänderten Daten gesichert", "ok": false },
+     { "t": "Es werden ausschließlich die seit der letzten Sicherung geänderten Daten gesichert", "ok": false },
      { "t": "Es wird nur die Struktur der Ordner ohne Dateiinhalte gesichert", "ok": false },
      { "t": "Es werden ausschließlich Systemdateien, aber keine Nutzdaten gesichert", "ok": false }
     ],
@@ -17101,7 +17101,7 @@ const POOLS = {
      { "t": "Sie sichert nur die seit dem letzten Backup beliebiger Art geänderten Daten", "ok": true },
      { "t": "Sie sichert bei jedem Durchlauf erneut den kompletten Datenbestand", "ok": false },
      { "t": "Sie sichert alle seit der letzten Vollsicherung geänderten Daten", "ok": false },
-     { "t": "Sie sichert neu angelegte, aber keine nachträglich geänderten Dateien", "ok": false }
+     { "t": "Sie sichert neu angelegte, aber überhaupt keine nachträglich geänderten Dateien", "ok": false }
     ],
     "e": "Die inkrementelle Sicherung erfasst nur die Änderungen seit dem letzten Backup beliebiger Art. Sie ist schnell und sparsam, die Wiederherstellung braucht aber die Vollsicherung plus alle folgenden Inkremente."
    },
@@ -17109,7 +17109,7 @@ const POOLS = {
     "q": "Was kennzeichnet eine differenzielle Sicherung?",
     "o": [
      { "t": "Sie sichert alle seit der letzten Vollsicherung geänderten Daten", "ok": true },
-     { "t": "Sie sichert nur die seit der letzten Sicherung geänderten Daten", "ok": false },
+     { "t": "Sie sichert ausschließlich die seit der letzten Sicherung geänderten Daten", "ok": false },
      { "t": "Sie sichert bei jedem Lauf den kompletten Datenbestand", "ok": false },
      { "t": "Sie sichert ausschließlich die Daten des laufenden Tages", "ok": false }
     ],
@@ -18015,7 +18015,7 @@ const POOLS = {
     "o": [
      { "t": "Mit zwei übereinstimmenden Willenserklärungen, also Angebot und Annahme", "ok": true },
      { "t": "Mit der körperlichen Übergabe der Ware an den Käufer", "ok": false },
-     { "t": "Mit dem vollständigen Eingang der Zahlung auf dem Konto des Verkäufers", "ok": false },
+     { "t": "Mit dem vollständigen Eingang der Zahlung auf dem Geschäftskonto des Verkäufers", "ok": false },
      { "t": "Mit dem Versand der Rechnung durch den Verkäufer", "ok": false }
     ],
     "e": "Der Vertrag entsteht bereits durch Angebot und Annahme. Lieferung und Zahlung sind die Erfüllung des bereits geschlossenen Vertrags."
@@ -18026,7 +18026,7 @@ const POOLS = {
      { "t": "Als unverbindliche Aufforderung zur Abgabe eines Angebots", "ok": true },
      { "t": "Als verbindliches Angebot des Händlers an den Kunden", "ok": false },
      { "t": "Als Annahme eines zuvor abgegebenen Kundenangebots", "ok": false },
-     { "t": "Als bereits geschlossener Vertrag zum angezeigten Preis", "ok": false }
+     { "t": "Als bereits wirksam geschlossener Vertrag zum angezeigten Verkaufspreis", "ok": false }
     ],
     "e": "Die Warenpräsentation ist eine invitatio ad offerendum. Erst die Bestellung des Kunden ist das Angebot, die Bestätigung des Händlers die Annahme."
    },
@@ -18055,7 +18055,7 @@ const POOLS = {
     "o": [
      { "t": "Die Nutzung wird über eine feste Laufzeit überlassen, das Eigentum bleibt beim Leasinggeber", "ok": true },
      { "t": "Das Eigentum geht bereits mit der ersten Rate auf den Leasingnehmer über", "ok": false },
-     { "t": "Der Leasinggeber trägt in jedem Fall sämtliche anfallenden Wartungs- und Reparaturkosten", "ok": false },
+     { "t": "Der Leasinggeber trägt in jedem Fall sämtliche anfallenden Wartungs-, Reparatur- und Versicherungskosten", "ok": false },
      { "t": "Der Vertrag ist für beide Seiten jederzeit fristlos kündbar", "ok": false }
     ],
     "e": "Leasing überlässt die Nutzung über eine feste Laufzeit. Das Eigentum verbleibt beim Leasinggeber, am Ende steht Rückgabe, Verlängerung oder Kauf."
@@ -18075,7 +18075,7 @@ const POOLS = {
     "o": [
      { "t": "Die Nacherfüllung durch Reparatur oder Ersatzlieferung", "ok": true },
      { "t": "Der sofortige Rücktritt vom gesamten Kaufvertrag", "ok": false },
-     { "t": "Die sofortige Minderung des vereinbarten Kaufpreises", "ok": false },
+     { "t": "Die sofortige Minderung des zuvor vereinbarten Gesamtkaufpreises", "ok": false },
      { "t": "Der unmittelbare Schadensersatz statt der Leistung", "ok": false }
     ],
     "e": "Die Nacherfüllung hat Vorrang. Erst wenn sie fehlschlägt, verweigert wird oder unzumutbar ist, kommen Minderung, Rücktritt oder Schadensersatz in Betracht."
@@ -18139,7 +18139,7 @@ const POOLS = {
     "q": "Welche Aussage zur Preisbildung im Polypol trifft zu?",
     "o": [
      { "t": "Der einzelne Anbieter ist Preisnehmer und muss sich am Marktpreis orientieren", "ok": true },
-     { "t": "Der einzelne Anbieter setzt den geltenden Preis weitgehend selbst fest", "ok": false },
+     { "t": "Der einzelne Anbieter setzt den geltenden Marktpreis weitgehend eigenständig selbst fest", "ok": false },
      { "t": "Der Preis wird von den wenigen großen Anbietern gemeinsam abgestimmt", "ok": false },
      { "t": "Der Preis wird ausschließlich durch staatliche Vorgaben bestimmt", "ok": false }
     ],
@@ -18149,7 +18149,7 @@ const POOLS = {
     "q": "Warum reagieren Anbieter im Oligopol besonders stark aufeinander?",
     "o": [
      { "t": "Weil die geringe Anbieterzahl jede Preisänderung für alle spürbar macht", "ok": true },
-     { "t": "Weil der Staat im Oligopol jede Preisänderung vorher genehmigen muss", "ok": false },
+     { "t": "Weil der Staat im Oligopol jede einzelne Preisänderung vorher ausdrücklich genehmigen muss", "ok": false },
      { "t": "Weil im Oligopol jeder Anbieter nur einen einzigen Kunden beliefert", "ok": false },
      { "t": "Weil die Produkte im Oligopol grundsätzlich nicht austauschbar sind", "ok": false }
     ],
@@ -18159,7 +18159,7 @@ const POOLS = {
     "q": "Was beschreibt der Begriff Marktmacht?",
     "o": [
      { "t": "Die Fähigkeit, Preis oder Bedingungen einseitig zu beeinflussen", "ok": true },
-     { "t": "Die absolute Höhe des erzielten Jahresumsatzes eines Anbieters", "ok": false },
+     { "t": "Die absolute Höhe des im Geschäftsjahr erzielten Gesamtumsatzes eines Anbieters", "ok": false },
      { "t": "Die Anzahl der Beschäftigten eines marktführenden Unternehmens", "ok": false },
      { "t": "Die gesetzlich festgelegte Obergrenze für jede Preiserhöhung", "ok": false }
     ],
@@ -18275,7 +18275,7 @@ const POOLS = {
     "o": [
      { "t": "Weil die Kennzahl die Verzinsung des gesamten Kapitals unabhängig von der Finanzierung misst", "ok": true },
      { "t": "Weil Fremdkapitalzinsen steuerlich grundsätzlich nicht abzugsfähig sind", "ok": false },
-     { "t": "Weil Fremdkapitalzinsen einen wesentlichen Teil des Umsatzes eines Betriebs darstellen", "ok": false },
+     { "t": "Weil Fremdkapitalzinsen einen wesentlichen Bestandteil der Umsatzerlöse eines Betriebs darstellen", "ok": false },
      { "t": "Weil ohne diese Korrektur das Eigenkapital doppelt erfasst würde", "ok": false }
     ],
     "e": "Die Zinsen sind die Vergütung des Fremdkapitals und wurden bereits vom Gewinn abgezogen. Für die Betrachtung des gesamten Kapitals müssen sie wieder eingerechnet werden."
@@ -18330,7 +18330,7 @@ const POOLS = {
     "o": [
      { "t": "Der Wurm verbreitet sich selbstständig über das Netz ohne Wirtsdatei", "ok": true },
      { "t": "Der Wurm benötigt zwingend eine Wirtsdatei zur Verbreitung", "ok": false },
-     { "t": "Der Wurm wird ausschließlich über Wechseldatenträger übertragen", "ok": false },
+     { "t": "Der Wurm wird ausschließlich über angeschlossene Wechseldatenträger übertragen", "ok": false },
      { "t": "Der Wurm verschlüsselt stets die Daten des befallenen Systems", "ok": false }
     ],
     "e": "Der Virus hängt sich an eine Wirtsdatei und braucht deren Ausführung. Der Wurm verbreitet sich eigenständig über Netzverbindungen."
@@ -18340,7 +18340,7 @@ const POOLS = {
     "o": [
      { "t": "Er wird als scheinbar nützliches Programm vom Nutzer selbst installiert", "ok": true },
      { "t": "Er verbreitet sich selbstständig über offene Netzwerkdienste", "ok": false },
-     { "t": "Er hängt sich unbemerkt an bereits vorhandene Programmdateien", "ok": false },
+     { "t": "Er hängt sich unbemerkt an bereits auf dem System vorhandene Programmdateien an", "ok": false },
      { "t": "Er wird über eine ungepatchte Lücke automatisch nachgeladen", "ok": false }
     ],
     "e": "Der Trojaner tarnt sich als nützliche Anwendung. Er verbreitet sich nicht selbst, sondern nutzt die Täuschung des Anwenders."
@@ -18349,7 +18349,7 @@ const POOLS = {
     "q": "Welche Eigenschaft kennzeichnet ein Rootkit?",
     "o": [
      { "t": "Es verbirgt seine Anwesenheit und die anderer Schadsoftware vor dem System", "ok": true },
-     { "t": "Es verschlüsselt gezielt Dateien und fordert anschließend Lösegeld", "ok": false },
+     { "t": "Es verschlüsselt gezielt einzelne Dateien und fordert anschließend ein Lösegeld", "ok": false },
      { "t": "Es zeichnet sämtliche Tastatureingaben des Anwenders auf", "ok": false },
      { "t": "Es überflutet ein Zielsystem mit einer Vielzahl von Anfragen", "ok": false }
     ],
@@ -18360,7 +18360,7 @@ const POOLS = {
     "o": [
      { "t": "Schadsoftware, die Daten verschlüsselt und Lösegeld für die Freigabe fordert", "ok": true },
      { "t": "Schadsoftware, die sich selbstständig über Netzwerke verbreitet", "ok": false },
-     { "t": "Schadsoftware, die unbemerkt Informationen sammelt und weiterleitet", "ok": false },
+     { "t": "Schadsoftware, die unbemerkt persönliche Informationen sammelt und nach außen weiterleitet", "ok": false },
      { "t": "Schadsoftware, die einen versteckten Zugang zum System offen hält", "ok": false }
     ],
     "e": "Ransomware beschreibt die Wirkung, nicht den Verbreitungsweg. Sie kann über Anhänge, Lücken oder gekaperte Zugänge ins System kommen."
@@ -18436,7 +18436,7 @@ const POOLS = {
      { "t": "Direkt am Server über Schnittstellen wie SAS, SATA oder USB", "ok": true },
      { "t": "Über das vorhandene LAN mit Zugriff per SMB oder NFS", "ok": false },
      { "t": "Über ein eigenes Speichernetz mit Fibre Channel", "ok": false },
-     { "t": "Ausschließlich über eine verschlüsselte Internetverbindung", "ok": false }
+     { "t": "Ausschließlich über eine dauerhaft verschlüsselte Internetverbindung", "ok": false }
     ],
     "e": "DAS ist direkt an einen Server angeschlossen und nur für diesen nutzbar. Der Zugriff erfolgt blockbasiert."
    },
@@ -18494,7 +18494,7 @@ const POOLS = {
     "q": "Warum wird ein SAN häufig über ein eigenes, getrenntes Netz betrieben?",
     "o": [
      { "t": "Weil Speicherzugriffe hohe Bandbreite und geringe Verzögerung benötigen", "ok": true },
-     { "t": "Weil Speicherzugriffe grundsätzlich nicht verschlüsselt werden dürfen", "ok": false },
+     { "t": "Weil Speicherzugriffe grundsätzlich niemals verschlüsselt übertragen werden dürfen", "ok": false },
      { "t": "Weil Speichersysteme keine IP-basierte Übertragung unterstützen", "ok": false },
      { "t": "Weil das Betriebssystem sonst keine Laufwerksbuchstaben vergeben kann", "ok": false }
     ],
@@ -18539,7 +18539,7 @@ const POOLS = {
     "q": "Was kennzeichnet einen Known Error?",
     "o": [
      { "t": "Ein Problem mit bekannter Ursache und dokumentierter Umgehungslösung", "ok": true },
-     { "t": "Eine Störung, deren Ursache noch vollständig unbekannt ist", "ok": false },
+     { "t": "Eine gemeldete Störung, deren Ursache bislang noch vollständig unbekannt ist", "ok": false },
      { "t": "Eine geplante Änderung, die noch nicht genehmigt wurde", "ok": false },
      { "t": "Eine Standardanfrage ohne jede Störung des Betriebs", "ok": false }
     ],
@@ -18561,7 +18561,7 @@ const POOLS = {
      { "t": "Es regelt die interne Zusammenarbeit zwischen Abteilungen desselben Anbieters", "ok": true },
      { "t": "Es regelt die zugesagten Leistungen gegenüber dem externen Kunden", "ok": false },
      { "t": "Es regelt die Verträge mit externen Zulieferern", "ok": false },
-     { "t": "Es regelt die Aufbewahrungsfristen für sämtliche Kundendaten des Anbieters", "ok": false }
+     { "t": "Es regelt die gesetzlichen Aufbewahrungsfristen für sämtliche Kundendaten des Anbieters", "ok": false }
     ],
     "e": "Das OLA sichert intern ab, was im SLA nach außen zugesagt wurde. Externe Zulieferer werden über Underpinning Contracts eingebunden."
    },
@@ -18579,7 +18579,7 @@ const POOLS = {
     "q": "Was geschieht bei einer funktionalen Eskalation?",
     "o": [
      { "t": "Der Vorgang wird an eine fachlich höhere Supportstufe weitergegeben", "ok": true },
-     { "t": "Der Vorgang wird an die Führungsebene der Institution übergeben", "ok": false },
+     { "t": "Der Vorgang wird unmittelbar an die Führungsebene der Institution übergeben", "ok": false },
      { "t": "Der Vorgang wird ohne Bearbeitung geschlossen und archiviert", "ok": false },
      { "t": "Der Vorgang wird an den meldenden Nutzer zurückgegeben", "ok": false }
     ],
@@ -18590,7 +18590,7 @@ const POOLS = {
     "o": [
      { "t": "Sie verzeichnet alle Konfigurationselemente und deren Beziehungen zueinander", "ok": true },
      { "t": "Sie speichert sämtliche Kennwörter der Administratoren zentral", "ok": false },
-     { "t": "Sie protokolliert ausschließlich fehlgeschlagene Anmeldeversuche der Nutzer", "ok": false },
+     { "t": "Sie protokolliert ausschließlich sämtliche fehlgeschlagenen Anmeldeversuche der Nutzer", "ok": false },
      { "t": "Sie enthält die Sicherungskopien aller betriebenen Systeme", "ok": false }
     ],
     "e": "Die CMDB macht Abhängigkeiten sichtbar. Dadurch lässt sich vor einer Änderung abschätzen, welche Services betroffen sein könnten."
@@ -18600,7 +18600,7 @@ const POOLS = {
     "o": [
      { "t": "Er ist die zentrale Anlaufstelle für alle Anliegen der Nutzer", "ok": true },
      { "t": "Er entwickelt die eingesetzten Fachanwendungen weiter", "ok": false },
-     { "t": "Er entscheidet allein über die Genehmigung aller Changes", "ok": false },
+     { "t": "Er entscheidet allein über die Genehmigung sämtlicher beantragter Changes", "ok": false },
      { "t": "Er betreibt ausschließlich die Netzwerkinfrastruktur", "ok": false }
     ],
     "e": "Der Service Desk ist der Single Point of Contact. Er nimmt Meldungen auf, löst Standardfälle und steuert die Weitergabe."
@@ -18611,7 +18611,7 @@ const POOLS = {
      { "t": "Weil ungeplante Änderungen ein wesentliches Risiko für den laufenden Betrieb sind", "ok": true },
      { "t": "Weil jede Änderung gesetzlich genehmigungspflichtig ist", "ok": false },
      { "t": "Weil ohne Genehmigung keine Rechnung gestellt werden darf", "ok": false },
-     { "t": "Weil Changes ausschließlich außerhalb der regulären Arbeitszeit erlaubt sind", "ok": false }
+     { "t": "Weil Changes ausschließlich außerhalb der regulären betrieblichen Arbeitszeit erlaubt sind", "ok": false }
     ],
     "e": "Viele Störungen entstehen durch Änderungen. Bewertung, Genehmigung und Dokumentation begrenzen dieses Risiko und machen Ursachen später nachvollziehbar."
    }
@@ -18646,7 +18646,7 @@ const POOLS = {
      { "t": "Es fordert Übereinstimmung mit der sichtbaren Absenderdomain und legt die Behandlung fest", "ok": true },
      { "t": "Es verschlüsselt den Inhalt der Nachricht Ende zu Ende", "ok": false },
      { "t": "Es ersetzt die Prüfungen von SPF und DKIM vollständig", "ok": false },
-     { "t": "Es speichert eine vollständige Kopie jeder geprüften Nachricht dauerhaft beim Anbieter", "ok": false }
+     { "t": "Es speichert eine vollständige Kopie jeder geprüften Nachricht dauerhaft beim beteiligten Anbieter", "ok": false }
     ],
     "e": "DMARC baut auf beiden Verfahren auf. Über das Alignment stellt es sicher, dass die geprüfte Domain zur angezeigten Absenderadresse passt."
    },
@@ -18684,7 +18684,7 @@ const POOLS = {
     "q": "Welche Schwäche von SPF gleicht DKIM aus?",
     "o": [
      { "t": "SPF schlägt bei Weiterleitungen fehl, obwohl die Nachricht echt ist", "ok": true },
-     { "t": "SPF kann die zulässige Absenderdomain nicht im DNS veröffentlichen", "ok": false },
+     { "t": "SPF kann die zulässige Absenderdomain nicht im öffentlichen DNS veröffentlichen", "ok": false },
      { "t": "SPF prüft ausschließlich verschlüsselte Verbindungen", "ok": false },
      { "t": "SPF erkennt keine Nachrichten ohne Betreffzeile", "ok": false }
     ],
@@ -18694,7 +18694,7 @@ const POOLS = {
     "q": "Welches Problem lösen SPF, DKIM und DMARC gemeinsam?",
     "o": [
      { "t": "Die Fälschung des Absenders, wie sie bei Phishing genutzt wird", "ok": true },
-     { "t": "Das unbemerkte Mitlesen der Nachricht auf dem Transportweg", "ok": false },
+     { "t": "Das unbemerkte Mitlesen der Nachricht auf dem gesamten Transportweg", "ok": false },
      { "t": "Die Überlastung des Mailservers durch zu viele Anfragen", "ok": false },
      { "t": "Den Verlust von Nachrichten durch fehlerhafte Postfächer", "ok": false }
     ],
@@ -18710,7 +18710,7 @@ const POOLS = {
     "o": [
      { "t": "Eine von der Umsetzung unabhängige Stelle wie der ISB oder die Revision", "ok": true },
      { "t": "Die Person, die die Maßnahme selbst umgesetzt hat", "ok": false },
-     { "t": "Ausschließlich der Hersteller der jeweils eingesetzten Technik", "ok": false },
+     { "t": "Ausschließlich der Hersteller der jeweils eingesetzten technischen Komponenten", "ok": false },
      { "t": "Jeder Anwender im Rahmen seiner täglichen Arbeit", "ok": false }
     ],
     "e": "Wer prüft, darf nicht sich selbst prüfen. Üblich sind der Informationssicherheitsbeauftragte, die interne Revision oder eine externe Prüfung."
@@ -18721,7 +18721,7 @@ const POOLS = {
      { "t": "Wenn sie gleichen Typs, ähnlich konfiguriert und gleichen Schutzbedarfs sind", "ok": true },
      { "t": "Wenn sie im selben Raum stehen, unabhängig von ihrer Konfiguration", "ok": false },
      { "t": "Wenn sie vom selben Hersteller stammen, unabhängig vom Einsatzzweck", "ok": false },
-     { "t": "Wenn sie im selben Jahr beschafft wurden, unabhängig vom Schutzbedarf", "ok": false }
+     { "t": "Wenn sie im selben Geschäftsjahr beschafft wurden, unabhängig vom jeweiligen Schutzbedarf", "ok": false }
     ],
     "e": "Die Gruppierung senkt den Aufwand erheblich, setzt aber voraus, dass Typ, Konfiguration, Einbindung, Rahmenbedingungen und Schutzbedarf übereinstimmen."
    },
@@ -18730,7 +18730,7 @@ const POOLS = {
     "o": [
      { "t": "Restrisiko dokumentieren, der Leitung vorlegen und die Übernahme schriftlich bestätigen lassen", "ok": true },
      { "t": "Die Maßnahme eigenständig aus dem laufenden Budget umsetzen", "ok": false },
-     { "t": "Die Anforderung im Sicherheitskonzept ohne Begründung ersatzlos als entbehrlich streichen", "ok": false },
+     { "t": "Die Anforderung im Sicherheitskonzept ohne weitere Begründung ersatzlos als entbehrlich streichen", "ok": false },
      { "t": "Die Entscheidung ohne weitere Dokumentation hinnehmen", "ok": false }
     ],
     "e": "Die Gesamtverantwortung liegt bei der Leitung. Der ISB macht das Risiko transparent und lässt die Entscheidung nachweisbar dokumentieren."
@@ -18749,7 +18749,7 @@ const POOLS = {
     "q": "Welche Angaben sind für IT-Systeme bei der Strukturanalyse zu erfassen?",
     "o": [
      { "t": "Bezeichnung, Typ, Plattform, Aufstellungsort, Status und zuständige Person", "ok": true },
-     { "t": "Ausschließlich Anschaffungspreis und die vorgesehene Abschreibungsdauer", "ok": false },
+     { "t": "Ausschließlich der Anschaffungspreis und die vorgesehene Abschreibungsdauer", "ok": false },
      { "t": "Ausschließlich Seriennummer und Garantiezeitraum", "ok": false },
      { "t": "Ausschließlich die Anzahl der angeschlossenen Endgeräte", "ok": false }
     ],
@@ -18760,8 +18760,8 @@ const POOLS = {
     "o": [
      { "t": "Beschreibung, spezifische Gefährdungslage und gestufte Anforderungen", "ok": true },
      { "t": "Preislisten der empfohlenen Produkte und Hersteller", "ok": false },
-     { "t": "Vollständige Konfigurationsdateien für alle Systeme", "ok": false },
-     { "t": "Namentliche Zuweisung der Aufgaben an einzelne Beschäftigte", "ok": false }
+     { "t": "Vollständige Konfigurationsdateien für sämtliche betriebenen Systeme", "ok": false },
+     { "t": "Namentliche Zuweisung sämtlicher Aufgaben an einzelne Beschäftigte", "ok": false }
     ],
     "e": "Die Anforderungen sind nach Basis, Standard und erhöhtem Schutzbedarf gestuft. Jeder Anforderung ist eine zuständige Rolle zugeordnet."
    },
@@ -18789,7 +18789,7 @@ const POOLS = {
     "q": "Welche Information sollte ein Netzplan für die Strukturanalyse enthalten?",
     "o": [
      { "t": "Die IT-Systeme mit Kennung sowie Art und Technik ihrer Verbindungen", "ok": true },
-     { "t": "Die Anschaffungskosten aller eingesetzten aktiven Netzkomponenten", "ok": false },
+     { "t": "Die Anschaffungskosten sämtlicher eingesetzter aktiver Netzkomponenten", "ok": false },
      { "t": "Die Urlaubsvertretung der jeweils zuständigen Person", "ok": false },
      { "t": "Die farbliche Gestaltung der verlegten Kabelstränge", "ok": false }
     ],
@@ -18801,7 +18801,7 @@ const POOLS = {
      { "t": "Dass sie wirksam, angemessen, praxistauglich und benutzerfreundlich sind", "ok": true },
      { "t": "Dass sie möglichst viele technische Systeme gleichzeitig betreffen", "ok": false },
      { "t": "Dass sie ohne Abstimmung mit den Fachabteilungen umsetzbar sind", "ok": false },
-     { "t": "Dass sie unabhängig vom ermittelten Schutzbedarf einheitlich gelten", "ok": false }
+     { "t": "Dass sie unabhängig vom jeweils ermittelten Schutzbedarf einheitlich gelten", "ok": false }
     ],
     "e": "Maßnahmen müssen zum Schutzbedarf passen. Sind sie unpraktikabel, werden sie umgangen und verlieren damit ihre Wirkung."
    },
@@ -18809,7 +18809,7 @@ const POOLS = {
     "q": "Warum sollte ein Sicherheitskonzept regelmäßig überprüft werden?",
     "o": [
      { "t": "Weil sich Bedrohungslage, Technik und Prozesse fortlaufend ändern", "ok": true },
-     { "t": "Weil die Aufbewahrungsfrist für Konzepte gesetzlich begrenzt ist", "ok": false },
+     { "t": "Weil die Aufbewahrungsfrist für solche Konzepte gesetzlich eng begrenzt ist", "ok": false },
      { "t": "Weil ein Konzept nach der Erstellung automatisch ungültig wird", "ok": false },
      { "t": "Weil die Zahl der Maßnahmen jährlich erhöht werden muss", "ok": false }
     ],
@@ -18829,9 +18829,9 @@ const POOLS = {
     "q": "Wodurch verlagern Sie ein Risiko?",
     "o": [
      { "t": "Durch Übertragung auf Dritte, etwa per Versicherung oder Auslagerung", "ok": true },
-     { "t": "Durch zusätzliche technische Maßnahmen im eigenen Haus", "ok": false },
+     { "t": "Durch zusätzliche technische Schutzmaßnahmen im eigenen Haus", "ok": false },
      { "t": "Durch vollständigen Verzicht auf die betroffene Tätigkeit", "ok": false },
-     { "t": "Durch dokumentierte Übernahme des verbleibenden Restrisikos", "ok": false }
+     { "t": "Durch die schriftlich dokumentierte Übernahme des verbleibenden Restrisikos", "ok": false }
     ],
     "e": "Die vier Optionen der Risikobehandlung sind vermeiden, reduzieren, verlagern und akzeptieren. Das Verlagern überträgt die Last auf einen Dritten."
    },
@@ -18840,7 +18840,7 @@ const POOLS = {
     "o": [
      { "t": "Genau einmal auf den gesamten Informationsverbund", "ok": true },
      { "t": "Auf jedes einzelne IT-System des Verbunds", "ok": false },
-     { "t": "Auf jeden Raum, in dem Technik betrieben wird", "ok": false },
+     { "t": "Auf jeden einzelnen Raum, in dem Technik betrieben wird", "ok": false },
      { "t": "Auf jede Anwendung mit erhöhtem Schutzbedarf", "ok": false }
     ],
     "e": "ISMS.1 ist ein Prozessbaustein und betrifft die Institution als Ganzes. Systembausteine werden dagegen je Zielobjekt oder Gruppe modelliert."
@@ -18849,9 +18849,9 @@ const POOLS = {
     "q": "Welches Ziel verfolgt die Strukturanalyse im Rahmen der IT-Grundschutz-Methodik?",
     "o": [
      { "t": "Eine vollständige Übersicht über alle Objekte des Informationsverbunds zu schaffen", "ok": true },
-     { "t": "Die Beschaffungskosten der eingesetzten Technik vollständig zu ermitteln", "ok": false },
+     { "t": "Die Beschaffungskosten der gesamten eingesetzten technischen Ausstattung vollständig zu ermitteln", "ok": false },
      { "t": "Den Marktwert der Institution zu bestimmen", "ok": false },
-     { "t": "Die Auslastung der Netzkomponenten zu messen", "ok": false }
+     { "t": "Die durchschnittliche Auslastung sämtlicher Netzkomponenten dauerhaft zu messen", "ok": false }
     ],
     "e": "Erst wenn Prozesse, Anwendungen, Systeme, Räume und Netze erfasst sind, lassen sich Schutzbedarf und Maßnahmen sinnvoll ableiten."
    },
@@ -18879,9 +18879,9 @@ const POOLS = {
     "q": "Wie verfahren Sie beim ersten IT-Grundschutz-Check mit Anforderungen für erhöhten Schutzbedarf?",
     "o": [
      { "t": "Sie bleiben zunächst unberücksichtigt und werden erst in der Risikoanalyse betrachtet", "ok": true },
-     { "t": "Sie werden vorrangig noch vor allen Basis- und Standard-Anforderungen geprüft", "ok": false },
+     { "t": "Sie werden vorrangig noch vor sämtlichen Basis- und Standard-Anforderungen vollständig geprüft", "ok": false },
      { "t": "Sie werden pauschal als entbehrlich eingestuft", "ok": false },
-     { "t": "Sie werden ohne Prüfung als nicht erfüllt vermerkt", "ok": false }
+     { "t": "Sie werden ohne jede weitere Prüfung pauschal als nicht erfüllt vermerkt", "ok": false }
     ],
     "e": "Der erste Check betrachtet Basis- und Standard-Anforderungen. Anforderungen bei erhöhtem Schutzbedarf werden in der anschließenden Risikoanalyse gezielt ausgewählt."
    },
@@ -18901,7 +18901,7 @@ const POOLS = {
      { "t": "Hoch, da nach dem Maximumprinzip der höchste Bedarf maßgeblich ist", "ok": true },
      { "t": "Normal, da die Mehrheit der Anwendungen unkritisch ist", "ok": false },
      { "t": "Den Durchschnitt aus den Schutzbedarfen aller Anwendungen", "ok": false },
-     { "t": "Sehr hoch, da mehrere Anwendungen gemeinsam betrieben werden", "ok": false }
+     { "t": "Sehr hoch, da mehrere Anwendungen gemeinsam auf ihm betrieben werden", "ok": false }
     ],
     "e": "Nach dem Maximumprinzip übernimmt das System den höchsten Schutzbedarf aller darauf laufenden Anwendungen."
    }
@@ -18936,7 +18936,7 @@ const POOLS = {
      { "t": "Die erfolgreiche Maßnahme wird zum Standard erklärt und ausgerollt", "ok": true },
      { "t": "Die geplante Maßnahme wird erstmals im Pilotbereich erprobt", "ok": false },
      { "t": "Das Ergebnis wird gemessen und mit dem Ziel verglichen", "ok": false },
-     { "t": "Die Ursachen des Problems werden erstmals systematisch analysiert", "ok": false }
+     { "t": "Die Ursachen des Problems werden erstmals vollständig systematisch analysiert", "ok": false }
     ],
     "e": "Act schreibt das Erreichte fest. Bleibt der Erfolg aus, wird nachgebessert und der Zyklus erneut durchlaufen."
    },
@@ -18944,7 +18944,7 @@ const POOLS = {
     "q": "Welche Tätigkeit gehört zur Qualitätsplanung?",
     "o": [
      { "t": "Messbare Qualitätskriterien für das Projekt festlegen", "ok": true },
-     { "t": "Den fertigen Programmcode auf Fehler durchsuchen", "ok": false },
+     { "t": "Den bereits fertiggestellten Programmcode auf Fehler durchsuchen", "ok": false },
      { "t": "Die Ladezeit der fertigen Anwendung messen", "ok": false },
      { "t": "Aufgetretene Fehler nach Häufigkeit auswerten", "ok": false }
     ],
@@ -18954,7 +18954,7 @@ const POOLS = {
     "q": "Welcher Inhalt gehört in einen Qualitätsmanagementplan?",
     "o": [
      { "t": "Die geplanten Prüfungen mit Zeitpunkt und Verantwortlichen", "ok": true },
-     { "t": "Die Gehaltsstruktur der eingesetzten Projektmitarbeiter", "ok": false },
+     { "t": "Die Gehaltsstruktur sämtlicher eingesetzter Projektmitarbeiter", "ok": false },
      { "t": "Die Anschaffungskosten sämtlicher Netzkomponenten", "ok": false },
      { "t": "Die Urlaubsplanung des gesamten Entwicklungsteams", "ok": false }
     ],
@@ -19010,7 +19010,7 @@ const POOLS = {
     "o": [
      { "t": "Passiv als eingetretener Zustand, etwa Bestellung ist eingegangen", "ok": true },
      { "t": "Aktiv mit einem Tätigkeitswort, etwa Bestellung prüfen", "ok": false },
-     { "t": "Als Frage an den Bearbeiter, etwa Bestellung vollständig", "ok": false },
+     { "t": "Als Frage an den zuständigen Bearbeiter, etwa Bestellung vollständig", "ok": false },
      { "t": "Als Zeitangabe mit Frist, etwa innerhalb von zwei Tagen", "ok": false }
     ],
     "e": "Das Ereignis beschreibt einen Zustand und verbraucht weder Zeit noch Ressourcen. Es wird als Sechseck dargestellt."
@@ -19059,7 +19059,7 @@ const POOLS = {
     "q": "Worin unterscheidet sich BPMN von der EPK?",
     "o": [
      { "t": "BPMN ist umfangreicher und kennt Bahnen sowie technisch ausführbare Modelle", "ok": true },
-     { "t": "BPMN ist einfacher und kennt ausschließlich Ereignisse und Funktionen", "ok": false },
+     { "t": "BPMN ist deutlich einfacher und kennt ausschließlich Ereignisse und Funktionen", "ok": false },
      { "t": "BPMN wird nur im deutschsprachigen Raum als Standard verwendet", "ok": false },
      { "t": "BPMN verzichtet vollständig auf die Darstellung von Verzweigungen", "ok": false }
     ],
@@ -19069,7 +19069,7 @@ const POOLS = {
     "q": "Welchen Zweck erfüllt eine EPK im Geschäftsprozessmanagement?",
     "o": [
      { "t": "Abläufe sichtbar machen, um Schwachstellen erkennen zu können", "ok": true },
-     { "t": "Die Hardwareausstattung einer Abteilung dokumentieren", "ok": false },
+     { "t": "Die vollständige Hardwareausstattung einer Abteilung dokumentieren", "ok": false },
      { "t": "Die Zugriffsrechte der Beschäftigten festlegen", "ok": false },
      { "t": "Die Netzwerktopologie eines Standorts darstellen", "ok": false }
     ],
@@ -19115,7 +19115,7 @@ const POOLS = {
     "o": [
      { "t": "Weil man sich auf sie verlässt und dadurch in die Irre geführt wird", "ok": true },
      { "t": "Weil sie zusätzlichen Speicherplatz auf dem Server belegt", "ok": false },
-     { "t": "Weil sie die Bearbeitungszeit von Störungsmeldungen verlängert", "ok": false },
+     { "t": "Weil sie die Bearbeitungszeit eingehender Störungsmeldungen deutlich verlängert", "ok": false },
      { "t": "Weil sie regelmäßig neu ausgedruckt werden muss", "ok": false }
     ],
     "e": "Bei fehlender Dokumentation prüft man selbst nach. Eine falsche Angabe wird dagegen übernommen und führt zu Fehlentscheidungen."
@@ -19124,7 +19124,7 @@ const POOLS = {
     "q": "Wie lässt sich die Aktualität der Dokumentation am wirksamsten sicherstellen?",
     "o": [
      { "t": "Die Aktualisierung wird fester Bestandteil des Änderungsprozesses", "ok": true },
-     { "t": "Die Dokumentation wird einmal jährlich vollständig neu erstellt", "ok": false },
+     { "t": "Die Dokumentation wird einmal im Jahr vollständig von Grund auf neu erstellt", "ok": false },
      { "t": "Die Dokumentation wird ausschließlich vom Hersteller gepflegt", "ok": false },
      { "t": "Die Dokumentation wird erst nach Projektabschluss angelegt", "ok": false }
     ],
@@ -19145,7 +19145,7 @@ const POOLS = {
     "o": [
      { "t": "Damit erkennbar ist, welcher Stand gilt und wer ihn verantwortet", "ok": true },
      { "t": "Damit die Datei beim Öffnen schneller geladen wird", "ok": false },
-     { "t": "Damit sie automatisch an alle Beschäftigten verteilt wird", "ok": false },
+     { "t": "Damit sie automatisch an sämtliche Beschäftigte im Haus verteilt wird", "ok": false },
      { "t": "Damit sie von Suchmaschinen besser gefunden werden kann", "ok": false }
     ],
     "e": "Ohne Version und Datum lässt sich nicht unterscheiden, welcher von mehreren Ständen aktuell ist."
@@ -19154,7 +19154,7 @@ const POOLS = {
     "q": "Warum unterliegt IT-Dokumentation einem Zugriffsschutz?",
     "o": [
      { "t": "Weil Netzpläne und Konfigurationen für Angreifer wertvolle Informationen sind", "ok": true },
-     { "t": "Weil sie urheberrechtlich in jedem Fall dem Hersteller des Systems gehört", "ok": false },
+     { "t": "Weil sie urheberrechtlich in jedem Fall allein dem Hersteller des Systems gehört", "ok": false },
      { "t": "Weil sie ausschließlich in Papierform aufbewahrt werden darf", "ok": false },
      { "t": "Weil sie andernfalls nicht revisionssicher archiviert wird", "ok": false }
     ],
@@ -19189,9 +19189,9 @@ const POOLS = {
     "q": "Warum müssen Standardpasswörter unbedingt geändert werden?",
     "o": [
      { "t": "Weil sie öffentlich bekannt sind und automatisiert durchprobiert werden", "ok": true },
-     { "t": "Weil sie technisch nach kurzer Zeit ihre Gültigkeit verlieren", "ok": false },
+     { "t": "Weil sie technisch bereits nach sehr kurzer Zeit ihre Gültigkeit vollständig verlieren", "ok": false },
      { "t": "Weil sie den Systemstart merklich verlangsamen", "ok": false },
-     { "t": "Weil sie sich nicht gemeinsam mit dem System sichern lassen", "ok": false }
+     { "t": "Weil sie sich nicht gemeinsam mit dem übrigen System sichern lassen", "ok": false }
     ],
     "e": "Werkseinstellungen stehen in Handbüchern und Listen im Netz. Angreifer probieren sie systematisch bei erreichbaren Geräten durch."
    },
@@ -19199,7 +19199,7 @@ const POOLS = {
     "q": "Warum werden Testzugänge nach der Inbetriebnahme eines Systems entfernt?",
     "o": [
      { "t": "Weil sie oft schwache Kennwörter haben und niemandem mehr auffallen", "ok": true },
-     { "t": "Weil sie den Startvorgang des Systems spürbar verlangsamen", "ok": false },
+     { "t": "Weil sie den Startvorgang des gesamten Systems spürbar verlangsamen", "ok": false },
      { "t": "Weil sie zusätzliche Lizenzgebühren je Konto verursachen", "ok": false },
      { "t": "Weil sie die Protokollierung der Anmeldungen unterbinden", "ok": false }
     ],
@@ -19209,7 +19209,7 @@ const POOLS = {
     "q": "Worin unterscheidet sich Härtung vom Patchmanagement?",
     "o": [
      { "t": "Die Härtung ist die sichere Grundkonfiguration, das Patchmanagement der dauerhafte Prozess", "ok": true },
-     { "t": "Das Patchmanagement ist die Grundkonfiguration, die Härtung der dauerhafte Prozess", "ok": false },
+     { "t": "Das Patchmanagement ist die sichere Grundkonfiguration, die Härtung der dauerhafte Prozess", "ok": false },
      { "t": "Die Härtung betrifft nur Anwendungen, das Patchmanagement nur Betriebssysteme", "ok": false },
      { "t": "Beide Begriffe bezeichnen denselben Vorgang mit unterschiedlichem Namen", "ok": false }
     ],
