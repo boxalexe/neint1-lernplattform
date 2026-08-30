@@ -437,3 +437,79 @@ table.sn-cheat td:nth-child(4),table.sn-cheat td:nth-child(5){color:var(--green)
     visibility:visible;
   }
 }
+
+/* ============ KARTEIKARTENMODUS ============ */
+.mode-row{margin:18px 0 4px}
+.mode-switch{display:flex;align-items:flex-start;gap:12px;cursor:pointer;
+  background:var(--panel-2);border:1px solid var(--border);border-radius:10px;padding:13px 15px;
+  transition:border-color .15s}
+.mode-switch:hover{border-color:var(--cyan)}
+.mode-switch input{position:absolute;opacity:0;width:0;height:0}
+.mode-slider{position:relative;width:42px;height:23px;background:var(--panel);
+  border:1px solid var(--border);border-radius:14px;flex-shrink:0;margin-top:2px;
+  transition:background .18s,border-color .18s}
+.mode-slider::after{content:'';position:absolute;top:2px;left:2px;width:17px;height:17px;
+  border-radius:50%;background:var(--muted);transition:transform .18s,background .18s}
+.mode-switch input:checked+.mode-slider{border-color:var(--green);background:rgba(61,220,132,0.12)}
+.mode-switch input:checked+.mode-slider::after{transform:translateX(19px);background:var(--green)}
+.mode-switch input:focus-visible+.mode-slider{outline:2px solid var(--cyan);outline-offset:2px}
+.mode-text{display:flex;flex-direction:column;gap:3px;min-width:0}
+.mode-name{font-family:'DM Mono',monospace;font-size:0.88rem;color:var(--text)}
+.mode-switch input:checked~.mode-text .mode-name{color:var(--green)}
+.mode-desc{font-size:0.8rem;color:var(--muted);line-height:1.5}
+
+/* ---- Die Karte selbst ---- */
+.card-notes{width:100%;margin-top:12px;background:var(--code-bg);border:1px solid var(--border);
+  border-radius:8px;color:var(--text);padding:11px 13px;font-family:inherit;font-size:0.95rem;
+  line-height:1.55;resize:vertical;min-height:80px}
+.card-notes:focus{outline:none;border-color:var(--cyan)}
+.card-notes[readonly]{opacity:0.7}
+.card-reveal{display:block;width:100%;margin-top:11px;background:var(--panel);
+  border:1px solid var(--cyan);color:var(--cyan);font-family:'DM Mono',monospace;font-size:0.85rem;
+  padding:11px 16px;border-radius:8px;cursor:pointer;transition:background .15s,opacity .15s}
+.card-reveal:hover:not(:disabled){background:rgba(34,211,238,0.1)}
+.card-reveal:disabled{opacity:0.45;border-color:var(--border);color:var(--muted);cursor:default}
+.card-solution{display:none;margin-top:13px;background:var(--code-bg);border:1px solid var(--border);
+  border-left:3px solid var(--green);border-radius:8px;padding:14px 16px;
+  animation:cardFlip .28s ease}
+.card-solution.show{display:block}
+@keyframes cardFlip{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:none}}
+.cs-label{font-family:'DM Mono',monospace;font-size:0.7rem;text-transform:uppercase;
+  letter-spacing:0.12em;color:var(--green);margin-bottom:7px}
+.cs-answer{color:var(--text);font-size:0.97rem;line-height:1.6;margin-bottom:9px}
+.cs-explain{color:var(--muted);font-size:0.89rem;line-height:1.65;
+  border-top:1px solid var(--border);padding-top:9px}
+.card-rate{display:none;align-items:center;gap:9px;margin-top:12px;flex-wrap:wrap}
+.card-rate.show{display:flex}
+.cr-frage{font-size:0.82rem;color:var(--muted);margin-right:2px}
+.cr-btn{background:var(--panel);border:1px solid var(--border);color:var(--muted);
+  font-family:'DM Mono',monospace;font-size:0.8rem;padding:8px 15px;border-radius:7px;
+  cursor:pointer;transition:all .15s}
+.cr-btn:hover:not(:disabled){border-color:var(--cyan);color:var(--cyan)}
+.cr-btn:disabled{cursor:default}
+.cr-yes.active{border-color:var(--green);color:var(--green);background:rgba(61,220,132,0.1)}
+.cr-no.active{border-color:var(--amber);color:var(--amber);background:rgba(245,182,66,0.1)}
+.card-rate.rated .cr-btn:not(.active){opacity:0.35}
+.wrong-box-cards{margin-top:12px;border-left:3px solid var(--cyan)}
+@media(max-width:560px){
+  .mode-switch{padding:11px 12px;gap:10px}
+  .cr-frage{width:100%;margin-bottom:2px}
+  .cr-btn{flex:1;text-align:center}
+}
+
+/* Abbrechen sitzt jetzt in der Kopfzeile des Laufs, damit er auch zu Beginn
+   ohne Scrollen erreichbar ist. Die Metazeile rutscht bei Platzmangel darunter. */
+.run-abort{background:var(--panel);border:1px solid var(--border);color:var(--muted);
+  font-family:'DM Mono',monospace;font-size:0.78rem;padding:8px 14px;border-radius:7px;
+  cursor:pointer;white-space:nowrap;transition:color .15s,border-color .15s;flex-shrink:0}
+.run-abort:hover{color:var(--red);border-color:var(--red)}
+.run-head .run-meta{margin-left:auto}
+@media(max-width:620px){
+  .run-head{gap:9px}
+  .run-head h2{flex:1 1 auto;min-width:0}
+  .run-abort{font-size:0.72rem;padding:7px 11px}
+  .run-head .run-meta{flex:1 0 100%;margin-left:0;text-align:left}
+}
+@media(max-width:400px){
+  .run-abort{flex:1 0 100%;text-align:center}
+}

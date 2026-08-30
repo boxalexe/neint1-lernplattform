@@ -22,7 +22,7 @@
     if (t && t !== 'default') document.documentElement.setAttribute('data-theme', t);
   } catch (e) {}
 </script>
-<link rel="stylesheet" href="styles.css?v=20260827f">
+<link rel="stylesheet" href="styles.css?v=20260827i">
 </head>
 <body>
 <header>
@@ -65,7 +65,7 @@
   <button class="menu-toggle" id="menuToggle" aria-expanded="false" aria-controls="tabBar">Menü öffnen</button>
   <div class="tab active" data-view="lesen" data-short="Lesen">Nachschlagen</div>
   <div class="tab" data-view="lib" data-short="Glossar">Glossar</div>
-  <div class="tab" data-view="quiz" data-short="Quiz">Multiple Choice</div>
+  <div class="tab" data-view="quiz" data-short="Quiz">Multiple&nbsp;Choice / Karteikarten</div>
   <a class="tab" href="subtrainer/" data-short="Subnetting"><svg class="tab-icon" width="15" height="15" viewBox="0 0 120 120" aria-hidden="true"><path d="M60,60 C34,60 24,26 60,26 C96,26 86,60 60,60 Z" fill="none" stroke="#22d3ee" stroke-width="11" stroke-linecap="round"/><path d="M60,94 C86,94 96,60 60,60 C24,60 34,94 60,94 Z" fill="none" stroke="#3ddc84" stroke-width="11" stroke-linecap="round"/></svg> Subnetting Trainer</a>
   <a class="tab" href="ap1sim5/ap1sim5.html" data-short="AP1-Sim"><svg class="tab-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 3h9l5 5v13a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1Z" stroke="#22d3ee" stroke-width="2" stroke-linejoin="round"/><path d="M14 3v6h6" stroke="#22d3ee" stroke-width="2" stroke-linejoin="round"/><path d="M9 14l2 2 4-4" stroke="#3ddc84" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> AP1 Simulator</a>
   <button class="zen-toggle" id="zenToggle" title="Zen Mode: Vollbild &amp; Fokus" aria-label="Zen Mode umschalten"><span class="zen-icon">&#9673;</span><span class="zen-label">Zen</span></button>
@@ -1621,6 +1621,16 @@ Prüfen Sie in Aufgaben immer alle fünf Kriterien einzeln durch: Genau daran h�
         <output class="scope-value" id="scopeValue">15</output>
       </div>
     </div>
+    <div class="mode-row">
+      <label class="mode-switch">
+        <input type="checkbox" id="cardModeToggle">
+        <span class="mode-slider" aria-hidden="true"></span>
+        <span class="mode-text">
+          <span class="mode-name">Karteikartenmodus</span>
+          <span class="mode-desc" id="modeDesc">Aus: Fragen mit vier Antwortmöglichkeiten zum Anklicken.</span>
+        </span>
+      </label>
+    </div>
     <div class="sel-bar">
       <button class="start-btn" id="startBtn" disabled>Quiz starten</button>
       <span class="sel-hint" id="selHint">Keine Kategorie gewählt</span>
@@ -1635,19 +1645,29 @@ Prüfen Sie in Aufgaben immer alle fünf Kriterien einzeln durch: Genau daran h�
         <button class="wrong-reset" id="wrongResetBtn" disabled>Zurücksetzen</button>
       </div>
     </div>
+    <div class="wrong-box wrong-box-cards" id="wrongCardBox">
+      <div class="wrong-info">
+        <span class="wrong-title">Wackelkandidaten Karteikarten</span>
+        <span class="wrong-sub" id="wrongCardSub">Noch keine Karten als „nicht gewusst" markiert.</span>
+      </div>
+      <div class="wrong-actions">
+        <button class="wrong-start" id="wrongCardStartBtn" disabled>Karten wiederholen</button>
+        <button class="wrong-reset" id="wrongCardResetBtn" disabled>Zurücksetzen</button>
+      </div>
+    </div>
   </div>
 
   <!-- Laufendes Quiz -->
   <div class="runner" id="runner">
     <div class="run-head">
       <h2 id="runTitle">Quiz</h2>
+      <button class="run-abort" id="abortBtn">Abbrechen &amp; zurück zur Auswahl</button>
       <span class="run-meta" id="runMeta"></span>
     </div>
     <div class="progress"><div class="progress-fill" id="progressFill"></div></div>
     <div id="questionArea"></div>
     <div style="display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin-top:20px">
       <button class="start-btn" id="resultBtn" style="display:none">Auswertung ansehen</button>
-      <button class="btn-sec" id="abortBtn">Abbrechen &amp; zurück zur Auswahl</button>
     </div>
   </div>
 
@@ -1716,6 +1736,6 @@ Fachinformatiker · Aura
   <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="19" x2="12" y2="5"></line><polyline points="6 11 12 5 18 11"></polyline></svg>
 </button>
 
-<script src="app.js?v=20260827f"></script>
+<script src="app.js?v=20260827i"></script>
 </body>
 </html>

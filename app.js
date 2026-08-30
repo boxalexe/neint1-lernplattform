@@ -19299,6 +19299,40 @@ function getWrongQuestions(){
 function wrongCount(){ return loadWrong().length; }
 function resetWrong(){ saveWrong([]); }
 
+// ---- Wackelkandidaten Karteikarten: getrennter Speicher ----
+// Bewusst nicht mit den Multiple-Choice-Wackelkandidaten vermischt: dort steht
+// ein objektiver Fehlklick dahinter, hier eine Selbsteinschätzung des Lernenden.
+const WRONG_CARDS_KEY = 'neint1_wrong_cards_v1';
+function loadWrongCards(){
+  try {
+    const raw = localStorage.getItem(WRONG_CARDS_KEY);
+    return raw ? JSON.parse(raw) : [];
+  } catch(e){ return []; }
+}
+function saveWrongCards(list){
+  try { localStorage.setItem(WRONG_CARDS_KEY, JSON.stringify(list)); } catch(e){}
+}
+function addWrongCard(qText){
+  const list = loadWrongCards();
+  if(!list.includes(qText)){ list.push(qText); saveWrongCards(list); }
+}
+function removeWrongCard(qText){
+  const list = loadWrongCards().filter(x => x !== qText);
+  saveWrongCards(list);
+}
+function getWrongCardQuestions(){
+  const wanted = new Set(loadWrongCards());
+  const out = [];
+  Object.keys(POOLS).forEach(key => {
+    POOLS[key].q.forEach(qObj => {
+      if(wanted.has(qObj.q)) out.push({ obj: qObj, catName: POOLS[key].name });
+    });
+  });
+  return out;
+}
+function wrongCardCount(){ return loadWrongCards().length; }
+function resetWrongCards(){ saveWrongCards([]); }
+
 
 // Rotation state per category: keeps a shuffled order + pointer, persists during session.
 const rotation = {}; // key -> { order:[indices], ptr:int }
@@ -19479,6 +19513,7 @@ function refreshSelState(){
     selHint.classList.toggle('warn', n >= MAX_CATS);
   }
   refreshWrongState();
+  updateWrongCardBox();
 }
 
 // Aktualisiert Anzeige und Buttons des Wackelkandidaten-Blocks.
@@ -19511,8 +19546,28 @@ const runTitle = document.getElementById('runTitle');
 const runMeta = document.getElementById('runMeta');
 const progressFill = document.getElementById('progressFill');
 
+// Karteikartenmodus: wird vor dem Start festgelegt und bleibt während des
+// gesamten Durchlaufs unverändert.
+let cardMode = false;
+
 function buildRun(){
   runQuestions = [];
+  if(quizScope === 'wrongcards'){
+    // Wiederholung der selbst als "nicht gewusst" markierten Karten
+    activeCats = ['__wrongcards__'];
+    const wrong = getWrongCardQuestions();
+    shuffle(wrong).forEach(entry => {
+      runQuestions.push({
+        cat: entry.catName,
+        q: entry.obj.q,
+        opts: shuffle(entry.obj.o),
+        e: entry.obj.e,
+        done: false,
+        correct: false
+      });
+    });
+    return;
+  }
   if(quizScope === 'wrong'){
     // Wackelkandidaten-Modus: alle lokal gemerkten falsch beantworteten Fragen
     activeCats = ['__wrong__'];
@@ -19569,7 +19624,9 @@ function buildRun(){
 
 function renderRun(){
   qArea.innerHTML = '';
-  if(quizScope === 'wrong'){
+  if(quizScope === 'wrongcards'){
+    runTitle.textContent = 'Wackelkandidaten Karteikarten';
+  } else if(quizScope === 'wrong'){
     runTitle.textContent = 'Wackelkandidaten';
   } else if(activeCats[0] === '__random__'){
     runTitle.textContent = 'Zufälliges Quiz';
@@ -19594,6 +19651,71 @@ function renderRun(){
 
     const explainEl = document.createElement('div');
     explainEl.className = 'explain';
+
+    // ---- Karteikartenmodus: freies Feld statt Auswahl, Musterlösung auf Klick ----
+    if(cardMode){
+      qEl.classList.add('q-card');
+
+      const notiz = document.createElement('textarea');
+      notiz.className = 'card-notes';
+      notiz.rows = 3;
+      notiz.placeholder = 'Antwort für sich selbst formulieren (wird nicht gespeichert und nicht bewertet)';
+      qEl.appendChild(notiz);
+
+      const revealBtn = document.createElement('button');
+      revealBtn.className = 'card-reveal';
+      revealBtn.type = 'button';
+      revealBtn.textContent = 'Musterlösung aufdecken';
+      qEl.appendChild(revealBtn);
+
+      const loesung = document.createElement('div');
+      loesung.className = 'card-solution';
+      const richtig = item.opts.find(o => o.ok);
+      loesung.innerHTML =
+        '<div class="cs-label">Musterlösung</div>' +
+        '<div class="cs-answer">' + (richtig ? richtig.t : '') + '</div>' +
+        '<div class="cs-explain">' + item.e + '</div>';
+      qEl.appendChild(loesung);
+
+      const bewertung = document.createElement('div');
+      bewertung.className = 'card-rate';
+      bewertung.innerHTML =
+        '<span class="cr-frage">Wie war es?</span>' +
+        '<button type="button" class="cr-btn cr-yes">Wusste ich</button>' +
+        '<button type="button" class="cr-btn cr-no">Wusste ich nicht</button>';
+      qEl.appendChild(bewertung);
+
+      revealBtn.addEventListener('click', () => {
+        loesung.classList.add('show');
+        bewertung.classList.add('show');
+        revealBtn.disabled = true;
+        revealBtn.textContent = 'Musterlösung sichtbar';
+      });
+
+      function bewerten(gewusst){
+        if(item.done) return;
+        item.done = true;
+        item.correct = gewusst;
+        // Selbsteinschätzung: nur der eigene Eindruck entscheidet
+        if(gewusst){ removeWrongCard(item.q); } else { addWrongCard(item.q); }
+        loesung.classList.add('show');
+        bewertung.classList.add('show', 'rated');
+        revealBtn.disabled = true;
+        revealBtn.textContent = 'Musterlösung sichtbar';
+        bewertung.querySelector('.cr-yes').classList.toggle('active', gewusst);
+        bewertung.querySelector('.cr-no').classList.toggle('active', !gewusst);
+        bewertung.querySelectorAll('.cr-btn').forEach(b => b.disabled = true);
+        notiz.readOnly = true;
+        updateMeta();
+        updateWrongCardBox();
+        if(runQuestions.every(x => x.done)) finishRun();
+      }
+      bewertung.querySelector('.cr-yes').addEventListener('click', () => bewerten(true));
+      bewertung.querySelector('.cr-no').addEventListener('click', () => bewerten(false));
+
+      qArea.appendChild(qEl);
+      return;
+    }
 
     item.opts.forEach((opt, oi) => {
       const optEl = document.createElement('div');
@@ -19630,7 +19752,9 @@ function renderRun(){
 function updateMeta(){
   const done = runQuestions.filter(x => x.done).length;
   const correct = runQuestions.filter(x => x.correct).length;
-  runMeta.textContent = done + ' / ' + runQuestions.length + ' beantwortet · ' + correct + ' richtig';
+  runMeta.textContent = cardMode
+    ? done + ' / ' + runQuestions.length + ' bearbeitet · ' + correct + ' gewusst'
+    : done + ' / ' + runQuestions.length + ' beantwortet · ' + correct + ' richtig';
   progressFill.style.width = (done/runQuestions.length*100) + '%';
 }
 
@@ -19713,6 +19837,7 @@ function startQuiz(){
   selectorEl.style.display = 'none';
   resultEl.classList.remove('show');
   runnerEl.classList.add('active');
+  if(typeof viewScroll === 'object') viewScroll['quiz'] = 0;   // neuer Lauf startet oben
   window.scrollTo({top:0,behavior:'smooth'});
 }
 
@@ -19723,8 +19848,73 @@ function backToSelector(){
   resultEl.classList.remove('show');
   selectorEl.style.display = 'block';
   refreshWrongState();
+  updateWrongCardBox();
+  if(typeof viewScroll === 'object') viewScroll['quiz'] = 0;
   window.scrollTo({top:0,behavior:'smooth'});
 }
+
+// Anzeige und Buttons des Karteikarten-Wackelkandidaten-Blocks.
+function updateWrongCardBox(){
+  const n = wrongCardCount();
+  const sub = document.getElementById('wrongCardSub');
+  const startB = document.getElementById('wrongCardStartBtn');
+  const resetB = document.getElementById('wrongCardResetBtn');
+  if(!sub || !startB || !resetB) return;
+  if(n === 0){
+    sub.textContent = 'Noch keine Karten als „nicht gewusst" markiert.';
+    startB.disabled = true;
+    resetB.disabled = true;
+  } else {
+    sub.textContent = n + (n === 1 ? ' Karte' : ' Karten') + ' zum Wiederholen gespeichert.';
+    startB.disabled = false;
+    resetB.disabled = false;
+  }
+}
+
+// Modus-Schalter: nur vor dem Start wirksam, nicht während eines Durchlaufs.
+(function initCardMode(){
+  const toggle = document.getElementById('cardModeToggle');
+  const desc = document.getElementById('modeDesc');
+  const selH2 = document.querySelector('#selector h2');
+  if(!toggle) return;
+  const AUS = 'Aus: Fragen mit vier Antwortmöglichkeiten zum Anklicken.';
+  const AN  = 'An: Frage mit freiem Feld, die Musterlösung wird auf Klick aufgedeckt. Die Bewertung nehmen Sie selbst vor.';
+  function apply(){
+    cardMode = toggle.checked;
+    if(desc) desc.textContent = cardMode ? AN : AUS;
+    if(selH2) selH2.textContent = cardMode ? 'Karteikarten' : 'Multiple Choice';
+    document.body.classList.toggle('cardmode', cardMode);
+    if(startBtn) startBtn.textContent = cardMode ? 'Karteikarten starten' : 'Quiz starten';
+  }
+  toggle.addEventListener('change', apply);
+  apply();
+})();
+
+// Karteikarten-Wackelkandidaten üben
+(function initWrongCards(){
+  const startB = document.getElementById('wrongCardStartBtn');
+  const resetB = document.getElementById('wrongCardResetBtn');
+  if(startB){
+    startB.addEventListener('click', () => {
+      if(wrongCardCount() === 0) return;
+      cardMode = true;                       // Wiederholung immer als Karte
+      const t = document.getElementById('cardModeToggle');
+      if(t && !t.checked){ t.checked = true; t.dispatchEvent(new Event('change')); }
+      quizScope = 'wrongcards';
+      startQuiz();
+    });
+  }
+  if(resetB){
+    resetB.addEventListener('click', () => {
+      if(wrongCardCount() === 0) return;
+      if(confirm('Alle gesammelten Karteikarten-Wackelkandidaten löschen?')){
+        resetWrongCards();
+        updateWrongCardBox();
+      }
+    });
+  }
+  updateWrongCardBox();
+})();
 
 startBtn.addEventListener('click', () => {
   // Normaler Start: aktueller Scope kommt vom Slider (nie 'wrong')
@@ -19798,6 +19988,11 @@ document.getElementById('finishOverlay').addEventListener('click', (e) => {
 // Wackelkandidaten üben: eigener Modus, unabhängig von Kategorieauswahl.
 document.getElementById('wrongStartBtn').addEventListener('click', () => {
   if(wrongCount() === 0) return;
+  // Diese Sammlung stammt aus dem Multiple-Choice-Modus und wird auch so geübt,
+  // unabhängig von der Stellung des Karteikarten-Schalters.
+  cardMode = false;
+  const t = document.getElementById('cardModeToggle');
+  if(t && t.checked){ t.checked = false; t.dispatchEvent(new Event('change')); }
   quizScope = 'wrong';
   startQuiz();
 });
@@ -19811,14 +20006,42 @@ document.getElementById('wrongResetBtn').addEventListener('click', () => {
 });
 
 // ---- Tab switching ----
+// Die Scrollposition wird je Ansicht gemerkt. Wer mitten im Quiz etwas im
+// Nachschlagewerk oder Glossar nachschlägt, landet beim Zurückwechseln wieder
+// an derselben Stelle statt ganz oben.
+const viewScroll = {};
+function aktiveView(){
+  const v = document.querySelector('.view.active');
+  return v ? v.id.replace('view-', '') : null;
+}
+function merkeScroll(){
+  const v = aktiveView();
+  if(v) viewScroll[v] = window.scrollY || window.pageYOffset || 0;
+}
+function stelleScrollHer(name){
+  const y = viewScroll[name];
+  if(typeof y !== 'number' || y <= 0){
+    window.scrollTo({top:0, behavior:'auto'});
+    return;
+  }
+  // Zweifach setzen: nach dem Anzeigen der Ansicht steht die endgültige
+  // Seitenhöhe erst im nächsten Frame fest.
+  window.scrollTo({top:y, behavior:'auto'});
+  if(typeof window.requestAnimationFrame === 'function'){
+    window.requestAnimationFrame(() => { window.scrollTo({top:y, behavior:'auto'}); });
+  }
+}
 document.querySelectorAll('.tab').forEach(tab => {
   if(!tab.dataset.view) return; // echter Navigations-Link (z.B. Subnetting Trainer) — Browser übernimmt
   tab.addEventListener('click', () => {
+    const ziel = tab.dataset.view;
+    if(aktiveView() === ziel) return;   // gleicher Tab: Position unangetastet lassen
+    merkeScroll();
     document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
     document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
     tab.classList.add('active');
-    document.getElementById('view-' + tab.dataset.view).classList.add('active');
-    window.scrollTo({top:0,behavior:'smooth'});
+    document.getElementById('view-' + ziel).classList.add('active');
+    stelleScrollHer(ziel);
   });
 });
 
