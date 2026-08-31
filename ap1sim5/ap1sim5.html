@@ -5,34 +5,34 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>AP1-Prüfungssimulation — Layer 8 Academy</title>
 <meta name="description" content="Übungssimulation für die IHK-Abschlussprüfung Teil 1 der IT-Berufe. 90 Minuten, 100 Punkte, offene Aufgaben mit Lösungsbogen zur Selbsteinschätzung.">
-<link rel="stylesheet" href="styles.css?v=5">
+<link rel="stylesheet" href="styles.css?v=6">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
 </head>
 <body>
 
-<!-- BARRIEREFREIHEIT -->
-<div class="a11y-wrap">
-  <button class="a11y-toggle" id="a11yToggle" aria-haspopup="true" aria-expanded="false" aria-label="Kontrasteinstellungen" title="Kontrasteinstellungen">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7Z"></path><circle cx="12" cy="12" r="3"></circle></svg>
-  </button>
-  <div class="a11y-menu" id="a11yMenu" role="menu" aria-label="Kontrastmodus wählen">
-    <button class="a11y-opt" data-theme="default" role="menuitemradio"><span class="a11y-dot" style="background:#22d3ee"></span><span>Original</span><span class="a11y-check">&#10003;</span></button>
-    <button class="a11y-opt" data-theme="hc" role="menuitemradio"><span class="a11y-dot" style="background:#ffffff"></span><span>Hoher Kontrast</span><span class="a11y-check">&#10003;</span></button>
-    <button class="a11y-opt" data-theme="cvd" role="menuitemradio"><span class="a11y-dot" style="background:#56b4e9"></span><span>Blau/Orange</span><span class="a11y-check">&#10003;</span></button>
-  </div>
-</div>
-
 <!-- ===== KOPFLEISTE (nur während der Prüfung) ===== -->
-<div class="examhead" id="examHead" hidden>
-  <div class="wrap examhead-inner">
-    <span class="eh-id" id="ehId">AP1-SIM</span>
-    <span class="eh-progress" id="ehProgress">0 / 0 Felder</span>
-    <span class="eh-timer" id="ehTimer">90:00</span>
+<!-- KOPFLEISTE: gilt für alle Ansichten -->
+<div class="topbar" id="topBar">
+  <div class="wrap topbar-inner">
+    <div class="a11y-wrap">
+      <button class="a11y-toggle" id="a11yToggle" aria-haspopup="true" aria-expanded="false" aria-label="Kontrasteinstellungen" title="Kontrasteinstellungen">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7Z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+      </button>
+      <div class="a11y-menu" id="a11yMenu" role="menu" aria-label="Kontrastmodus wählen">
+        <button class="a11y-opt" data-theme="default" role="menuitemradio"><span class="a11y-dot" style="background:#22d3ee"></span><span>Original</span><span class="a11y-check">&#10003;</span></button>
+        <button class="a11y-opt" data-theme="hc" role="menuitemradio"><span class="a11y-dot" style="background:#ffffff"></span><span>Hoher Kontrast</span><span class="a11y-check">&#10003;</span></button>
+        <button class="a11y-opt" data-theme="cvd" role="menuitemradio"><span class="a11y-dot" style="background:#56b4e9"></span><span>Blau/Orange</span><span class="a11y-check">&#10003;</span></button>
+      </div>
+    </div>
+    <span class="tb-title" id="ehId">AP1-Prüfungssimulation</span>
+    <button class="tb-btn" id="btnBackToPick" type="button" hidden>Zurück zur Auswahl</button>
+    <button class="tb-btn zen-toggle" id="zenToggle" type="button" hidden title="Zen: Vollbild und Fokus" aria-label="Zen-Modus umschalten"><span class="zen-icon">&#9673;</span><span class="zen-label">Zen</span></button>
+    <span class="eh-progress" id="ehProgress" hidden>0 / 0 Felder</span>
+    <span class="eh-timer" id="ehTimer" hidden>90:00</span>
   </div>
 </div>
-
 <main class="wrap">
 
 <!-- ===== SETUP ===== -->
@@ -132,7 +132,7 @@
   <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
 </button>
 
-<script src="exams.js?v=5"></script>
-<script src="app.js?v=5"></script>
+<script src="exams.js?v=6"></script>
+<script src="app.js?v=6"></script>
 </body>
 </html>

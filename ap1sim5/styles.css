@@ -11,17 +11,7 @@ body{background:var(--bg);color:var(--text);line-height:1.6;padding:0 0 60px;
   font-family:'Segoe UI',system-ui,-apple-system,sans-serif}
 .wrap{max-width:940px;margin:0 auto;padding:0 20px}
 
-/* ---- Kopfleiste während der Prüfung ---- */
-.examhead{position:sticky;top:0;z-index:30;background:rgba(10,14,18,0.95);
-  backdrop-filter:blur(8px);border-bottom:1px solid var(--border);padding:10px 0;margin-bottom:24px}
-.examhead-inner{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
-.eh-id{font-family:'DM Mono',monospace;font-size:0.8rem;color:var(--cyan);letter-spacing:1px}
-.eh-progress{font-size:0.8rem;color:var(--muted);margin-left:auto}
-.eh-timer{font-family:'DM Mono',monospace;font-size:1.15rem;font-weight:500;color:var(--green);
-  min-width:82px;text-align:right;font-variant-numeric:tabular-nums}
-.eh-timer.warn{color:var(--amber)}
-.eh-timer.crit{color:var(--red);animation:pulse 1s ease-in-out infinite}
-@keyframes pulse{50%{opacity:0.45}}
+
 
 /* ---- Views ---- */
 .view{display:none}
@@ -177,7 +167,7 @@ html[data-theme="cvd"]{
 }
 
 /* ---- Auge oben links ---- */
-.a11y-wrap{position:fixed;top:12px;left:12px;z-index:150}
+
 .a11y-toggle{background:transparent;border:none;padding:6px;cursor:pointer;display:flex;
   align-items:center;justify-content:center;border-radius:50%;opacity:0.5;
   transition:background .15s,opacity .15s}
@@ -211,5 +201,57 @@ html[data-theme="cvd"]{
 }
 
 /* Auge beim Scrollen ausblenden (überlagert sonst die Kopfleiste) */
-.a11y-wrap{transition:opacity .2s ease, transform .2s ease, visibility .2s}
-.a11y-wrap.scrolled-away{opacity:0;visibility:hidden;transform:translateY(-6px);pointer-events:none}
+
+
+
+
+/* ============ KOPFLEISTE (alle Ansichten) ============ */
+.topbar{position:sticky;top:0;z-index:150;background:rgba(10,14,18,0.96);
+  backdrop-filter:blur(8px);border-bottom:1px solid var(--border);padding:9px 0;margin-bottom:22px}
+.topbar-inner{display:flex;align-items:center;gap:10px;flex-wrap:nowrap;min-height:34px}
+.tb-title{font-family:'DM Mono',monospace;font-size:0.8rem;letter-spacing:1px;color:var(--cyan);
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;flex:0 1 auto}
+.tb-btn{background:var(--panel-2);border:1px solid var(--border);color:var(--muted);
+  font-family:'DM Mono',monospace;font-size:0.76rem;padding:6px 12px;border-radius:7px;
+  cursor:pointer;white-space:nowrap;display:flex;align-items:center;gap:6px;
+  transition:color .15s,border-color .15s,background .15s;flex-shrink:0}
+.tb-btn:hover{color:var(--cyan);border-color:var(--cyan)}
+.zen-toggle:hover{color:var(--green);border-color:var(--green)}
+.zen-icon{font-size:0.85rem;line-height:1}
+body.zen .zen-toggle{color:var(--green);border-color:var(--green);background:rgba(61,220,132,0.09)}
+.eh-progress{font-size:0.76rem;color:var(--muted);margin-left:auto;white-space:nowrap;flex-shrink:0}
+.eh-timer{font-family:'DM Mono',monospace;font-size:1.1rem;font-weight:500;color:var(--green);
+  min-width:76px;text-align:right;font-variant-numeric:tabular-nums;flex-shrink:0}
+.eh-progress[hidden]+.eh-timer{margin-left:auto}
+.eh-timer.warn{color:var(--amber)}
+.eh-timer.crit{color:var(--red);animation:pulse 1s ease-in-out infinite}
+@keyframes pulse{50%{opacity:0.45}}
+
+/* Auge sitzt jetzt in der Leiste, nicht mehr freischwebend */
+.a11y-wrap{position:relative;display:flex;align-items:center;flex-shrink:0}
+.a11y-menu{top:calc(100% + 10px);left:0}
+
+/* ---- Zen-Modus: Fokus auf die Aufgaben ---- */
+body.zen .hero,
+body.zen footer,
+body.zen .scenario .eyebrow{display:none}
+body.zen .topbar{margin-bottom:14px}
+body.zen .wrap{max-width:1100px}
+body.zen .task{padding:22px}
+
+@media(max-width:760px){
+  .tb-title{font-size:0.72rem}
+  .zen-label{display:none}
+  .tb-btn{padding:6px 10px;font-size:0.72rem}
+}
+@media(max-width:600px){
+  .topbar{padding:7px 0}
+  .topbar-inner{gap:7px}
+  .eh-progress{display:none}
+  .eh-timer{font-size:1rem;min-width:66px}
+  .tb-title{max-width:34vw}
+}
+@media(max-width:420px){
+  .tb-title{max-width:24vw;font-size:0.68rem}
+  .tb-btn{padding:5px 8px;font-size:0.68rem}
+}

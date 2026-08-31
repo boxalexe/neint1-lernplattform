@@ -57,6 +57,76 @@ function noteFor(points) {
   return 6;
 }
 
+/* ---------- Kopfleiste: Prüfungsmodus ---------- */
+function setPruefungsleiste(an) {
+  ['btnBackToPick', 'zenToggle', 'ehProgress', 'ehTimer'].forEach(function (id) {
+    var el = $(id);
+    if (el) el.hidden = !an;
+  });
+  var t = $('ehId');
+  if (t && !an) t.textContent = 'AP1-Prüfungssimulation';
+}
+
+/* ---------- Zen-Modus: Vollbild und Fokus ---------- */
+function initZen() {
+  var btn = $('zenToggle');
+  if (!btn) return;
+  function imVollbild() {
+    return document.fullscreenElement || document.webkitFullscreenElement ||
+           document.mozFullScreenElement || document.msFullscreenElement;
+  }
+  function vollbildAn() {
+    var el = document.documentElement;
+    var fn = el.requestFullscreen || el.webkitRequestFullscreen ||
+             el.mozRequestFullScreen || el.msRequestFullscreen;
+    if (fn) { try { fn.call(el); } catch (e) {} }
+  }
+  function vollbildAus() {
+    var fn = document.exitFullscreen || document.webkitExitFullscreen ||
+             document.mozCancelFullScreen || document.msExitFullscreen;
+    if (fn && imVollbild()) { try { fn.call(document); } catch (e) {} }
+  }
+  btn.addEventListener('click', function (e) {
+    e.stopPropagation();
+    if (document.body.classList.contains('zen')) {
+      document.body.classList.remove('zen');
+      vollbildAus();
+    } else {
+      document.body.classList.add('zen');
+      vollbildAn();
+    }
+  });
+  ['fullscreenchange', 'webkitfullscreenchange', 'mozfullscreenchange', 'MSFullscreenChange']
+    .forEach(function (ev) {
+      document.addEventListener(ev, function () {
+        if (!imVollbild()) document.body.classList.remove('zen');
+      });
+    });
+}
+
+/* ---------- Zurück zur Auswahl ---------- */
+function initBackToPick() {
+  var btn = $('btnBackToPick');
+  if (!btn) return;
+  btn.addEventListener('click', function () {
+    var hinweis = (state && state.status === 'running')
+      ? 'Die laufende Prüfung wird abgebrochen und alle bisherigen Antworten gehen verloren.\n\n'
+      : '';
+    askConfirm('Zurück zur Auswahl?',
+      hinweis + 'Sie kehren zur Auswahl der Prüfungen zurück.',
+      function () {
+        try { window.localStorage.removeItem(KEY); } catch (e) {}
+        state = null;
+        if (tickHandle) { clearInterval(tickHandle); tickHandle = null; }
+        document.body.classList.remove('zen');
+        setPruefungsleiste(false);
+        resetSetupForm();
+        renderSetup();
+        showView('viewSetup');
+      });
+  });
+}
+
 /* ---------- Modal ---------- */
 var modalCb = null;
 function askConfirm(title, text, cb) {
@@ -169,7 +239,7 @@ $('btnStart').addEventListener('click', function () {
 /* ---------- PRÜFUNG ---------- */
 function startRun() {
   var exam = examById(state.examId);
-  $('examHead').hidden = false;
+  setPruefungsleiste(true);
   $('ehId').textContent = exam.examId;
   $('runTitle').textContent = exam.title;
   $('runScenario').textContent = exam.scenario;
@@ -272,7 +342,7 @@ function doSubmit(auto) {
   state.autoSubmit = !!auto;
   Object.freeze(state.answers);
   save(KEY, state);
-  $('examHead').hidden = true;
+  setPruefungsleiste(false);
   renderReview();
   if (auto) {
     askConfirm('Zeit abgelaufen', 'Die Bearbeitungszeit ist beendet. Die Prüfung wurde automatisch abgegeben.\nDer Lösungsbogen ist jetzt freigeschaltet.', null);
@@ -433,7 +503,7 @@ $('btnReset').addEventListener('click', function () {
       if (tickHandle) { clearInterval(tickHandle); tickHandle = null; }
       resetSetupForm();
       renderSetup();
-      $('examHead').hidden = true;
+      setPruefungsleiste(false);
       showView('viewSetup');
     });
 });
@@ -453,6 +523,8 @@ function resetSetupForm() {
 
 /* ---------- WIEDERAUFNAHME ---------- */
 function boot() {
+  initZen();
+  initBackToPick();
   renderSetup();
   var s = load(KEY, null);
   if (!s || !examById(s.examId)) { showView('viewSetup'); return; }
@@ -525,20 +597,7 @@ boot();
   var btn = document.getElementById('scrollTopBtn');
   if (!btn) return;
   var ticking = false;
-  var a11y = document.getElementById('a11yToggle');
-  var a11yWrap = a11y ? a11y.parentNode : null;
-  var a11yMenu = document.getElementById('a11yMenu');
-  function upd() {
-    ticking = false;
-    var y = window.scrollY;
-    btn.classList.toggle('show', y > 400);
-    // Auge ausblenden, sobald gescrollt wird: es überlagert sonst die Kopfleiste
-    if (a11yWrap) {
-      var hide = y > 40;
-      a11yWrap.classList.toggle('scrolled-away', hide);
-      if (hide && a11yMenu) a11yMenu.classList.remove('open');
-    }
-  }
+  function upd() { ticking = false; btn.classList.toggle('show', window.scrollY > 400); }
   window.addEventListener('scroll', function () {
     if (!ticking) { window.requestAnimationFrame(upd); ticking = true; }
   }, { passive: true });
