@@ -108,7 +108,7 @@ tr:hover td{background:rgba(34,211,238,0.03)}
 .cat-chip.cat-random .cat-name{color:var(--cyan)}
 .cat-chip.cat-random{border-style:dashed}
 
-.cat-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:10px;margin-bottom:22px}
+.cat-grid{display:block;margin-bottom:22px}
 .cat-chip{display:flex;align-items:center;gap:10px;background:var(--panel-2);border:1px solid var(--border);border-radius:8px;padding:12px 14px;cursor:pointer;transition:all .13s;user-select:none}
 .cat-chip:hover{border-color:var(--cyan)}
 .cat-chip.sel{border-color:var(--green);background:rgba(61,220,132,0.1)}
@@ -212,7 +212,7 @@ footer{text-align:center;color:var(--muted);font-size:0.8rem;padding-top:40px;bo
 .lib-empty{color:var(--muted);font-family:'DM Mono',monospace;text-align:center;padding:40px 0}
 .menu-toggle{display:none;width:100%;background:var(--panel-2);border:1px solid var(--border);color:var(--text);font-family:'DM Mono','Consolas',monospace;font-size:0.9rem;padding:11px 14px;border-radius:8px;cursor:pointer;text-align:center;transition:border-color .15s}
 .menu-toggle:hover{border-color:var(--cyan)}
-@media(max-width:560px){.tabs .wrap{flex-direction:column}.cat-grid{grid-template-columns:1fr}table{display:block;overflow-x:auto;-webkit-overflow-scrolling:touch}.wrap{padding:0 14px}.cat-search{min-width:0;width:100%;font-size:16px}.cat-searchrow{gap:8px}header h1{font-size:2.35rem;letter-spacing:2px}.menu-toggle{display:block}.tabs .wrap>*:not(.menu-toggle){display:none}.tabs.menu-open .wrap>*{display:flex}.tabs.menu-open .wrap>.tab{justify-content:center}}
+@media(max-width:560px){.tabs .wrap{flex-direction:column}.cg-body{grid-template-columns:1fr}table{display:block;overflow-x:auto;-webkit-overflow-scrolling:touch}.wrap{padding:0 14px}.cat-search{min-width:0;width:100%;font-size:16px}.cat-searchrow{gap:8px}header h1{font-size:2.35rem;letter-spacing:2px}.menu-toggle{display:block}.tabs .wrap>*:not(.menu-toggle){display:none}.tabs.menu-open .wrap>*{display:flex}.tabs.menu-open .wrap>.tab{justify-content:center}}
 
 /* Übergangs-Overlay nach der letzten Frage — bleibt bis zur Nutzerentscheidung */
 .finish-overlay{position:fixed;inset:0;z-index:60;display:none;align-items:center;justify-content:center;background:rgba(10,14,18,0.82);backdrop-filter:blur(6px)}
@@ -512,4 +512,80 @@ table.sn-cheat td:nth-child(4),table.sn-cheat td:nth-child(5){color:var(--green)
 }
 @media(max-width:400px){
   .run-abort{flex:1 0 100%;text-align:center}
+}
+
+/* ============ HAUPTTHEMEN: aufklappbare Kategoriegruppen ============ */
+.cat-group{border:1px solid var(--border);border-radius:10px;margin-bottom:10px;
+  background:var(--panel-2);overflow:hidden}
+.cat-group.cg-hidden{display:none}
+.cg-head{display:flex;align-items:center;gap:10px;width:100%;background:transparent;
+  border:none;color:var(--text);font-family:'DM Mono',monospace;font-size:0.88rem;
+  padding:13px 15px;cursor:pointer;text-align:left;transition:background .15s}
+.cg-head:hover{background:var(--panel)}
+.cg-arrow{color:var(--cyan);font-size:0.8rem;transition:transform .2s;flex-shrink:0;display:inline-block}
+.cat-group.open .cg-arrow{transform:rotate(90deg)}
+.cg-title{flex:1 1 auto;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.cg-sel{display:none;margin-left:auto;font-size:0.72rem;color:var(--green);background:rgba(61,220,132,0.12);
+  border:1px solid var(--green);border-radius:20px;padding:2px 9px;white-space:nowrap;flex-shrink:0}
+.cg-sel.show{display:inline-block}
+.cg-body{display:none;padding:0 12px 12px;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:9px}
+.cat-group.open .cg-body{display:grid}
+.cat-group.open .cg-head{border-bottom:1px solid var(--border);margin-bottom:12px}
+@media(max-width:560px){
+  .cg-head{padding:11px 12px;gap:8px;font-size:0.82rem}
+  .cg-body{grid-template-columns:1fr;padding:0 10px 10px}
+}
+@media(max-width:380px){
+  .cg-sel{font-size:0.66rem;padding:2px 7px}
+}
+
+/* ============ THEMEN-BUBBLES ÜBER DEM NACHSCHLAGEWERK ============ */
+/* Die flache Sprungliste bleibt im Dokument (Suchindex), wird aber verborgen. */
+.jump.jump-hidden{display:none}
+
+.topics{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin:0 0 14px}
+.topic{position:relative;background:var(--panel-2);border:1px solid var(--border);
+  color:var(--text);font-family:'DM Mono',monospace;font-size:0.92rem;letter-spacing:0.4px;
+  padding:12px 22px;border-radius:26px;cursor:pointer;
+  transition:color .18s,border-color .18s,background .18s,transform .18s;
+  animation:topicPulse 2.8s ease-in-out infinite}
+.topic:nth-child(2){animation-delay:.25s}
+.topic:nth-child(3){animation-delay:.5s}
+.topic:nth-child(4){animation-delay:.75s}
+.topic:nth-child(5){animation-delay:1s}
+.topic:nth-child(6){animation-delay:1.25s}
+.topic:nth-child(7){animation-delay:1.5s}
+@keyframes topicPulse{
+  0%,100%{box-shadow:0 0 0 0 rgba(34,211,238,0.30)}
+  55%{box-shadow:0 0 0 7px rgba(34,211,238,0)}
+}
+.topic:hover{color:var(--cyan);border-color:var(--cyan);transform:translateY(-1px)}
+.topic.active{color:var(--bg);background:var(--cyan);border-color:var(--cyan);
+  animation:none;box-shadow:0 4px 18px rgba(34,211,238,0.28)}
+.topic:focus-visible{outline:2px solid var(--cyan);outline-offset:3px}
+
+/* Unterthemen: streuen gestaffelt auf und sammeln sich wieder ein */
+.topic-subs{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;
+  max-height:0;overflow:hidden;opacity:0;
+  transition:max-height .28s ease,opacity .22s ease,margin .28s ease;margin:0}
+.topic-subs.show{max-height:520px;opacity:1;margin:0 0 20px}
+.topic-sub{display:inline-block;background:var(--panel);border:1px solid var(--border);
+  color:var(--muted);text-decoration:none;font-size:0.82rem;padding:7px 15px;border-radius:20px;
+  opacity:0;transform:translateY(-7px) scale(.94);
+  transition:opacity .26s ease,transform .26s ease,color .15s,border-color .15s}
+.topic-subs.show .topic-sub{opacity:1;transform:none}
+.topic-sub:hover{color:var(--cyan);border-color:var(--cyan)}
+
+@media(prefers-reduced-motion:reduce){
+  .topic{animation:none}
+  .topic-sub{transition:opacity .01s;transform:none}
+}
+@media(max-width:640px){
+  .topics{gap:8px;margin-bottom:12px}
+  .topic{font-size:0.82rem;padding:10px 17px;border-radius:22px}
+  .topic-sub{font-size:0.76rem;padding:6px 12px}
+  .topic-subs.show{max-height:760px;margin-bottom:16px}
+}
+@media(max-width:380px){
+  .topic{font-size:0.76rem;padding:9px 14px}
 }

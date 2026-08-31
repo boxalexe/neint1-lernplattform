@@ -19246,6 +19246,311 @@ const POOLS = {
     "e": "Härtung zielt auf Sicherheit, nicht auf Leistung. Die Übertragungsrate hat keinen Bezug zur Angriffsfläche."
    }
   ]
+ },
+ "hardware": {
+  "name": "IT-Hardware & Energie",
+  "q": [
+   {
+    "q": "Welche Funktionseinheiten bilden zusammen die CPU?",
+    "o": [
+     { "t": "Rechenwerk und Steuerwerk", "ok": true },
+     { "t": "Speicherwerk und das Ein- und Ausgabewerk", "ok": false },
+     { "t": "Rechenwerk und der Arbeitsspeicher zusammen", "ok": false },
+     { "t": "Steuerwerk und das Bussystem der Hauptplatine", "ok": false }
+    ],
+    "e": "Rechenwerk (ALU) und Steuerwerk (CU) sitzen gemeinsam in der CPU. Speicherwerk und Ein-/Ausgabewerk sind eigene Einheiten der Architektur."
+   },
+   {
+    "q": "Welche Aufgabe erfüllt das Rechenwerk eines Von-Neumann-Rechners?",
+    "o": [
+     { "t": "Es führt arithmetische und logische Operationen aus", "ok": true },
+     { "t": "Es steuert die Reihenfolge der abzuarbeitenden Befehle vollständig", "ok": false },
+     { "t": "Es nimmt Programme und Daten dauerhaft zur Speicherung auf", "ok": false },
+     { "t": "Es verbindet den Rechner mit sämtlichen angeschlossenen Geräten", "ok": false }
+    ],
+    "e": "Das Rechenwerk heißt auch ALU. Die Steuerung der Befehlsreihenfolge übernimmt dagegen das Steuerwerk."
+   },
+   {
+    "q": "Wodurch entsteht der Von-Neumann-Flaschenhals?",
+    "o": [
+     { "t": "Befehle und Daten teilen sich denselben Bus und blockieren sich gegenseitig", "ok": true },
+     { "t": "Der eingebaute Prozessor besitzt zu wenige Kerne für echte parallele Berechnungen", "ok": false },
+     { "t": "Der Arbeitsspeicher verliert seine Inhalte beim Ausschalten", "ok": false },
+     { "t": "Das Netzteil liefert zu wenig Leistung für alle Komponenten", "ok": false }
+    ],
+    "e": "Weil beides über denselben Bus läuft, kann nicht gleichzeitig übertragen werden. Abhilfe schaffen Cache, breitere Busse oder die Harvard-Architektur mit getrennten Bussen."
+   },
+   {
+    "q": "Worin unterscheidet sich die Harvard- von der Von-Neumann-Architektur?",
+    "o": [
+     { "t": "Sie führt Befehle und Daten über getrennte Busse", "ok": true },
+     { "t": "Sie verzichtet vollständig auf ein eigenes Steuerwerk im Prozessor", "ok": false },
+     { "t": "Sie speichert Programme ausschließlich auf optischen Datenträgern", "ok": false },
+     { "t": "Sie benötigt grundsätzlich keinen Arbeitsspeicher für den Betrieb", "ok": false }
+    ],
+    "e": "Die Trennung umgeht den Flaschenhals. Deshalb ist die Harvard-Architektur bei Mikrocontrollern und Signalprozessoren verbreitet."
+   },
+   {
+    "q": "Welche Eigenschaft kennzeichnet den Arbeitsspeicher?",
+    "o": [
+     { "t": "Er ist flüchtig und verliert seinen Inhalt beim Ausschalten", "ok": true },
+     { "t": "Er behält seinen Inhalt auch ohne Stromversorgung dauerhaft", "ok": false },
+     { "t": "Er speichert Daten magnetisch auf rotierenden Scheiben", "ok": false },
+     { "t": "Er dient vorrangig der langfristigen Archivierung von Dateien", "ok": false }
+    ],
+    "e": "Der RAM ist ein schneller Zwischenspeicher für laufende Programme. Für dauerhafte Speicherung dienen HDD, SSD oder optische Medien."
+   },
+   {
+    "q": "Welchen Vorteil bietet eine SSD gegenüber einer HDD?",
+    "o": [
+     { "t": "Sie arbeitet ohne bewegliche Teile und dadurch schneller und robuster", "ok": true },
+     { "t": "Sie bietet grundsätzlich deutlich mehr Speicherplatz zum jeweils gleichen Preis", "ok": false },
+     { "t": "Sie behält ihre Daten im Gegensatz zur HDD auch ohne Strom", "ok": false },
+     { "t": "Sie lässt sich beliebig oft ohne jede Abnutzung beschreiben", "ok": false }
+    ],
+    "e": "Die SSD nutzt Flash-Speicher. Nachteile sind der höhere Preis je Gigabyte und die begrenzte Zahl an Schreibzyklen; beide Typen speichern jedoch dauerhaft."
+   },
+   {
+    "q": "Wie viel Speicherplatz fasst eine einschichtige DVD?",
+    "o": [
+     { "t": "4,7 GB", "ok": true },
+     { "t": "700 MB", "ok": false },
+     { "t": "25 GB", "ok": false },
+     { "t": "8,5 GB", "ok": false }
+    ],
+    "e": "Zum Vergleich: CD bis 700 MB, Blu-ray bis 25 GB je Schicht. Doppelschichtige Varianten fassen jeweils mehr."
+   },
+   {
+    "q": "Welche Schnittstelle überträgt Bild und Ton über ein einziges Kabel?",
+    "o": [
+     { "t": "HDMI", "ok": true },
+     { "t": "DVI", "ok": false },
+     { "t": "VGA", "ok": false },
+     { "t": "PS/2", "ok": false }
+    ],
+    "e": "DVI überträgt nur Bild, VGA nur analoges Bild. Auch DisplayPort kann Bild und Ton übertragen."
+   },
+   {
+    "q": "Wofür ist der PCI-Express-Steckplatz auf dem Mainboard vorgesehen?",
+    "o": [
+     { "t": "Für Erweiterungskarten wie Grafik- oder RAID-Controller", "ok": true },
+     { "t": "Für den Anschluss interner Festplatten und optischer Laufwerke", "ok": false },
+     { "t": "Für die Stromversorgung des Mainboards durch das Netzteil", "ok": false },
+     { "t": "Für das Einsetzen der Arbeitsspeicherriegel des Systems", "ok": false }
+    ],
+    "e": "Laufwerke werden über SATA angeschlossen, RAM über eigene Steckplätze. Die Bandbreite von PCI Express ergibt sich aus der Zahl der Lanes."
+   },
+   {
+    "q": "Ein Rechner benötigt 171 W Komponentenleistung. Wie berechnen Sie die Netzteilleistung bei 20 Prozent Reserve und 90 Prozent Wirkungsgrad?",
+    "o": [
+     { "t": "Erst die Reserve aufschlagen, dann durch den Wirkungsgrad teilen", "ok": true },
+     { "t": "Erst durch den Wirkungsgrad teilen, dann die Reserve abziehen", "ok": false },
+     { "t": "Reserve und Wirkungsgrad zusammen als 110 Prozent aufschlagen", "ok": false },
+     { "t": "Die Reserve aufschlagen und anschließend mit dem Wirkungsgrad malnehmen", "ok": false }
+    ],
+    "e": "171 W mal 1,20 ergibt 205,2 W, geteilt durch 0,90 ergibt 228 W. Der Wirkungsgrad wird geteilt, nicht multipliziert, weil das Netzteil mehr aufnimmt als es abgibt."
+   },
+   {
+    "q": "Was beschreibt der Wirkungsgrad eines Netzteils?",
+    "o": [
+     { "t": "Den Anteil der aufgenommenen Leistung, der tatsächlich abgegeben wird", "ok": true },
+     { "t": "Die höchste Leistung, die vom Gerät dauerhaft bereitgestellt werden kann", "ok": false },
+     { "t": "Den Stromverbrauch des Netzteils im ausgeschalteten Zustand", "ok": false },
+     { "t": "Die Anzahl der bereitgestellten Anschlüsse für Komponenten", "ok": false }
+    ],
+    "e": "Der Rest geht als Wärme verloren. Ein Netzteil mit 85 Prozent Wirkungsgrad nimmt bei 170 W Abgabe rund 200 W aus dem Netz auf."
+   },
+   {
+    "q": "Ein Gerät mit 200 W läuft 2.500 Stunden im Jahr, die Kilowattstunde kostet 0,30 EUR. Wie hoch sind die Stromkosten?",
+    "o": [
+     { "t": "150,00 EUR", "ok": true },
+     { "t": "50,00 EUR", "ok": false },
+     { "t": "1.500,00 EUR", "ok": false },
+     { "t": "15,00 EUR", "ok": false }
+    ],
+    "e": "200 W mal 2.500 h ergibt 500.000 Wh, also 500 kWh. Mal 0,30 EUR ergibt 150,00 EUR im Jahr."
+   },
+   {
+    "q": "Welchen Schutz bietet eine unterbrechungsfreie Stromversorgung über die Überbrückung hinaus?",
+    "o": [
+     { "t": "Sie meldet den Ausfall, damit Systeme geordnet herunterfahren können", "ok": true },
+     { "t": "Sie ersetzt die regelmäßige Datensicherung der angeschlossenen Systeme", "ok": false },
+     { "t": "Sie erhöht dauerhaft die verfügbare Rechenleistung der Server", "ok": false },
+     { "t": "Sie schützt die Systeme zuverlässig vor Angriffen aus dem Netz", "ok": false }
+    ],
+    "e": "Zusätzlich gleicht sie Spannungsschwankungen aus und filtert Störimpulse. Ein Ersatz für Datensicherung ist sie ausdrücklich nicht."
+   },
+   {
+    "q": "Welcher Druckertyp eignet sich für mehrlagige Durchschlagformulare?",
+    "o": [
+     { "t": "Der Nadeldrucker", "ok": true },
+     { "t": "Der Tintenstrahldrucker", "ok": false },
+     { "t": "Der Laserdrucker", "ok": false },
+     { "t": "Der 3D-Drucker", "ok": false }
+    ],
+    "e": "Nur der Nadeldrucker schlägt mechanisch über ein Farbband auf das Papier und erzeugt dadurch Durchschläge."
+   },
+   {
+    "q": "Warum benötigt ein LCD-Bildschirm eine Hintergrundbeleuchtung?",
+    "o": [
+     { "t": "Weil Flüssigkristalle selbst kein Licht erzeugen", "ok": true },
+     { "t": "Weil die Bildwiederholrate sonst deutlich absinken würde", "ok": false },
+     { "t": "Weil das Bild sonst ausschließlich in Graustufen erscheint", "ok": false },
+     { "t": "Weil die Flüssigkristalle sonst dauerhaft beschädigt würden", "ok": false }
+    ],
+    "e": "OLED benötigt sie nicht, weil dort jedes Bildelement selbst leuchtet. Daraus ergeben sich echtes Schwarz und höherer Kontrast."
+   },
+   {
+    "q": "Welche Bauform ist auf Dauerbetrieb und Ausfallsicherheit ausgelegt?",
+    "o": [
+     { "t": "Der Server", "ok": true },
+     { "t": "Das Tablet", "ok": false },
+     { "t": "Das Notebook", "ok": false },
+     { "t": "Der Desktop-PC", "ok": false }
+    ],
+    "e": "Server verfügen häufig über mehrere Prozessoren, große Speicher und redundante Komponenten wie Netzteile und Datenträger."
+   },
+   {
+    "q": "Was bewirkt Simultaneous Multithreading auf einem Prozessorkern?",
+    "o": [
+     { "t": "Ein physischer Kern nimmt zwei Threads gleichzeitig an", "ok": true },
+     { "t": "Ein physischer Kern wird in zwei vollwertige Rechenkerne aufgeteilt", "ok": false },
+     { "t": "Die Taktfrequenz des Prozessors wird dauerhaft verdoppelt", "ok": false },
+     { "t": "Der Cache jedes Kerns wird automatisch doppelt so groß", "ok": false }
+    ],
+    "e": "Das Betriebssystem sieht doppelt so viele logische Kerne. Die Rechenleistung verdoppelt sich dadurch aber nicht, der Zugewinn liegt meist bei 15 bis 30 Prozent."
+   },
+   {
+    "q": "Ein Vierkernprozessor mit SMT wird vom System angezeigt. Wie viele logische Kerne meldet es?",
+    "o": [
+     { "t": "Acht", "ok": true },
+     { "t": "Vier", "ok": false },
+     { "t": "Zwei", "ok": false },
+     { "t": "Sechzehn", "ok": false }
+    ],
+    "e": "Jeder der vier physischen Kerne stellt zwei Threads bereit. Physisch bleiben es vier Recheneinheiten."
+   },
+   {
+    "q": "Welche Aussage zur Speicherhierarchie trifft zu?",
+    "o": [
+     { "t": "Je näher am Prozessor, desto schneller und zugleich kleiner ist der Speicher", "ok": true },
+     { "t": "Je näher am Prozessor gelegen, desto größer und langsamer ist der jeweilige Speicher", "ok": false },
+     { "t": "Alle Cachestufen sind gleich groß und gleich schnell aufgebaut", "ok": false },
+     { "t": "Der Arbeitsspeicher ist grundsätzlich schneller als der L1-Cache", "ok": false }
+    ],
+    "e": "Die Reihenfolge lautet Register, L1, L2, L3, Arbeitsspeicher, Massenspeicher. Nach außen wird es größer, langsamer und billiger."
+   },
+   {
+    "q": "Welche Cachestufe wird üblicherweise von mehreren Kernen gemeinsam genutzt?",
+    "o": [
+     { "t": "Der L3-Cache", "ok": true },
+     { "t": "Der L1-Cache", "ok": false },
+     { "t": "Der L2-Cache", "ok": false },
+     { "t": "Der Registersatz", "ok": false }
+    ],
+    "e": "L1 liegt je Kern und ist am schnellsten, L2 meist ebenfalls je Kern. L3 ist am größten und dient als gemeinsamer Zwischenspeicher."
+   },
+   {
+    "q": "Wozu dient der Cache-Speicher einer CPU?",
+    "o": [
+     { "t": "Häufig benötigte Daten bereitzuhalten, damit die CPU nicht auf den RAM warten muss", "ok": true },
+     { "t": "Daten dauerhaft zu sichern, falls der Strom unerwartet ausfällt", "ok": false },
+     { "t": "Die Taktfrequenz des Prozessors bei Bedarf selbstständig anzuheben", "ok": false },
+     { "t": "Installierte Programme vollständig zu speichern, solange sie auf dem System bleiben", "ok": false }
+    ],
+    "e": "Der Cache ist die wichtigste Gegenmaßnahme zum Von-Neumann-Flaschenhals. Er ist flüchtig und dient nicht der Speicherung."
+   },
+   {
+    "q": "Welche Eigenschaft kennzeichnet ECC-RAM?",
+    "o": [
+     { "t": "Er erkennt Bitfehler und korrigiert Einzelbitfehler selbstständig", "ok": true },
+     { "t": "Er arbeitet deutlich schneller als gewöhnlicher Arbeitsspeicher", "ok": false },
+     { "t": "Er behält seine gespeicherten Inhalte auch nach dem Ausschalten des Systems", "ok": false },
+     { "t": "Er benötigt im Betrieb spürbar weniger elektrische Leistung", "ok": false }
+    ],
+    "e": "ECC-RAM wird vor allem in Servern eingesetzt, wo ein gekipptes Bit stille Datenfehler verursachen würde. Er ist teurer und muss von Mainboard und CPU unterstützt werden."
+   },
+   {
+    "q": "In welchem Umfeld wird ECC-RAM typischerweise eingesetzt?",
+    "o": [
+     { "t": "In Servern mit hohen Anforderungen an die Datenintegrität", "ok": true },
+     { "t": "In Spielerechnern mit besonders hoher Bildwiederholrate und Übertaktung", "ok": false },
+     { "t": "In Tablets mit möglichst langer Akkulaufzeit", "ok": false },
+     { "t": "In Netzwerkdruckern mit großem Auftragsspeicher", "ok": false }
+    ],
+    "e": "Im Dauerbetrieb summieren sich Speicherfehler. ECC verhindert, dass unbemerkt falsche Werte weiterverarbeitet werden."
+   },
+   {
+    "q": "Welche Aufgabe erfüllt die Firmware beim Einschalten des Rechners?",
+    "o": [
+     { "t": "Sie prüft die Hardware im Selbsttest und übergibt an den Bootloader", "ok": true },
+     { "t": "Sie lädt sämtliche installierten Anwendungsprogramme in den Arbeitsspeicher", "ok": false },
+     { "t": "Sie stellt die Netzwerkverbindung zum Update-Server her", "ok": false },
+     { "t": "Sie prüft die Datenträger vollständig auf logische Fehler", "ok": false }
+    ],
+    "e": "Der Ablauf ist POST, Grundinitialisierung, Übergabe an den Bootloader. Erst dieser startet das Betriebssystem."
+   },
+   {
+    "q": "Welche Funktion bietet UEFI, die das klassische BIOS nicht kennt?",
+    "o": [
+     { "t": "Secure Boot", "ok": true },
+     { "t": "Die Erkennung angeschlossener Festplatten", "ok": false },
+     { "t": "Das Festlegen der Startreihenfolge", "ok": false },
+     { "t": "Die Anzeige der Systemzeit", "ok": false }
+    ],
+    "e": "Secure Boot lässt nur signierte Bootloader zu und verhindert dadurch manipulierte Startumgebungen. Startreihenfolge und Hardwareerkennung beherrscht auch das BIOS."
+   },
+   {
+    "q": "Ein 4-TB-Datenträger lässt sich nur teilweise nutzen. Was ist die wahrscheinliche Ursache?",
+    "o": [
+     { "t": "Der Datenträger wurde mit MBR statt mit GPT partitioniert", "ok": true },
+     { "t": "Der Datenträger wurde mit GPT statt mit MBR partitioniert", "ok": false },
+     { "t": "Das Netzteil liefert zu wenig Leistung für den Datenträger", "ok": false },
+     { "t": "Der Datenträger ist über SATA statt über PCI Express angebunden", "ok": false }
+    ],
+    "e": "MBR ist auf 2 TB begrenzt und erlaubt höchstens vier primäre Partitionen. GPT hebt beide Grenzen auf und setzt UEFI voraus."
+   },
+   {
+    "q": "Welches Partitionsschema gehört zum UEFI-Start?",
+    "o": [
+     { "t": "GPT", "ok": true },
+     { "t": "MBR", "ok": false },
+     { "t": "FAT", "ok": false },
+     { "t": "RAID", "ok": false }
+    ],
+    "e": "Die Paare lauten BIOS mit MBR und UEFI mit GPT. GPT erlaubt sehr große Datenträger und viele Partitionen."
+   },
+   {
+    "q": "Was beschreibt der Begriff Green IT?",
+    "o": [
+     { "t": "Maßnahmen zur Senkung von Energieverbrauch und Umweltbelastung durch IT", "ok": true },
+     { "t": "Verbindliche Vorschriften zur Farbgestaltung von Bildschirmarbeitsplätzen", "ok": false },
+     { "t": "Ein Verfahren zur Verschlüsselung besonders sensibler Daten", "ok": false },
+     { "t": "Die gesetzliche Pflicht zur Zertifizierung aller Rechenzentren", "ok": false }
+    ],
+    "e": "Green IT betrachtet den gesamten Lebenszyklus von der Herstellung über den Betrieb bis zur fachgerechten Entsorgung."
+   },
+   {
+    "q": "Welchen ökologischen Vorteil bringt die Servervirtualisierung?",
+    "o": [
+     { "t": "Weniger physische Geräte senken Strombedarf, Kühlung und Elektronikschrott", "ok": true },
+     { "t": "Die Rechenleistung je einzelner Anwendung wird dauerhaft deutlich erhöht", "ok": false },
+     { "t": "Die regelmäßige Datensicherung wird durch den Einsatz der Virtualisierung überflüssig", "ok": false },
+     { "t": "Die Netzwerklast im Rechenzentrum sinkt automatisch erheblich", "ok": false }
+    ],
+    "e": "Statt vieler schwach ausgelasteter Einzelserver laufen mehrere Systeme auf wenigen gut ausgelasteten Hosts. Das spart zugleich Energie- und Wartungskosten."
+   },
+   {
+    "q": "Welche Maßnahme zählt zu Green IT?",
+    "o": [
+     { "t": "Fachgerechtes Recycling ausgemusterter Geräte", "ok": true },
+     { "t": "Der jährliche Austausch aller Endgeräte gegen neue Modelle", "ok": false },
+     { "t": "Der dauerhafte Betrieb aller Systeme ohne Energiesparfunktionen", "ok": false },
+     { "t": "Die Beschaffung nach dem jeweils niedrigsten Anschaffungspreis", "ok": false }
+    ],
+    "e": "Weitere Maßnahmen sind energieeffiziente Hardware, Virtualisierung, SSD statt HDD, aktive Energiesparfunktionen und eine längere Nutzungsdauer."
+   }
+  ]
  }
 };
 /* ============ ENGINE ============ */
@@ -19403,24 +19708,96 @@ function orderedCatKeys(){
     return collator.compare(POOLS[a].name, POOLS[b].name);
   });
 }
-orderedCatKeys().forEach(key => {
+// ---- Hauptthemen: fasst die Kategorien zu aufklappbaren Gruppen zusammen ----
+// Die Zuordnung ist fachlich gedacht, nicht alphabetisch: verwandte Kategorien
+// stehen beieinander, damit die Auswahl auf einen Blick überschaubar bleibt.
+const CAT_GROUPS = [
+  { id:'pruefung', titel:'AP1 & Querschnitt', offen:true,
+    keys:['ap1','__random__'] },
+  { id:'netz', titel:'Netzwerktechnik & Protokolle',
+    keys:['osi','tcpip','ip','routing','vlan','wlan','vpn','dnsdhcp','ethernet',
+          'ports','protokolle','drill','header','mux','ausdehnung','topo','fddi',
+          'voip','api','verkabelung'] },
+  { id:'sec', titel:'IT-Sicherheit & Datenschutz',
+    keys:['security','datenschutz','krypto','grundschutz','malware','haertung','mailsec'] },
+  { id:'sys', titel:'Systeme, Storage & Virtualisierung',
+    keys:['virt','hyperv','storage','raid','diagnose','medien','hardware'] },
+  { id:'dev', titel:'Softwareentwicklung & Grundlagen',
+    keys:['sql','oop','zahlen','logik'] },
+  { id:'bwl', titel:'BWL, Prozesse & Recht',
+    keys:['projekt','qm','epk','itil','kalkulation','vertraege','markt','doku'] },
+];
+
+function makeChip(key){
   const chip = document.createElement('div');
+  if(key === '__random__'){
+    const totalAll = Object.keys(POOLS).reduce((s,k)=>s+POOLS[k].q.length,0);
+    chip.className = 'cat-chip cat-random';
+    chip.dataset.key = '__random__';
+    chip.innerHTML = '<div class="cat-box">&#10003;</div><span class="cat-name">Zufällig</span><span class="cat-count">quer über alle '+totalAll+'</span>';
+    chip.addEventListener('click', () => toggleCat('__random__', chip));
+    return chip;
+  }
   chip.className = 'cat-chip' + (POOLS[key].gold ? ' cat-gold' : '');
   chip.dataset.key = key;
   chip.innerHTML = '<div class="cat-box">&#10003;</div><span class="cat-name">'+POOLS[key].name+'</span><span class="cat-count">'+POOLS[key].q.length+' Fragen</span>';
   chip.addEventListener('click', () => toggleCat(key, chip));
-  catGrid.appendChild(chip);
-});
-// Sonderkategorie "Zufällig": zieht quer über alle Pools, immer als letzter Chip.
-(function(){
-  const totalAll = Object.keys(POOLS).reduce((s,k)=>s+POOLS[k].q.length,0);
-  const chip = document.createElement('div');
-  chip.className = 'cat-chip cat-random';
-  chip.dataset.key = '__random__';
-  chip.innerHTML = '<div class="cat-box">&#10003;</div><span class="cat-name">Zufällig</span><span class="cat-count">quer über alle '+totalAll+'</span>';
-  chip.addEventListener('click', () => toggleCat('__random__', chip));
-  catGrid.appendChild(chip);
+  return chip;
+}
+
+(function renderCatGroups(){
+  // Sicherheitsnetz: Kategorien, die in keiner Gruppe stehen, landen sichtbar
+  // am Ende statt stillschweigend zu verschwinden.
+  const zugeordnet = new Set();
+  CAT_GROUPS.forEach(g => g.keys.forEach(k => zugeordnet.add(k)));
+  const rest = orderedCatKeys().filter(k => !zugeordnet.has(k));
+  const gruppen = rest.length
+    ? CAT_GROUPS.concat([{ id:'weitere', titel:'Weitere Kategorien', keys:rest }])
+    : CAT_GROUPS;
+
+  gruppen.forEach(g => {
+    const vorhanden = g.keys.filter(k => k === '__random__' || POOLS[k]);
+    if(!vorhanden.length) return;
+    const fragen = vorhanden.reduce((s,k) => s + (k === '__random__' ? 0 : POOLS[k].q.length), 0);
+
+    const box = document.createElement('div');
+    box.className = 'cat-group' + (g.offen ? ' open' : '');
+    box.dataset.group = g.id;
+
+    const head = document.createElement('button');
+    head.type = 'button';
+    head.className = 'cg-head';
+    head.setAttribute('aria-expanded', g.offen ? 'true' : 'false');
+    head.innerHTML =
+      '<span class="cg-arrow" aria-hidden="true">&#9656;</span>' +
+      '<span class="cg-title">' + g.titel + ' (' + vorhanden.length + ')</span>' +
+      '<span class="cg-sel" data-sel="' + g.id + '"></span>';
+
+    const body = document.createElement('div');
+    body.className = 'cg-body';
+    vorhanden.forEach(k => body.appendChild(makeChip(k)));
+
+    head.addEventListener('click', () => {
+      const auf = box.classList.toggle('open');
+      head.setAttribute('aria-expanded', auf ? 'true' : 'false');
+    });
+
+    box.appendChild(head);
+    box.appendChild(body);
+    catGrid.appendChild(box);
+  });
 })();
+
+// Zeigt am Gruppenkopf, wie viele Kategorien darin gerade ausgewählt sind.
+function updateGroupBadges(){
+  document.querySelectorAll('.cat-group').forEach(box => {
+    const n = box.querySelectorAll('.cat-chip.sel').length;
+    const badge = box.querySelector('.cg-sel');
+    if(!badge) return;
+    badge.textContent = n ? n + ' gewählt' : '';
+    badge.classList.toggle('show', n > 0);
+  });
+}
 
 // ---- Kategorie-Suche: nur Buchstaben/Zahlen erlaubt, filtert die Chips live ----
 const catSearch = document.getElementById('catSearch');
@@ -19444,6 +19821,24 @@ function filterCats(rawQuery){
     if(match) visible++;
   });
   catSearchCount.textContent = query === '' ? '' : (visible + ' / ' + chips.length + ' Kategorien');
+
+  // Während einer Suche klappen alle Gruppen mit Treffern auf, Gruppen ohne
+  // Treffer werden ausgeblendet. Beim Leeren des Feldes kehrt der
+  // Ausgangszustand zurück.
+  document.querySelectorAll('.cat-group').forEach(box => {
+    const treffer = box.querySelectorAll('.cat-chip:not(.cat-hidden)').length;
+    const head = box.querySelector('.cg-head');
+    if(query === ''){
+      box.classList.remove('cg-hidden');
+      const standard = box.dataset.group === 'pruefung';
+      box.classList.toggle('open', standard);
+      if(head) head.setAttribute('aria-expanded', standard ? 'true' : 'false');
+      return;
+    }
+    box.classList.toggle('cg-hidden', treffer === 0);
+    box.classList.toggle('open', treffer > 0);
+    if(head) head.setAttribute('aria-expanded', treffer > 0 ? 'true' : 'false');
+  });
 }
 
 if(catSearch){
@@ -19486,6 +19881,7 @@ function toggleCat(key, chip){
 }
 
 function refreshSelState(){
+  if(typeof updateGroupBadges === 'function') updateGroupBadges();
   const n = selected.size;
   const randomActive = selected.has('__random__');
   document.querySelectorAll('.cat-chip').forEach(chip => {
@@ -20004,6 +20400,104 @@ document.getElementById('wrongResetBtn').addEventListener('click', () => {
     refreshWrongState();
   }
 });
+
+// ---- Themen-Bubbles über dem Nachschlagewerk ----
+// Fasst die Sprungmarken zu Hauptthemen zusammen. Die flache Linkliste bleibt
+// im Dokument, weil die Volltextsuche ihren Index daraus aufbaut; sie wird nur
+// ausgeblendet.
+const READER_TOPICS = [
+  { id:'ap1',  titel:'AP1',                 ids:['r-ap1'] },
+  { id:'netz', titel:'Netzwerke',           ids:['r-osi','r-tcpip','r-ip','r-subnetting','r-routing','r-vlan','r-wlan','r-vpn','r-dnsdhcp','r-ethernet','r-ports','r-header','r-mux','r-ausdehnung','r-topo','r-fddi','r-voip','r-api','r-verkabelung','r-medien'] },
+  { id:'sec',  titel:'IT-Sicherheit',       ids:['r-security','r-datenschutz','r-krypto','r-grundschutz','r-malware','r-haertung','r-mailsec'] },
+  { id:'sys',  titel:'Systeme & Storage',   ids:['r-virt','r-hyperv','r-storage','r-raid','r-diagnose','r-hardware'] },
+  { id:'dev',  titel:'Software & Grundlagen', ids:['r-sql','r-oop','r-zahlen','r-logik'] },
+  { id:'bwl',  titel:'BWL & Prozesse',      ids:['r-projekt','r-qm','r-epk','r-itil','r-kalkulation','r-vertraege','r-markt','r-doku'] },
+];
+
+(function initTopicBubbles(){
+  const wrapEl = document.getElementById('topicBubbles');
+  const subsEl = document.getElementById('topicSubs');
+  const jump = document.querySelector('.jump');
+  if(!wrapEl || !subsEl || !jump) return;
+
+  // Beschriftung je Anker aus der vorhandenen Sprungliste übernehmen
+  const label = {};
+  jump.querySelectorAll('a').forEach(a => {
+    const id = (a.getAttribute('href') || '').replace('#', '');
+    if(id) label[id] = a.textContent.trim();
+  });
+
+  // Nicht zugeordnete Anker sichtbar auffangen statt verlieren
+  const zugeordnet = new Set();
+  READER_TOPICS.forEach(t => t.ids.forEach(i => zugeordnet.add(i)));
+  const rest = Object.keys(label).filter(i => !zugeordnet.has(i));
+  const themen = rest.length
+    ? READER_TOPICS.concat([{ id:'weitere', titel:'Weitere Themen', ids:rest }])
+    : READER_TOPICS;
+
+  let offen = null;
+
+  function schliessen(){
+    subsEl.classList.remove('show');
+    wrapEl.querySelectorAll('.topic').forEach(b => {
+      b.classList.remove('active');
+      b.setAttribute('aria-expanded', 'false');
+    });
+    offen = null;
+    // Erst nach der Animation leeren, damit das Einsammeln sichtbar bleibt
+    setTimeout(() => { if(!offen) subsEl.innerHTML = ''; }, 220);
+  }
+
+  function oeffnen(thema, btn){
+    subsEl.innerHTML = '';
+    const vorhanden = thema.ids.filter(i => document.getElementById(i));
+    vorhanden.forEach((id, n) => {
+      const a = document.createElement('a');
+      a.className = 'topic-sub';
+      a.href = '#' + id;
+      a.textContent = label[id] || id;
+      // Gestaffelt einblenden: die Unterthemen streuen nacheinander auf
+      a.style.transitionDelay = Math.min(n * 26, 320) + 'ms';
+      subsEl.appendChild(a);
+    });
+    wrapEl.querySelectorAll('.topic').forEach(b => {
+      const an = b === btn;
+      b.classList.toggle('active', an);
+      b.setAttribute('aria-expanded', an ? 'true' : 'false');
+    });
+    offen = thema.id;
+    // Im nächsten Frame die Klasse setzen, sonst greift der Übergang nicht
+    if(typeof window.requestAnimationFrame === 'function'){
+      window.requestAnimationFrame(() => subsEl.classList.add('show'));
+    } else {
+      subsEl.classList.add('show');
+    }
+  }
+
+  themen.forEach(t => {
+    const vorhanden = t.ids.filter(i => document.getElementById(i));
+    if(!vorhanden.length) return;
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'topic';
+    btn.dataset.topic = t.id;
+    btn.setAttribute('aria-expanded', 'false');
+    btn.textContent = t.titel;
+    btn.addEventListener('click', () => {
+      if(offen === t.id){ schliessen(); } else { oeffnen(t, btn); }
+    });
+    wrapEl.appendChild(btn);
+  });
+
+  // Sprung zu einem Unterthema: Auswahl danach wieder einsammeln
+  subsEl.addEventListener('click', e => {
+    const a = e.target.closest('.topic-sub');
+    if(a) setTimeout(schliessen, 260);
+  });
+
+  document.addEventListener('keydown', e => { if(e.key === 'Escape' && offen) schliessen(); });
+  jump.classList.add('jump-hidden');
+})();
 
 // ---- Tab switching ----
 // Die Scrollposition wird je Ansicht gemerkt. Wer mitten im Quiz etwas im
@@ -20537,7 +21031,30 @@ const GLOSSAR = [{"a":"2FA","f":"Zwei-Faktor-Authentifizierung","d":"Anmeldung m
 {"a":"Patchmanagement","f":"Patchmanagement","d":"Geregelter Ablauf zum Erfassen, Bewerten, Testen, Verteilen und Kontrollieren von Aktualisierungen."},
 {"a":"Security by Design","f":"Security by Design","d":"Sicherheit wird von Anfang an in Architektur und Entwurf eingeplant statt nachträglich aufgesetzt."},
 {"a":"Security by Default","f":"Security by Default","d":"Das System ist im Auslieferungszustand bereits sicher eingestellt; Sicherheit muss nicht erst aktiviert werden."},
-{"a":"Least Privilege","f":"Prinzip der geringsten Rechte","d":"Jedes Konto und jeder Dienst erhält nur die Rechte, die zur Aufgabenerfüllung nötig sind."}];
+{"a":"Least Privilege","f":"Prinzip der geringsten Rechte","d":"Jedes Konto und jeder Dienst erhält nur die Rechte, die zur Aufgabenerfüllung nötig sind."},
+{"a":"ALU","f":"Arithmetic Logic Unit","d":"Rechenwerk der CPU. Führt arithmetische und logische Operationen aus."},
+{"a":"CU","f":"Control Unit","d":"Steuerwerk der CPU. Holt Befehle, entschlüsselt sie und steuert die Reihenfolge der Abarbeitung."},
+{"a":"Von-Neumann-Flaschenhals","f":"Von-Neumann-Flaschenhals","d":"Engpass dadurch, dass Befehle und Daten über denselben Bus laufen und sich gegenseitig blockieren."},
+{"a":"Harvard-Architektur","f":"Harvard-Architektur","d":"Rechnerarchitektur mit getrennten Bussen für Befehle und Daten. Umgeht den Von-Neumann-Flaschenhals."},
+{"a":"Bussystem","f":"Bussystem","d":"Leitungssystem aus Datenbus, Adressbus und Steuerbus, das die Funktionseinheiten eines Rechners verbindet."},
+{"a":"PCI Express","f":"Peripheral Component Interconnect Express","d":"Steckplatzstandard für Erweiterungskarten. Die Bandbreite ergibt sich aus der Anzahl der Lanes."},
+{"a":"DVI","f":"Digital Visual Interface","d":"Digitale Schnittstelle zur Bildübertragung, überträgt keinen Ton."},
+{"a":"VGA","f":"Video Graphics Array","d":"Analoge Schnittstelle zur Bildübertragung, heute weitgehend abgelöst."},
+{"a":"ATX","f":"ATX-Anschluss","d":"Hauptstromanschluss vom Netzteil zum Mainboard."},
+{"a":"Wirkungsgrad","f":"Wirkungsgrad","d":"Anteil der aufgenommenen Leistung, den ein Netzteil tatsächlich abgibt. Der Rest geht als Wärme verloren."},
+{"a":"OLED","f":"Organic Light Emitting Diode","d":"Displaytechnik, bei der jedes Bildelement selbst leuchtet. Ermöglicht echtes Schwarz ohne Hintergrundbeleuchtung."},
+{"a":"LCD","f":"Liquid Crystal Display","d":"Displaytechnik mit Flüssigkristallen. Benötigt eine Hintergrundbeleuchtung, heute meist durch LEDs."},
+{"a":"Plotter","f":"Plotter","d":"Ausgabegerät für Vektorgrafiken wie Baupläne und technische Zeichnungen."},
+{"a":"Nadeldrucker","f":"Nadeldrucker","d":"Drucker, dessen Nadeln mechanisch über ein Farbband schlagen. Einziger gängiger Typ, der Durchschläge erzeugt."},
+{"a":"Core","f":"Rechenkern","d":"Eigenständige Recheneinheit einer CPU. Mehrkernprozessoren verarbeiten dadurch mehrere Befehlsströme echt parallel."},
+{"a":"Cache","f":"Cache-Speicher","d":"Sehr schneller Zwischenspeicher an der CPU. Gestuft in L1 je Kern, L2 meist je Kern und L3 gemeinsam für alle Kerne."},
+{"a":"DDR5","f":"Double Data Rate 5","d":"Arbeitsspeichergeneration mit höherer Bandbreite und Übertragungsrate als DDR4."},
+{"a":"ECC-RAM","f":"Error Correcting Code Memory","d":"Arbeitsspeicher, der Bitfehler erkennt und Einzelbitfehler korrigiert. Typisch in Servern mit hohen Integritätsanforderungen."},
+{"a":"POST","f":"Power-On Self-Test","d":"Selbsttest der Firmware beim Einschalten, der die Hardware prüft und initialisiert."},
+{"a":"GPT","f":"GUID Partition Table","d":"Partitionsschema für UEFI. Unterstützt sehr große Datenträger und viele Partitionen."},
+{"a":"MBR","f":"Master Boot Record","d":"Klassisches Partitionsschema für BIOS. Begrenzt auf 2 TB und vier primäre Partitionen."},
+{"a":"Secure Boot","f":"Secure Boot","d":"UEFI-Funktion, die nur signierte Bootloader startet und dadurch manipulierte Startumgebungen abweist."},
+{"a":"Green IT","f":"Green IT","d":"Maßnahmen zur Senkung von Energieverbrauch und Umweltbelastung durch Informationstechnik über den gesamten Lebenszyklus."}];
 
 // ---- Bibliothek: Render + Suche ----
 const libList = document.getElementById('libList');
@@ -20635,6 +21152,7 @@ renderLib(GLOSSAR_SORTED);
     "r-storage": ["DAS","NAS","SAN","Block-Storage","File-Storage","Objekt-Storage"],
     "r-itil": ["ITIL","Incident","Problem","Known Error","Change","SLA","OLA","CMDB"],
     "r-mailsec": ["SPF","DKIM","DMARC","Alignment"],
+    "r-hardware": ["ALU","CU","Von-Neumann-Flaschenhals","Harvard-Architektur","Bussystem","HDD","SSD","PCI Express","HDMI","Wirkungsgrad","SMT","Cache","ECC-RAM","BIOS","UEFI","POST","GPT","MBR","Secure Boot","Green IT"],
     "r-qm": ["PDCA","Qualitätssicherung","Qualitätskontrolle","Qualitätsplanung","Qualitätsmanagementplan"],
     "r-epk": ["EPK","Ereignis","Funktion","Konnektor","BPMN"],
     "r-doku": ["Systemdokumentation","Betriebsdokumentation","Benutzerdokumentation","Projektdokumentation"],
