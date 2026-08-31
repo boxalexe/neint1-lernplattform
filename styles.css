@@ -589,3 +589,25 @@ table.sn-cheat td:nth-child(4),table.sn-cheat td:nth-child(5){color:var(--green)
 @media(max-width:380px){
   .topic{font-size:0.76rem;padding:9px 14px}
 }
+
+/* ---- Lösch-X in Suchfeldern ---- */
+.has-clear input{padding-right:38px}
+.search-clear{position:absolute;right:9px;top:50%;transform:translateY(-50%);
+  width:22px;height:22px;display:none;align-items:center;justify-content:center;
+  background:transparent;border:none;color:var(--muted);font-size:0.9rem;line-height:1;
+  border-radius:50%;padding:0;opacity:.55;transition:opacity .15s,color .15s,background .15s;z-index:5}
+.search-clear.show{display:flex}
+.search-clear:hover{opacity:1;color:var(--cyan);background:rgba(255,255,255,0.07)}
+.qs-wrap .search-clear{right:11px}
+
+/* ---- Fortschrittszähler am Ende des Laufs ---- */
+.run-footer-count{font-family:'DM Mono',monospace;font-size:0.85rem;color:var(--muted);
+  border:1px solid var(--border);border-radius:8px;padding:10px 16px;background:var(--panel-2);
+  width:100%;text-align:center;margin-bottom:4px}
+.run-footer-count.alle-fertig{color:var(--green);border-color:var(--green)}
+
+/* Querverweis-Box: hebt sich dezent von den Prüfungsfallen ab */
+.callout.xref{border-left-color:var(--cyan)}
+.callout.xref .tag{background:var(--cyan);color:var(--bg)}
+.callout.xref a{color:var(--cyan);text-decoration:underline;text-underline-offset:2px}
+.callout.xref a:hover{color:var(--green)}

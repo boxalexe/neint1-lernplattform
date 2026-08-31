@@ -19946,6 +19946,14 @@ const progressFill = document.getElementById('progressFill');
 // gesamten Durchlaufs unverändert.
 let cardMode = false;
 
+// Fragen, die nur im Vergleich mehrerer Aussagen funktionieren, ergeben als
+// Karteikarte keinen Sinn: Auf dem leeren Feld ließe sich nichts sinnvoll
+// formulieren, weil die Aufgabe erst durch die vier Optionen entsteht.
+const NICHT_ALS_KARTE = /^(welche\s+(der\s+folgenden\s+)?(aussage|antwort|option|möglichkeit)[a-zäöüß]*\s+.*(trifft|treffen|ist\s+(richtig|korrekt|zutreffend)|sind\s+(richtig|korrekt|zutreffend))|was\s+(trifft\s+zu|ist\s+(richtig|korrekt)))/i;
+function alsKarteGeeignet(frageText){
+  return !NICHT_ALS_KARTE.test(String(frageText || '').trim());
+}
+
 function buildRun(){
   runQuestions = [];
   if(quizScope === 'wrongcards'){
@@ -20019,6 +20027,11 @@ function buildRun(){
 }
 
 function renderRun(){
+  // Im Karteikartenmodus die reinen Auswahlfragen aussortieren
+  if(cardMode){
+    const gefiltert = runQuestions.filter(x => alsKarteGeeignet(x.q));
+    if(gefiltert.length) runQuestions = gefiltert;
+  }
   qArea.innerHTML = '';
   if(quizScope === 'wrongcards'){
     runTitle.textContent = 'Wackelkandidaten Karteikarten';
@@ -20151,6 +20164,15 @@ function updateMeta(){
   runMeta.textContent = cardMode
     ? done + ' / ' + runQuestions.length + ' bearbeitet · ' + correct + ' gewusst'
     : done + ' / ' + runQuestions.length + ' beantwortet · ' + correct + ' richtig';
+  // Zähler am Ende der Liste: zeigt auf einen Blick, ob noch etwas offen ist
+  const fuss = document.getElementById('runFooterCount');
+  if(fuss){
+    const offen = runQuestions.length - done;
+    fuss.textContent = done + ' / ' + runQuestions.length + ' Fragen ' +
+      (cardMode ? 'bearbeitet' : 'beantwortet') +
+      (offen > 0 ? ' · noch ' + offen + ' offen' : ' · alle erledigt');
+    fuss.classList.toggle('alle-fertig', offen === 0);
+  }
   progressFill.style.width = (done/runQuestions.length*100) + '%';
 }
 
@@ -20295,7 +20317,13 @@ function updateWrongCardBox(){
       if(wrongCardCount() === 0) return;
       cardMode = true;                       // Wiederholung immer als Karte
       const t = document.getElementById('cardModeToggle');
-      if(t && !t.checked){ t.checked = true; t.dispatchEvent(new Event('change')); }
+      if(t && !t.checked){
+        t.checked = true;
+        var ev1;
+        if(typeof window.Event === 'function'){ ev1 = new window.Event('change', { bubbles: true }); }
+        else { ev1 = document.createEvent('Event'); ev1.initEvent('change', true, true); }
+        t.dispatchEvent(ev1);
+      }
       quizScope = 'wrongcards';
       startQuiz();
     });
@@ -20388,7 +20416,13 @@ document.getElementById('wrongStartBtn').addEventListener('click', () => {
   // unabhängig von der Stellung des Karteikarten-Schalters.
   cardMode = false;
   const t = document.getElementById('cardModeToggle');
-  if(t && t.checked){ t.checked = false; t.dispatchEvent(new Event('change')); }
+  if(t && t.checked){
+    t.checked = false;
+    var ev2;
+    if(typeof window.Event === 'function'){ ev2 = new window.Event('change', { bubbles: true }); }
+    else { ev2 = document.createEvent('Event'); ev2.initEvent('change', true, true); }
+    t.dispatchEvent(ev2);
+  }
   quizScope = 'wrong';
   startQuiz();
 });
@@ -20499,6 +20533,59 @@ const READER_TOPICS = [
   jump.classList.add('jump-hidden');
 })();
 
+// ---- Lösch-X in allen Suchfeldern ----
+// Setzt den Suchbegriff mit einem Klick zurück, statt ihn von Hand zu löschen.
+(function initSearchClear(){
+  // Ereignis defensiv erzeugen: der Konstruktor steht nicht in jeder Umgebung
+  // zur Verfügung, der Filter muss aber zuverlässig neu greifen.
+  function feuere(el, typ){
+    var ev;
+    if(typeof window.Event === 'function'){
+      ev = new window.Event(typ, { bubbles: true });
+    } else {
+      ev = document.createEvent('Event');
+      ev.initEvent(typ, true, true);
+    }
+    el.dispatchEvent(ev);
+  }
+  ['catSearch', 'libSearch', 'qsInput'].forEach(function(id){
+    const feld = document.getElementById(id);
+    if(!feld || !feld.parentNode) return;
+    const huelle = feld.parentNode;
+    // Das X wird absolut im Feldbereich positioniert
+    if(getComputedStyle(huelle).position === 'static') huelle.style.position = 'relative';
+    huelle.classList.add('has-clear');
+
+    const x = document.createElement('button');
+    x.type = 'button';
+    x.className = 'search-clear';
+    x.setAttribute('aria-label', 'Suche zurücksetzen');
+    x.title = 'Suche zurücksetzen';
+    x.innerHTML = '&#10005;';
+    huelle.appendChild(x);
+
+    function sichtbar(){ x.classList.toggle('show', feld.value.length > 0); }
+    feld.addEventListener('input', sichtbar);
+    x.addEventListener('click', function(e){
+      e.preventDefault();
+      e.stopPropagation();
+      feld.value = '';
+      // Ein echtes input-Ereignis, damit alle vorhandenen Filter neu greifen
+      feuere(feld, 'input');
+      feld.focus();
+      sichtbar();
+    });
+    feld.addEventListener('keydown', function(e){
+      if(e.key === 'Escape' && feld.value){
+        feld.value = '';
+        feuere(feld, 'input');
+        sichtbar();
+      }
+    });
+    sichtbar();
+  });
+})();
+
 // ---- Tab switching ----
 // Die Scrollposition wird je Ansicht gemerkt. Wer mitten im Quiz etwas im
 // Nachschlagewerk oder Glossar nachschlägt, landet beim Zurückwechseln wieder
@@ -20529,7 +20616,12 @@ document.querySelectorAll('.tab').forEach(tab => {
   if(!tab.dataset.view) return; // echter Navigations-Link (z.B. Subnetting Trainer) — Browser übernimmt
   tab.addEventListener('click', () => {
     const ziel = tab.dataset.view;
-    if(aktiveView() === ziel) return;   // gleicher Tab: Position unangetastet lassen
+    if(aktiveView() === ziel){
+      // Erneuter Klick auf den offenen Bereich führt nach oben
+      viewScroll[ziel] = 0;
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      return;
+    }
     merkeScroll();
     document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
     document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
@@ -21054,7 +21146,11 @@ const GLOSSAR = [{"a":"2FA","f":"Zwei-Faktor-Authentifizierung","d":"Anmeldung m
 {"a":"GPT","f":"GUID Partition Table","d":"Partitionsschema für UEFI. Unterstützt sehr große Datenträger und viele Partitionen."},
 {"a":"MBR","f":"Master Boot Record","d":"Klassisches Partitionsschema für BIOS. Begrenzt auf 2 TB und vier primäre Partitionen."},
 {"a":"Secure Boot","f":"Secure Boot","d":"UEFI-Funktion, die nur signierte Bootloader startet und dadurch manipulierte Startumgebungen abweist."},
-{"a":"Green IT","f":"Green IT","d":"Maßnahmen zur Senkung von Energieverbrauch und Umweltbelastung durch Informationstechnik über den gesamten Lebenszyklus."}];
+{"a":"Green IT","f":"Green IT","d":"Maßnahmen zur Senkung von Energieverbrauch und Umweltbelastung durch Informationstechnik über den gesamten Lebenszyklus."},
+{"a":"IANA","f":"Internet Assigned Numbers Authority","d":"Verwaltet den weltweiten IP-Adressraum, die Portnummern und die obersten Ebenen des DNS. Vergibt große Blöcke an die RIR."},
+{"a":"RIR","f":"Regional Internet Registry","d":"Regionale Vergabestelle für IP-Adressen. Für Europa ist das RIPE NCC zuständig."},
+{"a":"RIPE NCC","f":"Réseaux IP Européens Network Coordination Centre","d":"Regionale Vergabestelle für IP-Adressen in Europa, dem Nahen Osten und Zentralasien."},
+{"a":"Netzklasse","f":"IP-Netzklasse","d":"Historische Einteilung des IPv4-Adressraums in die Klassen A bis E anhand des ersten Bytes. Durch CIDR abgelöst."}];
 
 // ---- Bibliothek: Render + Suche ----
 const libList = document.getElementById('libList');
@@ -21120,7 +21216,7 @@ renderLib(GLOSSAR_SORTED);
     "r-fddi": ["FDDI"],
     "r-header": ["TTL","RTT","ICMP"],
     "r-hyperv": ["Hypervisor","Baremetal","Hosted","Para-Virtualisierung"],
-    "r-ip": ["ARP","NDP","SLAAC","APIPA","ARP-Cache","Multicast","Broadcast"],
+    "r-ip": ["ARP","NDP","SLAAC","APIPA","ARP-Cache","Multicast","Broadcast","IANA","RIR","Netzklasse"],
     "r-security": ["CIA","2FA","DMZ","IDS","IPS","Honeypot","Phishing","Pentest"],
     "r-medien": ["UTP","STP","MST","LWL","OUI","ADSL","SDSL","VDSL"],
     "r-logik": ["AND","OR","XOR","NAND","NOR","XNOR"],

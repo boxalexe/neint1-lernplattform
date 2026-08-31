@@ -22,7 +22,7 @@
     if (t && t !== 'default') document.documentElement.setAttribute('data-theme', t);
   } catch (e) {}
 </script>
-<link rel="stylesheet" href="styles.css?v=20260827m">
+<link rel="stylesheet" href="styles.css?v=20260827o">
 </head>
 <body>
 <header>
@@ -649,6 +649,22 @@ Ereignis: <em>Antragsteller ist benachrichtigt</em></p>
 <div class="callout"><span class="tag">DHCP</span><strong>DHCPv4</strong> vergibt IPv4-Adressen automatisch samt Maske, Gateway und DNS. Ablauf per DORA: <strong>D</strong>iscover (Client sucht), <strong>O</strong>ffer (Server bietet an), <strong>R</strong>equest (Client wählt), <strong>A</strong>cknowledge (Server bestätigt). <strong>DHCPv6</strong> ist das Pendant für IPv6: entweder zustandsbehaftet (Server vergibt die Adresse) oder zustandslos (Server liefert nur Zusatzinfos wie DNS, die Adresse entsteht per SLAAC).</div>
 <div class="callout"><span class="tag">IPv6-Autokonfiguration</span><strong>SLAAC</strong> (zustandslos): Der Router kündigt per <strong>Router-Advertisement</strong> ein Präfix an, das Gerät bildet den hinteren Adressteil selbst, kein Server nötig. <strong>DHCPv6</strong> (kann zustandsbehaftet): zentrale Vergabe/Verwaltung wie bei DHCPv4. Beide können auch kombiniert werden.</div>
 
+<h3>Adressvergabe und IANA</h3>
+<p>IP-Adressen werden nicht frei gewählt, sondern zentral verwaltet. An der Spitze steht die <strong>IANA</strong> (Internet Assigned Numbers Authority), die den weltweiten Adressraum verwaltet und große Blöcke an die fünf <strong>RIR</strong> (Regional Internet Registries) vergibt. Für Europa ist das <strong>RIPE NCC</strong> zuständig. Die RIR geben Blöcke an lokale Vergabestellen und Provider weiter, die daraus einzelne Netze an Endkunden zuteilen. Neben den Adressen verwaltet die IANA auch die Portnummern und die obersten Ebenen des Domain Name System.</p>
+
+<h3>Netzklassen</h3>
+<p>Ursprünglich war der IPv4-Adressraum in feste <strong>Klassen</strong> eingeteilt. Diese Netzklasse ergab sich allein aus dem ersten Byte und legte damit zugleich die Netzmaske fest.</p>
+<table>
+<tr><th>Klasse</th><th>Erstes Byte</th><th>Standardmaske</th><th>Verwendung</th></tr>
+<tr><td>A</td><td>1 – 126</td><td>255.0.0.0 (/8)</td><td>Sehr große Netze, rund 16,7 Millionen Hosts</td></tr>
+<tr><td>B</td><td>128 – 191</td><td>255.255.0.0 (/16)</td><td>Mittlere Netze, rund 65.000 Hosts</td></tr>
+<tr><td>C</td><td>192 – 223</td><td>255.255.255.0 (/24)</td><td>Kleine Netze, 254 nutzbare Hosts</td></tr>
+<tr><td>D</td><td>224 – 239</td><td>—</td><td>Multicast, keine Hostvergabe</td></tr>
+<tr><td>E</td><td>240 – 255</td><td>—</td><td>Für künftige Zwecke reserviert</td></tr>
+</table>
+<p>Der Bereich <strong>127.x.x.x</strong> ist vollständig für die Loopback-Adresse reserviert und gehört keiner nutzbaren Klasse an. Zu jeder Klasse existiert ein privater Bereich: 10.0.0.0/8 in Klasse A, 172.16.0.0/12 in Klasse B und 192.168.0.0/16 in Klasse C.</p>
+<div class="callout"><span class="tag">Prüfungsfalle</span>Die Klasseneinteilung ist seit Einführung von <strong>CIDR</strong> (Classless Inter-Domain Routing) praktisch abgelöst: Heute bestimmt die Präfixlänge die Netzgröße, nicht mehr das erste Byte. Trotzdem wird in Prüfungen regelmäßig nach der Klasse einer Adresse gefragt — dann zählt allein das erste Byte. Merken Sie sich die Lücke: <strong>127 gehört zu keiner nutzbaren Klasse</strong>, weil dieser Bereich der Loopback-Adresse vorbehalten ist, und Klasse B beginnt deshalb erst bei 128.</div>
+
 <h3>IPv4-Adressarten im Überblick</h3>
 <table>
 <tr><th>Art</th><th>Bereich</th><th>Zweck</th></tr>
@@ -668,6 +684,10 @@ Ereignis: <em>Antragsteller ist benachrichtigt</em></p>
 <p>In IPv6 übernimmt das <strong>NDP</strong> diese Aufgabe und nutzt dafür ICMPv6-Nachrichten statt Broadcasts. Die <strong>Neighbor Solicitation</strong> fragt per Multicast nach der MAC-Adresse zu einer IPv6-Adresse, das <strong>Neighbor Advertisement</strong> liefert die Antwort. Vor der ersten Nutzung einer selbst gebildeten Adresse prüft ein Gerät mit der <strong>Duplicate Address Detection (DAD)</strong>, ob die Adresse im Netz bereits vergeben ist. Dazu sendet es eine Neighbor Solicitation auf die eigene geplante Adresse. Antwortet jemand, liegt eine Kollision vor und die Adresse wird nicht verwendet.</p>
 
 <div class="callout"><span class="tag">Prüfungsfalle</span>Die privaten Bereiche müssen sitzen: <strong>10.0.0.0/8</strong>, <strong>172.16.0.0/12</strong> und <strong>192.168.0.0/16</strong>. Beliebter Stolperstein ist der mittlere Bereich, der nur bis 172.31.255.255 reicht — 172.32.x.x ist bereits öffentlich. Bei IPv6 gilt: <strong>fe80::/10</strong> ist link-local und wird nicht geroutet, während <strong>2000::/3</strong> global routbar ist.</div>
+
+<div class="callout xref"><span class="tag">Verwandte Themen</span>
+Die Adressberechnung wird ausführlich unter <a href="#r-subnetting">Subnetting – Schritt für Schritt</a> behandelt.<br>
+Im <a href="subtrainer/">Subnetting Trainer</a> kann dieses Thema gezielt geübt werden. Zusätzlich steht dort eine begleitende Hilfestellung zur Verfügung.</div>
 </section>
 
 <section id="r-doku">
@@ -1460,6 +1480,10 @@ Prüfen Sie in Aufgaben immer alle fünf Kriterien einzeln durch: Genau daran h�
 <div class="callout"><span class="tag">Warum kein „−2" bei IPv6?</span>IPv6 kennt kein Broadcast mehr, nur <strong>Multicast</strong>. Die einzige reservierte Sonderadresse je Subnetz ist die Subnet-Router-Anycast-Adresse, sie schränkt die praktisch verfügbare Hostzahl aber nicht relevant ein, da ein /64 ohnehin 2<sup>64</sup> Adressen bereitstellt. Die „minus 2"-Rechnung aus dem IPv4-Teil entfällt bei IPv6 dadurch komplett.</div>
 
 <div class="callout"><span class="tag">Prüfungsfalle</span>Die häufigsten Fehler: <strong>Netz- und Broadcastadresse werden mitgezählt</strong>, obwohl sie nicht an Hosts vergeben werden dürfen — deshalb 2<sup>n</sup> minus 2. Und bei der Frage nach der Zahl der <em>Subnetze</em> wird mit den geliehenen Bits gerechnet, bei der Frage nach den <em>Hosts</em> mit den verbleibenden Hostbits. Lesen Sie die Aufgabe genau: „wie viele Teilnetze" und „wie viele Hosts je Teilnetz" verlangen zwei verschiedene Rechnungen.</div>
+
+<div class="callout xref"><span class="tag">Verwandte Themen</span>
+Die Grundlagen zu Adressaufbau und Adressarten stehen unter <a href="#r-ip">IPv4 &amp; IPv6</a>.<br>
+Im <a href="subtrainer/">Subnetting Trainer</a> kann dieses Thema gezielt geübt werden. Zusätzlich steht dort eine begleitende Hilfestellung zur Verfügung.</div>
 </section>
 
 <section id="r-haertung">
@@ -1862,6 +1886,7 @@ Prüfen Sie in Aufgaben immer alle fünf Kriterien einzeln durch: Genau daran h�
     <div class="progress"><div class="progress-fill" id="progressFill"></div></div>
     <div id="questionArea"></div>
     <div style="display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin-top:20px">
+      <div class="run-footer-count" id="runFooterCount"></div>
       <button class="start-btn" id="resultBtn" style="display:none">Auswertung ansehen</button>
     </div>
   </div>
@@ -1931,6 +1956,6 @@ Fachinformatiker · Aura
   <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="19" x2="12" y2="5"></line><polyline points="6 11 12 5 18 11"></polyline></svg>
 </button>
 
-<script src="app.js?v=20260827m"></script>
+<script src="app.js?v=20260827o"></script>
 </body>
 </html>
