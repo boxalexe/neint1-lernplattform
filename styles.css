@@ -549,7 +549,7 @@ table.sn-cheat td:nth-child(4),table.sn-cheat td:nth-child(5){color:var(--green)
 .topics{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin:0 0 14px}
 .topic{position:relative;background:var(--panel-2);border:1px solid var(--border);
   color:var(--text);font-family:'DM Mono',monospace;font-size:0.92rem;letter-spacing:0.4px;
-  padding:12px 22px;border-radius:26px;cursor:pointer;
+  padding:12px 20px;border-radius:9px;cursor:pointer;
   transition:color .18s,border-color .18s,background .18s,transform .18s;
   animation:topicPulse 2.8s ease-in-out infinite}
 .topic:nth-child(2){animation-delay:.25s}
@@ -573,7 +573,7 @@ table.sn-cheat td:nth-child(4),table.sn-cheat td:nth-child(5){color:var(--green)
   transition:max-height .28s ease,opacity .22s ease,margin .28s ease;margin:0}
 .topic-subs.show{max-height:520px;opacity:1;margin:0 0 20px}
 .topic-sub{display:inline-block;background:var(--panel);border:1px solid var(--border);
-  color:var(--muted);text-decoration:none;font-size:0.82rem;padding:7px 15px;border-radius:20px;
+  color:var(--muted);text-decoration:none;font-size:0.82rem;padding:7px 14px;border-radius:8px;
   opacity:0;transform:translateY(-7px) scale(.94);
   transition:opacity .26s ease,transform .26s ease,color .15s,border-color .15s}
 .topic-subs.show .topic-sub{opacity:1;transform:none}
@@ -585,7 +585,7 @@ table.sn-cheat td:nth-child(4),table.sn-cheat td:nth-child(5){color:var(--green)
 }
 @media(max-width:640px){
   .topics{gap:8px;margin-bottom:12px}
-  .topic{font-size:0.82rem;padding:10px 17px;border-radius:22px}
+  .topic{font-size:0.82rem;padding:10px 16px;border-radius:8px}
   .topic-sub{font-size:0.76rem;padding:6px 12px}
   .topic-subs.show{max-height:760px;margin-bottom:16px}
 }
@@ -597,6 +597,9 @@ table.sn-cheat td:nth-child(4),table.sn-cheat td:nth-child(5){color:var(--green)
 /* Eigener Rahmen direkt um das Eingabefeld: erbt dessen Platz in der Flex-Zeile,
    damit das X im Feld sitzt und nicht den Trefferzähler daneben überdeckt. */
 .search-clear-wrap{position:relative;display:block;flex:1 1 auto;min-width:0}
+/* In der Kopfzeile bleibt der Rahmen so schmal wie das Feld selbst: sonst
+   drückt er Auge und Lupe auseinander, obwohl das Feld noch zugeklappt ist. */
+.quick-search .search-clear-wrap{flex:0 0 auto;display:inline-flex;align-items:center}
 .search-clear-wrap input{width:100%;padding-right:38px}
 .search-clear{position:absolute;right:9px;top:50%;transform:translateY(-50%);
   width:22px;height:22px;display:none;align-items:center;justify-content:center;
@@ -604,7 +607,7 @@ table.sn-cheat td:nth-child(4),table.sn-cheat td:nth-child(5){color:var(--green)
   border-radius:50%;padding:0;opacity:.55;transition:opacity .15s,color .15s,background .15s;z-index:5}
 .search-clear.show{display:flex}
 .search-clear:hover{opacity:1;color:var(--cyan);background:rgba(255,255,255,0.07)}
-.qs-wrap .search-clear-wrap{flex:1 1 auto}
+
 .qs-wrap .search-clear{right:11px}
 
 /* ---- Fortschrittszähler am Ende des Laufs ---- */
@@ -618,3 +621,10 @@ table.sn-cheat td:nth-child(4),table.sn-cheat td:nth-child(5){color:var(--green)
 .callout.xref .tag{background:var(--cyan);color:var(--bg)}
 .callout.xref a{color:var(--cyan);text-decoration:underline;text-underline-offset:2px}
 .callout.xref a:hover{color:var(--green)}
+
+/* ---- Footer ---- */
+.footer-lead{max-width:760px;margin:0 auto 10px;line-height:1.65}
+.footer-nav{margin:0 auto 10px;max-width:760px;line-height:1.9}
+.footer-nav a{color:var(--muted);text-decoration:none;border-bottom:1px solid transparent}
+.footer-nav a:hover{color:var(--cyan);border-bottom-color:var(--cyan)}
+.footer-meta{max-width:760px;margin:0 auto;opacity:.85}

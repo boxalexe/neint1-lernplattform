@@ -2712,7 +2712,7 @@ const POOLS = {
       "ok": false
      }
     ],
-    "e": "Als Quellport dient ein zufällig gewählter hoher Port aus dem dynamischen Bereich ab 49152, häufig auch schon ab 1024. Ebenfalls korrekt sind: ephemeraler Port, dynamischer Port, temporärer Quellport, hoher Port über 1023. Der Zielport ist dagegen fest 443 und benennt den Dienst."
+    "e": "Als Quellport dient ein zufällig gewählter hoher Port aus dem dynamischen Bereich ab 49152, häufig auch schon oberhalb von 1023. Gängige Bezeichnungen sind ephemeraler Port, dynamischer Port oder temporärer Quellport. Der Zielport ist dagegen fest 443 und benennt den Dienst."
    },
    {
     "q": "Was identifiziert ein Port auf einem Server?",
@@ -4047,7 +4047,7 @@ const POOLS = {
       "ok": false
      }
     ],
-    "e": "TCP steht für Transmission Control Protocol. Ebenfalls korrekt sind: Übertragungssteuerungsprotokoll, verbindungsorientiertes Transportprotokoll. Kennzeichen sind Verbindungsaufbau über den Drei-Wege-Handschlag, Bestätigungen, Sequenznummern, Neuübertragung verlorener Segmente, Fluss- und Überlastkontrolle. Gegenstück ist UDP ohne diese Zusicherungen."
+    "e": "TCP steht für Transmission Control Protocol, deutsch Übertragungssteuerungsprotokoll. Kennzeichen sind Verbindungsaufbau über den Drei-Wege-Handschlag, Bestätigungen, Sequenznummern, Neuübertragung verlorener Segmente sowie Fluss- und Überlastkontrolle. Gegenstück ist UDP ohne diese Zusicherungen."
    },
    {
     "q": "Welche Eigenschaften kennzeichnen das Protokoll UDP?",
@@ -4746,7 +4746,7 @@ const POOLS = {
       "ok": false
      }
     ],
-    "e": "TTL steht für Time to Live. Ebenfalls korrekt sind: Lebensdauer, Hop Limit bei IPv6, Zähler gegen endlose Kreisläufe. Trotz des Namens ist es keine Zeitangabe: Jeder Router verringert den Wert um eins, bei null wird das Paket verworfen. Genau das nutzt Traceroute aus. Im DNS bezeichnet TTL dagegen die Gültigkeitsdauer eines Eintrags im Zwischenspeicher."
+    "e": "TTL steht für Time to Live, deutsch Lebensdauer; bei IPv6 heißt das Feld Hop Limit. Trotz des Namens ist es keine Zeitangabe: Jeder Router verringert den Wert um eins, bei null wird das Paket verworfen. Genau das nutzt Traceroute aus. Im DNS bezeichnet TTL dagegen die Gültigkeitsdauer eines Eintrags im Zwischenspeicher."
    },
    {
     "q": "Was macht jeder Router mit der TTL eines durchlaufenden Pakets?",
@@ -6144,7 +6144,7 @@ const POOLS = {
       "ok": false
      }
     ],
-    "e": "Zur Anwendungsschicht gehören unter anderem HTTP und HTTPS, FTP, SMTP, IMAP und POP3, DNS, DHCP, SNMP, SSH, Telnet und LDAP. Ebenfalls korrekt sind: Application Layer, Layer 7, oberste Schicht des OSI-Modells. Wichtig: Nicht das Programm selbst liegt auf Schicht 7, sondern das Protokoll, über das es kommuniziert."
+    "e": "Zur Anwendungsschicht gehören unter anderem HTTP und HTTPS, FTP, SMTP, IMAP und POP3, DNS, DHCP, SNMP, SSH, Telnet und LDAP. Jedes dieser Protokolle ist eine gültige Antwort. Wichtig: Nicht das Programm selbst liegt auf Schicht 7, sondern das Protokoll, über das es kommuniziert."
    },
    {
     "q": "In welche Richtung durchläuft ein Datenpaket beim Empfang die Schichten?",
@@ -6245,7 +6245,7 @@ const POOLS = {
       "ok": false
      }
     ],
-    "e": "LAN steht für Local Area Network. Ebenfalls korrekt sind: lokales Netz, Firmennetz, Netz auf einem Gelände oder in einem Gebäude. Typische Ausdehnung bis einige hundert Meter, Technik meist Ethernet, Betrieb in eigener Verantwortung."
+    "e": "LAN steht für Local Area Network, deutsch lokales Netz. Typische Ausdehnung bis einige hundert Meter innerhalb eines Gebäudes oder Geländes, Technik meist Ethernet, Betrieb in eigener Verantwortung."
    },
    {
     "q": "Wofür steht WAN?",
@@ -6267,7 +6267,7 @@ const POOLS = {
       "ok": false
      }
     ],
-    "e": "WAN steht für Wide Area Network. Ebenfalls korrekt sind: Weitverkehrsnetz, Netz über große Entfernungen, Standortkopplung. Die Strecke wird in der Regel von einem Anbieter bereitgestellt, Bandbreite meist geringer und Laufzeit höher als im LAN. Das Internet ist das größte WAN."
+    "e": "WAN steht für Wide Area Network, deutsch Weitverkehrsnetz. Es überbrückt große Entfernungen und verbindet räumlich getrennte Standorte. Die Strecke stellt in der Regel ein Anbieter bereit; das Internet ist das größte WAN."
    },
    {
     "q": "Wofür steht PAN?",
@@ -6289,7 +6289,7 @@ const POOLS = {
       "ok": false
      }
     ],
-    "e": "PAN steht für Personal Area Network. Ebenfalls korrekt sind: persönliches Netz, Nahbereichsnetz, Netz im unmittelbaren Umfeld einer Person. Typische Technik ist Bluetooth oder NFC, Reichweite wenige Meter, etwa Kopfhörer, Smartwatch oder Tastatur."
+    "e": "PAN steht für Personal Area Network, deutsch persönliches Netz. Reichweite wenige Meter im unmittelbaren Umfeld einer Person, typische Technik Bluetooth oder NFC."
    },
    {
     "q": "Wofür steht MAN?",
@@ -6311,7 +6311,7 @@ const POOLS = {
       "ok": false
      }
     ],
-    "e": "MAN steht für Metropolitan Area Network. Ebenfalls korrekt sind: Stadtnetz, Netz über ein Stadtgebiet, Zusammenschluss mehrerer Standorte innerhalb einer Stadt. Größer als ein CAN, kleiner als ein WAN."
+    "e": "MAN steht für Metropolitan Area Network, deutsch Stadtnetz. Es verbindet mehrere Standorte innerhalb eines Stadtgebiets und liegt damit zwischen CAN und WAN."
    },
    {
     "q": "Welche typische Reichweite hat ein PAN?",
@@ -6399,7 +6399,7 @@ const POOLS = {
       "ok": false
      }
     ],
-    "e": "WLAN steht für Wireless Local Area Network. Ebenfalls korrekt sind: drahtloses lokales Netz, Funknetz, kabelloses LAN nach IEEE 802.11. Zugriffsverfahren ist CSMA/CA, weil eine Station im Funk nicht gleichzeitig senden und mithören kann."
+    "e": "WLAN steht für Wireless Local Area Network, deutsch drahtloses lokales Netz nach IEEE 802.11. Zugriffsverfahren ist CSMA/CA, weil eine Station im Funk nicht gleichzeitig senden und mithören kann."
    },
    {
     "q": "Welcher Standard beschreibt WLAN (Wi-Fi)?",
@@ -6465,7 +6465,7 @@ const POOLS = {
       "ok": false
      }
     ],
-    "e": "CAN steht für Campus Area Network. Ebenfalls korrekt sind: Campusnetz, Geländenetz, Verbindung mehrerer Gebäude auf einem Grundstück. Größer als ein LAN, kleiner als ein MAN. Nicht zu verwechseln mit dem CAN-Bus in der Fahrzeugtechnik."
+    "e": "CAN steht für Campus Area Network, deutsch Campus- oder Geländenetz. Es verbindet mehrere Gebäude auf einem Grundstück und liegt zwischen LAN und MAN. Nicht zu verwechseln mit dem CAN-Bus der Fahrzeugtechnik."
    },
    {
     "q": "Welche Ausdehnung deckt ein CAN typischerweise ab?",
@@ -6553,7 +6553,7 @@ const POOLS = {
       "ok": false
      }
     ],
-    "e": "GAN steht für Global Area Network. Ebenfalls korrekt sind: weltumspannendes Netz, globales Netz, Verbindung über Kontinente hinweg. Realisiert über Seekabel und Satelliten; das Internet ist das bekannteste Beispiel."
+    "e": "GAN steht für Global Area Network, deutsch weltumspannendes Netz. Realisiert über Seekabel und Satelliten; das Internet ist das bekannteste Beispiel."
    },
    {
     "q": "Welche Technologie ist typisch für ein GAN?",
@@ -6597,7 +6597,7 @@ const POOLS = {
       "ok": false
      }
     ],
-    "e": "BAN steht für Body Area Network. Ebenfalls korrekt sind: körpernahes Netz, Netz am oder im Körper. Typisch sind medizinische Sensoren, Herzschrittmacher, Fitnessarmbänder und Hörgeräte. Es ist die kleinste Netzausdehnung, noch unterhalb des PAN."
+    "e": "BAN steht für Body Area Network, deutsch körpernahes Netz. Typisch sind medizinische Sensoren, Herzschrittmacher, Fitnessarmbänder und Hörgeräte. Es ist die kleinste Netzausdehnung, unterhalb des PAN."
    },
    {
     "q": "Was ist ein typisches BAN-Beispiel?",
@@ -6892,7 +6892,7 @@ const POOLS = {
       "ok": false
      }
     ],
-    "e": "CSMA/CD steht für Carrier Sense Multiple Access with Collision Detection. Ebenfalls korrekt sind: Mehrfachzugriff mit Trägerprüfung und Kollisionserkennung, Zugriffsverfahren im klassischen Ethernet. Ablauf: Leitung abhören, senden, Kollision erkennen, Jam-Signal, zufällige Wartezeit, erneuter Versuch. Das Funkgegenstück heißt CSMA/CA und vermeidet Kollisionen vorab."
+    "e": "CSMA/CD steht für Carrier Sense Multiple Access with Collision Detection, deutsch Mehrfachzugriff mit Trägerprüfung und Kollisionserkennung. Ablauf: Leitung abhören, senden, Kollision erkennen, Jam-Signal, zufällige Wartezeit, erneuter Versuch. Das Funkgegenstück heißt CSMA/CA."
    },
    {
     "q": "Wie reagiert CSMA/CD auf eine erkannte Kollision?",
@@ -7691,7 +7691,7 @@ const POOLS = {
       "ok": false
      }
     ],
-    "e": "NIC steht für Network Interface Card. Ebenfalls korrekt sind: Netzwerkkarte, Netzwerkadapter, Netzwerkschnittstelle. Sie trägt die weltweit eindeutige MAC-Adresse und arbeitet auf den Schichten 1 und 2 des OSI-Modells."
+    "e": "NIC steht für Network Interface Card, deutsch Netzwerkkarte oder Netzwerkadapter. Sie trägt die weltweit eindeutige MAC-Adresse und arbeitet auf den Schichten 1 und 2 des OSI-Modells."
    },
    {
     "q": "Welches Merkmal trägt jede Netzwerkkarte ab Werk?",
@@ -10282,7 +10282,7 @@ const POOLS = {
      { "t": "Transport-Level-DNS — beschleunigte Auflösung über UDP statt TCP", "ok": false },
      { "t": "Top-Lease-Database — zentrale Verwaltung der DHCP-Adressbereiche", "ok": false }
     ],
-    "e": "TLD steht für Top Level Domain. Der TLD-Server ist zuständig für eine Endung wie .de, .com oder .org. Ebenfalls korrekt sind: Top-Level-Domain-Server, Server der obersten Domänenebene, zweite Stufe der Namensauflösung. Die Kette lautet: Root-Server, TLD-Server, autoritativer Nameserver der Zone."
+    "e": "TLD steht für Top Level Domain. Der TLD-Server ist zuständig für eine Endung wie .de, .com oder .org. Die Auflösungskette lautet: Root-Server, TLD-Server, autoritativer Nameserver der Zone."
    },
    {
     "q": "Was ist ein A-Record im DNS?",
@@ -10699,7 +10699,7 @@ const POOLS = {
       "ok": false
      }
     ],
-    "e": "API steht für Application Programming Interface, auf Deutsch Programmierschnittstelle. Ebenfalls korrekt sind: Schnittstelle zwischen Programmen, definierter Zugriffspunkt, Programmierschnittstelle. Sie legt fest, welche Funktionen ein System nach außen anbietet, ohne die interne Umsetzung offenzulegen. Verbreitete Ausprägungen: REST, SOAP, GraphQL, Webhook."
+    "e": "API steht für Application Programming Interface, deutsch Programmierschnittstelle. Sie legt fest, welche Funktionen ein System nach außen anbietet, ohne die interne Umsetzung offenzulegen. Verbreitete Ausprägungen sind REST, SOAP, GraphQL und Webhook."
    },
    {
     "q": "Welche Formate nutzen APIs meist für Antworten?",
@@ -11096,7 +11096,7 @@ const POOLS = {
       "ok": false
      }
     ],
-    "e": "VoIP steht für Voice over IP. Ebenfalls korrekt sind: Sprachübertragung über IP-Netze, Internettelefonie, IP-Telefonie. Die Sprache wird digitalisiert, in Pakete zerlegt und über das Datennetz übertragen. Signalisierung meist über SIP, Sprachdaten über RTP auf UDP."
+    "e": "VoIP steht für Voice over IP, deutsch Sprachübertragung über IP-Netze; gebräuchlich sind auch Internettelefonie und IP-Telefonie. Die Sprache wird digitalisiert, in Pakete zerlegt und über das Datennetz übertragen. Signalisierung meist über SIP, Sprachdaten über RTP auf UDP."
    },
    {
     "q": "Welches Transportprotokoll nutzt VoIP für die Sprachdaten typischerweise?",
@@ -11809,7 +11809,7 @@ const POOLS = {
       "ok": false
      }
     ],
-    "e": "SHA steht für Secure Hash Algorithm. Ebenfalls korrekt sind: sicherer Hashalgorithmus, kryptografische Prüfsummenfunktion. Er erzeugt aus beliebigen Daten einen Wert fester Länge und dient der Integritätsprüfung sowie digitalen Signaturen. Gebräuchlich sind SHA-256 und SHA-3; SHA-1 gilt als unsicher."
+    "e": "SHA steht für Secure Hash Algorithm, deutsch sicherer Hashalgorithmus. Er erzeugt aus beliebigen Daten einen Wert fester Länge und dient der Integritätsprüfung sowie digitalen Signaturen. Gebräuchlich sind SHA-256 und SHA-3; SHA-1 gilt als unsicher."
    },
    {
     "q": "Was ist der Unterschied zwischen Verschlüsselung und Hashing?",
@@ -12166,7 +12166,7 @@ const POOLS = {
       "ok": false
      }
     ],
-    "e": "ESP steht für Encapsulating Security Payload. Ebenfalls korrekt sind: verschlüsselnder Sicherheitsanteil, Kapselung der Nutzdaten. ESP bietet Vertraulichkeit durch Verschlüsselung sowie Authentizität und Integrität. Das Gegenstück AH (Authentication Header) sichert nur Authentizität und Integrität, verschlüsselt aber nicht."
+    "e": "ESP steht für Encapsulating Security Payload. Es bietet Vertraulichkeit durch Verschlüsselung sowie Authentizität und Integrität. Das Gegenstück AH, der Authentication Header, sichert nur Authentizität und Integrität, verschlüsselt aber nicht."
    },
    {
     "q": "Welche Aufgabe hat IKE (Internet Key Exchange) bei IPsec?",
@@ -13300,7 +13300,7 @@ const POOLS = {
      { "t": "Die Meldepflicht für Datenschutzverletzungen gegenüber Aufsichtsbehörden", "ok": false },
      { "t": "Ausschließlich Regeln für die Videoüberwachung öffentlicher Plätze", "ok": false }
     ],
-    "e": "TDDDG steht für Telekommunikation-Digitale-Dienste-Datenschutz-Gesetz, vormals TTDSG. Ebenfalls korrekt sind: Nachfolger des TTDSG, Gesetz zum Datenschutz bei digitalen Diensten. Es regelt unter anderem die Einwilligung beim Setzen von Cookies und den Schutz der Endeinrichtung, ergänzend zur DSGVO."
+    "e": "TDDDG steht für Telekommunikation-Digitale-Dienste-Datenschutz-Gesetz und ist der Nachfolger des TTDSG. Es regelt unter anderem die Einwilligung beim Setzen von Cookies und den Schutz der Endeinrichtung, ergänzend zur DSGVO."
    },
    {
     "q": "Welche älteren Regelungen ersetzt das TDDDG im Kern?",
@@ -13677,7 +13677,7 @@ const POOLS = {
       "ok": false
      }
     ],
-    "e": "SSID steht für Service Set Identifier. Ebenfalls korrekt sind: Netzname, Kennung des Funknetzes, WLAN-Name. Sie identifiziert das Funknetz gegenüber den Clients. Das Verstecken der SSID ist keine Sicherheitsmaßnahme, weil sie beim Verbindungsaufbau ohnehin mitgesendet wird."
+    "e": "SSID steht für Service Set Identifier, deutsch Netzname oder Kennung des Funknetzes. Sie identifiziert das Funknetz gegenüber den Clients. Das Verstecken der SSID ist keine Sicherheitsmaßnahme, weil sie beim Verbindungsaufbau ohnehin mitgesendet wird."
    },
    {
     "q": "Welche Aufgabe hat ein Access Point (AP)?",
@@ -14162,7 +14162,7 @@ const POOLS = {
       "ok": false
      }
     ],
-    "e": "FDDI steht für Fiber Distributed Data Interface. Ebenfalls korrekt sind: Glasfaser-Doppelring, Token-Ring über Lichtwellenleiter, Backbone-Technik mit 100 Mbit/s. Kennzeichen sind der gegenläufige Doppelring zur Ausfallsicherheit und der kollisionsfreie Zugriff über Token Passing."
+    "e": "FDDI steht für Fiber Distributed Data Interface. Kennzeichen sind der gegenläufige Doppelring aus Glasfaser zur Ausfallsicherheit, der kollisionsfreie Zugriff über Token Passing und eine Rate von 100 Mbit/s. Typischer Einsatz war der Backbone."
    },
    {
     "q": "Warum entstehen bei FDDI keine Datenkollisionen?",
@@ -16796,7 +16796,7 @@ const POOLS = {
      { "t": "Remote Array of Internal Drives", "ok": false },
      { "t": "Redundant Allocation of Indexed Data", "ok": false }
     ],
-    "e": "RAID steht für Redundant Array of Independent Disks, früher auch Inexpensive Disks. Ebenfalls korrekt sind: redundanter Verbund unabhängiger Festplatten, Plattenverbund. Zweck ist je nach Level höhere Verfügbarkeit durch Redundanz, mehr Geschwindigkeit durch Verteilung oder beides. Wichtig: RAID ersetzt keine Datensicherung."
+    "e": "RAID steht für Redundant Array of Independent Disks, früher auch Inexpensive Disks, deutsch redundanter Verbund unabhängiger Festplatten. Zweck ist je nach Level höhere Verfügbarkeit, mehr Geschwindigkeit oder beides. Wichtig: RAID ersetzt keine Datensicherung."
    },
    {
     "q": "Welche zwei Hauptziele verfolgt ein RAID-Verbund grundsätzlich?",
@@ -17321,7 +17321,7 @@ const POOLS = {
      { "t": "21", "ok": false },
      { "t": "25", "ok": false }
     ],
-    "e": "SSH läuft auf Port 22. Ebenfalls korrekt sind: 22, Secure Shell, verschlüsselte Fernwartung. Auf demselben Port laufen SFTP und SCP, weil beide den SSH-Kanal nutzen. SSH ersetzt das unverschlüsselte Telnet auf Port 23."
+    "e": "SSH läuft auf Port 22, auch geschrieben als tcp/22. Auf demselben Port laufen SFTP und SCP, weil beide den SSH-Kanal nutzen. SSH ersetzt das unverschlüsselte Telnet auf Port 23."
    },
    {
     "q": "Auf welchem Port läuft DNS standardmäßig?",
@@ -17331,7 +17331,7 @@ const POOLS = {
      { "t": "80", "ok": false },
      { "t": "25", "ok": false }
     ],
-    "e": "DNS läuft auf Port 53. Ebenfalls korrekt sind: 53, Domain Name System, Namensauflösung. Überwiegend wird UDP genutzt, weil Anfragen kurz sind; TCP auf demselben Port kommt bei Zonentransfers und großen Antworten zum Einsatz."
+    "e": "DNS läuft auf Port 53. Überwiegend wird UDP genutzt, weil Anfragen kurz sind; TCP auf demselben Port kommt bei Zonentransfers und großen Antworten zum Einsatz."
    },
    {
     "q": "Auf welchem Port empfängt ein DHCP-Server Anfragen?",
@@ -17361,7 +17361,7 @@ const POOLS = {
      { "t": "22", "ok": false },
      { "t": "23", "ok": false }
     ],
-    "e": "Der aktive FTP-Datenkanal läuft über Port 20. Ebenfalls korrekt sind: 20, FTP-Data, Datenkanal. Der Steuerkanal läuft über Port 21. Im passiven Modus baut der Client auch die Datenverbindung auf, weshalb dieser Modus besser durch Firewalls kommt."
+    "e": "Der aktive FTP-Datenkanal läuft über Port 20, der Steuerkanal über Port 21. Im passiven Modus baut der Client auch die Datenverbindung auf, weshalb dieser Modus besser durch Firewalls kommt."
    },
    {
     "q": "Auf welchem Port läuft NTP standardmäßig?",
@@ -17371,7 +17371,7 @@ const POOLS = {
      { "t": "161", "ok": false },
      { "t": "110", "ok": false }
     ],
-    "e": "NTP läuft auf Port 123. Ebenfalls korrekt sind: 123, Network Time Protocol, Zeitsynchronisation. NTP nutzt UDP. Eine einheitliche Uhrzeit ist Voraussetzung für auswertbare Protokolle, gültige Zertifikate und die Kerberos-Anmeldung."
+    "e": "NTP läuft auf Port 123 und nutzt UDP. Eine einheitliche Uhrzeit ist Voraussetzung für auswertbare Protokolle, gültige Zertifikate und die Kerberos-Anmeldung."
    },
    {
     "q": "Auf welchem Port läuft LDAP standardmäßig?",
@@ -17381,7 +17381,7 @@ const POOLS = {
      { "t": "636", "ok": false },
      { "t": "445", "ok": false }
     ],
-    "e": "LDAP läuft auf Port 389. Ebenfalls korrekt sind: 389, Lightweight Directory Access Protocol, Verzeichnisdienst. Verschlüsselt läuft LDAPS über Port 636. Typischer Einsatz ist die zentrale Benutzerverwaltung, etwa im Active Directory."
+    "e": "LDAP läuft auf Port 389, verschlüsselt als LDAPS auf Port 636. Typischer Einsatz ist die zentrale Benutzerverwaltung, etwa im Active Directory."
    },
    {
     "q": "Auf welchem Port läuft POP3S standardmäßig?",
@@ -17391,7 +17391,7 @@ const POOLS = {
      { "t": "110", "ok": false },
      { "t": "587", "ok": false }
     ],
-    "e": "POP3S läuft auf Port 995. Ebenfalls korrekt sind: 995, POP3 über TLS, verschlüsselter Mailabruf. Unverschlüsselt läuft POP3 über Port 110. Das Gegenstück für IMAP ist IMAPS auf Port 993."
+    "e": "POP3S läuft auf Port 995, unverschlüsseltes POP3 auf Port 110. Das Gegenstück für IMAP ist IMAPS auf Port 993."
    },
    {
     "q": "Auf welchem Port liefern Mail-Clients ausgehende Mails per Submission ein?",
@@ -17411,7 +17411,7 @@ const POOLS = {
      { "t": "25", "ok": false },
      { "t": "995", "ok": false }
     ],
-    "e": "SMTPS läuft auf Port 465. Ebenfalls korrekt sind: 465, SMTP über TLS, verschlüsselter Mailversand. Unverschlüsselt läuft SMTP über Port 25; für die Einlieferung durch Clients mit STARTTLS ist Port 587 vorgesehen."
+    "e": "SMTPS läuft auf Port 465, unverschlüsseltes SMTP auf Port 25. Für die authentifizierte Einlieferung durch Clients mit STARTTLS ist Port 587 vorgesehen."
    }
   ]
  },
@@ -17561,7 +17561,7 @@ const POOLS = {
      { "t": "Für eine Vererbungsbeziehung zur übergeordneten Oberklasse", "ok": false },
      { "t": "Für eine gerichtete Abhängigkeit zwischen zwei Paketen", "ok": false }
     ],
-    "e": "Die Raute kennzeichnet ein Ganzes-Teil-Verhältnis. Die leere Raute steht für die Aggregation, bei der das Teil auch ohne das Ganze bestehen kann. Die gefüllte Raute steht für die Komposition, bei der das Teil mit dem Ganzen entfällt. Ebenfalls korrekt sind: Aggregation, Komposition, Ganzes-Teil-Beziehung, Teil-von-Beziehung. Die Raute steht immer auf der Seite des Ganzen."
+    "e": "Die Raute kennzeichnet ein Ganzes-Teil-Verhältnis. Die leere Raute steht für die Aggregation, bei der das Teil auch ohne das Ganze bestehen kann; die gefüllte Raute für die Komposition, bei der das Teil mit dem Ganzen entfällt. Die Raute steht immer auf der Seite des Ganzen."
    },
    {
     "q": "Was unterscheidet die Komposition von der Aggregation?",
@@ -21193,7 +21193,31 @@ const GLOSSAR = [{"a":"2FA","f":"Zwei-Faktor-Authentifizierung","d":"Anmeldung m
 {"a":"IANA","f":"Internet Assigned Numbers Authority","d":"Verwaltet den weltweiten IP-Adressraum, die Portnummern und die obersten Ebenen des DNS. Vergibt große Blöcke an die RIR."},
 {"a":"RIR","f":"Regional Internet Registry","d":"Regionale Vergabestelle für IP-Adressen. Für Europa ist das RIPE NCC zuständig."},
 {"a":"RIPE NCC","f":"Réseaux IP Européens Network Coordination Centre","d":"Regionale Vergabestelle für IP-Adressen in Europa, dem Nahen Osten und Zentralasien."},
-{"a":"Netzklasse","f":"IP-Netzklasse","d":"Historische Einteilung des IPv4-Adressraums in die Klassen A bis E anhand des ersten Bytes. Durch CIDR abgelöst."}];
+{"a":"Netzklasse","f":"IP-Netzklasse","d":"Historische Einteilung des IPv4-Adressraums in die Klassen A bis E anhand des ersten Bytes. Durch CIDR abgelöst."},
+{"a":"Vertraulichkeit","f":"Confidentiality","d":"Schutzziel: Nur Berechtigte können die Daten einsehen. Umgesetzt über Verschlüsselung und Berechtigungskonzept."},
+{"a":"Integrität","f":"Integrity","d":"Schutzziel: Daten sind unverändert und vollständig. Nachgewiesen über Hashwerte, Prüfsummen und Signaturen."},
+{"a":"Verfügbarkeit","f":"Availability","d":"Schutzziel: Daten und Dienste sind nutzbar, wenn sie gebraucht werden. Erreicht über Redundanz, USV und Sicherungen."},
+{"a":"Authentizität","f":"Authenticity","d":"Schutzziel: Die Herkunft ist zweifelsfrei nachgewiesen. Umgesetzt über digitale Signaturen und Zertifikate."},
+{"a":"Authentifizierung","f":"Authentifizierung","d":"Nachweis der Identität, beantwortet die Frage Wer bist du. Erfolgt über Wissen, Besitz oder Sein."},
+{"a":"Autorisierung","f":"Autorisierung","d":"Prüfung der Rechte, beantwortet die Frage Was darfst du. Erfolgt erst nach erfolgreicher Authentifizierung."},
+{"a":"Schutzbedarfsfeststellung","f":"Schutzbedarfsfeststellung","d":"Einstufung jedes Objekts je Schutzziel in normal, hoch oder sehr hoch. Grundlage für die Auswahl der Maßnahmen."},
+{"a":"Risikoanalyse","f":"Risikoanalyse","d":"Vertiefte Betrachtung bei hohem oder sehr hohem Schutzbedarf. Ergänzt den IT-Grundschutz um zusätzliche Maßnahmen."},
+{"a":"Underpinning Contract","f":"Underpinning Contract","d":"Vertrag mit einem externen Zulieferer, der die Einhaltung des SLA gegenüber dem Kunden absichert."},
+{"a":"Kapselung","f":"Datenkapselung","d":"OOP-Prinzip: Attribute werden nach außen verborgen und nur über Methoden zugänglich gemacht."},
+{"a":"Klassendiagramm","f":"UML-Klassendiagramm","d":"Zeigt den statischen Aufbau: Klassen mit Attributen, Methoden, Sichtbarkeiten und Beziehungen mit Multiplizitäten."},
+{"a":"Aktivitätsdiagramm","f":"UML-Aktivitätsdiagramm","d":"Zeigt einen Ablauf mit Aktivitäten, Entscheidungsknoten und parallelen Zweigen."},
+{"a":"Inkrement","f":"Increment","d":"Scrum-Artefakt: das am Sprintende fertige, lieferbare Zwischenergebnis."},
+{"a":"Trunk-Port","f":"Trunk-Port","d":"Switch-Port, der mehrere VLANs mit Kennzeichnung nach 802.1Q überträgt. Verbindet üblicherweise Switches untereinander."},
+{"a":"Access-Port","f":"Access-Port","d":"Switch-Port, der genau einem VLAN zugeordnet ist und ungetaggt zum Endgerät überträgt."},
+{"a":"Virus","f":"Computervirus","d":"Schadsoftware, die sich an eine Wirtsdatei hängt und sich erst bei deren Ausführung verbreitet."},
+{"a":"Mietvertrag","f":"Mietvertrag","d":"Vertrag über die Gebrauchsüberlassung gegen Miete. Das Eigentum bleibt beim Vermieter."},
+{"a":"Zweierkomplement","f":"Zweierkomplement","d":"Darstellung negativer Binärzahlen: alle Bits kippen und eins addieren. Das höchstwertige Bit ist das Vorzeichen."},
+{"a":"TCO","f":"Total Cost of Ownership","d":"Gesamtkosten über die Nutzungsdauer, also Anschaffung plus Betrieb, Wartung, Energie und Entsorgung."},
+{"a":"Amortisationsdauer","f":"Amortisationsdauer","d":"Zeitraum, nach dem eine Investition durch Einsparungen oder Erträge wieder eingebracht ist."},
+{"a":"EVA-Prinzip","f":"Eingabe, Verarbeitung, Ausgabe","d":"Grundmuster jeder Datenverarbeitung. Erweitert um die Speicherung ergibt sich EVAS."},
+{"a":"Von-Neumann-Architektur","f":"Von-Neumann-Architektur","d":"Rechnerarchitektur mit Rechenwerk, Steuerwerk, Speicherwerk, Ein-/Ausgabewerk und gemeinsamem Bus für Befehle und Daten."},
+{"a":"idempotent","f":"Idempotenz","d":"Eine Operation, die mehrfach ausgeführt denselben Zustand ergibt. Gilt für GET, PUT und DELETE, nicht für POST."},
+{"a":"API-Key","f":"API-Schlüssel","d":"Zeichenfolge zur Authentifizierung gegenüber einer Programmierschnittstelle. Bietet weniger Schutz als tokenbasierte Verfahren."}];
 
 // ---- Bibliothek: Render + Suche ----
 const libList = document.getElementById('libList');
@@ -21249,8 +21273,8 @@ renderLib(GLOSSAR_SORTED);
   if (!reader || typeof GLOSSAR === 'undefined') return;
 
   var CURATED = {
-    "r-ap1": ["FAZ","FEZ","SAZ","SEZ","USV","TOM","AVV","RPO","RTO"],
-    "r-api": ["REST","PUT","PATCH","OAuth","Bearer-Token","SOAP"],
+    "r-ap1": ["FAZ","FEZ","SAZ","SEZ","USV","TOM","AVV","RPO","RTO","TCO","Amortisationsdauer","EVA-Prinzip"],
+    "r-api": ["REST","PUT","PATCH","OAuth","Bearer-Token","SOAP","idempotent","API-Key"],
     "r-raid": ["RAID","Hot-Spare","RPO","RTO","GFS","Generationenprinzip","Tower of Hanoi"],
     "r-datenschutz": ["DSGVO","BDSG","TOM","AVV","DSFA","DSB"],
     "r-diagnose": ["ICMP","DNS","MAC"],
@@ -21260,15 +21284,15 @@ renderLib(GLOSSAR_SORTED);
     "r-header": ["TTL","RTT","ICMP"],
     "r-hyperv": ["Hypervisor","Baremetal","Hosted","Para-Virtualisierung"],
     "r-ip": ["ARP","NDP","SLAAC","APIPA","ARP-Cache","Multicast","Broadcast","IANA","RIR","Netzklasse"],
-    "r-security": ["CIA","2FA","DMZ","IDS","IPS","Honeypot","Phishing","Pentest"],
+    "r-security": ["CIA","2FA","DMZ","IDS","IPS","Honeypot","Phishing","Pentest","Authentifizierung","Autorisierung","Vertraulichkeit","Integrität","Verfügbarkeit"],
     "r-medien": ["UTP","STP","MST","LWL","OUI","ADSL","SDSL","VDSL"],
     "r-logik": ["AND","OR","XOR","NAND","NOR","XNOR"],
     "r-mux": ["MUX","DEMUX","TDM","FDM","WDM","CDM"],
     "r-ausdehnung": ["BAN","PAN","CAN","MAN","GAN","MPLS"],
-    "r-oop": [],
+    "r-oop": [,"Kapselung","Klassendiagramm"],
     "r-osi": ["OSI","PDU","ASCII","TLS"],
     "r-ports": ["Proxy","SOCKS","RDP","HTTPS","POP3","IMAP","STARTTLS","SMTP","TLS","SSL"],
-    "r-projekt": ["FAZ","FEZ","V-Modell","Spiralmodell","XP","SMART","Tuckman","RACI"],
+    "r-projekt": ["FAZ","FEZ","V-Modell","Spiralmodell","XP","SMART","Tuckman","RACI","Inkrement"],
     
     "r-routing": ["STP","NAT","CAM","OSPF","RIP","Trunk","Longest Prefix Match","Cut-Through"],
     "r-sql": ["SQL"],
@@ -21278,18 +21302,18 @@ renderLib(GLOSSAR_SORTED);
     "r-topo": ["FDDI"],
     "r-krypto": ["RSA","ECC","Diffie-Hellman","PKI","X.509","CRL","OCSP","CSR","Hash","Salt"],
     "r-virt": ["Hypervisor","Overcommitment","Live-Migration","Thin Client","VDI"],
-    "r-vlan": ["VLAN","Trunk","VLAN-Hopping","MAC-Spoofing","802.1X"],
+    "r-vlan": ["VLAN","Trunk","VLAN-Hopping","MAC-Spoofing","802.1X","Trunk-Port","Access-Port"],
     "r-voip": ["VoIP","SIP","RTP","QoS"],
     "r-vpn": ["IPsec","IKE","IKEv2","ISAKMP","ESP","AH","L2TP","OpenVPN","Diffie-Hellman"],
     "r-wlan": ["SSID","PSK","SAE","Roaming","Band Steering","IEEE 802.11","Wireless Controller"],
-    "r-zahlen": ["MSB","LSB","Nibble"],
-    "r-vertraege": ["Kaufvertrag","Werkvertrag","Dienstvertrag","Leasing","Lieferverzug","Nacherfüllung"],
+    "r-zahlen": ["MSB","LSB","Nibble","Zweierkomplement"],
+    "r-vertraege": ["Kaufvertrag","Werkvertrag","Dienstvertrag","Leasing","Lieferverzug","Nacherfüllung","Mietvertrag"],
     "r-markt": ["Polypol","Oligopol","Monopol","Monopson","Primärer Sektor","Tertiärer Sektor"],
     "r-kalkulation": ["Bezugskalkulation","Zieleinkaufspreis","Bareinkaufspreis","Bezugspreis","Ratendarlehen","ROI"],
-    "r-malware": ["Wurm","Trojaner","Rootkit","Ransomware","Keylogger","Phishing","Zero-Day"],
-    "r-grundschutz": ["BSI","VIVA","IT-Grundschutz","Maximumprinzip","Kumulationseffekt"],
+    "r-malware": ["Wurm","Trojaner","Rootkit","Ransomware","Keylogger","Phishing","Zero-Day","Virus"],
+    "r-grundschutz": ["BSI","VIVA","IT-Grundschutz","Maximumprinzip","Kumulationseffekt","Schutzbedarfsfeststellung","Risikoanalyse"],
     "r-storage": ["DAS","NAS","SAN","Block-Storage","File-Storage","Objekt-Storage"],
-    "r-itil": ["ITIL","Incident","Problem","Known Error","Change","SLA","OLA","CMDB"],
+    "r-itil": ["ITIL","Incident","Problem","Known Error","Change","SLA","OLA","CMDB","Underpinning Contract"],
     "r-mailsec": ["SPF","DKIM","DMARC","Alignment"],
     "r-hardware": ["ALU","CU","Von-Neumann-Flaschenhals","Harvard-Architektur","Bussystem","HDD","SSD","PCI Express","HDMI","Wirkungsgrad","SMT","Cache","ECC-RAM","BIOS","UEFI","POST","GPT","MBR","Secure Boot","Green IT"],
     "r-qm": ["PDCA","Qualitätssicherung","Qualitätskontrolle","Qualitätsplanung","Qualitätsmanagementplan"],
