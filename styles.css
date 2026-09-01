@@ -205,9 +205,12 @@ footer{text-align:center;color:var(--muted);font-size:0.8rem;padding-top:40px;bo
 .lib-count{font-family:'DM Mono',monospace;font-size:0.8rem;color:var(--muted);white-space:nowrap}
 .lib-letter{font-family:'DM Mono',monospace;color:var(--cyan);font-size:1.1rem;font-weight:700;border-bottom:1px solid var(--border);padding-bottom:6px;margin:28px 0 12px}
 .lib-item{display:grid;grid-template-columns:110px 1fr;gap:4px 16px;padding:10px 12px;border:1px solid transparent;border-radius:8px}
+/* Lange Begriffe dürfen die Spalte nicht sprengen: sie werden nach deutschen
+   Trennregeln mit Bindestrich umbrochen und laufen darunter weiter. */
+.lib-item > *{min-width:0}
 .lib-item:hover{background:var(--panel-2);border-color:var(--border)}
-.lib-abbr{font-family:'DM Mono',monospace;color:var(--green);font-weight:600;font-size:0.95rem}
-.lib-full{color:#eaf2f8;font-weight:600;font-size:0.92rem}
+.lib-abbr{font-family:'DM Mono',monospace;color:var(--green);font-weight:600;font-size:0.95rem;hyphens:auto;-webkit-hyphens:auto;-ms-hyphens:auto;overflow-wrap:break-word;word-break:break-word}
+.lib-full{color:#eaf2f8;font-weight:600;font-size:0.92rem;hyphens:auto;-webkit-hyphens:auto;-ms-hyphens:auto;overflow-wrap:break-word;word-break:break-word}
 .lib-desc{grid-column:2;color:var(--muted);font-size:0.87rem;line-height:1.5}
 .lib-empty{color:var(--muted);font-family:'DM Mono',monospace;text-align:center;padding:40px 0}
 .menu-toggle{display:none;width:100%;background:var(--panel-2);border:1px solid var(--border);color:var(--text);font-family:'DM Mono','Consolas',monospace;font-size:0.9rem;padding:11px 14px;border-radius:8px;cursor:pointer;text-align:center;transition:border-color .15s}
@@ -591,13 +594,17 @@ table.sn-cheat td:nth-child(4),table.sn-cheat td:nth-child(5){color:var(--green)
 }
 
 /* ---- Lösch-X in Suchfeldern ---- */
-.has-clear input{padding-right:38px}
+/* Eigener Rahmen direkt um das Eingabefeld: erbt dessen Platz in der Flex-Zeile,
+   damit das X im Feld sitzt und nicht den Trefferzähler daneben überdeckt. */
+.search-clear-wrap{position:relative;display:block;flex:1 1 auto;min-width:0}
+.search-clear-wrap input{width:100%;padding-right:38px}
 .search-clear{position:absolute;right:9px;top:50%;transform:translateY(-50%);
   width:22px;height:22px;display:none;align-items:center;justify-content:center;
   background:transparent;border:none;color:var(--muted);font-size:0.9rem;line-height:1;
   border-radius:50%;padding:0;opacity:.55;transition:opacity .15s,color .15s,background .15s;z-index:5}
 .search-clear.show{display:flex}
 .search-clear:hover{opacity:1;color:var(--cyan);background:rgba(255,255,255,0.07)}
+.qs-wrap .search-clear-wrap{flex:1 1 auto}
 .qs-wrap .search-clear{right:11px}
 
 /* ---- Fortschrittszähler am Ende des Laufs ---- */

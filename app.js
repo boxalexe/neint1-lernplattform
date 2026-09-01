@@ -77,7 +77,7 @@ const POOLS = {
     "e": "Externe verursachen Kosten und müssen sich einarbeiten; zudem kann Abhängigkeit und Wissensabfluss entstehen."
    },
    {
-    "q": "Welche Aussage beschreibt ein Lastenheft richtig?",
+    "q": "Was enthält ein Lastenheft und von wem stammt es?",
     "o": [
      { "t": "Es enthält die Anforderungen des Auftraggebers", "ok": true },
      { "t": "Es beschreibt die technische Umsetzung des Auftragnehmers", "ok": false },
@@ -207,7 +207,7 @@ const POOLS = {
     "e": "Fremdbezug pro Benutzer und Jahr: 30 € × 12 = 360 €. Eigenentwicklung erstes Jahr: 180.000 € + 24.000 € = 204.000 €. Break-even: 204.000 € ÷ 360 € = 566,67 → ab 567 Benutzern günstiger."
    },
    {
-    "q": "Welche Aussage beschreibt Software as a Service?",
+    "q": "Was kennzeichnet Software as a Service?",
     "o": [
      { "t": "Die Software wird als Dienst über ein Netzwerk bereitgestellt", "ok": true },
      { "t": "Der Kunde entwickelt und betreibt die Software komplett selbst", "ok": false },
@@ -407,7 +407,7 @@ const POOLS = {
     "e": "Die kleinste Platte bestimmt die Kapazität aller Laufwerke. (6 − 1) × 3 TB = 15 TB."
    },
    {
-    "q": "Welche Aussage trifft auf JBOD zu?",
+    "q": "Wie fasst JBOD mehrere Datenträger zusammen?",
     "o": [
      { "t": "Bündelt verschieden große Platten ohne Redundanz", "ok": true },
      { "t": "Spiegelt alle Daten automatisch auf zwei Platten", "ok": false },
@@ -417,7 +417,7 @@ const POOLS = {
     "e": "JBOD fasst unterschiedlich große Laufwerke zu einem logischen Bereich zusammen, bietet aber keine Redundanz."
    },
    {
-    "q": "Welche Aussage trifft auf ein SAN zu?",
+    "q": "Auf welcher Ebene stellt ein SAN den Speicher bereit?",
     "o": [
      { "t": "Es stellt Speicher meist auf Blockebene bereit", "ok": true },
      { "t": "Es ist ausschließlich ein einfacher USB-Speicher", "ok": false },
@@ -444,7 +444,7 @@ const POOLS = {
      { "t": "Portnummer", "ok": false },
      { "t": "URL", "ok": false }
     ],
-    "e": "Die MAC-Adresse adressiert Geräte auf Schicht 2."
+    "e": "Die MAC-Adresse. Ebenfalls korrekt sind: Hardwareadresse, physikalische Adresse, Ethernet-Adresse, 48-Bit-Adresse. Sie ist weltweit eindeutig, fest an die Netzwerkkarte gebunden und nur innerhalb des lokalen Netzsegments von Bedeutung."
    },
    {
     "q": "Welche Angabe gehört zur Vermittlungsschicht (OSI-Schicht 3)?",
@@ -454,7 +454,7 @@ const POOLS = {
      { "t": "USB-Anschluss", "ok": false },
      { "t": "Dateiname", "ok": false }
     ],
-    "e": "Die IP-Adresse ermöglicht die Vermittlung (Routing) zwischen Netzen auf Schicht 3."
+    "e": "Die IP-Adresse. Ebenfalls korrekt sind: logische Adresse, IPv4- oder IPv6-Adresse, Netzadresse mit Präfix, Subnetzmaske, Standardgateway. Im Unterschied zur MAC-Adresse ist sie logisch vergeben, änderbar und über Netzgrenzen hinweg routbar."
    },
    {
     "q": "Welche Protokolle werden typischerweise der Transportschicht (OSI-Schicht 4) zugeordnet?",
@@ -464,7 +464,7 @@ const POOLS = {
      { "t": "HTTP und DNS", "ok": false },
      { "t": "Ethernet und WLAN", "ok": false }
     ],
-    "e": "TCP und UDP sind die klassischen Transportprotokolle auf Schicht 4."
+    "e": "TCP und UDP. Ebenfalls korrekt sind: Transmission Control Protocol, User Datagram Protocol, ergänzend SCTP. TCP arbeitet verbindungsorientiert mit Zustellgarantie, UDP verbindungslos und schnell. Beide adressieren die Anwendung über Portnummern."
    },
    {
     "q": "In welche Reihenfolge gehört eine vereinfachte Bottom-up-Netzwerkfehlersuche?",
@@ -544,7 +544,7 @@ const POOLS = {
      { "t": "DNS", "ok": false },
      { "t": "SMTP", "ok": false }
     ],
-    "e": "ARP löst im lokalen Netz eine IPv4-Adresse in die zugehörige MAC-Adresse auf."
+    "e": "ARP, das Address Resolution Protocol. Ebenfalls korrekt sind: Adressauflösungsprotokoll, ARP-Request als Broadcast mit ARP-Reply als Unicast, Auflösung von IP zu MAC. Das Ergebnis landet im ARP-Cache. Bei IPv6 übernimmt diese Aufgabe NDP mit Neighbor Solicitation und Neighbor Advertisement."
    },
    {
     "q": "Der Befehl ping liefert vier Antworten mit null Prozent Paketverlust. Was lässt sich daraus ableiten?",
@@ -1388,6 +1388,7 @@ const POOLS = {
    },
    {
     "q": "Welche der folgenden Anforderungen ist nichtfunktional?",
+    "card": false,
     "o": [
      { "t": "Eine Suchanfrage muss in unter zwei Sekunden beantwortet werden.", "ok": true },
      { "t": "Benutzer können jederzeit ein neues Kundenkonto mit Stammdaten anlegen.", "ok": false },
@@ -1597,7 +1598,7 @@ const POOLS = {
     "e": "Änderungen können mehrere Projektgrößen gleichzeitig beeinflussen."
    },
    {
-    "q": "Welche Aussage zu M.2 und NVMe ist korrekt?",
+    "q": "In welchem Verhältnis stehen M.2 und NVMe zueinander?",
     "o": [
      { "t": "M.2 ist eine Bauform, eine M.2-SSD kann SATA oder NVMe nutzen.", "ok": true },
      { "t": "Jede M.2-SSD verwendet zwingend das NVMe-Protokoll.", "ok": false },
@@ -1657,7 +1658,7 @@ const POOLS = {
     "e": "Eine geeignete Monitorposition unterstützt eine natürliche Körperhaltung."
    },
    {
-    "q": "Welche Aussage zu ASCII- und Binärdateien ist korrekt?",
+    "q": "Worin unterscheiden sich ASCII- und Binärdateien?",
     "o": [
      { "t": "ASCII-Dateien enthalten lesbare Zeichen, Binärdateien werden per Format interpretiert.", "ok": true },
      { "t": "Binärdateien können auf modernen Systemen gar nicht erst dauerhaft gespeichert werden.", "ok": false },
@@ -1717,7 +1718,7 @@ const POOLS = {
     "e": "2^24 = 16.777.216 Farben."
    },
    {
-    "q": "Welche Aussage beschreibt eine verlustfreie Kompression?",
+    "q": "Was kennzeichnet eine verlustfreie Kompression?",
     "o": [
      { "t": "Die ursprünglichen Daten sind vollständig rekonstruierbar.", "ok": true },
      { "t": "Ein Teil der Informationen wird dabei unwiderruflich entfernt.", "ok": false },
@@ -1847,7 +1848,7 @@ const POOLS = {
     "e": "Eine vorhandene Sicherungsdatei ist noch kein Nachweis für eine funktionierende Wiederherstellung."
    },
    {
-    "q": "Welche Aussage beschreibt die 3-2-1-Regel korrekt?",
+    "q": "Wofür steht die 3-2-1-Regel bei der Datensicherung?",
     "o": [
      { "t": "Drei Kopien, zwei verschiedene Medien, eine Kopie außer Haus", "ok": true },
      { "t": "Drei Benutzerkonten, zwei Passwörter und ein einziger zentraler Server", "ok": false },
@@ -2067,7 +2068,7 @@ const POOLS = {
     "e": "RAID 10 spiegelt Plattenpaare und verteilt die Daten zusätzlich. Die Spiegelung sorgt für Ausfallsicherheit, das Striping für Tempo."
    },
    {
-    "q": "Welche Aussage zum Verhältnis von RAID und Backup ist korrekt?",
+    "q": "In welchem Verhältnis stehen RAID und Datensicherung zueinander?",
     "o": [
      { "t": "RAID erhöht die Verfügbarkeit, ersetzt aber kein Backup", "ok": true },
      { "t": "RAID macht eine getrennte Datensicherung vollständig überflüssig", "ok": false },
@@ -2117,7 +2118,7 @@ const POOLS = {
     "e": "Betroffene müssen erkennen können, dass sie gefilmt werden. Ein deutliches Hinweisschild ist dafür Pflicht."
    },
    {
-    "q": "Welche Aussage zur Speicherung von Videoaufnahmen trifft zu?",
+    "q": "Was ist bei der Aufbewahrung von Videoaufnahmen zu beachten?",
     "o": [
      { "t": "Zulässige Aufbewahrungsfristen müssen eingehalten werden", "ok": true },
      { "t": "Die Speicherdauer darf beliebig lang gewählt werden", "ok": false },
@@ -2450,7 +2451,7 @@ const POOLS = {
     "e": "Der Server antwortet an den Quellport des Clients (52143)."
    },
    {
-    "q": "Welche Aussage zu Well-Known Ports ist korrekt?",
+    "q": "Wodurch sind Well-Known Ports gekennzeichnet?",
     "o": [
      {
       "t": "Sie sind festen Standarddiensten zugeordnet",
@@ -2604,7 +2605,7 @@ const POOLS = {
     "e": "Der Port sorgt für die Zustellung an die korrekte Anwendung/den Dienst."
    },
    {
-    "q": "Welche Kombination beschreibt eine vollständige Ende-zu-Ende-Verbindung?",
+    "q": "Welche Angaben beschreiben eine vollständige Ende-zu-Ende-Verbindung?",
     "o": [
      {
       "t": "Quell-IP mit Quellport, Ziel-IP mit Zielport und dem verwendeten Transportprotokoll, z. B. TCP oder UDP",
@@ -2711,7 +2712,7 @@ const POOLS = {
       "ok": false
      }
     ],
-    "e": "Der Zielport ist fest (443), der Quellport wird vom Client-OS dynamisch aus dem Ephemeral-Bereich gewählt."
+    "e": "Als Quellport dient ein zufällig gewählter hoher Port aus dem dynamischen Bereich ab 49152, häufig auch schon ab 1024. Ebenfalls korrekt sind: ephemeraler Port, dynamischer Port, temporärer Quellport, hoher Port über 1023. Der Zielport ist dagegen fest 443 und benennt den Dienst."
    },
    {
     "q": "Was identifiziert ein Port auf einem Server?",
@@ -3470,7 +3471,7 @@ const POOLS = {
       "ok": false
      }
     ],
-    "e": "DNS läuft auf Port 53 (UDP, bei großen Antworten TCP)."
+    "e": "Port 53 gehört zu DNS. Ebenfalls korrekt sind: DNS, Domain Name System, Namensauflösung. Überwiegend UDP, bei Zonentransfers und großen Antworten TCP auf demselben Port."
    },
    {
     "q": "Welcher Port gehört zu Telnet?",
@@ -3514,7 +3515,7 @@ const POOLS = {
       "ok": false
      }
     ],
-    "e": "SNMP für Netzwerküberwachung auf Port 161 (UDP), Traps auf 162."
+    "e": "Port 161 gehört zu SNMP. Ebenfalls korrekt sind: SNMP, Simple Network Management Protocol, Netzwerkmanagement. Über Port 162 laufen die Traps, also selbstständige Meldungen der überwachten Geräte."
    },
    {
     "q": "Was ist der Unterschied zwischen SMTP (25) und Submission (587)?",
@@ -3602,7 +3603,7 @@ const POOLS = {
       "ok": false
      }
     ],
-    "e": "MySQL-Datenbankserver lauscht standardmäßig auf Port 3306."
+    "e": "Port 3306 gehört zu MySQL. Ebenfalls korrekt sind: MySQL, MariaDB, Datenbankverbindung. Zum Vergleich: PostgreSQL 5432, MS SQL Server 1433, Oracle 1521."
    },
    {
     "q": "Welcher Port ist Standard für einen SOCKS-Proxy?",
@@ -3712,7 +3713,7 @@ const POOLS = {
       "ok": false
      }
     ],
-    "e": "SFTP (SSH File Transfer Protocol) tunnelt Dateitransfer durch eine SSH-Verbindung."
+    "e": "Für die Dateiübertragung über SSH dient SFTP. Ebenfalls korrekt sind: SFTP, SSH File Transfer Protocol, SCP, Secure Copy. Beide laufen über Port 22. Nicht verwechseln mit FTPS, das FTP über TLS ist und die Ports 21 beziehungsweise 990 nutzt."
    }
   ]
  },
@@ -3968,7 +3969,7 @@ const POOLS = {
     "e": "Ein gemeinsam genutztes Medium spart Leitungs- und Infrastrukturkosten."
    },
    {
-    "q": "Welche Aussage über festen Zielport und variablen Quellport stimmt?",
+    "q": "Welche Rolle haben Zielport und Quellport bei einer Verbindung?",
     "o": [
      { "t": "Der Zielport identifiziert den Dienst, der Quellport die Client-Instanz", "ok": true },
      { "t": "Der Quellport identifiziert den Dienst, der Zielport die Client-Instanz", "ok": false },
@@ -4046,10 +4047,10 @@ const POOLS = {
       "ok": false
      }
     ],
-    "e": "TCP = Transmission Control Protocol."
+    "e": "TCP steht für Transmission Control Protocol. Ebenfalls korrekt sind: Übertragungssteuerungsprotokoll, verbindungsorientiertes Transportprotokoll. Kennzeichen sind Verbindungsaufbau über den Drei-Wege-Handschlag, Bestätigungen, Sequenznummern, Neuübertragung verlorener Segmente, Fluss- und Überlastkontrolle. Gegenstück ist UDP ohne diese Zusicherungen."
    },
    {
-    "q": "Welche Aussage über UDP ist korrekt?",
+    "q": "Welche Eigenschaften kennzeichnen das Protokoll UDP?",
     "o": [
      {
       "t": "Verbindungslos, keine Zustellgarantie, schnell",
@@ -4247,7 +4248,7 @@ const POOLS = {
     "e": "Bei Dateien/Web/Mail zählt Vollständigkeit → TCP."
    },
    {
-    "q": "Welche Aussage über TCP/IP als Protokollfamilie ist korrekt?",
+    "q": "Was leistet die Protokollfamilie TCP/IP?",
     "o": [
      { "t": "Sie regelt die Datenübertragung unabhängig von Hardware/Software", "ok": true },
      { "t": "Sie definiert die physikalischen Eigenschaften der Übertragungsmedien", "ok": false },
@@ -4333,7 +4334,7 @@ const POOLS = {
     "e": "UDP versendet eigenständige Datagramme ohne Verbindungskontext."
    },
    {
-    "q": "Welche Aussage zur Flusskontrolle stimmt?",
+    "q": "Welches der Transportprotokolle besitzt eine Flusskontrolle?",
     "o": [
      {
       "t": "TCP besitzt Flusskontrolle, UDP nicht",
@@ -4588,7 +4589,7 @@ const POOLS = {
       "ok": false
      }
     ],
-    "e": "DNS-Anfragen laufen über UDP Port 53; TCP nur bei Zonentransfer oder großen Antworten."
+    "e": "DNS nutzt überwiegend UDP, weil Anfragen und Antworten kurz sind und der Verbindungsaufbau eingespart wird. Ebenfalls korrekt sind: UDP, User Datagram Protocol, verbindungslos. TCP wird auf demselben Port 53 genutzt, wenn die Antwort zu groß wird oder ein Zonentransfer stattfindet."
    },
    {
     "q": "Was sendet der Client als letztes beim Three-Way-Handshake?",
@@ -4745,7 +4746,7 @@ const POOLS = {
       "ok": false
      }
     ],
-    "e": "TTL = Time to Live, ein Hop-Zähler im IP-Header."
+    "e": "TTL steht für Time to Live. Ebenfalls korrekt sind: Lebensdauer, Hop Limit bei IPv6, Zähler gegen endlose Kreisläufe. Trotz des Namens ist es keine Zeitangabe: Jeder Router verringert den Wert um eins, bei null wird das Paket verworfen. Genau das nutzt Traceroute aus. Im DNS bezeichnet TTL dagegen die Gültigkeitsdauer eines Eintrags im Zwischenspeicher."
    },
    {
     "q": "Was macht jeder Router mit der TTL eines durchlaufenden Pakets?",
@@ -5352,7 +5353,7 @@ const POOLS = {
       "ok": false
      }
     ],
-    "e": "Layer 1 überträgt Bits physisch; Geräte: Hub, Repeater, Kabel."
+    "e": "Schicht 1 überträgt rohe Bits als physikalische Signale. Ebenfalls korrekt sind: Kabel und Stecker, Spannungspegel, Lichtimpulse, Funkwellen, Pinbelegung, Hub und Repeater, Medienkonverter, Bitcodierung. Typische Prüfungsformulierungen: elektrische Übertragung, physikalische Verbindung, Übertragungsmedium."
    },
    {
     "q": "Was läuft auf Schicht 2 (Sicherungsschicht / Data Link)?",
@@ -5374,7 +5375,7 @@ const POOLS = {
       "ok": false
      }
     ],
-    "e": "Layer 2 arbeitet mit Frames/MAC-Adressen; Gerät: Switch, Bridge."
+    "e": "Schicht 2 bildet Frames und adressiert über MAC-Adressen im lokalen Netz. Ebenfalls korrekt sind: Switch und Bridge, Fehlererkennung über Prüfsumme (CRC), Zugriffsverfahren wie CSMA/CD, VLAN-Kennzeichnung nach 802.1Q, Flusskontrolle auf Abschnittsebene, ARP-Auflösung als Bindeglied zu Schicht 3."
    },
    {
     "q": "Was läuft auf Schicht 3 (Vermittlungsschicht / Network)?",
@@ -5396,7 +5397,7 @@ const POOLS = {
       "ok": false
      }
     ],
-    "e": "Layer 3 = IP-Adressen und Routing; Gerät: Router."
+    "e": "Schicht 3 leistet logische Adressierung und Wegewahl. Ebenfalls korrekt sind: Router und Layer-3-Switch, IPv4 und IPv6, Routing und Routing-Protokolle wie OSPF, RIP und BGP, ICMP, Fragmentierung, Subnetze und Präfixe, NAT. Typische Prüfungsformulierungen: Wegewahl, Weiterleitung zwischen Netzen, IP-Adressierung."
    },
    {
     "q": "Was läuft auf Schicht 4 (Transportschicht / Transport)?",
@@ -5418,7 +5419,7 @@ const POOLS = {
       "ok": false
      }
     ],
-    "e": "Layer 4 = TCP/UDP, Ports, Segmente, Flusskontrolle."
+    "e": "Schicht 4 sorgt für die Ende-zu-Ende-Verbindung zwischen Anwendungen. Ebenfalls korrekt sind: TCP und UDP, Portnummern, Segmentierung, Verbindungsaufbau über Drei-Wege-Handschlag, Zustellgarantie und Sequenznummern, Flusskontrolle und Überlastkontrolle bei TCP."
    },
    {
     "q": "Was läuft auf Schicht 5 (Sitzungsschicht / Session)?",
@@ -5440,7 +5441,7 @@ const POOLS = {
       "ok": false
      }
     ],
-    "e": "Layer 5 verwaltet Sitzungen (Aufbau, Synchronisation, Abbau)."
+    "e": "Schicht 5 baut Sitzungen auf, hält sie und beendet sie. Ebenfalls korrekt sind: Sitzungsverwaltung, Wiederaufsetzpunkte nach Abbruch, Dialogsteuerung, Synchronisation, Zuordnung mehrerer Verbindungen zu einer Sitzung. In der Praxis werden die Schichten 5 bis 7 im TCP/IP-Modell zur Anwendungsschicht zusammengefasst."
    },
    {
     "q": "Was läuft auf Schicht 6 (Darstellungsschicht / Presentation)?",
@@ -5462,7 +5463,7 @@ const POOLS = {
       "ok": false
      }
     ],
-    "e": "Layer 6 wandelt/verschlüsselt/komprimiert Datenformate."
+    "e": "Schicht 6 vereinheitlicht die Darstellung der Daten. Ebenfalls korrekt sind: Zeichencodierung wie ASCII und UTF-8, Datenformate, Kompression, Ver- und Entschlüsselung der Nutzdaten, Umwandlung zwischen unterschiedlichen Darstellungen der Endsysteme."
    },
    {
     "q": "Was läuft auf Schicht 7 (Anwendungsschicht / Application)?",
@@ -5484,7 +5485,7 @@ const POOLS = {
       "ok": false
      }
     ],
-    "e": "Layer 7 stellt Netzdienste für Anwendungen bereit (HTTP, SMTP, DNS …)."
+    "e": "Schicht 7 stellt die Dienste bereit, die die Anwendung nutzt. Ebenfalls korrekt sind: HTTP und HTTPS, FTP, SMTP, IMAP und POP3, DNS, DHCP, SNMP, SSH, Telnet, LDAP. Wichtig: Nicht das Anwendungsprogramm selbst liegt auf Schicht 7, sondern das Protokoll, über das es kommuniziert."
    },
    {
     "q": "Auf welcher Schicht arbeitet ein Router primär?",
@@ -5506,7 +5507,7 @@ const POOLS = {
       "ok": false
      }
     ],
-    "e": "Der Router trifft Weiterleitungsentscheidungen anhand von IP → Layer 3."
+    "e": "Der Router arbeitet auf Schicht 3, der Vermittlungsschicht. Er entscheidet anhand der IP-Adresse über die Wegewahl und trennt Broadcastdomänen. Ebenfalls korrekt sind: Vermittlungsschicht, Network Layer, Layer 3. Ein Layer-3-Switch übernimmt dieselbe Aufgabe in Hardware, ein Router zusätzlich WAN-Anbindung und NAT."
    },
    {
     "q": "Auf welcher Schicht arbeitet ein klassischer Switch primär?",
@@ -5528,7 +5529,7 @@ const POOLS = {
       "ok": false
      }
     ],
-    "e": "Ein klassischer Switch schaltet anhand von MAC-Adressen → Layer 2 (Sicherung). Layer-2-Switch = MAC-Adressen, Layer-3-Switch = MAC-Adressen/IP-Adressen + Routing."
+    "e": "Der Switch arbeitet auf Schicht 2, der Sicherungsschicht, und leitet anhand der MAC-Adresse weiter. Ebenfalls korrekt sind: Sicherungsschicht, Data Link Layer, Layer 2. Er trennt Kollisionsdomänen, aber keine Broadcastdomänen. Ein Layer-3-Switch reicht zusätzlich in Schicht 3 hinein."
    },
    {
     "q": "Auf welcher Schicht arbeitet ein Hub/Repeater?",
@@ -5550,7 +5551,7 @@ const POOLS = {
       "ok": false
      }
     ],
-    "e": "Hubs/Repeater verteilen/verstärken nur Signale → Layer 1."
+    "e": "Hub und Repeater arbeiten auf Schicht 1, der Bitübertragungsschicht. Sie verstärken und verteilen Signale, ohne Adressen auszuwerten. Ebenfalls korrekt sind: Bitübertragungsschicht, Physical Layer, Layer 1. Folge: Alle angeschlossenen Geräte liegen in einer gemeinsamen Kollisionsdomäne."
    },
    {
     "q": "Auf welcher Schicht werden Ports (TCP/UDP) verwendet?",
@@ -5572,7 +5573,7 @@ const POOLS = {
       "ok": false
      }
     ],
-    "e": "Ports sind Merkmal der Transportschicht (Layer 4)."
+    "e": "Portnummern gehören zu Schicht 4, der Transportschicht. Ebenfalls korrekt sind: Transportschicht, Transport Layer, Layer 4. Der Port adressiert den Dienst beziehungsweise die Anwendung, während die IP-Adresse auf Schicht 3 das Endsystem adressiert. Zusammen mit dem Protokoll bilden sie einen Socket."
    },
    {
     "q": "Wie heißt die Dateneinheit (PDU) auf der Sicherungsschicht (L2)?",
@@ -5682,7 +5683,7 @@ const POOLS = {
       "ok": false
      }
     ],
-    "e": "IP ist ein Vermittlungsschicht-Protokoll (Layer 3)."
+    "e": "IP liegt auf Schicht 3, der Vermittlungsschicht. Ebenfalls korrekt sind: Vermittlungsschicht, Network Layer, Layer 3, Internetschicht im TCP/IP-Modell. Auf derselben Schicht liegen ICMP, IPsec sowie die Routing-Protokolle."
    },
    {
     "q": "Auf welcher Schicht liegen TCP und UDP?",
@@ -5704,7 +5705,7 @@ const POOLS = {
       "ok": false
      }
     ],
-    "e": "TCP/UDP sind Transportschicht-Protokolle (Layer 4)."
+    "e": "TCP und UDP liegen auf Schicht 4, der Transportschicht. Ebenfalls korrekt sind: Transportschicht, Transport Layer, Layer 4. TCP arbeitet verbindungsorientiert mit Zustellgarantie, UDP verbindungslos ohne Garantie, beide adressieren Anwendungen über Portnummern."
    },
    {
     "q": "Auf welcher Schicht arbeitet das Protokoll HTTP?",
@@ -5726,7 +5727,7 @@ const POOLS = {
       "ok": false
      }
     ],
-    "e": "HTTP ist ein Anwendungsschicht-Protokoll."
+    "e": "HTTP arbeitet auf Schicht 7, der Anwendungsschicht. Ebenfalls korrekt sind: Anwendungsschicht, Application Layer, Layer 7. Es nutzt darunter TCP auf Schicht 4, üblicherweise Port 80, bei HTTPS Port 443 mit TLS dazwischen."
    },
    {
     "q": "Womit adressiert Schicht 2, womit Schicht 3?",
@@ -5836,7 +5837,7 @@ const POOLS = {
       "ok": false
      }
     ],
-    "e": "DNS ist ein Anwendungsprotokoll (Layer 7). DNS definiert die Anwendungslogik: Namensauflösung (www.beispiel.com → 192.x.x.x)."
+    "e": "DNS arbeitet auf Schicht 7, der Anwendungsschicht. Ebenfalls korrekt sind: Anwendungsschicht, Application Layer, Layer 7. Es nutzt darunter überwiegend UDP auf Port 53, bei Zonentransfers und großen Antworten TCP auf demselben Port."
    },
    {
     "q": "In welche Richtung durchläuft ein gesendetes Datenpaket die Schichten?",
@@ -5902,10 +5903,10 @@ const POOLS = {
       "ok": false
      }
     ],
-    "e": "MAC-Adressen und Frames gehören zur Sicherungsschicht (L2)."
+    "e": "Frames mit MAC-Adressen gehören zu Schicht 2, der Sicherungsschicht. Ebenfalls korrekt sind: Sicherungsschicht, Data Link Layer, Layer 2. Merkhilfe für die Dateneinheiten: Bits auf Schicht 1, Frames auf Schicht 2, Pakete auf Schicht 3, Segmente oder Datagramme auf Schicht 4."
    },
    {
-    "q": "Welche Aussage über einen Layer-3-Switch ist korrekt?",
+    "q": "Worin unterscheidet sich ein Layer-3-Switch von einem gewöhnlichen Switch?",
     "o": [
      {
       "t": "Er leitet zusätzlich zur MAC- auch IP-basiert weiter",
@@ -5946,7 +5947,7 @@ const POOLS = {
       "ok": false
      }
     ],
-    "e": "ARP löst IP-Adressen (L3) in MAC-Adressen (L2) auf — es arbeitet an der L2/L3-Grenze."
+    "e": "ARP wird meist zwischen Schicht 2 und 3 eingeordnet und in Prüfungen überwiegend der Sicherungsschicht (Schicht 2) zugeschlagen. Begründung: Es löst eine IP-Adresse aus Schicht 3 in eine MAC-Adresse aus Schicht 2 auf und arbeitet direkt mit Frames. Ebenfalls vertretbar: Bindeglied zwischen Schicht 2 und 3."
    },
    {
     "q": "Was versteht man unter Kapselung beim Sendeprozess?",
@@ -6044,10 +6045,11 @@ const POOLS = {
       "ok": false
      }
     ],
-    "e": "TLS wird oft Schicht 6 (Darstellung) zugeordnet, sitzt aber technisch zwischen Transport und Anwendung."
+    "e": "TLS wird zwischen Transport- und Anwendungsschicht eingeordnet, üblicherweise als Schicht 5 bis 6, in Prüfungen häufig als Schicht 6 (Darstellungsschicht). Ebenfalls vertretbar: oberhalb von TCP, unterhalb der Anwendung, Sitzungs- und Darstellungsschicht. Es liefert Vertraulichkeit, Integrität und Authentizität für darüberliegende Protokolle wie HTTP."
    },
    {
     "q": "Welches Protokoll gehört NICHT zur Transportschicht?",
+    "card": false,
     "o": [
      {
       "t": "IP",
@@ -6098,7 +6100,7 @@ const POOLS = {
       "ok": false
      }
     ],
-    "e": "IP auf L3 ist die Grundlage der globalen Paketvermittlung im Internet."
+    "e": "Das Internet Protocol (IP) arbeitet auf Schicht 3 und ermöglicht die weltweite Vermittlung. Ebenfalls korrekt sind: IPv4, IPv6, Internet Protocol. Auf derselben Schicht arbeiten ergänzend ICMP für Steuer- und Fehlermeldungen sowie die Routing-Protokolle OSPF, RIP und BGP."
    },
    {
     "q": "Was unterscheidet eine Kollisionsdomäne von einer Broadcastdomäne?",
@@ -6142,7 +6144,7 @@ const POOLS = {
       "ok": false
      }
     ],
-    "e": "HTTP, SMTP, FTP, DNS sind Anwendungsschicht-Protokolle (L7)."
+    "e": "Zur Anwendungsschicht gehören unter anderem HTTP und HTTPS, FTP, SMTP, IMAP und POP3, DNS, DHCP, SNMP, SSH, Telnet und LDAP. Ebenfalls korrekt sind: Application Layer, Layer 7, oberste Schicht des OSI-Modells. Wichtig: Nicht das Programm selbst liegt auf Schicht 7, sondern das Protokoll, über das es kommuniziert."
    },
    {
     "q": "In welche Richtung durchläuft ein Datenpaket beim Empfang die Schichten?",
@@ -6167,7 +6169,7 @@ const POOLS = {
     "e": "Empfangen: L1 → L7 (Entkapselung). Senden: L7 → L1 (Kapselung)."
    },
    {
-    "q": "Welche Aussage zum TCP/IP-Modell stimmt?",
+    "q": "Wie gliedert das TCP/IP-Modell die Netzwerkkommunikation?",
     "o": [
      {
       "t": "Es fasst die OSI-Schichten in vier Ebenen zusammen: Netzzugang, Internet, Transport, Anwendung",
@@ -6206,7 +6208,7 @@ const POOLS = {
      { "t": "Schicht 3 (Vermittlung)", "ok": false },
      { "t": "Schicht 7 (Anwendung)", "ok": false }
     ],
-    "e": "Kabel, Steckverbindungen und Link-Status gehören zur physikalischen Übertragung — der Startpunkt der Bottom-up-Fehlersuche."
+    "e": "Kabel, Stecker und Verbindungsleuchte gehören zu Schicht 1, der Bitübertragungsschicht. Ebenfalls korrekt sind: Bitübertragungsschicht, Physical Layer, Layer 1. Die Fehlersuche beginnt bewusst hier, weil ein Defekt auf Schicht 1 alle darüberliegenden Schichten unbrauchbar macht."
    },
    {
     "q": "Welche Schicht wandelt Zeichencodierungen wie UTF-8 um, damit die Empfänger-Anwendung die Daten verarbeiten kann?",
@@ -6243,7 +6245,7 @@ const POOLS = {
       "ok": false
      }
     ],
-    "e": "LAN = Local Area Network (lokales Netz, z. B. Büro/Gebäude)."
+    "e": "LAN steht für Local Area Network. Ebenfalls korrekt sind: lokales Netz, Firmennetz, Netz auf einem Gelände oder in einem Gebäude. Typische Ausdehnung bis einige hundert Meter, Technik meist Ethernet, Betrieb in eigener Verantwortung."
    },
    {
     "q": "Wofür steht WAN?",
@@ -6265,7 +6267,7 @@ const POOLS = {
       "ok": false
      }
     ],
-    "e": "WAN = Wide Area Network (großräumig, z. B. Internet)."
+    "e": "WAN steht für Wide Area Network. Ebenfalls korrekt sind: Weitverkehrsnetz, Netz über große Entfernungen, Standortkopplung. Die Strecke wird in der Regel von einem Anbieter bereitgestellt, Bandbreite meist geringer und Laufzeit höher als im LAN. Das Internet ist das größte WAN."
    },
    {
     "q": "Wofür steht PAN?",
@@ -6287,7 +6289,7 @@ const POOLS = {
       "ok": false
      }
     ],
-    "e": "PAN = Personal Area Network (persönlicher Nahbereich)."
+    "e": "PAN steht für Personal Area Network. Ebenfalls korrekt sind: persönliches Netz, Nahbereichsnetz, Netz im unmittelbaren Umfeld einer Person. Typische Technik ist Bluetooth oder NFC, Reichweite wenige Meter, etwa Kopfhörer, Smartwatch oder Tastatur."
    },
    {
     "q": "Wofür steht MAN?",
@@ -6309,7 +6311,7 @@ const POOLS = {
       "ok": false
      }
     ],
-    "e": "MAN = Metropolitan Area Network (Stadtnetz)."
+    "e": "MAN steht für Metropolitan Area Network. Ebenfalls korrekt sind: Stadtnetz, Netz über ein Stadtgebiet, Zusammenschluss mehrerer Standorte innerhalb einer Stadt. Größer als ein CAN, kleiner als ein WAN."
    },
    {
     "q": "Welche typische Reichweite hat ein PAN?",
@@ -6397,7 +6399,7 @@ const POOLS = {
       "ok": false
      }
     ],
-    "e": "WLAN = drahtloses LAN, meist nach IEEE 802.11 (Wi-Fi)."
+    "e": "WLAN steht für Wireless Local Area Network. Ebenfalls korrekt sind: drahtloses lokales Netz, Funknetz, kabelloses LAN nach IEEE 802.11. Zugriffsverfahren ist CSMA/CA, weil eine Station im Funk nicht gleichzeitig senden und mithören kann."
    },
    {
     "q": "Welcher Standard beschreibt WLAN (Wi-Fi)?",
@@ -6463,7 +6465,7 @@ const POOLS = {
       "ok": false
      }
     ],
-    "e": "Im Ausdehnungskontext: Campus Area Network (mehrere Gebäude eines Geländes). (Im KFZ-Bereich meint CAN den Controller Area Network Bus — anderer Kontext.)"
+    "e": "CAN steht für Campus Area Network. Ebenfalls korrekt sind: Campusnetz, Geländenetz, Verbindung mehrerer Gebäude auf einem Grundstück. Größer als ein LAN, kleiner als ein MAN. Nicht zu verwechseln mit dem CAN-Bus in der Fahrzeugtechnik."
    },
    {
     "q": "Welche Ausdehnung deckt ein CAN typischerweise ab?",
@@ -6551,7 +6553,7 @@ const POOLS = {
       "ok": false
      }
     ],
-    "e": "GAN = Global Area Network (weltumspannend)."
+    "e": "GAN steht für Global Area Network. Ebenfalls korrekt sind: weltumspannendes Netz, globales Netz, Verbindung über Kontinente hinweg. Realisiert über Seekabel und Satelliten; das Internet ist das bekannteste Beispiel."
    },
    {
     "q": "Welche Technologie ist typisch für ein GAN?",
@@ -6595,7 +6597,7 @@ const POOLS = {
       "ok": false
      }
     ],
-    "e": "BAN = Body Area Network, Geräte am/im Körper."
+    "e": "BAN steht für Body Area Network. Ebenfalls korrekt sind: körpernahes Netz, Netz am oder im Körper. Typisch sind medizinische Sensoren, Herzschrittmacher, Fitnessarmbänder und Hörgeräte. Es ist die kleinste Netzausdehnung, noch unterhalb des PAN."
    },
    {
     "q": "Was ist ein typisches BAN-Beispiel?",
@@ -6674,7 +6676,7 @@ const POOLS = {
     "e": "Die Skala: PAN < LAN < CAN < MAN < WAN."
    },
    {
-    "q": "Welche Aussage über WLAN ist korrekt?",
+    "q": "Wie ist WLAN im Hinblick auf Netzart und Standard einzuordnen?",
     "o": [
      {
       "t": "Es ist ein drahtloses LAN, meist nach 802.11",
@@ -6890,7 +6892,7 @@ const POOLS = {
       "ok": false
      }
     ],
-    "e": "CSMA/CD = Mithören des Mediums, Senden bei Freiheit, Kollisionen erkennen."
+    "e": "CSMA/CD steht für Carrier Sense Multiple Access with Collision Detection. Ebenfalls korrekt sind: Mehrfachzugriff mit Trägerprüfung und Kollisionserkennung, Zugriffsverfahren im klassischen Ethernet. Ablauf: Leitung abhören, senden, Kollision erkennen, Jam-Signal, zufällige Wartezeit, erneuter Versuch. Das Funkgegenstück heißt CSMA/CA und vermeidet Kollisionen vorab."
    },
    {
     "q": "Wie reagiert CSMA/CD auf eine erkannte Kollision?",
@@ -7689,7 +7691,7 @@ const POOLS = {
       "ok": false
      }
     ],
-    "e": "NIC = Netzwerkkarte, die Schnittstelle des Geräts zum Netz."
+    "e": "NIC steht für Network Interface Card. Ebenfalls korrekt sind: Netzwerkkarte, Netzwerkadapter, Netzwerkschnittstelle. Sie trägt die weltweit eindeutige MAC-Adresse und arbeitet auf den Schichten 1 und 2 des OSI-Modells."
    },
    {
     "q": "Welches Merkmal trägt jede Netzwerkkarte ab Werk?",
@@ -7780,7 +7782,7 @@ const POOLS = {
     "e": "ARP ermittelt zu einer bekannten IP die zugehörige MAC im lokalen Netz."
    },
    {
-    "q": "Welche Aussage zu Glasfaser gegenüber Kupfer stimmt?",
+    "q": "Welche Vorteile bietet Glasfaser gegenüber Kupfer?",
     "o": [
      {
       "t": "Höhere Reichweite und Bandbreite, keine EMV-Störung",
@@ -8940,7 +8942,7 @@ const POOLS = {
     "e": "Der gesamte 127.0.0.0/8-Bereich ist Loopback."
    },
    {
-    "q": "Welche Aussage zu IPv6 stimmt?",
+    "q": "Was kennzeichnet den Adressraum von IPv6?",
     "o": [
      {
       "t": "Der Adressraum ist praktisch unerschöpflich",
@@ -10280,7 +10282,7 @@ const POOLS = {
      { "t": "Transport-Level-DNS — beschleunigte Auflösung über UDP statt TCP", "ok": false },
      { "t": "Top-Lease-Database — zentrale Verwaltung der DHCP-Adressbereiche", "ok": false }
     ],
-    "e": "TLD-Server verwalten die Endungen wie .de, .com und verweisen auf autoritative Server."
+    "e": "TLD steht für Top Level Domain. Der TLD-Server ist zuständig für eine Endung wie .de, .com oder .org. Ebenfalls korrekt sind: Top-Level-Domain-Server, Server der obersten Domänenebene, zweite Stufe der Namensauflösung. Die Kette lautet: Root-Server, TLD-Server, autoritativer Nameserver der Zone."
    },
    {
     "q": "Was ist ein A-Record im DNS?",
@@ -10697,7 +10699,7 @@ const POOLS = {
       "ok": false
      }
     ],
-    "e": "API = Application Programming Interface."
+    "e": "API steht für Application Programming Interface, auf Deutsch Programmierschnittstelle. Ebenfalls korrekt sind: Schnittstelle zwischen Programmen, definierter Zugriffspunkt, Programmierschnittstelle. Sie legt fest, welche Funktionen ein System nach außen anbietet, ohne die interne Umsetzung offenzulegen. Verbreitete Ausprägungen: REST, SOAP, GraphQL, Webhook."
    },
    {
     "q": "Welche Formate nutzen APIs meist für Antworten?",
@@ -11004,7 +11006,7 @@ const POOLS = {
     "e": "Die API definiert, wie Anfragen und Antworten aussehen müssen."
    },
    {
-    "q": "Welche Aussage über JSON stimmt?",
+    "q": "Was kennzeichnet das Datenformat JSON?",
     "o": [
      {
       "t": "Leichtgewichtiges, verbreitetes Datenformat für APIs",
@@ -11094,7 +11096,7 @@ const POOLS = {
       "ok": false
      }
     ],
-    "e": "VoIP überträgt Telefonie als Datenpakete über IP-Netze."
+    "e": "VoIP steht für Voice over IP. Ebenfalls korrekt sind: Sprachübertragung über IP-Netze, Internettelefonie, IP-Telefonie. Die Sprache wird digitalisiert, in Pakete zerlegt und über das Datennetz übertragen. Signalisierung meist über SIP, Sprachdaten über RTP auf UDP."
    },
    {
     "q": "Welches Transportprotokoll nutzt VoIP für die Sprachdaten typischerweise?",
@@ -11288,7 +11290,7 @@ const POOLS = {
       "ok": false
      }
     ],
-    "e": "Diese drei Faktoren bestimmen, wie sauber ein Gespräch klingt."
+    "e": "Von Verzögerung, Schwankung und Paketverlust. Ebenfalls korrekt sind: Latenz unter etwa 150 ms in eine Richtung, Jitter beziehungsweise Laufzeitschwankung, Packet Loss unter 1 Prozent, ausreichende Bandbreite, Priorisierung über QoS, verwendeter Codec. Reine Bandbreite allein genügt nicht."
    },
    {
     "q": "Was leistet ein Jitter-Buffer?",
@@ -11308,7 +11310,7 @@ const POOLS = {
      { "t": "Priorisierung (QoS) und Segmentierung (VLAN)", "ok": false },
      { "t": "Adressauflösung (DNS) und Adressvergabe (DHCP)", "ok": false }
     ],
-    "e": "SIP baut das Gespräch auf, RTP transportiert die Sprache."
+    "e": "Signalisierungsprotokolle und Transportprotokolle für die Sprachdaten. Ebenfalls korrekt sind: SIP für Verbindungsauf- und -abbau, H.323 als Alternative, RTP für den Sprachstrom, RTCP für die Qualitätsüberwachung. Merksatz: Die Signalisierung baut das Gespräch auf, RTP über UDP transportiert die Sprache."
    },
    {
     "q": "Warum ist VoIP anfällig für Netzwerkprobleme?",
@@ -11743,7 +11745,7 @@ const POOLS = {
       "ok": false
      }
     ],
-    "e": "Verschlüsselung schützt Vertraulichkeit, die Signatur Integrität und Authentizität."
+    "e": "Vertraulichkeit, Integrität und Authentizität. Ebenfalls korrekt sind: Geheimhaltung des Inhalts, Erkennung von Veränderungen, zweifelsfreie Herkunft. Die Verschlüsselung liefert die Vertraulichkeit, die Signatur Integrität und Authentizität. Ergänzend ergibt sich die Verbindlichkeit, weil der Absender die Urheberschaft nicht abstreiten kann."
    },
    {
     "q": "Warum verschlüsselt man den Sitzungsschlüssel asymmetrisch statt ihn direkt zu senden?",
@@ -11807,7 +11809,7 @@ const POOLS = {
       "ok": false
      }
     ],
-    "e": "SHA (z. B. SHA-256, SHA-3) ist der verbreitete Standard für kryptografische Hashfunktionen."
+    "e": "SHA steht für Secure Hash Algorithm. Ebenfalls korrekt sind: sicherer Hashalgorithmus, kryptografische Prüfsummenfunktion. Er erzeugt aus beliebigen Daten einen Wert fester Länge und dient der Integritätsprüfung sowie digitalen Signaturen. Gebräuchlich sind SHA-256 und SHA-3; SHA-1 gilt als unsicher."
    },
    {
     "q": "Was ist der Unterschied zwischen Verschlüsselung und Hashing?",
@@ -11999,7 +12001,7 @@ const POOLS = {
      { "t": "RADIUS-Server, DHCP-Relay, DNS-Resolver und ein NTP-Zeitserver für die Zertifikatssynchronisation", "ok": false },
      { "t": "Firewall, IDS, Proxy-Server und ein VPN-Gateway zur Absicherung der Zertifikatsübertragung", "ok": false }
     ],
-    "e": "Kern der PKI: CA signiert Zertifikate, RA prüft die Identität der Antragsteller, X.509-Zertifikate binden Schlüssel an Identitäten, CRL/OCSP melden widerrufene Zertifikate."
+    "e": "Zertifizierungsstelle, Registrierungsstelle, Verzeichnisdienst und Sperrliste. Ebenfalls korrekt sind: CA (Certificate Authority), RA (Registration Authority), Directory beziehungsweise Verzeichnis der ausgestellten Zertifikate, CRL oder OCSP für den Sperrstatus, Wurzelzertifikat als Vertrauensanker, Zwischenzertifizierungsstellen."
    },
    {
     "q": "Was ist ein PSK (Pre-Shared Key)?",
@@ -12066,7 +12068,7 @@ const POOLS = {
       "ok": false
      }
     ],
-    "e": "IPsec sichert auf der Netzwerkschicht (L3) den IP-Verkehr."
+    "e": "IPsec arbeitet auf Schicht 3, der Vermittlungsschicht. Ebenfalls korrekt sind: Vermittlungsschicht, Network Layer, Layer 3, IP-Ebene. Daraus folgt der Vorteil: Alle darüberliegenden Protokolle werden mitgeschützt, ohne dass die Anwendung angepasst werden muss. TLS liegt dagegen höher, oberhalb von TCP."
    },
    {
     "q": "Was verschlüsselt der IPsec-Transportmodus?",
@@ -12164,7 +12166,7 @@ const POOLS = {
       "ok": false
      }
     ],
-    "e": "ESP kapselt und verschlüsselt die Nutzdaten und sichert deren Integrität."
+    "e": "ESP steht für Encapsulating Security Payload. Ebenfalls korrekt sind: verschlüsselnder Sicherheitsanteil, Kapselung der Nutzdaten. ESP bietet Vertraulichkeit durch Verschlüsselung sowie Authentizität und Integrität. Das Gegenstück AH (Authentication Header) sichert nur Authentizität und Integrität, verschlüsselt aber nicht."
    },
    {
     "q": "Welche Aufgabe hat IKE (Internet Key Exchange) bei IPsec?",
@@ -12380,7 +12382,7 @@ const POOLS = {
       "ok": false
      }
     ],
-    "e": "IPsec bietet Vertraulichkeit (Verschlüsselung), Authentifizierung und Integrität."
+    "e": "Vertraulichkeit, Integrität und Authentizität. Ebenfalls korrekt sind: Verschlüsselung der Nutzdaten, Schutz vor Veränderung, Nachweis der Gegenstelle. Ergänzend bietet IPsec Schutz vor Wiedereinspielung über Sequenznummern. Vertraulichkeit liefert allerdings nur ESP, nicht AH."
    },
    {
     "q": "Was passiert im Tunnelmodus mit dem ursprünglichen IP-Header?",
@@ -12587,6 +12589,7 @@ const POOLS = {
    },
    {
     "q": "VLAN-Zuordnung kann statisch oder dynamisch erfolgen. Welche Gegenüberstellung von Vor- und Nachteil trifft zu?",
+    "card": false,
     "o": [
      { "t": "Statisch (portbasiert): einfach und vorhersehbar, aber pflegeaufwändig bei Umzügen. Dynamisch (MAC-/regelbasiert): flexibel bei wechselnden Endgeräten, aber komplexer und abhängig von einer zentralen Datenbank", "ok": true },
      { "t": "Statisch (portbasiert): passt sich selbsttätig an jeden Gerätewechsel an, aber dadurch schwer kontrollierbar. Dynamisch (MAC-/regelbasiert): fest an den Switch-Port gebunden, dafür aber besonders wartungsarm und stabil", "ok": false },
@@ -12636,7 +12639,7 @@ const POOLS = {
     "e": "Jedes VLAN bildet eine eigene Broadcastdomäne. Broadcast- und Multicast-Verkehr bleibt darin, statt das gesamte Netz zu belasten."
    },
    {
-    "q": "Welche Aussage zum nativen VLAN trifft zu?",
+    "q": "Wie wird der Verkehr des nativen VLANs über einen Trunk übertragen?",
     "o": [
      { "t": "Sein Verkehr wird auf dem Trunk ohne Kennung übertragen", "ok": true },
      { "t": "Sein Verkehr wird auf dem Trunk stets doppelt gekennzeichnet", "ok": false },
@@ -12696,7 +12699,7 @@ const POOLS = {
     "e": "Ein offener Port ist ein unkontrollierter Zugang. Ergänzend werden ungenutzte Ports einem isolierten VLAN zugewiesen."
    },
    {
-    "q": "Welche Aussage über VLANs und die physische Hardware ist zutreffend?",
+    "q": "In welchem Verhältnis stehen VLANs zur physischen Infrastruktur?",
     "o": [
      { "t": "Mehrere VLANs können dieselbe physische Infrastruktur nutzen", "ok": true },
      { "t": "Jedes VLAN benötigt einen eigenen physischen Switch", "ok": false },
@@ -12870,7 +12873,7 @@ const POOLS = {
       "ok": false
      }
     ],
-    "e": "CIA = Confidentiality, Integrity, Availability (Vertraulichkeit, Integrität, Verfügbarkeit)."
+    "e": "Vertraulichkeit, Integrität und Verfügbarkeit. Ebenfalls korrekt sind: Confidentiality, Integrity, Availability, VIV, die drei Grundwerte der Informationssicherheit. Häufig ergänzt werden Authentizität, woraus die Merkhilfe VIVA entsteht, sowie Verbindlichkeit und Zurechenbarkeit."
    },
    {
     "q": "Was bedeutet Authentifizierung?",
@@ -13138,7 +13141,7 @@ const POOLS = {
       "ok": false
      }
     ],
-    "e": "Die drei Authentifizierungsfaktoren: etwas, das man weiß / hat / ist."
+    "e": "Wissen, Besitz und Sein. Ebenfalls korrekt sind: etwas, das man weiß wie Passwort oder PIN; etwas, das man besitzt wie Token, Chipkarte oder Smartphone; etwas, das man ist wie Fingerabdruck, Gesicht oder Iris. Entscheidend für die Prüfung: Eine echte Mehr-Faktor-Authentifizierung kombiniert Faktoren aus verschiedenen Gruppen, zwei Passwörter genügen nicht."
    },
    {
     "q": "Warum ist Social Engineering so gefährlich?",
@@ -13297,7 +13300,7 @@ const POOLS = {
      { "t": "Die Meldepflicht für Datenschutzverletzungen gegenüber Aufsichtsbehörden", "ok": false },
      { "t": "Ausschließlich Regeln für die Videoüberwachung öffentlicher Plätze", "ok": false }
     ],
-    "e": "Das TDDDG regelt Datenschutz speziell für digitale Dienste und ersetzte das frühere TTDSG."
+    "e": "TDDDG steht für Telekommunikation-Digitale-Dienste-Datenschutz-Gesetz, vormals TTDSG. Ebenfalls korrekt sind: Nachfolger des TTDSG, Gesetz zum Datenschutz bei digitalen Diensten. Es regelt unter anderem die Einwilligung beim Setzen von Cookies und den Schutz der Endeinrichtung, ergänzend zur DSGVO."
    },
    {
     "q": "Welche älteren Regelungen ersetzt das TDDDG im Kern?",
@@ -13640,7 +13643,7 @@ const POOLS = {
     "e": "Betroffene müssen erkennen können, dass sie gefilmt werden. Ein deutliches Hinweisschild ist dafür Pflicht (Transparenz, Art. 13 DSGVO)."
    },
    {
-    "q": "Welche Aussage zur Speicherung von Videoaufnahmen trifft zu?",
+    "q": "Wie lange dürfen Aufnahmen einer Videoüberwachung gespeichert bleiben?",
     "o": [
      { "t": "Zulässige Aufbewahrungsfristen müssen eingehalten werden", "ok": true },
      { "t": "Die Speicherdauer darf beliebig lang gewählt werden", "ok": false },
@@ -13674,7 +13677,7 @@ const POOLS = {
       "ok": false
      }
     ],
-    "e": "Die SSID ist der sichtbare Netzwerkname des WLANs."
+    "e": "SSID steht für Service Set Identifier. Ebenfalls korrekt sind: Netzname, Kennung des Funknetzes, WLAN-Name. Sie identifiziert das Funknetz gegenüber den Clients. Das Verstecken der SSID ist keine Sicherheitsmaßnahme, weil sie beim Verbindungsaufbau ohnehin mitgesendet wird."
    },
    {
     "q": "Welche Aufgabe hat ein Access Point (AP)?",
@@ -14159,7 +14162,7 @@ const POOLS = {
       "ok": false
      }
     ],
-    "e": "FDDI = Fiber Distributed Data Interface (Glasfaser-Ringnetz)."
+    "e": "FDDI steht für Fiber Distributed Data Interface. Ebenfalls korrekt sind: Glasfaser-Doppelring, Token-Ring über Lichtwellenleiter, Backbone-Technik mit 100 Mbit/s. Kennzeichen sind der gegenläufige Doppelring zur Ausfallsicherheit und der kollisionsfreie Zugriff über Token Passing."
    },
    {
     "q": "Warum entstehen bei FDDI keine Datenkollisionen?",
@@ -16793,7 +16796,7 @@ const POOLS = {
      { "t": "Remote Array of Internal Drives", "ok": false },
      { "t": "Redundant Allocation of Indexed Data", "ok": false }
     ],
-    "e": "RAID steht für Redundant Array of Independent Disks — ein Verbund mehrerer Festplatten, der als eine logische Einheit arbeitet. Früher stand das I für Inexpensive."
+    "e": "RAID steht für Redundant Array of Independent Disks, früher auch Inexpensive Disks. Ebenfalls korrekt sind: redundanter Verbund unabhängiger Festplatten, Plattenverbund. Zweck ist je nach Level höhere Verfügbarkeit durch Redundanz, mehr Geschwindigkeit durch Verteilung oder beides. Wichtig: RAID ersetzt keine Datensicherung."
    },
    {
     "q": "Welche zwei Hauptziele verfolgt ein RAID-Verbund grundsätzlich?",
@@ -17198,7 +17201,7 @@ const POOLS = {
      { "t": "Telnet", "ok": false },
      { "t": "SMTP", "ok": false }
     ],
-    "e": "Port 21 ist der FTP-Steuerkanal. Der Datenkanal im aktiven Modus nutzt Port 20."
+    "e": "Port 21 ist der Steuerkanal von FTP. Ebenfalls korrekt sind: FTP, File Transfer Protocol, FTP-Steuerkanal, Kommandokanal. Der Datenkanal läuft im aktiven Modus über Port 20. Verschlüsselte Varianten: FTPS über 990, SFTP über SSH auf Port 22."
    },
    {
     "q": "Welcher Dienst läuft standardmäßig auf Port 23?",
@@ -17208,7 +17211,7 @@ const POOLS = {
      { "t": "FTP", "ok": false },
      { "t": "SMTP", "ok": false }
     ],
-    "e": "Port 23 gehört zu Telnet — unverschlüsselte Fernwartung. Die sichere Alternative SSH läuft auf Port 22."
+    "e": "Port 23 gehört zu Telnet. Ebenfalls korrekt sind: Telnet, Fernwartung im Klartext. Wichtig für die Prüfung: Telnet überträgt unverschlüsselt und wird deshalb durch SSH auf Port 22 ersetzt."
    },
    {
     "q": "Welcher Dienst läuft standardmäßig auf Port 25?",
@@ -17218,7 +17221,7 @@ const POOLS = {
      { "t": "IMAP", "ok": false },
      { "t": "Telnet", "ok": false }
     ],
-    "e": "Port 25 ist SMTP für den Mailversand zwischen Servern. Client-Einlieferung läuft heute über 587."
+    "e": "Port 25 gehört zu SMTP. Ebenfalls korrekt sind: SMTP, Simple Mail Transfer Protocol, Mailversand, Servertransport zwischen Mailservern. Verwandt: Port 587 für die Einlieferung durch Clients mit STARTTLS, Port 465 für SMTPS."
    },
    {
     "q": "Welcher Dienst läuft standardmäßig auf Port 80?",
@@ -17228,7 +17231,7 @@ const POOLS = {
      { "t": "DNS", "ok": false },
      { "t": "FTP", "ok": false }
     ],
-    "e": "Port 80 ist unverschlüsseltes HTTP. Die verschlüsselte Variante HTTPS liegt auf 443."
+    "e": "Port 80 gehört zu HTTP. Ebenfalls korrekt sind: HTTP, Hypertext Transfer Protocol, unverschlüsselter Webzugriff. Verschlüsselt läuft der Webzugriff über HTTPS auf Port 443."
    },
    {
     "q": "Welcher Dienst läuft standardmäßig auf Port 110?",
@@ -17238,7 +17241,7 @@ const POOLS = {
      { "t": "SMTP", "ok": false },
      { "t": "SNMP", "ok": false }
     ],
-    "e": "Port 110 ist POP3 zum Abholen von Mails. IMAP nutzt 143, die verschlüsselte POP3-Variante 995."
+    "e": "Port 110 gehört zu POP3. Ebenfalls korrekt sind: POP3, Post Office Protocol Version 3, Mailabruf. POP3 holt Nachrichten in der Grundeinstellung vom Server ab, während IMAP auf Port 143 sie dort belässt. Verschlüsselt: POP3S auf Port 995."
    },
    {
     "q": "Welcher Dienst läuft standardmäßig auf Port 143?",
@@ -17248,7 +17251,7 @@ const POOLS = {
      { "t": "LDAP", "ok": false },
      { "t": "NTP", "ok": false }
     ],
-    "e": "Port 143 ist IMAP — Mails bleiben auf dem Server. Die verschlüsselte Variante IMAPS liegt auf 993."
+    "e": "Port 143 gehört zu IMAP. Ebenfalls korrekt sind: IMAP, Internet Message Access Protocol, Mailzugriff mit Serverhaltung. Im Unterschied zu POP3 bleiben die Nachrichten auf dem Server und werden geräteübergreifend synchronisiert. Verschlüsselt: IMAPS auf Port 993."
    },
    {
     "q": "Welcher Dienst läuft standardmäßig auf Port 443?",
@@ -17258,7 +17261,7 @@ const POOLS = {
      { "t": "SMB", "ok": false },
      { "t": "RDP", "ok": false }
     ],
-    "e": "Port 443 ist HTTPS — HTTP über TLS. Das unverschlüsselte HTTP liegt auf 80."
+    "e": "Port 443 gehört zu HTTPS. Ebenfalls korrekt sind: HTTPS, HTTP über TLS, verschlüsselter Webzugriff, HTTP Secure. Unverschlüsselt läuft der Webzugriff über Port 80."
    },
    {
     "q": "Welcher Dienst läuft standardmäßig auf Port 445?",
@@ -17268,7 +17271,7 @@ const POOLS = {
      { "t": "LDAP", "ok": false },
      { "t": "MySQL", "ok": false }
     ],
-    "e": "Port 445 gehört zu SMB — Datei- und Druckerfreigaben in Windows-Netzen."
+    "e": "Port 445 gehört zu SMB. Ebenfalls korrekt sind: SMB, Server Message Block, CIFS, Windows-Dateifreigabe, Datei- und Druckerfreigabe. Der Port sollte nie aus dem Internet erreichbar sein, weil er ein bevorzugtes Angriffsziel ist."
    },
    {
     "q": "Welcher Dienst läuft standardmäßig auf Port 161?",
@@ -17278,7 +17281,7 @@ const POOLS = {
      { "t": "LDAP", "ok": false },
      { "t": "Syslog", "ok": false }
     ],
-    "e": "Port 161 ist SNMP für die Geräteabfrage. Traps vom Gerät zur Managementstation laufen über 162."
+    "e": "Port 161 gehört zu SNMP. Ebenfalls korrekt sind: SNMP, Simple Network Management Protocol, Netzwerküberwachung, Geräteabfrage. SNMP nutzt UDP; die Traps, also Meldungen der Geräte von sich aus, laufen über Port 162."
    },
    {
     "q": "Welcher Dienst läuft standardmäßig auf Port 993?",
@@ -17288,7 +17291,7 @@ const POOLS = {
      { "t": "SMTPS", "ok": false },
      { "t": "LDAPS", "ok": false }
     ],
-    "e": "Port 993 ist IMAPS — IMAP über TLS. POP3S liegt auf 995, SMTPS auf 465."
+    "e": "Port 993 gehört zu IMAPS. Ebenfalls korrekt sind: IMAPS, IMAP über TLS, verschlüsselter Mailzugriff. Unverschlüsselt läuft IMAP über Port 143. Das Gegenstück für POP3 ist POP3S auf Port 995."
    },
    {
     "q": "Welcher Dienst läuft standardmäßig auf Port 3306?",
@@ -17298,7 +17301,7 @@ const POOLS = {
      { "t": "SMB", "ok": false },
      { "t": "LDAP", "ok": false }
     ],
-    "e": "Port 3306 ist der Standardport des MySQL-Datenbankservers."
+    "e": "Port 3306 gehört zu MySQL. Ebenfalls korrekt sind: MySQL, MariaDB, Datenbankdienst. Verwandte Datenbankports: PostgreSQL auf 5432, Microsoft SQL Server auf 1433, Oracle auf 1521."
    },
    {
     "q": "Welcher Dienst läuft standardmäßig auf Port 3389?",
@@ -17308,7 +17311,7 @@ const POOLS = {
      { "t": "SMB", "ok": false },
      { "t": "VNC", "ok": false }
     ],
-    "e": "Port 3389 gehört zu RDP — grafische Fernsteuerung von Windows-Systemen."
+    "e": "Port 3389 gehört zu RDP. Ebenfalls korrekt sind: RDP, Remote Desktop Protocol, Remotedesktop, Fernzugriff auf Windows-Oberflächen. Wie SMB sollte auch RDP nicht ungeschützt aus dem Internet erreichbar sein, sondern nur über VPN."
    },
    {
     "q": "Auf welchem Port läuft SSH standardmäßig?",
@@ -17318,7 +17321,7 @@ const POOLS = {
      { "t": "21", "ok": false },
      { "t": "25", "ok": false }
     ],
-    "e": "SSH nutzt Port 22 — verschlüsselte Fernwartung und Basis für SFTP und SCP."
+    "e": "SSH läuft auf Port 22. Ebenfalls korrekt sind: 22, Secure Shell, verschlüsselte Fernwartung. Auf demselben Port laufen SFTP und SCP, weil beide den SSH-Kanal nutzen. SSH ersetzt das unverschlüsselte Telnet auf Port 23."
    },
    {
     "q": "Auf welchem Port läuft DNS standardmäßig?",
@@ -17328,7 +17331,7 @@ const POOLS = {
      { "t": "80", "ok": false },
      { "t": "25", "ok": false }
     ],
-    "e": "DNS nutzt Port 53 — Anfragen per UDP, Zonentransfers und große Antworten per TCP."
+    "e": "DNS läuft auf Port 53. Ebenfalls korrekt sind: 53, Domain Name System, Namensauflösung. Überwiegend wird UDP genutzt, weil Anfragen kurz sind; TCP auf demselben Port kommt bei Zonentransfers und großen Antworten zum Einsatz."
    },
    {
     "q": "Auf welchem Port empfängt ein DHCP-Server Anfragen?",
@@ -17358,7 +17361,7 @@ const POOLS = {
      { "t": "22", "ok": false },
      { "t": "23", "ok": false }
     ],
-    "e": "Im aktiven Modus überträgt FTP die Daten über Port 20, die Steuerung läuft über 21."
+    "e": "Der aktive FTP-Datenkanal läuft über Port 20. Ebenfalls korrekt sind: 20, FTP-Data, Datenkanal. Der Steuerkanal läuft über Port 21. Im passiven Modus baut der Client auch die Datenverbindung auf, weshalb dieser Modus besser durch Firewalls kommt."
    },
    {
     "q": "Auf welchem Port läuft NTP standardmäßig?",
@@ -17368,7 +17371,7 @@ const POOLS = {
      { "t": "161", "ok": false },
      { "t": "110", "ok": false }
     ],
-    "e": "NTP zur Zeitsynchronisation nutzt Port 123 über UDP."
+    "e": "NTP läuft auf Port 123. Ebenfalls korrekt sind: 123, Network Time Protocol, Zeitsynchronisation. NTP nutzt UDP. Eine einheitliche Uhrzeit ist Voraussetzung für auswertbare Protokolle, gültige Zertifikate und die Kerberos-Anmeldung."
    },
    {
     "q": "Auf welchem Port läuft LDAP standardmäßig?",
@@ -17378,7 +17381,7 @@ const POOLS = {
      { "t": "636", "ok": false },
      { "t": "445", "ok": false }
     ],
-    "e": "LDAP nutzt Port 389, die TLS-gesicherte Variante LDAPS läuft auf 636."
+    "e": "LDAP läuft auf Port 389. Ebenfalls korrekt sind: 389, Lightweight Directory Access Protocol, Verzeichnisdienst. Verschlüsselt läuft LDAPS über Port 636. Typischer Einsatz ist die zentrale Benutzerverwaltung, etwa im Active Directory."
    },
    {
     "q": "Auf welchem Port läuft POP3S standardmäßig?",
@@ -17388,7 +17391,7 @@ const POOLS = {
      { "t": "110", "ok": false },
      { "t": "587", "ok": false }
     ],
-    "e": "POP3S ist POP3 über TLS auf Port 995. IMAPS liegt auf 993, das unverschlüsselte POP3 auf 110."
+    "e": "POP3S läuft auf Port 995. Ebenfalls korrekt sind: 995, POP3 über TLS, verschlüsselter Mailabruf. Unverschlüsselt läuft POP3 über Port 110. Das Gegenstück für IMAP ist IMAPS auf Port 993."
    },
    {
     "q": "Auf welchem Port liefern Mail-Clients ausgehende Mails per Submission ein?",
@@ -17408,7 +17411,7 @@ const POOLS = {
      { "t": "25", "ok": false },
      { "t": "995", "ok": false }
     ],
-    "e": "SMTPS ist SMTP über TLS auf Port 465 — im Unterschied zu 587, wo per STARTTLS hochgestuft wird."
+    "e": "SMTPS läuft auf Port 465. Ebenfalls korrekt sind: 465, SMTP über TLS, verschlüsselter Mailversand. Unverschlüsselt läuft SMTP über Port 25; für die Einlieferung durch Clients mit STARTTLS ist Port 587 vorgesehen."
    }
   ]
  },
@@ -17456,7 +17459,7 @@ const POOLS = {
     "e": "LEFT JOIN behält die linke Tabelle vollständig. Nur-Treffer wäre der INNER JOIN, beide Seiten vollständig der FULL JOIN, die Gegenrichtung der RIGHT JOIN."
    },
    {
-    "q": "Alle Kunden ohne eine einzige Bestellung sollen ermittelt werden. Welcher Ansatz passt?",
+    "q": "Mit welchem SQL-Ansatz ermitteln Sie alle Kunden ohne eine einzige Bestellung?",
     "o": [
      { "t": "LEFT JOIN von Kunden auf Bestellungen und Filter auf NULL in der Bestellspalte", "ok": true },
      { "t": "INNER JOIN beider Tabellen und anschließende Gruppierung über die Kundennummer", "ok": false },
@@ -17558,7 +17561,7 @@ const POOLS = {
      { "t": "Für eine Vererbungsbeziehung zur übergeordneten Oberklasse", "ok": false },
      { "t": "Für eine gerichtete Abhängigkeit zwischen zwei Paketen", "ok": false }
     ],
-    "e": "Die Raute an der Linie zeigt eine Teil-Ganzes-Beziehung: leer = Aggregation, gefüllt = Komposition. Als Zeichen # vor einem Attribut bedeutet die Raute dagegen protected — zwei völlig verschiedene Dinge."
+    "e": "Die Raute kennzeichnet ein Ganzes-Teil-Verhältnis. Die leere Raute steht für die Aggregation, bei der das Teil auch ohne das Ganze bestehen kann. Die gefüllte Raute steht für die Komposition, bei der das Teil mit dem Ganzen entfällt. Ebenfalls korrekt sind: Aggregation, Komposition, Ganzes-Teil-Beziehung, Teil-von-Beziehung. Die Raute steht immer auf der Seite des Ganzen."
    },
    {
     "q": "Was unterscheidet die Komposition von der Aggregation?",
@@ -17643,7 +17646,7 @@ const POOLS = {
      { "t": "Product Owner, Projektleiter und Testmanager", "ok": false },
      { "t": "Scrum Master, Abteilungsleiter und Product Manager", "ok": false }
     ],
-    "e": "Scrum kennt genau diese drei Rollen. Einen klassischen Projektleiter gibt es in Scrum bewusst nicht — die Verantwortung ist auf die drei Rollen verteilt."
+    "e": "Product Owner, Scrum Master und Entwicklungsteam. Ebenfalls korrekt sind: Produktverantwortlicher, Scrum-Master beziehungsweise Moderator, Entwickler oder Umsetzungsteam. Der Product Owner verantwortet den fachlichen Wert und das Backlog, der Scrum Master das Vorgehen und die Beseitigung von Hindernissen, das Team die Umsetzung."
    },
    {
     "q": "Wofür ist der Product Owner verantwortlich?",
@@ -17663,7 +17666,7 @@ const POOLS = {
      { "t": "Lastenheft, Pflichtenheft und Abnahmeprotokoll", "ok": false },
      { "t": "Projektstrukturplan, Arbeitspaket und Meilenstein", "ok": false }
     ],
-    "e": "Backlogs und Inkrement sind die Artefakte. Daily, Review und Retrospektive sind dagegen Events — eine beliebte Verwechslung in Prüfungen."
+    "e": "Product Backlog, Sprint Backlog und Increment. Ebenfalls korrekt sind: Produkt-Rückstand, Sprint-Rückstand, Produktinkrement beziehungsweise lieferbares Zwischenergebnis. Das Product Backlog priorisiert alle offenen Anforderungen, das Sprint Backlog die Auswahl für den laufenden Sprint, das Increment ist das fertige Ergebnis am Sprintende."
    },
    {
     "q": "Was ist der Kerngedanke von Kanban?",
@@ -17853,7 +17856,7 @@ const POOLS = {
      { "t": "Backbone-, Horizontal- und Vertikalbereich", "ok": false },
      { "t": "Innen-, Außen- und Übergangsbereich", "ok": false }
     ],
-    "e": "Primärbereich (Gelände), Sekundärbereich (Gebäude) und Tertiärbereich (Etage) sind die drei genormten Ebenen. Kern/Verteilung/Zugang ist ein Modell aus dem Switch-Design, nicht der Verkabelungsnorm."
+    "e": "Primär-, Sekundär- und Tertiärbereich. Ebenfalls korrekt sind: Geländeverkabelung, Gebäudeverkabelung, Etagenverkabelung. Der Primärbereich verbindet Gebäude bis 1500 m, der Sekundärbereich die Etagen bis 500 m, der Tertiärbereich führt vom Etagenverteiler zur Datendose bis 90 m."
    },
    {
     "q": "Was verbindet der Primärbereich der strukturierten Verkabelung?",
@@ -18051,7 +18054,7 @@ const POOLS = {
     "e": "Entscheidend ist der geschuldete Erfolg. Beim Werkvertrag folgen daraus Abnahme und Gewährleistung, beim Dienstvertrag nicht."
    },
    {
-    "q": "Welche Aussage zum Leasing trifft zu?",
+    "q": "Was kennzeichnet einen Leasingvertrag hinsichtlich Laufzeit und Eigentum?",
     "o": [
      { "t": "Die Nutzung wird über eine feste Laufzeit überlassen, das Eigentum bleibt beim Leasinggeber", "ok": true },
      { "t": "Das Eigentum geht bereits mit der ersten Rate auf den Leasingnehmer über", "ok": false },
@@ -18136,7 +18139,7 @@ const POOLS = {
     "e": "Das Monopson ist das Nachfragemonopol. Die Marktmacht liegt hier auf der Seite des einzigen Abnehmers."
    },
    {
-    "q": "Welche Aussage zur Preisbildung im Polypol trifft zu?",
+    "q": "Wie bildet sich der Preis im Polypol für den einzelnen Anbieter?",
     "o": [
      { "t": "Der einzelne Anbieter ist Preisnehmer und muss sich am Marktpreis orientieren", "ok": true },
      { "t": "Der einzelne Anbieter setzt den geltenden Marktpreis weitgehend eigenständig selbst fest", "ok": false },
@@ -18481,7 +18484,7 @@ const POOLS = {
     "e": "Das NAS wird über das vorhandene Netz als Laufwerk eingebunden und ist günstig sowie schnell eingerichtet. Für hohe Lasten im Rechenzentrum ist ein SAN geeigneter."
    },
    {
-    "q": "Welche Aussage zum File-Storage trifft zu?",
+    "q": "Wie sind die Daten beim File-Storage organisiert?",
     "o": [
      { "t": "Die Daten liegen in einer Ordnerhierarchie mit Pfaden und Dateinamen", "ok": true },
      { "t": "Die Daten liegen als Objekte mit umfangreichen Metadaten vor", "ok": false },
@@ -18856,7 +18859,7 @@ const POOLS = {
     "e": "Erst wenn Prozesse, Anwendungen, Systeme, Räume und Netze erfasst sind, lassen sich Schutzbedarf und Maßnahmen sinnvoll ableiten."
    },
    {
-    "q": "Welche Aussage zum IT-Grundschutz-Check trifft zu?",
+    "q": "Was leistet der IT-Grundschutz-Check?",
     "o": [
      { "t": "Er vergleicht den Soll-Zustand der Anforderungen mit dem tatsächlichen Ist-Zustand", "ok": true },
      { "t": "Er ersetzt die Schutzbedarfsfeststellung vollständig", "ok": false },
@@ -19016,7 +19019,7 @@ const POOLS = {
     "e": "Das Ereignis beschreibt einen Zustand und verbraucht weder Zeit noch Ressourcen. Es wird als Sechseck dargestellt."
    },
    {
-    "q": "Welche Aussage zur Funktion in einer EPK trifft zu?",
+    "q": "Was kennzeichnet eine Funktion in einer ereignisgesteuerten Prozesskette?",
     "o": [
      { "t": "Sie beschreibt eine Tätigkeit und benötigt Zeit und Ressourcen", "ok": true },
      { "t": "Sie beschreibt einen Zustand und benötigt weder Zeit noch Ressourcen", "ok": false },
@@ -19237,6 +19240,7 @@ const POOLS = {
    },
    {
     "q": "Welche Maßnahme gehört nicht zur Systemhärtung?",
+    "card": false,
     "o": [
      { "t": "Die Übertragungsrate der Netzwerkkarte erhöhen", "ok": true },
      { "t": "Nicht benötigte Benutzerkonten deaktivieren", "ok": false },
@@ -19431,7 +19435,7 @@ const POOLS = {
     "e": "Jeder der vier physischen Kerne stellt zwei Threads bereit. Physisch bleiben es vier Recheneinheiten."
    },
    {
-    "q": "Welche Aussage zur Speicherhierarchie trifft zu?",
+    "q": "Welcher Zusammenhang gilt in der Speicherhierarchie zwischen Nähe zur CPU, Geschwindigkeit und Größe?",
     "o": [
      { "t": "Je näher am Prozessor, desto schneller und zugleich kleiner ist der Speicher", "ok": true },
      { "t": "Je näher am Prozessor gelegen, desto größer und langsamer ist der jeweilige Speicher", "ok": false },
@@ -19946,12 +19950,40 @@ const progressFill = document.getElementById('progressFill');
 // gesamten Durchlaufs unverändert.
 let cardMode = false;
 
-// Fragen, die nur im Vergleich mehrerer Aussagen funktionieren, ergeben als
-// Karteikarte keinen Sinn: Auf dem leeren Feld ließe sich nichts sinnvoll
-// formulieren, weil die Aufgabe erst durch die vier Optionen entsteht.
-const NICHT_ALS_KARTE = /^(welche\s+(der\s+folgenden\s+)?(aussage|antwort|option|möglichkeit)[a-zäöüß]*\s+.*(trifft|treffen|ist\s+(richtig|korrekt|zutreffend)|sind\s+(richtig|korrekt|zutreffend))|was\s+(trifft\s+zu|ist\s+(richtig|korrekt)))/i;
-function alsKarteGeeignet(frageText){
-  return !NICHT_ALS_KARTE.test(String(frageText || '').trim());
+// Eignung für den Karteikartenmodus wird an der Frage selbst hinterlegt, nicht
+// aus dem Fragetext geraten: "card": false sperrt eine Frage ausdrücklich.
+// Betroffen sind Negativfragen und Gegenüberstellungen, die ihre Eindeutigkeit
+// erst aus den sichtbaren Antwortoptionen beziehen.
+function alsKarteGeeignet(frageObjekt){
+  if(frageObjekt && typeof frageObjekt === 'object' && frageObjekt.card === false) return false;
+  return true;
+}
+
+// Anzahl der Fragen, die im aktuellen Modus tatsächlich erscheinen.
+function fragenImModus(key){
+  if(key === '__random__') return 0;
+  const pool = POOLS[key];
+  if(!pool) return 0;
+  if(!cardMode) return pool.q.length;
+  return pool.q.filter(q => q.card !== false).length;
+}
+
+// Beschriftung aller Kategorie-Chips an den Modus anpassen.
+function updateChipCounts(){
+  document.querySelectorAll('.cat-chip').forEach(chip => {
+    const key = chip.dataset.key;
+    const feld = chip.querySelector('.cat-count');
+    if(!feld) return;
+    if(key === '__random__'){
+      let summe = 0;
+      Object.keys(POOLS).forEach(k => { summe += fragenImModus(k); });
+      feld.textContent = 'quer über alle ' + summe;
+      return;
+    }
+    feld.textContent = fragenImModus(key) + ' Fragen';
+  });
+  // Auch die Gruppenköpfe führen die Zahl der Kategorien, die bleibt gleich
+  if(typeof refreshSelState === 'function') refreshSelState();
 }
 
 function buildRun(){
@@ -19965,6 +19997,7 @@ function buildRun(){
         cat: entry.catName,
         q: entry.obj.q,
         opts: shuffle(entry.obj.o),
+        card: entry.obj.card,
         e: entry.obj.e,
         done: false,
         correct: false
@@ -19981,6 +20014,7 @@ function buildRun(){
         cat: entry.catName,
         q: entry.obj.q,
         opts: shuffle(entry.obj.o),
+        card: entry.obj.card,
         e: entry.obj.e,
         done: false,
         correct: false
@@ -20001,6 +20035,7 @@ function buildRun(){
         cat: entry.catName,
         q: entry.obj.q,
         opts: shuffle(entry.obj.o),
+        card: entry.obj.card,
         e: entry.obj.e,
         done: false,
         correct: false
@@ -20016,6 +20051,7 @@ function buildRun(){
         cat: POOLS[key].name,
         q: qObj.q,
         opts: shuffle(qObj.o),
+        card: qObj.card,
         e: qObj.e,
         done: false,
         correct: false
@@ -20029,7 +20065,7 @@ function buildRun(){
 function renderRun(){
   // Im Karteikartenmodus die reinen Auswahlfragen aussortieren
   if(cardMode){
-    const gefiltert = runQuestions.filter(x => alsKarteGeeignet(x.q));
+    const gefiltert = runQuestions.filter(x => x.card !== false);
     if(gefiltert.length) runQuestions = gefiltert;
   }
   qArea.innerHTML = '';
@@ -20303,6 +20339,7 @@ function updateWrongCardBox(){
     if(selH2) selH2.textContent = cardMode ? 'Karteikarten' : 'Multiple Choice';
     document.body.classList.toggle('cardmode', cardMode);
     if(startBtn) startBtn.textContent = cardMode ? 'Karteikarten starten' : 'Quiz starten';
+    if(typeof updateChipCounts === 'function') updateChipCounts();
   }
   toggle.addEventListener('change', apply);
   apply();
@@ -20551,10 +20588,16 @@ const READER_TOPICS = [
   ['catSearch', 'libSearch', 'qsInput'].forEach(function(id){
     const feld = document.getElementById(id);
     if(!feld || !feld.parentNode) return;
-    const huelle = feld.parentNode;
-    // Das X wird absolut im Feldbereich positioniert
-    if(getComputedStyle(huelle).position === 'static') huelle.style.position = 'relative';
-    huelle.classList.add('has-clear');
+    // Das Feld bekommt einen eigenen Rahmen, damit das X exakt im Eingabefeld
+    // sitzt und nicht am Ende der umgebenden Zeile neben dem Trefferzähler.
+    let huelle = feld.parentNode;
+    if(!huelle.classList.contains('search-clear-wrap')){
+      const box = document.createElement('span');
+      box.className = 'search-clear-wrap';
+      huelle.insertBefore(box, feld);
+      box.appendChild(feld);
+      huelle = box;
+    }
 
     const x = document.createElement('button');
     x.type = 'button';
