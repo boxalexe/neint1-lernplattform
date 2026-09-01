@@ -16491,7 +16491,7 @@ const POOLS = {
    {
     "q": "Welcher technische Nachteil ist mit Containervirtualisierung verbunden?",
     "o": [
-     { "t": "Container benötigen für jede einzelne Instanz ein vollständiges eigenes Gastbetriebssystem und starten dadurch spürbar langsamer", "ok": false },
+     { "t": "Container benötigen für jede einzelne Instanz ein vollständiges eigenes Gastbetriebssystem und starten dadurch spürbar langsamer als virtuelle Maschinen", "ok": false },
      { "t": "Container teilen sich den Kernel des Host-Betriebssystems und bieten daher eine geringere Isolation als klassische virtuelle Maschinen", "ok": true },
      { "t": "Container können nur Anwendungen desselben Betriebssystemtyps wie der Host ausführen", "ok": false },
      { "t": "Container benötigen grundsätzlich mehr Arbeitsspeicher als virtuelle Maschinen", "ok": false }
@@ -16527,6 +16527,126 @@ const POOLS = {
      { "t": "Eine stabile Netzwerkverbindung wird für den laufenden Betrieb überflüssig", "ok": false }
     ],
     "e": "VDI erfordert hohe Anfangsinvestitionen, zudem betrifft ein Serverausfall potenziell viele Arbeitsplätze gleichzeitig."
+   },
+   {
+    "q": "Was bedeutet der Betrieb On-Premises?",
+    "o": [
+     { "t": "Betrieb der Systeme in eigenen Räumen und eigener Verantwortung", "ok": true },
+     { "t": "Betrieb der Systeme beim Anbieter mit Abrechnung nach Nutzung", "ok": false },
+     { "t": "Betrieb ausschließlich über eine verschlüsselte Internetverbindung", "ok": false },
+     { "t": "Betrieb verteilt auf mehrere Anbieter zur Ausfallsicherheit", "ok": false }
+    ],
+    "e": "Der Betrieb beschafft die Hardware selbst und trägt Wartung, Aktualisierung und Ausfallsicherheit. Gegenmodell ist die Cloud, bei der ein Anbieter diese Leistungen über das Netz bereitstellt und nach Nutzung abrechnet."
+   },
+   {
+    "q": "Was stellt ein Anbieter bei IaaS bereit?",
+    "o": [
+     { "t": "Rechenleistung, Speicher und Netz, meist als virtuelle Maschinen", "ok": true },
+     { "t": "Eine vollständig fertige Anwendung einschließlich ihrer Pflege", "ok": false },
+     { "t": "Eine bereits fertig eingerichtete Laufzeitumgebung samt Betriebssystem und Datenbank", "ok": false },
+     { "t": "Ausschließlich die Anbindung an das öffentliche Internet", "ok": false }
+    ],
+    "e": "Bei IaaS verantwortet der Kunde weiterhin Betriebssystem, Middleware, Anwendung und Daten. Genau daran lassen sich die Modelle unterscheiden: Ab PaaS übernimmt der Anbieter das Betriebssystem."
+   },
+   {
+    "q": "Welches Servicemodell liegt vor, wenn der Anbieter eine fertige Anwendung vollständig betreibt?",
+    "o": [
+     { "t": "SaaS, Software as a Service", "ok": true },
+     { "t": "IaaS, Infrastructure as a Service", "ok": false },
+     { "t": "PaaS, Platform as a Service", "ok": false },
+     { "t": "On-Premises im eigenen Haus", "ok": false }
+    ],
+    "e": "Bei Software as a Service nutzt der Kunde die Anwendung nur noch und verwaltet Benutzer, Konfiguration und Daten. Betrieb, Aktualisierung und Verfügbarkeit liegen vollständig beim Anbieter."
+   },
+   {
+    "q": "Wer verantwortet bei PaaS das Betriebssystem?",
+    "o": [
+     { "t": "Der Anbieter der Plattform", "ok": true },
+     { "t": "Der Kunde in vollem Umfang selbst", "ok": false },
+     { "t": "Beide gemeinsam zu gleichen Teilen", "ok": false },
+     { "t": "Ein unabhängiger dritter Dienstleister", "ok": false }
+    ],
+    "e": "Bei PaaS stellt der Anbieter Betriebssystem, Laufzeitumgebung und Datenbank bereit und pflegt sie. Der Kunde verantwortet nur noch die eigene Anwendung und deren Daten. Bei IaaS läge das Betriebssystem dagegen beim Kunden."
+   },
+   {
+    "q": "Was kennzeichnet eine Hybrid Cloud?",
+    "o": [
+     { "t": "Die Kombination aus privater und öffentlicher Cloud", "ok": true },
+     { "t": "Die ausschließliche Nutzung durch ein einzelnes Unternehmen", "ok": false },
+     { "t": "Die gemeinsame Nutzung durch mehrere gleichartige Einrichtungen", "ok": false },
+     { "t": "Die Verteilung auf mehrere voneinander unabhängige Anbieter", "ok": false }
+    ],
+    "e": "Schutzbedürftige Daten bleiben in der Private Cloud, Lastspitzen und unkritische Dienste laufen in der Public Cloud. Vorteil ist die Verbindung von Kontrolle und Elastizität, Nachteil die höhere Komplexität durch zwei Umgebungen samt Schnittstellen."
+   },
+   {
+    "q": "Welches Bereitstellungsmodell eignet sich bei strengen Anforderungen an Kontrolle und Datenstandort?",
+    "o": [
+     { "t": "Die Private Cloud", "ok": true },
+     { "t": "Die Public Cloud", "ok": false },
+     { "t": "Die Community Cloud", "ok": false },
+     { "t": "Ein reines SaaS-Angebot", "ok": false }
+    ],
+    "e": "Die Ressourcen werden ausschließlich für ein Unternehmen betrieben, im eigenen Rechenzentrum oder exklusiv beim Anbieter. Vorteil ist die hohe Kontrolle, Nachteil sind höhere Kosten und geringere Elastizität. Alternativ kommt eine Hybrid Cloud in Betracht."
+   },
+   {
+    "q": "Worin unterscheiden sich Skalierbarkeit und Elastizität?",
+    "o": [
+     { "t": "Skalierbarkeit meint das Mitwachsen der Leistung, Elastizität zusätzlich das automatische Zurückfahren", "ok": true },
+     { "t": "Elastizität meint allein das Mitwachsen der Leistung, Skalierbarkeit dagegen das dauerhafte Bereitstellen von Reserven", "ok": false },
+     { "t": "Beide Begriffe bezeichnen denselben Vorgang mit verschiedenen Namen", "ok": false },
+     { "t": "Skalierbarkeit betrifft nur den Speicher, Elastizität nur die Rechenleistung", "ok": false }
+    ],
+    "e": "Ein System ist skalierbar, wenn es mit dem Bedarf wachsen kann. Elastisch ist es, wenn es Ressourcen bei sinkender Last auch selbstständig wieder abgibt und dadurch Kosten spart."
+   },
+   {
+    "q": "Was beschreibt der Begriff Vendor Lock-in?",
+    "o": [
+     { "t": "Die Abhängigkeit von einem Anbieter, weil ein Wechsel teuer oder aufwendig wäre", "ok": true },
+     { "t": "Die vertragliche Zusicherung einer bestimmten jährlichen Mindestverfügbarkeit des Dienstes", "ok": false },
+     { "t": "Die Verschlüsselung der Daten mit einem anbietereigenen Schlüssel", "ok": false },
+     { "t": "Die Verpflichtung des Anbieters zur Löschung nach Vertragsende", "ok": false }
+    ],
+    "e": "Ursachen sind proprietäre Schnittstellen, eigene Datenformate oder tief eingebundene Zusatzdienste. Gegenmaßnahmen sind offene Standards, regelmäßige Exportmöglichkeiten und eine dokumentierte Ausstiegsstrategie."
+   },
+   {
+    "q": "Wer bleibt bei der Nutzung eines Cloud-Dienstes datenschutzrechtlich verantwortlich?",
+    "o": [
+     { "t": "Das beauftragende Unternehmen als Verantwortlicher", "ok": true },
+     { "t": "Der Cloud-Anbieter als beauftragter Auftragsverarbeiter", "ok": false },
+     { "t": "Beide Seiten zu gleichen Teilen gemeinsam", "ok": false },
+     { "t": "Die zuständige Aufsichtsbehörde des Bundeslandes", "ok": false }
+    ],
+    "e": "Der Anbieter verarbeitet die Daten weisungsgebunden im Auftrag und ist Auftragsverarbeiter. Erforderlich ist ein Vertrag nach Art. 28 DSGVO. Merksatz: Die Verarbeitung lässt sich auslagern, die Verantwortung nicht."
+   },
+   {
+    "q": "Welcher Kostenunterschied besteht typischerweise zwischen Cloud und eigenem Betrieb?",
+    "o": [
+     { "t": "Die Cloud verursacht laufende Betriebskosten, der eigene Betrieb eine Anfangsinvestition", "ok": true },
+     { "t": "Die Cloud verursacht eine hohe einmalige Anfangsinvestition, der eigene Betrieb laufende Kosten", "ok": false },
+     { "t": "Beide Betriebsarten verursachen ausschließlich einmalige Anschaffungskosten", "ok": false },
+     { "t": "In beiden Fällen fallen ausschließlich laufende Personalkosten an", "ok": false }
+    ],
+    "e": "In der Cloud wird nach Nutzung abgerechnet, was die Anfangsbelastung senkt und mit dem Bedarf mitwächst. Beim eigenen Betrieb steht eine Investition am Anfang, danach laufen Wartung, Energie und Personal weiter."
+   },
+   {
+    "q": "Was bedeutet Mandantenfähigkeit bei einem Cloud-Dienst?",
+    "o": [
+     { "t": "Mehrere Kunden nutzen dieselbe Umgebung, ihre Daten bleiben aber getrennt", "ok": true },
+     { "t": "Jeder Kunde erhält jeweils eine vollständig eigene physische Hardware zugewiesen", "ok": false },
+     { "t": "Der Dienst lässt sich ausschließlich von einem Kunden nutzen", "ok": false },
+     { "t": "Die Daten aller Kunden werden gemeinsam ausgewertet", "ok": false }
+    ],
+    "e": "Die Trennung erfolgt logisch über Kennungen und Rechte, nicht physisch. Das ermöglicht die günstigen Preise der Public Cloud, verlangt aber Vertrauen in die saubere Trennung durch den Anbieter."
+   },
+   {
+    "q": "Ein Betrieb hat kein eigenes IT-Personal und benötigt eine Standardlösung für die Buchhaltung. Welches Modell passt?",
+    "o": [
+     { "t": "SaaS als fertig betriebene Anwendung", "ok": true },
+     { "t": "IaaS mit eigener Serverpflege", "ok": false },
+     { "t": "On-Premises im eigenen Serverraum", "ok": false },
+     { "t": "Eine selbst betriebene Private Cloud", "ok": false }
+    ],
+    "e": "Bei SaaS entfällt der gesamte Betrieb einschließlich Aktualisierung und Sicherung. Bei IaaS müsste der Betrieb weiterhin Betriebssystem und Anwendung selbst pflegen, wofür das Personal fehlt."
    }
   ]
  },
@@ -18217,6 +18337,166 @@ const POOLS = {
      { "t": "Ein Polypol", "ok": false }
     ],
     "e": "Ein einziger Anbieter steht vielen Nachfragern gegenüber. Er ist Preissetzer, begrenzt durch Zahlungsbereitschaft und Aufsicht."
+   },
+   {
+    "q": "Was bezeichnet der Begriff Inflation?",
+    "o": [
+     { "t": "Einen anhaltenden Anstieg des allgemeinen Preisniveaus", "ok": true },
+     { "t": "Einen anhaltenden Rückgang des allgemeinen Preisniveaus", "ok": false },
+     { "t": "Ein über längere Zeit hinweg vollständig unverändertes Preisniveau", "ok": false },
+     { "t": "Einen kurzfristigen Preisanstieg bei einem einzelnen Gut", "ok": false }
+    ],
+    "e": "Gemeint ist der Durchschnitt aller Preise, nicht ein einzelnes Produkt. Gemessen wird über den Verbraucherpreisindex, die Veränderung gegenüber dem Vorjahr ergibt die Inflationsrate. Folge ist ein Kaufkraftverlust: Für denselben Betrag gibt es weniger Ware. Die EZB strebt mittelfristig rund zwei Prozent an."
+   },
+   {
+    "q": "Was bezeichnet der Begriff Deflation?",
+    "o": [
+     { "t": "Einen anhaltenden Rückgang des allgemeinen Preisniveaus", "ok": true },
+     { "t": "Einen anhaltenden Anstieg des allgemeinen Preisniveaus aller Güter", "ok": false },
+     { "t": "Ein langsameres Ansteigen der Preise als im Vorjahr", "ok": false },
+     { "t": "Eine Erhöhung der Löhne bei gleichbleibenden Preisen", "ok": false }
+    ],
+    "e": "Die Inflationsrate ist negativ, die Preise fallen tatsächlich. Gefährlich ist die Abwärtsspirale: Kunden warten auf weiter sinkende Preise, der Absatz bricht ein, Betriebe kürzen Investitionen und Personal, was die Nachfrage weiter dämpft. Sparer gewinnen real, Schuldner verlieren."
+   },
+   {
+    "q": "Was kennzeichnet eine Stagflation?",
+    "o": [
+     { "t": "Steigende Preise bei gleichzeitiger Stagnation und hoher Arbeitslosigkeit", "ok": true },
+     { "t": "Steigende Preise bei einer insgesamt kräftig wachsenden Wirtschaftsleistung des Landes", "ok": false },
+     { "t": "Sinkende Preise bei gleichzeitig hoher Arbeitslosigkeit", "ok": false },
+     { "t": "Stabile Preise bei stagnierender wirtschaftlicher Entwicklung", "ok": false }
+    ],
+    "e": "Das Besondere ist das gleichzeitige Auftreten beider Probleme. Klassischer Auslöser ist ein Angebotsschock wie eine Energiekrise. Daraus folgt die politische Zwickmühle: Zinserhöhungen gegen die Inflation würgen die Konjunktur weiter ab, Konjunkturprogramme heizen die Inflation an."
+   },
+   {
+    "q": "Was versteht man unter Kaufkraft?",
+    "o": [
+     { "t": "Die Gütermenge, die man für einen bestimmten Geldbetrag erhält", "ok": true },
+     { "t": "Die Höhe des monatlich ausgezahlten Bruttoeinkommens eines Haushalts", "ok": false },
+     { "t": "Die Summe aller Ersparnisse eines privaten Haushalts", "ok": false },
+     { "t": "Die Menge des insgesamt im Umlauf befindlichen Bargeldes", "ok": false }
+    ],
+    "e": "Die Kaufkraft verhält sich umgekehrt zum Preisniveau: Steigen die Preise, sinkt sie. Verwandte Begriffe sind Realeinkommen und Reallohn, also das, was vom Nominalbetrag nach Berücksichtigung der Preisentwicklung übrig bleibt."
+   },
+   {
+    "q": "Wie wirkt sich eine Inflation auf Sparguthaben aus, wenn der Zins unter der Inflationsrate liegt?",
+    "o": [
+     { "t": "Das Guthaben wächst nominal, verliert aber real an Kaufkraft", "ok": true },
+     { "t": "Das Guthaben verliert sowohl nominal als auch real an Wert", "ok": false },
+     { "t": "Das Guthaben gewinnt sowohl nominal als auch real an Wert", "ok": false },
+     { "t": "Das Guthaben bleibt nominal und real vollständig unverändert", "ok": false }
+    ],
+    "e": "Beispiel: 10.000 EUR zu 1 Prozent Zins bei 5 Prozent Inflation ergeben nominal 10.100 EUR, real aber rund 4 Prozent weniger Kaufkraft. Genau das ist gemeint, wenn von negativen Realzinsen die Rede ist. Sparer zählen bei Inflation zu den Verlierern."
+   },
+   {
+    "q": "Wer zählt bei einer Inflation typischerweise zu den Gewinnern?",
+    "o": [
+     { "t": "Schuldner, weil ihre Schuld real an Gewicht verliert", "ok": true },
+     { "t": "Sparer, weil ihr Guthaben real deutlich an Wert gewinnt", "ok": false },
+     { "t": "Rentner mit fest vereinbarten Bezügen ohne jede Anpassung", "ok": false },
+     { "t": "Arbeitnehmer mit über Jahre unverändertem Nominallohn", "ok": false }
+    ],
+    "e": "Die Schuldsumme bleibt nominal gleich, während das Geld an Wert verliert; die reale Last sinkt also. Verlierer sind Sparer, Empfänger fester Bezüge und Arbeitnehmer ohne Lohnanpassung. Bei Deflation kehrt sich das Verhältnis genau um."
+   },
+   {
+    "q": "Ein Arbeitnehmer erhält 2 Prozent mehr Lohn, die Preise steigen um 5 Prozent. Wie verändert sich sein Reallohn?",
+    "o": [
+     { "t": "Er sinkt um rund 3 Prozent", "ok": true },
+     { "t": "Er steigt um rund 2 Prozent", "ok": false },
+     { "t": "Er steigt um rund 3 Prozent", "ok": false },
+     { "t": "Er bleibt vollständig unverändert", "ok": false }
+    ],
+    "e": "Der Nominallohn ist der ausgezahlte Betrag, der Reallohn berücksichtigt die Preisentwicklung. Steigen die Preise stärker als der Lohn, entsteht ein Reallohnverlust. Erst ab einer Lohnsteigerung oberhalb der Inflationsrate bleibt real mehr übrig."
+   },
+   {
+    "q": "Warum kann eine Deflation zu einer Abwärtsspirale führen?",
+    "o": [
+     { "t": "Weil Kunden Käufe aufschieben und dadurch Absatz und Investitionen weiter sinken", "ok": true },
+     { "t": "Weil die Betriebe wegen steigender Rohstoffkosten ihre Produktion drosseln müssen", "ok": false },
+     { "t": "Weil die Löhne schneller steigen als die Verkaufspreise der Betriebe", "ok": false },
+     { "t": "Weil die Zentralbank die Geldmenge unkontrolliert stark ausweitet", "ok": false }
+    ],
+    "e": "Der Ablauf: Erwartung weiter fallender Preise, Kaufzurückhaltung, sinkender Absatz, Preissenkungen, gekürzte Investitionen, Entlassungen, noch schwächere Nachfrage. Der Kreislauf verstärkt sich selbst, weshalb Deflation als gefährlicher gilt als moderate Inflation."
+   },
+   {
+    "q": "Welche Ursache liegt einer Kosteninflation zugrunde?",
+    "o": [
+     { "t": "Gestiegene Preise für Energie, Rohstoffe oder Löhne, die weitergegeben werden", "ok": true },
+     { "t": "Eine Nachfrage, die das insgesamt verfügbare Güterangebot deutlich übersteigt", "ok": false },
+     { "t": "Ein deutlicher Rückgang der staatlichen Ausgaben und Investitionen", "ok": false },
+     { "t": "Eine dauerhaft zurückhaltende Investitionstätigkeit der Betriebe", "ok": false }
+    ],
+    "e": "Man unterscheidet Kosteninflation, Nachfrageinflation bei Nachfrageüberhang und importierte Inflation über teurere Einfuhren. Auch eine stark ausgeweitete Geldmenge wirkt preistreibend. Im Aufgabentext deuten steigende Energie- oder Rohstoffpreise auf die Kosteninflation."
+   },
+   {
+    "q": "Die Inflationsrate fällt von 6 auf 3 Prozent. Was bedeutet das?",
+    "o": [
+     { "t": "Die Preise steigen weiterhin, nur langsamer als zuvor", "ok": true },
+     { "t": "Die Preise sinken nun gegenüber dem Vorjahresniveau ab", "ok": false },
+     { "t": "Das Preisniveau bleibt ab sofort vollständig unverändert", "ok": false },
+     { "t": "Die Kaufkraft kehrt damit auf ihren Ausgangswert zurück", "ok": false }
+    ],
+    "e": "Eine sinkende Inflationsrate wird als Disinflation bezeichnet und ist keine Deflation. Von Deflation spricht man erst bei einer negativen Rate, also tatsächlich fallenden Preisen. Diese Unterscheidung wird in Prüfungen gezielt abgefragt."
+   },
+   {
+    "q": "Die Energiepreise verdoppeln sich, Betriebe drosseln die Produktion und entlassen Personal, die Verbraucherpreise steigen dennoch. Welche Lage liegt vor?",
+    "o": [
+     { "t": "Eine Stagflation", "ok": true },
+     { "t": "Eine reine Nachfrageinflation", "ok": false },
+     { "t": "Eine Deflation mit Abwärtsspirale", "ok": false },
+     { "t": "Eine ausgeprägte Disinflation", "ok": false }
+    ],
+    "e": "Kennzeichen sind steigende Preise bei gleichzeitig stagnierender Wirtschaft und hoher Arbeitslosigkeit. Auslöser ist hier ein Angebotsschock über die Energiekosten. Genau diese Kombination macht die Bekämpfung so schwierig."
+   },
+   {
+    "q": "Wie wirkt sich eine Deflation auf Schuldner aus?",
+    "o": [
+     { "t": "Die reale Last ihrer Schulden steigt", "ok": true },
+     { "t": "Die reale Last ihrer Schulden sinkt spürbar ab", "ok": false },
+     { "t": "Die Schuldsumme wird automatisch nominal verringert", "ok": false },
+     { "t": "Auf bestehende Schulden hat sie keinerlei Wirkung", "ok": false }
+    ],
+    "e": "Die Schuldsumme bleibt nominal gleich, während das Geld an Kaufkraft gewinnt. Für die Tilgung muss also real mehr geleistet werden. Bei Inflation ist es umgekehrt: Dort gewinnen Schuldner und verlieren Sparer."
+   },
+   {
+    "q": "Welche Folge hat eine Inflation typischerweise für Unternehmen?",
+    "o": [
+     { "t": "Höhere Einkaufs- und Energiekosten bei erschwerter Kalkulation", "ok": true },
+     { "t": "Dauerhaft sinkende Kosten bei gleichbleibenden Absatzpreisen", "ok": false },
+     { "t": "Eine automatische Steigerung des real erzielten Gewinns", "ok": false },
+     { "t": "Vollständig planbare Preise über mehrere Geschäftsjahre hinweg", "ok": false }
+    ],
+    "e": "Hinzu kommen zurückhaltendere Kunden wegen der gesunkenen Kaufkraft, häufigere Preisanpassungen und teurere Finanzierung, wenn die Zentralbank die Zinsen anhebt. Betriebe mit langfristigen Festpreisverträgen geraten besonders unter Druck."
+   },
+   {
+    "q": "Womit wird die Veränderung des Preisniveaus in Deutschland gemessen?",
+    "o": [
+     { "t": "Mit dem Verbraucherpreisindex", "ok": true },
+     { "t": "Mit dem Bruttoinlandsprodukt", "ok": false },
+     { "t": "Mit der Arbeitslosenquote des Vorjahres", "ok": false },
+     { "t": "Mit dem Wechselkurs gegenüber dem Dollar", "ok": false }
+    ],
+    "e": "Der Verbraucherpreisindex bildet einen repräsentativen Warenkorb ab. Seine prozentuale Veränderung gegenüber dem Vorjahr ergibt die Inflationsrate. Das Bruttoinlandsprodukt misst dagegen die Wirtschaftsleistung, nicht das Preisniveau."
+   },
+   {
+    "q": "Welche Sektoren bilden zusammen die Gesamtwirtschaft?",
+    "o": [
+     { "t": "Primärer, sekundärer, tertiärer, quartärer und quintärer Sektor", "ok": true },
+     { "t": "Ausschließlich der primäre, der sekundäre und der tertiäre Sektor", "ok": false },
+     { "t": "Ausschließlich der sekundäre und der tertiäre Sektor zusammen", "ok": false },
+     { "t": "Ausschließlich der tertiäre und der quartäre Sektor zusammen", "ok": false }
+    ],
+    "e": "Der quartäre Sektor umfasst wissensbasierte Tätigkeiten wie Forschung und Beratung, der quintäre Sektor die privaten Haushalte als Konsumenten und Anbieter von Arbeitskraft. Alle fünf zusammen ergeben die Gesamtwirtschaft."
+   },
+   {
+    "q": "Welchem Sektor werden die privaten Haushalte zugeordnet?",
+    "o": [
+     { "t": "Dem quintären Sektor", "ok": true },
+     { "t": "Dem quartären Sektor", "ok": false },
+     { "t": "Dem tertiären Sektor", "ok": false },
+     { "t": "Dem primären Sektor", "ok": false }
+    ],
+    "e": "Der quintäre Sektor betrachtet die Haushalte als eigenständigen Bereich: Sie treten als Konsumenten auf und stellen zugleich Arbeitskraft bereit. Der quartäre Sektor umfasst dagegen Forschung, Beratung und Datenanalyse."
    }
   ]
  },
@@ -21217,7 +21497,23 @@ const GLOSSAR = [{"a":"2FA","f":"Zwei-Faktor-Authentifizierung","d":"Anmeldung m
 {"a":"EVA-Prinzip","f":"Eingabe, Verarbeitung, Ausgabe","d":"Grundmuster jeder Datenverarbeitung. Erweitert um die Speicherung ergibt sich EVAS."},
 {"a":"Von-Neumann-Architektur","f":"Von-Neumann-Architektur","d":"Rechnerarchitektur mit Rechenwerk, Steuerwerk, Speicherwerk, Ein-/Ausgabewerk und gemeinsamem Bus für Befehle und Daten."},
 {"a":"idempotent","f":"Idempotenz","d":"Eine Operation, die mehrfach ausgeführt denselben Zustand ergibt. Gilt für GET, PUT und DELETE, nicht für POST."},
-{"a":"API-Key","f":"API-Schlüssel","d":"Zeichenfolge zur Authentifizierung gegenüber einer Programmierschnittstelle. Bietet weniger Schutz als tokenbasierte Verfahren."}];
+{"a":"API-Key","f":"API-Schlüssel","d":"Zeichenfolge zur Authentifizierung gegenüber einer Programmierschnittstelle. Bietet weniger Schutz als tokenbasierte Verfahren."},
+{"a":"Inflation","f":"Inflation","d":"Anhaltender Anstieg des allgemeinen Preisniveaus. Folge ist ein Kaufkraftverlust; Schuldner gewinnen, Sparer verlieren."},
+{"a":"Deflation","f":"Deflation","d":"Anhaltender Rückgang des Preisniveaus. Gefahr ist die Abwärtsspirale aus Kaufzurückhaltung, sinkendem Absatz und Entlassungen."},
+{"a":"Stagflation","f":"Stagflation","d":"Steigende Preise bei gleichzeitiger Stagnation und hoher Arbeitslosigkeit. Typischer Auslöser ist ein Angebotsschock."},
+{"a":"Kaufkraft","f":"Kaufkraft","d":"Gütermenge, die man für einen bestimmten Geldbetrag erhält. Sie verhält sich umgekehrt zum Preisniveau."},
+{"a":"Disinflation","f":"Disinflation","d":"Rückgang der Inflationsrate bei weiterhin steigenden Preisen. Nicht zu verwechseln mit Deflation."},
+{"a":"Reallohn","f":"Reallohn","d":"Kaufkraft des Lohns nach Berücksichtigung der Preisentwicklung. Gegenstück ist der Nominallohn, also der ausgezahlte Betrag."},
+{"a":"Verbraucherpreisindex","f":"Verbraucherpreisindex","d":"Kennzahl für die Preisentwicklung eines repräsentativen Warenkorbs. Grundlage zur Berechnung der Inflationsrate."},
+{"a":"Angebotsschock","f":"Angebotsschock","d":"Plötzliche Verteuerung oder Verknappung von Energie und Rohstoffen. Häufiger Auslöser einer Stagflation."},
+{"a":"Quintärer Sektor","f":"Haushaltssektor","d":"Die privaten Haushalte als eigener Wirtschaftsbereich: Konsumenten und Anbieter von Arbeitskraft."},
+{"a":"On-Premises","f":"On-Premises","d":"Betrieb der Systeme in eigenen Räumen und eigener Verantwortung. Gegenmodell zur Cloud."},
+{"a":"Public Cloud","f":"Public Cloud","d":"Von einem Anbieter für viele Kunden bereitgestellte, geteilte Ressourcen. Günstig und elastisch, dafür geringere Kontrolle."},
+{"a":"Private Cloud","f":"Private Cloud","d":"Ausschließlich für ein Unternehmen betriebene Cloud-Umgebung. Hohe Kontrolle, dafür teurer und weniger elastisch."},
+{"a":"Hybrid Cloud","f":"Hybrid Cloud","d":"Kombination aus privater und öffentlicher Cloud. Schutzbedürftige Daten bleiben privat, Lastspitzen laufen öffentlich."},
+{"a":"Elastizität","f":"Elastizität","d":"Fähigkeit, Ressourcen bei sinkender Last automatisch wieder abzugeben. Geht über reine Skalierbarkeit hinaus."},
+{"a":"Vendor Lock-in","f":"Anbieterabhängigkeit","d":"Abhängigkeit von einem Anbieter, weil ein Wechsel wegen proprietärer Schnittstellen oder Formate teuer wäre."},
+{"a":"Mandantenfähigkeit","f":"Multi-Tenancy","d":"Mehrere Kunden nutzen dieselbe Umgebung bei logisch getrennten Daten. Grundlage der Public Cloud."}];
 
 // ---- Bibliothek: Render + Suche ----
 const libList = document.getElementById('libList');
@@ -21301,14 +21597,14 @@ renderLib(GLOSSAR_SORTED);
     "r-tcpip": ["QUIC","Congestion Control"],
     "r-topo": ["FDDI"],
     "r-krypto": ["RSA","ECC","Diffie-Hellman","PKI","X.509","CRL","OCSP","CSR","Hash","Salt"],
-    "r-virt": ["Hypervisor","Overcommitment","Live-Migration","Thin Client","VDI"],
+    "r-virt": ["Hypervisor","Overcommitment","Live-Migration","Thin Client","VDI","On-Premises","IaaS","PaaS","SaaS","Public Cloud","Private Cloud","Hybrid Cloud","Elastizität","Vendor Lock-in","Mandantenfähigkeit"],
     "r-vlan": ["VLAN","Trunk","VLAN-Hopping","MAC-Spoofing","802.1X","Trunk-Port","Access-Port"],
     "r-voip": ["VoIP","SIP","RTP","QoS"],
     "r-vpn": ["IPsec","IKE","IKEv2","ISAKMP","ESP","AH","L2TP","OpenVPN","Diffie-Hellman"],
     "r-wlan": ["SSID","PSK","SAE","Roaming","Band Steering","IEEE 802.11","Wireless Controller"],
     "r-zahlen": ["MSB","LSB","Nibble","Zweierkomplement"],
     "r-vertraege": ["Kaufvertrag","Werkvertrag","Dienstvertrag","Leasing","Lieferverzug","Nacherfüllung","Mietvertrag"],
-    "r-markt": ["Polypol","Oligopol","Monopol","Monopson","Primärer Sektor","Tertiärer Sektor"],
+    "r-markt": ["Polypol","Oligopol","Monopol","Monopson","Primärer Sektor","Tertiärer Sektor","Inflation","Deflation","Stagflation","Kaufkraft","Disinflation","Reallohn","Verbraucherpreisindex","Angebotsschock","Quintärer Sektor"],
     "r-kalkulation": ["Bezugskalkulation","Zieleinkaufspreis","Bareinkaufspreis","Bezugspreis","Ratendarlehen","ROI"],
     "r-malware": ["Wurm","Trojaner","Rootkit","Ransomware","Keylogger","Phishing","Zero-Day","Virus"],
     "r-grundschutz": ["BSI","VIVA","IT-Grundschutz","Maximumprinzip","Kumulationseffekt","Schutzbedarfsfeststellung","Risikoanalyse"],
