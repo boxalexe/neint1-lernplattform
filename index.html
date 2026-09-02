@@ -22,7 +22,7 @@
     if (t && t !== 'default') document.documentElement.setAttribute('data-theme', t);
   } catch (e) {}
 </script>
-<link rel="stylesheet" href="styles.css?v=20260827t">
+<link rel="stylesheet" href="styles.css?v=20260827y">
 </head>
 <body>
 <header>
@@ -252,6 +252,8 @@
 </table>
 
 <div class="callout"><span class="tag">Verbindliche Auskunft</span>Diese Plattform bereitet auf die AP1 vor, ist aber kein amtliches Angebot. Prüfungsinhalte, Hilfsmittel und Ablauf können sich ändern und regional abweichen. Wer wirklich sichergehen will, wendet sich an die für ihn zuständige <a href="https://www.dihk.de/ihk-finder" target="_blank" rel="noopener">IHK</a>, die als zuständige Stelle die Prüfungen organisiert und verbindlich Auskunft gibt.</div>
+
+<div class="callout xref"><span class="tag">Verwandte Themen</span><a href="#r-kalkulation">Kaufmännisches Rechnen</a> · <a href="#r-vertraege">Verträge &amp; Rechtsgeschäfte</a> · <a href="#r-projekt">Projektmanagement</a></div>
 </section>
 
 <section id="r-api">
@@ -276,6 +278,8 @@
 <p>Die Unterscheidung 401/403 ist prüfungsrelevant: 401 = Identität fehlt oder ist ungültig (Authentifizierung), 403 = Identität bekannt, aber keine Rechte (Autorisierung). <strong>Rate Limiting</strong> begrenzt die Anfragen pro Client und Zeitraum, um Überlastung und Missbrauch zu verhindern.</p>
 
 <div class="callout"><span class="tag">Prüfungsfalle</span><strong>PUT</strong> ersetzt die Ressource vollständig, <strong>PATCH</strong> ändert nur einzelne Felder. Wer mit PUT ein Teilobjekt sendet, löscht die nicht mitgeschickten Felder. Zweite häufige Falle: <strong>GET, PUT und DELETE sind idempotent</strong>, mehrfaches Ausführen führt zum selben Zustand. <strong>POST ist es nicht</strong> — zweimal abgeschickt entstehen zwei Datensätze. Genau danach wird gefragt, wenn im Szenario eine Bestellung doppelt angelegt wurde.</div>
+
+<div class="callout xref"><span class="tag">Verwandte Themen</span><a href="#r-mailsec">E-Mail-Sicherheit: SPF, DKIM &amp; DMARC</a> · <a href="#r-sql">SQL & Datenbanken</a> · <a href="#r-security">IT-Sicherheit Grundlagen</a></div>
 </section>
 
 <section id="r-raid">
@@ -289,6 +293,7 @@
 <tr><td>RAID 5</td><td>Striping + Parität</td><td>3</td><td>(n − 1) × Kapazität</td><td>1 Platte</td></tr>
 <tr><td>RAID 6</td><td>Striping + doppelte Parität</td><td>4</td><td>(n − 2) × Kapazität</td><td>2 Platten</td></tr>
 <tr><td>RAID 10</td><td>Mirroring, dann Striping (1+0)</td><td>4</td><td>n / 2 × Kapazität</td><td>1 je Spiegelpaar</td></tr>
+<tr><td>RAID 50</td><td>Striping über mehrere RAID-5-Gruppen (5+0)</td><td>6</td><td>(n − Anzahl Gruppen) × Kapazität</td><td>1 Platte je RAID-5-Gruppe</td></tr>
 </table>
 <p><strong>RAID 10 vs. RAID 01:</strong> Bei RAID 10 werden zuerst Plattenpaare gespiegelt und dann gestript, bei RAID 01 zuerst gestript und dann gespiegelt. RAID 10 gilt als robuster, weil auch mehrere Platten gleichzeitig ausfallen dürfen, solange nie beide Platten desselben Spiegelpaars betroffen sind. <strong>RAID 50</strong> fasst mehrere RAID-5-Gruppen per übergeordnetem Striping zusammen.</p>
 <div class="callout"><span class="tag">Rebuild-Risiko</span>Nach einem Plattentausch rekonstruiert der Controller die Daten aus den übrigen Platten. Bei RAID 5 ist die Redundanz während des Rebuilds aufgebraucht, ein zweiter Ausfall in dieser Phase bedeutet Totalverlust. Genau hier punktet RAID 6. Eine <strong>Hot-Spare</strong> springt automatisch ein, <strong>Hot-Swap</strong> erlaubt den Plattentausch im laufenden Betrieb.</div>
@@ -315,6 +320,8 @@
 <p><strong>Aufbewahrungskonzepte:</strong> Neben der Rotation ist festzulegen, wie lange Stände vorgehalten werden müssen. Dabei wirken zwei Anforderungen gegeneinander: Handels- und steuerrechtliche Aufbewahrungsfristen verlangen langes Vorhalten, die DSGVO dagegen die Löschung personenbezogener Daten, sobald der Zweck entfällt. Ein Löschkonzept muss beides zusammenbringen. Zusätzlich sind Aufbewahrungsort (mindestens eine Kopie außer Haus), Schutz vor nachträglicher Veränderung und die regelmäßige <strong>Rücksicherungsprobe</strong> festzulegen, denn nur eine getestete Sicherung ist eine echte Sicherung.</p>
 
 <div class="callout"><span class="tag">Prüfungsfalle</span>Die Nutzkapazität wird gern falsch gerechnet. Bei <strong>RAID 5</strong> geht die Kapazität <em>einer</em> Platte für Parität verloren: 4 Platten à 2 TB ergeben 6 TB nutzbar. Bei <strong>RAID 6</strong> sind es zwei Platten, bei <strong>RAID 1</strong> die Hälfte, bei <strong>RAID 10</strong> ebenfalls die Hälfte. Und die wichtigste Aussage überhaupt: <strong>RAID ersetzt keine Datensicherung.</strong> Versehentliches Löschen, Schadsoftware oder ein Brand treffen alle Platten des Verbunds gleichzeitig.</div>
+
+<div class="callout xref"><span class="tag">Verwandte Themen</span><a href="#r-datenschutz">Informationssicherheit &amp; Datenschutz</a> · <a href="#r-grundschutz">BSI-Grundschutz &amp; Schutzbedarf</a> · <a href="#r-storage">Storage-Systeme</a></div>
 </section>
 
 <section id="r-grundschutz">
@@ -378,6 +385,8 @@
 <p>Für ein <strong>ISO 27001-Zertifikat auf Basis von IT-Grundschutz</strong> sind erforderlich: ein festgelegter Geltungsbereich (Informationsverbund), ein vollständiges und umgesetztes Sicherheitskonzept nach IT-Grundschutz mit erfüllten Basis- und Standard-Anforderungen, durchgeführte Risikoanalysen für Objekte mit erhöhtem Schutzbedarf, die vollständigen Referenzdokumente sowie ein Audit durch einen beim BSI zertifizierten Auditor. Das Zertifikat ist befristet und wird durch Überwachungsaudits aufrechterhalten.</p>
 
 <div class="callout"><span class="tag">Prüfungsfalle</span>Der Schutzbedarf wird <strong>je Schutzziel getrennt</strong> festgestellt: Ein System kann bei der Verfügbarkeit „normal" sein und bei der Vertraulichkeit „sehr hoch". Wer pauschal eine Stufe für das ganze System vergibt, verliert Punkte. Zweite Falle: Beim <strong>Maximumprinzip</strong> zählt die höchste Anforderung aller Anwendungen, nicht der Durchschnitt und nicht die Mehrheit.</div>
+
+<div class="callout xref"><span class="tag">Verwandte Themen</span><a href="#r-datenschutz">Informationssicherheit &amp; Datenschutz</a> · <a href="#r-raid">Backup & RAID</a> · <a href="#r-haertung">Systemhärtung</a></div>
 </section>
 
 <section id="r-datenschutz">
@@ -455,6 +464,8 @@
 <p>Ergänzend wichtig: <strong>Gemeinsam Verantwortliche</strong> legen Zwecke und Mittel zusammen fest und regeln ihre Pflichten vertraglich. Bei <strong>Datentransfers in Drittländer</strong> braucht es eine Grundlage wie einen Angemessenheitsbeschluss oder <strong>Standardvertragsklauseln</strong>. <strong>Löschkonzepte</strong> legen fest, wann welche Daten nach Ablauf der Aufbewahrungsfristen entfernt werden.</p>
 
 <div class="callout"><span class="tag">Prüfungsfalle</span>Personenbezug endet nicht bei Name und Adresse. Auch <strong>IP-Adresse, Kundennummer, Personalnummer oder Standortdaten</strong> sind personenbezogen, sobald sich damit eine Person bestimmen lässt. Merken Sie außerdem die Abgrenzung: <strong>Pseudonymisierung</strong> ist umkehrbar und bleibt personenbezogen, <strong>Anonymisierung</strong> ist nicht umkehrbar und fällt damit aus der DSGVO heraus.</div>
+
+<div class="callout xref"><span class="tag">Verwandte Themen</span><a href="#r-raid">Backup & RAID</a> · <a href="#r-grundschutz">BSI-Grundschutz &amp; Schutzbedarf</a> · <a href="#r-security">IT-Sicherheit Grundlagen</a></div>
 </section>
 
 <section id="r-diagnose">
@@ -475,6 +486,8 @@
 <div class="callout"><span class="tag">Ping-Grenze</span>Ein erfolgreicher Ping belegt nur die Erreichbarkeit per ICMP. Er garantiert nicht, dass ein bestimmter TCP- oder UDP-Dienst auf dem Ziel funktioniert, der Webserver kann trotz sauberem Ping gestört sein, und umgekehrt kann eine Firewall ICMP blocken, obwohl der Dienst läuft.</div>
 
 <div class="callout"><span class="tag">Prüfungsfalle</span>Die Fehlersuche läuft <strong>von unten nach oben</strong> durch die Schichten: erst Kabel und Verbindungsleuchte, dann Adresse und Subnetzmaske, dann Gateway, dann Namensauflösung, zuletzt die Anwendung. Wer oben beginnt, sucht lange. Klassisches Erkennungszeichen: Eine Adresse aus <strong>169.254.x.x</strong> bedeutet immer, dass kein DHCP-Server geantwortet hat.</div>
+
+<div class="callout xref"><span class="tag">Verwandte Themen</span><a href="#r-ip">IPv4 & IPv6</a> · <a href="#r-dnsdhcp">DNS & DHCP im Detail</a> · <a href="#r-ports">Ports & Sockets</a></div>
 </section>
 
 <section id="r-dnsdhcp">
@@ -499,6 +512,8 @@
 <p>Nach der Vergabe versucht der Client bei <strong>T1</strong> (50 % der Lease) ein <strong>Renewal</strong> direkt beim bekannten Server; scheitert das, fragt er bei <strong>T2</strong> (87,5 %) per Broadcast beliebige Server. Läuft die Lease komplett ab, beginnt DORA von vorn. <strong>DHCP Snooping</strong> schützt am Switch vor nicht autorisierten DHCP-Servern: Nur vertrauenswürdige Ports dürfen Server-Antworten senden, ein Rogue-Server im Netz kann Clients sonst falsche Gateways unterschieben.</p>
 
 <div class="callout"><span class="tag">Prüfungsfalle</span>Verwechselt werden gern <strong>rekursiv</strong> und <strong>iterativ</strong>: Der Client stellt eine <em>rekursive</em> Anfrage an seinen Resolver und erwartet die fertige Antwort. Der Resolver fragt anschließend <em>iterativ</em> bei Root-, TLD- und autoritativem Server nach. Zweite Falle: Bei DHCP läuft der <strong>Request</strong> ebenfalls als Broadcast, damit die übrigen Server ihr Angebot zurückziehen.</div>
+
+<div class="callout xref"><span class="tag">Verwandte Themen</span><a href="#r-ip">IPv4 & IPv6</a> · <a href="#r-mailsec">E-Mail-Sicherheit: SPF, DKIM &amp; DMARC</a> · <a href="#r-diagnose">Diagnose & Fehlersuche</a></div>
 </section>
 
 <section id="r-mailsec">
@@ -517,6 +532,8 @@
 <p>Genau hier setzt <strong>DMARC</strong> an. Es fordert, dass die geprüfte Domain zur sichtbaren Absenderadresse passt (<strong>Alignment</strong>), und akzeptiert die Mail, wenn <em>mindestens eines</em> der beiden Verfahren mit passender Ausrichtung erfolgreich ist. Zusätzlich legt die Richtlinie fest, was sonst passiert:</p>
 <p><code>p=none</code> beobachtet nur und meldet, <code>p=quarantine</code> stuft verdächtige Mails als Spam ein, <code>p=reject</code> weist sie ganz ab. Über eine Berichtsadresse erhält der Domaininhaber Auswertungen darüber, wer in seinem Namen versendet. Der übliche Weg ist deshalb: mit <code>p=none</code> starten, Berichte auswerten, alle legitimen Versandwege aufnehmen und erst dann auf <code>quarantine</code> und schließlich <code>reject</code> verschärfen.</p>
 <div class="callout"><span class="tag">Merksatz</span><strong>SPF</strong> = wer <em>darf</em> senden. <strong>DKIM</strong> = wurde unterwegs <em>verändert</em>. <strong>DMARC</strong> = was <em>tun</em>, wenn es nicht passt. Alle drei stehen im DNS und schützen vor Absenderfälschung, wie sie bei Phishing und CEO-Fraud verwendet wird.</div>
+
+<div class="callout xref"><span class="tag">Verwandte Themen</span><a href="#r-krypto">Verschlüsselung & PKI</a> · <a href="#r-dnsdhcp">DNS & DHCP im Detail</a> · <a href="#r-malware">Schadsoftware &amp; Angriffsarten</a></div>
 </section>
 
 <section id="r-epk">
@@ -554,6 +571,8 @@ Ereignis: <em>Antragsteller ist benachrichtigt</em></p>
 <p>Die <strong>BPMN</strong> (Business Process Model and Notation) ist die international verbreitete, deutlich umfangreichere Notation. Sie kennt zusätzlich Rollen in Form von Bahnen (Pools und Lanes), unterschiedliche Ereignistypen wie Zeit- und Nachrichtenereignisse sowie Elemente für Fehlerbehandlung. BPMN ist zudem so genau festgelegt, dass Modelle technisch ausgeführt werden können.</p>
 <p>Die <strong>EPK</strong> ist einfacher und schneller zu lesen, im deutschsprachigen Raum weit verbreitet und für die fachliche Abstimmung mit Anwendern gut geeignet. Kurz gefasst: EPK für die verständliche fachliche Sicht, BPMN für die genaue, technisch verwertbare Modellierung.</p>
 <p>Im <strong>Geschäftsprozessmanagement</strong> ist die EPK ein Werkzeug der Ist-Aufnahme und der Soll-Konzeption. Erst wenn der Ablauf sichtbar ist, lassen sich Doppelarbeit, Medienbrüche, Wartezeiten und unklare Zuständigkeiten erkennen und gezielt beseitigen.</p>
+
+<div class="callout xref"><span class="tag">Verwandte Themen</span><a href="#r-projekt">Projektmanagement</a> · <a href="#r-qm">Qualitätsmanagement</a> · <a href="#r-oop">OOP & UML</a></div>
 </section>
 
 
@@ -576,6 +595,8 @@ Ereignis: <em>Antragsteller ist benachrichtigt</em></p>
 <p>Die <strong>MTU</strong> (Maximum Transmission Unit) ist die maximale Paketgröße, bei Ethernet standardmäßig 1500 Byte; <strong>Jumbo Frames</strong> (bis ~9000 Byte) reduzieren den Overhead in Speichernetzen. Am Switch relevant: <strong>MAC Aging</strong> (gelernte MAC-Einträge verfallen nach Timeout), <strong>Port Security</strong> (nur zugelassene MAC-Adressen je Port, sonst Blockade), <strong>Link Aggregation mit LACP</strong> (mehrere physische Links werden zu einem logischen gebündelt, mehr Bandbreite und Redundanz).</p>
 
 <div class="callout"><span class="tag">Prüfungsfalle</span><strong>CSMA/CD</strong> gehört zum kabelgebundenen Ethernet und erkennt Kollisionen <em>nachträglich</em>. <strong>CSMA/CA</strong> gehört zum WLAN und <em>vermeidet</em> sie vorher, weil eine Station im Funk nicht gleichzeitig senden und mithören kann. In vollduplex geschalteten Switch-Netzen entstehen ohnehin keine Kollisionen mehr, CSMA/CD ist dort praktisch bedeutungslos.</div>
+
+<div class="callout xref"><span class="tag">Verwandte Themen</span><a href="#r-medien">Kabel, Medien & Hardware</a> · <a href="#r-topo">Netzwerktopologien</a> · <a href="#r-osi">OSI-Modell (7 Schichten)</a></div>
 </section>
 
 <section id="r-fddi">
@@ -589,6 +610,8 @@ Ereignis: <em>Antragsteller ist benachrichtigt</em></p>
 </ul>
 
 <div class="callout"><span class="tag">Prüfungsfalle</span>FDDI arbeitet mit einem <strong>Doppelring</strong>, bei dem der zweite Ring als Reserve dient. Fällt eine Strecke aus, schalten die Stationen auf den Gegenring um und bilden einen einzelnen, größeren Ring — das ist der eigentliche Prüfungspunkt. Zugriff erfolgt über <strong>Token Passing</strong>: Nur wer das Token besitzt, darf senden, wodurch es keine Kollisionen gibt.</div>
+
+<div class="callout xref"><span class="tag">Verwandte Themen</span><a href="#r-topo">Netzwerktopologien</a> · <a href="#r-ethernet">Ethernet & Zugriffsverfahren</a> · <a href="#r-medien">Kabel, Medien & Hardware</a></div>
 </section>
 
 <section id="r-header">
@@ -610,6 +633,8 @@ Ereignis: <em>Antragsteller ist benachrichtigt</em></p>
 <p><strong>traceroute</strong> (Linux) / <strong>tracert</strong> (Windows) nutzt die TTL: erst TTL=1 (erster Router meldet sich), dann 2, 3 … bis das Ziel erreicht ist, so wird jeder Hop sichtbar. Reine Erreichbarkeit prüft man dagegen mit <strong>ping</strong> (ICMP Echo Request/Reply); die dabei gemessene <span class="term">RTT (Round Trip Time)</span> ist die Umlaufzeit hin und zurück und damit ein direktes Maß für die Latenz.</p>
 
 <div class="callout"><span class="tag">Prüfungsfalle</span><strong>TTL ist keine Zeitangabe</strong>, obwohl der Name das nahelegt. Der Wert wird von jedem Router um eins verringert; erreicht er null, wird das Paket verworfen und eine ICMP-Meldung zurückgeschickt. Genau das nutzt <strong>Traceroute</strong> aus, indem es die TTL schrittweise erhöht. Aus dem Startwert und dem angekommenen Wert lässt sich die Zahl der durchlaufenen Router berechnen.</div>
+
+<div class="callout xref"><span class="tag">Verwandte Themen</span><a href="#r-osi">OSI-Modell (7 Schichten)</a> · <a href="#r-ip">IPv4 & IPv6</a> · <a href="#r-tcpip">TCP/IP & UDP</a></div>
 </section>
 
 <section id="r-hyperv">
@@ -627,6 +652,8 @@ Ereignis: <em>Antragsteller ist benachrichtigt</em></p>
 <p><strong>Hyper-V Export/Import:</strong> Über die Export-Funktion lässt sich eine komplette VM samt Konfiguration, virtuellen Festplatten und Prüfpunkten als in sich geschlossenes Paket sichern und später auf demselben oder einem anderen Host wieder importieren. Positive Nebeneffekte: Das Paket dient zugleich als konsistentes Backup, lässt sich zum Klonen einer VM nutzen und erlaubt die einfache Übertragung auf andere Hardware, ohne die VM neu aufsetzen zu müssen.</p>
 
 <div class="callout"><span class="tag">Prüfungsfalle</span><strong>Typ 1</strong> läuft direkt auf der Hardware, ohne darunterliegendes Betriebssystem, und wird im Rechenzentrum eingesetzt. <strong>Typ 2</strong> läuft als Anwendung auf einem vorhandenen Betriebssystem und eignet sich für Test und Entwicklung am Arbeitsplatz. Wird im Szenario „hohe Leistung", „Produktivbetrieb" oder „Rechenzentrum" genannt, ist Typ 1 die erwartete Antwort.</div>
+
+<div class="callout xref"><span class="tag">Verwandte Themen</span><a href="#r-virt">Virtualisierung Grundlagen</a> · <a href="#r-storage">Storage-Systeme</a> · <a href="#r-hardware">IT-Hardware, Energie &amp; Grundlagen</a></div>
 </section>
 
 <section id="r-ip">
@@ -712,6 +739,8 @@ Im <a href="subtrainer/">Subnetting Trainer</a> kann dieses Thema gezielt geübt
 <p>Dokumentation altert mit jeder Änderung am System. Wirksam ist deshalb nur die Kopplung an bestehende Abläufe: Die Aktualisierung wird fester Bestandteil des Änderungsprozesses, eine Änderung gilt erst als abgeschlossen, wenn die Dokumentation nachgezogen wurde. Ergänzend hilft eine benannte Verantwortlichkeit je Dokument und eine regelmäßige Überprüfung in festem Rhythmus.</p>
 <div class="callout"><span class="tag">Häufige Fehler</span>Dokumentation erst am Projektende erstellen, wenn Details längst vergessen sind. Alles in einem Dokument für alle Zielgruppen mischen. Nach Änderungen nicht nachziehen. Wissen nur im Kopf einzelner Personen belassen. Keine Version und kein Datum angeben. Und die Ablage so wählen, dass sie ausgerechnet bei einem Ausfall des Systems nicht erreichbar ist.</div>
 <div class="callout"><span class="tag">AP1-Beispiel</span>Ein Betrieb führt eine neue Warenwirtschaft ein. Zu erstellen sind: eine <strong>Systemdokumentation</strong> mit Serverarchitektur, Datenbankschema und Schnittstellen für die IT, eine <strong>Betriebsdokumentation</strong> mit Sicherungskonzept und Wiederanlaufplan für den Betrieb, eine <strong>Benutzerdokumentation</strong> mit bebilderten Anleitungen für die Lagermitarbeitenden sowie eine <strong>Projektdokumentation</strong> mit Pflichtenheft, Protokollen und Abnahme für den Auftraggeber. Typische Prüfungsfrage: Ordnen Sie drei Inhalte der jeweils richtigen Dokumentationsart zu und begründen Sie die Zuordnung über die Zielgruppe.</div>
+
+<div class="callout xref"><span class="tag">Verwandte Themen</span><a href="#r-projekt">Projektmanagement</a> · <a href="#r-itil">ITIL &amp; IT-Servicemanagement</a> · <a href="#r-qm">Qualitätsmanagement</a></div>
 </section>
 <section id="r-hardware">
 <h2>IT-Hardware, Energie &amp; Grundlagen</h2>
@@ -839,6 +868,8 @@ Merken Sie sich die Reihenfolge: erst summieren, dann Reserve aufschlagen, dann 
 <tr><td>3D-Drucker</td><td>Baut Objekte schichtweise nach einem CAD-Modell auf</td><td>Prototypen, Ersatzteile</td></tr>
 </table>
 <div class="callout"><span class="tag">Prüfungsfalle</span>Der <strong>Nadeldrucker</strong> wirkt veraltet, ist aber die einzige der genannten Techniken, die <em>Durchschläge</em> erzeugen kann, weil sie mechanisch auf das Papier schlägt. Genau danach wird gefragt, wenn im Szenario mehrlagige Formulare vorkommen. <strong>Multifunktionsgeräte</strong> vereinen Drucken, Scannen, Kopieren und teils Faxen in einem Gerät und sparen dadurch Platz und Anschaffungskosten.</div>
+
+<div class="callout xref"><span class="tag">Verwandte Themen</span><a href="#r-medien">Kabel, Medien & Hardware</a> · <a href="#r-virt">Virtualisierung Grundlagen</a> · <a href="#r-haertung">Systemhärtung</a></div>
 </section>
 
 <section id="r-security">
@@ -862,6 +893,12 @@ Merken Sie sich die Reihenfolge: erst summieren, dann Reserve aufschlagen, dann 
 <p>Passwörter werden nie im Klartext und nie nur "verschlüsselt" gespeichert, sondern gehasht, mit modernen, absichtlich langsamen Verfahren wie <strong>Argon2</strong>, <strong>bcrypt</strong> oder <strong>scrypt</strong>, die Brute-Force massiv verteuern. Schnelle Hashes wie MD5 oder reines SHA-256 sind dafür ungeeignet. Ein <strong>Salt</strong> verhindert nicht jeden Angriff, er sorgt dafür, dass gleiche Passwörter unterschiedliche Hashes ergeben, und macht vorberechnete Tabellen (Rainbow Tables) wertlos. Zur Erkennung und Reaktion im Betrieb: <strong>SIEM</strong> sammelt und korreliert Logdaten zentral, <strong>EDR</strong> überwacht Endgeräte auf verdächtiges Verhalten, <strong>Incident Response</strong> ist der geplante Ablauf für den Ernstfall (erkennen, eindämmen, bereinigen, wiederherstellen, auswerten).</p>
 
 <div class="callout"><span class="tag">Prüfungsfalle</span><strong>Authentifizierung</strong> beantwortet die Frage „Wer bist du?", <strong>Autorisierung</strong> die Frage „Was darfst du?". Beides wird regelmäßig vertauscht. Erst wird die Identität nachgewiesen, dann werden die Rechte geprüft. Merken Sie zusätzlich die drei Faktoren: <strong>Wissen</strong> wie ein Passwort, <strong>Besitz</strong> wie ein Token, <strong>Sein</strong> wie ein Fingerabdruck. Eine Mehr-Faktor-Authentifizierung verlangt Faktoren aus <em>verschiedenen</em> Gruppen, zwei Passwörter genügen nicht.</div>
+
+<div class="callout"><span class="tag">Beispielaufgabe</span>
+<strong>Aufgabe:</strong> Der Arbeitslaptop einer Mitarbeiterin wird aus dem Auto gestohlen. Welche Maßnahmen müssen <em>vorher</em> getroffen worden sein, damit die Firmendaten geschützt bleiben? Nennen Sie vier Maßnahmen.<br><br>
+<strong>Musterlösung:</strong> Vollverschlüsselung des Datenträgers, damit die Daten ohne Anmeldung unlesbar bleiben; ein langes Kennwort ohne Wörterbuchwörter mit Groß- und Kleinbuchstaben, Ziffern und Sonderzeichen; ein zweiter Faktor bei der Anmeldung; eine automatische Bildschirmsperre nach kurzer Zeit; eine zentrale Geräteverwaltung mit der Möglichkeit zur Fernlöschung; sowie eine aktuelle Datensicherung, damit die Daten trotz Verlust weiterhin verfügbar sind.<br><br>
+<strong>Hinweis zur Bewertung:</strong> Gefragt sind vorbeugende Maßnahmen. Antworten wie Diebstahlanzeige oder Sperrung im Nachhinein erfüllen die Aufgabenstellung nicht, weil sie erst nach dem Verlust greifen.</div>
+<div class="callout xref"><span class="tag">Verwandte Themen</span><a href="#r-datenschutz">Informationssicherheit &amp; Datenschutz</a> · <a href="#r-grundschutz">BSI-Grundschutz &amp; Schutzbedarf</a> · <a href="#r-krypto">Verschlüsselung & PKI</a> · <a href="#r-malware">Schadsoftware &amp; Angriffsarten</a></div>
 </section>
 
 <section id="r-itil">
@@ -889,6 +926,8 @@ Merken Sie sich die Reihenfolge: erst summieren, dann Reserve aufschlagen, dann 
 <p>Bei der <strong>funktionalen Eskalation</strong> wird ein Incident an eine fachlich höhere Stufe weitergereicht, etwa vom First Level an den Second Level Support. Bei der <strong>hierarchischen Eskalation</strong> wird die Führungsebene einbezogen, weil Fristen zu reißen drohen oder Entscheidungen nötig sind. Der Support ist üblicherweise in Stufen gegliedert: <strong>First Level</strong> nimmt an und löst Standardfälle, <strong>Second Level</strong> übernimmt fachlich Anspruchsvolles, <strong>Third Level</strong> sind Spezialisten oder der Hersteller.</p>
 
 <div class="callout"><span class="tag">Prüfungsfalle</span>Die drei Vereinbarungsarten werden gern verwechselt: Das <strong>SLA</strong> regelt die Leistung gegenüber dem <em>Kunden</em>, das <strong>OLA</strong> die Zusammenarbeit zwischen <em>internen</em> Abteilungen, der <strong>Underpinning Contract</strong> die Leistung eines <em>externen Zulieferers</em>. Alle drei zusammen müssen zueinander passen: Ein SLA mit vier Stunden Wiederherstellungszeit ist nicht haltbar, wenn der Zulieferer erst am Folgetag reagiert.</div>
+
+<div class="callout xref"><span class="tag">Verwandte Themen</span><a href="#r-qm">Qualitätsmanagement</a> · <a href="#r-doku">IT-Dokumentation</a> · <a href="#r-grundschutz">BSI-Grundschutz &amp; Schutzbedarf</a></div>
 </section>
 
 <section id="r-medien">
@@ -919,6 +958,8 @@ Merken Sie sich die Reihenfolge: erst summieren, dann Reserve aufschlagen, dann 
 <p><strong>Unterschied zur Glasfaser:</strong> Glasfaser überträgt Lichtsignale statt elektrischer Signale. Daraus ergeben sich die entscheidenden Vorteile: sehr geringe Dämpfung und dadurch hohe Reichweite ohne Ratenverlust, deutlich höhere und symmetrische Bandbreiten, keine Störung durch elektromagnetische Felder und keine Abstrahlung. Nachteilig sind der aufwendige Neubau der Leitungswege und die empfindlichere Handhabung beim Spleißen. Wird Glasfaser bis ins Gebäude oder in die Wohnung geführt (FTTB/FTTH), entfällt die Kupferstrecke und damit die Entfernungsabhängigkeit weitgehend.</p>
 
 <div class="callout"><span class="tag">Prüfungsfalle</span>Die <strong>100-Meter-Grenze</strong> bei Twisted Pair gilt für die Gesamtstrecke: 90 Meter fest verlegtes Kabel plus zusammen 10 Meter Rangier- und Anschlusskabel. Wer nur die Verlegestrecke rechnet, kommt auf ein falsches Ergebnis. Zweite Falle: Ein <strong>Crossover-Kabel</strong> wird dank Auto-MDI-X heute praktisch nicht mehr gebraucht, ist aber weiterhin Prüfungsstoff.</div>
+
+<div class="callout xref"><span class="tag">Verwandte Themen</span><a href="#r-verkabelung">Strukturierte Verkabelung</a> · <a href="#r-ethernet">Ethernet & Zugriffsverfahren</a> · <a href="#r-hardware">IT-Hardware, Energie &amp; Grundlagen</a></div>
 </section>
 
 <section id="r-kalkulation">
@@ -961,6 +1002,8 @@ Jahr 2: Zinsen 20.000 &times; 5 % = 1.000,00 EUR, Rate 11.000,00 EUR, Restschuld
 Jahr 3: Zinsen 10.000 &times; 5 % = 500,00 EUR, Rate 10.500,00 EUR, Restschuld danach 0,00 EUR<br>
 Zinsen insgesamt: 3.000,00 EUR</div>
 <p><strong>Unterschied zum Annuitätendarlehen:</strong> Dort bleibt die <em>Gesamtrate</em> über die Laufzeit konstant. Innerhalb der Rate verschiebt sich das Verhältnis: Der Zinsanteil sinkt mit der Restschuld, der Tilgungsanteil steigt entsprechend an. Merkhilfe: Beim Ratendarlehen ist die <strong>Tilgung</strong> gleich, beim Annuitätendarlehen die <strong>Rate</strong>.</p>
+
+<div class="callout xref"><span class="tag">Verwandte Themen</span><a href="#r-vertraege">Verträge &amp; Rechtsgeschäfte</a> · <a href="#r-markt">Markt &amp; Wirtschaftssektoren</a> · <a href="#r-ap1">AP1</a></div>
 </section>
 
 <section id="r-logik">
@@ -979,6 +1022,8 @@ Zinsen insgesamt: 3.000,00 EUR</div>
 <div class="callout"><span class="tag">Brücke zum Subnetting</span>Die Netzadresse entsteht durch bitweises <strong>AND</strong> aus IP-Adresse UND Subnetzmaske. Die 1-Bits der Maske lassen den Netzanteil durch, die 0-Bits blenden den Hostanteil aus (Wert AND 1 = Wert, Wert AND 0 = 0). <strong>XOR</strong> erkennt Bit-Unterschiede, <strong>XNOR</strong> prüft auf Gleichheit.</div>
 
 <div class="callout"><span class="tag">Prüfungsfalle</span><strong>XOR</strong> liefert nur dann wahr, wenn genau <em>eine</em> Eingabe wahr ist. Bei zwei wahren Eingaben ist das Ergebnis falsch — das ist der Unterschied zum einfachen ODER und die häufigste Verwechslung. Merkhilfe für die Anwendung: XOR mit demselben Wert zweimal angewendet stellt den Ursprung wieder her, weshalb es in einfachen Verschlüsselungen und bei der RAID-Parität eingesetzt wird.</div>
+
+<div class="callout xref"><span class="tag">Verwandte Themen</span><a href="#r-zahlen">Zahlensysteme</a> · <a href="#r-hardware">IT-Hardware, Energie &amp; Grundlagen</a></div>
 </section>
 
 <section id="r-markt">
@@ -1004,6 +1049,7 @@ Zinsen insgesamt: 3.000,00 EUR</div>
 <tr><td>Tertiärer Sektor</td><td>Dienstleistungen</td><td>Handel, Banken, Logistik, IT-Support, Softwarehaus</td></tr>
 <tr><td>Quartärer Sektor</td><td>Information und Wissen, oft als Abspaltung des tertiären Sektors betrachtet</td><td>Forschung, Beratung, Datenanalyse, Bildung</td></tr>
 <tr><td>Quintärer Sektor</td><td>Die privaten Haushalte als eigener Bereich</td><td>Haushalte als Konsumenten und als Anbieter von Arbeitskraft</td></tr>
+<tr><td colspan="3" class="tbl-hint">Zur Abgrenzung: Der tertiäre Sektor erbringt Dienstleistungen, der quartäre Sektor wissens- und informationsbasierte Dienstleistungen.</td></tr>
 </table>
 <p>Alle fünf Sektoren zusammen bilden die Gesamtwirtschaft. In der Einordnung liegt die typische Prüfungsfrage: Ein Betrieb, der Software entwickelt und betreut, gehört zum tertiären Sektor, weil er eine Dienstleistung erbringt. Ein Betrieb, der Rechner zusammenbaut, gehört zum sekundären Sektor. Über die Zeit hat sich die Beschäftigung in Industrieländern deutlich vom primären zum tertiären Sektor verschoben, was als sektoraler Strukturwandel bezeichnet wird.</p>
 
@@ -1040,6 +1086,8 @@ Zinsen insgesamt: 3.000,00 EUR</div>
 <strong>Sparguthaben bei Inflation:</strong> 10.000 EUR zu 1 Prozent Zins bei 5 Prozent Inflation ergeben nominal 10.100 EUR, real aber einen Kaufkraftverlust von etwa 4 Prozent.<br>
 <strong>Kaufzurückhaltung bei Deflation:</strong> Kunden verschieben Anschaffungen, weil sie mit weiter fallenden Preisen rechnen. Der Absatz bricht ein, Betriebe kürzen Investitionen und Personal.<br>
 <strong>Energiekrise als Auslöser:</strong> Energiepreise verdoppeln sich, die Produktion wird gedrosselt, Beschäftigte werden entlassen, die Verbraucherpreise steigen dennoch. Das ist der Musterfall einer Stagflation.</div>
+
+<div class="callout xref"><span class="tag">Verwandte Themen</span><a href="#r-kalkulation">Kaufmännisches Rechnen</a> · <a href="#r-vertraege">Verträge &amp; Rechtsgeschäfte</a> · <a href="#r-ap1">AP1</a></div>
 </section>
 
 <section id="r-mux">
@@ -1054,6 +1102,8 @@ Zinsen insgesamt: 3.000,00 EUR</div>
 <p>Auf der Transportschicht ist die Portvergabe eine Form des Multiplexings: viele Anwendungen teilen sich eine Netzverbindung, unterschieden durch Ports.</p>
 
 <div class="callout"><span class="tag">Prüfungsfalle</span>Beim <strong>Zeitmultiplex</strong> nutzen alle Teilnehmer nacheinander die volle Bandbreite in eigenen Zeitschlitzen. Beim <strong>Frequenzmultiplex</strong> senden sie gleichzeitig auf getrennten Frequenzbereichen. Häufige Verwechslung im Aufgabentext: „nacheinander" bedeutet Zeit, „gleichzeitig auf verschiedenen Kanälen" bedeutet Frequenz. Beim Wellenlängenmultiplex in der Glasfaser gilt dasselbe Prinzip mit Lichtwellenlängen.</div>
+
+<div class="callout xref"><span class="tag">Verwandte Themen</span><a href="#r-medien">Kabel, Medien & Hardware</a> · <a href="#r-ethernet">Ethernet & Zugriffsverfahren</a></div>
 </section>
 
 <section id="r-ausdehnung">
@@ -1083,6 +1133,8 @@ Zinsen insgesamt: 3.000,00 EUR</div>
 <p><strong>GAN (Global Area Network):</strong> Erstreckt sich über Länder und Kontinente und ermöglicht weltweite Kommunikation. Typische Technik ist Satellitenverbindung, interkontinentale Glasfaser und das Internet selbst. Die Sicherheit übernehmen starke Verschlüsselung und globale VPN-Verbindungen.</p>
 
 <div class="callout"><span class="tag">Prüfungsfalle</span>Die Zuordnung erfolgt über die <strong>räumliche Ausdehnung</strong>, nicht über die Zahl der Geräte oder die Technik. Ein Firmengelände mit mehreren Gebäuden ist ein <strong>CAN</strong>, ein Netz über eine Stadt ein <strong>MAN</strong>, die Verbindung zweier weit entfernter Standorte ein <strong>WAN</strong>. Auch ein WAN mit nur zwei Teilnehmern bleibt ein WAN.</div>
+
+<div class="callout xref"><span class="tag">Verwandte Themen</span><a href="#r-topo">Netzwerktopologien</a> · <a href="#r-vpn">VPN & IPsec</a> · <a href="#r-verkabelung">Strukturierte Verkabelung</a></div>
 </section>
 
 <section id="r-oop">
@@ -1123,6 +1175,8 @@ Datenbank ‑ ‑ &rarr; Benutzerverwaltung: Benutzerdatensatz (gestrichelt, Rü
 Benutzerverwaltung ‑ ‑ &rarr; Anmeldemaske: true oder false<br>
 Ein <code>alt</code>-Fragment trennt danach den Fall „Anmeldung erfolgreich" vom Fall „Fehlermeldung anzeigen".</div>
 <p>Für die Prüfung wichtig ist die Abgrenzung: Das <strong>Klassendiagramm</strong> zeigt Struktur und Beziehungen, das <strong>Aktivitätsdiagramm</strong> einen Ablauf mit Verzweigungen ohne festen Bezug zu Objekten, und das <strong>Sequenzdiagramm</strong> den Nachrichtenaustausch zwischen konkreten Objekten über die Zeit.</p>
+
+<div class="callout xref"><span class="tag">Verwandte Themen</span><a href="#r-sql">SQL & Datenbanken</a> · <a href="#r-projekt">Projektmanagement</a> · <a href="#r-doku">IT-Dokumentation</a></div>
 </section>
 
 <section id="r-osi">
@@ -1150,6 +1204,11 @@ Ein <code>alt</code>-Fragment trennt danach den Fall „Anmeldung erfolgreich" v
 <p><strong>Schicht 6. Darstellung (Presentation):</strong> Formatiert und konvertiert Daten für die Empfänger-Anwendung: Zeichencodierung (z. B. UTF-8), Kompression und Verschlüsselung (z. B. TLS).</p>
 <p><strong>Schicht 7. Anwendung (Application):</strong> Stellt Netzdienste für Programme bereit, die Schnittstelle zwischen Anwendungssoftware und Netz. Typische Protokolle: HTTP, SMTP, IMAP, DNS, FTP.</p>
 <div class="callout"><span class="tag">OSI vs. TCP/IP (DoD)</span>Das OSI-Modell ist ein theoretisches ISO-Referenzmodell mit sieben Schichten, ideal zum strukturierten Denken und für die Fehlersuche. Das TCP/IP-Modell (auch DoD-Modell) ist das praxisnahe Gegenstück mit vier Schichten und die technische Grundlage des Internets. Beide beschreiben dieselbe Kommunikation, nur unterschiedlich fein unterteilt: Netzzugang &asymp; OSI 1–2, Internet &asymp; OSI 3, Transport &asymp; OSI 4, Anwendung &asymp; OSI 5–7. In der Prüfung nicht verwechseln: zwei Modelle, nicht dasselbe Modell.</div>
+
+<h3>Kollisions- und Broadcastdomäne</h3>
+<p>Eine <strong>Kollisionsdomäne</strong> umfasst alle Geräte, deren Signale sich gegenseitig stören können. Ein <strong>Hub</strong> auf Schicht 1 verbindet alle Anschlüsse zu einer einzigen Kollisionsdomäne. Ein <strong>Switch</strong> auf Schicht 2 trennt sie dagegen: Jeder Port bildet eine eigene Kollisionsdomäne, weshalb im modernen Vollduplexbetrieb praktisch keine Kollisionen mehr auftreten.</p>
+<p>Eine <strong>Broadcastdomäne</strong> umfasst alle Geräte, die einen Broadcast erreicht. Ein Switch leitet Broadcasts an alle Ports weiter und trennt Broadcastdomänen deshalb <em>nicht</em>. Erst ein <strong>Router</strong> auf Schicht 3 oder die Aufteilung in <strong>VLANs</strong> begrenzt sie. Merksatz: Der Switch trennt Kollisionsdomänen, der Router trennt Broadcastdomänen.</p>
+<div class="callout xref"><span class="tag">Verwandte Themen</span><a href="#r-tcpip">TCP/IP & UDP</a> · <a href="#r-header">Header, TTL & Traceroute</a> · <a href="#r-routing">Routing & Switching</a></div>
 </section>
 
 <section id="r-ports">
@@ -1189,6 +1248,8 @@ Ein <code>alt</code>-Fragment trennt danach den Fall „Anmeldung erfolgreich" v
 <tr><td>3306</td><td>MySQL</td><td>TCP</td><td>Datenbankserver</td></tr>
 </table>
 <div class="callout"><span class="tag">Merkhilfe</span>Verschlüsselte Varianten enden auf „S" und liegen höher: HTTP 80 → HTTPS 443, IMAP 143 → IMAPS 993, POP3 110 → POP3S 995. Alternativ hebt <strong>STARTTLS</strong> eine bestehende Klartextverbindung auf demselben Port auf TLS an (z. B. SMTP 587, IMAP 143), statt einen eigenen verschlüsselten Port zu nutzen. <strong>Port 25</strong> wird heute überwiegend für den Mailtransport zwischen Mailservern genutzt. Mail-Clients liefern ausgehende Nachrichten stattdessen in der Regel über Port <strong>587</strong> (Submission) oder <strong>465</strong> (SMTPS) ein.</div>
+
+<div class="callout xref"><span class="tag">Verwandte Themen</span><a href="#r-tcpip">TCP/IP & UDP</a> · <a href="#r-security">IT-Sicherheit Grundlagen</a> · <a href="#r-diagnose">Diagnose & Fehlersuche</a></div>
 </section>
 
 <section id="r-projekt">
@@ -1263,6 +1324,8 @@ Prüfen Sie in Aufgaben immer alle fünf Kriterien einzeln durch: Genau daran h�
 <tr><td>Budget freigeben</td><td>C</td><td>I</td><td>I</td><td>A</td></tr>
 </table>
 <div class="callout"><span class="tag">Prüfungsfalle</span>Pro Zeile darf es <strong>genau ein A</strong> geben. Zwei Verantwortliche bedeuten in der Praxis, dass sich niemand verantwortlich fühlt. <strong>R</strong> kann dagegen mehrfach vorkommen, wenn mehrere gemeinsam ausführen. Und der Unterschied zwischen C und I ist die Richtung: <em>Consulted</em> wird vorher gefragt und antwortet, <em>Informed</em> bekommt hinterher Bescheid.</div>
+
+<div class="callout xref"><span class="tag">Verwandte Themen</span><a href="#r-qm">Qualitätsmanagement</a> · <a href="#r-epk">EPK &amp; Geschäftsprozesse</a> · <a href="#r-doku">IT-Dokumentation</a></div>
 </section>
 
 <section id="r-qm">
@@ -1301,6 +1364,8 @@ Prüfen Sie in Aufgaben immer alle fünf Kriterien einzeln durch: Genau daran h�
 <p>Im <strong>Projekt</strong> ist Qualität eine der drei Größen des magischen Dreiecks neben Zeit und Kosten: Wird an einer Ecke gezogen, verändern sich die anderen. Wer den Termin hält und das Budget nicht erhöht, geht bei gleichbleibendem Umfang zwangsläufig bei der Qualität ins Risiko.</p>
 <p>Im <strong>IT-Betrieb</strong> zeigt sich Qualität in messbaren Servicegrößen wie Verfügbarkeit, Reaktions- und Lösungszeiten, die im Service Level Agreement vereinbart sind. Der Übergang ist fließend: Was im Projekt an Qualität versäumt wurde, erzeugt im Betrieb dauerhaft Störungen und Aufwand.</p>
 <div class="callout"><span class="tag">Typische AP1-Fragen</span>Abgrenzung von Qualitätssicherung und Qualitätskontrolle, die vier Phasen des PDCA-Zyklus in richtiger Reihenfolge, Anwendung des Zyklus auf ein vorgegebenes Szenario, Inhalte eines Qualitätsmanagementplans sowie die Einordnung von Qualität ins magische Dreieck.</div>
+
+<div class="callout xref"><span class="tag">Verwandte Themen</span><a href="#r-projekt">Projektmanagement</a> · <a href="#r-epk">EPK &amp; Geschäftsprozesse</a> · <a href="#r-itil">ITIL &amp; IT-Servicemanagement</a></div>
 </section>
 
 <section id="r-routing">
@@ -1330,6 +1395,8 @@ Prüfen Sie in Aufgaben immer alle fünf Kriterien einzeln durch: Genau daran h�
 <p>Das klassische STP braucht nach einer Topologieänderung relativ lange, bis wieder alles weiterleitet. Sein Nachfolger <strong>RSTP</strong> (Rapid Spanning Tree Protocol) reagiert deutlich schneller und ist heute Standard, bleibt aber zum klassischen STP abwärtskompatibel.</p>
 
 <div class="callout"><span class="tag">Prüfungsfalle</span>Ein <strong>Switch</strong> arbeitet auf Schicht 2 und entscheidet anhand der <strong>MAC-Adresse</strong>, ein <strong>Router</strong> auf Schicht 3 anhand der <strong>IP-Adresse</strong>. Daraus folgt die zweite wichtige Aussage: Ein Switch trennt <em>Kollisionsdomänen</em>, aber keine Broadcastdomänen. Erst ein Router oder ein VLAN trennt Broadcastdomänen. Diese Kombination wird sehr häufig geprüft.</div>
+
+<div class="callout xref"><span class="tag">Verwandte Themen</span><a href="#r-ip">IPv4 & IPv6</a> · <a href="#r-vlan">VLAN-Segmentierung</a> · <a href="#r-osi">OSI-Modell (7 Schichten)</a></div>
 </section>
 
 <section id="r-malware">
@@ -1358,6 +1425,8 @@ Prüfen Sie in Aufgaben immer alle fünf Kriterien einzeln durch: Genau daran h�
 <p><strong>DoS und DDoS:</strong> Überlastung eines Dienstes durch eine Flut von Anfragen, beim verteilten Angriff (DDoS) aus vielen Quellen gleichzeitig. <strong>Man-in-the-Middle:</strong> Der Angreifer schaltet sich unbemerkt in die Verbindung und kann mitlesen oder verändern. <strong>SQL-Injection:</strong> Über ungeprüfte Eingabefelder wird eigener Datenbankcode eingeschleust; Gegenmaßnahme sind vorbereitete Anweisungen mit Parametern und Eingabevalidierung. <strong>Cross-Site-Scripting (XSS):</strong> Fremder Skriptcode wird in eine Webseite eingebettet und im Browser anderer Nutzer ausgeführt. <strong>Brute Force:</strong> Systematisches Durchprobieren von Passwörtern; Gegenmaßnahmen sind Sperrmechanismen, lange Passwörter und ein zweiter Faktor. <strong>Zero-Day:</strong> Ausnutzung einer Lücke, für die es noch keinen Patch gibt.</p>
 
 <div class="callout"><span class="tag">Prüfungsfalle</span><strong>Ransomware beschreibt die Wirkung, nicht den Verbreitungsweg.</strong> Sie kann als Anhang, über eine ungepatchte Lücke oder ein gekapertes Zugangskonto ins System gelangen. Zweite Falle: Ein Virenscanner allein schützt nicht vor unbekannten Varianten. Erwartet werden im Szenario mehrere Ebenen — geprüfte Sicherungen mit Air Gap, zeitnahes Patchen, Netzsegmentierung und eingeschränkte Rechte.</div>
+
+<div class="callout xref"><span class="tag">Verwandte Themen</span><a href="#r-haertung">Systemhärtung</a> · <a href="#r-security">IT-Sicherheit Grundlagen</a> · <a href="#r-raid">Backup & RAID</a></div>
 </section>
 <section id="r-sql">
 <h2>SQL & Datenbanken</h2>
@@ -1381,6 +1450,8 @@ Prüfen Sie in Aufgaben immer alle fünf Kriterien einzeln durch: Genau daran h�
 <p><strong>2. Normalform:</strong> 1NF erfüllt, und kein Nichtschlüsselattribut hängt nur von einem <em>Teil</em> eines zusammengesetzten Schlüssels ab. In einer Bestellpositionstabelle mit Schlüssel (BestellNr, ArtikelNr) darf der Artikelname nicht stehen, er hängt nur von ArtikelNr ab und gehört in die Artikeltabelle.</p>
 <p><strong>3. Normalform:</strong> 2NF erfüllt, und kein Nichtschlüsselattribut hängt von einem <em>anderen Nichtschlüsselattribut</em> ab (keine transitive Abhängigkeit). Steht in der Mitarbeitertabelle neben der AbteilungsNr auch der Abteilungsname, hängt dieser transitiv über die AbteilungsNr am Schlüssel, er gehört in die Abteilungstabelle.</p>
 <div class="callout"><span class="tag">Merkhilfe</span>"The key, the whole key, and nothing but the key": 1NF = atomare Werte, 2NF = vom ganzen Schlüssel abhängig, 3NF = nur vom Schlüssel abhängig.</div>
+
+<div class="callout xref"><span class="tag">Verwandte Themen</span><a href="#r-oop">OOP & UML</a> · <a href="#r-api">API, REST, SOAP & Webhook</a> · <a href="#r-doku">IT-Dokumentation</a></div>
 </section>
 
 
@@ -1401,6 +1472,8 @@ Prüfen Sie in Aufgaben immer alle fünf Kriterien einzeln durch: Genau daran h�
 <p><strong>Objekt-Storage:</strong> Jede Datei wird als Objekt mit eindeutiger Kennung und ausführlichen Metadaten abgelegt, ohne Ordnerbaum. Der Zugriff erfolgt in der Regel über eine Programmierschnittstelle (HTTP/REST). Sehr gut skalierbar über riesige Datenmengen hinweg, dafür nicht für ständige Änderungen an einzelnen Dateien gedacht. Typisch für Cloudspeicher, Archive, Backups und Medienbibliotheken.</p>
 
 <div class="callout"><span class="tag">Prüfungsfalle</span>Beim Zugriff entscheidet die <strong>Ebene</strong>: dateibasiert beim NAS, blockbasiert bei SAN und DAS. Nur bei blockbasiertem Speicher legt der Server das Dateisystem selbst an — deshalb ist er für Datenbanken und virtuelle Maschinen nötig. Und beachten Sie: <strong>iSCSI</strong> ist blockbasiert, obwohl es über das gewöhnliche IP-Netz läuft. Nicht die Leitung entscheidet, sondern die Zugriffsart.</div>
+
+<div class="callout xref"><span class="tag">Verwandte Themen</span><a href="#r-raid">Backup & RAID</a> · <a href="#r-virt">Virtualisierung Grundlagen</a> · <a href="#r-hardware">IT-Hardware, Energie &amp; Grundlagen</a></div>
 </section>
 
 <section id="r-verkabelung">
@@ -1425,6 +1498,8 @@ Prüfen Sie in Aufgaben immer alle fünf Kriterien einzeln durch: Genau daran h�
 <p>Die beiden Standards legen die Belegung der acht Adern im RJ45-Stecker fest. Sie unterscheiden sich nur darin, dass die Adernpaare Grün und Orange vertauscht sind. Innerhalb einer Installation muss durchgängig <em>ein</em> Schema verwendet werden, in der Praxis meist T568B. Gleiches Schema an beiden Enden ergibt ein normales Patchkabel (1:1), zwei verschiedene Schemata ergeben das historische Crossover-Kabel.</p>
 
 <div class="callout"><span class="tag">Prüfungsfalle</span>Die drei Bereiche werden regelmäßig verwechselt. Der <strong>Primärbereich</strong> verbindet Gebäude miteinander (bis 1500 m), der <strong>Sekundärbereich</strong> die Etagen innerhalb eines Gebäudes (bis 500 m), der <strong>Tertiärbereich</strong> führt vom Etagenverteiler zur Datendose (bis 90 m). Merkhilfe: von außen nach innen und von groß nach klein. Im Primär- und Sekundärbereich wird wegen der Länge Glasfaser eingesetzt.</div>
+
+<div class="callout xref"><span class="tag">Verwandte Themen</span><a href="#r-medien">Kabel, Medien & Hardware</a> · <a href="#r-topo">Netzwerktopologien</a> · <a href="#r-hardware">IT-Hardware, Energie &amp; Grundlagen</a></div>
 </section>
 
 <section id="r-subnetting">
@@ -1554,6 +1629,8 @@ Im <a href="subtrainer/">Subnetting Trainer</a> kann dieses Thema gezielt geübt
 <h3>Einordnung</h3>
 <p>Härtung ist keine freiwillige Kür: Im <strong>IT-Grundschutz</strong> des BSI enthalten die Bausteine für Betriebssysteme und Anwendungen genau solche Anforderungen, etwa zur Deaktivierung nicht benötigter Dienste, zur Rechtevergabe und zur sicheren Grundkonfiguration. Zusammen mit Patchmanagement, Protokollierung und Berechtigungskonzept bildet sie die technische Umsetzung der Schutzziele Vertraulichkeit, Integrität und Verfügbarkeit auf Systemebene.</p>
 <div class="callout"><span class="tag">AP1-Beispiel</span>Ein neu beschaffter Webserver soll in Betrieb gehen. Nennen Sie vier Härtungsmaßnahmen und begründen Sie sie. Erwartet werden etwa: nicht benötigte Dienste abschalten, weil jeder laufende Dienst angreifbar ist; Standardkonten und Standardpasswörter ändern, weil diese öffentlich bekannt sind; Rechte nach dem Prinzip der geringsten Rechte vergeben, um den Schaden bei einem kompromittierten Konto zu begrenzen; aktuelle Sicherheitsaktualisierungen einspielen, um bekannte Lücken zu schließen.</div>
+
+<div class="callout xref"><span class="tag">Verwandte Themen</span><a href="#r-grundschutz">BSI-Grundschutz &amp; Schutzbedarf</a> · <a href="#r-malware">Schadsoftware &amp; Angriffsarten</a> · <a href="#r-security">IT-Sicherheit Grundlagen</a></div>
 </section>
 
 <section id="r-tcpip">
@@ -1584,6 +1661,11 @@ Im <a href="subtrainer/">Subnetting Trainer</a> kann dieses Thema gezielt geübt
 <p>OSI ist das theoretische Referenzmodell zum Einordnen und Fehlersuchen, TCP/IP das implementierte Modell des Internets, in der Prüfung nie als dasselbe Modell behandeln.</p>
 
 <div class="callout"><span class="tag">Prüfungsfalle</span><strong>TCP</strong> ist verbindungsorientiert, bestätigt Pakete und sortiert sie in die richtige Reihenfolge. <strong>UDP</strong> tut nichts davon und ist gerade deshalb schneller. Die Falle: UDP ist nicht „schlechter", sondern für Sprache, Video und DNS-Abfragen die <em>richtige</em> Wahl, weil eine verspätete Wiederholung dort wertlos wäre. Wird im Szenario Echtzeit genannt, ist UDP die erwartete Antwort.</div>
+
+<h3>Wie TCP Zuverlässigkeit herstellt</h3>
+<p>Jedes Segment trägt eine <strong>Sequenznummer</strong>, die seine Position im Datenstrom angibt. Der Empfänger bestätigt den Empfang mit einer <strong>Bestätigungsnummer</strong> (ACK). Über die Sequenznummern setzt er die Segmente in der richtigen Reihenfolge zusammen, auch wenn sie unterwegs überholt wurden.</p>
+<p>Bleibt eine Bestätigung aus, läuft beim Sender ein Zeitgeber ab und das Segment wird <strong>erneut übertragen</strong>. Beschädigte Segmente erkennt der Empfänger an der <strong>Prüfsumme</strong> und verwirft sie, sodass ebenfalls neu gesendet wird. Über die <strong>Fenstergröße</strong> steuert der Empfänger, wie viele Daten unbestätigt unterwegs sein dürfen; das ist die Flusskontrolle. Beendet wird eine Verbindung geordnet über einen Abbau mit FIN und den zugehörigen Bestätigungen.</p>
+<div class="callout xref"><span class="tag">Verwandte Themen</span><a href="#r-osi">OSI-Modell (7 Schichten)</a> · <a href="#r-ports">Ports & Sockets</a> · <a href="#r-ip">IPv4 & IPv6</a></div>
 </section>
 
 <section id="r-topo">
@@ -1605,6 +1687,8 @@ Im <a href="subtrainer/">Subnetting Trainer</a> kann dieses Thema gezielt geübt
 <p><strong>Masche:</strong> Jede Station ist mit mehreren oder allen anderen verbunden, viele alternative Wege. Vorteil: höchste Ausfallsicherheit, Verkehr wird umgeleitet. Nachteile: Verkabelung und Administration extrem aufwendig und teuer. Beispiele: das Internet-Backbone, redundante Rechenzentrums-Kopplungen, Mesh-WLAN-Systeme.</p>
 
 <div class="callout"><span class="tag">Prüfungsfalle</span>Gefragt wird nach der <strong>logischen</strong> Topologie, nicht nach dem Aussehen der Verkabelung. Ein Netz mit einem zentralen Switch ist physisch ein <strong>Stern</strong>, arbeitet logisch aber wie ein Bus, sofern es sich um einen Hub handelt. Zweite Falle: Beim Stern ist der zentrale Knoten der <em>Single Point of Failure</em> — fällt er aus, steht das gesamte Netz, während der Ausfall eines Endgeräts folgenlos bleibt.</div>
+
+<div class="callout xref"><span class="tag">Verwandte Themen</span><a href="#r-ausdehnung">Netzwerkausdehnung (BAN → GAN)</a> · <a href="#r-ethernet">Ethernet & Zugriffsverfahren</a> · <a href="#r-verkabelung">Strukturierte Verkabelung</a></div>
 </section>
 
 <section id="r-krypto">
@@ -1624,6 +1708,17 @@ Im <a href="subtrainer/">Subnetting Trainer</a> kann dieses Thema gezielt geübt
 <div class="callout"><span class="tag">PKI (Public Key Infrastructure)</span>Ein <strong>Zertifikat</strong> (Standard <strong>X.509</strong>) bindet einen Public Key an eine Identität, signiert von einer <strong>CA</strong>. Hierarchie: Root-CA → <strong>Intermediate-CA</strong> (stellt im Alltag die Endnutzerzertifikate aus, während die Root-CA offline bleibt) → End-Entity. Vertrauen: Clients vertrauen der Root-CA und damit allem, was sie signiert. Beantragt wird ein Zertifikat über einen <strong>CSR</strong> (Certificate Signing Request), er enthält den Public Key und die Identitätsdaten des Antragstellers, den die CA prüft und signiert. Ein <strong>Self-Signed Certificate</strong> ist von seiner eigenen CA signiert, ohne externen Vertrauensanker, daher von Browsern standardmäßig nicht akzeptiert. Widerruf wird über <strong>CRL</strong> (Certificate Revocation List) oder <strong>OCSP</strong> (Online Certificate Status Protocol) geprüft.</div>
 
 <div class="callout"><span class="tag">Prüfungsfalle</span>Wer <strong>signiert</strong>, nutzt seinen <em>privaten</em> Schlüssel; geprüft wird mit dem <em>öffentlichen</em> Schlüssel des Absenders. Wer <strong>verschlüsselt</strong>, nutzt den <em>öffentlichen</em> Schlüssel des Empfängers; entschlüsselt wird mit dessen <em>privatem</em> Schlüssel. Diese Kreuzung ist die häufigste Fehlerquelle überhaupt. Merken Sie zusätzlich: Eine Signatur sichert Authentizität und Integrität, aber <strong>keine Vertraulichkeit</strong> — der Inhalt bleibt lesbar.</div>
+
+<h3>Symmetrisch und asymmetrisch im Klartext</h3>
+<p><strong>Symmetrische Verschlüsselung</strong> nutzt für das Ver- und Entschlüsseln <em>denselben</em> Schlüssel. Beide Seiten müssen ihn kennen und geheim halten. Der Vorteil liegt in der Geschwindigkeit: Große Datenmengen lassen sich damit sehr schnell verarbeiten. Der Nachteil ist der Schlüsselaustausch, denn der gemeinsame Schlüssel muss zuerst sicher zur Gegenstelle gelangen. Zudem wächst die Zahl der benötigten Schlüssel stark an, wenn viele Teilnehmer untereinander kommunizieren. Typische Verfahren sind AES und ChaCha20.</p>
+<p><strong>Asymmetrische Verschlüsselung</strong> arbeitet mit einem <em>Schlüsselpaar</em> aus öffentlichem und privatem Schlüssel. Was mit dem einen verschlüsselt wurde, lässt sich nur mit dem anderen entschlüsseln. Der öffentliche Schlüssel darf frei verteilt werden, der private bleibt geheim. Dadurch entfällt das Problem des Schlüsselaustauschs, und zusätzlich sind digitale Signaturen möglich. Der Nachteil ist der hohe Rechenaufwand, weshalb sie für große Datenmengen zu langsam ist. Typische Verfahren sind RSA und ECC.</p>
+<p>In der Praxis werden beide kombiniert (<strong>Hybridverfahren</strong>): Asymmetrisch wird ein zufälliger Sitzungsschlüssel sicher ausgetauscht, die eigentlichen Nutzdaten werden anschließend symmetrisch mit diesem Schlüssel verschlüsselt. So verbindet man den sicheren Austausch mit der hohen Geschwindigkeit. Genau so arbeitet TLS beim Aufruf einer Webseite.</p>
+
+<h3>Zertifizierungsstelle (CA)</h3>
+<p>Eine <strong>Zertifizierungsstelle</strong>, englisch <strong>Certificate Authority</strong> und meist als <strong>CA</strong> abgekürzt, ist eine vertrauenswürdige dritte Stelle. Sie prüft die Identität eines Antragstellers und bestätigt anschließend mit ihrer eigenen Signatur, dass ein bestimmter öffentlicher Schlüssel wirklich zu dieser Person, Organisation oder Domain gehört. Das Ergebnis dieser Bestätigung ist das <strong>Zertifikat</strong>.</p>
+<p>Ohne CA könnte jeder behaupten, ein bestimmter öffentlicher Schlüssel gehöre ihm. Der Browser vertraut einem Zertifikat, weil er dem <strong>Wurzelzertifikat</strong> der ausstellenden CA vertraut; dieses ist im Betriebssystem oder Browser fest hinterlegt. Über Zwischenzertifikate entsteht so eine überprüfbare <strong>Vertrauenskette</strong> vom Serverzertifikat bis zur Wurzel. Wird ein Schlüssel kompromittiert, kann die CA das Zertifikat über eine Sperrliste (CRL) oder eine Statusabfrage (OCSP) widerrufen. Die CA ist damit ein zentraler Bestandteil einer Public-Key-Infrastruktur.</p>
+<div class="callout xref"><span class="tag">Verwandte Themen</span><a href="#r-vpn">VPN & IPsec</a> · <a href="#r-mailsec">E-Mail-Sicherheit: SPF, DKIM &amp; DMARC</a> · <a href="#r-security">IT-Sicherheit Grundlagen</a></div>
+
 </section>
 
 <section id="r-vertraege">
@@ -1654,6 +1749,8 @@ Im <a href="subtrainer/">Subnetting Trainer</a> kann dieses Thema gezielt geübt
 <tr><td>Zahlungsverzug</td><td>Rechnung wird nicht fristgerecht beglichen</td><td>Mahnung, Verzugszinsen, gerichtliches Mahnverfahren</td></tr>
 </table>
 <p>Wichtig für die Prüfung: Bei Mängeln hat die <strong>Nacherfüllung Vorrang</strong>. Erst wenn sie fehlschlägt, verweigert wird oder unzumutbar ist, kommen Minderung, Rücktritt oder Schadensersatz in Betracht.</p>
+
+<div class="callout xref"><span class="tag">Verwandte Themen</span><a href="#r-kalkulation">Kaufmännisches Rechnen</a> · <a href="#r-markt">Markt &amp; Wirtschaftssektoren</a> · <a href="#r-ap1">AP1</a></div>
 </section>
 
 <section id="r-virt">
@@ -1716,6 +1813,8 @@ Im <a href="subtrainer/">Subnetting Trainer</a> kann dieses Thema gezielt geübt
 <div class="callout"><span class="tag">Prüfungsfalle</span>Die drei Servicemodelle werden regelmäßig vertauscht. Entscheidend ist die Frage, <em>wer das Betriebssystem verantwortet</em>: Bei <strong>IaaS</strong> der Kunde, ab <strong>PaaS</strong> der Anbieter. Zweite Falle: Auch in der Cloud bleibt der Kunde <strong>Verantwortlicher</strong> im Sinne der DSGVO, der Anbieter ist Auftragsverarbeiter — ein Vertrag zur Auftragsverarbeitung nach Art. 28 DSGVO ist deshalb zwingend. Die Verantwortung lässt sich nicht auslagern, nur die Verarbeitung.</div>
 
 <div class="callout"><span class="tag">Praxisbeispiel</span>Ein Betrieb mit 40 Beschäftigten will seine Warenwirtschaft ablösen. <strong>SaaS</strong> passt, wenn kein eigenes Betriebswissen vorhanden ist und Standardfunktionen genügen. <strong>IaaS</strong> passt, wenn eine vorhandene Speziallösung weiterlaufen soll, aber kein eigener Serverraum gewünscht ist. <strong>On-Premises</strong> bleibt sinnvoll, wenn besonders schutzbedürftige Daten das Haus nicht verlassen dürfen oder die Internetanbindung unzuverlässig ist. Begründen Sie in Aufgaben immer über die genannten Rahmenbedingungen, nicht über allgemeine Vorteile.</div>
+
+<div class="callout xref"><span class="tag">Verwandte Themen</span><a href="#r-hyperv">Hypervisor & Virtualisierungstechnik</a> · <a href="#r-storage">Storage-Systeme</a> · <a href="#r-hardware">IT-Hardware, Energie &amp; Grundlagen</a></div>
 </section>
 
 <section id="r-vlan">
@@ -1731,6 +1830,8 @@ Im <a href="subtrainer/">Subnetting Trainer</a> kann dieses Thema gezielt geübt
 <p><strong>Prinzipielle Grenzen der VLAN-Technik:</strong> Die Trennung ist rein <strong>logisch auf Layer 2</strong>, sie ersetzt keine physische Trennung. Kommunikation zwischen VLANs erfordert L3-Routing (zusätzliche Komplexität und ein möglicher Engpass), und die Isolation ist nur so gut wie die Konfiguration: Fehlkonfigurationen oder Angriffe wie <strong>VLAN-Hopping</strong> (Switch-Spoofing über automatisch ausgehandelte Trunks, Double Tagging über das native VLAN) können die Trennung aushebeln. Gegenmaßnahmen: ungenutzte Ports deaktivieren, kein automatisches Trunk-Aushandeln (DTP aus), natives VLAN nicht für Nutzdaten verwenden.</p>
 
 <div class="callout"><span class="tag">Prüfungsfalle</span>Ein <strong>Access-Port</strong> gehört zu genau einem VLAN und überträgt ungetaggt zum Endgerät. Ein <strong>Trunk-Port</strong> überträgt mehrere VLANs mit Kennzeichnung nach 802.1Q zwischen Switches. Wird ein Endgerät versehentlich an einen Trunk gehängt oder stimmen die <strong>nativen VLANs</strong> beider Trunk-Seiten nicht überein, landen Frames im falschen VLAN — genau das ist die typische Fehlerursache im Aufgabentext.</div>
+
+<div class="callout xref"><span class="tag">Verwandte Themen</span><a href="#r-wlan">WLAN</a> · <a href="#r-routing">Routing & Switching</a> · <a href="#r-verkabelung">Strukturierte Verkabelung</a></div>
 </section>
 
 <section id="r-voip">
@@ -1751,6 +1852,8 @@ Im <a href="subtrainer/">Subnetting Trainer</a> kann dieses Thema gezielt geübt
 <p><strong>Typische Einsatzbereiche:</strong> Internettelefonie für Privatkunden (der Anschluss beim Provider ist heute standardmäßig VoIP), IP-Telefonanlagen in Unternehmen statt klassischer TK-Anlagen, <strong>Softphones</strong>. Telefonie als Software am PC oder Smartphone ohne Tischtelefon, und Videokonferenzsysteme, die Sprache und Bild über dieselben Echtzeitprotokolle übertragen.</p>
 
 <div class="callout"><span class="tag">Prüfungsfalle</span>Bei VoIP zählt nicht die Bandbreite allein, sondern <strong>Laufzeit, Schwankung und Verlust</strong>. Als Richtwerte gelten unter 150 ms Verzögerung in eine Richtung, möglichst geringer Jitter und unter 1 Prozent Paketverlust. Deshalb wird Sprache über <strong>UDP</strong> übertragen und im Netz per <strong>QoS</strong> bevorzugt behandelt. Eine Wiederholung verlorener Sprachpakete wäre sinnlos, weil sie zu spät ankäme.</div>
+
+<div class="callout xref"><span class="tag">Verwandte Themen</span><a href="#r-tcpip">TCP/IP & UDP</a> · <a href="#r-wlan">WLAN</a> · <a href="#r-ports">Ports & Sockets</a></div>
 </section>
 
 <section id="r-vpn">
@@ -1769,6 +1872,8 @@ Im <a href="subtrainer/">Subnetting Trainer</a> kann dieses Thema gezielt geübt
 <p><strong>WireGuard</strong> ist ein modernes, schlankes VPN-Protokoll mit fest vorgegebener aktueller Kryptografie, deutlich weniger Code als IPsec oder OpenVPN, dadurch schnell und gut prüfbar. <strong>Perfect Forward Secrecy (PFS):</strong> Für jede Sitzung werden eigene, flüchtige Schlüssel ausgehandelt, wird ein Langzeitschlüssel später kompromittiert, bleiben aufgezeichnete alte Sitzungen trotzdem unlesbar. Bei IPsec gilt für die AP1 die knappe Unterscheidung: <strong>AH</strong> sichert Integrität und Authentizität, verschlüsselt aber nicht. <strong>ESP</strong> kann zusätzlich verschlüsseln und wird in der Praxis fast immer verwendet.</p>
 
 <div class="callout"><span class="tag">Prüfungsfalle</span><strong>AH</strong> sichert nur Authentizität und Integrität, <strong>ESP</strong> zusätzlich die Vertraulichkeit durch Verschlüsselung — wer echte Verschlüsselung braucht, wählt ESP. Zweite Unterscheidung: Der <strong>Transportmodus</strong> schützt nur die Nutzdaten und wird zwischen Endpunkten genutzt, der <strong>Tunnelmodus</strong> verpackt das gesamte Originalpaket und ist der Regelfall bei der Standortkopplung.</div>
+
+<div class="callout xref"><span class="tag">Verwandte Themen</span><a href="#r-krypto">Verschlüsselung & PKI</a> · <a href="#r-security">IT-Sicherheit Grundlagen</a> · <a href="#r-ausdehnung">Netzwerkausdehnung (BAN → GAN)</a></div>
 </section>
 
 <section id="r-wlan">
@@ -1787,6 +1892,8 @@ Im <a href="subtrainer/">Subnetting Trainer</a> kann dieses Thema gezielt geübt
 <div class="callout"><span class="tag">Schwachstellen</span><strong>WPS</strong> (Wi-Fi Protected Setup) vereinfacht die Einrichtung, ist aber durch PIN-Brute-Force angreifbar und sollte deaktiviert werden. Das <strong>Hidden-Node-Problem</strong>: zwei Clients hören sich gegenseitig nicht und senden gleichzeitig zum AP, es kollidiert, obwohl beide CSMA/CA korrekt anwenden.</div>
 
 <div class="callout"><span class="tag">Prüfungsfalle</span>Im 2,4-GHz-Band sind in Europa nur die <strong>Kanäle 1, 6 und 11</strong> überschneidungsfrei nutzbar — benachbarte Kanäle stören sich. Zweite Falle: <strong>Versteckte SSID und MAC-Filter sind keine Sicherheitsmaßnahmen</strong>, sondern nur schwache Hürden, weil beide mitgelesen und nachgeahmt werden können. Echte Sicherheit liefert erst eine starke Verschlüsselung mit WPA2 oder WPA3, idealerweise mit 802.1X.</div>
+
+<div class="callout xref"><span class="tag">Verwandte Themen</span><a href="#r-vlan">VLAN-Segmentierung</a> · <a href="#r-security">IT-Sicherheit Grundlagen</a> · <a href="#r-medien">Kabel, Medien & Hardware</a></div>
 </section>
 
 <section id="r-zahlen">
@@ -1869,6 +1976,8 @@ Im <a href="subtrainer/">Subnetting Trainer</a> kann dieses Thema gezielt geübt
 <p>Das <strong>Zweierkomplement</strong> stellt negative Zahlen dar: alle Bits invertieren, dann 1 addieren. Beispiel &minus;5 in 8 Bit: 5 = 0000 0101 &rarr; invertiert 1111 1010 &rarr; +1 = <code>1111 1011</code>. Das höchste Bit wirkt als Vorzeichen; 8 Bit decken damit &minus;128 bis +127 ab. Ein <strong>Overflow</strong> entsteht, wenn ein Ergebnis diesen Bereich verlässt (127 + 1 kippt nach &minus;128). <strong>Bitmasken</strong> blenden per UND-Verknüpfung gezielt Bits aus, genau das Prinzip der Subnetzmaske.</p>
 
 <div class="callout"><span class="tag">Prüfungsfalle</span>Beim <strong>Zweierkomplement</strong> wird das höchstwertige Bit als Vorzeichen gelesen: Eine 1 bedeutet eine negative Zahl. Zur Umwandlung alle Bits kippen und eins addieren. Zweite Falle bei Speichergrößen: <strong>kB, MB und GB rechnen mit 1000</strong>, <strong>KiB, MiB und GiB mit 1024</strong>. Steht in der Aufgabe die Einheit mit „i", muss mit 1024 gerechnet werden — genau daran scheitern viele Rechenaufgaben.</div>
+
+<div class="callout xref"><span class="tag">Verwandte Themen</span><a href="#r-logik">Logische Verknüpfungen</a> · <a href="#r-ip">IPv4 & IPv6</a> · <a href="#r-subnetting">Subnetting – Schritt für Schritt</a></div>
 </section>
 
 
@@ -2027,6 +2136,6 @@ Im <a href="subtrainer/">Subnetting Trainer</a> kann dieses Thema gezielt geübt
   <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="19" x2="12" y2="5"></line><polyline points="6 11 12 5 18 11"></polyline></svg>
 </button>
 
-<script src="app.js?v=20260827t"></script>
+<script src="app.js?v=20260827y"></script>
 </body>
 </html>

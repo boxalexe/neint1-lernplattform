@@ -11611,7 +11611,7 @@ const POOLS = {
     "q": "Warum ist der Hashwert bei der Signatur wichtig?",
     "o": [
      {
-      "t": "Er erkennt jede Änderung der Nachricht (Integrität)",
+      "t": "Er erkennt jede Änderung der Nachricht",
       "ok": true
      },
      {
@@ -11642,7 +11642,7 @@ const POOLS = {
    {
     "q": "Was ist eine Zertifizierungsstelle (CA)?",
     "o": [
-     { "t": "Eine vertrauenswürdige Instanz, die Zertifikate signiert/ausstellt", "ok": true },
+     { "t": "Eine vertrauenswürdige Instanz, die Zertifikate ausstellt", "ok": true },
      { "t": "Ein Dienst, der private Schlüssel zentral erzeugt und verwahrt", "ok": false },
      { "t": "Eine Behörde, die Verschlüsselungsverfahren prüft und zulässt", "ok": false },
      { "t": "Ein Server, der ablaufende Zertifikate automatisch verlängert", "ok": false }
@@ -12016,10 +12016,10 @@ const POOLS = {
    {
     "q": "Was ist SSL/TLS und wofür wird es verwendet?",
     "o": [
-     { "t": "Ein Protokoll zur verschlüsselten, authentifizierten Absicherung von Verbindungen — die Grundlage von HTTPS", "ok": true },
+     { "t": "Ein Protokoll zur verschlüsselten und authentifizierten Absicherung von Verbindungen", "ok": true },
      { "t": "Ein Verfahren zur Absicherung von E-Mails auf dem Server, das Nachrichten dauerhaft verschlüsselt ablegt", "ok": false },
-     { "t": "Ein Tunnelprotokoll auf Schicht 2, das komplette Netzwerke über das Internet miteinander koppelt", "ok": false },
-     { "t": "Ein Authentifizierungsdienst, der Benutzeranmeldungen zentral über einen Verzeichnisserver abwickelt", "ok": false }
+     { "t": "Ein Tunnelprotokoll auf Schicht 2, das komplette Firmennetzwerke sicher über das Internet miteinander koppelt", "ok": false },
+     { "t": "Ein Authentifizierungsdienst, der sämtliche Benutzeranmeldungen zentral über einen Verzeichnisserver abwickelt", "ok": false }
     ],
     "e": "SSL ist der veraltete Vorgänger von TLS. TLS sichert Verbindungen per Verschlüsselung, Serverauthentifizierung (Zertifikat) und Integritätsschutz — Transportverschlüsselung, keine Speicherverschlüsselung."
    },
@@ -20283,6 +20283,7 @@ function buildRun(){
         correct: false
       });
     });
+    filterFuerModus();
     return;
   }
   if(quizScope === 'wrong'){
@@ -20300,6 +20301,7 @@ function buildRun(){
         correct: false
       });
     });
+    filterFuerModus();
     return;
   }
   activeCats = Array.from(selected);
@@ -20321,6 +20323,7 @@ function buildRun(){
         correct: false
       });
     });
+    filterFuerModus();
     return;
   }
   activeCats.forEach(key => {
@@ -20340,14 +20343,19 @@ function buildRun(){
   });
   // shuffle question order across all selected categories
   runQuestions = shuffle(runQuestions);
+  filterFuerModus();
+}
+
+// Im Karteikartenmodus die reinen Auswahlfragen entfernen. Das geschieht
+// bereits beim Aufbau der Liste, damit Fortschritt und Zähler von Beginn an
+// die tatsächlich enthaltene Fragenzahl anzeigen.
+function filterFuerModus(){
+  if(!cardMode) return;
+  const gefiltert = runQuestions.filter(x => x.card !== false);
+  if(gefiltert.length) runQuestions = gefiltert;
 }
 
 function renderRun(){
-  // Im Karteikartenmodus die reinen Auswahlfragen aussortieren
-  if(cardMode){
-    const gefiltert = runQuestions.filter(x => x.card !== false);
-    if(gefiltert.length) runQuestions = gefiltert;
-  }
   qArea.innerHTML = '';
   if(quizScope === 'wrongcards'){
     runTitle.textContent = 'Wackelkandidaten Karteikarten';
@@ -20850,6 +20858,145 @@ const READER_TOPICS = [
   jump.classList.add('jump-hidden');
 })();
 
+// ---- Sprung nach oben mit kurzem Übergang ----
+// Statt die gesamte Seite hochzurollen wird kurz abgeblendet und direkt
+// oben wieder eingeblendet. Wer Bewegung reduziert hat, springt ohne Effekt.
+// Wechselt die Ansicht ohne den Tab-Handler auszulösen. Ein click() auf den
+// bereits offenen Reiter würde den Sprung nach oben auslösen statt zum Ziel.
+function zeigeReader(){
+  const tab = document.querySelector('.tab[data-view="lesen"]');
+  const view = document.getElementById('view-lesen');
+  if(!tab || !view) return;
+  if(view.classList.contains('active')) return;
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+  tab.classList.add('active');
+  view.classList.add('active');
+}
+
+// Sprung zu einem Element mit demselben Übergang wie der Sprung nach oben.
+function teleportZu(ziel){
+  const el = (typeof ziel === 'string') ? document.getElementById(ziel.replace(/^#/, '')) : ziel;
+  if(!el){ teleportNachOben(); return; }
+  const sanft = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(sanft){ el.scrollIntoView({behavior:'auto', block:'start'}); return; }
+  // Läuft bereits ein Übergang, wird ohne zweiten Effekt direkt gesprungen.
+  // Sonst würde der Klick wirkungslos verpuffen.
+  if(document.querySelector('.tp-overlay')){
+    el.scrollIntoView({behavior:'auto', block:'start'});
+    return;
+  }
+
+  const overlay = document.createElement('div');
+  overlay.className = 'tp-overlay';
+  overlay.innerHTML = '<div class="tp-beam"></div><div class="tp-ring"></div>';
+  document.body.appendChild(overlay);
+  if(typeof window.requestAnimationFrame === 'function'){
+    window.requestAnimationFrame(() => overlay.classList.add('tp-in'));
+  } else {
+    overlay.classList.add('tp-in');
+  }
+  setTimeout(() => {
+    el.scrollIntoView({behavior:'auto', block:'start'});
+    overlay.classList.add('tp-out');
+  }, 620);
+  setTimeout(() => overlay.classList.remove('tp-in'), 700);
+  setTimeout(() => { if(overlay.parentNode) overlay.parentNode.removeChild(overlay); }, 1400);
+}
+
+function teleportNachOben(){
+  const sanft = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(sanft){ window.scrollTo(0, 0); return; }
+  if(document.querySelector('.tp-overlay')){          // läuft bereits
+    window.scrollTo(0, 0);
+    return;
+  }
+
+  const overlay = document.createElement('div');
+  overlay.className = 'tp-overlay';
+  overlay.innerHTML = '<div class="tp-beam"></div><div class="tp-ring"></div>';
+  document.body.appendChild(overlay);
+
+  // Erst abblenden, dann unsichtbar nach oben setzen, dann aufblenden
+  if(typeof window.requestAnimationFrame === 'function'){
+    window.requestAnimationFrame(() => overlay.classList.add('tp-in'));
+  } else {
+    overlay.classList.add('tp-in');
+  }
+  setTimeout(() => {
+    window.scrollTo(0, 0);
+    overlay.classList.add('tp-out');
+  }, 620);
+  setTimeout(() => {
+    overlay.classList.remove('tp-in');
+  }, 700);
+  setTimeout(() => {
+    if(overlay.parentNode) overlay.parentNode.removeChild(overlay);
+  }, 1400);
+}
+
+// ---- Alle Sprungmarken im Nachschlagewerk nutzen denselben Übergang ----
+// Betrifft die Unterthemen der Themenblasen und die Verweise unter
+// "Verwandte Themen". Ohne das würden sie hart springen, während der Pfeil
+// unten rechts und die Suche den Übergang zeigen.
+document.addEventListener('click', function(e){
+  const a = e.target.closest && e.target.closest('a[href^="#r-"]');
+  if(!a) return;
+  const id = a.getAttribute('href').slice(1);
+  const ziel = document.getElementById(id);
+  if(!ziel) return;
+  e.preventDefault();
+  if(typeof zeigeReader === 'function') zeigeReader();
+  teleportZu(ziel);
+}, true);
+
+// ---- Lupe und Auge wandern beim Scrollen in die Menüleiste ----
+// Der Kopfbereich scrollt weg; damit man mitten im Nachschlagewerk weiter
+// suchen kann, wechselt die Leiste mit Auge und Lupe in die klebende Menüzeile
+// und kehrt beim Zurückscrollen an ihren Platz zurück.
+(function initToolsFollow(){
+  const tools = document.querySelector('header .a11y-wrap');
+  const tabsRow = document.querySelector('.tabs .wrap');
+  const header = document.querySelector('header');
+  if(!tools || !tabsRow || !header) return;
+
+  const heimat = tools.parentNode;
+  const platzhalter = document.createComment('tools');
+  heimat.insertBefore(platzhalter, tools);
+  let imMenu = false;
+
+  function schliesseMenues(){
+    const m = document.getElementById('a11yMenu');
+    if(m) m.classList.remove('open');
+    const qs = document.getElementById('quickSearch');
+    if(qs) qs.classList.remove('open');
+  }
+  function pruefe(){
+    const grenze = header.offsetHeight - 40;
+    const soll = (window.scrollY || window.pageYOffset || 0) > grenze;
+    if(soll === imMenu) return;
+    schliesseMenues();
+    if(soll){
+      tabsRow.appendChild(tools);
+      tools.classList.add('in-menu');
+    } else {
+      heimat.insertBefore(tools, platzhalter);
+      tools.classList.remove('in-menu');
+    }
+    imMenu = soll;
+  }
+  let laeuft = false;
+  window.addEventListener('scroll', function(){
+    if(laeuft) return;
+    laeuft = true;
+    (window.requestAnimationFrame || function(f){ setTimeout(f, 16); })(function(){
+      laeuft = false;
+      pruefe();
+    });
+  }, { passive: true });
+  pruefe();
+})();
+
 // ---- Lösch-X in allen Suchfeldern ----
 // Setzt den Suchbegriff mit einem Klick zurück, statt ihn von Hand zu löschen.
 (function initSearchClear(){
@@ -20942,7 +21089,7 @@ document.querySelectorAll('.tab').forEach(tab => {
     if(aktiveView() === ziel){
       // Erneuter Klick auf den offenen Bereich führt nach oben
       viewScroll[ziel] = 0;
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      teleportNachOben();
       return;
     }
     merkeScroll();
@@ -21051,7 +21198,7 @@ if(scrollTopBtn){
     if(!topBtnTicking){ window.requestAnimationFrame(updateScrollTopBtn); topBtnTicking = true; }
   }, {passive:true});
   scrollTopBtn.addEventListener('click', () => {
-    window.scrollTo({top:0, behavior:'smooth'});
+    teleportNachOben();
   });
 }
 
@@ -21604,7 +21751,7 @@ renderLib(GLOSSAR_SORTED);
     "r-wlan": ["SSID","PSK","SAE","Roaming","Band Steering","IEEE 802.11","Wireless Controller"],
     "r-zahlen": ["MSB","LSB","Nibble","Zweierkomplement"],
     "r-vertraege": ["Kaufvertrag","Werkvertrag","Dienstvertrag","Leasing","Lieferverzug","Nacherfüllung","Mietvertrag"],
-    "r-markt": ["Polypol","Oligopol","Monopol","Monopson","Primärer Sektor","Tertiärer Sektor","Inflation","Deflation","Stagflation","Kaufkraft","Disinflation","Reallohn","Verbraucherpreisindex","Angebotsschock","Quintärer Sektor"],
+    "r-markt": ["Polypol","Oligopol","Monopol","Monopson","Primärer Sektor","Tertiärer Sektor","Inflation","Deflation","Stagflation","Kaufkraft","Disinflation","Reallohn","Verbraucherpreisindex","Angebotsschock","Quintärer Sektor","Quartärer Sektor"],
     "r-kalkulation": ["Bezugskalkulation","Zieleinkaufspreis","Bareinkaufspreis","Bezugspreis","Ratendarlehen","ROI"],
     "r-malware": ["Wurm","Trojaner","Rootkit","Ransomware","Keylogger","Phishing","Zero-Day","Virus"],
     "r-grundschutz": ["BSI","VIVA","IT-Grundschutz","Maximumprinzip","Kumulationseffekt","Schutzbedarfsfeststellung","Risikoanalyse"],
@@ -21860,9 +22007,14 @@ window.addEventListener('pageshow', () => { window.scrollTo(0, 0); });
     // Die Kategorie selbst bleibt als Treffer erhalten
     INDEX.push({ cat: nav.label, term: nav.label, text: nav.label, hash: nav.hash, top: true });
 
+    // AP1 ist ein Sammelkapitel und wiederholt Begriffe aus allen anderen
+    // Kapiteln. Es bleibt allein über sein Stichwort auffindbar, damit die
+    // Suche nicht dauernd dorthin führt statt ins eigentliche Fachkapitel.
+    if(nav.hash === '#r-ap1') return;
+
     const seen = {};
     // Zwischenüberschriften, hervorgehobene Fachbegriffe und die Begriffsspalte von Tabellen
-    const elems = sec.querySelectorAll('h3, strong, table tr > td:first-child, table tr > th:first-child');
+    const elems = sec.querySelectorAll('h3, strong, .term, table tr > td:first-child, table tr > th:first-child');
     Array.prototype.forEach.call(elems, function(el){
       // führende Aufzählungs- und Rechenzeichen abschneiden
       const term = cleanText(el).replace(/^[\u2212\u2013\u2014+\-=•·\s]+/, '').trim();
@@ -21888,16 +22040,25 @@ window.addEventListener('pageshow', () => { window.scrollTo(0, 0); });
     });
   });
 
-  function open(){ wrap.classList.add('open'); toggle.setAttribute('aria-expanded','true'); setTimeout(()=>input.focus(), 60); }
-  function close(){ wrap.classList.remove('open'); toggle.setAttribute('aria-expanded','false'); results.classList.remove('has'); results.innerHTML=''; input.value=''; }
+  // Die umgebende Leiste wird mitmarkiert: geschlossen stehen Auge und Lupe
+  // mittig, beim Aufklappen rutschen sie an den Rand und geben Platz frei.
+  function leiste(){ return wrap.closest('.a11y-wrap'); }
+  function open(){
+    wrap.classList.add('open');
+    const l = leiste(); if(l) l.classList.add('suche-offen');
+    toggle.setAttribute('aria-expanded','true');
+    setTimeout(()=>input.focus(), 60);
+  }
+  function close(){
+    wrap.classList.remove('open');
+    const l = leiste(); if(l) l.classList.remove('suche-offen');
+    toggle.setAttribute('aria-expanded','false');
+    results.classList.remove('has'); results.innerHTML=''; input.value='';
+  }
   function goTo(hash){
-    const lesenTab = document.querySelector('.tab[data-view="lesen"]');
-    if(lesenTab) lesenTab.click();
+    zeigeReader();
     close();
-    setTimeout(() => {
-      const el = document.getElementById(hash.slice(1));
-      if(el) el.scrollIntoView({behavior:'smooth', block:'start'});
-    }, 80);
+    setTimeout(() => teleportZu(hash), 40);
   }
   toggle.addEventListener('click', (e) => { e.stopPropagation(); wrap.classList.contains('open') ? close() : open(); });
   input.addEventListener('input', () => {
