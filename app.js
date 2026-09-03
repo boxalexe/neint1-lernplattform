@@ -3928,6 +3928,7 @@ const POOLS = {
    },
    {
     "q": "Multiplexing auf der Transportschicht bedeutet konkret …",
+    "card": false,
     "o": [
      { "t": "Mehrere Anwendungen teilen sich über Ports eine Netzverbindung", "ok": true },
      { "t": "Mehrere physische Leitungen werden zu einem logischen Link gebündelt", "ok": false },
@@ -5080,6 +5081,7 @@ const POOLS = {
    },
    {
     "q": "Der Header verhält sich zum Paket wie …",
+    "card": false,
     "o": [
      {
       "t": "der Adressaufkleber zum Postpaket",
@@ -6611,6 +6613,7 @@ const POOLS = {
    },
    {
     "q": "Ordne aufsteigend nach Reichweite: BAN, LAN, MAN, WAN.",
+    "card": false,
     "o": [
      {
       "t": "BAN < LAN < MAN < WAN",
@@ -7092,6 +7095,7 @@ const POOLS = {
    },
    {
     "q": "Ein Hub bildet für alle angeschlossenen Geräte …",
+    "card": false,
     "o": [
      {
       "t": "eine einzige gemeinsame Kollisionsdomäne",
@@ -7192,7 +7196,7 @@ const POOLS = {
     "q": "Welches Feld im Ethernet-Frame dient der Fehlererkennung?",
     "o": [
      {
-      "t": "Die FCS (Frame Check Sequence / CRC)",
+      "t": "Die FCS (Frame Check Sequence)",
       "ok": true
      },
      {
@@ -11831,7 +11835,7 @@ const POOLS = {
       "ok": false
      }
     ],
-    "e": "Verschlüsselung schützt Vertraulichkeit (mit Schlüssel umkehrbar); Hash prüft Integrität (nicht umkehrbar)."
+    "e": "Verschlüsselung ist umkehrbar, Hashing nicht. Bei der Verschlüsselung werden Daten mit einem Schlüssel so verändert, dass sie sich später wieder entschlüsseln lassen; das Ziel ist Vertraulichkeit. Beim Hashing entsteht aus beliebigen Daten ein Prüfwert fester Länge, der sich nicht zurückrechnen lässt; das Ziel ist Integrität. Schon die kleinste Änderung der Eingabe verändert den Hashwert vollständig. Typische Einsatzgebiete: Verschlüsselung für vertrauliche Nachrichten und Datenträger, Hashing für die Passwortablage, Prüfsummen und digitale Signaturen."
    },
    {
     "q": "Wozu wird ein Salt beim Passwort-Hashing verwendet?",
@@ -20181,14 +20185,15 @@ function refreshSelState(){
   startBtn.disabled = n === 0;
   if(n === 0){ selHint.textContent = 'Keine Kategorie gewählt'; selHint.classList.remove('warn'); }
   else if(randomActive){
-    const totalAll = Object.keys(POOLS).reduce((s,k)=>s+POOLS[k].q.length,0);
+    // Im Karteikartenmodus zählen nur die dort nutzbaren Fragen
+    const totalAll = Object.keys(POOLS).reduce((s,k)=>s+fragenImModus(k),0);
     const qc = quizScope === 'all' ? totalAll : Math.min(quizScope, totalAll);
     selHint.textContent = 'Zufällig · ' + qc + ' Fragen quer über alle Kategorien';
     selHint.classList.remove('warn');
   }
   else {
     let qcount = 0;
-    selected.forEach(k => { qcount += (quizScope === 'all' ? POOLS[k].q.length : Math.min(quizScope, POOLS[k].q.length)); });
+    selected.forEach(k => { const v = fragenImModus(k); qcount += (quizScope === 'all' ? v : Math.min(quizScope, v)); });
     selHint.textContent = n + ' von max. ' + MAX_CATS + ' gewählt · ' + qcount + ' Fragen';
     selHint.classList.toggle('warn', n >= MAX_CATS);
   }
@@ -21165,6 +21170,13 @@ function onScroll(){
   scrollAcc += Math.abs(delta);
   // Ist das Mobile-Menü offen, bleibt die Leiste sichtbar. Erst ein echtes
   // Runterscrollen (nach der Schonzeit) klappt das Menü wieder zu.
+  // Beim Scrollen schließt eine geöffnete Suche, damit sich die Leiste wie
+  // gewohnt zurückziehen kann und kein Feld mitfährt.
+  const sucheOffen = document.querySelector('.quick-search.open');
+  if(sucheOffen && scrollAcc > 6){
+    const t = document.getElementById('qsToggle');
+    if(t) t.click();
+  }
   if(tabBar.classList.contains('menu-open')){
     tabBar.classList.remove('hidden');
     if(!menuOpenGrace && scrollDir === 1 && scrollAcc > HIDE_AFTER && menuCloseHandler){
@@ -21660,7 +21672,10 @@ const GLOSSAR = [{"a":"2FA","f":"Zwei-Faktor-Authentifizierung","d":"Anmeldung m
 {"a":"Hybrid Cloud","f":"Hybrid Cloud","d":"Kombination aus privater und öffentlicher Cloud. Schutzbedürftige Daten bleiben privat, Lastspitzen laufen öffentlich."},
 {"a":"Elastizität","f":"Elastizität","d":"Fähigkeit, Ressourcen bei sinkender Last automatisch wieder abzugeben. Geht über reine Skalierbarkeit hinaus."},
 {"a":"Vendor Lock-in","f":"Anbieterabhängigkeit","d":"Abhängigkeit von einem Anbieter, weil ein Wechsel wegen proprietärer Schnittstellen oder Formate teuer wäre."},
-{"a":"Mandantenfähigkeit","f":"Multi-Tenancy","d":"Mehrere Kunden nutzen dieselbe Umgebung bei logisch getrennten Daten. Grundlage der Public Cloud."}];
+{"a":"Mandantenfähigkeit","f":"Multi-Tenancy","d":"Mehrere Kunden nutzen dieselbe Umgebung bei logisch getrennten Daten. Grundlage der Public Cloud."},
+{"a":"Root-CA","f":"Root Certificate Authority","d":"Oberste Zertifizierungsstelle einer PKI. Ihr Zertifikat ist selbstsigniert und als Vertrauensanker im System hinterlegt."},
+{"a":"Intermediate-CA","f":"Zwischenzertifizierungsstelle","d":"Stellt unterhalb der Root-CA die Endzertifikate aus, damit der Schlüssel der Root-CA nicht im Tagesbetrieb genutzt werden muss."},
+{"a":"Vertrauenskette","f":"Chain of Trust","d":"Prüfbare Kette vom Serverzertifikat über Zwischenstellen bis zur Root-CA."}];
 
 // ---- Bibliothek: Render + Suche ----
 const libList = document.getElementById('libList');
@@ -21743,7 +21758,7 @@ renderLib(GLOSSAR_SORTED);
     "r-subnetting": ["CIDR","Broadcast","RFC"],
     "r-tcpip": ["QUIC","Congestion Control"],
     "r-topo": ["FDDI"],
-    "r-krypto": ["RSA","ECC","Diffie-Hellman","PKI","X.509","CRL","OCSP","CSR","Hash","Salt"],
+    "r-krypto": ["RSA","ECC","Diffie-Hellman","PKI","X.509","CRL","OCSP","CSR","Hash","Salt","Root-CA","Intermediate-CA","Vertrauenskette"],
     "r-virt": ["Hypervisor","Overcommitment","Live-Migration","Thin Client","VDI","On-Premises","IaaS","PaaS","SaaS","Public Cloud","Private Cloud","Hybrid Cloud","Elastizität","Vendor Lock-in","Mandantenfähigkeit"],
     "r-vlan": ["VLAN","Trunk","VLAN-Hopping","MAC-Spoofing","802.1X","Trunk-Port","Access-Port"],
     "r-voip": ["VoIP","SIP","RTP","QoS"],
@@ -22046,6 +22061,9 @@ window.addEventListener('pageshow', () => { window.scrollTo(0, 0); });
   function open(){
     wrap.classList.add('open');
     const l = leiste(); if(l) l.classList.add('suche-offen');
+    // Sitzt die Leiste in der Menüzeile, muss diese sichtbar sein
+    const bar = document.getElementById('tabBar');
+    if(bar && bar.contains(wrap)) bar.classList.remove('hidden');
     toggle.setAttribute('aria-expanded','true');
     setTimeout(()=>input.focus(), 60);
   }

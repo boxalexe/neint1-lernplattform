@@ -707,31 +707,42 @@ table.sn-cheat td:nth-child(4),table.sn-cheat td:nth-child(5){color:var(--green)
 }
 
 
-/* ---- Suchfeld öffnet nach rechts, ohne die Symbole zu bewegen ----
-   Der Feldrahmen ist absolut positioniert und beansprucht damit keinen Platz
-   in der Flex-Zeile. Auge und Lupe bleiben in jeder Bildschirmbreite mittig. */
+/* ---- Suchfeld klappt unterhalb der Symbolzeile auf ----
+   Einheitlich auf allen Bildschirmgrößen. Der Feldrahmen liegt außerhalb des
+   Layoutflusses, dadurch bleiben Auge und Lupe immer mittig stehen. */
 .quick-search{position:relative;flex:0 0 auto}
+.quick-search{position:static}
+.a11y-wrap{position:relative}
+/* Feste, mittig ausgerichtete Breite: das Feld klappt unter den Symbolen auf
+   und ist unabhängig davon, ob die Leiste links oder rechts sitzt. */
 .quick-search .search-clear-wrap{
-  position:absolute;left:100%;top:50%;transform:translateY(-50%);
-  margin-left:6px;display:block;width:0;overflow:visible;
-  transition:width .28s ease;pointer-events:none;z-index:60}
-.quick-search.open .search-clear-wrap{width:190px;pointer-events:auto}
-.quick-search .search-clear-wrap .qs-input{width:100%}
-.quick-search.open .qs-input{width:100%;max-width:none}
+  position:absolute;left:50%;transform:translateX(-50%);top:calc(100% + 8px);
+  margin:0;display:block;width:340px;max-width:82vw;
+  height:0;overflow:hidden;opacity:0;pointer-events:none;
+  transition:height .24s ease,opacity .2s ease;z-index:80}
+.quick-search.open .search-clear-wrap{height:38px;opacity:1;pointer-events:auto}
+.quick-search .qs-input{width:100%;max-width:100%}
+.quick-search.open .qs-input{width:100%;max-width:100%;padding:8px 34px 8px 12px;opacity:1;border:1px solid var(--border);margin-left:0}
 .a11y-wrap{justify-content:center !important}
 
-@media(max-width:760px){
-  .quick-search.open .search-clear-wrap{width:150px}
-}
-@media(max-width:480px){
-  /* Auf sehr schmalen Geräten öffnet das Feld nach links, damit es nicht
-     über den Bildschirmrand hinausläuft. */
-  .quick-search .search-clear-wrap{left:auto;right:100%;margin-left:0;margin-right:6px}
-  .quick-search.open .search-clear-wrap{width:44vw}
-}
+
+
 
 /* In der Menüleiste sitzt die Symbolleiste rechts; dort öffnet das Feld nach
    links, damit es nicht über den Bildschirmrand hinausläuft. */
-.a11y-wrap.in-menu .quick-search .search-clear-wrap{
-  left:auto;right:100%;margin-left:0;margin-right:6px}
+.a11y-wrap.in-menu .quick-search .search-clear-wrap{left:50%;right:auto;transform:translateX(-50%);margin:0}
 .a11y-wrap.in-menu .qs-results{right:0;left:auto}
+
+
+
+
+/* Trefferliste sitzt unterhalb des aufgeklappten Feldes */
+.qs-results{left:50%;right:auto;transform:translateX(-50%);top:calc(100% + 54px);width:340px;max-width:82vw}
+.a11y-wrap.in-menu .qs-results{left:50%;right:auto;transform:translateX(-50%)}
+@media(max-width:620px){
+  /* Auf schmalen Geräten die volle Breite nutzen */
+  .quick-search .search-clear-wrap{left:0;right:0;transform:none;width:auto;max-width:100%}
+  .a11y-wrap.in-menu .quick-search .search-clear-wrap{left:0;right:0;transform:none;width:auto}
+  .qs-results{left:0;right:0;transform:none;width:auto;max-width:100%}
+  .a11y-wrap.in-menu .qs-results{left:0;right:0;transform:none}
+}
