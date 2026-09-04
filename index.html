@@ -24,7 +24,7 @@
     if (t && t !== 'default') document.documentElement.setAttribute('data-theme', t);
   } catch (e) {}
 </script>
-<link rel="stylesheet" href="styles.css?v=20260828h">
+<link rel="stylesheet" href="styles.css?v=20260828j">
 </head>
 <body>
 <header>
@@ -430,9 +430,11 @@
 
 <h3>Rollen &amp; Pflichten</h3>
 <div class="callout"><span class="tag">DSB-Pflicht</span><strong>Datenschutzbeauftragter (DSB):</strong> Pflicht, wenn mindestens 20 Personen ständig automatisiert personenbezogene Daten verarbeiten, wenn die Kerntätigkeit in umfangreicher Verarbeitung sensibler Daten oder systematischer Überwachung besteht, oder grundsätzlich bei Behörden (außer Gerichte in ihrer justiziellen Tätigkeit). Rechtsgrundlage: Art. 37 DSGVO und § 38 BDSG.</div>
-<p>Der <span class="term">Verantwortliche</span> entscheidet über Zwecke und Mittel der Verarbeitung. Der <span class="term">Auftragsverarbeiter</span> verarbeitet Daten dagegen ausschließlich weisungsgebunden im Auftrag des Verantwortlichen, etwa ein externer Cloud-Anbieter, er trifft keine eigenen Entscheidungen über Zweck oder Mittel. Diese Beziehung wird über eine <strong>AVV (Auftragsverarbeitungsvertrag)</strong> geregelt.</p>
+<p>Der <span class="term">Verantwortliche</span> entscheidet über Zwecke und Mittel der Verarbeitung (in der Praxis meist das Unternehmen selbst, ein Verein, eine Behörde oder eine Arztpraxis, nicht die einzelne Sachbearbeiterin). Nach Art. 4 Nr. 7 DSGVO ist Verantwortlicher „die natürliche oder juristische Person, Behörde, Einrichtung oder andere Stelle, die allein oder gemeinsam mit anderen über die Zwecke und Mittel der Verarbeitung von personenbezogenen Daten entscheidet“. Der <span class="term">Auftragsverarbeiter</span> verarbeitet Daten dagegen ausschließlich weisungsgebunden im Auftrag des Verantwortlichen, etwa ein externer Cloud-Anbieter, er trifft keine eigenen Entscheidungen über Zweck oder Mittel. Diese Beziehung wird über eine <strong>AVV (Auftragsverarbeitungsvertrag)</strong> geregelt.</p>
 <p>Zu den organisatorischen Pflichten zählen <strong>TOM</strong> (Technische und organisatorische Maßnahmen), konkrete Schutzmaßnahmen wie Zugriffskontrollen oder Verschlüsselung, sowie <strong>Privacy by Design/Default</strong>: Datenschutz wird von Anfang an mitgeplant, datenschutzfreundliche Voreinstellungen sind Standard.</p>
 <p>Zwei Fristen/Verfahren, die oft verwechselt werden: Die <strong>Meldepflicht</strong> ist reaktiv, sie greift erst <em>nach</em> einer bereits eingetretenen Datenschutzverletzung und verlangt eine Meldung an die Aufsichtsbehörde innerhalb von 72 Stunden. Die <strong>DSFA</strong> (Datenschutz-Folgenabschätzung) ist proaktiv, sie erfolgt <em>vorab</em>, bevor eine geplante Verarbeitung mit voraussichtlich hohem Risiko für die Betroffenen überhaupt startet.</p>
+<p><strong>Beides am selben Beispiel:</strong> Ein Betreiber plant, öffentlich zugängliche Bereiche systematisch und großflächig per Video zu überwachen, etwa einen Marktplatz oder ein Einkaufszentrum. Weil öffentlich zugängliche Bereiche umfangreich und systematisch überwacht werden, ist nach Art. 35 Abs. 3 lit. c DSGVO <em>vor</em> der Inbetriebnahme eine <strong>DSFA</strong> durchzuführen: Zweck und Erforderlichkeit werden geprüft, die Risiken für die Betroffenen bewertet und Schutzmaßnahmen festgelegt, etwa Löschfristen, eingeschränkte Kamerawinkel, Schwärzung angrenzender Bereiche und ein Zugriffskonzept.</p>
+<p>Wird später der Aufzeichnungsserver derselben Anlage gehackt und fließen Aufnahmen ab, greift die <strong>Meldepflicht</strong> nach Art. 33 DSGVO: Der Verantwortliche meldet den Vorfall binnen 72 Stunden nach Bekanntwerden an die Aufsichtsbehörde. Ist ein hohes Risiko für die Betroffenen zu erwarten, kommt nach Art. 34 DSGVO die Benachrichtigung der Betroffenen hinzu. Merksatz: Die DSFA fragt vorher, ob die Verarbeitung so überhaupt starten darf; die Meldepflicht greift, wenn danach etwas schiefgeht.</p>
 
 <h3>Wichtige Artikel &amp; Paragraphen</h3>
 <p>Diese Fundstellen tauchen in der Prüfung und im Berufsalltag am häufigsten auf. Man muss sie nicht auswendig zitieren, sollte aber wissen, was wo geregelt ist.</p>
@@ -910,6 +912,18 @@ Merken Sie sich die Reihenfolge: erst summieren, dann Reserve aufschlagen, dann 
 <strong>Aufgabe:</strong> Der Arbeitslaptop einer Mitarbeiterin wird aus dem Auto gestohlen. Welche Maßnahmen müssen <em>vorher</em> getroffen worden sein, damit die Firmendaten geschützt bleiben? Nennen Sie vier Maßnahmen.<br><br>
 <strong>Musterlösung:</strong> Vollverschlüsselung des Datenträgers, damit die Daten ohne Anmeldung unlesbar bleiben; ein langes Kennwort ohne Wörterbuchwörter mit Groß- und Kleinbuchstaben, Ziffern und Sonderzeichen; ein zweiter Faktor bei der Anmeldung; eine automatische Bildschirmsperre nach kurzer Zeit; eine zentrale Geräteverwaltung mit der Möglichkeit zur Fernlöschung; sowie eine aktuelle Datensicherung, damit die Daten trotz Verlust weiterhin verfügbar sind.<br><br>
 <strong>Hinweis zur Bewertung:</strong> Gefragt sind vorbeugende Maßnahmen. Antworten wie Diebstahlanzeige oder Sperrung im Nachhinein erfüllen die Aufgabenstellung nicht, weil sie erst nach dem Verlust greifen.</div>
+<h3>IDS und IPS</h3>
+<p>Ein <strong>IDS</strong> (Intrusion Detection System) beobachtet den Datenverkehr, erkennt verdächtige Muster und schlägt Alarm, greift aber nicht ein. Ein <strong>IPS</strong> (Intrusion Prevention System) sitzt aktiv im Datenpfad und kann verdächtige Pakete verwerfen oder Verbindungen abbrechen. Die Erkennung läuft bei beiden entweder <strong>signaturbasiert</strong> über bekannte Angriffsmuster oder <strong>anomaliebasiert</strong> über Abweichungen vom gelernten Normalverhalten.</p>
+<p>Nach dem Einsatzort unterscheidet man das <strong>netzbasierte</strong> System (NIDS/NIPS) an einem zentralen Punkt hinter der Firewall oder am Übergang zwischen Segmenten, und das <strong>hostbasierte</strong> System (HIDS/HIPS) direkt auf einem Server, wo es Systemdateien, Protokolle und Prozesse überwacht. Ein NIDS wird typischerweise über einen Spiegelport oder einen Netzwerk-TAP mitlesend angebunden, ein NIPS dagegen in Reihe geschaltet, weil es sonst nicht blockieren könnte.</p>
+<table>
+<tr><th>Ebene</th><th>Was geprüft wird</th></tr>
+<tr><td>Schicht 3 und 4</td><td>IP-Adressen, Ports, Verbindungszustand, auffällige Muster wie Portscans oder ungewöhnlich viele halboffene Verbindungen</td></tr>
+<tr><td>Schicht 7</td><td>Inhalte der Anwendungsprotokolle, etwa HTTP, DNS, SMTP oder SMB, auf Angriffsmuster wie SQL-Injection, Cross-Site Scripting oder Schadcode</td></tr>
+<tr><td>Host-Ebene</td><td>Veränderungen an Systemdateien, verdächtige Prozesse, Anmeldeversuche und Rechteausweitungen</td></tr>
+</table>
+<p><strong>Was nicht geprüft wird:</strong> Verschlüsselter Verkehr bleibt für beide Systeme inhaltlich undurchsichtig, solange er nicht vorher aufgebrochen wird; erkennbar sind dann nur Metadaten wie Ziel, Menge und Zeitpunkt. Ebenso wenig sehen netzbasierte Systeme den Verkehr, der sie gar nicht passiert, etwa die Kommunikation zwischen zwei Rechnern im selben Segment oder zwischen virtuellen Maschinen auf demselben Host. Und keines der beiden ersetzt Firewall, Patchmanagement oder ein Rechtekonzept, sie ergänzen diese nur.</p>
+<div class="callout"><span class="tag">Prüfungsfalle</span>Der Unterschied liegt allein im <em>aktiven Eingreifen</em>: IDS meldet, IPS blockiert zusätzlich. Daraus folgt der wichtigste Nachteil des IPS: Ein Fehlalarm (False Positive) trennt legitime Verbindungen und kann den Betrieb stören, weshalb ein IPS häufig erst im Beobachtungsmodus gefahren und schrittweise scharf geschaltet wird. Ein IDS kann diesen Schaden nicht anrichten, bemerkt einen Angriff aber eben nur.</div>
+
 <div class="callout xref"><span class="tag">Verwandte Themen</span><a href="#r-datenschutz">Informationssicherheit &amp; Datenschutz</a> · <a href="#r-grundschutz">BSI-Grundschutz &amp; Schutzbedarf</a> · <a href="#r-krypto">Verschlüsselung & PKI</a> · <a href="#r-malware">Schadsoftware &amp; Angriffsarten</a></div>
 </section>
 
@@ -2161,6 +2175,6 @@ Im <a href="subnetting-trainer/">Subnetting Trainer</a> kann dieses Thema geziel
   <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="19" x2="12" y2="5"></line><polyline points="6 11 12 5 18 11"></polyline></svg>
 </button>
 
-<script src="app.js?v=20260828h"></script>
+<script src="app.js?v=20260828j"></script>
 </body>
 </html>

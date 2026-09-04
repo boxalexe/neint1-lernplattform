@@ -763,3 +763,13 @@ table.sn-cheat td:nth-child(4),table.sn-cheat td:nth-child(5){color:var(--green)
 .h3-jump{color:var(--muted);text-decoration:none;font-size:0.82em;margin-left:6px;
   opacity:.6;transition:opacity .15s,color .15s;vertical-align:middle}
 .h3-jump:hover{opacity:1;color:var(--cyan)}
+
+/* ---- Fachbegriffe im Fließtext hervorheben ----
+   Betrifft nur Hervorhebungen in Absätzen des Nachschlagewerks. Tabellen
+   behalten ihre Spaltenfarbe, die Hinweisboxen ihre eigene Wirkung, sonst
+   wirkt die Seite überladen. Gleiches Cyan wie bei den Glossarbegriffen,
+   damit beides zusammenpasst. */
+#view-lesen p strong{color:var(--cyan)}
+#view-lesen .callout p strong{color:inherit}
+#view-lesen p .term strong,
+#view-lesen p strong .term{color:var(--cyan)}
