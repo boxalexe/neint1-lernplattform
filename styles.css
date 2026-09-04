@@ -773,3 +773,21 @@ table.sn-cheat td:nth-child(4),table.sn-cheat td:nth-child(5){color:var(--green)
 #view-lesen .callout p strong{color:inherit}
 #view-lesen p .term strong,
 #view-lesen p strong .term{color:var(--cyan)}
+
+/* Häufige Prüfungsthemen im AP1-Kapitel */
+.haeufig{background:var(--panel-2);border:1px solid var(--border);border-left:3px solid var(--green);
+  border-radius:10px;padding:15px 17px;margin:18px 0 22px}
+.haeufig-titel{font-family:'DM Mono',monospace;font-size:0.8rem;text-transform:uppercase;
+  letter-spacing:0.1em;color:var(--green);margin:0 0 11px}
+.haeufig-liste{display:flex;flex-wrap:wrap;gap:7px}
+.haeufig-liste a{display:inline-block;background:var(--panel);border:1px solid var(--border);
+  color:var(--text);text-decoration:none;font-size:0.83rem;padding:6px 12px;border-radius:7px;
+  transition:color .15s,border-color .15s}
+.haeufig-liste a:hover{color:var(--cyan);border-color:var(--cyan)}
+.haeufig-note{font-size:0.83rem;color:var(--muted);line-height:1.6;margin:12px 0 0;
+  border-top:1px solid var(--border);padding-top:10px}
+@media(max-width:560px){
+  .haeufig{padding:13px 14px}
+  .haeufig-liste{gap:6px}
+  .haeufig-liste a{font-size:0.78rem;padding:5px 10px}
+}
