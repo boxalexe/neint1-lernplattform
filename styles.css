@@ -746,3 +746,20 @@ table.sn-cheat td:nth-child(4),table.sn-cheat td:nth-child(5){color:var(--green)
   .qs-results{left:0;right:0;transform:none;width:auto;max-width:100%}
   .a11y-wrap.in-menu .qs-results{left:0;right:0;transform:none}
 }
+
+/* Einleitung über dem AP1-Kapitel */
+.intro-box{background:var(--panel-2);border:1px solid var(--border);border-radius:10px;
+  padding:16px 18px;margin:14px 0 22px}
+.intro-box p{margin:0 0 9px;line-height:1.65}
+.intro-box p:last-child{margin-bottom:0}
+.intro-note{font-size:0.85rem;color:var(--muted);border-top:1px solid var(--border);padding-top:9px;margin-top:11px}
+@media(max-width:560px){.intro-box{padding:13px 14px}}
+
+/* Themenblasen mittig ausrichten, auch wenn sich die Anzahl ändert */
+.topics{justify-content:center}
+.topic-subs{justify-content:center}
+
+/* Sprungpfeil in den AP1-Zwischenüberschriften */
+.h3-jump{color:var(--muted);text-decoration:none;font-size:0.82em;margin-left:6px;
+  opacity:.6;transition:opacity .15s,color .15s;vertical-align:middle}
+.h3-jump:hover{opacity:1;color:var(--cyan)}
