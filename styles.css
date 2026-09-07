@@ -769,8 +769,11 @@ table.sn-cheat td:nth-child(4),table.sn-cheat td:nth-child(5){color:var(--green)
    behalten ihre Spaltenfarbe, die Hinweisboxen ihre eigene Wirkung, sonst
    wirkt die Seite überladen. Gleiches Cyan wie bei den Glossarbegriffen,
    damit beides zusammenpasst. */
-#view-lesen p strong{color:var(--cyan)}
-#view-lesen .callout p strong{color:inherit}
+#view-lesen p strong,
+#view-lesen li strong,
+#view-lesen dt strong{color:var(--cyan)}
+#view-lesen .callout p strong,
+#view-lesen .callout li strong{color:inherit}
 #view-lesen p .term strong,
 #view-lesen p strong .term{color:var(--cyan)}
 
@@ -791,3 +794,7 @@ table.sn-cheat td:nth-child(4),table.sn-cheat td:nth-child(5){color:var(--green)
   .haeufig-liste{gap:6px}
   .haeufig-liste a{font-size:0.78rem;padding:5px 10px}
 }
+
+/* OSI-Übersichtstabelle: Nummer und Schichtbezeichnung stehen in getrennten
+   Spalten, beide gehören zusammen und werden deshalb gemeinsam grün gesetzt. */
+#view-lesen table.osi-uebersicht td:nth-child(2){color:var(--green)}

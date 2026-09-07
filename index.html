@@ -24,7 +24,7 @@
     if (t && t !== 'default') document.documentElement.setAttribute('data-theme', t);
   } catch (e) {}
 </script>
-<link rel="stylesheet" href="styles.css?v=20260828n">
+<link rel="stylesheet" href="styles.css?v=20260828p">
 </head>
 <body>
 <header>
@@ -1216,7 +1216,7 @@ Ein <code>alt</code>-Fragment trennt danach den Fall „Anmeldung erfolgreich" v
 <section id="r-osi">
 <h2>OSI-Modell (7 Schichten)</h2>
 <p>Das <span class="term">OSI-Referenzmodell</span> (Open Systems Interconnection) gliedert Netzwerkkommunikation in 7 Schichten; die Dateneinheit je Schicht heißt PDU (Protocol Data Unit). Beim Senden fügt jede Schicht ihren Header hinzu (<strong>Kapselung</strong>, von oben 7 nach unten 1), beim Empfangen liest und entfernt jede Schicht ihren Header wieder (<strong>Entkapselung</strong>, von unten 1 nach oben 7).</p>
-<table>
+<table class="osi-uebersicht">
 <tr><th>#</th><th>Schicht (DE)</th><th>Layer (EN)</th><th>Aufgabe</th><th>PDU</th><th>Geräte/Protokolle</th></tr>
 <tr><td>7</td><td>Anwendung</td><td>Application</td><td>Netzdienste für Apps</td><td>Daten</td><td>HTTP, FTP, SMTP, DNS</td></tr>
 <tr><td>6</td><td>Darstellung</td><td>Presentation</td><td>Format, Codierung, Verschlüsselung, Kompression</td><td>Daten</td><td>TLS, ASCII, JPEG</td></tr>
@@ -1245,7 +1245,7 @@ Ein <code>alt</code>-Fragment trennt danach den Fall „Anmeldung erfolgreich" v
 <h3>Alternative Veranschaulichung: das Matrjoschka-Prinzip</h3>
 <p>Wer sich die Reihenfolge der Schichten schlecht merken kann, denkt sie am besten als ineinander gesteckte Puppen. Entscheidend ist die Perspektive: Nicht die Schicht wird eingepackt, sondern die Daten wandern nach unten durch die Schichten und bekommen dabei Hülle um Hülle. Der Fachbegriff dafür lautet <strong>Kapselung</strong>.</p>
 
-<p><strong>Beim Sender wird eingepackt.</strong> Innen liegen die eigentlichen Nutzdaten der Anwendung, etwa ein HTTP-Request (Schicht 7). Jede tiefere Schicht nimmt das, was von oben kommt, legt es vollständig in sich hinein und schreibt außen ihre eigenen Steuerinformationen dazu, den <strong>Header</strong>:</p>
+<p><strong>Beim Sender wird eingepackt.</strong> Innen liegen die eigentlichen Nutzdaten der Anwendung, etwa ein HTTP-Request (<strong>Schicht 7</strong>). Jede tiefere Schicht nimmt das, was von oben kommt, legt es vollständig in sich hinein und schreibt außen ihre eigenen Steuerinformationen dazu, den <strong>Header</strong>:</p>
 <ul>
 <li><strong>Schicht 6</strong> und <strong>Schicht 5</strong> legen nur hauchdünne Hüllen darum. Schicht 6 regelt, in welcher Form die Daten dargestellt werden, also Zeichencodierung, Kompression und Verschlüsselung. Schicht 5 hält fest, zu welcher laufenden Sitzung sie gehören. In der Praxis sind diese beiden Hüllen oft so dünn, dass man sie kaum bemerkt; im TCP/IP-Modell werden sie mit Schicht 7 zusammengefasst.</li>
 <li><strong>Schicht 4</strong> legt die erste robuste Verpackung an: Sie verpackt die Daten der darüberliegenden Schichten und ergänzt eigene Steuerinformationen wie Quell- und Zielport sowie Sequenznummern. Das Ergebnis heißt <strong>Segment</strong> (bei TCP) beziehungsweise Datagramm (bei UDP).</li>
@@ -2224,6 +2224,6 @@ Im <a href="subnetting-trainer/">Subnetting Trainer</a> kann dieses Thema geziel
   <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="19" x2="12" y2="5"></line><polyline points="6 11 12 5 18 11"></polyline></svg>
 </button>
 
-<script src="app.js?v=20260828n"></script>
+<script src="app.js?v=20260828p"></script>
 </body>
 </html>
