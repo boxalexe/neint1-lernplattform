@@ -24,7 +24,7 @@
     if (t && t !== 'default') document.documentElement.setAttribute('data-theme', t);
   } catch (e) {}
 </script>
-<link rel="stylesheet" href="styles.css?v=20260828k">
+<link rel="stylesheet" href="styles.css?v=20260828n">
 </head>
 <body>
 <header>
@@ -1242,6 +1242,33 @@ Ein <code>alt</code>-Fragment trennt danach den Fall „Anmeldung erfolgreich" v
 <h3>Kollisions- und Broadcastdomäne</h3>
 <p>Eine <strong>Kollisionsdomäne</strong> umfasst alle Geräte, deren Signale sich gegenseitig stören können. Ein <strong>Hub</strong> auf Schicht 1 verbindet alle Anschlüsse zu einer einzigen Kollisionsdomäne. Ein <strong>Switch</strong> auf Schicht 2 trennt sie dagegen: Jeder Port bildet eine eigene Kollisionsdomäne, weshalb im modernen Vollduplexbetrieb praktisch keine Kollisionen mehr auftreten.</p>
 <p>Eine <strong>Broadcastdomäne</strong> umfasst alle Geräte, die einen Broadcast erreicht. Ein Switch leitet Broadcasts an alle Ports weiter und trennt Broadcastdomänen deshalb <em>nicht</em>. Erst ein <strong>Router</strong> auf Schicht 3 oder die Aufteilung in <strong>VLANs</strong> begrenzt sie. Merksatz: Der Switch trennt Kollisionsdomänen, der Router trennt Broadcastdomänen.</p>
+<h3>Alternative Veranschaulichung: das Matrjoschka-Prinzip</h3>
+<p>Wer sich die Reihenfolge der Schichten schlecht merken kann, denkt sie am besten als ineinander gesteckte Puppen. Entscheidend ist die Perspektive: Nicht die Schicht wird eingepackt, sondern die Daten wandern nach unten durch die Schichten und bekommen dabei Hülle um Hülle. Der Fachbegriff dafür lautet <strong>Kapselung</strong>.</p>
+
+<p><strong>Beim Sender wird eingepackt.</strong> Innen liegen die eigentlichen Nutzdaten der Anwendung, etwa ein HTTP-Request (Schicht 7). Jede tiefere Schicht nimmt das, was von oben kommt, legt es vollständig in sich hinein und schreibt außen ihre eigenen Steuerinformationen dazu, den <strong>Header</strong>:</p>
+<ul>
+<li><strong>Schicht 6</strong> und <strong>Schicht 5</strong> legen nur hauchdünne Hüllen darum. Schicht 6 regelt, in welcher Form die Daten dargestellt werden, also Zeichencodierung, Kompression und Verschlüsselung. Schicht 5 hält fest, zu welcher laufenden Sitzung sie gehören. In der Praxis sind diese beiden Hüllen oft so dünn, dass man sie kaum bemerkt; im TCP/IP-Modell werden sie mit Schicht 7 zusammengefasst.</li>
+<li><strong>Schicht 4</strong> legt die erste robuste Verpackung an: Sie verpackt die Daten der darüberliegenden Schichten und ergänzt eigene Steuerinformationen wie Quell- und Zielport sowie Sequenznummern. Das Ergebnis heißt <strong>Segment</strong> (bei TCP) beziehungsweise Datagramm (bei UDP).</li>
+<li><strong>Schicht 3</strong> legt die zweite robuste Verpackung an und schreibt Quell- und Ziel-IP-Adresse darauf. Das Ergebnis heißt <strong>Paket</strong>.</li>
+<li><strong>Schicht 2</strong> bildet die größte Datenverpackung ganz außen, den <strong>Frame</strong>, und schreibt Quell- und Ziel-MAC-Adresse sowie eine Prüfsumme darauf.</li>
+</ul>
+<p><strong>Schicht 1</strong> verpackt nichts mehr. Sie schickt den fertigen Frame nur noch als Folge von Signalen über Kupfer, Glasfaser oder Funk.</p>
+
+<p><strong>Beim Empfänger wird ausgepackt.</strong> Er beginnt außen und arbeitet sich nach innen vor: Frame öffnen, darin liegt das Paket. Paket öffnen, darin liegt das Segment. So weiter, bis in der Mitte die reinen Nutzdaten für die Anwendung übrig bleiben. Jede Schicht liest dabei genau ihren eigenen Header und wirft die Hülle weg. Der Fachbegriff dafür lautet <strong>Entkapselung</strong>.</p>
+
+<table>
+<tr><th>Schicht</th><th>Rolle im Bild</th><th>Was auf dem Header steht</th></tr>
+<tr><td>7 Anwendung</td><td>Der Inhalt ganz innen</td><td>Die eigentlichen Nutzdaten, etwa ein HTTP-Request</td></tr>
+<tr><td>6 Darstellung</td><td>Erste hauchdünne Hülle</td><td>Angaben zu Darstellung, Kodierung oder Verschlüsselung</td></tr>
+<tr><td>5 Sitzung</td><td>Zweite hauchdünne Hülle</td><td>Angaben zur laufenden Kommunikationssitzung</td></tr>
+<tr><td>4 Transport</td><td>Erste robuste Verpackung (Segment)</td><td>Quell- und Zielport, Sequenznummer (TCP/UDP)</td></tr>
+<tr><td>3 Vermittlung</td><td>Zweite robuste Verpackung (Paket)</td><td>Quell- und Ziel-IP-Adresse, TTL</td></tr>
+<tr><td>2 Sicherung</td><td>Größte Datenverpackung (Frame) ganz außen</td><td>Quell- und Ziel-MAC-Adresse, Prüfsumme (CRC)</td></tr>
+<tr><td>1 Bitübertragung</td><td>Keine Verpackung, sondern der Transportweg</td><td>Signale auf Kupfer, Glasfaser oder Funk</td></tr>
+</table>
+
+<div class="callout"><span class="tag">Merksatz</span><strong>Der Frame ist die Verpackung ganz außen, die Nutzdaten sind der Inhalt ganz innen.</strong> Daraus folgt direkt, warum die Geräte auf verschiedenen Schichten arbeiten: Ein <strong>Switch</strong> muss nur die äußerste Hülle öffnen, um die <strong>MAC-Adresse</strong> zu lesen, und weiß gar nicht, was darin steckt; deshalb Schicht 2. Ein <strong>Router</strong> öffnet eine Hülle mehr, um an die <strong>IP-Adresse</strong> zu kommen, denn nur damit findet er den Weg in ein anderes Netz; deshalb Schicht 3. Und weil jede Hülle einen eigenen Header trägt, wächst die übertragene Datenmenge mit jeder Schicht ein Stück an. Merkhilfe für die Namen von innen nach außen: Daten, Segment, Paket, Frame, Bits.</div>
+
 <div class="callout xref"><span class="tag">Verwandte Themen</span><a href="#r-tcpip">TCP/IP & UDP</a> · <a href="#r-header">Header, TTL & Traceroute</a> · <a href="#r-routing">Routing & Switching</a></div>
 </section>
 
@@ -1429,6 +1456,20 @@ Prüfen Sie in Aufgaben immer alle fünf Kriterien einzeln durch: Genau daran h�
 <p>Das klassische STP braucht nach einer Topologieänderung relativ lange, bis wieder alles weiterleitet. Sein Nachfolger <strong>RSTP</strong> (Rapid Spanning Tree Protocol) reagiert deutlich schneller und ist heute Standard, bleibt aber zum klassischen STP abwärtskompatibel.</p>
 
 <div class="callout"><span class="tag">Prüfungsfalle</span>Ein <strong>Switch</strong> arbeitet auf Schicht 2 und entscheidet anhand der <strong>MAC-Adresse</strong>, ein <strong>Router</strong> auf Schicht 3 anhand der <strong>IP-Adresse</strong>. Daraus folgt die zweite wichtige Aussage: Ein Switch trennt <em>Kollisionsdomänen</em>, aber keine Broadcastdomänen. Erst ein Router oder ein VLAN trennt Broadcastdomänen. Diese Kombination wird sehr häufig geprüft.</div>
+
+<h3>ARP und DHCP im Vergleich</h3>
+<p>Beide Protokolle beschaffen einem Rechner eine Information, die ihm fehlt, und beide starten mit einem Broadcast. Verwechselt werden sie trotzdem regelmäßig, weil der Zweck ein völlig anderer ist.</p>
+<table>
+<tr><th></th><th>ARP</th><th>DHCP</th></tr>
+<tr><td>Zweck</td><td>Zu einer bekannten IP-Adresse die MAC-Adresse finden</td><td>Überhaupt erst eine IP-Adresse und die Netzparameter erhalten</td></tr>
+<tr><td>Wann</td><td>Vor jeder Übertragung im lokalen Segment, sofern nicht im Cache</td><td>Einmal beim Start des Geräts und zur Verlängerung der Leihfrist</td></tr>
+<tr><td>Richtung</td><td>Von Schicht 3 zu Schicht 2</td><td>Liefert Adressdaten für Schicht 3</td></tr>
+<tr><td>Ablauf</td><td>Request als Broadcast, Reply als Unicast</td><td>Discover, Offer, Request, Acknowledge (DORA)</td></tr>
+<tr><td>Antwort von</td><td>Dem Gerät, dem die gesuchte IP gehört</td><td>Dem DHCP-Server, notfalls über einen Relay-Agent</td></tr>
+<tr><td>Ergebnis</td><td>Eintrag im ARP-Cache, zeitlich begrenzt</td><td>Lease mit IP, Maske, Gateway und DNS-Server</td></tr>
+<tr><td>Über Netzgrenzen</td><td>Nein, endet am Router</td><td>Ja, wenn ein Relay-Agent eingerichtet ist</td></tr>
+</table>
+<div class="callout"><span class="tag">Merkhilfe</span><strong>DHCP verschafft die Adresse, ARP findet den Weg zum Nachbarn.</strong> Ein Gerät braucht zuerst DHCP, um überhaupt eine IP-Adresse zu haben; erst danach nutzt es ARP, um im eigenen Segment die passende MAC-Adresse zu ermitteln. Beide arbeiten nur innerhalb der Broadcastdomäne, wobei DHCP diese Grenze über den Relay-Agent überwinden kann und ARP nicht.</div>
 
 <div class="callout xref"><span class="tag">Verwandte Themen</span><a href="#r-ip">IPv4 & IPv6</a> · <a href="#r-vlan">VLAN-Segmentierung</a> · <a href="#r-osi">OSI-Modell (7 Schichten)</a></div>
 </section>
@@ -2183,6 +2224,6 @@ Im <a href="subnetting-trainer/">Subnetting Trainer</a> kann dieses Thema geziel
   <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="19" x2="12" y2="5"></line><polyline points="6 11 12 5 18 11"></polyline></svg>
 </button>
 
-<script src="app.js?v=20260828k"></script>
+<script src="app.js?v=20260828n"></script>
 </body>
 </html>

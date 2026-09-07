@@ -5839,7 +5839,7 @@ const POOLS = {
       "ok": false
      }
     ],
-    "e": "DNS arbeitet auf Schicht 7, der Anwendungsschicht. Ebenfalls korrekt sind: Anwendungsschicht, Application Layer, Layer 7. Es nutzt darunter überwiegend UDP auf Port 53, bei Zonentransfers und großen Antworten TCP auf demselben Port."
+    "e": "DNS arbeitet auf Schicht 7, der Anwendungsschicht. Seine Aufgabe ist die Namensauflösung: Es übersetzt einen für Menschen lesbaren Namen wie beispiel.de in die IP-Adresse, die der Rechner für den Verbindungsaufbau braucht. Ebenfalls korrekt sind: Anwendungsschicht, Application Layer, Layer 7. Es nutzt darunter überwiegend UDP auf Port 53, bei Zonentransfers und großen Antworten TCP auf demselben Port."
    },
    {
     "q": "In welche Richtung durchläuft ein gesendetes Datenpaket die Schichten?",
@@ -5949,7 +5949,7 @@ const POOLS = {
       "ok": false
      }
     ],
-    "e": "ARP wird meist zwischen Schicht 2 und 3 eingeordnet und in Prüfungen überwiegend der Sicherungsschicht (Schicht 2) zugeschlagen. Begründung: Es löst eine IP-Adresse aus Schicht 3 in eine MAC-Adresse aus Schicht 2 auf und arbeitet direkt mit Frames. Ebenfalls vertretbar: Bindeglied zwischen Schicht 2 und 3."
+    "e": "ARP wird meist zwischen Schicht 2 und 3 eingeordnet und in Prüfungen überwiegend der Sicherungsschicht (Schicht 2) zugeschlagen. Die Richtung merkt man sich als Schicht 3 zu Schicht 2: Bekannt ist die IP-Adresse (Schicht 3), gesucht wird die zugehörige MAC-Adresse (Schicht 2). Der Ablauf: Broadcast-Anfrage ins Segment, Unicast-Antwort des Besitzers, Ablage im ARP-Cache. Ebenfalls vertretbar: Bindeglied zwischen Schicht 2 und 3. Bei IPv6 übernimmt NDP diese Aufgabe."
    },
    {
     "q": "Was versteht man unter Kapselung beim Sendeprozess?",
@@ -12583,6 +12583,7 @@ const POOLS = {
   "q": [
    {
     "q": "Welche der folgenden Gründe sprechen für die Aufteilung eines physischen Netzes in mehrere VLANs?",
+    "card": false,
     "o": [
      { "t": "Eindämmung von Broadcast-Domänen, logische Trennung von Abteilungen, feinere Sicherheits und Zugriffskontrolle", "ok": true },
      { "t": "Höhere physische Kabelbandbreite, geringerer Stromverbrauch der Switches und automatische IP-Vergabe", "ok": false },
@@ -13229,7 +13230,7 @@ const POOLS = {
      { "t": "IDS schützt einzelne Hosts; IPS ist ausschließlich für ganze Netze gedacht", "ok": false },
      { "t": "IDS arbeitet nur signaturbasiert; IPS erkennt ausschließlich Anomalien", "ok": false }
     ],
-    "e": "IDS = Intrusion Detection System (passiv). IPS = Intrusion Prevention System (aktiv eingreifend)."
+    "e": "IDS steht für Intrusion Detection System und arbeitet passiv: Es beobachtet den Verkehr, erkennt Auffälligkeiten und meldet sie, greift aber nicht ein. IPS steht für Intrusion Prevention System und sitzt aktiv im Datenpfad, sodass es verdächtige Pakete verwerfen oder Verbindungen trennen kann. Beide erkennen entweder über Signaturen bekannter Angriffsmuster oder über Anomalien, also Abweichungen vom normalen Verhalten. Der Preis der aktiven Variante ist das Risiko von Fehlalarmen: Ein IPS kann bei einer falschen Einstufung legitimen Verkehr blockieren, ein IDS nicht. Wichtig für die Prüfung: Verschlüsselten Verkehr können beide nicht ohne Weiteres inhaltlich prüfen."
    },
    {
     "q": "Was ist ein Zero-Day-Exploit?",
@@ -13250,6 +13251,26 @@ const POOLS = {
      { "t": "Schadsoftware, die sich als nützliches Programm tarnt und Hintertüren öffnet", "ok": false }
     ],
     "e": "Ransomware verschlüsselt Dateien und droht mit Datenverlust, bis ein Lösegeld bezahlt wird."
+   },
+   {
+    "q": "Wo wird ein netzbasiertes IPS im Netz eingebunden?",
+    "o": [
+     { "t": "In Reihe im Datenpfad, damit es Pakete verwerfen kann", "ok": true },
+     { "t": "Mitlesend über einen Spiegelport neben dem eigentlichen Datenpfad", "ok": false },
+     { "t": "Ausschließlich als Dienst auf jedem einzelnen Endgerät im Netz", "ok": false },
+     { "t": "Zwischen Bildschirm und Rechner an der Arbeitsplatzverkabelung", "ok": false }
+    ],
+    "e": "Nur in Reihe kann ein IPS eingreifen und Verbindungen unterbrechen. Ein IDS wird dagegen typischerweise über Spiegelport oder Netzwerk-TAP mitlesend angebunden, weil es nur beobachtet. Daraus folgt der Nachteil des IPS: Ein Fehlalarm trennt legitime Verbindungen."
+   },
+   {
+    "q": "Welche Art von Verkehr können IDS und IPS inhaltlich nicht ohne Weiteres prüfen?",
+    "o": [
+     { "t": "Verschlüsselten Verkehr, solange er nicht aufgebrochen wird", "ok": true },
+     { "t": "Unverschlüsselten Verkehr der Anwendungsschicht wie einfaches HTTP", "ok": false },
+     { "t": "Verkehr, der über die Ports 80 und 443 zum Webserver läuft", "ok": false },
+     { "t": "Broadcast-Verkehr innerhalb des eigenen Netzsegments", "ok": false }
+    ],
+    "e": "Bei verschlüsseltem Verkehr bleiben nur Metadaten wie Ziel, Menge und Zeitpunkt sichtbar. Ebenfalls unsichtbar bleibt netzbasierten Systemen der Verkehr, der sie gar nicht passiert, etwa zwischen zwei Rechnern im selben Segment oder zwischen virtuellen Maschinen auf demselben Host."
    }
   ]
  },
@@ -13494,7 +13515,7 @@ const POOLS = {
      { "t": "Ab einem Jahresumsatz von einer Million Euro", "ok": false },
      { "t": "Erst wenn tatsächlich ein nachweisbarer Datenschutzverstoß aufgetreten ist und gemeldet wurde", "ok": false }
     ],
-    "e": "Die Personenzahl-Schwelle ist einer von mehreren möglichen Auslösern für die DSB-Pflicht."
+    "e": "Die Personenzahl ist nur einer von mehreren Auslösern. Nach Paragraf 38 BDSG gilt die Schwelle von mindestens 20 Personen, die ständig automatisiert personenbezogene Daten verarbeiten. Unabhängig von der Personenzahl besteht die Pflicht außerdem, wenn besondere Kategorien personenbezogener Daten nach Art. 9 DSGVO verarbeitet werden, etwa Gesundheits-, Religions- oder Gewerkschaftsdaten, wenn eine Datenschutz-Folgenabschätzung erforderlich ist, wenn die Kerntätigkeit in einer umfangreichen regelmäßigen Überwachung von Personen besteht, oder wenn Daten geschäftsmäßig zur Übermittlung verarbeitet werden, etwa bei Auskunfteien und Adresshändlern. Bei Behörden ist ein Datenschutzbeauftragter immer zu bestellen."
    },
    {
     "q": "Unabhängig von der Mitarbeiterzahl: wann ist ein DSB ebenfalls Pflicht?",
@@ -13655,6 +13676,26 @@ const POOLS = {
      { "t": "Videomaterial muss grundsätzlich dauerhaft archiviert werden", "ok": false }
     ],
     "e": "Videoaufnahmen dürfen nur so lange gespeichert werden, wie es der Zweck erfordert. Danach sind sie zu löschen (Speicherbegrenzung)."
+   },
+   {
+    "q": "Ein Betreiber will einen Marktplatz großflächig per Video überwachen. Was ist vor der Inbetriebnahme erforderlich?",
+    "o": [
+     { "t": "Eine Datenschutz-Folgenabschätzung", "ok": true },
+     { "t": "Eine Meldung des Vorhabens an die Aufsichtsbehörde binnen 72 Stunden", "ok": false },
+     { "t": "Die schriftliche Einwilligung sämtlicher künftig gefilmter Personen", "ok": false },
+     { "t": "Ein Vertrag zur Auftragsverarbeitung mit dem Kamerahersteller", "ok": false }
+    ],
+    "e": "Die systematische umfangreiche Überwachung öffentlich zugänglicher Bereiche ist nach Art. 35 Abs. 3 lit. c DSGVO ausdrücklich ein Fall für die DSFA. Sie erfolgt vorab und prüft Zweck, Erforderlichkeit, Risiken und Schutzmaßnahmen wie Löschfristen, Kamerawinkel und Zugriffskonzept. Die 72-Stunden-Frist gehört dagegen zur Meldepflicht nach einem Vorfall."
+   },
+   {
+    "q": "Bei einer Videoüberwachungsanlage wurde der Aufzeichnungsserver gehackt und Aufnahmen sind abgeflossen. Was ist zu tun?",
+    "o": [
+     { "t": "Meldung an die Aufsichtsbehörde binnen 72 Stunden nach Bekanntwerden", "ok": true },
+     { "t": "Eine Datenschutz-Folgenabschätzung nachträglich für die Anlage erstellen", "ok": false },
+     { "t": "Die Anlage stilllegen und den Vorfall intern ohne Meldung dokumentieren", "ok": false },
+     { "t": "Ausschließlich die betroffenen Personen benachrichtigen, ohne Behörde", "ok": false }
+    ],
+    "e": "Nach Art. 33 DSGVO meldet der Verantwortliche eine Datenschutzverletzung binnen 72 Stunden nach Bekanntwerden. Bei voraussichtlich hohem Risiko kommt nach Art. 34 DSGVO die Benachrichtigung der Betroffenen hinzu. Merksatz: Die DSFA fragt vorab, ob die Verarbeitung starten darf; die Meldepflicht greift, wenn danach etwas schiefgeht."
    }
   ]
  },
@@ -13686,12 +13727,12 @@ const POOLS = {
    {
     "q": "Welche Aufgabe hat ein Access Point (AP)?",
     "o": [
-     { "t": "Er stellt das WLAN bereit und verbindet Funkgeräte mit dem Netz", "ok": true },
+     { "t": "Er verbindet kabelgebundene und kabellose Netze miteinander und stellt das WLAN bereit", "ok": true },
      { "t": "Er routet den Verkehr zwischen dem lokalen Netz und dem Internet", "ok": false },
      { "t": "Er weist allen Funkgeräten automatisch ihre IP-Adressen zu", "ok": false },
      { "t": "Er verstärkt das Signal vorhandener Netze und erweitert die Reichweite", "ok": false }
     ],
-    "e": "Der AP ist die Funkzentrale und bindet WLAN-Geräte ans (meist kabelgebundene) Netz an."
+    "e": "Der Access Point ist die Funkzentrale des Netzes: Er spannt das WLAN auf, meldet sich über seine SSID, wickelt Anmeldung und Verschlüsselung ab und leitet den Verkehr zwischen Funkgeräten und dem kabelgebundenen Netz weiter. Damit arbeitet er als Brücke zwischen zwei Übertragungsmedien auf Schicht 2. In größeren Umgebungen werden mehrere Access Points über einen Controller zentral verwaltet."
    },
    {
     "q": "Welche Frequenzbänder nutzt WLAN klassisch?",
@@ -13767,7 +13808,7 @@ const POOLS = {
      { "t": "Mehrere Access Points teilen sich automatisch eine gemeinsame SSID", "ok": false },
      { "t": "Clients verbinden sich abwechselnd mit dem jeweils stärksten Endgerät", "ok": false }
     ],
-    "e": "Infrastrukturmodus: alle Geräte laufen über den AP (typisch für Heim/Firma)."
+    "e": "Im Infrastrukturmodus läuft die gesamte Kommunikation zentral und koordiniert über einen festen Access Point oder WLAN-Router. Die Endgeräte kommunizieren nie direkt miteinander, sondern leiten sämtliche Datenpakete über diese Basisstation, die meist zugleich den Übergang ins kabelgebundene LAN und ins Internet bereitstellt. Das Gegenstück ist der Ad-hoc-Modus, bei dem sich Geräte ohne zentrale Station direkt verbinden. Der Infrastrukturmodus ist der Regelfall in Haushalt und Betrieb, weil sich darüber Verschlüsselung, Zugangskontrolle und Verwaltung zentral steuern lassen."
    },
    {
     "q": "Was kennzeichnet den Ad-hoc-Modus?",
@@ -13809,7 +13850,7 @@ const POOLS = {
      { "t": "Personal verschlüsselt nur die Anmeldung, Enterprise den gesamten Verkehr im Funknetz", "ok": false },
      { "t": "Personal ist auf wenige Geräte begrenzt, Enterprise erlaubt beliebig viele Clients", "ok": false }
     ],
-    "e": "Personal = ein Passwort für alle (PSK); Enterprise = individuelle Anmeldung über RADIUS."
+    "e": "Der Unterschied liegt in der Art der Authentifizierung. WPA2-Personal verwendet einen einzigen gemeinsamen Schlüssel für alle Nutzer, den Pre-Shared Key. Scheidet jemand aus, muss der Schlüssel auf allen Geräten getauscht werden. WPA2-Enterprise vergibt dagegen individuelle Zugangsdaten je Benutzer und prüft sie über einen zentralen RADIUS-Server nach 802.1X. Dadurch lässt sich ein einzelner Zugang gezielt sperren, jede Anmeldung ist nachvollziehbar, und jede Sitzung erhält einen eigenen Schlüssel. Im Betrieb ist Enterprise deshalb der Standard, Personal eher im Haushalt."
    },
    {
     "q": "Welche Rolle spielt ein RADIUS-Server im WLAN?",
@@ -13854,28 +13895,6 @@ const POOLS = {
      }
     ],
     "e": "MAC-Filter ist nur eine kleine Hürde; Spoofing umgeht ihn leicht."
-   },
-   {
-    "q": "Welchen Schutzwert hat eine versteckte SSID?",
-    "o": [
-     {
-      "t": "Gering, der Name lässt sich trotzdem ermitteln",
-      "ok": true
-     },
-     {
-      "t": "Sehr hoch, macht das Netz unsichtbar",
-      "ok": false
-     },
-     {
-      "t": "Verhindert automatische Verbindungen unbekannter Geräte vollständig",
-      "ok": false
-     },
-     {
-      "t": "Verschlüsselt den Verkehr",
-      "ok": false
-     }
-    ],
-    "e": "Das Verstecken der SSID bietet nur minimalen Schutz und ist leicht auslesbar."
    },
    {
     "q": "Wie trennt man ein Gäste-WLAN sinnvoll vom Firmennetz?",
@@ -13964,7 +13983,7 @@ const POOLS = {
     "e": "Funk ist störanfälliger, die Bandbreite wird geteilt und schwankt mit der Umgebung."
    },
    {
-    "q": "Welcher Faktor beeinflusst die WLAN-Reichweite am stärksten?",
+    "q": "Welche Faktoren beeinflussen die WLAN-Reichweite am stärksten?",
     "o": [
      {
       "t": "Hindernisse, Störquellen und Frequenzband",
@@ -14129,12 +14148,12 @@ const POOLS = {
       "ok": false
      }
     ],
-    "e": "Fast Roaming (802.11r) ermöglicht reibungslosen AP-Wechsel ohne erneute Authentifizierung."
+    "e": "Der Client wechselt beim Durchqueren des Gebäudes selbstständig auf den jeweils besser erreichbaren Access Point, ohne dass die Verbindung abreißt. Voraussetzung ist eine einheitliche SSID über alle Access Points hinweg. Fast Roaming nach 802.11r verkürzt dabei die erneute Anmeldung so weit, dass laufende Telefonate oder Videokonferenzen nicht unterbrochen werden."
    },
    {
     "q": "Wie funktioniert die Anmeldung per Pre-Shared Key (PSK) in einem WLAN?",
     "o": [
-     { "t": "Client und Access Point kennen dasselbe Passwort und leiten daraus die Schlüssel zur Verschlüsselung der Funkverbindung ab", "ok": true },
+     { "t": "Nahtloser Wechsel zwischen Access Points, während der Nutzer durch das Firmengebäude läuft", "ok": true },
      { "t": "Der Access Point sendet dem Client bei jeder Verbindung ein neues Passwort zu, das einzig und allein für diese Sitzung gültig ist", "ok": false },
      { "t": "Jeder Client authentifiziert sich mit individuellen Zugangsdaten gegen einen zentralen Authentifizierungsserver", "ok": false },
      { "t": "Der Client weist sich über ein digitales Zertifikat aus, das von der CA des Netzbetreibers signiert wurde", "ok": false }
@@ -18640,7 +18659,7 @@ const POOLS = {
      { "t": "Es zeichnet sämtliche Tastatureingaben des Anwenders auf", "ok": false },
      { "t": "Es überflutet ein Zielsystem mit einer Vielzahl von Anfragen", "ok": false }
     ],
-    "e": "Rootkits nisten sich tief im System ein, oft auf Kernel-Ebene, und machen sich für Betriebssystem und Virenscanner unsichtbar."
+    "e": "Ein Rootkit nistet sich tief im System ein, oft auf Kernel-Ebene, und verbirgt dort seine eigenen Dateien, Prozesse und Netzverbindungen vor Betriebssystem und Virenscanner. Es dient Angreifern meist als dauerhafte Hintertür: Selbst wenn andere Teile der Schadsoftware entdeckt und gelöscht werden, sorgt das verborgene Rootkit dafür, dass sie im Hintergrund automatisch wieder nachgeladen wird. Genau deshalb gilt ein befallenes System als nicht zuverlässig bereinigbar; die saubere Lösung ist eine Neuinstallation aus vertrauenswürdiger Quelle. Erkennung gelingt am ehesten von außen, etwa über ein Rettungsmedium oder den Vergleich des Netzverkehrs."
    },
    {
     "q": "Was beschreibt der Begriff Ransomware?",
@@ -18660,7 +18679,7 @@ const POOLS = {
      { "t": "Sie prüft eingehende Dateien auf bekannte Schadsignaturen", "ok": false },
      { "t": "Sie beschleunigt den Systemstart durch Umgehung von Prüfungen", "ok": false }
     ],
-    "e": "Über eine Backdoor gelangt ein Angreifer erneut ins System, auch nachdem die ursprünglich genutzte Lücke geschlossen wurde."
+    "e": "Eine Backdoor öffnet einen verborgenen Zugang, der die reguläre Anmeldung umgeht, damit ein Angreifer jederzeit zurückkehren kann. Sie entsteht entweder durch Schadsoftware oder durch vergessene Wartungszugänge und Standardkennwörter. Häufig wird sie von einem Rootkit begleitet oder von diesem selbst bereitgestellt: Das Rootkit verbirgt die Hintertür vor dem System, sodass sie auch nach einer oberflächlichen Bereinigung bestehen bleibt. Gegenmaßnahmen sind Zugangsprüfungen, Netzsegmentierung, Überwachung ausgehender Verbindungen und im Ernstfall die Neuinstallation."
    },
    {
     "q": "Ein Mitarbeiter erhält eine Mail, die scheinbar von der Geschäftsführung stammt und eine eilige Überweisung anweist. Um welchen Angriff handelt es sich?",
@@ -18670,7 +18689,7 @@ const POOLS = {
      { "t": "Um eine SQL-Injection", "ok": false },
      { "t": "Um einen Brute-Force-Angriff", "ok": false }
     ],
-    "e": "Beim CEO-Fraud gibt sich der Täter als Führungskraft aus und nutzt Autoritätsdruck. Wirksame Gegenmaßnahme ist ein verbindliches Rückrufverfahren."
+    "e": "Es handelt sich um CEO-Fraud, auch Chef-Masche oder Business Email Compromise genannt. Methodisch zählt der Fall zugleich zum Spear Phishing: Anders als beim Massen-Phishing ist die Nachricht gezielt auf eine einzelne Person zugeschnitten und nutzt zuvor recherchierte Informationen wie Namen, Zuständigkeiten und Abwesenheiten. Die Angreifer erzeugen Zeitdruck und Verschwiegenheit, damit die übliche Freigabe umgangen wird. Gegenmaßnahmen sind das Vier-Augen-Prinzip bei Zahlungen, eine Rückfrage über einen bekannten Kanal und klare Regeln, dass Anweisungen per Mail allein nie für eine Überweisung genügen."
    },
    {
     "q": "Worin unterscheidet sich Spear-Phishing vom klassischen Phishing?",
@@ -21698,7 +21717,12 @@ const GLOSSAR = [{"a":"2FA","f":"Zwei-Faktor-Authentifizierung","d":"Anmeldung m
 {"a":"Objektspeicher","f":"Object Storage","d":"Speichert Daten als Objekte mit Metadaten und eindeutiger Kennung, ohne Verzeichnisbaum. Geeignet für große Mengen unveränderlicher Dateien."},
 {"a":"Blockspeicher","f":"Block Storage","d":"Stellt rohe Blöcke bereit, auf denen der Server sein eigenes Dateisystem anlegt. Nötig für Datenbanken und virtuelle Maschinen."},
 {"a":"TBW","f":"Terabytes Written","d":"Angabe, wie viele Terabyte eine SSD über ihre Lebensdauer schreiben kann. Auswahlkriterium bei schreibintensiven Servern."},
-{"a":"Wear Leveling","f":"Wear Leveling","d":"Gleichmäßige Verteilung der Schreibzugriffe über alle Flash-Zellen einer SSD, damit einzelne Zellen nicht vorzeitig verschleißen."}];
+{"a":"Wear Leveling","f":"Wear Leveling","d":"Gleichmäßige Verteilung der Schreibzugriffe über alle Flash-Zellen einer SSD, damit einzelne Zellen nicht vorzeitig verschleißen."},
+{"a":"nftables","f":"nftables","d":"Paketfilter des Linux-Kernels und Nachfolger von iptables. Regelt in Tabellen und Ketten, welche Pakete passieren dürfen."},
+{"a":"ufw","f":"Uncomplicated Firewall","d":"Vereinfachte Bedienoberfläche für den Linux-Paketfilter. Erlaubt Regeln wie das Freigeben eines Ports ohne Kenntnis der zugrunde liegenden Syntax."},
+{"a":"iptables","f":"iptables","d":"Klassisches Werkzeug zur Regelverwaltung des Linux-Paketfilters, inzwischen weitgehend durch nftables abgelöst."},
+{"a":"HTTP/3","f":"Hypertext Transfer Protocol Version 3","d":"Aktuelle HTTP-Fassung, die auf QUIC über UDP aufsetzt statt auf TCP. Verbindungsaufbau und Verschlüsselung erfolgen in einem Schritt."}
+];
 
 // ---- Bibliothek: Render + Suche ----
 const libList = document.getElementById('libList');
@@ -21779,7 +21803,7 @@ renderLib(GLOSSAR_SORTED);
     "r-sql": ["SQL"],
     "r-verkabelung": ["RJ45","ISO"],
     "r-subnetting": ["CIDR","Broadcast","RFC"],
-    "r-tcpip": ["QUIC","Congestion Control"],
+    "r-tcpip": ["QUIC","Congestion Control","HTTP/3"],
     "r-topo": ["FDDI"],
     "r-krypto": ["RSA","ECC","Diffie-Hellman","PKI","X.509","CRL","OCSP","CSR","Hash","Salt","Root-CA","Intermediate-CA","Vertrauenskette","SSL","TLS"],
     "r-virt": ["Hypervisor","Overcommitment","Live-Migration","Thin Client","VDI","On-Premises","IaaS","PaaS","SaaS","Public Cloud","Private Cloud","Hybrid Cloud","Elastizität","Vendor Lock-in","Mandantenfähigkeit"],
@@ -21800,7 +21824,7 @@ renderLib(GLOSSAR_SORTED);
     "r-qm": ["PDCA","Qualitätssicherung","Qualitätskontrolle","Qualitätsplanung","Qualitätsmanagementplan"],
     "r-epk": ["EPK","Ereignis","Funktion","Konnektor","BPMN"],
     "r-doku": ["Systemdokumentation","Betriebsdokumentation","Benutzerdokumentation","Projektdokumentation"],
-    "r-haertung": ["Härtung","Angriffsfläche","Patchmanagement","Least Privilege","Security by Design","Security by Default"]
+    "r-haertung": ["Härtung","Angriffsfläche","Patchmanagement","Least Privilege","Security by Design","Security by Default","nftables","ufw"]
   };
 
   var defByKey = {};
