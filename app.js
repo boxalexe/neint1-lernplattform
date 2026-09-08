@@ -21722,7 +21722,17 @@ const GLOSSAR = [{"a":"2FA","f":"Zwei-Faktor-Authentifizierung","d":"Anmeldung m
 {"a":"ufw","f":"Uncomplicated Firewall","d":"Vereinfachte Bedienoberfläche für den Linux-Paketfilter. Erlaubt Regeln wie das Freigeben eines Ports ohne Kenntnis der zugrunde liegenden Syntax."},
 {"a":"iptables","f":"iptables","d":"Klassisches Werkzeug zur Regelverwaltung des Linux-Paketfilters, inzwischen weitgehend durch nftables abgelöst."},
 {"a":"HTTP/3","f":"Hypertext Transfer Protocol Version 3","d":"Aktuelle HTTP-Fassung, die auf QUIC über UDP aufsetzt statt auf TCP. Verbindungsaufbau und Verschlüsselung erfolgen in einem Schritt."}
-];
+,
+{"a":"Striping","f":"Striping","d":"Verteilt Daten blockweise über mehrere Platten. Erhöht die Geschwindigkeit, bietet allein aber keine Ausfallsicherheit."},
+{"a":"Mirroring","f":"Spiegelung","d":"Schreibt Daten identisch auf zwei Platten. Fällt eine aus, läuft der Betrieb mit der anderen weiter."},
+{"a":"Parität","f":"Paritätsinformation","d":"Per XOR berechnete Prüfinformation, aus der sich die Daten einer ausgefallenen Platte rekonstruieren lassen."},
+{"a":"Rebuild","f":"Wiederherstellung des Verbunds","d":"Rekonstruktion der Daten auf einer neu eingesetzten Platte aus den übrigen Platten. Während des Vorgangs ist die Redundanz eingeschränkt."},
+{"a":"Hot Swap","f":"Hot Swap","d":"Austausch einer defekten Platte im laufenden Betrieb, ohne das System abzuschalten."},
+{"a":"RAID-Controller","f":"RAID-Controller","d":"Steuert den Plattenverbund und setzt die Regeln des RAID-Levels um. Als Steckkarte oder Chip auf der Hauptplatine (Hardware-RAID) oder als Funktion des Betriebssystems (Software-RAID)."},
+{"a":"Hot Spare","f":"Hot Spare","d":"Bereitgehaltene Ersatzplatte im Verbund, die bei einem Ausfall automatisch einspringt und den Rebuild sofort startet."},
+{"a":"Single Point of Failure","f":"Einzelfehlerstelle","d":"Bauteil, dessen Ausfall das gesamte System lahmlegt, weil es keine Reserve gibt. Beim RAID etwa der Controller."},
+{"a":"BBU","f":"Battery Backup Unit","d":"Pufferakku am RAID-Controller. Sichert den Schreibcache bei Stromausfall, damit die Parität nicht inkonsistent bleibt."},
+{"a":"Degraded","f":"Degraded Mode","d":"Zustand eines RAID-Verbunds nach dem Ausfall einer Platte: weiterhin nutzbar, aber ohne Schutzreserve und langsamer."}];
 
 // ---- Bibliothek: Render + Suche ----
 const libList = document.getElementById('libList');
@@ -21780,7 +21790,7 @@ renderLib(GLOSSAR_SORTED);
   var CURATED = {
     "r-ap1": ["FAZ","FEZ","SAZ","SEZ","USV","TOM","AVV","RPO","RTO","TCO","Amortisationsdauer","EVA-Prinzip"],
     "r-api": ["REST","PUT","PATCH","OAuth","Bearer-Token","SOAP","idempotent","API-Key"],
-    "r-raid": ["RAID","Hot-Spare","RPO","RTO","GFS","Generationenprinzip","Tower of Hanoi","Air Gap"],
+    "r-raid": ["RAID","Hot-Spare","RPO","RTO","GFS","Generationenprinzip","Tower of Hanoi","Air Gap","NAS","Hot Swap","Rebuild","NVMe","Parität","Striping","Mirroring","Verfügbarkeit","RAID-Controller","Hot Spare","Single Point of Failure","BBU"],
     "r-datenschutz": ["DSGVO","BDSG","TOM","AVV","DSFA","DSB"],
     "r-diagnose": ["ICMP","DNS","MAC"],
     "r-dnsdhcp": ["DORA","Resolver","APIPA","TLD","TTL","DNS","DHCP","CNAME","Lease","Relay-Agent"],
