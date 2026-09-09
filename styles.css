@@ -650,7 +650,7 @@ table.sn-cheat td:nth-child(4),table.sn-cheat td:nth-child(5){color:var(--green)
   /* In der aufgeklappten Mobilnavigation sitzt sie zentriert in eigener Zeile */
   .a11y-wrap.in-menu{margin:4px auto 0;justify-content:center}
   .tabs .wrap>.a11y-wrap.in-menu{display:flex}
-  .a11y-wrap.in-menu .qs-input{max-width:60vw}
+  .a11y-wrap.in-menu .qs-input{width:100%;max-width:100%}
 }
 
 /* ---- Übergang beim Sprung nach oben ---- */
@@ -697,10 +697,10 @@ table.sn-cheat td:nth-child(4),table.sn-cheat td:nth-child(5){color:var(--green)
 .a11y-wrap>.a11y-toggle,
 .a11y-wrap>.a11y-menu{order:1}
 .a11y-wrap{gap:2px}
-.quick-search.open .qs-input{width:190px;max-width:46vw}
+.quick-search.open .qs-input{width:100%;max-width:100%}
 /* In der Kopfzeile mittig, in der Menüleiste rechtsbündig */
 @media(max-width:560px){
-  .quick-search.open .qs-input{width:150px;max-width:52vw}
+  .quick-search.open .qs-input{width:100%;max-width:100%}
 }
 
 
@@ -738,13 +738,19 @@ table.sn-cheat td:nth-child(4),table.sn-cheat td:nth-child(5){color:var(--green)
 
 /* Trefferliste sitzt unterhalb des aufgeklappten Feldes */
 .qs-results{left:50%;right:auto;transform:translateX(-50%);top:calc(100% + 54px);width:340px;max-width:82vw}
-.a11y-wrap.in-menu .qs-results{left:50%;right:auto;transform:translateX(-50%)}
+/* In der Menüzeile sitzt die Werkzeugleiste rechtsbündig. Feld und Trefferliste
+   würden sich sonst relativ zu dieser schmalen Leiste zentrieren und landeten am
+   rechten Rand. Im Menüzustand daher am Fenster ausrichten. */
+.a11y-wrap.in-menu .quick-search .search-clear-wrap{position:fixed;top:58px;left:50%;right:auto;transform:translateX(-50%);width:340px;max-width:82vw}
+.a11y-wrap.in-menu .qs-results{position:fixed;top:104px;left:50%;right:auto;transform:translateX(-50%);width:340px;max-width:82vw}
 @media(max-width:620px){
   /* Auf schmalen Geräten die volle Breite nutzen */
-  .quick-search .search-clear-wrap{left:0;right:0;transform:none;width:auto;max-width:100%}
-  .a11y-wrap.in-menu .quick-search .search-clear-wrap{left:0;right:0;transform:none;width:auto}
+  .quick-search .search-clear-wrap{left:50%;right:auto;transform:translateX(-50%);width:min(340px,88vw);max-width:88vw}
+  /* Feld mittig mit begrenzter Breite, damit das Lösch-X im Feldrand sitzt
+     und nicht am Bildschirmrand. Die Trefferliste darunter darf breit sein. */
+  .a11y-wrap.in-menu .quick-search .search-clear-wrap{position:fixed;top:56px;left:50%;right:auto;transform:translateX(-50%);width:min(340px,88vw);max-width:88vw}
   .qs-results{left:0;right:0;transform:none;width:auto;max-width:100%}
-  .a11y-wrap.in-menu .qs-results{left:0;right:0;transform:none}
+  .a11y-wrap.in-menu .qs-results{position:fixed;top:100px;left:10px;right:10px;transform:none;width:auto;max-width:none}
 }
 
 /* Einleitung über dem AP1-Kapitel */
@@ -810,8 +816,11 @@ table.sn-cheat td:nth-child(4),table.sn-cheat td:nth-child(5){color:var(--green)
    sie keine Höhe und sitzt rechts neben dem Menüknopf. */
 @media(max-width:560px){
   .tabs .wrap{position:relative}
-  .a11y-wrap.in-menu{position:absolute;right:0;top:2px;margin:0;justify-content:flex-end}
-  .a11y-wrap.in-menu .qs-input{max-width:62vw}
-  /* Der Menüknopf braucht rechts Platz für Auge und Lupe */
-  .tabs .wrap>.menu-toggle{padding-right:78px}
+  /* Auge und Lupe sitzen rechts innerhalb der Knopffläche, senkrecht mittig.
+     Der Knopf bekommt beidseitig denselben Freiraum, damit seine Beschriftung
+     mittig bleibt und nicht nach links rutscht. */
+  .a11y-wrap.in-menu{position:absolute;right:12px;top:0;height:44px;margin:0;
+    justify-content:flex-end;align-items:center;z-index:5}
+  .a11y-wrap.in-menu .qs-input{width:100%;max-width:100%}
+  .tabs .wrap>.menu-toggle{padding-left:78px;padding-right:78px;text-align:center}
 }

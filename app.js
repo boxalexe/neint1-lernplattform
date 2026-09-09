@@ -19858,6 +19858,171 @@ const POOLS = {
     "e": "Weitere Maßnahmen sind energieeffiziente Hardware, Virtualisierung, SSD statt HDD, aktive Energiesparfunktionen und eine längere Nutzungsdauer."
    }
   ]
+ },
+ "marketing": {
+  "name": "Marketing & Marktforschung",
+  "q": [
+   {
+    "q": "Was untersucht eine Marktanalyse?",
+    "o": [
+     { "t": "Die aktuelle Marktlage zu einem bestimmten Zeitpunkt", "ok": true },
+     { "t": "Die fortlaufende Entwicklung eines Marktes über einen längeren Zeitraum", "ok": false },
+     { "t": "Die voraussichtliche Entwicklung des Marktes in den kommenden Jahren", "ok": false },
+     { "t": "Ausschließlich die Preisgestaltung der unmittelbaren Wettbewerber", "ok": false }
+    ],
+    "e": "Die Marktanalyse ist eine Momentaufnahme. Die laufende Verfolgung über die Zeit ist die Marktbeobachtung, der Blick nach vorn die Marktprognose. In Aufgaben verrät das Zeitwort die Antwort: derzeit deutet auf die Analyse, seit Monaten auf die Beobachtung, voraussichtlich auf die Prognose."
+   },
+   {
+    "q": "Was kennzeichnet die Marktbeobachtung?",
+    "o": [
+     { "t": "Die fortlaufende Verfolgung eines Marktes über längere Zeit", "ok": true },
+     { "t": "Die einmalige Untersuchung der Marktlage zu einem festen Stichtag", "ok": false },
+     { "t": "Die Vorhersage künftiger Entwicklungen anhand vorhandener Daten", "ok": false },
+     { "t": "Die einmalige Befragung einer zufällig gewählten Kundengruppe", "ok": false }
+    ],
+    "e": "Sie liefert Verläufe statt Momentaufnahmen und macht Veränderungen sichtbar, etwa steigende Nachfrage oder neue Wettbewerber. Abgrenzung: Marktanalyse ist die Gegenwart, Marktprognose die Zukunft."
+   },
+   {
+    "q": "Was ist der Unterschied zwischen Primär- und Sekundärforschung?",
+    "o": [
+     { "t": "Primärforschung erhebt neue Daten, Sekundärforschung wertet vorhandene aus", "ok": true },
+     { "t": "Sekundärforschung erhebt neue Daten, Primärforschung wertet vorhandene aus", "ok": false },
+     { "t": "Primärforschung betrifft Kunden, Sekundärforschung ausschließlich Wettbewerber", "ok": false },
+     { "t": "Primärforschung ist gesetzlich vorgeschrieben, Sekundärforschung dagegen freiwillig", "ok": false }
+    ],
+    "e": "Primärforschung arbeitet mit Befragung, Interview, Beobachtung oder Experiment; genau zugeschnitten, aber zeitaufwendig und teuer. Sekundärforschung nutzt Statistiken, Studien, Fachliteratur oder eigene Verkaufszahlen; schnell und günstig, dafür oft veraltet oder nicht genau passend. Praxisregel: erst sekundär prüfen, dann bei Bedarf primär erheben."
+   },
+   {
+    "q": "Welche Methode gehört zur Primärforschung?",
+    "o": [
+     { "t": "Die Befragung von Kunden mit einem eigenen Fragebogen", "ok": true },
+     { "t": "Die Auswertung veröffentlichter Statistiken des Statistischen Bundesamtes", "ok": false },
+     { "t": "Die Durchsicht von Fachliteratur zur allgemeinen Branchenentwicklung", "ok": false },
+     { "t": "Die Analyse der eigenen Verkaufszahlen aus den vergangenen Jahren", "ok": false }
+    ],
+    "e": "Zur Primärforschung zählen Befragung, Interview, Fokusgruppe, Beobachtung und Experiment. Alle genannten Alternativen greifen auf bereits vorhandene Daten zurück und gehören damit zur Sekundärforschung."
+   },
+   {
+    "q": "Welches Auswahlverfahren liefert die statistisch zuverlässigsten Ergebnisse?",
+    "o": [
+     { "t": "Die Zufallsauswahl", "ok": true },
+     { "t": "Die Quotenauswahl mit fest vorgegebenen Merkmalen", "ok": false },
+     { "t": "Die Befragung ausschließlich vorhandener Stammkunden", "ok": false },
+     { "t": "Die Auswahl der jeweils am leichtesten erreichbaren Personen", "ok": false }
+    ],
+    "e": "Nur bei der Zufallsauswahl hat jedes Element dieselbe bekannte Chance, ausgewählt zu werden; deshalb lässt sich das Ergebnis auf die Gesamtheit übertragen. Die Quotenauswahl bildet die Zielgruppe zwar passend ab, ist aber nicht zufällig und dadurch anfälliger für Verzerrungen."
+   },
+   {
+    "q": "Welche vier Instrumente umfasst der Marketing-Mix?",
+    "o": [
+     { "t": "Produkt-, Preis-, Distributions- und Kommunikationspolitik", "ok": true },
+     { "t": "Produktion, Personal, Planung und Preisgestaltung im Betrieb", "ok": false },
+     { "t": "Marktanalyse, Marktbeobachtung, Marktprognose und Marktforschung", "ok": false },
+     { "t": "Beschaffung, Lagerhaltung, Fertigung und der anschließende Absatz", "ok": false }
+    ],
+    "e": "Im Englischen sind es die vier P: Product, Price, Place, Promotion. Die Instrumente müssen zueinander passen; ein hochwertiges Produkt zum Niedrigpreis mit reißerischer Werbung wäre nicht stimmig. In Aufgaben ist meist eine Maßnahme dem richtigen Instrument zuzuordnen."
+   },
+   {
+    "q": "Welchem Instrument des Marketing-Mix ist die Wahl des Vertriebswegs zuzuordnen?",
+    "o": [
+     { "t": "Der Distributionspolitik", "ok": true },
+     { "t": "Der Kommunikationspolitik mit ihrer Werbung", "ok": false },
+     { "t": "Der Produktpolitik mit ihren Serviceleistungen", "ok": false },
+     { "t": "Der Preispolitik mit Rabatten und Boni", "ok": false }
+    ],
+    "e": "Die Distributionspolitik beantwortet, wie das Produkt zum Kunden gelangt: Direktvertrieb, Handel oder Onlineshop. Dazu zählen auch Lagerhaltung, Logistik und Standortwahl. Die Kommunikationspolitik beantwortet dagegen, wie der Kunde davon erfährt."
+   },
+   {
+    "q": "Was kennzeichnet die Skimmingstrategie?",
+    "o": [
+     { "t": "Ein hoher Einführungspreis, der später gesenkt wird", "ok": true },
+     { "t": "Ein niedriger Einführungspreis, der später angehoben wird", "ok": false },
+     { "t": "Ein über die gesamte Laufzeit unveränderter niedriger Preis", "ok": false },
+     { "t": "Ein Preis, der sich ausschließlich an den eigenen Kosten orientiert", "ok": false }
+    ],
+    "e": "Skimming kommt von abschöpfen: Zuerst kaufen die besonders zahlungsbereiten Kunden, danach sinkt der Preis und erschließt weitere Gruppen. Sinnvoll bei Neuheiten ohne Wettbewerb. Das Gegenstück ist die Penetrationsstrategie. Bei Unterhaltungselektronik erkennt man Skimming an fallenden Preisen nach dem Marktstart."
+   },
+   {
+    "q": "Ein Betrieb bringt ein neues Produkt bewusst günstig auf den Markt, um schnell Marktanteile zu gewinnen. Welche Strategie liegt vor?",
+    "o": [
+     { "t": "Die Penetrationsstrategie", "ok": true },
+     { "t": "Die Skimmingstrategie mit hohem Startpreis", "ok": false },
+     { "t": "Die Hochpreisstrategie zur Imagebildung", "ok": false },
+     { "t": "Die wertorientierte Preisbildung am Kundennutzen", "ok": false }
+    ],
+    "e": "Penetration heißt eindringen: Über den niedrigen Preis wird schnell Marktanteil gewonnen und Wettbewerbern der Einstieg erschwert. Später kann der Preis angehoben werden. Skimming wäre der umgekehrte Weg mit hohem Startpreis."
+   },
+   {
+    "q": "Wofür stehen die vier Buchstaben der AIDA-Formel?",
+    "o": [
+     { "t": "Attention, Interest, Desire, Action", "ok": true },
+     { "t": "Awareness, Information, Decision, Acquisition", "ok": false },
+     { "t": "Attraction, Involvement, Demand, Agreement", "ok": false },
+     { "t": "Attention, Investment, Delivery, Approval", "ok": false }
+    ],
+    "e": "Auf Deutsch: Aufmerksamkeit, Interesse, Wunsch, Handlung. Die Formel beschreibt die Stufen bis zur Kaufentscheidung, und die Reihenfolge gehört zur Antwort, denn ohne Aufmerksamkeit entsteht kein Interesse. In Aufgaben ist meist eine Werbemaßnahme der passenden Stufe zuzuordnen."
+   },
+   {
+    "q": "Welcher AIDA-Stufe ist ein auffälliges Werbebanner zuzuordnen?",
+    "o": [
+     { "t": "Der Stufe Attention, weil es zunächst nur auffallen soll", "ok": true },
+     { "t": "Der Stufe Interest, weil der Kunde sich damit beschäftigt", "ok": false },
+     { "t": "Der Stufe Desire, weil dabei ein Kaufwunsch entsteht", "ok": false },
+     { "t": "Der Stufe Action, weil dadurch eine Bestellung ausgelöst wird", "ok": false }
+    ],
+    "e": "Das Banner soll zunächst nur auffallen. Erst wenn der Kunde die Produktbeschreibung liest, ist die Stufe Interest erreicht; der Kaufwunsch entsteht auf der Stufe Desire, die Bestellung ist die Stufe Action."
+   },
+   {
+    "q": "Wie wird ein Produkt mit hohem Marktanteil und geringem Marktwachstum in der BCG-Matrix bezeichnet?",
+    "o": [
+     { "t": "Als Cash Cow", "ok": true },
+     { "t": "Als Star mit hohem Wachstum und hohem Anteil", "ok": false },
+     { "t": "Als Question Mark mit noch unklarer Entwicklung", "ok": false },
+     { "t": "Als Poor Dog ohne nennenswerte Bedeutung", "ok": false }
+    ],
+    "e": "Die Cash Cow bringt stabile Erträge bei geringem Investitionsbedarf. Aus diesen Mitteln werden häufig Stars und Question Marks finanziert, weshalb sie in Aufgaben oft die eigentliche Begründung liefert. Der typische Weg führt vom Question Mark über den Star zur Cash Cow und endet als Poor Dog."
+   },
+   {
+    "q": "Welche Handlungsempfehlung gilt für ein Produkt im Feld Question Mark?",
+    "o": [
+     { "t": "Prüfen und entscheiden, ob ausgebaut oder aufgegeben wird", "ok": true },
+     { "t": "Sofort und ohne weitere Prüfung aus dem Sortiment nehmen", "ok": false },
+     { "t": "Erträge abschöpfen und keine weiteren Mittel investieren", "ok": false },
+     { "t": "Unverändert weiterführen, weil die Entwicklung gesichert ist", "ok": false }
+    ],
+    "e": "Das Question Mark steht in einem wachsenden Markt, hat aber wenig Anteil. Es kann sich zum Star entwickeln oder scheitern, weshalb eine bewusste Entscheidung nötig ist. Abschöpfen passt zur Cash Cow, Auslaufen lassen zum Poor Dog."
+   },
+   {
+    "q": "Was schützt ein Patent?",
+    "o": [
+     { "t": "Technische Erfindungen", "ok": true },
+     { "t": "Die äußere Gestaltung eines Erzeugnisses", "ok": false },
+     { "t": "Namen, Logos und sonstige Kennzeichen", "ok": false },
+     { "t": "Die geprüfte Qualität eines Erzeugnisses", "ok": false }
+    ],
+    "e": "Das Patent schützt technische Erfindungen, der Designschutz die äußere Gestaltung, die Marke Namen und Logos, das Gütezeichen bestätigt geprüfte Qualität. Für die IT wichtig: Software wird in Deutschland grundsätzlich nicht patentiert, sondern durch das Urheberrecht geschützt, das ohne Anmeldung entsteht."
+   },
+   {
+    "q": "Welche Maßnahme zählt zur Verkaufsförderung?",
+    "o": [
+     { "t": "Eine zeitlich befristete Rabattaktion mit Gutscheinen", "ok": true },
+     { "t": "Die dauerhafte Festlegung des Grundpreises eines Erzeugnisses", "ok": false },
+     { "t": "Die Auswahl geeigneter Vertriebswege für den Absatz", "ok": false },
+     { "t": "Die Entwicklung eines neuen Produktdesigns für das Sortiment", "ok": false }
+    ],
+    "e": "Verkaufsförderung umfasst kurzfristige Maßnahmen zur Absatzsteigerung: Rabattaktionen, Gutscheine, Gewinnspiele, Warenproben, Treueprogramme und Aufsteller am Verkaufsort. Sie wirkt schnell, aber begrenzt lange. Die dauerhafte Preisfestlegung gehört zur Preispolitik, der Vertriebsweg zur Distributionspolitik."
+   },
+   {
+    "q": "Welche Kundendienstleistung fällt in die Zeit nach dem Kauf?",
+    "o": [
+     { "t": "Wartung, Support und Garantieleistungen", "ok": true },
+     { "t": "Die Beratung und Vorführung des Produkts im Verkaufsraum", "ok": false },
+     { "t": "Die Vereinbarung der Zahlungsart beim Vertragsabschluss", "ok": false },
+     { "t": "Die Bereitstellung von Produktinformationen vor der Entscheidung", "ok": false }
+    ],
+    "e": "Vor dem Kauf stehen Beratung, Information und Vorführung; während des Kaufs Zahlungsart, Lieferung und Inbetriebnahme; danach Installation, Schulung, Support, Wartung, Garantie und Reparatur. Für IT-Betriebe sind Wartungsvertrag und Reaktionszeiten häufig der ausschlaggebende Grund für den Zuschlag."
+   }
+  ]
  }
 };
 /* ============ ENGINE ============ */
@@ -20032,7 +20197,7 @@ const CAT_GROUPS = [
   { id:'dev', titel:'Softwareentwicklung & Grundlagen',
     keys:['sql','oop','zahlen','logik'] },
   { id:'bwl', titel:'BWL, Prozesse & Recht',
-    keys:['projekt','qm','epk','itil','kalkulation','vertraege','markt','doku'] },
+    keys:['projekt','qm','epk','itil','kalkulation','vertraege','markt','marketing','doku'] },
 ];
 
 function makeChip(key){
@@ -20793,7 +20958,7 @@ const READER_TOPICS = [
   { id:'sec',  titel:'IT-Sicherheit',       ids:['r-security','r-datenschutz','r-krypto','r-grundschutz','r-malware','r-haertung','r-mailsec'] },
   { id:'sys',  titel:'Systeme & Storage',   ids:['r-virt','r-hyperv','r-storage','r-raid','r-diagnose','r-hardware'] },
   { id:'dev',  titel:'Software & Grundlagen', ids:['r-sql','r-oop','r-zahlen','r-logik'] },
-  { id:'bwl',  titel:'BWL & Prozesse',      ids:['r-projekt','r-qm','r-epk','r-itil','r-kalkulation','r-vertraege','r-markt','r-doku'] },
+  { id:'bwl',  titel:'BWL & Prozesse',      ids:['r-projekt','r-qm','r-epk','r-itil','r-kalkulation','r-vertraege','r-markt','r-marketing','r-doku'] },
 ];
 
 (function initTopicBubbles(){
@@ -21750,7 +21915,34 @@ const GLOSSAR = [{"a":"2FA","f":"Zwei-Faktor-Authentifizierung","d":"Anmeldung m
 {"a":"Hot Spare","f":"Hot Spare","d":"Bereitgehaltene Ersatzplatte im Verbund, die bei einem Ausfall automatisch einspringt und den Rebuild sofort startet."},
 {"a":"Single Point of Failure","f":"Einzelfehlerstelle","d":"Bauteil, dessen Ausfall das gesamte System lahmlegt, weil es keine Reserve gibt. Beim RAID etwa der Controller."},
 {"a":"BBU","f":"Battery Backup Unit","d":"Pufferakku am RAID-Controller. Sichert den Schreibcache bei Stromausfall, damit die Parität nicht inkonsistent bleibt."},
-{"a":"Degraded","f":"Degraded Mode","d":"Zustand eines RAID-Verbunds nach dem Ausfall einer Platte: weiterhin nutzbar, aber ohne Schutzreserve und langsamer."}];
+{"a":"Degraded","f":"Degraded Mode","d":"Zustand eines RAID-Verbunds nach dem Ausfall einer Platte: weiterhin nutzbar, aber ohne Schutzreserve und langsamer."},
+{"a":"Port Security","f":"Port Security","d":"Switch-Funktion, die einen Port auf bestimmte MAC-Adressen begrenzt. Verhindert, dass ein beliebiges angestecktes Gerät ins Netz kommt."},
+{"a":"Management-VLAN","f":"Management-VLAN","d":"Eigenes VLAN für die Verwaltung von Switches, Access Points und Firewalls. Nur für Administratoren erreichbar."},
+{"a":"Standardgateway","f":"Default Gateway","d":"Router, an den ein Gerät alle Pakete schickt, deren Ziel außerhalb des eigenen Netzes liegt. Ohne ihn sind nur lokale Ziele erreichbar."},
+{"a":"Layer-3-Switch","f":"Layer-3-Switch","d":"Switch, der zusätzlich zwischen VLANs routen kann. Übernimmt in Hardware, wofür sonst ein Router nötig wäre."},
+{"a":"Broadcastdomäne","f":"Broadcastdomäne","d":"Bereich, den ein Broadcast erreicht. Wird durch Router oder VLANs begrenzt, nicht durch Switches."},
+{"a":"Subnetzmaske","f":"Subnetzmaske","d":"Trennt eine IP-Adresse in Netz- und Hostanteil. Anhand ihrer entscheidet ein Gerät, ob ein Ziel im eigenen Netz liegt."},
+{"a":"Marketing-Mix","f":"Marketing-Mix","d":"Die vier Instrumente Produkt-, Preis-, Distributions- und Kommunikationspolitik, englisch die vier P."},
+{"a":"AIDA","f":"Attention, Interest, Desire, Action","d":"Stufenmodell bis zur Kaufentscheidung: Aufmerksamkeit, Interesse, Wunsch, Handlung."},
+{"a":"BCG-Matrix","f":"Boston-Consulting-Group-Matrix","d":"Ordnet Produkte nach Marktanteil und Marktwachstum in Star, Cash Cow, Question Mark und Poor Dog ein."},
+{"a":"Cash Cow","f":"Cash Cow","d":"Produkt mit hohem Marktanteil in einem kaum wachsenden Markt. Liefert stabile Erträge bei geringem Investitionsbedarf."},
+{"a":"Question Mark","f":"Question Mark","d":"Produkt mit geringem Anteil in einem wachsenden Markt. Erfordert eine Entscheidung: ausbauen oder aufgeben."},
+{"a":"Poor Dog","f":"Poor Dog","d":"Produkt mit geringem Anteil in einem kaum wachsenden Markt. Wird in der Regel ausgelaufen."},
+{"a":"Skimming","f":"Skimmingstrategie","d":"Markteinführung mit hohem Preis, der später gesenkt wird. Schöpft zuerst die zahlungsbereiten Kunden ab."},
+{"a":"Penetration","f":"Penetrationsstrategie","d":"Markteinführung mit niedrigem Preis, um schnell Marktanteile zu gewinnen."},
+{"a":"Primärforschung","f":"Primärforschung","d":"Eigene Erhebung neuer Daten über Befragung, Beobachtung oder Experiment. Genau zugeschnitten, aber teuer."},
+{"a":"Sekundärforschung","f":"Sekundärforschung","d":"Auswertung bereits vorhandener Daten wie Statistiken, Studien oder eigener Verkaufszahlen. Schnell und günstig."},
+{"a":"Marktanalyse","f":"Marktanalyse","d":"Untersuchung der Marktlage zu einem bestimmten Zeitpunkt. Momentaufnahme im Unterschied zur Marktbeobachtung."},
+{"a":"Marktbeobachtung","f":"Marktbeobachtung","d":"Fortlaufende Verfolgung eines Marktes über längere Zeit. Macht Veränderungen sichtbar."},
+{"a":"Marktprognose","f":"Marktprognose","d":"Vorhersage der künftigen Marktentwicklung auf Basis vorhandener Daten."},
+{"a":"Verkaufsförderung","f":"Sales Promotion","d":"Kurzfristige Maßnahmen zur Absatzsteigerung wie Rabattaktionen, Gutscheine oder Warenproben."},
+{"a":"Zufallsauswahl","f":"Zufallsauswahl","d":"Stichprobenverfahren, bei dem jedes Element dieselbe Auswahlchance hat. Statistisch am zuverlässigsten."},
+{"a":"Quotenauswahl","f":"Quotenauswahl","d":"Stichprobenverfahren mit vorgegebenen Merkmalen wie Alter oder Region. Günstiger, aber nicht zufällig."},
+{"a":"Gebrauchsmuster","f":"Gebrauchsmuster","d":"Schutzrecht für technische Erfindungen mit geringerer Prüfhürde und kürzerer Laufzeit als das Patent."},
+{"a":"Designschutz","f":"Eingetragenes Design","d":"Schutzrecht für die äußere Gestaltung eines Erzeugnisses, früher Geschmacksmuster."},
+{"a":"Urheberrecht","f":"Urheberrecht","d":"Schützt Werke wie Software, Texte oder Grafiken ab dem Zeitpunkt der Schöpfung, ohne Anmeldung. In Deutschland der übliche Schutz für Software statt eines Patents."},
+{"a":"Marktsegmentierung","f":"Marktsegmentierung","d":"Einteilung eines Marktes in Gruppen mit ähnlichen Merkmalen oder Bedürfnissen, um Angebot und Werbung gezielt auszurichten."},
+{"a":"USP","f":"Unique Selling Proposition","d":"Alleinstellungsmerkmal, das ein Angebot von Wettbewerbern unterscheidet und für den Kunden einen echten Vorteil bedeutet."}];
 
 // ---- Bibliothek: Render + Suche ----
 const libList = document.getElementById('libList');
@@ -21806,6 +21998,7 @@ renderLib(GLOSSAR_SORTED);
   if (!reader || typeof GLOSSAR === 'undefined') return;
 
   var CURATED = {
+    "r-marketing": ["Marketing-Mix","AIDA","BCG-Matrix","Cash Cow","Question Mark","Poor Dog","Skimming","Penetration","Primärforschung","Sekundärforschung","Marktanalyse","Marktbeobachtung","Marktprognose","Verkaufsförderung","Zufallsauswahl","Quotenauswahl","Gebrauchsmuster","Designschutz","Urheberrecht","Marktsegmentierung","USP"],
     "r-ap1": ["FAZ","FEZ","SAZ","SEZ","USV","TOM","AVV","RPO","RTO","TCO","Amortisationsdauer","EVA-Prinzip"],
     "r-api": ["REST","PUT","PATCH","OAuth","Bearer-Token","SOAP","idempotent","API-Key"],
     "r-raid": ["RAID","Hot-Spare","RPO","RTO","GFS","Generationenprinzip","Tower of Hanoi","Air Gap","NAS","Hot Swap","Rebuild","NVMe","Parität","Striping","Mirroring","Verfügbarkeit","RAID-Controller","Hot Spare","Single Point of Failure","BBU"],
@@ -21827,7 +22020,7 @@ renderLib(GLOSSAR_SORTED);
     "r-ports": ["Proxy","SOCKS","RDP","HTTPS","POP3","IMAP","STARTTLS","SMTP","TLS","SSL"],
     "r-projekt": ["FAZ","FEZ","V-Modell","Spiralmodell","XP","SMART","Tuckman","RACI","Inkrement"],
     
-    "r-routing": ["STP","NAT","CAM","OSPF","RIP","Trunk","Longest Prefix Match","Cut-Through"],
+    "r-routing": ["STP","NAT","CAM","OSPF","RIP","Trunk","Longest Prefix Match","Cut-Through","Standardgateway","Subnetzmaske","ARP-Cache","Broadcastdomäne"],
     "r-sql": ["SQL"],
     "r-verkabelung": ["RJ45","ISO"],
     "r-subnetting": ["CIDR","Broadcast","RFC"],
@@ -21835,7 +22028,7 @@ renderLib(GLOSSAR_SORTED);
     "r-topo": ["FDDI"],
     "r-krypto": ["RSA","ECC","Diffie-Hellman","PKI","X.509","CRL","OCSP","CSR","Hash","Salt","Root-CA","Intermediate-CA","Vertrauenskette","SSL","TLS"],
     "r-virt": ["Hypervisor","Overcommitment","Live-Migration","Thin Client","VDI","On-Premises","IaaS","PaaS","SaaS","Public Cloud","Private Cloud","Hybrid Cloud","Elastizität","Vendor Lock-in","Mandantenfähigkeit"],
-    "r-vlan": ["VLAN","Trunk","VLAN-Hopping","MAC-Spoofing","802.1X","Trunk-Port","Access-Port","DTP"],
+    "r-vlan": ["VLAN","Trunk","VLAN-Hopping","MAC-Spoofing","802.1X","Trunk-Port","Access-Port","DTP","ACL","Port Security","Management-VLAN","Layer-3-Switch","Broadcastdomäne"],
     "r-voip": ["VoIP","SIP","RTP","QoS"],
     "r-vpn": ["IPsec","IKE","IKEv2","ISAKMP","ESP","AH","L2TP","OpenVPN","Diffie-Hellman","PFS"],
     "r-wlan": ["SSID","PSK","SAE","Roaming","Band Steering","IEEE 802.11","Wireless Controller"],

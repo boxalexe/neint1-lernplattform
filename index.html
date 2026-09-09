@@ -4,6 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Layer 8 Academy: IHK AP1 Prüfungsvorbereitung</title>
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <meta name="description" content="Kostenlose Prüfungsvorbereitung auf die IHK-Abschlussprüfung Teil 1 (AP1) der IT-Berufe: 1346 Übungsfragen in 47 Kategorien, 46 Nachschlagekapitel und 458 Glossarbegriffe zu Netzwerktechnik, IT-Sicherheit, SQL, Projektmanagement und Wirtschaft. Mit Karteikartenmodus, Subnetting-Trainer und Prüfungssimulationen.">
 <link rel="canonical" href="https://layer8academy.boxberger.app/">
 <meta property="og:type" content="website">
@@ -15,16 +17,13 @@
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Layer 8 Academy: IHK AP1 Prüfungsvorbereitung">
 <meta name="twitter:description" content="Kostenlose Prüfungsvorbereitung auf die IHK-Abschlussprüfung Teil 1 (AP1) der IT-Berufe: über 1100 Übungsfragen zu Netzwerken, IT-Sicherheit, SQL, Projektmanagement und mehr, mit ausführlichem Nachschlagewerk.">
-<link rel="icon" href="/favicon.svg" type="image/svg+xml" sizes="any">
-<link rel="apple-touch-icon" href="/favicon.svg">
-<link rel="alternate icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120'%3E%3Cpath d='M60,60 C34,60 24,26 60,26 C96,26 86,60 60,60 Z' fill='none' stroke='%2322d3ee' stroke-width='11' stroke-linecap='round'/%3E%3Cpath d='M60,94 C86,94 96,60 60,60 C24,60 34,94 60,94 Z' fill='none' stroke='%233ddc84' stroke-width='11' stroke-linecap='round'/%3E%3C/svg%3E">
 <script>
   try {
     var t = localStorage.getItem('l8a_theme');
     if (t && t !== 'default') document.documentElement.setAttribute('data-theme', t);
   } catch (e) {}
 </script>
-<link rel="stylesheet" href="styles.css?v=20260828t">
+<link rel="stylesheet" href="styles.css?v=20260829a">
 </head>
 <body>
 <header>
@@ -100,6 +99,7 @@
   <a href="#r-medien">Kabel/Hardware</a>
   <a href="#r-kalkulation">Kaufmännisches Rechnen</a>
   <a href="#r-logik">Logik/Gatter</a>
+  <a href="#r-marketing">Marketing &amp; Marktforschung</a>
   <a href="#r-markt">Markt &amp; Wirtschaft</a>
   <a href="#r-mux">Multiplexing</a>
   <a href="#r-ausdehnung">Netzausdehnung</a>
@@ -139,7 +139,7 @@
 <p>Die AP1 ist keine reine Wissensabfrage, sondern eine zusammenhängende Handlungssituation aus einem Betrieb. Die Teilaufgaben bauen aufeinander auf: Ergebnisse aus einer Aufgabe werden in der nächsten weiterverwendet. Anders als im Multiple-Choice-Training musst du Antworten selbst formulieren, Rechenwege zeigen und Entscheidungen begründen. Dieser Abschnitt nennt jedes Thema aus dem AP1-Pool mit Stichpunkten und einer Beispielaufgabe, wie sie in der echten Prüfung aussehen könnte.</p>
 
 <div class="haeufig">
-<p class="haeufig-titel">Themen, die erfahrungsgemäß am häufigsten drankamen</p>
+<p class="haeufig-titel">Themen, die am häufigsten drankamen</p>
 <div class="haeufig-liste">
 <a href="#r-osi">OSI-Modell</a><a href="#r-ip">IPv4</a><a href="#r-subnetting">Subnetting</a><a href="#r-dnsdhcp">DHCP/DNS</a><a href="#r-vlan">VLAN</a><a href="#r-routing">Routing</a><a href="#r-raid">RAID</a><a href="#r-raid">Backup</a><a href="#r-datenschutz">Datenschutz</a><a href="#r-security">IT-Sicherheit</a><a href="#r-projekt">Projektmanagement</a><a href="#r-kalkulation">Kaufmännisches Rechnen</a><a href="#r-vertraege">Verträge</a><a href="#r-sql">SQL-Grundlagen</a><a href="#r-hardware">Hardware</a><a href="#r-virt">Cloud, SaaS &amp; On-Premises</a>
 </div>
@@ -386,7 +386,7 @@
 <h3>Schutzziele</h3>
 <p>Die drei klassischen Schutzziele sind <strong>Vertraulichkeit</strong>, <strong>Integrität</strong> und <strong>Verfügbarkeit</strong>. Häufig wird als viertes Ziel die <strong>Authentizität</strong> ergänzt; aus diesen vier ergibt sich die Merkhilfe <strong>VIVA</strong>.</p>
 <table>
-<tr><th>Ziel</th><th>Bedeutung</th><th>Typische Maßnahme</th></tr>
+<tr><th>Ziel</th><th>Bedeutung</th><th>Typisches Vorgehen</th></tr>
 <tr><td>Vertraulichkeit</td><td>Nur Berechtigte können die Daten einsehen</td><td>Verschlüsselung, Berechtigungskonzept</td></tr>
 <tr><td>Integrität</td><td>Daten sind unverändert und vollständig</td><td>Hashwerte, Prüfsummen, Signaturen</td></tr>
 <tr><td>Verfügbarkeit</td><td>Daten und Dienste sind nutzbar, wenn sie gebraucht werden</td><td>Redundanz, USV, Backup</td></tr>
@@ -880,7 +880,7 @@ Im <a href="subnetting-trainer/">Subnetting Trainer</a> kann dieses Thema geziel
 <h3>Cache-Speicher</h3>
 <p>Der <strong>Cache</strong> ist ein sehr schneller Zwischenspeicher direkt auf oder unmittelbar neben der CPU. Häufig benötigte Befehle und Daten liegen dort bereit, damit die CPU nicht auf den deutlich langsameren Arbeitsspeicher warten muss. Er ist die wichtigste Gegenmaßnahme zum Von-Neumann-Flaschenhals.</p>
 <table>
-<tr><th>Stufe</th><th>Größe</th><th>Geschwindigkeit</th><th>Zuordnung</th></tr>
+<tr><th>Stufe</th><th>Kapazität</th><th>Geschwindigkeit</th><th>Zuordnung</th></tr>
 <tr><td>L1-Cache</td><td>sehr klein</td><td>am schnellsten</td><td>je Kern, meist getrennt für Befehle und Daten</td></tr>
 <tr><td>L2-Cache</td><td>größer</td><td>etwas langsamer</td><td>in der Regel je Kern</td></tr>
 <tr><td>L3-Cache</td><td>am größten</td><td>am langsamsten der drei</td><td>gemeinsam für alle Kerne</td></tr>
@@ -911,7 +911,7 @@ Im <a href="subnetting-trainer/">Subnetting Trainer</a> kann dieses Thema geziel
 <h3>Green IT und Nachhaltigkeit</h3>
 <p><strong>Green IT</strong> umfasst alle Maßnahmen, die Energieverbrauch und Umweltbelastung durch Informationstechnik verringern, und zwar über den gesamten Lebenszyklus von der Herstellung über den Betrieb bis zur Entsorgung.</p>
 <table>
-<tr><th>Maßnahme</th><th>Wirkung</th></tr>
+<tr><th>Vorgehen</th><th>Wirkung</th></tr>
 <tr><td>Energieeffiziente Hardware beschaffen</td><td>Geringere Aufnahme im Dauerbetrieb, etwa über Netzteile mit hohem Wirkungsgrad</td></tr>
 <tr><td><strong>Servervirtualisierung</strong></td><td>Mehrere Systeme auf einer Maschine statt vieler schwach ausgelasteter Rechner; senkt Strom-, Kühl- und Platzbedarf</td></tr>
 <tr><td>SSD statt HDD</td><td>Geringerer Verbrauch, weniger Abwärme, keine mechanischen Teile</td></tr>
@@ -1144,6 +1144,118 @@ Zinsen insgesamt: 3.000,00 EUR</div>
 <div class="callout xref"><span class="tag">Verwandte Themen</span><a href="#r-zahlen">Zahlensysteme</a> · <a href="#r-hardware">IT-Hardware, Energie &amp; Grundlagen</a></div>
 </section>
 
+<section id="r-marketing">
+<h2>Marketing &amp; Marktforschung</h2>
+<p><strong>Marketing</strong> umfasst alle Maßnahmen, mit denen ein Betrieb Kundenbedürfnisse erkennt, sein Angebot am Markt platziert und damit seine Unternehmensziele erreicht. Es beginnt nicht beim Verkaufen, sondern bei der Frage, was der Markt überhaupt braucht.</p>
+
+<h3>Zielgruppe und Alleinstellung</h3>
+<p>Die <strong>Marktsegmentierung</strong> teilt einen Markt in Gruppen mit ähnlichen Merkmalen oder Bedürfnissen auf. Üblich sind Kriterien wie Alter, Region, Betriebsgröße oder Branche. Der Zweck: Wer die Gruppen kennt, kann Angebot und Werbung gezielt darauf ausrichten, statt alle gleich anzusprechen und niemanden richtig zu treffen.</p>
+<p>Der <strong>USP</strong> (Unique Selling Proposition) ist das Merkmal, das ein Angebot von dem der Wettbewerber unterscheidet. Das kann eine besondere Funktion sein, eine höhere Qualität, ein schnellerer Service oder eine kürzere Reaktionszeit. Entscheidend ist, dass der Kunde darin einen echten Vorteil sieht und die Wettbewerber ihn nicht ohne Weiteres bieten.</p>
+<div class="callout"><span class="tag">Merksatz</span><strong>Die Segmentierung bestimmt, wen man anspricht; der USP bestimmt, warum man gewählt wird.</strong> Für einen IT-Dienstleister ist der USP häufig kein Produktmerkmal, sondern eine zugesicherte Reaktionszeit oder ein fester Ansprechpartner.</div>
+
+<h3>Marktforschung</h3>
+<p><strong>Marktforschung</strong> beschafft, prüft und wertet Informationen über Märkte, Kunden und Wettbewerber systematisch aus. Sie soll Bedürfnisse sichtbar machen, Chancen erkennen, Wettbewerber einordnen und Entscheidungen absichern.</p>
+<table>
+<tr><th>Begriff</th><th>Zeitbezug</th><th>Bedeutung</th></tr>
+<tr><td><strong>Marktanalyse</strong></td><td>Gegenwart</td><td>Untersuchung der aktuellen Marktlage zu einem Zeitpunkt</td></tr>
+<tr><td><strong>Marktbeobachtung</strong></td><td>Laufend</td><td>Fortlaufende Verfolgung eines Marktes über längere Zeit</td></tr>
+<tr><td><strong>Marktprognose</strong></td><td>Zukunft</td><td>Vorhersage der weiteren Entwicklung</td></tr>
+</table>
+<div class="callout"><span class="tag">Merksatz</span><strong>Analyse ist eine Momentaufnahme, Beobachtung ein Film, Prognose ein Blick nach vorn.</strong> In Aufgaben verrät das Zeitwort die Antwort: „derzeit" deutet auf die Analyse, „seit Monaten" auf die Beobachtung, „voraussichtlich" auf die Prognose.</div>
+
+<h3>Primär- und Sekundärforschung</h3>
+<table>
+<tr><th></th><th>Primärforschung</th><th>Sekundärforschung</th></tr>
+<tr><td>Vorgehen</td><td>Neue Daten werden eigens erhoben</td><td>Vorhandene Daten werden ausgewertet</td></tr>
+<tr><td>Wege</td><td>Befragung, Interview, Fokusgruppe, Beobachtung, Experiment</td><td>Statistiken, Studien, Fachliteratur, Datenbanken, eigene Verkaufszahlen</td></tr>
+<tr><td>Vorteil</td><td>Genau auf die eigene Fragestellung zugeschnitten</td><td>Schnell verfügbar und deutlich günstiger</td></tr>
+<tr><td>Nachteil</td><td>Zeitaufwendig und teuer</td><td>Oft veraltet oder nicht genau passend</td></tr>
+</table>
+<div class="callout"><span class="tag">Merksatz</span><strong>Primär heißt selbst erheben, sekundär heißt vorhandenes auswerten.</strong> Praxisregel: Man beginnt mit der Sekundärforschung, weil sie billig ist, und erhebt erst dann selbst, wenn die vorhandenen Daten die Frage nicht beantworten.</div>
+
+<h3>Auswahlverfahren</h3>
+<p>Bei der <strong>Vollerhebung</strong> wird jedes Element der Zielgruppe befragt, bei der <strong>Teilerhebung</strong> nur ein Ausschnitt. Da eine Vollerhebung meist zu teuer ist, arbeitet man mit Stichproben.</p>
+<p>Bei der <strong>Zufallsauswahl</strong> hat jedes Element dieselbe Chance, ausgewählt zu werden; das Ergebnis ist statistisch belastbar und auf die Gesamtheit übertragbar. Bei der <strong>Quotenauswahl</strong> werden Merkmale wie Alter, Geschlecht oder Region vorgegeben, damit die Stichprobe die Zielgruppe abbildet. Sie ist günstiger, hängt aber von der Auswahl der Befragenden ab.</p>
+<div class="callout"><span class="tag">Prüfungsfalle</span>Gefragt wird gern nach dem <em>statistisch zuverlässigsten</em> Verfahren; die Antwort ist die <strong>Zufallsauswahl</strong>, weil nur dort die Auswahlwahrscheinlichkeit bekannt ist. Die Quotenauswahl liefert zwar eine passend zusammengesetzte Gruppe, ist aber nicht zufällig und damit anfälliger für Verzerrungen.</div>
+
+<h3>Der Marketing-Mix: die vier P</h3>
+<p>Der <strong>Marketing-Mix</strong> fasst die vier Instrumente zusammen, mit denen ein Betrieb sein Angebot am Markt steuert. Sie werden nach ihren englischen Bezeichnungen als die vier P bezeichnet.</p>
+<table>
+<tr><th>Instrument</th><th>Deutsch</th><th>Leitfrage</th><th>Beispiele</th></tr>
+<tr><td><strong>Product</strong></td><td>Produktpolitik</td><td>Was bieten wir an?</td><td>Qualität, Design, Verpackung, Sortiment, Service</td></tr>
+<tr><td><strong>Price</strong></td><td>Preispolitik</td><td>Zu welchem Preis?</td><td>Preisstrategie, Rabatte, Zahlungsbedingungen</td></tr>
+<tr><td><strong>Place</strong></td><td>Distributionspolitik</td><td>Wie kommt es zum Kunden?</td><td>Direktvertrieb, Handel, Onlineshop, Logistik</td></tr>
+<tr><td><strong>Promotion</strong></td><td>Kommunikationspolitik</td><td>Wie erfährt der Kunde davon?</td><td>Werbung, Verkaufsförderung, Öffentlichkeitsarbeit, persönlicher Verkauf</td></tr>
+</table>
+<div class="callout"><span class="tag">Merksatz</span><strong>Produkt, Preis, Vertrieb, Werbung.</strong> Die vier greifen ineinander: Ein hochwertiges Produkt zum Niedrigpreis im Discounter mit reißerischer Werbung passt nicht zusammen. In Aufgaben wird deshalb häufig verlangt, eine Maßnahme dem richtigen Instrument zuzuordnen oder zu begründen, warum sie zur Strategie passt.</div>
+
+<h3>Produktpolitik und Kundendienst</h3>
+<p>Zur <strong>Produktpolitik</strong> gehören alle Entscheidungen über das Angebot selbst: Qualität, Gestaltung, Verpackung, Sortimentsbreite und die begleitenden Dienstleistungen. Gerade Letztere schaffen zusätzlichen Nutzen und binden Kunden über den einmaligen Kauf hinaus.</p>
+<table>
+<tr><th>Zeitpunkt</th><th>Leistungen</th></tr>
+<tr><td>Vor dem Kauf</td><td>Beratung, Information, Vorführung, Testmöglichkeit</td></tr>
+<tr><td>Während des Kaufs</td><td>Zahlungsarten, Finanzierung, Lieferung, Inbetriebnahme</td></tr>
+<tr><td>Nach dem Kauf</td><td>Installation, Schulung, Support, Wartung, Garantie, Reparatur</td></tr>
+</table>
+<div class="callout"><span class="tag">Merksatz</span><strong>Ein gutes Produkt verkauft einmal, guter Service verkauft wieder.</strong> Für IT-Betriebe ist das besonders greifbar: Wartungsvertrag, Fernwartung und Reaktionszeiten sind Teil der Produktpolitik und häufig der eigentliche Grund für den Zuschlag.</div>
+
+<h3>Preispolitik</h3>
+<table>
+<tr><th>Strategie</th><th>Vorgehen</th><th>Wann sinnvoll</th></tr>
+<tr><td><strong>Hochpreisstrategie</strong></td><td>Dauerhaft hoher Preis</td><td>Hochwertiges Image, Qualitätsführerschaft</td></tr>
+<tr><td><strong>Niedrigpreisstrategie</strong></td><td>Dauerhaft niedriger Preis</td><td>Große Mengen, Kostenführerschaft</td></tr>
+<tr><td><strong>Skimming</strong></td><td>Teuer starten, später senken</td><td>Neuheit ohne Wettbewerb, zahlungsbereite Erstkäufer</td></tr>
+<tr><td><strong>Penetration</strong></td><td>Günstig starten, später anheben</td><td>Schnell Marktanteile gewinnen, Wettbewerber abwehren</td></tr>
+</table>
+<p>Ergänzend wirken <strong>Rabatte</strong>, Boni und Gutscheine sowie <strong>psychologische Preise</strong> wie 9,99 statt 10,00 Euro. Bei der Preisbildung unterscheidet man den kostenorientierten Ansatz, der von den eigenen Kosten ausgeht, und den wertorientierten, der sich am Nutzen für den Kunden orientiert.</p>
+<div class="callout"><span class="tag">Merksatz</span><strong>Skimming startet teuer, Penetration startet günstig.</strong> Merkhilfe: Skimming kommt von „abschöpfen", man schöpft zuerst die zahlungsbereiten Kunden ab. Penetration heißt „eindringen", man drängt über den Preis in den Markt. Bei Elektronik erkennt man Skimming an sinkenden Preisen nach dem Marktstart.</div>
+
+<h3>Distribution und Kommunikation</h3>
+<p>Die <strong>Distributionspolitik</strong> beantwortet, auf welchem Weg das Produkt zum Kunden gelangt: über Direktvertrieb, den Handel oder einen Onlineshop. Dazu gehören auch Lagerhaltung, Logistik, Standortwahl und die Zusammenarbeit mit Handelspartnern.</p>
+<p>Die <strong>Kommunikationspolitik</strong> sorgt dafür, dass der Kunde vom Angebot erfährt und sich dafür entscheidet. Instrumente sind Werbung, <strong>Verkaufsförderung</strong>, Öffentlichkeitsarbeit, Onlinemarketing und der persönliche Verkauf.</p>
+<p><strong>Verkaufsförderung</strong> meint dabei kurzfristige Maßnahmen zur Absatzsteigerung: Rabattaktionen, Gutscheine, Gewinnspiele, Warenproben, Treueprogramme und Aufsteller am Verkaufsort. Sie wirkt schnell, aber nur begrenzt lange.</p>
+
+<h3>Die AIDA-Formel</h3>
+<p>AIDA beschreibt, welche Stufen ein Kunde bis zur Kaufentscheidung durchläuft. Jede Werbemaßnahme lässt sich einer dieser Stufen zuordnen.</p>
+<table>
+<tr><th>Stufe</th><th>Bedeutung</th><th>Beispiel</th></tr>
+<tr><td><strong>Attention</strong></td><td>Aufmerksamkeit wecken</td><td>Auffälliges Banner, Plakat, Anzeige</td></tr>
+<tr><td><strong>Interest</strong></td><td>Interesse erzeugen</td><td>Kunde liest die Produktbeschreibung</td></tr>
+<tr><td><strong>Desire</strong></td><td>Wunsch auslösen</td><td>Vergleich, Bewertungen, Vorführung</td></tr>
+<tr><td><strong>Action</strong></td><td>Handlung auslösen</td><td>Bestellung, Vertragsabschluss</td></tr>
+</table>
+<div class="callout"><span class="tag">Merksatz</span><strong>Aufmerksamkeit, Interesse, Wunsch, Handlung.</strong> Die Reihenfolge ist Teil der Antwort: Ohne Aufmerksamkeit gibt es kein Interesse. In Aufgaben wird meist verlangt, eine konkrete Werbemaßnahme der richtigen Stufe zuzuordnen.</div>
+
+<h3>Die BCG-Matrix</h3>
+<p>Die <strong>BCG-Matrix</strong> ordnet die Produkte eines Betriebs nach zwei Größen: dem eigenen <strong>Marktanteil</strong> und dem <strong>Marktwachstum</strong>. Daraus ergeben sich vier Felder mit jeweils eigener Handlungsempfehlung.</p>
+<table>
+<tr><th>Feld</th><th>Marktanteil</th><th>Wachstum</th><th>Empfehlung</th></tr>
+<tr><td><strong>Star</strong></td><td>hoch</td><td>hoch</td><td>Investieren und Stellung ausbauen</td></tr>
+<tr><td><strong>Cash Cow</strong></td><td>hoch</td><td>gering</td><td>Erträge abschöpfen, wenig investieren</td></tr>
+<tr><td><strong>Question Mark</strong></td><td>gering</td><td>hoch</td><td>Prüfen und entscheiden: ausbauen oder aufgeben</td></tr>
+<tr><td><strong>Poor Dog</strong></td><td>gering</td><td>gering</td><td>Auslaufen lassen</td></tr>
+</table>
+<div class="callout"><span class="tag">Merksatz</span><strong>Star fördern, Cash Cow melken, Question Mark entscheiden, Poor Dog abbauen.</strong> Der typische Lebensweg eines Produkts führt vom Question Mark über den Star zur Cash Cow und endet als Poor Dog. Die Cash Cow finanziert dabei die Entwicklung der nachfolgenden Produkte, was in Aufgaben oft die eigentliche Begründung ist.</div>
+
+<h3>Schutzrechte</h3>
+<table>
+<tr><th>Recht</th><th>Schützt</th><th>Beispiel</th></tr>
+<tr><td><strong>Patent</strong></td><td>Technische Erfindungen</td><td>Neues Verfahren zur Datenkomprimierung</td></tr>
+<tr><td><strong>Gebrauchsmuster</strong></td><td>Technische Erfindungen mit geringerer Hürde, kürzere Laufzeit</td><td>Kleinere technische Neuerung</td></tr>
+<tr><td><strong>Designschutz</strong></td><td>Äußere Gestaltung</td><td>Form und Aussehen eines Gehäuses</td></tr>
+<tr><td><strong>Marke</strong></td><td>Namen, Logos, Kennzeichen</td><td>Firmenname, Produktlogo</td></tr>
+<tr><td><strong>Gütezeichen</strong></td><td>Geprüfte Qualität, kein Schutzrecht im engeren Sinn</td><td>Prüfsiegel unabhängiger Stellen</td></tr>
+</table>
+<div class="callout"><span class="tag">Merksatz</span><strong>Patent schützt Technik, Designschutz schützt das Aussehen, die Marke schützt den Namen.</strong> Für die IT wichtig: Software wird in Deutschland grundsätzlich nicht durch ein Patent, sondern über das <strong>Urheberrecht</strong> geschützt, das automatisch mit der Schöpfung entsteht und keiner Anmeldung bedarf.</div>
+
+<h3>Zwei Beispiele aus der Praxis</h3>
+<p><strong>Marktforschung vor einer Produkteinführung:</strong> Ein Betrieb plant eine ergonomische Tastatur. Zuerst wertet er vorhandene Marktstudien und eigene Verkaufszahlen aus, das ist <strong>Sekundärforschung</strong> und kostet fast nichts. Weil daraus nicht hervorgeht, welche Eigenschaften die Zielgruppe erwartet, folgt eine Kundenbefragung als <strong>Primärforschung</strong>. Erst aus beiden Quellen zusammen entsteht die Entscheidung über Ausstattung, Preis und Vertriebsweg. Genau diese Reihenfolge ist prüfungsrelevant: erst das Vorhandene auswerten, dann gezielt selbst erheben.</p>
+<p><strong>Kundenorientierter Verkauf:</strong> Ein Kunde sucht einen Notebook für den Außendienst. Der Verkäufer klärt zuerst die Anforderungen, also Einsatzort, Laufzeit und benötigte Anschlüsse, und empfiehlt danach ein passendes Gerät. Nach dem Kauf folgen Einrichtung, Garantieabwicklung und Support. Das Ziel ist nicht der einzelne Abschluss, sondern ein Kunde, der beim nächsten Bedarf wiederkommt.</p>
+<div class="callout"><span class="tag">Der Kerngedanke</span><strong>Marketing beginnt nicht erst bei der Werbung und endet nicht mit dem Verkauf.</strong> Sein Ziel ist es, Kundenbedürfnisse zu erkennen, passende Produkte anzubieten, Zufriedenheit zu schaffen und dauerhafte Kundenbeziehungen aufzubauen.<br><br>
+Dieser eine Satz verbindet alle Teile des Kapitels: Bedürfnisse erkennen ist <strong>Marktforschung</strong> und <strong>Segmentierung</strong>, passende Produkte anbieten ist <strong>Produkt-</strong> und <strong>Preispolitik</strong>, sie zum Kunden bringen ist <strong>Distribution</strong> und <strong>Kommunikation</strong>, und Zufriedenheit sowie Bindung entstehen über <strong>Service</strong> und <strong>Kundendienst</strong>. Zufriedene Kunden kaufen erneut und empfehlen weiter, was günstiger ist als jede Neukundengewinnung.</div>
+
+<div class="callout xref"><span class="tag">Verwandte Themen</span><a href="#r-markt">Markt &amp; Wirtschaftssektoren</a> · <a href="#r-kalkulation">Kaufmännisches Rechnen</a> · <a href="#r-vertraege">Verträge &amp; Rechtsgeschäfte</a></div>
+</section>
 <section id="r-markt">
 <h2>Markt &amp; Wirtschaftssektoren</h2>
 <h3>Marktformen</h3>
@@ -1205,8 +1317,11 @@ Zinsen insgesamt: 3.000,00 EUR</div>
 <strong>Kaufzurückhaltung bei Deflation:</strong> Kunden verschieben Anschaffungen, weil sie mit weiter fallenden Preisen rechnen. Der Absatz bricht ein, Betriebe kürzen Investitionen und Personal.<br>
 <strong>Energiekrise als Auslöser:</strong> Energiepreise verdoppeln sich, die Produktion wird gedrosselt, Beschäftigte werden entlassen, die Verbraucherpreise steigen dennoch. Das ist der Musterfall einer Stagflation.</div>
 
+
+
 <div class="callout xref"><span class="tag">Verwandte Themen</span><a href="#r-kalkulation">Kaufmännisches Rechnen</a> · <a href="#r-vertraege">Verträge &amp; Rechtsgeschäfte</a> · <a href="#r-ap1">AP1</a></div>
 </section>
+
 
 <section id="r-mux">
 <h2>Multiplexing</h2>
@@ -1541,6 +1656,17 @@ Prüfen Sie in Aufgaben immer alle fünf Kriterien einzeln durch: Genau daran h�
 
 <div class="callout"><span class="tag">Prüfungsfalle</span>Ein <strong>Switch</strong> arbeitet auf Schicht 2 und entscheidet anhand der <strong>MAC-Adresse</strong>, ein <strong>Router</strong> auf Schicht 3 anhand der <strong>IP-Adresse</strong>. Daraus folgt die zweite wichtige Aussage: Ein Switch trennt <em>Kollisionsdomänen</em>, aber keine Broadcastdomänen. Erst ein Router oder ein VLAN trennt Broadcastdomänen. Diese Kombination wird sehr häufig geprüft.</div>
 
+<h3>Switch oder Router? Die Entscheidung am Beispiel</h3>
+<p>Dass ein Switch mit MAC-Adressen und ein Router mit IP-Adressen arbeitet, lässt sich leicht auswendig lernen. Entscheidend ist aber, woran ein Rechner selbst erkennt, welchen Weg seine Daten nehmen. Diese Entscheidung trifft er vor jeder Übertragung anhand der <strong>Subnetzmaske</strong>.</p>
+<p><strong>Fall 1, gleiches Netz:</strong> Ein Rechner mit 192.168.1.10/24 will 192.168.1.20 erreichen. Er verknüpft beide Adressen mit seiner Maske und stellt fest, dass die Netzanteile übereinstimmen. Das Ziel liegt also im selben Netz. Er ermittelt per <strong>ARP</strong> dessen MAC-Adresse und schickt den Frame direkt los; der Switch leitet ihn anhand seiner MAC-Tabelle an den richtigen Port weiter. Ein Router ist an diesem Vorgang überhaupt nicht beteiligt.</p>
+<p><strong>Fall 2, anderes Netz:</strong> Derselbe Rechner will 10.0.0.5 erreichen. Der Vergleich ergibt diesmal einen abweichenden Netzanteil, das Ziel liegt außerhalb. Jetzt schickt er den Frame an sein <strong>Standardgateway</strong>, also den Router. Bemerkenswert dabei: Als Ziel-MAC trägt er die des Routers ein, während die Ziel-IP unverändert 10.0.0.5 bleibt. Der Router packt den Frame aus, prüft seine Routingtabelle und schickt das Paket mit einer neuen Ziel-MAC weiter.</p>
+<div class="callout"><span class="tag">Merksatz</span><strong>Gleiches Netz bedeutet Switch, anderes Netz bedeutet Router.</strong> Daraus folgt eine typische Prüfungsaussage: Die <em>IP-Adresse</em> des Ziels bleibt auf dem ganzen Weg gleich, die <em>MAC-Adresse</em> wird bei jedem Router neu gesetzt. Fehlt einem Rechner das Standardgateway, erreicht er ausschließlich Ziele im eigenen Netz; genau das steckt hinter dem Befund, dass der Nachbarrechner erreichbar ist, das Internet aber nicht.</div>
+
+<h3>Wozu ARP gebraucht wird</h3>
+<p>ARP wird oft nur als Ablauf auswendig gelernt. Der Grund dahinter ist einfach: Im lokalen Netz wird nicht anhand der IP-Adresse zugestellt, sondern anhand der MAC-Adresse. Der Rechner kennt zwar das Ziel als IP, weiß aber nicht, welches Gerät im Segment dazugehört.</p>
+<p>Also fragt er alle gleichzeitig: Ein Broadcast geht an das gesamte Segment mit der sinngemäßen Frage, wer diese IP-Adresse besitze. Alle hören mit, aber nur das gesuchte Gerät antwortet, und zwar direkt an den Fragesteller mit seiner MAC-Adresse. Das Ergebnis landet im <strong>ARP-Cache</strong>, damit die Frage nicht bei jedem Paket erneut gestellt werden muss.</p>
+<div class="callout"><span class="tag">Merksatz</span><strong>ARP übersetzt eine bekannte IP-Adresse in die zugehörige MAC-Adresse.</strong> Die Anfrage geht als Broadcast an alle, die Antwort kommt als Unicast von einem. Der Vorgang endet immer am Router, weil Broadcasts Netzgrenzen nicht überschreiten; für ein Ziel außerhalb fragt der Rechner deshalb nach der MAC des Gateways, nicht nach der des eigentlichen Ziels.</div>
+
 <h3>ARP und DHCP im Vergleich</h3>
 <p>Beide Protokolle beschaffen einem Rechner eine Information, die ihm fehlt, und beide starten mit einem Broadcast. Verwechselt werden sie trotzdem regelmäßig, weil der Zweck ein völlig anderer ist.</p>
 <table>
@@ -1721,7 +1847,7 @@ Prüfen Sie in Aufgaben immer alle fünf Kriterien einzeln durch: Genau daran h�
 <p>Zur Kontrolle mit der Formel aus Schritt 4: 6 verbleibende Hostbits ergeben 2<sup>6</sup> − 2 = <strong>62 nutzbare Adressen</strong> je Subnetz, genau die Differenz zwischen erster und letzter nutzbarer Adresse in jeder Zeile oben.</p>
 
 <h3>6. Der Schnelltrick für die Prüfung</h3>
-<div class="callout"><span class="tag">Blockgröße-Methode</span>1. Blockgröße = 256 − Maskenwert im „interessanten" Oktett (dem Oktett, das weder 0 noch 255 ist).<br>2. Ab der Netzadresse in Blockgröße-Schritten hochzählen → jede Zahl ist die nächste Subnetz-Adresse.<br>3. In jedem Subnetz gilt: erste Adresse = Netzadresse (nicht nutzbar), letzte Adresse = Broadcast (nicht nutzbar), alles dazwischen ist vergebbar.</div>
+<div class="callout"><span class="tag">Rechenweg über die Blockanzahl</span>1. Blockgröße = 256 − Maskenwert im „interessanten" Oktett (dem Oktett, das weder 0 noch 255 ist).<br>2. Ab der Netzadresse in Blockgröße-Schritten hochzählen → jede Zahl ist die nächste Subnetz-Adresse.<br>3. In jedem Subnetz gilt: erste Adresse = Netzadresse (nicht nutzbar), letzte Adresse = Broadcast (nicht nutzbar), alles dazwischen ist vergebbar.</div>
 
 <h3>7. Referenztabelle, das Cheat-Sheet</h3>
 <p>Diese Tabelle deckt die gängigen Prüfungsfälle ab, ausgehend von einem ursprünglichen <code>/24</code>-Netz. Cyan markiert die Präfixlänge (die „Frage"), Grün die daraus berechneten Werte (die „Antwort").</p>
@@ -1772,7 +1898,7 @@ Im <a href="subnetting-trainer/">Subnetting Trainer</a> kann dieses Thema geziel
 
 <h3>Maßnahmen der Härtung</h3>
 <table>
-<tr><th>Maßnahme</th><th>Wirkung</th></tr>
+<tr><th>Vorgehen</th><th>Wirkung</th></tr>
 <tr><td>Nicht benötigte <strong>Dienste deaktivieren</strong></td><td>Weniger lauschende Prozesse, weniger angreifbare Software</td></tr>
 <tr><td>Nicht benötigte Software entfernen</td><td>Weniger Schwachstellen und weniger Pflegeaufwand</td></tr>
 <tr><td><strong>Standardkonten</strong> absichern</td><td>Vorgegebene Konten deaktivieren oder umbenennen, Gastkonto abschalten</td></tr>
@@ -2012,6 +2138,24 @@ Im <a href="subnetting-trainer/">Subnetting Trainer</a> kann dieses Thema geziel
 <p><strong>Prinzipielle Grenzen der VLAN-Technik:</strong> Die Trennung ist rein <strong>logisch auf Layer 2</strong>, sie ersetzt keine physische Trennung. Kommunikation zwischen VLANs erfordert L3-Routing (zusätzliche Komplexität und ein möglicher Engpass), und die Isolation ist nur so gut wie die Konfiguration: Fehlkonfigurationen oder Angriffe wie <strong>VLAN-Hopping</strong> (Switch-Spoofing über automatisch ausgehandelte Trunks, Double Tagging über das native VLAN) können die Trennung aushebeln. Gegenmaßnahmen: ungenutzte Ports deaktivieren, kein automatisches Trunk-Aushandeln (<strong>DTP</strong> abschalten), natives VLAN nicht für Nutzdaten verwenden.</p>
 
 <div class="callout"><span class="tag">Prüfungsfalle</span>Ein <strong>Access-Port</strong> gehört zu genau einem VLAN und überträgt ungetaggt zum Endgerät. Ein <strong>Trunk-Port</strong> überträgt mehrere VLANs mit Kennzeichnung nach 802.1Q zwischen Switches. Wird ein Endgerät versehentlich an einen Trunk gehängt oder stimmen die <strong>nativen VLANs</strong> beider Trunk-Seiten nicht überein, landen Frames im falschen VLAN; genau das ist die typische Fehlerursache im Aufgabentext.</div>
+
+<h3>VLANs am Firmenbeispiel</h3>
+<p>In einem Betrieb arbeiten Verwaltung, Entwicklung und Gäste im selben Gebäude und hängen an denselben Switches. Ohne VLANs lägen alle Geräte in einer gemeinsamen <strong>Broadcastdomäne</strong>: Jeder Broadcast erreicht jeden, und ein Gastgerät könnte grundsätzlich die internen Systeme ansprechen.</p>
+<p>Mit drei VLANs ändert sich das, ohne dass ein einziges Kabel neu verlegt wird. Die Bereiche sind logisch getrennt, obwohl sie dieselbe Hardware nutzen. Ein Gast erreicht die Verwaltungssysteme nicht mehr, und Broadcasts bleiben auf das jeweilige VLAN beschränkt, was unnötigen Verkehr spart.</p>
+<div class="callout"><span class="tag">Merksatz</span><strong>Ein VLAN trennt logisch, obwohl die Hardware gemeinsam genutzt wird.</strong> Das ist der eigentliche wirtschaftliche Vorteil: Trennung ohne zusätzliche Switches und ohne zweite Verkabelung. Wird im Szenario eine Trennung „ohne Neuverkabelung" oder „mit vorhandener Hardware" verlangt, ist das VLAN die erwartete Antwort.</div>
+
+<p><strong>Wichtig beim Inter-VLAN-Routing:</strong> Zwei Geräte am selben Switch können nicht miteinander kommunizieren, wenn sie in verschiedenen VLANs liegen, denn der Switch arbeitet auf Schicht 2 und überschreitet diese Grenze nicht. Für den Austausch braucht es einen Router oder einen <strong>Layer-3-Switch</strong>. Genau deshalb ist ein VLAN erst dann eine Sicherheitsmaßnahme, wenn an dieser Übergangsstelle auch gefiltert wird.</p>
+
+<table>
+<tr><th>Zweck</th><th>Vorgehen</th></tr>
+<tr><td>Übergang kontrollieren</td><td>Verkehr zwischen VLANs ausschließlich über Router oder Layer-3-Switch führen und dort per <strong>ACL</strong> filtern</td></tr>
+<tr><td>Gäste isolieren</td><td>Gast-VLAN nur ins Internet lassen, kein Zugriff auf interne Netze</td></tr>
+<tr><td>Server schützen</td><td>Server-VLAN nur für berechtigte Quellen erreichbar machen</td></tr>
+<tr><td>Verwaltung trennen</td><td>Eigenes <strong>Management-VLAN</strong> für Switches, Access Points und Firewalls, erreichbar nur für Administratoren</td></tr>
+<tr><td>Unbefugte Geräte abwehren</td><td>Ungenutzte Ports abschalten und <strong>Port Security</strong> aktivieren, damit nicht jedes angesteckte Gerät ins Netz kommt</td></tr>
+<tr><td>Überblick behalten</td><td>Alle VLAN-Kennungen und Zuordnungen dokumentieren und regelmäßig prüfen</td></tr>
+</table>
+<div class="callout"><span class="tag">Prüfungsfalle</span>Ein VLAN allein ist <strong>keine</strong> Sicherheitsmaßnahme, sondern zunächst nur eine Trennung. Sicherheit entsteht erst durch das, was am Übergang passiert: Ohne Filterregeln am Router erreichen sich die VLANs weiterhin gegenseitig, nur eben über einen Umweg. Zweiter Punkt: Auch das <em>native VLAN</em> auf Trunk-Verbindungen sollte nicht für Nutzdaten verwendet werden, weil ungetaggte Frames dort sonst im falschen Bereich landen können.</div>
 
 <div class="callout xref"><span class="tag">Verwandte Themen</span><a href="#r-wlan">WLAN</a> · <a href="#r-routing">Routing & Switching</a> · <a href="#r-verkabelung">Strukturierte Verkabelung</a></div>
 </section>
@@ -2318,6 +2462,6 @@ Im <a href="subnetting-trainer/">Subnetting Trainer</a> kann dieses Thema geziel
   <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="19" x2="12" y2="5"></line><polyline points="6 11 12 5 18 11"></polyline></svg>
 </button>
 
-<script src="app.js?v=20260828t"></script>
+<script src="app.js?v=20260829a"></script>
 </body>
 </html>
