@@ -20984,9 +20984,18 @@ document.addEventListener('click', function(e){
   if(!tools || !tabsRow || !header) return;
 
   const heimat = tools.parentNode;
-  const platzhalter = document.createComment('tools');
+  // Sichtbarer Platzhalter statt Kommentar: Wandert die Leiste in die Menüzeile,
+  // verlöre der Kopfbereich sonst ihre Höhe, der Inhalt rutschte nach oben und
+  // die Seite würde beim Überschreiten der Grenze sichtbar springen.
+  const platzhalter = document.createElement('div');
+  platzhalter.className = 'tools-platzhalter';
+  platzhalter.setAttribute('aria-hidden', 'true');
   heimat.insertBefore(platzhalter, tools);
   let imMenu = false;
+  // Grenze einmal messen, solange die Leiste noch im Kopfbereich sitzt.
+  // Andernfalls verschöbe sich die Schwelle mit der schrumpfenden Kopfhöhe
+  // und die Leiste würde an der Grenze hin- und herspringen.
+  let grenzwert = null;
 
   function schliesseMenues(){
     const m = document.getElementById('a11yMenu');
@@ -20995,15 +21004,24 @@ document.addEventListener('click', function(e){
     if(qs) qs.classList.remove('open');
   }
   function pruefe(){
-    const grenze = header.offsetHeight - 40;
-    const soll = (window.scrollY || window.pageYOffset || 0) > grenze;
+    if(grenzwert === null && !imMenu){
+      grenzwert = Math.max(60, header.offsetHeight - 40);
+    }
+    const grenze = grenzwert === null ? 260 : grenzwert;
+    const y = window.scrollY || window.pageYOffset || 0;
+    // Kleiner Abstand zwischen Ein- und Ausblenden, damit die Leiste an der
+    // Grenze nicht bei jeder Mausradbewegung hin- und herwechselt.
+    const soll = imMenu ? y > grenze - 30 : y > grenze;
     if(soll === imMenu) return;
     schliesseMenues();
     if(soll){
+      // Höhe festhalten, bevor das Element den Kopfbereich verlässt
+      platzhalter.style.height = tools.offsetHeight + 'px';
       tabsRow.appendChild(tools);
       tools.classList.add('in-menu');
     } else {
       heimat.insertBefore(tools, platzhalter);
+      platzhalter.style.height = '';
       tools.classList.remove('in-menu');
     }
     imMenu = soll;

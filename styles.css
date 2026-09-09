@@ -798,3 +798,20 @@ table.sn-cheat td:nth-child(4),table.sn-cheat td:nth-child(5){color:var(--green)
 /* OSI-Übersichtstabelle: Nummer und Schichtbezeichnung stehen in getrennten
    Spalten, beide gehören zusammen und werden deshalb gemeinsam grün gesetzt. */
 #view-lesen table.osi-uebersicht td:nth-child(2){color:var(--green)}
+
+/* Hält im Kopfbereich die Höhe frei, während die Werkzeugleiste in der
+   Menüzeile sitzt. Ohne das springt die Seite beim Überschreiten der Grenze. */
+.tools-platzhalter{height:0;transition:none;pointer-events:none}
+
+/* ---- Mobil: Werkzeugleiste ohne Höhenzuwachs in der Menüzeile ----
+   Die Menüzeile ist auf schmalen Geräten eine Spalte. Käme die Leiste dort als
+   weitere Zeile hinzu, würde die klebende Leiste höher und der Seiteninhalt
+   an der Umschaltgrenze sichtbar springen. Absolut positioniert beansprucht
+   sie keine Höhe und sitzt rechts neben dem Menüknopf. */
+@media(max-width:560px){
+  .tabs .wrap{position:relative}
+  .a11y-wrap.in-menu{position:absolute;right:0;top:2px;margin:0;justify-content:flex-end}
+  .a11y-wrap.in-menu .qs-input{max-width:62vw}
+  /* Der Menüknopf braucht rechts Platz für Auge und Lupe */
+  .tabs .wrap>.menu-toggle{padding-right:78px}
+}

@@ -24,7 +24,7 @@
     if (t && t !== 'default') document.documentElement.setAttribute('data-theme', t);
   } catch (e) {}
 </script>
-<link rel="stylesheet" href="styles.css?v=20260828r">
+<link rel="stylesheet" href="styles.css?v=20260828t">
 </head>
 <body>
 <header>
@@ -545,6 +545,29 @@
 
 <div class="callout"><span class="tag">Prüfungsfalle</span>Die Fehlersuche läuft <strong>von unten nach oben</strong> durch die Schichten: erst Kabel und Verbindungsleuchte, dann Adresse und Subnetzmaske, dann Gateway, dann Namensauflösung, zuletzt die Anwendung. Wer oben beginnt, sucht lange. Klassisches Erkennungszeichen: Eine Adresse aus <strong>169.254.x.x</strong> bedeutet immer, dass kein DHCP-Server geantwortet hat.</div>
 
+<h3>Prüfreihenfolge Schritt für Schritt</h3>
+<p>Die Fehlersuche läuft von unten nach oben durch die Schichten. Jeder Schritt setzt voraus, dass der vorherige erfolgreich war; dadurch grenzt man die Ursache systematisch ein, statt zu raten.</p>
+<ol>
+<li><strong>Physische Verbindung:</strong> Kabel, Steckverbindung, Verbindungsleuchte am Anschluss, bei Funk die Verbindung zum Access Point.</li>
+<li><strong>IP-Konfiguration:</strong> Mit <code>ipconfig /all</code> prüfen, ob eine gültige Adresse, eine passende Subnetzmaske, ein Standardgateway und ein DNS-Server eingetragen sind.</li>
+<li><strong>Eigener Protokollstapel:</strong> <code>ping 127.0.0.1</code> spricht die Loopback-Adresse an und zeigt, ob TCP/IP auf dem Gerät selbst arbeitet.</li>
+<li><strong>Standardgateway anpingen:</strong> Gelingt das, funktioniert die Verbindung im eigenen Segment.</li>
+<li><strong>Externe Adresse anpingen</strong>, etwa <code>ping 8.8.8.8</code>: Damit sind Routing und Internetzugang geprüft, noch ohne Namensauflösung.</li>
+<li><strong>Namensauflösung:</strong> <code>nslookup beispiel.de</code> oder ein Ping auf einen Namen zeigt, ob DNS antwortet.</li>
+</ol>
+
+<h3>Typische Fehlerbilder deuten</h3>
+<table>
+<tr><th>Beobachtung</th><th>Wahrscheinliche Ursache</th><th>Nächster Schritt</th></tr>
+<tr><td>Adresse aus 169.254.x.x</td><td>Kein DHCP-Server erreichbar, daher APIPA-Selbstvergabe</td><td>DHCP-Dienst, VLAN-Zuordnung und Relay-Agent prüfen</td></tr>
+<tr><td><code>ping 8.8.8.8</code> gelingt, <code>ping beispiel.de</code> nicht</td><td>Namensauflösung gestört, Netz und Routing sind in Ordnung</td><td>Eingetragenen DNS-Server prüfen, Zwischenspeicher leeren</td></tr>
+<tr><td>Gateway erreichbar, externe Adresse nicht</td><td>Routing oder Internetanbindung gestört</td><td>Router, Standardroute und Anbindung prüfen</td></tr>
+<tr><td>Loopback gelingt, Gateway nicht</td><td>Problem im eigenen Segment</td><td>Verkabelung, Switch-Port und VLAN prüfen</td></tr>
+<tr><td>Nichts geht, keine Verbindungsleuchte</td><td>Physische Unterbrechung</td><td>Kabel, Port und Netzwerkkarte prüfen</td></tr>
+</table>
+<div class="callout"><span class="tag">Prüfungsfalle</span>Die beiden häufigsten Befunde sauber auseinanderhalten: Eine Adresse aus <strong>169.254.x.x</strong> bedeutet immer ein <strong>DHCP-Problem</strong> und muss zuerst behoben werden, weil ohne gültige Adresse nichts weiter funktioniert. Ist dagegen eine <em>IP-Adresse</em> erreichbar, ein <em>Name</em> aber nicht, liegt es fast sicher an <strong>DNS</strong>; Verkabelung, Adressvergabe und Routing sind dann bereits nachweislich in Ordnung.</div>
+<div class="callout"><span class="tag">Merksatz</span>Erst Kabel und IP-Konfiguration prüfen, dann Gateway und Routing testen, anschließend die Namensauflösung kontrollieren und zuletzt die Anwendung selbst untersuchen.</div>
+
 <div class="callout xref"><span class="tag">Verwandte Themen</span><a href="#r-ip">IPv4 & IPv6</a> · <a href="#r-dnsdhcp">DNS & DHCP im Detail</a> · <a href="#r-ports">Ports & Sockets</a></div>
 </section>
 
@@ -570,6 +593,17 @@
 <p>Nach der Vergabe versucht der Client bei <strong>T1</strong> (50 % der Lease) ein <strong>Renewal</strong> direkt beim bekannten Server; scheitert das, fragt er bei <strong>T2</strong> (87,5 %) per Broadcast beliebige Server. Läuft die Lease komplett ab, beginnt DORA von vorn. <strong>DHCP Snooping</strong> schützt am Switch vor nicht autorisierten DHCP-Servern: Nur vertrauenswürdige Ports dürfen Server-Antworten senden, ein Rogue-Server im Netz kann Clients sonst falsche Gateways unterschieben.</p>
 
 <div class="callout"><span class="tag">Prüfungsfalle</span>Verwechselt werden gern <strong>rekursiv</strong> und <strong>iterativ</strong>: Der Client stellt eine <em>rekursive</em> Anfrage an seinen Resolver und erwartet die fertige Antwort. Der Resolver fragt anschließend <em>iterativ</em> bei Root-, TLD- und autoritativem Server nach. Zweite Falle: Bei DHCP läuft der <strong>Request</strong> ebenfalls als Broadcast, damit die übrigen Server ihr Angebot zurückziehen.</div>
+
+<h3>DHCP-Reservierung</h3>
+<p>Manche Geräte brauchen dauerhaft dieselbe Adresse, etwa Drucker, NAS-Systeme, Access Points oder VoIP-Telefone. Statt sie fest am Gerät einzutragen, nutzt man die <strong>DHCP-Reservierung</strong>: Das Gerät fragt weiterhin ganz normal per DHCP an, der Server erkennt es an seiner <strong>MAC-Adresse</strong> und weist ihm jedes Mal dieselbe IP-Adresse zu.</p>
+<p>Der Vorteil gegenüber einer fest eingetragenen Adresse liegt in der Verwaltung: Alle Adressen bleiben zentral am Server sichtbar und änderbar, Doppelvergaben sind ausgeschlossen, und ein Gerätetausch erfordert nur eine Anpassung der hinterlegten MAC-Adresse. Bei fester Konfiguration am Gerät müsste dagegen jemand vor Ort tätig werden, und der Adressbereich ließe sich nicht mehr zuverlässig überblicken.</p>
+<div class="callout"><span class="tag">Prüfungsfalle</span>Eine Reservierung ist <em>keine</em> statische Adresse. Das Gerät bezieht seine Konfiguration weiterhin über DHCP und erhält dabei auch Gateway und DNS-Server; nur die Adresse ist festgelegt. Wird im Szenario nach einer zentral verwaltbaren, aber gleichbleibenden Adresse gefragt, ist die Reservierung die erwartete Antwort. Wichtig außerdem: Die reservierte Adresse sollte außerhalb des dynamischen Vergabebereichs liegen oder von diesem ausgenommen sein.</div>
+
+<h3>Zwischenspeicher und TTL</h3>
+<p>Damit nicht jede Anfrage die gesamte Auflösungskette durchläuft, speichern Betriebssysteme und DNS-Server jede Antwort für die Dauer ihrer <strong>TTL</strong> zwischen. Das entlastet die Server und beschleunigt den Zugriff spürbar.</p>
+<p>Der Preis dafür zeigt sich nach Änderungen: Wurde ein Eintrag umgestellt, arbeiten Clients bis zum Ablauf der TTL weiter mit der alten Adresse. Deshalb setzt man die TTL vor einer geplanten Umstellung bewusst herab, etwa auf wenige Minuten, und erhöht sie hinterher wieder. Lokal lässt sich der Zwischenspeicher unter Windows mit <code>ipconfig /flushdns</code> leeren, unter Linux je nach Dienst etwa mit <code>resolvectl flush-caches</code>.</p>
+<p>Beim <strong>Reverse Lookup</strong> läuft die Auflösung umgekehrt: Zu einer IP-Adresse wird über einen <strong>PTR-Record</strong> der zugehörige Name ermittelt. Genutzt wird das für aussagekräftige Protokolle, für die Prüfung einliefernder Mailserver und für Sicherheitsanalysen.</p>
+<div class="callout"><span class="tag">Merksatz</span><strong>DHCP liefert einem Gerät seine Netzwerkdaten, DNS übersetzt anschließend Namen in IP-Adressen.</strong> Ohne DHCP fehlt dem Gerät die Adresse, ohne DNS kennt es nur Zahlen statt Namen. Beide Dienste sind unabhängig voneinander, greifen im Alltag aber unmittelbar ineinander: Der DHCP-Server teilt dem Client mit, welchen DNS-Server er überhaupt fragen soll.</div>
 
 <div class="callout xref"><span class="tag">Verwandte Themen</span><a href="#r-ip">IPv4 & IPv6</a> · <a href="#r-mailsec">E-Mail-Sicherheit: SPF, DKIM &amp; DMARC</a> · <a href="#r-diagnose">Diagnose & Fehlersuche</a></div>
 </section>
@@ -971,6 +1005,16 @@ Merken Sie sich die Reihenfolge: erst summieren, dann Reserve aufschlagen, dann 
 </table>
 <p><strong>Was nicht geprüft wird:</strong> Verschlüsselter Verkehr bleibt für beide Systeme inhaltlich undurchsichtig, solange er nicht vorher aufgebrochen wird; erkennbar sind dann nur Metadaten wie Ziel, Menge und Zeitpunkt. Ebenso wenig sehen netzbasierte Systeme den Verkehr, der sie gar nicht passiert, etwa die Kommunikation zwischen zwei Rechnern im selben Segment oder zwischen virtuellen Maschinen auf demselben Host. Und keines der beiden ersetzt Firewall, Patchmanagement oder ein Rechtekonzept, sie ergänzen diese nur.</p>
 <div class="callout"><span class="tag">Prüfungsfalle</span>Der Unterschied liegt allein im <em>aktiven Eingreifen</em>: IDS meldet, IPS blockiert zusätzlich. Daraus folgt der wichtigste Nachteil des IPS: Ein Fehlalarm (False Positive) trennt legitime Verbindungen und kann den Betrieb stören, weshalb ein IPS häufig erst im Beobachtungsmodus gefahren und schrittweise scharf geschaltet wird. Ein IDS kann diesen Schaden nicht anrichten, bemerkt einen Angriff aber eben nur.</div>
+
+<h3>Die Grundbegriffe im Arbeitsalltag</h3>
+<p><strong>Authentifizierung und Autorisierung</strong> lassen sich an einem einzigen Vorgang auseinanderhalten. Eine Mitarbeiterin meldet sich morgens mit Benutzername und Kennwort am Firmennetz an; das System prüft, ob sie wirklich die ist, für die sie sich ausgibt. Danach öffnet sie die Ordner ihrer Abteilung, während die Personalakten für sie gesperrt bleiben. Der erste Schritt war die Authentifizierung, der zweite die Autorisierung. Beides ist unabhängig: Eine erfolgreiche Anmeldung sagt noch nichts darüber aus, was jemand tun darf.</p>
+<div class="callout"><span class="tag">Merksatz</span><strong>Authentifizierung fragt: Wer bist du? Autorisierung fragt: Was darfst du?</strong> Die Reihenfolge ist zwingend, denn Rechte lassen sich erst prüfen, wenn die Identität feststeht.</div>
+
+<p><strong>Least Privilege</strong> wird an einer typischen Rollenverteilung greifbar. Ein Mitarbeiter im Helpdesk darf Kennwörter zurücksetzen und Drucker einrichten, weil er das täglich braucht. Zugriff auf Gehaltsdaten oder Servereinstellungen hat er nicht, obwohl er technisch derselben Anmeldung folgt. Wird sein Konto durch Phishing übernommen, kann der Angreifer genau diese begrenzten Dinge tun und nicht mehr. Das ist der eigentliche Zweck: nicht Misstrauen gegenüber Personen, sondern Begrenzung des Schadens bei Fehlern und übernommenen Konten.</p>
+<div class="callout"><span class="tag">Merksatz</span><strong>Jeder erhält nur die Rechte, die er für seine Aufgabe tatsächlich benötigt.</strong> Dazu gehört auch, Rechte wieder zu entziehen, wenn jemand die Abteilung wechselt; sonst sammeln sich über Jahre Berechtigungen an, die niemand mehr überblickt.</div>
+
+<p><strong>Mehr-Faktor-Authentifizierung</strong> beantwortet die Frage, was passiert, wenn ein Kennwort trotz aller Vorsicht abhandenkommt. Der Angreifer kennt es zwar, scheitert aber am zweiten Schritt: Es fehlt ihm der Einmalcode aus der Authenticator-App oder das Sicherheitstoken, das physisch beim Berechtigten liegt. Das gestohlene Kennwort allein ist damit wertlos.</p>
+<div class="callout"><span class="tag">Merksatz</span><strong>Ein Kennwort allein genügt nicht mehr.</strong> Entscheidend ist, dass die Faktoren aus <em>verschiedenen</em> Gruppen stammen: Wissen, Besitz oder Sein. Zwei Kennwörter hintereinander sind deshalb keine Mehr-Faktor-Authentifizierung, ein Kennwort plus Einmalcode dagegen schon.</div>
 
 <div class="callout xref"><span class="tag">Verwandte Themen</span><a href="#r-datenschutz">Informationssicherheit &amp; Datenschutz</a> · <a href="#r-grundschutz">BSI-Grundschutz &amp; Schutzbedarf</a> · <a href="#r-krypto">Verschlüsselung & PKI</a> · <a href="#r-malware">Schadsoftware &amp; Angriffsarten</a></div>
 </section>
@@ -1845,6 +1889,16 @@ Im <a href="subnetting-trainer/">Subnetting Trainer</a> kann dieses Thema geziel
 <h3>Zertifizierungsstelle (CA)</h3>
 <p>Eine <strong>Zertifizierungsstelle</strong>, englisch <strong>Certificate Authority</strong> und meist als <strong>CA</strong> abgekürzt, ist eine vertrauenswürdige dritte Stelle. Sie prüft die Identität eines Antragstellers und bestätigt anschließend mit ihrer eigenen Signatur, dass ein bestimmter öffentlicher Schlüssel wirklich zu dieser Person, Organisation oder Domain gehört. Das Ergebnis dieser Bestätigung ist das <strong>Zertifikat</strong>.</p>
 <p>Ohne CA könnte jeder behaupten, ein bestimmter öffentlicher Schlüssel gehöre ihm. Der Browser vertraut einem Zertifikat, weil er dem <strong>Wurzelzertifikat</strong> der ausstellenden Stelle vertraut. Diese oberste Instanz heißt <strong>Root-CA</strong>; ihr Zertifikat ist selbstsigniert und im Betriebssystem oder Browser fest hinterlegt. Unter ihr stellen <strong>Zwischenzertifizierungsstellen</strong> (Intermediate-CA) die eigentlichen Endzertifikate aus, damit der besonders schützenswerte Schlüssel der Root-CA nicht im Tagesbetrieb verwendet werden muss. So entsteht eine überprüfbare <strong>Vertrauenskette</strong> vom Serverzertifikat über die Zwischenstelle bis zur Root-CA. Wird ein Schlüssel kompromittiert, kann die CA das Zertifikat über eine Sperrliste (CRL) oder eine Statusabfrage (OCSP) widerrufen. Die CA ist damit ein zentraler Bestandteil einer Public-Key-Infrastruktur.</p>
+<h3>Drei Bilder, die das Schlüsselpaar erklären</h3>
+<p><strong>Die offene Schatztruhe.</strong> Stellen Sie sich den öffentlichen Schlüssel als Truhe vor, die offen an einem für alle zugänglichen Ort steht. Jeder darf etwas hineinlegen und den Deckel zuklappen; danach bekommt niemand sie wieder auf, auch der Einleger selbst nicht. Nur der Besitzer öffnet sie mit seinem privaten Schlüssel. Genau deshalb darf der öffentliche Schlüssel bedenkenlos verteilt werden: Er kann ausschließlich verschließen, nicht öffnen.</p>
+<div class="callout"><span class="tag">Merksatz</span><strong>Zum Verschlüsseln nimmt man den öffentlichen Schlüssel des Empfängers, zum Entschlüsseln dessen privaten Schlüssel.</strong> Wer eine vertrauliche Nachricht an jemanden schickt, arbeitet also mit einem fremden Schlüssel, nicht mit dem eigenen.</div>
+
+<p><strong>Der persönliche Stempel.</strong> Beim Signieren dreht sich die Richtung um. Der private Schlüssel wirkt wie ein Stempel, den nur eine Person besitzt: Sie drückt ihn auf das Dokument. Prüfen kann den Abdruck jeder, der den passenden öffentlichen Schlüssel hat. Damit ist nachgewiesen, dass die Nachricht wirklich von dieser Person stammt und unterwegs nicht verändert wurde. Vertraulich wird sie dadurch allerdings nicht, denn ein Stempel verbirgt den Text nicht.</p>
+<div class="callout"><span class="tag">Merksatz</span><strong>Der private Schlüssel signiert, der öffentliche prüft.</strong> Merken Sie sich die Kreuzung: Beim Verschlüsseln nutzt man den <em>fremden</em> öffentlichen Schlüssel, beim Signieren den <em>eigenen</em> privaten. Diese Vertauschung ist die häufigste Fehlerquelle in der Prüfung.</div>
+
+<p><strong>Die Ausweisbehörde.</strong> Ein öffentlicher Schlüssel allein sagt nichts darüber aus, wem er gehört; jeder könnte behaupten, ein bestimmter Schlüssel sei seiner. Hier tritt die Zertifizierungsstelle auf, vergleichbar mit einer Behörde, die Ausweise ausstellt: Sie prüft die Identität des Antragstellers und bestätigt anschließend mit ihrer eigenen Unterschrift, dass dieser Schlüssel tatsächlich zu dieser Person, Organisation oder Domain gehört. Das Ergebnis ist das Zertifikat, also der Ausweis des Schlüssels. Der Browser vertraut ihm, weil er die ausstellende Stelle kennt, so wie eine Behörde einen Ausweis anerkennt, ohne die Person selbst zu kennen.</p>
+<div class="callout"><span class="tag">Merksatz</span><strong>Die Zertifizierungsstelle bestätigt, dass ein öffentlicher Schlüssel wirklich zum angegebenen Inhaber gehört.</strong> Ohne diese Bestätigung wäre jede verschlüsselte Verbindung wertlos, weil man nie wüsste, ob man dem Richtigen oder einem Angreifer dazwischen schreibt.</div>
+
 <div class="callout xref"><span class="tag">Verwandte Themen</span><a href="#r-vpn">VPN & IPsec</a> · <a href="#r-mailsec">E-Mail-Sicherheit: SPF, DKIM &amp; DMARC</a> · <a href="#r-security">IT-Sicherheit Grundlagen</a></div>
 
 </section>
@@ -2264,6 +2318,6 @@ Im <a href="subnetting-trainer/">Subnetting Trainer</a> kann dieses Thema geziel
   <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="19" x2="12" y2="5"></line><polyline points="6 11 12 5 18 11"></polyline></svg>
 </button>
 
-<script src="app.js?v=20260828r"></script>
+<script src="app.js?v=20260828t"></script>
 </body>
 </html>
