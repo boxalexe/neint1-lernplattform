@@ -144,12 +144,25 @@ html, body {
   font-size: 12px;
 }
 
+/* WICHTIG: padding-bottom wird in Flex- und Grid-Scrollcontainern von Chrome
+   und Safari NICHT zur scrollbaren Fläche gezählt. Das letzte Element wäre
+   dadurch unerreichbar. Deshalb hat der Scroller unten keinen Innenabstand,
+   der Platz kommt als Abstandhalter aus dem Inhalt. */
 .interaction-zone > section {
   left: 0;
   top: 30px;                      /* unter der waagerechten Lebensleiste */
-  padding: 10px 12px 12px;
+  padding: 10px 12px 0;
   overflow-y: auto;
+  overflow-x: hidden;
   -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;   /* Wischen scrollt den Block, nicht die Seite */
+  touch-action: pan-y;
+}
+.interaction-zone > section::after {
+  content: "";
+  display: block;
+  flex: 0 0 auto;
+  height: 14px;
 }
 
 /* ---------- Frageblock: alles untereinander ---------- */
@@ -158,6 +171,18 @@ html, body {
   flex-direction: column;
   gap: 8px;
   overflow-y: auto;
+}
+/* Die Breitbild-Fassung streckt Symptome und Antworten auf die volle Höhe
+   und zentriert sie darin. Auf dem Telefon muss beides seine natürliche
+   Höhe behalten, sonst kann der Block nicht überlaufen und damit auch
+   nicht scrollen. */
+#question-block .q-symptome,
+#question-block .options-grid {
+  height: auto;
+  align-self: stretch;
+  align-content: start;
+  flex: 0 0 auto;
+  min-height: 0;
 }
 #question-block #question-text {
   order: 0;
@@ -219,11 +244,27 @@ html, body {
 
 /* ---------- Auswahlbildschirme ---------- */
 .difficulty-screen {
-  padding: 14px 10px calc(14px + env(safe-area-inset-bottom));
+  padding: 14px 10px 0;           /* unten nichts, siehe Hinweis oben */
   overflow-y: auto;
+  overscroll-behavior: contain;
+  touch-action: pan-y;
   align-items: flex-start;
 }
-.diff-panel { width: 100%; }
+.diff-panel {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  /* Abstand am Ende gehört in den Inhalt, nicht in den Scroller */
+  padding-bottom: calc(18px + env(safe-area-inset-bottom));
+}
+/* Der Rückweg wandert auf dem Telefon nach oben. Unten stünde er hinter
+   den Schaltflächen und wäre nur durch Scrollen erreichbar. */
+.diff-back {
+  order: -1;
+  align-self: flex-start;
+  margin: 0 0 10px;
+  padding: 10px 2px;
+}
 .diff-title { font-size: 16px; }
 .diff-sub   { font-size: 15px; margin-bottom: 14px; }
 .diff-options { grid-template-columns: 1fr !important; gap: 10px; }
@@ -237,7 +278,7 @@ html, body {
 .diff-desc { font-size: 14px; }
 .boss-tags { font-size: 13px; }
 .boss-art  { height: 74px; }
-.diff-back { min-height: var(--tap-min); font-size: 15px; }
+.diff-back { min-height: var(--tap-min); font-size: 15px; text-align: left; }
 
 /* ---------- Rückfrage ---------- */
 .confirm-box { width: min(94vw, 420px); padding: 16px; }

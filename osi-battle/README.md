@@ -150,6 +150,22 @@ sitzt also nicht mehr auf A. Gemischt wird ausschliesslich die Darstellung:
 der Mischung nichts. In den Quelldateien darf die richtige Antwort deshalb
 ruhig an erster Stelle stehen, das macht das Gegenlesen leichter.
 
+## Fallstrick beim Anpassen der Smartphone-Ansicht
+
+`padding-bottom` wird in Flex- und Grid-Scrollcontainern von Chrome und Safari
+nicht zur scrollbaren Fläche gezählt. Das letzte Element im Block ist dann
+unerreichbar, obwohl darüber alles scrollt. Deshalb haben in `mobile.css`
+weder `.interaction-zone > section` noch `.difficulty-screen` einen unteren
+Innenabstand: der Platz kommt aus `section::after` beziehungsweise aus
+`padding-bottom` am `.diff-panel`, also aus dem Inhalt. Wer dort wieder
+`padding-bottom` auf den Scroller setzt, schneidet die unterste Antwort und
+den Zurück-Knopf ab.
+
+Aus demselben Grund darf im Frageblock nichts auf `height: 100%` oder
+`align-content: center` stehen. Die Breitbild-Fassung tut das, damit Symptome
+und Antworten die Zone füllen; auf dem Telefon verhindert es, dass der Block
+überhaupt überläuft, und damit auch das Scrollen.
+
 ## Bekannte Grenzen
 
 Die Golem-Zeichnung ist auf 1400 × 830 ausgelegt und skaliert auf dem Telefon
