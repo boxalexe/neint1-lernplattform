@@ -28,6 +28,7 @@ const UI = {
       symptomList: document.getElementById("symptom-list"),
       questionText: document.getElementById("question-text"),
       optionsGrid: document.getElementById("options-grid"),
+      answerNext: document.getElementById("answer-next"),
       resultBlock: document.getElementById("result-block"),
       resultVerdict: document.getElementById("result-verdict"),
       resultStrike: document.getElementById("result-strike"),
@@ -189,6 +190,7 @@ const UI = {
     const kopf = document.querySelector(".symptom-heading");
     if (kopf) kopf.textContent = this.texte.symptomUeberschrift;
 
+    if (this.els.answerNext) this.els.answerNext.hidden = true;
     this.els.symptomList.innerHTML = "";
     question.symptoms.forEach(s => {
       const li = document.createElement("li");
@@ -237,7 +239,24 @@ const UI = {
     if (b) b.classList.add("option-correct");
   },
 
+  /* Nach der Antwort wird NICHT sofort aufgelöst. Die markierten Antworten
+     bleiben stehen, bis selbst weitergeklickt wird. Vorher verschwand die
+     Frage nach einer halben Sekunde und man konnte nicht mehr nachsehen,
+     was man eigentlich gewählt hatte. */
+  showAnswerPause(onNext) {
+    const b = this.els.answerNext;
+    if (!b) { if (onNext) onNext(); return; }
+    b.hidden = false;
+    b.onclick = () => {
+      b.onclick = null;
+      b.hidden = true;
+      if (onNext) onNext();
+    };
+    b.focus({ preventScroll: true });
+  },
+
   showResult(correct, damage, crit, strike, explanation, merksatz, onContinue) {
+    if (this.els.answerNext) this.els.answerNext.hidden = true;
     this.els.questionBlock.hidden = true;
     this.els.resultBlock.hidden = false;
 
@@ -383,6 +402,7 @@ const UI = {
     this.els.endText.textContent = statsText;
   },
   hideEnd() {
+    if (this.els.answerNext) this.els.answerNext.hidden = true;
     this.resetEndEffects();
     this.els.endScreen.hidden = true;
     this.els.dialogueBox.hidden = true;

@@ -1560,3 +1560,30 @@ body { display: block; padding: 0; margin: 0; background: #05080f; }
 #question-block .options-grid {
   gap: clamp(3px, 0.6vh, 7px);
 }
+
+/* ==========================================================
+   Weiter-Schaltfläche direkt nach der Antwort
+   Sitzt unter der Symptomliste und erscheint erst, wenn beantwortet
+   wurde. Solange sie steht, bleibt die Frage mit den farbig markierten
+   Antworten sichtbar; die Auflösung kommt erst auf Klick. Vorher wurde
+   nach einer halben Sekunde automatisch umgeblendet.
+   ========================================================== */
+#answer-next {
+  display: none;
+  width: 100%;
+  margin-top: clamp(6px, 1vh, 12px);
+  padding: clamp(6px, 1vh, 10px) 12px;
+  font-size: clamp(8px, 1.15vh, 10px);
+  align-self: stretch;
+}
+#answer-next:not([hidden]) {
+  display: inline-block;
+  animation: weiterPuls 1.5s ease-in-out infinite;
+}
+@keyframes weiterPuls {
+  0%, 100% { transform: scale(1);    box-shadow: 0 4px 0 rgba(0,0,0,0.5); }
+  50%      { transform: scale(1.035); box-shadow: 0 4px 0 rgba(0,0,0,0.5), 0 0 14px rgba(125,255,168,0.55); }
+}
+@media (prefers-reduced-motion: reduce) {
+  #answer-next:not([hidden]) { animation: none; }
+}

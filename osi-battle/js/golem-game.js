@@ -143,9 +143,10 @@ const GolemGame = {
     }
     UI.updateProgress(this.state.richtige, this.state.ziel, this.state.fehler, this.state.maxFehler);
 
-    setTimeout(() => {
+    // Auflösung erst auf Klick, siehe UI.showAnswerPause
+    UI.showAnswerPause(() => {
       UI.showResult(correct, dmg, false, q.strike, q.e, q.merksatz, () => this.afterResult(correct));
-    }, 600);
+    });
   },
 
   afterResult(correct) {

@@ -176,9 +176,10 @@ const Game = {
     // Fortschritt zählt ausschließlich richtige Diagnosen
     UI.updateProgress(this.state.richtige, this.state.ziel, this.state.fehler, this.state.maxFehler);
 
-    setTimeout(() => {
+    // Auflösung erst auf Klick, damit die Markierungen in Ruhe lesbar bleiben
+    UI.showAnswerPause(() => {
       UI.showResult(correct, dmg, crit, q.strike, q.e, q.merksatz, () => this.nextTurn());
-    }, 550);
+    });
   },
 
   checkEnd() {

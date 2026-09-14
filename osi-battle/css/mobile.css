@@ -257,6 +257,14 @@ html, body {
   touch-action: manipulation;
 }
 #dialogue-next, #continue-btn { align-self: stretch; text-align: center; }
+/* Die Weiter-Schaltfläche nach der Antwort ist am Telefon eine echte
+   Tippfläche und steht zwischen Infos und Antworten. */
+#answer-next {
+  min-height: var(--tap-min);
+  font-size: 11px;
+  margin-top: 10px;
+  touch-action: manipulation;
+}
 
 /* ---------- Auswahlbildschirme ---------- */
 .difficulty-screen {

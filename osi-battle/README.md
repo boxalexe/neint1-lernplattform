@@ -85,6 +85,22 @@ Der Golem beschriftet zwei Dinge anders als die Hydra: die Liste heisst
 Krankheitszeichen, und ein Fehlgriff meldet „Suche die Katastrophe!" statt
 „Fehldiagnose!". Gesetzt wird das in `boot.js` über `UI.setBossTexte`.
 
+## Ablauf einer Frage
+
+```
+Sprechblase -> Frage mit Symptomen und Antworten
+            -> Antwort geklickt: Markierung erscheint, Frage bleibt stehen
+            -> "Weiter" unter der Symptomliste (pulsiert)
+            -> Auflösung mit Treffertext, Erklärung und Merksatz
+            -> "Weiter" -> nächste Frage
+```
+
+Der Schritt nach der Antwort ist bewusst manuell. Vorher blendete das
+Ergebnis nach einer halben Sekunde automatisch um, und die grün und rot
+markierten Antworten waren weg, bevor man sie lesen konnte. Gesteuert wird
+das über `UI.showAnswerPause`; beide Spiellogiken rufen es an derselben
+Stelle auf, an der vorher ein `setTimeout` stand.
+
 ## Fragen ergänzen
 
 **Hydra:** Neuen Eintrag ans Ende von `QUESTIONS` in `js/data.js`, `headId` auf
