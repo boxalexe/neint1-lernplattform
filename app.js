@@ -12000,7 +12000,7 @@ const POOLS = {
    {
     "q": "Welche Komponenten umfasst eine PKI typischerweise?",
     "o": [
-     { "t": "CA (Zertifizierungsstelle), RA (Registrierungsstelle), X.509-Zertifikate, Verzeichnisdienst und Sperrmechanismus (CRL/OCSP)", "ok": true },
+     { "t": "Zertifizierungsstelle, Registrierungsstelle, digitale Zertifikate, Verzeichnisdienst und Sperrmechanismus", "ok": true },
      { "t": "Schlüsselgenerator, Passwort-Tresor, zentrale Klartext-Datenbank und ein separater Backup-Server für private Schlüssel", "ok": false },
      { "t": "RADIUS-Server, DHCP-Relay, DNS-Resolver und ein NTP-Zeitserver für die Zertifikatssynchronisation", "ok": false },
      { "t": "Firewall, IDS, Proxy-Server und ein VPN-Gateway zur Absicherung der Zertifikatsübertragung", "ok": false }
@@ -21904,8 +21904,7 @@ const GLOSSAR = [{"a":"2FA","f":"Zwei-Faktor-Authentifizierung","d":"Anmeldung m
 {"a":"nftables","f":"nftables","d":"Paketfilter des Linux-Kernels und Nachfolger von iptables. Regelt in Tabellen und Ketten, welche Pakete passieren dürfen."},
 {"a":"ufw","f":"Uncomplicated Firewall","d":"Vereinfachte Bedienoberfläche für den Linux-Paketfilter. Erlaubt Regeln wie das Freigeben eines Ports ohne Kenntnis der zugrunde liegenden Syntax."},
 {"a":"iptables","f":"iptables","d":"Klassisches Werkzeug zur Regelverwaltung des Linux-Paketfilters, inzwischen weitgehend durch nftables abgelöst."},
-{"a":"HTTP/3","f":"Hypertext Transfer Protocol Version 3","d":"Aktuelle HTTP-Fassung, die auf QUIC über UDP aufsetzt statt auf TCP. Verbindungsaufbau und Verschlüsselung erfolgen in einem Schritt."}
-,
+{"a":"HTTP/3","f":"Hypertext Transfer Protocol Version 3","d":"Aktuelle HTTP-Fassung, die auf QUIC über UDP aufsetzt statt auf TCP. Verbindungsaufbau und Verschlüsselung erfolgen in einem Schritt."},
 {"a":"Striping","f":"Striping","d":"Verteilt Daten blockweise über mehrere Platten. Erhöht die Geschwindigkeit, bietet allein aber keine Ausfallsicherheit."},
 {"a":"Mirroring","f":"Spiegelung","d":"Schreibt Daten identisch auf zwei Platten. Fällt eine aus, läuft der Betrieb mit der anderen weiter."},
 {"a":"Parität","f":"Paritätsinformation","d":"Per XOR berechnete Prüfinformation, aus der sich die Daten einer ausgefallenen Platte rekonstruieren lassen."},
@@ -21942,7 +21941,33 @@ const GLOSSAR = [{"a":"2FA","f":"Zwei-Faktor-Authentifizierung","d":"Anmeldung m
 {"a":"Designschutz","f":"Eingetragenes Design","d":"Schutzrecht für die äußere Gestaltung eines Erzeugnisses, früher Geschmacksmuster."},
 {"a":"Urheberrecht","f":"Urheberrecht","d":"Schützt Werke wie Software, Texte oder Grafiken ab dem Zeitpunkt der Schöpfung, ohne Anmeldung. In Deutschland der übliche Schutz für Software statt eines Patents."},
 {"a":"Marktsegmentierung","f":"Marktsegmentierung","d":"Einteilung eines Marktes in Gruppen mit ähnlichen Merkmalen oder Bedürfnissen, um Angebot und Werbung gezielt auszurichten."},
-{"a":"USP","f":"Unique Selling Proposition","d":"Alleinstellungsmerkmal, das ein Angebot von Wettbewerbern unterscheidet und für den Kunden einen echten Vorteil bedeutet."}];
+{"a":"USP","f":"Unique Selling Proposition","d":"Alleinstellungsmerkmal, das ein Angebot von Wettbewerbern unterscheidet und für den Kunden einen echten Vorteil bedeutet."},
+{"a":"Abliteration","f":"Abliteration, Refusal-Entfernung","d":"Nachträglicher Eingriff in die Gewichte eines Sprachmodells, bei dem die interne Richtung für Ablehnungen herausgerechnet wird. Das Modell verweigert danach kaum noch Antworten, ohne dass neu trainiert wurde."},
+{"a":"AGI","f":"Artificial General Intelligence","d":"Hypothetische KI, die beliebige geistige Aufgaben auf menschlichem Niveau löst statt nur ein enges Aufgabenfeld. Es existiert weder ein anerkanntes Messverfahren noch ein System, das den Anspruch belegt."},
+{"a":"Chain of Thought","f":"Chain of Thought, Gedankenkette, Reasoning","d":"Das Modell erzeugt vor der eigentlichen Antwort Zwischenschritte in Textform und investiert dadurch mehr Rechenschritte. Bei Logik- und Rechenaufgaben steigt die Trefferquote. Reasoning-Modelle sind darauf trainiert, diese Kette von selbst zu bilden."},
+{"a":"Context Engineering","f":"Context Engineering","d":"Gezielte Zusammenstellung dessen, was im Kontextfenster landet: Systemanweisung, Werkzeuge, abgerufene Dokumente, Gesprächsverlauf. Wirkt stärker als die einzelne Formulierung, weil der Kontext begrenzt ist und überflüssiger Inhalt die Antwortqualität senkt."},
+{"a":"Deep Learning","f":"Deep Learning, tiefes Lernen","d":"Maschinelles Lernen mit vielschichtigen neuronalen Netzen, die Merkmale selbst aus den Daten ableiten statt sie vorgegeben zu bekommen. Trainiert wird über Backpropagation und Gradientenabstieg."},
+{"a":"Destillation","f":"Wissensdestillation, Knowledge Distillation","d":"Ein großes Lehrermodell trainiert ein kleineres Schülermodell auf sein Ausgabeverhalten. Ergebnis ist ein Modell, das schneller und billiger läuft und dabei nur wenig Qualität verliert."},
+{"a":"Diffusion","f":"Diffusionsmodell","d":"Generatives Verfahren, das aus reinem Rauschen schrittweise ein Bild herausrechnet. Trainiert wird umgekehrt: Dem Netz werden verrauschte Daten gezeigt, und es lernt, den Rauschanteil vorherzusagen."},
+{"a":"Embeddings","f":"Embeddings, Vektoreinbettungen","d":"Darstellung von Text, Bild oder Audio als Zahlenvektor, in dem inhaltlich ähnliche Dinge nah beieinander liegen. Grundlage für semantische Suche, Empfehlungen und RAG."},
+{"a":"Fine-Tuning","f":"Fine-Tuning, Feinabstimmung","d":"Weitertraining eines vortrainierten Modells auf einem kleineren, spezifischen Datensatz, um Stil, Format oder Fachdomäne festzulegen. Sparsame Varianten wie LoRA passen nur wenige zusätzliche Parameter an."},
+{"a":"GPT","f":"Generative Pre-trained Transformer","d":"Modellfamilie aus vortrainierten Transformer-Decodern, die Text Token für Token fortschreibt. Achtung, doppelt belegte Abkürzung: In der Hardware steht GPT für die GUID Partition Table."},
+{"a":"Halluzinationen","f":"Halluzination, Konfabulation","d":"Sachlich falsche, aber flüssig und selbstsicher formulierte Ausgabe eines Sprachmodells. Ursache ist das Prinzip der Wahrscheinlichkeitsfortschreibung: Erzeugt wird plausible Sprache, nicht geprüftes Wissen."},
+{"a":"KI-Agenten","f":"KI-Agent, AI Agent","d":"Sprachmodell in einer Schleife: Es plant, ruft Werkzeuge auf, wertet das Ergebnis aus und entscheidet selbst über den nächsten Schritt, bis ein Ziel erreicht ist. Unterschied zum Chatbot ist das eigenständige Handeln über mehrere Schritte."},
+{"a":"LLM","f":"Large Language Model, großes Sprachmodell","d":"Auf sehr großen Textmengen trainiertes neuronales Netz, das Token für Token die wahrscheinlichste Fortsetzung erzeugt. Es hält kein Wissen wie eine Datenbank vor, sondern statistische Muster."},
+{"a":"MCP","f":"Model Context Protocol","d":"Offener Standard, über den Sprachmodelle einheitlich auf externe Werkzeuge, Daten und Dienste zugreifen. Ein MCP-Server stellt seine Funktionen bereit, der Client bindet sie ein. Ersetzt die Einzelintegration je Dienst durch eine gemeinsame Schnittstelle."},
+{"a":"Mixture of Experts","f":"Mixture of Experts, MoE","d":"Architektur, bei der ein Modell aus vielen Teilnetzen besteht und ein Router je Token nur wenige davon aktiviert. Das Modell besitzt sehr viele Parameter, rechnet pro Anfrage aber nur mit einem Bruchteil."},
+{"a":"Multimodalität","f":"Multimodalität","d":"Fähigkeit eines Modells, mehrere Datenarten gemeinsam zu verarbeiten, etwa Text, Bild, Audio und Video. Alle Eingaben werden dafür in dieselbe Vektordarstellung überführt."},
+{"a":"Open Weights","f":"Open Weights, offene Gewichte","d":"Veröffentlichte Modellgewichte, die jeder herunterladen und selbst betreiben kann. Nicht dasselbe wie Open Source: Trainingsdaten und Trainingscode bleiben meist verschlossen, und die Lizenz kann die Nutzung einschränken."},
+{"a":"Prompt Engineering","f":"Prompt Engineering","d":"Systematisches Formulieren der Anweisung an ein Sprachmodell: klare Aufgabe, Rolle, Ausgabeformat, Beispiele. Wirkt stark, weil die Ausgabe unmittelbar von der Eingabe abhängt."},
+{"a":"Quantisierung","f":"Quantisierung","d":"Speicherung der Modellgewichte mit geringerer Genauigkeit, etwa 4 oder 8 Bit statt 16. Senkt Speicherbedarf und Rechenlast deutlich und macht große Modelle auf gewöhnlicher Hardware lauffähig, kostet aber etwas Qualität."},
+{"a":"RAG","f":"Retrieval Augmented Generation","d":"Vor der Antwort werden passende Dokumente aus einer eigenen Wissensbasis gesucht, meist über Embeddings, und in den Kontext gelegt. Das Modell antwortet damit belegt und aktuell, ohne neu trainiert zu werden."},
+{"a":"Recurrent Depth","f":"Recurrent Depth, Opaque Recurrence","d":"Ansatz, bei dem ein Modell denselben Block im latenten Raum mehrfach durchläuft, statt Zwischenschritte als Text auszugeben. Die Rechentiefe steigt zur Laufzeit, der Denkweg bleibt jedoch unlesbar."},
+{"a":"Token","f":"Token","d":"Kleinste Verarbeitungseinheit eines Sprachmodells, meist ein Wortteil. Im Deutschen entspricht ein Token grob drei bis vier Zeichen. Kontextfenster und Abrechnung werden in Token gemessen."},
+{"a":"Tool Calling","f":"Tool Calling, Funktionsaufruf","d":"Das Modell gibt statt Fließtext einen strukturierten Aufruf mit Parametern aus, den die Anwendung ausführt. Das Ergebnis fließt zurück in den Kontext. So werden Suche, Datenbank oder Rechner angebunden."},
+{"a":"Transformer","f":"Transformer","d":"Netzarchitektur von 2017 und Grundlage nahezu aller heutigen Sprachmodelle. Kern ist der Attention-Mechanismus, der alle Token einer Eingabe parallel gewichtet, statt sie nacheinander zu lesen."},
+{"a":"Weltmodell","f":"Weltmodell, World Model","d":"Interne Repräsentation, mit der ein System Zustände und die Folgen von Handlungen vorhersagt. Ob Sprachmodelle so etwas ausbilden oder nur Oberflächenmuster fortschreiben, ist fachlich offen."},
+{"a":"Zero-shot","f":"Zero-Shot, ohne Beispiele","d":"Das Modell löst eine Aufgabe allein aus der Anweisung, ohne Beispiele im Prompt. Mit einem Beispiel heißt es One-Shot, mit mehreren Few-Shot."}];
 
 // ---- Bibliothek: Render + Suche ----
 const libList = document.getElementById('libList');
