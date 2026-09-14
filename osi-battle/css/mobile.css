@@ -20,7 +20,7 @@
 :root {
   /* dvh statt vh: die Adressleiste mobiler Browser fährt ein und aus,
      vh rechnet dabei falsch und schneidet den unteren Rand ab. */
-  --bühne-h: 30dvh;
+  --stage-h: 30dvh;
   --tap-min: 52px;
 }
 
@@ -31,17 +31,30 @@ html, body {
   -webkit-text-size-adjust: 100%;
 }
 
+/* Die Szene wird zum Raster: Kopfzeile, Boss-Leiste, Bühne, Bedienfeld.
+   Vorher hingen die Blöcke an gerechneten Pixelabständen, was bei jeder
+   Schriftgröße und jeder Browserleiste anders ausgeht. Das Raster misst
+   die ersten beiden Zeilen selbst aus, die Bühne bekommt eine feste Höhe
+   und das Bedienfeld den Rest. minmax(0, 1fr) ist dabei entscheidend:
+   ohne die Null als Untergrenze wächst die letzte Zeile mit ihrem Inhalt
+   statt zu begrenzen, und dann scrollt darin nichts mehr. */
 .scene {
   position: fixed;
   inset: 0;
   height: 100dvh;
-  display: block;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto auto var(--stage-h) minmax(0, 1fr);
+  gap: 6px;
+  padding: 0 6px calc(6px + env(safe-area-inset-bottom));
 }
 
 /* ---------- Kopfzeile ---------- */
 .hud-top {
-  position: absolute;
-  top: 0; left: 0; right: 0;
+  position: static;
+  grid-row: 1;
+  grid-column: 1;
+  margin: 0 -6px;                  /* über die Ränder des Rasters hinweg */
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -74,8 +87,9 @@ html, body {
 
 /* ---------- Boss-Leiste ---------- */
 .hp-block.boss {
-  position: absolute;
-  top: 62px; left: 8px; right: 8px;
+  position: static;
+  grid-row: 2;
+  grid-column: 1;
   margin: 0;
 }
 .boss-track { height: 24px; }
@@ -85,19 +99,21 @@ html, body {
 /* ---------- Bühne: oberes Drittel ---------- */
 .hydra-wrap,
 .golem-wrap {
-  top: 92px;
-  bottom: auto;
-  height: var(--bühne-h);
-  min-height: 150px;
+  position: relative;
+  grid-row: 3;
+  grid-column: 1;                  /* beide in dieselbe Zelle, einer ist aus */
+  top: auto; bottom: auto; left: auto; right: auto;
+  height: auto;
+  min-height: 0;
 }
 .fog-layer { opacity: 0.5; }
 
 /* ---------- Bedienbereich: der ganze Rest ---------- */
 .interaction-zone {
-  position: absolute;
-  left: 6px; right: 6px;
-  top: calc(92px + var(--bühne-h) + 10px);
-  bottom: 6px;
+  position: relative;              /* Bezug für die Abschnitte darin */
+  grid-row: 4;
+  grid-column: 1;
+  left: auto; right: auto; top: auto; bottom: auto;
   width: auto;
   height: auto;
   min-height: 0;
@@ -289,8 +305,7 @@ html, body {
 
 /* ---------- Querformat: Bühne schrumpft, Text gewinnt ---------- */
 @media (orientation: landscape) and (max-height: 520px) {
-  :root { --bühne-h: 24dvh; }
-  .hydra-wrap, .golem-wrap { min-height: 110px; }
+  :root { --stage-h: 22dvh; }
   #dialogue-text { font-size: 15px; }
   .option-btn { min-height: 44px; font-size: 14px; padding: 9px 10px; }
   .symptom-list li { font-size: 13px; }

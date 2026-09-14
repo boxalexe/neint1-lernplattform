@@ -18,24 +18,14 @@ Der Rückweg ist bereits eingebaut: die Bossauswahl hat unten einen Link auf
 Academy, ist dieser Pfad in `index.html` und `mobile.html` anzupassen — es ist
 in beiden Dateien genau eine Zeile mit `class="diff-back"` und `href`.
 
-Zwei Einstiegspunkte, beide mit identischer Spiellogik und identischen Fragen:
+`index.html` schaltet selbst um: `css/mobile.css` wird über das `media`-Attribut
+am `<link>` nur unterhalb 820 Pixel Breite angewandt. Am Desktop wird das Blatt
+gar nicht erst wirksam, die Browser-Edition bleibt unverändert. Eine Weiche in
+der Academy ist also nicht nötig, ein Link auf `index.html` genügt.
 
-| Datei | Für | Unterschied |
-|---|---|---|
-| `index.html` | Desktop und Tablet | Bühne gross, Textfeld als Streifen unten |
-| `mobile.html` | Smartphone | Bühne oben, Bedienbereich darunter über die volle Höhe |
-
-Wer automatisch weiterleiten will, hängt das in die eigene Academy-Seite, nicht
-in die beiden Dateien:
-
-```html
-<a id="arena" href="osi-battle/index.html">Diagnose-Arena</a>
-<script>
-  if (matchMedia("(max-width: 820px)").matches) {
-    document.getElementById("arena").href = "osi-battle/mobile.html";
-  }
-</script>
-```
+`mobile.html` ist dieselbe Seite mit demselben Blatt ohne Bedingung, also eine
+erzwungene Telefonansicht. Praktisch zum Prüfen am grossen Schirm, sonst nicht
+nötig.
 
 Lokal testen ohne Webserver geht per Doppelklick. In VS Code ist die Erweiterung
 Live Server bequemer, weil sie beim Speichern neu lädt.
@@ -149,6 +139,18 @@ sitzt also nicht mehr auf A. Gemischt wird ausschliesslich die Darstellung:
 `onSelect` bekommt weiterhin den Index aus `options`, die Spiellogik merkt von
 der Mischung nichts. In den Quelldateien darf die richtige Antwort deshalb
 ruhig an erster Stelle stehen, das macht das Gegenlesen leichter.
+
+## Aufbau der Smartphone-Ansicht
+
+`.scene` ist dort ein Raster mit vier Zeilen: Kopfzeile, Boss-Leiste, Bühne,
+Bedienfeld. Die ersten beiden messen sich selbst aus, die Bühne bekommt
+`--stage-h`, das Bedienfeld den Rest. Entscheidend ist `minmax(0, 1fr)` in der
+letzten Zeile: ohne die Null als Untergrenze wächst sie mit ihrem Inhalt statt
+ihn zu begrenzen, und dann scrollt darin nichts mehr.
+
+Vorher lagen die Blöcke auf gerechneten Pixelabständen. Das geht bei jeder
+anderen Schriftgrösse und jeder Browserleiste anders aus und war der Grund,
+warum Teile ausserhalb des Bildes lagen.
 
 ## Fallstrick beim Anpassen der Smartphone-Ansicht
 
