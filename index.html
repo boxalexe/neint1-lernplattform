@@ -69,6 +69,7 @@
   <div class="tab" data-view="quiz" data-short="Quiz">Multiple&nbsp;Choice / Karteikarten</div>
   <a class="tab" href="subnetting-trainer/" data-short="Subnetting"><svg class="tab-icon" width="15" height="15" viewBox="0 0 120 120" aria-hidden="true"><path d="M60,60 C34,60 24,26 60,26 C96,26 86,60 60,60 Z" fill="none" stroke="#22d3ee" stroke-width="11" stroke-linecap="round"/><path d="M60,94 C86,94 96,60 60,60 C24,60 34,94 60,94 Z" fill="none" stroke="#3ddc84" stroke-width="11" stroke-linecap="round"/></svg> Subnetting Trainer</a>
   <a class="tab" href="ap1-simulator/" data-short="AP1-Sim"><svg class="tab-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 3h9l5 5v13a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1Z" stroke="#22d3ee" stroke-width="2" stroke-linejoin="round"/><path d="M14 3v6h6" stroke="#22d3ee" stroke-width="2" stroke-linejoin="round"/><path d="M9 14l2 2 4-4" stroke="#3ddc84" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> AP1 Simulator</a>
+  <a class="tab" href="osi-battle/" data-short="Arena"><svg class="tab-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 3l8 3v6c0 4-3.4 7.1-8 9-4.6-1.9-8-5-8-9V6l8-3Z" stroke="#22d3ee" stroke-width="2" stroke-linejoin="round"/><path d="M7.5 12.5h2l1.3-3 2.2 6 1.4-3h2.1" stroke="#3ddc84" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> Diagnose-Arena</a>
   <button class="zen-toggle" id="zenToggle" title="Zen Mode: Vollbild &amp; Fokus" aria-label="Zen Mode umschalten"><span class="zen-icon">&#9673;</span><span class="zen-label">Zen</span></button>
 </div></div>
 
@@ -377,7 +378,8 @@
 
 <div class="callout"><span class="tag">Prüfungsfalle</span>Die Nutzkapazität wird gern falsch gerechnet. Bei <strong>RAID 5</strong> geht die Kapazität <em>einer</em> Platte für Parität verloren: 4 Platten à 2 TB ergeben 6 TB nutzbar. Bei <strong>RAID 6</strong> sind es zwei Platten, bei <strong>RAID 1</strong> die Hälfte, bei <strong>RAID 10</strong> ebenfalls die Hälfte. Und die wichtigste Aussage überhaupt: <strong>RAID ersetzt keine Datensicherung.</strong> Versehentliches Löschen, Schadsoftware oder ein Brand treffen alle Platten des Verbunds gleichzeitig.</div>
 
-<div class="callout xref"><span class="tag">Verwandte Themen</span><a href="#r-datenschutz">Informationssicherheit &amp; Datenschutz</a> · <a href="#r-grundschutz">BSI-Grundschutz &amp; Schutzbedarf</a> · <a href="#r-storage">Storage-Systeme</a></div>
+<div class="callout xref"><span class="tag">Verwandte Themen</span><a href="#r-datenschutz">Informationssicherheit &amp; Datenschutz</a> · <a href="#r-grundschutz">BSI-Grundschutz &amp; Schutzbedarf</a> · <a href="#r-storage">Storage-Systeme</a><br>
+In der <a href="osi-battle/">Diagnose-Arena</a> tritt der RAID-Golem an: Die Stufen werden über das durchgespielt, was man gerade nicht tun sollte.</div>
 </section>
 
 <section id="r-grundschutz">
@@ -568,7 +570,8 @@
 <div class="callout"><span class="tag">Prüfungsfalle</span>Die beiden häufigsten Befunde sauber auseinanderhalten: Eine Adresse aus <strong>169.254.x.x</strong> bedeutet immer ein <strong>DHCP-Problem</strong> und muss zuerst behoben werden, weil ohne gültige Adresse nichts weiter funktioniert. Ist dagegen eine <em>IP-Adresse</em> erreichbar, ein <em>Name</em> aber nicht, liegt es fast sicher an <strong>DNS</strong>; Verkabelung, Adressvergabe und Routing sind dann bereits nachweislich in Ordnung.</div>
 <div class="callout"><span class="tag">Merksatz</span>Erst Kabel und IP-Konfiguration prüfen, dann Gateway und Routing testen, anschließend die Namensauflösung kontrollieren und zuletzt die Anwendung selbst untersuchen.</div>
 
-<div class="callout xref"><span class="tag">Verwandte Themen</span><a href="#r-ip">IPv4 & IPv6</a> · <a href="#r-dnsdhcp">DNS & DHCP im Detail</a> · <a href="#r-ports">Ports & Sockets</a></div>
+<div class="callout xref"><span class="tag">Verwandte Themen</span><a href="#r-ip">IPv4 & IPv6</a> · <a href="#r-dnsdhcp">DNS & DHCP im Detail</a> · <a href="#r-ports">Ports & Sockets</a><br>
+In der <a href="osi-battle/">Diagnose-Arena</a> wird diese Prüfreihenfolge als Differenzialdiagnose trainiert: Aus einer Symptomliste folgt genau eine Ursache.</div>
 </section>
 
 <section id="r-dnsdhcp">
@@ -1468,7 +1471,8 @@ Ein <code>alt</code>-Fragment trennt danach den Fall „Anmeldung erfolgreich" v
 
 <div class="callout"><span class="tag">Merksatz</span><strong>Der Frame ist die Verpackung ganz außen, die Nutzdaten sind der Inhalt ganz innen.</strong> Daraus folgt direkt, warum die Geräte auf verschiedenen Schichten arbeiten: Ein <strong>Switch</strong> muss nur die äußerste Hülle öffnen, um die <strong>MAC-Adresse</strong> zu lesen, und weiß gar nicht, was darin steckt; deshalb Schicht 2. Ein <strong>Router</strong> öffnet eine Hülle mehr, um an die <strong>IP-Adresse</strong> zu kommen, denn nur damit findet er den Weg in ein anderes Netz; deshalb Schicht 3. Und weil jede Hülle einen eigenen Header trägt, wächst die übertragene Datenmenge mit jeder Schicht ein Stück an. Merkhilfe für die Namen von innen nach außen: Daten, Segment, Paket, Frame, Bits.</div>
 
-<div class="callout xref"><span class="tag">Verwandte Themen</span><a href="#r-tcpip">TCP/IP & UDP</a> · <a href="#r-header">Header, TTL & Traceroute</a> · <a href="#r-routing">Routing & Switching</a></div>
+<div class="callout xref"><span class="tag">Verwandte Themen</span><a href="#r-tcpip">TCP/IP & UDP</a> · <a href="#r-header">Header, TTL & Traceroute</a> · <a href="#r-routing">Routing & Switching</a><br>
+In der <a href="osi-battle/">Diagnose-Arena</a> steht jeder Kopf der OSI-Hydra für eine Schicht; jeder Befund gehört eindeutig zu einer davon.</div>
 </section>
 
 <section id="r-ports">

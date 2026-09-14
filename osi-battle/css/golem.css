@@ -1,0 +1,379 @@
+/* ==========================================================
+   golem.css — RAID-GOLEM und Bossauswahl.
+   Ergänzt style.css, überschreibt nichts daraus.
+
+   FARBLOGIK (drei Flussarten, drei Farben, überall gleich):
+     Striping  = blau     Daten werden verteilt
+     Mirroring = grün    Daten werden kopiert
+     Parität  = bernstein, gestrichelt   Daten werden berechnet
+   Der Controller hat als einziger Knoten ein viertes, warnendes Rot.
+   Er ist nie doppelt vorhanden, und die Farbe sagt das mit.
+   ========================================================== */
+
+:root {
+  --golem-chassis: #2b3550;
+  --golem-chassis-hi: #3a4668;
+  --golem-plate: #38425f;
+  --golem-face: #1d2740;
+  --golem-metal: #93a5c9;
+  --flow-stripe: #5cc8ff;
+  --flow-mirror: #6fe08a;
+  --flow-parity: #f5c242;
+  --spof: #ff6b3d;
+  --disk-dead: #7a2626;
+}
+
+/* ===== Bossauswahl ===== */
+.boss-screen .diff-options { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.boss-btn { align-items: stretch; text-align: left; gap: 10px; }
+.boss-art {
+  height: 104px;
+  display: block;
+  margin: 0 auto 2px;
+  width: 100%;
+}
+.boss-btn .diff-name { color: var(--text-primary); }
+.boss-btn[data-boss="netz-hydra"] .diff-name { color: #9fd0ff; }
+.boss-btn[data-boss="raid-golem"] .diff-name { color: var(--flow-parity); }
+.boss-tags {
+  font-family: var(--font-body);
+  font-size: 17px;
+  color: var(--text-dim);
+}
+@media (max-width: 720px) {
+  .boss-screen .diff-options { grid-template-columns: 1fr; }
+  .boss-art { height: 82px; }
+}
+
+/* Regelhinweis: steht nur beim Golem und muss sofort ins Auge fallen,
+   weil er die übliche Erwartung an ein Lernspiel umdreht. */
+.diff-regel {
+  font-family: var(--font-body);
+  font-size: 19px;
+  line-height: 1.35;
+  color: var(--flow-parity);
+  background: rgba(245, 194, 66, 0.09);
+  border: 2px solid var(--flow-parity);
+  border-radius: 6px;
+  padding: 10px 14px;
+  margin: 0 0 16px;
+}
+.diff-regel[hidden] { display: none; }
+
+/* Zurück-Schaltfläche auf dem Schwierigkeitsschirm */
+.diff-back {
+  margin-top: 14px;
+  background: none;
+  border: none;
+  color: var(--text-dim);
+  font-family: var(--font-body);
+  font-size: 18px;
+  cursor: pointer;
+  padding: 6px 2px;
+}
+.diff-back:hover { color: var(--text-primary); }
+/* Derselbe Stil, wenn es ein echter Link zurück zur Academy ist */
+a.diff-back { display: inline-block; text-decoration: none; }
+.diff-back:focus-visible { outline: 2px solid var(--hp-warn); outline-offset: 3px; }
+
+/* ===== Bühne ===== */
+/* Exakt dieselbe Buehne wie .hydra-wrap: gleicher Rahmen, gleiche Ebene,
+   gleiches Durchklicken. Nur der Inhalt ist ein anderer. */
+.golem-wrap {
+  position: absolute;
+  top: var(--bar-zone, 42px);
+  bottom: calc(var(--bubble-h, 260px) + var(--bubble-gap, 18px) + 10px);
+  left: 0;
+  right: 0;
+  min-height: 200px;
+  display: block;
+  z-index: 0;
+}
+.golem-wrap svg,
+#golem-svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+.golem-wrap,
+.golem-wrap svg,
+#golem-svg { pointer-events: none; }
+
+/* .hydra-wrap und .golem-wrap setzen display selbst, deshalb greift das
+   hidden-Attribut nur mit eigener Regel. */
+.hydra-wrap[hidden],
+.golem-wrap[hidden] { display: none !important; }
+
+/* ===== Host und Gehäuse ===== */
+.host-body { fill: #161f36; stroke: #0a0f1c; stroke-width: 3; }
+.host-label,
+.group-label,
+.yoke-label,
+.ctrl-label,
+.shield-text,
+.stage-name {
+  font-family: var(--font-display);
+  fill: var(--text-primary);
+  text-anchor: middle;
+}
+.host-label { font-size: 11px; fill: var(--text-dim); }
+.group-label { font-size: 11px; fill: #b9c7e4; letter-spacing: 1px; }
+.yoke-label { font-size: 11px; fill: #06111d; letter-spacing: 2px; }
+
+.group-panel {
+  fill: var(--golem-chassis);
+  stroke: #0a0f1c;
+  stroke-width: 4;
+}
+.group-rivet { fill: #55648c; }
+.foot { fill: var(--golem-chassis-hi); stroke: #0a0f1c; stroke-width: 4; }
+.golem-ground {
+  fill: #000;
+  opacity: 0.45;
+}
+
+/* ===== Platten ===== */
+.disk-body { fill: var(--golem-plate); stroke: #0a0f1c; stroke-width: 3; }
+.disk-face { fill: var(--golem-face); }
+.disk-platter-outer { fill: #6e7fa6; stroke: #0a0f1c; stroke-width: 2; }
+.disk-platter-inner { fill: #b9c7e4; }
+.disk-spindle { fill: #0a0f1c; }
+.disk-arm { stroke: #d7e0f2; stroke-width: 2.4; stroke-linecap: round; fill: none; }
+.disk-led { fill: var(--hp-safe); }
+.disk-label {
+  font-family: var(--font-display);
+  font-size: 10px;
+  fill: #dbe4f4;
+  text-anchor: middle;
+}
+.disk-badge-bg { fill: #4a3a22; stroke: var(--flow-parity); stroke-width: 1.5; }
+.disk-badge {
+  font-family: var(--font-display);
+  font-size: 9px;
+  fill: var(--flow-parity);
+  text-anchor: middle;
+}
+.golem-disk.disk-lost .disk-badge-bg { fill: #2b0b0b; stroke: #7a3a3a; }
+.golem-disk.disk-lost .disk-badge { fill: #7a3a3a; }
+.disk-broken { opacity: 0; }
+.disk-crack { stroke: #ffb3a0; stroke-width: 2; fill: none; }
+.disk-cross { stroke: #ff6b6b; stroke-width: 4; stroke-linecap: round; }
+
+.golem-disk.disk-parity .disk-body { fill: #4a3a22; stroke: var(--flow-parity); }
+.golem-disk.disk-parity .disk-label { fill: var(--flow-parity); }
+
+.golem-disk.disk-lost .disk-body { fill: var(--disk-dead); stroke: #2b0b0b; }
+.golem-disk.disk-lost .disk-face { fill: #2b0b0b; }
+.golem-disk.disk-lost .disk-platter-outer { fill: #4a2020; }
+.golem-disk.disk-lost .disk-platter-inner { fill: #7a3a3a; }
+.golem-disk.disk-lost .disk-led { fill: #4a1010; }
+.golem-disk.disk-lost .disk-arm { stroke: #7a3a3a; }
+.golem-disk.disk-lost .disk-broken { opacity: 1; }
+.golem-disk.disk-lost .disk-label { fill: #ffb3a0; }
+
+/* ===== Flusslinien ===== */
+.flow-line { fill: none; stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
+.flow-head { stroke: none; }
+.flow-io { stroke: #6b7c9e; }
+.flow-head.flow-io { fill: #6b7c9e; }
+.flow-stripe { stroke: var(--flow-stripe); }
+.flow-head.flow-stripe { fill: var(--flow-stripe); }
+.flow-mirror { stroke: var(--flow-mirror); }
+.flow-head.flow-mirror { fill: var(--flow-mirror); }
+.flow-parity,
+.flow-parity-fix { stroke: var(--flow-parity); stroke-dasharray: 7 6; }
+.flow-head.flow-parity-fix { fill: var(--flow-parity); }
+
+.yoke-body { fill: var(--flow-stripe); stroke: #0a0f1c; stroke-width: 3; }
+.yoke-seg { stroke: #06111d; stroke-width: 3; }
+
+.flow-chip { stroke: #0a0f1c; stroke-width: 2.5; }
+.flow-chip-mirror { fill: var(--flow-mirror); }
+.flow-chip-parity { fill: var(--flow-parity); }
+.flow-chip-text {
+  font-family: var(--font-display);
+  font-size: 9px;
+  fill: #06111d;
+  text-anchor: middle;
+}
+.flow-warn {
+  font-family: var(--font-display);
+  font-size: 9px;
+  fill: var(--spof);
+  text-anchor: middle;
+}
+
+/* ===== Controller: das Auge ===== */
+.ctrl-glow { fill: var(--spof); opacity: 0.14; }
+.ctrl-shell { fill: #3a2a33; stroke: var(--spof); stroke-width: 4; }
+.ctrl-brow { fill: #1a1016; }
+.ctrl-eye-glow { fill: var(--spof); opacity: 0.22; }
+.ctrl-eye { fill: #ffd9b8; }
+.ctrl-pupil { fill: #24070b; }
+.ctrl-fin { fill: #3a2a33; stroke: var(--spof); stroke-width: 3; }
+.ctrl-label { font-size: 10px; fill: var(--spof); letter-spacing: 1px; }
+.ctrl-spof {
+  font-family: var(--font-body);
+  font-size: 16px;
+  fill: #c98a72;
+  text-anchor: middle;
+}
+.golem-controller { animation: ctrlBreathe 5.2s ease-in-out infinite; transform-origin: 700px 152px; }
+@keyframes ctrlBreathe {
+  0%, 100% { transform: scale(1); }
+  50%      { transform: scale(1.025); }
+}
+
+/* ===== Hot-Spare-Schilde (Verhärtung nach Fehlgriff) ===== */
+.golem-shield { opacity: 0; }
+.golem-shield.shield-on { opacity: 1; }
+.shield-body { fill: #1f2a44; stroke: var(--hp-warn); stroke-width: 3; }
+.shield-text { font-size: 10px; fill: var(--hp-warn); }
+.shield-caption {
+  font-family: var(--font-body);
+  font-size: 15px;
+  fill: var(--text-dim);
+  text-anchor: middle;
+  opacity: 0;
+}
+.shield-caption.caption-on { opacity: 0.75; }
+
+/* Epilog: das Auge steht allein und atmet schwerer */
+.golem-controller.ctrl-solo { animation: ctrlSolo 3s ease-in-out infinite; }
+@keyframes ctrlSolo {
+  0%, 100% { transform: scale(1.12); }
+  50%      { transform: scale(1.2); }
+}
+.debris-plate { fill: #2a3145; stroke: #0a0f1c; stroke-width: 2.5; }
+.debris-crack { stroke: #6b7c9e; stroke-width: 1.6; fill: none; }
+.debris { opacity: 0.9; }
+
+/* ===== Anzeigen ===== */
+.stage-name { font-size: 15px; fill: var(--text-primary); text-anchor: start; letter-spacing: 1px; }
+.stage-tol {
+  font-family: var(--font-body);
+  font-size: 18px;
+  fill: var(--text-dim);
+  text-anchor: start;
+}
+.legend-line { stroke-width: 4; }
+.legend-text {
+  font-family: var(--font-body);
+  font-size: 16px;
+  fill: var(--text-dim);
+}
+.golem-legend { opacity: 0.85; }
+
+.golem-dmg {
+  font-family: var(--font-display);
+  font-size: 15px;
+  fill: #ff8a5c;
+  text-anchor: middle;
+  opacity: 0;
+}
+.golem-dmg.dmg-run { animation: golemDmgFloat 1.2s ease-out forwards; }
+@keyframes golemDmgFloat {
+  0%   { opacity: 0; transform: translateY(10px); }
+  18%  { opacity: 1; transform: translateY(0); }
+  100% { opacity: 0; transform: translateY(-34px); }
+}
+
+.golem-move {
+  font-family: var(--font-display);
+  font-size: 26px;
+  fill: var(--flow-parity);
+  text-anchor: middle;
+  opacity: 0;
+  letter-spacing: 2px;
+}
+.golem-move.move-run { animation: moveBanner 1.6s ease-out forwards; }
+@keyframes moveBanner {
+  0%   { opacity: 0; transform: scale(0.82); }
+  22%  { opacity: 1; transform: scale(1.06); }
+  70%  { opacity: 1; transform: scale(1); }
+  100% { opacity: 0; transform: scale(1); }
+}
+
+/* ===== Bewegung ===== */
+.golem-arrive { animation: golemArrive 1.5s cubic-bezier(0.2, 0.9, 0.25, 1) both; }
+@keyframes golemArrive {
+  0%   { opacity: 0; transform: translateY(46px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+.golem-body.golem-hit { animation: golemHit 0.5s steps(4) 1; }
+@keyframes golemHit {
+  0%, 100% { transform: translate(700px, 300px) scale(var(--gs, 1)); }
+  50%      { filter: none; }
+}
+/* Treffer wird über die Platten selbst sichtbar; der Rumpf zuckt nur kurz. */
+.golem-body.golem-hit .group-panel { stroke: #ff6b6b; }
+.golem-body.golem-harden .group-panel { stroke: var(--hp-warn); }
+.golem-controller.ctrl-flare .ctrl-glow { opacity: 0.4; }
+.golem-shield.shield-pop { animation: shieldPop 0.7s ease-out; }
+@keyframes shieldPop {
+  0%   { opacity: 0; transform: scale(0.4); }
+  55%  { opacity: 1; transform: scale(1.2); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+.golem-disk.disk-strike { animation: diskStrike 0.6s ease-out; }
+@keyframes diskStrike {
+  0%   { transform: translate(0, 0); }
+  20%  { transform: translate(-5px, 3px); }
+  45%  { transform: translate(4px, -2px); }
+  70%  { transform: translate(-2px, 2px); }
+  100% { transform: translate(0, 0); }
+}
+
+.golem-body.golem-collapse { animation: golemCollapse 0.9s ease-in forwards; }
+@keyframes golemCollapse {
+  0%   { opacity: 1; }
+  40%  { opacity: 0.9; }
+  100% { opacity: 0; }
+}
+.golem-body.golem-reform { animation: golemReform 0.9s cubic-bezier(0.2, 0.9, 0.25, 1); }
+@keyframes golemReform {
+  0%   { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+.golem-wrap.golem-explode { animation: golemExplode 1.2s ease-out forwards; }
+@keyframes golemExplode {
+  0%   { opacity: 1; transform: scale(1); }
+  14%  { opacity: 1; transform: scale(1.06); }
+  100% { opacity: 0; transform: scale(1.3); }
+}
+.golem-wrap.golem-overwhelm {
+  z-index: 2;
+  animation: golemOverwhelm 2s ease-in forwards;
+}
+@keyframes golemOverwhelm {
+  0%   { transform: scale(1); }
+  100% { transform: scale(2.6) translateY(8%); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .golem-arrive,
+  .golem-controller,
+  .golem-body.golem-hit,
+  .golem-body.golem-collapse,
+  .golem-body.golem-reform,
+  .golem-disk.disk-strike,
+  .golem-shield.shield-pop,
+  .golem-wrap.golem-explode,
+  .golem-wrap.golem-overwhelm,
+  .golem-move.move-run,
+  .golem-dmg.dmg-run { animation: none !important; }
+  .golem-wrap.golem-explode { opacity: 0; }
+  .golem-move.move-run,
+  .golem-dmg.dmg-run { opacity: 1; }
+}
+
+/* Kleine Schirme: Zeichnung darf schmaler werden, Text bleibt lesbar */
+@media (max-width: 640px) {
+  .legend-text, .stage-tol { font-size: 15px; }
+  .golem-move { font-size: 19px; }
+  .ctrl-spof { font-size: 14px; }
+}

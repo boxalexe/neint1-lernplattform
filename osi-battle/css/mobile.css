@@ -1,0 +1,263 @@
+/* ==========================================================
+   mobile.css — Smartphone-Edition.
+
+   Wird AUSSCHLIESSLICH von mobile.html geladen. style.css und golem.css
+   bleiben unverändert, die Browser-Edition merkt von dieser Datei nichts.
+
+   GRUNDGEDANKE
+   Am Schreibtisch ist die Bühne gross und das Textfeld ein Streifen unten.
+   Am Telefon ist es umgekehrt: gelesen und getippt wird fast die ganze
+   Zeit, der Boss ist Begleitbild. Deshalb bekommt die Zeichnung nur den
+   oberen Teil und der Bedienbereich den Rest, als durchgehende Spalte.
+
+   TOUCH
+   Jede Antwort ist eine volle Zeile mit mindestens 52 Pixeln Höhe. Das ist
+   die übliche Untergrenze für sichere Treffer mit dem Daumen. Symptome
+   stehen ueber den Antworten, nicht daneben, weil nebeneinander auf 360
+   Pixeln beides unlesbar würde.
+   ========================================================== */
+
+:root {
+  /* dvh statt vh: die Adressleiste mobiler Browser fährt ein und aus,
+     vh rechnet dabei falsch und schneidet den unteren Rand ab. */
+  --bühne-h: 30dvh;
+  --tap-min: 52px;
+}
+
+html, body {
+  height: 100%;
+  overflow: hidden;
+  overscroll-behavior: none;       /* kein Gummiband-Scrollen beim Wischen */
+  -webkit-text-size-adjust: 100%;
+}
+
+.scene {
+  position: fixed;
+  inset: 0;
+  height: 100dvh;
+  display: block;
+}
+
+/* ---------- Kopfzeile ---------- */
+.hud-top {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 8px 10px 6px;
+  background: rgba(8, 12, 24, 0.92);
+  border-bottom: 3px solid var(--border-ink);
+}
+.hud-title { min-width: 0; }
+.console-title {
+  font-size: 11px;
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.console-subtitle {
+  font-size: 13px;
+  margin: 2px 0 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.reset-btn {
+  flex: 0 0 auto;
+  min-height: 40px;
+  padding: 8px 14px;
+  font-size: 10px;
+}
+
+/* ---------- Boss-Leiste ---------- */
+.hp-block.boss {
+  position: absolute;
+  top: 62px; left: 8px; right: 8px;
+  margin: 0;
+}
+.boss-track { height: 24px; }
+.boss-bar-name  { font-size: 9px; }
+.boss-bar-value { font-size: 13px; }
+
+/* ---------- Bühne: oberes Drittel ---------- */
+.hydra-wrap,
+.golem-wrap {
+  top: 92px;
+  bottom: auto;
+  height: var(--bühne-h);
+  min-height: 150px;
+}
+.fog-layer { opacity: 0.5; }
+
+/* ---------- Bedienbereich: der ganze Rest ---------- */
+.interaction-zone {
+  position: absolute;
+  left: 6px; right: 6px;
+  top: calc(92px + var(--bühne-h) + 10px);
+  bottom: 6px;
+  width: auto;
+  height: auto;
+  min-height: 0;
+  max-height: none;
+  transform: none;
+  border-width: 3px;
+  border-radius: 8px;
+}
+.interaction-zone::before { display: none; }   /* Sprechblasenspitze kostet nur Platz */
+
+/* Lebensleiste des Spielers wird waagerecht und wandert nach oben,
+   damit die Textspalte die volle Breite behält. */
+.hp-block.player {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  bottom: auto;
+  width: auto;
+  height: 30px;
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+  padding: 0 10px;
+  border-right: none;
+  border-bottom: 3px solid var(--border-ink);
+}
+.hp-block.player .hp-name  { font-size: 9px; }
+.hp-block.player .hp-value { font-size: 13px; }
+.hp-bar-track.vertical {
+  flex: 1 1 auto;
+  width: auto;
+  height: 12px;
+  min-height: 0;
+}
+/* Waagerecht heisst: von rechts leeren, nicht von oben. */
+.hp-bar-track.vertical .hp-bar-fill {
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  height: 100% !important;
+  transition: width 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+.player-dmg {
+  top: 50%; bottom: auto; right: 10px; left: auto;
+  transform: translateY(-50%);
+  font-size: 12px;
+}
+
+.interaction-zone > section {
+  left: 0;
+  top: 30px;                      /* unter der waagerechten Lebensleiste */
+  padding: 10px 12px 12px;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* ---------- Frageblock: alles untereinander ---------- */
+#question-block {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  overflow-y: auto;
+}
+#question-block #question-text {
+  order: 0;
+  font-size: 10px;
+  text-align: center;
+  margin: 0 0 2px;
+}
+#question-block .q-symptome,
+#question-block .options-grid {
+  grid-column: auto;
+  grid-row: auto;
+  margin: 0;
+  min-width: 0;
+}
+#question-block .q-symptome { order: 1; }
+#question-block .options-grid { order: 2; }
+.symptom-heading { font-size: 9px; }
+#question-block .symptom-list {
+  display: block;
+  grid-template-columns: none;
+}
+.symptom-list li {
+  font-size: 15px;
+  line-height: 1.3;
+  padding: 2px 0 2px 9px;
+}
+
+/* Antworten: volle Breite, sichere Daumengröße */
+#question-block .options-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.option-btn {
+  width: 100%;
+  min-height: var(--tap-min);
+  font-size: 16px;
+  line-height: 1.3;
+  padding: 12px 12px;
+  text-align: left;
+  touch-action: manipulation;      /* kein Doppeltipp-Zoom, kein 300ms-Verzug */
+}
+
+/* ---------- Dialog, Ergebnis, Ende ---------- */
+#dialogue-text { font-size: 17px; line-height: 1.4; }
+#result-explanation { font-size: 15px; line-height: 1.4; }
+.result-verdict { font-size: 10px; }
+.result-strike  { font-size: 15px; }
+.result-merksatz { font-size: 15px; padding: 8px 10px; }
+#end-title { font-size: 14px; }
+#end-text  { font-size: 15px; }
+.continue-btn {
+  min-height: var(--tap-min);
+  font-size: 10px;
+  padding: 12px 18px;
+  touch-action: manipulation;
+}
+#dialogue-next, #continue-btn { align-self: stretch; text-align: center; }
+
+/* ---------- Auswahlbildschirme ---------- */
+.difficulty-screen {
+  padding: 14px 10px calc(14px + env(safe-area-inset-bottom));
+  overflow-y: auto;
+  align-items: flex-start;
+}
+.diff-panel { width: 100%; }
+.diff-title { font-size: 16px; }
+.diff-sub   { font-size: 15px; margin-bottom: 14px; }
+.diff-options { grid-template-columns: 1fr !important; gap: 10px; }
+.diff-btn {
+  min-height: var(--tap-min);
+  padding: 12px 14px;
+  touch-action: manipulation;
+}
+.diff-name { font-size: 12px; }
+.diff-meta { font-size: 14px; }
+.diff-desc { font-size: 14px; }
+.boss-tags { font-size: 13px; }
+.boss-art  { height: 74px; }
+.diff-back { min-height: var(--tap-min); font-size: 15px; }
+
+/* ---------- Rückfrage ---------- */
+.confirm-box { width: min(94vw, 420px); padding: 16px; }
+.confirm-title { font-size: 12px; }
+.confirm-text  { font-size: 15px; }
+.confirm-actions { flex-direction: column; gap: 8px; }
+.confirm-btn { min-height: var(--tap-min); width: 100%; font-size: 11px; }
+
+/* ---------- Querformat: Bühne schrumpft, Text gewinnt ---------- */
+@media (orientation: landscape) and (max-height: 520px) {
+  :root { --bühne-h: 24dvh; }
+  .hydra-wrap, .golem-wrap { min-height: 110px; }
+  #dialogue-text { font-size: 15px; }
+  .option-btn { min-height: 44px; font-size: 14px; padding: 9px 10px; }
+  .symptom-list li { font-size: 13px; }
+}
+
+/* Sehr schmale Geräte */
+@media (max-width: 340px) {
+  .option-btn { font-size: 15px; }
+  .symptom-list li { font-size: 14px; }
+  .console-title { font-size: 10px; }
+}

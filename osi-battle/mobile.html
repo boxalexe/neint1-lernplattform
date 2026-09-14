@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Diagnose-Arena — Layer 8 Academy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/golem.css">
+<link rel="stylesheet" href="css/mobile.css">
+</head>
+<body>
+<div id="fade-overlay" aria-hidden="true"></div>
+
+<!-- ===== 1. Bossauswahl ===== -->
+<div class="difficulty-screen boss-screen" id="boss-screen">
+  <div class="diff-panel">
+    <h1 class="diff-title">DIAGNOSE-ARENA</h1>
+    <p class="diff-sub">Zwei Gegner, zwei Denkweisen. Wähle, gegen was du heute antrittst.</p>
+    <div class="diff-options">
+
+      <button class="diff-btn boss-btn" type="button" data-boss="netz-hydra">
+        <svg class="boss-art" viewBox="0 0 200 104" aria-hidden="true">
+          <g fill="none" stroke="#9fd0ff" stroke-width="3" stroke-linecap="round">
+            <path d="M100 96 C 92 70, 60 58, 40 34"/>
+            <path d="M100 96 C 96 68, 78 50, 68 24"/>
+            <path d="M100 96 L 100 20"/>
+            <path d="M100 96 C 104 68, 122 50, 132 24"/>
+            <path d="M100 96 C 108 70, 140 58, 160 34"/>
+          </g>
+          <g fill="#dbe4f4">
+            <circle cx="40" cy="30" r="8"/><circle cx="68" cy="20" r="8"/>
+            <circle cx="100" cy="16" r="9"/>
+            <circle cx="132" cy="20" r="8"/><circle cx="160" cy="30" r="8"/>
+          </g>
+          <g fill="#e14b4b">
+            <circle cx="38" cy="29" r="2"/><circle cx="66" cy="19" r="2"/>
+            <circle cx="98" cy="15" r="2.4"/>
+            <circle cx="130" cy="19" r="2"/><circle cx="158" cy="29" r="2"/>
+          </g>
+        </svg>
+        <span class="diff-name">NETZ-HYDRA</span>
+        <span class="diff-meta">Sieben Köpfe, sieben OSI-Schichten</span>
+        <span class="diff-desc">Symptome liefern, Schicht bestimmen. Jede richtige Diagnose schlägt einen Kopf ein Stück tiefer.</span>
+        <span class="boss-tags">Fehlersuche im Netz &middot; 25 bis 45 Diagnosen</span>
+      </button>
+
+      <button class="diff-btn boss-btn" type="button" data-boss="raid-golem">
+        <svg class="boss-art" viewBox="0 0 200 104" aria-hidden="true">
+          <g stroke="#0a0f1c" stroke-width="2">
+            <rect x="44" y="52" width="112" height="44" rx="6" fill="#2b3550"/>
+            <rect x="52" y="60" width="20" height="28" rx="3" fill="#38425f"/>
+            <rect x="78" y="60" width="20" height="28" rx="3" fill="#38425f"/>
+            <rect x="104" y="60" width="20" height="28" rx="3" fill="#38425f"/>
+            <rect x="130" y="60" width="20" height="28" rx="3" fill="#4a3a22"/>
+            <rect x="60" y="38" width="80" height="10" rx="3" fill="#5cc8ff"/>
+          </g>
+          <g fill="none" stroke="#5cc8ff" stroke-width="2.4">
+            <path d="M76 48 L76 58"/><path d="M100 48 L100 58"/><path d="M124 48 L124 58"/>
+          </g>
+          <path d="M100 6 L124 14 L124 28 L100 36 L76 28 L76 14 Z" fill="#3a2a33" stroke="#ff6b3d" stroke-width="3"/>
+          <ellipse cx="100" cy="22" rx="11" ry="6" fill="#ffd9b8"/>
+          <ellipse cx="100" cy="22" rx="3" ry="5" fill="#24070b"/>
+        </svg>
+        <span class="diff-name">RAID-GOLEM</span>
+        <span class="diff-meta">Acht Stufen abwärts bis zum Controller</span>
+        <span class="diff-desc">Finde den Eingriff, den man niemals macht. Bricht eine Stufe, baut der Golem sich vor deinen Augen um.</span>
+        <span class="boss-tags">Speicher und Redundanz &middot; 8 bis 16 Angriffe</span>
+      </button>
+
+    </div>
+    <a class="diff-back" href="../index.html">Zurück zur Layer 8 Academy</a>
+  </div>
+</div>
+
+<!-- ===== 2. Schwierigkeit (Inhalte werden je Boss gesetzt) ===== -->
+<div class="difficulty-screen is-hidden" id="difficulty-screen">
+  <div class="diff-panel">
+    <h1 class="diff-title" id="diff-screen-title">NETZ-HYDRA</h1>
+    <p class="diff-sub" id="diff-screen-sub"></p>
+    <p class="diff-regel" id="diff-regel" hidden></p>
+    <div class="diff-options">
+      <button class="diff-btn" type="button" data-diff="leicht">
+        <span class="diff-name">LEICHT</span>
+        <span class="diff-meta" data-slot="meta"></span>
+        <span class="diff-desc" data-slot="desc"></span>
+      </button>
+      <button class="diff-btn" type="button" data-diff="mittel">
+        <span class="diff-name">MITTEL</span>
+        <span class="diff-meta" data-slot="meta"></span>
+        <span class="diff-desc" data-slot="desc"></span>
+      </button>
+      <button class="diff-btn" type="button" data-diff="schwer">
+        <span class="diff-name">SCHWER</span>
+        <span class="diff-meta" data-slot="meta"></span>
+        <span class="diff-desc" data-slot="desc"></span>
+      </button>
+    </div>
+    <button class="diff-back" type="button" id="diff-back">Zurück zur Bossauswahl</button>
+  </div>
+</div>
+
+<!-- ===== 3. Kampf ===== -->
+<div class="scene" id="scene">
+  <div id="hurt-flash" aria-hidden="true"></div>
+  <div id="binary-burst" aria-hidden="true"></div>
+
+  <div class="hydra-wrap" id="hydra-wrap" hidden></div>
+  <div class="golem-wrap" id="golem-wrap" hidden></div>
+
+  <div class="fog-layer" aria-hidden="true">
+    <span class="fog fog-1"></span>
+    <span class="fog fog-2"></span>
+    <span class="fog fog-3"></span>
+  </div>
+
+  <header class="hud-top">
+    <div class="hud-title">
+      <h1 class="console-title" id="console-title">NETZ-HYDRA</h1>
+      <p class="console-subtitle">Diagnose-Kampf &middot; <span id="diff-label">MITTEL</span> &middot; <span id="progress-label">0 / 0</span> &middot; <span id="fehler-label">Fehler 0 / 0</span></p>
+    </div>
+    <button class="reset-btn" id="restart-btn" type="button">Neu</button>
+  </header>
+
+  <div class="hp-block boss" id="boss-hp-wrap">
+    <div class="hp-bar-track boss-track">
+      <div class="hp-bar-fill" id="boss-hp-fill"></div>
+      <span class="boss-bar-name" id="boss-name">NETZ-HYDRA</span>
+      <span class="boss-bar-value" id="boss-hp-label">0 / 0</span>
+    </div>
+  </div>
+
+  <div class="confirm-overlay" id="confirm-overlay" hidden>
+    <div class="confirm-box">
+      <p class="confirm-title">Bist du sicher?</p>
+      <p class="confirm-text">Der laufende Kampf wird beendet und du kehrst zur Bossauswahl zurück.</p>
+      <div class="confirm-actions">
+        <button class="confirm-btn confirm-yes" id="confirm-yes" type="button">Ja, zurück zur Auswahl</button>
+        <button class="confirm-btn confirm-no" id="confirm-no" type="button">Abbrechen</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="interaction-zone" id="interaction-zone">
+    <div class="hp-block player" id="player-hp-wrap">
+      <span class="player-dmg" id="player-dmg"></span>
+      <span class="hp-name">DU</span>
+      <div class="hp-bar-track vertical"><div class="hp-bar-fill" id="player-hp-fill"></div></div>
+      <span class="hp-value" id="player-hp-label">0 / 0</span>
+    </div>
+
+    <section id="dialogue-box" hidden>
+      <p id="dialogue-text"></p>
+      <button class="continue-btn" id="dialogue-next" type="button">Weiter</button>
+    </section>
+
+    <section id="question-block" hidden>
+      <p id="question-text"></p>
+      <div class="q-symptome">
+        <p class="symptom-heading">Symptome</p>
+        <ul id="symptom-list" class="symptom-list"></ul>
+      </div>
+      <div class="options-grid" id="options-grid"></div>
+    </section>
+
+    <section id="result-block" hidden>
+      <p class="result-verdict" id="result-verdict"></p>
+      <p id="result-strike" class="result-strike"></p>
+      <p id="result-explanation"></p>
+      <p id="result-merksatz" class="result-merksatz"></p>
+      <button class="continue-btn" id="continue-btn" type="button">Weiter</button>
+    </section>
+
+    <section id="end-screen" hidden>
+      <h2 class="end-title" id="end-title"></h2>
+      <p id="end-text"></p>
+      <button class="continue-btn" id="end-restart-btn" type="button">Noch mal</button>
+    </section>
+  </div>
+</div>
+
+<script src="js/data.js"></script>
+<script src="js/hydra-art.js"></script>
+<script src="js/golem-data.js"></script>
+<script src="js/golem-art.js"></script>
+<script src="js/animations.js"></script>
+<script src="js/ui.js"></script>
+<script src="js/golem-ui.js"></script>
+<script src="js/game.js"></script>
+<script src="js/golem-game.js"></script>
+<script src="js/boot.js"></script>
+</body>
+</html>
