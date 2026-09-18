@@ -4511,7 +4511,7 @@ const POOLS = {
    {
     "q": "Was passiert, wenn ein TCP-Segment auf dem Weg verloren geht?",
     "o": [
-     { "t": "Der Sender erhält keine Bestätigung (ACK) und sendet das Segment nach Timeout erneut", "ok": true },
+     { "t": "Der Sender erhält keine Bestätigung und sendet das Segment nach Timeout erneut", "ok": true },
      { "t": "Der Empfänger fordert das fehlende Segment direkt beim letzten Router an", "ok": false },
      { "t": "Die Verbindung wird neu aufgebaut und die Übertragung beginnt von vorn", "ok": false },
      { "t": "Der Empfänger rekonstruiert das Segment aus den Prüfsummen der Nachbarpakete", "ok": false }
@@ -5622,7 +5622,7 @@ const POOLS = {
     "e": "Layer 3 kapselt Daten in Pakete."
    },
    {
-    "q": "Wie heißt die Dateneinheit auf der Transportschicht (L4, TCP)?",
+    "q": "Wie heißt die Dateneinheit auf der Transportschicht?",
     "o": [
      {
       "t": "Segment",
@@ -15579,6 +15579,151 @@ const POOLS = {
    }
   ]
  },
+ "speicher": {
+  "name": "Speichergrößen & Einheiten",
+  "q": [
+   {
+    "q": "Aus wie vielen Bit besteht ein Byte?",
+    "o": [
+     { "t": "8 Bit", "ok": true },
+     { "t": "4 Bit", "ok": false },
+     { "t": "10 Bit", "ok": false },
+     { "t": "16 Bit", "ok": false }
+    ],
+    "e": "Ein Byte fasst genau 8 Bit zusammen und ist die kleinste einzeln adressierbare Speichergröße. 4 Bit sind ein Nibble, also ein halbes Byte."
+   },
+   {
+    "q": "Wie viele verschiedene Zustände lassen sich mit einem Byte darstellen?",
+    "o": [
+     { "t": "256, also die Werte 0 bis 255", "ok": true },
+     { "t": "128, also die Werte 0 bis 127", "ok": false },
+     { "t": "255, also die Werte 1 bis 255", "ok": false },
+     { "t": "1024, also die Werte 0 bis 1023", "ok": false }
+    ],
+    "e": "2 hoch 8 ergibt 256 mögliche Zustände. Da bei 0 begonnen wird, reicht der Wertebereich von 0 bis 255 – dieselbe Spanne wie ein Oktett einer IPv4-Adresse."
+   },
+   {
+    "q": "Wofür stehen die Kurzzeichen b und B bei Datenmengen?",
+    "o": [
+     { "t": "Kleines b steht für Bit, großes B für Byte", "ok": true },
+     { "t": "Kleines b steht für Byte, großes B für Bit", "ok": false },
+     { "t": "Beide stehen für Byte, das große B nur bei größeren Werten", "ok": false },
+     { "t": "Kleines b steht für Basiseinheit, großes B für Blockgröße", "ok": false }
+    ],
+    "e": "Das kleine b meint Bit, das große B meint Byte. Zwischen beiden liegt immer der Faktor 8. Leitungen werden in Mbit/s angegeben, Dateien und Datenträger in MB."
+   },
+   {
+    "q": "Welcher Datenrate in Byte pro Sekunde entspricht eine Leitung mit 100 Mbit/s?",
+    "o": [
+     { "t": "12,5 MB/s", "ok": true },
+     { "t": "100 MB/s", "ok": false },
+     { "t": "800 MB/s", "ok": false },
+     { "t": "10 MB/s", "ok": false }
+    ],
+    "e": "100 Mbit/s geteilt durch 8 ergibt 12,5 MB/s. Wer Bit und Byte verwechselt, liegt um den Faktor 8 daneben."
+   },
+   {
+    "q": "Wie viele Byte hat ein Kibibyte (KiB)?",
+    "o": [
+     { "t": "1024 Byte", "ok": true },
+     { "t": "1000 Byte", "ok": false },
+     { "t": "1 048 576 Byte", "ok": false },
+     { "t": "8192 Byte", "ok": false }
+    ],
+    "e": "Das KiB ist die binäre Einheit nach IEC und umfasst 2 hoch 10, also 1024 Byte. Das dezimale Kilobyte (kB) umfasst dagegen 1000 Byte."
+   },
+   {
+    "q": "Woran erkennt man in einer Aufgabenstellung, dass mit 1024 statt mit 1000 gerechnet werden muss?",
+    "o": [
+     { "t": "Am eingeschobenen i in der Einheit, also KiB, MiB oder GiB", "ok": true },
+     { "t": "Am großen Anfangsbuchstaben der Vorsilbe, also KB statt kB", "ok": false },
+     { "t": "Daran, dass die Einheit ausgeschrieben statt abgekürzt wird", "ok": false },
+     { "t": "Daran, dass es sich um einen Datenträger und nicht um eine Leitung handelt", "ok": false }
+    ],
+    "e": "Die IEC-Präfixe Kibi, Mebi und Gibi tragen ein i und stehen für die binäre Zählweise mit 1024. Ohne i gilt die dezimale SI-Zählweise mit 1000."
+   },
+   {
+    "q": "Warum zeigt eine als 1 TB beworbene Festplatte im Betriebssystem nur rund 931 GB an?",
+    "o": [
+     { "t": "Der Hersteller rechnet dezimal mit 1000, das Betriebssystem binär mit 1024", "ok": true },
+     { "t": "Rund 7 Prozent der Kapazität sind fest für die Formatierung reserviert", "ok": false },
+     { "t": "Das Dateisystem legt automatisch einen Wiederherstellungsbereich an", "ok": false },
+     { "t": "Der Hersteller zieht die Kapazität für defekte Sektoren vorab ab", "ok": false }
+    ],
+    "e": "1 TB sind 10 hoch 12 Byte. Dreimal durch 1024 geteilt ergibt das rund 931 GiB, angezeigt meist als GB. Es fehlt nichts, es wird nur in zwei verschiedenen Maßstäben gemessen."
+   },
+   {
+    "q": "Wie lange dauert die Übertragung einer 2-GB-Datei über eine Leitung mit 50 Mbit/s rechnerisch?",
+    "o": [
+     { "t": "Rund 320 Sekunden", "ok": true },
+     { "t": "Rund 40 Sekunden", "ok": false },
+     { "t": "Rund 2560 Sekunden", "ok": false },
+     { "t": "Rund 160 Sekunden", "ok": false }
+    ],
+    "e": "2 GB sind 2000 MB, mal 8 ergibt 16 000 Mbit. Geteilt durch 50 Mbit/s sind das 320 Sekunden, also 5 Minuten und 20 Sekunden. Der erste Schritt ist immer, beide Seiten auf dieselbe Einheit zu bringen."
+   },
+   {
+    "q": "Welche Einheit folgt in der Reihenfolge direkt auf das Terabyte?",
+    "o": [
+     { "t": "Petabyte", "ok": true },
+     { "t": "Exabyte", "ok": false },
+     { "t": "Gigabyte", "ok": false },
+     { "t": "Zettabyte", "ok": false }
+    ],
+    "e": "Die Leiter lautet Kilo, Mega, Giga, Tera, Peta, Exa, Zetta, Yotta. Jede Stufe ist das Tausendfache der vorherigen."
+   },
+   {
+    "q": "Wie viel Speicher belegen 2 000 000 Datensätze zu je 250 Byte als reine Nutzdaten?",
+    "o": [
+     { "t": "500 MB", "ok": true },
+     { "t": "50 MB", "ok": false },
+     { "t": "5 GB", "ok": false },
+     { "t": "500 kB", "ok": false }
+    ],
+    "e": "2 000 000 mal 250 Byte ergibt 500 000 000 Byte, also 500 MB beziehungsweise 0,5 GB. In der Praxis kommen Indizes, Protokolldateien und ein Zuschlag für Wachstum hinzu."
+   },
+   {
+    "q": "Wie heißt eine Gruppe von 4 Bit?",
+    "o": [
+     { "t": "Nibble", "ok": true },
+     { "t": "Oktett", "ok": false },
+     { "t": "Wort", "ok": false },
+     { "t": "Tribit", "ok": false }
+    ],
+    "e": "Vier Bit bilden ein Nibble, also ein halbes Byte. Ein Nibble entspricht genau einer Hexadezimalstelle. Ein Oktett sind acht Bit."
+   },
+   {
+    "q": "Ein Backup von 480 GB soll über eine Leitung mit 1 Gbit/s übertragen werden. Wie lange dauert das rechnerisch?",
+    "o": [
+     { "t": "Rund 64 Minuten", "ok": true },
+     { "t": "Rund 8 Minuten", "ok": false },
+     { "t": "Rund 480 Minuten", "ok": false },
+     { "t": "Rund 16 Minuten", "ok": false }
+    ],
+    "e": "480 GB mal 8 ergibt 3840 Gbit. Geteilt durch 1 Gbit/s sind das 3840 Sekunden, also 64 Minuten. Bei Fragen zur Wiederherstellungszeit ist die Bandbreite der Engpass, nicht die Plattengröße."
+   },
+   {
+    "q": "Mit welcher Zählweise beschriften Hersteller Festplatten, SSDs und Leitungsgeschwindigkeiten?",
+    "o": [
+     { "t": "Dezimal nach SI, also in Tausenderschritten", "ok": true },
+     { "t": "Binär nach IEC, also in 1024er-Schritten", "ok": false },
+     { "t": "Dezimal bei Datenträgern, binär bei Leitungen", "ok": false },
+     { "t": "Je nach Hersteller frei wählbar und nicht genormt", "ok": false }
+    ],
+    "e": "Hersteller rechnen dezimal mit 1000, Betriebssysteme zeigen häufig binär mit 1024 an. Aus dieser Mischung entsteht die scheinbar fehlende Kapazität."
+   },
+   {
+    "q": "Welche der genannten Einheiten ist die größte?",
+    "o": [
+     { "t": "Yottabyte", "ok": true },
+     { "t": "Exabyte", "ok": false },
+     { "t": "Zettabyte", "ok": false },
+     { "t": "Petabyte", "ok": false }
+    ],
+    "e": "Oberhalb des Petabyte geht es mit Exa, Zetta und Yotta weiter, jeweils im Tausenderschritt. Das Yottabyte ist mit 10 hoch 24 Byte die größte davon und in der Praxis eine rein rechnerische Größe."
+   }
+  ]
+ },
  "logik": {
   "name": "Logische Verknüpfungen",
   "q": [
@@ -20195,7 +20340,7 @@ const CAT_GROUPS = [
   { id:'sys', titel:'Systeme, Storage & Virtualisierung',
     keys:['virt','hyperv','storage','raid','diagnose','medien','hardware'] },
   { id:'dev', titel:'Softwareentwicklung & Grundlagen',
-    keys:['sql','oop','zahlen','logik'] },
+    keys:['sql','oop','zahlen','speicher','logik'] },
   { id:'bwl', titel:'BWL, Prozesse & Recht',
     keys:['projekt','qm','epk','itil','kalkulation','vertraege','markt','marketing','doku'] },
 ];
@@ -20957,7 +21102,7 @@ const READER_TOPICS = [
   { id:'netz', titel:'Netzwerke',           ids:['r-osi','r-tcpip','r-ip','r-subnetting','r-routing','r-vlan','r-wlan','r-vpn','r-dnsdhcp','r-ethernet','r-ports','r-header','r-mux','r-ausdehnung','r-topo','r-fddi','r-voip','r-api','r-verkabelung','r-medien'] },
   { id:'sec',  titel:'IT-Sicherheit',       ids:['r-security','r-datenschutz','r-krypto','r-grundschutz','r-malware','r-haertung','r-mailsec'] },
   { id:'sys',  titel:'Systeme & Storage',   ids:['r-virt','r-hyperv','r-storage','r-raid','r-diagnose','r-hardware'] },
-  { id:'dev',  titel:'Software & Grundlagen', ids:['r-sql','r-oop','r-zahlen','r-logik'] },
+  { id:'dev',  titel:'Software & Grundlagen', ids:['r-sql','r-oop','r-zahlen','r-speicher','r-logik'] },
   { id:'bwl',  titel:'BWL & Prozesse',      ids:['r-projekt','r-qm','r-epk','r-itil','r-kalkulation','r-vertraege','r-markt','r-marketing','r-doku'] },
 ];
 
@@ -21288,6 +21433,66 @@ function stelleScrollHer(name){
     window.requestAnimationFrame(() => { window.scrollTo({top:y, behavior:'auto'}); });
   }
 }
+// ---- Nachfrage vor dem Verlassen der Seite ----
+// Subnetting Trainer, AP1 Simulator und Diagnose-Arena sind eigene Seiten. Ein
+// Wechsel dorthin lädt das Dokument neu und setzt damit einen laufenden
+// Fragendurchlauf zurück. Deshalb wird vorher gefragt. Nachschlagen, Glossar und
+// Fragen bleiben ungefragt umschaltbar — die halten ihren Stand ohnehin.
+(function(){
+  const box = document.getElementById('navConfirm');
+  const text = document.getElementById('navConfirmText');
+  const ja = document.getElementById('navConfirmYes');
+  const nein = document.getElementById('navConfirmNo');
+  if(!box || !text || !ja || !nein) return;
+
+  let ziel = null;
+  let vorher = null;
+
+  function schliessen(){
+    box.classList.remove('show');
+    ziel = null;
+    if(vorher && typeof vorher.focus === 'function') vorher.focus();
+    vorher = null;
+  }
+
+  function oeffnen(link){
+    ziel = link.getAttribute('href');
+    vorher = document.activeElement;
+    text.textContent = link.dataset.confirm || 'Seite wechseln?';
+    box.classList.add('show');
+    ja.focus();
+  }
+
+  document.querySelectorAll('.tab[data-confirm]').forEach(link => {
+    link.addEventListener('click', e => {
+      // Mittelklick, Strg/Cmd-Klick und Aufziehen in neuen Tab nicht abfangen
+      if(e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button !== 0) return;
+      e.preventDefault();
+      oeffnen(link);
+    });
+  });
+
+  ja.addEventListener('click', () => {
+    const weg = ziel;
+    schliessen();
+    if(weg) window.location.href = weg;
+  });
+  nein.addEventListener('click', schliessen);
+
+  // Klick auf den abgedunkelten Hintergrund zählt als Nein
+  box.addEventListener('click', e => { if(e.target === box) schliessen(); });
+
+  document.addEventListener('keydown', e => {
+    if(!box.classList.contains('show')) return;
+    if(e.key === 'Escape'){ schliessen(); return; }
+    // Fokus im Fenster halten, solange es offen ist
+    if(e.key === 'Tab'){
+      e.preventDefault();
+      (document.activeElement === ja ? nein : ja).focus();
+    }
+  });
+})();
+
 document.querySelectorAll('.tab').forEach(tab => {
   if(!tab.dataset.view) return; // echter Navigations-Link (z.B. Subnetting Trainer) — Browser übernimmt
   tab.addEventListener('click', () => {
@@ -21548,6 +21753,7 @@ const GLOSSAR = [{"a":"2FA","f":"Zwei-Faktor-Authentifizierung","d":"Anmeldung m
 {"a":"RTP","f":"Real-Time Transport Protocol","d":"Transportiert Echtzeitdaten wie Sprache und Video, z. B. bei VoIP. Läuft über UDP."},
 {"a":"SaaS","f":"Software as a Service","d":"Cloud-Modell: fertige Software wird über das Internet genutzt, z. B. Webmail oder Office 365."},
 {"a":"SAN","f":"Storage Area Network","d":"Eigenes Hochgeschwindigkeitsnetz, das Server mit zentralen Speichersystemen verbindet."},
+{"a":"SAS","f":"Serial Attached SCSI","d":"Serielle Schnittstelle für Laufwerke in Servern und Speichersystemen. Schneller und robuster als SATA, erlaubt längere Kabelwege und mehrere Laufwerke je Anschluss."},
 {"a":"SATA","f":"Serial ATA","d":"Standardschnittstelle zum Anschluss von Festplatten und SSDs im Rechner."},
 {"a":"SC","f":"Subscriber Connector","d":"Glasfaser-Steckertyp mit Push-Pull-Mechanik, verbreitet in Verteilern."},
 {"a":"SFTP","f":"SSH File Transfer Protocol","d":"Verschlüsselte Dateiübertragung über SSH (Port 22). Nicht zu verwechseln mit FTPS."},
@@ -21967,7 +22173,16 @@ const GLOSSAR = [{"a":"2FA","f":"Zwei-Faktor-Authentifizierung","d":"Anmeldung m
 {"a":"Tool Calling","f":"Tool Calling, Funktionsaufruf","d":"Das Modell gibt statt Fließtext einen strukturierten Aufruf mit Parametern aus, den die Anwendung ausführt. Das Ergebnis fließt zurück in den Kontext. So werden Suche, Datenbank oder Rechner angebunden."},
 {"a":"Transformer","f":"Transformer","d":"Netzarchitektur von 2017 und Grundlage nahezu aller heutigen Sprachmodelle. Kern ist der Attention-Mechanismus, der alle Token einer Eingabe parallel gewichtet, statt sie nacheinander zu lesen."},
 {"a":"Weltmodell","f":"Weltmodell, World Model","d":"Interne Repräsentation, mit der ein System Zustände und die Folgen von Handlungen vorhersagt. Ob Sprachmodelle so etwas ausbilden oder nur Oberflächenmuster fortschreiben, ist fachlich offen."},
-{"a":"Zero-shot","f":"Zero-Shot, ohne Beispiele","d":"Das Modell löst eine Aufgabe allein aus der Anweisung, ohne Beispiele im Prompt. Mit einem Beispiel heißt es One-Shot, mit mehreren Few-Shot."}];
+{"a":"Zero-shot","f":"Zero-Shot, ohne Beispiele","d":"Das Modell löst eine Aufgabe allein aus der Anweisung, ohne Beispiele im Prompt. Mit einem Beispiel heißt es One-Shot, mit mehreren Few-Shot."},
+{"a":"Bit","f":"Binary Digit","d":"Kleinste Informationseinheit: genau zwei Zustände, 0 oder 1. Kurzzeichen ist das kleine b, etwa in Mbit/s."},
+{"a":"Byte","f":"Byte","d":"Acht Bit als Einheit, die kleinste einzeln adressierbare Speichergröße. Kurzzeichen ist das große B, etwa in MB/s."},
+{"a":"kB","f":"Kilobyte","d":"1000 Byte nach SI. Mit diesem Faktor beschriften Hersteller Datenträger und Leitungen, nicht mit 1024."},
+{"a":"KiB","f":"Kibibyte","d":"1024 Byte nach IEC. Betriebssysteme rechnen häufig so, schreiben aber trotzdem KB an die Anzeige."},
+{"a":"MiB","f":"Mebibyte","d":"1024 KiB = 1 048 576 Byte. Binäres Gegenstück zum dezimalen Megabyte mit 1 000 000 Byte."},
+{"a":"GiB","f":"Gibibyte","d":"1024 MiB = 1 073 741 824 Byte. Deshalb meldet eine 1-TB-Platte im Betriebssystem rund 931 GiB."},
+{"a":"TiB","f":"Tebibyte","d":"1024 GiB. Binäres Gegenstück zum dezimalen Terabyte mit 10^12 Byte."},
+{"a":"PB","f":"Petabyte","d":"1000 TB = 10^15 Byte. Größenordnung großer Archive und Rechenzentren."},
+{"a":"IEC","f":"International Electrotechnical Commission","d":"Normungsgremium. Legte die Binärpräfixe Kibi, Mebi, Gibi fest, um sie von den dezimalen SI-Präfixen Kilo, Mega, Giga zu trennen."}];
 
 // ---- Bibliothek: Render + Suche ----
 const libList = document.getElementById('libList');
@@ -22063,7 +22278,8 @@ renderLib(GLOSSAR_SORTED);
     "r-kalkulation": ["Bezugskalkulation","Zieleinkaufspreis","Bareinkaufspreis","Bezugspreis","Ratendarlehen","ROI"],
     "r-malware": ["Wurm","Trojaner","Rootkit","Ransomware","Keylogger","Phishing","Zero-Day","Virus","Botnetz","Backdoor","Spyware","Brute Force","SQL-Injection","XSS","Social Engineering","DDoS"],
     "r-grundschutz": ["BSI","VIVA","IT-Grundschutz","Maximumprinzip","Kumulationseffekt","Schutzbedarfsfeststellung","Risikoanalyse"],
-    "r-storage": ["DAS","NAS","SAN","Block-Storage","File-Storage","Objekt-Storage","Objektspeicher","Blockspeicher"],
+    "r-storage": ["DAS","NAS","SAN","SAS","Block-Storage","File-Storage","Objekt-Storage","Objektspeicher","Blockspeicher"],
+    "r-speicher": ["Bit","Byte","Nibble","kB","KiB","MiB","GiB","TiB","PB","IEC"],
     "r-itil": ["ITIL","Incident","Problem","Known Error","Change","SLA","OLA","CMDB","Underpinning Contract"],
     "r-mailsec": ["SPF","DKIM","DMARC","Alignment"],
     "r-hardware": ["ALU","CU","Von-Neumann-Flaschenhals","Harvard-Architektur","Bussystem","HDD","SSD","PCI Express","HDMI","Wirkungsgrad","SMT","Cache","ECC-RAM","BIOS","UEFI","POST","GPT","MBR","Secure Boot","Green IT","NVMe","M.2","SATA","TBW","Wear Leveling"],
