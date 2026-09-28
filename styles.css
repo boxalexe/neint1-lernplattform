@@ -3,6 +3,7 @@
   --text:#c9d6e0; --muted:#7d94a6; --cyan:#22d3ee; --green:#3ddc84; --gold:#e9c15a;
   --amber:#f5b642; --red:#ff5f6b; --code-bg:#060a0e;
   --ok-border:var(--green); --scrolltop-color:var(--cyan);
+  --magenta:#ff3df0;
 }
 /* Theme: Hoher Kontrast — maximale Helligkeitsdifferenz für Kontrastempfindlichkeit,
    nicht CVD-spezifisch, sondern für allgemein reduziertes Kontrastsehen. */
@@ -11,6 +12,7 @@ html[data-theme="hc"]{
   --text:#ffffff; --muted:#c2c2c2; --cyan:#00eaff; --green:#00ff6a;
   --amber:#ffd400; --red:#ff3344; --code-bg:#000000;
   --scrolltop-color:#2f7bf0;
+  --magenta:#ff40ff;
 }
 /* Theme: Blau/Orange — Grün kräftig und kontrastreich, Rot als echtes Orange (statt
    Vermillion), damit der Unterschied zu Grün nicht mehr ins Rötliche kippt. Die
@@ -21,6 +23,7 @@ html[data-theme="cvd"]{
   --text:#eef1f6; --muted:#9aa8bb; --cyan:#56b4e9; --green:#2e9bff;
   --amber:#f0e442; --red:#ff8000; --code-bg:#060a10;
   --ok-border:#2e9bff; --scrolltop-color:#2e9bff;
+  --magenta:#ff4fd8;
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:auto}
@@ -870,4 +873,21 @@ table.sn-cheat td:nth-child(4),table.sn-cheat td:nth-child(5){color:var(--green)
 @media(max-width:560px){
   .nav-confirm-box{padding:20px 16px 16px}
   .nav-confirm-text{font-size:0.94rem}
+}
+
+/* ---- Suchtreffer: Ziel leuchtet dreimal Cyan/Magenta auf ----
+   Nur Hintergrund, Schatten und Textfarbe: nichts davon verändert die
+   Maße des Elements, der Text springt also nicht und die Seite wird am
+   Handy nicht breiter. Danach fällt alles auf die normale Farbe zurück. */
+@keyframes qsFlash{
+  0%,100%{background-color:transparent;box-shadow:0 0 0 0 transparent}
+  25%{background-color:color-mix(in srgb,var(--cyan) 28%,transparent);
+      box-shadow:0 0 0 3px var(--cyan),0 0 22px color-mix(in srgb,var(--cyan) 70%,transparent);color:#fff}
+  50%{background-color:transparent;box-shadow:0 0 0 0 transparent}
+  75%{background-color:color-mix(in srgb,var(--magenta) 28%,transparent);
+      box-shadow:0 0 0 3px var(--magenta),0 0 22px color-mix(in srgb,var(--magenta) 70%,transparent);color:#fff}
+}
+.qs-flash{animation:qsFlash .6s ease-in-out 3;border-radius:4px}
+@media (prefers-reduced-motion: reduce){
+  .qs-flash{animation:none;outline:3px solid var(--cyan);outline-offset:3px}
 }

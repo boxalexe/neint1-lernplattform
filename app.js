@@ -3,7 +3,7 @@ if('scrollRestoration' in history){ history.scrollRestoration = 'manual'; }
 
 const POOLS = {
  "ap1": {
-  "name": "AP1",
+  "name": "AP1 wording",
   "gold": true,
   "q": [
    {
@@ -2106,16 +2106,6 @@ const POOLS = {
      { "t": "Ein Netzwerkport, der nur eingehenden Verkehr zulässt", "ok": false }
     ],
     "e": "Ein Single Point of Failure ist eine Stelle ohne Redundanz, deren Ausfall den Betrieb des Gesamtsystems stoppt."
-   },
-   {
-    "q": "Welche Maßnahme ist bei einer Videoüberwachung datenschutzrechtlich geboten?",
-    "o": [
-     { "t": "Betroffene durch ein Hinweisschild über die Überwachung informieren", "ok": true },
-     { "t": "Aufnahmen ohne zeitliche Begrenzung dauerhaft speichern", "ok": false },
-     { "t": "Auch rein private Bereiche vollständig mit erfassen", "ok": false },
-     { "t": "Vollständig auf jede Dokumentation des festgelegten Überwachungszwecks verzichten", "ok": false }
-    ],
-    "e": "Betroffene müssen erkennen können, dass sie gefilmt werden. Ein deutliches Hinweisschild ist dafür Pflicht."
    },
    {
     "q": "Was ist bei der Aufbewahrung von Videoaufnahmen zu beachten?",
@@ -15618,12 +15608,12 @@ const POOLS = {
      { "t": "12,5 MB/s", "ok": true },
      { "t": "100 MB/s", "ok": false },
      { "t": "800 MB/s", "ok": false },
-     { "t": "10 MB/s", "ok": false }
+     { "t": "12,5 Mbit/s", "ok": false }
     ],
     "e": "100 Mbit/s geteilt durch 8 ergibt 12,5 MB/s. Wer Bit und Byte verwechselt, liegt um den Faktor 8 daneben."
    },
    {
-    "q": "Wie viele Byte hat ein Kibibyte (KiB)?",
+    "q": "Wie viele Byte hat ein Kibibyte?",
     "o": [
      { "t": "1024 Byte", "ok": true },
      { "t": "1000 Byte", "ok": false },
@@ -15646,7 +15636,7 @@ const POOLS = {
     "q": "Warum zeigt eine als 1 TB beworbene Festplatte im Betriebssystem nur rund 931 GB an?",
     "o": [
      { "t": "Der Hersteller rechnet dezimal mit 1000, das Betriebssystem binär mit 1024", "ok": true },
-     { "t": "Rund 7 Prozent der Kapazität sind fest für die Formatierung reserviert", "ok": false },
+     { "t": "Rund 7 Prozent der Kapazität bleiben fest für die Formatierung des Dateisystems reserviert", "ok": false },
      { "t": "Das Dateisystem legt automatisch einen Wiederherstellungsbereich an", "ok": false },
      { "t": "Der Hersteller zieht die Kapazität für defekte Sektoren vorab ab", "ok": false }
     ],
@@ -20171,7 +20161,9 @@ const POOLS = {
  }
 };
 /* ============ ENGINE ============ */
-const MAX_CATS = 3;
+// Kategorien sind frei wählbar. Statt einer harten Grenze gibt es ab dieser
+// Gesamtzahl einen Hinweis, dass der Durchlauf lang wird.
+const LANG_AB = 100;
 const PER_CAT = 15;
 let quizScope = 15; // 10..50 (5er-Schritte) | 'all' | 'wrong'
 const LETTERS = ['A','B','C','D','E','F'];
@@ -20329,7 +20321,7 @@ function orderedCatKeys(){
 // Die Zuordnung ist fachlich gedacht, nicht alphabetisch: verwandte Kategorien
 // stehen beieinander, damit die Auswahl auf einen Blick überschaubar bleibt.
 const CAT_GROUPS = [
-  { id:'pruefung', titel:'AP1 & Querschnitt', offen:true,
+  { id:'pruefung', titel:'AP1 | Alles', offen:true,
     keys:['ap1','__random__'] },
   { id:'netz', titel:'Netzwerktechnik & Protokolle',
     keys:['osi','tcpip','ip','routing','vlan','wlan','vpn','dnsdhcp','ethernet',
@@ -20490,7 +20482,6 @@ function toggleCat(key, chip){
     selected.delete(key);
     chip.classList.remove('sel');
   } else {
-    if(selected.size >= MAX_CATS) return;
     selected.add(key);
     chip.classList.add('sel');
   }
@@ -20503,13 +20494,7 @@ function refreshSelState(){
   const randomActive = selected.has('__random__');
   document.querySelectorAll('.cat-chip').forEach(chip => {
     const key = chip.dataset.key;
-    if(randomActive || key === '__random__'){
-      chip.classList.remove('disabled');
-    } else if(!selected.has(key) && n >= MAX_CATS){
-      chip.classList.add('disabled');
-    } else {
-      chip.classList.remove('disabled');
-    }
+    chip.classList.remove('disabled');
   });
   startBtn.disabled = n === 0;
   if(n === 0){ selHint.textContent = 'Keine Kategorie gewählt'; selHint.classList.remove('warn'); }
@@ -20517,14 +20502,16 @@ function refreshSelState(){
     // Im Karteikartenmodus zählen nur die dort nutzbaren Fragen
     const totalAll = Object.keys(POOLS).reduce((s,k)=>s+fragenImModus(k),0);
     const qc = quizScope === 'all' ? totalAll : Math.min(quizScope, totalAll);
-    selHint.textContent = 'Zufällig · ' + qc + ' Fragen quer über alle Kategorien';
-    selHint.classList.remove('warn');
+    const lang = qc > LANG_AB;
+    selHint.textContent = 'Zufällig · ' + qc + ' Fragen quer über alle Kategorien' + (lang ? ' · langer Durchlauf' : '');
+    selHint.classList.toggle('warn', lang);
   }
   else {
     let qcount = 0;
     selected.forEach(k => { const v = fragenImModus(k); qcount += (quizScope === 'all' ? v : Math.min(quizScope, v)); });
-    selHint.textContent = n + ' von max. ' + MAX_CATS + ' gewählt · ' + qcount + ' Fragen';
-    selHint.classList.toggle('warn', n >= MAX_CATS);
+    const lang = qcount > LANG_AB;
+    selHint.textContent = n + (n === 1 ? ' Kategorie' : ' Kategorien') + ' · ' + qcount + ' Fragen' + (lang ? ' · langer Durchlauf' : '');
+    selHint.classList.toggle('warn', lang);
   }
   refreshWrongState();
   updateWrongCardBox();
@@ -21201,6 +21188,9 @@ function zeigeReader(){
   const view = document.getElementById('view-lesen');
   if(!tab || !view) return;
   if(view.classList.contains('active')) return;
+  // Position der bisherigen Ansicht sichern. Fehlte das, landete der
+  // Fragenpool beim Zurückwechseln an der Stelle, an der man im Reader war.
+  merkeScroll();
   document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
   document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
   tab.classList.add('active');
@@ -21208,15 +21198,47 @@ function zeigeReader(){
 }
 
 // Sprung zu einem Element mit demselben Übergang wie der Sprung nach oben.
-function teleportZu(ziel){
+// vorher(): läuft erst, wenn das Overlay den Bildschirm deckt (z. B. der
+// Ansichtswechsel). So sieht man nie die falsche Ansicht an falscher Stelle.
+// Kleine Ziele landen mittig im Bild, große (ganze Kapitel, lange Tabellen)
+// mit dem Anfang oben. Danach leuchtet das Ziel dreimal Cyan/Magenta auf.
+function zielPlatzieren(el){
+  const r = el.getBoundingClientRect();
+  const vh = window.innerHeight || document.documentElement.clientHeight;
+  const y0 = window.scrollY || window.pageYOffset || 0;
+  let top;
+  if(el.tagName === 'SECTION' || r.height > vh * 0.6){
+    // Anfang zeigen, Platz für die Menüleiste lassen
+    top = r.top + y0 - Math.min(110, vh * 0.15);
+  } else {
+    top = r.top + y0 - (vh - r.height) / 2;
+  }
+  window.scrollTo({top: Math.max(0, Math.round(top)), behavior:'auto'});
+}
+function zielLeuchten(el){
+  // Bei ganzen Kapiteln leuchtet die Überschrift, nicht der komplette Block
+  const hell = (el.tagName === 'SECTION' && el.querySelector('h2')) || el;
+  hell.classList.remove('qs-flash');
+  void hell.offsetWidth;                         // Animation neu anstoßen
+  hell.classList.add('qs-flash');
+  const aus = () => hell.classList.remove('qs-flash');
+  hell.addEventListener('animationend', aus, {once:true});
+  setTimeout(aus, 2200);                          // Rückfall ohne Animation
+}
+function teleportZu(ziel, vorher){
   const el = (typeof ziel === 'string') ? document.getElementById(ziel.replace(/^#/, '')) : ziel;
-  if(!el){ teleportNachOben(); return; }
+  if(!el){ if(vorher) vorher(); teleportNachOben(); return; }
   const sanft = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if(sanft){ el.scrollIntoView({behavior:'auto', block:'start'}); return; }
-  // Läuft bereits ein Übergang, wird ohne zweiten Effekt direkt gesprungen.
-  // Sonst würde der Klick wirkungslos verpuffen.
-  if(document.querySelector('.tp-overlay')){
-    el.scrollIntoView({behavior:'auto', block:'start'});
+  // Ohne Übergang (reduzierte Bewegung) oder wenn schon einer läuft: direkt
+  if(sanft || document.querySelector('.tp-overlay')){
+    if(vorher) vorher();
+    zielPlatzieren(el);
+    // Ein Frame später erneut setzen: nach dem Einblenden der Ansicht steht
+    // die endgültige Seitenhöhe erst dann fest (am Handy spürbar).
+    if(typeof window.requestAnimationFrame === 'function'){
+      window.requestAnimationFrame(() => zielPlatzieren(el));
+    }
+    zielLeuchten(el);
     return;
   }
 
@@ -21230,10 +21252,16 @@ function teleportZu(ziel){
     overlay.classList.add('tp-in');
   }
   setTimeout(() => {
-    el.scrollIntoView({behavior:'auto', block:'start'});
+    if(vorher) vorher();
+    zielPlatzieren(el);
+    if(typeof window.requestAnimationFrame === 'function'){
+      window.requestAnimationFrame(() => zielPlatzieren(el));
+    }
     overlay.classList.add('tp-out');
   }, 620);
   setTimeout(() => overlay.classList.remove('tp-in'), 700);
+  // Aufleuchten, sobald das Overlay weitgehend ausgeblendet ist
+  setTimeout(() => zielLeuchten(el), 780);
   setTimeout(() => { if(overlay.parentNode) overlay.parentNode.removeChild(overlay); }, 1400);
 }
 
@@ -21279,8 +21307,7 @@ document.addEventListener('click', function(e){
   const ziel = document.getElementById(id);
   if(!ziel) return;
   e.preventDefault();
-  if(typeof zeigeReader === 'function') zeigeReader();
-  teleportZu(ziel);
+  teleportZu(ziel, typeof zeigeReader === 'function' ? zeigeReader : null);
 }, true);
 
 // ---- Lupe und Auge wandern beim Scrollen in die Menüleiste ----
@@ -22537,6 +22564,17 @@ window.addEventListener('pageshow', () => { window.scrollTo(0, 0); });
     if(nav.hash === '#r-ap1') return;
 
     const seen = {};
+    // Ausdrücklich vergebene Stichwörter (data-search="A, B") führen direkt zum
+    // Element, z. B. „PDU" zur OSI-Tabelle, deren Spaltenkopf sonst nicht zählt.
+    Array.prototype.forEach.call(sec.querySelectorAll('[data-search]'), function(el){
+      if(!el.id) el.id = 'qsx' + (++anchorCount);
+      el.getAttribute('data-search').split(',').map(t => t.trim()).filter(Boolean).forEach(function(t){
+        const key = norm(t);
+        if(!key || seen[key]) return;
+        seen[key] = true;
+        INDEX.push({ cat: nav.label, term: t, text: t + ' – ' + (el.getAttribute('data-search-label') || 'Tabelle'), hash: '#' + el.id, top: false });
+      });
+    });
     // Zwischenüberschriften, hervorgehobene Fachbegriffe und die Begriffsspalte von Tabellen
     const elems = sec.querySelectorAll('h3, strong, .term, table tr > td:first-child, table tr > th:first-child');
     Array.prototype.forEach.call(elems, function(el){
@@ -22583,9 +22621,11 @@ window.addEventListener('pageshow', () => { window.scrollTo(0, 0); });
     results.classList.remove('has'); results.innerHTML=''; input.value='';
   }
   function goTo(hash){
-    zeigeReader();
     close();
-    setTimeout(() => teleportZu(hash), 40);
+    // Am Handy sitzt die Suche im aufgeklappten Menü, das sonst das Ziel verdeckt
+    if(typeof menuCloseHandler === 'function' && menuCloseHandler) menuCloseHandler();
+    if(document.activeElement && document.activeElement.blur) document.activeElement.blur();
+    teleportZu(hash, zeigeReader);
   }
   toggle.addEventListener('click', (e) => { e.stopPropagation(); wrap.classList.contains('open') ? close() : open(); });
   input.addEventListener('input', () => {

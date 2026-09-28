@@ -1,0 +1,15 @@
+# Alte Ordnernamen, umbenannt am 28.08.2026. Dauerhaft (301) auf die neuen
+# Pfade umleiten, damit alte Links, Lesezeichen und Googles Index nicht ins
+# Leere laufen. Ohne Statuscode würde Cloudflare Pages 302 verwenden.
+
+# Feste Pfade zuerst
+/subtrainer              /subnetting-trainer/   301
+/subtrainer/             /subnetting-trainer/   301
+/ap1sim5                 /ap1-simulator/        301
+/ap1sim5/                /ap1-simulator/        301
+/ap1sim5/ap1sim5.html    /ap1-simulator/        301
+/ap1sim5/ap1sim5         /ap1-simulator/        301
+
+# Alles darunter (Skripte, Stylesheets, Unterseiten) mitnehmen
+/subtrainer/*            /subnetting-trainer/:splat   301
+/ap1sim5/*               /ap1-simulator/:splat        301
