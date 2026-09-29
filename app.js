@@ -5029,7 +5029,7 @@ const POOLS = {
     "q": "Was ist ein 'Hop' im Netzwerkkontext?",
     "o": [
      {
-      "t": "Ein Zwischenstopp (Router) auf dem Weg zum Ziel",
+      "t": "Ein Zwischenstopp auf dem Weg zum Ziel",
       "ok": true
      },
      {
@@ -5082,7 +5082,7 @@ const POOLS = {
       "ok": false
      },
      {
-      "t": "der Umschlag zum Inhalt (identisch)",
+      "t": "die Ware zur Versandkiste",
       "ok": false
      },
      {
@@ -12667,7 +12667,7 @@ const POOLS = {
     "q": "Welcher Vorteil entsteht durch VLANs bei einem Umzug innerhalb desselben Gebäudes?",
     "o": [
      { "t": "Die Zuordnung folgt dem Arbeitsplatz durch Umkonfiguration statt durch Umverkabelung", "ok": true },
-     { "t": "Die vorhandenen Kabelwege müssen für jeden einzelnen Umzug vollständig neu verlegt werden", "ok": false },
+     { "t": "Jeder Switch-Port führt alle VLANs gleichzeitig, deshalb entfällt beim Umzug jede Konfiguration", "ok": false },
      { "t": "Alle betroffenen Endgeräte erhalten zwingend neue MAC-Adressen", "ok": false },
      { "t": "Die Anzahl der benötigten Switches verringert sich automatisch", "ok": false }
     ],
@@ -14032,7 +14032,7 @@ const POOLS = {
      { "t": "Ein Verstärker, der die Reichweite eines einzelnen APs erhöht", "ok": false },
      { "t": "Eine Funktion, die Clients automatisch auf die Bänder verteilt", "ok": false }
     ],
-    "e": "Ein WLAN-Controller (WLC) verwaltet APs zentral: Konfiguration, Roaming, Sicherheitsrichtlinien."
+    "e": "Ein WLAN-Controller (WLC) verwaltet APs zentral: Konfiguration, Roaming, Sicherheitsrichtlinien. Praxisbeispiel: Eine Schule betreibt 40 Access Points. Soll das Passwort des Gäste-WLANs geändert werden, passiert das einmal am Controller, der die neue Einstellung an alle APs verteilt, statt jeden Access Point einzeln anzupassen."
    },
    {
     "q": "Was sind nicht-überlappende Kanäle bei 2,4 GHz in Europa?",
@@ -14143,12 +14143,12 @@ const POOLS = {
    {
     "q": "Wie funktioniert die Anmeldung per Pre-Shared Key (PSK) in einem WLAN?",
     "o": [
-     { "t": "Nahtloser Wechsel zwischen Access Points, während der Nutzer durch das Firmengebäude läuft", "ok": true },
-     { "t": "Der Access Point sendet dem Client bei jeder Verbindung ein neues Passwort zu, das einzig und allein für diese Sitzung gültig ist", "ok": false },
-     { "t": "Jeder Client authentifiziert sich mit individuellen Zugangsdaten gegen einen zentralen Authentifizierungsserver", "ok": false },
-     { "t": "Der Client weist sich über ein digitales Zertifikat aus, das von der CA des Netzbetreibers signiert wurde", "ok": false }
+     { "t": "Beide Seiten kennen das Passwort vorab und weisen es im 4-Way-Handshake nach, ohne es zu senden", "ok": true },
+     { "t": "Der Access Point schickt dem Client bei jeder Verbindung ein neues Passwort für diese Sitzung", "ok": false },
+     { "t": "Jeder Client meldet sich mit eigenen Zugangsdaten an einem zentralen Authentifizierungsserver an", "ok": false },
+     { "t": "Der Client weist sich mit einem Zertifikat aus, das die CA des Netzbetreibers signiert hat", "ok": false }
     ],
-    "e": "Bei WPA2/WPA3-Personal ist der PSK das WLAN-Passwort; beide Seiten kennen es vorab und leiten daraus die Sitzungsschlüssel ab (WPA3 nutzt dafür SAE). Individuelle Anmeldung pro Nutzer wäre Enterprise mit RADIUS, Zertifikate wären 802.1X/EAP-TLS."
+    "e": "Bei WPA2-Personal ist der PSK das WLAN-Passwort, das Client und Access Point vorab kennen. Die Anmeldung läuft über den 4-Way-Handshake (Vier-Wege-Handschlag): Beide tauschen Zufallswerte aus, leiten daraus die Sitzungsschlüssel ab und belegen so, dass sie denselben Schlüssel besitzen. Das Passwort selbst wird nie übertragen. Individuelle Zugangsdaten pro Nutzer wären WPA2-Enterprise mit RADIUS, Zertifikate wären 802.1X mit EAP-TLS."
    }
   ]
  },
@@ -21765,6 +21765,7 @@ const GLOSSAR = [{"a":"2FA","f":"Zwei-Faktor-Authentifizierung","d":"Anmeldung m
 {"a":"PoE","f":"Power over Ethernet","d":"Stromversorgung von Geräten (APs, IP-Telefone, Kameras) direkt über das Netzwerkkabel."},
 {"a":"POP3","f":"Post Office Protocol Version 3","d":"Mailabruf, bei dem Nachrichten heruntergeladen und meist vom Server gelöscht werden. Port 110, verschlüsselt 995 (POP3S)."},
 {"a":"PSK","f":"Pre-Shared Key","d":"Vorab vereinbarter gemeinsamer Schlüssel, z. B. das WLAN-Passwort bei WPA2-Personal."},
+{"a":"4-Way-Handshake","f":"Vier-Wege-Handschlag","d":"Anmeldeverfahren bei WPA2: Client und Access Point tauschen vier Nachrichten aus, leiten daraus die Sitzungsschlüssel ab und belegen, dass beide denselben Schlüssel kennen. Das Passwort wird nicht übertragen."},
 {"a":"PXE","f":"Preboot Execution Environment","d":"Startet Rechner über das Netzwerk, z. B. für automatische Betriebssysteminstallation. Nutzt DHCP und TFTP."},
 {"a":"QoS","f":"Quality of Service","d":"Priorisierung bestimmter Datenströme (z. B. VoIP) für gleichbleibende Qualität im Netz."},
 {"a":"QUIC","f":"Quick UDP Internet Connections","d":"Modernes Transportprotokoll auf UDP-Basis mit integrierter Verschlüsselung. Grundlage von HTTP/3."},
@@ -22298,7 +22299,7 @@ renderLib(GLOSSAR_SORTED);
     "r-vlan": ["VLAN","Trunk","VLAN-Hopping","MAC-Spoofing","802.1X","Trunk-Port","Access-Port","DTP","ACL","Port Security","Management-VLAN","Layer-3-Switch","Broadcastdomäne"],
     "r-voip": ["VoIP","SIP","RTP","QoS"],
     "r-vpn": ["IPsec","IKE","IKEv2","ISAKMP","ESP","AH","L2TP","OpenVPN","Diffie-Hellman","PFS"],
-    "r-wlan": ["SSID","PSK","SAE","Roaming","Band Steering","IEEE 802.11","Wireless Controller"],
+    "r-wlan": ["SSID","PSK","4-Way-Handshake","SAE","Roaming","Band Steering","IEEE 802.11","Wireless Controller"],
     "r-zahlen": ["MSB","LSB","Nibble","Zweierkomplement"],
     "r-vertraege": ["Kaufvertrag","Werkvertrag","Dienstvertrag","Leasing","Lieferverzug","Nacherfüllung","Mietvertrag"],
     "r-markt": ["Polypol","Oligopol","Monopol","Monopson","Primärer Sektor","Tertiärer Sektor","Inflation","Deflation","Stagflation","Kaufkraft","Disinflation","Reallohn","Verbraucherpreisindex","Angebotsschock","Quintärer Sektor","Quartärer Sektor"],

@@ -6,7 +6,7 @@
 <title>IHK AP1 Vorbereitung für Fachinformatiker | Layer 8 Academy</title>
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
-<meta name="description" content="Kostenlose Prüfungsvorbereitung auf die IHK-Abschlussprüfung Teil 1 (AP1) der IT-Berufe: 1378 Übungsfragen in 49 Kategorien, 47 Nachschlagekapitel und 562 Glossarbegriffe zu Netzwerktechnik, IT-Sicherheit, SQL, Projektmanagement und Wirtschaft. Mit Karteikartenmodus, Subnetting-Trainer und Prüfungssimulationen.">
+<meta name="description" content="Kostenlose Prüfungsvorbereitung auf die IHK-Abschlussprüfung Teil 1 (AP1) der IT-Berufe: 1378 Übungsfragen in 49 Kategorien, 47 Nachschlagekapitel und 563 Glossarbegriffe zu Netzwerktechnik, IT-Sicherheit, SQL, Projektmanagement und Wirtschaft. Mit Karteikartenmodus, Subnetting-Trainer und Prüfungssimulationen.">
 <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
 <meta name="theme-color" content="#0a0e12">
 <script type="application/ld+json">
@@ -66,7 +66,7 @@
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Layer 8 Academy">
 <meta property="og:title" content="IHK AP1 Vorbereitung für Fachinformatiker | Layer 8 Academy">
-<meta property="og:description" content="Kostenlose Prüfungsvorbereitung auf die IHK-Abschlussprüfung Teil 1 (AP1) der IT-Berufe: 1378 Übungsfragen in 49 Kategorien, 47 Nachschlagekapitel und 562 Glossarbegriffe zu Netzwerktechnik, IT-Sicherheit, SQL, Projektmanagement und Wirtschaft. Mit Karteikartenmodus, Subnetting-Trainer und Prüfungssimulationen.">
+<meta property="og:description" content="Kostenlose Prüfungsvorbereitung auf die IHK-Abschlussprüfung Teil 1 (AP1) der IT-Berufe: 1378 Übungsfragen in 49 Kategorien, 47 Nachschlagekapitel und 563 Glossarbegriffe zu Netzwerktechnik, IT-Sicherheit, SQL, Projektmanagement und Wirtschaft. Mit Karteikartenmodus, Subnetting-Trainer und Prüfungssimulationen.">
 <meta property="og:url" content="https://layer8academy.boxberger.app/">
 <meta property="og:locale" content="de_DE">
 <meta name="twitter:card" content="summary">
@@ -84,7 +84,7 @@
 <header>
   <div class="wrap">
     <h1><span class="t-neint">Layer</span> <svg class="title-8" width="44" height="44" viewBox="0 0 120 120" aria-label="L8A" role="img"><path d="M60,60 C34,60 24,26 60,26 C96,26 86,60 60,60 Z" fill="none" stroke="#3ddc84" stroke-width="7" stroke-linecap="round"/><path d="M60,94 C86,94 96,60 60,60 C24,60 34,94 60,94 Z" fill="none" stroke="#22d3ee" stroke-width="7" stroke-linecap="round"/><line x1="18" y1="26" x2="18" y2="52" stroke="#22d3ee" stroke-width="7" stroke-linecap="round"/><line x1="18" y1="52" x2="30" y2="52" stroke="#22d3ee" stroke-width="7" stroke-linecap="round"/><path d="M102,68 L92,94 M102,68 L112,94 M95,86 L107,86" stroke="#3ddc84" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg> <span class="t-symb">Academy</span></h1>
-    <p class="header-specs"><span id="specCats">49</span> Kategorien · <span id="specQs">1378</span> Fragen · <span id="specGloss">562</span> Nachschlagebegriffe</p>
+    <p class="header-specs"><span id="specCats">49</span> Kategorien · <span id="specQs">1378</span> Fragen · <span id="specGloss">563</span> Nachschlagebegriffe</p>
     <div class="a11y-wrap">
       <div class="quick-search" id="quickSearch">
         <button class="qs-toggle" id="qsToggle" aria-label="Begriffe suchen" title="Begriffe suchen" aria-expanded="false">
@@ -767,18 +767,18 @@ Ereignis: <em>Antragsteller ist benachrichtigt</em></p>
 
 <section id="r-header">
 <h2>Header, TTL & Traceroute</h2>
-<p>Ein Paket besteht aus <strong>Header</strong> (Steuerdaten) und <strong>Payload</strong> (Nutzdaten). Die Felder verteilen sich auf mehrere Header verschiedener Schichten:</p>
+<p>Ein Paket besteht aus <strong>Header</strong> (Steuerdaten) und <strong>Payload</strong> (Nutzdaten). Ein Router liest für seine Weiterleitungsentscheidung nur den Header, vor allem die Ziel-IP-Adresse, und lässt die Nutzdaten unberührt. Die Felder verteilen sich auf mehrere Header verschiedener Schichten:</p>
 <p><strong>IP-Header</strong> (Vermittlungsschicht):</p>
 <ul>
 <li><strong>Quell-/Ziel-IP-Adresse.</strong></li>
-<li><strong>TTL (Time to Live):</strong> Zähler (z. B. 64/128). Jeder Router zieht 1 ab; bei <code>0</code> wird das Paket verworfen (ICMP Time Exceeded; ICMP = Internet Control Message Protocol), verhindert Endlosschleifen.</li>
+<li><strong>TTL (Time to Live):</strong> Zähler, dessen Startwert das sendende System setzt: <strong>Linux 64</strong>, <strong>Windows 128</strong>, viele Router und Netzwerkgeräte 255. Jeder Router zieht 1 ab; bei <code>0</code> wird das Paket verworfen (ICMP Time Exceeded; ICMP = Internet Control Message Protocol), verhindert Endlosschleifen.</li>
 <li><strong>Protokollfeld:</strong> gibt an, welches Transportprotokoll in der Payload steckt (6 = TCP, 17 = UDP, 1 = ICMP). So weiß der Empfänger, wie er die Daten interpretieren muss.</li>
 </ul>
 <p><strong>TCP-Header</strong> (Transportschicht):</p>
 <ul>
 <li><strong>Quell-/Zielport.</strong></li>
 <li><strong>Sequenznummer (Sequence Number):</strong> nummeriert die Bytes, damit zerlegte Segmente beim Empfänger in richtiger Reihenfolge zusammengesetzt werden.</li>
-<li><strong>Bestätigungsnummer (Acknowledgement Number):</strong> gibt das nächste erwartete Byte an und bestätigt so den Empfang.</li>
+<li data-search="ACK, Acknowledgement Number" data-search-label="TCP-Header"><strong>Bestätigungsnummer (Acknowledgement Number):</strong> gibt das nächste erwartete Byte an und bestätigt so den Empfang.</li>
 <li><strong>Prüfsumme (Checksum):</strong> erkennt Übertragungsfehler in Header und Daten; ein fehlerhaftes Paket wird verworfen. Auch der IP-Header trägt eine eigene Prüfsumme.</li>
 </ul>
 <p><strong>traceroute</strong> (Linux) / <strong>tracert</strong> (Windows) nutzt die TTL: erst TTL=1 (erster Router meldet sich), dann 2, 3 … bis das Ziel erreicht ist, so wird jeder Hop sichtbar. Reine Erreichbarkeit prüft man dagegen mit <strong>ping</strong> (ICMP Echo Request/Reply); die dabei gemessene <span class="term">RTT (Round Trip Time)</span> ist die Umlaufzeit hin und zurück und damit ein direktes Maß für die Latenz.</p>
@@ -1996,7 +1996,7 @@ Im <a href="subnetting-trainer/">Subnetting Trainer</a> kann dieses Thema geziel
 <section id="r-tcpip">
 <h2>TCP/IP & UDP</h2>
 <p><span class="term">TCP/IP</span> ist die herstellerunabhängige Protokollfamilie des Internets. <strong>IP</strong> (Internet Protocol) übernimmt Adressierung und Routing (verbindungslos, unzuverlässig). <strong>TCP</strong> sorgt für eine zuverlässige Übertragung, solange die Verbindung besteht.</p>
-<div class="callout"><span class="tag">Three-Way-Handshake</span>1. <code>SYN</code> (Client fragt an) → 2. <code>SYN-ACK</code> (Server bestätigt/fragt zurück) → 3. <code>ACK</code> (Client bestätigt) → Verbindung steht. Geordneter Abbau über <code>FIN/ACK</code>; ein <code>RST</code>-Segment bricht die Verbindung dagegen sofort und ungeordnet ab (z. B. bei Fehlern).</div>
+<div class="callout" data-search="ACK, SYN, SYN-ACK, Three-Way-Handshake" data-search-label="TCP-Verbindungsaufbau"><span class="tag">Three-Way-Handshake</span>1. <code>SYN</code> (Client fragt an) → 2. <code>SYN-ACK</code> (Server bestätigt/fragt zurück) → 3. <code>ACK</code> (Client bestätigt) → Verbindung steht. Geordneter Abbau über <code>FIN/ACK</code>; ein <code>RST</code>-Segment bricht die Verbindung dagegen sofort und ungeordnet ab (z. B. bei Fehlern).</div>
 <p><strong>Staukontrolle</strong> (Congestion Control): TCP interpretiert Paketverluste als Zeichen von Netzüberlastung und reduziert automatisch die Senderate, bevor sie wieder ansteigt, schützt das Netz vor Überlastungskollaps. Die <strong>Flusskontrolle</strong> (Flow Control) dagegen schützt den einzelnen Empfänger: über die Fenstergröße signalisiert er, wie viele Daten er noch aufnehmen kann, damit der Sender ihn nicht überflutet. Eine <strong>Prüfsumme</strong> (Checksumme) in beiden Protokollen erkennt beschädigte Pakete.</p>
 <p><strong>UDP</strong> ist verbindungslos: Datagramme werden ohne Handshake und ohne Bestätigung verschickt, schnell, aber ohne Garantie.</p>
 <table>
@@ -2275,6 +2275,7 @@ Im <a href="subnetting-trainer/">Subnetting Trainer</a> kann dieses Thema geziel
 <tr><td>MAC-Filter</td><td>schwach (MAC fälschbar)</td></tr>
 <tr><td>versteckte SSID</td><td>schwach (auslesbar)</td></tr>
 </table>
+<p>Bei <strong>WPA2-Personal</strong> kennen Client und Access Point das Passwort vorab. Die Anmeldung läuft über den <strong>4-Way-Handshake</strong> (Vier-Wege-Handschlag): Beide tauschen Zufallswerte aus, leiten daraus die Sitzungsschlüssel ab und belegen so, dass sie denselben Schlüssel besitzen. Das Passwort selbst wird dabei nie übertragen.</p>
 <div class="callout"><span class="tag">Planung</span>Gäste-WLAN per <strong>VLAN</strong> vom Firmennetz trennen. <strong>Kanalwahl</strong> besonders bei 2,4 GHz wichtig, nur die Kanäle 1, 6 und 11 überlappen sich in Europa nicht. <strong>Mesh</strong>: mehrere APs, gemeinsame SSID, nahtloses <strong>Roaming</strong> (mit <strong>802.11r</strong> ohne erneute Anmeldung). Ein <strong>Wireless Controller</strong> verwaltet mehrere APs zentral. <strong>Band Steering</strong> lenkt Dual-Band-Geräte automatisch aufs schnellere 5-GHz-Band. AP zentral und hoch platzieren.</div>
 <p><strong>Wi-Fi 6</strong> (IEEE <strong>802.11ax</strong>) ist der aktuelle Standard nach Wi-Fi 5 (802.11ac) und Wi-Fi 4 (802.11n). <strong>WPA3-Personal</strong> nutzt statt PSK das Verfahren <strong>SAE</strong> (Simultaneous Authentication of Equals), macht Offline-Brute-Force-Angriffe auf das Passwort praktisch unmöglich. Ergänzend zu 802.11r verbessern auch <strong>802.11k</strong> (liefert dem Client eine Nachbarschaftsliste verfügbarer APs) und <strong>802.11v</strong> (Netzwerk-unterstütztes Roaming-Management) das Wechseln zwischen Access Points, für die Prüfung eher Zusatzwissen als Pflichtstoff.</p>
 <div class="callout"><span class="tag">Schwachstellen</span><strong>WPS</strong> (Wi-Fi Protected Setup) vereinfacht die Einrichtung, ist aber durch PIN-Brute-Force angreifbar und sollte deaktiviert werden. Das <strong>Hidden-Node-Problem</strong>: zwei Clients hören sich gegenseitig nicht und senden gleichzeitig zum AP, es kollidiert, obwohl beide CSMA/CA korrekt anwenden.</div>
