@@ -7,6 +7,7 @@ const EXAMS = [
   examId: "AP1-SIM-01",
   title: "AP1-Prüfungssimulation 01 — Gesundheitswesen",
   branche: "Therapiezentrum",
+  themen: ["Nutzwertanalyse", "Rabatt und Skonto", "USB-C und Docking", "Berechtigungen", "Mobile Sicherheit", "IPv4-Subnetting", "APIPA", "IPv6", "Netzplan", "Datenschutz", "KI", "Asymmetrische Verschlüsselung", "Speicherbedarf", "UML-Klassendiagramm", "Relationales Modell", "Pseudocode"],
   durationMinutes: 90,
   maxPoints: 100,
   disclaimer: "Unverbindliche Übungssimulation. Keine offizielle IHK-Prüfung und keine verbindliche Bewertung.",
@@ -261,6 +262,7 @@ const EXAMS = [
   examId: "AP1-SIM-02",
   title: "AP1-Prüfungssimulation 02 — Kanzlei und Beratung",
   branche: "Steuerkanzlei",
+  themen: ["Nutzwertanalyse", "Rabatt und Skonto", "Monitoranschluss", "Berechtigungskonzept", "Mobile Sicherheit", "IPv4-Subnetting", "DNS", "IPv6-Übergang", "UML-Aktivitätsdiagramm", "Auftragsverarbeitung", "Automatisierung und KI", "Hybride Verschlüsselung", "Verfügbarkeit und SLA", "UML-Klassendiagramm", "Relationales Modell", "Pseudocode und Testfälle"],
   durationMinutes: 90,
   maxPoints: 100,
   disclaimer: "Unverbindliche Übungssimulation. Keine offizielle IHK-Prüfung und keine verbindliche Bewertung.",
@@ -515,6 +517,7 @@ const EXAMS = [
   examId: "AP1-SIM-03",
   title: "AP1-Prüfungssimulation 03 — Logistik und Handel",
   branche: "Logistikdienstleister",
+  themen: ["Belegprüfung", "Rabatt und Skonto", "Lieferverzug", "WLAN-Sicherheit", "Gesamtkosten (TCO)", "IPv4-Subnetting", "WLAN-Fehleranalyse", "VPN", "Netzplan", "Videoüberwachung", "Automatisierung", "3-2-1-Backup und RAID", "Speicherbedarf", "Primär- und Fremdschlüssel", "ER-Modell", "Pseudocode", "Datenbankindex"],
   durationMinutes: 90,
   maxPoints: 100,
   disclaimer: "Unverbindliche Übungssimulation. Keine offizielle IHK-Prüfung und keine verbindliche Bewertung.",
@@ -769,6 +772,7 @@ const EXAMS = [
   examId: "AP1-SIM-04",
   title: "AP1-Prüfungssimulation 04 — Bildung und Schulung",
   branche: "Bildungsträger",
+  themen: ["Nutzwertanalyse", "Rabatt und Skonto", "Bildschnittstellen", "Ergonomie", "Benutzerkonten", "IPv4-Subnetting", "VLAN", "DHCP", "Netzplan", "Englischer Fachtext", "Barrierefreiheit", "KI", "Passwort-Hashing", "Speicherbedarf", "UML-Klassendiagramm", "Relationales Modell", "Pseudocode", "SQL GROUP BY und HAVING"],
   durationMinutes: 90,
   maxPoints: 100,
   disclaimer: "Unverbindliche Übungssimulation. Keine offizielle IHK-Prüfung und keine verbindliche Bewertung.",
@@ -1023,6 +1027,7 @@ const EXAMS = [
   examId: "AP1-SIM-05",
   title: "AP1-Prüfungssimulation 05 — Produktion und technischer Dienstleister",
   branche: "Maschinenbau",
+  themen: ["Nutzwertanalyse", "Rabatt und Skonto", "Netzteil-Dimensionierung", "Industrieumgebung", "USV", "IPv4-Subnetting", "Netzsegmentierung", "LAN und WAN", "Netzplan", "Beschäftigtendatenschutz", "Predictive Maintenance", "Ransomware", "Speicherbedarf", "UML-Klassendiagramm", "Relationales Modell", "Pseudocode", "Datenbank-Performance"],
   durationMinutes: 90,
   maxPoints: 100,
   disclaimer: "Unverbindliche Übungssimulation. Keine offizielle IHK-Prüfung und keine verbindliche Bewertung.",
@@ -1277,6 +1282,7 @@ const EXAMS = [
   examId: "AP2-SIM-06",
   title: "Prüfungssimulation 06 — Serverbetrieb, Cloud und Systemverwaltung",
   branche: "Systemtechnik (erhöhter Schwerpunkt Systemintegration)",
+  themen: ["Netzteil-Dimensionierung", "UEFI-Härtung", "Sicherheitsmaßnahmen", "Bootmanager", "Zertifikate und PKI", "Load Balancing", "DDoS", "Cloud-Servicemodelle", "Cloud-Bereitstellung", "RTO und RPO", "Ausfallkosten", "Cloud-Datenschutz", "Arrays", "Pseudocode", "Prozessverwaltung"],
   durationMinutes: 90,
   maxPoints: 100,
   disclaimer: "Unverbindliche Übungssimulation. Keine offizielle IHK-Prüfung und keine verbindliche Bewertung. Diese Variante liegt schwerpunktmäßig im Bereich Konzeption und Administration von IT-Systemen und geht damit über die typischen AP1-Inhalte hinaus.",
@@ -1536,6 +1542,565 @@ const EXAMS = [
           {id:"s6-4d-r2", criterion:"Identifikation des Prozesses beziehungsweise der PID beschrieben", points:1},
           {id:"s6-4d-r3", criterion:"Konkretes Werkzeug oder Befehl genannt", points:1},
           {id:"s6-4d-r4", criterion:"Erzwungenes Beenden oder Folge für nicht gesicherte Daten erwähnt", points:1}
+        ]}
+    ]
+  }
+  ]
+},
+{
+  examId: "AP1-SIM-07",
+  title: "AP1-Prüfungssimulation 07 — Autohaus und Werkstatt",
+  branche: "Autohaus mit Werkstatt",
+  themen: ["Nutzwertanalyse", "Soll-Ist-Vergleich", "Vor- und Nachkalkulation", "Speicherbedarf", "RAID 6", "USV", "VLAN", "Glasfaser", "IPv6-Subnetting", "Datenschutz", "KI", "UML-Aktivitätsdiagramm", "Schreibtischtest", "ER-Modell", "Referenzielle Integrität"],
+  durationMinutes: 90,
+  maxPoints: 100,
+  disclaimer: "Unverbindliche Übungssimulation. Keine offizielle IHK-Prüfung und keine verbindliche Bewertung.",
+  scenario: "Sie sind Auszubildende oder Auszubildender bei der Kernwerk Systemhaus GmbH in Münster. Ihr Kunde, die Autohaus Lindemeyer GmbH in Telgte, beschäftigt 64 Mitarbeitende in zwei Gebäuden: einem Verkaufshaus mit Showroom und Verwaltung sowie einer Werkstatt mit Karosserie- und Lackierbereich. Das Autohaus modernisiert seine IT. Geplant sind ein neuer Server, ein neu strukturiertes Netz über beide Gebäude und eine digitale Auftragsannahme für die Werkstatt. Sie unterstützen das Projektteam bei Planung, Berechnung und Dokumentation.",
+  tasks: [
+  {
+    id: "1", title: "Beschaffung und Projektkosten", points: 25,
+    context: "Für den neuen Server liegen drei Angebote vor. Die Projektgruppe hat eine Nutzwertanalyse begonnen. Bewertet wird auf einer Skala von 1 (schlecht) bis 5 (sehr gut). Der gewichtete Wert ergibt sich aus Gewichtung mal Punkten. Beim Übertragen sind einige Werte verloren gegangen, sie sind mit ? markiert.\n\nSchreibweise: Punkte → gewichteter Wert\n\nAnschaffungspreis, Gewichtung 35 %\n   A: 4 → ?   |   B: 3 → 1,05   |   C: ? → 1,75\nRechenleistung, Gewichtung 20 %\n   A: 5 → 1,00   |   B: ? → 0,80   |   C: 3 → ?\nEnergieverbrauch, Gewichtung ?\n   A: 3 → ?   |   B: ? → 1,00   |   C: 3 → 0,60\nGarantie und Service, Gewichtung 15 %\n   A: ? → 0,60   |   B: 5 → ?   |   C: 2 → ?\nErweiterbarkeit, Gewichtung 10 %\n   A: 3 → ?   |   B: 4 → 0,40   |   C: ? → 0,20",
+    subtasks: [
+      { id:"1a", operator:"Vervollständigen Sie", points:7, answerType:"table", required:true,
+        prompt:"Ermitteln Sie alle fehlenden Werte der Nutzwertanalyse und berechnen Sie den Gesamtnutzwert je Anbieter. Geben Sie an, wie Sie die fehlende Gewichtung ermittelt haben.",
+        minRequirements:"Fehlende Gewichtung, fehlende Punkte, fehlende gewichtete Werte, drei Gesamtnutzwerte",
+        fallbackValue:"A 3,90 | B 4,00 | C 3,45",
+        solution:"Fehlende Gewichtung Energieverbrauch: 100 % − 35 % − 20 % − 15 % − 10 % = 20 % (Kontrolle: C 0,60 ÷ 3 = 0,20)\n\nFehlende Punkte (gewichteter Wert ÷ Gewichtung):\nB Rechenleistung 0,80 ÷ 0,20 = 4 | B Energie 1,00 ÷ 0,20 = 5 | A Service 0,60 ÷ 0,15 = 4 | C Preis 1,75 ÷ 0,35 = 5 | C Erweiterbarkeit 0,20 ÷ 0,10 = 2\n\nAnbieter A: 1,40 + 1,00 + 0,60 + 0,60 + 0,30 = 3,90\nAnbieter B: 1,05 + 0,80 + 1,00 + 0,75 + 0,40 = 4,00\nAnbieter C: 1,75 + 0,60 + 0,60 + 0,30 + 0,20 = 3,45",
+        rubric:[
+          {id:"s7-1a-r1", criterion:"Gewichtung Energieverbrauch 20 % ermittelt und Weg angegeben", points:1},
+          {id:"s7-1a-r2", criterion:"Fehlende Punkte über gewichteten Wert ÷ Gewichtung bestimmt", points:1},
+          {id:"s7-1a-r3", criterion:"Alle fünf fehlenden Punktwerte korrekt (4, 5, 4, 5, 2)", points:1},
+          {id:"s7-1a-r4", criterion:"Fehlende gewichtete Werte korrekt ergänzt", points:1},
+          {id:"s7-1a-r5", criterion:"Gesamtnutzwert A = 3,90", points:1},
+          {id:"s7-1a-r6", criterion:"Gesamtnutzwert B = 4,00", points:1},
+          {id:"s7-1a-r7", criterion:"Gesamtnutzwert C = 3,45", points:1}
+        ]},
+      { id:"1b", operator:"Beurteilen Sie", points:3, answerType:"text", required:true,
+        prompt:"Treffen Sie eine Entscheidung auf Basis der Nutzwertanalyse und beurteilen Sie, wie belastbar diese Entscheidung ist.",
+        minRequirements:"Entscheidung, Abstand der Ergebnisse, Einschätzung der Belastbarkeit",
+        fallbackValue:null,
+        solution:"Entscheidung: Anbieter B mit dem höchsten Nutzwert von 4,00.\nBelastbarkeit: Der Vorsprung vor Anbieter A beträgt nur 0,10 Punkte. Schon eine leichte Verschiebung der Gewichtung, etwa beim Preis, oder eine um einen Punkt andere Bewertung könnte die Rangfolge umkehren. Die Punktvergabe ist zudem subjektiv. Vor dem Kauf sollten die knappen Kriterien geprüft oder die Gewichtung mit der Geschäftsführung bestätigt werden.",
+        rubric:[
+          {id:"s7-1b-r1", criterion:"Anbieter B gewählt", points:1},
+          {id:"s7-1b-r2", criterion:"Knapper Abstand zu A (0,10) erkannt", points:1},
+          {id:"s7-1b-r3", criterion:"Subjektivität oder Empfindlichkeit gegenüber der Gewichtung begründet", points:1}
+        ]},
+      { id:"1c", operator:"Berechnen Sie", points:8, answerType:"number_with_working", required:true,
+        prompt:"Parallel wurde das Projekt „18 neue Werkstatt-Arbeitsplätze inklusive Netzanbindung“ abgeschlossen. Das Systemhaus verrechnet intern 92,00 EUR je Arbeitsstunde.\n\nVorkalkulation (Plan):\nArbeitszeit 52 Stunden\nMaterial 6.120,00 EUR\nFremdleistung Elektroinstallation 740,00 EUR\n\nNachkalkulation (Ist):\nArbeitszeit 61 Stunden\nMaterial 5.870,00 EUR\nFremdleistung Elektroinstallation 1.180,00 EUR\n\nBerechnen Sie die Plan- und die Ist-Kosten (netto), die Abweichung je Kostenposition sowie die Gesamtabweichung in Euro und in Prozent. Runden Sie Prozentwerte auf zwei Nachkommastellen.",
+        minRequirements:"Plankosten, Istkosten, drei Einzelabweichungen, Gesamtabweichung in EUR und %",
+        fallbackValue:"+1.018,00 EUR bzw. +8,74 %",
+        solution:"Plan: 52 h × 92,00 EUR = 4.784,00 EUR | + 6.120,00 EUR + 740,00 EUR = 11.644,00 EUR\nIst: 61 h × 92,00 EUR = 5.612,00 EUR | + 5.870,00 EUR + 1.180,00 EUR = 12.662,00 EUR\n\nAbweichung je Position (Ist − Plan):\nArbeitszeit +828,00 EUR\nMaterial −250,00 EUR\nFremdleistung +440,00 EUR\n\nGesamtabweichung: 12.662,00 − 11.644,00 = +1.018,00 EUR\nIn Prozent bezogen auf den Plan: 1.018,00 ÷ 11.644,00 × 100 = 8,74 %\nKontrolle: 828 − 250 + 440 = 1.018",
+        rubric:[
+          {id:"s7-1c-r1", criterion:"Plankosten 11.644,00 EUR", points:1},
+          {id:"s7-1c-r2", criterion:"Istkosten 12.662,00 EUR", points:1},
+          {id:"s7-1c-r3", criterion:"Abweichung Arbeitszeit +828,00 EUR", points:1},
+          {id:"s7-1c-r4", criterion:"Abweichung Material −250,00 EUR mit richtigem Vorzeichen", points:1},
+          {id:"s7-1c-r5", criterion:"Abweichung Fremdleistung +440,00 EUR", points:1},
+          {id:"s7-1c-r6", criterion:"Gesamtabweichung +1.018,00 EUR", points:1},
+          {id:"s7-1c-r7", criterion:"Prozentwert 8,74 % mit dem Plan als Bezugsgröße", points:1},
+          {id:"s7-1c-r8", criterion:"Rechenweg nachvollziehbar und Einheiten angegeben", points:1}
+        ]},
+      { id:"1d", operator:"Nennen Sie", points:4, answerType:"text", required:true,
+        prompt:"Nennen Sie für die beiden Positionen mit Mehrkosten je eine plausible Ursache und je eine Maßnahme, mit der sich eine solche Abweichung bei künftigen Projekten verringern lässt.",
+        minRequirements:"Je Position eine Ursache und eine Maßnahme",
+        fallbackValue:null,
+        solution:"Arbeitszeit: Ursache zum Beispiel unerwartete Kompatibilitätsprobleme mit den Diagnosegeräten oder fehlende Vorbereitung vor Ort. Maßnahme: Vor-Ort-Begehung vor dem Angebot, Aufwandsschätzung mit Erfahrungswerten und Puffer.\nFremdleistung: Ursache zum Beispiel zusätzliche Stromkreise oder Kabelwege, die erst während der Installation festgestellt wurden. Maßnahme: Leistungsumfang mit dem Elektriker vorab schriftlich festlegen, Mehrleistungen nur nach Freigabe beauftragen.\nWeitere plausible Antworten sind möglich.",
+        rubric:[
+          {id:"s7-1d-r1", criterion:"Plausible Ursache für Mehraufwand Arbeitszeit", points:1},
+          {id:"s7-1d-r2", criterion:"Passende Maßnahme zur Arbeitszeit", points:1},
+          {id:"s7-1d-r3", criterion:"Plausible Ursache für Mehrkosten Fremdleistung", points:1},
+          {id:"s7-1d-r4", criterion:"Passende Maßnahme zur Fremdleistung", points:1}
+        ]},
+      { id:"1e", operator:"Erläutern Sie", points:3, answerType:"text", required:true,
+        prompt:"Erläutern Sie den Unterschied zwischen Vor- und Nachkalkulation und beschreiben Sie, wofür das Systemhaus die Ergebnisse der Nachkalkulation nutzen kann.",
+        minRequirements:"Zeitpunkt und Zweck beider Kalkulationen, Nutzen der Nachkalkulation",
+        fallbackValue:null,
+        solution:"Die Vorkalkulation entsteht vor Projektbeginn und schätzt die Kosten als Grundlage für Angebot und Preis. Die Nachkalkulation erfolgt nach Abschluss mit den tatsächlich angefallenen Werten.\nNutzen: Sie zeigt, ob das Projekt wirtschaftlich war, deckt Fehleinschätzungen auf und verbessert die Schätzgrundlage für künftige Angebote.",
+        rubric:[
+          {id:"s7-1e-r1", criterion:"Vorkalkulation als Planung vor Projektbeginn beschrieben", points:1},
+          {id:"s7-1e-r2", criterion:"Nachkalkulation als Auswertung der Ist-Werte beschrieben", points:1},
+          {id:"s7-1e-r3", criterion:"Nutzen für künftige Angebote oder Wirtschaftlichkeitskontrolle genannt", points:1}
+        ]}
+    ]
+  },
+  {
+    id: "2", title: "Speicherplanung und Stromversorgung", points: 25,
+    context: "Die Werkstatt dokumentiert künftig jeden Auftrag digital. Für den Fileserver gelten folgende Annahmen:\n\n34 Werkstattaufträge je Arbeitstag, 230 Arbeitstage im Jahr\nJe Auftrag:\n   18 Fotos zu je 4,2 MB\n   1 Diagnoseprotokoll mit 640 KiB\n   2 kurze Videos zu je 85 MiB\n\nDie Daten werden drei Jahre aufbewahrt. Zusätzlich wird eine Reserve von 25 % eingeplant.\nRechnen Sie bei Dezimalpräfixen mit Faktor 1.000 und bei Binärpräfixen mit Faktor 1.024.",
+    subtasks: [
+      { id:"2a", operator:"Berechnen Sie", points:5, answerType:"number_with_working", required:true,
+        prompt:"Berechnen Sie den Speicherbedarf je Werkstattauftrag in MiB. Runden Sie auf zwei Nachkommastellen.",
+        minRequirements:"Umrechnung aller drei Posten in MiB, Summe",
+        fallbackValue:"242,72 MiB",
+        solution:"Fotos: 18 × 4,2 MB = 75,6 MB = 75.600.000 Byte\n75.600.000 ÷ 1.024 ÷ 1.024 = 72,10 MiB\nProtokoll: 640 KiB ÷ 1.024 = 0,625 MiB\nVideos: 2 × 85 MiB = 170 MiB\nSumme: 72,10 + 0,63 + 170 = 242,72 MiB",
+        rubric:[
+          {id:"s7-2a-r1", criterion:"Fotos in Byte umgerechnet (Faktor 1.000 für MB)", points:1},
+          {id:"s7-2a-r2", criterion:"Fotos korrekt in MiB (72,10 MiB)", points:1},
+          {id:"s7-2a-r3", criterion:"Protokoll korrekt in MiB (0,625 MiB)", points:1},
+          {id:"s7-2a-r4", criterion:"Videos 170 MiB", points:1},
+          {id:"s7-2a-r5", criterion:"Summe 242,72 MiB (kleine Rundungsabweichungen zulässig)", points:1}
+        ]},
+      { id:"2b", operator:"Berechnen Sie", points:4, answerType:"number_with_working", required:true,
+        prompt:"Berechnen Sie den Speicherbedarf für ein Jahr in GiB und in TiB. Runden Sie auf zwei Nachkommastellen.",
+        minRequirements:"Anzahl Aufträge pro Jahr, Jahresbedarf in GiB und TiB",
+        fallbackValue:"1,81 TiB",
+        solution:"Aufträge pro Jahr: 34 × 230 = 7.820\n7.820 × 242,72 MiB = 1.898.070 MiB\n1.898.070 ÷ 1.024 = 1.853,58 GiB\n1.853,58 ÷ 1.024 = 1,81 TiB",
+        rubric:[
+          {id:"s7-2b-r1", criterion:"7.820 Aufträge pro Jahr", points:1},
+          {id:"s7-2b-r2", criterion:"Jahresbedarf in MiB korrekt", points:1},
+          {id:"s7-2b-r3", criterion:"Rund 1.853,6 GiB", points:1},
+          {id:"s7-2b-r4", criterion:"Rund 1,81 TiB", points:1}
+        ]},
+      { id:"2c", operator:"Berechnen Sie", points:4, answerType:"number_with_working", required:true,
+        prompt:"Berechnen Sie den Gesamtbedarf für drei Jahre einschließlich 25 % Reserve in TiB. Rechnen Sie das Ergebnis anschließend in TB um, weil Festplattenhersteller Kapazitäten in TB angeben.",
+        minRequirements:"Dreijahresbedarf, Reserve, Umrechnung TiB in TB",
+        fallbackValue:"6,79 TiB bzw. 7,46 TB",
+        solution:"Drei Jahre: 3 × 1,81 TiB = 5,43 TiB\nMit Reserve: 5,43 × 1,25 = 6,79 TiB\nIn TB: 6,79 × 1.024⁴ Byte = 6,79 × 1,0995 TB = 7,46 TB",
+        rubric:[
+          {id:"s7-2c-r1", criterion:"Dreijahresbedarf 5,43 TiB", points:1},
+          {id:"s7-2c-r2", criterion:"Reserve als Faktor 1,25 angewendet (6,79 TiB)", points:1},
+          {id:"s7-2c-r3", criterion:"Umrechnungsfaktor TiB in TB richtig (1,0995 oder über Byte)", points:1},
+          {id:"s7-2c-r4", criterion:"Ergebnis rund 7,46 TB", points:1}
+        ]},
+      { id:"2d", operator:"Ermitteln Sie", points:3, answerType:"number_with_working", required:true,
+        prompt:"Die Daten sollen auf einem RAID 6 mit Festplatten zu je 2 TB liegen. Ermitteln Sie die Mindestanzahl der Festplatten und die daraus entstehende Nettokapazität.",
+        minRequirements:"Nettoformel RAID 6, Anzahl Platten, Nettokapazität",
+        fallbackValue:"6 Festplatten, 8 TB netto",
+        solution:"RAID 6 nutzt die Kapazität von zwei Platten für doppelte Parität. Netto = (n − 2) × 2 TB.\nBenötigt: 7,46 TB ÷ 2 TB = 3,73, also mindestens 4 Datenplatten.\nn = 4 + 2 = 6 Festplatten, Nettokapazität 4 × 2 TB = 8 TB.",
+        rubric:[
+          {id:"s7-2d-r1", criterion:"Nettokapazität RAID 6 als (n − 2) × Plattengröße erkannt", points:1},
+          {id:"s7-2d-r2", criterion:"6 Festplatten", points:1},
+          {id:"s7-2d-r3", criterion:"8 TB netto", points:1}
+        ]},
+      { id:"2e", operator:"Berechnen Sie", points:6, answerType:"number_with_working", required:true,
+        prompt:"Server und Netzkomponenten sollen über eine USV abgesichert werden. Angeschlossen werden:\n\n1 Server 540 W\n1 NAS für Sicherungen 180 W\n1 Core-Switch 95 W\n1 Firewall 45 W\n2 Access-Switches zu je 60 W\n1 Router 25 W\n\nEs wird ein Sicherheitszuschlag von 20 % geplant. Der Leistungsfaktor beträgt 0,9.\nZur Auswahl stehen:\nUSV-M 1000: 1.000 VA / 900 W\nUSV-M 1500: 1.500 VA / 1.350 W\nUSV-M 2200: 2.200 VA / 1.980 W\n\nBerechnen Sie die Wirkleistung, die Leistung mit Zuschlag und die Scheinleistung. Wählen Sie das kleinste geeignete Modell und begründen Sie Ihre Wahl anhand beider Grenzwerte.",
+        minRequirements:"Summe in W, Zuschlag, Scheinleistung in VA, Modellwahl mit Prüfung von VA und W",
+        fallbackValue:"1.340 VA, USV-M 1500",
+        solution:"Wirkleistung: 540 + 180 + 95 + 45 + 2 × 60 + 25 = 1.005 W\nMit 20 % Zuschlag: 1.005 × 1,2 = 1.206 W\nScheinleistung: S = P ÷ Leistungsfaktor = 1.206 W ÷ 0,9 = 1.340 VA\nModell: USV-M 1500, weil 1.340 VA ≤ 1.500 VA und 1.206 W ≤ 1.350 W. Die USV-M 1000 scheidet bei beiden Werten aus.",
+        rubric:[
+          {id:"s7-2e-r1", criterion:"Summe 1.005 W (Access-Switches doppelt gezählt)", points:1},
+          {id:"s7-2e-r2", criterion:"Mit Zuschlag 1.206 W", points:1},
+          {id:"s7-2e-r3", criterion:"Scheinleistung über Division durch den Leistungsfaktor", points:1},
+          {id:"s7-2e-r4", criterion:"Ergebnis 1.340 VA", points:1},
+          {id:"s7-2e-r5", criterion:"USV-M 1500 gewählt", points:1},
+          {id:"s7-2e-r6", criterion:"Beide Grenzwerte VA und W geprüft", points:1}
+        ]},
+      { id:"2f", operator:"Begründen Sie", points:3, answerType:"text", required:true,
+        prompt:"In der Werkstatt schwankt die Netzspannung, wenn Hebebühnen und Kompressoren anlaufen. Begründen Sie, welche USV-Bauart nach IEC 62040-3 Sie für den Server empfehlen, und grenzen Sie sie von einer der beiden anderen Bauarten ab.",
+        minRequirements:"Empfohlene Bauart mit Begründung, Abgrenzung zu einer anderen Bauart",
+        fallbackValue:null,
+        solution:"Empfehlung: VFI (Online- oder Doppelwandler-USV). Sie richtet den Netzstrom dauerhaft gleich und erzeugt ihn über den Wechselrichter neu. Spannungsschwankungen erreichen den Server daher nicht, und bei Netzausfall gibt es keine Umschaltzeit.\nAbgrenzung: Eine VFD (Offline-USV) versorgt die Last im Normalbetrieb direkt aus dem Netz und schaltet erst bei Ausfall nach einigen Millisekunden auf die Batterie um, Schwankungen gelangen also zum Server. Eine VI (Line-Interactive) regelt Spannungsschwankungen über einen Regeltransformator aus, hat aber ebenfalls eine kurze Umschaltzeit.",
+        rubric:[
+          {id:"s7-2f-r1", criterion:"VFI beziehungsweise Online-USV empfohlen", points:1},
+          {id:"s7-2f-r2", criterion:"Begründung über dauerhafte Doppelwandlung oder fehlende Umschaltzeit", points:1},
+          {id:"s7-2f-r3", criterion:"Zutreffende Abgrenzung zu VFD oder VI", points:1}
+        ]}
+    ]
+  },
+  {
+    id: "3", title: "Netzwerk, IPv6, Datenschutz und KI", points: 25,
+    context: "Das Netz soll beide Gebäude verbinden und die Bereiche logisch trennen: Verkauf (14 Clients), Verwaltung (9 Clients), Werkstatt (22 Clients und Diagnosegeräte) sowie ein Kunden-WLAN im Showroom mit reinem Internetzugang. Verkaufshaus und Werkstatt liegen 160 m auseinander. Es werden managed Switches eingesetzt.\n\nDer Provider stellt das IPv6-Präfix 2001:db8:4c1a::/48 bereit.",
+    subtasks: [
+      { id:"3a", operator:"Erläutern Sie", points:4, answerType:"text", required:true,
+        prompt:"Kunden-WLAN und Werkstattnetz laufen über dieselben Switches. Erläutern Sie, wie VLANs die beiden Netze trotzdem trennen. Gehen Sie dabei auf Access-Port und Trunk-Port ein.",
+        minRequirements:"Logische Trennung, Access-Port, Trunk-Port mit Tagging",
+        fallbackValue:null,
+        solution:"VLANs teilen einen physischen Switch in mehrere logische Netze. Geräte in verschiedenen VLANs können auf Schicht 2 nicht direkt miteinander kommunizieren, für Verkehr zwischen VLANs ist ein Router oder eine Firewall nötig, an der Regeln greifen.\nAccess-Port: gehört genau einem VLAN an und überträgt ungetaggt zum Endgerät, etwa ein Werkstatt-PC im VLAN Werkstatt.\nTrunk-Port: überträgt mehrere VLANs zwischen Switches oder zum Access Point. Die Frames erhalten dabei eine VLAN-Kennung nach IEEE 802.1Q, damit der Empfänger sie zuordnen kann.",
+        rubric:[
+          {id:"s7-3a-r1", criterion:"Logische Trennung auf gemeinsamer Hardware beschrieben", points:1},
+          {id:"s7-3a-r2", criterion:"Verkehr zwischen VLANs nur über Router oder Firewall", points:1},
+          {id:"s7-3a-r3", criterion:"Access-Port korrekt beschrieben (ein VLAN, ungetaggt)", points:1},
+          {id:"s7-3a-r4", criterion:"Trunk-Port korrekt beschrieben (mehrere VLANs, 802.1Q-Tag)", points:1}
+        ]},
+      { id:"3b", operator:"Begründen Sie", points:3, answerType:"text", required:true,
+        prompt:"Begründen Sie, welches Übertragungsmedium Sie für die 160 m lange Verbindung zwischen den Gebäuden wählen, und ordnen Sie die Strecke einer Ebene der strukturierten Verkabelung zu.",
+        minRequirements:"Medium, zwei Gründe, Verkabelungsebene",
+        fallbackValue:null,
+        solution:"Medium: Lichtwellenleiter (Glasfaser).\nGründe: Twisted-Pair-Kupfer ist auf 100 m Kanallänge begrenzt, 160 m sind damit nicht zulässig. Glasfaser ist unempfindlich gegen elektromagnetische Störungen, etwa durch Werkstattmaschinen, und trennt die Gebäude galvanisch, sodass keine Potenzialunterschiede übertragen werden. Zudem bietet sie hohe Bandbreite mit Reserve.\nEbene: Primärverkabelung (Gelände- oder Campusverkabelung zwischen Gebäuden).",
+        rubric:[
+          {id:"s7-3b-r1", criterion:"Glasfaser gewählt", points:1},
+          {id:"s7-3b-r2", criterion:"Zwei tragfähige Gründe, darunter Längengrenze oder Störfestigkeit", points:1},
+          {id:"s7-3b-r3", criterion:"Primärverkabelung zugeordnet", points:1}
+        ]},
+      { id:"3c", operator:"Geben Sie an", points:2, answerType:"number_with_working", required:true,
+        prompt:"Geben Sie die folgenden IPv6-Adressen in der geforderten Form an.\n\n1. Kürzen Sie: 2001:0db8:4c1a:0000:0000:0bad:0000:00f0\n2. Schreiben Sie vollständig aus: 2001:db8:0:1::a",
+        minRequirements:"Gekürzte Form und vollständige Form",
+        fallbackValue:null,
+        solution:"1. 2001:db8:4c1a::bad:0:f0\n(führende Nullen entfallen, der längste Nullblock wird einmal durch :: ersetzt, der einzelne Nullblock bleibt als 0 stehen)\n2. 2001:0db8:0000:0001:0000:0000:0000:000a",
+        rubric:[
+          {id:"s7-3c-r1", criterion:"Kürzung korrekt, :: nur einmal verwendet", points:1},
+          {id:"s7-3c-r2", criterion:"Vollständige Schreibweise mit acht Blöcken zu je vier Stellen", points:1}
+        ]},
+      { id:"3d", operator:"Ermitteln Sie", points:6, answerType:"number_with_working", required:true,
+        prompt:"Aus dem Präfix 2001:db8:4c1a::/48 sollen mindestens 20 gleich große Subnetze entstehen.\n\n1. Bestimmen Sie die neue Präfixlänge.\n2. Wie viele Subnetze sind damit maximal möglich?\n3. Geben Sie das 6. Subnetz vollständig mit Präfixlänge an. Das erste Subnetz beginnt bei 2001:db8:4c1a::.\n4. Nennen Sie eine gültige Adresse aus diesem 6. Subnetz.",
+        minRequirements:"Anzahl geliehener Bits, Präfixlänge, maximale Anzahl, 6. Subnetz, Adresse",
+        fallbackValue:"/53, 32 Subnetze, 2001:db8:4c1a:2800::/53",
+        solution:"1. 2⁴ = 16 reicht nicht, 2⁵ = 32 ≥ 20, also 5 zusätzliche Bits: /48 + 5 = /53\n2. 2⁵ = 32 Subnetze\n3. Die 5 Bits liegen am Anfang des vierten Blocks. Schrittweite: 2^(16 − 5) = 2.048 = 0x0800.\nDas 6. Subnetz hat den Index 5: 5 × 0x0800 = 0x2800\n→ 2001:db8:4c1a:2800::/53\n4. Zum Beispiel 2001:db8:4c1a:2800::1\n(Hinweis aus der Praxis: Endgerätenetze werden bei IPv6 üblicherweise als /64 ausgelegt.)",
+        rubric:[
+          {id:"s7-3d-r1", criterion:"5 geliehene Bits begründet", points:1},
+          {id:"s7-3d-r2", criterion:"Präfixlänge /53", points:1},
+          {id:"s7-3d-r3", criterion:"Maximal 32 Subnetze", points:1},
+          {id:"s7-3d-r4", criterion:"Schrittweite 0x0800 im vierten Block erkannt", points:1},
+          {id:"s7-3d-r5", criterion:"6. Subnetz 2001:db8:4c1a:2800::/53", points:1},
+          {id:"s7-3d-r6", criterion:"Gültige Adresse aus diesem Subnetz", points:1}
+        ]},
+      { id:"3e", operator:"Beurteilen Sie", points:5, answerType:"text", required:true,
+        prompt:"Ein Serviceberater fotografiert bei der Fahrzeugannahme Fahrzeugschein und Führerschein der Kunden mit seinem privaten Smartphone und schickt die Bilder über einen privaten Messenger an die Werkstatt.\n\nErläutern Sie, warum dieses Vorgehen datenschutzrechtlich problematisch ist. Nennen Sie das vorrangig gefährdete Schutzziel sowie je eine technische und eine organisatorische Maßnahme, die das Risiko verringert.",
+        minRequirements:"Personenbezug, Kontrollverlust, Schutzziel, technische und organisatorische Maßnahme",
+        fallbackValue:null,
+        solution:"Problematisch: Fahrzeugschein und Führerschein enthalten personenbezogene Daten wie Name, Anschrift und Geburtsdatum. Das Autohaus ist dafür Verantwortlicher und muss sie durch geeignete Maßnahmen schützen. Auf dem Privatgerät und im privaten Messenger hat es keine Kontrolle über Speicherung, Zugriff, Weitergabe und Löschung, die Daten bleiben zudem in der privaten Galerie oder Cloud liegen. Eine Kopie des Führerscheins ist für die Auftragsannahme in der Regel auch nicht erforderlich (Datenminimierung).\nSchutzziel: Vertraulichkeit.\nTechnisch: dienstliche, zentral verwaltete Geräte (MDM) mit einer Annahme-App, die Bilder verschlüsselt direkt in die Auftragsakte überträgt.\nOrganisatorisch: Dienstanweisung, die private Geräte für Kundendaten untersagt, und Schulung der Serviceberater.",
+        rubric:[
+          {id:"s7-3e-r1", criterion:"Personenbezogene Daten erkannt", points:1},
+          {id:"s7-3e-r2", criterion:"Kontrollverlust über Speicherung, Weitergabe oder Löschung begründet", points:1},
+          {id:"s7-3e-r3", criterion:"Vertraulichkeit als Schutzziel genannt", points:1},
+          {id:"s7-3e-r4", criterion:"Passende technische Maßnahme", points:1},
+          {id:"s7-3e-r5", criterion:"Passende organisatorische Maßnahme", points:1}
+        ]},
+      { id:"3f", operator:"Beschreiben Sie", points:5, answerType:"text", required:true,
+        prompt:"Das Autohaus prüft eine KI-Anwendung, die auf Fotos Karosserieschäden erkennt und einen Kostenvoranschlag vorschlägt. Beschreiben Sie, welche Daten die KI benötigt, welchen Nutzen sie dem Autohaus bringt, und nennen Sie zwei Risiken oder Grenzen dieses Einsatzes.",
+        minRequirements:"Benötigte Daten, Nutzen, zwei Risiken oder Grenzen",
+        fallbackValue:null,
+        solution:"Daten: viele Fotos von Schäden mit zugeordneten tatsächlichen Reparaturkosten und Arbeitswerten aus früheren Aufträgen als Trainingsdaten, dazu Fahrzeugmodell und Ersatzteilpreise.\nNutzen: schnellere Schadensaufnahme, einheitliche Einschätzung, Entlastung der Serviceberater.\nRisiken und Grenzen: verdeckte Schäden hinter der Außenhaut erkennt ein Foto nicht. Fehleinschätzungen bei schlechter Bildqualität oder seltenen Modellen. Die Ergebnisse sind schwer nachvollziehbar, daher muss ein Mensch den Voranschlag prüfen und freigeben. Auf Fotos können Kennzeichen oder Personen zu sehen sein, das betrifft den Datenschutz.",
+        rubric:[
+          {id:"s7-3f-r1", criterion:"Trainingsdaten mit bekannten Ergebnissen beschrieben", points:1},
+          {id:"s7-3f-r2", criterion:"Nutzen für das Autohaus konkret", points:1},
+          {id:"s7-3f-r3", criterion:"Erstes Risiko oder erste Grenze fachlich zutreffend", points:1},
+          {id:"s7-3f-r4", criterion:"Zweites Risiko oder zweite Grenze fachlich zutreffend", points:1},
+          {id:"s7-3f-r5", criterion:"Menschliche Kontrolle oder Datenschutz berücksichtigt", points:1}
+        ]}
+    ]
+  },
+  {
+    id: "4", title: "Auftragsannahme und Datenbank", points: 25,
+    context: "Für die Werkstatt entwickelt das Systemhaus eine digitale Auftragsannahme mit eigener Datenbank.",
+    subtasks: [
+      { id:"4a", operator:"Modellieren Sie", points:7, answerType:"diagram_text", required:true,
+        prompt:"Beschreiben Sie ein UML-Aktivitätsdiagramm für folgenden Ablauf. Eine textliche Darstellung mit den Elementen des Diagramms ist zulässig.\n\n1. Der Serviceberater erfasst das Kennzeichen.\n2. Das System sucht das Fahrzeug. Ist es nicht vorhanden, wird es neu angelegt.\n3. Anschließend wird der Werkstattauftrag angelegt.\n4. Danach laufen zwei Tätigkeiten gleichzeitig: Das System prüft die Teileverfügbarkeit, und der Serviceberater reserviert einen Termin im Werkstattkalender.\n5. Sind beide abgeschlossen, werden fehlende Teile bestellt, falls nicht alle vorrätig sind.\n6. Zum Schluss erhält der Kunde eine Auftragsbestätigung per E-Mail.",
+        minRequirements:"Start, Aktionen, zwei Entscheidungen mit Zusammenführung, Gabelung und Vereinigung, Ende",
+        fallbackValue:null,
+        solution:"Startknoten (gefüllter Kreis)\n→ Aktion: Kennzeichen erfassen\n→ Aktion: Fahrzeug suchen\n→ Verzweigung [Fahrzeug vorhanden?]\n   [nein] → Aktion: Fahrzeug anlegen → Zusammenführung\n   [ja] → Zusammenführung\n→ Aktion: Werkstattauftrag anlegen\n→ Gabelung (Balken)\n   ‖ Aktion: Teileverfügbarkeit prüfen\n   ‖ Aktion: Termin reservieren\n→ Vereinigung (Balken)\n→ Verzweigung [alle Teile vorrätig?]\n   [nein] → Aktion: Teile bestellen → Zusammenführung\n   [ja] → Zusammenführung\n→ Aktion: Auftragsbestätigung senden\n→ Endknoten (Kreis mit gefülltem Kreis)\nBedingungen stehen in eckigen Klammern an den ausgehenden Kanten.",
+        rubric:[
+          {id:"s7-4a-r1", criterion:"Start- und Endknoten korrekt", points:1},
+          {id:"s7-4a-r2", criterion:"Aktionen vollständig und in richtiger Reihenfolge", points:1},
+          {id:"s7-4a-r3", criterion:"Verzweigung Fahrzeug vorhanden mit Zusammenführung", points:1},
+          {id:"s7-4a-r4", criterion:"Gabelung vor den parallelen Tätigkeiten", points:1},
+          {id:"s7-4a-r5", criterion:"Vereinigung nach den parallelen Tätigkeiten", points:1},
+          {id:"s7-4a-r6", criterion:"Verzweigung Teile vorrätig mit Zusammenführung", points:1},
+          {id:"s7-4a-r7", criterion:"Bedingungen als Guards in eckigen Klammern", points:1}
+        ]},
+      { id:"4b", operator:"Führen Sie einen Schreibtischtest durch", points:7, answerType:"table", required:true,
+        prompt:"Ein Programm wertet die Arbeitsdauer von Aufträgen in Minuten aus.\n\n 1  laufzeiten = [45, 120, 30, 90, 75]\n 2  grenze = 60\n 3  lang = 0\n 4  gesamt = 0\n 5  maximum = 0\n 6  FÜR i VON 0 BIS 4\n 7      gesamt = gesamt + laufzeiten[i]\n 8      WENN laufzeiten[i] > grenze DANN\n 9          lang = lang + 1\n10      ENDE WENN\n11      WENN laufzeiten[i] > maximum DANN\n12          maximum = laufzeiten[i]\n13      ENDE WENN\n14  ENDE FÜR\n15  anteil = lang / 5 * 100\n16  AUSGABE lang, maximum, anteil\n\nFüllen Sie für jeden Schleifendurchlauf eine Zeile mit den Spalten i | laufzeiten[i] | gesamt | lang | maximum aus und geben Sie die Ausgabe an.\nWie müsste Zeile 8 lauten, damit auch Aufträge mit genau 60 Minuten als lang gelten?",
+        minRequirements:"Fünf Tabellenzeilen, Ausgabewerte, geänderte Bedingung",
+        fallbackValue:"lang = 3, maximum = 120, anteil = 60",
+        solution:"i | laufzeiten[i] | gesamt | lang | maximum\n0 | 45  | 45  | 0 | 45\n1 | 120 | 165 | 1 | 120\n2 | 30  | 195 | 1 | 120\n3 | 90  | 285 | 2 | 120\n4 | 75  | 360 | 3 | 120\n\nAusgabe: lang = 3, maximum = 120, anteil = 3 / 5 × 100 = 60\nZeile 8: WENN laufzeiten[i] >= grenze DANN",
+        rubric:[
+          {id:"s7-4b-r1", criterion:"Zeilen i = 0 und i = 1 korrekt", points:1},
+          {id:"s7-4b-r2", criterion:"Zeilen i = 2 und i = 3 korrekt", points:1},
+          {id:"s7-4b-r3", criterion:"Zeile i = 4 korrekt", points:1},
+          {id:"s7-4b-r4", criterion:"Ausgabe lang = 3", points:1},
+          {id:"s7-4b-r5", criterion:"Ausgabe maximum = 120", points:1},
+          {id:"s7-4b-r6", criterion:"Ausgabe anteil = 60", points:1},
+          {id:"s7-4b-r7", criterion:"Bedingung mit >= angegeben", points:1}
+        ]},
+      { id:"4c", operator:"Modellieren Sie", points:7, answerType:"diagram_text", required:true,
+        prompt:"Erstellen Sie ein Entity-Relationship-Modell mit Entitäten, Attributen, Primärschlüsseln und Kardinalitäten. Eine textliche Darstellung ist zulässig.\n\nAnforderungen:\n1. Ein Kunde hat eine Kundennummer, einen Namen und eine Telefonnummer.\n2. Einem Kunden gehören ein oder mehrere Fahrzeuge. Jedes Fahrzeug hat eine Fahrzeug-Identifizierungsnummer (FIN), ein Kennzeichen und ein Modell und gehört genau einem Kunden.\n3. Zu einem Fahrzeug können beliebig viele Werkstattaufträge angelegt werden, mit Auftragsnummer, Datum und Status.\n4. Jeder Auftrag wird von genau einem Mitarbeiter verantwortet (Personalnummer, Name).\n5. In einem Auftrag werden mehrere Ersatzteile verbaut, und ein Ersatzteil kommt in vielen Aufträgen vor. Gespeichert wird jeweils die verbaute Menge. Ein Ersatzteil hat eine Teilenummer, eine Bezeichnung und einen Preis.",
+        minRequirements:"Fünf Entitäten mit Attributen und Primärschlüsseln, vier Beziehungen mit Kardinalitäten, Attribut Menge",
+        fallbackValue:null,
+        solution:"Entitäten (Primärschlüssel mit PK markiert):\nKunde (KundenNr PK, Name, Telefon)\nFahrzeug (FIN PK, Kennzeichen, Modell)\nAuftrag (AuftragsNr PK, Datum, Status)\nMitarbeiter (PersonalNr PK, Name)\nErsatzteil (TeileNr PK, Bezeichnung, Preis)\n\nBeziehungen:\nKunde 1 : n Fahrzeug (besitzt)\nFahrzeug 1 : n Auftrag (betrifft)\nMitarbeiter 1 : n Auftrag (verantwortet)\nAuftrag n : m Ersatzteil (verbaut) mit Beziehungsattribut Menge\n\nIm relationalen Modell wird aus der n:m-Beziehung eine eigene Tabelle Auftragsposition (AuftragsNr FK, TeileNr FK, Menge) mit zusammengesetztem Primärschlüssel.",
+        rubric:[
+          {id:"s7-4c-r1", criterion:"Fünf Entitäten mit passenden Attributen", points:1},
+          {id:"s7-4c-r2", criterion:"Primärschlüssel je Entität sinnvoll gekennzeichnet", points:1},
+          {id:"s7-4c-r3", criterion:"Kunde 1:n Fahrzeug", points:1},
+          {id:"s7-4c-r4", criterion:"Fahrzeug 1:n Auftrag", points:1},
+          {id:"s7-4c-r5", criterion:"Mitarbeiter 1:n Auftrag", points:1},
+          {id:"s7-4c-r6", criterion:"Auftrag n:m Ersatzteil", points:1},
+          {id:"s7-4c-r7", criterion:"Menge als Attribut der Beziehung modelliert", points:1}
+        ]},
+      { id:"4d", operator:"Erläutern Sie", points:4, answerType:"text", required:true,
+        prompt:"In der Datenbank soll ein Kunde gelöscht werden, dessen Fahrzeuge noch Werkstattaufträge besitzen. Erläutern Sie den Begriff referenzielle Integrität, beschreiben Sie zwei mögliche Reaktionen des Datenbanksystems und begründen Sie, welche Sie hier einstellen würden.",
+        minRequirements:"Begriff, zwei Löschregeln, begründete Wahl",
+        fallbackValue:null,
+        solution:"Referenzielle Integrität bedeutet, dass jeder Fremdschlüsselwert auf einen tatsächlich vorhandenen Primärschlüssel verweisen muss. Es darf keine Aufträge zu einem Fahrzeug geben, das nicht existiert.\nMögliche Reaktionen:\nRESTRICT beziehungsweise NO ACTION: Das Löschen wird verweigert, solange abhängige Datensätze existieren.\nCASCADE: Die abhängigen Fahrzeuge und Aufträge werden mitgelöscht.\nSET NULL: Der Fremdschlüssel wird geleert, sofern die Spalte das zulässt.\nWahl: RESTRICT. Aufträge sind Grundlage für Rechnungen, Gewährleistung und gesetzliche Aufbewahrungsfristen und dürfen nicht unbemerkt verschwinden. CASCADE würde diese Historie zerstören.",
+        rubric:[
+          {id:"s7-4d-r1", criterion:"Referenzielle Integrität korrekt erklärt", points:1},
+          {id:"s7-4d-r2", criterion:"Erste Löschregel korrekt beschrieben", points:1},
+          {id:"s7-4d-r3", criterion:"Zweite Löschregel korrekt beschrieben", points:1},
+          {id:"s7-4d-r4", criterion:"Begründete Wahl mit Bezug zur Auftragshistorie", points:1}
+        ]}
+    ]
+  }
+  ]
+},
+{
+  examId: "AP1-SIM-08",
+  title: "AP1-Prüfungssimulation 08 — Hotellerie",
+  branche: "Hotelgruppe",
+  themen: ["Nutzwertanalyse", "Festpreiskalkulation", "Speicherbedarf", "RAID 1", "Videoüberwachung", "USV", "VLAN", "PoE", "Strukturierte Verkabelung", "IPv6-Subnetting", "UML-Aktivitätsdiagramm", "Schreibtischtest", "Relationales Modell", "Referenzielle Integrität", "KI"],
+  durationMinutes: 90,
+  maxPoints: 100,
+  disclaimer: "Unverbindliche Übungssimulation. Keine offizielle IHK-Prüfung und keine verbindliche Bewertung.",
+  scenario: "Sie sind Auszubildende oder Auszubildender bei der Nordlicht IT-Service GmbH in Oldenburg. Ihr Kunde, die Hotelgruppe Seeblick, betreibt an der Nordseeküste zwei Häuser mit zusammen 140 Zimmern und 85 Mitarbeitenden. Im Stammhaus werden das WLAN erneuert, das Netz neu strukturiert und eine Videoüberwachung für Parkhaus und Lieferzone installiert. Außerdem entwickelt Nordlicht eine App für den digitalen Check-in. Sie begleiten das Projekt von der Angebotsphase bis zur Umsetzung.",
+  tasks: [
+  {
+    id: "1", title: "Angebotsvergleich und Projektkalkulation", points: 25,
+    context: "Für das neue WLAN wurden drei Angebote nach vier Kriterien auf einer Skala von 1 bis 10 bewertet.\n\nGewichtung: Preis 30 %, Abdeckung und Leistung 30 %, Verwaltung 25 %, Energiebedarf 15 %\n\nAnbieter A: Preis 8, Leistung 6, Verwaltung 7, Energie 7\nAnbieter B: Preis 5, Leistung 9, Verwaltung 8, Energie 6\nAnbieter C: Preis 7, Leistung 7, Verwaltung 5, Energie 9",
+    subtasks: [
+      { id:"1a", operator:"Berechnen Sie", points:6, answerType:"number_with_working", required:true,
+        prompt:"Berechnen Sie den Gesamtnutzwert je Anbieter und benennen Sie den Sieger.",
+        minRequirements:"Teilnutzwerte, drei Gesamtnutzwerte, Entscheidung",
+        fallbackValue:"A 7,00 | B 7,10 | C 6,80",
+        solution:"A: 0,30 × 8 + 0,30 × 6 + 0,25 × 7 + 0,15 × 7 = 2,40 + 1,80 + 1,75 + 1,05 = 7,00\nB: 0,30 × 5 + 0,30 × 9 + 0,25 × 8 + 0,15 × 6 = 1,50 + 2,70 + 2,00 + 0,90 = 7,10\nC: 0,30 × 7 + 0,30 × 7 + 0,25 × 5 + 0,15 × 9 = 2,10 + 2,10 + 1,25 + 1,35 = 6,80\nSieger: Anbieter B mit 7,10.",
+        rubric:[
+          {id:"s8-1a-r1", criterion:"Ansatz Gewichtung × Bewertung erkennbar", points:1},
+          {id:"s8-1a-r2", criterion:"Gesamtnutzwert A = 7,00", points:1},
+          {id:"s8-1a-r3", criterion:"Gesamtnutzwert B = 7,10", points:1},
+          {id:"s8-1a-r4", criterion:"Gesamtnutzwert C = 6,80", points:1},
+          {id:"s8-1a-r5", criterion:"Anbieter B als Sieger benannt", points:1},
+          {id:"s8-1a-r6", criterion:"Rechenweg nachvollziehbar", points:1}
+        ]},
+      { id:"1b", operator:"Ermitteln Sie", points:4, answerType:"number_with_working", required:true,
+        prompt:"Anbieter A kündigt eine neue Verwaltungssoftware an. Ermitteln Sie, welche Bewertung A im Kriterium Verwaltung mindestens erreichen müsste, um Anbieter B einzuholen. Geben Sie den rechnerischen Wert und die kleinste ganze Punktzahl auf der Skala an.",
+        minRequirements:"Fehlender Abstand, Umrechnung über die Gewichtung, rechnerischer Wert, ganze Punktzahl",
+        fallbackValue:"rechnerisch 7,4, auf der Skala 8 Punkte",
+        solution:"Abstand zu B: 7,10 − 7,00 = 0,10\nBenötigte Mehrpunkte in Verwaltung: 0,10 ÷ 0,25 = 0,4\nRechnerisch: 7 + 0,4 = 7,4\nDa nur ganze Punkte vergeben werden, sind 8 Punkte nötig. Kontrolle: A erreicht dann 2,40 + 1,80 + 2,00 + 1,05 = 7,25 und liegt vor B.",
+        rubric:[
+          {id:"s8-1b-r1", criterion:"Abstand 0,10 ermittelt", points:1},
+          {id:"s8-1b-r2", criterion:"Division durch die Gewichtung 0,25", points:1},
+          {id:"s8-1b-r3", criterion:"Rechnerischer Wert 7,4", points:1},
+          {id:"s8-1b-r4", criterion:"Ganzzahlige Mindestbewertung 8", points:1}
+        ]},
+      { id:"1c", operator:"Berechnen Sie", points:8, answerType:"number_with_working", required:true,
+        prompt:"Nordlicht hat das WLAN-Projekt zum Festpreis von 14.900,00 EUR netto angeboten. Der interne Stundensatz (Selbstkosten) beträgt 78,00 EUR, jede Anfahrt kostet pauschal 62,00 EUR.\n\nVorkalkulation (Plan):\n82 Arbeitsstunden, Material 4.950,00 EUR, Elektriker 1.100,00 EUR, 10 Anfahrten\n\nNachkalkulation (Ist):\n96 Arbeitsstunden, Material 5.160,00 EUR, Elektriker 1.340,00 EUR, 14 Anfahrten\n\nBerechnen Sie die geplanten und die tatsächlichen Selbstkosten, die Abweichung in Euro und in Prozent sowie den geplanten und den tatsächlichen Gewinn. Runden Sie Prozentwerte auf zwei Nachkommastellen.",
+        minRequirements:"Plan- und Istkosten, Abweichung in EUR und %, geplanter und tatsächlicher Gewinn",
+        fallbackValue:"Abweichung +1.790,00 EUR bzw. +13,70 %, Gewinn 44,00 EUR statt 1.834,00 EUR",
+        solution:"Plan: 82 × 78,00 = 6.396,00 | + 4.950,00 + 1.100,00 + 10 × 62,00 = 620,00 → 13.066,00 EUR\nIst: 96 × 78,00 = 7.488,00 | + 5.160,00 + 1.340,00 + 14 × 62,00 = 868,00 → 14.856,00 EUR\nAbweichung: 14.856,00 − 13.066,00 = +1.790,00 EUR\nIn Prozent: 1.790,00 ÷ 13.066,00 × 100 = 13,70 %\nGeplanter Gewinn: 14.900,00 − 13.066,00 = 1.834,00 EUR\nTatsächlicher Gewinn: 14.900,00 − 14.856,00 = 44,00 EUR",
+        rubric:[
+          {id:"s8-1c-r1", criterion:"Plankosten 13.066,00 EUR", points:1},
+          {id:"s8-1c-r2", criterion:"Istkosten 14.856,00 EUR", points:1},
+          {id:"s8-1c-r3", criterion:"Anfahrten in beiden Kalkulationen berücksichtigt", points:1},
+          {id:"s8-1c-r4", criterion:"Abweichung +1.790,00 EUR", points:1},
+          {id:"s8-1c-r5", criterion:"Abweichung 13,70 % mit Plan als Bezugsgröße", points:1},
+          {id:"s8-1c-r6", criterion:"Geplanter Gewinn 1.834,00 EUR", points:1},
+          {id:"s8-1c-r7", criterion:"Tatsächlicher Gewinn 44,00 EUR", points:1},
+          {id:"s8-1c-r8", criterion:"Rechenweg nachvollziehbar und Einheiten angegeben", points:1}
+        ]},
+      { id:"1d", operator:"Ermitteln Sie", points:3, answerType:"number_with_working", required:true,
+        prompt:"Ermitteln Sie die Kostenposition mit der größten Abweichung in Euro und nennen Sie zwei plausible Ursachen dafür.",
+        minRequirements:"Einzelabweichungen, größte Position, zwei Ursachen",
+        fallbackValue:"Arbeitszeit, +1.092,00 EUR",
+        solution:"Arbeitszeit: 14 h × 78,00 = +1.092,00 EUR\nMaterial: +210,00 EUR | Elektriker: +240,00 EUR | Anfahrten: 4 × 62,00 = +248,00 EUR\nGrößte Abweichung: Arbeitszeit mit +1.092,00 EUR.\nMögliche Ursachen: dicke Wände oder Stahlbeton erfordern mehr Access Points oder eine neue Ausleuchtungsmessung, Zimmer waren nur zu bestimmten Zeiten zugänglich, Nacharbeiten nach der Abnahme.",
+        rubric:[
+          {id:"s8-1d-r1", criterion:"Arbeitszeit mit +1.092,00 EUR als größte Position", points:1},
+          {id:"s8-1d-r2", criterion:"Erste plausible Ursache", points:1},
+          {id:"s8-1d-r3", criterion:"Zweite plausible Ursache", points:1}
+        ]},
+      { id:"1e", operator:"Erläutern Sie", points:4, answerType:"text", required:true,
+        prompt:"Erläutern Sie, wer beim Festpreis die Mehrkosten trägt, und nennen Sie zwei Maßnahmen im Projektmanagement, die eine solche Überschreitung früher sichtbar machen oder begrenzen.",
+        minRequirements:"Risikoträger beim Festpreis, zwei Maßnahmen",
+        fallbackValue:null,
+        solution:"Beim Festpreis zahlt der Kunde den vereinbarten Betrag unabhängig vom tatsächlichen Aufwand. Mehrkosten innerhalb des vereinbarten Leistungsumfangs trägt daher Nordlicht, sie mindern den Gewinn.\nMaßnahmen: regelmäßiger Soll-Ist-Vergleich an Meilensteinen, wöchentliche Zeiterfassung pro Arbeitspaket, Risikopuffer in der Vorkalkulation, Änderungsanträge (Change Requests) für Leistungen außerhalb des Auftrags, Vor-Ort-Begehung mit Ausleuchtungsmessung vor dem Angebot.",
+        rubric:[
+          {id:"s8-1e-r1", criterion:"Auftragnehmer trägt das Kostenrisiko", points:1},
+          {id:"s8-1e-r2", criterion:"Bezug zum vereinbarten Leistungsumfang erkennbar", points:1},
+          {id:"s8-1e-r3", criterion:"Erste Maßnahme fachlich passend", points:1},
+          {id:"s8-1e-r4", criterion:"Zweite Maßnahme fachlich passend", points:1}
+        ]}
+    ]
+  },
+  {
+    id: "2", title: "Videoüberwachung, Speicher und USV", points: 25,
+    context: "Im Parkhaus und in der Lieferzone werden 8 IP-Kameras installiert. Sie zeichnen rund um die Uhr mit einer konstanten Datenrate von je 6 Mbit/s auf einen Netzwerkrekorder (NVR) auf. Die Aufnahmen werden 72 Stunden gespeichert und danach automatisch überschrieben.\nRechnen Sie bei Dezimalpräfixen mit Faktor 1.000 und bei Binärpräfixen mit Faktor 1.024.",
+    subtasks: [
+      { id:"2a", operator:"Berechnen Sie", points:6, answerType:"number_with_working", required:true,
+        prompt:"Berechnen Sie den Speicherbedarf einer Kamera pro Stunde in GB, den Gesamtbedarf aller Kameras für 72 Stunden in GB und TB sowie den Gesamtbedarf in TiB. Runden Sie auf drei Nachkommastellen.",
+        minRequirements:"Umrechnung Bit in Byte, Bedarf je Stunde, Gesamtbedarf in GB, TB und TiB",
+        fallbackValue:"1.555,2 GB = 1,555 TB = 1,414 TiB",
+        solution:"Je Kamera und Sekunde: 6 Mbit ÷ 8 = 0,75 MB\nJe Stunde: 0,75 MB × 3.600 = 2.700 MB = 2,7 GB\nGesamt: 8 × 72 × 2,7 GB = 1.555,2 GB = 1,555 TB\nIn TiB: 1.555.200.000.000 Byte ÷ 1.024⁴ = 1,414 TiB",
+        rubric:[
+          {id:"s8-2a-r1", criterion:"Division durch 8 für Bit in Byte", points:1},
+          {id:"s8-2a-r2", criterion:"2,7 GB je Kamera und Stunde", points:1},
+          {id:"s8-2a-r3", criterion:"Faktor 8 Kameras × 72 Stunden angewendet", points:1},
+          {id:"s8-2a-r4", criterion:"1.555,2 GB", points:1},
+          {id:"s8-2a-r5", criterion:"1,555 TB", points:1},
+          {id:"s8-2a-r6", criterion:"1,414 TiB über 1.024⁴", points:1}
+        ]},
+      { id:"2b", operator:"Beurteilen Sie", points:3, answerType:"number_with_working", required:true,
+        prompt:"Der NVR soll zusätzlich 25 % Reserve erhalten. Er ist mit zwei Festplatten zu je 2 TB im RAID 1 bestückt. Beurteilen Sie rechnerisch, ob diese Ausstattung genügt.",
+        minRequirements:"Bedarf mit Reserve, Nettokapazität RAID 1, Vergleich",
+        fallbackValue:"Bedarf 1,944 TB, verfügbar 2 TB, ausreichend",
+        solution:"Bedarf mit Reserve: 1,5552 TB × 1,25 = 1,944 TB\nRAID 1 spiegelt beide Platten, netto steht die Kapazität einer Platte zur Verfügung: 2 TB.\n1,944 TB ≤ 2 TB, die Ausstattung genügt, allerdings nur mit knapp 3 % Luft.\nDer Vergleich gelingt auch in TiB: 1,768 TiB Bedarf gegenüber 1,819 TiB verfügbar.",
+        rubric:[
+          {id:"s8-2b-r1", criterion:"Bedarf mit Reserve 1,944 TB", points:1},
+          {id:"s8-2b-r2", criterion:"RAID 1 netto 2 TB erkannt", points:1},
+          {id:"s8-2b-r3", criterion:"Vergleich in einheitlicher Einheit und Ergebnis ausreichend", points:1}
+        ]},
+      { id:"2c", operator:"Erläutern Sie", points:5, answerType:"text", required:true,
+        prompt:"Erläutern Sie, auf welche Rechtsgrundlage der DSGVO sich die Hotelgruppe bei der Videoüberwachung stützen kann, und nennen Sie drei Anforderungen, die sie dabei beachten muss.",
+        minRequirements:"Rechtsgrundlage, drei Anforderungen",
+        fallbackValue:null,
+        solution:"Rechtsgrundlage: berechtigtes Interesse nach Art. 6 Abs. 1 lit. f DSGVO, zum Beispiel Schutz vor Diebstahl und Vandalismus. Die Interessen der Gefilmten dürfen dabei nicht überwiegen.\nAnforderungen:\nTransparenz: gut sichtbare Hinweisschilder mit Verantwortlichem, Zweck und Hinweis auf weitere Informationen.\nSpeicherbegrenzung: nur so lange speichern wie nötig, die 72 Stunden sind ein üblicher Richtwert.\nDatenminimierung: Kameras nur auf die nötigen Bereiche ausrichten, keine Erfassung öffentlicher Wege, Sanitär- oder Pausenbereiche.\nZugriffsschutz: Einsicht nur für wenige berechtigte Personen, protokolliert.\nBeschäftigte: Werden Mitarbeitende erfasst, hat ein vorhandener Betriebsrat nach § 87 Abs. 1 Nr. 6 BetrVG ein Mitbestimmungsrecht.",
+        rubric:[
+          {id:"s8-2c-r1", criterion:"Berechtigtes Interesse nach Art. 6 Abs. 1 lit. f genannt", points:1},
+          {id:"s8-2c-r2", criterion:"Interessenabwägung oder konkreter Zweck erkennbar", points:1},
+          {id:"s8-2c-r3", criterion:"Erste Anforderung zutreffend", points:1},
+          {id:"s8-2c-r4", criterion:"Zweite Anforderung zutreffend", points:1},
+          {id:"s8-2c-r5", criterion:"Dritte Anforderung zutreffend", points:1}
+        ]},
+      { id:"2d", operator:"Berechnen Sie", points:6, answerType:"number_with_working", required:true,
+        prompt:"Die Überwachungstechnik erhält eine eigene USV. Angeschlossen sind:\n\nNVR 110 W\nPoE-Switch im Parkhaus inklusive der versorgten Kameras 102 W\nFirewall 40 W\nRouter 18 W\n\nDie USV hat zwei Batterien mit je 12 V und 9 Ah. Der Wechselrichter arbeitet mit einem Wirkungsgrad von 90 %. Gehen Sie vereinfacht von einer linearen Entladung aus.\n\nBerechnen Sie die Überbrückungszeit in Minuten und beurteilen Sie, ob die Vorgabe von mindestens 30 Minuten erfüllt ist.",
+        minRequirements:"Gesamtlast, Batterieenergie, nutzbare Energie, Zeit in Minuten, Beurteilung",
+        fallbackValue:"43,2 Minuten",
+        solution:"Gesamtlast: 110 + 102 + 40 + 18 = 270 W\nBatterieenergie: 2 × 12 V × 9 Ah = 216 Wh\nNutzbar: 216 Wh × 0,9 = 194,4 Wh\nZeit: 194,4 Wh ÷ 270 W = 0,72 h = 43,2 Minuten\nDie Vorgabe von 30 Minuten ist erfüllt. In der Praxis sinkt die Laufzeit durch Alterung und hohe Entladeströme, daher ist dieser Puffer sinnvoll.",
+        rubric:[
+          {id:"s8-2d-r1", criterion:"Gesamtlast 270 W", points:1},
+          {id:"s8-2d-r2", criterion:"Batterieenergie 216 Wh", points:1},
+          {id:"s8-2d-r3", criterion:"Wirkungsgrad angewendet (194,4 Wh)", points:1},
+          {id:"s8-2d-r4", criterion:"0,72 Stunden", points:1},
+          {id:"s8-2d-r5", criterion:"43,2 Minuten", points:1},
+          {id:"s8-2d-r6", criterion:"Vorgabe als erfüllt beurteilt", points:1}
+        ]},
+      { id:"2e", operator:"Vergleichen Sie", points:5, answerType:"text", required:true,
+        prompt:"Das USV-Modell ist als Offline-USV (VFD) und als Online-USV (VFI) erhältlich. Vergleichen Sie beide Bauarten nach Funktionsprinzip, Umschaltzeit und Wirkungsgrad und geben Sie eine begründete Empfehlung für die Überwachungstechnik.",
+        minRequirements:"Funktionsprinzip beider Bauarten, Umschaltzeit, Wirkungsgrad, Empfehlung",
+        fallbackValue:null,
+        solution:"VFD (Offline): Im Normalbetrieb läuft die Last direkt am Netz, die Batterie wird nur geladen. Bei Ausfall schaltet die USV nach einigen Millisekunden auf den Wechselrichter um.\nVFI (Online, Doppelwandler): Der Netzstrom wird dauerhaft gleichgerichtet und über den Wechselrichter neu erzeugt. Es gibt keine Umschaltzeit, Störungen aus dem Netz erreichen die Last nicht.\nWirkungsgrad: Die Offline-USV arbeitet effizienter, weil im Normalbetrieb nichts gewandelt wird. Die Online-USV hat durch die ständige Doppelwandlung höhere Verluste und mehr Abwärme.\nEmpfehlung: VFI, weil die Aufzeichnung ohne jede Unterbrechung laufen soll. Vertretbar ist auch VFD mit der Begründung, dass die Netzteile der Geräte kurze Umschaltzeiten überbrücken und die Anschaffung günstiger ist.",
+        rubric:[
+          {id:"s8-2e-r1", criterion:"Funktionsprinzip VFD korrekt", points:1},
+          {id:"s8-2e-r2", criterion:"Funktionsprinzip VFI korrekt", points:1},
+          {id:"s8-2e-r3", criterion:"Umschaltzeit verglichen", points:1},
+          {id:"s8-2e-r4", criterion:"Wirkungsgrad verglichen", points:1},
+          {id:"s8-2e-r5", criterion:"Empfehlung fachlich begründet", points:1}
+        ]}
+    ]
+  },
+  {
+    id: "3", title: "Netzstruktur, PoE und IPv6", points: 25,
+    context: "Das Stammhaus erhält neue managed PoE-Switches. Geplante Bereiche: Rezeption und Verwaltung (12 Clients), Küche und Haustechnik (8 Geräte), Kassensystem im Restaurant (4 Terminals), Videoüberwachung (8 Kameras und NVR) sowie ein Gäste-WLAN für 140 Zimmer.\n\nDer Provider delegiert der Hotelgruppe das Präfix 2001:db8:5a:c300::/56.",
+    subtasks: [
+      { id:"3a", operator:"Begründen Sie", points:4, answerType:"text", required:true,
+        prompt:"Begründen Sie, warum die Kameras ein eigenes VLAN erhalten, und nennen Sie zwei Maßnahmen, die verhindern, dass Gäste aus dem WLAN auf Kameras oder andere Gäste zugreifen.",
+        minRequirements:"Zwei Gründe für das Kamera-VLAN, zwei Schutzmaßnahmen",
+        fallbackValue:null,
+        solution:"Gründe: Kameras sind schwer zu aktualisierende Netzgeräte mit eigener Firmware und damit ein häufiges Angriffsziel. Im eigenen VLAN lassen sie sich isolieren, sodass ein kompromittiertes Gerät nicht das Verwaltungsnetz erreicht. Zudem bleibt der konstante Videoverkehr vom übrigen Netz getrennt, und nur der NVR darf die Streams abrufen.\nMaßnahmen: Firewall-Regeln zwischen den VLANs, die aus dem Gäste-VLAN nur Internetzugriff erlauben. Client-Isolation im Gäste-WLAN, damit Gästegeräte sich nicht gegenseitig erreichen.",
+        rubric:[
+          {id:"s8-3a-r1", criterion:"Erster Grund fachlich tragfähig", points:1},
+          {id:"s8-3a-r2", criterion:"Zweiter Grund fachlich tragfähig", points:1},
+          {id:"s8-3a-r3", criterion:"Firewall-Regeln zwischen VLANs genannt", points:1},
+          {id:"s8-3a-r4", criterion:"Client-Isolation oder gleichwertige Maßnahme genannt", points:1}
+        ]},
+      { id:"3b", operator:"Berechnen Sie", points:6, answerType:"number_with_working", required:true,
+        prompt:"Ein Switch hat 24 PoE-Ports und ein PoE-Budget von 370 W. Angeschlossen werden:\n\n10 Access Points zu je 21 W\n6 VoIP-Telefone zu je 5,2 W\n2 Türsprechstellen zu je 11,5 W\n\n1. Berechnen Sie die Summe der PoE-Leistung und das verbleibende Budget.\n2. Wie viele zusätzliche Access Points zu je 21 W lassen sich maximal anschließen? Prüfen Sie dabei auch die freien Ports.\n3. Begründen Sie, welcher PoE-Standard für die Access Points mindestens nötig ist.",
+        minRequirements:"Summe, Restbudget, maximale Anzahl mit Portprüfung, Standard mit Begründung",
+        fallbackValue:"264,2 W, Rest 105,8 W, 5 weitere Access Points",
+        solution:"Summe: 10 × 21 + 6 × 5,2 + 2 × 11,5 = 210 + 31,2 + 23 = 264,2 W\nRestbudget: 370 − 264,2 = 105,8 W\nZusätzliche Access Points: 105,8 ÷ 21 = 5,04, also 5 Stück (105 W, Rest 0,8 W).\nFreie Ports: 24 − 18 = 6, die Ports begrenzen also nicht, das Budget ist der Engpass. Ohne jede Reserve ist diese Auslastung in der Praxis allerdings knapp.\nStandard: IEEE 802.3at (PoE+), da 802.3af am Endgerät nur 12,95 W (15,4 W am Port) liefert und für 21 W nicht reicht. PoE+ liefert bis 25,5 W am Endgerät (30 W am Port).",
+        rubric:[
+          {id:"s8-3b-r1", criterion:"Summe 264,2 W", points:1},
+          {id:"s8-3b-r2", criterion:"Restbudget 105,8 W", points:1},
+          {id:"s8-3b-r3", criterion:"5 zusätzliche Access Points", points:1},
+          {id:"s8-3b-r4", criterion:"Freie Ports geprüft (6) und Budget als Engpass erkannt", points:1},
+          {id:"s8-3b-r5", criterion:"802.3at beziehungsweise PoE+ gewählt", points:1},
+          {id:"s8-3b-r6", criterion:"Begründung über die Leistungsgrenze von 802.3af", points:1}
+        ]},
+      { id:"3c", operator:"Nennen Sie", points:3, answerType:"text", required:true,
+        prompt:"Nennen Sie drei Funktionen eines managed Switches, die in diesem Hotelnetz genutzt werden, und geben Sie jeweils kurz den Einsatzzweck an.",
+        minRequirements:"Drei Funktionen mit Einsatzzweck",
+        fallbackValue:null,
+        solution:"Mögliche Funktionen:\nVLAN nach IEEE 802.1Q: Trennung von Gäste-, Kamera- und Verwaltungsnetz\nPoE-Verwaltung je Port: Access Points oder Kameras gezielt neu starten, Budget überwachen\nSNMP und Monitoring: Ausfälle und Auslastung zentral erkennen\nQoS: Sprachverkehr der VoIP-Telefone bevorzugen\nPort-Security oder 802.1X: nur berechtigte Geräte an Netzwerkdosen zulassen\nLink Aggregation (LACP): höhere Bandbreite und Ausfallsicherheit zum Core\nWeitere fachlich richtige Antworten sind möglich.",
+        rubric:[
+          {id:"s8-3c-r1", criterion:"Erste Funktion mit passendem Zweck", points:1},
+          {id:"s8-3c-r2", criterion:"Zweite Funktion mit passendem Zweck", points:1},
+          {id:"s8-3c-r3", criterion:"Dritte Funktion mit passendem Zweck", points:1}
+        ]},
+      { id:"3d", operator:"Ordnen Sie zu", points:4, answerType:"table", required:true,
+        prompt:"Ordnen Sie die folgenden Strecken einer Ebene der strukturierten Verkabelung zu und geben Sie die maximal zulässige Länge der festen Installation im Tertiärbereich an.\n\n1. Glasfaserstrecke vom Stammhaus zum 240 m entfernten Wellnessgebäude\n2. Verbindung vom Serverraum im Keller zum Etagenverteiler im 3. Obergeschoss\n3. Leitung vom Etagenverteiler zur Datendose in Zimmer 312",
+        minRequirements:"Drei Zuordnungen, maximale Länge",
+        fallbackValue:null,
+        solution:"1. Primärverkabelung (Gelände- oder Campusverkabelung)\n2. Sekundärverkabelung (Gebäude- oder Steigbereichsverkabelung)\n3. Tertiärverkabelung (Etagen- oder horizontale Verkabelung)\nMaximale Länge der festen Installation (Permanent Link) im Tertiärbereich: 90 m. Mit Patchkabeln darf der gesamte Übertragungskanal 100 m nicht überschreiten.",
+        rubric:[
+          {id:"s8-3d-r1", criterion:"Strecke 1 Primärverkabelung", points:1},
+          {id:"s8-3d-r2", criterion:"Strecke 2 Sekundärverkabelung", points:1},
+          {id:"s8-3d-r3", criterion:"Strecke 3 Tertiärverkabelung", points:1},
+          {id:"s8-3d-r4", criterion:"90 m feste Installation (Kanal 100 m)", points:1}
+        ]},
+      { id:"3e", operator:"Ermitteln Sie", points:8, answerType:"number_with_working", required:true,
+        prompt:"Arbeiten Sie mit dem delegierten Präfix 2001:db8:5a:c300::/56.\n\n1. Wie viele /64-Subnetze stehen zur Verfügung?\n2. Das Präfix soll in 16 gleich große Blöcke für Gebäudeteile aufgeteilt werden. Geben Sie die Präfixlänge der Blöcke an und wie viele /64-Subnetze jeder Block enthält.\n3. Geben Sie den 3. Block vollständig mit Präfixlänge an. Der erste Block beginnt bei 2001:db8:5a:c300::.\n4. Zu welchem Block gehört die Adresse 2001:db8:5a:c3a7::15? Geben Sie die Nummer des Blocks an.\n5. Kürzen Sie: 2001:0db8:005a:c300:0000:0000:0000:0001",
+        minRequirements:"Anzahl /64-Netze, Blockpräfix und Inhalt, 3. Block, Zuordnung der Adresse, gekürzte Adresse",
+        fallbackValue:"256 Subnetze, /60 mit je 16 Netzen, 2001:db8:5a:c320::/60, 11. Block",
+        solution:"1. 64 − 56 = 8 Bits: 2⁸ = 256 Subnetze mit /64\n2. 16 Blöcke brauchen 4 Bits: /56 + 4 = /60. Jeder Block enthält 2^(64 − 60) = 16 Subnetze mit /64.\n3. Die Blöcke unterscheiden sich in der vorletzten Hexadezimalstelle des vierten Blocks, Schrittweite 0x10: c300, c310, c320 …\n3. Block: 2001:db8:5a:c320::/60\n4. Der vierte Block c3a7 liegt im Bereich c3a0 bis c3af. c3a0 ist der Block mit dem Index 0xa = 10, also der 11. Block.\n5. 2001:db8:5a:c300::1",
+        rubric:[
+          {id:"s8-3e-r1", criterion:"256 Subnetze mit /64", points:1},
+          {id:"s8-3e-r2", criterion:"Präfixlänge /60", points:1},
+          {id:"s8-3e-r3", criterion:"16 Subnetze je Block", points:1},
+          {id:"s8-3e-r4", criterion:"Schrittweite 0x10 im vierten Block erkannt", points:1},
+          {id:"s8-3e-r5", criterion:"3. Block 2001:db8:5a:c320::/60", points:1},
+          {id:"s8-3e-r6", criterion:"Adresse dem Bereich c3a0 bis c3af zugeordnet", points:1},
+          {id:"s8-3e-r7", criterion:"11. Block", points:1},
+          {id:"s8-3e-r8", criterion:"Kürzung 2001:db8:5a:c300::1", points:1}
+        ]}
+    ]
+  },
+  {
+    id: "4", title: "Check-in-App, Datenbank und KI", points: 25,
+    context: "Nordlicht entwickelt eine App, mit der Gäste vor der Anreise einchecken und einen digitalen Zimmerschlüssel auf das Smartphone erhalten. Die Buchungsdaten liegen in einer relationalen Datenbank.",
+    subtasks: [
+      { id:"4a", operator:"Modellieren Sie", points:6, answerType:"diagram_text", required:true,
+        prompt:"Beschreiben Sie ein UML-Aktivitätsdiagramm mit den Partitionen (Swimlanes) Gast und System für folgenden Ablauf. Eine textliche Darstellung ist zulässig.\n\n1. Der Gast gibt seine Buchungsnummer ein.\n2. Das System prüft die Buchung. Ist sie ungültig, erhält der Gast einen Hinweis und gibt die Nummer erneut ein.\n3. Bei gültiger Buchung füllt der Gast den digitalen Meldeschein aus.\n4. Das System prüft, ob eine Kreditkarte hinterlegt ist. Wenn ja, wird der Betrag vorautorisiert, wenn nein, wird die Buchung für die Zahlung an der Rezeption markiert.\n5. Danach erledigt das System zwei Dinge gleichzeitig: den digitalen Zimmerschlüssel senden und den Zimmerstatus für das Housekeeping aktualisieren.\n6. Anschließend endet der Ablauf.",
+        minRequirements:"Partitionen, Start und Ende, Schleife über ungültige Buchung, Verzweigung Zahlung mit Zusammenführung, Gabelung und Vereinigung",
+        fallbackValue:null,
+        solution:"Partition Gast | Partition System\n\nGast: Startknoten → Buchungsnummer eingeben\nSystem: Buchung prüfen → Verzweigung [Buchung gültig?]\n   [nein] → System: Hinweis anzeigen → zurück zu Gast: Buchungsnummer eingeben (Rücksprung über einen Zusammenführungsknoten vor der Eingabe)\n   [ja] → Gast: Meldeschein ausfüllen\nSystem: Verzweigung [Kreditkarte hinterlegt?]\n   [ja] → Betrag vorautorisieren → Zusammenführung\n   [nein] → Zahlung an Rezeption markieren → Zusammenführung\nSystem: Gabelung\n   ‖ Zimmerschlüssel senden\n   ‖ Zimmerstatus aktualisieren\nSystem: Vereinigung → Endknoten",
+        rubric:[
+          {id:"s8-4a-r1", criterion:"Partitionen Gast und System mit richtiger Zuordnung der Aktionen", points:1},
+          {id:"s8-4a-r2", criterion:"Start- und Endknoten korrekt", points:1},
+          {id:"s8-4a-r3", criterion:"Verzweigung Buchung gültig mit Rücksprung zur Eingabe", points:1},
+          {id:"s8-4a-r4", criterion:"Verzweigung Kreditkarte mit Zusammenführung", points:1},
+          {id:"s8-4a-r5", criterion:"Gabelung vor den parallelen Aktionen", points:1},
+          {id:"s8-4a-r6", criterion:"Vereinigung nach den parallelen Aktionen", points:1}
+        ]},
+      { id:"4b", operator:"Führen Sie einen Schreibtischtest durch", points:6, answerType:"table", required:true,
+        prompt:"Ein Programm wertet die Zimmerbelegung von Montag bis Freitag aus.\n\n 1  belegt = [98, 126, 140, 133, 105]\n 2  kapazitaet = 140\n 3  vollTage = 0\n 4  summe = 0\n 5  tag = 0\n 6  SOLANGE tag < 5\n 7      summe = summe + belegt[tag]\n 8      quote = belegt[tag] * 100 / kapazitaet\n 9      WENN quote >= 90 DANN\n10          vollTage = vollTage + 1\n11      ENDE WENN\n12      tag = tag + 1\n13  ENDE SOLANGE\n14  auslastung = summe * 100 / (kapazitaet * 5)\n15  AUSGABE vollTage, auslastung\n\nFüllen Sie für jeden Schleifendurchlauf eine Zeile mit den Spalten tag | belegt[tag] | summe | quote | vollTage aus und geben Sie die Ausgabe an.\nWie oft wird die Bedingung in Zeile 6 insgesamt geprüft?\nWas geschieht, wenn Zeile 12 fehlt?",
+        minRequirements:"Fünf Tabellenzeilen, Ausgabewerte, Anzahl der Prüfungen, Folge der fehlenden Zeile",
+        fallbackValue:"vollTage = 3, auslastung = 86",
+        solution:"tag | belegt[tag] | summe | quote | vollTage\n0 | 98  | 98  | 70  | 0\n1 | 126 | 224 | 90  | 1\n2 | 140 | 364 | 100 | 2\n3 | 133 | 497 | 95  | 3\n4 | 105 | 602 | 75  | 3\n\nAusgabe: vollTage = 3, auslastung = 602 × 100 ÷ 700 = 86\nDie Bedingung wird sechsmal geprüft: fünfmal wahr, beim sechsten Mal mit tag = 5 falsch.\nOhne Zeile 12 bleibt tag dauerhaft 0, die Bedingung ist immer wahr und es entsteht eine Endlosschleife.",
+        rubric:[
+          {id:"s8-4b-r1", criterion:"Zeilen tag = 0 und tag = 1 korrekt (90 zählt als voll)", points:1},
+          {id:"s8-4b-r2", criterion:"Zeilen tag = 2 bis 4 korrekt", points:1},
+          {id:"s8-4b-r3", criterion:"Ausgabe vollTage = 3", points:1},
+          {id:"s8-4b-r4", criterion:"Ausgabe auslastung = 86", points:1},
+          {id:"s8-4b-r5", criterion:"Sechs Prüfungen der Schleifenbedingung", points:1},
+          {id:"s8-4b-r6", criterion:"Endlosschleife erkannt", points:1}
+        ]},
+      { id:"4c", operator:"Überführen Sie", points:6, answerType:"table", required:true,
+        prompt:"Überführen Sie das folgende Datenmodell in Tabellen. Geben Sie je Tabelle die Spalten an und kennzeichnen Sie Primärschlüssel mit PK und Fremdschlüssel mit FK.\n\nEin Gast (GastNr, Name, E-Mail) hat beliebig viele Buchungen.\nEine Buchung (BuchungsNr, Anreise, Abreise) gehört zu genau einem Gast.\nEine Buchung kann mehrere Zimmer umfassen, und ein Zimmer kommt in vielen Buchungen vor.\nEin Zimmer (ZimmerNr, Etage) gehört genau einer Zimmerkategorie (KategorieNr, Bezeichnung, Preis pro Nacht) an.",
+        minRequirements:"Fünf Tabellen mit PK und FK, Zwischentabelle für die n:m-Beziehung",
+        fallbackValue:null,
+        solution:"Gast (GastNr PK, Name, EMail)\nBuchung (BuchungsNr PK, Anreise, Abreise, GastNr FK → Gast)\nKategorie (KategorieNr PK, Bezeichnung, PreisProNacht)\nZimmer (ZimmerNr PK, Etage, KategorieNr FK → Kategorie)\nBuchungZimmer (BuchungsNr PK/FK → Buchung, ZimmerNr PK/FK → Zimmer)\n\nDie n:m-Beziehung zwischen Buchung und Zimmer wird über die Zwischentabelle BuchungZimmer aufgelöst. Ihr Primärschlüssel setzt sich aus beiden Fremdschlüsseln zusammen.",
+        rubric:[
+          {id:"s8-4c-r1", criterion:"Tabelle Gast mit PK", points:1},
+          {id:"s8-4c-r2", criterion:"Tabelle Buchung mit PK und FK GastNr", points:1},
+          {id:"s8-4c-r3", criterion:"Tabelle Kategorie mit PK", points:1},
+          {id:"s8-4c-r4", criterion:"Tabelle Zimmer mit PK und FK KategorieNr", points:1},
+          {id:"s8-4c-r5", criterion:"Zwischentabelle für Buchung und Zimmer", points:1},
+          {id:"s8-4c-r6", criterion:"Zusammengesetzter Primärschlüssel aus beiden Fremdschlüsseln", points:1}
+        ]},
+      { id:"4d", operator:"Erläutern Sie", points:3, answerType:"text", required:true,
+        prompt:"Zimmer 108 wird dauerhaft zu einem Lagerraum umgebaut und soll aus der Datenbank gelöscht werden. Es kommt aber in früheren Buchungen vor. Erläutern Sie, was die referenzielle Integrität in diesem Fall bewirkt, und schlagen Sie eine fachlich sinnvolle Lösung vor.",
+        minRequirements:"Wirkung der referenziellen Integrität, Lösungsvorschlag mit Begründung",
+        fallbackValue:null,
+        solution:"Die Zwischentabelle BuchungZimmer verweist über den Fremdschlüssel ZimmerNr auf Zimmer 108. Bei der Löschregel RESTRICT verweigert das Datenbanksystem das Löschen, weil sonst Verweise ins Leere zeigen würden.\nLösung: Das Zimmer nicht löschen, sondern über ein Attribut wie aktiv = false oder buchbar = nein stilllegen. So bleiben frühere Buchungen und Rechnungen vollständig, und das Zimmer taucht bei neuen Buchungen nicht mehr auf. CASCADE wäre ungeeignet, weil dadurch Buchungshistorie verloren ginge.",
+        rubric:[
+          {id:"s8-4d-r1", criterion:"Verweis über den Fremdschlüssel erkannt", points:1},
+          {id:"s8-4d-r2", criterion:"Löschen wird verhindert oder ergäbe Verweise ins Leere", points:1},
+          {id:"s8-4d-r3", criterion:"Stilllegen statt Löschen oder gleichwertige Lösung begründet", points:1}
+        ]},
+      { id:"4e", operator:"Beurteilen Sie", points:4, answerType:"text", required:true,
+        prompt:"Die Hotelgruppe möchte einen KI-Chatbot in der App einsetzen. Nennen Sie eine Aufgabe, für die der Chatbot gut geeignet ist, und eine, für die er ungeeignet ist. Begründen Sie jeweils.",
+        minRequirements:"Geeignete Aufgabe mit Begründung, ungeeignete Aufgabe mit Begründung",
+        fallbackValue:null,
+        solution:"Geeignet: Beantwortung wiederkehrender Fragen wie Check-out-Zeit, Frühstückszeiten oder Parkmöglichkeiten. Die Antworten lassen sich aus hinterlegten Hotelinformationen ableiten, der Chatbot ist rund um die Uhr erreichbar und entlastet die Rezeption.\nUngeeignet: verbindliche Entscheidungen über Stornierungen und Erstattungen, Auskünfte zu Allergenen im Restaurant oder die Verarbeitung von Zahlungsdaten im Chat. Sprachmodelle können plausibel klingende, aber falsche Antworten erzeugen, bei rechtlich oder gesundheitlich relevanten Auskünften ist das nicht vertretbar. Solche Anfragen sollten an Mitarbeitende übergeben werden.",
+        rubric:[
+          {id:"s8-4e-r1", criterion:"Geeignete Aufgabe genannt", points:1},
+          {id:"s8-4e-r2", criterion:"Begründung für die Eignung", points:1},
+          {id:"s8-4e-r3", criterion:"Ungeeignete Aufgabe genannt", points:1},
+          {id:"s8-4e-r4", criterion:"Begründung über Fehlerrisiko, Verbindlichkeit oder Datenschutz", points:1}
         ]}
     ]
   }

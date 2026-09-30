@@ -158,7 +158,8 @@ function renderSetup() {
     lab.className = 'choice' + (isDone ? ' done' : '');
     lab.innerHTML =
       '<input type="radio" name="examPick" value="' + esc(ex.examId) + '">' +
-      '<span><b>' + esc(ex.examId) + ' — ' + esc(ex.branche) + '</b>' +
+      '<span><b>' + esc(ex.examId) + ' — ' + esc(ex.branche) +
+      (ex.themen && ex.themen.length ? '&nbsp; <span class="choice-topics">' + ex.themen.map(function (t) { return '<span>' + esc(t) + '</span>'; }).join('&nbsp;· ') + '</span>' : '') + '</b>' +
       '<small>' + ex.tasks.length + ' Aufgaben · ' + ex.maxPoints + ' Punkte · ' +
       ex.durationMinutes + ' Minuten' + (isDone ? ' · bereits absolviert, Wiederholung möglich' : '') + '</small></span>';
     box.appendChild(lab);
