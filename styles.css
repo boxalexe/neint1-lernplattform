@@ -261,7 +261,7 @@ footer{text-align:center;color:var(--muted);font-size:0.8rem;padding-top:40px;bo
    Handcursor ("großer Finger") je wieder durchschlägt. */
 *{cursor:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='26' height='26' viewBox='0 0 24 24'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='0.7' y2='1'%3E%3Cstop offset='0' stop-color='%237deaff'/%3E%3Cstop offset='0.45' stop-color='%2322d3ee'/%3E%3Cstop offset='1' stop-color='%230d7f9c'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath d='M4.5 1.8 L4.5 20.6 L9.3 16.1 L12.1 22.6 L15.2 21.3 L12.5 14.9 L19.2 14.7 Z' fill='url(%23g)' stroke='%2306222b' stroke-width='1.1' stroke-linejoin='round'/%3E%3C/svg%3E") 4 2, auto !important}
 a,button,input,label,select,summary,[role="button"],
-.tab,.cat-chip,.scope-slider,.opt,.zen-toggle,.wrong-start,.wrong-reset,
+.tab,.cat-chip,.scope-slider,.opt,.zen-toggle,.wrong-start,.wrong-reset,.wrong-print,.q-star,.pd-remove,
 .start-btn,.btn-sec,.finish-btn,.nav-confirm-btn,nav.jump a,.lib-item{cursor:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='28' viewBox='0 0 24 24'%3E%3Cdefs%3E%3ClinearGradient id='h' x1='0' y1='0' x2='0.6' y2='1'%3E%3Cstop offset='0' stop-color='%238fffbf'/%3E%3Cstop offset='0.5' stop-color='%233dff88'/%3E%3Cstop offset='1' stop-color='%2317a85a'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath d='M10 1.5 C8.9 1.5 8.2 2.3 8.2 3.4 L8.2 12.2 L6.9 10.9 C6.1 10.1 4.8 10.1 4.1 10.9 C3.4 11.6 3.4 12.8 4.1 13.6 L9.2 19.5 C10 20.4 11.1 21 12.4 21 L15.6 21 C17.9 21 19.8 19.1 19.8 16.8 L19.8 10.4 C19.8 9.4 19 8.6 18 8.6 C17.7 8.6 17.4 8.7 17.1 8.8 C16.8 8 16.1 7.5 15.2 7.5 C14.8 7.5 14.4 7.6 14.1 7.8 C13.8 7.1 13.1 6.6 12.3 6.6 C12.1 6.6 11.9 6.6 11.8 6.7 L11.8 3.4 C11.8 2.3 11.1 1.5 10 1.5 Z' fill='url(%23h)' stroke='%2306222b' stroke-width='1.2' stroke-linejoin='round'/%3E%3C/svg%3E") 12 2, pointer !important}
 
 /* Scroll-to-Top-Button: transparent, unten rechts, blendet erst beim Scrollen ein */
@@ -891,3 +891,32 @@ table.sn-cheat td:nth-child(4),table.sn-cheat td:nth-child(5){color:var(--green)
 @media (prefers-reduced-motion: reduce){
   .qs-flash{animation:none;outline:3px solid var(--cyan);outline-offset:3px}
 }
+
+/* ---- Stern im Durchlauf: Frage zu den Karteikarten-Wackelkandidaten legen ---- */
+.q-text.has-star{position:relative;padding-right:44px}
+.q-star{position:absolute;top:-6px;right:0;width:36px;height:36px;display:flex;align-items:center;justify-content:center;background:transparent;border:1px solid transparent;border-radius:8px;color:var(--muted);font-size:1.35rem;line-height:1;cursor:pointer;transition:color .15s,border-color .15s}
+.q-star:hover{color:var(--amber);border-color:var(--border)}
+.q-star.active{color:var(--amber)}
+.q-star:focus-visible{outline:2px solid var(--amber);outline-offset:2px}
+
+/* ---- Kasten Karteikarten drucken ---- */
+.wrong-print{background:transparent;color:var(--cyan);border:1px solid var(--cyan);font-weight:700;font-size:0.9rem;padding:10px 20px;border-radius:8px;cursor:pointer;font-family:'Segoe UI',sans-serif;transition:all .15s}
+.wrong-print:hover{background:color-mix(in srgb,var(--cyan) 12%,transparent)}
+.wrong-print:disabled{opacity:0.4;cursor:not-allowed}
+.wrong-box-print{margin-top:12px;border-left:3px solid var(--amber)}
+
+/* ---- Druckmappe ---- */
+.print-dash{display:none}
+.print-dash.active{display:block}
+.pd-head{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-bottom:8px}
+.pd-actions{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.pd-count{font-family:'DM Mono',monospace;font-size:0.85rem;color:var(--cyan);margin-bottom:6px}
+.pd-hint{margin-bottom:18px}
+.pd-item{display:grid;grid-template-columns:34px 1fr 40px;gap:12px;align-items:start;padding:14px 0;border-bottom:1px dashed var(--border)}
+.pd-num{font-family:'DM Mono',monospace;color:var(--muted);font-size:0.85rem;padding-top:3px}
+.pd-body{min-width:0}
+.pd-q{font-weight:600;color:var(--text);margin-bottom:6px;overflow-wrap:anywhere}
+.pd-a{color:var(--muted);font-size:0.92rem;line-height:1.5;overflow-wrap:anywhere}
+.pd-remove{width:36px;height:36px;border-radius:50%;border:1px solid var(--red);background:transparent;color:var(--red);font-size:1.3rem;font-weight:700;line-height:1;cursor:pointer;transition:background .15s}
+.pd-remove:hover{background:color-mix(in srgb,var(--red) 15%,transparent)}
+@media (max-width:560px){.pd-item{grid-template-columns:26px 1fr 38px;gap:8px}}

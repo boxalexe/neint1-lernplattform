@@ -20245,6 +20245,35 @@ function getWrongCardQuestions(){
   return out;
 }
 function wrongCardCount(){ return loadWrongCards().length; }
+
+// ---- Druckauswahl: eigener Speicher, nur über den Stern befüllt ----
+const PRINT_KEY = 'neint1_print_v1';
+function loadPrint(){
+  try {
+    const raw = localStorage.getItem(PRINT_KEY);
+    return raw ? JSON.parse(raw) : [];
+  } catch(e){ return []; }
+}
+function savePrint(list){
+  try { localStorage.setItem(PRINT_KEY, JSON.stringify(list)); } catch(e){}
+}
+function isPrint(qText){ return loadPrint().includes(qText); }
+function addPrint(qText){
+  const list = loadPrint();
+  if(!list.includes(qText)){ list.push(qText); savePrint(list); }
+}
+function removePrint(qText){ savePrint(loadPrint().filter(x => x !== qText)); }
+function printCount(){ return loadPrint().length; }
+function getPrintQuestions(){
+  const wanted = new Set(loadPrint());
+  const out = [];
+  Object.keys(POOLS).forEach(key => {
+    POOLS[key].q.forEach(qObj => {
+      if(wanted.has(qObj.q)) out.push({ obj: qObj, catName: POOLS[key].name });
+    });
+  });
+  return out;
+}
 function resetWrongCards(){ saveWrongCards([]); }
 
 
@@ -20703,6 +20732,30 @@ function renderRun(){
     qText.innerHTML = '<span class="num">'+(qi+1)+'.</span>'+item.q;
     qEl.appendChild(qText);
 
+    // Stern: Frage für den Kartendruck vormerken. Nur bei kartentauglichen
+    // Fragen, denn Negativfragen ergeben ohne Antwortoptionen keine Karte.
+    if(item.card !== false){
+      const star = document.createElement('button');
+      star.type = 'button';
+      star.className = 'q-star';
+      const starSync = function(){
+        const an = isPrint(item.q);
+        star.classList.toggle('active', an);
+        star.textContent = an ? '\u2605' : '\u2606';
+        star.setAttribute('aria-pressed', an ? 'true' : 'false');
+        star.title = an ? 'Aus der Druckauswahl nehmen' : 'Für den Kartendruck vormerken';
+        star.setAttribute('aria-label', star.title);
+      };
+      star.addEventListener('click', () => {
+        if(isPrint(item.q)){ removePrint(item.q); } else { addPrint(item.q); }
+        starSync();
+        updatePrintBox();
+      });
+      qText.classList.add('has-star');
+      qText.appendChild(star);
+      starSync();
+    }
+
     const explainEl = document.createElement('div');
     explainEl.className = 'explain';
 
@@ -20893,6 +20946,7 @@ function finishRun(){
 }
 
 function startQuiz(){
+  schliesseDruckmappe();
   buildRun();
   renderRun();
   const rb = document.getElementById('resultBtn');
@@ -20909,8 +20963,10 @@ function backToSelector(){
   if(rb) rb.style.display = 'none';
   runnerEl.classList.remove('active');
   resultEl.classList.remove('show');
+  schliesseDruckmappe();
   selectorEl.style.display = 'block';
   refreshWrongState();
+  updatePrintBox();
   updateWrongCardBox();
   if(typeof viewScroll === 'object') viewScroll['quiz'] = 0;
   window.scrollTo({top:0,behavior:'smooth'});
@@ -20984,6 +21040,199 @@ function updateWrongCardBox(){
     });
   }
   updateWrongCardBox();
+})();
+
+// ---- Druckmappe: Karteikarten-Wackelkandidaten als Faltkarten ----
+// A4 quer, zwei Faltspalten, drei Reihen: sechs Karten pro Blatt. Frage links,
+// Antwort rechts daneben, senkrecht gefaltet liegt die Antwort auf der Rückseite.
+const printDashEl = document.getElementById('printDash');
+const KARTEN_PRO_BLATT = 6;
+let druckAuswahl = [];   // [{ obj, catName }]
+
+function richtigeAntwort(obj){
+  const r = (obj.o || []).find(o => o.ok);
+  return r ? r.t : '';
+}
+
+function schliesseDruckmappe(){
+  const el = document.getElementById('printDash');
+  if(el) el.classList.remove('active');
+}
+
+function oeffneDruckmappe(){
+  if(!printDashEl) return;
+  druckAuswahl = getPrintQuestions().filter(x => alsKarteGeeignet(x.obj));
+  renderDruckmappe();
+  selectorEl.style.display = 'none';
+  runnerEl.classList.remove('active');
+  resultEl.classList.remove('show');
+  printDashEl.classList.add('active');
+  if(typeof viewScroll === 'object') viewScroll['quiz'] = 0;
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function renderDruckmappe(){
+  const liste = document.getElementById('pdList');
+  const zahl = document.getElementById('pdCount');
+  const btn = document.getElementById('pdPrintBtn');
+  const n = druckAuswahl.length;
+  const blaetter = Math.ceil(n / KARTEN_PRO_BLATT);
+  if(zahl){
+    zahl.textContent = n === 0
+      ? 'Keine Karten mehr in der Auswahl.'
+      : n + (n === 1 ? ' Karte' : ' Karten') + ' auf ' + blaetter + (blaetter === 1 ? ' Blatt' : ' Blättern');
+  }
+  if(btn) btn.disabled = n === 0;
+  if(!liste) return;
+  liste.innerHTML = '';
+  druckAuswahl.forEach((eintrag, i) => {
+    const zeile = document.createElement('div');
+    zeile.className = 'pd-item';
+    zeile.innerHTML =
+      '<span class="pd-num">' + (i+1) + '</span>' +
+      '<div class="pd-body">' +
+        '<span class="cat-label">' + eintrag.catName + '</span>' +
+        '<div class="pd-q">' + eintrag.obj.q + '</div>' +
+        '<div class="pd-a">' + richtigeAntwort(eintrag.obj) + '</div>' +
+      '</div>';
+    const minus = document.createElement('button');
+    minus.type = 'button';
+    minus.className = 'pd-remove';
+    minus.textContent = '\u2212';
+    minus.title = 'Aus der Auswahl nehmen';
+    minus.setAttribute('aria-label', 'Karte ' + (i+1) + ' aus der Auswahl nehmen');
+    minus.addEventListener('click', () => {
+      removePrint(eintrag.obj.q);
+      druckAuswahl.splice(i, 1);
+      renderDruckmappe();
+      updatePrintBox();
+    });
+    zeile.appendChild(minus);
+    liste.appendChild(zeile);
+  });
+}
+
+function baueDruckDokument(karten){
+  const B = 297, H = 210, SPALTE = B / 4, REIHE = H / 3;
+  const mm = v => v.toFixed(2) + 'mm';
+  let blaetter = '';
+  for(let start = 0; start < karten.length; start += KARTEN_PRO_BLATT){
+    let felder = '';
+    karten.slice(start, start + KARTEN_PRO_BLATT).forEach((k, s) => {
+      const nr = start + s + 1;
+      const x = (s % 2) * 2 * SPALTE;
+      const y = Math.floor(s / 2) * REIHE;
+      felder +=
+        '<div class="feld frage" style="left:' + mm(x) + ';top:' + mm(y) + '">' +
+          '<div class="kopf"><span class="kat">' + k.catName + '</span><span>#' + nr + '</span></div>' +
+          '<div class="text" data-nr="' + nr + '">' + k.obj.q + '</div>' +
+        '</div>' +
+        '<div class="feld antwort" style="left:' + mm(x + SPALTE) + ';top:' + mm(y) + '">' +
+          '<div class="kopf"><span>Antwort</span><span>#' + nr + '</span></div>' +
+          '<div class="text" data-nr="' + nr + '">' + richtigeAntwort(k.obj) + '</div>' +
+        '</div>';
+    });
+    const linien =
+      '<div class="linie falz senk" style="left:' + mm(SPALTE) + '"></div>' +
+      '<div class="linie schnitt senk" style="left:' + mm(2 * SPALTE) + '"></div>' +
+      '<div class="linie falz senk" style="left:' + mm(3 * SPALTE) + '"></div>' +
+      '<div class="linie schnitt waag" style="top:' + mm(REIHE) + '"></div>' +
+      '<div class="linie schnitt waag" style="top:' + mm(2 * REIHE) + '"></div>';
+    blaetter += '<section class="blatt">' + felder + linien + '</section>';
+  }
+
+  const css =
+    '@page{size:A4 landscape;margin:0}' +
+    '*{box-sizing:border-box;margin:0;padding:0}' +
+    'html,body{background:#fff;color:#111}' +
+    'body{font-family:"Segoe UI",Arial,Helvetica,sans-serif;-webkit-print-color-adjust:exact;print-color-adjust:exact}' +
+    '.blatt{position:relative;width:297mm;height:210mm;overflow:hidden;background:#fff;break-after:page;page-break-after:always}' +
+    '.blatt:last-of-type{break-after:auto;page-break-after:auto}' +
+    '.feld{position:absolute;width:' + mm(SPALTE) + ';height:' + mm(REIHE) + ';padding:6mm 5.5mm 5mm;display:flex;flex-direction:column}' +
+    '.kopf{display:flex;justify-content:space-between;gap:2mm;font-size:6.5pt;color:#777;margin-bottom:2mm;flex:0 0 auto}' +
+    '.kat{overflow:hidden;white-space:nowrap;text-overflow:ellipsis}' +
+    '.text{flex:1 1 auto;overflow:hidden;font-size:12pt;line-height:1.3;hyphens:auto;-webkit-hyphens:auto;overflow-wrap:anywhere}' +
+    '.frage .text{font-weight:600}' +
+    '.text code{font-family:Consolas,"Courier New",monospace;font-size:.92em}' +
+    '.linie{position:absolute;pointer-events:none}' +
+    '.senk{top:0;bottom:0;width:0}' +
+    '.waag{left:0;right:0;height:0}' +
+    '.schnitt.senk{border-left:.25mm solid #888}' +
+    '.schnitt.waag{border-top:.25mm solid #888}' +
+    '.falz.senk{border-left:.25mm dashed #bbb}' +
+    '.leiste{position:sticky;top:0;z-index:5;background:#f4f4f4;border-bottom:1px solid #ccc;padding:12px 16px;font-size:14px;line-height:1.45}' +
+    '.leiste button{font:inherit;font-weight:700;padding:8px 18px;margin-right:12px;border:1px solid #333;background:#111;color:#fff;border-radius:6px;cursor:pointer}' +
+    '.leiste .warn{color:#b00020;font-weight:600;margin-top:6px}' +
+    '@media screen{body{background:#e6e6e6}.blatt{margin:16px auto;box-shadow:0 1px 6px rgba(0,0,0,.25)}' +
+    '.zulang{outline:.6mm solid #d0021b;outline-offset:-.6mm}}' +
+    '@media print{.leiste{display:none}}';
+
+  // Passt jede Karte in ihr Feld ein: Schrift schrittweise verkleinern, bis
+  // nichts mehr überläuft. Was selbst bei 7 pt nicht passt, wird gemeldet.
+  const skript =
+    '(function(){' +
+      'var zulang=[];' +
+      'document.querySelectorAll(".text").forEach(function(t){' +
+        'var pt=12;' +
+        'while(t.scrollHeight>t.clientHeight+1&&pt>7){pt-=0.5;t.style.fontSize=pt+"pt";}' +
+        'if(t.scrollHeight>t.clientHeight+1){t.parentNode.classList.add("zulang");' +
+          'var nr=t.getAttribute("data-nr");if(zulang.indexOf(nr)<0)zulang.push(nr);}' +
+      '});' +
+      'var w=document.getElementById("warn");' +
+      'if(zulang.length){w.textContent="Zu lang für die Karte und abgeschnitten: Nr. "+zulang.join(", ")+". In der Druckmappe herausnehmen oder trotzdem drucken.";}' +
+      'else{setTimeout(function(){window.print();},300);}' +
+    '})();';
+
+  return '<!DOCTYPE html><html lang="de"><head><meta charset="utf-8">' +
+    '<meta name="viewport" content="width=device-width, initial-scale=1">' +
+    '<title>L8A Karteikarten</title><style>' + css + '</style></head><body>' +
+    '<div class="leiste"><button type="button" onclick="window.print()">Drucken</button>' +
+    'A4 quer, Skalierung 100\u00a0% bzw. „Tatsächliche Größe“, Ränder „Keine“. ' +
+    'Durchgezogene Linien schneiden, gestrichelte falten.' +
+    '<div class="warn" id="warn"></div></div>' +
+    blaetter +
+    '<script>' + skript + '<\/script></body></html>';
+}
+
+function druckeKarten(){
+  if(!druckAuswahl.length) return;
+  const w = window.open('', '_blank');
+  if(!w){
+    alert('Das Druckfenster wurde vom Browser blockiert. Bitte Pop-ups für diese Seite erlauben.');
+    return;
+  }
+  w.document.open();
+  w.document.write(baueDruckDokument(druckAuswahl));
+  w.document.close();
+}
+
+// Kasten "Karteikarten drucken" in der Auswahl
+function updatePrintBox(){
+  const n = printCount();
+  const sub = document.getElementById('printSub');
+  const oeffnen = document.getElementById('printOpenBtn');
+  const reset = document.getElementById('printResetBtn');
+  if(sub) sub.textContent = 'Ausgewählt: ' + n;
+  if(oeffnen) oeffnen.disabled = n === 0;
+  if(reset) reset.disabled = n === 0;
+}
+
+(function initDruckmappe(){
+  const oeffnen = document.getElementById('printOpenBtn');
+  const reset = document.getElementById('printResetBtn');
+  const drucken = document.getElementById('pdPrintBtn');
+  const zurueck = document.getElementById('pdBackBtn');
+  if(oeffnen) oeffnen.addEventListener('click', () => { if(printCount() > 0) oeffneDruckmappe(); });
+  if(reset) reset.addEventListener('click', () => {
+    if(printCount() === 0) return;
+    if(confirm('Alle für den Druck ausgewählten Karten entfernen?')){
+      savePrint([]);
+      updatePrintBox();
+    }
+  });
+  updatePrintBox();
+  if(drucken) drucken.addEventListener('click', druckeKarten);
+  if(zurueck) zurueck.addEventListener('click', backToSelector);
 })();
 
 startBtn.addEventListener('click', () => {

@@ -78,7 +78,7 @@
     if (t && t !== 'default') document.documentElement.setAttribute('data-theme', t);
   } catch (e) {}
 </script>
-<link rel="stylesheet" href="styles.css?v=20260928b">
+<link rel="stylesheet" href="styles.css?v=20261005b">
 </head>
 <body>
 <header>
@@ -2479,7 +2479,7 @@ Im <a href="subnetting-trainer/">Subnetting Trainer</a> kann dieses Thema geziel
   <!-- Kategorieauswahl -->
   <div class="selector" id="selector">
     <h2>Multiple Choice</h2>
-    <p class="sel-sub">Wähle beliebig viele Kategorien und lege mit dem Regler fest, wie viele Fragen aus jeder davon drankommen, von 10 bis 50 in Fünferschritten oder ganz rechts den kompletten Pool. Reihenfolge und Antwortpositionen werden bei jedem Start neu gemischt. Was du falsch beantwortest, sammelt sich unten bei den Wackelkandidaten, wo du es gezielt wiederholen kannst. Die Liste bleibt lokal in deinem Browser gespeichert. Auf einem anderen Gerät oder in einem anderen Browser beginnt sie leer.</p>
+    <p class="sel-sub">Wähle beliebig viele Kategorien und lege mit dem Regler fest, wie viele Fragen aus jeder davon drankommen, von 10 bis 50 in Fünferschritten oder ganz rechts den kompletten Pool. Reihenfolge und Antwortpositionen werden bei jedem Start neu gemischt. Was du falsch beantwortest, sammelt sich unten bei den Wackelkandidaten, wo du es gezielt wiederholen kannst. Über den Stern neben einer Aufgabe landet sie im Feld zum Drucken. Auf dem Papier steht wie im Karteikartenmodus nur die Frage samt richtiger Lösung, eine Erklärung fehlt. Gerade dort, wo mehrere Antworten denkbar wären, lohnt sich vorher eine handschriftliche Notiz. Diese Listen bleiben lokal in deinem Browser gespeichert. Auf einem anderen Gerät oder in einem anderen Browser beginnen sie leer.</p>
     <div class="cat-searchrow">
       <input type="text" id="catSearch" class="cat-search" placeholder="Kategorie suchen … z. B. Datenschutz" autocomplete="off" inputmode="search" enterkeyhint="search" aria-label="Kategorie suchen">
       <span class="cat-search-count" id="catSearchCount"></span>
@@ -2526,6 +2526,16 @@ Im <a href="subnetting-trainer/">Subnetting Trainer</a> kann dieses Thema geziel
         <button class="wrong-reset" id="wrongCardResetBtn" disabled>Zurücksetzen</button>
       </div>
     </div>
+    <div class="wrong-box wrong-box-print" id="printBox">
+      <div class="wrong-info">
+        <span class="wrong-title">Karteikarten drucken</span>
+        <span class="wrong-sub" id="printSub">Ausgewählt: 0</span>
+      </div>
+      <div class="wrong-actions">
+        <button class="wrong-print" id="printOpenBtn" disabled>Drucken</button>
+        <button class="wrong-reset" id="printResetBtn" disabled>Zurücksetzen</button>
+      </div>
+    </div>
   </div>
 
   <!-- Laufendes Quiz -->
@@ -2541,6 +2551,20 @@ Im <a href="subnetting-trainer/">Subnetting Trainer</a> kann dieses Thema geziel
       <div class="run-footer-count" id="runFooterCount"></div>
       <button class="start-btn" id="resultBtn" style="display:none">Auswertung ansehen</button>
     </div>
+  </div>
+
+  <!-- Druckmappe: Karteikarten-Wackelkandidaten als Faltkarten drucken -->
+  <div class="selector print-dash" id="printDash">
+    <div class="pd-head">
+      <h2>Karteikarten drucken</h2>
+      <div class="pd-actions">
+        <button class="start-btn" id="pdPrintBtn" type="button">Drucken</button>
+        <button class="run-abort" id="pdBackBtn" type="button">Zurück zur Auswahl</button>
+      </div>
+    </div>
+    <p class="pd-count" id="pdCount"></p>
+    <p class="sel-sub pd-hint">Sechs Karten pro A4-Blatt im Querformat. Durchgezogene Linien schneiden, gestrichelte Linien falten, die Antwort liegt danach auf der Rückseite. Im Druckdialog die Skalierung auf 100&nbsp;% bzw. „Tatsächliche Größe“ stellen und die Ränder auf „Keine“, sonst stimmen die Maße nicht. Das rote Minus nimmt eine Karte aus der Auswahl.</p>
+    <div class="pd-list" id="pdList"></div>
   </div>
 
   <!-- Übergangs-Overlay: bleibt stehen, bis der Nutzer entscheidet -->
@@ -2625,6 +2649,6 @@ Im <a href="subnetting-trainer/">Subnetting Trainer</a> kann dieses Thema geziel
   <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="19" x2="12" y2="5"></line><polyline points="6 11 12 5 18 11"></polyline></svg>
 </button>
 
-<script src="app.js?v=20260928b"></script>
+<script src="app.js?v=20261005b"></script>
 </body>
 </html>
