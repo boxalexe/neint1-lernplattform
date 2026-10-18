@@ -43,6 +43,7 @@ const GolemArt = {
   YOKE_TOP: -60,
   YOKE_H: 34,
   TIEFE: 9,       // sichtbare Gehäusetiefe nach rechts unten
+  READOUT_Y: 132, // Stufenanzeige links: unterhalb der Kopfzeile (Titel, Fortschritt, Fehler)
 
   /** Quader-Seiten (rechts und unten) für die 3D-Wirkung eines Rechtecks */
   tiefeMarkup(x, y, w, h, klasse) {
@@ -184,6 +185,7 @@ const GolemArt = {
         <rect class="yoke-body" x="${x}" y="${y}" width="${w}" height="${h}" rx="5"/>
         <rect class="yoke-shine" x="${x + 6}" y="${y + 3}" width="${w - 12}" height="${h * 0.32}" rx="3"/>
         ${segs}
+        <rect class="yoke-label-bg" x="-64" y="${y + 6}" width="128" height="${h - 12}" rx="4"/>
         <text class="yoke-label" x="0" y="${y + h / 2 + 5}">STRIPING</text>
       </g>
       ${pfeile}`;
@@ -440,8 +442,8 @@ const GolemArt = {
         </g>
 
         <g class="golem-readout">
-          <text class="stage-name" x="40" y="54">${stage.label}</text>
-          <text class="stage-tol" x="40" y="80">Toleranz: ${stage.toleranz}</text>
+          <text class="stage-name" x="40" y="${this.READOUT_Y}">${stage.label}</text>
+          <text class="stage-tol" x="40" y="${this.READOUT_Y + 26}">Toleranz: ${stage.toleranz}</text>
         </g>
         ${allein ? "" : this.legendMarkup()}
 

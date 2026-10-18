@@ -432,3 +432,5 @@ a.diff-back { display: inline-block; text-decoration: none; }
 .ctrl-eye-spark { fill: #ffffff; opacity: 0.75; }
 .ctrl-fin { fill: url(#gCtrlShell); }
 .debris-plate { fill: url(#gSteel); }
+/* Schild für STRIPING auf dem Joch: verdeckt die Trennstriche hinter dem Wort */
+.yoke-label-bg { fill: url(#gYoke); stroke: #06111d; stroke-width: 1.2; stroke-opacity: 0.5; }

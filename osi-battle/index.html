@@ -25,23 +25,52 @@
 
       <button class="diff-btn boss-btn" type="button" data-boss="netz-hydra">
         <svg class="boss-art" viewBox="0 0 200 104" aria-hidden="true">
-          <g fill="none" stroke="#9fd0ff" stroke-width="3" stroke-linecap="round">
-            <path d="M100 96 C 92 70, 60 58, 40 34"/>
-            <path d="M100 96 C 96 68, 78 50, 68 24"/>
-            <path d="M100 96 L 100 20"/>
-            <path d="M100 96 C 104 68, 122 50, 132 24"/>
-            <path d="M100 96 C 108 70, 140 58, 160 34"/>
+          <!-- Netz-Hydra im Kleinen, wie im Kampf: Licht von oben links, Röhrenhälse, Elfenbein-Hörner -->
+          <defs>
+            <radialGradient id="bshHaut" cx="0.38" cy="0.3" r="0.82" fx="0.3" fy="0.2">
+              <stop offset="0%" stop-color="#ffffff"/><stop offset="30%" stop-color="#eef3fb"/><stop offset="70%" stop-color="#b3c2df"/><stop offset="100%" stop-color="#6d80aa"/>
+            </radialGradient>
+            <linearGradient id="bshHorn" x1="0.2" y1="1" x2="0.6" y2="0">
+              <stop offset="0%" stop-color="#5e5b57"/><stop offset="60%" stop-color="#d8d1c2"/><stop offset="100%" stop-color="#fffdf6"/>
+            </linearGradient>
+            <radialGradient id="bshSchatten" cx="0.5" cy="0.5" r="0.5">
+              <stop offset="0%" stop-color="#000000" stop-opacity="0.6"/><stop offset="100%" stop-color="#000000" stop-opacity="0"/>
+            </radialGradient>
+            <g id="bshKopf">
+              <path d="M -5 -6 L -9 -14 L -2 -8 Z M 5 -6 L 9 -14 L 2 -8 Z" fill="url(#bshHorn)"/>
+              <path d="M -8 -3 L -6 4 L -1 9 L 1 9 L 6 4 L 8 -3 L 4 -8 L -4 -8 Z" fill="url(#bshHaut)" stroke="#56658a" stroke-width="0.6"/>
+              <ellipse cx="-3" cy="-1.5" rx="2.6" ry="1.8" fill="#2ea8ff" opacity="0.3"/>
+              <ellipse cx="3" cy="-1.5" rx="2.6" ry="1.8" fill="#2ea8ff" opacity="0.3"/>
+              <ellipse cx="-3" cy="-1.5" rx="1.5" ry="0.95" fill="#9df0ff"/>
+              <ellipse cx="3" cy="-1.5" rx="1.5" ry="0.95" fill="#9df0ff"/>
+            </g>
+          </defs>
+          <ellipse cx="100" cy="99" rx="40" ry="4.5" fill="url(#bshSchatten)"/>
+          <g fill="none" stroke-linecap="round">
+            <g stroke="#3d4b70" stroke-width="8.5">
+              <path d="M100 90 C 92 70, 60 58, 40 34"/><path d="M100 90 C 96 68, 78 50, 68 24"/><path d="M100 90 L 100 20"/>
+              <path d="M100 90 C 104 68, 122 50, 132 24"/><path d="M100 90 C 108 70, 140 58, 160 34"/>
+            </g>
+            <g stroke="#8698c0" stroke-width="7">
+              <path d="M100 90 C 92 70, 60 58, 40 34"/><path d="M100 90 C 96 68, 78 50, 68 24"/><path d="M100 90 L 100 20"/>
+              <path d="M100 90 C 104 68, 122 50, 132 24"/><path d="M100 90 C 108 70, 140 58, 160 34"/>
+            </g>
+            <g stroke="#e3eaf7" stroke-width="3.6" transform="translate(-0.9 -0.7)">
+              <path d="M100 90 C 92 70, 60 58, 40 34"/><path d="M100 90 C 96 68, 78 50, 68 24"/><path d="M100 90 L 100 20"/>
+              <path d="M100 90 C 104 68, 122 50, 132 24"/><path d="M100 90 C 108 70, 140 58, 160 34"/>
+            </g>
+            <g stroke="#ffffff" stroke-width="1" opacity="0.8" transform="translate(-1.6 -1.2)">
+              <path d="M100 90 C 92 70, 60 58, 40 34"/><path d="M100 90 C 96 68, 78 50, 68 24"/><path d="M100 90 L 100 20"/>
+              <path d="M100 90 C 104 68, 122 50, 132 24"/><path d="M100 90 C 108 70, 140 58, 160 34"/>
+            </g>
           </g>
-          <g fill="#dbe4f4">
-            <circle cx="40" cy="30" r="8"/><circle cx="68" cy="20" r="8"/>
-            <circle cx="100" cy="16" r="9"/>
-            <circle cx="132" cy="20" r="8"/><circle cx="160" cy="30" r="8"/>
-          </g>
-          <g fill="#e14b4b">
-            <circle cx="38" cy="29" r="2"/><circle cx="66" cy="19" r="2"/>
-            <circle cx="98" cy="15" r="2.4"/>
-            <circle cx="130" cy="19" r="2"/><circle cx="158" cy="29" r="2"/>
-          </g>
+          <ellipse cx="100" cy="86" rx="23" ry="14" fill="url(#bshHaut)" stroke="#56658a" stroke-width="0.8"/>
+          <path d="M 84 94 C 82 99, 84 101, 88 101 M 116 94 C 118 99, 116 101, 112 101" fill="none" stroke="#efe9da" stroke-width="1.6" stroke-linecap="round"/>
+          <use href="#bshKopf" transform="translate(40 32)"/>
+          <use href="#bshKopf" transform="translate(68 22)"/>
+          <use href="#bshKopf" transform="translate(100 17) scale(1.2)"/>
+          <use href="#bshKopf" transform="translate(132 22)"/>
+          <use href="#bshKopf" transform="translate(160 32)"/>
         </svg>
         <span class="diff-name">NETZ-HYDRA</span>
         <span class="diff-meta">Sieben Köpfe, sieben OSI-Schichten</span>
@@ -51,20 +80,60 @@
 
       <button class="diff-btn boss-btn" type="button" data-boss="raid-golem">
         <svg class="boss-art" viewBox="0 0 200 104" aria-hidden="true">
-          <g stroke="#0a0f1c" stroke-width="2">
-            <rect x="44" y="52" width="112" height="44" rx="6" fill="#2b3550"/>
-            <rect x="52" y="60" width="20" height="28" rx="3" fill="#38425f"/>
-            <rect x="78" y="60" width="20" height="28" rx="3" fill="#38425f"/>
-            <rect x="104" y="60" width="20" height="28" rx="3" fill="#38425f"/>
-            <rect x="130" y="60" width="20" height="28" rx="3" fill="#4a3a22"/>
-            <rect x="60" y="38" width="80" height="10" rx="3" fill="#5cc8ff"/>
-          </g>
-          <g fill="none" stroke="#5cc8ff" stroke-width="2.4">
-            <path d="M76 48 L76 58"/><path d="M100 48 L100 58"/><path d="M124 48 L124 58"/>
-          </g>
-          <path d="M100 6 L124 14 L124 28 L100 36 L76 28 L76 14 Z" fill="#3a2a33" stroke="#ff6b3d" stroke-width="3"/>
-          <ellipse cx="100" cy="22" rx="11" ry="6" fill="#ffd9b8"/>
-          <ellipse cx="100" cy="22" rx="3" ry="5" fill="#24070b"/>
+          <!-- RAID-Golem im Kleinen, wie im Kampf: Stahlgehäuse mit Tiefe, Laufwerke, gepanzerter Controller -->
+          <defs>
+            <linearGradient id="bsgStahl" x1="0" y1="0" x2="0.25" y2="1">
+              <stop offset="0%" stop-color="#5b6b92"/><stop offset="55%" stop-color="#2f3b5c"/><stop offset="100%" stop-color="#1c253d"/>
+            </linearGradient>
+            <linearGradient id="bsgDisk" x1="0" y1="0" x2="0.4" y2="1">
+              <stop offset="0%" stop-color="#c3ccdc"/><stop offset="40%" stop-color="#8d98af"/><stop offset="100%" stop-color="#4e586f"/>
+            </linearGradient>
+            <linearGradient id="bsgParitaet" x1="0" y1="0" x2="0.4" y2="1">
+              <stop offset="0%" stop-color="#d9b56a"/><stop offset="45%" stop-color="#8f6a2c"/><stop offset="100%" stop-color="#4a3416"/>
+            </linearGradient>
+            <radialGradient id="bsgScheibe" cx="0.42" cy="0.38" r="0.62">
+              <stop offset="0%" stop-color="#f2f6fd"/><stop offset="45%" stop-color="#9eabc5"/><stop offset="100%" stop-color="#3c465d"/>
+            </radialGradient>
+            <linearGradient id="bsgJoch" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#9be2ff"/><stop offset="100%" stop-color="#1d6fa8"/>
+            </linearGradient>
+            <radialGradient id="bsgKopf" cx="0.38" cy="0.3" r="0.85">
+              <stop offset="0%" stop-color="#6e4b56"/><stop offset="50%" stop-color="#3f2a33"/><stop offset="100%" stop-color="#1c1117"/>
+            </radialGradient>
+            <radialGradient id="bsgAuge" cx="0.5" cy="0.5" r="0.55">
+              <stop offset="0%" stop-color="#fff4d6"/><stop offset="40%" stop-color="#ffc27a"/><stop offset="80%" stop-color="#ff6b3d"/><stop offset="100%" stop-color="#8a1f12"/>
+            </radialGradient>
+            <radialGradient id="bsgSchatten" cx="0.5" cy="0.5" r="0.5">
+              <stop offset="0%" stop-color="#000000" stop-opacity="0.6"/><stop offset="100%" stop-color="#000000" stop-opacity="0"/>
+            </radialGradient>
+            <g id="bsgLaufwerk">
+              <rect x="0" y="0" width="20" height="28" rx="3" stroke="#0a0f1c" stroke-width="1"/>
+              <rect x="2.5" y="2.5" width="15" height="17" rx="2" fill="#16203a"/>
+              <circle cx="10" cy="11" r="6" fill="url(#bsgScheibe)"/>
+              <circle cx="10" cy="11" r="1.3" fill="#0a0f1c"/>
+              <path d="M 16 5 L 11 10" stroke="#eef2f9" stroke-width="1.2" stroke-linecap="round"/>
+              <rect x="3" y="22.5" width="5" height="2.6" rx="1" fill="#59d17a"/>
+            </g>
+          </defs>
+          <ellipse cx="100" cy="100" rx="64" ry="4" fill="url(#bsgSchatten)"/>
+          <path d="M 156 54 L 160 58 L 160 100 L 48 100 L 46 96 L 156 96 Z" fill="#0c1122"/>
+          <rect x="44" y="52" width="112" height="44" rx="6" fill="url(#bsgStahl)" stroke="#070b15" stroke-width="1.5"/>
+          <path d="M 46 92 L 46 57 Q 46 54 49 54 L 152 54" fill="none" stroke="#8fa0c8" stroke-width="0.9" opacity="0.6"/>
+          <use href="#bsgLaufwerk" x="52" y="60" fill="url(#bsgDisk)"/>
+          <use href="#bsgLaufwerk" x="78" y="60" fill="url(#bsgDisk)"/>
+          <use href="#bsgLaufwerk" x="104" y="60" fill="url(#bsgDisk)"/>
+          <use href="#bsgLaufwerk" x="130" y="60" fill="url(#bsgParitaet)"/>
+          <g fill="none" stroke="#5cc8ff" stroke-width="2.2"><path d="M76 48 L76 58"/><path d="M100 48 L100 58"/><path d="M124 48 L124 58"/></g>
+          <path d="M 140 39 L 143 42 L 143 51 L 63 51 L 61 48 L 140 48 Z" fill="#0c1122"/>
+          <rect x="60" y="38" width="80" height="10" rx="3" fill="url(#bsgJoch)" stroke="#06111d" stroke-width="1"/>
+          <rect x="62" y="39" width="76" height="3" rx="1.5" fill="#ffffff" opacity="0.3"/>
+          <path d="M100 9 L124 17 L124 31 L100 39 L76 31 L76 17 Z" fill="#0d070a"/>
+          <path d="M100 6 L124 14 L124 28 L100 36 L76 28 L76 14 Z" fill="url(#bsgKopf)" stroke="#ff6b3d" stroke-width="2.4"/>
+          <path d="M 78 20 L 78 15 L 99 8" fill="none" stroke="#ffd2c2" stroke-width="1.2" stroke-linecap="round" opacity="0.5"/>
+          <ellipse cx="100" cy="22" rx="16" ry="9" fill="#ff6b3d" opacity="0.28"/>
+          <ellipse cx="100" cy="22" rx="11" ry="6" fill="url(#bsgAuge)"/>
+          <ellipse cx="100" cy="22" rx="2.6" ry="5" fill="#24070b"/>
+          <ellipse cx="96" cy="19.5" rx="2.2" ry="1.2" fill="#ffffff" opacity="0.75"/>
         </svg>
         <span class="diff-name">RAID-GOLEM</span>
         <span class="diff-meta">Acht Stufen abwärts bis zum Controller</span>
