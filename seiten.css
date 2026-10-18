@@ -1,99 +1,37 @@
-/* Eigene Seiten für Themenfelder, Kapitel, Glossar und Impressum (tools/seiten-bauen.mjs).
-   Baut auf styles.css auf (Farben, Schriften, Nachschlagewerk) und ergänzt nur, was die App nicht hat. */
+/* Einzelseiten (Themenfelder, Kapitel, Übersicht; tools/seiten-bauen.mjs). Kopf, Menüleiste, Fußzeile und Inhalt
+   nutzen styles.css wie die App; hier steht nur, was die Einzelseiten zusätzlich brauchen. */
 
-/* ---- Kopf: Logo als Link (die Überschrift der Seite ist das Thema) und Navigation ---- */
-.seite-kopf{padding:26px 0 18px;margin-bottom:22px}
-.seite-logo{font-family:'DM Mono','Consolas',monospace;font-size:1.9rem;font-weight:700;letter-spacing:3px;text-transform:uppercase;
-  color:#eaf2f8;text-decoration:none;display:inline-flex;align-items:center;gap:0.25em;margin-bottom:14px}
-.seite-logo:focus-visible{outline:2px solid var(--cyan);outline-offset:4px;border-radius:6px}
-.seite-nav{display:flex;flex-wrap:wrap;justify-content:center;gap:8px}
-.seite-nav a{font-family:'DM Mono',monospace;font-size:0.82rem;color:var(--muted);text-decoration:none;padding:7px 13px;
-  border:1px solid var(--border);border-radius:8px;background:var(--panel-2);transition:color .15s,border-color .15s}
-.seite-nav a:hover,.seite-nav a:focus-visible{color:var(--cyan);border-color:var(--cyan);outline:none}
+/* Logo als Link zur Startseite: sieht aus wie die Überschrift der App (header h1 in styles.css) */
+header .seite-marke{font-family:'DM Mono','Consolas',monospace;font-size:2.7rem;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:#eaf2f8;
+  margin-bottom:8px;animation:titleGlitch 5.5s steps(1,end) infinite;display:inline-flex;align-items:center;gap:0.25em;text-decoration:none}
+header .seite-marke:focus-visible{outline:2px solid var(--cyan);outline-offset:6px;border-radius:8px}
+@media(max-width:560px){header .seite-marke{font-size:2.35rem;letter-spacing:2px}}
+@media(prefers-reduced-motion:reduce){header .seite-marke{animation:none}}
 
-/* ---- Inhalt ---- */
-.seite-inhalt{min-height:50vh}
-.brotkrumen{font-family:'DM Mono',monospace;font-size:0.78rem;color:var(--muted);margin:0 0 18px;display:flex;flex-wrap:wrap;gap:4px 6px;align-items:center}
-.brotkrumen a{color:var(--muted);text-decoration:none;border-bottom:1px solid transparent}
-.brotkrumen a:hover{color:var(--cyan);border-bottom-color:var(--cyan)}
-.brotkrumen [aria-current]{color:var(--text)}
-.bk-trenner{opacity:.6}
-.seite-h1{font-size:1.75rem;line-height:1.3;color:#eaf2f8;font-weight:700;text-align:center;padding-bottom:12px;margin:0 auto 22px;
-  border-bottom:2px solid var(--cyan);display:table}
-.seite-lead{max-width:760px;margin:0 auto 24px;text-align:center;color:var(--text);line-height:1.7}
-.seite #view-lesen section{margin-bottom:34px}
+/* Hauptüberschrift der Seite im Aussehen der Kapitelüberschriften (h2 in styles.css) */
+h1.wie-h2{font-size:1.4rem;color:#eaf2f8;font-weight:700;padding-bottom:10px;margin-bottom:20px;border-bottom:2px solid var(--cyan);display:table;margin-left:auto;margin-right:auto}
+.seite-lead{max-width:760px;margin:0 auto 24px;text-align:center;line-height:1.7}
 
-/* Kapitel-Karten (Themenfeld, Übersicht) */
-.seite-karten{list-style:none;display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px;margin:0 0 28px}
+/* Karten: jedes Kapitel einzeln aufrufen */
+.seite-karten{list-style:none;display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px;margin:0 0 30px}
 .seite-karten a{display:flex;flex-direction:column;gap:6px;height:100%;padding:14px 16px;background:var(--panel-2);border:1px solid var(--border);
   border-radius:10px;text-decoration:none;color:var(--text);transition:border-color .15s,transform .15s}
 .seite-karten a:hover,.seite-karten a:focus-visible{border-color:var(--cyan);transform:translateY(-1px);outline:none}
 .sk-titel{font-weight:600;color:var(--cyan)}
 .sk-text{font-size:0.88rem;color:var(--muted);line-height:1.55}
+.seite-feld{margin-top:10px}
 .seite-feldblock{margin-bottom:34px}
 .seite-feldblock h2 a{color:inherit;text-decoration:none}
 .seite-feldblock h2 a:hover{color:var(--cyan)}
-.seite-feldtext{text-align:center;color:var(--muted);max-width:760px;margin:-6px auto 16px;font-size:0.92rem}
 
-/* Pillen (Kapitel eines Feldes, andere Felder): wie die Themenblasen der App, aber immer sichtbar */
-.seite-pillen{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:0 0 26px}
-.seite-pillen .topic-sub{opacity:1;transform:none}
-.seite-pillen .topic{text-decoration:none;animation:none}
-.seite-pillen .aktuell{color:var(--bg);background:var(--cyan);border-color:var(--cyan)}
-.seite-feld h2{font-size:1.15rem}
-
-/* Weiter in der App */
-.seite-cta{background:var(--panel-2);border:1px solid var(--border);border-radius:12px;padding:18px 20px;margin:10px 0 28px;text-align:center}
-.seite-cta p{margin:0 0 12px;color:var(--text)}
-.seite-cta-knoepfe{display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
-.seite-knopf{font-family:'DM Mono',monospace;font-size:0.85rem;text-decoration:none;color:var(--text);padding:10px 16px;border:1px solid var(--border);
-  border-radius:9px;background:var(--panel);transition:color .15s,border-color .15s,background .15s}
-.seite-knopf:hover,.seite-knopf:focus-visible{color:var(--cyan);border-color:var(--cyan);outline:none}
-.seite-knopf-haupt{color:var(--bg);background:var(--cyan);border-color:var(--cyan);font-weight:600}
-.seite-knopf-haupt:hover,.seite-knopf-haupt:focus-visible{color:var(--bg);filter:brightness(1.08)}
-
-/* Vorheriges / nächstes Kapitel */
-.seite-blaettern{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:0 0 30px}
-.seite-blaettern a{display:flex;flex-direction:column;gap:2px;padding:12px 16px;border:1px solid var(--border);border-radius:10px;background:var(--panel-2);
-  color:var(--cyan);text-decoration:none;font-weight:600}
-.seite-blaettern a span{font-family:'DM Mono',monospace;font-size:0.72rem;font-weight:400;color:var(--muted)}
-.seite-blaettern a:hover,.seite-blaettern a:focus-visible{border-color:var(--cyan);outline:none}
-.seite-blaettern .sb-nach{text-align:right;grid-column:2}
-
-/* Glossar */
-.glossar-abc{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin:0 0 26px;position:sticky;top:0;z-index:5;
-  padding:10px 0;background:var(--bg)}
-.glossar-abc a{font-family:'DM Mono',monospace;min-width:34px;text-align:center;padding:6px 8px;border:1px solid var(--border);border-radius:7px;
-  color:var(--muted);text-decoration:none;background:var(--panel-2)}
-.glossar-abc a:hover,.glossar-abc a:focus-visible{color:var(--cyan);border-color:var(--cyan);outline:none}
-.glossar-gruppe{margin-bottom:30px;scroll-margin-top:70px}
-.glossar-gruppe dl{display:grid;gap:8px}
-.glossar-eintrag{padding:10px 14px;background:var(--panel-2);border:1px solid var(--border);border-radius:9px}
-.glossar-eintrag dt strong{color:var(--cyan);font-family:'DM Mono',monospace}
-.glossar-voll{color:var(--text)}
-.glossar-eintrag dd{color:var(--muted);font-size:0.92rem;margin-top:3px}
-
-/* Impressum */
-.seite-text{max-width:760px;margin:0 auto 30px}
-.seite-text h3{margin-top:22px}
-.seite-text p{margin:0 0 10px}
-.seite-text a{color:var(--cyan)}
-
-/* Handy */
 @media(max-width:560px){
-  .seite-kopf{padding:18px 0 14px}
-  .seite-logo{font-size:1.45rem;letter-spacing:2px;margin-bottom:10px}
-  .seite-nav{gap:6px}
-  .seite-nav a{font-size:0.76rem;padding:6px 10px}
-  .seite-h1{font-size:1.38rem}
   .seite-karten{grid-template-columns:1fr}
-  .seite-blaettern{grid-template-columns:1fr}
-  .seite-blaettern .sb-nach{grid-column:1;text-align:left}
-  .seite-cta{padding:16px 14px}
-  .seite-knopf{flex:1 1 100%;text-align:center}
-  .glossar-abc a{min-width:30px;padding:5px 6px;font-size:0.8rem}
 }
 @media(prefers-reduced-motion:reduce){
-  .seite-karten a,.seite-nav a,.seite-knopf{transition:none}
+  .seite-karten a{transition:none}
   .seite-karten a:hover{transform:none}
 }
+
+/* Die Lupe führt hier in die Suche der Startseite (seiten.js); das Feld selbst bleibt zu, damit Auge und Lupe
+   wie in der App mittig stehen */
+.seite .quick-search .qs-input,.seite .quick-search .qs-results{display:none}

@@ -20,56 +20,23 @@
 <script type="application/ld+json">
 {
  "@context": "https://schema.org",
- "@graph": [
-  {
-   "@type": "BreadcrumbList",
-   "itemListElement": [
-    {
-     "@type": "ListItem",
-     "position": 1,
-     "name": "Start",
-     "item": "https://layer8academy.boxberger.app/"
-    },
-    {
-     "@type": "ListItem",
-     "position": 2,
-     "name": "Nachschlagen",
-     "item": "https://layer8academy.boxberger.app/nachschlagen/"
-    },
-    {
-     "@type": "ListItem",
-     "position": 3,
-     "name": "Netzwerke",
-     "item": "https://layer8academy.boxberger.app/themen/netzwerke/"
-    },
-    {
-     "@type": "ListItem",
-     "position": 4,
-     "name": "Routing/Switching",
-     "item": "https://layer8academy.boxberger.app/nachschlagen/routing-switching/"
-    }
-   ]
-  },
-  {
-   "@type": "LearningResource",
-   "name": "Routing & Switching",
-   "description": "Switching arbeitet innerhalb eines Netzes auf Schicht 2 (MAC), Routing verbindet Netze auf Schicht 3 (IP).",
-   "url": "https://layer8academy.boxberger.app/nachschlagen/routing-switching/",
-   "inLanguage": "de-DE",
-   "isAccessibleForFree": true,
-   "learningResourceType": "Nachschlagewerk",
-   "educationalLevel": "Berufsausbildung",
-   "teaches": "Netzwerke",
-   "isPartOf": {
-    "@id": "https://layer8academy.boxberger.app/#website"
-   },
-   "author": {
-    "@type": "Person",
-    "name": "Alexander Boxberger-Adam",
-    "url": "https://boxberger.app/"
-   }
-  }
- ]
+ "@type": "LearningResource",
+ "name": "Routing & Switching",
+ "description": "Switching arbeitet innerhalb eines Netzes auf Schicht 2 (MAC), Routing verbindet Netze auf Schicht 3 (IP).",
+ "url": "https://layer8academy.boxberger.app/nachschlagen/routing-switching/",
+ "inLanguage": "de-DE",
+ "isAccessibleForFree": true,
+ "learningResourceType": "Nachschlagewerk",
+ "educationalLevel": "Berufsausbildung",
+ "teaches": "Netzwerke",
+ "isPartOf": {
+  "@id": "https://layer8academy.boxberger.app/#website"
+ },
+ "author": {
+  "@type": "Person",
+  "name": "Alexander Boxberger-Adam",
+  "url": "https://boxberger.app/"
+ }
 }
 </script>
 <script>
@@ -82,24 +49,58 @@
 <link rel="stylesheet" href="/seiten.css?v=20261018a">
 </head>
 <body class="seite">
-<header class="seite-kopf">
+<header>
   <div class="wrap">
-    <a class="seite-logo" href="/" aria-label="Layer 8 Academy – zur Lernplattform"><span class="t-neint">Layer</span> <svg class="title-8" width="44" height="44" viewBox="0 0 120 120" aria-label="L8A" role="img"><path d="M60,60 C34,60 24,26 60,26 C96,26 86,60 60,60 Z" fill="none" stroke="#3ddc84" stroke-width="7" stroke-linecap="round"/><path d="M60,94 C86,94 96,60 60,60 C24,60 34,94 60,94 Z" fill="none" stroke="#22d3ee" stroke-width="7" stroke-linecap="round"/><line x1="18" y1="26" x2="18" y2="52" stroke="#22d3ee" stroke-width="7" stroke-linecap="round"/><line x1="18" y1="52" x2="30" y2="52" stroke="#22d3ee" stroke-width="7" stroke-linecap="round"/><path d="M102,68 L92,94 M102,68 L112,94 M95,86 L107,86" stroke="#3ddc84" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg> <span class="t-symb">Academy</span></a>
-    <nav class="seite-nav" aria-label="Hauptnavigation">
-      <a href="/nachschlagen/">Nachschlagen</a>
-      <a href="/glossar/">Glossar</a>
-      <a href="/#fragen">Fragen üben</a>
-      <a href="/subnetting-trainer/">Subnetting</a>
-      <a href="/ap1-simulator/">AP1-Simulator</a>
-      <a href="/osi-battle/">Diagnose-Arena</a>
-    </nav>
+    <a class="seite-marke" href="/" aria-label="Layer 8 Academy – Startseite"><span class="t-neint">Layer</span> <svg class="title-8" width="44" height="44" viewBox="0 0 120 120" aria-label="L8A" role="img"><path d="M60,60 C34,60 24,26 60,26 C96,26 86,60 60,60 Z" fill="none" stroke="#3ddc84" stroke-width="7" stroke-linecap="round"/><path d="M60,94 C86,94 96,60 60,60 C24,60 34,94 60,94 Z" fill="none" stroke="#22d3ee" stroke-width="7" stroke-linecap="round"/><line x1="18" y1="26" x2="18" y2="52" stroke="#22d3ee" stroke-width="7" stroke-linecap="round"/><line x1="18" y1="52" x2="30" y2="52" stroke="#22d3ee" stroke-width="7" stroke-linecap="round"/><path d="M102,68 L92,94 M102,68 L112,94 M95,86 L107,86" stroke="#3ddc84" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg> <span class="t-symb">Academy</span></a>
+    <p class="header-specs"><span id="specCats">49</span> Kategorien · <span id="specQs">1378</span> Fragen · <span id="specGloss">563</span> Nachschlagebegriffe</p>
+    <div class="a11y-wrap">
+      <div class="quick-search" id="quickSearch">
+        <button class="qs-toggle" id="qsToggle" aria-label="Begriffe suchen" title="Begriffe suchen" aria-expanded="false">
+          <svg class="qs-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"></circle><line x1="21" y1="21" x2="16.5" y2="16.5"></line></svg>
+        </button>
+        <input type="text" class="qs-input" id="qsInput" placeholder="Stichwort suchen …" aria-label="Nachschlage-Stichwort suchen" autocomplete="off">
+        <div class="qs-results" id="qsResults" role="listbox"></div>
+      </div>
+      <button class="a11y-toggle" id="a11yToggle" aria-haspopup="true" aria-expanded="false" aria-label="Kontrasteinstellungen öffnen" title="Kontrasteinstellungen">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7Z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+      </button>
+      <div class="a11y-menu" id="a11yMenu" role="menu" aria-label="Kontrastmodus wählen">
+        <button class="a11y-opt" data-theme="default" role="menuitemradio">
+          <span class="a11y-dot" style="background:#22d3ee"></span>
+          <span>Original</span>
+          <span class="a11y-check">✓</span>
+        </button>
+        <button class="a11y-opt" data-theme="hc" role="menuitemradio">
+          <span class="a11y-dot" style="background:#ffffff"></span>
+          <span>Hoher Kontrast</span>
+          <span class="a11y-check">✓</span>
+        </button>
+        <button class="a11y-opt" data-theme="cvd" role="menuitemradio">
+          <span class="a11y-dot" style="background:#56b4e9"></span>
+          <span>Blau/Orange</span>
+          <span class="a11y-check">✓</span>
+        </button>
+      </div>
+    </div>
   </div>
 </header>
-<main class="wrap seite-inhalt">
-<nav class="brotkrumen" aria-label="Brotkrumenpfad"><a href="/">Start</a><span class="bk-trenner" aria-hidden="true">›</span><a href="/nachschlagen/">Nachschlagen</a><span class="bk-trenner" aria-hidden="true">›</span><a href="/themen/netzwerke/">Netzwerke</a><span class="bk-trenner" aria-hidden="true">›</span><span aria-current="page">Routing/Switching</span></nav>
-<h1 class="seite-h1">Routing &amp; Switching</h1>
+
+<div class="tabs" id="tabBar"><div class="wrap">
+  <button class="menu-toggle" id="menuToggle" aria-expanded="false" aria-controls="tabBar">Menü öffnen</button>
+  <a class="tab active" href="/" data-short="Lesen">Nachschlagen</a>
+  <a class="tab" href="/#glossar" data-short="Glossar">Glossar</a>
+  <a class="tab" href="/#fragen" data-short="Quiz">Multiple&nbsp;Choice / Karteikarten</a>
+  <a class="tab" href="/subnetting-trainer/" data-short="Subnetting"><svg class="tab-icon" width="15" height="15" viewBox="0 0 120 120" aria-hidden="true"><path d="M60,60 C34,60 24,26 60,26 C96,26 86,60 60,60 Z" fill="none" stroke="#22d3ee" stroke-width="11" stroke-linecap="round"/><path d="M60,94 C86,94 96,60 60,60 C24,60 34,94 60,94 Z" fill="none" stroke="#3ddc84" stroke-width="11" stroke-linecap="round"/></svg> Subnetting Trainer</a>
+  <a class="tab" href="/ap1-simulator/" data-short="AP1-Sim"><svg class="tab-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 3h9l5 5v13a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1Z" stroke="#22d3ee" stroke-width="2" stroke-linejoin="round"/><path d="M14 3v6h6" stroke="#22d3ee" stroke-width="2" stroke-linejoin="round"/><path d="M9 14l2 2 4-4" stroke="#3ddc84" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> AP1 Simulator</a>
+  <a class="tab" href="/osi-battle/" data-short="Arena"><svg class="tab-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 3l8 3v6c0 4-3.4 7.1-8 9-4.6-1.9-8-5-8-9V6l8-3Z" stroke="#22d3ee" stroke-width="2" stroke-linejoin="round"/><path d="M7.5 12.5h2l1.3-3 2.2 6 1.4-3h2.1" stroke="#3ddc84" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> Diagnose-Arena</a>
+  <button class="zen-toggle" id="zenToggle" title="Zen Mode: Vollbild &amp; Fokus" aria-label="Zen Mode umschalten"><span class="zen-icon">&#9673;</span><span class="zen-label">Zen</span></button>
+</div></div>
+
+<div class="wrap">
 <div class="view active" id="view-lesen">
+<div class="topics" aria-label="Themenfelder"><a class="topic active" href="/themen/netzwerke/" aria-current="page">Netzwerke</a><a class="topic" href="/themen/it-sicherheit/">IT-Sicherheit</a><a class="topic" href="/themen/systeme-storage/">Systeme &amp; Storage</a><a class="topic" href="/themen/software-grundlagen/">Software &amp; Grundlagen</a><a class="topic" href="/themen/bwl-prozesse/">BWL &amp; Prozesse</a></div>
 <section id="r-routing">
+<h1 class="wie-h2">Routing &amp; Switching</h1>
 <p><strong>Switching</strong> arbeitet innerhalb eines Netzes auf Schicht 2 (MAC), <strong>Routing</strong> verbindet Netze auf Schicht 3 (IP).</p>
 <p><span class="term">Switch:</span> lernt aus der Quell-MAC eingehender Frames, welche MAC an welchem Port hängt (MAC-Adresstabelle / CAM-Table, Content Addressable Memory). Unbekannte Ziel-MAC → <strong>Flooding</strong> an alle Ports außer dem Eingangsport. Broadcasts werden innerhalb der Broadcastdomäne geflutet.</p>
 <div class="callout"><span class="tag">Switching-Verfahren</span><strong>Store-and-Forward:</strong> Der Switch empfängt den kompletten Frame, prüft die Prüfsumme und verwirft fehlerhafte Frames, bevor er weiterleitet, sicherer, aber mit etwas höherer Latenz. <strong>Cut-Through:</strong> Der Switch beginnt die Weiterleitung bereits, sobald die Ziel-MAC-Adresse gelesen ist, ohne den ganzen Frame abzuwarten, schneller, leitet aber auch fehlerhafte Frames weiter. Ergänzend hält jedes Gerät einen <strong>ARP-Cache</strong>: eine temporäre Tabelle bereits aufgelöster IP-zu-MAC-Zuordnungen, die wiederholte ARP-Anfragen im selben Netz erspart.</div>
@@ -153,30 +154,47 @@
 
 <div class="callout xref"><span class="tag">Verwandte Themen</span><a href="/nachschlagen/ipv4-ipv6/">IPv4 & IPv6</a> · <a href="/nachschlagen/vlan/">VLAN-Segmentierung</a> · <a href="/nachschlagen/osi-modell/">OSI-Modell (7 Schichten)</a></div>
 </section>
-</div>
-<div class="seite-cta">
-  <p>Interaktiv mit Volltextsuche, Glossar-Bubbles und Übungsfragen lernen:</p>
-  <div class="seite-cta-knoepfe">
-    <a class="seite-knopf seite-knopf-haupt" href="/#r-routing">In der Lernplattform öffnen</a>
-    <a class="seite-knopf" href="/#fragen">Fragen üben</a>
-    <a class="seite-knopf" href="/glossar/">Glossar</a>
-  </div>
-</div>
-<nav class="seite-blaettern" aria-label="Weitere Kapitel">
-  <a class="sb-vor" href="/nachschlagen/subnetting/"><span>Vorheriges Kapitel</span>Subnetting</a>
-  <a class="sb-nach" href="/nachschlagen/vlan/"><span>Nächstes Kapitel</span>VLAN</a>
-</nav>
-<section class="seite-feld" aria-labelledby="feld-titel">
-<h2 id="feld-titel">Mehr aus Netzwerke</h2>
-<div class="seite-pillen"><a class="topic-sub" href="/nachschlagen/osi-modell/">OSI-Modell</a><a class="topic-sub" href="/nachschlagen/tcp-ip-udp/">TCP/IP &amp; UDP</a><a class="topic-sub" href="/nachschlagen/ipv4-ipv6/">IPv4/IPv6</a><a class="topic-sub" href="/nachschlagen/subnetting/">Subnetting</a><span class="topic-sub aktuell" aria-current="page">Routing/Switching</span><a class="topic-sub" href="/nachschlagen/vlan/">VLAN</a><a class="topic-sub" href="/nachschlagen/wlan/">WLAN</a><a class="topic-sub" href="/nachschlagen/vpn-ipsec/">VPN/IPsec</a><a class="topic-sub" href="/nachschlagen/dns-dhcp/">DNS/DHCP</a><a class="topic-sub" href="/nachschlagen/ethernet/">Ethernet</a><a class="topic-sub" href="/nachschlagen/ports-sockets/">Ports</a><a class="topic-sub" href="/nachschlagen/header-ttl-traceroute/">Header/TTL</a><a class="topic-sub" href="/nachschlagen/multiplexing/">Multiplexing</a><a class="topic-sub" href="/nachschlagen/netzwerkausdehnung/">Netzausdehnung</a><a class="topic-sub" href="/nachschlagen/netzwerktopologien/">Topologien</a><a class="topic-sub" href="/nachschlagen/fddi/">FDDI</a><a class="topic-sub" href="/nachschlagen/voip/">VoIP</a><a class="topic-sub" href="/nachschlagen/api-rest-soap/">API/REST</a><a class="topic-sub" href="/nachschlagen/strukturierte-verkabelung/">Strukturierte Verkabelung</a><a class="topic-sub" href="/nachschlagen/kabel-medien-hardware/">Kabel/Hardware</a></div>
+<section class="seite-feld">
+<h2>Mehr aus Netzwerke</h2>
+<ul class="seite-karten">
+  <li><a href="/nachschlagen/osi-modell/"><span class="sk-titel">OSI-Modell (7 Schichten)</span><span class="sk-text">Das OSI-Referenzmodell (Open Systems Interconnection) gliedert Netzwerkkommunikation in 7 Schichten; die Dateneinheit je Schicht heißt PDU (Protocol …</span></a></li>
+  <li><a href="/nachschlagen/tcp-ip-udp/"><span class="sk-titel">TCP/IP &amp; UDP</span><span class="sk-text">TCP/IP ist die herstellerunabhängige Protokollfamilie des Internets. IP (Internet Protocol) übernimmt Adressierung und Routing (verbindungslos …</span></a></li>
+  <li><a href="/nachschlagen/ipv4-ipv6/"><span class="sk-titel">IPv4 &amp; IPv6</span><span class="sk-text">IP-Adressen werden nicht frei gewählt, sondern zentral verwaltet. An der Spitze steht die IANA (Internet Assigned Numbers Authority), die den …</span></a></li>
+  <li><a href="/nachschlagen/subnetting/"><span class="sk-titel">Subnetting – Schritt für Schritt</span><span class="sk-text">Jede IP-Adresse besteht aus zwei Teilen: einem Netzwerkanteil (welches Netz?) und einem Hostanteil (welches Gerät innerhalb des Netzes?).</span></a></li>
+  <li><a href="/nachschlagen/vlan/"><span class="sk-titel">VLAN-Segmentierung</span><span class="sk-text">Warum segmentieren? Drei Kerngründe sprechen für die Aufteilung physischer Netze in VLANs: kleinere Broadcastdomänen (weniger Grundlast …</span></a></li>
+  <li><a href="/nachschlagen/wlan/"><span class="sk-titel">WLAN</span><span class="sk-text">SSID = Netzname, Access Point stellt das WLAN bereit (IEEE 802.11). Modi: Infrastruktur (über AP) vs. Ad-hoc (Geräte direkt).</span></a></li>
+  <li><a href="/nachschlagen/vpn-ipsec/"><span class="sk-titel">VPN &amp; IPsec</span><span class="sk-text">Ein VPN (Virtual Private Network) baut einen verschlüsselten Tunnel durch ein unsicheres Netz (z. B. Internet).</span></a></li>
+  <li><a href="/nachschlagen/dns-dhcp/"><span class="sk-titel">DNS &amp; DHCP im Detail</span><span class="sk-text">DHCP (Dynamic Host Configuration Protocol) vergibt automatisch IP-Konfiguration. Ablauf DORA : Discover (Client sucht per Broadcast) → Offer (Server …</span></a></li>
+  <li><a href="/nachschlagen/ethernet/"><span class="sk-titel">Ethernet &amp; Zugriffsverfahren</span><span class="sk-text">Ethernet (IEEE 802.3) ist die dominierende LAN-Technik. Adressierung über MAC (Schicht 2), Dateneinheit ist der Frame (Ziel-MAC, Quell-MAC …</span></a></li>
+  <li><a href="/nachschlagen/ports-sockets/"><span class="sk-titel">Ports &amp; Sockets</span><span class="sk-text">Ein Port ist eine 16-Bit-Nummer zwischen 0 und 65535 , die einen Dienst auf einem Server identifiziert.</span></a></li>
+  <li><a href="/nachschlagen/header-ttl-traceroute/"><span class="sk-titel">Header, TTL &amp; Traceroute</span><span class="sk-text">Ein Paket besteht aus Header (Steuerdaten) und Payload (Nutzdaten). Ein Router liest für seine Weiterleitungsentscheidung nur den Header, vor allem …</span></a></li>
+  <li><a href="/nachschlagen/multiplexing/"><span class="sk-titel">Multiplexing</span><span class="sk-text">Multiplexing kombiniert mehrere Signale zu einem und überträgt sie effizient über ein gemeinsames Medium.</span></a></li>
+  <li><a href="/nachschlagen/netzwerkausdehnung/"><span class="sk-titel">Netzwerkausdehnung (BAN → GAN)</span><span class="sk-text">Netze werden nach räumlicher Reichweite klassifiziert, von körpernah bis global.</span></a></li>
+  <li><a href="/nachschlagen/netzwerktopologien/"><span class="sk-titel">Netzwerktopologien</span><span class="sk-text">Stern: Jedes Gerät hängt mit eigenem Kabel an einem zentralen Verteiler (Switch). Vorteile: Ausfall eines Endgeräts stört die anderen nicht, Fehler …</span></a></li>
+  <li><a href="/nachschlagen/fddi/"><span class="sk-titel">FDDI (Fiber Distributed Data Interface)</span><span class="sk-text">FDDI ist ein Glasfaser-Ringnetz (Backbone der 80er/90er, 100 Mbit/s ) auf Token-Ring-Basis.</span></a></li>
+  <li><a href="/nachschlagen/voip/"><span class="sk-titel">VoIP</span><span class="sk-text">VoIP (Voice over IP) überträgt Telefonie als Datenpakete über das IP-Netz. Zwei Protokolle wirken zusammen: SIP (Session Initiation Protocol) für die …</span></a></li>
+  <li><a href="/nachschlagen/api-rest-soap/"><span class="sk-titel">API, REST, SOAP &amp; Webhook</span><span class="sk-text">Eine API ist eine vertragliche Schnittstelle zwischen Software-Systemen. Der Client sendet an einen Endpunkt, der Server verarbeitet gekapselt und …</span></a></li>
+  <li><a href="/nachschlagen/strukturierte-verkabelung/"><span class="sk-titel">Strukturierte Verkabelung</span><span class="sk-text">Die strukturierte Verkabelung ist ein herstellerunabhängiges, anwendungsneutrales Konzept für die Netzverkabelung von Gebäuden.</span></a></li>
+  <li><a href="/nachschlagen/kabel-medien-hardware/"><span class="sk-titel">Kabel, Medien &amp; Hardware</span><span class="sk-text">* Die maximale Reichweite hängt vom verwendeten Standard ab, die 550 m gelten beispielsweise für 10GBase-SR.</span></a></li>
+</ul>
 </section>
-</main>
+</div>
+</div><!-- /.wrap -->
+
 <footer><div class="wrap">
 <p class="footer-lead">Layer 8 Academy ist eine kostenlose Lernplattform zur Vorbereitung auf die IHK-Abschlussprüfung Teil 1 der IT-Berufe. Sie umfasst ein Nachschlagewerk, ein Glossar, Übungsfragen im Multiple-Choice- und Karteikartenmodus, einen Subnetting-Trainer und Prüfungssimulationen.</p>
-<nav class="footer-nav" aria-label="Themenfelder">
-  <a href="/themen/netzwerke/">Netzwerke</a> · <a href="/themen/it-sicherheit/">IT-Sicherheit</a> · <a href="/themen/systeme-storage/">Systeme &amp; Storage</a> · <a href="/themen/software-grundlagen/">Software &amp; Grundlagen</a> · <a href="/themen/bwl-prozesse/">BWL &amp; Prozesse</a> · <a href="/nachschlagen/">Alle Kapitel</a> · <a href="/glossar/">Glossar</a>
+<nav class="footer-nav" aria-label="Themen">
+  <a href="/nachschlagen/osi-modell/" data-r="r-osi">OSI-Modell</a> · <a href="/nachschlagen/subnetting/" data-r="r-subnetting">Subnetting</a> · <a href="/nachschlagen/ipv4-ipv6/" data-r="r-ip">IPv4 &amp; IPv6</a> · <a href="/nachschlagen/it-sicherheit/" data-r="r-security">IT-Sicherheit</a> · <a href="/nachschlagen/verschluesselung-pki/" data-r="r-krypto">Verschlüsselung</a> · <a href="/nachschlagen/datenschutz-informationssicherheit/" data-r="r-datenschutz">Datenschutz</a> · <a href="/nachschlagen/projektmanagement/" data-r="r-projekt">Projektmanagement</a> · <a href="/nachschlagen/it-hardware-energie/" data-r="r-hardware">IT-Hardware</a> · <a href="/nachschlagen/wissenswertes-zur-ap1/" data-r="r-ap1">Wissenswertes zur AP1</a> ·
+  <a href="/nachschlagen/">Alle Kapitel einzeln</a> · <a href="/#glossar" data-ansicht="lib">Glossar</a>
 </nav>
-<div class="footer-copy">© 2026 boxberger.app · <a href="/impressum/" class="imprint-link">Impressum &amp; Datenschutz</a></div>
+<p class="footer-meta">Für Fachinformatiker Systemintegration und Anwendungsentwicklung sowie IT-Systemelektroniker · <span id="footCats">49</span> Kategorien · <span id="footQs">1378</span> Fragen · zufällige Reihenfolge, Rotation ohne Wiederholung</p>
+<div class="footer-copy">© 2026 boxberger.app · <a href="/#impressum" class="imprint-link">Impressum &amp; Datenschutz</a></div>
 </div></footer>
+
+<button id="scrollTopBtn" aria-label="Nach oben scrollen" title="Nach oben">
+  <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="19" x2="12" y2="5"></line><polyline points="6 11 12 5 18 11"></polyline></svg>
+</button>
+
+<script src="/seiten.js?v=20261018a"></script>
 </body>
 </html>

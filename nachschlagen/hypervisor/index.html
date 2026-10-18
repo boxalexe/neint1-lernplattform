@@ -20,56 +20,23 @@
 <script type="application/ld+json">
 {
  "@context": "https://schema.org",
- "@graph": [
-  {
-   "@type": "BreadcrumbList",
-   "itemListElement": [
-    {
-     "@type": "ListItem",
-     "position": 1,
-     "name": "Start",
-     "item": "https://layer8academy.boxberger.app/"
-    },
-    {
-     "@type": "ListItem",
-     "position": 2,
-     "name": "Nachschlagen",
-     "item": "https://layer8academy.boxberger.app/nachschlagen/"
-    },
-    {
-     "@type": "ListItem",
-     "position": 3,
-     "name": "Systeme & Storage",
-     "item": "https://layer8academy.boxberger.app/themen/systeme-storage/"
-    },
-    {
-     "@type": "ListItem",
-     "position": 4,
-     "name": "Hypervisor",
-     "item": "https://layer8academy.boxberger.app/nachschlagen/hypervisor/"
-    }
-   ]
-  },
-  {
-   "@type": "LearningResource",
-   "name": "Hypervisor & Virtualisierungstechnik",
-   "description": "Ein Hypervisor erstellt und verwaltet virtuelle Maschinen und stellt ihnen eine Abstraktionsschicht aus virtueller Hardware bereit.",
-   "url": "https://layer8academy.boxberger.app/nachschlagen/hypervisor/",
-   "inLanguage": "de-DE",
-   "isAccessibleForFree": true,
-   "learningResourceType": "Nachschlagewerk",
-   "educationalLevel": "Berufsausbildung",
-   "teaches": "Systeme & Storage",
-   "isPartOf": {
-    "@id": "https://layer8academy.boxberger.app/#website"
-   },
-   "author": {
-    "@type": "Person",
-    "name": "Alexander Boxberger-Adam",
-    "url": "https://boxberger.app/"
-   }
-  }
- ]
+ "@type": "LearningResource",
+ "name": "Hypervisor & Virtualisierungstechnik",
+ "description": "Ein Hypervisor erstellt und verwaltet virtuelle Maschinen und stellt ihnen eine Abstraktionsschicht aus virtueller Hardware bereit.",
+ "url": "https://layer8academy.boxberger.app/nachschlagen/hypervisor/",
+ "inLanguage": "de-DE",
+ "isAccessibleForFree": true,
+ "learningResourceType": "Nachschlagewerk",
+ "educationalLevel": "Berufsausbildung",
+ "teaches": "Systeme & Storage",
+ "isPartOf": {
+  "@id": "https://layer8academy.boxberger.app/#website"
+ },
+ "author": {
+  "@type": "Person",
+  "name": "Alexander Boxberger-Adam",
+  "url": "https://boxberger.app/"
+ }
 }
 </script>
 <script>
@@ -82,24 +49,58 @@
 <link rel="stylesheet" href="/seiten.css?v=20261018a">
 </head>
 <body class="seite">
-<header class="seite-kopf">
+<header>
   <div class="wrap">
-    <a class="seite-logo" href="/" aria-label="Layer 8 Academy – zur Lernplattform"><span class="t-neint">Layer</span> <svg class="title-8" width="44" height="44" viewBox="0 0 120 120" aria-label="L8A" role="img"><path d="M60,60 C34,60 24,26 60,26 C96,26 86,60 60,60 Z" fill="none" stroke="#3ddc84" stroke-width="7" stroke-linecap="round"/><path d="M60,94 C86,94 96,60 60,60 C24,60 34,94 60,94 Z" fill="none" stroke="#22d3ee" stroke-width="7" stroke-linecap="round"/><line x1="18" y1="26" x2="18" y2="52" stroke="#22d3ee" stroke-width="7" stroke-linecap="round"/><line x1="18" y1="52" x2="30" y2="52" stroke="#22d3ee" stroke-width="7" stroke-linecap="round"/><path d="M102,68 L92,94 M102,68 L112,94 M95,86 L107,86" stroke="#3ddc84" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg> <span class="t-symb">Academy</span></a>
-    <nav class="seite-nav" aria-label="Hauptnavigation">
-      <a href="/nachschlagen/">Nachschlagen</a>
-      <a href="/glossar/">Glossar</a>
-      <a href="/#fragen">Fragen üben</a>
-      <a href="/subnetting-trainer/">Subnetting</a>
-      <a href="/ap1-simulator/">AP1-Simulator</a>
-      <a href="/osi-battle/">Diagnose-Arena</a>
-    </nav>
+    <a class="seite-marke" href="/" aria-label="Layer 8 Academy – Startseite"><span class="t-neint">Layer</span> <svg class="title-8" width="44" height="44" viewBox="0 0 120 120" aria-label="L8A" role="img"><path d="M60,60 C34,60 24,26 60,26 C96,26 86,60 60,60 Z" fill="none" stroke="#3ddc84" stroke-width="7" stroke-linecap="round"/><path d="M60,94 C86,94 96,60 60,60 C24,60 34,94 60,94 Z" fill="none" stroke="#22d3ee" stroke-width="7" stroke-linecap="round"/><line x1="18" y1="26" x2="18" y2="52" stroke="#22d3ee" stroke-width="7" stroke-linecap="round"/><line x1="18" y1="52" x2="30" y2="52" stroke="#22d3ee" stroke-width="7" stroke-linecap="round"/><path d="M102,68 L92,94 M102,68 L112,94 M95,86 L107,86" stroke="#3ddc84" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg> <span class="t-symb">Academy</span></a>
+    <p class="header-specs"><span id="specCats">49</span> Kategorien · <span id="specQs">1378</span> Fragen · <span id="specGloss">563</span> Nachschlagebegriffe</p>
+    <div class="a11y-wrap">
+      <div class="quick-search" id="quickSearch">
+        <button class="qs-toggle" id="qsToggle" aria-label="Begriffe suchen" title="Begriffe suchen" aria-expanded="false">
+          <svg class="qs-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"></circle><line x1="21" y1="21" x2="16.5" y2="16.5"></line></svg>
+        </button>
+        <input type="text" class="qs-input" id="qsInput" placeholder="Stichwort suchen …" aria-label="Nachschlage-Stichwort suchen" autocomplete="off">
+        <div class="qs-results" id="qsResults" role="listbox"></div>
+      </div>
+      <button class="a11y-toggle" id="a11yToggle" aria-haspopup="true" aria-expanded="false" aria-label="Kontrasteinstellungen öffnen" title="Kontrasteinstellungen">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7Z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+      </button>
+      <div class="a11y-menu" id="a11yMenu" role="menu" aria-label="Kontrastmodus wählen">
+        <button class="a11y-opt" data-theme="default" role="menuitemradio">
+          <span class="a11y-dot" style="background:#22d3ee"></span>
+          <span>Original</span>
+          <span class="a11y-check">✓</span>
+        </button>
+        <button class="a11y-opt" data-theme="hc" role="menuitemradio">
+          <span class="a11y-dot" style="background:#ffffff"></span>
+          <span>Hoher Kontrast</span>
+          <span class="a11y-check">✓</span>
+        </button>
+        <button class="a11y-opt" data-theme="cvd" role="menuitemradio">
+          <span class="a11y-dot" style="background:#56b4e9"></span>
+          <span>Blau/Orange</span>
+          <span class="a11y-check">✓</span>
+        </button>
+      </div>
+    </div>
   </div>
 </header>
-<main class="wrap seite-inhalt">
-<nav class="brotkrumen" aria-label="Brotkrumenpfad"><a href="/">Start</a><span class="bk-trenner" aria-hidden="true">›</span><a href="/nachschlagen/">Nachschlagen</a><span class="bk-trenner" aria-hidden="true">›</span><a href="/themen/systeme-storage/">Systeme &amp; Storage</a><span class="bk-trenner" aria-hidden="true">›</span><span aria-current="page">Hypervisor</span></nav>
-<h1 class="seite-h1">Hypervisor &amp; Virtualisierungstechnik</h1>
+
+<div class="tabs" id="tabBar"><div class="wrap">
+  <button class="menu-toggle" id="menuToggle" aria-expanded="false" aria-controls="tabBar">Menü öffnen</button>
+  <a class="tab active" href="/" data-short="Lesen">Nachschlagen</a>
+  <a class="tab" href="/#glossar" data-short="Glossar">Glossar</a>
+  <a class="tab" href="/#fragen" data-short="Quiz">Multiple&nbsp;Choice / Karteikarten</a>
+  <a class="tab" href="/subnetting-trainer/" data-short="Subnetting"><svg class="tab-icon" width="15" height="15" viewBox="0 0 120 120" aria-hidden="true"><path d="M60,60 C34,60 24,26 60,26 C96,26 86,60 60,60 Z" fill="none" stroke="#22d3ee" stroke-width="11" stroke-linecap="round"/><path d="M60,94 C86,94 96,60 60,60 C24,60 34,94 60,94 Z" fill="none" stroke="#3ddc84" stroke-width="11" stroke-linecap="round"/></svg> Subnetting Trainer</a>
+  <a class="tab" href="/ap1-simulator/" data-short="AP1-Sim"><svg class="tab-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 3h9l5 5v13a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1Z" stroke="#22d3ee" stroke-width="2" stroke-linejoin="round"/><path d="M14 3v6h6" stroke="#22d3ee" stroke-width="2" stroke-linejoin="round"/><path d="M9 14l2 2 4-4" stroke="#3ddc84" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> AP1 Simulator</a>
+  <a class="tab" href="/osi-battle/" data-short="Arena"><svg class="tab-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 3l8 3v6c0 4-3.4 7.1-8 9-4.6-1.9-8-5-8-9V6l8-3Z" stroke="#22d3ee" stroke-width="2" stroke-linejoin="round"/><path d="M7.5 12.5h2l1.3-3 2.2 6 1.4-3h2.1" stroke="#3ddc84" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> Diagnose-Arena</a>
+  <button class="zen-toggle" id="zenToggle" title="Zen Mode: Vollbild &amp; Fokus" aria-label="Zen Mode umschalten"><span class="zen-icon">&#9673;</span><span class="zen-label">Zen</span></button>
+</div></div>
+
+<div class="wrap">
 <div class="view active" id="view-lesen">
+<div class="topics" aria-label="Themenfelder"><a class="topic" href="/themen/netzwerke/">Netzwerke</a><a class="topic" href="/themen/it-sicherheit/">IT-Sicherheit</a><a class="topic active" href="/themen/systeme-storage/" aria-current="page">Systeme &amp; Storage</a><a class="topic" href="/themen/software-grundlagen/">Software &amp; Grundlagen</a><a class="topic" href="/themen/bwl-prozesse/">BWL &amp; Prozesse</a></div>
 <section id="r-hyperv">
+<h1 class="wie-h2">Hypervisor &amp; Virtualisierungstechnik</h1>
 <p>Ein <strong>Hypervisor</strong> erstellt und verwaltet virtuelle Maschinen und stellt ihnen eine Abstraktionsschicht aus virtueller Hardware bereit.</p>
 <table>
 <tr><th>Typ</th><th>Merkmal</th><th>Beispiele</th></tr>
@@ -116,30 +117,33 @@
 
 <div class="callout xref"><span class="tag">Verwandte Themen</span><a href="/nachschlagen/virtualisierung/">Virtualisierung Grundlagen</a> · <a href="/nachschlagen/storage-systeme/">Storage-Systeme</a> · <a href="/nachschlagen/it-hardware-energie/">IT-Hardware, Energie &amp; Grundlagen</a></div>
 </section>
-</div>
-<div class="seite-cta">
-  <p>Interaktiv mit Volltextsuche, Glossar-Bubbles und Übungsfragen lernen:</p>
-  <div class="seite-cta-knoepfe">
-    <a class="seite-knopf seite-knopf-haupt" href="/#r-hyperv">In der Lernplattform öffnen</a>
-    <a class="seite-knopf" href="/#fragen">Fragen üben</a>
-    <a class="seite-knopf" href="/glossar/">Glossar</a>
-  </div>
-</div>
-<nav class="seite-blaettern" aria-label="Weitere Kapitel">
-  <a class="sb-vor" href="/nachschlagen/virtualisierung/"><span>Vorheriges Kapitel</span>Virtualisierung</a>
-  <a class="sb-nach" href="/nachschlagen/storage-systeme/"><span>Nächstes Kapitel</span>Storage-Systeme</a>
-</nav>
-<section class="seite-feld" aria-labelledby="feld-titel">
-<h2 id="feld-titel">Mehr aus Systeme &amp; Storage</h2>
-<div class="seite-pillen"><a class="topic-sub" href="/nachschlagen/virtualisierung/">Virtualisierung</a><span class="topic-sub aktuell" aria-current="page">Hypervisor</span><a class="topic-sub" href="/nachschlagen/storage-systeme/">Storage-Systeme</a><a class="topic-sub" href="/nachschlagen/backup-raid/">Backup/RAID</a><a class="topic-sub" href="/nachschlagen/diagnose-fehlersuche/">Diagnose &amp; Fehlersuche</a><a class="topic-sub" href="/nachschlagen/it-hardware-energie/">IT-Hardware &amp; Energie</a></div>
+<section class="seite-feld">
+<h2>Mehr aus Systeme &amp; Storage</h2>
+<ul class="seite-karten">
+  <li><a href="/nachschlagen/virtualisierung/"><span class="sk-titel">Virtualisierung Grundlagen</span><span class="sk-text">Virtuell heißt: nicht real vorhanden, aber real erscheinend. Die virtuelle Infrastruktur läuft dabei auf echter Hardware, Virtualisierung von …</span></a></li>
+  <li><a href="/nachschlagen/storage-systeme/"><span class="sk-titel">Storage-Systeme</span><span class="sk-text">Block-Storage: Der Speicher wird in gleich große Blöcke aufgeteilt und ohne eigene Struktur bereitgestellt.</span></a></li>
+  <li><a href="/nachschlagen/backup-raid/"><span class="sk-titel">Backup &amp; RAID</span><span class="sk-text">RAID (Redundant Array of Independent Disks) fasst mehrere Festplatten zu einem logischen Verbund zusammen, für mehr Ausfallsicherheit, mehr Leistung …</span></a></li>
+  <li><a href="/nachschlagen/diagnose-fehlersuche/"><span class="sk-titel">Diagnose &amp; Fehlersuche</span><span class="sk-text">Systematische Fehlersuche folgt der Bottom-up-Logik des OSI-Modells: von der physischen Verbindung nach oben zur Anwendung. Die wichtigsten Werkzeuge:</span></a></li>
+  <li><a href="/nachschlagen/it-hardware-energie/"><span class="sk-titel">IT-Hardware, Energie &amp; Grundlagen</span><span class="sk-text">Nahezu alle heutigen Rechner folgen der nach John von Neumann benannten Architektur. Ihr Kerngedanke: Programme und Daten liegen im selben Speicher …</span></a></li>
+</ul>
 </section>
-</main>
+</div>
+</div><!-- /.wrap -->
+
 <footer><div class="wrap">
 <p class="footer-lead">Layer 8 Academy ist eine kostenlose Lernplattform zur Vorbereitung auf die IHK-Abschlussprüfung Teil 1 der IT-Berufe. Sie umfasst ein Nachschlagewerk, ein Glossar, Übungsfragen im Multiple-Choice- und Karteikartenmodus, einen Subnetting-Trainer und Prüfungssimulationen.</p>
-<nav class="footer-nav" aria-label="Themenfelder">
-  <a href="/themen/netzwerke/">Netzwerke</a> · <a href="/themen/it-sicherheit/">IT-Sicherheit</a> · <a href="/themen/systeme-storage/">Systeme &amp; Storage</a> · <a href="/themen/software-grundlagen/">Software &amp; Grundlagen</a> · <a href="/themen/bwl-prozesse/">BWL &amp; Prozesse</a> · <a href="/nachschlagen/">Alle Kapitel</a> · <a href="/glossar/">Glossar</a>
+<nav class="footer-nav" aria-label="Themen">
+  <a href="/nachschlagen/osi-modell/" data-r="r-osi">OSI-Modell</a> · <a href="/nachschlagen/subnetting/" data-r="r-subnetting">Subnetting</a> · <a href="/nachschlagen/ipv4-ipv6/" data-r="r-ip">IPv4 &amp; IPv6</a> · <a href="/nachschlagen/it-sicherheit/" data-r="r-security">IT-Sicherheit</a> · <a href="/nachschlagen/verschluesselung-pki/" data-r="r-krypto">Verschlüsselung</a> · <a href="/nachschlagen/datenschutz-informationssicherheit/" data-r="r-datenschutz">Datenschutz</a> · <a href="/nachschlagen/projektmanagement/" data-r="r-projekt">Projektmanagement</a> · <a href="/nachschlagen/it-hardware-energie/" data-r="r-hardware">IT-Hardware</a> · <a href="/nachschlagen/wissenswertes-zur-ap1/" data-r="r-ap1">Wissenswertes zur AP1</a> ·
+  <a href="/nachschlagen/">Alle Kapitel einzeln</a> · <a href="/#glossar" data-ansicht="lib">Glossar</a>
 </nav>
-<div class="footer-copy">© 2026 boxberger.app · <a href="/impressum/" class="imprint-link">Impressum &amp; Datenschutz</a></div>
+<p class="footer-meta">Für Fachinformatiker Systemintegration und Anwendungsentwicklung sowie IT-Systemelektroniker · <span id="footCats">49</span> Kategorien · <span id="footQs">1378</span> Fragen · zufällige Reihenfolge, Rotation ohne Wiederholung</p>
+<div class="footer-copy">© 2026 boxberger.app · <a href="/#impressum" class="imprint-link">Impressum &amp; Datenschutz</a></div>
 </div></footer>
+
+<button id="scrollTopBtn" aria-label="Nach oben scrollen" title="Nach oben">
+  <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="19" x2="12" y2="5"></line><polyline points="6 11 12 5 18 11"></polyline></svg>
+</button>
+
+<script src="/seiten.js?v=20261018a"></script>
 </body>
 </html>

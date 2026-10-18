@@ -22956,7 +22956,7 @@ window.addEventListener('pageshow', () => { if(!direktZiel()) window.scrollTo(0,
 
 // ---- Direkte Adressen in die App (Links von den Themen-, Kapitel- und Glossarseiten) ----
 // /#r-…: Kapitel im Nachschlagewerk, richtig unter der Menüleiste platziert und kurz hervorgehoben
-// /#fragen, /#glossar: Bereich öffnen · /#impressum: Impressum & Datenschutz zeigen
+// /#fragen, /#glossar: Bereich öffnen · /#suche: Lupe öffnen · /#impressum: Impressum & Datenschutz zeigen
 (function initDirektadressen(){
   const BEREICH = { '#fragen': 'quiz', '#glossar': 'lib' };
   function folge(beimLaden){
@@ -22965,6 +22965,10 @@ window.addEventListener('pageshow', () => { if(!direktZiel()) window.scrollTo(0,
       const tab = document.querySelector('.tab[data-view="' + BEREICH[h] + '"]');
       if(tab && aktiveView() !== BEREICH[h]) tab.click();
       window.scrollTo(0, 0);
+    } else if(h === '#suche'){
+      // Lupe auf den Einzelseiten: Suche im gesamten Nachschlagewerk öffnen
+      const qs = document.getElementById('quickSearch'), t = document.getElementById('qsToggle');
+      if(qs && t && !qs.classList.contains('open')) t.click();
     } else if(h === '#impressum'){
       const l = document.getElementById('imprintLink');
       if(l) l.click();

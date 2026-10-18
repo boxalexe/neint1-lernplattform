@@ -24,27 +24,27 @@ index.html   Struktur, Reader-Inhalte, Navigation
 app.js       Fragenpools, Glossar, Quiz-Logik, Kartendruck, Bubble-Rendering
 styles.css   Theming (mehrere Farbschemata über CSS-Variablen)
 seiten.css   Zusatz-Styles für die erzeugten Einzelseiten
+seiten.js    Kopf und Menüleiste der Einzelseiten (wie in der App)
 tools/       seiten-bauen.mjs: erzeugt die Einzelseiten (siehe unten)
 ```
 
 ## Eigene Seiten für Suchmaschinen
 
-Die Startseite bleibt die App (Sprünge, Suche, Quiz, Glossar-Bubbles). Zusätzlich gibt es crawlbare Einzelseiten, erzeugt aus `index.html` und `app.js`:
+Die Startseite bleibt die App (Sprünge, Suche, Quiz, Glossar-Bubbles). Zusätzlich lässt sich jedes Kapitel über Karten einzeln aufrufen, jeweils mit eigener Adresse, eigenem Titel und eigener Beschreibung für Suchmaschinen:
 
 | Adresse | Inhalt |
 |---|---|
-| `/themen/<feld>/` | die 5 Themenfelder (Netzwerke, IT-Sicherheit …) mit ihren Kapiteln |
-| `/nachschlagen/` | Übersicht aller Kapitel |
-| `/nachschlagen/<kapitel>/` | jedes Reader-Kapitel als eigene Seite, mit Brotkrumen, Weiterblättern und Link zurück in die App |
-| `/glossar/` | alle Glossarbegriffe |
-| `/impressum/` | Impressum & Datenschutz für die Einzelseiten (noindex) |
+| `/themen/<feld>/` | die 5 Themenfelder (Netzwerke, IT-Sicherheit …) mit den Karten ihrer Kapitel |
+| `/nachschlagen/` | Karten „Wissenswertes zur AP1“ und „Gesamtes Nachschlagewerk“, darunter alle Themenfelder |
+| `/nachschlagen/<kapitel>/` | ein Kapitel einzeln, darunter die Karten der anderen Kapitel des Themenfelds |
 
-Die Themenblasen und die Fußzeile der Startseite sind echte Links auf diese Seiten; `app.js` fängt sie in der App ab und springt wie bisher (`data-r`, `data-ansicht`). Die Einzelseiten führen mit `/#r-…`, `/#fragen`, `/#glossar` und `/#impressum` direkt an die passende Stelle der App.
+Kopf (Logo, Zahlen, Auge, Lupe), Menüleiste, Fußzeile und Pfeil nach oben sind dieselben wie in der App (`seiten.js` steuert sie). „Nachschlagen“ führt zur Startseite, „Glossar“ und „Multiple Choice“ in die Bereiche der App, die Lupe öffnet die Suche im gesamten Nachschlagewerk. Dafür versteht die App die Adressen `/#r-…`, `/#glossar`, `/#fragen`, `/#suche` und `/#impressum`.
 
-**Nach jeder Änderung an Kapiteln, Themenfeldern oder Glossar:** `node tools/seiten-bauen.mjs` (schreibt Seiten, Sitemap, Themenblasen und Fußzeile). Prüfen ohne Schreiben: `node tools/seiten-bauen.mjs --pruefen`. Ein neues Kapitel braucht eine Adresse in `KAPITEL_SLUG` im Skript.
+Die Themenblasen und die Fußzeile der Startseite sind echte Links auf diese Seiten; `app.js` fängt sie in der App ab und verhält sich wie bisher (`data-r`, `data-ansicht`).
+
+**Nach jeder Änderung an Kapiteln oder Themenfeldern:** `node tools/seiten-bauen.mjs` (schreibt Seiten, Sitemap, Themenblasen und Fußzeile). Prüfen ohne Schreiben: `node tools/seiten-bauen.mjs --pruefen`. Ein neues Kapitel braucht eine Adresse in `KAPITEL_SLUG` im Skript.
 
 `.assetsignore` hält `.git`, `tools` und Konfiguration aus der Auslieferung heraus.
-
 ## Kartendruck
 
 Die Druckansicht öffnet sich in einem eigenen Fenster mit hellem Layout. Damit Schnitt- und Faltlinien passen, im Druckdialog Querformat, Skalierung 100 % bzw. „Tatsächliche Größe“ und Ränder „Keine“ wählen. Durchgezogene Linien werden geschnitten, gestrichelte gefaltet. Gedruckt werden nur Frage und richtige Antwort, ohne Erklärung. Fragen, die nur mit sichtbaren Antwortoptionen eindeutig sind (`card: false`), lassen sich nicht vormerken.
