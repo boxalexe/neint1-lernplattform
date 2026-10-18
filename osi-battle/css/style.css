@@ -1587,3 +1587,95 @@ body { display: block; padding: 0; margin: 0; background: #05080f; }
 @media (prefers-reduced-motion: reduce) {
   #answer-next:not([hidden]) { animation: none; }
 }
+
+/* ==========================================================
+   Netz-Hydra realistischer: 2D gezeichnet, 3D-Wirkung.
+   Licht von oben links. Haut, Bauch und Flügel nutzen runde Verläufe
+   (Kennungen in hydra-art.js), Hälse sind gestapelte Röhren-Striche.
+   Umrisse fein statt Comic-Kontur. Ohne Filter (Performance-Regel).
+   ========================================================== */
+.dragon-skin,
+.body-main { fill: url(#bodyGrad); stroke: #5a6a90; stroke-width: 1.1; stroke-opacity: 0.75; }
+.dragon-skin-boss { fill: url(#bodyGradBoss); stroke: #61729a; stroke-width: 1.2; stroke-opacity: 0.75; }
+.dragon-horn { fill: url(#hornGrad); stroke: #4d4a44; stroke-width: 0.9; stroke-opacity: 0.8; }
+.dragon-eye { fill: url(#eyeGrad); }
+.dragon-eye-socket { fill: #1a2240; }
+.dragon-eye-pupil { fill: #021426; }
+.eye-glow-outer { fill: #2ea8ff; opacity: 0.16; }
+.eye-glow-mid   { fill: #7fe6ff; opacity: 0.22; }
+.evil-brow { fill: #6f7fa4; stroke: #3e4a68; stroke-width: 0.8; }
+.dragon-teeth { stroke: #fbf8ee; stroke-width: 1.8; }
+.dragon-crest { stroke: #6c7ba0; stroke-width: 2.2; opacity: 0.85; }
+.scale-row { stroke: #8f9fc4; stroke-width: 1.3; opacity: 0.55; }
+
+/* Kontaktschatten unter dem Kopf und Glanzkante oben auf dem Schädel */
+.head-ao { fill: url(#aoGrad); }
+.head-rim { fill: none; stroke: #ffffff; stroke-width: 2.2; stroke-linecap: round; opacity: 0.55; }
+.hydra-head.state-dead .head-ao { display: none; }
+
+/* Hälse als Röhren: Schattenton, versetztes Licht, Glanzstreifen, Schuppenbänder */
+.hydra-neck-outline { stroke: #3d4b70; stroke-opacity: 0.85; }
+.hydra-neck { stroke: #93a5ca; }
+.hydra-neck-light { fill: none; stroke: #e8eff9; stroke-linecap: round; }
+.hydra-neck-spec { fill: none; stroke: #ffffff; stroke-linecap: round; opacity: 0.85; }
+.hydra-neck-belly { opacity: 0.22; }
+.hydra-neck-scales { stroke: #7b8db6; stroke-width: inherit; stroke-dasharray: 2 9; stroke-linecap: butt; opacity: 0.3; }
+.hydra-neck-rings { stroke: #5f709a; stroke-dasharray: 1.6 13; opacity: 0.35; }
+.hydra-neck-spine { stroke: #6f80a8; opacity: 0.35; }
+
+/* Rumpf: verschatteter Halsansatz, Glanzkante links, Schattenkante rechts */
+.neck-base-ao { fill: url(#aoGrad); }
+.torso-rim { fill: none; stroke: #ffffff; stroke-width: 4; stroke-linecap: round; opacity: 0.5; }
+.torso-shade { fill: none; stroke: #4a5a82; stroke-width: 6; stroke-linecap: round; opacity: 0.35; }
+.belly-plate { fill: url(#bellyGrad); stroke: #8696ba; stroke-width: 1; }
+.belly-line { stroke: #8e9ec2; stroke-width: 1.3; opacity: 0.6; }
+.dragon-claw { stroke: #f6f2e6; stroke-width: 2.2; }
+
+/* Flügel: durchscheinende Haut mit Adern, Knochen mit Glanz */
+.wing-arm { fill: url(#wingGrad); stroke: #56668e; stroke-width: 1.3; }
+.wing-membrane { fill: url(#wingMembrane); stroke: #4a5a88; stroke-width: 1.2; opacity: 1; }
+.wing-seg { stroke: #c6d2ea; stroke-width: 1.4; opacity: 0.45; }
+.wing-bone { stroke: #e9eff9; stroke-width: 2.6; opacity: 0.9; }
+.wing-claw { stroke: #f6f2e6; }
+
+/* Energiekern und Schatten */
+.core-outer { fill: url(#coreGrad); opacity: 1; }
+.core-inner { fill: #c8f4ff; opacity: 0.16; }
+.ground-haze { fill: #223357; opacity: 0.35; }
+.ground-shadow { fill: url(#shadowGrad); }
+.foot-shadow { fill: url(#shadowGrad); }
+
+/* Treffer-Animationen mit den neuen Hornfarben */
+@keyframes hornRed {
+  0%, 100% { fill: url(#hornGrad); }
+  25%, 65% { fill: #ffb0b0; }
+}
+@keyframes skinRed {
+  0%, 100% { fill: url(#bodyGrad); stroke: #5a6a90; }
+  25%, 65% { fill: #ff6b6b; stroke: #a81f1f; }
+}
+@keyframes skinRedBoss {
+  0%, 100% { fill: url(#bodyGradBoss); stroke: #61729a; }
+  25%, 65% { fill: #ff7a7a; stroke: #a81f1f; }
+}
+
+/* Hälse: weicher Röhrenaufbau mit Schuppenmuster; Rumpf und Oberschenkel mit Schuppen */
+.hydra-neck { stroke: #8698c0; }
+.hydra-neck-light { stroke: #d3ddf0; }
+.hydra-neck-hi { fill: none; stroke: #f5f8fe; stroke-linecap: round; opacity: 0.9; }
+.hydra-neck-spec { opacity: 0.7; }
+.hydra-neck-scales { stroke: url(#scalePatternFine); stroke-dasharray: none; stroke-linecap: round; opacity: 0.55; }
+.hydra-neck-rings { opacity: 0.18; }
+.body-scales { fill: url(#scalePattern); opacity: 0.32; pointer-events: none; }
+.leg-scales { fill: url(#scalePatternFine); opacity: 0.35; }
+.leg-rim { fill: none; stroke: #ffffff; stroke-width: 3; stroke-linecap: round; opacity: 0.55; }
+.dragon-claw.talon { stroke: #efe9da; stroke-width: 3.2; }
+
+/* Köpfe: Schuppen und Schattenseite über der Haut; Hals ohne flimmernde Strichelung */
+.head-scales { fill: url(#scalePatternFine); opacity: 0.3; pointer-events: none; }
+.head-shade { fill: url(#shadeGrad); pointer-events: none; }
+.hydra-head.state-dead .head-scales,
+.hydra-head.state-dead .head-shade { display: none; }
+.hydra-neck-spine { opacity: 0; }
+.hydra-neck-rings { opacity: 0.12; }
+.dragon-crest { stroke: #8a9bc2; stroke-width: 2.6; opacity: 0.7; }

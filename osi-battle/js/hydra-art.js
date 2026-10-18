@@ -8,6 +8,13 @@
  * Detailebene: Schuppenreihen, Rückenkamm, Halsringe, Kiefer mit Zähnen,
  * segmentierte Flügelmembran, Krallen.
  * Routing bleibt zentraler Boss-Kopf. Jeder Kopf: 2 Augen, eigenes Profil.
+ *
+ * 3D-WIRKUNG (2D gezeichnet): Licht fällt von oben links. Jede Fläche bekommt
+ * einen runden Verlauf (Glanzlicht oben links, Eigenschatten unten rechts,
+ * objectBoundingBox, also je Teil eigenes Licht). Hälse sind Röhren aus
+ * gestapelten Strichen: Schattenton, versetztes Licht, schmaler Glanz. Dazu
+ * Kontaktschatten unter den Köpfen, Bodenschatten als Verlauf, Elfenbein-Hörner
+ * und leuchtende Iris. Alles ohne Filter (siehe Performance-Regel).
  */
 
 const HydraArt = {
@@ -205,12 +212,18 @@ const HydraArt = {
       this.eyeMarkup(-p.eyeDx, p.eyeY, rx, ry,  tilt, blinkDur, blinkDelay) +
       this.eyeMarkup( p.eyeDx, p.eyeY, rx, ry, -tilt, blinkDur, blinkDelay);
     const barY = headTop - 22;
+    // Schuppen und Schattenseite: dieselben Hautflächen wie das Profil, als Ebenen darüber
+    const haut = [...p.body.matchAll(/<path class="dragon-skin[^"]*" d="([^"]+)"\/>/g)].map(m => m[1]);
+    const plastik = haut.map(d => `<path class="head-scales" d="${d}"/><path class="head-shade" d="${d}"/>`).join("");
 
     return `
     <g class="hydra-head state-normal breathing" id="head-${headId}" data-head="${headId}"
        style="animation-duration:${n.breathDur}s; animation-delay:${n.breathDelay}s">
       <g class="head-alive">
+        <ellipse class="head-ao" cx="0" cy="22" rx="27" ry="20"/>
         ${p.body}
+        ${plastik}
+        <path class="head-rim" d="M -20 -16 Q -6 -28 12 -24"/>
         ${eyes}
         ${this.browMarkup(p.eyeDx, p.eyeY, rx)}
       </g>
@@ -253,10 +266,14 @@ const HydraArt = {
       // Drehpunkt ist der Ansatz am Körper.
       strandsSvg.push(`
         <g class="hydra-strand" id="strand-${h.headId}" style="transform-origin:${n.sx}px ${n.sy}px">
-          <path class="hydra-neck-outline" d="${path}" style="stroke-width:${w+6}px"/>
+          <path class="hydra-neck-outline" d="${path}" style="stroke-width:${w+4}px"/>
           <path class="hydra-neck" d="${path}" style="stroke-width:${w}px"/>
+          <path class="hydra-neck-light" d="${path}" style="stroke-width:${w*0.7}px" transform="translate(${(-w*0.1).toFixed(1)} ${(-w*0.08).toFixed(1)})"/>
+          <path class="hydra-neck-hi" d="${path}" style="stroke-width:${w*0.34}px" transform="translate(${(-w*0.18).toFixed(1)} ${(-w*0.14).toFixed(1)})"/>
           <path class="hydra-neck-belly" d="${path}" style="stroke-width:${w*0.42}px"/>
+          <path class="hydra-neck-scales" d="${path}" style="stroke-width:${w*0.96}px"/>
           <path class="hydra-neck-rings" d="${path}" style="stroke-width:${w}px"/>
+          <path class="hydra-neck-spec" d="${path}" style="stroke-width:${w*0.1}px" transform="translate(${(-w*0.24).toFixed(1)} ${(-w*0.19).toFixed(1)})"/>
           <path class="hydra-neck-spine" d="${path}" style="stroke-width:${w*0.9}px"/>
           <g transform="translate(${n.hx} ${n.hy}) rotate(${n.tilt}) scale(${n.scale})">
             <g transform="rotate(${n.yaw})">
@@ -273,27 +290,63 @@ const HydraArt = {
         <radialGradient id="bgGlow" cx="50%" cy="44%" r="72%">
           <stop offset="0%" stop-color="#1d2c56"/><stop offset="52%" stop-color="#0d1730"/><stop offset="100%" stop-color="#05080f"/>
         </radialGradient>
-        <linearGradient id="bodyGrad" x1="0.2" y1="0" x2="0.8" y2="1">
-          <stop offset="0%" stop-color="#ffffff"/><stop offset="45%" stop-color="#e2eaf8"/><stop offset="100%" stop-color="#93a5c9"/>
+        <!-- Haut: perlweiß, Glanzlicht oben links, Eigenschatten unten rechts (je Teil) -->
+        <radialGradient id="bodyGrad" cx="0.38" cy="0.3" r="0.82" fx="0.3" fy="0.2">
+          <stop offset="0%" stop-color="#ffffff"/><stop offset="24%" stop-color="#f3f7fd"/><stop offset="55%" stop-color="#d1dcef"/>
+          <stop offset="82%" stop-color="#9aabce"/><stop offset="100%" stop-color="#6a7ca6"/>
+        </radialGradient>
+        <radialGradient id="bodyGradBoss" cx="0.38" cy="0.3" r="0.82" fx="0.3" fy="0.2">
+          <stop offset="0%" stop-color="#ffffff"/><stop offset="28%" stop-color="#f7faff"/><stop offset="58%" stop-color="#dbe5f6"/>
+          <stop offset="84%" stop-color="#a7b8da"/><stop offset="100%" stop-color="#7486ae"/>
+        </radialGradient>
+        <radialGradient id="bellyGrad" cx="0.42" cy="0.32" r="0.78">
+          <stop offset="0%" stop-color="#ffffff"/><stop offset="45%" stop-color="#eef3fa"/><stop offset="80%" stop-color="#c3cfe6"/><stop offset="100%" stop-color="#97a7c9"/>
+        </radialGradient>
+        <linearGradient id="wingGrad" x1="0" y1="0" x2="0.35" y2="1">
+          <stop offset="0%" stop-color="#f1f5fc"/><stop offset="45%" stop-color="#b9c7e2"/><stop offset="100%" stop-color="#5f7098"/>
         </linearGradient>
-        <linearGradient id="bodyGradBoss" x1="0.2" y1="0" x2="0.8" y2="1">
-          <stop offset="0%" stop-color="#ffffff"/><stop offset="45%" stop-color="#edf3ff"/><stop offset="100%" stop-color="#a6b8dc"/>
+        <!-- Flügelhaut: durchscheinend, oben vom Licht aufgehellt, zum Rand dunkler -->
+        <linearGradient id="wingMembrane" x1="0" y1="0" x2="0.35" y2="1">
+          <stop offset="0%" stop-color="#d5e0f3" stop-opacity="0.92"/><stop offset="40%" stop-color="#8e9fca" stop-opacity="0.86"/>
+          <stop offset="100%" stop-color="#36467a" stop-opacity="0.94"/>
         </linearGradient>
-        <linearGradient id="bellyGrad" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stop-color="#fdfeff"/><stop offset="100%" stop-color="#cfd9ec"/>
+        <!-- Hörner: Elfenbein, dunkle Wurzel, helle Spitze -->
+        <linearGradient id="hornGrad" x1="0.2" y1="1" x2="0.6" y2="0">
+          <stop offset="0%" stop-color="#5e5b57"/><stop offset="30%" stop-color="#a9a499"/><stop offset="70%" stop-color="#e6e0d2"/><stop offset="100%" stop-color="#fffdf6"/>
         </linearGradient>
-        <linearGradient id="wingGrad" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stop-color="#dbe4f4"/><stop offset="100%" stop-color="#7385ab"/>
+        <!-- Iris: glüht von innen -->
+        <radialGradient id="eyeGrad" cx="0.5" cy="0.45" r="0.6">
+          <stop offset="0%" stop-color="#f4feff"/><stop offset="30%" stop-color="#9df0ff"/><stop offset="68%" stop-color="#2fb7f4"/><stop offset="100%" stop-color="#0b4f8a"/>
+        </radialGradient>
+        <!-- weiche Schatten: Boden, Kontakt unter den Köpfen, Ansatz der Hälse -->
+        <radialGradient id="shadowGrad" cx="0.5" cy="0.5" r="0.5">
+          <stop offset="0%" stop-color="#02040a" stop-opacity="0.75"/><stop offset="55%" stop-color="#02040a" stop-opacity="0.38"/><stop offset="100%" stop-color="#02040a" stop-opacity="0"/>
+        </radialGradient>
+        <radialGradient id="aoGrad" cx="0.5" cy="0.5" r="0.5">
+          <stop offset="0%" stop-color="#1c2747" stop-opacity="0.5"/><stop offset="100%" stop-color="#1c2747" stop-opacity="0"/>
+        </radialGradient>
+        <pattern id="scalePattern" width="16" height="11" patternUnits="userSpaceOnUse">
+          <path d="M 0 11 Q 8 1 16 11 M -8 5.5 Q 0 -4.5 8 5.5 M 8 5.5 Q 16 -4.5 24 5.5" fill="none" stroke="#4f6190" stroke-width="1.1"/>
+        </pattern>
+        <pattern id="scalePatternFine" width="9" height="6.5" patternUnits="userSpaceOnUse">
+          <path d="M 0 6.5 Q 4.5 0.6 9 6.5 M -4.5 3.25 Q 0 -2.6 4.5 3.25 M 4.5 3.25 Q 9 -2.6 13.5 3.25" fill="none" stroke="#4f6190" stroke-width="0.8"/>
+        </pattern>
+        <linearGradient id="shadeGrad" x1="0.3" y1="0" x2="0.6" y2="1">
+          <stop offset="0%" stop-color="#1c2a50" stop-opacity="0"/><stop offset="55%" stop-color="#1c2a50" stop-opacity="0.06"/>
+          <stop offset="100%" stop-color="#1c2a50" stop-opacity="0.42"/>
         </linearGradient>
-        <linearGradient id="wingMembrane" x1="0" y1="0" x2="0.3" y2="1">
-          <stop offset="0%" stop-color="#b9c7e4"/><stop offset="100%" stop-color="#465892"/>
-        </linearGradient>
+        <radialGradient id="coreGrad" cx="0.5" cy="0.45" r="0.5">
+          <stop offset="0%" stop-color="#e6fbff" stop-opacity="0.55"/><stop offset="40%" stop-color="#7fe0ff" stop-opacity="0.28"/><stop offset="100%" stop-color="#2fb6ff" stop-opacity="0"/>
+        </radialGradient>
       </defs>
 
 
       <g class="hydra-stage-shift" transform="translate(0,14)">
       <!-- Bodennebel/Standfläche -->
       <ellipse class="ground-haze" cx="700" cy="776" rx="340" ry="32"/>
+      <ellipse class="ground-shadow" cx="700" cy="770" rx="250" ry="30"/>
+      <ellipse class="foot-shadow" cx="632" cy="770" rx="40" ry="9"/>
+      <ellipse class="foot-shadow" cx="768" cy="770" rx="40" ry="9"/>
 
       <!-- ===== FLÜGEL ===== -->
       <g class="hydra-arrive">
@@ -323,6 +376,10 @@ const HydraArt = {
         <path class="tail-spine" d="M 712 690 l 10 -8 M 740 712 l 8 -10 M 770 722 l 4 -12 M 800 716 l 0 -12"/>
         <!-- Rumpf -->
         <path class="dragon-skin body-main" d="M 700 430 C 604 438, 562 508, 575 588 C 586 664, 644 716, 700 716 C 756 716, 814 664, 825 588 C 838 508, 796 438, 700 430 Z"/>
+        <path class="body-scales" d="M 700 430 C 604 438, 562 508, 575 588 C 586 664, 644 716, 700 716 C 756 716, 814 664, 825 588 C 838 508, 796 438, 700 430 Z"/>
+        <ellipse class="neck-base-ao" cx="700" cy="452" rx="118" ry="40"/>
+        <path class="torso-rim" d="M 598 560 C 592 506, 628 452, 690 440"/>
+        <path class="torso-shade" d="M 812 520 C 828 586, 812 660, 752 702"/>
         <!-- Bauchplatten -->
         <path class="belly-plate" d="M 700 460 C 666 468, 653 516, 659 574 C 665 632, 682 674, 700 685 C 718 674, 735 632, 741 574 C 747 516, 734 468, 700 460 Z"/>
         <path class="belly-line" d="M 679 492 L 721 492 M 673 532 L 727 532 M 674 574 L 726 574 M 679 616 L 721 616 M 687 654 L 713 654"/>
@@ -334,10 +391,15 @@ const HydraArt = {
         <!-- Brust/Schulterkamm -->
         <path class="dragon-crest" d="M 606 486 C 634 456, 664 448, 700 446 C 736 448, 766 456, 794 486"/>
         <!-- Beine -->
-        <path class="dragon-skin" d="M 626 656 C 598 702, 604 742, 628 762 C 637 748, 637 718, 648 694 C 637 680, 630 669, 626 656 Z"/>
-        <path class="dragon-claw" d="M 622 760 l -8 14 M 632 764 l -2 15 M 642 762 l 6 14"/>
-        <path class="dragon-skin" d="M 774 656 C 802 702, 796 742, 772 762 C 763 748, 763 718, 752 694 C 763 680, 770 669, 774 656 Z"/>
-        <path class="dragon-claw" d="M 778 760 l 8 14 M 768 764 l 2 15 M 758 762 l -6 14"/>
+        <path class="dragon-skin leg-shin" d="M 600 690 C 590 716, 594 742, 606 760 L 654 763 C 652 748, 642 736, 638 716 C 634 700, 620 688, 600 690 Z"/>
+        <path class="dragon-skin leg-thigh" d="M 604 596 C 562 612, 552 672, 586 704 C 614 730, 654 718, 662 688 C 670 650, 644 602, 604 596 Z"/>
+        <path class="leg-scales" d="M 604 596 C 562 612, 552 672, 586 704 C 614 730, 654 718, 662 688 C 670 650, 644 602, 604 596 Z"/>
+        <path class="leg-rim" d="M 576 640 C 578 620, 590 606, 606 600"/>
+        <path class="dragon-claw talon" d="M 608 760 l -9 12 M 622 762 l -4 15 M 637 762 l 2 15 M 651 760 l 8 12"/>
+        <path class="dragon-skin leg-shin" d="M 800 690 C 810 716, 806 742, 794 760 L 746 763 C 748 748, 758 736, 762 716 C 766 700, 780 688, 800 690 Z"/>
+        <path class="dragon-skin leg-thigh" d="M 796 596 C 838 612, 848 672, 814 704 C 786 730, 746 718, 738 688 C 730 650, 756 602, 796 596 Z"/>
+        <path class="leg-scales" d="M 796 596 C 838 612, 848 672, 814 704 C 786 730, 746 718, 738 688 C 730 650, 756 602, 796 596 Z"/>
+        <path class="dragon-claw talon" d="M 792 760 l 9 12 M 778 762 l 4 15 M 763 762 l -2 15 M 749 760 l -8 12"/>
         <!-- Energiekern (statisch gestapelt, kein Filter) -->
         <ellipse class="core-outer" cx="700" cy="565" rx="60" ry="80"/>
         <ellipse class="core-inner" cx="700" cy="565" rx="33" ry="46"/>

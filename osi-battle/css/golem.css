@@ -377,3 +377,58 @@ a.diff-back { display: inline-block; text-decoration: none; }
   .golem-move { font-size: 19px; }
   .ctrl-spof { font-size: 14px; }
 }
+
+/* ==========================================================
+   RAID-Golem realistischer: 2D gezeichnet, 3D-Wirkung.
+   Licht von oben links. Stahl als Verlauf mit Bürstung, sichtbare Tiefe
+   (Seiten-/Unterkante), echte Laufwerke, gepanzerter Controller.
+   Die Zustandsregeln oben (disk-lost, disk-parity, Treffer) bleiben gültig:
+   alles hier hat dieselbe oder geringere Spezifität bzw. nimmt sie aus.
+   ========================================================== */
+.group-depth, .yoke-depth, .foot-depth, .host-depth { fill: url(#gSteelSide); }
+.group-panel { fill: url(#gSteel); stroke: #070b15; stroke-width: 2.5; }
+.group-brush { fill: url(#gBrush); pointer-events: none; }
+.group-bevel { fill: none; stroke: #8fa0c8; stroke-width: 1.6; stroke-linecap: round; opacity: 0.55; }
+.group-vents { stroke: #0a0f1c; stroke-width: 3; stroke-linecap: round; opacity: 0.7; }
+.group-rivet { fill: url(#gBolt); }
+.foot { fill: url(#gSteel); stroke: #070b15; stroke-width: 2.5; }
+.host-body { fill: url(#gSteel); stroke: #070b15; stroke-width: 2; }
+.host-led { fill: #6fe08a; opacity: 0.9; }
+.golem-ground { fill: url(#gGround); opacity: 1; }
+
+/* Laufwerke: Alu-Gehäuse im Einschub, Deckelschrauben, spiegelnde Scheibe, Arm, leuchtende LED */
+.disk-slot { fill: #0b1020; }
+.disk-body { fill: url(#gDisk); stroke: #0a0f1c; stroke-width: 1.6; }
+.disk-bevel { fill: none; stroke: #ffffff; stroke-width: 1.4; opacity: 0.55; stroke-linecap: round; }
+.disk-face { fill: url(#gDiskFace); }
+.disk-screw { fill: url(#gBolt); }
+.disk-platter-outer { fill: url(#gPlatter); stroke: #1b2235; stroke-width: 1.2; }
+.disk-sheen { fill: #ffffff; opacity: 0.32; }
+.disk-platter-inner { fill: #d5dded; stroke: #6c7a97; stroke-width: 1; }
+.disk-pivot { fill: url(#gBolt); stroke: #0a0f1c; stroke-width: 0.8; }
+.disk-arm { stroke: #eef2f9; stroke-width: 2.8; }
+.disk-led-glow { fill: var(--hp-safe); opacity: 0.22; }
+.disk-label { fill: #0e1424; font-weight: bold; }
+.golem-disk.disk-parity:not(.disk-lost) .disk-body { fill: url(#gDiskParity); stroke: var(--flow-parity); }
+.golem-disk.disk-parity:not(.disk-lost) .disk-label { fill: #1c1206; }
+/* Kaputte Platte: dunkelrot, ohne Glanz und Licht */
+.golem-disk.disk-lost .disk-sheen,
+.golem-disk.disk-lost .disk-bevel,
+.golem-disk.disk-lost .disk-led-glow { opacity: 0; }
+.golem-disk.disk-lost .disk-label { fill: #ffb3a0; }
+
+/* Streifen-Joch: Metallträger mit Glanz */
+.yoke-body { fill: url(#gYoke); stroke: #06111d; stroke-width: 2; }
+.yoke-shine { fill: #ffffff; opacity: 0.28; pointer-events: none; }
+
+/* Controller: gepanzerter Kopf mit Tiefe, Panzerplatte, Bolzen, glühender Iris */
+.ctrl-depth { fill: #0d070a; }
+.ctrl-shell { fill: url(#gCtrlShell); stroke: var(--spof); stroke-width: 3.5; }
+.ctrl-plate { fill: none; stroke: #8a4a3e; stroke-width: 1.6; opacity: 0.7; }
+.ctrl-shine { fill: none; stroke: #ffd2c2; stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; opacity: 0.45; }
+.ctrl-bolt { fill: url(#gBolt); }
+.ctrl-eye { fill: url(#gCtrlEye); }
+.ctrl-eye-glow { opacity: 0.32; }
+.ctrl-eye-spark { fill: #ffffff; opacity: 0.75; }
+.ctrl-fin { fill: url(#gCtrlShell); }
+.debris-plate { fill: url(#gSteel); }
