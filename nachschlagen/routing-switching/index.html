@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Routing &amp; Switching – AP1 einfach erklärt | Layer 8 Academy</title>
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<meta name="description" content="Switching arbeitet innerhalb eines Netzes auf Schicht 2 (MAC), Routing verbindet Netze auf Schicht 3 (IP).">
+<meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+<meta name="theme-color" content="#0a0e12">
+<link rel="canonical" href="https://layer8academy.boxberger.app/nachschlagen/routing-switching/">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Layer 8 Academy">
+<meta property="og:title" content="Routing &amp; Switching – AP1 einfach erklärt | Layer 8 Academy">
+<meta property="og:description" content="Switching arbeitet innerhalb eines Netzes auf Schicht 2 (MAC), Routing verbindet Netze auf Schicht 3 (IP).">
+<meta property="og:url" content="https://layer8academy.boxberger.app/nachschlagen/routing-switching/">
+<meta property="og:locale" content="de_DE">
+<meta name="twitter:card" content="summary">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+    {
+     "@type": "ListItem",
+     "position": 1,
+     "name": "Start",
+     "item": "https://layer8academy.boxberger.app/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 2,
+     "name": "Nachschlagen",
+     "item": "https://layer8academy.boxberger.app/nachschlagen/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 3,
+     "name": "Netzwerke",
+     "item": "https://layer8academy.boxberger.app/themen/netzwerke/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 4,
+     "name": "Routing/Switching",
+     "item": "https://layer8academy.boxberger.app/nachschlagen/routing-switching/"
+    }
+   ]
+  },
+  {
+   "@type": "LearningResource",
+   "name": "Routing & Switching",
+   "description": "Switching arbeitet innerhalb eines Netzes auf Schicht 2 (MAC), Routing verbindet Netze auf Schicht 3 (IP).",
+   "url": "https://layer8academy.boxberger.app/nachschlagen/routing-switching/",
+   "inLanguage": "de-DE",
+   "isAccessibleForFree": true,
+   "learningResourceType": "Nachschlagewerk",
+   "educationalLevel": "Berufsausbildung",
+   "teaches": "Netzwerke",
+   "isPartOf": {
+    "@id": "https://layer8academy.boxberger.app/#website"
+   },
+   "author": {
+    "@type": "Person",
+    "name": "Alexander Boxberger-Adam",
+    "url": "https://boxberger.app/"
+   }
+  }
+ ]
+}
+</script>
+<script>
+  try {
+    var t = localStorage.getItem('l8a_theme');
+    if (t && t !== 'default') document.documentElement.setAttribute('data-theme', t);
+  } catch (e) {}
+</script>
+<link rel="stylesheet" href="/styles.css?v=20261018a">
+<link rel="stylesheet" href="/seiten.css?v=20261018a">
+</head>
+<body class="seite">
+<header class="seite-kopf">
+  <div class="wrap">
+    <a class="seite-logo" href="/" aria-label="Layer 8 Academy – zur Lernplattform"><span class="t-neint">Layer</span> <svg class="title-8" width="44" height="44" viewBox="0 0 120 120" aria-label="L8A" role="img"><path d="M60,60 C34,60 24,26 60,26 C96,26 86,60 60,60 Z" fill="none" stroke="#3ddc84" stroke-width="7" stroke-linecap="round"/><path d="M60,94 C86,94 96,60 60,60 C24,60 34,94 60,94 Z" fill="none" stroke="#22d3ee" stroke-width="7" stroke-linecap="round"/><line x1="18" y1="26" x2="18" y2="52" stroke="#22d3ee" stroke-width="7" stroke-linecap="round"/><line x1="18" y1="52" x2="30" y2="52" stroke="#22d3ee" stroke-width="7" stroke-linecap="round"/><path d="M102,68 L92,94 M102,68 L112,94 M95,86 L107,86" stroke="#3ddc84" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg> <span class="t-symb">Academy</span></a>
+    <nav class="seite-nav" aria-label="Hauptnavigation">
+      <a href="/nachschlagen/">Nachschlagen</a>
+      <a href="/glossar/">Glossar</a>
+      <a href="/#fragen">Fragen üben</a>
+      <a href="/subnetting-trainer/">Subnetting</a>
+      <a href="/ap1-simulator/">AP1-Simulator</a>
+      <a href="/osi-battle/">Diagnose-Arena</a>
+    </nav>
+  </div>
+</header>
+<main class="wrap seite-inhalt">
+<nav class="brotkrumen" aria-label="Brotkrumenpfad"><a href="/">Start</a><span class="bk-trenner" aria-hidden="true">›</span><a href="/nachschlagen/">Nachschlagen</a><span class="bk-trenner" aria-hidden="true">›</span><a href="/themen/netzwerke/">Netzwerke</a><span class="bk-trenner" aria-hidden="true">›</span><span aria-current="page">Routing/Switching</span></nav>
+<h1 class="seite-h1">Routing &amp; Switching</h1>
+<div class="view active" id="view-lesen">
+<section id="r-routing">
+<p><strong>Switching</strong> arbeitet innerhalb eines Netzes auf Schicht 2 (MAC), <strong>Routing</strong> verbindet Netze auf Schicht 3 (IP).</p>
+<p><span class="term">Switch:</span> lernt aus der Quell-MAC eingehender Frames, welche MAC an welchem Port hängt (MAC-Adresstabelle / CAM-Table, Content Addressable Memory). Unbekannte Ziel-MAC → <strong>Flooding</strong> an alle Ports außer dem Eingangsport. Broadcasts werden innerhalb der Broadcastdomäne geflutet.</p>
+<div class="callout"><span class="tag">Switching-Verfahren</span><strong>Store-and-Forward:</strong> Der Switch empfängt den kompletten Frame, prüft die Prüfsumme und verwirft fehlerhafte Frames, bevor er weiterleitet, sicherer, aber mit etwas höherer Latenz. <strong>Cut-Through:</strong> Der Switch beginnt die Weiterleitung bereits, sobald die Ziel-MAC-Adresse gelesen ist, ohne den ganzen Frame abzuwarten, schneller, leitet aber auch fehlerhafte Frames weiter. Ergänzend hält jedes Gerät einen <strong>ARP-Cache</strong>: eine temporäre Tabelle bereits aufgelöster IP-zu-MAC-Zuordnungen, die wiederholte ARP-Anfragen im selben Netz erspart.</div>
+<p><span class="term">Router:</span> entscheidet anhand der Ziel-IP und seiner <strong>Routingtabelle</strong> über den nächsten Hop. Ziele außerhalb des eigenen Netzes gehen ans <strong>Default Gateway</strong>. Router begrenzen die Broadcastdomäne.</p>
+<table>
+<tr><th></th><th>Statisches Routing</th><th>Dynamisches Routing</th></tr>
+<tr><td>Pflege</td><td>manuell eingetragen</td><td>automatisch über Protokolle wie OSPF (Open Shortest Path First) oder RIP (Routing Information Protocol)</td></tr>
+<tr><td>Vorteil</td><td>einfach, vorhersehbar</td><td>passt sich Ausfällen/Änderungen an</td></tr>
+<tr><td>Einsatz</td><td>kleine Netze</td><td>große, dynamische Netze</td></tr>
+</table>
+<div class="callout"><span class="tag">Zustellung</span>Ziel im selben Subnetz → direkt per MAC über den Switch (kein Router). Ziel in fremdem Netz → ans Default Gateway zum Weiterrouten. Hat die Routingtabelle mehrere passende Einträge, gewinnt der spezifischste (<strong>Longest Prefix Match</strong>), ein /28-Eintrag schlägt einen /24-Eintrag.</div>
+<p><span class="term">VLAN</span> (Virtual Local Area Network): trennt einen physischen Switch logisch in mehrere Broadcastdomänen, z. B. Gäste-WLAN vom Firmennetz, ohne separate Hardware. Zwei VLANs kommunizieren nur über einen Router oder L3-Switch (Inter-VLAN-Routing). Ein <strong>Trunk-Port</strong> transportiert Frames mehrerer VLANs gleichzeitig, markiert nach <strong>IEEE 802.1Q</strong> mit einem 4-Byte-VLAN-Tag (12 Bit VLAN-ID, theoretisch 4096 Werte). Nutzbar sind davon 4094, da die IDs <code>0</code> und <code>4095</code> reserviert sind. Ein normaler (Access-)Port trägt dagegen nur ein VLAN, untagged.</p>
+<p><span class="term">STP</span> (Spanning Tree Protocol): verhindert Switching-Loops in redundant verkabelten Netzen, indem es überzählige Verbindungen blockiert und erst bei Ausfall der aktiven Strecke aktiviert.</p>
+
+<h3>NAT, PAT & Portweiterleitung sauber getrennt</h3>
+<p><strong>NAT</strong> übersetzt Netzwerkadressen (privat &harr; öffentlich). <strong>PAT</strong> (Port Address Translation, auch NAT-Overload) unterscheidet viele interne Verbindungen zusätzlich über Portnummern, so teilen sich hunderte Geräte eine öffentliche IP; das ist der Normalfall im Heimrouter. <strong>Portweiterleitung</strong> arbeitet umgekehrt: Eingehender Verkehr auf einem bestimmten Port wird gezielt an ein internes Ziel geleitet. Kurz einzuordnen: <strong>Source NAT</strong> ändert die Absenderadresse (ausgehend), <strong>Destination NAT</strong> die Zieladresse (eingehend), <strong>Carrier-Grade NAT</strong> ist NAT beim Provider für viele Kunden gleichzeitig. NAT bleibt dabei kein Sicherheitsmechanismus, es ersetzt keine Firewall.</p>
+<h3>Routen-Auswahl & Routingprotokolle im Vergleich</h3>
+<p>Die <strong>Default Route</strong> (0.0.0.0/0) greift, wenn kein spezifischerer Eintrag passt. Konkurrieren mehrere Routen zum selben Ziel, entscheidet innerhalb eines Protokolls die <strong>Metrik</strong> (Wegkosten), zwischen verschiedenen Protokollen die <strong>Administrative Distance</strong> (Vertrauenswürdigkeit der Quelle). <strong>RIP</strong> zählt schlicht Hops (max. 15), konvergiert langsam und eignet sich nur für kleine Netze. <strong>OSPF</strong> ist ein Link-State-Protokoll: Metrik nach Leitungskosten/Bandbreite, schnelle Reaktion auf Änderungen, Standard in größeren Firmennetzen. <strong>BGP</strong> verbindet als Pfadvektor-Protokoll autonome Systeme im Internet, für die AP1 reicht die Einordnung als Zusatzwissen.</p>
+
+<h3>Spanning Tree Protocol (STP)</h3>
+<p>Redundante Verbindungen zwischen Switches erhöhen die Ausfallsicherheit, erzeugen aber Schleifen, in denen Broadcasts endlos kreisen und das Netz lahmlegen. Das <strong>Spanning Tree Protocol</strong> verhindert das, indem es überzählige Wege gezielt in den Standby versetzt und so einen schleifenfreien Baum aufspannt.</p>
+<p>Zunächst wählen die Switches eine <strong>Root Bridge</strong>, den Wurzelpunkt des Baums. Entscheidend ist die <strong>Bridge-ID</strong> aus Priorität und MAC-Adresse: Die niedrigste Bridge-ID gewinnt. Ihre Zustandsinformationen tauschen die Switches über <strong>BPDUs</strong> (Bridge Protocol Data Units) aus. Anschließend erhält jeder Port eine Rolle. Der <strong>Root-Port</strong> zeigt auf dem kürzesten Weg zur Root Bridge, je Switch genau einer. Der <strong>Designated-Port</strong> ist der zuständige, weiterleitende Port je Segment. Der <strong>Alternate-Port</strong> ist ein blockierter Ersatzweg, der bei Ausfall des Root-Ports einspringt.</p>
+<p>Das klassische STP braucht nach einer Topologieänderung relativ lange, bis wieder alles weiterleitet. Sein Nachfolger <strong>RSTP</strong> (Rapid Spanning Tree Protocol) reagiert deutlich schneller und ist heute Standard, bleibt aber zum klassischen STP abwärtskompatibel.</p>
+
+<div class="callout"><span class="tag">Prüfungsfalle</span>Ein <strong>Switch</strong> arbeitet auf Schicht 2 und entscheidet anhand der <strong>MAC-Adresse</strong>, ein <strong>Router</strong> auf Schicht 3 anhand der <strong>IP-Adresse</strong>. Daraus folgt die zweite wichtige Aussage: Ein Switch trennt <em>Kollisionsdomänen</em>, aber keine Broadcastdomänen. Erst ein Router oder ein VLAN trennt Broadcastdomänen. Diese Kombination wird sehr häufig geprüft.</div>
+
+<h3>Switch oder Router? Die Entscheidung am Beispiel</h3>
+<p>Dass ein Switch mit MAC-Adressen und ein Router mit IP-Adressen arbeitet, lässt sich leicht auswendig lernen. Entscheidend ist aber, woran ein Rechner selbst erkennt, welchen Weg seine Daten nehmen. Diese Entscheidung trifft er vor jeder Übertragung anhand der <strong>Subnetzmaske</strong>.</p>
+<p><strong>Fall 1, gleiches Netz:</strong> Ein Rechner mit 192.168.1.10/24 will 192.168.1.20 erreichen. Er verknüpft beide Adressen mit seiner Maske und stellt fest, dass die Netzanteile übereinstimmen. Das Ziel liegt also im selben Netz. Er ermittelt per <strong>ARP</strong> dessen MAC-Adresse und schickt den Frame direkt los; der Switch leitet ihn anhand seiner MAC-Tabelle an den richtigen Port weiter. Ein Router ist an diesem Vorgang überhaupt nicht beteiligt.</p>
+<p><strong>Fall 2, anderes Netz:</strong> Derselbe Rechner will 10.0.0.5 erreichen. Der Vergleich ergibt diesmal einen abweichenden Netzanteil, das Ziel liegt außerhalb. Jetzt schickt er den Frame an sein <strong>Standardgateway</strong>, also den Router. Bemerkenswert dabei: Als Ziel-MAC trägt er die des Routers ein, während die Ziel-IP unverändert 10.0.0.5 bleibt. Der Router packt den Frame aus, prüft seine Routingtabelle und schickt das Paket mit einer neuen Ziel-MAC weiter.</p>
+<div class="callout"><span class="tag">Merksatz</span><strong>Gleiches Netz bedeutet Switch, anderes Netz bedeutet Router.</strong> Daraus folgt eine typische Prüfungsaussage: Die <em>IP-Adresse</em> des Ziels bleibt auf dem ganzen Weg gleich, die <em>MAC-Adresse</em> wird bei jedem Router neu gesetzt. Fehlt einem Rechner das Standardgateway, erreicht er ausschließlich Ziele im eigenen Netz; genau das steckt hinter dem Befund, dass der Nachbarrechner erreichbar ist, das Internet aber nicht.</div>
+
+<h3>Wozu ARP gebraucht wird</h3>
+<p>ARP wird oft nur als Ablauf auswendig gelernt. Der Grund dahinter ist einfach: Im lokalen Netz wird nicht anhand der IP-Adresse zugestellt, sondern anhand der MAC-Adresse. Der Rechner kennt zwar das Ziel als IP, weiß aber nicht, welches Gerät im Segment dazugehört.</p>
+<p>Also fragt er alle gleichzeitig: Ein Broadcast geht an das gesamte Segment mit der sinngemäßen Frage, wer diese IP-Adresse besitze. Alle hören mit, aber nur das gesuchte Gerät antwortet, und zwar direkt an den Fragesteller mit seiner MAC-Adresse. Das Ergebnis landet im <strong>ARP-Cache</strong>, damit die Frage nicht bei jedem Paket erneut gestellt werden muss.</p>
+<div class="callout"><span class="tag">Merksatz</span><strong>ARP übersetzt eine bekannte IP-Adresse in die zugehörige MAC-Adresse.</strong> Die Anfrage geht als Broadcast an alle, die Antwort kommt als Unicast von einem. Der Vorgang endet immer am Router, weil Broadcasts Netzgrenzen nicht überschreiten; für ein Ziel außerhalb fragt der Rechner deshalb nach der MAC des Gateways, nicht nach der des eigentlichen Ziels.</div>
+
+<h3>ARP und DHCP im Vergleich</h3>
+<p>Beide Protokolle beschaffen einem Rechner eine Information, die ihm fehlt, und beide starten mit einem Broadcast. Verwechselt werden sie trotzdem regelmäßig, weil der Zweck ein völlig anderer ist.</p>
+<table>
+<tr><th></th><th>ARP</th><th>DHCP</th></tr>
+<tr><td>Zweck</td><td>Zu einer bekannten IP-Adresse die MAC-Adresse finden</td><td>Überhaupt erst eine IP-Adresse und die Netzparameter erhalten</td></tr>
+<tr><td>Wann</td><td>Vor jeder Übertragung im lokalen Segment, sofern nicht im Cache</td><td>Einmal beim Start des Geräts und zur Verlängerung der Leihfrist</td></tr>
+<tr><td>Richtung</td><td>Von Schicht 3 zu Schicht 2</td><td>Liefert Adressdaten für Schicht 3</td></tr>
+<tr><td>Ablauf</td><td>Request als Broadcast, Reply als Unicast</td><td>Discover, Offer, Request, Acknowledge (DORA)</td></tr>
+<tr><td>Antwort von</td><td>Dem Gerät, dem die gesuchte IP gehört</td><td>Dem DHCP-Server, notfalls über einen Relay-Agent</td></tr>
+<tr><td>Ergebnis</td><td>Eintrag im ARP-Cache, zeitlich begrenzt</td><td>Lease mit IP, Maske, Gateway und DNS-Server</td></tr>
+<tr><td>Über Netzgrenzen</td><td>Nein, endet am Router</td><td>Ja, wenn ein Relay-Agent eingerichtet ist</td></tr>
+</table>
+<div class="callout"><span class="tag">Merkhilfe</span><strong>DHCP verschafft die Adresse, ARP findet den Weg zum Nachbarn.</strong> Ein Gerät braucht zuerst DHCP, um überhaupt eine IP-Adresse zu haben; erst danach nutzt es ARP, um im eigenen Segment die passende MAC-Adresse zu ermitteln. Beide arbeiten nur innerhalb der Broadcastdomäne, wobei DHCP diese Grenze über den Relay-Agent überwinden kann und ARP nicht.</div>
+
+<div class="callout xref"><span class="tag">Verwandte Themen</span><a href="/nachschlagen/ipv4-ipv6/">IPv4 & IPv6</a> · <a href="/nachschlagen/vlan/">VLAN-Segmentierung</a> · <a href="/nachschlagen/osi-modell/">OSI-Modell (7 Schichten)</a></div>
+</section>
+</div>
+<div class="seite-cta">
+  <p>Interaktiv mit Volltextsuche, Glossar-Bubbles und Übungsfragen lernen:</p>
+  <div class="seite-cta-knoepfe">
+    <a class="seite-knopf seite-knopf-haupt" href="/#r-routing">In der Lernplattform öffnen</a>
+    <a class="seite-knopf" href="/#fragen">Fragen üben</a>
+    <a class="seite-knopf" href="/glossar/">Glossar</a>
+  </div>
+</div>
+<nav class="seite-blaettern" aria-label="Weitere Kapitel">
+  <a class="sb-vor" href="/nachschlagen/subnetting/"><span>Vorheriges Kapitel</span>Subnetting</a>
+  <a class="sb-nach" href="/nachschlagen/vlan/"><span>Nächstes Kapitel</span>VLAN</a>
+</nav>
+<section class="seite-feld" aria-labelledby="feld-titel">
+<h2 id="feld-titel">Mehr aus Netzwerke</h2>
+<div class="seite-pillen"><a class="topic-sub" href="/nachschlagen/osi-modell/">OSI-Modell</a><a class="topic-sub" href="/nachschlagen/tcp-ip-udp/">TCP/IP &amp; UDP</a><a class="topic-sub" href="/nachschlagen/ipv4-ipv6/">IPv4/IPv6</a><a class="topic-sub" href="/nachschlagen/subnetting/">Subnetting</a><span class="topic-sub aktuell" aria-current="page">Routing/Switching</span><a class="topic-sub" href="/nachschlagen/vlan/">VLAN</a><a class="topic-sub" href="/nachschlagen/wlan/">WLAN</a><a class="topic-sub" href="/nachschlagen/vpn-ipsec/">VPN/IPsec</a><a class="topic-sub" href="/nachschlagen/dns-dhcp/">DNS/DHCP</a><a class="topic-sub" href="/nachschlagen/ethernet/">Ethernet</a><a class="topic-sub" href="/nachschlagen/ports-sockets/">Ports</a><a class="topic-sub" href="/nachschlagen/header-ttl-traceroute/">Header/TTL</a><a class="topic-sub" href="/nachschlagen/multiplexing/">Multiplexing</a><a class="topic-sub" href="/nachschlagen/netzwerkausdehnung/">Netzausdehnung</a><a class="topic-sub" href="/nachschlagen/netzwerktopologien/">Topologien</a><a class="topic-sub" href="/nachschlagen/fddi/">FDDI</a><a class="topic-sub" href="/nachschlagen/voip/">VoIP</a><a class="topic-sub" href="/nachschlagen/api-rest-soap/">API/REST</a><a class="topic-sub" href="/nachschlagen/strukturierte-verkabelung/">Strukturierte Verkabelung</a><a class="topic-sub" href="/nachschlagen/kabel-medien-hardware/">Kabel/Hardware</a></div>
+</section>
+</main>
+<footer><div class="wrap">
+<p class="footer-lead">Layer 8 Academy ist eine kostenlose Lernplattform zur Vorbereitung auf die IHK-Abschlussprüfung Teil 1 der IT-Berufe. Sie umfasst ein Nachschlagewerk, ein Glossar, Übungsfragen im Multiple-Choice- und Karteikartenmodus, einen Subnetting-Trainer und Prüfungssimulationen.</p>
+<nav class="footer-nav" aria-label="Themenfelder">
+  <a href="/themen/netzwerke/">Netzwerke</a> · <a href="/themen/it-sicherheit/">IT-Sicherheit</a> · <a href="/themen/systeme-storage/">Systeme &amp; Storage</a> · <a href="/themen/software-grundlagen/">Software &amp; Grundlagen</a> · <a href="/themen/bwl-prozesse/">BWL &amp; Prozesse</a> · <a href="/nachschlagen/">Alle Kapitel</a> · <a href="/glossar/">Glossar</a>
+</nav>
+<div class="footer-copy">© 2026 boxberger.app · <a href="/impressum/" class="imprint-link">Impressum &amp; Datenschutz</a></div>
+</div></footer>
+</body>
+</html>

@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VoIP – AP1 einfach erklärt | Layer 8 Academy</title>
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<meta name="description" content="VoIP (Voice over IP) überträgt Telefonie als Datenpakete über das IP-Netz. Zwei Protokolle wirken zusammen: SIP (Session Initiation Protocol) für die …">
+<meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+<meta name="theme-color" content="#0a0e12">
+<link rel="canonical" href="https://layer8academy.boxberger.app/nachschlagen/voip/">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Layer 8 Academy">
+<meta property="og:title" content="VoIP – AP1 einfach erklärt | Layer 8 Academy">
+<meta property="og:description" content="VoIP (Voice over IP) überträgt Telefonie als Datenpakete über das IP-Netz. Zwei Protokolle wirken zusammen: SIP (Session Initiation Protocol) für die …">
+<meta property="og:url" content="https://layer8academy.boxberger.app/nachschlagen/voip/">
+<meta property="og:locale" content="de_DE">
+<meta name="twitter:card" content="summary">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+    {
+     "@type": "ListItem",
+     "position": 1,
+     "name": "Start",
+     "item": "https://layer8academy.boxberger.app/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 2,
+     "name": "Nachschlagen",
+     "item": "https://layer8academy.boxberger.app/nachschlagen/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 3,
+     "name": "Netzwerke",
+     "item": "https://layer8academy.boxberger.app/themen/netzwerke/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 4,
+     "name": "VoIP",
+     "item": "https://layer8academy.boxberger.app/nachschlagen/voip/"
+    }
+   ]
+  },
+  {
+   "@type": "LearningResource",
+   "name": "VoIP",
+   "description": "VoIP (Voice over IP) überträgt Telefonie als Datenpakete über das IP-Netz. Zwei Protokolle wirken zusammen: SIP (Session Initiation Protocol) für die …",
+   "url": "https://layer8academy.boxberger.app/nachschlagen/voip/",
+   "inLanguage": "de-DE",
+   "isAccessibleForFree": true,
+   "learningResourceType": "Nachschlagewerk",
+   "educationalLevel": "Berufsausbildung",
+   "teaches": "Netzwerke",
+   "isPartOf": {
+    "@id": "https://layer8academy.boxberger.app/#website"
+   },
+   "author": {
+    "@type": "Person",
+    "name": "Alexander Boxberger-Adam",
+    "url": "https://boxberger.app/"
+   }
+  }
+ ]
+}
+</script>
+<script>
+  try {
+    var t = localStorage.getItem('l8a_theme');
+    if (t && t !== 'default') document.documentElement.setAttribute('data-theme', t);
+  } catch (e) {}
+</script>
+<link rel="stylesheet" href="/styles.css?v=20261018a">
+<link rel="stylesheet" href="/seiten.css?v=20261018a">
+</head>
+<body class="seite">
+<header class="seite-kopf">
+  <div class="wrap">
+    <a class="seite-logo" href="/" aria-label="Layer 8 Academy – zur Lernplattform"><span class="t-neint">Layer</span> <svg class="title-8" width="44" height="44" viewBox="0 0 120 120" aria-label="L8A" role="img"><path d="M60,60 C34,60 24,26 60,26 C96,26 86,60 60,60 Z" fill="none" stroke="#3ddc84" stroke-width="7" stroke-linecap="round"/><path d="M60,94 C86,94 96,60 60,60 C24,60 34,94 60,94 Z" fill="none" stroke="#22d3ee" stroke-width="7" stroke-linecap="round"/><line x1="18" y1="26" x2="18" y2="52" stroke="#22d3ee" stroke-width="7" stroke-linecap="round"/><line x1="18" y1="52" x2="30" y2="52" stroke="#22d3ee" stroke-width="7" stroke-linecap="round"/><path d="M102,68 L92,94 M102,68 L112,94 M95,86 L107,86" stroke="#3ddc84" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg> <span class="t-symb">Academy</span></a>
+    <nav class="seite-nav" aria-label="Hauptnavigation">
+      <a href="/nachschlagen/">Nachschlagen</a>
+      <a href="/glossar/">Glossar</a>
+      <a href="/#fragen">Fragen üben</a>
+      <a href="/subnetting-trainer/">Subnetting</a>
+      <a href="/ap1-simulator/">AP1-Simulator</a>
+      <a href="/osi-battle/">Diagnose-Arena</a>
+    </nav>
+  </div>
+</header>
+<main class="wrap seite-inhalt">
+<nav class="brotkrumen" aria-label="Brotkrumenpfad"><a href="/">Start</a><span class="bk-trenner" aria-hidden="true">›</span><a href="/nachschlagen/">Nachschlagen</a><span class="bk-trenner" aria-hidden="true">›</span><a href="/themen/netzwerke/">Netzwerke</a><span class="bk-trenner" aria-hidden="true">›</span><span aria-current="page">VoIP</span></nav>
+<h1 class="seite-h1">VoIP</h1>
+<div class="view active" id="view-lesen">
+<section id="r-voip">
+<p><span class="term">VoIP</span> (Voice over IP) überträgt Telefonie als Datenpakete über das IP-Netz. Zwei Protokolle wirken zusammen: <strong>SIP</strong> (Session Initiation Protocol) für die <strong>Signalisierung</strong> (Rufauf-/abbau) und <strong>RTP</strong> (Real-Time Transport Protocol) für den <strong>Transport der Sprachdaten</strong>, über <strong>UDP</strong>, weil geringe Verzögerung wichtiger ist als das Nachliefern verlorener Pakete.</p>
+<ul>
+<li><strong>Latenz:</strong> Verzögerung zwischen Sprechen und Hören.</li>
+<li><strong>Jitter:</strong> Schwankung der Paketlaufzeit, ein Jitter-Buffer gleicht sie aus.</li>
+<li><strong>Paketverlust:</strong> führt zu Aussetzern (bei UDP kein Resend).</li>
+<li><strong>QoS</strong> (Quality of Service): priorisiert Sprachpakete; oft eigenes <strong>Voice-VLAN</strong>.</li>
+<li><strong>Codec:</strong> kodiert/komprimiert Sprache (z. B. G.711). Qualität vs. Bandbreite.</li>
+</ul>
+
+<h3>Warum VoIP, und wo es eingesetzt wird</h3>
+<p><strong>Warum:</strong> Sprache läuft über die ohnehin vorhandene Dateninfrastruktur, separate Telefonleitungen und -anlagen entfallen. Das senkt Kosten, vereinfacht die Verwaltung (ein Netz statt zwei) und macht Rufnummern standortunabhängig: Ein Mitarbeiter nimmt seine Nummer einfach mit ins Homeoffice.</p>
+<p><strong>Wie es grundsätzlich funktioniert:</strong> Die Sprache wird digitalisiert und von einem Codec komprimiert, SIP baut die Verbindung auf, RTP transportiert die Sprachpakete über UDP, beim Empfänger setzt der Jitter-Buffer sie wieder zu flüssiger Sprache zusammen.</p>
+<p><strong>Vorteile:</strong> geringere Kosten, vorhandene Infrastruktur, flexibel und skalierbar (neue Nebenstelle = Software statt Kabel), Integration mit Software wie CRM oder Kalender. <strong>Nachteile:</strong> abhängig von Netzqualität und Stromversorgung, fällt das Netz aus, steht auch die Telefonie; Latenz, Jitter und Paketverlust wirken sich direkt hörbar aus, QoS-Konfiguration ist praktisch Pflicht.</p>
+<p><strong>Typische Einsatzbereiche:</strong> Internettelefonie für Privatkunden (der Anschluss beim Provider ist heute standardmäßig VoIP), IP-Telefonanlagen in Unternehmen statt klassischer TK-Anlagen, <strong>Softphones</strong>. Telefonie als Software am PC oder Smartphone ohne Tischtelefon, und Videokonferenzsysteme, die Sprache und Bild über dieselben Echtzeitprotokolle übertragen.</p>
+
+<div class="callout"><span class="tag">Prüfungsfalle</span>Bei VoIP zählt nicht die Bandbreite allein, sondern <strong>Laufzeit, Schwankung und Verlust</strong>. Als Richtwerte gelten unter 150 ms Verzögerung in eine Richtung, möglichst geringer Jitter und unter 1 Prozent Paketverlust. Deshalb wird Sprache über <strong>UDP</strong> übertragen und im Netz per <strong>QoS</strong> bevorzugt behandelt. Eine Wiederholung verlorener Sprachpakete wäre sinnlos, weil sie zu spät ankäme.</div>
+
+<div class="callout xref"><span class="tag">Verwandte Themen</span><a href="/nachschlagen/tcp-ip-udp/">TCP/IP & UDP</a> · <a href="/nachschlagen/wlan/">WLAN</a> · <a href="/nachschlagen/ports-sockets/">Ports & Sockets</a></div>
+</section>
+</div>
+<div class="seite-cta">
+  <p>Interaktiv mit Volltextsuche, Glossar-Bubbles und Übungsfragen lernen:</p>
+  <div class="seite-cta-knoepfe">
+    <a class="seite-knopf seite-knopf-haupt" href="/#r-voip">In der Lernplattform öffnen</a>
+    <a class="seite-knopf" href="/#fragen">Fragen üben</a>
+    <a class="seite-knopf" href="/glossar/">Glossar</a>
+  </div>
+</div>
+<nav class="seite-blaettern" aria-label="Weitere Kapitel">
+  <a class="sb-vor" href="/nachschlagen/fddi/"><span>Vorheriges Kapitel</span>FDDI</a>
+  <a class="sb-nach" href="/nachschlagen/api-rest-soap/"><span>Nächstes Kapitel</span>API/REST</a>
+</nav>
+<section class="seite-feld" aria-labelledby="feld-titel">
+<h2 id="feld-titel">Mehr aus Netzwerke</h2>
+<div class="seite-pillen"><a class="topic-sub" href="/nachschlagen/osi-modell/">OSI-Modell</a><a class="topic-sub" href="/nachschlagen/tcp-ip-udp/">TCP/IP &amp; UDP</a><a class="topic-sub" href="/nachschlagen/ipv4-ipv6/">IPv4/IPv6</a><a class="topic-sub" href="/nachschlagen/subnetting/">Subnetting</a><a class="topic-sub" href="/nachschlagen/routing-switching/">Routing/Switching</a><a class="topic-sub" href="/nachschlagen/vlan/">VLAN</a><a class="topic-sub" href="/nachschlagen/wlan/">WLAN</a><a class="topic-sub" href="/nachschlagen/vpn-ipsec/">VPN/IPsec</a><a class="topic-sub" href="/nachschlagen/dns-dhcp/">DNS/DHCP</a><a class="topic-sub" href="/nachschlagen/ethernet/">Ethernet</a><a class="topic-sub" href="/nachschlagen/ports-sockets/">Ports</a><a class="topic-sub" href="/nachschlagen/header-ttl-traceroute/">Header/TTL</a><a class="topic-sub" href="/nachschlagen/multiplexing/">Multiplexing</a><a class="topic-sub" href="/nachschlagen/netzwerkausdehnung/">Netzausdehnung</a><a class="topic-sub" href="/nachschlagen/netzwerktopologien/">Topologien</a><a class="topic-sub" href="/nachschlagen/fddi/">FDDI</a><span class="topic-sub aktuell" aria-current="page">VoIP</span><a class="topic-sub" href="/nachschlagen/api-rest-soap/">API/REST</a><a class="topic-sub" href="/nachschlagen/strukturierte-verkabelung/">Strukturierte Verkabelung</a><a class="topic-sub" href="/nachschlagen/kabel-medien-hardware/">Kabel/Hardware</a></div>
+</section>
+</main>
+<footer><div class="wrap">
+<p class="footer-lead">Layer 8 Academy ist eine kostenlose Lernplattform zur Vorbereitung auf die IHK-Abschlussprüfung Teil 1 der IT-Berufe. Sie umfasst ein Nachschlagewerk, ein Glossar, Übungsfragen im Multiple-Choice- und Karteikartenmodus, einen Subnetting-Trainer und Prüfungssimulationen.</p>
+<nav class="footer-nav" aria-label="Themenfelder">
+  <a href="/themen/netzwerke/">Netzwerke</a> · <a href="/themen/it-sicherheit/">IT-Sicherheit</a> · <a href="/themen/systeme-storage/">Systeme &amp; Storage</a> · <a href="/themen/software-grundlagen/">Software &amp; Grundlagen</a> · <a href="/themen/bwl-prozesse/">BWL &amp; Prozesse</a> · <a href="/nachschlagen/">Alle Kapitel</a> · <a href="/glossar/">Glossar</a>
+</nav>
+<div class="footer-copy">© 2026 boxberger.app · <a href="/impressum/" class="imprint-link">Impressum &amp; Datenschutz</a></div>
+</div></footer>
+</body>
+</html>

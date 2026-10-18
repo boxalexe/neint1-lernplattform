@@ -1,0 +1,788 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IT-Glossar für die AP1: 563 Abkürzungen und Begriffe | Layer 8 Academy</title>
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<meta name="description" content="563 IT-Abkürzungen und Fachbegriffe für die IHK-Abschlussprüfung Teil 1 (AP1), kurz erklärt: von 2FA über DHCP und RAID bis VLAN und WPA3.">
+<meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+<meta name="theme-color" content="#0a0e12">
+<link rel="canonical" href="https://layer8academy.boxberger.app/glossar/">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Layer 8 Academy">
+<meta property="og:title" content="IT-Glossar für die AP1: 563 Abkürzungen und Begriffe | Layer 8 Academy">
+<meta property="og:description" content="563 IT-Abkürzungen und Fachbegriffe für die IHK-Abschlussprüfung Teil 1 (AP1), kurz erklärt: von 2FA über DHCP und RAID bis VLAN und WPA3.">
+<meta property="og:url" content="https://layer8academy.boxberger.app/glossar/">
+<meta property="og:locale" content="de_DE">
+<meta name="twitter:card" content="summary">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+    {
+     "@type": "ListItem",
+     "position": 1,
+     "name": "Start",
+     "item": "https://layer8academy.boxberger.app/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 2,
+     "name": "Glossar",
+     "item": "https://layer8academy.boxberger.app/glossar/"
+    }
+   ]
+  },
+  {
+   "@type": "DefinedTermSet",
+   "name": "IT-Glossar für die AP1",
+   "url": "https://layer8academy.boxberger.app/glossar/",
+   "inLanguage": "de-DE"
+  }
+ ]
+}
+</script>
+<script>
+  try {
+    var t = localStorage.getItem('l8a_theme');
+    if (t && t !== 'default') document.documentElement.setAttribute('data-theme', t);
+  } catch (e) {}
+</script>
+<link rel="stylesheet" href="/styles.css?v=20261018a">
+<link rel="stylesheet" href="/seiten.css?v=20261018a">
+</head>
+<body class="seite">
+<header class="seite-kopf">
+  <div class="wrap">
+    <a class="seite-logo" href="/" aria-label="Layer 8 Academy – zur Lernplattform"><span class="t-neint">Layer</span> <svg class="title-8" width="44" height="44" viewBox="0 0 120 120" aria-label="L8A" role="img"><path d="M60,60 C34,60 24,26 60,26 C96,26 86,60 60,60 Z" fill="none" stroke="#3ddc84" stroke-width="7" stroke-linecap="round"/><path d="M60,94 C86,94 96,60 60,60 C24,60 34,94 60,94 Z" fill="none" stroke="#22d3ee" stroke-width="7" stroke-linecap="round"/><line x1="18" y1="26" x2="18" y2="52" stroke="#22d3ee" stroke-width="7" stroke-linecap="round"/><line x1="18" y1="52" x2="30" y2="52" stroke="#22d3ee" stroke-width="7" stroke-linecap="round"/><path d="M102,68 L92,94 M102,68 L112,94 M95,86 L107,86" stroke="#3ddc84" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg> <span class="t-symb">Academy</span></a>
+    <nav class="seite-nav" aria-label="Hauptnavigation">
+      <a href="/nachschlagen/">Nachschlagen</a>
+      <a href="/glossar/">Glossar</a>
+      <a href="/#fragen">Fragen üben</a>
+      <a href="/subnetting-trainer/">Subnetting</a>
+      <a href="/ap1-simulator/">AP1-Simulator</a>
+      <a href="/osi-battle/">Diagnose-Arena</a>
+    </nav>
+  </div>
+</header>
+<main class="wrap seite-inhalt">
+<nav class="brotkrumen" aria-label="Brotkrumenpfad"><a href="/">Start</a><span class="bk-trenner" aria-hidden="true">›</span><span aria-current="page">Glossar</span></nav>
+<h1 class="seite-h1">IT-Glossar für die AP1</h1>
+<p class="seite-lead">563 Abkürzungen und Begriffe aus der IT, alphabetisch. In der Lernplattform erscheinen sie beim Lesen als Infoblase, und das Glossar lässt sich dort durchsuchen.</p>
+<nav class="glossar-abc" aria-label="Buchstaben"><a href="#g-zahlen">#</a><a href="#g-a">A</a><a href="#g-b">B</a><a href="#g-c">C</a><a href="#g-d">D</a><a href="#g-e">E</a><a href="#g-f">F</a><a href="#g-g">G</a><a href="#g-h">H</a><a href="#g-i">I</a><a href="#g-j">J</a><a href="#g-k">K</a><a href="#g-l">L</a><a href="#g-m">M</a><a href="#g-n">N</a><a href="#g-o">O</a><a href="#g-p">P</a><a href="#g-q">Q</a><a href="#g-r">R</a><a href="#g-s">S</a><a href="#g-t">T</a><a href="#g-u">U</a><a href="#g-v">V</a><a href="#g-w">W</a><a href="#g-x">X</a><a href="#g-z">Z</a></nav>
+<section class="glossar-gruppe" id="g-zahlen">
+<h2>#</h2>
+<dl>
+<div class="glossar-eintrag"><dt><strong>2FA</strong> <span class="glossar-voll">Zwei-Faktor-Authentifizierung</span></dt><dd>Anmeldung mit zwei unabhängigen Nachweisen, z. B. Passwort plus Einmalcode. Erhöht die Sicherheit deutlich.</dd></div>
+<div class="glossar-eintrag"><dt><strong>4-Way-Handshake</strong> <span class="glossar-voll">Vier-Wege-Handschlag</span></dt><dd>Anmeldeverfahren bei WPA2: Client und Access Point tauschen vier Nachrichten aus, leiten daraus die Sitzungsschlüssel ab und belegen, dass beide denselben Schlüssel kennen. Das Passwort wird nicht übertragen.</dd></div>
+<div class="glossar-eintrag"><dt><strong>802.11ax</strong> <span class="glossar-voll">Wi-Fi 6</span></dt><dd>WLAN-Standard nach 802.11ac. Höhere Effizienz und Durchsatz, besonders in dichten Umgebungen mit vielen Geräten.</dd></div>
+<div class="glossar-eintrag"><dt><strong>802.11r</strong> <span class="glossar-voll">Fast BSS Transition (Fast Roaming)</span></dt><dd>WLAN-Erweiterung für nahtlosen Wechsel zwischen Access Points ohne erneute vollständige Anmeldung.</dd></div>
+<div class="glossar-eintrag"><dt><strong>802.1Q</strong> <span class="glossar-voll">VLAN-Tagging-Standard</span></dt><dd>IEEE-Norm, die einen 4-Byte-Tag mit VLAN-ID in den Ethernet-Frame einfügt. Grundlage für VLANs über Trunk-Ports.</dd></div>
+<div class="glossar-eintrag"><dt><strong>802.1X</strong> <span class="glossar-voll">Portbasierte Netzwerk-Zugangskontrolle</span></dt><dd>IEEE-Standard: Ein Gerät muss sich erst authentifizieren (via EAP gegen z. B. RADIUS), bevor der Switch-/WLAN-Port Verkehr durchlässt. Basis von WPA-Enterprise.</dd></div>
+</dl>
+</section>
+<section class="glossar-gruppe" id="g-a">
+<h2>A</h2>
+<dl>
+<div class="glossar-eintrag"><dt><strong>A-Record</strong> <span class="glossar-voll">Address Record</span></dt><dd>DNS-Eintrag, der einem Namen eine IPv4-Adresse zuordnet.</dd></div>
+<div class="glossar-eintrag"><dt><strong>AAAA-Record</strong> <span class="glossar-voll">Quad-A Record</span></dt><dd>DNS-Eintrag, der einem Namen eine IPv6-Adresse zuordnet.</dd></div>
+<div class="glossar-eintrag"><dt><strong>Abliteration</strong> <span class="glossar-voll">Abliteration, Refusal-Entfernung</span></dt><dd>Nachträglicher Eingriff in die Gewichte eines Sprachmodells, bei dem die interne Richtung für Ablehnungen herausgerechnet wird. Das Modell verweigert danach kaum noch Antworten, ohne dass neu trainiert wurde.</dd></div>
+<div class="glossar-eintrag"><dt><strong>Abnahmetest</strong></dt><dd>Teststufe, die aus Sicht des Auftraggebers prüft, ob die Anforderungen erfüllt sind. Grundlage der Abnahme.</dd></div>
+<div class="glossar-eintrag"><dt><strong>Access-Port</strong></dt><dd>Switch-Port, der genau einem VLAN zugeordnet ist und ungetaggt zum Endgerät überträgt.</dd></div>
+<div class="glossar-eintrag"><dt><strong>ACK</strong> <span class="glossar-voll">Acknowledgement</span></dt><dd>Bestätigungssignal in Protokollen wie TCP. Teil des Three-Way-Handshakes (SYN, SYN-ACK, ACK).</dd></div>
+<div class="glossar-eintrag"><dt><strong>ACL</strong> <span class="glossar-voll">Access Control List</span></dt><dd>Liste von Regeln, die festlegt, wer auf eine Ressource zugreifen darf. Genutzt in Firewalls, Routern und Dateisystemen.</dd></div>
+<div class="glossar-eintrag"><dt><strong>ADSL</strong> <span class="glossar-voll">Asymmetric Digital Subscriber Line</span></dt><dd>DSL-Variante mit deutlich höherem Downstream als Upstream. Typisch für Privatanschlüsse.</dd></div>
+<div class="glossar-eintrag"><dt><strong>Adware</strong></dt><dd>Blendet unerwünschte Werbung ein und sammelt dabei häufig Nutzungsdaten.</dd></div>
+<div class="glossar-eintrag"><dt><strong>AES</strong> <span class="glossar-voll">Advanced Encryption Standard</span></dt><dd>Der Standard der symmetrischen Verschlüsselung. Schnell und sicher, z. B. bei HTTPS, VPN und WPA2/3 im Einsatz.</dd></div>
+<div class="glossar-eintrag"><dt><strong>AGI</strong> <span class="glossar-voll">Artificial General Intelligence</span></dt><dd>Hypothetische KI, die beliebige geistige Aufgaben auf menschlichem Niveau löst statt nur ein enges Aufgabenfeld. Es existiert weder ein anerkanntes Messverfahren noch ein System, das den Anspruch belegt.</dd></div>
+<div class="glossar-eintrag"><dt><strong>AH</strong> <span class="glossar-voll">Authentication Header</span></dt><dd>IPsec-Protokoll, das Authentizität und Integrität sichert, aber nicht verschlüsselt. Gegenstück: ESP.</dd></div>
+<div class="glossar-eintrag"><dt><strong>AIDA</strong> <span class="glossar-voll">Attention, Interest, Desire, Action</span></dt><dd>Stufenmodell bis zur Kaufentscheidung: Aufmerksamkeit, Interesse, Wunsch, Handlung.</dd></div>
+<div class="glossar-eintrag"><dt><strong>Air Gap</strong></dt><dd>Physische Trennung eines Systems oder einer Sicherung vom Netz. Schützt Datensicherungen davor, von Verschlüsselungstrojanern miterfasst zu werden.</dd></div>
+<div class="glossar-eintrag"><dt><strong>Aktivitätsdiagramm</strong> <span class="glossar-voll">UML-Aktivitätsdiagramm</span></dt><dd>Zeigt einen Ablauf mit Aktivitäten, Entscheidungsknoten und parallelen Zweigen.</dd></div>
+<div class="glossar-eintrag"><dt><strong>Alignment</strong> <span class="glossar-voll">Domain-Alignment</span></dt><dd>DMARC-Anforderung, dass die per SPF oder DKIM geprüfte Domain zur sichtbaren Absenderadresse passt.</dd></div>
+<div class="glossar-eintrag"><dt><strong>ALU</strong> <span class="glossar-voll">Arithmetic Logic Unit</span></dt><dd>Rechenwerk der CPU. Führt arithmetische und logische Operationen aus.</dd></div>
+<div class="glossar-eintrag"><dt><strong>Amortisationsdauer</strong></dt><dd>Zeitraum, nach dem eine Investition durch Einsparungen oder Erträge wieder eingebracht ist.</dd></div>
+<div class="glossar-eintrag"><dt><strong>AND</strong> <span class="glossar-voll">UND-Verknüpfung (Konjunktion)</span></dt><dd>Logikgatter: Ausgang ist 1, nur wenn beide Eingänge 1 sind. In der Netzwerktechnik zentral beim Subnetting — die Netzadresse entsteht durch bitweises AND aus IP-Adresse und Subnetzmaske.</dd></div>
+<div class="glossar-eintrag"><dt><strong>Angebotsschock</strong></dt><dd>Plötzliche Verteuerung oder Verknappung von Energie und Rohstoffen. Häufiger Auslöser einer Stagflation.</dd></div>
+<div class="glossar-eintrag"><dt><strong>Angriffsfläche</strong></dt><dd>Summe aller Punkte, an denen ein System angegriffen werden kann: Dienste, Konten, offene Ports, installierte Software.</dd></div>
+<div class="glossar-eintrag"><dt><strong>Annahmeverzug</strong></dt><dd>Der Käufer nimmt die ordnungsgemäße Lieferung nicht an. Der Verkäufer kann einlagern und die Kosten weiterberechnen.</dd></div>
+<div class="glossar-eintrag"><dt><strong>Annuitätendarlehen</strong></dt><dd>Darlehen mit gleichbleibender Gesamtrate. Zinsanteil sinkt, Tilgungsanteil steigt über die Laufzeit.</dd></div>
+<div class="glossar-eintrag"><dt><strong>AP</strong> <span class="glossar-voll">Access Point</span></dt><dd>Gerät, das ein WLAN bereitstellt und Funkgeräte mit dem kabelgebundenen Netz verbindet.</dd></div>
+<div class="glossar-eintrag"><dt><strong>API</strong> <span class="glossar-voll">Application Programming Interface</span></dt><dd>Definierte Schnittstelle zwischen Software-Systemen. Der Client sendet Anfragen, der Server antwortet standardisiert (meist JSON/XML).</dd></div>
+<div class="glossar-eintrag"><dt><strong>API-Key</strong> <span class="glossar-voll">API-Schlüssel</span></dt><dd>Zeichenfolge zur Authentifizierung gegenüber einer Programmierschnittstelle. Bietet weniger Schutz als tokenbasierte Verfahren.</dd></div>
+<div class="glossar-eintrag"><dt><strong>APIPA</strong> <span class="glossar-voll">Automatic Private IP Addressing</span></dt><dd>Automatische Selbstvergabe einer Adresse aus 169.254.0.0/16, wenn kein DHCP-Server erreichbar ist.</dd></div>
+<div class="glossar-eintrag"><dt><strong>ARP</strong> <span class="glossar-voll">Address Resolution Protocol</span></dt><dd>Löst im lokalen Netz eine bekannte IP-Adresse in die zugehörige MAC-Adresse auf. Bei IPv6 durch NDP ersetzt.</dd></div>
+<div class="glossar-eintrag"><dt><strong>ARP-Cache</strong> <span class="glossar-voll">ARP-Tabelle</span></dt><dd>Temporärer Zwischenspeicher eines Geräts mit bereits aufgelösten IP-zu-MAC-Zuordnungen. Erspart wiederholte ARP-Anfragen im selben Netzsegment; Einträge verfallen nach einer gewissen Zeit automatisch.</dd></div>
+<div class="glossar-eintrag"><dt><strong>ASCII</strong> <span class="glossar-voll">American Standard Code for Information Interchange</span></dt><dd>Zeichenkodierung mit 7 Bit für Buchstaben, Ziffern und Steuerzeichen. Grundlage vieler Textformate.</dd></div>
+<div class="glossar-eintrag"><dt><strong>ATX</strong> <span class="glossar-voll">ATX-Anschluss</span></dt><dd>Hauptstromanschluss vom Netzteil zum Mainboard.</dd></div>
+<div class="glossar-eintrag"><dt><strong>Authentifizierung</strong></dt><dd>Nachweis der Identität, beantwortet die Frage Wer bist du. Erfolgt über Wissen, Besitz oder Sein.</dd></div>
+<div class="glossar-eintrag"><dt><strong>Authentizität</strong> <span class="glossar-voll">Authenticity</span></dt><dd>Schutzziel: Die Herkunft ist zweifelsfrei nachgewiesen. Umgesetzt über digitale Signaturen und Zertifikate.</dd></div>
+<div class="glossar-eintrag"><dt><strong>Auto-Negotiation</strong> <span class="glossar-voll">Automatische Aushandlung</span></dt><dd>Zwei Ethernet-Ports einigen sich selbsttätig auf die höchste gemeinsame Geschwindigkeit und den Duplex-Modus.</dd></div>
+<div class="glossar-eintrag"><dt><strong>Autorisierung</strong></dt><dd>Prüfung der Rechte, beantwortet die Frage Was darfst du. Erfolgt erst nach erfolgreicher Authentifizierung.</dd></div>
+<div class="glossar-eintrag"><dt><strong>AVV</strong> <span class="glossar-voll">Auftragsverarbeitungsvertrag</span></dt><dd>Regelt vertraglich die Pflichten zwischen Verantwortlichem und Auftragsverarbeiter, etwa bei einem externen Cloud-Anbieter.</dd></div>
+</dl>
+</section>
+<section class="glossar-gruppe" id="g-b">
+<h2>B</h2>
+<dl>
+<div class="glossar-eintrag"><dt><strong>Backdoor</strong> <span class="glossar-voll">Hintertür</span></dt><dd>Versteckter Zugang, über den ein Angreifer später erneut ins System gelangt, auch nach Schließen der ursprünglichen Lücke.</dd></div>
+<div class="glossar-eintrag"><dt><strong>BAN</strong> <span class="glossar-voll">Body Area Network</span></dt><dd>Kleinste Netzausdehnung: Geräte direkt am oder im Körper, z. B. Smartwatch oder Medizinsensoren.</dd></div>
+<div class="glossar-eintrag"><dt><strong>Band Steering</strong> <span class="glossar-voll">Bandlenkung</span></dt><dd>WLAN-Funktion, die dual-band-fähige Geräte automatisch auf das weniger ausgelastete 5-GHz-Band lenkt.</dd></div>
+<div class="glossar-eintrag"><dt><strong>Bareinkaufspreis</strong></dt><dd>Zieleinkaufspreis abzüglich Skonto. Preis bei sofortiger Zahlung.</dd></div>
+<div class="glossar-eintrag"><dt><strong>Baremetal</strong> <span class="glossar-voll">Baremetal-Virtualisierung</span></dt><dd>Bezeichnung für einen Typ-1-Hypervisor, der direkt auf der Hardware läuft, ohne ein darunterliegendes Betriebssystem. Beispiele: VMware ESXi, Microsoft Hyper-V, Citrix Xen, KVM.</dd></div>
+<div class="glossar-eintrag"><dt><strong>BBU</strong> <span class="glossar-voll">Battery Backup Unit</span></dt><dd>Pufferakku am RAID-Controller. Sichert den Schreibcache bei Stromausfall, damit die Parität nicht inkonsistent bleibt.</dd></div>
+<div class="glossar-eintrag"><dt><strong>BCG-Matrix</strong> <span class="glossar-voll">Boston-Consulting-Group-Matrix</span></dt><dd>Ordnet Produkte nach Marktanteil und Marktwachstum in Star, Cash Cow, Question Mark und Poor Dog ein.</dd></div>
+<div class="glossar-eintrag"><dt><strong>BDSG</strong> <span class="glossar-voll">Bundesdatenschutzgesetz</span></dt><dd>Setzt die DSGVO in Deutschland um und ergänzt sie, u. a. mit Sonderregeln für öffentliche Stellen.</dd></div>
+<div class="glossar-eintrag"><dt><strong>Bearer-Token</strong> <span class="glossar-voll">Bearer Token</span></dt><dd>Zugriffstoken, das im HTTP-Header mitgesendet wird — wer es besitzt (&quot;bearer&quot;), gilt als berechtigt. Meist zeitlich begrenzt gültig, oft im Rahmen von OAuth ausgestellt. Muss daher wie ein Passwort geschützt werden.</dd></div>
+<div class="glossar-eintrag"><dt><strong>Benutzerdokumentation</strong></dt><dd>Anleitung für Anwender in Handlungsschritten, mit Bildschirmabbildungen und häufigen Fragen.</dd></div>
+<div class="glossar-eintrag"><dt><strong>Betriebsdokumentation</strong></dt><dd>Beschreibt das Handeln im laufenden Betrieb: Ablaufpläne, Sicherung und Wiederherstellung, Notfallpläne, Zuständigkeiten.</dd></div>
+<div class="glossar-eintrag"><dt><strong>Bezugskalkulation</strong></dt><dd>Stufenrechnung vom Listeneinkaufspreis über Rabatt und Skonto zuzüglich Bezugskosten zum Bezugspreis.</dd></div>
+<div class="glossar-eintrag"><dt><strong>Bezugspreis</strong> <span class="glossar-voll">Bezugspreis / Einstandspreis</span></dt><dd>Bareinkaufspreis zuzüglich Bezugskosten wie Fracht und Verpackung. Die tatsächlichen Kosten der Ware im Lager.</dd></div>
+<div class="glossar-eintrag"><dt><strong>BIOS</strong> <span class="glossar-voll">Basic Input/Output System</span></dt><dd>Klassische Firmware, die den Rechner startet und Hardware initialisiert. Nachfolger ist UEFI.</dd></div>
+<div class="glossar-eintrag"><dt><strong>Bit</strong> <span class="glossar-voll">Binary Digit</span></dt><dd>Kleinste Informationseinheit: genau zwei Zustände, 0 oder 1. Kurzzeichen ist das kleine b, etwa in Mbit/s.</dd></div>
+<div class="glossar-eintrag"><dt><strong>Block-Storage</strong> <span class="glossar-voll">Blockspeicher</span></dt><dd>Speicher in gleich großen Blöcken ohne eigene Struktur. Das Dateisystem legt der Nutzer an. Schnell, für Datenbanken und VMs.</dd></div>
+<div class="glossar-eintrag"><dt><strong>Blockspeicher</strong> <span class="glossar-voll">Block Storage</span></dt><dd>Stellt rohe Blöcke bereit, auf denen der Server sein eigenes Dateisystem anlegt. Nötig für Datenbanken und virtuelle Maschinen.</dd></div>
+<div class="glossar-eintrag"><dt><strong>BNC</strong> <span class="glossar-voll">Bayonet Neill Concelman</span></dt><dd>Bajonett-Steckverbinder für Koaxialkabel, typisch in alten Bus-Netzwerken (10BASE2).</dd></div>
+<div class="glossar-eintrag"><dt><strong>Botnetz</strong></dt><dd>Verbund gekaperter Rechner, die zentral gesteuert werden. Wird für DDoS-Angriffe, Spamversand oder Rechenlast missbraucht.</dd></div>
+<div class="glossar-eintrag"><dt><strong>BPMN</strong> <span class="glossar-voll">Business Process Model and Notation</span></dt><dd>Umfangreiche internationale Notation für Geschäftsprozesse mit Bahnen, Ereignistypen und technisch ausführbaren Modellen.</dd></div>
+<div class="glossar-eintrag"><dt><strong>Broadcast</strong> <span class="glossar-voll">Rundsendung an alle</span></dt><dd>Nachricht an alle Geräte im Subnetz. MAC-Broadcast: FF:FF:FF:FF:FF:FF. Wird durch Router begrenzt.</dd></div>
+<div class="glossar-eintrag"><dt><strong>Broadcastdomäne</strong></dt><dd>Bereich, den ein Broadcast erreicht. Wird durch Router oder VLANs begrenzt, nicht durch Switches.</dd></div>
+<div class="glossar-eintrag"><dt><strong>Brute Force</strong> <span class="glossar-voll">Brute-Force-Angriff</span></dt><dd>Systematisches Durchprobieren aller Zeichenkombinationen, um ein Kennwort zu erraten. Gegenmittel sind lange Kennwörter, Sperren nach Fehlversuchen und ein zweiter Faktor.</dd></div>
+<div class="glossar-eintrag"><dt><strong>BSI</strong> <span class="glossar-voll">Bundesamt für Sicherheit in der Informationstechnik</span></dt><dd>Deutsche Behörde für IT-Sicherheit. Gibt den IT-Grundschutz mit Bausteinen, Schutzbedarfskategorien und Profilen heraus.</dd></div>
+<div class="glossar-eintrag"><dt><strong>Bussystem</strong></dt><dd>Leitungssystem aus Datenbus, Adressbus und Steuerbus, das die Funktionseinheiten eines Rechners verbindet.</dd></div>
+<div class="glossar-eintrag"><dt><strong>Byte</strong></dt><dd>Acht Bit als Einheit, die kleinste einzeln adressierbare Speichergröße. Kurzzeichen ist das große B, etwa in MB/s.</dd></div>
+</dl>
+</section>
+<section class="glossar-gruppe" id="g-c">
+<h2>C</h2>
+<dl>
+<div class="glossar-eintrag"><dt><strong>CA</strong> <span class="glossar-voll">Certificate Authority (Zertifizierungsstelle)</span></dt><dd>Vertrauenswürdige Instanz, die digitale Zertifikate signiert und ausstellt. Basis der PKI.</dd></div>
+<div class="glossar-eintrag"><dt><strong>Cache</strong> <span class="glossar-voll">Cache-Speicher</span></dt><dd>Sehr schneller Zwischenspeicher an der CPU. Gestuft in L1 je Kern, L2 meist je Kern und L3 gemeinsam für alle Kerne.</dd></div>
+<div class="glossar-eintrag"><dt><strong>CAM</strong> <span class="glossar-voll">Content Addressable Memory</span></dt><dd>Spezialspeicher im Switch für die MAC-Adresstabelle: welche MAC hängt an welchem Port.</dd></div>
+<div class="glossar-eintrag"><dt><strong>CAN</strong> <span class="glossar-voll">Campus Area Network</span></dt><dd>Netz über mehrere Gebäude eines Geländes, z. B. Uni oder Firmencampus. Achtung: Im KFZ-Bereich steht CAN für Controller Area Network (Bussystem).</dd></div>
+<div class="glossar-eintrag"><dt><strong>Cash Cow</strong></dt><dd>Produkt mit hohem Marktanteil in einem kaum wachsenden Markt. Liefert stabile Erträge bei geringem Investitionsbedarf.</dd></div>
+<div class="glossar-eintrag"><dt><strong>CDM</strong> <span class="glossar-voll">Code Division Multiplexing (Codemultiplex)</span></dt><dd>Multiplexverfahren: Alle Teilnehmer senden gleichzeitig auf derselben Frequenz, getrennt durch eindeutige Codes. Der Empfänger filtert das gewünschte Signal über den passenden Code heraus. Basis von CDMA im Mobilfunk. Abgrenzung: TDM trennt über Zeit, FDM über Frequenz, WDM über Lichtwellenlänge.</dd></div>
+<div class="glossar-eintrag"><dt><strong>CEO-Fraud</strong> <span class="glossar-voll">Chef-Betrug</span></dt><dd>Social-Engineering-Angriff, bei dem sich der Täter als Geschäftsführung ausgibt und eine eilige Überweisung anweist.</dd></div>
+<div class="glossar-eintrag"><dt><strong>Chain of Thought</strong> <span class="glossar-voll">Chain of Thought, Gedankenkette, Reasoning</span></dt><dd>Das Modell erzeugt vor der eigentlichen Antwort Zwischenschritte in Textform und investiert dadurch mehr Rechenschritte. Bei Logik- und Rechenaufgaben steigt die Trefferquote. Reasoning-Modelle sind darauf trainiert, diese Kette von selbst zu bilden.</dd></div>
+<div class="glossar-eintrag"><dt><strong>Change</strong> <span class="glossar-voll">Änderung (ITIL)</span></dt><dd>Geplante Änderung an Service oder Infrastruktur. Wird bewertet, genehmigt und dokumentiert.</dd></div>
+<div class="glossar-eintrag"><dt><strong>CIA</strong> <span class="glossar-voll">Confidentiality, Integrity, Availability</span></dt><dd>Die drei klassischen Schutzziele der IT-Sicherheit: Vertraulichkeit, Integrität, Verfügbarkeit.</dd></div>
+<div class="glossar-eintrag"><dt><strong>CIDR</strong> <span class="glossar-voll">Classless Inter-Domain Routing</span></dt><dd>Präfix-Schreibweise für Netzgrößen, z. B. /24 = 24 Bit Netzanteil. Löste die starren Netzklassen ab.</dd></div>
+<div class="glossar-eintrag"><dt><strong>CLI</strong> <span class="glossar-voll">Command Line Interface</span></dt><dd>Textbasierte Befehlszeile zur Steuerung von Systemen, Gegenstück zur grafischen Oberfläche (GUI).</dd></div>
+<div class="glossar-eintrag"><dt><strong>CMDB</strong> <span class="glossar-voll">Configuration Management Database</span></dt><dd>Verzeichnis aller Konfigurationselemente einer IT-Landschaft und ihrer Beziehungen zueinander.</dd></div>
+<div class="glossar-eintrag"><dt><strong>CNAME</strong> <span class="glossar-voll">Canonical Name</span></dt><dd>DNS-Record, der als Alias auf einen anderen Domainnamen verweist.</dd></div>
+<div class="glossar-eintrag"><dt><strong>Congestion Control</strong> <span class="glossar-voll">Staukontrolle</span></dt><dd>TCP-Mechanismus, der bei Paketverlust die Senderate drosselt, um Netzüberlastung zu vermeiden.</dd></div>
+<div class="glossar-eintrag"><dt><strong>Context Engineering</strong></dt><dd>Gezielte Zusammenstellung dessen, was im Kontextfenster landet: Systemanweisung, Werkzeuge, abgerufene Dokumente, Gesprächsverlauf. Wirkt stärker als die einzelne Formulierung, weil der Kontext begrenzt ist und überflüssiger Inhalt die Antwortqualität senkt.</dd></div>
+<div class="glossar-eintrag"><dt><strong>Core</strong> <span class="glossar-voll">Rechenkern</span></dt><dd>Eigenständige Recheneinheit einer CPU. Mehrkernprozessoren verarbeiten dadurch mehrere Befehlsströme echt parallel.</dd></div>
+<div class="glossar-eintrag"><dt><strong>CPU</strong> <span class="glossar-voll">Central Processing Unit</span></dt><dd>Der Hauptprozessor eines Rechners, führt Programmbefehle aus.</dd></div>
+<div class="glossar-eintrag"><dt><strong>CRC</strong> <span class="glossar-voll">Cyclic Redundancy Check</span></dt><dd>Prüfsummenverfahren zur Erkennung von Übertragungsfehlern, z. B. in der FCS eines Ethernet-Frames.</dd></div>
+<div class="glossar-eintrag"><dt><strong>CRL</strong> <span class="glossar-voll">Certificate Revocation List</span></dt><dd>Sperrliste widerrufener Zertifikate einer CA. Alternative: Online-Prüfung per OCSP.</dd></div>
+<div class="glossar-eintrag"><dt><strong>CRM</strong> <span class="glossar-voll">Customer Relationship Management</span></dt><dd>Software zur Verwaltung von Kundenbeziehungen, Kontakten und Vertriebsprozessen.</dd></div>
+<div class="glossar-eintrag"><dt><strong>Crosstalk</strong> <span class="glossar-voll">Übersprechen</span></dt><dd>Ungewolltes Überkoppeln eines Signals von einer Ader auf eine benachbarte im selben Kabel, wodurch Störungen entstehen. Verdrillung der Adernpaare (Twisted Pair) und Schirmung reduzieren den Effekt. Kenngrößen: NEXT (Near-End Crosstalk) misst das Übersprechen am selben Kabelende wie der Sender, FEXT (Far-End Crosstalk) am entfernten Ende.</dd></div>
+<div class="glossar-eintrag"><dt><strong>CSMA/CA</strong> <span class="glossar-voll">Carrier Sense Multiple Access / Collision Avoidance</span></dt><dd>Zugriffsverfahren im WLAN: Kollisionen werden vermieden, da Funk sie nicht zuverlässig erkennen kann.</dd></div>
+<div class="glossar-eintrag"><dt><strong>CSMA/CD</strong> <span class="glossar-voll">Carrier Sense Multiple Access / Collision Detection</span></dt><dd>Zugriffsverfahren im klassischen Ethernet: Medium abhören, senden, Kollision erkennen, Backoff, neu senden.</dd></div>
+<div class="glossar-eintrag"><dt><strong>CSR</strong> <span class="glossar-voll">Certificate Signing Request</span></dt><dd>Antrag auf ein digitales Zertifikat: enthält den öffentlichen Schlüssel und die Identitätsdaten des Antragstellers. Die CA prüft die Angaben und signiert daraus das fertige Zertifikat — der private Schlüssel verlässt dabei nie den Antragsteller.</dd></div>
+<div class="glossar-eintrag"><dt><strong>CSS</strong> <span class="glossar-voll">Cascading Style Sheets</span></dt><dd>Sprache zur Gestaltung von Webseiten: Layout, Farben, Typografie. Ergänzt HTML.</dd></div>
+<div class="glossar-eintrag"><dt><strong>CSV</strong> <span class="glossar-voll">Comma-Separated Values</span></dt><dd>Einfaches Textformat für Tabellendaten, Werte durch Kommas oder Semikolons getrennt.</dd></div>
+<div class="glossar-eintrag"><dt><strong>CTS</strong> <span class="glossar-voll">Clear to Send</span></dt><dd>Antwort auf ein RTS: Der Access Point gibt den Kanal für die anfragende Station frei. Zusammen mit RTS reduziert es Kollisionen bei versteckten Endgeräten.</dd></div>
+<div class="glossar-eintrag"><dt><strong>CU</strong> <span class="glossar-voll">Control Unit</span></dt><dd>Steuerwerk der CPU. Holt Befehle, entschlüsselt sie und steuert die Reihenfolge der Abarbeitung.</dd></div>
+<div class="glossar-eintrag"><dt><strong>Cut-Through</strong> <span class="glossar-voll">Cut-Through-Switching</span></dt><dd>Switching-Verfahren: Der Switch beginnt die Weiterleitung, sobald die Ziel-MAC-Adresse gelesen ist, ohne den ganzen Frame abzuwarten. Schneller als Store-and-Forward, leitet aber auch fehlerhafte Frames weiter.</dd></div>
+</dl>
+</section>
+<section class="glossar-gruppe" id="g-d">
+<h2>D</h2>
+<dl>
+<div class="glossar-eintrag"><dt><strong>DAS</strong> <span class="glossar-voll">Direct Attached Storage</span></dt><dd>Speicher, der direkt an einen Server angeschlossen ist (SAS, SATA, USB). Blockbasiert und nur für diesen Server nutzbar.</dd></div>
+<div class="glossar-eintrag"><dt><strong>DDG</strong> <span class="glossar-voll">Digitale-Dienste-Gesetz</span></dt><dd>Setzt den Digital Services Act (DSA) der EU um. Ergänzt die DSGVO für Plattformbetreiber wie soziale Netzwerke und Suchmaschinen.</dd></div>
+<div class="glossar-eintrag"><dt><strong>DDoS</strong> <span class="glossar-voll">Distributed Denial of Service</span></dt><dd>Angriff, bei dem viele Systeme gleichzeitig ein Ziel überlasten, um es lahmzulegen.</dd></div>
+<div class="glossar-eintrag"><dt><strong>DDR5</strong> <span class="glossar-voll">Double Data Rate 5</span></dt><dd>Arbeitsspeichergeneration mit höherer Bandbreite und Übertragungsrate als DDR4.</dd></div>
+<div class="glossar-eintrag"><dt><strong>Deep Learning</strong> <span class="glossar-voll">Deep Learning, tiefes Lernen</span></dt><dd>Maschinelles Lernen mit vielschichtigen neuronalen Netzen, die Merkmale selbst aus den Daten ableiten statt sie vorgegeben zu bekommen. Trainiert wird über Backpropagation und Gradientenabstieg.</dd></div>
+<div class="glossar-eintrag"><dt><strong>Deflation</strong></dt><dd>Anhaltender Rückgang des Preisniveaus. Gefahr ist die Abwärtsspirale aus Kaufzurückhaltung, sinkendem Absatz und Entlassungen.</dd></div>
+<div class="glossar-eintrag"><dt><strong>Degraded</strong> <span class="glossar-voll">Degraded Mode</span></dt><dd>Zustand eines RAID-Verbunds nach dem Ausfall einer Platte: weiterhin nutzbar, aber ohne Schutzreserve und langsamer.</dd></div>
+<div class="glossar-eintrag"><dt><strong>DEMUX</strong> <span class="glossar-voll">Demultiplexer</span></dt><dd>Gegenstück zum Multiplexer: trennt einen kombinierten Datenstrom beim Empfänger wieder auf und ordnet die Teile der richtigen Anwendung zu. Auf der Transportschicht geschieht das anhand der Portnummern, die den ankommenden Verkehr dem passenden Socket zuweisen.</dd></div>
+<div class="glossar-eintrag"><dt><strong>DER</strong> <span class="glossar-voll">Distinguished Encoding Rules</span></dt><dd>Binäres Dateiformat für X.509-Zertifikate. PEM ist die textbasierte Variante.</dd></div>
+<div class="glossar-eintrag"><dt><strong>Designschutz</strong> <span class="glossar-voll">Eingetragenes Design</span></dt><dd>Schutzrecht für die äußere Gestaltung eines Erzeugnisses, früher Geschmacksmuster.</dd></div>
+<div class="glossar-eintrag"><dt><strong>Destillation</strong> <span class="glossar-voll">Wissensdestillation, Knowledge Distillation</span></dt><dd>Ein großes Lehrermodell trainiert ein kleineres Schülermodell auf sein Ausgabeverhalten. Ergebnis ist ein Modell, das schneller und billiger läuft und dabei nur wenig Qualität verliert.</dd></div>
+<div class="glossar-eintrag"><dt><strong>DHCP</strong> <span class="glossar-voll">Dynamic Host Configuration Protocol</span></dt><dd>Vergibt automatisch IP-Adresse, Subnetzmaske, Gateway und DNS-Server. Ablauf: DORA. Ports 67/68 (UDP).</dd></div>
+<div class="glossar-eintrag"><dt><strong>DHCPv4</strong> <span class="glossar-voll">Dynamic Host Configuration Protocol für IPv4</span></dt><dd>Vergibt IPv4-Adressen samt Maske, Gateway und DNS automatisch. Ablauf: Discover, Offer, Request, Acknowledge (DORA).</dd></div>
+<div class="glossar-eintrag"><dt><strong>DHCPv6</strong> <span class="glossar-voll">Dynamic Host Configuration Protocol für IPv6</span></dt><dd>IPv6-Variante von DHCP. Arbeitet stateful (vergibt Adressen zentral) oder stateless (liefert nur Zusatzinfos wie DNS, während die Adresse per SLAAC entsteht). Ablauf: Solicit, Advertise, Request, Reply.</dd></div>
+<div class="glossar-eintrag"><dt><strong>Dictionary Attack</strong> <span class="glossar-voll">Wörterbuchangriff</span></dt><dd>Durchprobieren gebräuchlicher Wörter und bekannter Kennwörter. Deutlich schneller als reines Durchprobieren aller Kombinationen.</dd></div>
+<div class="glossar-eintrag"><dt><strong>Dienstvertrag</strong></dt><dd>Vertrag über ein Tätigwerden ohne geschuldeten Erfolg, z. B. IT-Support nach Aufwand oder Beratung.</dd></div>
+<div class="glossar-eintrag"><dt><strong>Diffie-Hellman</strong> <span class="glossar-voll">Diffie-Hellman-Schlüsselaustausch</span></dt><dd>Verfahren, mit dem zwei Parteien über einen unsicheren Kanal einen gemeinsamen geheimen Schlüssel vereinbaren, ohne ihn zu übertragen.</dd></div>
+<div class="glossar-eintrag"><dt><strong>Diffusion</strong> <span class="glossar-voll">Diffusionsmodell</span></dt><dd>Generatives Verfahren, das aus reinem Rauschen schrittweise ein Bild herausrechnet. Trainiert wird umgekehrt: Dem Netz werden verrauschte Daten gezeigt, und es lernt, den Rauschanteil vorherzusagen.</dd></div>
+<div class="glossar-eintrag"><dt><strong>Disinflation</strong></dt><dd>Rückgang der Inflationsrate bei weiterhin steigenden Preisen. Nicht zu verwechseln mit Deflation.</dd></div>
+<div class="glossar-eintrag"><dt><strong>DKIM</strong> <span class="glossar-voll">DomainKeys Identified Mail</span></dt><dd>Kryptografische Signatur der Mail durch den sendenden Server. Der öffentliche Schlüssel liegt im DNS, erkennt Änderungen am Transportweg.</dd></div>
+<div class="glossar-eintrag"><dt><strong>DMA</strong> <span class="glossar-voll">Digital Markets Act</span></dt><dd>EU-Verordnung gegen Marktmacht großer Plattformbetreiber (Gatekeeper). Verwandt mit dem DSA, aber ein eigenständiges Regelwerk mit anderem Fokus.</dd></div>
+<div class="glossar-eintrag"><dt><strong>DMARC</strong> <span class="glossar-voll">Domain-based Message Authentication, Reporting and Conformance</span></dt><dd>Baut auf SPF und DKIM auf, fordert Übereinstimmung mit der sichtbaren Absenderdomain und legt die Behandlung fest: none, quarantine oder reject.</dd></div>
+<div class="glossar-eintrag"><dt><strong>DMZ</strong> <span class="glossar-voll">Demilitarized Zone</span></dt><dd>Abgetrennter Netzbereich für öffentlich erreichbare Server (z. B. Webserver), isoliert vom internen Netz.</dd></div>
+<div class="glossar-eintrag"><dt><strong>DNS</strong> <span class="glossar-voll">Domain Name System</span></dt><dd>Das Telefonbuch des Internets: löst Domainnamen in IP-Adressen auf. Port 53.</dd></div>
+<div class="glossar-eintrag"><dt><strong>DORA</strong> <span class="glossar-voll">Discover, Offer, Request, Acknowledge</span></dt><dd>Die vier Schritte der DHCP-Adressvergabe zwischen Client und Server.</dd></div>
+<div class="glossar-eintrag"><dt><strong>DoS</strong> <span class="glossar-voll">Denial of Service</span></dt><dd>Angriff, der einen Dienst durch Überlastung unbenutzbar macht. Verteilt = DDoS.</dd></div>
+<div class="glossar-eintrag"><dt><strong>DSA</strong> <span class="glossar-voll">Digital Services Act</span></dt><dd>EU-Verordnung für digitale Plattformen (soziale Netzwerke, Suchmaschinen). Wird in Deutschland durch das DDG umgesetzt.</dd></div>
+<div class="glossar-eintrag"><dt><strong>DSB</strong> <span class="glossar-voll">Datenschutzbeauftragter</span></dt><dd>Überwacht die Einhaltung der Datenschutzvorschriften im Unternehmen. Pflicht ab 20 Personen in der automatisierten Datenverarbeitung, bei Kerntätigkeit mit sensiblen Daten oder bei Behörden (Art. 37 DSGVO, § 38 BDSG).</dd></div>
+<div class="glossar-eintrag"><dt><strong>DSCP</strong> <span class="glossar-voll">Differentiated Services Code Point</span></dt><dd>6-Bit-Feld im IP-Header zur Klassifizierung von Paketen für Quality of Service: Router lesen den Wert und behandeln markierten Verkehr bevorzugt — z. B. VoIP-Pakete vor Downloads. Nachfolger des älteren ToS-Felds.</dd></div>
+<div class="glossar-eintrag"><dt><strong>DSFA</strong> <span class="glossar-voll">Datenschutz-Folgenabschätzung</span></dt><dd>Risikobewertung vor Beginn einer Verarbeitung, die voraussichtlich ein hohes Risiko für die Rechte betroffener Personen mit sich bringt (Art. 35 DSGVO).</dd></div>
+<div class="glossar-eintrag"><dt><strong>DSGVO</strong> <span class="glossar-voll">Datenschutz-Grundverordnung</span></dt><dd>EU-Verordnung zum Schutz personenbezogener Daten. Regelt Verarbeitung, Speicherung und Rechte der Betroffenen.</dd></div>
+<div class="glossar-eintrag"><dt><strong>DSL</strong> <span class="glossar-voll">Digital Subscriber Line</span></dt><dd>Breitband-Internetzugang über die Telefonleitung (Kupfer-Doppelader).</dd></div>
+<div class="glossar-eintrag"><dt><strong>DTP</strong> <span class="glossar-voll">Dynamic Trunking Protocol</span></dt><dd>Handelt zwischen Cisco-Switches automatisch aus, ob ein Port Access oder Trunk wird. Aus Sicherheitsgründen abschalten und Ports fest zuweisen.</dd></div>
+<div class="glossar-eintrag"><dt><strong>DVI</strong> <span class="glossar-voll">Digital Visual Interface</span></dt><dd>Digitale Schnittstelle zur Bildübertragung, überträgt keinen Ton.</dd></div>
+</dl>
+</section>
+<section class="glossar-gruppe" id="g-e">
+<h2>E</h2>
+<dl>
+<div class="glossar-eintrag"><dt><strong>EAP</strong> <span class="glossar-voll">Extensible Authentication Protocol</span></dt><dd>Rahmenwerk für Authentifizierungsverfahren, u. a. im WLAN (WPA-Enterprise). Varianten wie EAP-TLS nutzen Zertifikate statt Passwörter.</dd></div>
+<div class="glossar-eintrag"><dt><strong>ECC</strong> <span class="glossar-voll">Elliptic Curve Cryptography</span></dt><dd>Asymmetrisches Verschlüsselungsverfahren auf Basis elliptischer Kurven. Kürzere Schlüssel bei gleicher Sicherheit als RSA.</dd></div>
+<div class="glossar-eintrag"><dt><strong>ECC-RAM</strong> <span class="glossar-voll">Error Correcting Code Memory</span></dt><dd>Arbeitsspeicher, der Bitfehler erkennt und Einzelbitfehler korrigiert. Typisch in Servern mit hohen Integritätsanforderungen.</dd></div>
+<div class="glossar-eintrag"><dt><strong>Eigenkapitalrentabilität</strong></dt><dd>Gewinn geteilt durch Eigenkapital mal 100 %. Zeigt die Verzinsung des Eigentümerkapitals.</dd></div>
+<div class="glossar-eintrag"><dt><strong>Elastizität</strong></dt><dd>Fähigkeit, Ressourcen bei sinkender Last automatisch wieder abzugeben. Geht über reine Skalierbarkeit hinaus.</dd></div>
+<div class="glossar-eintrag"><dt><strong>Embeddings</strong> <span class="glossar-voll">Embeddings, Vektoreinbettungen</span></dt><dd>Darstellung von Text, Bild oder Audio als Zahlenvektor, in dem inhaltlich ähnliche Dinge nah beieinander liegen. Grundlage für semantische Suche, Empfehlungen und RAG.</dd></div>
+<div class="glossar-eintrag"><dt><strong>EMV</strong> <span class="glossar-voll">Elektromagnetische Verträglichkeit</span></dt><dd>Fähigkeit eines Geräts, im elektromagnetischen Umfeld störungsfrei zu arbeiten, ohne selbst andere Geräte unzulässig zu stören. Das Störphänomen selbst heißt EMI (Electromagnetic Interference). In der Netzwerktechnik relevant bei der Kabelwahl: geschirmte Leitungen (STP) und Glasfaser sind gegen elektromagnetische Einstreuung robuster als ungeschirmtes Kupfer (UTP).</dd></div>
+<div class="glossar-eintrag"><dt><strong>EPK</strong> <span class="glossar-voll">Ereignisgesteuerte Prozesskette</span></dt><dd>Darstellung eines Geschäftsprozesses als Abfolge von Ereignissen und Funktionen. Beginnt und endet mit einem Ereignis.</dd></div>
+<div class="glossar-eintrag"><dt><strong>Ereignis</strong> <span class="glossar-voll">Ereignis (EPK)</span></dt><dd>Eingetretener Zustand im Prozess, als Sechseck dargestellt und passiv formuliert. Verbraucht keine Zeit und keine Ressourcen.</dd></div>
+<div class="glossar-eintrag"><dt><strong>ERP</strong> <span class="glossar-voll">Enterprise Resource Planning</span></dt><dd>Software zur Steuerung zentraler Unternehmensprozesse: Einkauf, Lager, Produktion, Finanzen.</dd></div>
+<div class="glossar-eintrag"><dt><strong>ESP</strong> <span class="glossar-voll">Encapsulating Security Payload</span></dt><dd>IPsec-Protokoll, das Nutzdaten kapselt, verschlüsselt und deren Integrität sichert.</dd></div>
+<div class="glossar-eintrag"><dt><strong>EULA</strong> <span class="glossar-voll">End User License Agreement</span></dt><dd>Lizenzvertrag zwischen Softwarehersteller und Endnutzer über die Nutzungsbedingungen.</dd></div>
+<div class="glossar-eintrag"><dt><strong>EVA-Prinzip</strong> <span class="glossar-voll">Eingabe, Verarbeitung, Ausgabe</span></dt><dd>Grundmuster jeder Datenverarbeitung. Erweitert um die Speicherung ergibt sich EVAS.</dd></div>
+</dl>
+</section>
+<section class="glossar-gruppe" id="g-f">
+<h2>F</h2>
+<dl>
+<div class="glossar-eintrag"><dt><strong>FAZ</strong> <span class="glossar-voll">Frühester Anfangszeitpunkt</span></dt><dd>Netzplantechnik: der früheste Zeitpunkt, zu dem ein Vorgang beginnen kann. Ergibt sich in der Vorwärtsrechnung aus dem spätesten FEZ aller Vorgänger.</dd></div>
+<div class="glossar-eintrag"><dt><strong>FCS</strong> <span class="glossar-voll">Frame Check Sequence</span></dt><dd>Prüfsummenfeld am Ende eines Ethernet-Frames (CRC) zur Fehlererkennung.</dd></div>
+<div class="glossar-eintrag"><dt><strong>FDDI</strong> <span class="glossar-voll">Fiber Distributed Data Interface</span></dt><dd>Glasfaser-Doppelring der 80er/90er mit Token-Passing, 100 Mbit/s. Vom Switched Ethernet verdrängt.</dd></div>
+<div class="glossar-eintrag"><dt><strong>FDM</strong> <span class="glossar-voll">Frequency Division Multiplexing</span></dt><dd>Frequenzmultiplex: mehrere Signale gleichzeitig auf verschiedenen Frequenzbändern über ein Medium.</dd></div>
+<div class="glossar-eintrag"><dt><strong>FEZ</strong> <span class="glossar-voll">Frühester Endzeitpunkt</span></dt><dd>Netzplantechnik: FAZ plus Vorgangsdauer. Der früheste Zeitpunkt, zu dem ein Vorgang beendet sein kann.</dd></div>
+<div class="glossar-eintrag"><dt><strong>File-Storage</strong> <span class="glossar-voll">Dateispeicher</span></dt><dd>Speicher mit Ordnerhierarchie und Dateinamen. Einfach gemeinsam nutzbar, bei sehr großen Mengen unhandlich.</dd></div>
+<div class="glossar-eintrag"><dt><strong>FIN</strong> <span class="glossar-voll">Finish</span></dt><dd>TCP-Flag zum geordneten Verbindungsabbau. Gegenstück zum abrupten RST.</dd></div>
+<div class="glossar-eintrag"><dt><strong>Fine-Tuning</strong> <span class="glossar-voll">Fine-Tuning, Feinabstimmung</span></dt><dd>Weitertraining eines vortrainierten Modells auf einem kleineren, spezifischen Datensatz, um Stil, Format oder Fachdomäne festzulegen. Sparsame Varianten wie LoRA passen nur wenige zusätzliche Parameter an.</dd></div>
+<div class="glossar-eintrag"><dt><strong>Forward Lookup</strong> <span class="glossar-voll">Vorwärtsauflösung</span></dt><dd>Auflösung eines Namens in eine IP-Adresse. Der Regelfall bei jeder DNS-Anfrage.</dd></div>
+<div class="glossar-eintrag"><dt><strong>FP</strong> <span class="glossar-voll">Freier Puffer</span></dt><dd>Netzplantechnik: frühester Anfang des Nachfolgers minus eigenes FEZ. Verschiebung, ohne den frühesten Start eines Nachfolgers anzutasten.</dd></div>
+<div class="glossar-eintrag"><dt><strong>FQDN</strong> <span class="glossar-voll">Fully Qualified Domain Name</span></dt><dd>Vollständiger Domainname inkl. Host und aller Ebenen, z. B. www.example.com.</dd></div>
+<div class="glossar-eintrag"><dt><strong>FTP</strong> <span class="glossar-voll">File Transfer Protocol</span></dt><dd>Klassisches Dateiübertragungsprotokoll. Ports 20 (Daten) und 21 (Steuerung), unverschlüsselt.</dd></div>
+<div class="glossar-eintrag"><dt><strong>Funktion</strong> <span class="glossar-voll">Funktion (EPK)</span></dt><dd>Tätigkeit im Prozess, als abgerundetes Rechteck dargestellt und mit einem Tätigkeitswort formuliert. Benötigt Zeit und Ressourcen.</dd></div>
+</dl>
+</section>
+<section class="glossar-gruppe" id="g-g">
+<h2>G</h2>
+<dl>
+<div class="glossar-eintrag"><dt><strong>GAN</strong> <span class="glossar-voll">Global Area Network</span></dt><dd>Weltumspannendes Netz, meist über Satellit und globale Mobilfunknetze.</dd></div>
+<div class="glossar-eintrag"><dt><strong>Gebrauchsmuster</strong></dt><dd>Schutzrecht für technische Erfindungen mit geringerer Prüfhürde und kürzerer Laufzeit als das Patent.</dd></div>
+<div class="glossar-eintrag"><dt><strong>Generationenprinzip</strong> <span class="glossar-voll">Großvater-Vater-Sohn</span></dt><dd>Rotationsverfahren mit täglichen (Sohn), wöchentlichen (Vater) und monatlichen (Großvater) Sicherungen unterschiedlicher Aufbewahrungsdauer.</dd></div>
+<div class="glossar-eintrag"><dt><strong>Gesamtkapitalrentabilität</strong></dt><dd>(Gewinn plus Fremdkapitalzinsen) geteilt durch Gesamtkapital mal 100 %. Unabhängig von der Finanzierungsart.</dd></div>
+<div class="glossar-eintrag"><dt><strong>GFS</strong> <span class="glossar-voll">Grandfather-Father-Son</span></dt><dd>Klassisches Rotationskonzept für Backup-Medien: tägliche (Son), wöchentliche (Father) und monatliche (Grandfather) Sicherungen. Ältere Medien werden nach festem Rhythmus wiederverwendet, sodass mehrere Zeitpunkte in der Vergangenheit verfügbar bleiben.</dd></div>
+<div class="glossar-eintrag"><dt><strong>GiB</strong> <span class="glossar-voll">Gibibyte</span></dt><dd>1024 MiB = 1 073 741 824 Byte. Deshalb meldet eine 1-TB-Platte im Betriebssystem rund 931 GiB.</dd></div>
+<div class="glossar-eintrag"><dt><strong>GP</strong> <span class="glossar-voll">Gesamtpuffer</span></dt><dd>Netzplantechnik: SAZ minus FAZ. Zeitspanne, um die ein Vorgang verschoben werden darf, ohne das Projektende zu gefährden. GP=0 kennzeichnet den kritischen Pfad.</dd></div>
+<div class="glossar-eintrag"><dt><strong>GPT</strong> <span class="glossar-voll">GUID Partition Table</span></dt><dd>Partitionsschema für UEFI. Unterstützt sehr große Datenträger und viele Partitionen.</dd></div>
+<div class="glossar-eintrag"><dt><strong>GPT</strong> <span class="glossar-voll">Generative Pre-trained Transformer</span></dt><dd>Modellfamilie aus vortrainierten Transformer-Decodern, die Text Token für Token fortschreibt. Achtung, doppelt belegte Abkürzung: In der Hardware steht GPT für die GUID Partition Table.</dd></div>
+<div class="glossar-eintrag"><dt><strong>GPU</strong> <span class="glossar-voll">Graphics Processing Unit</span></dt><dd>Grafikprozessor. Übernimmt die Bildberechnung und ist oft der leistungshungrigste Verbraucher bei der Netzteilauslegung.</dd></div>
+<div class="glossar-eintrag"><dt><strong>Green IT</strong></dt><dd>Maßnahmen zur Senkung von Energieverbrauch und Umweltbelastung durch Informationstechnik über den gesamten Lebenszyklus.</dd></div>
+<div class="glossar-eintrag"><dt><strong>gRPC</strong> <span class="glossar-voll">gRPC Remote Procedure Call</span></dt><dd>Modernes, leistungsstarkes RPC-Framework von Google auf Basis von HTTP/2 und Protocol Buffers. Ermöglicht effiziente, typsichere Kommunikation zwischen verteilten Diensten, häufig in Microservice-Architekturen.</dd></div>
+<div class="glossar-eintrag"><dt><strong>GUI</strong> <span class="glossar-voll">Graphical User Interface</span></dt><dd>Grafische Benutzeroberfläche mit Fenstern, Symbolen und Maus-/Touchbedienung.</dd></div>
+</dl>
+</section>
+<section class="glossar-gruppe" id="g-h">
+<h2>H</h2>
+<dl>
+<div class="glossar-eintrag"><dt><strong>Halluzinationen</strong> <span class="glossar-voll">Halluzination, Konfabulation</span></dt><dd>Sachlich falsche, aber flüssig und selbstsicher formulierte Ausgabe eines Sprachmodells. Ursache ist das Prinzip der Wahrscheinlichkeitsfortschreibung: Erzeugt wird plausible Sprache, nicht geprüftes Wissen.</dd></div>
+<div class="glossar-eintrag"><dt><strong>Härtung</strong> <span class="glossar-voll">Hardening</span></dt><dd>Reduktion eines Systems auf das Notwendige und sichere Konfiguration, um die Angriffsfläche zu verkleinern.</dd></div>
+<div class="glossar-eintrag"><dt><strong>Harvard-Architektur</strong></dt><dd>Rechnerarchitektur mit getrennten Bussen für Befehle und Daten. Umgeht den Von-Neumann-Flaschenhals.</dd></div>
+<div class="glossar-eintrag"><dt><strong>Hash</strong> <span class="glossar-voll">Hashwert (kryptografische Prüfsumme)</span></dt><dd>Fester Fingerabdruck beliebiger Daten, nicht umkehrbar und kollisionsresistent. Grundlage von Signaturen, Passwortspeicherung und Integritätsprüfung. Bekannte Verfahren: SHA-256; MD5/SHA-1 gelten als gebrochen.</dd></div>
+<div class="glossar-eintrag"><dt><strong>HDD</strong> <span class="glossar-voll">Hard Disk Drive</span></dt><dd>Magnetische Festplatte mit rotierenden Scheiben. Günstig und groß, aber langsamer als SSD.</dd></div>
+<div class="glossar-eintrag"><dt><strong>HDMI</strong> <span class="glossar-voll">High Definition Multimedia Interface</span></dt><dd>Digitale Schnittstelle für Bild- und Tonübertragung an Monitore und Fernseher.</dd></div>
+<div class="glossar-eintrag"><dt><strong>Hidden Node</strong> <span class="glossar-voll">Verstecktes-Endgerät-Problem</span></dt><dd>Zwei WLAN-Clients hören sich gegenseitig nicht und senden gleichzeitig zum AP — es kommt zur Kollision. Milderung durch RTS/CTS.</dd></div>
+<div class="glossar-eintrag"><dt><strong>Honeypot</strong> <span class="glossar-voll">Honigtopf</span></dt><dd>Absichtlich verwundbares Lockvogel-System, das Angreifer anzieht, ablenkt und ihre Methoden sichtbar macht.</dd></div>
+<div class="glossar-eintrag"><dt><strong>Hosted</strong> <span class="glossar-voll">Hosted-Virtualisierung</span></dt><dd>Bezeichnung für einen Typ-2-Hypervisor, der wie eine gewöhnliche Anwendung auf einem bereits installierten Betriebssystem läuft. Beispiele: VirtualBox, VMware Workstation, Parallels Desktop.</dd></div>
+<div class="glossar-eintrag"><dt><strong>Hot Spare</strong></dt><dd>Bereitgehaltene Ersatzplatte im Verbund, die bei einem Ausfall automatisch einspringt und den Rebuild sofort startet.</dd></div>
+<div class="glossar-eintrag"><dt><strong>Hot Swap</strong></dt><dd>Austausch einer defekten Platte im laufenden Betrieb, ohne das System abzuschalten.</dd></div>
+<div class="glossar-eintrag"><dt><strong>Hot-Spare</strong> <span class="glossar-voll">Hot-Spare-Platte</span></dt><dd>Reservefestplatte, die in einem RAID-Verbund mitläuft und bei Ausfall einer Platte automatisch einspringt. Der Rebuild startet sofort, ohne dass ein Techniker eingreifen muss.</dd></div>
+<div class="glossar-eintrag"><dt><strong>Hot-Swap</strong></dt><dd>Austausch einer Festplatte im laufenden Betrieb, ohne das System herunterzufahren. Voraussetzung für Wartung und Plattentausch ohne Ausfallzeit, üblich in Servern und Storage-Systemen.</dd></div>
+<div class="glossar-eintrag"><dt><strong>HTML</strong> <span class="glossar-voll">Hypertext Markup Language</span></dt><dd>Auszeichnungssprache zur Strukturierung von Webseiteninhalten.</dd></div>
+<div class="glossar-eintrag"><dt><strong>HTTP</strong> <span class="glossar-voll">Hypertext Transfer Protocol</span></dt><dd>Protokoll zur Übertragung von Webinhalten. Port 80, unverschlüsselt.</dd></div>
+<div class="glossar-eintrag"><dt><strong>HTTP 200</strong> <span class="glossar-voll">200 OK</span></dt><dd>Erfolgreiche Anfrage, die Antwort enthält das gewünschte Ergebnis.</dd></div>
+<div class="glossar-eintrag"><dt><strong>HTTP 201</strong> <span class="glossar-voll">201 Created</span></dt><dd>Anfrage erfolgreich, dabei wurde eine neue Ressource angelegt.</dd></div>
+<div class="glossar-eintrag"><dt><strong>HTTP 204</strong> <span class="glossar-voll">204 No Content</span></dt><dd>Erfolgreich, aber ohne Inhalt in der Antwort. Häufig nach einem erfolgreichen DELETE.</dd></div>
+<div class="glossar-eintrag"><dt><strong>HTTP 400</strong> <span class="glossar-voll">400 Bad Request</span></dt><dd>Fehlerhafte oder ungültige Anfrage, der Server kann sie nicht verarbeiten.</dd></div>
+<div class="glossar-eintrag"><dt><strong>HTTP 401</strong> <span class="glossar-voll">401 Unauthorized</span></dt><dd>Authentifizierung fehlt oder ist ungültig. Die Identität ist nicht nachgewiesen.</dd></div>
+<div class="glossar-eintrag"><dt><strong>HTTP 403</strong> <span class="glossar-voll">HTTP 403 Forbidden</span></dt><dd>HTTP-Statuscode: Der Server hat die Anfrage verstanden, verweigert aber die Ausführung. Anders als 401 hilft hier keine Authentifizierung — der Zugriff ist grundsätzlich untersagt.</dd></div>
+<div class="glossar-eintrag"><dt><strong>HTTP 404</strong> <span class="glossar-voll">404 Not Found</span></dt><dd>Die angeforderte Ressource wurde nicht gefunden.</dd></div>
+<div class="glossar-eintrag"><dt><strong>HTTP 409</strong> <span class="glossar-voll">409 Conflict</span></dt><dd>Die Anfrage steht im Konflikt mit dem aktuellen Zustand der Ressource.</dd></div>
+<div class="glossar-eintrag"><dt><strong>HTTP 500</strong> <span class="glossar-voll">500 Internal Server Error</span></dt><dd>Allgemeiner Serverfehler bei der Verarbeitung der Anfrage.</dd></div>
+<div class="glossar-eintrag"><dt><strong>HTTP/3</strong> <span class="glossar-voll">Hypertext Transfer Protocol Version 3</span></dt><dd>Aktuelle HTTP-Fassung, die auf QUIC über UDP aufsetzt statt auf TCP. Verbindungsaufbau und Verschlüsselung erfolgen in einem Schritt.</dd></div>
+<div class="glossar-eintrag"><dt><strong>HTTPS</strong> <span class="glossar-voll">Hypertext Transfer Protocol Secure</span></dt><dd>HTTP über TLS/SSL verschlüsselt. Port 443, Standard im Web.</dd></div>
+<div class="glossar-eintrag"><dt><strong>Hybrid Cloud</strong></dt><dd>Kombination aus privater und öffentlicher Cloud. Schutzbedürftige Daten bleiben privat, Lastspitzen laufen öffentlich.</dd></div>
+<div class="glossar-eintrag"><dt><strong>Hypervisor</strong> <span class="glossar-voll">Virtual Machine Monitor</span></dt><dd>Software- oder Firmwareschicht, die virtuelle Maschinen erstellt und verwaltet. Stellt jedem Gastsystem virtuelle Hardware bereit und trennt es von der realen Hardware und den anderen Gästen. Typ 1 läuft direkt auf der Hardware (Baremetal), Typ 2 setzt auf einem vollständigen Host-Betriebssystem auf (Hosted).</dd></div>
+</dl>
+</section>
+<section class="glossar-gruppe" id="g-i">
+<h2>I</h2>
+<dl>
+<div class="glossar-eintrag"><dt><strong>IaaS</strong> <span class="glossar-voll">Infrastructure as a Service</span></dt><dd>Cloud-Modell: Anbieter stellt Rechenleistung, Speicher und Netz bereit; Kunde verwaltet Betriebssystem und Software.</dd></div>
+<div class="glossar-eintrag"><dt><strong>IANA</strong> <span class="glossar-voll">Internet Assigned Numbers Authority</span></dt><dd>Verwaltet den weltweiten IP-Adressraum, die Portnummern und die obersten Ebenen des DNS. Vergibt große Blöcke an die RIR.</dd></div>
+<div class="glossar-eintrag"><dt><strong>ICMP</strong> <span class="glossar-voll">Internet Control Message Protocol</span></dt><dd>Steuer- und Fehlermeldungsprotokoll auf IP-Ebene. Grundlage von ping und Traceroute (Time Exceeded).</dd></div>
+<div class="glossar-eintrag"><dt><strong>idempotent</strong> <span class="glossar-voll">Idempotenz</span></dt><dd>Eine Operation, die mehrfach ausgeführt denselben Zustand ergibt. Gilt für GET, PUT und DELETE, nicht für POST.</dd></div>
+<div class="glossar-eintrag"><dt><strong>IDS</strong> <span class="glossar-voll">Intrusion Detection System</span></dt><dd>Erkennt und meldet verdächtige Aktivitäten im Netz oder auf Systemen. Greift nicht aktiv ein (das macht ein IPS).</dd></div>
+<div class="glossar-eintrag"><dt><strong>IEC</strong> <span class="glossar-voll">International Electrotechnical Commission</span></dt><dd>Normungsgremium. Legte die Binärpräfixe Kibi, Mebi, Gibi fest, um sie von den dezimalen SI-Präfixen Kilo, Mega, Giga zu trennen.</dd></div>
+<div class="glossar-eintrag"><dt><strong>IEEE</strong> <span class="glossar-voll">Institute of Electrical and Electronics Engineers</span></dt><dd>Ingenieursverband, der viele Netzwerkstandards definiert, z. B. 802.3 (Ethernet) und 802.11 (WLAN).</dd></div>
+<div class="glossar-eintrag"><dt><strong>IEEE 802.11</strong> <span class="glossar-voll">WLAN-Standardfamilie</span></dt><dd>Standardfamilie für drahtlose WLAN-Netzwerke. Buchstaben-Zusätze wie ax oder r bezeichnen konkrete Ausbaustufen und Erweiterungen.</dd></div>
+<div class="glossar-eintrag"><dt><strong>IKE</strong> <span class="glossar-voll">Internet Key Exchange</span></dt><dd>Handelt bei IPsec die Schlüssel und Sicherheitsparameter (Security Associations) aus.</dd></div>
+<div class="glossar-eintrag"><dt><strong>IKEv2</strong> <span class="glossar-voll">Internet Key Exchange Version 2</span></dt><dd>Modernere Version des IPsec-Schlüsselaustauschs. Stabil bei Netzwechseln, gilt als sicher und schnell.</dd></div>
+<div class="glossar-eintrag"><dt><strong>IMAP</strong> <span class="glossar-voll">Internet Message Access Protocol</span></dt><dd>Mailabruf, bei dem Nachrichten auf dem Server bleiben und synchronisiert werden. Port 143, verschlüsselt 993 (IMAPS).</dd></div>
+<div class="glossar-eintrag"><dt><strong>Incident</strong> <span class="glossar-voll">Störung</span></dt><dd>Ungeplante Unterbrechung oder Qualitätsminderung eines Service. Ziel: schnellstmögliche Wiederherstellung, notfalls per Workaround.</dd></div>
+<div class="glossar-eintrag"><dt><strong>Inflation</strong></dt><dd>Anhaltender Anstieg des allgemeinen Preisniveaus. Folge ist ein Kaufkraftverlust; Schuldner gewinnen, Sparer verlieren.</dd></div>
+<div class="glossar-eintrag"><dt><strong>Inkrement</strong> <span class="glossar-voll">Increment</span></dt><dd>Scrum-Artefakt: das am Sprintende fertige, lieferbare Zwischenergebnis.</dd></div>
+<div class="glossar-eintrag"><dt><strong>Integrationstest</strong></dt><dd>Teststufe, die das Zusammenspiel mehrerer Komponenten prüft.</dd></div>
+<div class="glossar-eintrag"><dt><strong>Integrität</strong> <span class="glossar-voll">Integrity</span></dt><dd>Schutzziel: Daten sind unverändert und vollständig. Nachgewiesen über Hashwerte, Prüfsummen und Signaturen.</dd></div>
+<div class="glossar-eintrag"><dt><strong>Intermediate CA</strong> <span class="glossar-voll">Zwischenzertifizierungsstelle</span></dt><dd>CA zwischen Root-CA und Endzertifikat. Stellt Zertifikate aus, während die Root-CA offline geschützt bleibt.</dd></div>
+<div class="glossar-eintrag"><dt><strong>Intermediate-CA</strong> <span class="glossar-voll">Zwischenzertifizierungsstelle</span></dt><dd>Stellt unterhalb der Root-CA die Endzertifikate aus, damit der Schlüssel der Root-CA nicht im Tagesbetrieb genutzt werden muss.</dd></div>
+<div class="glossar-eintrag"><dt><strong>IoT</strong> <span class="glossar-voll">Internet of Things</span></dt><dd>Vernetzung von Alltagsgeräten und Sensoren über das Internet, z. B. smarte Thermostate.</dd></div>
+<div class="glossar-eintrag"><dt><strong>IP</strong> <span class="glossar-voll">Internet Protocol</span></dt><dd>Adressiert und routet Pakete zwischen Netzen (Schicht 3). Selbst verbindungslos und ohne Zustellgarantie.</dd></div>
+<div class="glossar-eintrag"><dt><strong>IPS</strong> <span class="glossar-voll">Intrusion Prevention System</span></dt><dd>Wie ein IDS, greift aber aktiv ein und blockiert erkannte Angriffe.</dd></div>
+<div class="glossar-eintrag"><dt><strong>IPsec</strong> <span class="glossar-voll">Internet Protocol Security</span></dt><dd>Sicherheitserweiterung auf IP-Ebene: Verschlüsselung, Authentifizierung, Integrität. Transport- und Tunnelmodus, Standard für VPNs.</dd></div>
+<div class="glossar-eintrag"><dt><strong>iptables</strong></dt><dd>Klassisches Werkzeug zur Regelverwaltung des Linux-Paketfilters, inzwischen weitgehend durch nftables abgelöst.</dd></div>
+<div class="glossar-eintrag"><dt><strong>IPv4</strong> <span class="glossar-voll">Internet Protocol Version 4</span></dt><dd>32-Bit-Adressen als vier Dezimal-Oktette (z. B. 192.168.0.1), ca. 4,3 Mrd. Adressen — knapp geworden.</dd></div>
+<div class="glossar-eintrag"><dt><strong>IPv6</strong> <span class="glossar-voll">Internet Protocol Version 6</span></dt><dd>128-Bit-Adressen in acht Hex-Blöcken (z. B. 2001:db8::1). Praktisch unerschöpflicher Adressraum.</dd></div>
+<div class="glossar-eintrag"><dt><strong>ISAKMP</strong> <span class="glossar-voll">Internet Security Association and Key Management Protocol</span></dt><dd>Rahmenwerk für Aushandlung und Verwaltung von Security Associations bei IPsec. IKE baut darauf auf.</dd></div>
+<div class="glossar-eintrag"><dt><strong>ISO</strong> <span class="glossar-voll">International Organization for Standardization</span></dt><dd>Internationale Normungsorganisation, u. a. Urheber des OSI-Referenzmodells.</dd></div>
+<div class="glossar-eintrag"><dt><strong>ISP</strong> <span class="glossar-voll">Internet Service Provider</span></dt><dd>Anbieter des Internetzugangs, z. B. Telekom oder Vodafone.</dd></div>
+<div class="glossar-eintrag"><dt><strong>IT-Grundschutz</strong> <span class="glossar-voll">BSI IT-Grundschutz</span></dt><dd>Standardisiertes Vorgehen des BSI mit Bausteinen und Anforderungen, um ohne volle Risikoanalyse ein angemessenes Sicherheitsniveau zu erreichen.</dd></div>
+<div class="glossar-eintrag"><dt><strong>ITIL</strong> <span class="glossar-voll">IT Infrastructure Library</span></dt><dd>Sammlung bewährter Praktiken für IT-Servicemanagement. Kein Gesetz und keine Norm, sondern ein Rahmenwerk.</dd></div>
+</dl>
+</section>
+<section class="glossar-gruppe" id="g-j">
+<h2>J</h2>
+<dl>
+<div class="glossar-eintrag"><dt><strong>JBOD</strong> <span class="glossar-voll">Just a Bunch Of Disks</span></dt><dd>Bündelt mehrere, auch verschieden große Laufwerke zu einem logischen Speicherbereich. Keine Redundanz: Ausfall eines Datenträgers kann Daten kosten.</dd></div>
+<div class="glossar-eintrag"><dt><strong>JSON</strong> <span class="glossar-voll">JavaScript Object Notation</span></dt><dd>Leichtgewichtiges, textbasiertes Datenformat. Standard für API-Antworten.</dd></div>
+<div class="glossar-eintrag"><dt><strong>JSON-RPC</strong> <span class="glossar-voll">JSON Remote Procedure Call</span></dt><dd>Leichtgewichtiges RPC-Protokoll, das Anfragen und Antworten im JSON-Format überträgt. Einfach aufgebaut und transportunabhängig (oft über HTTP).</dd></div>
+</dl>
+</section>
+<section class="glossar-gruppe" id="g-k">
+<h2>K</h2>
+<dl>
+<div class="glossar-eintrag"><dt><strong>Kapselung</strong> <span class="glossar-voll">Datenkapselung</span></dt><dd>OOP-Prinzip: Attribute werden nach außen verborgen und nur über Methoden zugänglich gemacht.</dd></div>
+<div class="glossar-eintrag"><dt><strong>Kaufkraft</strong></dt><dd>Gütermenge, die man für einen bestimmten Geldbetrag erhält. Sie verhält sich umgekehrt zum Preisniveau.</dd></div>
+<div class="glossar-eintrag"><dt><strong>Kaufvertrag</strong></dt><dd>Vertrag über Übergabe und Eigentumsübertragung einer Sache gegen Zahlung. Kommt durch Angebot und Annahme zustande, nicht erst durch Lieferung.</dd></div>
+<div class="glossar-eintrag"><dt><strong>kB</strong> <span class="glossar-voll">Kilobyte</span></dt><dd>1000 Byte nach SI. Mit diesem Faktor beschriften Hersteller Datenträger und Leitungen, nicht mit 1024.</dd></div>
+<div class="glossar-eintrag"><dt><strong>Kerberos</strong> <span class="glossar-voll">Kerberos-Authentifizierungsprotokoll</span></dt><dd>Ticketbasierte Authentifizierung in Netzwerken (Standard in Active Directory). Ein zentraler Server (KDC) stellt Tickets aus, Passwörter werden nie übertragen.</dd></div>
+<div class="glossar-eintrag"><dt><strong>Keylogger</strong></dt><dd>Zeichnet Tastatureingaben auf, um Zugangsdaten abzugreifen. Als Software oder als Hardware am Anschluss.</dd></div>
+<div class="glossar-eintrag"><dt><strong>KI-Agenten</strong> <span class="glossar-voll">KI-Agent, AI Agent</span></dt><dd>Sprachmodell in einer Schleife: Es plant, ruft Werkzeuge auf, wertet das Ergebnis aus und entscheidet selbst über den nächsten Schritt, bis ein Ziel erreicht ist. Unterschied zum Chatbot ist das eigenständige Handeln über mehrere Schritte.</dd></div>
+<div class="glossar-eintrag"><dt><strong>KiB</strong> <span class="glossar-voll">Kibibyte</span></dt><dd>1024 Byte nach IEC. Betriebssysteme rechnen häufig so, schreiben aber trotzdem KB an die Anzeige.</dd></div>
+<div class="glossar-eintrag"><dt><strong>Kill Switch</strong> <span class="glossar-voll">Notausschalter (VPN)</span></dt><dd>Blockiert den Internetzugriff automatisch, sobald die VPN-Verbindung abbricht — verhindert unverschlüsselten Datenabfluss.</dd></div>
+<div class="glossar-eintrag"><dt><strong>Klassendiagramm</strong> <span class="glossar-voll">UML-Klassendiagramm</span></dt><dd>Zeigt den statischen Aufbau: Klassen mit Attributen, Methoden, Sichtbarkeiten und Beziehungen mit Multiplizitäten.</dd></div>
+<div class="glossar-eintrag"><dt><strong>Known Error</strong> <span class="glossar-voll">Bekannter Fehler</span></dt><dd>Problem mit bekannter Ursache und dokumentierter Umgehungslösung (Workaround).</dd></div>
+<div class="glossar-eintrag"><dt><strong>Konnektor</strong></dt><dd>Verknüpfungsoperator in der EPK: UND für parallele Zweige, ODER für einen oder mehrere, XOR für genau einen Zweig.</dd></div>
+<div class="glossar-eintrag"><dt><strong>Kumulationseffekt</strong></dt><dd>Der Schutzbedarf steigt, weil viele für sich unkritische Daten zusammenkommen und in Summe größeren Schaden verursachen könnten.</dd></div>
+<div class="glossar-eintrag"><dt><strong>KVP</strong> <span class="glossar-voll">Kontinuierlicher Verbesserungsprozess</span></dt><dd>Methode zur stetigen Optimierung von Abläufen und Qualität in kleinen Schritten.</dd></div>
+</dl>
+</section>
+<section class="glossar-gruppe" id="g-l">
+<h2>L</h2>
+<dl>
+<div class="glossar-eintrag"><dt><strong>L2TP</strong> <span class="glossar-voll">Layer 2 Tunneling Protocol</span></dt><dd>VPN-Tunnelprotokoll ohne eigene Verschlüsselung, meist als L2TP/IPsec kombiniert.</dd></div>
+<div class="glossar-eintrag"><dt><strong>LAN</strong> <span class="glossar-voll">Local Area Network</span></dt><dd>Lokales Netz innerhalb eines Gebäudes oder Geländes, typisch Ethernet mit Switch.</dd></div>
+<div class="glossar-eintrag"><dt><strong>Layer-3-Switch</strong></dt><dd>Switch, der zusätzlich zwischen VLANs routen kann. Übernimmt in Hardware, wofür sonst ein Router nötig wäre.</dd></div>
+<div class="glossar-eintrag"><dt><strong>LC</strong> <span class="glossar-voll">Lucent Connector</span></dt><dd>Kompakter Glasfaser-Steckertyp, weit verbreitet in Rechenzentren.</dd></div>
+<div class="glossar-eintrag"><dt><strong>LCD</strong> <span class="glossar-voll">Liquid Crystal Display</span></dt><dd>Displaytechnik mit Flüssigkristallen. Benötigt eine Hintergrundbeleuchtung, heute meist durch LEDs.</dd></div>
+<div class="glossar-eintrag"><dt><strong>LDAP</strong> <span class="glossar-voll">Lightweight Directory Access Protocol</span></dt><dd>Protokoll für Verzeichnisdienste, z. B. zentrale Benutzerverwaltung (Active Directory). Port 389, verschlüsselt 636 (LDAPS).</dd></div>
+<div class="glossar-eintrag"><dt><strong>Lease</strong> <span class="glossar-voll">DHCP-Lease</span></dt><dd>Befristete Zuweisung einer IP-Adresse an einen Client. Wird nach der Hälfte der Laufzeit zur Verlängerung angefragt.</dd></div>
+<div class="glossar-eintrag"><dt><strong>Leasing</strong></dt><dd>Nutzungsüberlassung über feste Laufzeit gegen Rate, oft mit Kaufoption am Ende. Eigentum bleibt beim Leasinggeber.</dd></div>
+<div class="glossar-eintrag"><dt><strong>Least Privilege</strong> <span class="glossar-voll">Prinzip der geringsten Rechte</span></dt><dd>Jedes Konto und jeder Dienst erhält nur die Rechte, die zur Aufgabenerfüllung nötig sind.</dd></div>
+<div class="glossar-eintrag"><dt><strong>Lebenslinie</strong> <span class="glossar-voll">Lifeline</span></dt><dd>Senkrechte gestrichelte Linie im Sequenzdiagramm, die die Existenz eines Objekts über die Zeit darstellt.</dd></div>
+<div class="glossar-eintrag"><dt><strong>LED</strong> <span class="glossar-voll">Light Emitting Diode</span></dt><dd>Leuchtdiode; in der Netzwerktechnik Lichtquelle für Multimode-Glasfaser.</dd></div>
+<div class="glossar-eintrag"><dt><strong>Lieferverzug</strong></dt><dd>Vertragsstörung durch Überschreiten des Liefertermins. Rechte: Erfüllung verlangen, Verzugsschaden, nach Nachfrist Rücktritt.</dd></div>
+<div class="glossar-eintrag"><dt><strong>Live-Migration</strong></dt><dd>Verschiebung einer laufenden virtuellen Maschine auf einen anderen Host im laufenden Betrieb, ohne den Dienst zu unterbrechen. Vereinfacht Wartungsarbeiten und Lastenausgleich zwischen mehreren Hosts.</dd></div>
+<div class="glossar-eintrag"><dt><strong>LLM</strong> <span class="glossar-voll">Large Language Model, großes Sprachmodell</span></dt><dd>Auf sehr großen Textmengen trainiertes neuronales Netz, das Token für Token die wahrscheinlichste Fortsetzung erzeugt. Es hält kein Wissen wie eine Datenbank vor, sondern statistische Muster.</dd></div>
+<div class="glossar-eintrag"><dt><strong>Longest Prefix Match</strong> <span class="glossar-voll">Längste Präfixübereinstimmung</span></dt><dd>Routing-Regel: Bei mehreren passenden Einträgen gewinnt der spezifischste (längste Netzpräfix).</dd></div>
+<div class="glossar-eintrag"><dt><strong>Loopback</strong> <span class="glossar-voll">Rückschleife</span></dt><dd>Adresse 127.0.0.1 (IPv4) bzw. ::1 (IPv6). Verweist auf den eigenen Rechner; Pakete verlassen die Netzwerkkarte nie.</dd></div>
+<div class="glossar-eintrag"><dt><strong>LSB</strong> <span class="glossar-voll">Least Significant Bit</span></dt><dd>Das niederwertigste Bit einer Binärzahl (ganz rechts, Wertigkeit 1).</dd></div>
+<div class="glossar-eintrag"><dt><strong>LWL</strong> <span class="glossar-voll">Lichtwellenleiter</span></dt><dd>Deutscher Begriff für Glasfaserkabel: überträgt Daten als Licht, immun gegen elektromagnetische Störungen.</dd></div>
+</dl>
+</section>
+<section class="glossar-gruppe" id="g-m">
+<h2>M</h2>
+<dl>
+<div class="glossar-eintrag"><dt><strong>M.2</strong></dt><dd>Steckplatzformat für Erweiterungskarten, vor allem SSDs. Beschreibt die Bauform, nicht das Übertragungsprotokoll.</dd></div>
+<div class="glossar-eintrag"><dt><strong>MAC</strong> <span class="glossar-voll">Media Access Control</span></dt><dd>Weltweit eindeutige 48-Bit-Hardwareadresse einer Netzwerkkarte, z. B. 00:1A:2B:3C:4D:5E. Adressierung auf Schicht 2.</dd></div>
+<div class="glossar-eintrag"><dt><strong>MAC-Spoofing</strong> <span class="glossar-voll">MAC-Adressen-Fälschung</span></dt><dd>Vortäuschen einer fremden MAC-Adresse, um MAC-Filter oder dynamische VLAN-Zuordnung auszuhebeln. Grund, warum MAC-basierte Sicherheit als schwach gilt.</dd></div>
+<div class="glossar-eintrag"><dt><strong>MAN</strong> <span class="glossar-voll">Metropolitan Area Network</span></dt><dd>Stadtweites Netz, verbindet Standorte innerhalb einer Region (bis ~100 km).</dd></div>
+<div class="glossar-eintrag"><dt><strong>Management-VLAN</strong></dt><dd>Eigenes VLAN für die Verwaltung von Switches, Access Points und Firewalls. Nur für Administratoren erreichbar.</dd></div>
+<div class="glossar-eintrag"><dt><strong>Mandantenfähigkeit</strong> <span class="glossar-voll">Multi-Tenancy</span></dt><dd>Mehrere Kunden nutzen dieselbe Umgebung bei logisch getrennten Daten. Grundlage der Public Cloud.</dd></div>
+<div class="glossar-eintrag"><dt><strong>Marketing-Mix</strong></dt><dd>Die vier Instrumente Produkt-, Preis-, Distributions- und Kommunikationspolitik, englisch die vier P.</dd></div>
+<div class="glossar-eintrag"><dt><strong>Marktanalyse</strong></dt><dd>Untersuchung der Marktlage zu einem bestimmten Zeitpunkt. Momentaufnahme im Unterschied zur Marktbeobachtung.</dd></div>
+<div class="glossar-eintrag"><dt><strong>Marktbeobachtung</strong></dt><dd>Fortlaufende Verfolgung eines Marktes über längere Zeit. Macht Veränderungen sichtbar.</dd></div>
+<div class="glossar-eintrag"><dt><strong>Marktprognose</strong></dt><dd>Vorhersage der künftigen Marktentwicklung auf Basis vorhandener Daten.</dd></div>
+<div class="glossar-eintrag"><dt><strong>Marktsegmentierung</strong></dt><dd>Einteilung eines Marktes in Gruppen mit ähnlichen Merkmalen oder Bedürfnissen, um Angebot und Werbung gezielt auszurichten.</dd></div>
+<div class="glossar-eintrag"><dt><strong>Maximumprinzip</strong></dt><dd>Bei der Schutzbedarfsfeststellung übernimmt ein System den höchsten Schutzbedarf aller darauf laufenden Anwendungen.</dd></div>
+<div class="glossar-eintrag"><dt><strong>MBR</strong> <span class="glossar-voll">Master Boot Record</span></dt><dd>Klassisches Partitionsschema für BIOS. Begrenzt auf 2 TB und vier primäre Partitionen.</dd></div>
+<div class="glossar-eintrag"><dt><strong>MCP</strong> <span class="glossar-voll">Model Context Protocol</span></dt><dd>Offener Standard, über den Sprachmodelle einheitlich auf externe Werkzeuge, Daten und Dienste zugreifen. Ein MCP-Server stellt seine Funktionen bereit, der Client bindet sie ein. Ersetzt die Einzelintegration je Dienst durch eine gemeinsame Schnittstelle.</dd></div>
+<div class="glossar-eintrag"><dt><strong>MFA</strong> <span class="glossar-voll">Multi-Faktor-Authentifizierung</span></dt><dd>Anmeldung mit mehreren unabhängigen Faktoren (Wissen, Besitz, Biometrie). 2FA ist der Spezialfall mit zwei.</dd></div>
+<div class="glossar-eintrag"><dt><strong>MiB</strong> <span class="glossar-voll">Mebibyte</span></dt><dd>1024 KiB = 1 048 576 Byte. Binäres Gegenstück zum dezimalen Megabyte mit 1 000 000 Byte.</dd></div>
+<div class="glossar-eintrag"><dt><strong>Mietvertrag</strong></dt><dd>Vertrag über die Gebrauchsüberlassung gegen Miete. Das Eigentum bleibt beim Vermieter.</dd></div>
+<div class="glossar-eintrag"><dt><strong>Mirroring</strong> <span class="glossar-voll">Spiegelung</span></dt><dd>Schreibt Daten identisch auf zwei Platten. Fällt eine aus, läuft der Betrieb mit der anderen weiter.</dd></div>
+<div class="glossar-eintrag"><dt><strong>MITM</strong> <span class="glossar-voll">Man-in-the-Middle-Angriff</span></dt><dd>Angreifer schaltet sich unbemerkt zwischen zwei Kommunikationspartner und kann mitlesen oder manipulieren. Abwehr: Verschlüsselung mit Authentifizierung (z. B. TLS mit Zertifikatsprüfung).</dd></div>
+<div class="glossar-eintrag"><dt><strong>Mixture of Experts</strong> <span class="glossar-voll">Mixture of Experts, MoE</span></dt><dd>Architektur, bei der ein Modell aus vielen Teilnetzen besteht und ein Router je Token nur wenige davon aktiviert. Das Modell besitzt sehr viele Parameter, rechnet pro Anfrage aber nur mit einem Bruchteil.</dd></div>
+<div class="glossar-eintrag"><dt><strong>Modultest</strong> <span class="glossar-voll">Unit-Test</span></dt><dd>Teststufe, die einen einzelnen Baustein isoliert prüft. Im V-Modell der Komponentenspezifikation zugeordnet.</dd></div>
+<div class="glossar-eintrag"><dt><strong>Monopol</strong></dt><dd>Marktform mit nur einem Anbieter. Er ist Preissetzer, begrenzt durch Zahlungsbereitschaft und Aufsicht.</dd></div>
+<div class="glossar-eintrag"><dt><strong>Monopson</strong> <span class="glossar-voll">Nachfragemonopol</span></dt><dd>Marktform mit nur einem Nachfrager bei vielen Anbietern. Die Marktmacht liegt auf der Nachfrageseite.</dd></div>
+<div class="glossar-eintrag"><dt><strong>MPLS</strong> <span class="glossar-voll">Multiprotocol Label Switching</span></dt><dd>WAN-Technik, die Pakete anhand von Labels statt IP-Routing durch Providernetze leitet.</dd></div>
+<div class="glossar-eintrag"><dt><strong>MSB</strong> <span class="glossar-voll">Most Significant Bit</span></dt><dd>Das höchstwertige Bit einer Binärzahl (ganz links, größte Wertigkeit).</dd></div>
+<div class="glossar-eintrag"><dt><strong>MSS</strong> <span class="glossar-voll">Maximum Segment Size</span></dt><dd>Größte Nutzdatenmenge, die ein TCP-Segment tragen darf — ohne TCP-/IP-Header. Wird beim Verbindungsaufbau ausgehandelt und leitet sich aus der MTU des Übertragungswegs ab (typisch: MTU 1500 minus 40 Byte Header = MSS 1460).</dd></div>
+<div class="glossar-eintrag"><dt><strong>MST</strong> <span class="glossar-voll">Multi-Stream Transport</span></dt><dd>Funktion von DisplayPort und Thunderbolt, um mehrere Monitore über einen Ausgang zu betreiben, per Daisy-Chain oder MST-Hub.</dd></div>
+<div class="glossar-eintrag"><dt><strong>MTU</strong> <span class="glossar-voll">Maximum Transmission Unit</span></dt><dd>Größte Paketgröße, die ohne Fragmentierung übertragen werden kann. Bei Ethernet typisch 1500 Byte.</dd></div>
+<div class="glossar-eintrag"><dt><strong>Multicast</strong> <span class="glossar-voll">Gruppensendung</span></dt><dd>Nachricht an eine definierte Gruppe von Empfängern (1:n), nicht an alle. Effizienter als viele Unicasts.</dd></div>
+<div class="glossar-eintrag"><dt><strong>Multimodalität</strong></dt><dd>Fähigkeit eines Modells, mehrere Datenarten gemeinsam zu verarbeiten, etwa Text, Bild, Audio und Video. Alle Eingaben werden dafür in dieselbe Vektordarstellung überführt.</dd></div>
+<div class="glossar-eintrag"><dt><strong>MUX</strong> <span class="glossar-voll">Multiplexer</span></dt><dd>Bündelt mehrere Signale zur Übertragung über ein gemeinsames Medium. Gegenstück: Demultiplexer (DEMUX).</dd></div>
+<div class="glossar-eintrag"><dt><strong>MX</strong> <span class="glossar-voll">Mail Exchange</span></dt><dd>DNS-Record, der den zuständigen Mailserver einer Domain benennt.</dd></div>
+<div class="glossar-eintrag"><dt><strong>MX-Record</strong> <span class="glossar-voll">Mail Exchange Record</span></dt><dd>DNS-Eintrag, der den zuständigen Mailserver einer Domain benennt. Die Priorität bestimmt die Reihenfolge.</dd></div>
+<div class="glossar-eintrag"><dt><strong>MySQL</strong> <span class="glossar-voll">MySQL-Datenbank</span></dt><dd>Verbreitetes relationales Datenbanksystem. Standardport 3306 (TCP).</dd></div>
+</dl>
+</section>
+<section class="glossar-gruppe" id="g-n">
+<h2>N</h2>
+<dl>
+<div class="glossar-eintrag"><dt><strong>Nacherfüllung</strong></dt><dd>Vorrangiges Recht bei Mängeln: Reparatur oder Ersatzlieferung. Erst bei Fehlschlagen folgen Minderung, Rücktritt oder Schadensersatz.</dd></div>
+<div class="glossar-eintrag"><dt><strong>Nadeldrucker</strong></dt><dd>Drucker, dessen Nadeln mechanisch über ein Farbband schlagen. Einziger gängiger Typ, der Durchschläge erzeugt.</dd></div>
+<div class="glossar-eintrag"><dt><strong>NAND</strong> <span class="glossar-voll">NICHT-UND-Verknüpfung</span></dt><dd>Negiertes AND: Ausgang ist 0, nur wenn beide Eingänge 1 sind — in allen anderen Fällen 1. NAND gilt als Universalgatter: Aus NAND-Gattern allein lässt sich jede andere Logikfunktion aufbauen.</dd></div>
+<div class="glossar-eintrag"><dt><strong>NAS</strong> <span class="glossar-voll">Network Attached Storage</span></dt><dd>Netzwerkspeicher: ein ans LAN angeschlossenes Gerät, das Dateien zentral bereitstellt.</dd></div>
+<div class="glossar-eintrag"><dt><strong>NAT</strong> <span class="glossar-voll">Network Address Translation</span></dt><dd>Übersetzt private in öffentliche IP-Adressen. Primär gegen Adressknappheit — kein Sicherheitsmechanismus.</dd></div>
+<div class="glossar-eintrag"><dt><strong>NDP</strong> <span class="glossar-voll">Neighbor Discovery Protocol</span></dt><dd>Ersetzt bei IPv6 das ARP: löst Adressen auf und entdeckt Router (via ICMPv6).</dd></div>
+<div class="glossar-eintrag"><dt><strong>Netzklasse</strong> <span class="glossar-voll">IP-Netzklasse</span></dt><dd>Historische Einteilung des IPv4-Adressraums in die Klassen A bis E anhand des ersten Bytes. Durch CIDR abgelöst.</dd></div>
+<div class="glossar-eintrag"><dt><strong>NFC</strong> <span class="glossar-voll">Near Field Communication</span></dt><dd>Funkübertragung über wenige Zentimeter, z. B. kontaktloses Bezahlen. Typische PAN-Technologie.</dd></div>
+<div class="glossar-eintrag"><dt><strong>nftables</strong></dt><dd>Paketfilter des Linux-Kernels und Nachfolger von iptables. Regelt in Tabellen und Ketten, welche Pakete passieren dürfen.</dd></div>
+<div class="glossar-eintrag"><dt><strong>Nibble</strong> <span class="glossar-voll">Halbbyte</span></dt><dd>4 Bit = eine Hexadezimalstelle. Ein Byte besteht aus zwei Nibbles.</dd></div>
+<div class="glossar-eintrag"><dt><strong>NIC</strong> <span class="glossar-voll">Network Interface Card</span></dt><dd>Die Netzwerkkarte: physische Schnittstelle eines Geräts zum Netz, trägt ab Werk die MAC-Adresse.</dd></div>
+<div class="glossar-eintrag"><dt><strong>NOR</strong> <span class="glossar-voll">NICHT-ODER-Verknüpfung</span></dt><dd>Negiertes OR: Ausgang ist 1, nur wenn beide Eingänge 0 sind. Wie NAND ein Universalgatter, aus dem sich alle anderen Verknüpfungen konstruieren lassen.</dd></div>
+<div class="glossar-eintrag"><dt><strong>NOT</strong> <span class="glossar-voll">Negation (Inverter)</span></dt><dd>Logikgatter mit nur einem Eingang: kehrt den Wert um (0 wird 1, 1 wird 0). Baustein der negierten Gatter — NAND, NOR und XNOR sind AND, OR und XOR mit nachgeschaltetem NOT.</dd></div>
+<div class="glossar-eintrag"><dt><strong>NTP</strong> <span class="glossar-voll">Network Time Protocol</span></dt><dd>Synchronisiert Systemuhren über das Netzwerk mit Zeitservern. Port 123.</dd></div>
+<div class="glossar-eintrag"><dt><strong>NVMe</strong> <span class="glossar-voll">Non-Volatile Memory Express</span></dt><dd>Protokoll für SSDs, das direkt über PCIe angebunden wird. Deutlich höhere Datenraten und geringere Latenz als SATA.</dd></div>
+</dl>
+</section>
+<section class="glossar-gruppe" id="g-o">
+<h2>O</h2>
+<dl>
+<div class="glossar-eintrag"><dt><strong>OAuth</strong> <span class="glossar-voll">Open Authorization</span></dt><dd>Offener Standard zur delegierten Autorisierung: Ein Nutzer erlaubt einer Anwendung Zugriff auf seine Daten bei einem Dienst, ohne dass die Anwendung sein Passwort erhält. Liefert dabei typischerweise ein zeitlich begrenztes Access-Token.</dd></div>
+<div class="glossar-eintrag"><dt><strong>Objekt-Storage</strong> <span class="glossar-voll">Objektspeicher</span></dt><dd>Ablage als Objekte mit eindeutiger Kennung und Metadaten, ohne Ordnerbaum. Zugriff per HTTP/REST, stark skalierbar.</dd></div>
+<div class="glossar-eintrag"><dt><strong>Objektspeicher</strong> <span class="glossar-voll">Object Storage</span></dt><dd>Speichert Daten als Objekte mit Metadaten und eindeutiger Kennung, ohne Verzeichnisbaum. Geeignet für große Mengen unveränderlicher Dateien.</dd></div>
+<div class="glossar-eintrag"><dt><strong>OCSP</strong> <span class="glossar-voll">Online Certificate Status Protocol</span></dt><dd>Prüft den Widerrufsstatus eines Zertifikats online in Echtzeit — Alternative zur CRL.</dd></div>
+<div class="glossar-eintrag"><dt><strong>OLA</strong> <span class="glossar-voll">Operational Level Agreement</span></dt><dd>Interne Vereinbarung zwischen Abteilungen desselben Anbieters, damit das SLA nach außen eingehalten werden kann.</dd></div>
+<div class="glossar-eintrag"><dt><strong>OLED</strong> <span class="glossar-voll">Organic Light Emitting Diode</span></dt><dd>Displaytechnik, bei der jedes Bildelement selbst leuchtet. Ermöglicht echtes Schwarz ohne Hintergrundbeleuchtung.</dd></div>
+<div class="glossar-eintrag"><dt><strong>Oligopol</strong></dt><dd>Marktform mit wenigen Anbietern und vielen Nachfragern. Anbieter reagieren stark aufeinander.</dd></div>
+<div class="glossar-eintrag"><dt><strong>On-Premises</strong></dt><dd>Betrieb der Systeme in eigenen Räumen und eigener Verantwortung. Gegenmodell zur Cloud.</dd></div>
+<div class="glossar-eintrag"><dt><strong>OOP</strong> <span class="glossar-voll">Objektorientierte Programmierung</span></dt><dd>Programmierparadigma mit Klassen und Objekten: Kapselung, Vererbung, Polymorphie.</dd></div>
+<div class="glossar-eintrag"><dt><strong>Open Weights</strong> <span class="glossar-voll">Open Weights, offene Gewichte</span></dt><dd>Veröffentlichte Modellgewichte, die jeder herunterladen und selbst betreiben kann. Nicht dasselbe wie Open Source: Trainingsdaten und Trainingscode bleiben meist verschlossen, und die Lizenz kann die Nutzung einschränken.</dd></div>
+<div class="glossar-eintrag"><dt><strong>OpenVPN</strong></dt><dd>Open-Source-VPN-Protokoll auf TLS-Basis. Plattformunabhängig und flexibel konfigurierbar.</dd></div>
+<div class="glossar-eintrag"><dt><strong>OR</strong> <span class="glossar-voll">ODER-Verknüpfung (Disjunktion)</span></dt><dd>Logikgatter: Ausgang ist 1, sobald mindestens ein Eingang 1 ist. Nur bei 0/0 ergibt sich 0. Nicht zu verwechseln mit XOR, das bei gleichen Eingängen 0 liefert.</dd></div>
+<div class="glossar-eintrag"><dt><strong>OSI</strong> <span class="glossar-voll">Open Systems Interconnection</span></dt><dd>7-Schichten-Referenzmodell der Netzwerkkommunikation. Deutsch: 1 Bitübertragung, 2 Sicherung, 3 Vermittlung, 4 Transport, 5 Sitzung, 6 Darstellung, 7 Anwendung. Englisch: 1 Physical, 2 Data Link, 3 Network, 4 Transport, 5 Session, 6 Presentation, 7 Application.</dd></div>
+<div class="glossar-eintrag"><dt><strong>OSPF</strong> <span class="glossar-voll">Open Shortest Path First</span></dt><dd>Dynamisches Routingprotokoll, das den kürzesten Weg anhand von Link-Kosten berechnet.</dd></div>
+<div class="glossar-eintrag"><dt><strong>OUI</strong> <span class="glossar-voll">Organizationally Unique Identifier</span></dt><dd>Die ersten 24 Bit einer MAC-Adresse, kennzeichnen den Hersteller der Netzwerkkarte.</dd></div>
+<div class="glossar-eintrag"><dt><strong>Overcommitment</strong> <span class="glossar-voll">Überprovisionierung</span></dt><dd>Virtuellen Maschinen wird in Summe mehr Arbeitsspeicher oder Rechenleistung zugewiesen, als auf dem Host physisch vorhanden ist. Solange nicht alle VMs gleichzeitig ihr volles Kontingent abrufen, funktioniert das — bei gleichzeitigem Spitzenbedarf drohen Engpässe. Gegenmaßnahmen: Monitoring, Auslastungsprognosen, Live-Migration.</dd></div>
+<div class="glossar-eintrag"><dt><strong>Overhead</strong> <span class="glossar-voll">Zusatzaufwand / Mehraufwand</span></dt><dd>Zusätzlicher Ressourcenverbrauch (Zeit, Bandbreite, Rechenleistung), der neben den eigentlichen Nutzdaten für Steuerung, Verschlüsselung oder Protokoll-Header anfällt. Weniger Overhead bedeutet mehr Effizienz, aber oft auch weniger Sicherheit oder Fehlertoleranz — ein klassischer Kompromiss in der Netzwerktechnik.</dd></div>
+</dl>
+</section>
+<section class="glossar-gruppe" id="g-p">
+<h2>P</h2>
+<dl>
+<div class="glossar-eintrag"><dt><strong>PaaS</strong> <span class="glossar-voll">Platform as a Service</span></dt><dd>Cloud-Modell: Anbieter stellt Entwicklungs- und Laufzeitumgebung; Kunde bringt nur die Anwendung.</dd></div>
+<div class="glossar-eintrag"><dt><strong>Pair Programming</strong></dt><dd>Zwei Personen arbeiten gemeinsam an einem Rechner: einer schreibt, einer prüft mit. Erhöht Qualität und verteilt Wissen.</dd></div>
+<div class="glossar-eintrag"><dt><strong>PAN</strong> <span class="glossar-voll">Personal Area Network</span></dt><dd>Netz im persönlichen Nahbereich (~10 m), z. B. Bluetooth, USB, NFC.</dd></div>
+<div class="glossar-eintrag"><dt><strong>Para-Virtualisierung</strong></dt><dd>Virtualisierungsform, bei der keine Hardware emuliert wird. Stattdessen stellt der Hypervisor eine API als Schnittstelle bereit, die das Gastsystem direkt nutzen muss — dafür muss dessen Kernel angepasst oder bereits vorbereitet sein. Vorteil: kein Overhead durch Befehlsübersetzung. Typischer Einsatz: Rechenzentren, Cloud-Anbieter.</dd></div>
+<div class="glossar-eintrag"><dt><strong>Parität</strong> <span class="glossar-voll">Paritätsinformation</span></dt><dd>Per XOR berechnete Prüfinformation, aus der sich die Daten einer ausgefallenen Platte rekonstruieren lassen.</dd></div>
+<div class="glossar-eintrag"><dt><strong>Parity</strong> <span class="glossar-voll">Parität (RAID)</span></dt><dd>Per XOR berechnete Prüfinformation, aus der sich die Daten einer ausgefallenen Platte rekonstruieren lassen. Grundlage von RAID 5 (einfache Parität) und RAID 6 (doppelte Parität).</dd></div>
+<div class="glossar-eintrag"><dt><strong>PATCH</strong> <span class="glossar-voll">HTTP-Methode PATCH</span></dt><dd>Ändert gezielt einzelne Teile einer Ressource, nicht die gesamte. Im Gegensatz zu PUT wird nur das Übermittelte angepasst.</dd></div>
+<div class="glossar-eintrag"><dt><strong>Patchmanagement</strong></dt><dd>Geregelter Ablauf zum Erfassen, Bewerten, Testen, Verteilen und Kontrollieren von Aktualisierungen.</dd></div>
+<div class="glossar-eintrag"><dt><strong>PB</strong> <span class="glossar-voll">Petabyte</span></dt><dd>1000 TB = 10^15 Byte. Größenordnung großer Archive und Rechenzentren.</dd></div>
+<div class="glossar-eintrag"><dt><strong>PCI Express</strong> <span class="glossar-voll">Peripheral Component Interconnect Express</span></dt><dd>Steckplatzstandard für Erweiterungskarten. Die Bandbreite ergibt sich aus der Anzahl der Lanes.</dd></div>
+<div class="glossar-eintrag"><dt><strong>PCIe</strong> <span class="glossar-voll">Peripheral Component Interconnect Express</span></dt><dd>Serielles Bussystem für Erweiterungskarten und NVMe-SSDs. Bandbreite skaliert über die Anzahl der Lanes (x1, x4, x16).</dd></div>
+<div class="glossar-eintrag"><dt><strong>PD</strong> <span class="glossar-voll">Power Delivery</span></dt><dd>USB-Standard für hohe Ladeleistungen über USB-C, aushandelbar bis in den dreistelligen Watt-Bereich.</dd></div>
+<div class="glossar-eintrag"><dt><strong>PDCA</strong> <span class="glossar-voll">Plan, Do, Check, Act</span></dt><dd>Zyklus der kontinuierlichen Verbesserung: planen, begrenzt umsetzen, Ergebnis prüfen, bei Erfolg zum Standard machen.</dd></div>
+<div class="glossar-eintrag"><dt><strong>PDU</strong> <span class="glossar-voll">Protocol Data Unit</span></dt><dd>Dateneinheit einer OSI-Schicht: Bit (L1), Frame (L2), Paket (L3), Segment (L4).</dd></div>
+<div class="glossar-eintrag"><dt><strong>PEM</strong> <span class="glossar-voll">Privacy Enhanced Mail</span></dt><dd>Textbasiertes Dateiformat für Zertifikate und Schlüssel (Base64). Binäre Alternative: DER.</dd></div>
+<div class="glossar-eintrag"><dt><strong>Penetration</strong> <span class="glossar-voll">Penetrationsstrategie</span></dt><dd>Markteinführung mit niedrigem Preis, um schnell Marktanteile zu gewinnen.</dd></div>
+<div class="glossar-eintrag"><dt><strong>Pentest</strong> <span class="glossar-voll">Penetration Test (Penetrationstest)</span></dt><dd>Autorisierter, simulierter Angriff auf ein System, um Schwachstellen vor echten Angreifern zu finden.</dd></div>
+<div class="glossar-eintrag"><dt><strong>PFS</strong> <span class="glossar-voll">Perfect Forward Secrecy</span></dt><dd>Für jede Sitzung wird ein eigener, flüchtiger Schlüssel ausgehandelt. Ein später kompromittierter Langzeitschlüssel entschlüsselt frühere Aufzeichnungen dadurch nicht.</dd></div>
+<div class="glossar-eintrag"><dt><strong>PGP</strong> <span class="glossar-voll">Pretty Good Privacy</span></dt><dd>Verfahren zur E-Mail-Verschlüsselung und Signatur nach dem hybriden Prinzip.</dd></div>
+<div class="glossar-eintrag"><dt><strong>Phishing</strong></dt><dd>Social-Engineering-Angriff per gefälschter Mail oder Website, um Zugangsdaten zu stehlen.</dd></div>
+<div class="glossar-eintrag"><dt><strong>PKI</strong> <span class="glossar-voll">Public Key Infrastructure</span></dt><dd>System zur Verwaltung von Schlüsseln und Zertifikaten mit CA-Hierarchie und Vertrauenskette.</dd></div>
+<div class="glossar-eintrag"><dt><strong>Plotter</strong></dt><dd>Ausgabegerät für Vektorgrafiken wie Baupläne und technische Zeichnungen.</dd></div>
+<div class="glossar-eintrag"><dt><strong>PoE</strong> <span class="glossar-voll">Power over Ethernet</span></dt><dd>Stromversorgung von Geräten (APs, IP-Telefone, Kameras) direkt über das Netzwerkkabel.</dd></div>
+<div class="glossar-eintrag"><dt><strong>Polypol</strong></dt><dd>Marktform mit vielen Anbietern und vielen Nachfragern. Der einzelne Anbieter ist Preisnehmer.</dd></div>
+<div class="glossar-eintrag"><dt><strong>Poor Dog</strong></dt><dd>Produkt mit geringem Anteil in einem kaum wachsenden Markt. Wird in der Regel ausgelaufen.</dd></div>
+<div class="glossar-eintrag"><dt><strong>POP3</strong> <span class="glossar-voll">Post Office Protocol Version 3</span></dt><dd>Mailabruf, bei dem Nachrichten heruntergeladen und meist vom Server gelöscht werden. Port 110, verschlüsselt 995 (POP3S).</dd></div>
+<div class="glossar-eintrag"><dt><strong>Port Security</strong></dt><dd>Switch-Funktion, die einen Port auf bestimmte MAC-Adressen begrenzt. Verhindert, dass ein beliebiges angestecktes Gerät ins Netz kommt.</dd></div>
+<div class="glossar-eintrag"><dt><strong>POST</strong> <span class="glossar-voll">Power-On Self-Test</span></dt><dd>Selbsttest der Firmware beim Einschalten, der die Hardware prüft und initialisiert.</dd></div>
+<div class="glossar-eintrag"><dt><strong>PPTP</strong> <span class="glossar-voll">Point-to-Point Tunneling Protocol</span></dt><dd>Veraltetes VPN-Tunnelprotokoll mit bekannten Sicherheitslücken. Nicht mehr einsetzen — heute IPsec, OpenVPN oder WireGuard.</dd></div>
+<div class="glossar-eintrag"><dt><strong>Primärer Sektor</strong> <span class="glossar-voll">Urproduktion</span></dt><dd>Wirtschaftssektor der Rohstoffgewinnung: Land- und Forstwirtschaft, Fischerei, Bergbau.</dd></div>
+<div class="glossar-eintrag"><dt><strong>Primärforschung</strong></dt><dd>Eigene Erhebung neuer Daten über Befragung, Beobachtung oder Experiment. Genau zugeschnitten, aber teuer.</dd></div>
+<div class="glossar-eintrag"><dt><strong>Private Cloud</strong></dt><dd>Ausschließlich für ein Unternehmen betriebene Cloud-Umgebung. Hohe Kontrolle, dafür teurer und weniger elastisch.</dd></div>
+<div class="glossar-eintrag"><dt><strong>Problem</strong> <span class="glossar-voll">Problem (ITIL)</span></dt><dd>Die zugrunde liegende Ursache eines oder mehrerer Incidents. Ziel ist die dauerhafte Beseitigung.</dd></div>
+<div class="glossar-eintrag"><dt><strong>Projektdokumentation</strong></dt><dd>Unterlagen des Projekts: Lasten- und Pflichtenheft, Protokolle, Entscheidungen, Abnahme und Lessons Learned.</dd></div>
+<div class="glossar-eintrag"><dt><strong>Prompt Engineering</strong></dt><dd>Systematisches Formulieren der Anweisung an ein Sprachmodell: klare Aufgabe, Rolle, Ausgabeformat, Beispiele. Wirkt stark, weil die Ausgabe unmittelbar von der Eingabe abhängt.</dd></div>
+<div class="glossar-eintrag"><dt><strong>Proxy</strong> <span class="glossar-voll">Proxy-Server</span></dt><dd>Vermittler zwischen Client und Zielserver. Leitet Anfragen stellvertretend weiter, kann filtern, zwischenspeichern (Cache) und die interne Struktur verbergen.</dd></div>
+<div class="glossar-eintrag"><dt><strong>PSK</strong> <span class="glossar-voll">Pre-Shared Key</span></dt><dd>Vorab vereinbarter gemeinsamer Schlüssel, z. B. das WLAN-Passwort bei WPA2-Personal.</dd></div>
+<div class="glossar-eintrag"><dt><strong>PTR</strong> <span class="glossar-voll">Pointer Record</span></dt><dd>DNS-Eintrag für den Reverse-Lookup: löst eine IP-Adresse zurück in einen Namen auf.</dd></div>
+<div class="glossar-eintrag"><dt><strong>Public Cloud</strong></dt><dd>Von einem Anbieter für viele Kunden bereitgestellte, geteilte Ressourcen. Günstig und elastisch, dafür geringere Kontrolle.</dd></div>
+<div class="glossar-eintrag"><dt><strong>PUT</strong> <span class="glossar-voll">HTTP-Methode PUT</span></dt><dd>Ersetzt eine Ressource üblicherweise vollständig oder legt sie unter bekannter Adresse an. Idempotent: mehrfaches Senden führt zum selben Ergebnis.</dd></div>
+<div class="glossar-eintrag"><dt><strong>PXE</strong> <span class="glossar-voll">Preboot Execution Environment</span></dt><dd>Startet Rechner über das Netzwerk, z. B. für automatische Betriebssysteminstallation. Nutzt DHCP und TFTP.</dd></div>
+</dl>
+</section>
+<section class="glossar-gruppe" id="g-q">
+<h2>Q</h2>
+<dl>
+<div class="glossar-eintrag"><dt><strong>QoS</strong> <span class="glossar-voll">Quality of Service</span></dt><dd>Priorisierung bestimmter Datenströme (z. B. VoIP) für gleichbleibende Qualität im Netz.</dd></div>
+<div class="glossar-eintrag"><dt><strong>Qualitätskontrolle</strong></dt><dd>Nachgelagerte Prüfung am fertigen Produkt, ob die Vorgaben eingehalten wurden, etwa durch Tests und Messungen.</dd></div>
+<div class="glossar-eintrag"><dt><strong>Qualitätsmanagementplan</strong></dt><dd>Dokument mit Qualitätszielen, anzuwendenden Normen, geplanten Prüfungen und dem Vorgehen bei Abweichungen.</dd></div>
+<div class="glossar-eintrag"><dt><strong>Qualitätsplanung</strong></dt><dd>Festlegung, was Qualität im konkreten Projekt bedeutet, mit messbaren Kriterien.</dd></div>
+<div class="glossar-eintrag"><dt><strong>Qualitätssicherung</strong></dt><dd>Vorbeugende Maßnahmen am Prozess, damit Fehler gar nicht erst entstehen, etwa Reviews und Standards.</dd></div>
+<div class="glossar-eintrag"><dt><strong>Quantisierung</strong></dt><dd>Speicherung der Modellgewichte mit geringerer Genauigkeit, etwa 4 oder 8 Bit statt 16. Senkt Speicherbedarf und Rechenlast deutlich und macht große Modelle auf gewöhnlicher Hardware lauffähig, kostet aber etwas Qualität.</dd></div>
+<div class="glossar-eintrag"><dt><strong>Quartärer Sektor</strong> <span class="glossar-voll">Informationssektor</span></dt><dd>Abspaltung des tertiären Sektors für wissensbasierte Tätigkeiten: Forschung, Beratung, Datenanalyse.</dd></div>
+<div class="glossar-eintrag"><dt><strong>Question Mark</strong></dt><dd>Produkt mit geringem Anteil in einem wachsenden Markt. Erfordert eine Entscheidung: ausbauen oder aufgeben.</dd></div>
+<div class="glossar-eintrag"><dt><strong>QUIC</strong> <span class="glossar-voll">Quick UDP Internet Connections</span></dt><dd>Modernes Transportprotokoll auf UDP-Basis mit integrierter Verschlüsselung. Grundlage von HTTP/3.</dd></div>
+<div class="glossar-eintrag"><dt><strong>Quintärer Sektor</strong> <span class="glossar-voll">Haushaltssektor</span></dt><dd>Die privaten Haushalte als eigener Wirtschaftsbereich: Konsumenten und Anbieter von Arbeitskraft.</dd></div>
+<div class="glossar-eintrag"><dt><strong>Quotenauswahl</strong></dt><dd>Stichprobenverfahren mit vorgegebenen Merkmalen wie Alter oder Region. Günstiger, aber nicht zufällig.</dd></div>
+</dl>
+</section>
+<section class="glossar-gruppe" id="g-r">
+<h2>R</h2>
+<dl>
+<div class="glossar-eintrag"><dt><strong>RA</strong> <span class="glossar-voll">Registration Authority (Registrierungsstelle)</span></dt><dd>PKI-Komponente, die die Identität von Zertifikatsantragstellern prüft, bevor die CA das Zertifikat ausstellt.</dd></div>
+<div class="glossar-eintrag"><dt><strong>RACI</strong> <span class="glossar-voll">Responsible, Accountable, Consulted, Informed</span></dt><dd>Matrix zur Klärung von Zuständigkeiten je Aufgabe. Genau ein A je Zeile, R kann mehrfach vergeben werden.</dd></div>
+<div class="glossar-eintrag"><dt><strong>RADIUS</strong> <span class="glossar-voll">Remote Authentication Dial-In User Service</span></dt><dd>Zentraler Authentifizierungsserver, z. B. für WPA-Enterprise: prüft Benutzeranmeldungen im WLAN.</dd></div>
+<div class="glossar-eintrag"><dt><strong>RAG</strong> <span class="glossar-voll">Retrieval Augmented Generation</span></dt><dd>Vor der Antwort werden passende Dokumente aus einer eigenen Wissensbasis gesucht, meist über Embeddings, und in den Kontext gelegt. Das Modell antwortet damit belegt und aktuell, ohne neu trainiert zu werden.</dd></div>
+<div class="glossar-eintrag"><dt><strong>RAID</strong> <span class="glossar-voll">Redundant Array of Independent Disks</span></dt><dd>Verbund mehrerer Festplatten für Ausfallsicherheit und/oder Geschwindigkeit (RAID 0, 1, 5, 10).</dd></div>
+<div class="glossar-eintrag"><dt><strong>RAID-Controller</strong></dt><dd>Steuert den Plattenverbund und setzt die Regeln des RAID-Levels um. Als Steckkarte oder Chip auf der Hauptplatine (Hardware-RAID) oder als Funktion des Betriebssystems (Software-RAID).</dd></div>
+<div class="glossar-eintrag"><dt><strong>Rainbow Table</strong> <span class="glossar-voll">Regenbogentabelle</span></dt><dd>Vorberechnete Tabelle von Hashwerten zum schnellen Knacken von Passwörtern. Wird durch Salt unwirksam.</dd></div>
+<div class="glossar-eintrag"><dt><strong>RAM</strong> <span class="glossar-voll">Random Access Memory</span></dt><dd>Flüchtiger Arbeitsspeicher: schnell, verliert Inhalt beim Ausschalten.</dd></div>
+<div class="glossar-eintrag"><dt><strong>Ransomware</strong> <span class="glossar-voll">Erpressungssoftware</span></dt><dd>Schadsoftware, die Daten verschlüsselt und für die Freigabe Lösegeld fordert.</dd></div>
+<div class="glossar-eintrag"><dt><strong>RARP</strong> <span class="glossar-voll">Reverse Address Resolution Protocol</span></dt><dd>Umkehrung von ARP: ermittelt zu einer bekannten MAC-Adresse die zugehörige IP-Adresse. Historisch von plattenlosen Stationen zum Beziehen ihrer IP genutzt — heute veraltet und durch DHCP ersetzt.</dd></div>
+<div class="glossar-eintrag"><dt><strong>Ratendarlehen</strong> <span class="glossar-voll">Tilgungsdarlehen</span></dt><dd>Darlehen mit gleichbleibender Tilgung. Zinsen auf die sinkende Restschuld, dadurch fallende Gesamtrate.</dd></div>
+<div class="glossar-eintrag"><dt><strong>RDP</strong> <span class="glossar-voll">Remote Desktop Protocol</span></dt><dd>Grafische Fernsteuerung von Windows-Rechnern. Port 3389; gesicherter Zugang von außen über RD-Gateway.</dd></div>
+<div class="glossar-eintrag"><dt><strong>Reallohn</strong></dt><dd>Kaufkraft des Lohns nach Berücksichtigung der Preisentwicklung. Gegenstück ist der Nominallohn, also der ausgezahlte Betrag.</dd></div>
+<div class="glossar-eintrag"><dt><strong>Rebuild</strong> <span class="glossar-voll">Wiederherstellung des Verbunds</span></dt><dd>Rekonstruktion der Daten auf einer neu eingesetzten Platte aus den übrigen Platten. Während des Vorgangs ist die Redundanz eingeschränkt.</dd></div>
+<div class="glossar-eintrag"><dt><strong>Recurrent Depth</strong> <span class="glossar-voll">Recurrent Depth, Opaque Recurrence</span></dt><dd>Ansatz, bei dem ein Modell denselben Block im latenten Raum mehrfach durchläuft, statt Zwischenschritte als Text auszugeben. Die Rechentiefe steigt zur Laufzeit, der Denkweg bleibt jedoch unlesbar.</dd></div>
+<div class="glossar-eintrag"><dt><strong>Refactoring</strong></dt><dd>Verbesserung der inneren Struktur des Codes, ohne das Verhalten nach außen zu verändern.</dd></div>
+<div class="glossar-eintrag"><dt><strong>Relay-Agent</strong> <span class="glossar-voll">DHCP-Relay-Agent</span></dt><dd>Leitet DHCP-Broadcasts über Netzgrenzen an einen zentralen Server weiter, sodass nicht in jedem Subnetz ein eigener Server nötig ist.</dd></div>
+<div class="glossar-eintrag"><dt><strong>Resolver</strong> <span class="glossar-voll">DNS-Resolver</span></dt><dd>Komponente, die DNS-Anfragen für den Client auflöst — rekursiv (komplett) oder iterativ (schrittweise).</dd></div>
+<div class="glossar-eintrag"><dt><strong>REST</strong> <span class="glossar-voll">Representational State Transfer</span></dt><dd>Architekturstil für Web-APIs: zustandslos, nutzt HTTP-Methoden (GET, POST, PUT, DELETE).</dd></div>
+<div class="glossar-eintrag"><dt><strong>Reverse Lookup</strong> <span class="glossar-voll">Rückwärtsauflösung</span></dt><dd>Auflösung einer IP-Adresse in einen Namen über die Zone in-addr.arpa. Wird für Protokollierung und Mailprüfung genutzt.</dd></div>
+<div class="glossar-eintrag"><dt><strong>RFC</strong> <span class="glossar-voll">Request for Comments</span></dt><dd>Offizielle Dokumente, in denen Internetstandards und Protokolle beschrieben werden.</dd></div>
+<div class="glossar-eintrag"><dt><strong>RIP</strong> <span class="glossar-voll">Routing Information Protocol</span></dt><dd>Einfaches dynamisches Routingprotokoll auf Basis der Hop-Anzahl (max. 15 Hops).</dd></div>
+<div class="glossar-eintrag"><dt><strong>RIPE NCC</strong> <span class="glossar-voll">Réseaux IP Européens Network Coordination Centre</span></dt><dd>Regionale Vergabestelle für IP-Adressen in Europa, dem Nahen Osten und Zentralasien.</dd></div>
+<div class="glossar-eintrag"><dt><strong>RIR</strong> <span class="glossar-voll">Regional Internet Registry</span></dt><dd>Regionale Vergabestelle für IP-Adressen. Für Europa ist das RIPE NCC zuständig.</dd></div>
+<div class="glossar-eintrag"><dt><strong>Risikoanalyse</strong></dt><dd>Vertiefte Betrachtung bei hohem oder sehr hohem Schutzbedarf. Ergänzt den IT-Grundschutz um zusätzliche Maßnahmen.</dd></div>
+<div class="glossar-eintrag"><dt><strong>RJ11</strong> <span class="glossar-voll">Registered Jack 11</span></dt><dd>Kleiner Steckverbinder mit 4–6 Kontakten, klassisch für analoge Telefonleitungen und DSL-Anschlüsse. Nicht zu verwechseln mit dem breiteren 8-poligen RJ45 für Ethernet-Netzwerkkabel.</dd></div>
+<div class="glossar-eintrag"><dt><strong>RJ45</strong> <span class="glossar-voll">Registered Jack 45</span></dt><dd>Der 8-polige Standardstecker für Twisted-Pair-Netzwerkkabel (Ethernet).</dd></div>
+<div class="glossar-eintrag"><dt><strong>Roaming</strong> <span class="glossar-voll">WLAN-Roaming</span></dt><dd>Nahtloser Wechsel eines Clients zwischen Access Points ohne Verbindungsabbruch. Beschleunigt durch 802.11r.</dd></div>
+<div class="glossar-eintrag"><dt><strong>ROI</strong> <span class="glossar-voll">Return on Investment</span></dt><dd>Kapitalrendite aus Umsatzrentabilität mal Kapitalumschlag; vereinfacht Gewinn geteilt durch eingesetztes Kapital mal 100 %.</dd></div>
+<div class="glossar-eintrag"><dt><strong>Root-CA</strong> <span class="glossar-voll">Root Certificate Authority</span></dt><dd>Oberste Zertifizierungsstelle einer PKI. Ihr Zertifikat ist selbstsigniert und als Vertrauensanker im System hinterlegt.</dd></div>
+<div class="glossar-eintrag"><dt><strong>Rootkit</strong></dt><dd>Schadsoftware, die sich tief im System einnistet und ihre eigene Anwesenheit sowie die anderer Schadsoftware verbirgt.</dd></div>
+<div class="glossar-eintrag"><dt><strong>RPC</strong> <span class="glossar-voll">Remote Procedure Call (entfernter Prozeduraufruf)</span></dt><dd>Verfahren, bei dem ein Programm eine Funktion auf einem anderen Rechner aufruft, als wäre sie lokal — die Netzwerkkommunikation läuft im Hintergrund. Im OSI-Modell auf der Sitzungsschicht (Schicht 5) angesiedelt. Grundlage vieler verteilter Systeme; moderne Varianten sind z. B. gRPC und JSON-RPC.</dd></div>
+<div class="glossar-eintrag"><dt><strong>RPO</strong> <span class="glossar-voll">Recovery Point Objective</span></dt><dd>Maximal tolerierbarer Datenverlust, ausgedrückt als Zeitspanne bis zur letzten Sicherung. Ein RPO von 1 Stunde bedeutet: im Ernstfall darf höchstens 1 Stunde an Daten verloren gehen. Bestimmt die Sicherungshäufigkeit.</dd></div>
+<div class="glossar-eintrag"><dt><strong>RSA</strong> <span class="glossar-voll">Rivest–Shamir–Adleman</span></dt><dd>Klassisches asymmetrisches Verschlüsselungsverfahren mit öffentlichem und privatem Schlüssel.</dd></div>
+<div class="glossar-eintrag"><dt><strong>RST</strong> <span class="glossar-voll">Reset</span></dt><dd>TCP-Flag, das eine Verbindung sofort und ungeordnet abbricht — im Gegensatz zum geordneten FIN.</dd></div>
+<div class="glossar-eintrag"><dt><strong>RTO</strong> <span class="glossar-voll">Recovery Time Objective</span></dt><dd>Maximal tolerierbare Ausfallzeit, bis ein System nach einer Störung wieder verfügbar sein muss. Während RPO den akzeptablen Datenverlust beschreibt, betrifft RTO die Dauer der Wiederherstellung.</dd></div>
+<div class="glossar-eintrag"><dt><strong>RTP</strong> <span class="glossar-voll">Real-Time Transport Protocol</span></dt><dd>Transportiert Echtzeitdaten wie Sprache und Video, z. B. bei VoIP. Läuft über UDP.</dd></div>
+<div class="glossar-eintrag"><dt><strong>RTS</strong> <span class="glossar-voll">Request to Send</span></dt><dd>Steuersignal, mit dem eine Station den Wunsch anmeldet, Daten zu senden. Teil des RTS/CTS-Verfahrens im WLAN gegen das Hidden-Node-Problem.</dd></div>
+<div class="glossar-eintrag"><dt><strong>RTT</strong> <span class="glossar-voll">Round Trip Time (Paketumlaufzeit)</span></dt><dd>Zeit, die ein Paket vom Sender zum Ziel und die Antwort wieder zurück braucht. Wird u. a. per ping gemessen und geht in die Berechnung des TCP-Timeouts ein. Hohe RTT bedeutet spürbare Latenz — kritisch für Echtzeitanwendungen wie VoIP und Videotelefonie.</dd></div>
+</dl>
+</section>
+<section class="glossar-gruppe" id="g-s">
+<h2>S</h2>
+<dl>
+<div class="glossar-eintrag"><dt><strong>S/MIME</strong> <span class="glossar-voll">Secure/Multipurpose Internet Mail Extensions</span></dt><dd>Standard für E-Mail-Verschlüsselung und -Signatur mit X.509-Zertifikaten.</dd></div>
+<div class="glossar-eintrag"><dt><strong>SaaS</strong> <span class="glossar-voll">Software as a Service</span></dt><dd>Cloud-Modell: fertige Software wird über das Internet genutzt, z. B. Webmail oder Office 365.</dd></div>
+<div class="glossar-eintrag"><dt><strong>SAE</strong> <span class="glossar-voll">Simultaneous Authentication of Equals</span></dt><dd>Schlüsselverfahren in WPA3-Personal. Ersetzt PSK und verhindert Offline-Brute-Force auf das Passwort.</dd></div>
+<div class="glossar-eintrag"><dt><strong>Salt</strong> <span class="glossar-voll">Salt (Streuwert)</span></dt><dd>Zufallswert, der vor dem Hashing an ein Passwort angehängt wird. Macht Rainbow-Tables wirkungslos.</dd></div>
+<div class="glossar-eintrag"><dt><strong>SAN</strong> <span class="glossar-voll">Storage Area Network</span></dt><dd>Eigenes Hochgeschwindigkeitsnetz, das Server mit zentralen Speichersystemen verbindet.</dd></div>
+<div class="glossar-eintrag"><dt><strong>SAS</strong> <span class="glossar-voll">Serial Attached SCSI</span></dt><dd>Serielle Schnittstelle für Laufwerke in Servern und Speichersystemen. Schneller und robuster als SATA, erlaubt längere Kabelwege und mehrere Laufwerke je Anschluss.</dd></div>
+<div class="glossar-eintrag"><dt><strong>SATA</strong> <span class="glossar-voll">Serial ATA</span></dt><dd>Standardschnittstelle zum Anschluss von Festplatten und SSDs im Rechner.</dd></div>
+<div class="glossar-eintrag"><dt><strong>SAZ</strong> <span class="glossar-voll">Spätester Anfangszeitpunkt</span></dt><dd>Netzplantechnik: SEZ minus Vorgangsdauer. Der späteste Start, ohne das Projektende zu verzögern.</dd></div>
+<div class="glossar-eintrag"><dt><strong>SC</strong> <span class="glossar-voll">Subscriber Connector</span></dt><dd>Glasfaser-Steckertyp mit Push-Pull-Mechanik, verbreitet in Verteilern.</dd></div>
+<div class="glossar-eintrag"><dt><strong>Schutzbedarfsfeststellung</strong></dt><dd>Einstufung jedes Objekts je Schutzziel in normal, hoch oder sehr hoch. Grundlage für die Auswahl der Maßnahmen.</dd></div>
+<div class="glossar-eintrag"><dt><strong>SDSL</strong> <span class="glossar-voll">Symmetric Digital Subscriber Line</span></dt><dd>DSL-Variante mit gleicher Rate in beide Richtungen. Für Firmen mit hohem Upload-Bedarf.</dd></div>
+<div class="glossar-eintrag"><dt><strong>Secure Boot</strong></dt><dd>UEFI-Funktion, die nur signierte Bootloader startet und dadurch manipulierte Startumgebungen abweist.</dd></div>
+<div class="glossar-eintrag"><dt><strong>Security by Default</strong></dt><dd>Das System ist im Auslieferungszustand bereits sicher eingestellt; Sicherheit muss nicht erst aktiviert werden.</dd></div>
+<div class="glossar-eintrag"><dt><strong>Security by Design</strong></dt><dd>Sicherheit wird von Anfang an in Architektur und Entwurf eingeplant statt nachträglich aufgesetzt.</dd></div>
+<div class="glossar-eintrag"><dt><strong>Sekundärer Sektor</strong> <span class="glossar-voll">Produzierendes Gewerbe</span></dt><dd>Wirtschaftssektor der Verarbeitung: Industrie, Handwerk, Bau, Hardwarefertigung.</dd></div>
+<div class="glossar-eintrag"><dt><strong>Sekundärforschung</strong></dt><dd>Auswertung bereits vorhandener Daten wie Statistiken, Studien oder eigener Verkaufszahlen. Schnell und günstig.</dd></div>
+<div class="glossar-eintrag"><dt><strong>Self-Signed</strong> <span class="glossar-voll">Selbstsigniertes Zertifikat</span></dt><dd>Zertifikat, das von seiner eigenen Instanz signiert wurde — ohne externen Vertrauensanker. Für Tests/intern.</dd></div>
+<div class="glossar-eintrag"><dt><strong>Sequenzdiagramm</strong> <span class="glossar-voll">UML-Sequenzdiagramm</span></dt><dd>Zeigt den zeitlichen Ablauf des Nachrichtenaustauschs zwischen Objekten mit Lebenslinien und Aktivierungsbalken.</dd></div>
+<div class="glossar-eintrag"><dt><strong>Service Desk</strong></dt><dd>Zentrale Anlaufstelle (Single Point of Contact) für alle Anliegen der Nutzer.</dd></div>
+<div class="glossar-eintrag"><dt><strong>SEZ</strong> <span class="glossar-voll">Spätester Endzeitpunkt</span></dt><dd>Netzplantechnik: der späteste Zeitpunkt, zu dem ein Vorgang enden darf. Ergibt sich in der Rückwärtsrechnung aus dem frühesten SAZ aller Nachfolger.</dd></div>
+<div class="glossar-eintrag"><dt><strong>SFTP</strong> <span class="glossar-voll">SSH File Transfer Protocol</span></dt><dd>Verschlüsselte Dateiübertragung über SSH (Port 22). Nicht zu verwechseln mit FTPS.</dd></div>
+<div class="glossar-eintrag"><dt><strong>SHA</strong> <span class="glossar-voll">Secure Hash Algorithm</span></dt><dd>Familie kryptografischer Hashfunktionen (z. B. SHA-256). Erzeugt einen einwegigen Fingerabdruck von Daten.</dd></div>
+<div class="glossar-eintrag"><dt><strong>Single Point of Failure</strong> <span class="glossar-voll">Einzelfehlerstelle</span></dt><dd>Bauteil, dessen Ausfall das gesamte System lahmlegt, weil es keine Reserve gibt. Beim RAID etwa der Controller.</dd></div>
+<div class="glossar-eintrag"><dt><strong>SIP</strong> <span class="glossar-voll">Session Initiation Protocol</span></dt><dd>Signalisierungsprotokoll bei VoIP: baut Gespräche auf, verwaltet und beendet sie.</dd></div>
+<div class="glossar-eintrag"><dt><strong>Skimming</strong> <span class="glossar-voll">Skimmingstrategie</span></dt><dd>Markteinführung mit hohem Preis, der später gesenkt wird. Schöpft zuerst die zahlungsbereiten Kunden ab.</dd></div>
+<div class="glossar-eintrag"><dt><strong>SLA</strong> <span class="glossar-voll">Service Level Agreement</span></dt><dd>Vertrag über zugesicherte Dienstqualität, z. B. Verfügbarkeit und Reaktionszeiten.</dd></div>
+<div class="glossar-eintrag"><dt><strong>SLAAC</strong> <span class="glossar-voll">Stateless Address Autoconfiguration</span></dt><dd>IPv6-Selbstkonfiguration: Gerät bildet seine Adresse aus dem Router-Präfix, ohne Server.</dd></div>
+<div class="glossar-eintrag"><dt><strong>SMART</strong> <span class="glossar-voll">Spezifisch, Messbar, Attraktiv, Realistisch, Terminiert</span></dt><dd>Kriterien für überprüfbar formulierte Projektziele. In der Prüfung alle fünf einzeln durchgehen.</dd></div>
+<div class="glossar-eintrag"><dt><strong>SMB</strong> <span class="glossar-voll">Server Message Block</span></dt><dd>Protokoll für Windows-Datei- und Druckerfreigaben. Standardport 445 (TCP).</dd></div>
+<div class="glossar-eintrag"><dt><strong>SMT</strong> <span class="glossar-voll">Simultaneous Multithreading</span></dt><dd>Ein physischer CPU-Kern verarbeitet mehrere Threads gleichzeitig. Das Betriebssystem sieht dadurch mehr logische als physische Prozessoren.</dd></div>
+<div class="glossar-eintrag"><dt><strong>SMTP</strong> <span class="glossar-voll">Simple Mail Transfer Protocol</span></dt><dd>Versand von E-Mails zwischen Servern. Port 25; Client-Versand über 587 (Submission) oder 465 (SMTPS).</dd></div>
+<div class="glossar-eintrag"><dt><strong>SNMP</strong> <span class="glossar-voll">Simple Network Management Protocol</span></dt><dd>Überwachung und Verwaltung von Netzwerkgeräten. Port 161, Traps (Meldungen) auf 162.</dd></div>
+<div class="glossar-eintrag"><dt><strong>SOAP</strong> <span class="glossar-voll">Simple Object Access Protocol</span></dt><dd>Älteres API-Protokoll auf XML-Basis mit strengen Standards, verbreitet im Banking.</dd></div>
+<div class="glossar-eintrag"><dt><strong>Social Engineering</strong></dt><dd>Manipulation von Menschen statt Technik, um an Zugangsdaten oder Informationen zu gelangen. Varianten sind Phishing, Pretexting, Baiting und Tailgating.</dd></div>
+<div class="glossar-eintrag"><dt><strong>SOCKS</strong> <span class="glossar-voll">Socket Secure</span></dt><dd>Proxy-Protokoll, das beliebigen TCP/UDP-Verkehr weiterleitet. Standardport 1080, u. a. bei Tor genutzt.</dd></div>
+<div class="glossar-eintrag"><dt><strong>Spear-Phishing</strong></dt><dd>Gezielte Phishing-Variante auf eine bestimmte Person mit persönlichem Bezug, dadurch deutlich glaubwürdiger.</dd></div>
+<div class="glossar-eintrag"><dt><strong>SPF</strong> <span class="glossar-voll">Sender Policy Framework</span></dt><dd>DNS-Eintrag, der festlegt, welche Server für eine Domain Mails versenden dürfen. Prüft den sendenden Server.</dd></div>
+<div class="glossar-eintrag"><dt><strong>Spiralmodell</strong></dt><dd>Iteratives Modell mit wiederholten Zyklen aus Zielsetzung, Risikoanalyse, Entwicklung und Bewertung. Risikoanalyse ist fester Bestandteil jedes Zyklus.</dd></div>
+<div class="glossar-eintrag"><dt><strong>Split Tunneling</strong> <span class="glossar-voll">Geteiltes Tunneling</span></dt><dd>Nur ausgewählter Verkehr läuft durch den VPN-Tunnel, der Rest direkt ins Internet. Entlastet das VPN.</dd></div>
+<div class="glossar-eintrag"><dt><strong>Spyware</strong></dt><dd>Späht unbemerkt Nutzerverhalten, Eingaben oder Daten aus und übermittelt sie an Dritte.</dd></div>
+<div class="glossar-eintrag"><dt><strong>SQL</strong> <span class="glossar-voll">Structured Query Language</span></dt><dd>Standardsprache für relationale Datenbanken: Abfragen, Einfügen, Ändern, Löschen von Daten.</dd></div>
+<div class="glossar-eintrag"><dt><strong>SQL-Injection</strong></dt><dd>Einschleusen von SQL-Befehlen über ungeprüfte Eingabefelder. Gegenmittel sind vorbereitete Anweisungen und Eingabevalidierung.</dd></div>
+<div class="glossar-eintrag"><dt><strong>SSD</strong> <span class="glossar-voll">Solid State Drive</span></dt><dd>Flash-basierter Massenspeicher ohne bewegliche Teile: schnell, robust, teurer pro GB als HDD.</dd></div>
+<div class="glossar-eintrag"><dt><strong>SSH</strong> <span class="glossar-voll">Secure Shell</span></dt><dd>Verschlüsselte Fernsteuerung und Dateiübertragung. Port 22. Sicherer Nachfolger von Telnet.</dd></div>
+<div class="glossar-eintrag"><dt><strong>SSID</strong> <span class="glossar-voll">Service Set Identifier</span></dt><dd>Der Name eines WLAN-Netzes, den Geräte bei der Suche angezeigt bekommen.</dd></div>
+<div class="glossar-eintrag"><dt><strong>SSL</strong> <span class="glossar-voll">Secure Sockets Layer</span></dt><dd>Veraltetes Verschlüsselungsprotokoll für Verbindungen, abgelöst durch TLS. Der Begriff hält sich umgangssprachlich.</dd></div>
+<div class="glossar-eintrag"><dt><strong>Stagflation</strong></dt><dd>Steigende Preise bei gleichzeitiger Stagnation und hoher Arbeitslosigkeit. Typischer Auslöser ist ein Angebotsschock.</dd></div>
+<div class="glossar-eintrag"><dt><strong>Standardgateway</strong> <span class="glossar-voll">Default Gateway</span></dt><dd>Router, an den ein Gerät alle Pakete schickt, deren Ziel außerhalb des eigenen Netzes liegt. Ohne ihn sind nur lokale Ziele erreichbar.</dd></div>
+<div class="glossar-eintrag"><dt><strong>STARTTLS</strong> <span class="glossar-voll">Opportunistische TLS-Verschlüsselung</span></dt><dd>Erweiterung, die eine zunächst unverschlüsselte Klartextverbindung nachträglich auf eine TLS-verschlüsselte umschaltet — auf demselben Port. Genutzt bei SMTP (587), IMAP (143) und POP3 (110). Vorteil: keine getrennten Klartext-/Verschlüsselungsports nötig. Schwäche: anfällig für STARTTLS-Stripping, wenn nicht per Policy erzwungen.</dd></div>
+<div class="glossar-eintrag"><dt><strong>Store-and-Forward</strong> <span class="glossar-voll">Store-and-Forward-Switching</span></dt><dd>Switching-Verfahren: Der Switch empfängt den kompletten Frame, prüft die Prüfsumme und verwirft fehlerhafte Frames, bevor er weiterleitet. Sicherer als Cut-Through, dafür mit etwas höherer Latenz.</dd></div>
+<div class="glossar-eintrag"><dt><strong>STP</strong> <span class="glossar-voll">Spanning Tree Protocol / Shielded Twisted Pair</span></dt><dd>1) Netzprotokoll gegen Switching-Loops: deaktiviert redundante Verbindungen. 2) Geschirmtes Twisted-Pair-Kabel mit besserem Schutz gegen Störungen als UTP.</dd></div>
+<div class="glossar-eintrag"><dt><strong>Striping</strong></dt><dd>Verteilt Daten blockweise über mehrere Platten. Erhöht die Geschwindigkeit, bietet allein aber keine Ausfallsicherheit.</dd></div>
+<div class="glossar-eintrag"><dt><strong>Subnetzmaske</strong></dt><dd>Trennt eine IP-Adresse in Netz- und Hostanteil. Anhand ihrer entscheidet ein Gerät, ob ein Ziel im eigenen Netz liegt.</dd></div>
+<div class="glossar-eintrag"><dt><strong>SYN</strong> <span class="glossar-voll">Synchronize</span></dt><dd>Erstes Segment des TCP-Verbindungsaufbaus. Ablauf: SYN, SYN-ACK, ACK.</dd></div>
+<div class="glossar-eintrag"><dt><strong>Systemdokumentation</strong></dt><dd>Beschreibt den Aufbau: Architektur, Netzpläne, Schnittstellen, Datenmodell und Konfigurationen. Zielgruppe ist die Administration.</dd></div>
+</dl>
+</section>
+<section class="glossar-gruppe" id="g-t">
+<h2>T</h2>
+<dl>
+<div class="glossar-eintrag"><dt><strong>TACACS+</strong> <span class="glossar-voll">Terminal Access Controller Access-Control System Plus</span></dt><dd>AAA-Protokoll (Authentifizierung, Autorisierung, Accounting) v. a. für die Verwaltung von Netzwerkgeräten. Alternative zu RADIUS, trennt die drei AAA-Funktionen sauberer.</dd></div>
+<div class="glossar-eintrag"><dt><strong>TBW</strong> <span class="glossar-voll">Terabytes Written</span></dt><dd>Angabe, wie viele Terabyte eine SSD über ihre Lebensdauer schreiben kann. Auswahlkriterium bei schreibintensiven Servern.</dd></div>
+<div class="glossar-eintrag"><dt><strong>TCO</strong> <span class="glossar-voll">Total Cost of Ownership</span></dt><dd>Gesamtkosten über die Nutzungsdauer, also Anschaffung plus Betrieb, Wartung, Energie und Entsorgung.</dd></div>
+<div class="glossar-eintrag"><dt><strong>TCP</strong> <span class="glossar-voll">Transmission Control Protocol</span></dt><dd>Verbindungsorientiertes Transportprotokoll mit Zustellgarantie, Reihenfolgesicherung und Flusskontrolle (Schicht 4).</dd></div>
+<div class="glossar-eintrag"><dt><strong>TCP/IP-Modell</strong> <span class="glossar-voll">TCP/IP-Referenzmodell</span></dt><dd>Praxismodell mit 4 Schichten. Deutsch: Netzzugang (OSI 1+2), Internet (OSI 3), Transport (OSI 4), Anwendung (OSI 5+6+7). Englisch: Network Access, Internet, Transport, Application.</dd></div>
+<div class="glossar-eintrag"><dt><strong>TDDDG</strong> <span class="glossar-voll">Telekommunikation-Digitale-Dienste-Datenschutz-Gesetz</span></dt><dd>Regelt den Datenschutz für digitale Dienste wie Websites und Apps. Vormals TTDSG, ersetzt das alte TMG und das Datenschutzkapitel des TKG.</dd></div>
+<div class="glossar-eintrag"><dt><strong>TDM</strong> <span class="glossar-voll">Time Division Multiplexing</span></dt><dd>Zeitmultiplex: mehrere Signale teilen sich ein Medium in aufeinanderfolgenden Zeitschlitzen.</dd></div>
+<div class="glossar-eintrag"><dt><strong>Tertiärer Sektor</strong> <span class="glossar-voll">Dienstleistungssektor</span></dt><dd>Wirtschaftssektor der Dienstleistungen: Handel, Logistik, Banken, IT-Support, Softwarehäuser.</dd></div>
+<div class="glossar-eintrag"><dt><strong>TFTP</strong> <span class="glossar-voll">Trivial File Transfer Protocol</span></dt><dd>Minimaler Dateitransfer ohne Anmeldung über UDP (Port 69), z. B. beim PXE-Netzwerkboot.</dd></div>
+<div class="glossar-eintrag"><dt><strong>Thin Client</strong></dt><dd>Einfacher Endgeräte-Rechner mit minimaler eigener Rechenleistung, der im Wesentlichen nur Bildschirminhalte von einem Server empfängt und Eingaben zurücksendet. Typischer Client-Baustein einer VDI-Umgebung.</dd></div>
+<div class="glossar-eintrag"><dt><strong>Three-Way-Handshake</strong> <span class="glossar-voll">Drei-Wege-Handschlag</span></dt><dd>TCP-Verbindungsaufbau in drei Schritten: SYN → SYN-ACK → ACK.</dd></div>
+<div class="glossar-eintrag"><dt><strong>TiB</strong> <span class="glossar-voll">Tebibyte</span></dt><dd>1024 GiB. Binäres Gegenstück zum dezimalen Terabyte mit 10^12 Byte.</dd></div>
+<div class="glossar-eintrag"><dt><strong>TKG</strong> <span class="glossar-voll">Telekommunikationsgesetz</span></dt><dd>Enthält Datenschutzbestimmungen für Telekommunikationsanbieter, u. a. zum Fernmeldegeheimnis und zur Speicherung von Verbindungsdaten.</dd></div>
+<div class="glossar-eintrag"><dt><strong>TLD</strong> <span class="glossar-voll">Top-Level-Domain</span></dt><dd>Oberste Ebene eines Domainnamens, z. B. .de oder .com. TLD-Server verweisen auf autoritative Nameserver.</dd></div>
+<div class="glossar-eintrag"><dt><strong>TLS</strong> <span class="glossar-voll">Transport Layer Security</span></dt><dd>Aktuelles Protokoll zur Verschlüsselung von Verbindungen, z. B. bei HTTPS. Nachfolger von SSL.</dd></div>
+<div class="glossar-eintrag"><dt><strong>TMG</strong> <span class="glossar-voll">Telemediengesetz</span></dt><dd>Frühere deutsche Regelung für Telemedien wie Websites. Wurde im Datenschutzbereich vom TDDDG abgelöst.</dd></div>
+<div class="glossar-eintrag"><dt><strong>Token</strong></dt><dd>Kleinste Verarbeitungseinheit eines Sprachmodells, meist ein Wortteil. Im Deutschen entspricht ein Token grob drei bis vier Zeichen. Kontextfenster und Abrechnung werden in Token gemessen.</dd></div>
+<div class="glossar-eintrag"><dt><strong>TOM</strong> <span class="glossar-voll">Technische und organisatorische Maßnahmen</span></dt><dd>Konkrete Schutzmaßnahmen für personenbezogene Daten, z. B. Zugriffskontrollen und Verschlüsselung (Art. 32 DSGVO).</dd></div>
+<div class="glossar-eintrag"><dt><strong>Tool Calling</strong> <span class="glossar-voll">Tool Calling, Funktionsaufruf</span></dt><dd>Das Modell gibt statt Fließtext einen strukturierten Aufruf mit Parametern aus, den die Anwendung ausführt. Das Ergebnis fließt zurück in den Kontext. So werden Suche, Datenbank oder Rechner angebunden.</dd></div>
+<div class="glossar-eintrag"><dt><strong>Tower of Hanoi</strong> <span class="glossar-voll">Tower-of-Hanoi-Rotation</span></dt><dd>Medienrotation nach gestaffeltem Muster (jeden 2., 4., 8. Tag). Wenige Medien decken viele junge und einzelne sehr alte Stände ab.</dd></div>
+<div class="glossar-eintrag"><dt><strong>Transformer</strong></dt><dd>Netzarchitektur von 2017 und Grundlage nahezu aller heutigen Sprachmodelle. Kern ist der Attention-Mechanismus, der alle Token einer Eingabe parallel gewichtet, statt sie nacheinander zu lesen.</dd></div>
+<div class="glossar-eintrag"><dt><strong>Trap</strong> <span class="glossar-voll">SNMP-Trap</span></dt><dd>Unaufgeforderte Benachrichtigung, die ein überwachtes Gerät (Agent) von sich aus an die Managementstation sendet, sobald ein Ereignis eintritt (z. B. Schnittstelle down, Schwellwert überschritten). Gegenstück zum Polling, bei dem die Station aktiv abfragt. Läuft über UDP-Port 162, während normale SNMP-Abfragen auf 161 gehen.</dd></div>
+<div class="glossar-eintrag"><dt><strong>Trojaner</strong> <span class="glossar-voll">Trojanisches Pferd</span></dt><dd>Getarnt als nützliches Programm, schleust im Hintergrund eine Schadfunktion ein. Verbreitet sich nicht selbst.</dd></div>
+<div class="glossar-eintrag"><dt><strong>Trunk</strong> <span class="glossar-voll">Trunk-Port</span></dt><dd>Switch-Port, der Frames mehrerer VLANs gleichzeitig transportiert (tagged nach 802.1Q). Verbindet Switches/Router.</dd></div>
+<div class="glossar-eintrag"><dt><strong>Trunk-Port</strong></dt><dd>Switch-Port, der mehrere VLANs mit Kennzeichnung nach 802.1Q überträgt. Verbindet üblicherweise Switches untereinander.</dd></div>
+<div class="glossar-eintrag"><dt><strong>TTDSG</strong> <span class="glossar-voll">Telekommunikation-Telemedien-Datenschutz-Gesetz</span></dt><dd>Vorgänger des TDDDG, gleicher Regelungsbereich unter altem Namen.</dd></div>
+<div class="glossar-eintrag"><dt><strong>TTL</strong> <span class="glossar-voll">Time to Live</span></dt><dd>Hop-Zähler im IP-Header: jeder Router zieht 1 ab, bei 0 wird verworfen. Verhindert endlos kreisende Pakete. Bei DNS: Cache-Gültigkeitsdauer.</dd></div>
+<div class="glossar-eintrag"><dt><strong>Tuckman</strong> <span class="glossar-voll">Phasenmodell nach Tuckman</span></dt><dd>Teamentwicklung in fünf Phasen: Forming, Storming, Norming, Performing, Adjourning.</dd></div>
+</dl>
+</section>
+<section class="glossar-gruppe" id="g-u">
+<h2>U</h2>
+<dl>
+<div class="glossar-eintrag"><dt><strong>UDP</strong> <span class="glossar-voll">User Datagram Protocol</span></dt><dd>Verbindungsloses Transportprotokoll ohne Zustellgarantie — schnell, ideal für Echtzeit (VoIP, Streaming, DNS).</dd></div>
+<div class="glossar-eintrag"><dt><strong>UEFI</strong> <span class="glossar-voll">Unified Extensible Firmware Interface</span></dt><dd>Moderne Firmware-Schnittstelle, Nachfolger des BIOS. Unterstützt u. a. Secure Boot und große Festplatten.</dd></div>
+<div class="glossar-eintrag"><dt><strong>ufw</strong> <span class="glossar-voll">Uncomplicated Firewall</span></dt><dd>Vereinfachte Bedienoberfläche für den Linux-Paketfilter. Erlaubt Regeln wie das Freigeben eines Ports ohne Kenntnis der zugrunde liegenden Syntax.</dd></div>
+<div class="glossar-eintrag"><dt><strong>Umsatzrentabilität</strong></dt><dd>Gewinn geteilt durch Umsatz mal 100 %. Zeigt, wie viel Gewinn je Umsatzeuro bleibt.</dd></div>
+<div class="glossar-eintrag"><dt><strong>Underpinning Contract</strong></dt><dd>Vertrag mit einem externen Zulieferer, der die Einhaltung des SLA gegenüber dem Kunden absichert.</dd></div>
+<div class="glossar-eintrag"><dt><strong>Unicast</strong> <span class="glossar-voll">Einzelsendung</span></dt><dd>Nachricht an genau einen Empfänger (1:1). Der Normalfall der Netzwerkkommunikation.</dd></div>
+<div class="glossar-eintrag"><dt><strong>Uplink</strong> <span class="glossar-voll">Uplink-Port</span></dt><dd>Port, der einen Switch mit einem übergeordneten Gerät (Router, Core-Switch) verbindet, oft mit höherer Bandbreite.</dd></div>
+<div class="glossar-eintrag"><dt><strong>Urheberrecht</strong></dt><dd>Schützt Werke wie Software, Texte oder Grafiken ab dem Zeitpunkt der Schöpfung, ohne Anmeldung. In Deutschland der übliche Schutz für Software statt eines Patents.</dd></div>
+<div class="glossar-eintrag"><dt><strong>URL</strong> <span class="glossar-voll">Uniform Resource Locator</span></dt><dd>Vollständige Adresse einer Ressource im Web, z. B. https://example.com/seite.</dd></div>
+<div class="glossar-eintrag"><dt><strong>USB</strong> <span class="glossar-voll">Universal Serial Bus</span></dt><dd>Universelle Schnittstelle für Peripheriegeräte und Datenübertragung, auch als PAN-Technologie.</dd></div>
+<div class="glossar-eintrag"><dt><strong>USP</strong> <span class="glossar-voll">Unique Selling Proposition</span></dt><dd>Alleinstellungsmerkmal, das ein Angebot von Wettbewerbern unterscheidet und für den Kunden einen echten Vorteil bedeutet.</dd></div>
+<div class="glossar-eintrag"><dt><strong>USV</strong> <span class="glossar-voll">Unterbrechungsfreie Stromversorgung</span></dt><dd>Überbrückt Stromausfälle per Akku, damit Server geordnet weiterlaufen oder herunterfahren können (engl. UPS).</dd></div>
+<div class="glossar-eintrag"><dt><strong>UTP</strong> <span class="glossar-voll">Unshielded Twisted Pair</span></dt><dd>Ungeschirmtes Twisted-Pair-Kabel: Standard im LAN, günstig, aber störanfälliger als STP.</dd></div>
+</dl>
+</section>
+<section class="glossar-gruppe" id="g-v">
+<h2>V</h2>
+<dl>
+<div class="glossar-eintrag"><dt><strong>V-Modell</strong></dt><dd>Vorgehensmodell, das jeder Spezifikationsstufe eine Teststufe gegenüberstellt: Anforderung/Abnahmetest, Systementwurf/Systemtest, Technikentwurf/Integrationstest, Komponente/Modultest.</dd></div>
+<div class="glossar-eintrag"><dt><strong>VDI</strong> <span class="glossar-voll">Virtual Desktop Infrastructure</span></dt><dd>Bereitstellung individuell konfigurierter Betriebssysteminstanzen für Arbeitsplätze zentral auf einem Server statt lokal auf jedem Rechner. Vorteile: höhere Datensicherheit, einfachere Administration, Einsatz von Thin Clients. Nachteil: Serverausfall legt alle Arbeitsplätze gleichzeitig lahm.</dd></div>
+<div class="glossar-eintrag"><dt><strong>VDSL</strong> <span class="glossar-voll">Very High Speed Digital Subscriber Line</span></dt><dd>Schnelle DSL-Variante, meist Glasfaser bis zum Verteiler und Kupfer auf dem letzten Stück.</dd></div>
+<div class="glossar-eintrag"><dt><strong>Vendor Lock-in</strong> <span class="glossar-voll">Anbieterabhängigkeit</span></dt><dd>Abhängigkeit von einem Anbieter, weil ein Wechsel wegen proprietärer Schnittstellen oder Formate teuer wäre.</dd></div>
+<div class="glossar-eintrag"><dt><strong>Verbraucherpreisindex</strong></dt><dd>Kennzahl für die Preisentwicklung eines repräsentativen Warenkorbs. Grundlage zur Berechnung der Inflationsrate.</dd></div>
+<div class="glossar-eintrag"><dt><strong>Verfügbarkeit</strong> <span class="glossar-voll">Availability</span></dt><dd>Schutzziel: Daten und Dienste sind nutzbar, wenn sie gebraucht werden. Erreicht über Redundanz, USV und Sicherungen.</dd></div>
+<div class="glossar-eintrag"><dt><strong>Verkaufsförderung</strong> <span class="glossar-voll">Sales Promotion</span></dt><dd>Kurzfristige Maßnahmen zur Absatzsteigerung wie Rabattaktionen, Gutscheine oder Warenproben.</dd></div>
+<div class="glossar-eintrag"><dt><strong>Vertrauenskette</strong> <span class="glossar-voll">Chain of Trust</span></dt><dd>Prüfbare Kette vom Serverzertifikat über Zwischenstellen bis zur Root-CA.</dd></div>
+<div class="glossar-eintrag"><dt><strong>Vertraulichkeit</strong> <span class="glossar-voll">Confidentiality</span></dt><dd>Schutzziel: Nur Berechtigte können die Daten einsehen. Umgesetzt über Verschlüsselung und Berechtigungskonzept.</dd></div>
+<div class="glossar-eintrag"><dt><strong>VGA</strong> <span class="glossar-voll">Video Graphics Array</span></dt><dd>Analoge Schnittstelle zur Bildübertragung, heute weitgehend abgelöst.</dd></div>
+<div class="glossar-eintrag"><dt><strong>Virus</strong> <span class="glossar-voll">Computervirus</span></dt><dd>Schadsoftware, die sich an eine Wirtsdatei hängt und sich erst bei deren Ausführung verbreitet.</dd></div>
+<div class="glossar-eintrag"><dt><strong>VIVA</strong> <span class="glossar-voll">Vertraulichkeit, Integrität, Verfügbarkeit, Authentizität</span></dt><dd>Merkhilfe für die vier Schutzziele der Informationssicherheit.</dd></div>
+<div class="glossar-eintrag"><dt><strong>VLAN</strong> <span class="glossar-voll">Virtual Local Area Network</span></dt><dd>Logische Netztrennung auf einem physischen Switch: trennt Broadcastdomänen, z. B. Gäste-WLAN vom Firmennetz.</dd></div>
+<div class="glossar-eintrag"><dt><strong>VLAN-Hopping</strong> <span class="glossar-voll">VLAN-Hopping-Angriff</span></dt><dd>Angriff, der die VLAN-Trennung umgeht, z. B. per Switch-Spoofing (Trunk aushandeln) oder Double Tagging. Abwehr: ungenutzte Ports deaktivieren, kein automatisches Trunking, natives VLAN nicht für Nutzdaten.</dd></div>
+<div class="glossar-eintrag"><dt><strong>VLSM</strong> <span class="glossar-voll">Variable Length Subnet Masking</span></dt><dd>Subnetting mit unterschiedlich großen Subnetzen je nach Bedarf, statt einheitlicher Maskenlänge.</dd></div>
+<div class="glossar-eintrag"><dt><strong>VM</strong> <span class="glossar-voll">Virtuelle Maschine</span></dt><dd>Software-virtualisierter Rechner, der auf physischer Hardware läuft. Mehrere VMs teilen sich einen Host.</dd></div>
+<div class="glossar-eintrag"><dt><strong>VoIP</strong> <span class="glossar-voll">Voice over IP</span></dt><dd>Telefonie über das IP-Netz. Signalisierung per SIP, Sprachtransport per RTP über UDP.</dd></div>
+<div class="glossar-eintrag"><dt><strong>Von-Neumann-Architektur</strong></dt><dd>Rechnerarchitektur mit Rechenwerk, Steuerwerk, Speicherwerk, Ein-/Ausgabewerk und gemeinsamem Bus für Befehle und Daten.</dd></div>
+<div class="glossar-eintrag"><dt><strong>Von-Neumann-Flaschenhals</strong></dt><dd>Engpass dadurch, dass Befehle und Daten über denselben Bus laufen und sich gegenseitig blockieren.</dd></div>
+<div class="glossar-eintrag"><dt><strong>VPN</strong> <span class="glossar-voll">Virtual Private Network</span></dt><dd>Verschlüsselter Tunnel durch ein unsicheres Netz, z. B. für Homeoffice-Zugriff aufs Firmennetz. Häufig mit IPsec.</dd></div>
+</dl>
+</section>
+<section class="glossar-gruppe" id="g-w">
+<h2>W</h2>
+<dl>
+<div class="glossar-eintrag"><dt><strong>WAN</strong> <span class="glossar-voll">Wide Area Network</span></dt><dd>Weitverkehrsnetz über große Distanzen — das Internet ist das größte WAN.</dd></div>
+<div class="glossar-eintrag"><dt><strong>WDM</strong> <span class="glossar-voll">Wavelength Division Multiplexing</span></dt><dd>Wellenlängenmultiplex: mehrere Datenströme gleichzeitig über verschiedene Lichtwellenlängen in einer Glasfaser.</dd></div>
+<div class="glossar-eintrag"><dt><strong>Wear Leveling</strong></dt><dd>Gleichmäßige Verteilung der Schreibzugriffe über alle Flash-Zellen einer SSD, damit einzelne Zellen nicht vorzeitig verschleißen.</dd></div>
+<div class="glossar-eintrag"><dt><strong>Weltmodell</strong> <span class="glossar-voll">Weltmodell, World Model</span></dt><dd>Interne Repräsentation, mit der ein System Zustände und die Folgen von Handlungen vorhersagt. Ob Sprachmodelle so etwas ausbilden oder nur Oberflächenmuster fortschreiben, ist fachlich offen.</dd></div>
+<div class="glossar-eintrag"><dt><strong>WEP</strong> <span class="glossar-voll">Wired Equivalent Privacy</span></dt><dd>Veraltete, gebrochene WLAN-Verschlüsselung. Nicht mehr verwenden — heute WPA2/WPA3.</dd></div>
+<div class="glossar-eintrag"><dt><strong>Werkvertrag</strong></dt><dd>Vertrag über einen geschuldeten Erfolg, also ein fertiges Werk. Mit Abnahme und Gewährleistung, z. B. Erstellung einer Individualsoftware.</dd></div>
+<div class="glossar-eintrag"><dt><strong>Wireless Controller</strong> <span class="glossar-voll">WLAN-Controller (WLC)</span></dt><dd>Zentrales Gerät zur Verwaltung mehrerer Access Points: Konfiguration, Roaming, Sicherheit.</dd></div>
+<div class="glossar-eintrag"><dt><strong>Wirkungsgrad</strong></dt><dd>Anteil der aufgenommenen Leistung, den ein Netzteil tatsächlich abgibt. Der Rest geht als Wärme verloren.</dd></div>
+<div class="glossar-eintrag"><dt><strong>WLAN</strong> <span class="glossar-voll">Wireless Local Area Network</span></dt><dd>Drahtloses lokales Netz nach IEEE 802.11 (Wi-Fi), bereitgestellt über Access Points.</dd></div>
+<div class="glossar-eintrag"><dt><strong>Workaround</strong> <span class="glossar-voll">Umgehungslösung</span></dt><dd>Vorläufige Maßnahme, die den Betrieb wiederherstellt, ohne die Ursache zu beseitigen.</dd></div>
+<div class="glossar-eintrag"><dt><strong>WPA</strong> <span class="glossar-voll">Wi-Fi Protected Access</span></dt><dd>WLAN-Sicherheitsstandard. WPA2 ist Minimum, WPA3 aktuell (besserer Schutz gegen Brute-Force).</dd></div>
+<div class="glossar-eintrag"><dt><strong>WPS</strong> <span class="glossar-voll">Wi-Fi Protected Setup</span></dt><dd>Vereinfachte WLAN-Einrichtung per PIN oder Knopfdruck. Die PIN-Methode ist unsicher und sollte deaktiviert werden.</dd></div>
+<div class="glossar-eintrag"><dt><strong>Wurm</strong> <span class="glossar-voll">Computerwurm</span></dt><dd>Schadsoftware, die sich selbstständig über Netzwerke verbreitet, ohne Wirtsdatei und ohne Nutzeraktion.</dd></div>
+<div class="glossar-eintrag"><dt><strong>WWW</strong> <span class="glossar-voll">World Wide Web</span></dt><dd>Das über HTTP/HTTPS erreichbare Hypertext-System aus verlinkten Webseiten — ein Dienst des Internets.</dd></div>
+</dl>
+</section>
+<section class="glossar-gruppe" id="g-x">
+<h2>X</h2>
+<dl>
+<div class="glossar-eintrag"><dt><strong>X.509</strong> <span class="glossar-voll">X.509-Standard</span></dt><dd>Das Standardformat für digitale Zertifikate in der PKI, gespeichert als PEM oder DER.</dd></div>
+<div class="glossar-eintrag"><dt><strong>XML</strong> <span class="glossar-voll">Extensible Markup Language</span></dt><dd>Textbasierte Auszeichnungssprache für strukturierte Daten, u. a. bei SOAP-APIs.</dd></div>
+<div class="glossar-eintrag"><dt><strong>XNOR</strong> <span class="glossar-voll">Exclusive Not Or</span></dt><dd>Negiertes XOR: Ausgang 1, wenn beide Eingänge gleich sind — die Gleichheitsprüfung.</dd></div>
+<div class="glossar-eintrag"><dt><strong>XOR</strong> <span class="glossar-voll">Exclusive Or (Exklusiv-Oder)</span></dt><dd>Logische Verknüpfung: Ausgang 1, wenn die Eingänge verschieden sind. Erkennt Bit-Änderungen.</dd></div>
+<div class="glossar-eintrag"><dt><strong>XP</strong> <span class="glossar-voll">Extreme Programming</span></dt><dd>Agiles Vorgehen mit Pair Programming, testgetriebener Entwicklung, Refactoring und Continuous Integration.</dd></div>
+<div class="glossar-eintrag"><dt><strong>XSS</strong> <span class="glossar-voll">Cross-Site Scripting</span></dt><dd>Einschleusen von Skriptcode in eine Webseite, der im Browser anderer Besucher ausgeführt wird. Gegenmittel ist konsequentes Maskieren der Ausgabe.</dd></div>
+</dl>
+</section>
+<section class="glossar-gruppe" id="g-z">
+<h2>Z</h2>
+<dl>
+<div class="glossar-eintrag"><dt><strong>Zero-Day</strong> <span class="glossar-voll">Zero-Day-Schwachstelle</span></dt><dd>Sicherheitslücke, die ausgenutzt wird, bevor ein Patch verfügbar ist.</dd></div>
+<div class="glossar-eintrag"><dt><strong>Zero-shot</strong> <span class="glossar-voll">Zero-Shot, ohne Beispiele</span></dt><dd>Das Modell löst eine Aufgabe allein aus der Anweisung, ohne Beispiele im Prompt. Mit einem Beispiel heißt es One-Shot, mit mehreren Few-Shot.</dd></div>
+<div class="glossar-eintrag"><dt><strong>Zieleinkaufspreis</strong></dt><dd>Listeneinkaufspreis abzüglich Rabatt. Grundlage für die Skontoberechnung.</dd></div>
+<div class="glossar-eintrag"><dt><strong>Zonentransfer</strong></dt><dd>Übertragung eines kompletten DNS-Zonenbestands vom primären auf den sekundären Server. Läuft über TCP auf Port 53.</dd></div>
+<div class="glossar-eintrag"><dt><strong>Zufallsauswahl</strong></dt><dd>Stichprobenverfahren, bei dem jedes Element dieselbe Auswahlchance hat. Statistisch am zuverlässigsten.</dd></div>
+<div class="glossar-eintrag"><dt><strong>Zweierkomplement</strong></dt><dd>Darstellung negativer Binärzahlen: alle Bits kippen und eins addieren. Das höchstwertige Bit ist das Vorzeichen.</dd></div>
+</dl>
+</section>
+<div class="seite-cta">
+  <p>Glossar mit Sofortsuche und Begriffen direkt im Nachschlagewerk:</p>
+  <div class="seite-cta-knoepfe">
+    <a class="seite-knopf seite-knopf-haupt" href="/#glossar">In der Lernplattform öffnen</a>
+    <a class="seite-knopf" href="/#fragen">Fragen üben</a>
+    <a class="seite-knopf" href="/glossar/">Glossar</a>
+  </div>
+</div>
+</main>
+<footer><div class="wrap">
+<p class="footer-lead">Layer 8 Academy ist eine kostenlose Lernplattform zur Vorbereitung auf die IHK-Abschlussprüfung Teil 1 der IT-Berufe. Sie umfasst ein Nachschlagewerk, ein Glossar, Übungsfragen im Multiple-Choice- und Karteikartenmodus, einen Subnetting-Trainer und Prüfungssimulationen.</p>
+<nav class="footer-nav" aria-label="Themenfelder">
+  <a href="/themen/netzwerke/">Netzwerke</a> · <a href="/themen/it-sicherheit/">IT-Sicherheit</a> · <a href="/themen/systeme-storage/">Systeme &amp; Storage</a> · <a href="/themen/software-grundlagen/">Software &amp; Grundlagen</a> · <a href="/themen/bwl-prozesse/">BWL &amp; Prozesse</a> · <a href="/nachschlagen/">Alle Kapitel</a> · <a href="/glossar/">Glossar</a>
+</nav>
+<div class="footer-copy">© 2026 boxberger.app · <a href="/impressum/" class="imprint-link">Impressum &amp; Datenschutz</a></div>
+</div></footer>
+</body>
+</html>

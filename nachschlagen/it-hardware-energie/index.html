@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IT-Hardware, Energie &amp; Grundlagen | AP1 – Layer 8 Academy</title>
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<meta name="description" content="Nahezu alle heutigen Rechner folgen der nach John von Neumann benannten Architektur. Ihr Kerngedanke: Programme und Daten liegen im selben Speicher und …">
+<meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+<meta name="theme-color" content="#0a0e12">
+<link rel="canonical" href="https://layer8academy.boxberger.app/nachschlagen/it-hardware-energie/">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Layer 8 Academy">
+<meta property="og:title" content="IT-Hardware, Energie &amp; Grundlagen | AP1 – Layer 8 Academy">
+<meta property="og:description" content="Nahezu alle heutigen Rechner folgen der nach John von Neumann benannten Architektur. Ihr Kerngedanke: Programme und Daten liegen im selben Speicher und …">
+<meta property="og:url" content="https://layer8academy.boxberger.app/nachschlagen/it-hardware-energie/">
+<meta property="og:locale" content="de_DE">
+<meta name="twitter:card" content="summary">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+    {
+     "@type": "ListItem",
+     "position": 1,
+     "name": "Start",
+     "item": "https://layer8academy.boxberger.app/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 2,
+     "name": "Nachschlagen",
+     "item": "https://layer8academy.boxberger.app/nachschlagen/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 3,
+     "name": "Systeme & Storage",
+     "item": "https://layer8academy.boxberger.app/themen/systeme-storage/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 4,
+     "name": "IT-Hardware & Energie",
+     "item": "https://layer8academy.boxberger.app/nachschlagen/it-hardware-energie/"
+    }
+   ]
+  },
+  {
+   "@type": "LearningResource",
+   "name": "IT-Hardware, Energie & Grundlagen",
+   "description": "Nahezu alle heutigen Rechner folgen der nach John von Neumann benannten Architektur. Ihr Kerngedanke: Programme und Daten liegen im selben Speicher und …",
+   "url": "https://layer8academy.boxberger.app/nachschlagen/it-hardware-energie/",
+   "inLanguage": "de-DE",
+   "isAccessibleForFree": true,
+   "learningResourceType": "Nachschlagewerk",
+   "educationalLevel": "Berufsausbildung",
+   "teaches": "Systeme & Storage",
+   "isPartOf": {
+    "@id": "https://layer8academy.boxberger.app/#website"
+   },
+   "author": {
+    "@type": "Person",
+    "name": "Alexander Boxberger-Adam",
+    "url": "https://boxberger.app/"
+   }
+  }
+ ]
+}
+</script>
+<script>
+  try {
+    var t = localStorage.getItem('l8a_theme');
+    if (t && t !== 'default') document.documentElement.setAttribute('data-theme', t);
+  } catch (e) {}
+</script>
+<link rel="stylesheet" href="/styles.css?v=20261018a">
+<link rel="stylesheet" href="/seiten.css?v=20261018a">
+</head>
+<body class="seite">
+<header class="seite-kopf">
+  <div class="wrap">
+    <a class="seite-logo" href="/" aria-label="Layer 8 Academy – zur Lernplattform"><span class="t-neint">Layer</span> <svg class="title-8" width="44" height="44" viewBox="0 0 120 120" aria-label="L8A" role="img"><path d="M60,60 C34,60 24,26 60,26 C96,26 86,60 60,60 Z" fill="none" stroke="#3ddc84" stroke-width="7" stroke-linecap="round"/><path d="M60,94 C86,94 96,60 60,60 C24,60 34,94 60,94 Z" fill="none" stroke="#22d3ee" stroke-width="7" stroke-linecap="round"/><line x1="18" y1="26" x2="18" y2="52" stroke="#22d3ee" stroke-width="7" stroke-linecap="round"/><line x1="18" y1="52" x2="30" y2="52" stroke="#22d3ee" stroke-width="7" stroke-linecap="round"/><path d="M102,68 L92,94 M102,68 L112,94 M95,86 L107,86" stroke="#3ddc84" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg> <span class="t-symb">Academy</span></a>
+    <nav class="seite-nav" aria-label="Hauptnavigation">
+      <a href="/nachschlagen/">Nachschlagen</a>
+      <a href="/glossar/">Glossar</a>
+      <a href="/#fragen">Fragen üben</a>
+      <a href="/subnetting-trainer/">Subnetting</a>
+      <a href="/ap1-simulator/">AP1-Simulator</a>
+      <a href="/osi-battle/">Diagnose-Arena</a>
+    </nav>
+  </div>
+</header>
+<main class="wrap seite-inhalt">
+<nav class="brotkrumen" aria-label="Brotkrumenpfad"><a href="/">Start</a><span class="bk-trenner" aria-hidden="true">›</span><a href="/nachschlagen/">Nachschlagen</a><span class="bk-trenner" aria-hidden="true">›</span><a href="/themen/systeme-storage/">Systeme &amp; Storage</a><span class="bk-trenner" aria-hidden="true">›</span><span aria-current="page">IT-Hardware &amp; Energie</span></nav>
+<h1 class="seite-h1">IT-Hardware, Energie &amp; Grundlagen</h1>
+<div class="view active" id="view-lesen">
+<section id="r-hardware">
+<h3>Von-Neumann-Architektur</h3>
+<p>Nahezu alle heutigen Rechner folgen der nach John von Neumann benannten Architektur. Ihr Kerngedanke: Programme und Daten liegen im <strong>selben Speicher</strong> und werden über <strong>denselben Bus</strong> transportiert.</p>
+<table>
+<tr><th>Funktionseinheit</th><th>Aufgabe</th></tr>
+<tr><td><strong>Rechenwerk</strong> (ALU, Arithmetic Logic Unit)</td><td>Führt arithmetische und logische Operationen aus</td></tr>
+<tr><td><strong>Steuerwerk</strong> (CU, Control Unit)</td><td>Holt Befehle, entschlüsselt sie und steuert die Reihenfolge der Abarbeitung</td></tr>
+<tr><td><strong>Speicherwerk</strong></td><td>Nimmt Programme und Daten gemeinsam auf</td></tr>
+<tr><td><strong>Ein- und Ausgabewerk</strong> (I/O)</td><td>Verbindet den Rechner mit der Außenwelt, etwa Tastatur, Monitor, Drucker</td></tr>
+<tr><td><strong>Bussystem</strong></td><td>Verbindet die Einheiten über Datenbus, Adressbus und Steuerbus</td></tr>
+</table>
+<p>Rechenwerk und Steuerwerk bilden zusammen die <strong>CPU</strong> (Central Processing Unit). Sie arbeitet Befehle in einem festen Zyklus ab: holen, entschlüsseln, ausführen, Ergebnis zurückschreiben.</p>
+<div class="callout"><span class="tag">Von-Neumann-Flaschenhals</span>Weil Befehle <em>und</em> Daten über denselben Bus laufen, können sie nicht gleichzeitig übertragen werden. Der Bus wird damit zum Engpass, der die Rechenleistung begrenzt: Die CPU wartet auf Daten, statt zu rechnen. Gegenmaßnahmen sind Zwischenspeicher (Cache) direkt an der CPU, breitere und schnellere Busse sowie die <strong>Harvard-Architektur</strong>, die Befehle und Daten über getrennte Busse führt und deshalb in Mikrocontrollern und Signalprozessoren verbreitet ist.</div>
+
+<h3>Bauformen</h3>
+<table>
+<tr><th>Bauform</th><th>Merkmal</th><th>Typischer Einsatz</th></tr>
+<tr><td>Desktop-PC</td><td>Stationär, sehr gut erweiterbar, alle Komponenten austauschbar</td><td>Arbeitsplatz mit hohen Leistungsanforderungen</td></tr>
+<tr><td>Notebook</td><td>Bildschirm, Tastatur und Akku im Gehäuse; erweiterbar meist nur bei Arbeitsspeicher und Massenspeicher</td><td>Mobiles Arbeiten</td></tr>
+<tr><td>Tablet</td><td>Bedienung über Touchscreen, Hardware hinter dem Display, ausschließlich Flash-Speicher</td><td>Erfassung vor Ort, Präsentation</td></tr>
+<tr><td>Smartphone</td><td>Mobiler Rechner mit Telefonfunktion, ersetzt Kamera, Navigation und Medienabspieler</td><td>Ständige Erreichbarkeit, mobile Anwendungen</td></tr>
+<tr><td>Server</td><td>Auf Dauerbetrieb ausgelegt, oft mehrere Prozessoren, große Speicher und redundante Komponenten</td><td>Zentrale Dienste im Rechenzentrum</td></tr>
+</table>
+<div class="callout"><span class="tag">Prüfungsfalle</span>Bei der Auswahl einer Bauform zählt nicht die höchste Leistung, sondern die <em>Anforderung im Szenario</em>. Wer im Außendienst dokumentiert, braucht Mobilität und Akkulaufzeit, nicht Erweiterbarkeit. Wer einen Dienst rund um die Uhr bereitstellt, braucht Redundanz. Begründen Sie die Wahl immer über den genannten Einsatzzweck.</div>
+
+<h3>Zentrale Komponenten</h3>
+<p><strong>Prozessor:</strong> Verarbeitet alle Befehle. Kennzahlen sind Taktfrequenz, Anzahl der Kerne und Cachegröße. Weil er im Betrieb viel Wärme abgibt, ist eine Kühlung mit Kühlkörper und Lüfter zwingend.</p>
+<p><strong>Arbeitsspeicher (RAM):</strong> Zwischenspeicher für laufende Programme und deren Daten, sehr schnell erreichbar. Er ist <strong>flüchtig</strong>: Beim Ausschalten geht der Inhalt verloren. Genau das unterscheidet ihn vom Massenspeicher.</p>
+<p><strong>Massenspeicher:</strong> Die <strong>HDD</strong> speichert magnetisch auf rotierenden Scheiben. Ein Schreib-Lese-Kopf bewegt sich über die Oberfläche, weshalb die Zugriffszeit von der Umdrehungszahl abhängt und mechanischer Verschleiß entsteht. Erschütterungen im Betrieb können den Kopf beschädigen. Dafür ist die HDD günstig je Gigabyte und hält Daten auch nach jahrelanger Lagerung zuverlässig.</p>
+<p>Die <strong>SSD</strong> nutzt Flash-Speicher ohne bewegliche Teile und ist dadurch deutlich schneller, leiser, stoßunempfindlicher und sparsamer. Zwei Eigenschaften muss man aber kennen:</p>
+<p><strong>Begrenzte Schreibzyklen:</strong> Jede Speicherzelle verträgt nur eine bestimmte Anzahl an Schreibvorgängen, je nach Zelltyp einige hundert bis mehrere tausend. Der Controller verteilt Schreibzugriffe deshalb gleichmäßig über alle Zellen (<strong>Wear Leveling</strong>) und hält Reservezellen bereit. Im normalen Arbeitsplatzbetrieb hält eine SSD damit weit über ihre übliche Nutzungsdauer, in schreibintensiven Serverumgebungen ist die angegebene Schreibleistung (<strong>TBW</strong>, Terabytes Written) aber ein echtes Auswahlkriterium.</p>
+<p><strong>Datenverlust bei stromloser Lagerung:</strong> Flash-Zellen speichern Ladung, die über die Zeit abfließt. Eine SSD, die jahrelang ohne Strom im Schrank liegt, kann deshalb Daten verlieren, je nach Zustand der Zellen und Umgebungstemperatur, wobei Wärme den Vorgang beschleunigt. Für eine Langzeitarchivierung ist eine SSD damit die falsche Wahl; dafür eignen sich HDD, Bandlaufwerke oder optische Medien besser. Wird eine SSD als Sicherungsmedium genutzt, sollte sie regelmäßig angeschlossen werden.</p>
+<p><strong>Anbindung:</strong> <strong>M.2</strong> bezeichnet nur die Bauform des Steckplatzes, nicht die Geschwindigkeit. Entscheidend ist das Protokoll: Eine M.2-SSD kann über <strong>SATA</strong> angebunden sein und ist dann auf rund 600 MB/s begrenzt, oder über <strong>NVMe</strong> (Non-Volatile Memory Express) direkt an <strong>PCI Express</strong>. NVMe wurde eigens für Flash-Speicher entwickelt, nutzt mehrere parallele Warteschlangen statt der für Festplatten gedachten SATA-Logik und erreicht damit ein Vielfaches der Übertragungsrate bei deutlich geringerer Zugriffszeit.</p>
+<p><strong>Optische Medien:</strong> CD bis 700 MB, DVD bis 4,7 GB, Blu-ray bis 25 GB je Schicht. Doppelschichtige Varianten fassen entsprechend mehr.</p>
+<p><strong>Mainboard:</strong> Die Hauptplatine verbindet alle Komponenten und stellt die Kommunikationswege bereit. Wichtige Bestandteile sind der CPU-Sockel, die RAM-Steckplätze, SATA-Anschlüsse für Laufwerke, <strong>PCI-Express</strong>-Steckplätze für Erweiterungskarten sowie die Stromanschlüsse und externen Schnittstellen.</p>
+<p><strong>Erweiterungskarten:</strong> Grafikkarte für die Bildberechnung, RAID-Controller für den Verbund mehrerer Datenträger, USB-Controller für zusätzliche Anschlüsse, TV-Karte für den Empfang von Fernsehsignalen.</p>
+
+<h3>Mehrkernprozessoren</h3>
+<p>Moderne Prozessoren besitzen mehrere <strong>Rechenkerne</strong> (Cores). Jeder Kern arbeitet eigene Befehle ab, sodass mehrere Aufgaben tatsächlich gleichzeitig laufen und nicht nur schnell abwechselnd. Ein Vierkernprozessor kann also vier Befehlsströme parallel verarbeiten.</p>
+<p>Ergänzend erlaubt <strong>Hyper-Threading</strong>, allgemein <strong>Simultaneous Multithreading (SMT)</strong>, dass ein physischer Kern zwei Threads gleichzeitig annimmt. Das Betriebssystem sieht dadurch doppelt so viele <em>logische</em> Kerne. Der Gewinn entsteht, weil Wartezeiten eines Threads für den anderen genutzt werden.</p>
+<div class="callout"><span class="tag">Prüfungsfalle</span>SMT verdoppelt <strong>nicht</strong> die Rechenleistung. Ein Vierkernprozessor mit SMT zeigt acht logische Kerne, hat aber weiterhin nur vier physische Recheneinheiten. Der Zugewinn liegt je nach Anwendung typischerweise im Bereich von 15 bis 30 Prozent, nicht bei 100 Prozent. Achten Sie in Aufgaben auf die Unterscheidung zwischen <em>physischen</em> und <em>logischen</em> Kernen.</div>
+
+<h3>Cache-Speicher</h3>
+<p>Der <strong>Cache</strong> ist ein sehr schneller Zwischenspeicher direkt auf oder unmittelbar neben der CPU. Häufig benötigte Befehle und Daten liegen dort bereit, damit die CPU nicht auf den deutlich langsameren Arbeitsspeicher warten muss. Er ist die wichtigste Gegenmaßnahme zum Von-Neumann-Flaschenhals.</p>
+<table>
+<tr><th>Stufe</th><th>Kapazität</th><th>Geschwindigkeit</th><th>Zuordnung</th></tr>
+<tr><td>L1-Cache</td><td>sehr klein</td><td>am schnellsten</td><td>je Kern, meist getrennt für Befehle und Daten</td></tr>
+<tr><td>L2-Cache</td><td>größer</td><td>etwas langsamer</td><td>in der Regel je Kern</td></tr>
+<tr><td>L3-Cache</td><td>am größten</td><td>am langsamsten der drei</td><td>gemeinsam für alle Kerne</td></tr>
+</table>
+<div class="callout"><span class="tag">Merksatz</span>Je näher ein Speicher an der CPU liegt, desto <strong>schneller</strong> ist er, desto <strong>kleiner</strong> und teurer aber auch. Diese Ordnung gilt für die gesamte Speicherhierarchie: Register, dann L1, L2, L3, dann Arbeitsspeicher, zuletzt Massenspeicher. Wer die Reihenfolge kennt, kann jede Frage nach schneller oder größer sicher beantworten.</div>
+
+<h3>Arbeitsspeichertypen</h3>
+<table>
+<tr><th>Typ</th><th>Merkmal</th></tr>
+<tr><td><strong>DDR4</strong></td><td>Lange Zeit der Standard in Arbeitsplatzrechnern</td></tr>
+<tr><td><strong>DDR5</strong></td><td>Nachfolger mit höherer Bandbreite und Übertragungsrate</td></tr>
+<tr><td><strong>ECC-RAM</strong></td><td>Error Correcting Code: erkennt Bitfehler und korrigiert Einzelbitfehler selbstständig</td></tr>
+</table>
+<div class="callout"><span class="tag">Prüfungsfalle</span><strong>ECC-RAM</strong> ist ein Klassiker. Er wird vor allem in <em>Servern</em> eingesetzt, weil dort ein unbemerkt gekipptes Bit stille Datenfehler verursachen kann, die über Jahre unentdeckt bleiben. Er ist nicht schneller als normaler Speicher, sondern zuverlässiger, kostet mehr und muss von Mainboard und Prozessor unterstützt werden. Wird im Szenario „hohe Datenintegrität" oder „Dauerbetrieb" genannt, ist ECC die erwartete Antwort.</div>
+
+<h3>BIOS und UEFI</h3>
+<p>Beim Einschalten übernimmt zunächst die Firmware der Hauptplatine. Sie prüft und initialisiert die Hardware im <strong>POST</strong> (Power-On Self-Test), stellt grundlegende Einstellungen bereit und übergibt anschließend an den Bootloader des Betriebssystems.</p>
+<table>
+<tr><th>Merkmal</th><th>BIOS</th><th>UEFI</th></tr>
+<tr><td>Datenträgergröße</td><td>Begrenzt durch MBR auf 2 TB</td><td>Unterstützt über GPT sehr große Datenträger</td></tr>
+<tr><td>Startvorgang</td><td>Langsamer</td><td>Schneller, unterstützt Fast Boot</td></tr>
+<tr><td>Bedienung</td><td>Rein textbasiert, nur Tastatur</td><td>Grafische Oberfläche, auch mit Maus</td></tr>
+<tr><td>Partitionsschema</td><td>MBR, höchstens vier primäre Partitionen</td><td>GPT, sehr viele Partitionen möglich</td></tr>
+<tr><td>Sicherheit</td><td>Keine Signaturprüfung beim Start</td><td><strong>Secure Boot</strong> lässt nur signierte Bootloader zu</td></tr>
+</table>
+<div class="callout"><span class="tag">Prüfungsfalle</span><strong>Secure Boot</strong> gehört zu UEFI, nicht zum BIOS, und ist eine der häufigsten Fragen zur Systemhärtung: Es verhindert, dass ein manipulierter oder untergeschobener Bootloader gestartet wird. Merken Sie sich außerdem das Paar <strong>BIOS und MBR</strong> gegen <strong>UEFI und GPT</strong> samt der 2-TB-Grenze des MBR. Wird nach der Ursache gefragt, warum ein 4-TB-Datenträger nicht vollständig nutzbar ist, lautet die Antwort: MBR statt GPT.</div>
+
+<h3>Green IT und Nachhaltigkeit</h3>
+<p><strong>Green IT</strong> umfasst alle Maßnahmen, die Energieverbrauch und Umweltbelastung durch Informationstechnik verringern, und zwar über den gesamten Lebenszyklus von der Herstellung über den Betrieb bis zur Entsorgung.</p>
+<table>
+<tr><th>Vorgehen</th><th>Wirkung</th></tr>
+<tr><td>Energieeffiziente Hardware beschaffen</td><td>Geringere Aufnahme im Dauerbetrieb, etwa über Netzteile mit hohem Wirkungsgrad</td></tr>
+<tr><td><strong>Servervirtualisierung</strong></td><td>Mehrere Systeme auf einer Maschine statt vieler schwach ausgelasteter Rechner; senkt Strom-, Kühl- und Platzbedarf</td></tr>
+<tr><td>SSD statt HDD</td><td>Geringerer Verbrauch, weniger Abwärme, keine mechanischen Teile</td></tr>
+<tr><td>Energiesparfunktionen nutzen</td><td>Ruhezustand, automatisches Abschalten von Bildschirmen, Lastabsenkung außerhalb der Arbeitszeit</td></tr>
+<tr><td>Nutzungsdauer verlängern</td><td>Aufrüsten und Weiterverwenden statt Neubeschaffung spart die energieintensive Herstellung</td></tr>
+<tr><td>Fachgerechtes Recycling</td><td>Rückgewinnung von Rohstoffen, sichere Entsorgung von Schadstoffen nach dem Elektrogesetz</td></tr>
+<tr><td>Abwärme nutzen und Klimatisierung optimieren</td><td>Kalt- und Warmgangtrennung im Rechenzentrum, Wärmerückgewinnung</td></tr>
+</table>
+<div class="callout"><span class="tag">Prüfungsbeispiel</span>Ein Betrieb ersetzt zwölf schwach ausgelastete Einzelserver durch zwei virtualisierte Hosts. Nennen Sie zwei ökologische und einen wirtschaftlichen Vorteil.<br>
+Ökologisch: geringerer Stromverbrauch im Betrieb, geringerer Kühlbedarf und weniger Elektronikschrott durch weniger Geräte.<br>
+Wirtschaftlich: niedrigere Energie- und Wartungskosten sowie weniger benötigte Stellfläche im Rechenzentrum.<br>
+Achten Sie darauf, dass nach Ökologie <em>und</em> Wirtschaftlichkeit gefragt wird: Green IT wird in der Prüfung fast immer über beide Seiten begründet, weil Energiesparen unmittelbar Kosten senkt.</div>
+
+<h3>Schnittstellen</h3>
+<table>
+<tr><th>Schnittstelle</th><th>Verwendung</th></tr>
+<tr><td>USB</td><td>Universeller Standard für Eingabegeräte, Datenträger und Peripherie; überträgt Daten und Strom</td></tr>
+<tr><td>SATA</td><td>Anbindung interner Laufwerke</td></tr>
+<tr><td>PCI Express</td><td>Steckplatz für Erweiterungskarten, Bandbreite über die Anzahl der Lanes bestimmt</td></tr>
+<tr><td>VGA</td><td>Analoge Bildübertragung, veraltet</td></tr>
+<tr><td>DVI</td><td>Digitale Bildübertragung ohne Ton</td></tr>
+<tr><td>HDMI</td><td>Digitale Übertragung von <strong>Bild und Ton</strong> über ein Kabel</td></tr>
+<tr><td>DisplayPort</td><td>Digitale Bildübertragung, unterstützt Multi-Stream Transport für mehrere Monitore</td></tr>
+<tr><td>PS/2</td><td>Ältere Schnittstelle für Tastatur und Maus</td></tr>
+<tr><td>RJ45</td><td>Netzwerkanschluss für das lokale Netz</td></tr>
+</table>
+<div class="callout"><span class="tag">Merkhilfe</span><strong>DVI überträgt nur Bild, HDMI auch Ton.</strong> Wer in einer Aufgabe einen Monitor mit Lautsprechern über ein einziges Kabel anbinden soll, wählt HDMI oder DisplayPort, nicht DVI oder VGA.</div>
+
+<h3>Energie und Stromversorgung</h3>
+<p>Das <strong>Netzteil</strong> wandelt die Netzwechselspannung in die benötigten Gleichspannungen um und versorgt darüber alle Komponenten. Typische Anschlüsse sind der ATX-Stecker für das Mainboard, ein separater Anschluss für die CPU sowie SATA- und PCIe-Stromstecker.</p>
+<p>Der <strong>Wirkungsgrad</strong> gibt an, wie viel der aufgenommenen Leistung tatsächlich an die Komponenten abgegeben wird. Der Rest geht als Wärme verloren. Ein Netzteil mit 85 Prozent Wirkungsgrad nimmt bei 170 Watt Abgabeleistung rund 200 Watt aus dem Netz auf.</p>
+<div class="callout"><span class="tag">Rechenweg für die Prüfung</span>Netzteil für einen Rechner mit 1 Mainboard 45 W, 1 CPU 90 W, 4 RAM je 5 W und 2 SSD je 8 W, Reserve 20 Prozent, Wirkungsgrad 90 Prozent.<br>
+Summe: 45 + 90 + 20 + 16 = <strong>171 W</strong><br>
+Reserve: 171 × 1,20 = <strong>205,2 W</strong><br>
+Wirkungsgrad: 205,2 ÷ 0,90 = <strong>228 W</strong><br>
+Gewählt wird die nächstgrößere marktübliche Größe, hier 250 W.<br>
+Merken Sie sich die Reihenfolge: erst summieren, dann Reserve aufschlagen, dann durch den Wirkungsgrad teilen. Der Wirkungsgrad wird <em>geteilt</em>, nicht multipliziert.</div>
+<p><strong>Stromkosten</strong> ergeben sich aus Leistung mal Betriebszeit mal Arbeitspreis. Ein Gerät mit 200 W, das 10 Stunden täglich an 250 Tagen läuft, verbraucht 200 W × 2.500 h = 500.000 Wh = 500 kWh. Bei 0,30 EUR je Kilowattstunde entstehen 150,00 EUR im Jahr.</p>
+<p>Eine <strong>unterbrechungsfreie Stromversorgung (USV)</strong> überbrückt Netzausfälle aus Akkus, glättet Spannungsschwankungen und meldet den Ausfall an die angeschlossenen Systeme, damit diese geordnet herunterfahren können. Sie schützt damit vor Datenverlust, nicht nur vor Stillstand.</p>
+
+<h3>Ein- und Ausgabegeräte</h3>
+<p><strong>Eingabe:</strong> Tastatur, Maus, Touchpad, Scanner, Webcam, Gamepad. Die Maus wandelt Bewegung über Sensoren in digitale Signale; die Entwicklung führte von mechanischen über optomechanische zu optischen und laserbasierten Verfahren.</p>
+<p><strong>Bildschirme:</strong> Röhrenmonitore sind abgelöst. <strong>LCD</strong> benötigt eine Hintergrundbeleuchtung, weil Flüssigkristalle selbst kein Licht erzeugen; heute übernehmen LEDs diese Aufgabe und bringen geringeren Verbrauch, gleichmäßigere Ausleuchtung und längere Lebensdauer. <strong>OLED</strong> leuchtet dagegen selbst, wodurch echtes Schwarz und hoher Kontrast möglich sind.</p>
+<table>
+<tr><th>Druckertyp</th><th>Verfahren</th><th>Typischer Einsatz</th></tr>
+<tr><td>Tintenstrahldrucker</td><td>Feine Tintentröpfchen werden auf das Papier gebracht</td><td>Farbdruck und Fotos in kleiner Auflage</td></tr>
+<tr><td>Laserdrucker</td><td>Elektrofotografisches Verfahren mit Toner, der aufgeschmolzen wird</td><td>Hohe Auflagen, schneller Bürodruck</td></tr>
+<tr><td>Nadeldrucker</td><td>Nadeln schlagen mechanisch über ein Farbband auf das Papier</td><td>Durchschlagsätze, etwa Lieferscheine</td></tr>
+<tr><td>Plotter</td><td>Zeichnet Vektorgrafiken, auch schneidend oder belichtend</td><td>Baupläne, technische Zeichnungen</td></tr>
+<tr><td>3D-Drucker</td><td>Baut Objekte schichtweise nach einem CAD-Modell auf</td><td>Prototypen, Ersatzteile</td></tr>
+</table>
+<div class="callout"><span class="tag">Prüfungsfalle</span>Der <strong>Nadeldrucker</strong> wirkt veraltet, ist aber die einzige der genannten Techniken, die <em>Durchschläge</em> erzeugen kann, weil sie mechanisch auf das Papier schlägt. Genau danach wird gefragt, wenn im Szenario mehrlagige Formulare vorkommen. <strong>Multifunktionsgeräte</strong> vereinen Drucken, Scannen, Kopieren und teils Faxen in einem Gerät und sparen dadurch Platz und Anschaffungskosten.</div>
+
+<div class="callout xref"><span class="tag">Verwandte Themen</span><a href="/nachschlagen/kabel-medien-hardware/">Kabel, Medien & Hardware</a> · <a href="/nachschlagen/virtualisierung/">Virtualisierung Grundlagen</a> · <a href="/nachschlagen/systemhaertung/">Systemhärtung</a></div>
+</section>
+</div>
+<div class="seite-cta">
+  <p>Interaktiv mit Volltextsuche, Glossar-Bubbles und Übungsfragen lernen:</p>
+  <div class="seite-cta-knoepfe">
+    <a class="seite-knopf seite-knopf-haupt" href="/#r-hardware">In der Lernplattform öffnen</a>
+    <a class="seite-knopf" href="/#fragen">Fragen üben</a>
+    <a class="seite-knopf" href="/glossar/">Glossar</a>
+  </div>
+</div>
+<nav class="seite-blaettern" aria-label="Weitere Kapitel">
+  <a class="sb-vor" href="/nachschlagen/diagnose-fehlersuche/"><span>Vorheriges Kapitel</span>Diagnose &amp; Fehlersuche</a>
+  <span></span>
+</nav>
+<section class="seite-feld" aria-labelledby="feld-titel">
+<h2 id="feld-titel">Mehr aus Systeme &amp; Storage</h2>
+<div class="seite-pillen"><a class="topic-sub" href="/nachschlagen/virtualisierung/">Virtualisierung</a><a class="topic-sub" href="/nachschlagen/hypervisor/">Hypervisor</a><a class="topic-sub" href="/nachschlagen/storage-systeme/">Storage-Systeme</a><a class="topic-sub" href="/nachschlagen/backup-raid/">Backup/RAID</a><a class="topic-sub" href="/nachschlagen/diagnose-fehlersuche/">Diagnose &amp; Fehlersuche</a><span class="topic-sub aktuell" aria-current="page">IT-Hardware &amp; Energie</span></div>
+</section>
+</main>
+<footer><div class="wrap">
+<p class="footer-lead">Layer 8 Academy ist eine kostenlose Lernplattform zur Vorbereitung auf die IHK-Abschlussprüfung Teil 1 der IT-Berufe. Sie umfasst ein Nachschlagewerk, ein Glossar, Übungsfragen im Multiple-Choice- und Karteikartenmodus, einen Subnetting-Trainer und Prüfungssimulationen.</p>
+<nav class="footer-nav" aria-label="Themenfelder">
+  <a href="/themen/netzwerke/">Netzwerke</a> · <a href="/themen/it-sicherheit/">IT-Sicherheit</a> · <a href="/themen/systeme-storage/">Systeme &amp; Storage</a> · <a href="/themen/software-grundlagen/">Software &amp; Grundlagen</a> · <a href="/themen/bwl-prozesse/">BWL &amp; Prozesse</a> · <a href="/nachschlagen/">Alle Kapitel</a> · <a href="/glossar/">Glossar</a>
+</nav>
+<div class="footer-copy">© 2026 boxberger.app · <a href="/impressum/" class="imprint-link">Impressum &amp; Datenschutz</a></div>
+</div></footer>
+</body>
+</html>

@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SQL &amp; Datenbanken – AP1 einfach erklärt | Layer 8 Academy</title>
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<meta name="description" content="SQL (Structured Query Language) ist die Standardsprache für relationale Datenbanken. Die Grundbefehle: SELECT liest, INSERT fügt ein, UPDATE ändert, DELETE …">
+<meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+<meta name="theme-color" content="#0a0e12">
+<link rel="canonical" href="https://layer8academy.boxberger.app/nachschlagen/sql-datenbanken/">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Layer 8 Academy">
+<meta property="og:title" content="SQL &amp; Datenbanken – AP1 einfach erklärt | Layer 8 Academy">
+<meta property="og:description" content="SQL (Structured Query Language) ist die Standardsprache für relationale Datenbanken. Die Grundbefehle: SELECT liest, INSERT fügt ein, UPDATE ändert, DELETE …">
+<meta property="og:url" content="https://layer8academy.boxberger.app/nachschlagen/sql-datenbanken/">
+<meta property="og:locale" content="de_DE">
+<meta name="twitter:card" content="summary">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+    {
+     "@type": "ListItem",
+     "position": 1,
+     "name": "Start",
+     "item": "https://layer8academy.boxberger.app/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 2,
+     "name": "Nachschlagen",
+     "item": "https://layer8academy.boxberger.app/nachschlagen/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 3,
+     "name": "Software & Grundlagen",
+     "item": "https://layer8academy.boxberger.app/themen/software-grundlagen/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 4,
+     "name": "SQL & Datenbanken",
+     "item": "https://layer8academy.boxberger.app/nachschlagen/sql-datenbanken/"
+    }
+   ]
+  },
+  {
+   "@type": "LearningResource",
+   "name": "SQL & Datenbanken",
+   "description": "SQL (Structured Query Language) ist die Standardsprache für relationale Datenbanken. Die Grundbefehle: SELECT liest, INSERT fügt ein, UPDATE ändert, DELETE …",
+   "url": "https://layer8academy.boxberger.app/nachschlagen/sql-datenbanken/",
+   "inLanguage": "de-DE",
+   "isAccessibleForFree": true,
+   "learningResourceType": "Nachschlagewerk",
+   "educationalLevel": "Berufsausbildung",
+   "teaches": "Software & Grundlagen",
+   "isPartOf": {
+    "@id": "https://layer8academy.boxberger.app/#website"
+   },
+   "author": {
+    "@type": "Person",
+    "name": "Alexander Boxberger-Adam",
+    "url": "https://boxberger.app/"
+   }
+  }
+ ]
+}
+</script>
+<script>
+  try {
+    var t = localStorage.getItem('l8a_theme');
+    if (t && t !== 'default') document.documentElement.setAttribute('data-theme', t);
+  } catch (e) {}
+</script>
+<link rel="stylesheet" href="/styles.css?v=20261018a">
+<link rel="stylesheet" href="/seiten.css?v=20261018a">
+</head>
+<body class="seite">
+<header class="seite-kopf">
+  <div class="wrap">
+    <a class="seite-logo" href="/" aria-label="Layer 8 Academy – zur Lernplattform"><span class="t-neint">Layer</span> <svg class="title-8" width="44" height="44" viewBox="0 0 120 120" aria-label="L8A" role="img"><path d="M60,60 C34,60 24,26 60,26 C96,26 86,60 60,60 Z" fill="none" stroke="#3ddc84" stroke-width="7" stroke-linecap="round"/><path d="M60,94 C86,94 96,60 60,60 C24,60 34,94 60,94 Z" fill="none" stroke="#22d3ee" stroke-width="7" stroke-linecap="round"/><line x1="18" y1="26" x2="18" y2="52" stroke="#22d3ee" stroke-width="7" stroke-linecap="round"/><line x1="18" y1="52" x2="30" y2="52" stroke="#22d3ee" stroke-width="7" stroke-linecap="round"/><path d="M102,68 L92,94 M102,68 L112,94 M95,86 L107,86" stroke="#3ddc84" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg> <span class="t-symb">Academy</span></a>
+    <nav class="seite-nav" aria-label="Hauptnavigation">
+      <a href="/nachschlagen/">Nachschlagen</a>
+      <a href="/glossar/">Glossar</a>
+      <a href="/#fragen">Fragen üben</a>
+      <a href="/subnetting-trainer/">Subnetting</a>
+      <a href="/ap1-simulator/">AP1-Simulator</a>
+      <a href="/osi-battle/">Diagnose-Arena</a>
+    </nav>
+  </div>
+</header>
+<main class="wrap seite-inhalt">
+<nav class="brotkrumen" aria-label="Brotkrumenpfad"><a href="/">Start</a><span class="bk-trenner" aria-hidden="true">›</span><a href="/nachschlagen/">Nachschlagen</a><span class="bk-trenner" aria-hidden="true">›</span><a href="/themen/software-grundlagen/">Software &amp; Grundlagen</a><span class="bk-trenner" aria-hidden="true">›</span><span aria-current="page">SQL &amp; Datenbanken</span></nav>
+<h1 class="seite-h1">SQL &amp; Datenbanken</h1>
+<div class="view active" id="view-lesen">
+<section id="r-sql">
+<p><strong>SQL</strong> (Structured Query Language) ist die Standardsprache für relationale Datenbanken. Die Grundbefehle: <code>SELECT</code> liest, <code>INSERT</code> fügt ein, <code>UPDATE</code> ändert, <code>DELETE</code> löscht. <code>WHERE</code> filtert Zeilen, <code>ORDER BY</code> sortiert die Ausgabe, <code>SELECT DISTINCT</code> entfernt Duplikate <em>aus dem Ergebnis</em>, die Tabelle selbst bleibt unverändert.</p>
+<h3>GROUP BY und HAVING</h3>
+<p><code>GROUP BY</code> fasst Zeilen mit gleichen Werten zu Gruppen zusammen, meist kombiniert mit Aggregatfunktionen wie <code>COUNT</code>, <code>SUM</code>, <code>AVG</code>, <code>MIN</code>, <code>MAX</code>. Die zentrale Abgrenzung: <strong>WHERE filtert einzelne Zeilen vor der Gruppierung, HAVING filtert die fertigen Gruppen nach der Aggregation.</strong> "Abteilungen mit mehr als 10 Beschäftigten" braucht daher HAVING, nicht WHERE.</p>
+<h3>JOINs</h3>
+<table>
+<tr><th>JOIN</th><th>Ergebnis</th></tr>
+<tr><td>INNER JOIN</td><td>Nur Zeilen mit Treffern in beiden Tabellen</td></tr>
+<tr><td>LEFT JOIN</td><td>Alle Zeilen der linken Tabelle; ohne Treffer rechts stehen NULL-Werte</td></tr>
+<tr><td>RIGHT JOIN</td><td>Alle Zeilen der rechten Tabelle; ohne Treffer links stehen NULL-Werte</td></tr>
+<tr><td>FULL JOIN</td><td>Alle Zeilen beider Tabellen, Treffer werden kombiniert</td></tr>
+</table>
+<p>Klassisches Prüfungsszenario: "Alle Kunden ohne Bestellung". LEFT JOIN von Kunden auf Bestellungen, dann Filter auf <code>IS NULL</code> in der Bestellspalte.</p>
+<h3>Indizes</h3>
+<p>Ein <strong>Index</strong> beschleunigt die Suche auf einer Spalte erheblich, wie ein Stichwortverzeichnis im Buch. Der Preis: zusätzlicher Speicher, und jede Schreiboperation muss den Index mitpflegen, wird also etwas langsamer. Indizes gehören deshalb auf Spalten, über die häufig gesucht oder verknüpft wird, nicht pauschal auf alles.</p>
+<h3>Normalisierung (1NF – 3NF)</h3>
+<p>Normalisierung beseitigt <strong>Redundanz</strong>, mehrfach gespeicherte gleiche Informationen. Redundanz führt zu drei typischen <strong>Anomalien</strong>: Bei der <strong>Änderungsanomalie</strong> muss dieselbe Information an vielen Stellen geändert werden (eine vergessene Stelle macht die Daten inkonsistent). Bei der <strong>Einfügeanomalie</strong> lassen sich Daten nicht erfassen, weil abhängige Daten noch fehlen (eine neue Abteilung ohne ersten Mitarbeiter). Bei der <strong>Löschanomalie</strong> gehen mit dem letzten Datensatz ungewollt weitere Informationen verloren (der letzte Mitarbeiter nimmt die Abteilungsdaten mit).</p>
+<p><strong>1. Normalform:</strong> Alle Werte atomar, keine Listen in einem Feld. "Telefon: 0251/111, 0170/222" verletzt die 1NF; die Nummern gehören in eigene Zeilen oder eine eigene Tabelle.</p>
+<p><strong>2. Normalform:</strong> 1NF erfüllt, und kein Nichtschlüsselattribut hängt nur von einem <em>Teil</em> eines zusammengesetzten Schlüssels ab. In einer Bestellpositionstabelle mit Schlüssel (BestellNr, ArtikelNr) darf der Artikelname nicht stehen, er hängt nur von ArtikelNr ab und gehört in die Artikeltabelle.</p>
+<p><strong>3. Normalform:</strong> 2NF erfüllt, und kein Nichtschlüsselattribut hängt von einem <em>anderen Nichtschlüsselattribut</em> ab (keine transitive Abhängigkeit). Steht in der Mitarbeitertabelle neben der AbteilungsNr auch der Abteilungsname, hängt dieser transitiv über die AbteilungsNr am Schlüssel, er gehört in die Abteilungstabelle.</p>
+<div class="callout"><span class="tag">Merkhilfe</span>"The key, the whole key, and nothing but the key": 1NF = atomare Werte, 2NF = vom ganzen Schlüssel abhängig, 3NF = nur vom Schlüssel abhängig.</div>
+
+<div class="callout xref"><span class="tag">Verwandte Themen</span><a href="/nachschlagen/oop-uml/">OOP & UML</a> · <a href="/nachschlagen/api-rest-soap/">API, REST, SOAP & Webhook</a> · <a href="/nachschlagen/it-dokumentation/">IT-Dokumentation</a></div>
+</section>
+</div>
+<div class="seite-cta">
+  <p>Interaktiv mit Volltextsuche, Glossar-Bubbles und Übungsfragen lernen:</p>
+  <div class="seite-cta-knoepfe">
+    <a class="seite-knopf seite-knopf-haupt" href="/#r-sql">In der Lernplattform öffnen</a>
+    <a class="seite-knopf" href="/#fragen">Fragen üben</a>
+    <a class="seite-knopf" href="/glossar/">Glossar</a>
+  </div>
+</div>
+<nav class="seite-blaettern" aria-label="Weitere Kapitel">
+  <span></span>
+  <a class="sb-nach" href="/nachschlagen/oop-uml/"><span>Nächstes Kapitel</span>OOP &amp; UML</a>
+</nav>
+<section class="seite-feld" aria-labelledby="feld-titel">
+<h2 id="feld-titel">Mehr aus Software &amp; Grundlagen</h2>
+<div class="seite-pillen"><span class="topic-sub aktuell" aria-current="page">SQL &amp; Datenbanken</span><a class="topic-sub" href="/nachschlagen/oop-uml/">OOP &amp; UML</a><a class="topic-sub" href="/nachschlagen/zahlensysteme/">Zahlensysteme</a><a class="topic-sub" href="/nachschlagen/speichergroessen-einheiten/">Speichergrößen &amp; Einheiten</a><a class="topic-sub" href="/nachschlagen/logische-verknuepfungen/">Logik/Gatter</a></div>
+</section>
+</main>
+<footer><div class="wrap">
+<p class="footer-lead">Layer 8 Academy ist eine kostenlose Lernplattform zur Vorbereitung auf die IHK-Abschlussprüfung Teil 1 der IT-Berufe. Sie umfasst ein Nachschlagewerk, ein Glossar, Übungsfragen im Multiple-Choice- und Karteikartenmodus, einen Subnetting-Trainer und Prüfungssimulationen.</p>
+<nav class="footer-nav" aria-label="Themenfelder">
+  <a href="/themen/netzwerke/">Netzwerke</a> · <a href="/themen/it-sicherheit/">IT-Sicherheit</a> · <a href="/themen/systeme-storage/">Systeme &amp; Storage</a> · <a href="/themen/software-grundlagen/">Software &amp; Grundlagen</a> · <a href="/themen/bwl-prozesse/">BWL &amp; Prozesse</a> · <a href="/nachschlagen/">Alle Kapitel</a> · <a href="/glossar/">Glossar</a>
+</nav>
+<div class="footer-copy">© 2026 boxberger.app · <a href="/impressum/" class="imprint-link">Impressum &amp; Datenschutz</a></div>
+</div></footer>
+</body>
+</html>

@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Virtualisierung Grundlagen | AP1 – Layer 8 Academy</title>
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<meta name="description" content="Virtuell heißt: nicht real vorhanden, aber real erscheinend. Die virtuelle Infrastruktur läuft dabei auf echter Hardware, Virtualisierung von …">
+<meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+<meta name="theme-color" content="#0a0e12">
+<link rel="canonical" href="https://layer8academy.boxberger.app/nachschlagen/virtualisierung/">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Layer 8 Academy">
+<meta property="og:title" content="Virtualisierung Grundlagen | AP1 – Layer 8 Academy">
+<meta property="og:description" content="Virtuell heißt: nicht real vorhanden, aber real erscheinend. Die virtuelle Infrastruktur läuft dabei auf echter Hardware, Virtualisierung von …">
+<meta property="og:url" content="https://layer8academy.boxberger.app/nachschlagen/virtualisierung/">
+<meta property="og:locale" content="de_DE">
+<meta name="twitter:card" content="summary">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+    {
+     "@type": "ListItem",
+     "position": 1,
+     "name": "Start",
+     "item": "https://layer8academy.boxberger.app/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 2,
+     "name": "Nachschlagen",
+     "item": "https://layer8academy.boxberger.app/nachschlagen/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 3,
+     "name": "Systeme & Storage",
+     "item": "https://layer8academy.boxberger.app/themen/systeme-storage/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 4,
+     "name": "Virtualisierung",
+     "item": "https://layer8academy.boxberger.app/nachschlagen/virtualisierung/"
+    }
+   ]
+  },
+  {
+   "@type": "LearningResource",
+   "name": "Virtualisierung Grundlagen",
+   "description": "Virtuell heißt: nicht real vorhanden, aber real erscheinend. Die virtuelle Infrastruktur läuft dabei auf echter Hardware, Virtualisierung von …",
+   "url": "https://layer8academy.boxberger.app/nachschlagen/virtualisierung/",
+   "inLanguage": "de-DE",
+   "isAccessibleForFree": true,
+   "learningResourceType": "Nachschlagewerk",
+   "educationalLevel": "Berufsausbildung",
+   "teaches": "Systeme & Storage",
+   "isPartOf": {
+    "@id": "https://layer8academy.boxberger.app/#website"
+   },
+   "author": {
+    "@type": "Person",
+    "name": "Alexander Boxberger-Adam",
+    "url": "https://boxberger.app/"
+   }
+  }
+ ]
+}
+</script>
+<script>
+  try {
+    var t = localStorage.getItem('l8a_theme');
+    if (t && t !== 'default') document.documentElement.setAttribute('data-theme', t);
+  } catch (e) {}
+</script>
+<link rel="stylesheet" href="/styles.css?v=20261018a">
+<link rel="stylesheet" href="/seiten.css?v=20261018a">
+</head>
+<body class="seite">
+<header class="seite-kopf">
+  <div class="wrap">
+    <a class="seite-logo" href="/" aria-label="Layer 8 Academy – zur Lernplattform"><span class="t-neint">Layer</span> <svg class="title-8" width="44" height="44" viewBox="0 0 120 120" aria-label="L8A" role="img"><path d="M60,60 C34,60 24,26 60,26 C96,26 86,60 60,60 Z" fill="none" stroke="#3ddc84" stroke-width="7" stroke-linecap="round"/><path d="M60,94 C86,94 96,60 60,60 C24,60 34,94 60,94 Z" fill="none" stroke="#22d3ee" stroke-width="7" stroke-linecap="round"/><line x1="18" y1="26" x2="18" y2="52" stroke="#22d3ee" stroke-width="7" stroke-linecap="round"/><line x1="18" y1="52" x2="30" y2="52" stroke="#22d3ee" stroke-width="7" stroke-linecap="round"/><path d="M102,68 L92,94 M102,68 L112,94 M95,86 L107,86" stroke="#3ddc84" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg> <span class="t-symb">Academy</span></a>
+    <nav class="seite-nav" aria-label="Hauptnavigation">
+      <a href="/nachschlagen/">Nachschlagen</a>
+      <a href="/glossar/">Glossar</a>
+      <a href="/#fragen">Fragen üben</a>
+      <a href="/subnetting-trainer/">Subnetting</a>
+      <a href="/ap1-simulator/">AP1-Simulator</a>
+      <a href="/osi-battle/">Diagnose-Arena</a>
+    </nav>
+  </div>
+</header>
+<main class="wrap seite-inhalt">
+<nav class="brotkrumen" aria-label="Brotkrumenpfad"><a href="/">Start</a><span class="bk-trenner" aria-hidden="true">›</span><a href="/nachschlagen/">Nachschlagen</a><span class="bk-trenner" aria-hidden="true">›</span><a href="/themen/systeme-storage/">Systeme &amp; Storage</a><span class="bk-trenner" aria-hidden="true">›</span><span aria-current="page">Virtualisierung</span></nav>
+<h1 class="seite-h1">Virtualisierung Grundlagen</h1>
+<div class="view active" id="view-lesen">
+<section id="r-virt">
+<p><strong>Virtuell</strong> heißt: nicht real vorhanden, aber real erscheinend. Die virtuelle Infrastruktur läuft dabei auf echter Hardware, <strong>Virtualisierung von Betriebssystemen</strong> bedeutet, mehrere Betriebssysteme gleichzeitig auf einer gemeinsamen Hardwarebasis zu betreiben.</p>
+<table>
+<tr><th>Begriff</th><th>Kernaussage</th></tr>
+<tr><td>Simulation</td><td>bildet das Verhalten eines Systems softwareseitig nach, ohne das reale System zu ersetzen (Flugsimulator bringt den Piloten nicht ans Ziel)</td></tr>
+<tr><td>Emulation</td><td>alle Hardware-Komponenten inkl. CPU werden nachgebildet. CPU-Emulation übersetzt Befehle, großer Overhead</td></tr>
+<tr><td>Virtualisierung</td><td>wie Emulation, nur die CPU wird nicht nachgebildet, der Gast nutzt die Host-CPU-Architektur direkt, deutlich mehr Performance</td></tr>
+</table>
+<p><strong>Servervirtualisierung:</strong> Jeder virtuelle Server erhält virtuelle Ressourcen, die der Hypervisor dynamisch verwaltet, die Zuteilung kann fest reserviert oder je nach Bedarf flexibel angepasst werden. Vorteile: bessere Auslastung, schnelleres Backup, zentrale Verwaltung, Skalierbarkeit. Nachteile: ein Hardwareausfall trifft alle VMs gleichzeitig, nicht jede Software läuft virtualisiert.</p>
+<div class="callout"><span class="tag">Ressourcen</span><strong>Überprovisionierung (Overcommitment):</strong> VMs wird in Summe mehr zugewiesen, als physisch existiert. Solange nicht alle gleichzeitig ihr volles Kontingent abrufen, funktioniert das, bei Spitzenlast drohen Engpässe. Gegenmittel: Monitoring, Auslastungsprognosen, im Ernstfall <strong>Live-Migration</strong>, die Verschiebung einer laufenden VM auf einen anderen Host, ohne den Betrieb zu unterbrechen.</div>
+<p><strong>Anwendungsvirtualisierung:</strong> Die Installation wird vom Client getrennt, der die Anwendung nutzt. Teile werden bei Bedarf geladen, lokal installiert wird nichts. Vorteil: eine zentrale Installation, einfacher Austausch. Nachteil: grafiklastige Anwendungen leiden, stabile Verbindung nötig.</p>
+<p><strong>Betriebssystem-/Containervirtualisierung:</strong> Container nutzen den Kernel des Host-Betriebssystems gemeinsam und benötigen dafür keinen eigenen Hypervisor. Ein Container bündelt Anwendung, Abhängigkeiten, Bibliotheken und Konfiguration. Vorteil: geringer Ressourcenverbrauch, schnelle Bereitstellung. Nachteil: Einrichtung und Betrieb erfordern mehr Fachwissen. Beispiele: Docker, Microsoft Hyper-V Container, BSD Jails, Solaris Zones.</p>
+<p><strong>VDI</strong> (Virtual Desktop Infrastructure): individuell konfigurierte Betriebssysteminstanzen laufen zentral auf einem Server statt lokal. Vorteil: hohe Datensicherheit, einfache Administration, Einsatz von <strong>Thin Clients</strong> möglich. Nachteil: hohe Anfangskosten, Serverausfall legt alle Arbeitsplätze gleichzeitig lahm.</p>
+<p><strong>Thin Client</strong> gegenüber <strong>Thick Client (Fat Client):</strong> Ein Thin Client ist ein minimal ausgestattetes Endgerät ohne nennenswerte lokale Rechenleistung oder Speicherung. Anwendungen und Daten liegen zentral auf dem Server, das Gerät stellt im Wesentlichen nur die Oberfläche dar (typisch für VDI). Ein Thick Client verarbeitet und speichert dagegen lokal, arbeitet weitgehend eigenständig und ist auch ohne ständige Serververbindung nutzbar. Thin Clients senken Wartungsaufwand und Stromverbrauch, hängen aber vollständig von Server und Netz ab.</p>
+
+<h3>Container vs. virtuelle Maschine, der direkte Vergleich</h3>
+<table>
+<tr><th>Kriterium</th><th>Virtuelle Maschine</th><th>Container</th></tr>
+<tr><td>Kernel</td><td>Eigenes komplettes Gast-OS mit eigenem Kernel</td><td>Teilt sich den Kernel des Hosts</td></tr>
+<tr><td>Isolation</td><td>Stark (vollständige Trennung)</td><td>Geringer (gemeinsamer Kernel)</td></tr>
+<tr><td>Ressourcen/Start</td><td>Schwergewichtig, Start in Minuten</td><td>Leichtgewichtig, Start in Sekunden</td></tr>
+<tr><td>Typischer Einsatz</td><td>Unterschiedliche Betriebssysteme, starke Trennung</td><td>Microservices, schnelle Skalierung</td></tr>
+</table>
+<p>Randnotiz zur Einordnung: <strong>KVM</strong> wird für Lernzwecke als Typ-1-Hypervisor behandelt, technisch ist es ein Modul im Linux-Kernel, das den Kernel selbst zum Hypervisor macht.</p>
+
+<div class="callout"><span class="tag">Prüfungsfalle</span><strong>Container</strong> teilen sich den Kernel des Wirtssystems und starten in Sekunden, <strong>virtuelle Maschinen</strong> bringen ein vollständiges eigenes Betriebssystem mit. Daraus folgt: Container sind schlanker und schneller, bieten aber eine geringere Isolation. Wer ein anderes Betriebssystem als das des Wirts benötigt, kommt an einer virtuellen Maschine nicht vorbei.</div>
+
+<h3>Cloud, SaaS &amp; On-Premises</h3>
+<p><strong>On-Premises</strong> bedeutet Betrieb im eigenen Haus: Der Betrieb beschafft die Hardware, betreibt sie in eigenen Räumen und trägt Wartung, Aktualisierung und Ausfallsicherheit selbst. <strong>Cloud Computing</strong> verlagert diese Leistungen zu einem Anbieter, der sie über das Netz bereitstellt und nach Nutzung abrechnet.</p>
+
+<h3>Servicemodelle</h3>
+<table>
+<tr><th>Modell</th><th>Anbieter stellt bereit</th><th>Kunde verantwortet</th><th>Beispiel</th></tr>
+<tr><td><strong>IaaS</strong> (Infrastructure as a Service)</td><td>Rechenleistung, Speicher, Netz, meist als virtuelle Maschinen</td><td>Betriebssystem, Middleware, Anwendung, Daten</td><td>Angemieteter virtueller Server</td></tr>
+<tr><td><strong>PaaS</strong> (Platform as a Service)</td><td>Zusätzlich Betriebssystem, Laufzeitumgebung und Datenbank</td><td>Nur die eigene Anwendung und deren Daten</td><td>Verwaltete Umgebung für eigene Webanwendungen</td></tr>
+<tr><td><strong>SaaS</strong> (Software as a Service)</td><td>Fertige Anwendung einschließlich Betrieb und Pflege</td><td>Nur Benutzerverwaltung, Konfiguration und Daten</td><td>Web-basiertes Office- oder CRM-Paket</td></tr>
+</table>
+<p>Die Verantwortung des Anbieters nimmt von IaaS über PaaS zu SaaS zu, die des Kunden entsprechend ab. Merkhilfe: Je weiter oben im Stapel, desto weniger muss der Kunde selbst betreiben, desto geringer aber auch sein Einfluss auf die Umsetzung.</p>
+
+<h3>Bereitstellungsmodelle</h3>
+<p><strong>Public Cloud:</strong> Ressourcen werden von einem Anbieter für viele Kunden bereitgestellt und geteilt (Mandantenfähigkeit). Sehr flexibel und günstig, dafür geringere Kontrolle über Standort und Umsetzung.<br>
+<strong>Private Cloud:</strong> Ressourcen werden ausschließlich für ein Unternehmen betrieben, im eigenen Rechenzentrum oder exklusiv beim Anbieter. Hohe Kontrolle, dafür teurer und weniger elastisch.<br>
+<strong>Hybrid Cloud:</strong> Kombination beider Welten. Schutzbedürftige Daten bleiben privat, Lastspitzen und unkritische Dienste laufen öffentlich.<br>
+<strong>Community Cloud:</strong> Gemeinsam genutzt von mehreren Einrichtungen mit gleichen Anforderungen, etwa Behörden oder Kliniken.</p>
+
+<h3>Cloud oder eigener Betrieb</h3>
+<table>
+<tr><th></th><th>Cloud</th><th>On-Premises</th></tr>
+<tr><td>Kostenart</td><td>Laufende Betriebskosten nach Nutzung</td><td>Einmalige Investition plus laufender Betrieb</td></tr>
+<tr><td>Skalierung</td><td>Kurzfristig und elastisch</td><td>Nur über Neubeschaffung</td></tr>
+<tr><td>Kontrolle über Daten</td><td>Beim Anbieter, vertraglich geregelt</td><td>Vollständig im eigenen Haus</td></tr>
+<tr><td>Fachpersonal</td><td>Weniger eigenes Betriebswissen nötig</td><td>Eigenes Personal erforderlich</td></tr>
+<tr><td>Abhängigkeit</td><td>Von Anbieter und Internetanbindung</td><td>Von eigener Technik und Personal</td></tr>
+</table>
+<p>Weitere Begriffe: <strong>Skalierbarkeit</strong> meint das Mitwachsen der Leistung mit dem Bedarf, <strong>Elastizität</strong> zusätzlich das automatische Zurückfahren bei sinkender Last. <strong>Vendor Lock-in</strong> beschreibt die Abhängigkeit von einem Anbieter, wenn ein Wechsel wegen proprietärer Schnittstellen oder Datenformate teuer wird. Ein <strong>SLA</strong> regelt die zugesicherte Verfügbarkeit.</p>
+
+<div class="callout"><span class="tag">Prüfungsfalle</span>Die drei Servicemodelle werden regelmäßig vertauscht. Entscheidend ist die Frage, <em>wer das Betriebssystem verantwortet</em>: Bei <strong>IaaS</strong> der Kunde, ab <strong>PaaS</strong> der Anbieter. Zweite Falle: Auch in der Cloud bleibt der Kunde <strong>Verantwortlicher</strong> im Sinne der DSGVO, der Anbieter ist Auftragsverarbeiter; ein Vertrag zur Auftragsverarbeitung nach Art. 28 DSGVO ist deshalb zwingend. Die Verantwortung lässt sich nicht auslagern, nur die Verarbeitung.</div>
+
+<div class="callout"><span class="tag">Praxisbeispiel</span>Ein Betrieb mit 40 Beschäftigten will seine Warenwirtschaft ablösen. <strong>SaaS</strong> passt, wenn kein eigenes Betriebswissen vorhanden ist und Standardfunktionen genügen. <strong>IaaS</strong> passt, wenn eine vorhandene Speziallösung weiterlaufen soll, aber kein eigener Serverraum gewünscht ist. <strong>On-Premises</strong> bleibt sinnvoll, wenn besonders schutzbedürftige Daten das Haus nicht verlassen dürfen oder die Internetanbindung unzuverlässig ist. Begründen Sie in Aufgaben immer über die genannten Rahmenbedingungen, nicht über allgemeine Vorteile.</div>
+
+<div class="callout xref"><span class="tag">Verwandte Themen</span><a href="/nachschlagen/hypervisor/">Hypervisor & Virtualisierungstechnik</a> · <a href="/nachschlagen/storage-systeme/">Storage-Systeme</a> · <a href="/nachschlagen/it-hardware-energie/">IT-Hardware, Energie &amp; Grundlagen</a></div>
+</section>
+</div>
+<div class="seite-cta">
+  <p>Interaktiv mit Volltextsuche, Glossar-Bubbles und Übungsfragen lernen:</p>
+  <div class="seite-cta-knoepfe">
+    <a class="seite-knopf seite-knopf-haupt" href="/#r-virt">In der Lernplattform öffnen</a>
+    <a class="seite-knopf" href="/#fragen">Fragen üben</a>
+    <a class="seite-knopf" href="/glossar/">Glossar</a>
+  </div>
+</div>
+<nav class="seite-blaettern" aria-label="Weitere Kapitel">
+  <span></span>
+  <a class="sb-nach" href="/nachschlagen/hypervisor/"><span>Nächstes Kapitel</span>Hypervisor</a>
+</nav>
+<section class="seite-feld" aria-labelledby="feld-titel">
+<h2 id="feld-titel">Mehr aus Systeme &amp; Storage</h2>
+<div class="seite-pillen"><span class="topic-sub aktuell" aria-current="page">Virtualisierung</span><a class="topic-sub" href="/nachschlagen/hypervisor/">Hypervisor</a><a class="topic-sub" href="/nachschlagen/storage-systeme/">Storage-Systeme</a><a class="topic-sub" href="/nachschlagen/backup-raid/">Backup/RAID</a><a class="topic-sub" href="/nachschlagen/diagnose-fehlersuche/">Diagnose &amp; Fehlersuche</a><a class="topic-sub" href="/nachschlagen/it-hardware-energie/">IT-Hardware &amp; Energie</a></div>
+</section>
+</main>
+<footer><div class="wrap">
+<p class="footer-lead">Layer 8 Academy ist eine kostenlose Lernplattform zur Vorbereitung auf die IHK-Abschlussprüfung Teil 1 der IT-Berufe. Sie umfasst ein Nachschlagewerk, ein Glossar, Übungsfragen im Multiple-Choice- und Karteikartenmodus, einen Subnetting-Trainer und Prüfungssimulationen.</p>
+<nav class="footer-nav" aria-label="Themenfelder">
+  <a href="/themen/netzwerke/">Netzwerke</a> · <a href="/themen/it-sicherheit/">IT-Sicherheit</a> · <a href="/themen/systeme-storage/">Systeme &amp; Storage</a> · <a href="/themen/software-grundlagen/">Software &amp; Grundlagen</a> · <a href="/themen/bwl-prozesse/">BWL &amp; Prozesse</a> · <a href="/nachschlagen/">Alle Kapitel</a> · <a href="/glossar/">Glossar</a>
+</nav>
+<div class="footer-copy">© 2026 boxberger.app · <a href="/impressum/" class="imprint-link">Impressum &amp; Datenschutz</a></div>
+</div></footer>
+</body>
+</html>

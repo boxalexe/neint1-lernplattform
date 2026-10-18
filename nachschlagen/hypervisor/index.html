@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hypervisor &amp; Virtualisierungstechnik | AP1 – Layer 8 Academy</title>
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<meta name="description" content="Ein Hypervisor erstellt und verwaltet virtuelle Maschinen und stellt ihnen eine Abstraktionsschicht aus virtueller Hardware bereit.">
+<meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+<meta name="theme-color" content="#0a0e12">
+<link rel="canonical" href="https://layer8academy.boxberger.app/nachschlagen/hypervisor/">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Layer 8 Academy">
+<meta property="og:title" content="Hypervisor &amp; Virtualisierungstechnik | AP1 – Layer 8 Academy">
+<meta property="og:description" content="Ein Hypervisor erstellt und verwaltet virtuelle Maschinen und stellt ihnen eine Abstraktionsschicht aus virtueller Hardware bereit.">
+<meta property="og:url" content="https://layer8academy.boxberger.app/nachschlagen/hypervisor/">
+<meta property="og:locale" content="de_DE">
+<meta name="twitter:card" content="summary">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+    {
+     "@type": "ListItem",
+     "position": 1,
+     "name": "Start",
+     "item": "https://layer8academy.boxberger.app/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 2,
+     "name": "Nachschlagen",
+     "item": "https://layer8academy.boxberger.app/nachschlagen/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 3,
+     "name": "Systeme & Storage",
+     "item": "https://layer8academy.boxberger.app/themen/systeme-storage/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 4,
+     "name": "Hypervisor",
+     "item": "https://layer8academy.boxberger.app/nachschlagen/hypervisor/"
+    }
+   ]
+  },
+  {
+   "@type": "LearningResource",
+   "name": "Hypervisor & Virtualisierungstechnik",
+   "description": "Ein Hypervisor erstellt und verwaltet virtuelle Maschinen und stellt ihnen eine Abstraktionsschicht aus virtueller Hardware bereit.",
+   "url": "https://layer8academy.boxberger.app/nachschlagen/hypervisor/",
+   "inLanguage": "de-DE",
+   "isAccessibleForFree": true,
+   "learningResourceType": "Nachschlagewerk",
+   "educationalLevel": "Berufsausbildung",
+   "teaches": "Systeme & Storage",
+   "isPartOf": {
+    "@id": "https://layer8academy.boxberger.app/#website"
+   },
+   "author": {
+    "@type": "Person",
+    "name": "Alexander Boxberger-Adam",
+    "url": "https://boxberger.app/"
+   }
+  }
+ ]
+}
+</script>
+<script>
+  try {
+    var t = localStorage.getItem('l8a_theme');
+    if (t && t !== 'default') document.documentElement.setAttribute('data-theme', t);
+  } catch (e) {}
+</script>
+<link rel="stylesheet" href="/styles.css?v=20261018a">
+<link rel="stylesheet" href="/seiten.css?v=20261018a">
+</head>
+<body class="seite">
+<header class="seite-kopf">
+  <div class="wrap">
+    <a class="seite-logo" href="/" aria-label="Layer 8 Academy – zur Lernplattform"><span class="t-neint">Layer</span> <svg class="title-8" width="44" height="44" viewBox="0 0 120 120" aria-label="L8A" role="img"><path d="M60,60 C34,60 24,26 60,26 C96,26 86,60 60,60 Z" fill="none" stroke="#3ddc84" stroke-width="7" stroke-linecap="round"/><path d="M60,94 C86,94 96,60 60,60 C24,60 34,94 60,94 Z" fill="none" stroke="#22d3ee" stroke-width="7" stroke-linecap="round"/><line x1="18" y1="26" x2="18" y2="52" stroke="#22d3ee" stroke-width="7" stroke-linecap="round"/><line x1="18" y1="52" x2="30" y2="52" stroke="#22d3ee" stroke-width="7" stroke-linecap="round"/><path d="M102,68 L92,94 M102,68 L112,94 M95,86 L107,86" stroke="#3ddc84" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg> <span class="t-symb">Academy</span></a>
+    <nav class="seite-nav" aria-label="Hauptnavigation">
+      <a href="/nachschlagen/">Nachschlagen</a>
+      <a href="/glossar/">Glossar</a>
+      <a href="/#fragen">Fragen üben</a>
+      <a href="/subnetting-trainer/">Subnetting</a>
+      <a href="/ap1-simulator/">AP1-Simulator</a>
+      <a href="/osi-battle/">Diagnose-Arena</a>
+    </nav>
+  </div>
+</header>
+<main class="wrap seite-inhalt">
+<nav class="brotkrumen" aria-label="Brotkrumenpfad"><a href="/">Start</a><span class="bk-trenner" aria-hidden="true">›</span><a href="/nachschlagen/">Nachschlagen</a><span class="bk-trenner" aria-hidden="true">›</span><a href="/themen/systeme-storage/">Systeme &amp; Storage</a><span class="bk-trenner" aria-hidden="true">›</span><span aria-current="page">Hypervisor</span></nav>
+<h1 class="seite-h1">Hypervisor &amp; Virtualisierungstechnik</h1>
+<div class="view active" id="view-lesen">
+<section id="r-hyperv">
+<p>Ein <strong>Hypervisor</strong> erstellt und verwaltet virtuelle Maschinen und stellt ihnen eine Abstraktionsschicht aus virtueller Hardware bereit.</p>
+<table>
+<tr><th>Typ</th><th>Merkmal</th><th>Beispiele</th></tr>
+<tr><td>Typ 1 (Baremetal)</td><td>läuft direkt auf der Hardware, kein Host-Betriebssystem nötig</td><td>Hyper-V, VMware ESXi, Citrix Xen, KVM</td></tr>
+<tr><td>Typ 2 (Hosted)</td><td>setzt auf einem vollständig installierten Betriebssystem auf</td><td>VirtualBox, VMware Workstation, Virtual PC, Parallels</td></tr>
+</table>
+<div class="callout"><span class="tag">Ring-Schema</span>Bei rein softwarebasierter Virtualisierung ohne Hardwareunterstützung wollten Gastsysteme eigentlich privilegierte Befehle in Ring 0 ausführen, liefen aber nur in Ring 3. Ältere Hypervisoren lösten das per <strong>Binary Translation</strong>: Der Hypervisor erkannte solche Befehle zur Laufzeit und ersetzte sie durch sichere Äquivalente. Kompatibilitätsprobleme mit neuen Gast-Betriebssystemen entstehen bei alten Hypervisor-Versionen meist durch fehlende Treiber oder fehlende Unterstützung neuer Virtualisierungsfunktionen und CPU-Erweiterungen.</div>
+<p><strong>Para-Virtualisierung</strong> (Typ 1): Statt Hardware zu emulieren, stellt der Hypervisor eine API bereit, die der Gast direkt nutzen muss. Vorteil: deutlich weniger Overhead als bei voller Befehlsübersetzung, dadurch schnellere Kommunikation. Nachteil: der Gast-Kernel muss angepasst oder bereits vorbereitet sein. Einsatz: Rechenzentren, Cloud-Anbieter.</p>
+<p><strong>Hardwareunterstützung:</strong> Intel VT und AMD-V stellen einen eigenen CPU-Modus bereit, in dem privilegierte Befehle des Gastsystems direkt und hardwareunterstützt laufen, keine Anpassung am Gast-Kernel nötig, deutlich weniger Overhead als bei reiner Software-Übersetzung. Beide sind herstellerspezifische Erweiterungen, die denselben Zweck erfüllen, aber nicht direkt kompatibel sind: Ein Prozessor unterstützt jeweils nur die Erweiterung seines eigenen Herstellers.</p>
+<div class="callout"><span class="tag">Grenzen</span>Auf einem Host können viele VMs gleichzeitig laufen, die Grenze setzt allein die vorhandene physische Hardware (CPU, Arbeitsspeicher, Storage). Feste, allgemeingültige Verhältniszahlen wie "X virtuelle CPUs pro physischem Kern" gibt es dafür nicht, die Empfehlungen der Hersteller ändern sich mit neuer Hardware und neuen Hypervisor-Versionen. Vorteile der Virtualisierung insgesamt: kostengünstig, flexibel, ideal für Test-/Entwicklungsumgebungen. Nachteil: Fehler in der Virtualisierungssoftware können einem Angreifer den Ausbruch aus der VM ermöglichen.</div>
+<p><strong>Hyper-V Export/Import:</strong> Über die Export-Funktion lässt sich eine komplette VM samt Konfiguration, virtuellen Festplatten und Prüfpunkten als in sich geschlossenes Paket sichern und später auf demselben oder einem anderen Host wieder importieren. Positive Nebeneffekte: Das Paket dient zugleich als konsistentes Backup, lässt sich zum Klonen einer VM nutzen und erlaubt die einfache Übertragung auf andere Hardware, ohne die VM neu aufsetzen zu müssen.</p>
+
+<div class="callout"><span class="tag">Prüfungsfalle</span><strong>Typ 1</strong> läuft direkt auf der Hardware, ohne darunterliegendes Betriebssystem, und wird im Rechenzentrum eingesetzt. <strong>Typ 2</strong> läuft als Anwendung auf einem vorhandenen Betriebssystem und eignet sich für Test und Entwicklung am Arbeitsplatz. Wird im Szenario „hohe Leistung", „Produktivbetrieb" oder „Rechenzentrum" genannt, ist Typ 1 die erwartete Antwort.</div>
+
+<div class="callout xref"><span class="tag">Verwandte Themen</span><a href="/nachschlagen/virtualisierung/">Virtualisierung Grundlagen</a> · <a href="/nachschlagen/storage-systeme/">Storage-Systeme</a> · <a href="/nachschlagen/it-hardware-energie/">IT-Hardware, Energie &amp; Grundlagen</a></div>
+</section>
+</div>
+<div class="seite-cta">
+  <p>Interaktiv mit Volltextsuche, Glossar-Bubbles und Übungsfragen lernen:</p>
+  <div class="seite-cta-knoepfe">
+    <a class="seite-knopf seite-knopf-haupt" href="/#r-hyperv">In der Lernplattform öffnen</a>
+    <a class="seite-knopf" href="/#fragen">Fragen üben</a>
+    <a class="seite-knopf" href="/glossar/">Glossar</a>
+  </div>
+</div>
+<nav class="seite-blaettern" aria-label="Weitere Kapitel">
+  <a class="sb-vor" href="/nachschlagen/virtualisierung/"><span>Vorheriges Kapitel</span>Virtualisierung</a>
+  <a class="sb-nach" href="/nachschlagen/storage-systeme/"><span>Nächstes Kapitel</span>Storage-Systeme</a>
+</nav>
+<section class="seite-feld" aria-labelledby="feld-titel">
+<h2 id="feld-titel">Mehr aus Systeme &amp; Storage</h2>
+<div class="seite-pillen"><a class="topic-sub" href="/nachschlagen/virtualisierung/">Virtualisierung</a><span class="topic-sub aktuell" aria-current="page">Hypervisor</span><a class="topic-sub" href="/nachschlagen/storage-systeme/">Storage-Systeme</a><a class="topic-sub" href="/nachschlagen/backup-raid/">Backup/RAID</a><a class="topic-sub" href="/nachschlagen/diagnose-fehlersuche/">Diagnose &amp; Fehlersuche</a><a class="topic-sub" href="/nachschlagen/it-hardware-energie/">IT-Hardware &amp; Energie</a></div>
+</section>
+</main>
+<footer><div class="wrap">
+<p class="footer-lead">Layer 8 Academy ist eine kostenlose Lernplattform zur Vorbereitung auf die IHK-Abschlussprüfung Teil 1 der IT-Berufe. Sie umfasst ein Nachschlagewerk, ein Glossar, Übungsfragen im Multiple-Choice- und Karteikartenmodus, einen Subnetting-Trainer und Prüfungssimulationen.</p>
+<nav class="footer-nav" aria-label="Themenfelder">
+  <a href="/themen/netzwerke/">Netzwerke</a> · <a href="/themen/it-sicherheit/">IT-Sicherheit</a> · <a href="/themen/systeme-storage/">Systeme &amp; Storage</a> · <a href="/themen/software-grundlagen/">Software &amp; Grundlagen</a> · <a href="/themen/bwl-prozesse/">BWL &amp; Prozesse</a> · <a href="/nachschlagen/">Alle Kapitel</a> · <a href="/glossar/">Glossar</a>
+</nav>
+<div class="footer-copy">© 2026 boxberger.app · <a href="/impressum/" class="imprint-link">Impressum &amp; Datenschutz</a></div>
+</div></footer>
+</body>
+</html>

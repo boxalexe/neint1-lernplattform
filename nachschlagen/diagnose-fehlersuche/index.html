@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Diagnose &amp; Fehlersuche – AP1 einfach erklärt | Layer 8 Academy</title>
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<meta name="description" content="Systematische Fehlersuche folgt der Bottom-up-Logik des OSI-Modells: von der physischen Verbindung nach oben zur Anwendung. Die wichtigsten Werkzeuge:">
+<meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+<meta name="theme-color" content="#0a0e12">
+<link rel="canonical" href="https://layer8academy.boxberger.app/nachschlagen/diagnose-fehlersuche/">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Layer 8 Academy">
+<meta property="og:title" content="Diagnose &amp; Fehlersuche – AP1 einfach erklärt | Layer 8 Academy">
+<meta property="og:description" content="Systematische Fehlersuche folgt der Bottom-up-Logik des OSI-Modells: von der physischen Verbindung nach oben zur Anwendung. Die wichtigsten Werkzeuge:">
+<meta property="og:url" content="https://layer8academy.boxberger.app/nachschlagen/diagnose-fehlersuche/">
+<meta property="og:locale" content="de_DE">
+<meta name="twitter:card" content="summary">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+    {
+     "@type": "ListItem",
+     "position": 1,
+     "name": "Start",
+     "item": "https://layer8academy.boxberger.app/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 2,
+     "name": "Nachschlagen",
+     "item": "https://layer8academy.boxberger.app/nachschlagen/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 3,
+     "name": "Systeme & Storage",
+     "item": "https://layer8academy.boxberger.app/themen/systeme-storage/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 4,
+     "name": "Diagnose & Fehlersuche",
+     "item": "https://layer8academy.boxberger.app/nachschlagen/diagnose-fehlersuche/"
+    }
+   ]
+  },
+  {
+   "@type": "LearningResource",
+   "name": "Diagnose & Fehlersuche",
+   "description": "Systematische Fehlersuche folgt der Bottom-up-Logik des OSI-Modells: von der physischen Verbindung nach oben zur Anwendung. Die wichtigsten Werkzeuge:",
+   "url": "https://layer8academy.boxberger.app/nachschlagen/diagnose-fehlersuche/",
+   "inLanguage": "de-DE",
+   "isAccessibleForFree": true,
+   "learningResourceType": "Nachschlagewerk",
+   "educationalLevel": "Berufsausbildung",
+   "teaches": "Systeme & Storage",
+   "isPartOf": {
+    "@id": "https://layer8academy.boxberger.app/#website"
+   },
+   "author": {
+    "@type": "Person",
+    "name": "Alexander Boxberger-Adam",
+    "url": "https://boxberger.app/"
+   }
+  }
+ ]
+}
+</script>
+<script>
+  try {
+    var t = localStorage.getItem('l8a_theme');
+    if (t && t !== 'default') document.documentElement.setAttribute('data-theme', t);
+  } catch (e) {}
+</script>
+<link rel="stylesheet" href="/styles.css?v=20261018a">
+<link rel="stylesheet" href="/seiten.css?v=20261018a">
+</head>
+<body class="seite">
+<header class="seite-kopf">
+  <div class="wrap">
+    <a class="seite-logo" href="/" aria-label="Layer 8 Academy – zur Lernplattform"><span class="t-neint">Layer</span> <svg class="title-8" width="44" height="44" viewBox="0 0 120 120" aria-label="L8A" role="img"><path d="M60,60 C34,60 24,26 60,26 C96,26 86,60 60,60 Z" fill="none" stroke="#3ddc84" stroke-width="7" stroke-linecap="round"/><path d="M60,94 C86,94 96,60 60,60 C24,60 34,94 60,94 Z" fill="none" stroke="#22d3ee" stroke-width="7" stroke-linecap="round"/><line x1="18" y1="26" x2="18" y2="52" stroke="#22d3ee" stroke-width="7" stroke-linecap="round"/><line x1="18" y1="52" x2="30" y2="52" stroke="#22d3ee" stroke-width="7" stroke-linecap="round"/><path d="M102,68 L92,94 M102,68 L112,94 M95,86 L107,86" stroke="#3ddc84" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg> <span class="t-symb">Academy</span></a>
+    <nav class="seite-nav" aria-label="Hauptnavigation">
+      <a href="/nachschlagen/">Nachschlagen</a>
+      <a href="/glossar/">Glossar</a>
+      <a href="/#fragen">Fragen üben</a>
+      <a href="/subnetting-trainer/">Subnetting</a>
+      <a href="/ap1-simulator/">AP1-Simulator</a>
+      <a href="/osi-battle/">Diagnose-Arena</a>
+    </nav>
+  </div>
+</header>
+<main class="wrap seite-inhalt">
+<nav class="brotkrumen" aria-label="Brotkrumenpfad"><a href="/">Start</a><span class="bk-trenner" aria-hidden="true">›</span><a href="/nachschlagen/">Nachschlagen</a><span class="bk-trenner" aria-hidden="true">›</span><a href="/themen/systeme-storage/">Systeme &amp; Storage</a><span class="bk-trenner" aria-hidden="true">›</span><span aria-current="page">Diagnose &amp; Fehlersuche</span></nav>
+<h1 class="seite-h1">Diagnose &amp; Fehlersuche</h1>
+<div class="view active" id="view-lesen">
+<section id="r-diagnose">
+<p>Systematische Fehlersuche folgt der Bottom-up-Logik des OSI-Modells: von der physischen Verbindung nach oben zur Anwendung. Die wichtigsten Werkzeuge:</p>
+<table>
+<tr><th>Befehl</th><th>Prüfzweck</th></tr>
+<tr><td><code>ipconfig</code> (Windows) / <code>ip a</code> (Linux)</td><td>Eigene IP-Konfiguration: Adresse, Maske, Gateway anzeigen</td></tr>
+<tr><td><code>ping</code></td><td>Erreichbarkeit eines Ziels per ICMP prüfen</td></tr>
+<tr><td><code>tracert</code> (Windows) / <code>traceroute</code> (Linux)</td><td>Weg eines Pakets über alle Router (Hops) verfolgen</td></tr>
+<tr><td><code>nslookup</code> / <code>dig</code></td><td>DNS-Auflösung gezielt testen</td></tr>
+<tr><td><code>arp -a</code></td><td>Zuordnungstabelle IP &harr; MAC im lokalen Netz anzeigen</td></tr>
+<tr><td><code>route print</code> / <code>ip route</code></td><td>Lokale Routingtabelle anzeigen</td></tr>
+<tr><td><code>netstat</code> / <code>ss</code></td><td>Offene Ports und aktive Verbindungen anzeigen</td></tr>
+</table>
+<h3>Die typische Prüfreihenfolge</h3>
+<p>1. Physische Verbindung und Link-Status (Kabel, LED). 2. Lokale IP-Konfiguration prüfen (<code>ipconfig</code>, eine 169.254er-Adresse verrät fehlendes DHCP). 3. Eigenen Stack testen (<code>ping 127.0.0.1</code>). 4. Gateway anpingen, klappt das, steht das lokale Netz. 5. Ein externes Ziel per IP anpingen (z. B. <code>ping 8.8.8.8</code>), klappt das, steht das Routing. 6. Denselben Namen per DNS testen (<code>nslookup</code>), schlägt nur das fehl, liegt es an der Namensauflösung. 7. Erst dann den Anwendungsdienst selbst prüfen.</p>
+<div class="callout"><span class="tag">Ping-Grenze</span>Ein erfolgreicher Ping belegt nur die Erreichbarkeit per ICMP. Er garantiert nicht, dass ein bestimmter TCP- oder UDP-Dienst auf dem Ziel funktioniert, der Webserver kann trotz sauberem Ping gestört sein, und umgekehrt kann eine Firewall ICMP blocken, obwohl der Dienst läuft.</div>
+
+<div class="callout"><span class="tag">Prüfungsfalle</span>Die Fehlersuche läuft <strong>von unten nach oben</strong> durch die Schichten: erst Kabel und Verbindungsleuchte, dann Adresse und Subnetzmaske, dann Gateway, dann Namensauflösung, zuletzt die Anwendung. Wer oben beginnt, sucht lange. Klassisches Erkennungszeichen: Eine Adresse aus <strong>169.254.x.x</strong> bedeutet immer, dass kein DHCP-Server geantwortet hat.</div>
+
+<h3>Prüfreihenfolge Schritt für Schritt</h3>
+<p>Die Fehlersuche läuft von unten nach oben durch die Schichten. Jeder Schritt setzt voraus, dass der vorherige erfolgreich war; dadurch grenzt man die Ursache systematisch ein, statt zu raten.</p>
+<ol>
+<li><strong>Physische Verbindung:</strong> Kabel, Steckverbindung, Verbindungsleuchte am Anschluss, bei Funk die Verbindung zum Access Point.</li>
+<li><strong>IP-Konfiguration:</strong> Mit <code>ipconfig /all</code> prüfen, ob eine gültige Adresse, eine passende Subnetzmaske, ein Standardgateway und ein DNS-Server eingetragen sind.</li>
+<li><strong>Eigener Protokollstapel:</strong> <code>ping 127.0.0.1</code> spricht die Loopback-Adresse an und zeigt, ob TCP/IP auf dem Gerät selbst arbeitet.</li>
+<li><strong>Standardgateway anpingen:</strong> Gelingt das, funktioniert die Verbindung im eigenen Segment.</li>
+<li><strong>Externe Adresse anpingen</strong>, etwa <code>ping 8.8.8.8</code>: Damit sind Routing und Internetzugang geprüft, noch ohne Namensauflösung.</li>
+<li><strong>Namensauflösung:</strong> <code>nslookup beispiel.de</code> oder ein Ping auf einen Namen zeigt, ob DNS antwortet.</li>
+</ol>
+
+<h3>Typische Fehlerbilder deuten</h3>
+<table>
+<tr><th>Beobachtung</th><th>Wahrscheinliche Ursache</th><th>Nächster Schritt</th></tr>
+<tr><td>Adresse aus 169.254.x.x</td><td>Kein DHCP-Server erreichbar, daher APIPA-Selbstvergabe</td><td>DHCP-Dienst, VLAN-Zuordnung und Relay-Agent prüfen</td></tr>
+<tr><td><code>ping 8.8.8.8</code> gelingt, <code>ping beispiel.de</code> nicht</td><td>Namensauflösung gestört, Netz und Routing sind in Ordnung</td><td>Eingetragenen DNS-Server prüfen, Zwischenspeicher leeren</td></tr>
+<tr><td>Gateway erreichbar, externe Adresse nicht</td><td>Routing oder Internetanbindung gestört</td><td>Router, Standardroute und Anbindung prüfen</td></tr>
+<tr><td>Loopback gelingt, Gateway nicht</td><td>Problem im eigenen Segment</td><td>Verkabelung, Switch-Port und VLAN prüfen</td></tr>
+<tr><td>Nichts geht, keine Verbindungsleuchte</td><td>Physische Unterbrechung</td><td>Kabel, Port und Netzwerkkarte prüfen</td></tr>
+</table>
+<div class="callout"><span class="tag">Prüfungsfalle</span>Die beiden häufigsten Befunde sauber auseinanderhalten: Eine Adresse aus <strong>169.254.x.x</strong> bedeutet immer ein <strong>DHCP-Problem</strong> und muss zuerst behoben werden, weil ohne gültige Adresse nichts weiter funktioniert. Ist dagegen eine <em>IP-Adresse</em> erreichbar, ein <em>Name</em> aber nicht, liegt es fast sicher an <strong>DNS</strong>; Verkabelung, Adressvergabe und Routing sind dann bereits nachweislich in Ordnung.</div>
+<div class="callout"><span class="tag">Merksatz</span>Erst Kabel und IP-Konfiguration prüfen, dann Gateway und Routing testen, anschließend die Namensauflösung kontrollieren und zuletzt die Anwendung selbst untersuchen.</div>
+
+<div class="callout xref"><span class="tag">Verwandte Themen</span><a href="/nachschlagen/ipv4-ipv6/">IPv4 & IPv6</a> · <a href="/nachschlagen/dns-dhcp/">DNS & DHCP im Detail</a> · <a href="/nachschlagen/ports-sockets/">Ports & Sockets</a><br>
+In der <a href="/osi-battle/">Diagnose-Arena</a> wird diese Prüfreihenfolge als Differenzialdiagnose trainiert: Aus einer Symptomliste folgt genau eine Ursache.</div>
+</section>
+</div>
+<div class="seite-cta">
+  <p>Interaktiv mit Volltextsuche, Glossar-Bubbles und Übungsfragen lernen:</p>
+  <div class="seite-cta-knoepfe">
+    <a class="seite-knopf seite-knopf-haupt" href="/#r-diagnose">In der Lernplattform öffnen</a>
+    <a class="seite-knopf" href="/#fragen">Fragen üben</a>
+    <a class="seite-knopf" href="/glossar/">Glossar</a>
+  </div>
+</div>
+<nav class="seite-blaettern" aria-label="Weitere Kapitel">
+  <a class="sb-vor" href="/nachschlagen/backup-raid/"><span>Vorheriges Kapitel</span>Backup/RAID</a>
+  <a class="sb-nach" href="/nachschlagen/it-hardware-energie/"><span>Nächstes Kapitel</span>IT-Hardware &amp; Energie</a>
+</nav>
+<section class="seite-feld" aria-labelledby="feld-titel">
+<h2 id="feld-titel">Mehr aus Systeme &amp; Storage</h2>
+<div class="seite-pillen"><a class="topic-sub" href="/nachschlagen/virtualisierung/">Virtualisierung</a><a class="topic-sub" href="/nachschlagen/hypervisor/">Hypervisor</a><a class="topic-sub" href="/nachschlagen/storage-systeme/">Storage-Systeme</a><a class="topic-sub" href="/nachschlagen/backup-raid/">Backup/RAID</a><span class="topic-sub aktuell" aria-current="page">Diagnose &amp; Fehlersuche</span><a class="topic-sub" href="/nachschlagen/it-hardware-energie/">IT-Hardware &amp; Energie</a></div>
+</section>
+</main>
+<footer><div class="wrap">
+<p class="footer-lead">Layer 8 Academy ist eine kostenlose Lernplattform zur Vorbereitung auf die IHK-Abschlussprüfung Teil 1 der IT-Berufe. Sie umfasst ein Nachschlagewerk, ein Glossar, Übungsfragen im Multiple-Choice- und Karteikartenmodus, einen Subnetting-Trainer und Prüfungssimulationen.</p>
+<nav class="footer-nav" aria-label="Themenfelder">
+  <a href="/themen/netzwerke/">Netzwerke</a> · <a href="/themen/it-sicherheit/">IT-Sicherheit</a> · <a href="/themen/systeme-storage/">Systeme &amp; Storage</a> · <a href="/themen/software-grundlagen/">Software &amp; Grundlagen</a> · <a href="/themen/bwl-prozesse/">BWL &amp; Prozesse</a> · <a href="/nachschlagen/">Alle Kapitel</a> · <a href="/glossar/">Glossar</a>
+</nav>
+<div class="footer-copy">© 2026 boxberger.app · <a href="/impressum/" class="imprint-link">Impressum &amp; Datenschutz</a></div>
+</div></footer>
+</body>
+</html>

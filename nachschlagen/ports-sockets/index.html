@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ports &amp; Sockets – AP1 einfach erklärt | Layer 8 Academy</title>
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<meta name="description" content="Ein Port ist eine 16-Bit-Nummer zwischen 0 und 65535 , die einen Dienst auf einem Server identifiziert.">
+<meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+<meta name="theme-color" content="#0a0e12">
+<link rel="canonical" href="https://layer8academy.boxberger.app/nachschlagen/ports-sockets/">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Layer 8 Academy">
+<meta property="og:title" content="Ports &amp; Sockets – AP1 einfach erklärt | Layer 8 Academy">
+<meta property="og:description" content="Ein Port ist eine 16-Bit-Nummer zwischen 0 und 65535 , die einen Dienst auf einem Server identifiziert.">
+<meta property="og:url" content="https://layer8academy.boxberger.app/nachschlagen/ports-sockets/">
+<meta property="og:locale" content="de_DE">
+<meta name="twitter:card" content="summary">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+    {
+     "@type": "ListItem",
+     "position": 1,
+     "name": "Start",
+     "item": "https://layer8academy.boxberger.app/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 2,
+     "name": "Nachschlagen",
+     "item": "https://layer8academy.boxberger.app/nachschlagen/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 3,
+     "name": "Netzwerke",
+     "item": "https://layer8academy.boxberger.app/themen/netzwerke/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 4,
+     "name": "Ports",
+     "item": "https://layer8academy.boxberger.app/nachschlagen/ports-sockets/"
+    }
+   ]
+  },
+  {
+   "@type": "LearningResource",
+   "name": "Ports & Sockets",
+   "description": "Ein Port ist eine 16-Bit-Nummer zwischen 0 und 65535 , die einen Dienst auf einem Server identifiziert.",
+   "url": "https://layer8academy.boxberger.app/nachschlagen/ports-sockets/",
+   "inLanguage": "de-DE",
+   "isAccessibleForFree": true,
+   "learningResourceType": "Nachschlagewerk",
+   "educationalLevel": "Berufsausbildung",
+   "teaches": "Netzwerke",
+   "isPartOf": {
+    "@id": "https://layer8academy.boxberger.app/#website"
+   },
+   "author": {
+    "@type": "Person",
+    "name": "Alexander Boxberger-Adam",
+    "url": "https://boxberger.app/"
+   }
+  }
+ ]
+}
+</script>
+<script>
+  try {
+    var t = localStorage.getItem('l8a_theme');
+    if (t && t !== 'default') document.documentElement.setAttribute('data-theme', t);
+  } catch (e) {}
+</script>
+<link rel="stylesheet" href="/styles.css?v=20261018a">
+<link rel="stylesheet" href="/seiten.css?v=20261018a">
+</head>
+<body class="seite">
+<header class="seite-kopf">
+  <div class="wrap">
+    <a class="seite-logo" href="/" aria-label="Layer 8 Academy – zur Lernplattform"><span class="t-neint">Layer</span> <svg class="title-8" width="44" height="44" viewBox="0 0 120 120" aria-label="L8A" role="img"><path d="M60,60 C34,60 24,26 60,26 C96,26 86,60 60,60 Z" fill="none" stroke="#3ddc84" stroke-width="7" stroke-linecap="round"/><path d="M60,94 C86,94 96,60 60,60 C24,60 34,94 60,94 Z" fill="none" stroke="#22d3ee" stroke-width="7" stroke-linecap="round"/><line x1="18" y1="26" x2="18" y2="52" stroke="#22d3ee" stroke-width="7" stroke-linecap="round"/><line x1="18" y1="52" x2="30" y2="52" stroke="#22d3ee" stroke-width="7" stroke-linecap="round"/><path d="M102,68 L92,94 M102,68 L112,94 M95,86 L107,86" stroke="#3ddc84" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg> <span class="t-symb">Academy</span></a>
+    <nav class="seite-nav" aria-label="Hauptnavigation">
+      <a href="/nachschlagen/">Nachschlagen</a>
+      <a href="/glossar/">Glossar</a>
+      <a href="/#fragen">Fragen üben</a>
+      <a href="/subnetting-trainer/">Subnetting</a>
+      <a href="/ap1-simulator/">AP1-Simulator</a>
+      <a href="/osi-battle/">Diagnose-Arena</a>
+    </nav>
+  </div>
+</header>
+<main class="wrap seite-inhalt">
+<nav class="brotkrumen" aria-label="Brotkrumenpfad"><a href="/">Start</a><span class="bk-trenner" aria-hidden="true">›</span><a href="/nachschlagen/">Nachschlagen</a><span class="bk-trenner" aria-hidden="true">›</span><a href="/themen/netzwerke/">Netzwerke</a><span class="bk-trenner" aria-hidden="true">›</span><span aria-current="page">Ports</span></nav>
+<h1 class="seite-h1">Ports &amp; Sockets</h1>
+<div class="view active" id="view-lesen">
+<section id="r-ports">
+<p>Ein <span class="term">Port</span> ist eine 16-Bit-Nummer zwischen <code>0</code> und <code>65535</code>, die einen Dienst auf einem Server identifiziert. Eine TCP-Verbindung wird eindeutig durch das Vierertupel aus <strong>Quell-IP, Quellport, Ziel-IP und Zielport</strong> identifiziert, die verbreitete Schreibweise <code>IP:Port</code> für einen <strong>Socket</strong> ist dabei eine vereinfachte Darstellung, die nur eine Seite dieses Tupels zeigt. Ports gehören zur Transportschicht und werden von <span class="term">TCP</span> (Transmission Control Protocol) und <span class="term">UDP</span> (User Datagram Protocol) genutzt.</p>
+<table>
+<tr><th>Bereich</th><th>Bezeichnung</th><th>Verwendung</th></tr>
+<tr><td>0 – 1023</td><td>Well-Known</td><td>Standarddienste (HTTP, SSH, DNS …)</td></tr>
+<tr><td>1024 – 49151</td><td>Registered</td><td>Registrierte Anwendungen (RDP 3389, MySQL 3306)</td></tr>
+<tr><td>49152 – 65535</td><td>Dynamic / Ephemeral</td><td>Temporäre Quellports, vom OS vergeben</td></tr>
+</table>
+<p><strong>Quellport:</strong> Der Zielport ist fest (z. B. 443), der Quellport wird zufällig aus dem dynamischen Bereich gewählt. Vor allem der <strong>Client</strong> nutzt seinen eigenen Quellport, um eingehende Antworten dem richtigen Socket bzw. Prozess zuzuordnen, er weiß, welche Anwendung unter diesem Port auf eine Antwort wartet.</p>
+<div class="callout"><span class="tag">Weitere Ports</span><strong>8443</strong> liegt im Registered-Bereich und dient häufig als alternativer HTTPS-Port für Web-Interfaces. <strong>SOCKS</strong>-Proxys nutzen standardmäßig Port <strong>1080</strong> (z. B. bei Tor). Ein <strong>Proxy</strong> vermittelt Verbindungen stellvertretend und kann filtern, cachen oder anonymisieren.</div>
+
+<h3>Wichtige Protokolle & Ports</h3>
+<table>
+<tr><th>Port</th><th>Dienst</th><th>Transport</th><th>Funktion</th></tr>
+<tr><td>20/21</td><td>FTP Data/Control</td><td>TCP</td><td>Dateien / Steuerbefehle</td></tr>
+<tr><td>22</td><td>SSH</td><td>TCP</td><td>Verschlüsselte Fernsteuerung</td></tr>
+<tr><td>23</td><td>Telnet</td><td>TCP</td><td>Unverschlüsselt, unsicher</td></tr>
+<tr><td>25</td><td>SMTP</td><td>TCP</td><td>Mailversand Server→Server</td></tr>
+<tr><td>53</td><td>DNS</td><td>UDP/TCP</td><td>Namensauflösung</td></tr>
+<tr><td>67/68</td><td>DHCP</td><td>UDP</td><td>Auto-IP (Server/Client)</td></tr>
+<tr><td>69</td><td>TFTP</td><td>UDP</td><td>Dateitransfer ohne Login (PXE)</td></tr>
+<tr><td>80</td><td>HTTP</td><td>TCP</td><td>Web, unverschlüsselt</td></tr>
+<tr><td>110/143</td><td>POP3/IMAP</td><td>TCP</td><td>Mailabruf (bei POP3 optional löschend, IMAP behält auf dem Server)</td></tr>
+<tr><td>161</td><td>SNMP</td><td>UDP</td><td>Geräteabfrage durch die Managementstation (Polling)</td></tr>
+<tr><td>162</td><td>SNMP-Trap</td><td>UDP</td><td>Unaufgeforderte Ereignismeldung vom Gerät an die Station</td></tr>
+<tr><td>389/636</td><td>LDAP/LDAPS</td><td>TCP (meist), UDP möglich</td><td>Verzeichnisdienst (unv./verschl.)</td></tr>
+<tr><td>443</td><td>HTTPS</td><td>TCP</td><td>Web über TLS/SSL</td></tr>
+<tr><td>465/587</td><td>SMTPS/Submission</td><td>TCP</td><td>Mailversand: 465 mit TLS, 587 meist per STARTTLS</td></tr>
+<tr><td>993/995</td><td>IMAPS/POP3S</td><td>TCP</td><td>Mailabruf verschlüsselt</td></tr>
+<tr><td>3389</td><td>RDP</td><td>TCP</td><td>Grafische Windows-Fernsteuerung</td></tr>
+<tr><td>123</td><td>NTP</td><td>UDP</td><td>Zeitsynchronisation</td></tr>
+<tr><td>22</td><td>SFTP</td><td>TCP</td><td>Dateitransfer über SSH-Kanal</td></tr>
+<tr><td>445</td><td>SMB</td><td>TCP</td><td>Windows-Datei-/Druckerfreigabe</td></tr>
+<tr><td>3306</td><td>MySQL</td><td>TCP</td><td>Datenbankserver</td></tr>
+</table>
+<div class="callout"><span class="tag">Merkhilfe</span>Verschlüsselte Varianten enden auf „S" und liegen höher: HTTP 80 → HTTPS 443, IMAP 143 → IMAPS 993, POP3 110 → POP3S 995. Alternativ hebt <strong>STARTTLS</strong> eine bestehende Klartextverbindung auf demselben Port auf TLS an (z. B. SMTP 587, IMAP 143), statt einen eigenen verschlüsselten Port zu nutzen. <strong>Port 25</strong> wird heute überwiegend für den Mailtransport zwischen Mailservern genutzt. Mail-Clients liefern ausgehende Nachrichten stattdessen in der Regel über Port <strong>587</strong> (Submission) oder <strong>465</strong> (SMTPS) ein.</div>
+
+<div class="callout xref"><span class="tag">Verwandte Themen</span><a href="/nachschlagen/tcp-ip-udp/">TCP/IP & UDP</a> · <a href="/nachschlagen/it-sicherheit/">IT-Sicherheit Grundlagen</a> · <a href="/nachschlagen/diagnose-fehlersuche/">Diagnose & Fehlersuche</a></div>
+</section>
+</div>
+<div class="seite-cta">
+  <p>Interaktiv mit Volltextsuche, Glossar-Bubbles und Übungsfragen lernen:</p>
+  <div class="seite-cta-knoepfe">
+    <a class="seite-knopf seite-knopf-haupt" href="/#r-ports">In der Lernplattform öffnen</a>
+    <a class="seite-knopf" href="/#fragen">Fragen üben</a>
+    <a class="seite-knopf" href="/glossar/">Glossar</a>
+  </div>
+</div>
+<nav class="seite-blaettern" aria-label="Weitere Kapitel">
+  <a class="sb-vor" href="/nachschlagen/ethernet/"><span>Vorheriges Kapitel</span>Ethernet</a>
+  <a class="sb-nach" href="/nachschlagen/header-ttl-traceroute/"><span>Nächstes Kapitel</span>Header/TTL</a>
+</nav>
+<section class="seite-feld" aria-labelledby="feld-titel">
+<h2 id="feld-titel">Mehr aus Netzwerke</h2>
+<div class="seite-pillen"><a class="topic-sub" href="/nachschlagen/osi-modell/">OSI-Modell</a><a class="topic-sub" href="/nachschlagen/tcp-ip-udp/">TCP/IP &amp; UDP</a><a class="topic-sub" href="/nachschlagen/ipv4-ipv6/">IPv4/IPv6</a><a class="topic-sub" href="/nachschlagen/subnetting/">Subnetting</a><a class="topic-sub" href="/nachschlagen/routing-switching/">Routing/Switching</a><a class="topic-sub" href="/nachschlagen/vlan/">VLAN</a><a class="topic-sub" href="/nachschlagen/wlan/">WLAN</a><a class="topic-sub" href="/nachschlagen/vpn-ipsec/">VPN/IPsec</a><a class="topic-sub" href="/nachschlagen/dns-dhcp/">DNS/DHCP</a><a class="topic-sub" href="/nachschlagen/ethernet/">Ethernet</a><span class="topic-sub aktuell" aria-current="page">Ports</span><a class="topic-sub" href="/nachschlagen/header-ttl-traceroute/">Header/TTL</a><a class="topic-sub" href="/nachschlagen/multiplexing/">Multiplexing</a><a class="topic-sub" href="/nachschlagen/netzwerkausdehnung/">Netzausdehnung</a><a class="topic-sub" href="/nachschlagen/netzwerktopologien/">Topologien</a><a class="topic-sub" href="/nachschlagen/fddi/">FDDI</a><a class="topic-sub" href="/nachschlagen/voip/">VoIP</a><a class="topic-sub" href="/nachschlagen/api-rest-soap/">API/REST</a><a class="topic-sub" href="/nachschlagen/strukturierte-verkabelung/">Strukturierte Verkabelung</a><a class="topic-sub" href="/nachschlagen/kabel-medien-hardware/">Kabel/Hardware</a></div>
+</section>
+</main>
+<footer><div class="wrap">
+<p class="footer-lead">Layer 8 Academy ist eine kostenlose Lernplattform zur Vorbereitung auf die IHK-Abschlussprüfung Teil 1 der IT-Berufe. Sie umfasst ein Nachschlagewerk, ein Glossar, Übungsfragen im Multiple-Choice- und Karteikartenmodus, einen Subnetting-Trainer und Prüfungssimulationen.</p>
+<nav class="footer-nav" aria-label="Themenfelder">
+  <a href="/themen/netzwerke/">Netzwerke</a> · <a href="/themen/it-sicherheit/">IT-Sicherheit</a> · <a href="/themen/systeme-storage/">Systeme &amp; Storage</a> · <a href="/themen/software-grundlagen/">Software &amp; Grundlagen</a> · <a href="/themen/bwl-prozesse/">BWL &amp; Prozesse</a> · <a href="/nachschlagen/">Alle Kapitel</a> · <a href="/glossar/">Glossar</a>
+</nav>
+<div class="footer-copy">© 2026 boxberger.app · <a href="/impressum/" class="imprint-link">Impressum &amp; Datenschutz</a></div>
+</div></footer>
+</body>
+</html>

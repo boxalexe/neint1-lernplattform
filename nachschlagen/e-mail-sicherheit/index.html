@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>E-Mail-Sicherheit: SPF, DKIM &amp; DMARC | AP1 – Layer 8 Academy</title>
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<meta name="description" content="Das ursprüngliche Mailprotokoll SMTP prüft nicht, ob ein Absender wirklich der ist, der er zu sein vorgibt.">
+<meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+<meta name="theme-color" content="#0a0e12">
+<link rel="canonical" href="https://layer8academy.boxberger.app/nachschlagen/e-mail-sicherheit/">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Layer 8 Academy">
+<meta property="og:title" content="E-Mail-Sicherheit: SPF, DKIM &amp; DMARC | AP1 – Layer 8 Academy">
+<meta property="og:description" content="Das ursprüngliche Mailprotokoll SMTP prüft nicht, ob ein Absender wirklich der ist, der er zu sein vorgibt.">
+<meta property="og:url" content="https://layer8academy.boxberger.app/nachschlagen/e-mail-sicherheit/">
+<meta property="og:locale" content="de_DE">
+<meta name="twitter:card" content="summary">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+    {
+     "@type": "ListItem",
+     "position": 1,
+     "name": "Start",
+     "item": "https://layer8academy.boxberger.app/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 2,
+     "name": "Nachschlagen",
+     "item": "https://layer8academy.boxberger.app/nachschlagen/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 3,
+     "name": "IT-Sicherheit",
+     "item": "https://layer8academy.boxberger.app/themen/it-sicherheit/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 4,
+     "name": "E-Mail-Sicherheit",
+     "item": "https://layer8academy.boxberger.app/nachschlagen/e-mail-sicherheit/"
+    }
+   ]
+  },
+  {
+   "@type": "LearningResource",
+   "name": "E-Mail-Sicherheit: SPF, DKIM & DMARC",
+   "description": "Das ursprüngliche Mailprotokoll SMTP prüft nicht, ob ein Absender wirklich der ist, der er zu sein vorgibt.",
+   "url": "https://layer8academy.boxberger.app/nachschlagen/e-mail-sicherheit/",
+   "inLanguage": "de-DE",
+   "isAccessibleForFree": true,
+   "learningResourceType": "Nachschlagewerk",
+   "educationalLevel": "Berufsausbildung",
+   "teaches": "IT-Sicherheit",
+   "isPartOf": {
+    "@id": "https://layer8academy.boxberger.app/#website"
+   },
+   "author": {
+    "@type": "Person",
+    "name": "Alexander Boxberger-Adam",
+    "url": "https://boxberger.app/"
+   }
+  }
+ ]
+}
+</script>
+<script>
+  try {
+    var t = localStorage.getItem('l8a_theme');
+    if (t && t !== 'default') document.documentElement.setAttribute('data-theme', t);
+  } catch (e) {}
+</script>
+<link rel="stylesheet" href="/styles.css?v=20261018a">
+<link rel="stylesheet" href="/seiten.css?v=20261018a">
+</head>
+<body class="seite">
+<header class="seite-kopf">
+  <div class="wrap">
+    <a class="seite-logo" href="/" aria-label="Layer 8 Academy – zur Lernplattform"><span class="t-neint">Layer</span> <svg class="title-8" width="44" height="44" viewBox="0 0 120 120" aria-label="L8A" role="img"><path d="M60,60 C34,60 24,26 60,26 C96,26 86,60 60,60 Z" fill="none" stroke="#3ddc84" stroke-width="7" stroke-linecap="round"/><path d="M60,94 C86,94 96,60 60,60 C24,60 34,94 60,94 Z" fill="none" stroke="#22d3ee" stroke-width="7" stroke-linecap="round"/><line x1="18" y1="26" x2="18" y2="52" stroke="#22d3ee" stroke-width="7" stroke-linecap="round"/><line x1="18" y1="52" x2="30" y2="52" stroke="#22d3ee" stroke-width="7" stroke-linecap="round"/><path d="M102,68 L92,94 M102,68 L112,94 M95,86 L107,86" stroke="#3ddc84" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg> <span class="t-symb">Academy</span></a>
+    <nav class="seite-nav" aria-label="Hauptnavigation">
+      <a href="/nachschlagen/">Nachschlagen</a>
+      <a href="/glossar/">Glossar</a>
+      <a href="/#fragen">Fragen üben</a>
+      <a href="/subnetting-trainer/">Subnetting</a>
+      <a href="/ap1-simulator/">AP1-Simulator</a>
+      <a href="/osi-battle/">Diagnose-Arena</a>
+    </nav>
+  </div>
+</header>
+<main class="wrap seite-inhalt">
+<nav class="brotkrumen" aria-label="Brotkrumenpfad"><a href="/">Start</a><span class="bk-trenner" aria-hidden="true">›</span><a href="/nachschlagen/">Nachschlagen</a><span class="bk-trenner" aria-hidden="true">›</span><a href="/themen/it-sicherheit/">IT-Sicherheit</a><span class="bk-trenner" aria-hidden="true">›</span><span aria-current="page">E-Mail-Sicherheit</span></nav>
+<h1 class="seite-h1">E-Mail-Sicherheit: SPF, DKIM &amp; DMARC</h1>
+<div class="view active" id="view-lesen">
+<section id="r-mailsec">
+<p>Das ursprüngliche Mailprotokoll SMTP prüft nicht, ob ein Absender wirklich der ist, der er zu sein vorgibt. Jeder kann eine beliebige Absenderadresse eintragen. Drei aufeinander aufbauende Verfahren schließen diese Lücke. Alle drei werden als <strong>DNS-Einträge</strong> der eigenen Domain hinterlegt, meist als TXT-Record.</p>
+
+<table>
+<tr><th>Verfahren</th><th>Prüft</th><th>Kernidee</th></tr>
+<tr><td><strong>SPF</strong> (Sender Policy Framework)</td><td>Den sendenden <em>Server</em></td><td>Die Domain veröffentlicht im DNS, welche Server für sie Mails versenden dürfen. Der Empfänger vergleicht die IP des einliefernden Servers mit dieser Liste.</td></tr>
+<tr><td><strong>DKIM</strong> (DomainKeys Identified Mail)</td><td>Die <em>Unverfälschtheit</em> der Nachricht</td><td>Der sendende Server signiert Kopfzeilen und Inhalt kryptografisch. Der öffentliche Schlüssel liegt im DNS. Der Empfänger prüft die Signatur und erkennt Änderungen auf dem Transportweg.</td></tr>
+<tr><td><strong>DMARC</strong></td><td>Was bei Fehlschlag geschehen soll</td><td>Baut auf SPF und DKIM auf, verlangt zusätzlich die Übereinstimmung mit der sichtbaren Absenderdomain (Alignment) und legt die Behandlung fest: nichts tun, in den Spam-Ordner, oder abweisen.</td></tr>
+</table>
+
+<h3>Wie die drei zusammenspielen</h3>
+<p>SPF allein hat eine Lücke: Wird eine Mail weitergeleitet, ändert sich der einliefernde Server und die Prüfung schlägt fehl, obwohl die Mail echt ist. DKIM allein hat eine andere Lücke: Die Signatur kann von einer ganz anderen Domain stammen als der, die im Absenderfeld steht.</p>
+<p>Genau hier setzt <strong>DMARC</strong> an. Es fordert, dass die geprüfte Domain zur sichtbaren Absenderadresse passt (<strong>Alignment</strong>), und akzeptiert die Mail, wenn <em>mindestens eines</em> der beiden Verfahren mit passender Ausrichtung erfolgreich ist. Zusätzlich legt die Richtlinie fest, was sonst passiert:</p>
+<p><code>p=none</code> beobachtet nur und meldet, <code>p=quarantine</code> stuft verdächtige Mails als Spam ein, <code>p=reject</code> weist sie ganz ab. Über eine Berichtsadresse erhält der Domaininhaber Auswertungen darüber, wer in seinem Namen versendet. Der übliche Weg ist deshalb: mit <code>p=none</code> starten, Berichte auswerten, alle legitimen Versandwege aufnehmen und erst dann auf <code>quarantine</code> und schließlich <code>reject</code> verschärfen.</p>
+<div class="callout"><span class="tag">Merksatz</span><strong>SPF</strong> = wer <em>darf</em> senden. <strong>DKIM</strong> = wurde unterwegs <em>verändert</em>. <strong>DMARC</strong> = was <em>tun</em>, wenn es nicht passt. Alle drei stehen im DNS und schützen vor Absenderfälschung, wie sie bei Phishing und CEO-Fraud verwendet wird.</div>
+
+<div class="callout xref"><span class="tag">Verwandte Themen</span><a href="/nachschlagen/verschluesselung-pki/">Verschlüsselung & PKI</a> · <a href="/nachschlagen/dns-dhcp/">DNS & DHCP im Detail</a> · <a href="/nachschlagen/schadsoftware-angriffe/">Schadsoftware &amp; Angriffsarten</a></div>
+</section>
+</div>
+<div class="seite-cta">
+  <p>Interaktiv mit Volltextsuche, Glossar-Bubbles und Übungsfragen lernen:</p>
+  <div class="seite-cta-knoepfe">
+    <a class="seite-knopf seite-knopf-haupt" href="/#r-mailsec">In der Lernplattform öffnen</a>
+    <a class="seite-knopf" href="/#fragen">Fragen üben</a>
+    <a class="seite-knopf" href="/glossar/">Glossar</a>
+  </div>
+</div>
+<nav class="seite-blaettern" aria-label="Weitere Kapitel">
+  <a class="sb-vor" href="/nachschlagen/systemhaertung/"><span>Vorheriges Kapitel</span>Systemhärtung</a>
+  <span></span>
+</nav>
+<section class="seite-feld" aria-labelledby="feld-titel">
+<h2 id="feld-titel">Mehr aus IT-Sicherheit</h2>
+<div class="seite-pillen"><a class="topic-sub" href="/nachschlagen/it-sicherheit/">IT-Sicherheit</a><a class="topic-sub" href="/nachschlagen/datenschutz-informationssicherheit/">Datenschutz/InfoSec</a><a class="topic-sub" href="/nachschlagen/verschluesselung-pki/">Verschlüsselung/PKI</a><a class="topic-sub" href="/nachschlagen/bsi-grundschutz/">BSI-Grundschutz</a><a class="topic-sub" href="/nachschlagen/schadsoftware-angriffe/">Schadsoftware &amp; Angriffe</a><a class="topic-sub" href="/nachschlagen/systemhaertung/">Systemhärtung</a><span class="topic-sub aktuell" aria-current="page">E-Mail-Sicherheit</span></div>
+</section>
+</main>
+<footer><div class="wrap">
+<p class="footer-lead">Layer 8 Academy ist eine kostenlose Lernplattform zur Vorbereitung auf die IHK-Abschlussprüfung Teil 1 der IT-Berufe. Sie umfasst ein Nachschlagewerk, ein Glossar, Übungsfragen im Multiple-Choice- und Karteikartenmodus, einen Subnetting-Trainer und Prüfungssimulationen.</p>
+<nav class="footer-nav" aria-label="Themenfelder">
+  <a href="/themen/netzwerke/">Netzwerke</a> · <a href="/themen/it-sicherheit/">IT-Sicherheit</a> · <a href="/themen/systeme-storage/">Systeme &amp; Storage</a> · <a href="/themen/software-grundlagen/">Software &amp; Grundlagen</a> · <a href="/themen/bwl-prozesse/">BWL &amp; Prozesse</a> · <a href="/nachschlagen/">Alle Kapitel</a> · <a href="/glossar/">Glossar</a>
+</nav>
+<div class="footer-copy">© 2026 boxberger.app · <a href="/impressum/" class="imprint-link">Impressum &amp; Datenschutz</a></div>
+</div></footer>
+</body>
+</html>

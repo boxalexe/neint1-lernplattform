@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ethernet &amp; Zugriffsverfahren | AP1 – Layer 8 Academy</title>
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<meta name="description" content="Ethernet (IEEE 802.3) ist die dominierende LAN-Technik. Adressierung über MAC (Schicht 2), Dateneinheit ist der Frame (Ziel-MAC, Quell-MAC, Nutzdaten …">
+<meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+<meta name="theme-color" content="#0a0e12">
+<link rel="canonical" href="https://layer8academy.boxberger.app/nachschlagen/ethernet/">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Layer 8 Academy">
+<meta property="og:title" content="Ethernet &amp; Zugriffsverfahren | AP1 – Layer 8 Academy">
+<meta property="og:description" content="Ethernet (IEEE 802.3) ist die dominierende LAN-Technik. Adressierung über MAC (Schicht 2), Dateneinheit ist der Frame (Ziel-MAC, Quell-MAC, Nutzdaten …">
+<meta property="og:url" content="https://layer8academy.boxberger.app/nachschlagen/ethernet/">
+<meta property="og:locale" content="de_DE">
+<meta name="twitter:card" content="summary">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+    {
+     "@type": "ListItem",
+     "position": 1,
+     "name": "Start",
+     "item": "https://layer8academy.boxberger.app/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 2,
+     "name": "Nachschlagen",
+     "item": "https://layer8academy.boxberger.app/nachschlagen/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 3,
+     "name": "Netzwerke",
+     "item": "https://layer8academy.boxberger.app/themen/netzwerke/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 4,
+     "name": "Ethernet",
+     "item": "https://layer8academy.boxberger.app/nachschlagen/ethernet/"
+    }
+   ]
+  },
+  {
+   "@type": "LearningResource",
+   "name": "Ethernet & Zugriffsverfahren",
+   "description": "Ethernet (IEEE 802.3) ist die dominierende LAN-Technik. Adressierung über MAC (Schicht 2), Dateneinheit ist der Frame (Ziel-MAC, Quell-MAC, Nutzdaten …",
+   "url": "https://layer8academy.boxberger.app/nachschlagen/ethernet/",
+   "inLanguage": "de-DE",
+   "isAccessibleForFree": true,
+   "learningResourceType": "Nachschlagewerk",
+   "educationalLevel": "Berufsausbildung",
+   "teaches": "Netzwerke",
+   "isPartOf": {
+    "@id": "https://layer8academy.boxberger.app/#website"
+   },
+   "author": {
+    "@type": "Person",
+    "name": "Alexander Boxberger-Adam",
+    "url": "https://boxberger.app/"
+   }
+  }
+ ]
+}
+</script>
+<script>
+  try {
+    var t = localStorage.getItem('l8a_theme');
+    if (t && t !== 'default') document.documentElement.setAttribute('data-theme', t);
+  } catch (e) {}
+</script>
+<link rel="stylesheet" href="/styles.css?v=20261018a">
+<link rel="stylesheet" href="/seiten.css?v=20261018a">
+</head>
+<body class="seite">
+<header class="seite-kopf">
+  <div class="wrap">
+    <a class="seite-logo" href="/" aria-label="Layer 8 Academy – zur Lernplattform"><span class="t-neint">Layer</span> <svg class="title-8" width="44" height="44" viewBox="0 0 120 120" aria-label="L8A" role="img"><path d="M60,60 C34,60 24,26 60,26 C96,26 86,60 60,60 Z" fill="none" stroke="#3ddc84" stroke-width="7" stroke-linecap="round"/><path d="M60,94 C86,94 96,60 60,60 C24,60 34,94 60,94 Z" fill="none" stroke="#22d3ee" stroke-width="7" stroke-linecap="round"/><line x1="18" y1="26" x2="18" y2="52" stroke="#22d3ee" stroke-width="7" stroke-linecap="round"/><line x1="18" y1="52" x2="30" y2="52" stroke="#22d3ee" stroke-width="7" stroke-linecap="round"/><path d="M102,68 L92,94 M102,68 L112,94 M95,86 L107,86" stroke="#3ddc84" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg> <span class="t-symb">Academy</span></a>
+    <nav class="seite-nav" aria-label="Hauptnavigation">
+      <a href="/nachschlagen/">Nachschlagen</a>
+      <a href="/glossar/">Glossar</a>
+      <a href="/#fragen">Fragen üben</a>
+      <a href="/subnetting-trainer/">Subnetting</a>
+      <a href="/ap1-simulator/">AP1-Simulator</a>
+      <a href="/osi-battle/">Diagnose-Arena</a>
+    </nav>
+  </div>
+</header>
+<main class="wrap seite-inhalt">
+<nav class="brotkrumen" aria-label="Brotkrumenpfad"><a href="/">Start</a><span class="bk-trenner" aria-hidden="true">›</span><a href="/nachschlagen/">Nachschlagen</a><span class="bk-trenner" aria-hidden="true">›</span><a href="/themen/netzwerke/">Netzwerke</a><span class="bk-trenner" aria-hidden="true">›</span><span aria-current="page">Ethernet</span></nav>
+<h1 class="seite-h1">Ethernet &amp; Zugriffsverfahren</h1>
+<div class="view active" id="view-lesen">
+<section id="r-ethernet">
+<p><span class="term">Ethernet</span> (IEEE 802.3) ist die dominierende LAN-Technik. Adressierung über MAC (Schicht 2), Dateneinheit ist der <strong>Frame</strong> (Ziel-MAC, Quell-MAC, Nutzdaten, Prüfsumme FCS/CRC (Frame Check Sequence / Cyclic Redundancy Check), Präambel zur Synchronisation).</p>
+<table>
+<tr><th>Verfahren</th><th>Einsatz</th><th>Prinzip</th></tr>
+<tr><td>CSMA/CD (Carrier Sense Multiple Access / Collision Detection)</td><td>Kabel-Ethernet</td><td>Medium abhören, senden, Kollision erkennen → Backoff</td></tr>
+<tr><td>CSMA/CA (… / Collision Avoidance)</td><td>WLAN</td><td>Kollision vermeiden (Funk kann Kollision nicht sicher erkennen)</td></tr>
+<tr><td>Token Passing</td><td>Token Ring, FDDI</td><td>nur Token-Inhaber sendet → kollisionsfrei</td></tr>
+</table>
+<div class="callout"><span class="tag">Domänen</span><strong>Kollisionsdomäne:</strong> Bereich, in dem Frames kollidieren können. Ein <strong>Hub</strong> bildet eine gemeinsame; ein <strong>Switch</strong> trennt sie pro Port. <strong>Broadcastdomäne:</strong> wird durch einen <strong>Router</strong> begrenzt. In modernen Vollduplex-Switch-Netzen entstehen keine Kollisionen mehr, daher spielt CSMA/CD kaum noch eine Rolle.</div>
+<p>Datenraten: 10 Mbit/s (Ethernet) · 100 Mbit/s (Fast Ethernet) · 1 Gbit/s (Gigabit Ethernet) · 10 Gbit/s und mehr.</p>
+<div class="callout"><span class="tag">Adressierungsarten</span><strong>Unicast:</strong> 1:1 an eine bestimmte MAC. <strong>Multicast:</strong> 1:n an eine definierte Gruppe. <strong>Broadcast:</strong> 1:alle (Ziel-MAC <code>FF:FF:FF:FF:FF:FF</code>).</p></div>
+<p><strong>PoE</strong> (Power over Ethernet) versorgt Geräte wie Access Points, IP-Telefone und Kameras direkt über das Netzwerkkabel, kein separates Netzteil nötig. <strong>Auto-Negotiation</strong> handelt zwischen zwei verbundenen Ports automatisch die höchste gemeinsame Geschwindigkeit und den Duplex-Modus aus. Ein <strong>Uplink-Port</strong> verbindet einen Switch mit einem übergeordneten Gerät (Router, Core-Switch), oft mit höherer Bandbreite als die restlichen Ports.</p>
+
+<h3>Duplex, MTU & Switch-Betriebsfunktionen</h3>
+<p><strong>Halbduplex</strong> heißt abwechselnd senden oder empfangen, <strong>Vollduplex</strong> beides gleichzeitig, heutiger Standard an Switchports. <strong>Auto-Negotiation</strong> handelt Geschwindigkeit und Duplexmodus automatisch aus. Ein <strong>Duplex Mismatch</strong> (eine Seite fest halb, die andere voll) ist ein klassischer Schleichfehler: Die Verbindung steht, aber Paketverluste, Fehlerzähler und miserable Übertragungsleistung häufen sich.</p>
+<p>Die <strong>MTU</strong> (Maximum Transmission Unit) ist die maximale Paketgröße, bei Ethernet standardmäßig 1500 Byte; <strong>Jumbo Frames</strong> (bis ~9000 Byte) reduzieren den Overhead in Speichernetzen. Am Switch relevant: <strong>MAC Aging</strong> (gelernte MAC-Einträge verfallen nach Timeout), <strong>Port Security</strong> (nur zugelassene MAC-Adressen je Port, sonst Blockade), <strong>Link Aggregation mit LACP</strong> (mehrere physische Links werden zu einem logischen gebündelt, mehr Bandbreite und Redundanz).</p>
+
+<div class="callout"><span class="tag">Prüfungsfalle</span><strong>CSMA/CD</strong> gehört zum kabelgebundenen Ethernet und erkennt Kollisionen <em>nachträglich</em>. <strong>CSMA/CA</strong> gehört zum WLAN und <em>vermeidet</em> sie vorher, weil eine Station im Funk nicht gleichzeitig senden und mithören kann. In vollduplex geschalteten Switch-Netzen entstehen ohnehin keine Kollisionen mehr, CSMA/CD ist dort praktisch bedeutungslos.</div>
+
+<div class="callout xref"><span class="tag">Verwandte Themen</span><a href="/nachschlagen/kabel-medien-hardware/">Kabel, Medien & Hardware</a> · <a href="/nachschlagen/netzwerktopologien/">Netzwerktopologien</a> · <a href="/nachschlagen/osi-modell/">OSI-Modell (7 Schichten)</a></div>
+</section>
+</div>
+<div class="seite-cta">
+  <p>Interaktiv mit Volltextsuche, Glossar-Bubbles und Übungsfragen lernen:</p>
+  <div class="seite-cta-knoepfe">
+    <a class="seite-knopf seite-knopf-haupt" href="/#r-ethernet">In der Lernplattform öffnen</a>
+    <a class="seite-knopf" href="/#fragen">Fragen üben</a>
+    <a class="seite-knopf" href="/glossar/">Glossar</a>
+  </div>
+</div>
+<nav class="seite-blaettern" aria-label="Weitere Kapitel">
+  <a class="sb-vor" href="/nachschlagen/dns-dhcp/"><span>Vorheriges Kapitel</span>DNS/DHCP</a>
+  <a class="sb-nach" href="/nachschlagen/ports-sockets/"><span>Nächstes Kapitel</span>Ports</a>
+</nav>
+<section class="seite-feld" aria-labelledby="feld-titel">
+<h2 id="feld-titel">Mehr aus Netzwerke</h2>
+<div class="seite-pillen"><a class="topic-sub" href="/nachschlagen/osi-modell/">OSI-Modell</a><a class="topic-sub" href="/nachschlagen/tcp-ip-udp/">TCP/IP &amp; UDP</a><a class="topic-sub" href="/nachschlagen/ipv4-ipv6/">IPv4/IPv6</a><a class="topic-sub" href="/nachschlagen/subnetting/">Subnetting</a><a class="topic-sub" href="/nachschlagen/routing-switching/">Routing/Switching</a><a class="topic-sub" href="/nachschlagen/vlan/">VLAN</a><a class="topic-sub" href="/nachschlagen/wlan/">WLAN</a><a class="topic-sub" href="/nachschlagen/vpn-ipsec/">VPN/IPsec</a><a class="topic-sub" href="/nachschlagen/dns-dhcp/">DNS/DHCP</a><span class="topic-sub aktuell" aria-current="page">Ethernet</span><a class="topic-sub" href="/nachschlagen/ports-sockets/">Ports</a><a class="topic-sub" href="/nachschlagen/header-ttl-traceroute/">Header/TTL</a><a class="topic-sub" href="/nachschlagen/multiplexing/">Multiplexing</a><a class="topic-sub" href="/nachschlagen/netzwerkausdehnung/">Netzausdehnung</a><a class="topic-sub" href="/nachschlagen/netzwerktopologien/">Topologien</a><a class="topic-sub" href="/nachschlagen/fddi/">FDDI</a><a class="topic-sub" href="/nachschlagen/voip/">VoIP</a><a class="topic-sub" href="/nachschlagen/api-rest-soap/">API/REST</a><a class="topic-sub" href="/nachschlagen/strukturierte-verkabelung/">Strukturierte Verkabelung</a><a class="topic-sub" href="/nachschlagen/kabel-medien-hardware/">Kabel/Hardware</a></div>
+</section>
+</main>
+<footer><div class="wrap">
+<p class="footer-lead">Layer 8 Academy ist eine kostenlose Lernplattform zur Vorbereitung auf die IHK-Abschlussprüfung Teil 1 der IT-Berufe. Sie umfasst ein Nachschlagewerk, ein Glossar, Übungsfragen im Multiple-Choice- und Karteikartenmodus, einen Subnetting-Trainer und Prüfungssimulationen.</p>
+<nav class="footer-nav" aria-label="Themenfelder">
+  <a href="/themen/netzwerke/">Netzwerke</a> · <a href="/themen/it-sicherheit/">IT-Sicherheit</a> · <a href="/themen/systeme-storage/">Systeme &amp; Storage</a> · <a href="/themen/software-grundlagen/">Software &amp; Grundlagen</a> · <a href="/themen/bwl-prozesse/">BWL &amp; Prozesse</a> · <a href="/nachschlagen/">Alle Kapitel</a> · <a href="/glossar/">Glossar</a>
+</nav>
+<div class="footer-copy">© 2026 boxberger.app · <a href="/impressum/" class="imprint-link">Impressum &amp; Datenschutz</a></div>
+</div></footer>
+</body>
+</html>

@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OSI-Modell (7 Schichten) – AP1 einfach erklärt | Layer 8 Academy</title>
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<meta name="description" content="Das OSI-Referenzmodell (Open Systems Interconnection) gliedert Netzwerkkommunikation in 7 Schichten; die Dateneinheit je Schicht heißt PDU (Protocol Data …">
+<meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+<meta name="theme-color" content="#0a0e12">
+<link rel="canonical" href="https://layer8academy.boxberger.app/nachschlagen/osi-modell/">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Layer 8 Academy">
+<meta property="og:title" content="OSI-Modell (7 Schichten) – AP1 einfach erklärt | Layer 8 Academy">
+<meta property="og:description" content="Das OSI-Referenzmodell (Open Systems Interconnection) gliedert Netzwerkkommunikation in 7 Schichten; die Dateneinheit je Schicht heißt PDU (Protocol Data …">
+<meta property="og:url" content="https://layer8academy.boxberger.app/nachschlagen/osi-modell/">
+<meta property="og:locale" content="de_DE">
+<meta name="twitter:card" content="summary">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+    {
+     "@type": "ListItem",
+     "position": 1,
+     "name": "Start",
+     "item": "https://layer8academy.boxberger.app/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 2,
+     "name": "Nachschlagen",
+     "item": "https://layer8academy.boxberger.app/nachschlagen/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 3,
+     "name": "Netzwerke",
+     "item": "https://layer8academy.boxberger.app/themen/netzwerke/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 4,
+     "name": "OSI-Modell",
+     "item": "https://layer8academy.boxberger.app/nachschlagen/osi-modell/"
+    }
+   ]
+  },
+  {
+   "@type": "LearningResource",
+   "name": "OSI-Modell (7 Schichten)",
+   "description": "Das OSI-Referenzmodell (Open Systems Interconnection) gliedert Netzwerkkommunikation in 7 Schichten; die Dateneinheit je Schicht heißt PDU (Protocol Data …",
+   "url": "https://layer8academy.boxberger.app/nachschlagen/osi-modell/",
+   "inLanguage": "de-DE",
+   "isAccessibleForFree": true,
+   "learningResourceType": "Nachschlagewerk",
+   "educationalLevel": "Berufsausbildung",
+   "teaches": "Netzwerke",
+   "isPartOf": {
+    "@id": "https://layer8academy.boxberger.app/#website"
+   },
+   "author": {
+    "@type": "Person",
+    "name": "Alexander Boxberger-Adam",
+    "url": "https://boxberger.app/"
+   }
+  }
+ ]
+}
+</script>
+<script>
+  try {
+    var t = localStorage.getItem('l8a_theme');
+    if (t && t !== 'default') document.documentElement.setAttribute('data-theme', t);
+  } catch (e) {}
+</script>
+<link rel="stylesheet" href="/styles.css?v=20261018a">
+<link rel="stylesheet" href="/seiten.css?v=20261018a">
+</head>
+<body class="seite">
+<header class="seite-kopf">
+  <div class="wrap">
+    <a class="seite-logo" href="/" aria-label="Layer 8 Academy – zur Lernplattform"><span class="t-neint">Layer</span> <svg class="title-8" width="44" height="44" viewBox="0 0 120 120" aria-label="L8A" role="img"><path d="M60,60 C34,60 24,26 60,26 C96,26 86,60 60,60 Z" fill="none" stroke="#3ddc84" stroke-width="7" stroke-linecap="round"/><path d="M60,94 C86,94 96,60 60,60 C24,60 34,94 60,94 Z" fill="none" stroke="#22d3ee" stroke-width="7" stroke-linecap="round"/><line x1="18" y1="26" x2="18" y2="52" stroke="#22d3ee" stroke-width="7" stroke-linecap="round"/><line x1="18" y1="52" x2="30" y2="52" stroke="#22d3ee" stroke-width="7" stroke-linecap="round"/><path d="M102,68 L92,94 M102,68 L112,94 M95,86 L107,86" stroke="#3ddc84" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg> <span class="t-symb">Academy</span></a>
+    <nav class="seite-nav" aria-label="Hauptnavigation">
+      <a href="/nachschlagen/">Nachschlagen</a>
+      <a href="/glossar/">Glossar</a>
+      <a href="/#fragen">Fragen üben</a>
+      <a href="/subnetting-trainer/">Subnetting</a>
+      <a href="/ap1-simulator/">AP1-Simulator</a>
+      <a href="/osi-battle/">Diagnose-Arena</a>
+    </nav>
+  </div>
+</header>
+<main class="wrap seite-inhalt">
+<nav class="brotkrumen" aria-label="Brotkrumenpfad"><a href="/">Start</a><span class="bk-trenner" aria-hidden="true">›</span><a href="/nachschlagen/">Nachschlagen</a><span class="bk-trenner" aria-hidden="true">›</span><a href="/themen/netzwerke/">Netzwerke</a><span class="bk-trenner" aria-hidden="true">›</span><span aria-current="page">OSI-Modell</span></nav>
+<h1 class="seite-h1">OSI-Modell (7 Schichten)</h1>
+<div class="view active" id="view-lesen">
+<section id="r-osi">
+<p>Das <span class="term">OSI-Referenzmodell</span> (Open Systems Interconnection) gliedert Netzwerkkommunikation in 7 Schichten; die Dateneinheit je Schicht heißt PDU (Protocol Data Unit). Beim Senden fügt jede Schicht ihren Header hinzu (<strong>Kapselung</strong>, von oben 7 nach unten 1), beim Empfangen liest und entfernt jede Schicht ihren Header wieder (<strong>Entkapselung</strong>, von unten 1 nach oben 7).</p>
+<table class="osi-uebersicht" data-search="PDU, Protocol Data Unit, OSI-Tabelle, Dateneinheit" data-search-label="OSI-Übersichtstabelle">
+<tr><th>#</th><th>Schicht (DE)</th><th>Layer (EN)</th><th>Aufgabe</th><th>PDU</th><th>Geräte/Protokolle</th></tr>
+<tr><td>7</td><td>Anwendung</td><td>Application</td><td>Netzdienste für Apps</td><td>Daten</td><td>HTTP, FTP, SMTP, DNS</td></tr>
+<tr><td>6</td><td>Darstellung</td><td>Presentation</td><td>Format, Codierung, Verschlüsselung, Kompression</td><td>Daten</td><td>TLS, ASCII, JPEG</td></tr>
+<tr><td>5</td><td>Sitzung</td><td>Session</td><td>Auf-/Abbau von Sitzungen</td><td>Daten</td><td>Sessions, RPC</td></tr>
+<tr><td>4</td><td>Transport</td><td>Transport</td><td>Ende-zu-Ende, Ports, Segmentierung</td><td>Segment</td><td>TCP, UDP</td></tr>
+<tr><td>3</td><td>Vermittlung</td><td>Network</td><td>Logische Adressierung, Routing</td><td>Paket</td><td>IP, Router</td></tr>
+<tr><td>2</td><td>Sicherung</td><td>Data Link</td><td>MAC-Adressen, Frames, Fehlererkennung</td><td>Frame</td><td>Switch, Bridge, Ethernet</td></tr>
+<tr><td>1</td><td>Bitübertragung</td><td>Physical</td><td>Rohe Bits über das Medium</td><td>Bit</td><td>Hub, Repeater, Kabel</td></tr>
+</table>
+<div class="callout"><span class="tag">Hinweis zur Praxis</span>Im klassischen OSI-Modell hat die Sitzungsschicht eine eigene Funktion. In der Praxis des TCP/IP-Modells werden ihre Aufgaben jedoch oft von der Anwendungsschicht oder direkt von Anwendungen und Protokollen übernommen. Deshalb existiert für Schicht 5 heute häufig kein eigenes Protokoll in modernen Netzwerken.</div>
+<div class="callout"><span class="tag">Merkhilfe 1→7</span>„Please Do Not Throw Salami Pizza Away", von Schicht 1 nach 7: <strong>P</strong>hysical, <strong>D</strong>ata Link, <strong>N</strong>etwork, <strong>T</strong>ransport, <strong>S</strong>ession, <strong>P</strong>resentation, <strong>A</strong>pplication. Achtung auf die Richtung: Der Satz läuft von unten (1) nach oben (7). Das TCP/IP-Modell hat 4 Schichten: Netzzugang (OSI 1+2), Internet (OSI 3), Transport (OSI 4), Anwendung (OSI 5+6+7).</div>
+
+<h3>Die sieben Schichten im Detail</h3>
+<p><strong>Schicht 1. Bitübertragung (Physical):</strong> Überträgt einzelne Bits über das Medium. Kupfer, Glasfaser oder Funk. Sie definiert Spannungen, Signale, Steckverbindungen und Kabeltypen. Hier gibt es keine Adressen; typische Hardware sind Kabel, Repeater und Hubs.</p>
+<p><strong>Schicht 2. Sicherung (Data Link):</strong> Regelt die Übertragung zwischen direkt verbundenen Geräten, erkennt Übertragungsfehler (z. B. per FCS-Prüfsumme im Frame) und korrigiert sie teils. Adressiert wird mit <strong>MAC-Adressen</strong>; typische Protokolle sind Ethernet und WLAN (802.11), typisches Gerät der Switch.</p>
+<p><strong>Schicht 3. Vermittlung (Network):</strong> Übernimmt Routing und Weiterleitung von Paketen über Netzgrenzen hinweg. Adressiert wird mit <strong>IP-Adressen</strong>; typische Protokolle sind IPv4, IPv6 und ICMP, typisches Gerät der Router.</p>
+<p><strong>Schicht 4. Transport (Transport):</strong> Organisiert die Ende-zu-Ende-Übertragung zwischen Anwendungen, je nach Protokoll mit Flusskontrolle, Fehlerbehandlung und gesicherter Zustellung (TCP) oder schlank und verbindungslos (UDP). <strong>Ports</strong> ordnen die Daten den Anwendungen zu.</p>
+<p><strong>Schicht 5. Sitzung (Session):</strong> Steuert den Dialog zwischen zwei Kommunikationspartnern: Aufbau, Verwaltung und geordnetes Beenden von Sitzungen.</p>
+<p><strong>Schicht 6. Darstellung (Presentation):</strong> Formatiert und konvertiert Daten für die Empfänger-Anwendung: Zeichencodierung (z. B. UTF-8), Kompression und Verschlüsselung (z. B. TLS).</p>
+<p><strong>Schicht 7. Anwendung (Application):</strong> Stellt Netzdienste für Programme bereit, die Schnittstelle zwischen Anwendungssoftware und Netz. Typische Protokolle: HTTP, SMTP, IMAP, DNS, FTP.</p>
+<div class="callout"><span class="tag">OSI vs. TCP/IP (DoD)</span>Das OSI-Modell ist ein theoretisches ISO-Referenzmodell mit sieben Schichten, ideal zum strukturierten Denken und für die Fehlersuche. Das TCP/IP-Modell (auch DoD-Modell) ist das praxisnahe Gegenstück mit vier Schichten und die technische Grundlage des Internets. Beide beschreiben dieselbe Kommunikation, nur unterschiedlich fein unterteilt: Netzzugang &asymp; OSI 1–2, Internet &asymp; OSI 3, Transport &asymp; OSI 4, Anwendung &asymp; OSI 5–7. In der Prüfung nicht verwechseln: zwei Modelle, nicht dasselbe Modell.</div>
+
+<h3>Kollisions- und Broadcastdomäne</h3>
+<p>Eine <strong>Kollisionsdomäne</strong> umfasst alle Geräte, deren Signale sich gegenseitig stören können. Ein <strong>Hub</strong> auf Schicht 1 verbindet alle Anschlüsse zu einer einzigen Kollisionsdomäne. Ein <strong>Switch</strong> auf Schicht 2 trennt sie dagegen: Jeder Port bildet eine eigene Kollisionsdomäne, weshalb im modernen Vollduplexbetrieb praktisch keine Kollisionen mehr auftreten.</p>
+<p>Eine <strong>Broadcastdomäne</strong> umfasst alle Geräte, die einen Broadcast erreicht. Ein Switch leitet Broadcasts an alle Ports weiter und trennt Broadcastdomänen deshalb <em>nicht</em>. Erst ein <strong>Router</strong> auf Schicht 3 oder die Aufteilung in <strong>VLANs</strong> begrenzt sie. Merksatz: Der Switch trennt Kollisionsdomänen, der Router trennt Broadcastdomänen.</p>
+<h3>Alternative Veranschaulichung: das Matrjoschka-Prinzip</h3>
+<p>Wer sich die Reihenfolge der Schichten schlecht merken kann, denkt sie am besten als ineinander gesteckte Puppen. Entscheidend ist die Perspektive: Nicht die Schicht wird eingepackt, sondern die Daten wandern nach unten durch die Schichten und bekommen dabei Hülle um Hülle. Der Fachbegriff dafür lautet <strong>Kapselung</strong>.</p>
+
+<p><strong>Beim Sender wird eingepackt.</strong> Innen liegen die eigentlichen Nutzdaten der Anwendung, etwa ein HTTP-Request (<strong>Schicht 7</strong>). Jede tiefere Schicht nimmt das, was von oben kommt, legt es vollständig in sich hinein und schreibt außen ihre eigenen Steuerinformationen dazu, den <strong>Header</strong>:</p>
+<ul>
+<li><strong>Schicht 6</strong> und <strong>Schicht 5</strong> legen nur hauchdünne Hüllen darum. Schicht 6 regelt, in welcher Form die Daten dargestellt werden, also Zeichencodierung, Kompression und Verschlüsselung. Schicht 5 hält fest, zu welcher laufenden Sitzung sie gehören. In der Praxis sind diese beiden Hüllen oft so dünn, dass man sie kaum bemerkt; im TCP/IP-Modell werden sie mit Schicht 7 zusammengefasst.</li>
+<li><strong>Schicht 4</strong> legt die erste robuste Verpackung an: Sie verpackt die Daten der darüberliegenden Schichten und ergänzt eigene Steuerinformationen wie Quell- und Zielport sowie Sequenznummern. Das Ergebnis heißt <strong>Segment</strong> (bei TCP) beziehungsweise Datagramm (bei UDP).</li>
+<li><strong>Schicht 3</strong> legt die zweite robuste Verpackung an und schreibt Quell- und Ziel-IP-Adresse darauf. Das Ergebnis heißt <strong>Paket</strong>.</li>
+<li><strong>Schicht 2</strong> bildet die größte Datenverpackung ganz außen, den <strong>Frame</strong>, und schreibt Quell- und Ziel-MAC-Adresse sowie eine Prüfsumme darauf.</li>
+</ul>
+<p><strong>Schicht 1</strong> verpackt nichts mehr. Sie schickt den fertigen Frame nur noch als Folge von Signalen über Kupfer, Glasfaser oder Funk.</p>
+
+<p><strong>Beim Empfänger wird ausgepackt.</strong> Er beginnt außen und arbeitet sich nach innen vor: Frame öffnen, darin liegt das Paket. Paket öffnen, darin liegt das Segment. So weiter, bis in der Mitte die reinen Nutzdaten für die Anwendung übrig bleiben. Jede Schicht liest dabei genau ihren eigenen Header und wirft die Hülle weg. Der Fachbegriff dafür lautet <strong>Entkapselung</strong>.</p>
+
+<table>
+<tr><th>Schicht</th><th>Rolle im Bild</th><th>Was auf dem Header steht</th></tr>
+<tr><td>7 Anwendung</td><td>Der Inhalt ganz innen</td><td>Die eigentlichen Nutzdaten, etwa ein HTTP-Request</td></tr>
+<tr><td>6 Darstellung</td><td>Erste hauchdünne Hülle</td><td>Angaben zu Darstellung, Kodierung oder Verschlüsselung</td></tr>
+<tr><td>5 Sitzung</td><td>Zweite hauchdünne Hülle</td><td>Angaben zur laufenden Kommunikationssitzung</td></tr>
+<tr><td>4 Transport</td><td>Erste robuste Verpackung (Segment)</td><td>Quell- und Zielport, Sequenznummer (TCP/UDP)</td></tr>
+<tr><td>3 Vermittlung</td><td>Zweite robuste Verpackung (Paket)</td><td>Quell- und Ziel-IP-Adresse, TTL</td></tr>
+<tr><td>2 Sicherung</td><td>Größte Datenverpackung (Frame) ganz außen</td><td>Quell- und Ziel-MAC-Adresse, Prüfsumme (CRC)</td></tr>
+<tr><td>1 Bitübertragung</td><td>Keine Verpackung, sondern der Transportweg</td><td>Signale auf Kupfer, Glasfaser oder Funk</td></tr>
+</table>
+
+<div class="callout"><span class="tag">Merksatz</span><strong>Der Frame ist die Verpackung ganz außen, die Nutzdaten sind der Inhalt ganz innen.</strong> Daraus folgt direkt, warum die Geräte auf verschiedenen Schichten arbeiten: Ein <strong>Switch</strong> muss nur die äußerste Hülle öffnen, um die <strong>MAC-Adresse</strong> zu lesen, und weiß gar nicht, was darin steckt; deshalb Schicht 2. Ein <strong>Router</strong> öffnet eine Hülle mehr, um an die <strong>IP-Adresse</strong> zu kommen, denn nur damit findet er den Weg in ein anderes Netz; deshalb Schicht 3. Und weil jede Hülle einen eigenen Header trägt, wächst die übertragene Datenmenge mit jeder Schicht ein Stück an. Merkhilfe für die Namen von innen nach außen: Daten, Segment, Paket, Frame, Bits.</div>
+
+<div class="callout xref"><span class="tag">Verwandte Themen</span><a href="/nachschlagen/tcp-ip-udp/">TCP/IP & UDP</a> · <a href="/nachschlagen/header-ttl-traceroute/">Header, TTL & Traceroute</a> · <a href="/nachschlagen/routing-switching/">Routing & Switching</a><br>
+In der <a href="/osi-battle/">Diagnose-Arena</a> steht jeder Kopf der OSI-Hydra für eine Schicht; jeder Befund gehört eindeutig zu einer davon.</div>
+</section>
+</div>
+<div class="seite-cta">
+  <p>Interaktiv mit Volltextsuche, Glossar-Bubbles und Übungsfragen lernen:</p>
+  <div class="seite-cta-knoepfe">
+    <a class="seite-knopf seite-knopf-haupt" href="/#r-osi">In der Lernplattform öffnen</a>
+    <a class="seite-knopf" href="/#fragen">Fragen üben</a>
+    <a class="seite-knopf" href="/glossar/">Glossar</a>
+  </div>
+</div>
+<nav class="seite-blaettern" aria-label="Weitere Kapitel">
+  <span></span>
+  <a class="sb-nach" href="/nachschlagen/tcp-ip-udp/"><span>Nächstes Kapitel</span>TCP/IP &amp; UDP</a>
+</nav>
+<section class="seite-feld" aria-labelledby="feld-titel">
+<h2 id="feld-titel">Mehr aus Netzwerke</h2>
+<div class="seite-pillen"><span class="topic-sub aktuell" aria-current="page">OSI-Modell</span><a class="topic-sub" href="/nachschlagen/tcp-ip-udp/">TCP/IP &amp; UDP</a><a class="topic-sub" href="/nachschlagen/ipv4-ipv6/">IPv4/IPv6</a><a class="topic-sub" href="/nachschlagen/subnetting/">Subnetting</a><a class="topic-sub" href="/nachschlagen/routing-switching/">Routing/Switching</a><a class="topic-sub" href="/nachschlagen/vlan/">VLAN</a><a class="topic-sub" href="/nachschlagen/wlan/">WLAN</a><a class="topic-sub" href="/nachschlagen/vpn-ipsec/">VPN/IPsec</a><a class="topic-sub" href="/nachschlagen/dns-dhcp/">DNS/DHCP</a><a class="topic-sub" href="/nachschlagen/ethernet/">Ethernet</a><a class="topic-sub" href="/nachschlagen/ports-sockets/">Ports</a><a class="topic-sub" href="/nachschlagen/header-ttl-traceroute/">Header/TTL</a><a class="topic-sub" href="/nachschlagen/multiplexing/">Multiplexing</a><a class="topic-sub" href="/nachschlagen/netzwerkausdehnung/">Netzausdehnung</a><a class="topic-sub" href="/nachschlagen/netzwerktopologien/">Topologien</a><a class="topic-sub" href="/nachschlagen/fddi/">FDDI</a><a class="topic-sub" href="/nachschlagen/voip/">VoIP</a><a class="topic-sub" href="/nachschlagen/api-rest-soap/">API/REST</a><a class="topic-sub" href="/nachschlagen/strukturierte-verkabelung/">Strukturierte Verkabelung</a><a class="topic-sub" href="/nachschlagen/kabel-medien-hardware/">Kabel/Hardware</a></div>
+</section>
+</main>
+<footer><div class="wrap">
+<p class="footer-lead">Layer 8 Academy ist eine kostenlose Lernplattform zur Vorbereitung auf die IHK-Abschlussprüfung Teil 1 der IT-Berufe. Sie umfasst ein Nachschlagewerk, ein Glossar, Übungsfragen im Multiple-Choice- und Karteikartenmodus, einen Subnetting-Trainer und Prüfungssimulationen.</p>
+<nav class="footer-nav" aria-label="Themenfelder">
+  <a href="/themen/netzwerke/">Netzwerke</a> · <a href="/themen/it-sicherheit/">IT-Sicherheit</a> · <a href="/themen/systeme-storage/">Systeme &amp; Storage</a> · <a href="/themen/software-grundlagen/">Software &amp; Grundlagen</a> · <a href="/themen/bwl-prozesse/">BWL &amp; Prozesse</a> · <a href="/nachschlagen/">Alle Kapitel</a> · <a href="/glossar/">Glossar</a>
+</nav>
+<div class="footer-copy">© 2026 boxberger.app · <a href="/impressum/" class="imprint-link">Impressum &amp; Datenschutz</a></div>
+</div></footer>
+</body>
+</html>

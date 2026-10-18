@@ -1,0 +1,6 @@
+# Nicht ausliefern (Cloudflare Workers Static Assets): Versionsgeschichte, Werkzeuge, Konfiguration
+.git
+.wrangler
+/tools
+/wrangler.jsonc
+/README.md

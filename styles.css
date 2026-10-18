@@ -920,3 +920,6 @@ table.sn-cheat td:nth-child(4),table.sn-cheat td:nth-child(5){color:var(--green)
 .pd-remove{width:36px;height:36px;border-radius:50%;border:1px solid var(--red);background:transparent;color:var(--red);font-size:1.3rem;font-weight:700;line-height:1;cursor:pointer;transition:background .15s}
 .pd-remove:hover{background:color-mix(in srgb,var(--red) 15%,transparent)}
 @media (max-width:560px){.pd-item{grid-template-columns:26px 1fr 38px;gap:8px}}
+
+/* Themenblasen sind echte Links (Themenfeld-Seiten), sehen aber aus wie Knöpfe */
+.topics a.topic{text-decoration:none}

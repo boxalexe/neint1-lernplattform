@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VPN &amp; IPsec – AP1 einfach erklärt | Layer 8 Academy</title>
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<meta name="description" content="Ein VPN (Virtual Private Network) baut einen verschlüsselten Tunnel durch ein unsicheres Netz (z. B. Internet).">
+<meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+<meta name="theme-color" content="#0a0e12">
+<link rel="canonical" href="https://layer8academy.boxberger.app/nachschlagen/vpn-ipsec/">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Layer 8 Academy">
+<meta property="og:title" content="VPN &amp; IPsec – AP1 einfach erklärt | Layer 8 Academy">
+<meta property="og:description" content="Ein VPN (Virtual Private Network) baut einen verschlüsselten Tunnel durch ein unsicheres Netz (z. B. Internet).">
+<meta property="og:url" content="https://layer8academy.boxberger.app/nachschlagen/vpn-ipsec/">
+<meta property="og:locale" content="de_DE">
+<meta name="twitter:card" content="summary">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+    {
+     "@type": "ListItem",
+     "position": 1,
+     "name": "Start",
+     "item": "https://layer8academy.boxberger.app/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 2,
+     "name": "Nachschlagen",
+     "item": "https://layer8academy.boxberger.app/nachschlagen/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 3,
+     "name": "Netzwerke",
+     "item": "https://layer8academy.boxberger.app/themen/netzwerke/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 4,
+     "name": "VPN/IPsec",
+     "item": "https://layer8academy.boxberger.app/nachschlagen/vpn-ipsec/"
+    }
+   ]
+  },
+  {
+   "@type": "LearningResource",
+   "name": "VPN & IPsec",
+   "description": "Ein VPN (Virtual Private Network) baut einen verschlüsselten Tunnel durch ein unsicheres Netz (z. B. Internet).",
+   "url": "https://layer8academy.boxberger.app/nachschlagen/vpn-ipsec/",
+   "inLanguage": "de-DE",
+   "isAccessibleForFree": true,
+   "learningResourceType": "Nachschlagewerk",
+   "educationalLevel": "Berufsausbildung",
+   "teaches": "Netzwerke",
+   "isPartOf": {
+    "@id": "https://layer8academy.boxberger.app/#website"
+   },
+   "author": {
+    "@type": "Person",
+    "name": "Alexander Boxberger-Adam",
+    "url": "https://boxberger.app/"
+   }
+  }
+ ]
+}
+</script>
+<script>
+  try {
+    var t = localStorage.getItem('l8a_theme');
+    if (t && t !== 'default') document.documentElement.setAttribute('data-theme', t);
+  } catch (e) {}
+</script>
+<link rel="stylesheet" href="/styles.css?v=20261018a">
+<link rel="stylesheet" href="/seiten.css?v=20261018a">
+</head>
+<body class="seite">
+<header class="seite-kopf">
+  <div class="wrap">
+    <a class="seite-logo" href="/" aria-label="Layer 8 Academy – zur Lernplattform"><span class="t-neint">Layer</span> <svg class="title-8" width="44" height="44" viewBox="0 0 120 120" aria-label="L8A" role="img"><path d="M60,60 C34,60 24,26 60,26 C96,26 86,60 60,60 Z" fill="none" stroke="#3ddc84" stroke-width="7" stroke-linecap="round"/><path d="M60,94 C86,94 96,60 60,60 C24,60 34,94 60,94 Z" fill="none" stroke="#22d3ee" stroke-width="7" stroke-linecap="round"/><line x1="18" y1="26" x2="18" y2="52" stroke="#22d3ee" stroke-width="7" stroke-linecap="round"/><line x1="18" y1="52" x2="30" y2="52" stroke="#22d3ee" stroke-width="7" stroke-linecap="round"/><path d="M102,68 L92,94 M102,68 L112,94 M95,86 L107,86" stroke="#3ddc84" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg> <span class="t-symb">Academy</span></a>
+    <nav class="seite-nav" aria-label="Hauptnavigation">
+      <a href="/nachschlagen/">Nachschlagen</a>
+      <a href="/glossar/">Glossar</a>
+      <a href="/#fragen">Fragen üben</a>
+      <a href="/subnetting-trainer/">Subnetting</a>
+      <a href="/ap1-simulator/">AP1-Simulator</a>
+      <a href="/osi-battle/">Diagnose-Arena</a>
+    </nav>
+  </div>
+</header>
+<main class="wrap seite-inhalt">
+<nav class="brotkrumen" aria-label="Brotkrumenpfad"><a href="/">Start</a><span class="bk-trenner" aria-hidden="true">›</span><a href="/nachschlagen/">Nachschlagen</a><span class="bk-trenner" aria-hidden="true">›</span><a href="/themen/netzwerke/">Netzwerke</a><span class="bk-trenner" aria-hidden="true">›</span><span aria-current="page">VPN/IPsec</span></nav>
+<h1 class="seite-h1">VPN &amp; IPsec</h1>
+<div class="view active" id="view-lesen">
+<section id="r-vpn">
+<p>Ein <span class="term">VPN</span> (Virtual Private Network) baut einen verschlüsselten Tunnel durch ein unsicheres Netz (z. B. Internet). <strong>IPsec</strong> arbeitet auf Schicht 3 und bietet Verschlüsselung, Authentifizierung und Integrität. Schlüssel werden über <strong>IKE</strong> (Internet Key Exchange, aufbauend auf dem <strong>ISAKMP</strong>-Rahmenwerk) ausgehandelt, typischerweise per Diffie-Hellman; <strong>IKEv2</strong> ist die modernere, stabilere Variante, besonders bei Netzwerkwechseln (Mobilfunk↔WLAN); <strong>ESP</strong> (Encapsulating Security Payload) kapselt und schützt die Nutzdaten.</p>
+<p>Neben IPsec gibt es weitere VPN-Protokolle: <strong>L2TP</strong> (Layer 2 Tunneling Protocol) baut den Tunnel, liefert aber selbst keine Verschlüsselung, daher meist als L2TP/IPsec kombiniert. <strong>OpenVPN</strong> ist ein Open-Source-Protokoll auf TLS-Basis, plattformunabhängig und flexibel konfigurierbar.</p>
+<table>
+<tr><th>Modus</th><th>Was wird geschützt</th><th>Einsatz</th></tr>
+<tr><td>Transport</td><td>nur die Nutzdaten (Payload)</td><td>Host-zu-Host / Ende-zu-Ende</td></tr>
+<tr><td>Tunnel</td><td>ganzes IP-Paket + neuer Header</td><td>Site-to-Site (Gateway↔Gateway)</td></tr>
+</table>
+<p><strong>VPN-Typen:</strong> Remote Access (einzelner Client ins Firmennetz), Site-to-Site/LAN-to-LAN (zwei Netze), End-to-End (zwei Endgeräte direkt), Site-to-End (z. B. Homeoffice ↔ Firmenrouter).</p>
+<div class="callout"><span class="tag">Tunneling & RDP</span><strong>Split Tunneling:</strong> nur Firmenverkehr durch den Tunnel, Rest direkt ins Internet (entlastet das VPN, weniger Kontrolle). Oft kombiniert mit <strong>Split DNS</strong>: interne Namen werden über den Tunnel aufgelöst, externe normal. <strong>Full/Closed Tunneling:</strong> aller Verkehr durch den Tunnel (mehr Kontrolle, mehr Last). Ein <strong>Kill Switch</strong> blockiert den Internetzugriff automatisch, sobald die VPN-Verbindung abbricht, verhindert unbemerkten Klartextverkehr. <strong>RDP</strong> (Remote Desktop Protocol, Port 3389) ermöglicht grafische Fernsteuerung; ein <strong>RD-Gateway</strong> ist der gesicherte Zugangspunkt von außen.</div>
+
+<h3>WireGuard, PFS und AH vs. ESP</h3>
+<p><strong>WireGuard</strong> ist ein modernes, schlankes VPN-Protokoll mit fest vorgegebener aktueller Kryptografie, deutlich weniger Code als IPsec oder OpenVPN, dadurch schnell und gut prüfbar. <strong>Perfect Forward Secrecy (PFS):</strong> Für jede Sitzung werden eigene, flüchtige Schlüssel ausgehandelt, wird ein Langzeitschlüssel später kompromittiert, bleiben aufgezeichnete alte Sitzungen trotzdem unlesbar. Bei IPsec gilt für die AP1 die knappe Unterscheidung: <strong>AH</strong> sichert Integrität und Authentizität, verschlüsselt aber nicht. <strong>ESP</strong> kann zusätzlich verschlüsseln und wird in der Praxis fast immer verwendet.</p>
+
+<div class="callout"><span class="tag">Prüfungsfalle</span><strong>AH</strong> sichert nur Authentizität und Integrität, <strong>ESP</strong> zusätzlich die Vertraulichkeit durch Verschlüsselung; wer echte Verschlüsselung braucht, wählt ESP. Zweite Unterscheidung: Der <strong>Transportmodus</strong> schützt nur die Nutzdaten und wird zwischen Endpunkten genutzt, der <strong>Tunnelmodus</strong> verpackt das gesamte Originalpaket und ist der Regelfall bei der Standortkopplung.</div>
+
+<div class="callout xref"><span class="tag">Verwandte Themen</span><a href="/nachschlagen/verschluesselung-pki/">Verschlüsselung & PKI</a> · <a href="/nachschlagen/it-sicherheit/">IT-Sicherheit Grundlagen</a> · <a href="/nachschlagen/netzwerkausdehnung/">Netzwerkausdehnung (BAN → GAN)</a></div>
+</section>
+</div>
+<div class="seite-cta">
+  <p>Interaktiv mit Volltextsuche, Glossar-Bubbles und Übungsfragen lernen:</p>
+  <div class="seite-cta-knoepfe">
+    <a class="seite-knopf seite-knopf-haupt" href="/#r-vpn">In der Lernplattform öffnen</a>
+    <a class="seite-knopf" href="/#fragen">Fragen üben</a>
+    <a class="seite-knopf" href="/glossar/">Glossar</a>
+  </div>
+</div>
+<nav class="seite-blaettern" aria-label="Weitere Kapitel">
+  <a class="sb-vor" href="/nachschlagen/wlan/"><span>Vorheriges Kapitel</span>WLAN</a>
+  <a class="sb-nach" href="/nachschlagen/dns-dhcp/"><span>Nächstes Kapitel</span>DNS/DHCP</a>
+</nav>
+<section class="seite-feld" aria-labelledby="feld-titel">
+<h2 id="feld-titel">Mehr aus Netzwerke</h2>
+<div class="seite-pillen"><a class="topic-sub" href="/nachschlagen/osi-modell/">OSI-Modell</a><a class="topic-sub" href="/nachschlagen/tcp-ip-udp/">TCP/IP &amp; UDP</a><a class="topic-sub" href="/nachschlagen/ipv4-ipv6/">IPv4/IPv6</a><a class="topic-sub" href="/nachschlagen/subnetting/">Subnetting</a><a class="topic-sub" href="/nachschlagen/routing-switching/">Routing/Switching</a><a class="topic-sub" href="/nachschlagen/vlan/">VLAN</a><a class="topic-sub" href="/nachschlagen/wlan/">WLAN</a><span class="topic-sub aktuell" aria-current="page">VPN/IPsec</span><a class="topic-sub" href="/nachschlagen/dns-dhcp/">DNS/DHCP</a><a class="topic-sub" href="/nachschlagen/ethernet/">Ethernet</a><a class="topic-sub" href="/nachschlagen/ports-sockets/">Ports</a><a class="topic-sub" href="/nachschlagen/header-ttl-traceroute/">Header/TTL</a><a class="topic-sub" href="/nachschlagen/multiplexing/">Multiplexing</a><a class="topic-sub" href="/nachschlagen/netzwerkausdehnung/">Netzausdehnung</a><a class="topic-sub" href="/nachschlagen/netzwerktopologien/">Topologien</a><a class="topic-sub" href="/nachschlagen/fddi/">FDDI</a><a class="topic-sub" href="/nachschlagen/voip/">VoIP</a><a class="topic-sub" href="/nachschlagen/api-rest-soap/">API/REST</a><a class="topic-sub" href="/nachschlagen/strukturierte-verkabelung/">Strukturierte Verkabelung</a><a class="topic-sub" href="/nachschlagen/kabel-medien-hardware/">Kabel/Hardware</a></div>
+</section>
+</main>
+<footer><div class="wrap">
+<p class="footer-lead">Layer 8 Academy ist eine kostenlose Lernplattform zur Vorbereitung auf die IHK-Abschlussprüfung Teil 1 der IT-Berufe. Sie umfasst ein Nachschlagewerk, ein Glossar, Übungsfragen im Multiple-Choice- und Karteikartenmodus, einen Subnetting-Trainer und Prüfungssimulationen.</p>
+<nav class="footer-nav" aria-label="Themenfelder">
+  <a href="/themen/netzwerke/">Netzwerke</a> · <a href="/themen/it-sicherheit/">IT-Sicherheit</a> · <a href="/themen/systeme-storage/">Systeme &amp; Storage</a> · <a href="/themen/software-grundlagen/">Software &amp; Grundlagen</a> · <a href="/themen/bwl-prozesse/">BWL &amp; Prozesse</a> · <a href="/nachschlagen/">Alle Kapitel</a> · <a href="/glossar/">Glossar</a>
+</nav>
+<div class="footer-copy">© 2026 boxberger.app · <a href="/impressum/" class="imprint-link">Impressum &amp; Datenschutz</a></div>
+</div></footer>
+</body>
+</html>

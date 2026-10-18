@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Systemhärtung – AP1 einfach erklärt | Layer 8 Academy</title>
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<meta name="description" content="Härtung (englisch Hardening ) bezeichnet alle Maßnahmen, mit denen ein System auf das für seinen Zweck Notwendige reduziert und sicher konfiguriert wird.">
+<meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+<meta name="theme-color" content="#0a0e12">
+<link rel="canonical" href="https://layer8academy.boxberger.app/nachschlagen/systemhaertung/">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Layer 8 Academy">
+<meta property="og:title" content="Systemhärtung – AP1 einfach erklärt | Layer 8 Academy">
+<meta property="og:description" content="Härtung (englisch Hardening ) bezeichnet alle Maßnahmen, mit denen ein System auf das für seinen Zweck Notwendige reduziert und sicher konfiguriert wird.">
+<meta property="og:url" content="https://layer8academy.boxberger.app/nachschlagen/systemhaertung/">
+<meta property="og:locale" content="de_DE">
+<meta name="twitter:card" content="summary">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+    {
+     "@type": "ListItem",
+     "position": 1,
+     "name": "Start",
+     "item": "https://layer8academy.boxberger.app/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 2,
+     "name": "Nachschlagen",
+     "item": "https://layer8academy.boxberger.app/nachschlagen/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 3,
+     "name": "IT-Sicherheit",
+     "item": "https://layer8academy.boxberger.app/themen/it-sicherheit/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 4,
+     "name": "Systemhärtung",
+     "item": "https://layer8academy.boxberger.app/nachschlagen/systemhaertung/"
+    }
+   ]
+  },
+  {
+   "@type": "LearningResource",
+   "name": "Systemhärtung",
+   "description": "Härtung (englisch Hardening ) bezeichnet alle Maßnahmen, mit denen ein System auf das für seinen Zweck Notwendige reduziert und sicher konfiguriert wird.",
+   "url": "https://layer8academy.boxberger.app/nachschlagen/systemhaertung/",
+   "inLanguage": "de-DE",
+   "isAccessibleForFree": true,
+   "learningResourceType": "Nachschlagewerk",
+   "educationalLevel": "Berufsausbildung",
+   "teaches": "IT-Sicherheit",
+   "isPartOf": {
+    "@id": "https://layer8academy.boxberger.app/#website"
+   },
+   "author": {
+    "@type": "Person",
+    "name": "Alexander Boxberger-Adam",
+    "url": "https://boxberger.app/"
+   }
+  }
+ ]
+}
+</script>
+<script>
+  try {
+    var t = localStorage.getItem('l8a_theme');
+    if (t && t !== 'default') document.documentElement.setAttribute('data-theme', t);
+  } catch (e) {}
+</script>
+<link rel="stylesheet" href="/styles.css?v=20261018a">
+<link rel="stylesheet" href="/seiten.css?v=20261018a">
+</head>
+<body class="seite">
+<header class="seite-kopf">
+  <div class="wrap">
+    <a class="seite-logo" href="/" aria-label="Layer 8 Academy – zur Lernplattform"><span class="t-neint">Layer</span> <svg class="title-8" width="44" height="44" viewBox="0 0 120 120" aria-label="L8A" role="img"><path d="M60,60 C34,60 24,26 60,26 C96,26 86,60 60,60 Z" fill="none" stroke="#3ddc84" stroke-width="7" stroke-linecap="round"/><path d="M60,94 C86,94 96,60 60,60 C24,60 34,94 60,94 Z" fill="none" stroke="#22d3ee" stroke-width="7" stroke-linecap="round"/><line x1="18" y1="26" x2="18" y2="52" stroke="#22d3ee" stroke-width="7" stroke-linecap="round"/><line x1="18" y1="52" x2="30" y2="52" stroke="#22d3ee" stroke-width="7" stroke-linecap="round"/><path d="M102,68 L92,94 M102,68 L112,94 M95,86 L107,86" stroke="#3ddc84" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg> <span class="t-symb">Academy</span></a>
+    <nav class="seite-nav" aria-label="Hauptnavigation">
+      <a href="/nachschlagen/">Nachschlagen</a>
+      <a href="/glossar/">Glossar</a>
+      <a href="/#fragen">Fragen üben</a>
+      <a href="/subnetting-trainer/">Subnetting</a>
+      <a href="/ap1-simulator/">AP1-Simulator</a>
+      <a href="/osi-battle/">Diagnose-Arena</a>
+    </nav>
+  </div>
+</header>
+<main class="wrap seite-inhalt">
+<nav class="brotkrumen" aria-label="Brotkrumenpfad"><a href="/">Start</a><span class="bk-trenner" aria-hidden="true">›</span><a href="/nachschlagen/">Nachschlagen</a><span class="bk-trenner" aria-hidden="true">›</span><a href="/themen/it-sicherheit/">IT-Sicherheit</a><span class="bk-trenner" aria-hidden="true">›</span><span aria-current="page">Systemhärtung</span></nav>
+<h1 class="seite-h1">Systemhärtung</h1>
+<div class="view active" id="view-lesen">
+<section id="r-haertung">
+<p><strong>Härtung</strong> (englisch <em>Hardening</em>) bezeichnet alle Maßnahmen, mit denen ein System auf das für seinen Zweck Notwendige reduziert und sicher konfiguriert wird. Ziel ist die Verkleinerung der <strong>Angriffsfläche</strong>: Jeder Dienst, jedes Konto, jeder offene Port und jede installierte Komponente, die nicht gebraucht wird, ist ein möglicher Einstiegspunkt und muss gepflegt werden. Was nicht vorhanden ist, kann auch nicht angegriffen werden.</p>
+
+<h3>Maßnahmen der Härtung</h3>
+<table>
+<tr><th>Vorgehen</th><th>Wirkung</th></tr>
+<tr><td>Nicht benötigte <strong>Dienste deaktivieren</strong></td><td>Weniger lauschende Prozesse, weniger angreifbare Software</td></tr>
+<tr><td>Nicht benötigte Software entfernen</td><td>Weniger Schwachstellen und weniger Pflegeaufwand</td></tr>
+<tr><td><strong>Standardkonten</strong> absichern</td><td>Vorgegebene Konten deaktivieren oder umbenennen, Gastkonto abschalten</td></tr>
+<tr><td><strong>Standardpasswörter ändern</strong></td><td>Werkseinstellungen sind öffentlich bekannt und werden automatisiert durchprobiert</td></tr>
+<tr><td>Rechte nach <strong>Least Privilege</strong></td><td>Jedes Konto nur mit den nötigen Rechten, getrennte Konten für administrative Aufgaben</td></tr>
+<tr><td><strong>Lokale Firewall</strong> aktivieren</td><td>Eingehende Verbindungen auf das Nötige begrenzen, auch im internen Netz</td></tr>
+<tr><td><strong>Patchmanagement</strong></td><td>Bekannte Lücken zeitnah und geordnet schließen</td></tr>
+<tr><td>Protokollierung aktivieren</td><td>Auffälligkeiten werden nachvollziehbar und auswertbar</td></tr>
+<tr><td>Verschlüsselung nutzen</td><td>Datenträger und Übertragungswege absichern</td></tr>
+<tr><td><strong>Endpoint-Schutz</strong></td><td>Schadsoftware erkennen und verhaltensauffällige Prozesse blockieren</td></tr>
+</table>
+
+<h3>Patch- und Updatemanagement</h3>
+<p><strong>Patchmanagement</strong> ist der geregelte Ablauf, mit dem Aktualisierungen erfasst, bewertet, getestet, verteilt und kontrolliert werden. Ungeprüftes sofortiges Einspielen kann den Betrieb stören, zu langes Warten lässt bekannte Lücken offen. Der übliche Weg: Sicherheitsrelevanz bewerten, im Testsystem prüfen, im Wartungsfenster verteilen, Erfolg kontrollieren und dokumentieren. Für kritische Lücken gibt es ein verkürztes Notfallverfahren.</p>
+<div class="callout"><span class="tag">Prüfungsfalle</span>Härtung und Patchmanagement werden gern gleichgesetzt. Die <strong>Härtung</strong> ist die einmalige sichere Grundkonfiguration eines Systems, das <strong>Patchmanagement</strong> der dauerhafte Prozess, der es sicher hält. Beides zusammen ergibt erst ein wirksam geschütztes System.</div>
+
+<h3>Security by Design und Security by Default</h3>
+<p><strong>Security by Design</strong> bedeutet, Sicherheit von Anfang an mitzuentwerfen statt nachträglich aufzusetzen. Sicherheitsanforderungen fließen bereits in Architektur und Entwurf ein, weil nachträgliche Absicherung teurer und lückenhafter ist.</p>
+<p><strong>Security by Default</strong> bedeutet, dass ein System <em>im Auslieferungszustand</em> bereits sicher eingestellt ist: unnötige Dienste aus, kein voreingestelltes Standardpasswort, restriktive Rechte. Der Nutzer muss Sicherheit nicht erst aktivieren, sondern bewusst lockern, wenn er sie senken will.</p>
+
+<h3>Praxisbeispiele</h3>
+<p><strong>Windows:</strong> Gastkonto deaktivieren und das Administratorkonto umbenennen, Gruppenrichtlinien für Kennwortlänge und Sperrung setzen, nicht benötigte Rollen und Features entfernen, Windows-Firewall je Profil konfigurieren, automatische Ausführung von Wechseldatenträgern abschalten, BitLocker für die Datenträgerverschlüsselung, Anmeldeprotokollierung aktivieren.</p>
+<p><strong>Linux:</strong> Anmeldung als root über SSH unterbinden und stattdessen Schlüsselauthentifizierung nutzen, nicht benötigte Dienste über die Dienstverwaltung abschalten, Paketauswahl auf das Nötige beschränken, lokale Firewall über nftables oder ufw einrichten, Dateirechte und Eigentümer prüfen, Aktualisierungen über die Paketverwaltung geregelt einspielen, Protokolle zentral sammeln.</p>
+<div class="callout"><span class="tag">Typische Fehlkonfigurationen</span>Standardpasswort belassen, etwa an Druckern, Kameras oder Netzkomponenten. Ein Dienst läuft mit administrativen Rechten, obwohl er sie nicht braucht. Testzugänge bleiben nach der Inbetriebnahme bestehen. Ein Verwaltungszugang ist aus dem Internet erreichbar. Die lokale Firewall wird zur Fehlersuche abgeschaltet und nie wieder eingeschaltet. Und Protokollierung ist zwar aktiv, wird aber von niemandem ausgewertet.</div>
+
+<h3>Einordnung</h3>
+<p>Härtung ist keine freiwillige Kür: Im <strong>IT-Grundschutz</strong> des BSI enthalten die Bausteine für Betriebssysteme und Anwendungen genau solche Anforderungen, etwa zur Deaktivierung nicht benötigter Dienste, zur Rechtevergabe und zur sicheren Grundkonfiguration. Zusammen mit Patchmanagement, Protokollierung und Berechtigungskonzept bildet sie die technische Umsetzung der Schutzziele Vertraulichkeit, Integrität und Verfügbarkeit auf Systemebene.</p>
+<div class="callout"><span class="tag">AP1-Beispiel</span>Ein neu beschaffter Webserver soll in Betrieb gehen. Nennen Sie vier Härtungsmaßnahmen und begründen Sie sie. Erwartet werden etwa: nicht benötigte Dienste abschalten, weil jeder laufende Dienst angreifbar ist; Standardkonten und Standardpasswörter ändern, weil diese öffentlich bekannt sind; Rechte nach dem Prinzip der geringsten Rechte vergeben, um den Schaden bei einem kompromittierten Konto zu begrenzen; aktuelle Sicherheitsaktualisierungen einspielen, um bekannte Lücken zu schließen.</div>
+
+<div class="callout xref"><span class="tag">Verwandte Themen</span><a href="/nachschlagen/bsi-grundschutz/">BSI-Grundschutz &amp; Schutzbedarf</a> · <a href="/nachschlagen/schadsoftware-angriffe/">Schadsoftware &amp; Angriffsarten</a> · <a href="/nachschlagen/it-sicherheit/">IT-Sicherheit Grundlagen</a></div>
+</section>
+</div>
+<div class="seite-cta">
+  <p>Interaktiv mit Volltextsuche, Glossar-Bubbles und Übungsfragen lernen:</p>
+  <div class="seite-cta-knoepfe">
+    <a class="seite-knopf seite-knopf-haupt" href="/#r-haertung">In der Lernplattform öffnen</a>
+    <a class="seite-knopf" href="/#fragen">Fragen üben</a>
+    <a class="seite-knopf" href="/glossar/">Glossar</a>
+  </div>
+</div>
+<nav class="seite-blaettern" aria-label="Weitere Kapitel">
+  <a class="sb-vor" href="/nachschlagen/schadsoftware-angriffe/"><span>Vorheriges Kapitel</span>Schadsoftware &amp; Angriffe</a>
+  <a class="sb-nach" href="/nachschlagen/e-mail-sicherheit/"><span>Nächstes Kapitel</span>E-Mail-Sicherheit</a>
+</nav>
+<section class="seite-feld" aria-labelledby="feld-titel">
+<h2 id="feld-titel">Mehr aus IT-Sicherheit</h2>
+<div class="seite-pillen"><a class="topic-sub" href="/nachschlagen/it-sicherheit/">IT-Sicherheit</a><a class="topic-sub" href="/nachschlagen/datenschutz-informationssicherheit/">Datenschutz/InfoSec</a><a class="topic-sub" href="/nachschlagen/verschluesselung-pki/">Verschlüsselung/PKI</a><a class="topic-sub" href="/nachschlagen/bsi-grundschutz/">BSI-Grundschutz</a><a class="topic-sub" href="/nachschlagen/schadsoftware-angriffe/">Schadsoftware &amp; Angriffe</a><span class="topic-sub aktuell" aria-current="page">Systemhärtung</span><a class="topic-sub" href="/nachschlagen/e-mail-sicherheit/">E-Mail-Sicherheit</a></div>
+</section>
+</main>
+<footer><div class="wrap">
+<p class="footer-lead">Layer 8 Academy ist eine kostenlose Lernplattform zur Vorbereitung auf die IHK-Abschlussprüfung Teil 1 der IT-Berufe. Sie umfasst ein Nachschlagewerk, ein Glossar, Übungsfragen im Multiple-Choice- und Karteikartenmodus, einen Subnetting-Trainer und Prüfungssimulationen.</p>
+<nav class="footer-nav" aria-label="Themenfelder">
+  <a href="/themen/netzwerke/">Netzwerke</a> · <a href="/themen/it-sicherheit/">IT-Sicherheit</a> · <a href="/themen/systeme-storage/">Systeme &amp; Storage</a> · <a href="/themen/software-grundlagen/">Software &amp; Grundlagen</a> · <a href="/themen/bwl-prozesse/">BWL &amp; Prozesse</a> · <a href="/nachschlagen/">Alle Kapitel</a> · <a href="/glossar/">Glossar</a>
+</nav>
+<div class="footer-copy">© 2026 boxberger.app · <a href="/impressum/" class="imprint-link">Impressum &amp; Datenschutz</a></div>
+</div></footer>
+</body>
+</html>

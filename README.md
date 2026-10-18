@@ -23,7 +23,27 @@ Reines HTML/CSS/JavaScript, keine Frameworks, kein Build-Schritt.
 index.html   Struktur, Reader-Inhalte, Navigation
 app.js       Fragenpools, Glossar, Quiz-Logik, Kartendruck, Bubble-Rendering
 styles.css   Theming (mehrere Farbschemata über CSS-Variablen)
+seiten.css   Zusatz-Styles für die erzeugten Einzelseiten
+tools/       seiten-bauen.mjs: erzeugt die Einzelseiten (siehe unten)
 ```
+
+## Eigene Seiten für Suchmaschinen
+
+Die Startseite bleibt die App (Sprünge, Suche, Quiz, Glossar-Bubbles). Zusätzlich gibt es crawlbare Einzelseiten, erzeugt aus `index.html` und `app.js`:
+
+| Adresse | Inhalt |
+|---|---|
+| `/themen/<feld>/` | die 5 Themenfelder (Netzwerke, IT-Sicherheit …) mit ihren Kapiteln |
+| `/nachschlagen/` | Übersicht aller Kapitel |
+| `/nachschlagen/<kapitel>/` | jedes Reader-Kapitel als eigene Seite, mit Brotkrumen, Weiterblättern und Link zurück in die App |
+| `/glossar/` | alle Glossarbegriffe |
+| `/impressum/` | Impressum & Datenschutz für die Einzelseiten (noindex) |
+
+Die Themenblasen und die Fußzeile der Startseite sind echte Links auf diese Seiten; `app.js` fängt sie in der App ab und springt wie bisher (`data-r`, `data-ansicht`). Die Einzelseiten führen mit `/#r-…`, `/#fragen`, `/#glossar` und `/#impressum` direkt an die passende Stelle der App.
+
+**Nach jeder Änderung an Kapiteln, Themenfeldern oder Glossar:** `node tools/seiten-bauen.mjs` (schreibt Seiten, Sitemap, Themenblasen und Fußzeile). Prüfen ohne Schreiben: `node tools/seiten-bauen.mjs --pruefen`. Ein neues Kapitel braucht eine Adresse in `KAPITEL_SLUG` im Skript.
+
+`.assetsignore` hält `.git`, `tools` und Konfiguration aus der Auslieferung heraus.
 
 ## Kartendruck
 

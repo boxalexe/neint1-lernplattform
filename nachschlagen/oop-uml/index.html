@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OOP &amp; UML – AP1 einfach erklärt | Layer 8 Academy</title>
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<meta name="description" content="Die objektorientierte Programmierung modelliert Software als Zusammenspiel von Objekten. Eine Klasse ist der Bauplan; ein Objekt ist eine konkrete Instanz …">
+<meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+<meta name="theme-color" content="#0a0e12">
+<link rel="canonical" href="https://layer8academy.boxberger.app/nachschlagen/oop-uml/">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Layer 8 Academy">
+<meta property="og:title" content="OOP &amp; UML – AP1 einfach erklärt | Layer 8 Academy">
+<meta property="og:description" content="Die objektorientierte Programmierung modelliert Software als Zusammenspiel von Objekten. Eine Klasse ist der Bauplan; ein Objekt ist eine konkrete Instanz …">
+<meta property="og:url" content="https://layer8academy.boxberger.app/nachschlagen/oop-uml/">
+<meta property="og:locale" content="de_DE">
+<meta name="twitter:card" content="summary">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+    {
+     "@type": "ListItem",
+     "position": 1,
+     "name": "Start",
+     "item": "https://layer8academy.boxberger.app/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 2,
+     "name": "Nachschlagen",
+     "item": "https://layer8academy.boxberger.app/nachschlagen/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 3,
+     "name": "Software & Grundlagen",
+     "item": "https://layer8academy.boxberger.app/themen/software-grundlagen/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 4,
+     "name": "OOP & UML",
+     "item": "https://layer8academy.boxberger.app/nachschlagen/oop-uml/"
+    }
+   ]
+  },
+  {
+   "@type": "LearningResource",
+   "name": "OOP & UML",
+   "description": "Die objektorientierte Programmierung modelliert Software als Zusammenspiel von Objekten. Eine Klasse ist der Bauplan; ein Objekt ist eine konkrete Instanz …",
+   "url": "https://layer8academy.boxberger.app/nachschlagen/oop-uml/",
+   "inLanguage": "de-DE",
+   "isAccessibleForFree": true,
+   "learningResourceType": "Nachschlagewerk",
+   "educationalLevel": "Berufsausbildung",
+   "teaches": "Software & Grundlagen",
+   "isPartOf": {
+    "@id": "https://layer8academy.boxberger.app/#website"
+   },
+   "author": {
+    "@type": "Person",
+    "name": "Alexander Boxberger-Adam",
+    "url": "https://boxberger.app/"
+   }
+  }
+ ]
+}
+</script>
+<script>
+  try {
+    var t = localStorage.getItem('l8a_theme');
+    if (t && t !== 'default') document.documentElement.setAttribute('data-theme', t);
+  } catch (e) {}
+</script>
+<link rel="stylesheet" href="/styles.css?v=20261018a">
+<link rel="stylesheet" href="/seiten.css?v=20261018a">
+</head>
+<body class="seite">
+<header class="seite-kopf">
+  <div class="wrap">
+    <a class="seite-logo" href="/" aria-label="Layer 8 Academy – zur Lernplattform"><span class="t-neint">Layer</span> <svg class="title-8" width="44" height="44" viewBox="0 0 120 120" aria-label="L8A" role="img"><path d="M60,60 C34,60 24,26 60,26 C96,26 86,60 60,60 Z" fill="none" stroke="#3ddc84" stroke-width="7" stroke-linecap="round"/><path d="M60,94 C86,94 96,60 60,60 C24,60 34,94 60,94 Z" fill="none" stroke="#22d3ee" stroke-width="7" stroke-linecap="round"/><line x1="18" y1="26" x2="18" y2="52" stroke="#22d3ee" stroke-width="7" stroke-linecap="round"/><line x1="18" y1="52" x2="30" y2="52" stroke="#22d3ee" stroke-width="7" stroke-linecap="round"/><path d="M102,68 L92,94 M102,68 L112,94 M95,86 L107,86" stroke="#3ddc84" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg> <span class="t-symb">Academy</span></a>
+    <nav class="seite-nav" aria-label="Hauptnavigation">
+      <a href="/nachschlagen/">Nachschlagen</a>
+      <a href="/glossar/">Glossar</a>
+      <a href="/#fragen">Fragen üben</a>
+      <a href="/subnetting-trainer/">Subnetting</a>
+      <a href="/ap1-simulator/">AP1-Simulator</a>
+      <a href="/osi-battle/">Diagnose-Arena</a>
+    </nav>
+  </div>
+</header>
+<main class="wrap seite-inhalt">
+<nav class="brotkrumen" aria-label="Brotkrumenpfad"><a href="/">Start</a><span class="bk-trenner" aria-hidden="true">›</span><a href="/nachschlagen/">Nachschlagen</a><span class="bk-trenner" aria-hidden="true">›</span><a href="/themen/software-grundlagen/">Software &amp; Grundlagen</a><span class="bk-trenner" aria-hidden="true">›</span><span aria-current="page">OOP &amp; UML</span></nav>
+<h1 class="seite-h1">OOP &amp; UML</h1>
+<div class="view active" id="view-lesen">
+<section id="r-oop">
+<p>Die <strong>objektorientierte Programmierung</strong> modelliert Software als Zusammenspiel von Objekten. Eine <strong>Klasse</strong> ist der Bauplan; ein <strong>Objekt</strong> ist eine konkrete Instanz dieses Bauplans. <strong>Attribute</strong> beschreiben den Zustand, <strong>Methoden</strong> das Verhalten. Der <strong>Konstruktor</strong> ist eine spezielle Methode, die ein neues Objekt bei dessen Erzeugung initialisiert.</p>
+<p>Die vier Grundprinzipien: <strong>Kapselung</strong> versteckt interne Daten hinter kontrollierten Zugriffsmethoden. <strong>Vererbung</strong> lässt eine Unterklasse Attribute und Methoden der Oberklasse übernehmen. <strong>Polymorphie</strong> erlaubt, dass derselbe Methodenaufruf je nach Objekttyp unterschiedlich ausgeführt wird. <strong>Abstraktion</strong> modelliert nur die wesentlichen Eigenschaften und lässt unwichtige Details weg.</p>
+<h3>UML-Sichtbarkeiten</h3>
+<table>
+<tr><th>Zeichen</th><th>Sichtbarkeit</th><th>Zugriff</th></tr>
+<tr><td><code>+</code></td><td>public</td><td>von überall</td></tr>
+<tr><td><code>&minus;</code></td><td>private</td><td>nur innerhalb der eigenen Klasse</td></tr>
+<tr><td><code>#</code></td><td>protected</td><td>eigene Klasse und Unterklassen</td></tr>
+<tr><td><code>~</code></td><td>package</td><td>innerhalb desselben Pakets</td></tr>
+</table>
+<div class="callout"><span class="tag">Prüfungsfalle</span>Die Raute hat in UML zwei völlig verschiedene Bedeutungen: Als Zeichen <code>#</code> vor einem Attribut steht sie für die Sichtbarkeit <strong>protected</strong>. Als Rautensymbol an einer <strong>Beziehungslinie</strong> steht sie dagegen für Aggregation (leere Raute) oder Komposition (gefüllte Raute), nicht verwechseln.</div>
+<h3>Beziehungen zwischen Klassen</h3>
+<p><strong>Assoziation:</strong> Eine allgemeine Verbindung ("kennt", "nutzt"), dargestellt als einfache Linie. <strong>Aggregation</strong> (leere Raute am Ganzen): Teile gehören zum Ganzen, existieren aber auch ohne es, ein Team besteht aus Spielern, die Spieler existieren auch ohne das Team. <strong>Komposition</strong> (gefüllte Raute): Die Teile existieren nicht ohne das Ganze. Räume existieren nicht ohne ihr Gebäude. <strong>Generalisierung/Vererbung:</strong> geschlossener, nicht ausgefüllter Dreieckspfeil zur Oberklasse.</p>
+<p><strong>Multiplizitäten</strong> geben an, wie viele Objekte an einer Beziehung beteiligt sind: <code>1</code> = genau eins, <code>0..1</code> = keins oder eins, <code>*</code> oder <code>0..*</code> = beliebig viele, <code>1..*</code> = mindestens eins.</p>
+<p>Neben dem <strong>Klassendiagramm</strong> (statischer Aufbau) sind zwei weitere UML-Diagramme prüfungsrelevant: Das <strong>Anwendungsfalldiagramm</strong> (Use Case) zeigt, welche Akteure welche Funktionen des Systems nutzen. Das <strong>Aktivitätsdiagramm</strong> beschreibt Abläufe mit Verzweigungen, vergleichbar einem Flussdiagramm.</p>
+
+<h3>Sequenzdiagramm</h3>
+<p>Während das Klassendiagramm den <em>statischen</em> Aufbau zeigt, stellt das <strong>Sequenzdiagramm</strong> den <em>zeitlichen Ablauf</em> einer Interaktion dar: Wer schickt wann welche Nachricht an wen?</p>
+<p>Der Aufbau folgt festen Regeln. Am oberen Rand stehen nebeneinander die beteiligten <strong>Akteure und Objekte</strong>, jeweils in einem Kasten. Von jedem geht senkrecht nach unten eine gestrichelte <strong>Lebenslinie</strong> ab; die Zeit läuft also von oben nach unten. Auf der Lebenslinie markieren schmale Balken die <strong>Aktivierung</strong>, also den Zeitraum, in dem das Objekt gerade arbeitet.</p>
+<p>Zwischen den Lebenslinien verlaufen waagerechte Pfeile, die <strong>Nachrichten</strong>:</p>
+<table>
+<tr><th>Pfeilart</th><th>Bedeutung</th></tr>
+<tr><td>Durchgezogener Pfeil mit gefüllter Spitze</td><td>Synchroner Aufruf: Der Sender wartet auf die Antwort</td></tr>
+<tr><td>Durchgezogener Pfeil mit offener Spitze</td><td>Asynchrone Nachricht: Der Sender arbeitet sofort weiter</td></tr>
+<tr><td>Gestrichelter Pfeil</td><td>Antwort beziehungsweise Rückgabe</td></tr>
+<tr><td>Pfeil auf die eigene Lebenslinie</td><td>Selbstaufruf</td></tr>
+<tr><td>Kreuz am Ende der Lebenslinie</td><td>Das Objekt wird zerstört</td></tr>
+</table>
+<p>Wiederholungen und Verzweigungen werden in Rahmen gesetzt, die als <strong>kombinierte Fragmente</strong> bezeichnet werden: <code>loop</code> für Schleifen, <code>alt</code> für Alternativen mit Bedingung, <code>opt</code> für einen optionalen Teil.</p>
+<div class="callout"><span class="tag">Beispiel Anmeldung</span>Benutzer &rarr; Anmeldemaske: Zugangsdaten eingeben (synchron)<br>
+Anmeldemaske &rarr; Benutzerverwaltung: pruefeAnmeldung(kennung, passwort)<br>
+Benutzerverwaltung &rarr; Datenbank: sucheBenutzer(kennung)<br>
+Datenbank ‑ ‑ &rarr; Benutzerverwaltung: Benutzerdatensatz (gestrichelt, Rückgabe)<br>
+Benutzerverwaltung ‑ ‑ &rarr; Anmeldemaske: true oder false<br>
+Ein <code>alt</code>-Fragment trennt danach den Fall „Anmeldung erfolgreich" vom Fall „Fehlermeldung anzeigen".</div>
+<p>Für die Prüfung wichtig ist die Abgrenzung: Das <strong>Klassendiagramm</strong> zeigt Struktur und Beziehungen, das <strong>Aktivitätsdiagramm</strong> einen Ablauf mit Verzweigungen ohne festen Bezug zu Objekten, und das <strong>Sequenzdiagramm</strong> den Nachrichtenaustausch zwischen konkreten Objekten über die Zeit.</p>
+
+<div class="callout xref"><span class="tag">Verwandte Themen</span><a href="/nachschlagen/sql-datenbanken/">SQL & Datenbanken</a> · <a href="/nachschlagen/projektmanagement/">Projektmanagement</a> · <a href="/nachschlagen/it-dokumentation/">IT-Dokumentation</a></div>
+</section>
+</div>
+<div class="seite-cta">
+  <p>Interaktiv mit Volltextsuche, Glossar-Bubbles und Übungsfragen lernen:</p>
+  <div class="seite-cta-knoepfe">
+    <a class="seite-knopf seite-knopf-haupt" href="/#r-oop">In der Lernplattform öffnen</a>
+    <a class="seite-knopf" href="/#fragen">Fragen üben</a>
+    <a class="seite-knopf" href="/glossar/">Glossar</a>
+  </div>
+</div>
+<nav class="seite-blaettern" aria-label="Weitere Kapitel">
+  <a class="sb-vor" href="/nachschlagen/sql-datenbanken/"><span>Vorheriges Kapitel</span>SQL &amp; Datenbanken</a>
+  <a class="sb-nach" href="/nachschlagen/zahlensysteme/"><span>Nächstes Kapitel</span>Zahlensysteme</a>
+</nav>
+<section class="seite-feld" aria-labelledby="feld-titel">
+<h2 id="feld-titel">Mehr aus Software &amp; Grundlagen</h2>
+<div class="seite-pillen"><a class="topic-sub" href="/nachschlagen/sql-datenbanken/">SQL &amp; Datenbanken</a><span class="topic-sub aktuell" aria-current="page">OOP &amp; UML</span><a class="topic-sub" href="/nachschlagen/zahlensysteme/">Zahlensysteme</a><a class="topic-sub" href="/nachschlagen/speichergroessen-einheiten/">Speichergrößen &amp; Einheiten</a><a class="topic-sub" href="/nachschlagen/logische-verknuepfungen/">Logik/Gatter</a></div>
+</section>
+</main>
+<footer><div class="wrap">
+<p class="footer-lead">Layer 8 Academy ist eine kostenlose Lernplattform zur Vorbereitung auf die IHK-Abschlussprüfung Teil 1 der IT-Berufe. Sie umfasst ein Nachschlagewerk, ein Glossar, Übungsfragen im Multiple-Choice- und Karteikartenmodus, einen Subnetting-Trainer und Prüfungssimulationen.</p>
+<nav class="footer-nav" aria-label="Themenfelder">
+  <a href="/themen/netzwerke/">Netzwerke</a> · <a href="/themen/it-sicherheit/">IT-Sicherheit</a> · <a href="/themen/systeme-storage/">Systeme &amp; Storage</a> · <a href="/themen/software-grundlagen/">Software &amp; Grundlagen</a> · <a href="/themen/bwl-prozesse/">BWL &amp; Prozesse</a> · <a href="/nachschlagen/">Alle Kapitel</a> · <a href="/glossar/">Glossar</a>
+</nav>
+<div class="footer-copy">© 2026 boxberger.app · <a href="/impressum/" class="imprint-link">Impressum &amp; Datenschutz</a></div>
+</div></footer>
+</body>
+</html>

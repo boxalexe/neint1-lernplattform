@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IPv4 &amp; IPv6 – AP1 einfach erklärt | Layer 8 Academy</title>
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<meta name="description" content="IP-Adressen werden nicht frei gewählt, sondern zentral verwaltet. An der Spitze steht die IANA (Internet Assigned Numbers Authority), die den weltweiten …">
+<meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+<meta name="theme-color" content="#0a0e12">
+<link rel="canonical" href="https://layer8academy.boxberger.app/nachschlagen/ipv4-ipv6/">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Layer 8 Academy">
+<meta property="og:title" content="IPv4 &amp; IPv6 – AP1 einfach erklärt | Layer 8 Academy">
+<meta property="og:description" content="IP-Adressen werden nicht frei gewählt, sondern zentral verwaltet. An der Spitze steht die IANA (Internet Assigned Numbers Authority), die den weltweiten …">
+<meta property="og:url" content="https://layer8academy.boxberger.app/nachschlagen/ipv4-ipv6/">
+<meta property="og:locale" content="de_DE">
+<meta name="twitter:card" content="summary">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+    {
+     "@type": "ListItem",
+     "position": 1,
+     "name": "Start",
+     "item": "https://layer8academy.boxberger.app/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 2,
+     "name": "Nachschlagen",
+     "item": "https://layer8academy.boxberger.app/nachschlagen/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 3,
+     "name": "Netzwerke",
+     "item": "https://layer8academy.boxberger.app/themen/netzwerke/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 4,
+     "name": "IPv4/IPv6",
+     "item": "https://layer8academy.boxberger.app/nachschlagen/ipv4-ipv6/"
+    }
+   ]
+  },
+  {
+   "@type": "LearningResource",
+   "name": "IPv4 & IPv6",
+   "description": "IP-Adressen werden nicht frei gewählt, sondern zentral verwaltet. An der Spitze steht die IANA (Internet Assigned Numbers Authority), die den weltweiten …",
+   "url": "https://layer8academy.boxberger.app/nachschlagen/ipv4-ipv6/",
+   "inLanguage": "de-DE",
+   "isAccessibleForFree": true,
+   "learningResourceType": "Nachschlagewerk",
+   "educationalLevel": "Berufsausbildung",
+   "teaches": "Netzwerke",
+   "isPartOf": {
+    "@id": "https://layer8academy.boxberger.app/#website"
+   },
+   "author": {
+    "@type": "Person",
+    "name": "Alexander Boxberger-Adam",
+    "url": "https://boxberger.app/"
+   }
+  }
+ ]
+}
+</script>
+<script>
+  try {
+    var t = localStorage.getItem('l8a_theme');
+    if (t && t !== 'default') document.documentElement.setAttribute('data-theme', t);
+  } catch (e) {}
+</script>
+<link rel="stylesheet" href="/styles.css?v=20261018a">
+<link rel="stylesheet" href="/seiten.css?v=20261018a">
+</head>
+<body class="seite">
+<header class="seite-kopf">
+  <div class="wrap">
+    <a class="seite-logo" href="/" aria-label="Layer 8 Academy – zur Lernplattform"><span class="t-neint">Layer</span> <svg class="title-8" width="44" height="44" viewBox="0 0 120 120" aria-label="L8A" role="img"><path d="M60,60 C34,60 24,26 60,26 C96,26 86,60 60,60 Z" fill="none" stroke="#3ddc84" stroke-width="7" stroke-linecap="round"/><path d="M60,94 C86,94 96,60 60,60 C24,60 34,94 60,94 Z" fill="none" stroke="#22d3ee" stroke-width="7" stroke-linecap="round"/><line x1="18" y1="26" x2="18" y2="52" stroke="#22d3ee" stroke-width="7" stroke-linecap="round"/><line x1="18" y1="52" x2="30" y2="52" stroke="#22d3ee" stroke-width="7" stroke-linecap="round"/><path d="M102,68 L92,94 M102,68 L112,94 M95,86 L107,86" stroke="#3ddc84" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg> <span class="t-symb">Academy</span></a>
+    <nav class="seite-nav" aria-label="Hauptnavigation">
+      <a href="/nachschlagen/">Nachschlagen</a>
+      <a href="/glossar/">Glossar</a>
+      <a href="/#fragen">Fragen üben</a>
+      <a href="/subnetting-trainer/">Subnetting</a>
+      <a href="/ap1-simulator/">AP1-Simulator</a>
+      <a href="/osi-battle/">Diagnose-Arena</a>
+    </nav>
+  </div>
+</header>
+<main class="wrap seite-inhalt">
+<nav class="brotkrumen" aria-label="Brotkrumenpfad"><a href="/">Start</a><span class="bk-trenner" aria-hidden="true">›</span><a href="/nachschlagen/">Nachschlagen</a><span class="bk-trenner" aria-hidden="true">›</span><a href="/themen/netzwerke/">Netzwerke</a><span class="bk-trenner" aria-hidden="true">›</span><span aria-current="page">IPv4/IPv6</span></nav>
+<h1 class="seite-h1">IPv4 &amp; IPv6</h1>
+<div class="view active" id="view-lesen">
+<section id="r-ip">
+<table>
+<tr><th></th><th>IPv4</th><th>IPv6</th></tr>
+<tr><td>Länge</td><td>32 Bit</td><td>128 Bit</td></tr>
+<tr><td>Schreibweise</td><td>4 Dezimal-Oktette (192.168.0.1)</td><td>8 Hex-Blöcke (2001:db8::1)</td></tr>
+<tr><td>Adressraum</td><td>~4,3 Mrd.</td><td>2¹²⁸ (praktisch unerschöpflich)</td></tr>
+<tr><td>Loopback</td><td>127.0.0.1</td><td>::1</td></tr>
+<tr><td>Adressauflösung</td><td>ARP</td><td>NDP (Neighbor Discovery Protocol, via ICMPv6)</td></tr>
+</table>
+<ul>
+<li><strong>Private Bereiche (IPv4):</strong> <code>10.0.0.0/8</code>, <code>172.16.0.0/12</code>, <code>192.168.0.0/16</code>.</li>
+<li><strong>APIPA</strong> (Automatic Private IP Addressing) / Link-Local: <code>169.254.0.0/16</code> (automatisch bei fehlendem DHCP).</li>
+<li><strong>IPv6 Link-Local:</strong> theoretisch als <code>fe80::/10</code> definiert, in der Praxis wird aber immer <code>fe80::/64</code> verwendet, da die Bits 11 bis 64 bei der automatischen Adressbildung durch das Endgerät standardmäßig mit Nullen aufgefüllt werden. Gültig nur im lokalen Segment, nicht routbar. Basis für NDP und SLAAC, unabhängig von einer globalen Adresse vorhanden.</li>
+<li><strong>CIDR</strong> (Classless Inter-Domain Routing): Präfix-Schreibweise wie <strong>/24</strong> = 24 Bit Netz, Maske <code>255.255.255.0</code>, 254 nutzbare Hosts (256 minus Netz- und Broadcastadresse).</li>
+</ul>
+<div class="callout"><span class="tag">IPv6-Kürzung</span>Innerhalb jedes 16-Bit-Blocks dürfen führende Nullen weggelassen werden, aus <code>0042</code> wird <code>42</code>. Der doppelte Doppelpunkt <code>::</code> geht einen Schritt weiter und ersetzt die <strong>längste zusammenhängende Folge von Nullblöcken</strong>, und das genau <strong>einmal</strong> im gesamten Adressstring, da eine zweite Kürzung nicht mehr eindeutig auflösbar wäre, wie viele Nullblöcke an welcher Stelle fehlen. Beispiel: <code>2001:0db8:0000:0000:0000:ff00:0042:8329</code> wird durch Weglassen führender Nullen zu <code>2001:db8:0:0:0:ff00:42:8329</code> und durch <code>::</code> für die drei aufeinanderfolgenden Nullblöcke schließlich zu <code>2001:db8::ff00:42:8329</code>.</div>
+<div class="callout"><span class="tag">DHCP</span><strong>DHCPv4</strong> vergibt IPv4-Adressen automatisch samt Maske, Gateway und DNS. Ablauf per DORA: <strong>D</strong>iscover (Client sucht), <strong>O</strong>ffer (Server bietet an), <strong>R</strong>equest (Client wählt), <strong>A</strong>cknowledge (Server bestätigt). <strong>DHCPv6</strong> ist das Pendant für IPv6: entweder zustandsbehaftet (Server vergibt die Adresse) oder zustandslos (Server liefert nur Zusatzinfos wie DNS, die Adresse entsteht per SLAAC).</div>
+<div class="callout"><span class="tag">IPv6-Autokonfiguration</span><strong>SLAAC</strong> (zustandslos): Der Router kündigt per <strong>Router-Advertisement</strong> ein Präfix an, das Gerät bildet den hinteren Adressteil selbst, kein Server nötig. <strong>DHCPv6</strong> (kann zustandsbehaftet): zentrale Vergabe/Verwaltung wie bei DHCPv4. Beide können auch kombiniert werden.</div>
+
+<h3>Adressvergabe und IANA</h3>
+<p>IP-Adressen werden nicht frei gewählt, sondern zentral verwaltet. An der Spitze steht die <strong>IANA</strong> (Internet Assigned Numbers Authority), die den weltweiten Adressraum verwaltet und große Blöcke an die fünf <strong>RIR</strong> (Regional Internet Registries) vergibt. Für Europa ist das <strong>RIPE NCC</strong> zuständig. Die RIR geben Blöcke an lokale Vergabestellen und Provider weiter, die daraus einzelne Netze an Endkunden zuteilen. Neben den Adressen verwaltet die IANA auch die Portnummern und die obersten Ebenen des Domain Name System.</p>
+
+<h3>Netzklassen</h3>
+<p>Ursprünglich war der IPv4-Adressraum in feste <strong>Klassen</strong> eingeteilt. Diese Netzklasse ergab sich allein aus dem ersten Byte und legte damit zugleich die Netzmaske fest.</p>
+<table>
+<tr><th>Klasse</th><th>Erstes Byte</th><th>Standardmaske</th><th>Verwendung</th></tr>
+<tr><td>A</td><td>1 – 126</td><td>255.0.0.0 (/8)</td><td>Sehr große Netze, rund 16,7 Millionen Hosts</td></tr>
+<tr><td>B</td><td>128 – 191</td><td>255.255.0.0 (/16)</td><td>Mittlere Netze, rund 65.000 Hosts</td></tr>
+<tr><td>C</td><td>192 – 223</td><td>255.255.255.0 (/24)</td><td>Kleine Netze, 254 nutzbare Hosts</td></tr>
+<tr><td>D</td><td>224 – 239</td><td>—</td><td>Multicast, keine Hostvergabe</td></tr>
+<tr><td>E</td><td>240 – 255</td><td>—</td><td>Für künftige Zwecke reserviert</td></tr>
+</table>
+<p>Der Bereich <strong>127.x.x.x</strong> ist vollständig für die Loopback-Adresse reserviert und gehört keiner nutzbaren Klasse an. Zu jeder Klasse existiert ein privater Bereich: 10.0.0.0/8 in Klasse A, 172.16.0.0/12 in Klasse B und 192.168.0.0/16 in Klasse C.</p>
+<div class="callout"><span class="tag">Prüfungsfalle</span>Die Klasseneinteilung ist seit Einführung von <strong>CIDR</strong> (Classless Inter-Domain Routing) praktisch abgelöst: Heute bestimmt die Präfixlänge die Netzgröße, nicht mehr das erste Byte. Trotzdem wird in Prüfungen regelmäßig nach der Klasse einer Adresse gefragt; dann zählt allein das erste Byte. Merken Sie sich die Lücke: <strong>127 gehört zu keiner nutzbaren Klasse</strong>, weil dieser Bereich der Loopback-Adresse vorbehalten ist, und Klasse B beginnt deshalb erst bei 128.</div>
+
+<h3>IPv4-Adressarten im Überblick</h3>
+<table>
+<tr><th>Art</th><th>Bereich</th><th>Zweck</th></tr>
+<tr><td>Öffentlich</td><td>alles außerhalb der Sonderbereiche</td><td>Im Internet routbar</td></tr>
+<tr><td>Privat</td><td>10.0.0.0/8, 172.16.0.0/12, 192.168.0.0/16</td><td>Interne Netze, nicht routbar (NAT nötig)</td></tr>
+<tr><td>Link-Local (APIPA)</td><td>169.254.0.0/16</td><td>Selbstvergabe, wenn kein DHCP antwortet</td></tr>
+<tr><td>Loopback</td><td>127.0.0.0/8</td><td>Der eigene Rechner (localhost)</td></tr>
+<tr><td>Limited Broadcast</td><td>255.255.255.255</td><td>An alle im eigenen Segment, wird nicht geroutet</td></tr>
+</table>
+<p>Die historischen Klassen A, B und C (erkennbar am ersten Oktett) sind in modernen Netzen weitgehend durch <strong>CIDR</strong> mit flexiblen Präfixlängen ersetzt, sie tauchen aber in Prüfungen weiter auf.</p>
+<h3>IPv6-Adressarten & Autokonfigurations-Ablauf</h3>
+<p><strong>Global Unicast</strong> (2000::/3) ist weltweit routbar, <strong>Link-Local</strong> (fe80::/10, praktisch als /64 genutzt) gilt nur im eigenen Segment und existiert auf jeder IPv6-Schnittstelle, <strong>Unique Local</strong> (fc00::/7) ist das Gegenstück zu privaten IPv4-Adressen, <strong>Multicast</strong> (ff00::/8) ersetzt den Broadcast, <strong>Anycast</strong> adressiert den jeweils nächstgelegenen von mehreren Anbietern derselben Adresse. Statt TTL heißt das Feld bei IPv6 <strong>Hop Limit</strong>.</p>
+<p>Der typische Ablauf beim Netzbeitritt: Das Gerät bildet seine Link-Local-Adresse, sendet eine <strong>Router Solicitation</strong>, der Router antwortet mit einem <strong>Router Advertisement</strong> (Präfix + Konfigurationshinweise). Je nach RA-Flags konfiguriert sich das Gerät per <strong>SLAAC</strong> selbst und/oder holt Details per <strong>DHCPv6</strong>. Die Nachbarauflösung übernimmt durchgehend <strong>NDP</strong> statt ARP.</p>
+
+<h3>Adressauflösung: ARP und NDP</h3>
+<p>Damit ein Frame im lokalen Netz zugestellt werden kann, muss zur bekannten IP-Adresse die passende MAC-Adresse gefunden werden. In IPv4 leistet das <strong>ARP</strong>. Der <strong>ARP-Request</strong> geht als <strong>Broadcast</strong> an alle im Segment und fragt sinngemäß, wer die gesuchte IP besitzt. Nur der betroffene Host antwortet, und zwar mit einem <strong>ARP-Reply</strong> als gezieltem <strong>Unicast</strong> zurück an den Fragenden. Gelernte Zuordnungen landen im <strong>ARP-Cache</strong>, einer Tabelle mit befristeten Einträgen, damit nicht bei jedem Frame neu gefragt werden muss.</p>
+<p>In IPv6 übernimmt das <strong>NDP</strong> diese Aufgabe und nutzt dafür ICMPv6-Nachrichten statt Broadcasts. Die <strong>Neighbor Solicitation</strong> fragt per Multicast nach der MAC-Adresse zu einer IPv6-Adresse, das <strong>Neighbor Advertisement</strong> liefert die Antwort. Vor der ersten Nutzung einer selbst gebildeten Adresse prüft ein Gerät mit der <strong>Duplicate Address Detection (DAD)</strong>, ob die Adresse im Netz bereits vergeben ist. Dazu sendet es eine Neighbor Solicitation auf die eigene geplante Adresse. Antwortet jemand, liegt eine Kollision vor und die Adresse wird nicht verwendet.</p>
+
+<div class="callout"><span class="tag">Prüfungsfalle</span>Die privaten Bereiche müssen sitzen: <strong>10.0.0.0/8</strong>, <strong>172.16.0.0/12</strong> und <strong>192.168.0.0/16</strong>. Beliebter Stolperstein ist der mittlere Bereich, der nur bis 172.31.255.255 reicht, denn 172.32.x.x ist bereits öffentlich. Bei IPv6 gilt: <strong>fe80::/10</strong> ist link-local und wird nicht geroutet, während <strong>2000::/3</strong> global routbar ist.</div>
+
+<div class="callout xref"><span class="tag">Verwandte Themen</span>
+Die Adressberechnung wird ausführlich unter <a href="/nachschlagen/subnetting/">Subnetting – Schritt für Schritt</a> behandelt.<br>
+Im <a href="/subnetting-trainer/">Subnetting Trainer</a> kann dieses Thema gezielt geübt werden. Zusätzlich steht dort eine begleitende Hilfestellung zur Verfügung.</div>
+</section>
+</div>
+<div class="seite-cta">
+  <p>Interaktiv mit Volltextsuche, Glossar-Bubbles und Übungsfragen lernen:</p>
+  <div class="seite-cta-knoepfe">
+    <a class="seite-knopf seite-knopf-haupt" href="/#r-ip">In der Lernplattform öffnen</a>
+    <a class="seite-knopf" href="/#fragen">Fragen üben</a>
+    <a class="seite-knopf" href="/glossar/">Glossar</a>
+  </div>
+</div>
+<nav class="seite-blaettern" aria-label="Weitere Kapitel">
+  <a class="sb-vor" href="/nachschlagen/tcp-ip-udp/"><span>Vorheriges Kapitel</span>TCP/IP &amp; UDP</a>
+  <a class="sb-nach" href="/nachschlagen/subnetting/"><span>Nächstes Kapitel</span>Subnetting</a>
+</nav>
+<section class="seite-feld" aria-labelledby="feld-titel">
+<h2 id="feld-titel">Mehr aus Netzwerke</h2>
+<div class="seite-pillen"><a class="topic-sub" href="/nachschlagen/osi-modell/">OSI-Modell</a><a class="topic-sub" href="/nachschlagen/tcp-ip-udp/">TCP/IP &amp; UDP</a><span class="topic-sub aktuell" aria-current="page">IPv4/IPv6</span><a class="topic-sub" href="/nachschlagen/subnetting/">Subnetting</a><a class="topic-sub" href="/nachschlagen/routing-switching/">Routing/Switching</a><a class="topic-sub" href="/nachschlagen/vlan/">VLAN</a><a class="topic-sub" href="/nachschlagen/wlan/">WLAN</a><a class="topic-sub" href="/nachschlagen/vpn-ipsec/">VPN/IPsec</a><a class="topic-sub" href="/nachschlagen/dns-dhcp/">DNS/DHCP</a><a class="topic-sub" href="/nachschlagen/ethernet/">Ethernet</a><a class="topic-sub" href="/nachschlagen/ports-sockets/">Ports</a><a class="topic-sub" href="/nachschlagen/header-ttl-traceroute/">Header/TTL</a><a class="topic-sub" href="/nachschlagen/multiplexing/">Multiplexing</a><a class="topic-sub" href="/nachschlagen/netzwerkausdehnung/">Netzausdehnung</a><a class="topic-sub" href="/nachschlagen/netzwerktopologien/">Topologien</a><a class="topic-sub" href="/nachschlagen/fddi/">FDDI</a><a class="topic-sub" href="/nachschlagen/voip/">VoIP</a><a class="topic-sub" href="/nachschlagen/api-rest-soap/">API/REST</a><a class="topic-sub" href="/nachschlagen/strukturierte-verkabelung/">Strukturierte Verkabelung</a><a class="topic-sub" href="/nachschlagen/kabel-medien-hardware/">Kabel/Hardware</a></div>
+</section>
+</main>
+<footer><div class="wrap">
+<p class="footer-lead">Layer 8 Academy ist eine kostenlose Lernplattform zur Vorbereitung auf die IHK-Abschlussprüfung Teil 1 der IT-Berufe. Sie umfasst ein Nachschlagewerk, ein Glossar, Übungsfragen im Multiple-Choice- und Karteikartenmodus, einen Subnetting-Trainer und Prüfungssimulationen.</p>
+<nav class="footer-nav" aria-label="Themenfelder">
+  <a href="/themen/netzwerke/">Netzwerke</a> · <a href="/themen/it-sicherheit/">IT-Sicherheit</a> · <a href="/themen/systeme-storage/">Systeme &amp; Storage</a> · <a href="/themen/software-grundlagen/">Software &amp; Grundlagen</a> · <a href="/themen/bwl-prozesse/">BWL &amp; Prozesse</a> · <a href="/nachschlagen/">Alle Kapitel</a> · <a href="/glossar/">Glossar</a>
+</nav>
+<div class="footer-copy">© 2026 boxberger.app · <a href="/impressum/" class="imprint-link">Impressum &amp; Datenschutz</a></div>
+</div></footer>
+</body>
+</html>

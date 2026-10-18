@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Netzwerktopologien – AP1 einfach erklärt | Layer 8 Academy</title>
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<meta name="description" content="Stern: Jedes Gerät hängt mit eigenem Kabel an einem zentralen Verteiler (Switch). Vorteile: Ausfall eines Endgeräts stört die anderen nicht, Fehler sind …">
+<meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+<meta name="theme-color" content="#0a0e12">
+<link rel="canonical" href="https://layer8academy.boxberger.app/nachschlagen/netzwerktopologien/">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Layer 8 Academy">
+<meta property="og:title" content="Netzwerktopologien – AP1 einfach erklärt | Layer 8 Academy">
+<meta property="og:description" content="Stern: Jedes Gerät hängt mit eigenem Kabel an einem zentralen Verteiler (Switch). Vorteile: Ausfall eines Endgeräts stört die anderen nicht, Fehler sind …">
+<meta property="og:url" content="https://layer8academy.boxberger.app/nachschlagen/netzwerktopologien/">
+<meta property="og:locale" content="de_DE">
+<meta name="twitter:card" content="summary">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+    {
+     "@type": "ListItem",
+     "position": 1,
+     "name": "Start",
+     "item": "https://layer8academy.boxberger.app/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 2,
+     "name": "Nachschlagen",
+     "item": "https://layer8academy.boxberger.app/nachschlagen/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 3,
+     "name": "Netzwerke",
+     "item": "https://layer8academy.boxberger.app/themen/netzwerke/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 4,
+     "name": "Topologien",
+     "item": "https://layer8academy.boxberger.app/nachschlagen/netzwerktopologien/"
+    }
+   ]
+  },
+  {
+   "@type": "LearningResource",
+   "name": "Netzwerktopologien",
+   "description": "Stern: Jedes Gerät hängt mit eigenem Kabel an einem zentralen Verteiler (Switch). Vorteile: Ausfall eines Endgeräts stört die anderen nicht, Fehler sind …",
+   "url": "https://layer8academy.boxberger.app/nachschlagen/netzwerktopologien/",
+   "inLanguage": "de-DE",
+   "isAccessibleForFree": true,
+   "learningResourceType": "Nachschlagewerk",
+   "educationalLevel": "Berufsausbildung",
+   "teaches": "Netzwerke",
+   "isPartOf": {
+    "@id": "https://layer8academy.boxberger.app/#website"
+   },
+   "author": {
+    "@type": "Person",
+    "name": "Alexander Boxberger-Adam",
+    "url": "https://boxberger.app/"
+   }
+  }
+ ]
+}
+</script>
+<script>
+  try {
+    var t = localStorage.getItem('l8a_theme');
+    if (t && t !== 'default') document.documentElement.setAttribute('data-theme', t);
+  } catch (e) {}
+</script>
+<link rel="stylesheet" href="/styles.css?v=20261018a">
+<link rel="stylesheet" href="/seiten.css?v=20261018a">
+</head>
+<body class="seite">
+<header class="seite-kopf">
+  <div class="wrap">
+    <a class="seite-logo" href="/" aria-label="Layer 8 Academy – zur Lernplattform"><span class="t-neint">Layer</span> <svg class="title-8" width="44" height="44" viewBox="0 0 120 120" aria-label="L8A" role="img"><path d="M60,60 C34,60 24,26 60,26 C96,26 86,60 60,60 Z" fill="none" stroke="#3ddc84" stroke-width="7" stroke-linecap="round"/><path d="M60,94 C86,94 96,60 60,60 C24,60 34,94 60,94 Z" fill="none" stroke="#22d3ee" stroke-width="7" stroke-linecap="round"/><line x1="18" y1="26" x2="18" y2="52" stroke="#22d3ee" stroke-width="7" stroke-linecap="round"/><line x1="18" y1="52" x2="30" y2="52" stroke="#22d3ee" stroke-width="7" stroke-linecap="round"/><path d="M102,68 L92,94 M102,68 L112,94 M95,86 L107,86" stroke="#3ddc84" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg> <span class="t-symb">Academy</span></a>
+    <nav class="seite-nav" aria-label="Hauptnavigation">
+      <a href="/nachschlagen/">Nachschlagen</a>
+      <a href="/glossar/">Glossar</a>
+      <a href="/#fragen">Fragen üben</a>
+      <a href="/subnetting-trainer/">Subnetting</a>
+      <a href="/ap1-simulator/">AP1-Simulator</a>
+      <a href="/osi-battle/">Diagnose-Arena</a>
+    </nav>
+  </div>
+</header>
+<main class="wrap seite-inhalt">
+<nav class="brotkrumen" aria-label="Brotkrumenpfad"><a href="/">Start</a><span class="bk-trenner" aria-hidden="true">›</span><a href="/nachschlagen/">Nachschlagen</a><span class="bk-trenner" aria-hidden="true">›</span><a href="/themen/netzwerke/">Netzwerke</a><span class="bk-trenner" aria-hidden="true">›</span><span aria-current="page">Topologien</span></nav>
+<h1 class="seite-h1">Netzwerktopologien</h1>
+<div class="view active" id="view-lesen">
+<section id="r-topo">
+<table>
+<tr><th>Topologie</th><th>Prinzip</th><th>Schwachstelle</th></tr>
+<tr><td>Stern</td><td>Alle an zentralem Switch. Heutiger Standard, einfache Fehlersuche.</td><td>Switch = Single Point of Failure. Hoher Kabelaufwand.</td></tr>
+<tr><td>Baum</td><td>Mehrere Sterne hierarchisch. Leicht erweiterbar.</td><td>Ausfall der Wurzel legt den Ast lahm.</td></tr>
+<tr><td>Ring</td><td>Jeder mit zwei Nachbarn, geschlossener Kreis. Kein Hub nötig.</td><td>Ein Bruch unterbricht den Ring (außer Doppelring).</td></tr>
+<tr><td>Bus</td><td>Gemeinsames Kabel, Terminatoren an den Enden. Geringster Kabelaufwand.</td><td>Kabelbruch legt alles lahm; Kollisionen.</td></tr>
+<tr><td>Masche</td><td>Jeder mit mehreren/allen verbunden. Höchste Ausfallsicherheit (Internet).</td><td>Extrem teuer in Verkabelung/Administration.</td></tr>
+</table>
+
+<h3>Die Topologien im Detail</h3>
+<p><strong>Stern:</strong> Jedes Gerät hängt mit eigenem Kabel an einem zentralen Verteiler (Switch). Vorteile: Ausfall eines Endgeräts stört die anderen nicht, Fehler sind schnell lokalisiert, einfach erweiterbar. Nachteile: hoher Kabelaufwand, der Switch ist Single Point of Failure. Beispiele: praktisch jedes Büro-LAN, Heimnetz am Router, Etagenverteilung im Bürogebäude.</p>
+<p><strong>Baum:</strong> Mehrere Sterne hierarchisch gekoppelt, ein übergeordneter Verteiler verbindet untergeordnete. Vorteile: sehr gut skalierbar, klare Struktur. Nachteil: fällt ein Knoten aus, ist der gesamte darunterliegende Ast offline. Beispiele: strukturierte Gebäudeverkabelung (Core–Etage–Arbeitsplatz), Campusnetze, klassische Konzernnetz-Hierarchien.</p>
+<p><strong>Ring:</strong> Jede Station ist mit genau zwei Nachbarn zu einem geschlossenen Kreis verbunden; gesendet wird reihum (Token-Verfahren). Vorteile: kein zentraler Verteiler nötig, kollisionsfrei. Nachteil: ein einziger Bruch unterbricht den Ring, außer beim Doppelring. Beispiele: FDDI-Backbones, Token Ring (historisch), Provider-Glasfaserringe in Städten.</p>
+<p><strong>Bus:</strong> Alle Geräte teilen sich eine durchgehende Leitung mit Terminatoren an den Enden. Vorteile: minimaler Kabelaufwand, einfacher Aufbau. Nachteile: Kabelbruch legt alles lahm, viele Teilnehmer erzeugen Kollisionen. Beispiele: frühes Koax-Ethernet (10BASE2), Feldbusse in der Industrie (z. B. CAN-Bus im Auto).</p>
+<p><strong>Masche:</strong> Jede Station ist mit mehreren oder allen anderen verbunden, viele alternative Wege. Vorteil: höchste Ausfallsicherheit, Verkehr wird umgeleitet. Nachteile: Verkabelung und Administration extrem aufwendig und teuer. Beispiele: das Internet-Backbone, redundante Rechenzentrums-Kopplungen, Mesh-WLAN-Systeme.</p>
+
+<div class="callout"><span class="tag">Prüfungsfalle</span>Gefragt wird nach der <strong>logischen</strong> Topologie, nicht nach dem Aussehen der Verkabelung. Ein Netz mit einem zentralen Switch ist physisch ein <strong>Stern</strong>, arbeitet logisch aber wie ein Bus, sofern es sich um einen Hub handelt. Zweite Falle: Beim Stern ist der zentrale Knoten der <em>Single Point of Failure</em> — fällt er aus, steht das gesamte Netz, während der Ausfall eines Endgeräts folgenlos bleibt.</div>
+
+<div class="callout xref"><span class="tag">Verwandte Themen</span><a href="/nachschlagen/netzwerkausdehnung/">Netzwerkausdehnung (BAN → GAN)</a> · <a href="/nachschlagen/ethernet/">Ethernet & Zugriffsverfahren</a> · <a href="/nachschlagen/strukturierte-verkabelung/">Strukturierte Verkabelung</a></div>
+</section>
+</div>
+<div class="seite-cta">
+  <p>Interaktiv mit Volltextsuche, Glossar-Bubbles und Übungsfragen lernen:</p>
+  <div class="seite-cta-knoepfe">
+    <a class="seite-knopf seite-knopf-haupt" href="/#r-topo">In der Lernplattform öffnen</a>
+    <a class="seite-knopf" href="/#fragen">Fragen üben</a>
+    <a class="seite-knopf" href="/glossar/">Glossar</a>
+  </div>
+</div>
+<nav class="seite-blaettern" aria-label="Weitere Kapitel">
+  <a class="sb-vor" href="/nachschlagen/netzwerkausdehnung/"><span>Vorheriges Kapitel</span>Netzausdehnung</a>
+  <a class="sb-nach" href="/nachschlagen/fddi/"><span>Nächstes Kapitel</span>FDDI</a>
+</nav>
+<section class="seite-feld" aria-labelledby="feld-titel">
+<h2 id="feld-titel">Mehr aus Netzwerke</h2>
+<div class="seite-pillen"><a class="topic-sub" href="/nachschlagen/osi-modell/">OSI-Modell</a><a class="topic-sub" href="/nachschlagen/tcp-ip-udp/">TCP/IP &amp; UDP</a><a class="topic-sub" href="/nachschlagen/ipv4-ipv6/">IPv4/IPv6</a><a class="topic-sub" href="/nachschlagen/subnetting/">Subnetting</a><a class="topic-sub" href="/nachschlagen/routing-switching/">Routing/Switching</a><a class="topic-sub" href="/nachschlagen/vlan/">VLAN</a><a class="topic-sub" href="/nachschlagen/wlan/">WLAN</a><a class="topic-sub" href="/nachschlagen/vpn-ipsec/">VPN/IPsec</a><a class="topic-sub" href="/nachschlagen/dns-dhcp/">DNS/DHCP</a><a class="topic-sub" href="/nachschlagen/ethernet/">Ethernet</a><a class="topic-sub" href="/nachschlagen/ports-sockets/">Ports</a><a class="topic-sub" href="/nachschlagen/header-ttl-traceroute/">Header/TTL</a><a class="topic-sub" href="/nachschlagen/multiplexing/">Multiplexing</a><a class="topic-sub" href="/nachschlagen/netzwerkausdehnung/">Netzausdehnung</a><span class="topic-sub aktuell" aria-current="page">Topologien</span><a class="topic-sub" href="/nachschlagen/fddi/">FDDI</a><a class="topic-sub" href="/nachschlagen/voip/">VoIP</a><a class="topic-sub" href="/nachschlagen/api-rest-soap/">API/REST</a><a class="topic-sub" href="/nachschlagen/strukturierte-verkabelung/">Strukturierte Verkabelung</a><a class="topic-sub" href="/nachschlagen/kabel-medien-hardware/">Kabel/Hardware</a></div>
+</section>
+</main>
+<footer><div class="wrap">
+<p class="footer-lead">Layer 8 Academy ist eine kostenlose Lernplattform zur Vorbereitung auf die IHK-Abschlussprüfung Teil 1 der IT-Berufe. Sie umfasst ein Nachschlagewerk, ein Glossar, Übungsfragen im Multiple-Choice- und Karteikartenmodus, einen Subnetting-Trainer und Prüfungssimulationen.</p>
+<nav class="footer-nav" aria-label="Themenfelder">
+  <a href="/themen/netzwerke/">Netzwerke</a> · <a href="/themen/it-sicherheit/">IT-Sicherheit</a> · <a href="/themen/systeme-storage/">Systeme &amp; Storage</a> · <a href="/themen/software-grundlagen/">Software &amp; Grundlagen</a> · <a href="/themen/bwl-prozesse/">BWL &amp; Prozesse</a> · <a href="/nachschlagen/">Alle Kapitel</a> · <a href="/glossar/">Glossar</a>
+</nav>
+<div class="footer-copy">© 2026 boxberger.app · <a href="/impressum/" class="imprint-link">Impressum &amp; Datenschutz</a></div>
+</div></footer>
+</body>
+</html>

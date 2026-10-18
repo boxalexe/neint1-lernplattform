@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VLAN-Segmentierung – AP1 einfach erklärt | Layer 8 Academy</title>
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<meta name="description" content="Warum segmentieren? Drei Kerngründe sprechen für die Aufteilung physischer Netze in VLANs: kleinere Broadcastdomänen (weniger Grundlast, Broadcast-Stürme …">
+<meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+<meta name="theme-color" content="#0a0e12">
+<link rel="canonical" href="https://layer8academy.boxberger.app/nachschlagen/vlan/">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Layer 8 Academy">
+<meta property="og:title" content="VLAN-Segmentierung – AP1 einfach erklärt | Layer 8 Academy">
+<meta property="og:description" content="Warum segmentieren? Drei Kerngründe sprechen für die Aufteilung physischer Netze in VLANs: kleinere Broadcastdomänen (weniger Grundlast, Broadcast-Stürme …">
+<meta property="og:url" content="https://layer8academy.boxberger.app/nachschlagen/vlan/">
+<meta property="og:locale" content="de_DE">
+<meta name="twitter:card" content="summary">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+    {
+     "@type": "ListItem",
+     "position": 1,
+     "name": "Start",
+     "item": "https://layer8academy.boxberger.app/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 2,
+     "name": "Nachschlagen",
+     "item": "https://layer8academy.boxberger.app/nachschlagen/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 3,
+     "name": "Netzwerke",
+     "item": "https://layer8academy.boxberger.app/themen/netzwerke/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 4,
+     "name": "VLAN",
+     "item": "https://layer8academy.boxberger.app/nachschlagen/vlan/"
+    }
+   ]
+  },
+  {
+   "@type": "LearningResource",
+   "name": "VLAN-Segmentierung",
+   "description": "Warum segmentieren? Drei Kerngründe sprechen für die Aufteilung physischer Netze in VLANs: kleinere Broadcastdomänen (weniger Grundlast, Broadcast-Stürme …",
+   "url": "https://layer8academy.boxberger.app/nachschlagen/vlan/",
+   "inLanguage": "de-DE",
+   "isAccessibleForFree": true,
+   "learningResourceType": "Nachschlagewerk",
+   "educationalLevel": "Berufsausbildung",
+   "teaches": "Netzwerke",
+   "isPartOf": {
+    "@id": "https://layer8academy.boxberger.app/#website"
+   },
+   "author": {
+    "@type": "Person",
+    "name": "Alexander Boxberger-Adam",
+    "url": "https://boxberger.app/"
+   }
+  }
+ ]
+}
+</script>
+<script>
+  try {
+    var t = localStorage.getItem('l8a_theme');
+    if (t && t !== 'default') document.documentElement.setAttribute('data-theme', t);
+  } catch (e) {}
+</script>
+<link rel="stylesheet" href="/styles.css?v=20261018a">
+<link rel="stylesheet" href="/seiten.css?v=20261018a">
+</head>
+<body class="seite">
+<header class="seite-kopf">
+  <div class="wrap">
+    <a class="seite-logo" href="/" aria-label="Layer 8 Academy – zur Lernplattform"><span class="t-neint">Layer</span> <svg class="title-8" width="44" height="44" viewBox="0 0 120 120" aria-label="L8A" role="img"><path d="M60,60 C34,60 24,26 60,26 C96,26 86,60 60,60 Z" fill="none" stroke="#3ddc84" stroke-width="7" stroke-linecap="round"/><path d="M60,94 C86,94 96,60 60,60 C24,60 34,94 60,94 Z" fill="none" stroke="#22d3ee" stroke-width="7" stroke-linecap="round"/><line x1="18" y1="26" x2="18" y2="52" stroke="#22d3ee" stroke-width="7" stroke-linecap="round"/><line x1="18" y1="52" x2="30" y2="52" stroke="#22d3ee" stroke-width="7" stroke-linecap="round"/><path d="M102,68 L92,94 M102,68 L112,94 M95,86 L107,86" stroke="#3ddc84" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg> <span class="t-symb">Academy</span></a>
+    <nav class="seite-nav" aria-label="Hauptnavigation">
+      <a href="/nachschlagen/">Nachschlagen</a>
+      <a href="/glossar/">Glossar</a>
+      <a href="/#fragen">Fragen üben</a>
+      <a href="/subnetting-trainer/">Subnetting</a>
+      <a href="/ap1-simulator/">AP1-Simulator</a>
+      <a href="/osi-battle/">Diagnose-Arena</a>
+    </nav>
+  </div>
+</header>
+<main class="wrap seite-inhalt">
+<nav class="brotkrumen" aria-label="Brotkrumenpfad"><a href="/">Start</a><span class="bk-trenner" aria-hidden="true">›</span><a href="/nachschlagen/">Nachschlagen</a><span class="bk-trenner" aria-hidden="true">›</span><a href="/themen/netzwerke/">Netzwerke</a><span class="bk-trenner" aria-hidden="true">›</span><span aria-current="page">VLAN</span></nav>
+<h1 class="seite-h1">VLAN-Segmentierung</h1>
+<div class="view active" id="view-lesen">
+<section id="r-vlan">
+<p><strong>Warum segmentieren?</strong> Drei Kerngründe sprechen für die Aufteilung physischer Netze in VLANs: <strong>kleinere Broadcastdomänen</strong> (weniger Grundlast, Broadcast-Stürme bleiben lokal begrenzt), <strong>logische Trennung</strong> von Abteilungen, Gerätegruppen oder Gästen ohne separate Hardware und Verkabelung, sowie <strong>feinere Sicherheits- und Zugriffskontrolle</strong>, der Verkehr zwischen Segmenten läuft über einen Router bzw. L3-Switch und kann dort gefiltert werden. Weitere Pluspunkte: Flexibilität bei Umzügen (logische statt physische Umverkabelung) und Priorisierung, z. B. ein eigenes Voice-VLAN für VoIP.</p>
+<table>
+<tr><th></th><th>Statische VLANs (portbasiert)</th><th>Dynamische VLANs (MAC-/regelbasiert)</th></tr>
+<tr><td>Zuordnung</td><td>fest am Switch-Port konfiguriert</td><td>anhand von Merkmalen (v. a. MAC-Adresse) aus einer zentralen Datenbank</td></tr>
+<tr><td>Vorteil</td><td>einfach, vorhersehbar, robust</td><td>Gerät behält sein VLAN an jedem Port, flexibel bei mobilen Endgeräten</td></tr>
+<tr><td>Nachteil</td><td>pflegeaufwändig: jeder Umzug erfordert Port-Umkonfiguration</td><td>komplexer, abhängig von zentraler Datenbank (z. B. RADIUS-gestützt)</td></tr>
+</table>
+<div class="callout"><span class="tag">Sicherheit</span><strong>Dynamische VLANs gehören nicht in sicherheitskritische Bereiche:</strong> Die Zuordnung stützt sich auf fälschbare Merkmale, per <strong>MAC-Spoofing</strong> kann sich ein Angreifer als berechtigtes Gerät ausgeben und in ein geschütztes VLAN eingeordnet werden. In sensiblen Zonen ist die statische, portgebundene Zuordnung robuster; noch stärker ist portbasierte Zugangskontrolle nach <strong>802.1X</strong> (Authentifizierung via EAP gegen einen RADIUS-Server, bevor der Port überhaupt Verkehr durchlässt).</div>
+<p><strong>Prinzipielle Grenzen der VLAN-Technik:</strong> Die Trennung ist rein <strong>logisch auf Layer 2</strong>, sie ersetzt keine physische Trennung. Kommunikation zwischen VLANs erfordert L3-Routing (zusätzliche Komplexität und ein möglicher Engpass), und die Isolation ist nur so gut wie die Konfiguration: Fehlkonfigurationen oder Angriffe wie <strong>VLAN-Hopping</strong> (Switch-Spoofing über automatisch ausgehandelte Trunks, Double Tagging über das native VLAN) können die Trennung aushebeln. Gegenmaßnahmen: ungenutzte Ports deaktivieren, kein automatisches Trunk-Aushandeln (<strong>DTP</strong> abschalten), natives VLAN nicht für Nutzdaten verwenden.</p>
+
+<div class="callout"><span class="tag">Prüfungsfalle</span>Ein <strong>Access-Port</strong> gehört zu genau einem VLAN und überträgt ungetaggt zum Endgerät. Ein <strong>Trunk-Port</strong> überträgt mehrere VLANs mit Kennzeichnung nach 802.1Q zwischen Switches. Wird ein Endgerät versehentlich an einen Trunk gehängt oder stimmen die <strong>nativen VLANs</strong> beider Trunk-Seiten nicht überein, landen Frames im falschen VLAN; genau das ist die typische Fehlerursache im Aufgabentext.</div>
+
+<h3>VLANs am Firmenbeispiel</h3>
+<p>In einem Betrieb arbeiten Verwaltung, Entwicklung und Gäste im selben Gebäude und hängen an denselben Switches. Ohne VLANs lägen alle Geräte in einer gemeinsamen <strong>Broadcastdomäne</strong>: Jeder Broadcast erreicht jeden, und ein Gastgerät könnte grundsätzlich die internen Systeme ansprechen.</p>
+<p>Mit drei VLANs ändert sich das, ohne dass ein einziges Kabel neu verlegt wird. Die Bereiche sind logisch getrennt, obwohl sie dieselbe Hardware nutzen. Ein Gast erreicht die Verwaltungssysteme nicht mehr, und Broadcasts bleiben auf das jeweilige VLAN beschränkt, was unnötigen Verkehr spart.</p>
+<div class="callout"><span class="tag">Merksatz</span><strong>Ein VLAN trennt logisch, obwohl die Hardware gemeinsam genutzt wird.</strong> Das ist der eigentliche wirtschaftliche Vorteil: Trennung ohne zusätzliche Switches und ohne zweite Verkabelung. Wird im Szenario eine Trennung „ohne Neuverkabelung" oder „mit vorhandener Hardware" verlangt, ist das VLAN die erwartete Antwort.</div>
+
+<p><strong>Wichtig beim Inter-VLAN-Routing:</strong> Zwei Geräte am selben Switch können nicht miteinander kommunizieren, wenn sie in verschiedenen VLANs liegen, denn der Switch arbeitet auf Schicht 2 und überschreitet diese Grenze nicht. Für den Austausch braucht es einen Router oder einen <strong>Layer-3-Switch</strong>. Genau deshalb ist ein VLAN erst dann eine Sicherheitsmaßnahme, wenn an dieser Übergangsstelle auch gefiltert wird.</p>
+
+<table>
+<tr><th>Zweck</th><th>Vorgehen</th></tr>
+<tr><td>Übergang kontrollieren</td><td>Verkehr zwischen VLANs ausschließlich über Router oder Layer-3-Switch führen und dort per <strong>ACL</strong> filtern</td></tr>
+<tr><td>Gäste isolieren</td><td>Gast-VLAN nur ins Internet lassen, kein Zugriff auf interne Netze</td></tr>
+<tr><td>Server schützen</td><td>Server-VLAN nur für berechtigte Quellen erreichbar machen</td></tr>
+<tr><td>Verwaltung trennen</td><td>Eigenes <strong>Management-VLAN</strong> für Switches, Access Points und Firewalls, erreichbar nur für Administratoren</td></tr>
+<tr><td>Unbefugte Geräte abwehren</td><td>Ungenutzte Ports abschalten und <strong>Port Security</strong> aktivieren, damit nicht jedes angesteckte Gerät ins Netz kommt</td></tr>
+<tr><td>Überblick behalten</td><td>Alle VLAN-Kennungen und Zuordnungen dokumentieren und regelmäßig prüfen</td></tr>
+</table>
+<div class="callout"><span class="tag">Prüfungsfalle</span>Ein VLAN allein ist <strong>keine</strong> Sicherheitsmaßnahme, sondern zunächst nur eine Trennung. Sicherheit entsteht erst durch das, was am Übergang passiert: Ohne Filterregeln am Router erreichen sich die VLANs weiterhin gegenseitig, nur eben über einen Umweg. Zweiter Punkt: Auch das <em>native VLAN</em> auf Trunk-Verbindungen sollte nicht für Nutzdaten verwendet werden, weil ungetaggte Frames dort sonst im falschen Bereich landen können.</div>
+
+<div class="callout xref"><span class="tag">Verwandte Themen</span><a href="/nachschlagen/wlan/">WLAN</a> · <a href="/nachschlagen/routing-switching/">Routing & Switching</a> · <a href="/nachschlagen/strukturierte-verkabelung/">Strukturierte Verkabelung</a></div>
+</section>
+</div>
+<div class="seite-cta">
+  <p>Interaktiv mit Volltextsuche, Glossar-Bubbles und Übungsfragen lernen:</p>
+  <div class="seite-cta-knoepfe">
+    <a class="seite-knopf seite-knopf-haupt" href="/#r-vlan">In der Lernplattform öffnen</a>
+    <a class="seite-knopf" href="/#fragen">Fragen üben</a>
+    <a class="seite-knopf" href="/glossar/">Glossar</a>
+  </div>
+</div>
+<nav class="seite-blaettern" aria-label="Weitere Kapitel">
+  <a class="sb-vor" href="/nachschlagen/routing-switching/"><span>Vorheriges Kapitel</span>Routing/Switching</a>
+  <a class="sb-nach" href="/nachschlagen/wlan/"><span>Nächstes Kapitel</span>WLAN</a>
+</nav>
+<section class="seite-feld" aria-labelledby="feld-titel">
+<h2 id="feld-titel">Mehr aus Netzwerke</h2>
+<div class="seite-pillen"><a class="topic-sub" href="/nachschlagen/osi-modell/">OSI-Modell</a><a class="topic-sub" href="/nachschlagen/tcp-ip-udp/">TCP/IP &amp; UDP</a><a class="topic-sub" href="/nachschlagen/ipv4-ipv6/">IPv4/IPv6</a><a class="topic-sub" href="/nachschlagen/subnetting/">Subnetting</a><a class="topic-sub" href="/nachschlagen/routing-switching/">Routing/Switching</a><span class="topic-sub aktuell" aria-current="page">VLAN</span><a class="topic-sub" href="/nachschlagen/wlan/">WLAN</a><a class="topic-sub" href="/nachschlagen/vpn-ipsec/">VPN/IPsec</a><a class="topic-sub" href="/nachschlagen/dns-dhcp/">DNS/DHCP</a><a class="topic-sub" href="/nachschlagen/ethernet/">Ethernet</a><a class="topic-sub" href="/nachschlagen/ports-sockets/">Ports</a><a class="topic-sub" href="/nachschlagen/header-ttl-traceroute/">Header/TTL</a><a class="topic-sub" href="/nachschlagen/multiplexing/">Multiplexing</a><a class="topic-sub" href="/nachschlagen/netzwerkausdehnung/">Netzausdehnung</a><a class="topic-sub" href="/nachschlagen/netzwerktopologien/">Topologien</a><a class="topic-sub" href="/nachschlagen/fddi/">FDDI</a><a class="topic-sub" href="/nachschlagen/voip/">VoIP</a><a class="topic-sub" href="/nachschlagen/api-rest-soap/">API/REST</a><a class="topic-sub" href="/nachschlagen/strukturierte-verkabelung/">Strukturierte Verkabelung</a><a class="topic-sub" href="/nachschlagen/kabel-medien-hardware/">Kabel/Hardware</a></div>
+</section>
+</main>
+<footer><div class="wrap">
+<p class="footer-lead">Layer 8 Academy ist eine kostenlose Lernplattform zur Vorbereitung auf die IHK-Abschlussprüfung Teil 1 der IT-Berufe. Sie umfasst ein Nachschlagewerk, ein Glossar, Übungsfragen im Multiple-Choice- und Karteikartenmodus, einen Subnetting-Trainer und Prüfungssimulationen.</p>
+<nav class="footer-nav" aria-label="Themenfelder">
+  <a href="/themen/netzwerke/">Netzwerke</a> · <a href="/themen/it-sicherheit/">IT-Sicherheit</a> · <a href="/themen/systeme-storage/">Systeme &amp; Storage</a> · <a href="/themen/software-grundlagen/">Software &amp; Grundlagen</a> · <a href="/themen/bwl-prozesse/">BWL &amp; Prozesse</a> · <a href="/nachschlagen/">Alle Kapitel</a> · <a href="/glossar/">Glossar</a>
+</nav>
+<div class="footer-copy">© 2026 boxberger.app · <a href="/impressum/" class="imprint-link">Impressum &amp; Datenschutz</a></div>
+</div></footer>
+</body>
+</html>

@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Zahlensysteme – AP1 einfach erklärt | Layer 8 Academy</title>
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<meta name="description" content="Der wichtigste Merksatz zuerst, weil er alles andere vereinfacht: Man muss im Grunde nur zwei Systeme wirklich beherrschen. Dezimal und Binär.">
+<meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+<meta name="theme-color" content="#0a0e12">
+<link rel="canonical" href="https://layer8academy.boxberger.app/nachschlagen/zahlensysteme/">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Layer 8 Academy">
+<meta property="og:title" content="Zahlensysteme – AP1 einfach erklärt | Layer 8 Academy">
+<meta property="og:description" content="Der wichtigste Merksatz zuerst, weil er alles andere vereinfacht: Man muss im Grunde nur zwei Systeme wirklich beherrschen. Dezimal und Binär.">
+<meta property="og:url" content="https://layer8academy.boxberger.app/nachschlagen/zahlensysteme/">
+<meta property="og:locale" content="de_DE">
+<meta name="twitter:card" content="summary">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+    {
+     "@type": "ListItem",
+     "position": 1,
+     "name": "Start",
+     "item": "https://layer8academy.boxberger.app/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 2,
+     "name": "Nachschlagen",
+     "item": "https://layer8academy.boxberger.app/nachschlagen/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 3,
+     "name": "Software & Grundlagen",
+     "item": "https://layer8academy.boxberger.app/themen/software-grundlagen/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 4,
+     "name": "Zahlensysteme",
+     "item": "https://layer8academy.boxberger.app/nachschlagen/zahlensysteme/"
+    }
+   ]
+  },
+  {
+   "@type": "LearningResource",
+   "name": "Zahlensysteme",
+   "description": "Der wichtigste Merksatz zuerst, weil er alles andere vereinfacht: Man muss im Grunde nur zwei Systeme wirklich beherrschen. Dezimal und Binär.",
+   "url": "https://layer8academy.boxberger.app/nachschlagen/zahlensysteme/",
+   "inLanguage": "de-DE",
+   "isAccessibleForFree": true,
+   "learningResourceType": "Nachschlagewerk",
+   "educationalLevel": "Berufsausbildung",
+   "teaches": "Software & Grundlagen",
+   "isPartOf": {
+    "@id": "https://layer8academy.boxberger.app/#website"
+   },
+   "author": {
+    "@type": "Person",
+    "name": "Alexander Boxberger-Adam",
+    "url": "https://boxberger.app/"
+   }
+  }
+ ]
+}
+</script>
+<script>
+  try {
+    var t = localStorage.getItem('l8a_theme');
+    if (t && t !== 'default') document.documentElement.setAttribute('data-theme', t);
+  } catch (e) {}
+</script>
+<link rel="stylesheet" href="/styles.css?v=20261018a">
+<link rel="stylesheet" href="/seiten.css?v=20261018a">
+</head>
+<body class="seite">
+<header class="seite-kopf">
+  <div class="wrap">
+    <a class="seite-logo" href="/" aria-label="Layer 8 Academy – zur Lernplattform"><span class="t-neint">Layer</span> <svg class="title-8" width="44" height="44" viewBox="0 0 120 120" aria-label="L8A" role="img"><path d="M60,60 C34,60 24,26 60,26 C96,26 86,60 60,60 Z" fill="none" stroke="#3ddc84" stroke-width="7" stroke-linecap="round"/><path d="M60,94 C86,94 96,60 60,60 C24,60 34,94 60,94 Z" fill="none" stroke="#22d3ee" stroke-width="7" stroke-linecap="round"/><line x1="18" y1="26" x2="18" y2="52" stroke="#22d3ee" stroke-width="7" stroke-linecap="round"/><line x1="18" y1="52" x2="30" y2="52" stroke="#22d3ee" stroke-width="7" stroke-linecap="round"/><path d="M102,68 L92,94 M102,68 L112,94 M95,86 L107,86" stroke="#3ddc84" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg> <span class="t-symb">Academy</span></a>
+    <nav class="seite-nav" aria-label="Hauptnavigation">
+      <a href="/nachschlagen/">Nachschlagen</a>
+      <a href="/glossar/">Glossar</a>
+      <a href="/#fragen">Fragen üben</a>
+      <a href="/subnetting-trainer/">Subnetting</a>
+      <a href="/ap1-simulator/">AP1-Simulator</a>
+      <a href="/osi-battle/">Diagnose-Arena</a>
+    </nav>
+  </div>
+</header>
+<main class="wrap seite-inhalt">
+<nav class="brotkrumen" aria-label="Brotkrumenpfad"><a href="/">Start</a><span class="bk-trenner" aria-hidden="true">›</span><a href="/nachschlagen/">Nachschlagen</a><span class="bk-trenner" aria-hidden="true">›</span><a href="/themen/software-grundlagen/">Software &amp; Grundlagen</a><span class="bk-trenner" aria-hidden="true">›</span><span aria-current="page">Zahlensysteme</span></nav>
+<h1 class="seite-h1">Zahlensysteme</h1>
+<div class="view active" id="view-lesen">
+<section id="r-zahlen">
+<h3>Schritt für Schritt: Wie man zwischen den Systemen umrechnet</h3>
+<p>Der wichtigste Merksatz zuerst, weil er alles andere vereinfacht: <strong>Man muss im Grunde nur zwei Systeme wirklich beherrschen. Dezimal und Binär.</strong> Hexadezimal und Oktal sind keine eigenständigen neuen Fähigkeiten. Beide sind nichts anderes als Binärzahlen, nur in kleine Blöcke aufgeteilt und nebeneinander geschrieben. Wer Binär versteht, kann Hex und Oktal fast geschenkt mitnehmen.</p>
+
+<h3>0.1 Binär, die Grundlage: nur Nullen und Einsen</h3>
+<p>Bevor es zu Hexadezimal geht, kurz das Fundament. Das Binärsystem kennt nur zwei Ziffern: <strong>0</strong> und <strong>1</strong>. Jede Stelle steht für eine Zweierpotenz, und von rechts nach links verdoppelt sich der Stellenwert: 1, 2, 4, 8, 16, 32, 64, 128. Eine 0 heißt „diese Wertigkeit zählt nicht mit", eine 1 heißt „diese Wertigkeit zählt mit".</p>
+<p>Man liest eine Binärzahl also nicht einfach ab, sondern rechnet sie zusammen: Man addiert alle Stellenwerte, an denen eine 1 steht. Beispiel für ein Oktett aus 8 Bit: <code>1010 0101</code> = 128 + 32 + 4 + 1 = 165. Sind alle acht Bits gesetzt (<code>1111 1111</code>), ergibt das 128 + 64 + 32 + 16 + 8 + 4 + 2 + 1 = 255, der höchste Wert eines Oktetts.</p>
+<p>Die Stelle ganz links mit dem höchsten Stellenwert (128) heißt <strong>MSB</strong> (Most Significant Bit, höchstwertiges Bit), die Stelle ganz rechts mit dem Wert 1 heißt <strong>LSB</strong> (Least Significant Bit, niederwertigstes Bit). Diese Begriffe tauchen immer wieder auf, wenn es um die Reihenfolge von Bits geht.</p>
+<p><strong>Rückweg Dezimal &rarr; Binär:</strong> Das Standardverfahren ist die wiederholte Division durch 2. Man teilt die Zahl immer wieder durch 2 und notiert jeweils den Rest (0 oder 1), bis 0 erreicht ist. Die Reste von unten nach oben gelesen ergeben die Binärzahl. Beispiel 165: 165 ÷ 2 = 82 Rest 1, 82 ÷ 2 = 41 Rest 0, 41 ÷ 2 = 20 Rest 1, 20 ÷ 2 = 10 Rest 0, 10 ÷ 2 = 5 Rest 0, 5 ÷ 2 = 2 Rest 1, 2 ÷ 2 = 1 Rest 0, 1 ÷ 2 = 0 Rest 1. Von unten nach oben: <code>1010 0101</code>. Kontrollrechnung über die Zweierpotenzen: 128 + 32 + 4 + 1 = 165, passt.</p>
+<p>Genau dieses Zusammenrechnen der Achterblöcke ist die Grundlage für IP-Adressen und Subnetzmasken. Ist das Prinzip klar, sind Hexadezimal und Oktal nur noch kompakte Schreibweisen derselben Bits.</p>
+
+<h3>1. Hexadezimal, einfach Binär in 4er-Blöcken</h3>
+<p>Jede einzelne Hex-Ziffer steht für genau 4 Bit (ein sogenanntes Nibble). Der Trick beim Umrechnen: Man wandelt <strong>jede Hex-Ziffer für sich</strong> in ihre 4-Bit-Binärform um, schreibt alle Blöcke einfach nebeneinander ab, und hat damit schon die komplette Binärzahl. Erst danach rechnet man diese eine lange Binärzahl ganz normal in Dezimal um.</p>
+
+<p><strong>Beispiel: Hex <code>3F12</code> in Dezimal umrechnen</strong></p>
+<div class="sn-step"><div class="sn-badge">1</div><div class="sn-step-body">Jede Ziffer einzeln in 4 Bit wandeln: <code>3</code> → <span class="sn-num">0011</span>, <code>F</code> → <span class="sn-num">1111</span>, <code>1</code> → <span class="sn-num">0001</span>, <code>2</code> → <span class="sn-num">0010</span></div></div>
+<div class="sn-step"><div class="sn-badge">2</div><div class="sn-step-body">Die vier Blöcke einfach nebeneinander abschreiben: <span class="sn-num">0011 1111 0001 0010</span>, das ist jetzt die vollständige Binärzahl.</div></div>
+<div class="sn-step"><div class="sn-badge">3</div><div class="sn-step-body">Diese Binärzahl ganz normal über die Bitwertigkeiten aufsummieren (nur die Einsen zählen): 8192+4096+2048+1024+512+256+16+2 = <span class="sn-num">16146</span></div></div>
+<p>Ergebnis: Hex <code>3F12</code> = Dezimal <strong>16146</strong>. Der einzige neue Schritt gegenüber reinem Binär-Rechnen war das Nebeneinanderschreiben der 4er-Blöcke, die eigentliche Rechnung am Ende ist dieselbe wie bei jeder anderen Binärzahl auch.</p>
+
+<h3>2. Oktal, dasselbe Prinzip, nur in 3er-Blöcken</h3>
+<p>Oktal funktioniert genau nach demselben Muster wie Hex, nur dass eine Oktalziffer nicht für ein ganzes Nibble (4 Bit) steht, sondern nur für <strong>3 Bit</strong> (manchmal Tribit genannt). Der Grund: Oktal hat die Basis 8, und 8 lässt sich mit genau 3 Bit vollständig abdecken (2³ = 8). Innerhalb eines solchen 3-Bit-Blocks zählt man deshalb nicht mit den großen Bitwertigkeiten 128-64-32…, sondern nur mit den drei kleinsten: <strong>4 – 2 – 1</strong>.</p>
+
+<p><strong>Einfaches Beispiel: Binär <code>101011100</code> in Oktal umrechnen</strong></p>
+<div class="sn-step"><div class="sn-badge">1</div><div class="sn-step-body">Die Binärzahl in 3er-Blöcke aufteilen: <span class="sn-num">101</span> <span class="sn-num">011</span> <span class="sn-num">100</span></div></div>
+<div class="sn-step"><div class="sn-badge">2</div><div class="sn-step-body">Jeden Block einzeln mit 4-2-1 abzählen (nur die gesetzten Einsen zusammenzählen): <span class="sn-num">101</span> → 4+1=<span class="sn-num">5</span>, <span class="sn-num">011</span> → 2+1=<span class="sn-num">3</span>, <span class="sn-num">100</span> → 4=<span class="sn-num">4</span></div></div>
+<div class="sn-step"><div class="sn-badge">3</div><div class="sn-step-body">Die drei Ergebnisse nebeneinander abschreiben: Oktal <span class="sn-num">534</span></div></div>
+
+<div class="callout"><span class="tag">Praktischer Zusammenhang</span>Wer schon eine Hex-Zahl in Binär gewandelt hat (wie im Beispiel oben), muss für Oktal <strong>nicht neu anfangen</strong>. Dieselbe Binärzahl lässt sich einfach anders aufteilen, statt in 4er-Blöcken (für Hex) eben in 3er-Blöcken (für Oktal). Aus <code>3F12</code> wurde oben die Binärzahl <code>0011111100010010</code> (16 Bit). Da 16 nicht glatt durch 3 teilbar ist, ergänzt man links so viele Nullen, bis es passt (hier 2 Nullen → 18 Bit): <code>000011111100010010</code>. In 3er-Blöcken aufgeteilt und je mit 4-2-1 abgezählt: <span class="sn-num">000 011 111 100 010 010</span> → <span class="sn-num">0 3 7 4 2 2</span> → Oktal <strong>37422</strong>. Zur Kontrolle: Auch <code>37422</code> (oktal) ergibt umgerechnet wieder <strong>16146</strong>, dieselbe Zahl wie beim Hex-Weg, nur anders geschrieben.</div>
+
+<h3>3. Der Rückweg: Eine große Dezimalzahl in Binär umrechnen</h3>
+<p>Für die andere Richtung, von Dezimal zurück nach Binär, gibt es einen einfachen, mechanischen Trick: <strong>immer wieder durch 2 teilen</strong>. Nach jeder Division schaut man nur auf eines: Bleibt eine Nachkommazahl übrig oder nicht?</p>
+<div class="callout"><span class="tag">Die Regel</span>Ergibt die Division eine <strong>Nachkommazahl</strong> (also endet sie auf „,5"), war die Ausgangszahl ungerade, dann notiert man eine <strong>1</strong>. Geht die Division <strong>glatt auf</strong> (keine Nachkommazahl), war sie gerade, dann notiert man eine <strong>0</strong>. Man rechnet dabei immer nur mit dem ganzzahligen Anteil weiter (die Nachkommazahl war ja bereits die notierte 1 und wird verworfen), bis am Ende die 0 erreicht ist.</div>
+
+<p><strong>Beispiel: Dezimal <code>345</code> in Binär umrechnen</strong></p>
+<div class="sn-step"><div class="sn-badge">1</div><div class="sn-step-body">345 ÷ 2 = 172,5 → Nachkommazahl vorhanden → <span class="sn-num">1</span> notieren, weiter mit 172</div></div>
+<div class="sn-step"><div class="sn-badge">2</div><div class="sn-step-body">172 ÷ 2 = 86,0 → keine Nachkommazahl → <span class="sn-num">0</span> notieren, weiter mit 86</div></div>
+<div class="sn-step"><div class="sn-badge">3</div><div class="sn-step-body">86 ÷ 2 = 43,0 → keine Nachkommazahl → <span class="sn-num">0</span> notieren, weiter mit 43</div></div>
+<div class="sn-step"><div class="sn-badge">4</div><div class="sn-step-body">43 ÷ 2 = 21,5 → Nachkommazahl vorhanden → <span class="sn-num">1</span> notieren, weiter mit 21</div></div>
+<div class="sn-step"><div class="sn-badge">5</div><div class="sn-step-body">21 ÷ 2 = 10,5 → Nachkommazahl vorhanden → <span class="sn-num">1</span> notieren, weiter mit 10</div></div>
+<div class="sn-step"><div class="sn-badge">6</div><div class="sn-step-body">10 ÷ 2 = 5,0 → keine Nachkommazahl → <span class="sn-num">0</span> notieren, weiter mit 5</div></div>
+<div class="sn-step"><div class="sn-badge">7</div><div class="sn-step-body">5 ÷ 2 = 2,5 → Nachkommazahl vorhanden → <span class="sn-num">1</span> notieren, weiter mit 2</div></div>
+<div class="sn-step"><div class="sn-badge">8</div><div class="sn-step-body">2 ÷ 2 = 1,0 → keine Nachkommazahl → <span class="sn-num">0</span> notieren, weiter mit 1</div></div>
+<div class="sn-step"><div class="sn-badge">9</div><div class="sn-step-body">1 ÷ 2 = 0,5 → Nachkommazahl vorhanden → <span class="sn-num">1</span> notieren, weiter mit 0 → <strong>Schluss, die 0 ist erreicht</strong></div></div>
+
+<div class="callout"><span class="tag">Wichtig: die Ableserichtung</span>Die notierten Ziffern stehen jetzt in der Reihenfolge, in der sie berechnet wurden: 1,0,0,1,1,0,1,0,1. Das ist <strong>nicht</strong> die fertige Binärzahl! Man muss sie <strong>von unten nach oben</strong> ablesen, also in der genau umgekehrten Reihenfolge, in der sie notiert wurden. Von unten nach oben gelesen ergibt sich: <span class="sn-op">101011001</span>. Das ist die fertige Binärzahl.</div>
+<p>Ergebnis: Dezimal <strong>345</strong> = Binär <strong class="sn-op">101011001</strong>. Die letzte notierte Ziffer (aus dem letzten Schritt, kurz vor der 0) wird beim Ablesen zur führenden, also ersten Ziffer der Binärzahl, die allererste notierte Ziffer landet ganz am Ende.</p>
+
+<table>
+<tr><th>System</th><th>Basis</th><th>Ziffern</th></tr>
+<tr><td>Dual (binär)</td><td>2</td><td>0, 1</td></tr>
+<tr><td>Oktal</td><td>8</td><td>0–7</td></tr>
+<tr><td>Dezimal</td><td>10</td><td>0–9</td></tr>
+<tr><td>Hexadezimal</td><td>16</td><td>0–9, A–F</td></tr>
+</table>
+<p><strong>Bitwertigkeiten im Byte:</strong> <code>128 64 32 16 8 4 2 1</code>. Ein Byte (8 Bit) fasst 256 Werte (0–255). Eine Hex-Ziffer entspricht genau 4 Bit (Nibble).</p>
+<table>
+<tr><th>System</th><th>Wert</th><th>Rechnung</th><th>Ergebnis</th></tr>
+<tr><td>Binär</td><td><code>1010</code></td><td>8 + 2</td><td><strong>10</strong></td></tr>
+<tr><td>Binär</td><td><code>1111</code></td><td>8 + 4 + 2 + 1</td><td><strong>15</strong></td></tr>
+<tr><td>Binär</td><td><code>11111111</code></td><td>128+64+32+16+8+4+2+1</td><td><strong>255</strong></td></tr>
+<tr><td>Hex</td><td><code>10</code></td><td>1×16 + 0</td><td><strong>16</strong></td></tr>
+<tr><td>Hex</td><td><code>1A</code></td><td>1×16 + 10</td><td><strong>26</strong></td></tr>
+<tr><td>Hex</td><td><code>FF</code></td><td>15×16 + 15</td><td><strong>255</strong></td></tr>
+</table>
+<p>Bei zweistelligen Hexzahlen zählt die <strong>linke Ziffer × 16</strong> plus die <strong>rechte Ziffer</strong>, genau wie bei Dezimalzahlen die Zehnerstelle × 10 plus die Einerstelle. Allgemein gilt die Stellenwertregel: Jede Stelle zählt mit ihrer Potenz von 16, von rechts nach links 16<sup>0</sup>, 16<sup>1</sup>, 16<sup>2</sup> und so weiter. 2F3 ist also 2 × 256 + 15 × 16 + 3 = 755.</p>
+<p><code>A</code>=10, <code>B</code>=11, <code>C</code>=12, <code>D</code>=13, <code>E</code>=14, <code>F</code>=15. Hex braucht für die Werte 10–15 eigene Buchstaben, weil eine einzelne Ziffernstelle sonst nicht ausreicht.</p>
+<p>Hexadezimal wird in der IT genutzt, weil es Bitgruppen kompakt darstellt und leicht in Binär umrechenbar ist.</p>
+
+<h3>Hex-Tabelle 0–F & Zweierkomplement</h3>
+<table>
+<tr><th>Dez</th><td>0</td><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td><td>8</td><td>9</td><td>10</td><td>11</td><td>12</td><td>13</td><td>14</td><td>15</td></tr>
+<tr><th>Hex</th><td>0</td><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td><td>8</td><td>9</td><td>A</td><td>B</td><td>C</td><td>D</td><td>E</td><td>F</td></tr>
+<tr><th>Binär</th><td>0000</td><td>0001</td><td>0010</td><td>0011</td><td>0100</td><td>0101</td><td>0110</td><td>0111</td><td>1000</td><td>1001</td><td>1010</td><td>1011</td><td>1100</td><td>1101</td><td>1110</td><td>1111</td></tr>
+</table>
+<p>Das <strong>Zweierkomplement</strong> stellt negative Zahlen dar: alle Bits invertieren, dann 1 addieren. Beispiel &minus;5 in 8 Bit: 5 = 0000 0101 &rarr; invertiert 1111 1010 &rarr; +1 = <code>1111 1011</code>. Das höchste Bit wirkt als Vorzeichen; 8 Bit decken damit &minus;128 bis +127 ab. Ein <strong>Overflow</strong> entsteht, wenn ein Ergebnis diesen Bereich verlässt (127 + 1 kippt nach &minus;128). <strong>Bitmasken</strong> blenden per UND-Verknüpfung gezielt Bits aus, genau das Prinzip der Subnetzmaske.</p>
+
+<div class="callout"><span class="tag">Prüfungsfalle</span>Beim <strong>Zweierkomplement</strong> wird das höchstwertige Bit als Vorzeichen gelesen: Eine 1 bedeutet eine negative Zahl. Zur Umwandlung alle Bits kippen und eins addieren. Zweite Falle bei Speichergrößen: <strong>kB, MB und GB rechnen mit 1000</strong>, <strong>KiB, MiB und GiB mit 1024</strong>. Steht in der Aufgabe die Einheit mit „i", muss mit 1024 gerechnet werden; genau daran scheitern viele Rechenaufgaben.</div>
+
+<div class="callout xref"><span class="tag">Verwandte Themen</span><a href="/nachschlagen/logische-verknuepfungen/">Logische Verknüpfungen</a> · <a href="/nachschlagen/speichergroessen-einheiten/">Speichergrößen &amp; Einheiten</a> · <a href="/nachschlagen/ipv4-ipv6/">IPv4 & IPv6</a> · <a href="/nachschlagen/subnetting/">Subnetting – Schritt für Schritt</a></div>
+</section>
+</div>
+<div class="seite-cta">
+  <p>Interaktiv mit Volltextsuche, Glossar-Bubbles und Übungsfragen lernen:</p>
+  <div class="seite-cta-knoepfe">
+    <a class="seite-knopf seite-knopf-haupt" href="/#r-zahlen">In der Lernplattform öffnen</a>
+    <a class="seite-knopf" href="/#fragen">Fragen üben</a>
+    <a class="seite-knopf" href="/glossar/">Glossar</a>
+  </div>
+</div>
+<nav class="seite-blaettern" aria-label="Weitere Kapitel">
+  <a class="sb-vor" href="/nachschlagen/oop-uml/"><span>Vorheriges Kapitel</span>OOP &amp; UML</a>
+  <a class="sb-nach" href="/nachschlagen/speichergroessen-einheiten/"><span>Nächstes Kapitel</span>Speichergrößen &amp; Einheiten</a>
+</nav>
+<section class="seite-feld" aria-labelledby="feld-titel">
+<h2 id="feld-titel">Mehr aus Software &amp; Grundlagen</h2>
+<div class="seite-pillen"><a class="topic-sub" href="/nachschlagen/sql-datenbanken/">SQL &amp; Datenbanken</a><a class="topic-sub" href="/nachschlagen/oop-uml/">OOP &amp; UML</a><span class="topic-sub aktuell" aria-current="page">Zahlensysteme</span><a class="topic-sub" href="/nachschlagen/speichergroessen-einheiten/">Speichergrößen &amp; Einheiten</a><a class="topic-sub" href="/nachschlagen/logische-verknuepfungen/">Logik/Gatter</a></div>
+</section>
+</main>
+<footer><div class="wrap">
+<p class="footer-lead">Layer 8 Academy ist eine kostenlose Lernplattform zur Vorbereitung auf die IHK-Abschlussprüfung Teil 1 der IT-Berufe. Sie umfasst ein Nachschlagewerk, ein Glossar, Übungsfragen im Multiple-Choice- und Karteikartenmodus, einen Subnetting-Trainer und Prüfungssimulationen.</p>
+<nav class="footer-nav" aria-label="Themenfelder">
+  <a href="/themen/netzwerke/">Netzwerke</a> · <a href="/themen/it-sicherheit/">IT-Sicherheit</a> · <a href="/themen/systeme-storage/">Systeme &amp; Storage</a> · <a href="/themen/software-grundlagen/">Software &amp; Grundlagen</a> · <a href="/themen/bwl-prozesse/">BWL &amp; Prozesse</a> · <a href="/nachschlagen/">Alle Kapitel</a> · <a href="/glossar/">Glossar</a>
+</nav>
+<div class="footer-copy">© 2026 boxberger.app · <a href="/impressum/" class="imprint-link">Impressum &amp; Datenschutz</a></div>
+</div></footer>
+</body>
+</html>

@@ -21404,17 +21404,28 @@ const READER_TOPICS = [
 
   themen.forEach(t => {
     const vorhanden = t.ids.filter(i => document.getElementById(i));
-    if(!vorhanden.length) return;
-    const btn = document.createElement('button');
-    btn.type = 'button';
-    btn.className = 'topic';
-    btn.dataset.topic = t.id;
+    // Die Blasen stehen als echte Links auf die Themenfeld-Seiten im HTML (für Suchmaschinen,
+    // tools/seiten-bauen.mjs). In der App klappen sie wie bisher die Unterthemen auf.
+    let btn = wrapEl.querySelector('.topic[data-topic="' + t.id + '"]');
+    if(!vorhanden.length){ if(btn) btn.remove(); return; }
+    if(btn){
+      btn.setAttribute('role', 'button');
+      btn.addEventListener('keydown', e => { if(e.key === ' '){ e.preventDefault(); btn.click(); } });
+    } else {
+      btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'topic';
+      btn.dataset.topic = t.id;
+      btn.textContent = t.titel;
+      wrapEl.appendChild(btn);
+    }
     btn.setAttribute('aria-expanded', 'false');
-    btn.textContent = t.titel;
-    btn.addEventListener('click', () => {
+    btn.addEventListener('click', e => {
+      // Strg/Cmd/Umschalt + Klick: die Themenseite wie bei jedem Link in neuem Tab bzw. Fenster
+      if(btn.tagName === 'A' && (e.ctrlKey || e.metaKey || e.shiftKey)) return;
+      e.preventDefault();
       if(offen === t.id){ schliessen(); } else { oeffnen(t, btn); }
     });
-    wrapEl.appendChild(btn);
   });
 
   // Sprung zu einem Unterthema: Auswahl danach wieder einsammeln
@@ -21549,10 +21560,21 @@ function teleportNachOben(){
 // Betrifft die Unterthemen der Themenblasen und die Verweise unter
 // "Verwandte Themen". Ohne das würden sie hart springen, während der Pfeil
 // unten rechts und die Suche den Übergang zeigen.
+// Links mit data-r (echte Adresse einer Kapitelseite, z. B. in der Fußzeile) springen in der App genauso,
+// links mit data-ansicht öffnen den Bereich; mit Strg/Cmd/Umschalt öffnet der Browser die Seite selbst.
 document.addEventListener('click', function(e){
-  const a = e.target.closest && e.target.closest('a[href^="#r-"]');
+  const a = e.target.closest && e.target.closest('a[href^="#r-"], a[data-r], a[data-ansicht]');
   if(!a) return;
-  const id = a.getAttribute('href').slice(1);
+  if((a.dataset.r || a.dataset.ansicht) && (e.ctrlKey || e.metaKey || e.shiftKey)) return;
+  if(a.dataset.ansicht){
+    const tab = document.querySelector('.tab[data-view="' + a.dataset.ansicht + '"]');
+    if(!tab) return;
+    e.preventDefault();
+    if(aktiveView() !== a.dataset.ansicht) tab.click();
+    teleportNachOben();
+    return;
+  }
+  const id = a.dataset.r || a.getAttribute('href').slice(1);
   const ziel = document.getElementById(id);
   if(!ziel) return;
   e.preventDefault();
@@ -22665,10 +22687,12 @@ renderLib(GLOSSAR_SORTED);
 })();
 
 // Beim Laden immer oben starten (ohne Animation), egal was der Browser cachen will.
-window.scrollTo(0, 0);
-window.addEventListener('load', () => { window.scrollTo(0, 0); });
+// Ausnahme: direkte Adresse eines Kapitels (/#r-…, Links von den Kapitelseiten), siehe initDirektadressen.
+const direktZiel = () => /^#r-[a-z0-9]+$/.test(location.hash) && !!document.getElementById(location.hash.slice(1));
+if(!direktZiel()) window.scrollTo(0, 0);
+window.addEventListener('load', () => { if(!direktZiel()) window.scrollTo(0, 0); });
 // pageshow greift auch beim Wiederherstellen aus dem Back-Forward-Cache (mobil häufig).
-window.addEventListener('pageshow', () => { window.scrollTo(0, 0); });
+window.addEventListener('pageshow', () => { if(!direktZiel()) window.scrollTo(0, 0); });
 
 // ---- Barrierefreiheit: Kontrast-Umschalter ----
 (function(){
@@ -22928,4 +22952,32 @@ window.addEventListener('pageshow', () => { window.scrollTo(0, 0); });
     }
   });
   document.addEventListener('click', (e) => { if(!wrap.contains(e.target)) close(); });
+})();
+
+// ---- Direkte Adressen in die App (Links von den Themen-, Kapitel- und Glossarseiten) ----
+// /#r-…: Kapitel im Nachschlagewerk, richtig unter der Menüleiste platziert und kurz hervorgehoben
+// /#fragen, /#glossar: Bereich öffnen · /#impressum: Impressum & Datenschutz zeigen
+(function initDirektadressen(){
+  const BEREICH = { '#fragen': 'quiz', '#glossar': 'lib' };
+  function folge(beimLaden){
+    const h = location.hash;
+    if(BEREICH[h]){
+      const tab = document.querySelector('.tab[data-view="' + BEREICH[h] + '"]');
+      if(tab && aktiveView() !== BEREICH[h]) tab.click();
+      window.scrollTo(0, 0);
+    } else if(h === '#impressum'){
+      const l = document.getElementById('imprintLink');
+      if(l) l.click();
+    } else if(beimLaden && /^#r-[a-z0-9]+$/.test(h)){
+      const el = document.getElementById(h.slice(1));
+      if(!el) return;
+      // Nach dem Aufbau (Glossar-Bubbles verändern die Höhe) noch einmal genau setzen
+      const setze = () => zielPlatzieren(el);
+      if(typeof window.requestAnimationFrame === 'function') window.requestAnimationFrame(setze); else setze();
+      window.addEventListener('load', setze, { once: true });
+      zielLeuchten(el);
+    }
+  }
+  folge(true);
+  window.addEventListener('hashchange', () => folge(false));
 })();

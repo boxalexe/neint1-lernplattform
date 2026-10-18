@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Subnetting – Schritt für Schritt | AP1 – Layer 8 Academy</title>
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<meta name="description" content="Jede IP-Adresse besteht aus zwei Teilen: einem Netzwerkanteil (welches Netz?) und einem Hostanteil (welches Gerät innerhalb des Netzes?).">
+<meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+<meta name="theme-color" content="#0a0e12">
+<link rel="canonical" href="https://layer8academy.boxberger.app/nachschlagen/subnetting/">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Layer 8 Academy">
+<meta property="og:title" content="Subnetting – Schritt für Schritt | AP1 – Layer 8 Academy">
+<meta property="og:description" content="Jede IP-Adresse besteht aus zwei Teilen: einem Netzwerkanteil (welches Netz?) und einem Hostanteil (welches Gerät innerhalb des Netzes?).">
+<meta property="og:url" content="https://layer8academy.boxberger.app/nachschlagen/subnetting/">
+<meta property="og:locale" content="de_DE">
+<meta name="twitter:card" content="summary">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+    {
+     "@type": "ListItem",
+     "position": 1,
+     "name": "Start",
+     "item": "https://layer8academy.boxberger.app/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 2,
+     "name": "Nachschlagen",
+     "item": "https://layer8academy.boxberger.app/nachschlagen/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 3,
+     "name": "Netzwerke",
+     "item": "https://layer8academy.boxberger.app/themen/netzwerke/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 4,
+     "name": "Subnetting",
+     "item": "https://layer8academy.boxberger.app/nachschlagen/subnetting/"
+    }
+   ]
+  },
+  {
+   "@type": "LearningResource",
+   "name": "Subnetting – Schritt für Schritt",
+   "description": "Jede IP-Adresse besteht aus zwei Teilen: einem Netzwerkanteil (welches Netz?) und einem Hostanteil (welches Gerät innerhalb des Netzes?).",
+   "url": "https://layer8academy.boxberger.app/nachschlagen/subnetting/",
+   "inLanguage": "de-DE",
+   "isAccessibleForFree": true,
+   "learningResourceType": "Nachschlagewerk",
+   "educationalLevel": "Berufsausbildung",
+   "teaches": "Netzwerke",
+   "isPartOf": {
+    "@id": "https://layer8academy.boxberger.app/#website"
+   },
+   "author": {
+    "@type": "Person",
+    "name": "Alexander Boxberger-Adam",
+    "url": "https://boxberger.app/"
+   }
+  }
+ ]
+}
+</script>
+<script>
+  try {
+    var t = localStorage.getItem('l8a_theme');
+    if (t && t !== 'default') document.documentElement.setAttribute('data-theme', t);
+  } catch (e) {}
+</script>
+<link rel="stylesheet" href="/styles.css?v=20261018a">
+<link rel="stylesheet" href="/seiten.css?v=20261018a">
+</head>
+<body class="seite">
+<header class="seite-kopf">
+  <div class="wrap">
+    <a class="seite-logo" href="/" aria-label="Layer 8 Academy – zur Lernplattform"><span class="t-neint">Layer</span> <svg class="title-8" width="44" height="44" viewBox="0 0 120 120" aria-label="L8A" role="img"><path d="M60,60 C34,60 24,26 60,26 C96,26 86,60 60,60 Z" fill="none" stroke="#3ddc84" stroke-width="7" stroke-linecap="round"/><path d="M60,94 C86,94 96,60 60,60 C24,60 34,94 60,94 Z" fill="none" stroke="#22d3ee" stroke-width="7" stroke-linecap="round"/><line x1="18" y1="26" x2="18" y2="52" stroke="#22d3ee" stroke-width="7" stroke-linecap="round"/><line x1="18" y1="52" x2="30" y2="52" stroke="#22d3ee" stroke-width="7" stroke-linecap="round"/><path d="M102,68 L92,94 M102,68 L112,94 M95,86 L107,86" stroke="#3ddc84" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg> <span class="t-symb">Academy</span></a>
+    <nav class="seite-nav" aria-label="Hauptnavigation">
+      <a href="/nachschlagen/">Nachschlagen</a>
+      <a href="/glossar/">Glossar</a>
+      <a href="/#fragen">Fragen üben</a>
+      <a href="/subnetting-trainer/">Subnetting</a>
+      <a href="/ap1-simulator/">AP1-Simulator</a>
+      <a href="/osi-battle/">Diagnose-Arena</a>
+    </nav>
+  </div>
+</header>
+<main class="wrap seite-inhalt">
+<nav class="brotkrumen" aria-label="Brotkrumenpfad"><a href="/">Start</a><span class="bk-trenner" aria-hidden="true">›</span><a href="/nachschlagen/">Nachschlagen</a><span class="bk-trenner" aria-hidden="true">›</span><a href="/themen/netzwerke/">Netzwerke</a><span class="bk-trenner" aria-hidden="true">›</span><span aria-current="page">Subnetting</span></nav>
+<h1 class="seite-h1">Subnetting – Schritt für Schritt</h1>
+<div class="view active" id="view-lesen">
+<section id="r-subnetting">
+<h3>1. Was Subnetting überhaupt macht</h3>
+<p>Jede IP-Adresse besteht aus zwei Teilen: einem <strong>Netzwerkanteil</strong> (welches Netz?) und einem <strong>Hostanteil</strong> (welches Gerät innerhalb des Netzes?). Die <strong>Subnetzmaske</strong> legt fest, wo genau die Grenze zwischen beiden Teilen verläuft.</p>
+<p><strong>Subnetting</strong> bedeutet: ein großes Netz wird in mehrere kleinere Netze aufgeteilt, indem diese Grenze verschoben wird. Der Grund dafür ist meist einer von drei: kleinere <strong>Broadcastdomänen</strong> (weniger Störverkehr), keine Verschwendung von Adressen, oder eine saubere Trennung von Abteilungen, Standorten oder Gerätegruppen.</p>
+
+<h3>2. Die Subnetzmaske verstehen</h3>
+<p>Die Maske ist genau wie die IP-Adresse 32 Bit lang. Sie besteht immer aus einer Folge von <strong>1-Bits</strong>, gefolgt von einer Folge von <strong>0-Bits</strong>, nie gemischt. Eine 1 bedeutet „dieses Bit gehört zum Netzwerkanteil", eine 0 bedeutet „dieses Bit gehört zum Hostanteil".</p>
+<p>Beispiel: Die Maske <code>255.255.255.0</code> sieht binär so aus: <code>11111111.11111111.11111111.00000000</code>. Die ersten 24 Bit sind 1, das ist der Netzanteil. Die letzten 8 Bit sind 0, das ist der Hostanteil.</p>
+<p>Die <strong>CIDR-Schreibweise</strong> (z. B. <code>/24</code>) ist nichts anderes als die Anzahl der 1-Bits in der Maske durchgezählt. <code>/24</code> und <code>255.255.255.0</code> sagen exakt dasselbe, nur in zwei verschiedenen Schreibweisen.</p>
+
+<h3>3. Die Grundidee: Bits leihen</h3>
+<p>Um aus einem Netz mehrere kleinere zu machen, „leiht" man sich Bits vom Hostanteil und gibt sie dem Netzanteil dazu. Der wichtige Merksatz dazu: <strong>jedes geliehene Bit verdoppelt die Anzahl der Subnetze, und halbiert gleichzeitig die Anzahl der Adressen, die in jedem einzelnen Subnetz übrig bleiben.</strong></p>
+<table>
+<tr><th>Geliehene Bits</th><th>Anzahl Subnetze</th><th>Verbleibende Hostbits (Beispiel ab /24)</th></tr>
+<tr><td>1 Bit</td><td>2 Subnetze</td><td>7 Hostbits übrig</td></tr>
+<tr><td>2 Bit</td><td>4 Subnetze</td><td>6 Hostbits übrig</td></tr>
+<tr><td>3 Bit</td><td>8 Subnetze</td><td>5 Hostbits übrig</td></tr>
+</table>
+<p>Das Muster: Mit jedem weiteren geliehenen Bit verdoppelt sich die linke Spalte, während die rechte Spalte um 1 sinkt. Genau dieses Muster steckt hinter der Formel im nächsten Schritt.</p>
+
+<h3>4. Die Formeln (jetzt, als Werkzeug, nicht als Einstieg)</h3>
+<p>Sobald das Prinzip aus Schritt 3 sitzt, lässt sich das Verdoppeln/Halbieren als Formel schreiben:</p>
+<div class="callout"><span class="tag">Formeln</span>Anzahl Subnetze = <span class="sn-op">2</span><sup>geliehene Bits</sup><br>Nutzbare Hosts je Subnetz = <span class="sn-op">2</span><sup>verbleibende Hostbits</sup> <span class="sn-op">−</span> <span class="sn-num">2</span></div>
+<p>Das <strong>−2</strong> in der zweiten Formel ist keine willkürliche Korrektur, sondern hat einen konkreten Grund: Jedes Subnetz braucht selbst eine <strong>Netzadresse</strong> (die allererste Adresse, identifiziert das Subnetz als Ganzes, kein Gerät darf sie tragen) und eine <strong>Broadcastadresse</strong> (die allerletzte Adresse, steht für „alle Geräte in diesem Subnetz gleichzeitig"). Beide sind für einzelne Geräte nicht nutzbar, daher werden sie von der Gesamtzahl abgezogen.</p>
+
+<h3>5. Praxisbeispiel. Schritt für Schritt durchgerechnet</h3>
+<p><strong>Aufgabe:</strong> Gegeben ist das Netz <code>192.168.1.0/24</code>. Gesucht sind mindestens 4 Subnetze. Wie sehen die neue Maske und die einzelnen Subnetze aus?</p>
+
+<div class="sn-step"><div class="sn-badge">1</div><div class="sn-step-body">Wie viele Subnetze werden gebraucht? → <span class="sn-num">4</span></div></div>
+<div class="sn-step"><div class="sn-badge">2</div><div class="sn-step-body">Wie viele Bits muss ich leihen, damit 2<sup>Bits</sup> mindestens 4 ergibt? 2<sup>2</sup> = <span class="sn-num">4</span> passt exakt → <span class="sn-num">2 Bit</span> leihen.</div></div>
+<div class="sn-step"><div class="sn-badge">3</div><div class="sn-step-body">Neue Präfixlänge = altes Präfix + geliehene Bits = 24 <span class="sn-op">+</span> 2 = <span class="sn-num">/26</span></div></div>
+<div class="sn-step"><div class="sn-badge">4</div><div class="sn-step-body">Die neue Maske im letzten Oktett: 2 zusätzliche 1-Bits ergeben <code>11000000</code> = <span class="sn-num">192</span>. Die volle Maske lautet <code>255.255.255.192</code>.</div></div>
+<div class="sn-step"><div class="sn-badge">5</div><div class="sn-step-body">Die <strong>Blockgröße</strong> (der Abstand zwischen den Subnetzen) ist 256 <span class="sn-op">−</span> 192 = <span class="sn-num">64</span>.</div></div>
+<div class="sn-step"><div class="sn-badge">6</div><div class="sn-step-body">Ab der ursprünglichen Netzadresse in <span class="sn-num">64er</span>-Schritten hochzählen, das ergibt alle vier Subnetze.</div></div>
+
+<table>
+<tr><th>Subnetz</th><th>Netzadresse</th><th>Erste nutzbare Adresse</th><th>Letzte nutzbare Adresse</th><th>Broadcastadresse</th></tr>
+<tr><td>1</td><td>192.168.1.0</td><td>192.168.1.1</td><td>192.168.1.62</td><td>192.168.1.63</td></tr>
+<tr><td>2</td><td>192.168.1.64</td><td>192.168.1.65</td><td>192.168.1.126</td><td>192.168.1.127</td></tr>
+<tr><td>3</td><td>192.168.1.128</td><td>192.168.1.129</td><td>192.168.1.190</td><td>192.168.1.191</td></tr>
+<tr><td>4</td><td>192.168.1.192</td><td>192.168.1.193</td><td>192.168.1.254</td><td>192.168.1.255</td></tr>
+</table>
+<p>Zur Kontrolle mit der Formel aus Schritt 4: 6 verbleibende Hostbits ergeben 2<sup>6</sup> − 2 = <strong>62 nutzbare Adressen</strong> je Subnetz, genau die Differenz zwischen erster und letzter nutzbarer Adresse in jeder Zeile oben.</p>
+
+<h3>6. Der Schnelltrick für die Prüfung</h3>
+<div class="callout"><span class="tag">Rechenweg über die Blockanzahl</span>1. Blockgröße = 256 − Maskenwert im „interessanten" Oktett (dem Oktett, das weder 0 noch 255 ist).<br>2. Ab der Netzadresse in Blockgröße-Schritten hochzählen → jede Zahl ist die nächste Subnetz-Adresse.<br>3. In jedem Subnetz gilt: erste Adresse = Netzadresse (nicht nutzbar), letzte Adresse = Broadcast (nicht nutzbar), alles dazwischen ist vergebbar.</div>
+
+<h3>7. Referenztabelle, das Cheat-Sheet</h3>
+<p>Diese Tabelle deckt die gängigen Prüfungsfälle ab, ausgehend von einem ursprünglichen <code>/24</code>-Netz. Cyan markiert die Präfixlänge (die „Frage"), Grün die daraus berechneten Werte (die „Antwort").</p>
+<table class="sn-cheat">
+<tr><th>Präfix</th><th>Maske (letztes Oktett)</th><th>Hostbits</th><th>Nutzbare Hosts</th><th>Subnetze aus /24</th></tr>
+<tr><td>/24</td><td>0 → 255.255.255.0</td><td>8</td><td>254</td><td>1 (Ausgangsnetz)</td></tr>
+<tr><td>/25</td><td>128 → 255.255.255.128</td><td>7</td><td>126</td><td>2</td></tr>
+<tr><td>/26</td><td>192 → 255.255.255.192</td><td>6</td><td>62</td><td>4</td></tr>
+<tr><td>/27</td><td>224 → 255.255.255.224</td><td>5</td><td>30</td><td>8</td></tr>
+<tr><td>/28</td><td>240 → 255.255.255.240</td><td>4</td><td>14</td><td>16</td></tr>
+<tr><td>/29</td><td>248 → 255.255.255.248</td><td>3</td><td>6</td><td>32</td></tr>
+<tr><td>/30</td><td>252 → 255.255.255.252</td><td>2</td><td>2</td><td>64</td></tr>
+</table>
+<div class="callout"><span class="tag">Sonderfälle</span><strong>/31:</strong> 0 nutzbare Adressen nach der Standardformel, wird aber gezielt für reine Punkt-zu-Punkt-Verbindungen genutzt (z. B. zwischen zwei Routern), bei denen beide der zwei Adressen als Hosts zählen, ohne separate Netz-/Broadcastadresse (RFC 3021). <strong>/32:</strong> eine einzelne, exakte Host-Adresse, typisch für Routen zu einem ganz bestimmten Einzelgerät.</div>
+
+<h3>8. IPv6-Subnetting</h3>
+<p>Bei IPv6 gilt dieselbe Grundlogik wie bei IPv4, pro geliehenem Bit verdoppelt sich die Anzahl der Subnetze, aber die Praxis sieht anders aus: Der Adressraum ist so riesig, dass niemand Adressen sparen muss. IPv6-Subnetting ist eine reine <strong>Organisationsfrage</strong>, keine Sparfrage.</p>
+<p>Eine IPv6-Adresse hat 128 Bit, geschrieben als 8 Blöcke zu je 16 Bit (Hex). In der Praxis bekommt praktisch jedes Endgeräte-Netz einen <strong>/64</strong>-Präfix, hier wird, anders als bei IPv4, so gut wie nie bis auf einzelne Host-Bits heruntergerechnet, weil ein einzelnes /64 bereits 2<sup>64</sup> Adressen bereithält.</p>
+<p>Subnetting bedeutet bei IPv6 also meist: Ein Provider vergibt z. B. ein <strong>/48</strong>-Präfix. Der Bereich zwischen <code>/48</code> und <code>/64</code>, also 16 Bit, steht komplett zur freien Aufteilung in einzelne /64-Subnetze zur Verfügung.</p>
+<div class="callout"><span class="tag">Formel bleibt gleich</span>Mögliche /64-Subnetze aus einem /48 = 2<sup>64−48</sup> = 2<sup>16</sup> = <strong>65 536 Subnetze</strong>, für praktisch jede Organisation mehr als genug.</div>
+<p><strong>Praktisches Beispiel:</strong> Aus dem zugeteilten Präfix <code>2001:db8:abcd::/48</code> entstehen die einzelnen /64-Subnetze, indem man den passenden Hex-Block zwischen Präfix und Interface-Teil einfach hochzählt:</p>
+<table>
+<tr><th>Subnetz-Nr.</th><th>Vollständiges Präfix</th></tr>
+<tr><td>0</td><td>2001:db8:abcd:0000::/64</td></tr>
+<tr><td>1</td><td>2001:db8:abcd:0001::/64</td></tr>
+<tr><td>2</td><td>2001:db8:abcd:0002::/64</td></tr>
+<tr><td>…</td><td>…</td></tr>
+<tr><td>65535</td><td>2001:db8:abcd:ffff::/64</td></tr>
+</table>
+<table>
+<tr><th>Zugeteiltes Präfix</th><th>Bits bis /64</th><th>Mögliche /64-Subnetze</th></tr>
+<tr><td>/48 (typische Standortzuteilung)</td><td>16</td><td>2¹⁶ = 65 536</td></tr>
+<tr><td>/56 (kleinere Zuteilung, z. B. Heimanschluss)</td><td>8</td><td>2⁸ = 256</td></tr>
+<tr><td>/60</td><td>4</td><td>2⁴ = 16</td></tr>
+</table>
+<div class="callout"><span class="tag">Warum kein „−2" bei IPv6?</span>IPv6 kennt kein Broadcast mehr, nur <strong>Multicast</strong>. Die einzige reservierte Sonderadresse je Subnetz ist die Subnet-Router-Anycast-Adresse, sie schränkt die praktisch verfügbare Hostzahl aber nicht relevant ein, da ein /64 ohnehin 2<sup>64</sup> Adressen bereitstellt. Die „minus 2"-Rechnung aus dem IPv4-Teil entfällt bei IPv6 dadurch komplett.</div>
+
+<div class="callout"><span class="tag">Prüfungsfalle</span>Die häufigsten Fehler: <strong>Netz- und Broadcastadresse werden mitgezählt</strong>, obwohl sie nicht an Hosts vergeben werden dürfen — deshalb 2<sup>n</sup> minus 2. Und bei der Frage nach der Zahl der <em>Subnetze</em> wird mit den geliehenen Bits gerechnet, bei der Frage nach den <em>Hosts</em> mit den verbleibenden Hostbits. Lesen Sie die Aufgabe genau: „wie viele Teilnetze" und „wie viele Hosts je Teilnetz" verlangen zwei verschiedene Rechnungen.</div>
+
+<div class="callout xref"><span class="tag">Verwandte Themen</span>
+Die Grundlagen zu Adressaufbau und Adressarten stehen unter <a href="/nachschlagen/ipv4-ipv6/">IPv4 &amp; IPv6</a>.<br>
+Im <a href="/subnetting-trainer/">Subnetting Trainer</a> kann dieses Thema gezielt geübt werden. Zusätzlich steht dort eine begleitende Hilfestellung zur Verfügung.</div>
+</section>
+</div>
+<div class="seite-cta">
+  <p>Interaktiv mit Volltextsuche, Glossar-Bubbles und Übungsfragen lernen:</p>
+  <div class="seite-cta-knoepfe">
+    <a class="seite-knopf seite-knopf-haupt" href="/#r-subnetting">In der Lernplattform öffnen</a>
+    <a class="seite-knopf" href="/#fragen">Fragen üben</a>
+    <a class="seite-knopf" href="/glossar/">Glossar</a>
+  </div>
+</div>
+<nav class="seite-blaettern" aria-label="Weitere Kapitel">
+  <a class="sb-vor" href="/nachschlagen/ipv4-ipv6/"><span>Vorheriges Kapitel</span>IPv4/IPv6</a>
+  <a class="sb-nach" href="/nachschlagen/routing-switching/"><span>Nächstes Kapitel</span>Routing/Switching</a>
+</nav>
+<section class="seite-feld" aria-labelledby="feld-titel">
+<h2 id="feld-titel">Mehr aus Netzwerke</h2>
+<div class="seite-pillen"><a class="topic-sub" href="/nachschlagen/osi-modell/">OSI-Modell</a><a class="topic-sub" href="/nachschlagen/tcp-ip-udp/">TCP/IP &amp; UDP</a><a class="topic-sub" href="/nachschlagen/ipv4-ipv6/">IPv4/IPv6</a><span class="topic-sub aktuell" aria-current="page">Subnetting</span><a class="topic-sub" href="/nachschlagen/routing-switching/">Routing/Switching</a><a class="topic-sub" href="/nachschlagen/vlan/">VLAN</a><a class="topic-sub" href="/nachschlagen/wlan/">WLAN</a><a class="topic-sub" href="/nachschlagen/vpn-ipsec/">VPN/IPsec</a><a class="topic-sub" href="/nachschlagen/dns-dhcp/">DNS/DHCP</a><a class="topic-sub" href="/nachschlagen/ethernet/">Ethernet</a><a class="topic-sub" href="/nachschlagen/ports-sockets/">Ports</a><a class="topic-sub" href="/nachschlagen/header-ttl-traceroute/">Header/TTL</a><a class="topic-sub" href="/nachschlagen/multiplexing/">Multiplexing</a><a class="topic-sub" href="/nachschlagen/netzwerkausdehnung/">Netzausdehnung</a><a class="topic-sub" href="/nachschlagen/netzwerktopologien/">Topologien</a><a class="topic-sub" href="/nachschlagen/fddi/">FDDI</a><a class="topic-sub" href="/nachschlagen/voip/">VoIP</a><a class="topic-sub" href="/nachschlagen/api-rest-soap/">API/REST</a><a class="topic-sub" href="/nachschlagen/strukturierte-verkabelung/">Strukturierte Verkabelung</a><a class="topic-sub" href="/nachschlagen/kabel-medien-hardware/">Kabel/Hardware</a></div>
+</section>
+</main>
+<footer><div class="wrap">
+<p class="footer-lead">Layer 8 Academy ist eine kostenlose Lernplattform zur Vorbereitung auf die IHK-Abschlussprüfung Teil 1 der IT-Berufe. Sie umfasst ein Nachschlagewerk, ein Glossar, Übungsfragen im Multiple-Choice- und Karteikartenmodus, einen Subnetting-Trainer und Prüfungssimulationen.</p>
+<nav class="footer-nav" aria-label="Themenfelder">
+  <a href="/themen/netzwerke/">Netzwerke</a> · <a href="/themen/it-sicherheit/">IT-Sicherheit</a> · <a href="/themen/systeme-storage/">Systeme &amp; Storage</a> · <a href="/themen/software-grundlagen/">Software &amp; Grundlagen</a> · <a href="/themen/bwl-prozesse/">BWL &amp; Prozesse</a> · <a href="/nachschlagen/">Alle Kapitel</a> · <a href="/glossar/">Glossar</a>
+</nav>
+<div class="footer-copy">© 2026 boxberger.app · <a href="/impressum/" class="imprint-link">Impressum &amp; Datenschutz</a></div>
+</div></footer>
+</body>
+</html>

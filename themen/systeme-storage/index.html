@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Systeme &amp; Storage für die AP1: alle Kapitel | Layer 8 Academy</title>
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<meta name="description" content="Systeme und Speicher für die AP1: Virtualisierung und Hypervisor, Storage-Systeme, Backup und RAID, IT-Hardware und Energie sowie Diagnose und Fehlersuche.">
+<meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+<meta name="theme-color" content="#0a0e12">
+<link rel="canonical" href="https://layer8academy.boxberger.app/themen/systeme-storage/">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Layer 8 Academy">
+<meta property="og:title" content="Systeme &amp; Storage für die AP1: alle Kapitel | Layer 8 Academy">
+<meta property="og:description" content="Systeme und Speicher für die AP1: Virtualisierung und Hypervisor, Storage-Systeme, Backup und RAID, IT-Hardware und Energie sowie Diagnose und Fehlersuche.">
+<meta property="og:url" content="https://layer8academy.boxberger.app/themen/systeme-storage/">
+<meta property="og:locale" content="de_DE">
+<meta name="twitter:card" content="summary">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+    {
+     "@type": "ListItem",
+     "position": 1,
+     "name": "Start",
+     "item": "https://layer8academy.boxberger.app/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 2,
+     "name": "Nachschlagen",
+     "item": "https://layer8academy.boxberger.app/nachschlagen/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 3,
+     "name": "Systeme & Storage",
+     "item": "https://layer8academy.boxberger.app/themen/systeme-storage/"
+    }
+   ]
+  },
+  {
+   "@type": "LearningResource",
+   "name": "Systeme & Storage für die AP1",
+   "description": "Systeme und Speicher für die AP1: Virtualisierung und Hypervisor, Storage-Systeme, Backup und RAID, IT-Hardware und Energie sowie Diagnose und Fehlersuche.",
+   "url": "https://layer8academy.boxberger.app/themen/systeme-storage/",
+   "inLanguage": "de-DE",
+   "isAccessibleForFree": true,
+   "learningResourceType": "Nachschlagewerk",
+   "educationalLevel": "Berufsausbildung",
+   "teaches": "Systeme & Storage",
+   "isPartOf": {
+    "@id": "https://layer8academy.boxberger.app/#website"
+   },
+   "author": {
+    "@type": "Person",
+    "name": "Alexander Boxberger-Adam",
+    "url": "https://boxberger.app/"
+   },
+   "hasPart": [
+    {
+     "@type": "LearningResource",
+     "name": "Virtualisierung Grundlagen",
+     "url": "https://layer8academy.boxberger.app/nachschlagen/virtualisierung/"
+    },
+    {
+     "@type": "LearningResource",
+     "name": "Hypervisor & Virtualisierungstechnik",
+     "url": "https://layer8academy.boxberger.app/nachschlagen/hypervisor/"
+    },
+    {
+     "@type": "LearningResource",
+     "name": "Storage-Systeme",
+     "url": "https://layer8academy.boxberger.app/nachschlagen/storage-systeme/"
+    },
+    {
+     "@type": "LearningResource",
+     "name": "Backup & RAID",
+     "url": "https://layer8academy.boxberger.app/nachschlagen/backup-raid/"
+    },
+    {
+     "@type": "LearningResource",
+     "name": "Diagnose & Fehlersuche",
+     "url": "https://layer8academy.boxberger.app/nachschlagen/diagnose-fehlersuche/"
+    },
+    {
+     "@type": "LearningResource",
+     "name": "IT-Hardware, Energie & Grundlagen",
+     "url": "https://layer8academy.boxberger.app/nachschlagen/it-hardware-energie/"
+    }
+   ]
+  }
+ ]
+}
+</script>
+<script>
+  try {
+    var t = localStorage.getItem('l8a_theme');
+    if (t && t !== 'default') document.documentElement.setAttribute('data-theme', t);
+  } catch (e) {}
+</script>
+<link rel="stylesheet" href="/styles.css?v=20261018a">
+<link rel="stylesheet" href="/seiten.css?v=20261018a">
+</head>
+<body class="seite">
+<header class="seite-kopf">
+  <div class="wrap">
+    <a class="seite-logo" href="/" aria-label="Layer 8 Academy – zur Lernplattform"><span class="t-neint">Layer</span> <svg class="title-8" width="44" height="44" viewBox="0 0 120 120" aria-label="L8A" role="img"><path d="M60,60 C34,60 24,26 60,26 C96,26 86,60 60,60 Z" fill="none" stroke="#3ddc84" stroke-width="7" stroke-linecap="round"/><path d="M60,94 C86,94 96,60 60,60 C24,60 34,94 60,94 Z" fill="none" stroke="#22d3ee" stroke-width="7" stroke-linecap="round"/><line x1="18" y1="26" x2="18" y2="52" stroke="#22d3ee" stroke-width="7" stroke-linecap="round"/><line x1="18" y1="52" x2="30" y2="52" stroke="#22d3ee" stroke-width="7" stroke-linecap="round"/><path d="M102,68 L92,94 M102,68 L112,94 M95,86 L107,86" stroke="#3ddc84" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg> <span class="t-symb">Academy</span></a>
+    <nav class="seite-nav" aria-label="Hauptnavigation">
+      <a href="/nachschlagen/">Nachschlagen</a>
+      <a href="/glossar/">Glossar</a>
+      <a href="/#fragen">Fragen üben</a>
+      <a href="/subnetting-trainer/">Subnetting</a>
+      <a href="/ap1-simulator/">AP1-Simulator</a>
+      <a href="/osi-battle/">Diagnose-Arena</a>
+    </nav>
+  </div>
+</header>
+<main class="wrap seite-inhalt">
+<nav class="brotkrumen" aria-label="Brotkrumenpfad"><a href="/">Start</a><span class="bk-trenner" aria-hidden="true">›</span><a href="/nachschlagen/">Nachschlagen</a><span class="bk-trenner" aria-hidden="true">›</span><span aria-current="page">Systeme &amp; Storage</span></nav>
+<h1 class="seite-h1">Systeme &amp; Storage für die AP1</h1>
+<p class="seite-lead">Systeme und Speicher für die AP1: Virtualisierung und Hypervisor, Storage-Systeme, Backup und RAID, IT-Hardware und Energie sowie Diagnose und Fehlersuche.</p>
+<ul class="seite-karten">
+  <li><a href="/nachschlagen/virtualisierung/"><span class="sk-titel">Virtualisierung Grundlagen</span><span class="sk-text">Virtuell heißt: nicht real vorhanden, aber real erscheinend. Die virtuelle Infrastruktur läuft dabei auf echter Hardware, Virtualisierung von …</span></a></li>
+  <li><a href="/nachschlagen/hypervisor/"><span class="sk-titel">Hypervisor &amp; Virtualisierungstechnik</span><span class="sk-text">Ein Hypervisor erstellt und verwaltet virtuelle Maschinen und stellt ihnen eine Abstraktionsschicht aus virtueller Hardware bereit.</span></a></li>
+  <li><a href="/nachschlagen/storage-systeme/"><span class="sk-titel">Storage-Systeme</span><span class="sk-text">Block-Storage: Der Speicher wird in gleich große Blöcke aufgeteilt und ohne eigene Struktur bereitgestellt.</span></a></li>
+  <li><a href="/nachschlagen/backup-raid/"><span class="sk-titel">Backup &amp; RAID</span><span class="sk-text">RAID (Redundant Array of Independent Disks) fasst mehrere Festplatten zu einem logischen Verbund zusammen, für mehr Ausfallsicherheit, mehr Leistung …</span></a></li>
+  <li><a href="/nachschlagen/diagnose-fehlersuche/"><span class="sk-titel">Diagnose &amp; Fehlersuche</span><span class="sk-text">Systematische Fehlersuche folgt der Bottom-up-Logik des OSI-Modells: von der physischen Verbindung nach oben zur Anwendung. Die wichtigsten Werkzeuge:</span></a></li>
+  <li><a href="/nachschlagen/it-hardware-energie/"><span class="sk-titel">IT-Hardware, Energie &amp; Grundlagen</span><span class="sk-text">Nahezu alle heutigen Rechner folgen der nach John von Neumann benannten Architektur. Ihr Kerngedanke: Programme und Daten liegen im selben Speicher …</span></a></li>
+</ul>
+<nav class="seite-pillen seite-felder" aria-label="Andere Themenfelder"><a class="topic" href="/themen/netzwerke/">Netzwerke</a><a class="topic" href="/themen/it-sicherheit/">IT-Sicherheit</a><span class="topic aktuell" aria-current="page">Systeme &amp; Storage</span><a class="topic" href="/themen/software-grundlagen/">Software &amp; Grundlagen</a><a class="topic" href="/themen/bwl-prozesse/">BWL &amp; Prozesse</a></nav>
+<div class="seite-cta">
+  <p>Alle Themen zusammen, mit Volltextsuche, Glossar-Bubbles und Übungsfragen:</p>
+  <div class="seite-cta-knoepfe">
+    <a class="seite-knopf seite-knopf-haupt" href="/">In der Lernplattform öffnen</a>
+    <a class="seite-knopf" href="/#fragen">Fragen üben</a>
+    <a class="seite-knopf" href="/glossar/">Glossar</a>
+  </div>
+</div>
+</main>
+<footer><div class="wrap">
+<p class="footer-lead">Layer 8 Academy ist eine kostenlose Lernplattform zur Vorbereitung auf die IHK-Abschlussprüfung Teil 1 der IT-Berufe. Sie umfasst ein Nachschlagewerk, ein Glossar, Übungsfragen im Multiple-Choice- und Karteikartenmodus, einen Subnetting-Trainer und Prüfungssimulationen.</p>
+<nav class="footer-nav" aria-label="Themenfelder">
+  <a href="/themen/netzwerke/">Netzwerke</a> · <a href="/themen/it-sicherheit/">IT-Sicherheit</a> · <a href="/themen/systeme-storage/">Systeme &amp; Storage</a> · <a href="/themen/software-grundlagen/">Software &amp; Grundlagen</a> · <a href="/themen/bwl-prozesse/">BWL &amp; Prozesse</a> · <a href="/nachschlagen/">Alle Kapitel</a> · <a href="/glossar/">Glossar</a>
+</nav>
+<div class="footer-copy">© 2026 boxberger.app · <a href="/impressum/" class="imprint-link">Impressum &amp; Datenschutz</a></div>
+</div></footer>
+</body>
+</html>

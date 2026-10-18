@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Backup &amp; RAID – AP1 einfach erklärt | Layer 8 Academy</title>
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<meta name="description" content="RAID (Redundant Array of Independent Disks) fasst mehrere Festplatten zu einem logischen Verbund zusammen, für mehr Ausfallsicherheit, mehr Leistung oder …">
+<meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+<meta name="theme-color" content="#0a0e12">
+<link rel="canonical" href="https://layer8academy.boxberger.app/nachschlagen/backup-raid/">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Layer 8 Academy">
+<meta property="og:title" content="Backup &amp; RAID – AP1 einfach erklärt | Layer 8 Academy">
+<meta property="og:description" content="RAID (Redundant Array of Independent Disks) fasst mehrere Festplatten zu einem logischen Verbund zusammen, für mehr Ausfallsicherheit, mehr Leistung oder …">
+<meta property="og:url" content="https://layer8academy.boxberger.app/nachschlagen/backup-raid/">
+<meta property="og:locale" content="de_DE">
+<meta name="twitter:card" content="summary">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+    {
+     "@type": "ListItem",
+     "position": 1,
+     "name": "Start",
+     "item": "https://layer8academy.boxberger.app/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 2,
+     "name": "Nachschlagen",
+     "item": "https://layer8academy.boxberger.app/nachschlagen/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 3,
+     "name": "Systeme & Storage",
+     "item": "https://layer8academy.boxberger.app/themen/systeme-storage/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 4,
+     "name": "Backup/RAID",
+     "item": "https://layer8academy.boxberger.app/nachschlagen/backup-raid/"
+    }
+   ]
+  },
+  {
+   "@type": "LearningResource",
+   "name": "Backup & RAID",
+   "description": "RAID (Redundant Array of Independent Disks) fasst mehrere Festplatten zu einem logischen Verbund zusammen, für mehr Ausfallsicherheit, mehr Leistung oder …",
+   "url": "https://layer8academy.boxberger.app/nachschlagen/backup-raid/",
+   "inLanguage": "de-DE",
+   "isAccessibleForFree": true,
+   "learningResourceType": "Nachschlagewerk",
+   "educationalLevel": "Berufsausbildung",
+   "teaches": "Systeme & Storage",
+   "isPartOf": {
+    "@id": "https://layer8academy.boxberger.app/#website"
+   },
+   "author": {
+    "@type": "Person",
+    "name": "Alexander Boxberger-Adam",
+    "url": "https://boxberger.app/"
+   }
+  }
+ ]
+}
+</script>
+<script>
+  try {
+    var t = localStorage.getItem('l8a_theme');
+    if (t && t !== 'default') document.documentElement.setAttribute('data-theme', t);
+  } catch (e) {}
+</script>
+<link rel="stylesheet" href="/styles.css?v=20261018a">
+<link rel="stylesheet" href="/seiten.css?v=20261018a">
+</head>
+<body class="seite">
+<header class="seite-kopf">
+  <div class="wrap">
+    <a class="seite-logo" href="/" aria-label="Layer 8 Academy – zur Lernplattform"><span class="t-neint">Layer</span> <svg class="title-8" width="44" height="44" viewBox="0 0 120 120" aria-label="L8A" role="img"><path d="M60,60 C34,60 24,26 60,26 C96,26 86,60 60,60 Z" fill="none" stroke="#3ddc84" stroke-width="7" stroke-linecap="round"/><path d="M60,94 C86,94 96,60 60,60 C24,60 34,94 60,94 Z" fill="none" stroke="#22d3ee" stroke-width="7" stroke-linecap="round"/><line x1="18" y1="26" x2="18" y2="52" stroke="#22d3ee" stroke-width="7" stroke-linecap="round"/><line x1="18" y1="52" x2="30" y2="52" stroke="#22d3ee" stroke-width="7" stroke-linecap="round"/><path d="M102,68 L92,94 M102,68 L112,94 M95,86 L107,86" stroke="#3ddc84" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg> <span class="t-symb">Academy</span></a>
+    <nav class="seite-nav" aria-label="Hauptnavigation">
+      <a href="/nachschlagen/">Nachschlagen</a>
+      <a href="/glossar/">Glossar</a>
+      <a href="/#fragen">Fragen üben</a>
+      <a href="/subnetting-trainer/">Subnetting</a>
+      <a href="/ap1-simulator/">AP1-Simulator</a>
+      <a href="/osi-battle/">Diagnose-Arena</a>
+    </nav>
+  </div>
+</header>
+<main class="wrap seite-inhalt">
+<nav class="brotkrumen" aria-label="Brotkrumenpfad"><a href="/">Start</a><span class="bk-trenner" aria-hidden="true">›</span><a href="/nachschlagen/">Nachschlagen</a><span class="bk-trenner" aria-hidden="true">›</span><a href="/themen/systeme-storage/">Systeme &amp; Storage</a><span class="bk-trenner" aria-hidden="true">›</span><span aria-current="page">Backup/RAID</span></nav>
+<h1 class="seite-h1">Backup &amp; RAID</h1>
+<div class="view active" id="view-lesen">
+<section id="r-raid">
+<p><strong>RAID</strong> (Redundant Array of Independent Disks) fasst mehrere Festplatten zu einem logischen Verbund zusammen, für mehr Ausfallsicherheit, mehr Leistung oder beides. Drei Grundtechniken: <strong>Striping</strong> verteilt Daten blockweise über mehrere Platten (Tempo), <strong>Mirroring</strong> spiegelt sie identisch (Sicherheit), <strong>Parität</strong> ist eine per XOR berechnete Prüfinformation, aus der sich ausgefallene Daten rekonstruieren lassen.</p>
+
+<h3>RAID anschaulich erklärt</h3>
+<p><strong>RAID ist kein Bauteil, sondern ein Prinzip.</strong> Die Festplatten selbst sind ganz gewöhnliche Platten, die nichts davon wissen, dass sie in einem Verbund stecken. Den Verbund organisiert ein <strong>RAID-Controller</strong>, entweder als Chip auf einer eigenen Steckkarte oder auf der Hauptplatine (Hardware-RAID), oder als Funktion des Betriebssystems (Software-RAID). Dieser Controller ist gewissermaßen der Dirigent: Er entscheidet, welcher Datenblock auf welche Platte geschrieben wird, und setzt dabei die Regeln des jeweiligen RAID-Levels um.</p>
+
+<p>Bevor es an die Beispiele geht, hier die drei Grundtechniken im Alltagsbild, denn ohne sie ergibt kein RAID-Level Sinn.</p>
+
+<p><strong>Striping</strong> ist wie ein Umzug mit mehreren Helfern: Statt dass eine Person alle Kisten nacheinander trägt, greift jede gleichzeitig eine andere Kiste. Der Umzug geht schneller, weil die Arbeit aufgeteilt wird. Genau das macht Striping mit Daten, es zerlegt sie in Blöcke und verteilt diese über mehrere Platten, die parallel schreiben und lesen. Der Haken: Fällt eine Person aus, fehlen deren Kisten und der Umzug ist unvollständig. Reines Striping bringt deshalb Tempo, aber keinerlei Sicherheit.</p>
+
+<p><strong>Mirroring</strong> ist wie Durchschlagpapier beim Ausfüllen eines Formulars: Jeder Strich entsteht sofort ein zweites Mal auf dem Blatt darunter. Geht das obere Blatt verloren, liegt der vollständige Durchschlag bereit. Übertragen heißt das, jeder Datenblock wird gleichzeitig auf zwei Platten geschrieben. Der Preis ist der doppelte Platzbedarf, denn von zwei Platten mit je 4 TB bleiben nur 4 TB nutzbar. Dafür läuft der Verbund beim Ausfall einer Platte ohne Unterbrechung weiter.</p>
+
+<p><strong>Parität</strong> ist wie eine notierte Quersumme: Man schreibt zu mehreren Zahlen zusätzlich ihre Summe auf. Fällt später eine einzelne Zahl weg, lässt sie sich aus der Summe und den übrigen Zahlen eindeutig zurückrechnen. Zu 3, 5 und 4 notiert man die 12; verschwindet die 5, ergibt 12 minus 3 minus 4 wieder genau diese 5. Technisch nutzt RAID dafür keine Addition, sondern die XOR-Verknüpfung, das Prinzip ist aber dasselbe. Der Vorteil gegenüber dem Spiegeln: Es genügt <em>eine</em> zusätzliche Platte für die Prüfinformation statt einer Kopie jeder einzelnen Platte. Der Nachteil: Nach einem Ausfall muss das System die fehlenden Daten erst berechnen, wodurch der Verbund vorübergehend langsamer arbeitet.</p>
+
+<div class="callout"><span class="tag">Merkbild</span><strong>Striping</strong> teilt die Arbeit auf, <strong>Mirroring</strong> legt eine vollständige Kopie an, <strong>Parität</strong> merkt sich die Quersumme. Daraus lassen sich alle Level ableiten: RAID 0 ist reines Striping, RAID 1 reines Mirroring, RAID 5 verbindet Striping mit einer Paritätsinformation, RAID 6 mit zweien, und RAID 10 spiegelt zuerst und verteilt die Spiegelpaare anschließend per Striping.</div>
+
+<p>Warum der Aufwand? Weil eine Datensicherung zwar die Daten rettet, aber nicht den <strong>Betrieb</strong>. Genau dieser Unterschied wird an drei Beispielen deutlich.</p>
+
+<p><strong>Beispiel 1: das Krankenhaus.</strong> Nachts steht eine Notoperation an, die Ärztin braucht sofort die digitalen Röntgenbilder. Ausgerechnet jetzt fällt eine Platte im Server aus.</p>
+<ul>
+<li><strong>Ohne RAID, nur mit Sicherung:</strong> Die Daten sind zwar auf dem Sicherungsmedium vorhanden, aber niemand kommt sofort daran. Erst muss jemand aus der IT geweckt werden, eine Ersatzplatte einbauen und die Sicherung über Stunden zurückspielen. So lange kann die Patientin nicht warten.</li>
+<li><strong>Mit RAID 5 oder RAID 6:</strong> Der Server meldet den Ausfall, läuft aber ohne Unterbrechung weiter, weil sich die fehlenden Daten aus der <strong>Parität</strong> der übrigen Platten berechnen lassen. Die Ärztin merkt nichts und öffnet die Bilder sofort. Am nächsten Morgen tauscht die IT die defekte Platte im laufenden Betrieb aus, sofern das Gehäuse <strong>Hot Swap</strong> unterstützt.</li>
+</ul>
+
+<p><strong>Beispiel 2: der Onlinehandel.</strong> Am umsatzstärksten Tag des Jahres fällt in einem großen Shop eine Platte mit Produktdaten aus. Die Seite darf jetzt nicht für zwei Stunden abschalten, um eine Sicherung einzuspielen, denn jede Minute Stillstand kostet Umsatz und Kundenvertrauen. Über den Verbund laufen die Server einfach weiter, die Kundschaft bemerkt den Vorfall gar nicht. Hier geht es nicht um die Daten selbst, sondern ausschließlich um <strong>Verfügbarkeit</strong>.</p>
+
+<p><strong>Beispiel 3: das Familien-NAS.</strong> Im Flur steht eine kleine Netzwerkfestplatte, ein <strong>NAS</strong>, auf dem alle Geräte im Haushalt ihre Fotos und Dokumente ablegen. Stirbt dort eine Platte, hieße das ohne Verbund: neues Gerät einrichten und tagelang Daten zurückkopieren. Mit <strong>RAID 1</strong> oder <strong>RAID 5</strong> steckt man stattdessen eine neue Platte hinein, und das System stellt den Verbund im Hintergrund selbst wieder her. Diesen Vorgang nennt man <strong>Rebuild</strong>; währenddessen bleibt alles benutzbar, nur etwas langsamer. Wer den Ausfall gar nicht erst abwarten will, hält eine Platte als <strong>Hot Spare</strong> im Gehäuse bereit: Sie läuft ungenutzt mit und springt bei einem Defekt automatisch ein, sodass der Rebuild sofort startet.</p>
+
+<h3>Wo RAID privat vorkommt</h3>
+<p><strong>Im NAS:</strong> Das ist mit Abstand der häufigste Fall. In eine solche Box passen je nach Modell zwei bis vier Platten, eingerichtet meist als RAID 1 bei zwei Platten oder RAID 5 ab drei. Fällt eine aus, meldet das Gerät den Fehler, die Daten bleiben aber erreichbar.</p>
+<p><strong>Im Arbeitsplatzrechner:</strong> Früher wurden zwei Platten gern als <strong>RAID 0</strong> gekoppelt, um Ladezeiten zu verkürzen. Das lohnt sich heute kaum noch, weil moderne <strong>NVMe</strong>-SSDs ohnehin ein Vielfaches der Geschwindigkeit alter Festplatten erreichen. Dazu kommt das bekannte Risiko: Bei RAID 0 führt der Ausfall einer einzigen Platte zum Verlust aller Daten des Verbunds.</p>
+
+<div class="callout"><span class="tag">Der Kernsatz</span><strong>Die Sicherung rettet die Daten, der Verbund rettet den Betrieb.</strong> Beides beantwortet eine andere Frage. Die Sicherung fragt: Bekomme ich die Daten zurück? Der Verbund fragt: Kann ich ohne Unterbrechung weiterarbeiten? Genau deshalb braucht ein Betrieb immer beides, und genau danach wird in der Prüfung gefragt, wenn ein Szenario Ausfallzeiten oder Wiederherstellungszeiten nennt.</div>
+
+<div class="callout"><span class="tag">Wichtig</span>RAID ist <strong>kein Backup</strong>. Es schützt vor dem Ausfall einzelner Platten, nicht vor versehentlichem Löschen, Ransomware, Überspannung oder Diebstahl des ganzen Geräts. Dagegen hilft nur eine echte, getrennte Sicherung.</div>
+<table>
+<tr><th>Level</th><th>Prinzip</th><th>Min. Platten</th><th>Nettokapazität</th><th>Ausfalltoleranz</th></tr>
+<tr><td>RAID 0</td><td>Striping</td><td>2</td><td>n × Kapazität</td><td>keine, 1 Ausfall = Totalverlust</td></tr>
+<tr><td>RAID 1</td><td>Mirroring</td><td>2</td><td>Kapazität einer Platte</td><td>1 Platte</td></tr>
+<tr><td>RAID 4</td><td>Striping + Parität auf einer festen Platte</td><td>3</td><td>(n − 1) × Kapazität</td><td>1 Platte</td></tr>
+<tr><td>RAID 5</td><td>Striping + Parität</td><td>3</td><td>(n − 1) × Kapazität</td><td>1 Platte</td></tr>
+<tr><td>RAID 6</td><td>Striping + doppelte Parität</td><td>4</td><td>(n − 2) × Kapazität</td><td>2 Platten</td></tr>
+<tr><td>RAID 10</td><td>Mirroring, dann Striping (1+0)</td><td>4</td><td>n / 2 × Kapazität</td><td>1 je Spiegelpaar</td></tr>
+<tr><td>RAID 50</td><td>Striping über mehrere RAID-5-Gruppen (5+0)</td><td>6</td><td>(n − Anzahl Gruppen) × Kapazität</td><td>1 Platte je RAID-5-Gruppe</td></tr>
+</table>
+
+<p><strong>Warum RAID 4 kaum eingesetzt wird:</strong> Es arbeitet wie RAID 5, legt die Paritätsinformationen aber nicht verteilt ab, sondern gesammelt auf <em>einer festen</em> Platte. Da bei jedem Schreibvorgang die Parität aktualisiert werden muss, wird genau diese eine Platte zum Flaschenhals, während die anderen warten. RAID 5 verteilt die Parität deshalb reihum über alle Platten und ist bei gleicher Sicherheit und gleicher Nettokapazität schneller. RAID 4 wird trotzdem genannt, weil es das Zwischenglied in der Entwicklung ist und in Prüfungen als Abgrenzung zu RAID 5 auftaucht.</p>
+
+<h3>Der Controller als Single Point of Failure</h3>
+<p>Der <strong>RAID-Controller</strong> ist die einzige Stelle, die den Verbund zusammenhält, und damit selbst ein <strong>Single Point of Failure</strong>: Fällt er aus, ist der gesamte Verbund nicht mehr ansprechbar, obwohl keine einzige Platte defekt ist. Die <strong>Daten selbst bleiben dabei erhalten</strong>, sie liegen unverändert auf den Platten; unlesbar sind sie nur, weil die Information fehlt, wie die Blöcke zusammengehören.</p>
+<p>Zugänglich werden sie wieder, sobald ein <em>baugleicher</em> Controller mit passender Firmware eingesetzt wird, der die vorhandene Konfiguration von den Platten einliest. Genau hier liegt die Falle: Jeder Hersteller nutzt ein eigenes Format, weshalb ein fremdes Modell den Verbund oft nicht erkennt. Beim Software-RAID entfällt dieses Problem, dafür ist dort das Betriebssystem die kritische Stelle.</p>
+<div class="callout"><span class="tag">Prüfungsfalle</span>Gefragt wird gern, ob nach einem Controllerdefekt die Daten verloren sind. Die Antwort lautet <strong>nein</strong>, sie sind nur nicht erreichbar. Praktische Vorsorge: einen identischen Ersatzcontroller vorhalten, die Konfiguration dokumentieren, bei Hardware-RAID auf einen Pufferakku (BBU) achten, damit ein Stromausfall während des Schreibens die Parität nicht inkonsistent zurücklässt, und vor allem eine getrennte Datensicherung führen. Denn auch hier gilt: <strong>RAID ist kein Backup.</strong></div>
+<p><strong>RAID 10 vs. RAID 01:</strong> Bei RAID 10 werden zuerst Plattenpaare gespiegelt und dann gestript, bei RAID 01 zuerst gestript und dann gespiegelt. RAID 10 gilt als robuster, weil auch mehrere Platten gleichzeitig ausfallen dürfen, solange nie beide Platten desselben Spiegelpaars betroffen sind. <strong>RAID 50</strong> fasst mehrere RAID-5-Gruppen per übergeordnetem Striping zusammen.</p>
+<div class="callout"><span class="tag">Rebuild-Risiko</span>Nach einem Plattentausch rekonstruiert der Controller die Daten aus den übrigen Platten. Bei RAID 5 ist die Redundanz während des Rebuilds aufgebraucht, ein zweiter Ausfall in dieser Phase bedeutet Totalverlust. Genau hier punktet RAID 6. Eine <strong>Hot-Spare</strong> springt automatisch ein, <strong>Hot-Swap</strong> erlaubt den Plattentausch im laufenden Betrieb.</div>
+<h3>Backup-Strategien</h3>
+<table>
+<tr><th>Art</th><th>Sichert</th><th>Wiederherstellung braucht</th></tr>
+<tr><td>Vollsicherung</td><td>bei jedem Lauf den kompletten Datenbestand</td><td>nur die Vollsicherung</td></tr>
+<tr><td>Inkrementell</td><td>Änderungen seit dem letzten Backup, unabhängig von dessen Art</td><td>Vollsicherung + alle Inkremente</td></tr>
+<tr><td>Differenziell</td><td>Änderungen seit der letzten Vollsicherung</td><td>Vollsicherung + letzte Differenz</td></tr>
+</table>
+<div class="callout"><span class="tag">3-2-1-Regel</span>Drei Kopien der Daten, die Originaldaten plus zwei Sicherungskopien, auf zwei verschiedenen Medien, davon eine räumlich getrennt (offsite). Schützt auch bei Brand, Diebstahl oder Wasserschaden am Standort. <strong>RPO</strong> (Recovery Point Objective) = maximal tolerierbarer Datenverlust als Zeitspanne. <strong>RTO</strong> (Recovery Time Objective) = maximal tolerierbare Ausfallzeit bis zur Wiederherstellung. Ein Backup ist erst brauchbar, wenn die Testwiederherstellung funktioniert.</div>
+<p><strong>Grandfather-Father-Son (GFS)</strong> ist ein klassisches Rotationskonzept für Sicherungsmedien: <strong>Son</strong> = tägliche Sicherungen, <strong>Father</strong> = wöchentliche Sicherungen, <strong>Grandfather</strong> = monatliche Sicherungen. Ältere Medien werden nach einem festen Rhythmus wiederverwendet, sodass mehrere Zeitpunkte in der Vergangenheit verfügbar bleiben, ohne für jeden Tag ein eigenes Medium vorzuhalten.</p>
+
+<h3>Backups gegen Ransomware härten</h3>
+<p>Ein Backup, das ein Angreifer mitverschlüsseln kann, ist keins. Deshalb: <strong>Air Gap</strong> (mindestens eine Kopie physisch oder logisch getrennt vom Netz, externes Medium, getrennter Standort), <strong>unveränderliche Sicherungen</strong> (Immutable/WORM: für eine definierte Frist weder lösch- noch überschreibbar), <strong>Backup-Verschlüsselung</strong> gegen Datenabfluss und definierte <strong>Aufbewahrungsfristen</strong> mit mehreren Wiederherstellungspunkten, ein einzelner Stand hilft nicht, wenn die Verschlüsselung erst nach Tagen auffällt.</p>
+<h3>RAID 50 rechnen & RPO/RTO am Szenario</h3>
+<p><strong>RAID 50</strong> kombiniert mehrere RAID-5-Gruppen per Striping. Beispiel: 2 Gruppen à 4 Platten zu je 4 TB, je Gruppe entfällt eine Platte auf Parität: 2 &times; (4&minus;1) &times; 4 TB = <strong>24 TB</strong> netto von 32 TB brutto; je Gruppe darf eine Platte ausfallen. RAID 60 rechnet analog mit (n&minus;2) je Gruppe.</p>
+<p><strong>Szenario:</strong> Eine Firma sichert täglich um 22 Uhr, der definierte <strong>RPO</strong> beträgt 24 Stunden, der <strong>RTO</strong> 4 Stunden. Fällt der Server um 15 Uhr aus, sind die Daten seit 22 Uhr des Vortags verloren (17 Stunden, innerhalb des RPO), und die Wiederherstellung muss bis 19 Uhr laufen. Wer einen kleineren RPO braucht, muss häufiger sichern. RPO bestimmt die Sicherungsfrequenz, RTO die nötige Wiederherstellungstechnik.</p>
+
+<h3>Rotationsverfahren und Aufbewahrung</h3>
+<p>Ein Sicherungskonzept legt nicht nur fest, <em>was</em> gesichert wird, sondern auch, wie lange Stände vorgehalten und wie Medien wiederverwendet werden.</p>
+<p><strong>Generationenprinzip (Großvater-Vater-Sohn, GFS):</strong> Das gebräuchlichste Rotationsverfahren. Die <strong>Sohn</strong>-Sicherungen laufen täglich und werden meist innerhalb der Woche überschrieben. Die <strong>Vater</strong>-Sicherungen entstehen wöchentlich, typischerweise als Vollsicherung am Wochenende, und werden einige Wochen aufbewahrt. Die <strong>Großvater</strong>-Sicherungen laufen monatlich und werden lange archiviert, oft ein Jahr oder länger. So bleibt eine feine Abstufung: kurzfristig viele Stände, langfristig wenige, aber weit zurückreichende.</p>
+<p><strong>Tower of Hanoi:</strong> Ein Rotationsverfahren, das seinen Namen dem gleichnamigen Knobelspiel verdankt. Die Medien werden nach einem festen, gestaffelten Muster eingesetzt: Ein Medium wird jeden zweiten Tag genutzt, das nächste jeden vierten, das übernächste jeden achten und so weiter. Dadurch entsteht mit wenigen Medien eine breite Abdeckung: Es existieren viele junge Sicherungsstände und zugleich einzelne sehr alte. Der Vorteil ist die effiziente Medienausnutzung, der Nachteil die vergleichsweise komplizierte Verwaltung und die Fehleranfälligkeit bei manueller Handhabung.</p>
+<p><strong>Aufbewahrungskonzepte:</strong> Neben der Rotation ist festzulegen, wie lange Stände vorgehalten werden müssen. Dabei wirken zwei Anforderungen gegeneinander: Handels- und steuerrechtliche Aufbewahrungsfristen verlangen langes Vorhalten, die DSGVO dagegen die Löschung personenbezogener Daten, sobald der Zweck entfällt. Ein Löschkonzept muss beides zusammenbringen. Zusätzlich sind Aufbewahrungsort (mindestens eine Kopie außer Haus), Schutz vor nachträglicher Veränderung und die regelmäßige <strong>Rücksicherungsprobe</strong> festzulegen, denn nur eine getestete Sicherung ist eine echte Sicherung.</p>
+
+<div class="callout"><span class="tag">Prüfungsfalle</span>Die Nutzkapazität wird gern falsch gerechnet. Bei <strong>RAID 5</strong> geht die Kapazität <em>einer</em> Platte für Parität verloren: 4 Platten à 2 TB ergeben 6 TB nutzbar. Bei <strong>RAID 6</strong> sind es zwei Platten, bei <strong>RAID 1</strong> die Hälfte, bei <strong>RAID 10</strong> ebenfalls die Hälfte. Und die wichtigste Aussage überhaupt: <strong>RAID ersetzt keine Datensicherung.</strong> Versehentliches Löschen, Schadsoftware oder ein Brand treffen alle Platten des Verbunds gleichzeitig.</div>
+
+<div class="callout xref"><span class="tag">Verwandte Themen</span><a href="/nachschlagen/datenschutz-informationssicherheit/">Informationssicherheit &amp; Datenschutz</a> · <a href="/nachschlagen/bsi-grundschutz/">BSI-Grundschutz &amp; Schutzbedarf</a> · <a href="/nachschlagen/storage-systeme/">Storage-Systeme</a><br>
+In der <a href="/osi-battle/">Diagnose-Arena</a> tritt der RAID-Golem an: Die Stufen werden über das durchgespielt, was man gerade nicht tun sollte.</div>
+</section>
+</div>
+<div class="seite-cta">
+  <p>Interaktiv mit Volltextsuche, Glossar-Bubbles und Übungsfragen lernen:</p>
+  <div class="seite-cta-knoepfe">
+    <a class="seite-knopf seite-knopf-haupt" href="/#r-raid">In der Lernplattform öffnen</a>
+    <a class="seite-knopf" href="/#fragen">Fragen üben</a>
+    <a class="seite-knopf" href="/glossar/">Glossar</a>
+  </div>
+</div>
+<nav class="seite-blaettern" aria-label="Weitere Kapitel">
+  <a class="sb-vor" href="/nachschlagen/storage-systeme/"><span>Vorheriges Kapitel</span>Storage-Systeme</a>
+  <a class="sb-nach" href="/nachschlagen/diagnose-fehlersuche/"><span>Nächstes Kapitel</span>Diagnose &amp; Fehlersuche</a>
+</nav>
+<section class="seite-feld" aria-labelledby="feld-titel">
+<h2 id="feld-titel">Mehr aus Systeme &amp; Storage</h2>
+<div class="seite-pillen"><a class="topic-sub" href="/nachschlagen/virtualisierung/">Virtualisierung</a><a class="topic-sub" href="/nachschlagen/hypervisor/">Hypervisor</a><a class="topic-sub" href="/nachschlagen/storage-systeme/">Storage-Systeme</a><span class="topic-sub aktuell" aria-current="page">Backup/RAID</span><a class="topic-sub" href="/nachschlagen/diagnose-fehlersuche/">Diagnose &amp; Fehlersuche</a><a class="topic-sub" href="/nachschlagen/it-hardware-energie/">IT-Hardware &amp; Energie</a></div>
+</section>
+</main>
+<footer><div class="wrap">
+<p class="footer-lead">Layer 8 Academy ist eine kostenlose Lernplattform zur Vorbereitung auf die IHK-Abschlussprüfung Teil 1 der IT-Berufe. Sie umfasst ein Nachschlagewerk, ein Glossar, Übungsfragen im Multiple-Choice- und Karteikartenmodus, einen Subnetting-Trainer und Prüfungssimulationen.</p>
+<nav class="footer-nav" aria-label="Themenfelder">
+  <a href="/themen/netzwerke/">Netzwerke</a> · <a href="/themen/it-sicherheit/">IT-Sicherheit</a> · <a href="/themen/systeme-storage/">Systeme &amp; Storage</a> · <a href="/themen/software-grundlagen/">Software &amp; Grundlagen</a> · <a href="/themen/bwl-prozesse/">BWL &amp; Prozesse</a> · <a href="/nachschlagen/">Alle Kapitel</a> · <a href="/glossar/">Glossar</a>
+</nav>
+<div class="footer-copy">© 2026 boxberger.app · <a href="/impressum/" class="imprint-link">Impressum &amp; Datenschutz</a></div>
+</div></footer>
+</body>
+</html>

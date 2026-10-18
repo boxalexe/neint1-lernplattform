@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Storage-Systeme – AP1 einfach erklärt | Layer 8 Academy</title>
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<meta name="description" content="Block-Storage: Der Speicher wird in gleich große Blöcke aufgeteilt und ohne eigene Struktur bereitgestellt.">
+<meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+<meta name="theme-color" content="#0a0e12">
+<link rel="canonical" href="https://layer8academy.boxberger.app/nachschlagen/storage-systeme/">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Layer 8 Academy">
+<meta property="og:title" content="Storage-Systeme – AP1 einfach erklärt | Layer 8 Academy">
+<meta property="og:description" content="Block-Storage: Der Speicher wird in gleich große Blöcke aufgeteilt und ohne eigene Struktur bereitgestellt.">
+<meta property="og:url" content="https://layer8academy.boxberger.app/nachschlagen/storage-systeme/">
+<meta property="og:locale" content="de_DE">
+<meta name="twitter:card" content="summary">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+    {
+     "@type": "ListItem",
+     "position": 1,
+     "name": "Start",
+     "item": "https://layer8academy.boxberger.app/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 2,
+     "name": "Nachschlagen",
+     "item": "https://layer8academy.boxberger.app/nachschlagen/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 3,
+     "name": "Systeme & Storage",
+     "item": "https://layer8academy.boxberger.app/themen/systeme-storage/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 4,
+     "name": "Storage-Systeme",
+     "item": "https://layer8academy.boxberger.app/nachschlagen/storage-systeme/"
+    }
+   ]
+  },
+  {
+   "@type": "LearningResource",
+   "name": "Storage-Systeme",
+   "description": "Block-Storage: Der Speicher wird in gleich große Blöcke aufgeteilt und ohne eigene Struktur bereitgestellt.",
+   "url": "https://layer8academy.boxberger.app/nachschlagen/storage-systeme/",
+   "inLanguage": "de-DE",
+   "isAccessibleForFree": true,
+   "learningResourceType": "Nachschlagewerk",
+   "educationalLevel": "Berufsausbildung",
+   "teaches": "Systeme & Storage",
+   "isPartOf": {
+    "@id": "https://layer8academy.boxberger.app/#website"
+   },
+   "author": {
+    "@type": "Person",
+    "name": "Alexander Boxberger-Adam",
+    "url": "https://boxberger.app/"
+   }
+  }
+ ]
+}
+</script>
+<script>
+  try {
+    var t = localStorage.getItem('l8a_theme');
+    if (t && t !== 'default') document.documentElement.setAttribute('data-theme', t);
+  } catch (e) {}
+</script>
+<link rel="stylesheet" href="/styles.css?v=20261018a">
+<link rel="stylesheet" href="/seiten.css?v=20261018a">
+</head>
+<body class="seite">
+<header class="seite-kopf">
+  <div class="wrap">
+    <a class="seite-logo" href="/" aria-label="Layer 8 Academy – zur Lernplattform"><span class="t-neint">Layer</span> <svg class="title-8" width="44" height="44" viewBox="0 0 120 120" aria-label="L8A" role="img"><path d="M60,60 C34,60 24,26 60,26 C96,26 86,60 60,60 Z" fill="none" stroke="#3ddc84" stroke-width="7" stroke-linecap="round"/><path d="M60,94 C86,94 96,60 60,60 C24,60 34,94 60,94 Z" fill="none" stroke="#22d3ee" stroke-width="7" stroke-linecap="round"/><line x1="18" y1="26" x2="18" y2="52" stroke="#22d3ee" stroke-width="7" stroke-linecap="round"/><line x1="18" y1="52" x2="30" y2="52" stroke="#22d3ee" stroke-width="7" stroke-linecap="round"/><path d="M102,68 L92,94 M102,68 L112,94 M95,86 L107,86" stroke="#3ddc84" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg> <span class="t-symb">Academy</span></a>
+    <nav class="seite-nav" aria-label="Hauptnavigation">
+      <a href="/nachschlagen/">Nachschlagen</a>
+      <a href="/glossar/">Glossar</a>
+      <a href="/#fragen">Fragen üben</a>
+      <a href="/subnetting-trainer/">Subnetting</a>
+      <a href="/ap1-simulator/">AP1-Simulator</a>
+      <a href="/osi-battle/">Diagnose-Arena</a>
+    </nav>
+  </div>
+</header>
+<main class="wrap seite-inhalt">
+<nav class="brotkrumen" aria-label="Brotkrumenpfad"><a href="/">Start</a><span class="bk-trenner" aria-hidden="true">›</span><a href="/nachschlagen/">Nachschlagen</a><span class="bk-trenner" aria-hidden="true">›</span><a href="/themen/systeme-storage/">Systeme &amp; Storage</a><span class="bk-trenner" aria-hidden="true">›</span><span aria-current="page">Storage-Systeme</span></nav>
+<h1 class="seite-h1">Storage-Systeme</h1>
+<div class="view active" id="view-lesen">
+<section id="r-storage">
+<h3>Anbindungsarten</h3>
+<table>
+<tr><th>Art</th><th>Anbindung</th><th>Zugriff</th><th>Typischer Einsatz</th></tr>
+<tr><td><strong>DAS</strong> (Direct Attached Storage)</td><td>Direkt am Server über SAS, SATA oder USB</td><td>Blockbasiert, nur für diesen einen Server</td><td>Interne Platten, direkt angeschlossenes Plattengehäuse</td></tr>
+<tr><td><strong>NAS</strong> (Network Attached Storage)</td><td>Über das vorhandene LAN per Ethernet</td><td>Dateibasiert über SMB oder NFS</td><td>Gemeinsame Dateiablage für Abteilungen</td></tr>
+<tr><td><strong>SAN</strong> (Storage Area Network)</td><td>Eigenes Speichernetz über Fibre Channel oder iSCSI</td><td>Blockbasiert, Server sieht das Ziel wie eine lokale Platte</td><td>Datenbanken, Virtualisierungscluster im Rechenzentrum</td></tr>
+</table>
+<div class="callout"><span class="tag">NAS oder SAN?</span>Die Abgrenzung ist der Prüfungsklassiker. Ein <strong>NAS</strong> stellt <em>Dateien</em> über das normale Netz bereit und wird als Netzlaufwerk eingebunden. Ein <strong>SAN</strong> stellt <em>Blöcke</em> über ein eigenes, meist getrenntes Speichernetz bereit; das Betriebssystem des Servers formatiert diesen Speicher selbst und behandelt ihn wie eine eigene Festplatte. Daraus folgt auch der Kostenunterschied: NAS ist günstig und schnell eingerichtet, SAN ist aufwendiger und teurer, dafür leistungsfähiger und besser für hohe Lasten geeignet.</div>
+
+<h3>Zugriffsmodelle</h3>
+<p><strong>Block-Storage:</strong> Der Speicher wird in gleich große Blöcke aufgeteilt und ohne eigene Struktur bereitgestellt. Das Dateisystem legt erst das darüberliegende System an. Sehr schnell und flexibel, ideal für Datenbanken und virtuelle Maschinen.</p>
+<p><strong>File-Storage:</strong> Die Daten liegen in einer Ordnerhierarchie mit Pfaden und Dateinamen. Einfach zu verstehen und gemeinsam nutzbar, wird aber bei sehr großen Datenmengen mit vielen Ebenen zunehmend unhandlich.</p>
+<p><strong>Objekt-Storage:</strong> Jede Datei wird als Objekt mit eindeutiger Kennung und ausführlichen Metadaten abgelegt, ohne Ordnerbaum. Der Zugriff erfolgt in der Regel über eine Programmierschnittstelle (HTTP/REST). Sehr gut skalierbar über riesige Datenmengen hinweg, dafür nicht für ständige Änderungen an einzelnen Dateien gedacht. Typisch für Cloudspeicher, Archive, Backups und Medienbibliotheken.</p>
+
+<div class="callout"><span class="tag">Prüfungsfalle</span>Beim Zugriff entscheidet die <strong>Ebene</strong>: dateibasiert beim NAS, blockbasiert bei SAN und DAS. Nur bei blockbasiertem Speicher legt der Server das Dateisystem selbst an; deshalb ist er für Datenbanken und virtuelle Maschinen nötig. Und beachten Sie: <strong>iSCSI</strong> ist blockbasiert, obwohl es über das gewöhnliche IP-Netz läuft. Nicht die Leitung entscheidet, sondern die Zugriffsart.</div>
+
+<h3>Cloud-Speicher</h3>
+<p>Neben DAS, NAS und SAN tritt der <strong>Cloud-Speicher</strong> als vierte Möglichkeit. Der Anbieter stellt die Kapazität über das Netz bereit und rechnet nach tatsächlicher Nutzung ab. Man unterscheidet dieselben Zugriffsarten wie im eigenen Rechenzentrum: <strong>Objektspeicher</strong> für große Mengen unveränderlicher Dateien wie Sicherungen, Bilder oder Protokolle, <strong>Dateispeicher</strong> als Netzlaufwerk für Abteilungen und <strong>Blockspeicher</strong> als virtuelle Festplatte für Server und Datenbanken.</p>
+<table>
+<tr><th>Merkmal</th><th>Cloud-Speicher</th><th>Eigener Speicher</th></tr>
+<tr><td>Kosten</td><td>Laufend nach Nutzung, keine Anfangsinvestition</td><td>Einmalige Anschaffung, danach Betrieb und Strom</td></tr>
+<tr><td>Kapazität</td><td>Wächst kurzfristig mit dem Bedarf</td><td>Nur durch Nachrüsten erweiterbar</td></tr>
+<tr><td>Zugriff</td><td>Von überall, abhängig von der Internetanbindung</td><td>Im eigenen Netz, unabhängig von der Leitung</td></tr>
+<tr><td>Datenhoheit</td><td>Beim Anbieter, vertraglich geregelt</td><td>Vollständig im eigenen Haus</td></tr>
+<tr><td>Wiederherstellung</td><td>Begrenzt durch die Leitungsgeschwindigkeit</td><td>Nur durch die lokale Anbindung begrenzt</td></tr>
+</table>
+<p>In der Praxis wird häufig kombiniert: Aktuelle Daten liegen lokal für schnellen Zugriff, ältere Stände wandern in den günstigeren Cloud-Speicher. Für Sicherungen ist die Cloud besonders geeignet, weil sie die räumliche Trennung nach der <strong>3-2-1-Regel</strong> ohne eigenen Zweitstandort erfüllt.</p>
+<div class="callout"><span class="tag">Prüfungsfalle</span>Bei der Rückholung großer Datenmengen wird die <em>Leitung</em> zum Engpass, nicht der Speicher: 10 TB über eine 100-Mbit-Anbindung dauern rechnerisch über neun Tage. Deshalb wird in Aufgaben zur Wiederherstellungszeit fast immer nach der Bandbreite gefragt. Zweiter Punkt: Auch bei Cloud-Speicher bleibt das beauftragende Unternehmen datenschutzrechtlich verantwortlich, ein Vertrag zur Auftragsverarbeitung ist erforderlich.</div>
+
+<div class="callout xref"><span class="tag">Verwandte Themen</span><a href="/nachschlagen/backup-raid/">Backup & RAID</a> · <a href="/nachschlagen/virtualisierung/">Virtualisierung Grundlagen</a> · <a href="/nachschlagen/it-hardware-energie/">IT-Hardware, Energie &amp; Grundlagen</a></div>
+</section>
+</div>
+<div class="seite-cta">
+  <p>Interaktiv mit Volltextsuche, Glossar-Bubbles und Übungsfragen lernen:</p>
+  <div class="seite-cta-knoepfe">
+    <a class="seite-knopf seite-knopf-haupt" href="/#r-storage">In der Lernplattform öffnen</a>
+    <a class="seite-knopf" href="/#fragen">Fragen üben</a>
+    <a class="seite-knopf" href="/glossar/">Glossar</a>
+  </div>
+</div>
+<nav class="seite-blaettern" aria-label="Weitere Kapitel">
+  <a class="sb-vor" href="/nachschlagen/hypervisor/"><span>Vorheriges Kapitel</span>Hypervisor</a>
+  <a class="sb-nach" href="/nachschlagen/backup-raid/"><span>Nächstes Kapitel</span>Backup/RAID</a>
+</nav>
+<section class="seite-feld" aria-labelledby="feld-titel">
+<h2 id="feld-titel">Mehr aus Systeme &amp; Storage</h2>
+<div class="seite-pillen"><a class="topic-sub" href="/nachschlagen/virtualisierung/">Virtualisierung</a><a class="topic-sub" href="/nachschlagen/hypervisor/">Hypervisor</a><span class="topic-sub aktuell" aria-current="page">Storage-Systeme</span><a class="topic-sub" href="/nachschlagen/backup-raid/">Backup/RAID</a><a class="topic-sub" href="/nachschlagen/diagnose-fehlersuche/">Diagnose &amp; Fehlersuche</a><a class="topic-sub" href="/nachschlagen/it-hardware-energie/">IT-Hardware &amp; Energie</a></div>
+</section>
+</main>
+<footer><div class="wrap">
+<p class="footer-lead">Layer 8 Academy ist eine kostenlose Lernplattform zur Vorbereitung auf die IHK-Abschlussprüfung Teil 1 der IT-Berufe. Sie umfasst ein Nachschlagewerk, ein Glossar, Übungsfragen im Multiple-Choice- und Karteikartenmodus, einen Subnetting-Trainer und Prüfungssimulationen.</p>
+<nav class="footer-nav" aria-label="Themenfelder">
+  <a href="/themen/netzwerke/">Netzwerke</a> · <a href="/themen/it-sicherheit/">IT-Sicherheit</a> · <a href="/themen/systeme-storage/">Systeme &amp; Storage</a> · <a href="/themen/software-grundlagen/">Software &amp; Grundlagen</a> · <a href="/themen/bwl-prozesse/">BWL &amp; Prozesse</a> · <a href="/nachschlagen/">Alle Kapitel</a> · <a href="/glossar/">Glossar</a>
+</nav>
+<div class="footer-copy">© 2026 boxberger.app · <a href="/impressum/" class="imprint-link">Impressum &amp; Datenschutz</a></div>
+</div></footer>
+</body>
+</html>
