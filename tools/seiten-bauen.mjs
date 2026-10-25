@@ -171,7 +171,11 @@ function seite({ url, titel, beschreibung, inhalt, daten }) {
 <meta property="og:description" content="${esc(beschreibung)}">
 <meta property="og:url" content="${BASIS}${url}">
 <meta property="og:locale" content="de_DE">
-<meta name="twitter:card" content="summary">
+<meta property="og:image" content="${BASIS}/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Layer 8 Academy: kostenlose Vorbereitung auf die IHK AP1">
+<meta name="twitter:card" content="summary_large_image">
 ${ld(daten)}
 <script>
   try {
