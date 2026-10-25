@@ -6,14 +6,14 @@
 <title>OOP &amp; UML – AP1 einfach erklärt | Layer 8 Academy</title>
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
-<meta name="description" content="Die objektorientierte Programmierung modelliert Software als Zusammenspiel von Objekten. Eine Klasse ist der Bauplan; ein Objekt ist eine konkrete Instanz …">
+<meta name="description" content="Bevor die erste Zeile Code entsteht, wird die Software geplant und modelliert. Dieses Kapitel führt vom Softwareentwicklungsprozess über Algorithmen und …">
 <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
 <meta name="theme-color" content="#0a0e12">
 <link rel="canonical" href="https://layer8academy.boxberger.app/nachschlagen/oop-uml/">
 <meta property="og:type" content="article">
 <meta property="og:site_name" content="Layer 8 Academy">
 <meta property="og:title" content="OOP &amp; UML – AP1 einfach erklärt | Layer 8 Academy">
-<meta property="og:description" content="Die objektorientierte Programmierung modelliert Software als Zusammenspiel von Objekten. Eine Klasse ist der Bauplan; ein Objekt ist eine konkrete Instanz …">
+<meta property="og:description" content="Bevor die erste Zeile Code entsteht, wird die Software geplant und modelliert. Dieses Kapitel führt vom Softwareentwicklungsprozess über Algorithmen und …">
 <meta property="og:url" content="https://layer8academy.boxberger.app/nachschlagen/oop-uml/">
 <meta property="og:locale" content="de_DE">
 <meta name="twitter:card" content="summary">
@@ -22,7 +22,7 @@
  "@context": "https://schema.org",
  "@type": "LearningResource",
  "name": "OOP & UML",
- "description": "Die objektorientierte Programmierung modelliert Software als Zusammenspiel von Objekten. Eine Klasse ist der Bauplan; ein Objekt ist eine konkrete Instanz …",
+ "description": "Bevor die erste Zeile Code entsteht, wird die Software geplant und modelliert. Dieses Kapitel führt vom Softwareentwicklungsprozess über Algorithmen und …",
  "url": "https://layer8academy.boxberger.app/nachschlagen/oop-uml/",
  "inLanguage": "de-DE",
  "isAccessibleForFree": true,
@@ -52,7 +52,7 @@
 <header>
   <div class="wrap">
     <a class="seite-marke" href="/" aria-label="Layer 8 Academy – Startseite"><span class="t-neint">Layer</span> <svg class="title-8" width="44" height="44" viewBox="0 0 120 120" aria-label="L8A" role="img"><path d="M60,60 C34,60 24,26 60,26 C96,26 86,60 60,60 Z" fill="none" stroke="#3ddc84" stroke-width="7" stroke-linecap="round"/><path d="M60,94 C86,94 96,60 60,60 C24,60 34,94 60,94 Z" fill="none" stroke="#22d3ee" stroke-width="7" stroke-linecap="round"/><line x1="18" y1="26" x2="18" y2="52" stroke="#22d3ee" stroke-width="7" stroke-linecap="round"/><line x1="18" y1="52" x2="30" y2="52" stroke="#22d3ee" stroke-width="7" stroke-linecap="round"/><path d="M102,68 L92,94 M102,68 L112,94 M95,86 L107,86" stroke="#3ddc84" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg> <span class="t-symb">Academy</span></a>
-    <p class="header-specs"><span id="specCats">49</span> Kategorien · <span id="specQs">1378</span> Fragen · <span id="specGloss">563</span> Nachschlagebegriffe</p>
+    <p class="header-specs"><span id="specCats">49</span> Kategorien · <span id="specQs">1407</span> Fragen · <span id="specGloss">586</span> Nachschlagebegriffe</p>
     <div class="a11y-wrap">
       <div class="quick-search" id="quickSearch">
         <button class="qs-toggle" id="qsToggle" aria-label="Begriffe suchen" title="Begriffe suchen" aria-expanded="false">
@@ -101,9 +101,65 @@
 <div class="topics" aria-label="Themenfelder"><a class="topic" href="/themen/netzwerke/">Netzwerke</a><a class="topic" href="/themen/it-sicherheit/">IT-Sicherheit</a><a class="topic" href="/themen/systeme-storage/">Systeme &amp; Storage</a><a class="topic active" href="/themen/software-grundlagen/" aria-current="page">Software &amp; Grundlagen</a><a class="topic" href="/themen/bwl-prozesse/">BWL &amp; Prozesse</a></div>
 <section id="r-oop">
 <h1 class="wie-h2">OOP &amp; UML</h1>
+<p>Bevor die erste Zeile Code entsteht, wird die Software geplant und modelliert. Dieses Kapitel führt vom <strong>Softwareentwicklungsprozess</strong> über <strong>Algorithmen</strong> und <strong>Pseudocode</strong> zur <strong>objektorientierten Programmierung</strong> und zu den prüfungsrelevanten <strong>UML-Diagrammen</strong>.</p>
+
+<h3>Strukturierte Softwareentwicklung (SDLC)</h3>
+<p>Der <strong>Software Development Life Cycle</strong> (SDLC) beschreibt den geplanten Weg einer Software von der Anforderungsanalyse über Entwurf, Umsetzung und Test bis zu Betrieb und Wartung. Die vorgelagerte Planung dient vor allem dazu, <strong>Komplexität zu beherrschen</strong>: Ohne Entwurf entsteht schnell <strong>Spaghetticode</strong> mit unübersichtlichen Abhängigkeiten oder ein <strong>Monolith</strong>, in dem wenige überladene Klassen alles erledigen. Solche Systeme sind fehleranfällig, schwer zu testen und teuer zu ändern.</p>
+<table>
+<tr><th>Ansatz</th><th>Wartbarkeit</th><th>Kostenverlauf</th><th>Qualität</th></tr>
+<tr><td>Unstrukturiert</td><td>gering, Änderungen haben unvorhersehbare Seiteneffekte</td><td>niedriger Start, danach stark steigend durch nachträgliche Fehlerbehebung</td><td>schlecht testbar, instabil</td></tr>
+<tr><td>Strukturiert geplant</td><td>hoch, dank Kapselung und Modulen gezielt änderbar</td><td>höherer Aufwand in der Analyse, dafür deutlich weniger Nachbesserung im Betrieb</td><td>Logik vor der Umsetzung geprüft, zuverlässig</td></tr>
+</table>
+<p>In der <strong>Anforderungsanalyse</strong> (Requirements Engineering) wird streng unterschieden: <strong>Funktionale Anforderungen</strong> legen fest, <em>was</em> das System leisten muss, etwa „Benutzer können Beiträge erstellen“ oder „nach gültiger Anmeldung wird ein Login-Token erzeugt“. <strong>Nicht-funktionale Anforderungen</strong> legen fest, <em>wie</em> gut, schnell oder sicher es das tut, etwa „Antwortzeit unter 2 Sekunden“ oder „Übertragung nur verschlüsselt mit TLS 1.3“.</p>
+<div class="callout"><span class="tag">Merksatz</span>Funktional = WAS das System tut. Nicht-funktional = WIE es das tut (Leistung, Sicherheit, Bedienbarkeit, Verfügbarkeit).</div>
+
+<h3>Algorithmus, Programmieren und Codieren</h3>
+<p>Ein <strong>Algorithmus</strong> ist eine eindeutige, endliche Handlungsvorschrift zur Lösung eines Problems oder einer ganzen Problemklasse. Er ist unabhängig von einer Programmiersprache. Das Alltagsbeispiel ist das Kochrezept: Zutaten als Eingabe, ausführbare Einzelschritte, nach endlicher Zeit ein Gericht als Ergebnis. In der Informatik sind Such- und Sortierverfahren (binäre Suche, Bubblesort, Quicksort), Kompression und Verschlüsselung typische Algorithmen.</p>
+<table>
+<tr><th>Eigenschaft</th><th>Fachbegriff</th><th>Bedeutung und Gegenbeispiel</th></tr>
+<tr><td>Eindeutigkeit</td><td>Determinismus</td><td>Zu jedem Zeitpunkt steht fest, welcher Schritt folgt. Gegenbeispiel: Anweisungen, die man unterschiedlich auslegen kann.</td></tr>
+<tr><td>Endlichkeit</td><td>Finitheit und Terminierung</td><td>Endlich lange Beschreibung (statisch) und Abbruch nach endlich vielen Schritten (dynamisch). Gegenbeispiel: Endlosschleife ohne Abbruchbedingung.</td></tr>
+<tr><td>Ausführbarkeit</td><td>Effektivität</td><td>Jeder Schritt ist tatsächlich durchführbar. Gegenbeispiel: Division durch null.</td></tr>
+<tr><td>Ein- und Ausgabe</td><td>Input und Output</td><td>Aus definierten Eingaben entstehen definierte Ergebnisse. Gegenbeispiel: ein Ablauf ohne jede Ausgabe oder Zustandsänderung.</td></tr>
+<tr><td>Allgemeinheit</td><td>Generalität</td><td>Löst eine ganze Klasse gleichartiger Probleme. Gegenbeispiel: ein Programm, das nur 2 + 2 rechnen kann.</td></tr>
+</table>
+<p><strong>Programmieren</strong> umfasst den gesamten Entwurf: Problem analysieren, Lösungslogik strukturieren und beschreiben, etwa mit Pseudocode oder UML. <strong>Codieren</strong> ist nur der handwerkliche Teil, also die Übersetzung des fertigen Entwurfs in eine konkrete Programmiersprache wie Java oder C++.</p>
+<div class="callout"><span class="tag">Prüfungsfalle</span>Programmieren und Codieren sind nicht dasselbe. Wer nur codiert, setzt einen fertigen Entwurf um; das Programmieren schließt Analyse und Modellierung mit ein.</div>
+
+<h3>Pseudocode und Variablen</h3>
+<p><strong>Pseudocode</strong> beschreibt einen Algorithmus sprach- und plattformunabhängig mit festen Schlüsselwörtern: <code>START</code> und <code>ENDE</code> umrahmen eine Einheit, <code>SETZE</code>, <code>=</code> oder <code>:=</code> weisen einer Variablen einen Wert zu, <code>LIES</code> liest eine Eingabe, <code>SCHREIBE</code> gibt etwas aus.</p>
+<p>Eine <strong>Variable</strong> ist aus Sicht des Programmierers ein benannter Behälter für einen veränderlichen Wert. Technisch steht dahinter ein Speicherbereich im Arbeitsspeicher mit einer Adresse. Im Pseudocode werden <strong>keine Datentypen</strong> angegeben, weil es nur um die Logik geht und der Typ sich aus dem Zusammenhang ergibt. In Programmiersprachen wie Java muss der Datentyp dagegen deklariert werden, damit der Compiler weiß, wie viel Speicher er reserviert (etwa 32 Bit für <code>int</code>, 64 Bit für <code>double</code>).</p>
+<div class="callout"><span class="tag">Beispiel Zuweisungen</span><code>a = 5</code> → a hat den Wert 5<br>
+<code>b = a + 1</code> → b erhält 6<br>
+<code>a = a + 1</code> → a wird um 1 erhöht und ist danach 6<br>
+<code>a = (-2) * a</code> → a wird mit −2 multipliziert und ist danach −12<br>
+Die rechte Seite wird immer zuerst ausgewertet, dann wird das Ergebnis links gespeichert.</div>
+
+<h3>Die drei Kontrollstrukturen</h3>
+<p>Nach dem Hauptsatz der strukturierten Programmierung lässt sich jeder Algorithmus aus drei Grundstrukturen aufbauen: <strong>Sequenz</strong> (Anweisungen nacheinander), <strong>Selektion</strong> (Verzweigung nach einer Bedingung, <code>WENN … DANN … SONST … ENDE WENN</code>) und <strong>Iteration</strong> (Wiederholung in einer Schleife).</p>
+<table>
+<tr><th>Schleife</th><th>Pseudocode</th><th>Verhalten</th></tr>
+<tr><td>Kopfgesteuert</td><td><code>SOLANGE … WIEDERHOLE … ENDE SOLANGE</code></td><td>Prüft die Bedingung vor dem Durchlauf. Ist sie von Anfang an falsch, läuft der Rumpf kein einziges Mal.</td></tr>
+<tr><td>Fußgesteuert</td><td><code>WIEDERHOLE … BIS Bedingung</code></td><td>Prüft die Abbruchbedingung nach dem Durchlauf. Der Rumpf läuft mindestens einmal.</td></tr>
+<tr><td>Zählergesteuert</td><td><code>FÜR i VON … BIS … WIEDERHOLE … ENDE FÜR</code></td><td>Für eine bekannte Anzahl Durchläufe. Die Laufvariable ändert sich automatisch um 1, mit <code>SCHRITT k</code> um k oder mit <code>ABWÄRTS BIS</code> rückwärts.</td></tr>
+</table>
+<div class="callout"><span class="tag">Beispiel Schleifen</span><code>SETZE i = 1</code><br>
+<code>SOLANGE i &lt;= 3 WIEDERHOLE</code><br>
+<code>&nbsp;&nbsp;SCHREIBE i</code><br>
+<code>&nbsp;&nbsp;SETZE i = i + 1</code><br>
+<code>ENDE SOLANGE</code> → gibt 1, 2, 3 aus<br><br>
+<code>FÜR i VON 2 BIS 10 SCHRITT 2 WIEDERHOLE</code><br>
+<code>&nbsp;&nbsp;SCHREIBE i</code><br>
+<code>ENDE FÜR</code> → gibt 2, 4, 6, 8, 10 aus</div>
+<div class="callout"><span class="tag">Merksatz</span>Kopfgesteuert: 0 oder mehr Durchläufe. Fußgesteuert: mindestens 1 Durchlauf. Zählergesteuert: wenn die Anzahl vorher feststeht.</div>
+
+<h3>Objektorientierte Programmierung</h3>
 <p>Die <strong>objektorientierte Programmierung</strong> modelliert Software als Zusammenspiel von Objekten. Eine <strong>Klasse</strong> ist der Bauplan; ein <strong>Objekt</strong> ist eine konkrete Instanz dieses Bauplans. <strong>Attribute</strong> beschreiben den Zustand, <strong>Methoden</strong> das Verhalten. Der <strong>Konstruktor</strong> ist eine spezielle Methode, die ein neues Objekt bei dessen Erzeugung initialisiert.</p>
-<p>Die vier Grundprinzipien: <strong>Kapselung</strong> versteckt interne Daten hinter kontrollierten Zugriffsmethoden. <strong>Vererbung</strong> lässt eine Unterklasse Attribute und Methoden der Oberklasse übernehmen. <strong>Polymorphie</strong> erlaubt, dass derselbe Methodenaufruf je nach Objekttyp unterschiedlich ausgeführt wird. <strong>Abstraktion</strong> modelliert nur die wesentlichen Eigenschaften und lässt unwichtige Details weg.</p>
-<h3>UML-Sichtbarkeiten</h3>
+<p>Die Klasse existiert im Quellcode und belegt selbst keinen Speicher für Attributwerte. Erst beim <strong>Instanziieren</strong> wird für das neue Objekt Speicher im Arbeitsspeicher (Heap) reserviert, in dem seine eigenen Attributwerte liegen.</p>
+<p>Die vier Grundprinzipien: <strong>Kapselung</strong> versteckt interne Daten hinter kontrollierten Zugriffsmethoden. <strong>Vererbung</strong> lässt eine Unterklasse Attribute und Methoden der Oberklasse übernehmen. <strong>Polymorphie</strong> erlaubt, dass derselbe Methodenaufruf je nach Objekttyp unterschiedlich ausgeführt wird, weil Unterklassen geerbte Methoden überschreiben. <strong>Abstraktion</strong> modelliert nur die wesentlichen Eigenschaften und lässt unwichtige Details weg.</p>
+
+<h3>Klassendiagramm und Sichtbarkeiten</h3>
+<p>Im <strong>Klassendiagramm</strong> ist eine Klasse ein dreigeteilter Kasten: oben der Klassenname, in der Mitte die Attribute, unten die Methoden. Vor jedem Element steht seine Sichtbarkeit.</p>
 <table>
 <tr><th>Zeichen</th><th>Sichtbarkeit</th><th>Zugriff</th></tr>
 <tr><td><code>+</code></td><td>public</td><td>von überall</td></tr>
@@ -111,11 +167,49 @@
 <tr><td><code>#</code></td><td>protected</td><td>eigene Klasse und Unterklassen</td></tr>
 <tr><td><code>~</code></td><td>package</td><td>innerhalb desselben Pakets</td></tr>
 </table>
-<div class="callout"><span class="tag">Prüfungsfalle</span>Die Raute hat in UML zwei völlig verschiedene Bedeutungen: Als Zeichen <code>#</code> vor einem Attribut steht sie für die Sichtbarkeit <strong>protected</strong>. Als Rautensymbol an einer <strong>Beziehungslinie</strong> steht sie dagegen für Aggregation (leere Raute) oder Komposition (gefüllte Raute), nicht verwechseln.</div>
+<div class="callout"><span class="tag">Prüfungsfalle</span>Soll eine Unterklasse direkt auf ein geerbtes Attribut zugreifen, muss es <strong>protected</strong> sein, nicht private. Ein privates Attribut der Oberklasse ist in der Unterklasse nicht direkt sichtbar.</div>
+
 <h3>Beziehungen zwischen Klassen</h3>
-<p><strong>Assoziation:</strong> Eine allgemeine Verbindung ("kennt", "nutzt"), dargestellt als einfache Linie. <strong>Aggregation</strong> (leere Raute am Ganzen): Teile gehören zum Ganzen, existieren aber auch ohne es, ein Team besteht aus Spielern, die Spieler existieren auch ohne das Team. <strong>Komposition</strong> (gefüllte Raute): Die Teile existieren nicht ohne das Ganze. Räume existieren nicht ohne ihr Gebäude. <strong>Generalisierung/Vererbung:</strong> geschlossener, nicht ausgefüllter Dreieckspfeil zur Oberklasse.</p>
+<table>
+<tr><th>Beziehung</th><th>Bedeutung</th><th>Darstellung</th></tr>
+<tr><td>Generalisierung (Vererbung)</td><td>„ist ein“: Unterklasse erbt von Oberklasse</td><td>durchgezogene Linie, leere Dreiecksspitze zeigt zur Oberklasse</td></tr>
+<tr><td>Realisierung (Interface)</td><td>Klasse setzt die Methoden einer Schnittstelle um</td><td>gestrichelte Linie, leere Dreiecksspitze zeigt zum Interface</td></tr>
+<tr><td>Assoziation</td><td>„kennt“ oder „nutzt“</td><td>durchgezogene Linie, optional mit offenem Richtungspfeil</td></tr>
+<tr><td>Aggregation</td><td>„hat ein“, Teile existieren auch allein</td><td>leere Raute am Ganzen</td></tr>
+<tr><td>Komposition</td><td>Teile existieren nicht ohne das Ganze</td><td>gefüllte Raute am Ganzen</td></tr>
+</table>
+<p>Ein Team besteht aus Spielern, die Spieler existieren auch ohne das Team: <strong>Aggregation</strong>. Räume existieren nicht ohne ihr Gebäude: <strong>Komposition</strong>. Ein <strong>Interface</strong> wird im Diagramm mit <code>&lt;&lt;interface&gt;&gt;</code> über dem Namen gekennzeichnet und enthält nur abstrakte Methoden, die jede realisierende Klasse umsetzen muss.</p>
 <p><strong>Multiplizitäten</strong> geben an, wie viele Objekte an einer Beziehung beteiligt sind: <code>1</code> = genau eins, <code>0..1</code> = keins oder eins, <code>*</code> oder <code>0..*</code> = beliebig viele, <code>1..*</code> = mindestens eins.</p>
-<p>Neben dem <strong>Klassendiagramm</strong> (statischer Aufbau) sind zwei weitere UML-Diagramme prüfungsrelevant: Das <strong>Anwendungsfalldiagramm</strong> (Use Case) zeigt, welche Akteure welche Funktionen des Systems nutzen. Das <strong>Aktivitätsdiagramm</strong> beschreibt Abläufe mit Verzweigungen, vergleichbar einem Flussdiagramm.</p>
+<div class="callout"><span class="tag">Merkhilfe</span>Die Raute sitzt immer am Ganzen, nie am Teil. Leer = Aggregation, das Teil überlebt allein. Gefüllt = Komposition, „schwarz wie der Tod“: stirbt das Ganze, sterben die Teile mit.</div>
+<div class="callout"><span class="tag">Prüfungsfalle</span>Die Raute hat in UML zwei völlig verschiedene Bedeutungen: Als Zeichen <code>#</code> vor einem Attribut steht sie für die Sichtbarkeit <strong>protected</strong>. Als Rautensymbol an einer <strong>Beziehungslinie</strong> steht sie dagegen für Aggregation (leere Raute) oder Komposition (gefüllte Raute), nicht verwechseln.</div>
+
+<h3>Anwendungsfalldiagramm (Use Case)</h3>
+<p>Das <strong>Anwendungsfalldiagramm</strong> zeigt die funktionalen Anforderungen aus Sicht der Nutzer, ohne technische Details. Ein Rechteck bildet die <strong>Systemgrenze</strong>. Außerhalb steht jeder Akteur als Strichmännchen: eine Benutzerrolle oder ein Nachbarsystem, das mit dem System arbeitet. Innerhalb steht jeder Anwendungsfall (Use Case) als Ellipse.</p>
+<p>Zwei besondere Beziehungen strukturieren größere Diagramme. Beide werden als <strong>gestrichelter Pfeil</strong> gezeichnet, zeigen aber in entgegengesetzte Richtungen:</p>
+<table>
+<tr><th></th><th>&lt;&lt;include&gt;&gt;</th><th>&lt;&lt;extend&gt;&gt;</th></tr>
+<tr><td>Ausführung</td><td>immer, verpflichtend</td><td>nur unter einer Bedingung, optional</td></tr>
+<tr><td>Zweck</td><td>wiederkehrende Teilabläufe auslagern</td><td>Sonderfälle und Zusatzoptionen</td></tr>
+<tr><td>Pfeilrichtung</td><td>vom Basis-Anwendungsfall zum eingebundenen</td><td>vom erweiternden Anwendungsfall zum Basis-Anwendungsfall</td></tr>
+</table>
+<p>Bei extend legt der Basis-Anwendungsfall einen <strong>Erweiterungspunkt</strong> (Extension Point) fest, an dem die Erweiterung andockt. Die <strong>Bedingung</strong> (Condition) steht als Text am Pfeil.</p>
+<div class="callout"><span class="tag">Beispiel Online-Shop</span>Akteur Kunde nutzt „Bestellung aufgeben“.<br>
+„Bestellung aufgeben“ → <code>&lt;&lt;include&gt;&gt;</code> → „Identität prüfen“: Die Prüfung läuft bei jeder Bestellung mit.<br>
+„Neukundenrabatt gewähren“ → <code>&lt;&lt;extend&gt;&gt;</code> → „Bestellung aufgeben“: nur mit der Bedingung [Erstkauf] am Erweiterungspunkt Rabattprüfung.</div>
+
+<h3>Aktivitätsdiagramm</h3>
+<p>Das <strong>Aktivitätsdiagramm</strong> zeigt den logischen und zeitlichen Ablauf eines Prozesses, etwa eine Bargeldabhebung mit PIN-Prüfung. Es verfeinert oft einen Anwendungsfall oder stellt einen Algorithmus grafisch dar.</p>
+<table>
+<tr><th>Element</th><th>Symbol</th><th>Bedeutung</th></tr>
+<tr><td>Startknoten</td><td>gefüllter Kreis</td><td>Beginn des Ablaufs</td></tr>
+<tr><td>Endknoten</td><td>Kreis mit Punkt in der Mitte</td><td>Ende des Ablaufs</td></tr>
+<tr><td>Aktion</td><td>Rechteck mit abgerundeten Ecken</td><td>ein Arbeitsschritt</td></tr>
+<tr><td>Kontrollfluss</td><td>Pfeil</td><td>Reihenfolge der Aktionen</td></tr>
+<tr><td>Entscheidung und Zusammenführung</td><td>Raute</td><td>verzweigt nach Bedingungen in eckigen Klammern (Guards), führt Pfade wieder zusammen</td></tr>
+<tr><td>Fork und Join</td><td>schwarzer Balken</td><td>teilt in parallele Abläufe auf bzw. wartet, bis alle fertig sind</td></tr>
+<tr><td>Swimlane</td><td>Spalte oder Zeile</td><td>ordnet Aktionen einem Verantwortlichen zu, etwa Kunde und Automat</td></tr>
+</table>
+<div class="callout"><span class="tag">Prüfungsfalle</span>Raute und schwarzer Balken nicht verwechseln. Die <strong>Raute</strong> bedeutet Entweder-oder: Nach Guards wie [PIN korrekt] oder [PIN falsch] wird genau ein Pfad weiterverfolgt. Der <strong>Balken</strong> bedeutet Sowohl-als-auch: Nach dem Fork laufen alle Pfade gleichzeitig, etwa Geld auszahlen und Beleg drucken; der Join wartet auf beide.</div>
 
 <h3>Sequenzdiagramm</h3>
 <p>Während das Klassendiagramm den <em>statischen</em> Aufbau zeigt, stellt das <strong>Sequenzdiagramm</strong> den <em>zeitlichen Ablauf</em> einer Interaktion dar: Wer schickt wann welche Nachricht an wen?</p>
@@ -136,9 +230,20 @@ Benutzerverwaltung &rarr; Datenbank: sucheBenutzer(kennung)<br>
 Datenbank ‑ ‑ &rarr; Benutzerverwaltung: Benutzerdatensatz (gestrichelt, Rückgabe)<br>
 Benutzerverwaltung ‑ ‑ &rarr; Anmeldemaske: true oder false<br>
 Ein <code>alt</code>-Fragment trennt danach den Fall „Anmeldung erfolgreich" vom Fall „Fehlermeldung anzeigen".</div>
-<p>Für die Prüfung wichtig ist die Abgrenzung: Das <strong>Klassendiagramm</strong> zeigt Struktur und Beziehungen, das <strong>Aktivitätsdiagramm</strong> einen Ablauf mit Verzweigungen ohne festen Bezug zu Objekten, und das <strong>Sequenzdiagramm</strong> den Nachrichtenaustausch zwischen konkreten Objekten über die Zeit.</p>
+<p>Für die Prüfung wichtig ist die Abgrenzung: Das <strong>Klassendiagramm</strong> zeigt Struktur und Beziehungen, das <strong>Aktivitätsdiagramm</strong> einen Ablauf mit Verzweigungen ohne festen Bezug zu Objekten, das <strong>Sequenzdiagramm</strong> den Nachrichtenaustausch zwischen konkreten Objekten über die Zeit und das <strong>Anwendungsfalldiagramm</strong> die Funktionen aus Sicht der Nutzer.</p>
 
-<div class="callout xref"><span class="tag">Verwandte Themen</span><a href="/nachschlagen/sql-datenbanken/">SQL & Datenbanken</a> · <a href="/nachschlagen/projektmanagement/">Projektmanagement</a> · <a href="/nachschlagen/it-dokumentation/">IT-Dokumentation</a></div>
+<h3>Praxisszenarien</h3>
+<p><strong>Mitarbeiter und Manager (Vererbung und Polymorphie):</strong> Die Oberklasse <code>Mitarbeiter</code> hat die Attribute <code>#name</code> und <code>#grundgehalt</code> sowie die Methode <code>+berechneGehalt()</code>. Die Unterklasse <code>Manager</code> erbt davon (durchgezogene Linie, leere Spitze zu Mitarbeiter), hat zusätzlich <code>-bonus</code> und überschreibt <code>berechneGehalt()</code>: Ist der Bonus mindestens 0, gibt sie grundgehalt + bonus zurück, sonst nur das Grundgehalt. Weil <code>grundgehalt</code> protected ist, darf Manager direkt darauf zugreifen.</p>
+<div class="callout"><span class="tag">Pseudocode Manager</span><code>METHODE berechneGehalt()</code><br>
+<code>&nbsp;&nbsp;WENN bonus &gt;= 0 DANN</code><br>
+<code>&nbsp;&nbsp;&nbsp;&nbsp;RÜCKGABE grundgehalt + bonus</code><br>
+<code>&nbsp;&nbsp;SONST</code><br>
+<code>&nbsp;&nbsp;&nbsp;&nbsp;RÜCKGABE grundgehalt</code><br>
+<code>&nbsp;&nbsp;ENDE WENN</code><br>
+<code>ENDE METHODE</code></div>
+<p><strong>Druckbare Dokumente (Interface-Realisierung):</strong> Das Interface <code>Druckbar</code> schreibt die Methode <code>+drucken(): boolean</code> vor. Die Klasse <code>PDFDokument</code> mit dem Attribut <code>-seitenzahl</code> realisiert es (gestrichelte Linie, leere Spitze zu Druckbar) und muss <code>drucken()</code> umsetzen: Bei mehr als 0 Seiten wird gedruckt und true zurückgegeben, sonst eine Fehlermeldung ausgegeben und false zurückgegeben.</p>
+
+<div class="callout xref"><span class="tag">Verwandte Themen</span><a href="/nachschlagen/sql-datenbanken/">SQL & Datenbanken</a> · <a href="/nachschlagen/projektmanagement/">Projektmanagement</a> · <a href="/nachschlagen/epk-geschaeftsprozesse/">EPK & Prozesse</a> · <a href="/nachschlagen/it-dokumentation/">IT-Dokumentation</a></div>
 </section>
 <section class="seite-feld">
 <h2>Mehr aus Software &amp; Grundlagen</h2>
@@ -158,7 +263,7 @@ Ein <code>alt</code>-Fragment trennt danach den Fall „Anmeldung erfolgreich" v
   <a href="/nachschlagen/osi-modell/" data-r="r-osi">OSI-Modell</a> · <a href="/nachschlagen/subnetting/" data-r="r-subnetting">Subnetting</a> · <a href="/nachschlagen/ipv4-ipv6/" data-r="r-ip">IPv4 &amp; IPv6</a> · <a href="/nachschlagen/it-sicherheit/" data-r="r-security">IT-Sicherheit</a> · <a href="/nachschlagen/verschluesselung-pki/" data-r="r-krypto">Verschlüsselung</a> · <a href="/nachschlagen/datenschutz-informationssicherheit/" data-r="r-datenschutz">Datenschutz</a> · <a href="/nachschlagen/projektmanagement/" data-r="r-projekt">Projektmanagement</a> · <a href="/nachschlagen/it-hardware-energie/" data-r="r-hardware">IT-Hardware</a> · <a href="/nachschlagen/wissenswertes-zur-ap1/" data-r="r-ap1">Wissenswertes zur AP1</a> ·
   <a href="/nachschlagen/">Alle Kapitel einzeln</a> · <a href="/#glossar" data-ansicht="lib">Glossar</a>
 </nav>
-<p class="footer-meta">Für Fachinformatiker Systemintegration und Anwendungsentwicklung sowie IT-Systemelektroniker · <span id="footCats">49</span> Kategorien · <span id="footQs">1378</span> Fragen · zufällige Reihenfolge, Rotation ohne Wiederholung</p>
+<p class="footer-meta">Für Fachinformatiker Systemintegration und Anwendungsentwicklung sowie IT-Systemelektroniker · <span id="footCats">49</span> Kategorien · <span id="footQs">1407</span> Fragen · zufällige Reihenfolge, Rotation ohne Wiederholung</p>
 <div class="footer-copy">© 2026 boxberger.app · <a href="/#impressum" class="imprint-link">Impressum &amp; Datenschutz</a></div>
 </div></footer>
 

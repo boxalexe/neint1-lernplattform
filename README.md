@@ -6,12 +6,12 @@ Kostenlose, werbefreie Übungsplattform für die **IHK-Abschlussprüfung Teil 1 
 
 ## Was es ist
 
-- **Multiple-Choice-Trainer** — 1378 Fragen in 49 Kategorien (Netzwerke, IT-Sicherheit, SQL, Projektmanagement, Verschlüsselung, Verkabelung u. v. m.), Anzahl pro Kategorie per Regler wählbar
+- **Multiple-Choice-Trainer** — 1407 Fragen in 49 Kategorien (Netzwerke, IT-Sicherheit, SQL, Projektmanagement, Verschlüsselung, Verkabelung u. v. m.), Anzahl pro Kategorie per Regler wählbar
 - **Karteikartenmodus** — Frage mit freiem Antwortfeld, Musterlösung auf Klick, Selbsteinschätzung „Wusste ich“ / „Wusste ich nicht“
 - **Wackelkandidaten** — falsch beantwortete Fragen und nicht gewusste Karten werden getrennt gesammelt und lassen sich gezielt wiederholen
 - **Karteikarten drucken** — Fragen per Stern im Durchlauf vormerken, in der Druckmappe prüfen und als Faltkarten drucken: sechs Karten pro A4-Blatt quer, Frage vorne, richtige Antwort hinten, ausschneiden und falten
 - **Nachschlagewerk** — 48 Reader-Kapitel mit Erklärtexten, Tabellen und Rechenbeispielen (Subnetting, Netzplantechnik, RAID, Break-even …)
-- **Glossar** — 563 Begriffe, durchsuchbar, im Reader per Hover/Tap als Infobubble bei thematisch zentralen Begriffen
+- **Glossar** — 586 Begriffe, durchsuchbar, im Reader per Hover/Tap als Infobubble bei thematisch zentralen Begriffen
 - **Eigene Trainer** — Subnetting Trainer (`/subnetting-trainer/`), AP1 Simulator (`/ap1-simulator/`) und die Diagnose-Arena (`/osi-battle/`)
 - Läuft **komplett clientseitig**, kein Server, kein Tracking, alles im `localStorage` des Browsers
 
@@ -65,7 +65,7 @@ Gehostet als Cloudflare Worker. Push auf `main` im Repo `boxalexe/neint1-lernpla
 
 ## Stand
 
-48 Reader-Kapitel · 49 Kategorien · 1378 Fragen · 563 Glossarbegriffe
+48 Reader-Kapitel · 49 Kategorien · 1407 Fragen · 586 Glossarbegriffe
 
 ## Hinweis
 

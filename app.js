@@ -17839,7 +17839,7 @@ const POOLS = {
      { "t": "Für eine Vererbungsbeziehung zur übergeordneten Oberklasse", "ok": false },
      { "t": "Für eine gerichtete Abhängigkeit zwischen zwei Paketen", "ok": false }
     ],
-    "e": "Die Raute kennzeichnet ein Ganzes-Teil-Verhältnis. Die leere Raute steht für die Aggregation, bei der das Teil auch ohne das Ganze bestehen kann; die gefüllte Raute für die Komposition, bei der das Teil mit dem Ganzen entfällt. Die Raute steht immer auf der Seite des Ganzen."
+    "e": "Leere Raute: Aggregation, die Teile bestehen auch ohne das Ganze. Gefüllte Raute: Komposition, die Teile entfallen mit dem Ganzen."
    },
    {
     "q": "Was unterscheidet die Komposition von der Aggregation?",
@@ -17902,14 +17902,306 @@ const POOLS = {
     "e": "Use-Case-Diagramme zeigen die Außensicht: Strichmännchen (Akteure) und Ellipsen (Anwendungsfälle). Klasseninterna zeigt das Klassendiagramm, Abläufe das Sequenz- oder Aktivitätsdiagramm."
    },
    {
-    "q": "Welche UML-Beziehung stellt der geschlossene, nicht ausgefüllte Dreieckspfeil dar?",
+    "q": "Welche UML-Beziehung stellt eine durchgezogene Linie mit leerer Dreiecksspitze dar?",
     "o": [
      { "t": "Die Generalisierung beziehungsweise Vererbung", "ok": true },
      { "t": "Eine einfache Assoziation zwischen zwei Klassen", "ok": false },
      { "t": "Eine Komposition mit existenzabhängigen Teilen", "ok": false },
      { "t": "Eine gestrichelte Abhängigkeit zwischen Klassen", "ok": false }
     ],
-    "e": "Der leere Dreieckspfeil zeigt von der Unterklasse zur Oberklasse. Assoziationen sind einfache Linien, Kompositionen tragen die gefüllte Raute, Abhängigkeiten gestrichelte Pfeile."
+    "e": "Die Spitze zeigt von der Unterklasse zur Oberklasse. Gestrichelt wäre es die Realisierung eines Interfaces."
+   },
+   {
+    "q": "Welche Anforderung an ein Ticketsystem gehört zu den nicht-funktionalen Anforderungen?",
+    "card": false,
+    "o": [
+     { "t": "Eine Ticketsuche liefert das Ergebnis in unter zwei Sekunden", "ok": true },
+     { "t": "Mitarbeitende können Tickets anlegen, zuweisen und schließen", "ok": false },
+     { "t": "Beim Schließen eines Tickets erhält der Kunde eine E-Mail", "ok": false },
+     { "t": "Tickets lassen sich nach Status und Priorität filtern", "ok": false }
+    ],
+    "e": "Nicht-funktional beschreibt, wie gut das System arbeitet, hier die Antwortzeit. Die anderen sind Funktionen."
+   },
+   {
+    "q": "Welche Anforderung an einen Webshop gehört zu den funktionalen Anforderungen?",
+    "card": false,
+    "o": [
+     { "t": "Der Shop berechnet beim Bestellen die Versandkosten", "ok": true },
+     { "t": "Alle Daten werden nur über TLS 1.3 übertragen", "ok": false },
+     { "t": "Der Shop ist an 99,9 Prozent der Zeit erreichbar", "ok": false },
+     { "t": "Jede Seite lädt bei normaler Last in einer Sekunde", "ok": false }
+    ],
+    "e": "Funktional beschreibt, was das System tut. Verschlüsselung, Verfügbarkeit und Ladezeit sind Qualitätsmerkmale."
+   },
+   {
+    "q": "Was ist der wichtigste Grund, Software vor der Umsetzung strukturiert zu planen?",
+    "o": [
+     { "t": "Die Komplexität beherrschen und teure spätere Nachbesserungen vermeiden", "ok": true },
+     { "t": "Die Programmiersprache schon vor der Anforderungsanalyse festlegen", "ok": false },
+     { "t": "Auf spätere Tests verzichten, weil der Entwurf bereits fehlerfrei ist", "ok": false },
+     { "t": "Die Startkosten des Projekts so niedrig wie möglich halten", "ok": false }
+    ],
+    "e": "Planung kostet am Anfang mehr, verhindert aber Spaghetticode und teure Änderungen im Betrieb."
+   },
+   {
+    "q": "Ein Ablauf enthält eine Schleife ohne Abbruchbedingung. Welche Eigenschaft eines Algorithmus ist verletzt?",
+    "o": [
+     { "t": "Die Endlichkeit (Terminierung)", "ok": true },
+     { "t": "Die Allgemeinheit (Generalität)", "ok": false },
+     { "t": "Die Eindeutigkeit (Determinismus)", "ok": false },
+     { "t": "Die Ausführbarkeit (Effektivität)", "ok": false }
+    ],
+    "e": "Ein Algorithmus muss nach endlich vielen Schritten abbrechen."
+   },
+   {
+    "q": "Ein Programm kann ausschließlich die Aufgabe 2 + 2 berechnen. Welche Eigenschaft eines Algorithmus fehlt?",
+    "o": [
+     { "t": "Die Allgemeinheit (Generalität)", "ok": true },
+     { "t": "Die Endlichkeit (Terminierung)", "ok": false },
+     { "t": "Die Eindeutigkeit (Determinismus)", "ok": false },
+     { "t": "Die Ausführbarkeit (Effektivität)", "ok": false }
+    ],
+    "e": "Ein Algorithmus löst eine ganze Klasse gleichartiger Probleme, nicht nur ein Einzelbeispiel."
+   },
+   {
+    "q": "Ein Schritt eines Ablaufs verlangt eine Division durch null. Welche Eigenschaft eines Algorithmus ist verletzt?",
+    "o": [
+     { "t": "Die Ausführbarkeit (Effektivität)", "ok": true },
+     { "t": "Die Endlichkeit (Terminierung)", "ok": false },
+     { "t": "Die Allgemeinheit (Generalität)", "ok": false },
+     { "t": "Die Eindeutigkeit (Determinismus)", "ok": false }
+    ],
+    "e": "Jeder Schritt muss tatsächlich durchführbar sein. Eine Division durch null ist es nicht."
+   },
+   {
+    "q": "Was unterscheidet Programmieren von Codieren?",
+    "o": [
+     { "t": "Programmieren umfasst Analyse und Entwurf, Codieren nur die Übersetzung in eine Sprache", "ok": true },
+     { "t": "Codieren umfasst Analyse und Entwurf, Programmieren nur die Übersetzung in eine Sprache", "ok": false },
+     { "t": "Beide Begriffe meinen dasselbe, Codieren ist nur die umgangssprachliche Form", "ok": false },
+     { "t": "Codieren schließt zusätzlich das Testen und die Inbetriebnahme des Systems ein", "ok": false }
+    ],
+    "e": "Programmieren ist der ganze Entwurf mit Pseudocode oder UML. Codieren setzt den fertigen Entwurf in Java, C++ usw. um."
+   },
+   {
+    "q": "Warum werden im Pseudocode in der Regel keine Datentypen angegeben?",
+    "o": [
+     { "t": "Es geht um die Logik, der Typ ergibt sich aus dem Zusammenhang", "ok": true },
+     { "t": "Pseudocode wird vom Compiler ohne Typprüfung direkt übersetzt", "ok": false },
+     { "t": "Datentypen sind nur in objektorientierten Sprachen erlaubt", "ok": false },
+     { "t": "Ohne Datentypen läuft der Algorithmus später schneller ab", "ok": false }
+    ],
+    "e": "Pseudocode prüft nur die Logik. Erst ein Compiler braucht den Typ, um Speicher zu reservieren."
+   },
+   {
+    "q": "Welchen Wert hat a nach diesem Pseudocode: a = 1, danach a = a + 1, danach a = a - 10?",
+    "o": [
+     { "t": "-8", "ok": true },
+     { "t": "-9", "ok": false },
+     { "t": "8", "ok": false },
+     { "t": "-10", "ok": false }
+    ],
+    "e": "a wird erst 2, dann 2 - 10 = -8. Die rechte Seite wird immer zuerst berechnet."
+   },
+   {
+    "q": "Wie oft läuft der Rumpf einer kopfgesteuerten Schleife (SOLANGE ... WIEDERHOLE) mindestens?",
+    "o": [
+     { "t": "Keinmal, wenn die Bedingung schon zu Beginn falsch ist", "ok": true },
+     { "t": "Einmal, weil die Bedingung erst nach dem Durchlauf geprüft wird", "ok": false },
+     { "t": "Zweimal, weil die Bedingung vor und nach dem Rumpf geprüft wird", "ok": false },
+     { "t": "So oft, wie die Laufvariable beim Start als Wert enthält", "ok": false }
+    ],
+    "e": "Die kopfgesteuerte Schleife prüft vor dem Durchlauf und kann daher null Durchläufe haben."
+   },
+   {
+    "q": "Welche Schleife führt ihren Rumpf garantiert mindestens einmal aus?",
+    "o": [
+     { "t": "Die fußgesteuerte Schleife (WIEDERHOLE ... BIS)", "ok": true },
+     { "t": "Die kopfgesteuerte Schleife (SOLANGE ... WIEDERHOLE)", "ok": false },
+     { "t": "Die zählergesteuerte Schleife (FÜR ... WIEDERHOLE)", "ok": false },
+     { "t": "Die zählergesteuerte Schleife (FÜR ... ABWÄRTS BIS)", "ok": false }
+    ],
+    "e": "Die fußgesteuerte Schleife prüft die Abbruchbedingung erst nach dem Durchlauf."
+   },
+   {
+    "q": "Welche Werte gibt die Schleife FÜR i VON 2 BIS 10 SCHRITT 2 WIEDERHOLE SCHREIBE i aus?",
+    "o": [
+     { "t": "2, 4, 6, 8, 10", "ok": true },
+     { "t": "2, 4, 6, 8", "ok": false },
+     { "t": "4, 6, 8, 10", "ok": false },
+     { "t": "1, 3, 5, 7, 9", "ok": false }
+    ],
+    "e": "Start bei 2, Schrittweite 2, die Obergrenze 10 wird noch ausgegeben."
+   },
+   {
+    "q": "Aus welchen drei Grundstrukturen lässt sich nach der strukturierten Programmierung jeder Algorithmus aufbauen?",
+    "o": [
+     { "t": "Sequenz, Selektion und Iteration", "ok": true },
+     { "t": "Sequenz, Rekursion und Vererbung", "ok": false },
+     { "t": "Selektion, Kapselung und Iteration", "ok": false },
+     { "t": "Deklaration, Zuweisung und Ausgabe", "ok": false }
+    ],
+    "e": "Nacheinander ausführen, verzweigen und wiederholen genügen für jeden Algorithmus."
+   },
+   {
+    "q": "Wann wird Speicher für die Attributwerte eines Objekts reserviert?",
+    "o": [
+     { "t": "Beim Instanziieren des Objekts zur Laufzeit", "ok": true },
+     { "t": "Beim Schreiben der Klasse im Quellcode", "ok": false },
+     { "t": "Beim Kompilieren für jede deklarierte Klasse", "ok": false },
+     { "t": "Beim Aufruf der ersten Methode des Objekts", "ok": false }
+    ],
+    "e": "Die Klasse ist nur der Bauplan. Erst das erzeugte Objekt belegt Speicher im Heap."
+   },
+   {
+    "q": "Was beschreibt Polymorphie in der objektorientierten Programmierung?",
+    "o": [
+     { "t": "Derselbe Methodenaufruf verhält sich je nach Objekttyp unterschiedlich", "ok": true },
+     { "t": "Interne Daten werden hinter kontrollierten Zugriffsmethoden versteckt", "ok": false },
+     { "t": "Eine Unterklasse übernimmt Attribute und Methoden der Oberklasse", "ok": false },
+     { "t": "Nur die wesentlichen Eigenschaften eines Objekts werden modelliert", "ok": false }
+    ],
+    "e": "Unterklassen überschreiben geerbte Methoden mit eigener Logik. Die anderen Antworten beschreiben Kapselung, Vererbung und Abstraktion."
+   },
+   {
+    "q": "Welche Sichtbarkeit erlaubt den Zugriff aus der eigenen Klasse und aus Unterklassen, aber nicht von beliebigen anderen Klassen?",
+    "o": [
+     { "t": "protected (#)", "ok": true },
+     { "t": "private (-)", "ok": false },
+     { "t": "public (+)", "ok": false },
+     { "t": "package (~)", "ok": false }
+    ],
+    "e": "Mit protected darf etwa eine Unterklasse Manager direkt auf das geerbte grundgehalt zugreifen."
+   },
+   {
+    "q": "Wie wird in UML dargestellt, dass eine Klasse ein Interface realisiert?",
+    "o": [
+     { "t": "Gestrichelte Linie mit leerer Dreiecksspitze zum Interface", "ok": true },
+     { "t": "Durchgezogene Linie mit leerer Dreiecksspitze zum Interface", "ok": false },
+     { "t": "Gestrichelte Linie mit gefüllter Raute am Interface", "ok": false },
+     { "t": "Durchgezogene Linie mit offenem Pfeil zur Klasse", "ok": false }
+    ],
+    "e": "Durchgezogen mit leerer Spitze wäre Vererbung. Die Realisierung ist gestrichelt."
+   },
+   {
+    "q": "An welcher Klasse sitzt bei Aggregation und Komposition die Raute?",
+    "o": [
+     { "t": "An der Klasse, die das Ganze darstellt", "ok": true },
+     { "t": "An der Klasse, die das Teil darstellt", "ok": false },
+     { "t": "An der Klasse mit der höheren Multiplizität", "ok": false },
+     { "t": "An der Klasse, die zuerst erzeugt wird", "ok": false }
+    ],
+    "e": "Die Raute sitzt immer am Ganzen, leer bei Aggregation, gefüllt bei Komposition."
+   },
+   {
+    "q": "Was drückt eine include-Beziehung im Anwendungsfalldiagramm aus?",
+    "o": [
+     { "t": "Der eingebundene Anwendungsfall läuft bei jeder Ausführung mit", "ok": true },
+     { "t": "Der eingebundene Anwendungsfall läuft nur unter einer Bedingung", "ok": false },
+     { "t": "Der Anwendungsfall übernimmt alle Akteure des anderen Anwendungsfalls", "ok": false },
+     { "t": "Der Anwendungsfall wird außerhalb der Systemgrenze ausgeführt", "ok": false }
+    ],
+    "e": "include ist verpflichtend und lagert wiederkehrende Teilabläufe aus. Bedingt ist extend."
+   },
+   {
+    "q": "In welche Richtung zeigt der gestrichelte Pfeil einer extend-Beziehung?",
+    "o": [
+     { "t": "Vom erweiternden Anwendungsfall zum Basis-Anwendungsfall", "ok": true },
+     { "t": "Vom Basis-Anwendungsfall zum erweiternden Anwendungsfall", "ok": false },
+     { "t": "Vom Akteur zum erweiternden Anwendungsfall", "ok": false },
+     { "t": "Vom erweiternden Anwendungsfall zum Akteur", "ok": false }
+    ],
+    "e": "Bei extend zeigt der Pfeil zurück zur Basis, bei include von der Basis weg."
+   },
+   {
+    "q": "In welche Richtung zeigt der gestrichelte Pfeil einer include-Beziehung?",
+    "o": [
+     { "t": "Vom Basis-Anwendungsfall zum eingebundenen Anwendungsfall", "ok": true },
+     { "t": "Vom eingebundenen Anwendungsfall zum Basis-Anwendungsfall", "ok": false },
+     { "t": "Vom Akteur zum eingebundenen Anwendungsfall", "ok": false },
+     { "t": "Vom eingebundenen Anwendungsfall zum Akteur", "ok": false }
+    ],
+    "e": "Die Basis bindet den Teilablauf ein, also zeigt der Pfeil von der Basis weg."
+   },
+   {
+    "q": "Wo wird bei einer extend-Beziehung festgelegt, an welcher Stelle die Erweiterung andockt?",
+    "o": [
+     { "t": "Als Erweiterungspunkt im Basis-Anwendungsfall", "ok": true },
+     { "t": "Als Bedingung am Akteur außerhalb der Systemgrenze", "ok": false },
+     { "t": "Als Multiplizität an der Verbindungslinie", "ok": false },
+     { "t": "Als eigener Anwendungsfall mit include-Beziehung", "ok": false }
+    ],
+    "e": "Der Extension Point steht in der Ellipse des Basis-Anwendungsfalls, die Bedingung am Pfeil."
+   },
+   {
+    "q": "Wo werden Akteure im Anwendungsfalldiagramm platziert?",
+    "o": [
+     { "t": "Außerhalb der Systemgrenze", "ok": true },
+     { "t": "Innerhalb der Systemgrenze", "ok": false },
+     { "t": "Auf der Linie der Systemgrenze", "ok": false },
+     { "t": "In einer eigenen Swimlane", "ok": false }
+    ],
+    "e": "Akteure sind Rollen oder Fremdsysteme außerhalb des Systems; die Anwendungsfälle liegen innerhalb."
+   },
+   {
+    "q": "Was bedeutet im Aktivitätsdiagramm ein schwarzer Balken mit mehreren ausgehenden Pfeilen?",
+    "o": [
+     { "t": "Die folgenden Abläufe laufen gleichzeitig nebeneinander", "ok": true },
+     { "t": "Genau einer der folgenden Pfade wird ausgewählt", "ok": false },
+     { "t": "Der gesamte Ablauf endet an dieser Stelle", "ok": false },
+     { "t": "Die vorherige Aktion wird wiederholt ausgeführt", "ok": false }
+    ],
+    "e": "Das ist ein Fork: Er teilt den Ablauf in parallele Stränge, ein Join führt sie wieder zusammen."
+   },
+   {
+    "q": "Was modelliert im Aktivitätsdiagramm eine Raute mit Bedingungen wie [PIN korrekt] und [PIN falsch]?",
+    "o": [
+     { "t": "Eine Entscheidung, nach der genau ein Pfad weiterläuft", "ok": true },
+     { "t": "Eine Aufteilung in mehrere gleichzeitige Abläufe", "ok": false },
+     { "t": "Das Warten auf den Abschluss paralleler Abläufe", "ok": false },
+     { "t": "Den Wechsel der Zuständigkeit in eine andere Swimlane", "ok": false }
+    ],
+    "e": "Die Raute ist ein Entweder-oder. Parallele Abläufe zeigt der schwarze Balken."
+   },
+   {
+    "q": "Wie wird der Endknoten eines Aktivitätsdiagramms dargestellt?",
+    "o": [
+     { "t": "Als Kreis mit einem gefüllten Punkt in der Mitte", "ok": true },
+     { "t": "Als gefüllter schwarzer Kreis ohne äußeren Ring", "ok": false },
+     { "t": "Als schwarzer Balken quer zum Kontrollfluss", "ok": false },
+     { "t": "Als Raute mit einer Bedingung in Klammern", "ok": false }
+    ],
+    "e": "Der gefüllte Kreis ohne Ring ist der Startknoten, der Endknoten hat zusätzlich einen Ring."
+   },
+   {
+    "q": "Wozu dienen Swimlanes in einem Aktivitätsdiagramm?",
+    "o": [
+     { "t": "Sie ordnen Aktionen dem jeweils Verantwortlichen zu", "ok": true },
+     { "t": "Sie teilen den Ablauf in parallele Stränge auf", "ok": false },
+     { "t": "Sie markieren Anfang und Ende eines Ablaufs", "ok": false },
+     { "t": "Sie legen die Reihenfolge der Aktionen fest", "ok": false }
+    ],
+    "e": "Swimlanes sind Spalten oder Zeilen, etwa für Kunde und Automat."
+   },
+   {
+    "q": "Welches UML-Diagramm zeigt den Nachrichtenaustausch zwischen Objekten im zeitlichen Verlauf?",
+    "o": [
+     { "t": "Das Sequenzdiagramm", "ok": true },
+     { "t": "Das Aktivitätsdiagramm", "ok": false },
+     { "t": "Das Klassendiagramm", "ok": false },
+     { "t": "Das Anwendungsfalldiagramm", "ok": false }
+    ],
+    "e": "Im Sequenzdiagramm läuft die Zeit entlang der Lebenslinien von oben nach unten."
+   },
+   {
+    "q": "Die Methode berechneGehalt() eines Managers liefert grundgehalt + bonus, wenn bonus >= 0 ist, sonst nur das grundgehalt. Was liefert sie bei grundgehalt 3000 und bonus 500?",
+    "o": [
+     { "t": "3500", "ok": true },
+     { "t": "3000", "ok": false },
+     { "t": "500", "ok": false },
+     { "t": "2500", "ok": false }
+    ],
+    "e": "Der Bonus ist nicht negativ, also wird grundgehalt + bonus zurückgegeben."
    }
   ]
  },
@@ -22481,7 +22773,30 @@ const GLOSSAR = [{"a":"2FA","f":"Zwei-Faktor-Authentifizierung","d":"Anmeldung m
 {"a":"GiB","f":"Gibibyte","d":"1024 MiB = 1 073 741 824 Byte. Deshalb meldet eine 1-TB-Platte im Betriebssystem rund 931 GiB."},
 {"a":"TiB","f":"Tebibyte","d":"1024 GiB. Binäres Gegenstück zum dezimalen Terabyte mit 10^12 Byte."},
 {"a":"PB","f":"Petabyte","d":"1000 TB = 10^15 Byte. Größenordnung großer Archive und Rechenzentren."},
-{"a":"IEC","f":"International Electrotechnical Commission","d":"Normungsgremium. Legte die Binärpräfixe Kibi, Mebi, Gibi fest, um sie von den dezimalen SI-Präfixen Kilo, Mega, Giga zu trennen."}];
+{"a":"IEC","f":"International Electrotechnical Commission","d":"Normungsgremium. Legte die Binärpräfixe Kibi, Mebi, Gibi fest, um sie von den dezimalen SI-Präfixen Kilo, Mega, Giga zu trennen."},
+{"a":"SDLC","f":"Software Development Life Cycle","d":"Geplanter Lebenszyklus einer Software von der Anforderungsanalyse über Entwurf, Umsetzung und Test bis zu Betrieb und Wartung."},
+{"a":"Spaghetticode","d":"Unstrukturierter Code mit verworrenen Abhängigkeiten. Schwer zu verstehen, zu testen und zu ändern."},
+{"a":"Algorithmus","d":"Eindeutige, endliche Handlungsvorschrift zur Lösung einer Klasse gleichartiger Probleme, unabhängig von einer Programmiersprache."},
+{"a":"Determinismus","d":"Eigenschaft eines Algorithmus: Zu jedem Zeitpunkt steht eindeutig fest, welcher Schritt als Nächstes folgt."},
+{"a":"Terminierung","d":"Eigenschaft eines Algorithmus: Er bricht nach endlich vielen Schritten mit einem Ergebnis ab."},
+{"a":"Pseudocode","d":"Sprachunabhängige Beschreibung eines Algorithmus mit festen Schlüsselwörtern wie WENN, SOLANGE oder SCHREIBE, meist ohne Datentypen."},
+{"a":"Iteration","d":"Kontrollstruktur zur Wiederholung von Anweisungen in einer Schleife, kopf-, fuß- oder zählergesteuert."},
+{"a":"Instanz","d":"Konkretes Objekt, das zur Laufzeit aus einer Klasse erzeugt wird und eigene Attributwerte im Arbeitsspeicher hat."},
+{"a":"Konstruktor","d":"Spezielle Methode, die beim Erzeugen eines Objekts automatisch läuft und seine Attribute initialisiert."},
+{"a":"Vererbung","d":"OOP-Prinzip: Eine Unterklasse übernimmt Attribute und Methoden der Oberklasse („ist ein“-Beziehung)."},
+{"a":"Polymorphie","d":"OOP-Prinzip: Derselbe Methodenaufruf verhält sich je nach Objekttyp unterschiedlich, weil Unterklassen Methoden überschreiben."},
+{"a":"Abstraktion","d":"OOP-Prinzip: Nur die wesentlichen Eigenschaften werden modelliert, unwichtige Details weggelassen."},
+{"a":"Generalisierung","d":"UML-Beziehung für Vererbung: durchgezogene Linie mit leerer Dreiecksspitze zur Oberklasse."},
+{"a":"Interface","f":"Schnittstelle","d":"Legt Methoden fest, die jede realisierende Klasse umsetzen muss. In UML: gestrichelte Linie mit leerer Dreiecksspitze zum Interface."},
+{"a":"Aggregation","d":"Teil-Ganzes-Beziehung, bei der die Teile auch ohne das Ganze existieren. In UML: leere Raute am Ganzen."},
+{"a":"Komposition","d":"Teil-Ganzes-Beziehung, bei der die Teile nicht ohne das Ganze existieren. In UML: gefüllte Raute am Ganzen."},
+{"a":"Akteur","d":"Im Use-Case-Diagramm eine Benutzerrolle oder ein Fremdsystem außerhalb der Systemgrenze, dargestellt als Strichmännchen."},
+{"a":"Use Case","f":"Anwendungsfall","d":"Funktion, die ein System für einen Akteur erbringt. Im Diagramm eine Ellipse innerhalb der Systemgrenze."},
+{"a":"include","f":"Include-Beziehung (UML)","d":"Der eingebundene Anwendungsfall läuft immer mit. Gestrichelter Pfeil vom Basis- zum eingebundenen Anwendungsfall."},
+{"a":"extend","f":"Extend-Beziehung (UML)","d":"Die Erweiterung läuft nur unter einer Bedingung. Gestrichelter Pfeil von der Erweiterung zum Basis-Anwendungsfall."},
+{"a":"Fork","f":"Gabelung (UML)","d":"Schwarzer Balken im Aktivitätsdiagramm, der den Ablauf in parallel laufende Stränge aufteilt."},
+{"a":"Join","f":"Vereinigung (UML)","d":"Schwarzer Balken im Aktivitätsdiagramm, der parallele Stränge zusammenführt und wartet, bis alle fertig sind."},
+{"a":"Swimlane","d":"Spalte oder Zeile im Aktivitätsdiagramm, die Aktionen einem Verantwortlichen zuordnet."}];
 
 // ---- Bibliothek: Render + Suche ----
 const libList = document.getElementById('libList');
@@ -22554,7 +22869,7 @@ renderLib(GLOSSAR_SORTED);
     "r-logik": ["AND","OR","XOR","NAND","NOR","XNOR"],
     "r-mux": ["MUX","DEMUX","TDM","FDM","WDM","CDM"],
     "r-ausdehnung": ["BAN","PAN","CAN","MAN","GAN","MPLS"],
-    "r-oop": [,"Kapselung","Klassendiagramm"],
+    "r-oop": ["SDLC","Spaghetticode","Algorithmus","Determinismus","Terminierung","Pseudocode","Iteration","Instanz","Konstruktor","Kapselung","Vererbung","Polymorphie","Abstraktion","Klassendiagramm","Generalisierung","Interface","Aggregation","Komposition","Akteur","Use Case","include","extend","Aktivitätsdiagramm","Fork","Join","Swimlane","Sequenzdiagramm"],
     "r-osi": ["OSI","PDU","ASCII","TLS"],
     "r-ports": ["Proxy","SOCKS","RDP","HTTPS","POP3","IMAP","STARTTLS","SMTP","TLS","SSL"],
     "r-projekt": ["FAZ","FEZ","V-Modell","Spiralmodell","XP","SMART","Tuckman","RACI","Inkrement"],
