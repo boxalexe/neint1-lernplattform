@@ -77,6 +77,7 @@
   const DEFS = '<defs>'
     + '<marker id="u-tri" viewBox="0 0 12 12" refX="11" refY="6" markerWidth="12" markerHeight="12" orient="auto"><path d="M1,1 L11,6 L1,11 z" class="u-hollow"/></marker>'
     + '<marker id="u-arr" viewBox="0 0 12 12" refX="11" refY="6" markerWidth="11" markerHeight="11" orient="auto"><path d="M1,1 L11,6 L1,11" class="u-open"/></marker>'
+    + '<marker id="u-arr-f" viewBox="0 0 12 12" refX="11" refY="6" markerWidth="11" markerHeight="11" orient="auto"><path d="M1,1 L11,6 L1,11 z" class="u-solid"/></marker>'
     + '<marker id="u-dia" viewBox="0 0 16 12" refX="1" refY="6" markerWidth="16" markerHeight="12" orient="auto"><path d="M1,6 L8,1 L15,6 L8,11 z" class="u-hollow"/></marker>'
     + '<marker id="u-dia-f" viewBox="0 0 16 12" refX="1" refY="6" markerWidth="16" markerHeight="12" orient="auto"><path d="M1,6 L8,1 L15,6 L8,11 z" class="u-solid"/></marker>'
     + '</defs>';
@@ -99,10 +100,17 @@
       else if (r.op === '*--') mk = ' marker-start="url(#u-dia-f)"';
       s += '<line class="u-line" x1="' + p1[0].toFixed(1) + '" y1="' + p1[1].toFixed(1) + '" x2="' + p2[0].toFixed(1) + '" y2="' + p2[1].toFixed(1) + '"' + dash + mk + '/>';
       const len = Math.hypot(p2[0] - p1[0], p2[1] - p1[1]) || 1, ux = (p2[0] - p1[0]) / len, uy = (p2[1] - p1[1]) / len, nx = -uy, ny = ux;
-      const put = (txt, px, py, anchor) => { s += '<text class="u-mul" x="' + px.toFixed(1) + '" y="' + py.toFixed(1) + '" text-anchor="' + anchor + '">' + esc(txt) + '</text>'; };
-      if (r.label) put(r.label, (p1[0] + p2[0]) / 2 + nx * 12, (p1[1] + p2[1]) / 2 + ny * 12, 'middle');
-      if (r.am) put(r.am, p1[0] + ux * 16 + nx * 12, p1[1] + uy * 16 + ny * 12, 'middle');
-      if (r.bm) put(r.bm, p2[0] - ux * 16 + nx * 12, p2[1] - uy * 16 + ny * 12, 'middle');
+      // Beschriftung neben die Linie, nie darauf (Allvater 19.11.2026: „verliehen an“ lag auf dem Pfeil): bei steilen Linien bündig links
+      // bzw. rechts daneben, bei flachen mittig darüber bzw. darunter. Name der Beziehung auf die eine Seite, Vielfachheiten auf die andere.
+      const put = (txt, px, py, side) => {
+        const sx = nx * side, sy = ny * side, steep = Math.abs(sx) > 0.5;
+        const anchor = steep ? (sx < 0 ? 'end' : 'start') : 'middle';
+        const x = px + sx * 8, y = py + sy * 10 + (steep ? 4 : sy > 0 ? 9 : -2);
+        s += '<text class="u-mul" x="' + x.toFixed(1) + '" y="' + y.toFixed(1) + '" text-anchor="' + anchor + '">' + esc(txt) + '</text>';
+      };
+      if (r.label) put(r.label, (p1[0] + p2[0]) / 2, (p1[1] + p2[1]) / 2, 1);
+      if (r.am) put(r.am, p1[0] + ux * 18, p1[1] + uy * 18, -1);
+      if (r.bm) put(r.bm, p2[0] - ux * 18, p2[1] - uy * 18, -1);
     }
     for (const c of d.classes) {
       s += '<rect class="u-box" x="' + c.x + '" y="' + c.y + '" width="' + c.w + '" height="' + c.h + '" rx="1"/>';
@@ -119,9 +127,16 @@
 
   /* Sequenzdiagramm: actors = ['Kunde','Shop'], msgs = [['Kunde','Shop','bestellen()'], ['Shop','Kunde','Rechnung','ret']] */
   function sequence(actors, msgs) {
-    const SP = Math.max(150, Math.max(...actors.map((a) => a.length)) * 9 + 60), TOP = 20, BOX = 30;
-    const W = SP * actors.length + 20, H = TOP + BOX + 30 + msgs.length * 44 + 20;
-    const X = (n) => 10 + SP / 2 + SP * actors.indexOf(n);
+    // Abstand der Lebenslinien nach der längsten Nachricht (Allvater 19.11.2026: lange Beschriftungen liefen über die Linien): jede
+    // Beschriftung passt zwischen ihre beiden Lebenslinien; Selbstnachrichten bekommen rechts Platz, damit nichts abgeschnitten wird
+    const CHW = 6.8, idx = (n) => actors.indexOf(n);
+    let SP = Math.max(150, Math.max(...actors.map((a) => a.length)) * 9 + 60);
+    msgs.forEach((m, i) => { const slots = Math.abs(idx(m[1]) - idx(m[0])); if (slots) SP = Math.max(SP, ((String(i + 1).length + 2 + m[2].length) * CHW + 28) / slots); });
+    const TOP = 20, BOX = 30, X = (n) => 10 + SP / 2 + SP * idx(n);
+    let W = SP * actors.length + 20;
+    msgs.forEach((m) => { if (m[0] === m[1]) W = Math.max(W, X(m[0]) + 40 + m[2].length * CHW + 12); });
+    W = Math.ceil(W);
+    const H = TOP + BOX + 30 + msgs.length * 44 + 20;
     let s = '<svg class="uml" viewBox="0 0 ' + W + ' ' + H + '" style="max-width:' + W + 'px" xmlns="http://www.w3.org/2000/svg" role="img">' + DEFS;
     actors.forEach((a) => {
       const bw = a.length * 9 + 28;
@@ -132,11 +147,11 @@
       const y = TOP + BOX + 36 + i * 44, ret = m[3] === 'ret';
       if (m[0] === m[1]) {
         const x = X(m[0]);
-        s += '<path class="u-line" fill="none" d="M' + x + ',' + y + ' h34 v18 h-34" marker-end="url(#u-arr)"/><text class="u-mul" x="' + (x + 40) + '" y="' + (y + 12) + '">' + esc(m[2]) + '</text>';
+        s += '<path class="u-line" fill="none" d="M' + x + ',' + y + ' h34 v18 h-34" marker-end="url(#u-arr-f)"/><text class="u-mul" x="' + (x + 40) + '" y="' + (y + 12) + '">' + esc(m[2]) + '</text>';
         return;
       }
       const x1 = X(m[0]), x2 = X(m[1]), dir = x2 > x1 ? 1 : -1;
-      s += '<line class="u-line" x1="' + x1 + '" y1="' + y + '" x2="' + (x2 - dir * 2) + '" y2="' + y + '"' + (ret ? ' stroke-dasharray="6 4"' : '') + ' marker-end="url(#u-arr)"/>';
+      s += '<line class="u-line" x1="' + x1 + '" y1="' + y + '" x2="' + (x2 - dir * 2) + '" y2="' + y + '"' + (ret ? ' stroke-dasharray="6 4"' : '') + ' marker-end="url(#u-arr' + (ret ? '' : '-f') + ')"/>';
       s += '<text class="u-mul" x="' + ((x1 + x2) / 2) + '" y="' + (y - 7) + '" text-anchor="middle">' + esc((i + 1) + ': ' + m[2]) + '</text>';
     });
     return s + '</svg>';

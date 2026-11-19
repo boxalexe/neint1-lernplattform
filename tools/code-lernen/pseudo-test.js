@@ -36,6 +36,11 @@ t('Block offen', 'WENN 1 < 2 DANN\n AUSGABE 1', 'FEHLER: Der Block wird nicht ab
 t('Streuner ENDE', 'AUSGABE 1\nENDE WENN', 'FEHLER: „ENDE WENN“ passt hier zu keinem Anfang (ein Block wurde nicht geöffnet oder schon geschlossen)');
 t('Bedingung keine Bool', 'WENN 5 DANN\n AUSGABE 1\nENDE WENN', 'FEHLER: Hier muss eine Bedingung stehen (WAHR oder FALSCH), nicht 5');
 t('Text minus', 'AUSGABE "a" - 1', 'FEHLER: „-“ rechnet nur mit Zahlen, hier steht aber "a"');
+// Schreibweise der Layer 8 Academy (Kapitel OOP & UML) gilt gleichwertig
+t('L8A Solange', 'START\nSETZE i = 1\nSOLANGE i <= 3 WIEDERHOLE\n  SCHREIBE i\n  SETZE i = i + 1\nENDE SOLANGE\nENDE', '1\n2\n3');
+t('L8A Für', 'FÜR i VON 2 BIS 10 SCHRITT 2 WIEDERHOLE\n  SCHREIBE i\nENDE FÜR', '2\n4\n6\n8\n10');
+t('L8A Methode', 'METHODE gehalt(grund, bonus)\n  WENN bonus >= 0 DANN\n    RÜCKGABE grund + bonus\n  SONST\n    RÜCKGABE grund\n  ENDE WENN\nENDE METHODE\nSCHREIBE gehalt(3000, 500)', '3500');
+t('L8A Lies', 'LIES x\nSCHREIBE x * 2', '14', { inputs: ['7'] });
 
 const r = P.run('x <- 1\nWENN x = 1 DANN\n  x <- 2\nENDE WENN');
 console.log('Ereignisse:', r.events.map((e) => e.line + ':' + e.msg).join(' | '));

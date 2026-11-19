@@ -131,24 +131,26 @@
   }
 
   const R = {
-    algo: /^ALGORITHMUS\b/i,
-    out: /^AUSGABE\b:?\s*(.*)$/i,
-    inp: new RegExp('^EINGABE\\b:?\\s*(' + ID + ')\\s*$', 'i'),
+    // Schreibweisen wie in der Layer 8 Academy und vielen Prüfungen gelten gleichwertig: START, SCHREIBE, LIES, SETZE x = 5,
+    // SOLANGE ... WIEDERHOLE, FÜR ... WIEDERHOLE, METHODE und RÜCKGABE; ein einzelnes ENDE schließt den Algorithmus ab
+    algo: /^(?:ALGORITHMUS|START)\b|^ENDE$/i,
+    out: /^(?:AUSGABE|SCHREIBE)\b:?\s*(.*)$/i,
+    inp: new RegExp('^(?:EINGABE|LIES)\\b:?\\s*(' + ID + ')\\s*$', 'i'),
     endIf: /^ENDE\s*WENN$/i,
     endWhile: /^ENDE\s*SOLANGE$/i,
     endFor: /^ENDE\s*F(Ü|UE)R$/i,
-    endFn: /^ENDE\s*FUNKTION$/i,
+    endFn: /^ENDE\s*(?:FUNKTION|METHODE)$/i,
     elseIf: /^SONST\s+WENN\s+(.*?)(?:\s+DANN)?$/i,
     else: /^SONST$/i,
     if: /^WENN\s+(.*?)(?:\s+DANN)?$/i,
-    while: /^SOLANGE\s+(.*?)(?:\s+MACHE)?$/i,
+    while: /^SOLANGE\s+(.*?)(?:\s+(?:MACHE|WIEDERHOLE))?$/i,
     repeat: /^WIEDERHOLE$/i,
     until: /^BIS\s+(.*)$/i,
-    each: new RegExp('^F(?:Ü|UE)R\\s+JEDES\\s+(' + ID + ')\\s+IN\\s+(.*)$', 'i'),
-    for: new RegExp('^F(?:Ü|UE)R\\s+(' + ID + ')\\s+VON\\s+(.*?)\\s+BIS\\s+(.*?)(?:\\s+SCHRITT\\s+(.*))?$', 'i'),
-    fn: new RegExp('^FUNKTION\\s+(' + ID + ')\\s*\\((.*)\\)\\s*$', 'i'),
-    ret: /^GIB\s+ZUR(?:Ü|UE)CK\b\s*(.*)$/i,
-    setze: /^SETZE\s+(.+?)\s+AUF\s+(.*)$/i,
+    each: new RegExp('^F(?:Ü|UE)R\\s+JEDES\\s+(' + ID + ')\\s+IN\\s+(.*?)(?:\\s+WIEDERHOLE)?$', 'i'),
+    for: new RegExp('^F(?:Ü|UE)R\\s+(' + ID + ')\\s+VON\\s+(.*?)\\s+BIS\\s+(.*?)(?:\\s+SCHRITT\\s+(.*?))?(?:\\s+WIEDERHOLE)?$', 'i'),
+    fn: new RegExp('^(?:FUNKTION|METHODE)\\s+(' + ID + ')\\s*\\((.*)\\)\\s*$', 'i'),
+    ret: /^(?:GIB\s+ZUR(?:Ü|UE)CK|R(?:Ü|UE)CKGABE)\b\s*(.*)$/i,
+    setze: /^SETZE\s+(.+?)(?:\s+AUF\s+|\s*:=\s*|\s*=\s*)(.*)$/i,
     assign: new RegExp('^(' + ID + '(?:\\s*\\[.*\\])?)\\s*(?:<-|←|:=)\\s*(.*)$')
   };
 

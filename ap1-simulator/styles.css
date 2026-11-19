@@ -209,8 +209,8 @@ html[data-theme="cvd"]{
 
 
 /* ============ KOPFLEISTE (alle Ansichten) ============ */
-.topbar{position:sticky;top:0;z-index:150;background:rgba(10,14,18,0.96);
-  backdrop-filter:blur(8px);border-bottom:1px solid var(--border);padding:9px 0;margin-bottom:22px}
+.topbar{position:sticky;top:0;z-index:150;background:var(--bg);
+  border-bottom:1px solid var(--border);padding:9px 0;margin-bottom:22px}
 .topbar-inner{display:flex;align-items:center;gap:10px;flex-wrap:nowrap;min-height:34px}
 .tb-title{font-family:'DM Mono',monospace;font-size:0.8rem;letter-spacing:1px;color:var(--cyan);
   white-space:nowrap;overflow:hidden;text-overflow:ellipsis;flex:0 1 auto}
