@@ -411,7 +411,7 @@
     $('#nav').innerHTML = '<a class="nav-top" href="#/home">Start</a>' + A.tracks.map((t) => {
       const ls = A.lessons(t);
       return '<details' + (cur === t.id ? ' open' : '') + '><summary><span>' + esc(t.title) + '</span><span class="small muted">' + ls.filter((l) => P.done[l.id]).length + '/' + ls.length + '</span></summary>' + ls.map((l) => '<a class="nl' + (P.done[l.id] ? ' done' : '') + (CUR && CUR.lesson.id === l.id ? ' on' : '') + '" href="#/lesson/' + l.id + '"><span class="dot"></span>' + esc(l.title) + '</a>').join('') + '</details>';
-    }).join('') + '<div class="nav-sep"></div><a class="nav-top" href="#/play/pseudo">Spielwiese</a><a class="nav-top" href="#/compare/vars">Sprachvergleich</a><a class="nav-top" href="#/glossar">Begriffe von A bis Z</a><button class="nav-reset" type="button">Lernfortschritt löschen</button>';
+    }).join('') + '<div class="nav-sep"></div><a class="nav-top" href="#/play/pseudo">Spielwiese</a><a class="nav-top" href="#/compare/vars">Sprachvergleich</a><a class="nav-top" href="#/glossar">Begriffe von A bis Z</a><button class="nav-reset" type="button">Lernfortschritt löschen</button><div class="nav-sep"></div><a class="nav-top" href="/#impressum">Impressum und Datenschutz</a>';
   }
 
   function route() {

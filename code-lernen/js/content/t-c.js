@@ -36,7 +36,7 @@
           C(['int a = 5;§Startwert.', 'a++;§Erhöht a um 1: 6.', 'a += 4;§Kurzform für a = a + 4: 10.', 'a *= 2;§a = a * 2: 20.', 'printf("%d\\n", a);§Ausgabe: 20'], 'Kurzschreibweisen')
         ],
         tips: [A.warn('`if (x = 5)` ist in C **erlaubt** und setzt x auf 5, weil jede Zahl ungleich 0 als „wahr“ gilt. Das ist eine der berühmtesten Fehlerquellen. Vergleichen heißt `==`. Mit `-Wall` warnt dich der Compiler.')],
-        quiz: [A.q('Was ist in C „falsch“?', ['Die Zahl 0', 'Das Wort false', 'Jede negative Zahl', 'Eine leere Zeile'], 0, 'Null ist falsch, alles andere ist wahr.')],
+        quiz: [A.q('Was ist in C „falsch“?', ['Die Zahl 0', 'Der Text "falsch"', 'Jede negative Zahl', 'Eine leere Zeile'], 0, 'Null ist falsch, alles andere ist wahr. Seit C99 gibt es mit stdbool.h auch die Wörter true und false, dahinter stehen genau 1 und 0.')],
         tasks: [PP('Was gibt das Programm aus?', ['printf("%d\\n", 17 / 5);', 'printf("%d\\n", 17 % 5);'], '3\n2', 'Beides sind int: ganzzahlige Division und Rest.')]
       },
       {

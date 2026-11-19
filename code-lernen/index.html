@@ -4,14 +4,12 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <!-- Kein Code verlässt diese Seite: keine Verbindungen nach außen (connect-src 'none'), JavaScript-Übungen laufen nur im abgeschotteten Worker -->
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'wasm-unsafe-eval'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'none'; worker-src 'self'; frame-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'wasm-unsafe-eval'; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data:; connect-src 'none'; worker-src 'self'; frame-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
 <title>CodeLernen: Programmieren für die AP2 | Layer 8 Academy</title>
 <meta name="description" content="Programmieren Schritt für Schritt: Pseudocode, OOP und UML, SQL, Python, JavaScript, Java, C#, C und C++. Mit Erklärungen zu jeder Zeile, Quiz und Übungen bis zum Stoff der AP2. Läuft komplett im Browser.">
 <link rel="canonical" href="https://layer8academy.boxberger.app/code-lernen/">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/fonts/fonts.css">
 <link rel="stylesheet" href="css/style.css?v=2">
 </head>
 <body>
@@ -39,6 +37,7 @@
   <div id="shade" hidden></div>
   <main id="main"></main>
 </div>
+<footer class="legal">Privates Lernprojekt, ohne Gewähr. Code wird nur in deinem Browser ausgeführt. <a href="/#impressum">Impressum &amp; Datenschutz</a></footer>
 
 <!-- SQL-Motor (sql.js, MIT-Lizenz) lokal eingebettet: Abfragen laufen nur im Browser, nichts geht an einen Server -->
 <script src="js/vendor/sql-wasm-b64.js"></script>

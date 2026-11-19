@@ -38,7 +38,7 @@
           C(['print(7 + 3)§Addition: 10', 'print(7 / 2)§Normale Division liefert **immer** eine Kommazahl: 3.5', 'print(7 // 2)§Ganzzahl-Division (zwei Schrägstriche): 3', 'print(7 % 2)§Das Prozentzeichen liefert den **Rest** (Modulo): 1', 'print(2 ** 10)§Zwei Sterne = Potenz: 2 hoch 10 = 1024', 'print(5 > 3 and 5 < 10)§and = UND. Beide Vergleiche stimmen: True', 'print(not (5 == 5))§not dreht um. 5 == 5 ist True, also False. Vergleichen heißt ==', 'print(5 != 4)§!= bedeutet ungleich: True'], 'Rechnen, Vergleichen, Verknüpfen')
         ],
         tips: [A.tip('In Python ergibt `7 / 2` richtig `3.5`. Willst du die ganzzahlige Division wie in Java oder C, nimm `//`.')],
-        quiz: [A.q('Was ergibt `7 // 2` in Python?', ['3', '3.5', '4', '1'], 0, '`//` ist die Ganzzahl-Division und schneidet die Nachkommastellen ab.')],
+        quiz: [A.q('Was ergibt `7 // 2` in Python?', ['3', '3.5', '4', '1'], 0, '`//` ist die Ganzzahl-Division und rundet nach unten ab. Bei positiven Zahlen fallen einfach die Nachkommastellen weg, bei negativen wird weiter nach unten gerundet: `-7 // 2` ergibt -4.')],
         tasks: [A.predict('Was gibt das Programm aus?', ['print(17 // 5, 17 % 5)'], '3 2', '17 durch 5 ist 3 Rest 2.', 'Erst `//` (ganzzahlig), dann `%` (Rest).'), A.predict('Was gibt das Programm aus?', ['print(10 > 5 and 3 > 4)'], 'False', '`and` ist nur True, wenn beide Seiten True sind. 3 > 4 stimmt nicht.')].map((t) => Object.assign(t, { lang: 'python' }))
       },
       {

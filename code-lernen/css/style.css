@@ -264,3 +264,7 @@ svg.uml { width: 100%; height: auto; display: block; margin: 0 auto; font-family
   .goal { padding: 8px 12px; }
 }
 @media print { #top, #side, #shade, button, .tr-ctl { display: none !important; } #layout { display: block; } body { background: #fff; color: #000; } }
+/* Fußzeile mit Impressum und Datenschutz (von jeder Seite aus erreichbar) */
+footer.legal { border-top: 1px solid var(--border); padding: 14px 16px 22px; text-align: center; font: .78rem var(--mono); color: var(--muted); background: var(--bg); }
+footer.legal a { color: var(--muted); text-decoration: underline; } footer.legal a:hover { color: var(--cyan); }
+@media (min-width: 901px) { footer.legal { margin-left: 290px; } }
