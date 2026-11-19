@@ -8,7 +8,7 @@
     ['`kunde`', '`id`, `name`, `stadt`, `geburtsjahr`', 'Wer kauft ein? (8 Kunden, einer ohne Stadt)'],
     ['`produkt`', '`id`, `name`, `kategorie`, `preis`', 'Was wird verkauft? (8 Produkte)'],
     ['`bestellung`', '`id`, `kunde_id`, `produkt_id`, `menge`, `datum`', 'Wer hat wann wie viel von was bestellt? (14 Bestellungen)']
-  ], 'Unsere Beispieldatenbank „Shop“', 'Mit dieser Datenbank arbeitest du im ganzen Kurs. Du kannst sie jederzeit unter **Spielwiese → SQL** ansehen. Jede Ausführung beginnt mit frischen Daten: Du kannst nichts kaputt machen.');
+  ], 'Unsere Beispieldatenbank „Shop“', 'Mit dieser Datenbank arbeitest du im ganzen Kurs. Du kannst sie jederzeit in der **Spielwiese** unter **SQL** ansehen. Jede Ausführung beginnt mit frischen Daten: Du kannst nichts kaputt machen.');
 
   A.track({
     id: 'sql', title: 'SQL und Datenbanken', tag: 'SQL',

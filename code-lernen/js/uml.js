@@ -142,5 +142,25 @@
     return s + '</svg>';
   }
 
-  g.UML = { parse, classDiagram, sequence };
+  /*
+   * Struktogramm (Nassi-Shneiderman) aus einer kleinen Beschreibung:
+   *   'Text'                                          Anweisung
+   *   { wenn: 'Bedingung', ja: [...], nein: [...] }   Verzweigung (Dreieck oben, zwei Spalten)
+   *   { solange: 'Bedingung', tue: [...] }            kopfgesteuerte Schleife (auch für Zählschleifen)
+   *   { wiederhole: [...], bis: 'Bedingung' }         fußgesteuerte Schleife
+   * Ausgabe ist HTML ohne Skript, alle Texte maskiert.
+   */
+  function nsd(blocks) {
+    const list = (bs) => (bs && bs.length ? bs.map(one).join('') : '<div class="nsd-s nsd-leer">nichts tun</div>');
+    const one = (b) => {
+      if (typeof b === 'string') return '<div class="nsd-s">' + esc(b) + '</div>';
+      if (b.wenn !== undefined) return '<div class="nsd-if"><div class="nsd-cond"><span class="nsd-c">' + esc(b.wenn) + '</span><span class="nsd-ja">ja</span><span class="nsd-nein">nein</span></div><div class="nsd-cols"><div class="nsd-col">' + list(b.ja) + '</div><div class="nsd-col">' + list(b.nein) + '</div></div></div>';
+      if (b.solange !== undefined) return '<div class="nsd-loop"><div class="nsd-head">' + esc(b.solange) + '</div><div class="nsd-inner">' + list(b.tue) + '</div></div>';
+      if (b.wiederhole !== undefined) return '<div class="nsd-loop nsd-fuss"><div class="nsd-inner">' + list(b.wiederhole) + '</div><div class="nsd-head">' + esc(b.bis) + '</div></div>';
+      return '';
+    };
+    return '<div class="nsd">' + list(blocks) + '</div>';
+  }
+
+  g.UML = { parse, classDiagram, sequence, nsd };
 })(typeof window !== 'undefined' ? window : globalThis);

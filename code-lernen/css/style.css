@@ -200,6 +200,20 @@ svg.uml { width: 100%; height: auto; display: block; margin: 0 auto; font-family
 .u-mem { fill: var(--text); font-size: 12px; } .u-mul { fill: var(--muted); font-size: 11px; }
 .u-line { stroke: var(--text); stroke-width: 1.3; } .u-life { stroke: var(--muted); stroke-dasharray: 5 5; }
 .u-hollow { fill: var(--panel-2); stroke: var(--text); stroke-width: 1.2; } .u-solid { fill: var(--text); stroke: var(--text); } .u-open { fill: none; stroke: var(--text); stroke-width: 1.3; }
+/* Struktogramm (Nassi-Shneiderman): Kästen ineinander, Verzweigung mit Dreieck aus zwei Diagonalen */
+.nsd { font-family: var(--mono); font-size: .85rem; color: var(--text); border: 1px solid var(--cyan); max-width: 640px; margin: 0 auto; background: var(--panel); }
+.nsd-s { padding: 7px 10px; border-top: 1px solid var(--cyan); } .nsd > :first-child, .nsd-col > :first-child, .nsd-inner > :first-child { border-top: 0; }
+.nsd-leer { color: var(--muted); font-style: italic; }
+.nsd-if, .nsd-loop { border-top: 1px solid var(--cyan); } .nsd > .nsd-if:first-child, .nsd > .nsd-loop:first-child, .nsd-col > .nsd-if:first-child, .nsd-col > .nsd-loop:first-child, .nsd-inner > .nsd-if:first-child, .nsd-inner > .nsd-loop:first-child { border-top: 0; }
+.nsd-cond { position: relative; height: 62px; }
+.nsd-cond::before, .nsd-cond::after { content: ""; position: absolute; top: 0; bottom: 0; width: 50%; }
+.nsd-cond::before { left: 0; background: linear-gradient(to top right, transparent calc(50% - .6px), var(--cyan) calc(50% - .6px), var(--cyan) calc(50% + .6px), transparent calc(50% + .6px)); }
+.nsd-cond::after { right: 0; background: linear-gradient(to top left, transparent calc(50% - .6px), var(--cyan) calc(50% - .6px), var(--cyan) calc(50% + .6px), transparent calc(50% + .6px)); }
+.nsd-c { position: absolute; left: 0; right: 0; top: 6px; text-align: center; padding: 0 22%; z-index: 1; }
+.nsd-ja, .nsd-nein { position: absolute; bottom: 4px; font-size: .75rem; color: var(--green); } .nsd-ja { left: 10px; } .nsd-nein { right: 10px; color: var(--amber); }
+.nsd-cols { display: grid; grid-template-columns: 1fr 1fr; border-top: 1px solid var(--cyan); } .nsd-col + .nsd-col { border-left: 1px solid var(--cyan); }
+.nsd-head { padding: 7px 10px; } .nsd-inner { margin-left: 26px; border-left: 1px solid var(--cyan); border-top: 1px solid var(--cyan); }
+.nsd-fuss .nsd-inner { border-top: 0; border-bottom: 1px solid var(--cyan); }
 .tabs { display: flex; gap: 6px; margin: 4px 0 14px; flex-wrap: wrap; } .tabs a { padding: 7px 16px; border: 1px solid var(--border); border-radius: var(--r); color: var(--muted); background: var(--panel-2); font-family: var(--mono); font-size: .85rem; }
 .tabs a.on { background: var(--cyan); border-color: var(--cyan); color: var(--bg); } .tabs a:hover { text-decoration: none; border-color: var(--cyan); }
 .pg { margin: 10px 0; } .pg-top { padding-left: 0; } .refbox { background: var(--panel-2); border: 1px solid var(--border); border-radius: var(--r); padding: 10px 14px; white-space: pre-wrap; font-family: var(--mono); font-size: .86rem; }

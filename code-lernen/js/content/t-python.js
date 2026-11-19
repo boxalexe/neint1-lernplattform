@@ -56,7 +56,7 @@
         parts: [
           C(['for i in range(1, 4):§range(1, 4) liefert 1, 2, 3. **Das Ende (4) gehört nicht mehr dazu!** i bekommt der Reihe nach diese Werte.', '    print("Durchlauf", i)§Eingerückter Schleifenkörper. Ausgabe: Durchlauf 1, Durchlauf 2, Durchlauf 3'], 'Zählschleife mit for und range'),
           C(['zahl = 1§Startwert.', 'while zahl < 50:§Vor jedem Durchlauf wird die Bedingung geprüft. Solange sie True ist, läuft der Block.', '    zahl = zahl * 3§Hier ändert sich etwas, damit die Schleife irgendwann endet.', 'print(zahl)§Nach der Schleife: 81 (1, 3, 9, 27, 81).'], 'Bedingungsschleife while'),
-          C(['for i in range(10):§range(10) ist 0 bis 9.', '    if i == 3:§Bei 3 …', '        continue§… überspringt continue den Rest dieses Durchlaufs und macht mit dem nächsten weiter.', '    if i == 6:§Bei 6 …', '        break§… beendet break die ganze Schleife sofort.', '    print(i)§Ausgabe: 0 1 2 4 5 (jeweils in einer eigenen Zeile)'], 'break und continue')
+          C(['for i in range(10):§range(10) ist 0 bis 9.', '    if i == 3:§Wenn i gleich 3 ist:', '        continue§Dann überspringt continue den Rest dieses Durchlaufs und macht mit dem nächsten weiter.', '    if i == 6:§Wenn i gleich 6 ist:', '        break§Dann beendet break die ganze Schleife sofort.', '    print(i)§Ausgabe: 0 1 2 4 5 (jeweils in einer eigenen Zeile)'], 'break und continue')
         ],
         tips: [A.warn('`range(1, 4)` liefert **1, 2, 3**, nicht 4. Das Ende ist **ausgeschlossen**. Mit `range(5)` bekommst du 0 bis 4, genau passend zu den Listenindizes.')],
         quiz: [A.q('Welche Zahlen liefert `range(2, 5)`?', ['2, 3, 4', '2, 3, 4, 5', '3, 4, 5', '2, 5'], 0, 'Start ist dabei, das Ende nicht.')],

@@ -253,7 +253,7 @@
     ['Block', 'Eine Gruppe zusammengehöriger Anweisungen, z. B. der Körper einer Schleife oder eines if-Zweigs.'],
     ['Boolean (Wahrheitswert)', 'Ein Datentyp mit nur zwei Werten: WAHR (true) und FALSCH (false).'],
     ['Compiler', 'Ein Programm, das Quellcode vor dem Start in Maschinencode übersetzt (z. B. bei C, C++, Java, C#).'],
-    ['Datentyp', 'Beschreibt, welche Art von Wert eine Variable hält (ganze Zahl, Kommazahl, Text, Wahrheitswert …).'],
+    ['Datentyp', 'Beschreibt, welche Art von Wert eine Variable hält (ganze Zahl, Kommazahl, Text oder Wahrheitswert).'],
     ['Debugging', 'Die Suche und Beseitigung von Fehlern („Bugs“) im Programm.'],
     ['Fremdschlüssel', 'In SQL: Eine Spalte, die auf den Primärschlüssel einer anderen Tabelle verweist und so Daten verknüpft.'],
     ['Funktion', 'Ein benannter, wiederverwendbarer Codeblock, der Parameter entgegennimmt und einen Wert zurückgeben kann.'],

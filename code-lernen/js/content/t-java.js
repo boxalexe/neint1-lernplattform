@@ -7,7 +7,7 @@
   A.track({
     id: 'java', title: 'Java', tag: 'JAVA',
     desc: 'Streng typisiert und objektorientiert: Variablen, Methoden, Arrays, Klassen, Vererbung und Ausnahmen. Der Klassiker in Ausbildung, Studium und Unternehmen.',
-    intro: 'In Java gehört **alles in Klassen**, und jede Variable hat einen **festen Typ**, den du hinschreibst (`int`, `String`, …). Das wirkt zuerst streng, hilft aber, Fehler früh zu finden: Der Compiler meldet sie schon **vor** dem Start.\n\nZum Ausprobieren brauchst du ein **JDK** (z. B. Temurin von adoptium.net) und eine Datei `Main.java`. Starten: `javac Main.java` (übersetzen), dann `java Main` (ausführen). Ab JDK 11 geht für einzelne Dateien auch `java Main.java`. Die Code-Beispiele in den weiteren Lektionen zeigen meist nur den Teil **innerhalb von `main`**.',
+    intro: 'In Java gehört **alles in Klassen**, und jede Variable hat einen **festen Typ**, den du hinschreibst (zum Beispiel `int` oder `String`). Das wirkt zuerst streng, hilft aber, Fehler früh zu finden: Der Compiler meldet sie schon **vor** dem Start.\n\nZum Ausprobieren brauchst du ein **JDK** (z. B. Temurin von adoptium.net) und eine Datei `Main.java`. Starten: `javac Main.java` (übersetzen), dann `java Main` (ausführen). Ab JDK 11 geht für einzelne Dateien auch `java Main.java`. Die Code-Beispiele in den weiteren Lektionen zeigen meist nur den Teil **innerhalb von `main`**.',
     lessons: [
       {
         concept: 'hello',

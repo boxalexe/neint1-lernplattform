@@ -28,11 +28,11 @@ t('Eingabe', 'EINGABE a\nEINGABE b\nAUSGABE a + b', '12', { inputs: ['5', '7'] }
 t('Maximum', 'liste <- [3, 9, 2, 7]\nmax <- liste[0]\nFÜR JEDES z IN liste\n  WENN z > max DANN\n    max <- z\n  ENDE WENN\nENDE FÜR\nAUSGABE max', '9');
 
 // Fehlerfälle
-t('Endlosschleife', 'n <- 1\nSOLANGE n > 0\n n <- n + 1\nENDE SOLANGE', 'FEHLER: Abbruch nach 3000 Schritten – vermutlich eine Endlosschleife (die Bedingung wird nie FALSCH)');
+t('Endlosschleife', 'n <- 1\nSOLANGE n > 0\n n <- n + 1\nENDE SOLANGE', 'FEHLER: Abbruch nach 3000 Schritten. Vermutlich ist das eine Endlosschleife, weil die Bedingung nie FALSCH wird');
 t('Variable fehlt', 'AUSGABE y', 'FEHLER: Die Variable „y“ hat noch keinen Wert. Sie muss vorher mit ← gesetzt werden');
 t('Index', 'l <- [1,2]\nAUSGABE l[2]', 'FEHLER: Index 2 gibt es nicht: gültig sind 0 bis 1 (die Zählung beginnt bei 0)');
 t('Durch 0', 'AUSGABE 5 / 0', 'FEHLER: Durch 0 kann man nicht teilen');
-t('Block offen', 'WENN 1 < 2 DANN\n AUSGABE 1', 'FEHLER: Der Block wird nicht abgeschlossen (es fehlt ein ENDE … oder BIS …)');
+t('Block offen', 'WENN 1 < 2 DANN\n AUSGABE 1', 'FEHLER: Der Block wird nicht abgeschlossen (es fehlt das passende Ende, zum Beispiel ENDE WENN, ENDE SOLANGE oder bei WIEDERHOLE das BIS)');
 t('Streuner ENDE', 'AUSGABE 1\nENDE WENN', 'FEHLER: „ENDE WENN“ passt hier zu keinem Anfang (ein Block wurde nicht geöffnet oder schon geschlossen)');
 t('Bedingung keine Bool', 'WENN 5 DANN\n AUSGABE 1\nENDE WENN', 'FEHLER: Hier muss eine Bedingung stehen (WAHR oder FALSCH), nicht 5');
 t('Text minus', 'AUSGABE "a" - 1', 'FEHLER: „-“ rechnet nur mit Zahlen, hier steht aber "a"');

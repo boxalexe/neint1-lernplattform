@@ -10,7 +10,8 @@
  *   FÜR i VON 1 BIS 10 [SCHRITT 2] ... ENDE FÜR
  *   FÜR JEDES x IN liste ... ENDE FÜR
  *   FUNKTION name(a, b) ... GIB ZURÜCK wert ... ENDE FUNKTION
- * Listen: [1, 2, 3], liste[0] (Index beginnt bei 0), LÄNGE(liste), ANHÄNGEN(liste, wert)
+ * Listen: [1, 2, 3], liste[0] (Index beginnt bei 0), LÄNGE(liste), ANHÄNGEN(liste, wert),
+ *         LETZTES_ENTFERNEN(liste) und ERSTES_ENTFERNEN(liste) (nehmen das Element heraus und geben es zurück)
  * Operatoren: + - * / DIV MOD  = != < > <= >=  UND ODER NICHT
  */
 (function (g) {
@@ -176,7 +177,7 @@
       }
       if (stops.length) {
         const last = lines[lines.length - 1];
-        throw new PErr('Der Block wird nicht abgeschlossen (es fehlt ein ENDE … oder BIS …)', last ? last.n : 0);
+        throw new PErr('Der Block wird nicht abgeschlossen (es fehlt das passende Ende, zum Beispiel ENDE WENN, ENDE SOLANGE oder bei WIEDERHOLE das BIS)', last ? last.n : 0);
       }
       return body;
     }
@@ -248,7 +249,7 @@
       }
       pos++;
       const e = parseExpr(t, n);
-      if (e.k !== 'call') throw new PErr('Diese Zeile ist keine Anweisung. Gemeint: x <- … (Zuweisung), AUSGABE … oder ein Funktionsaufruf', n);
+      if (e.k !== 'call') throw new PErr('Diese Zeile ist keine Anweisung. Gemeint ist zum Beispiel eine Zuweisung wie x <- 5, eine AUSGABE oder ein Funktionsaufruf', n);
       return { k: 'call', e, line: n };
     }
 
@@ -276,7 +277,7 @@
     const frames = [{ name: null, vars: {} }];
     const snap = () => frames.map((f) => ({ name: f.name, vars: Object.fromEntries(Object.entries(f.vars).map(([k, v]) => [k, copy(v)])) }));
     const emit = (line, msg, extra) => {
-      if (++steps > MAXSTEPS) throw new PErr('Abbruch nach ' + MAXSTEPS + ' Schritten – vermutlich eine Endlosschleife (die Bedingung wird nie FALSCH)', line);
+      if (++steps > MAXSTEPS) throw new PErr('Abbruch nach ' + MAXSTEPS + ' Schritten. Vermutlich ist das eine Endlosschleife, weil die Bedingung nie FALSCH wird', line);
       events.push(Object.assign({ line, msg, scopes: snap(), out }, extra || {}));
     };
     const top = () => frames[frames.length - 1].vars;
@@ -301,7 +302,10 @@
       'text': (a) => fmt(a[0], true),
       'zahl': (a) => { const n = parseFloat(a[0]); return Number.isNaN(n) ? bad('ZAHL: „' + a[0] + '“ ist keine Zahl') : n; },
       'anhängen': (a) => { if (!Array.isArray(a[0])) bad('ANHÄNGEN braucht eine Liste'); a[0].push(a[1]); return a[0]; },
-      'anhaengen': (a) => B['anhängen'](a)
+      'anhaengen': (a) => B['anhängen'](a),
+      // Stapel und Warteschlange (AP2-Kurs): oben bzw. vorne herausnehmen, der Wert kommt zurück
+      'letztes_entfernen': (a) => { if (!Array.isArray(a[0])) bad('LETZTES_ENTFERNEN braucht eine Liste'); if (!a[0].length) bad('Die Liste ist leer, es gibt nichts zu entfernen'); return a[0].pop(); },
+      'erstes_entfernen': (a) => { if (!Array.isArray(a[0])) bad('ERSTES_ENTFERNEN braucht eine Liste'); if (!a[0].length) bad('Die Liste ist leer, es gibt nichts zu entfernen'); return a[0].shift(); }
     };
     let curLine = 0;
     function bad(m) { throw new PErr(m, curLine); }
@@ -361,7 +365,7 @@
       const vars = {};
       fn.params.forEach((p, i) => { vars[p] = copy(args[i]); });
       frames.push({ name: fn.name + '(' + args.map((a) => fmt(a)).join(', ') + ')', vars });
-      emit(fn.line, 'Aufruf: ' + fn.name + '(' + args.map((a) => fmt(a)).join(', ') + ') – die Parameter bekommen ihre Werte', { call: true });
+      emit(fn.line, 'Aufruf: ' + fn.name + '(' + args.map((a) => fmt(a)).join(', ') + '). Die Parameter bekommen ihre Werte', { call: true });
       try { exec(fn.body); } catch (r) { if (r instanceof Ret) { frames.pop(); return r.v; } throw r; }
       frames.pop();
       return null;
@@ -403,23 +407,23 @@
             let done = false;
             for (const b of s.branches) {
               const c = needBool(ev(b.cond, b.line), b.line);
-              emit(b.line, 'Prüfe: ' + b.text + ' → ' + (c ? 'WAHR, dieser Zweig wird ausgeführt' : 'FALSCH, dieser Zweig wird übersprungen'));
+              emit(b.line, 'Prüfe: ' + b.text + '. Ergebnis: ' + (c ? 'WAHR, dieser Zweig wird ausgeführt' : 'FALSCH, dieser Zweig wird übersprungen'));
               if (c) { exec(b.body); done = true; break; }
             }
-            if (!done && s.els) { emit(s.els.line, 'Keine Bedingung traf zu → SONST-Zweig'); exec(s.els.body); }
+            if (!done && s.els) { emit(s.els.line, 'Keine Bedingung traf zu, also läuft der SONST-Zweig'); exec(s.els.body); }
             break;
           }
           case 'while': {
             while (true) {
               const c = needBool(ev(s.cond, s.line), s.line);
-              emit(s.line, 'Prüfe: ' + s.text + ' → ' + (c ? 'WAHR, der Schleifenkörper läuft noch einmal' : 'FALSCH, die Schleife ist beendet'));
+              emit(s.line, 'Prüfe: ' + s.text + '. Ergebnis: ' + (c ? 'WAHR, der Schleifenkörper läuft noch einmal' : 'FALSCH, die Schleife ist beendet'));
               if (!c) break;
               exec(s.body);
             }
             break;
           }
           case 'repeat': {
-            do { exec(s.body); var c = needBool(ev(s.cond, s.untilLine), s.untilLine); emit(s.untilLine, 'Prüfe: ' + s.text + ' → ' + (c ? 'WAHR, jetzt wird aufgehört' : 'FALSCH, es geht von vorn los')); } while (!c);
+            do { exec(s.body); var c = needBool(ev(s.cond, s.untilLine), s.untilLine); emit(s.untilLine, 'Prüfe: ' + s.text + '. Ergebnis: ' + (c ? 'WAHR, jetzt wird aufgehört' : 'FALSCH, es geht von vorn los')); } while (!c);
             break;
           }
           case 'for': {
@@ -430,7 +434,7 @@
               emit(s.line, s.v + ' = ' + num(i) + ' (Durchlauf ' + (Math.round(Math.abs((i - a) / st)) + 1) + ')');
               exec(s.body);
             }
-            emit(s.line, 'Die Zählung ist über ' + num(b) + ' hinaus → die Schleife ist beendet');
+            emit(s.line, 'Die Zählung ist über ' + num(b) + ' hinaus, die Schleife ist beendet');
             break;
           }
           case 'each': {
@@ -438,12 +442,12 @@
             if (!Array.isArray(l) && typeof l !== 'string') throw new PErr('FÜR JEDES braucht eine Liste oder einen Text', s.line);
             const items = Array.isArray(l) ? l.slice() : l.split('');
             items.forEach((x, i) => { top()[s.v] = x; emit(s.line, s.v + ' = ' + fmt(x) + ' (Element ' + (i + 1) + ' von ' + items.length + ')'); exec(s.body); });
-            emit(s.line, 'Alle Elemente sind durch → die Schleife ist beendet');
+            emit(s.line, 'Alle Elemente sind durch, die Schleife ist beendet');
             break;
           }
           case 'ret': {
             const v = s.e ? ev(s.e, s.line) : null;
-            emit(s.line, 'GIB ZURÜCK ' + (v === null ? '' : fmt(v)) + ' – die Funktion endet hier');
+            emit(s.line, 'GIB ZURÜCK ' + (v === null ? '' : fmt(v)) + '. Die Funktion endet hier');
             throw new Ret(v);
           }
           case 'call': {
