@@ -10,6 +10,11 @@
 /ap1sim5/ap1sim5.html    /ap1-simulator/        301
 /ap1sim5/ap1sim5         /ap1-simulator/        301
 
+# Diagnose-Arena offline (19.11.2026): alte Links landen bei CodeLernen statt im Leeren
+/osi-battle              /code-lernen/          301
+/osi-battle/             /code-lernen/          301
+/osi-battle/*            /code-lernen/          301
+
 # Alles darunter (Skripte, Stylesheets, Unterseiten) mitnehmen
 /subtrainer/*            /subnetting-trainer/:splat   301
 /ap1sim5/*               /ap1-simulator/:splat        301

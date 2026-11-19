@@ -1,0 +1,11 @@
+# CodeLernen: Code wird nur im Browser zum Üben ausgeführt, nie nach außen geschickt.
+# Die Seite darf keine Verbindungen aufbauen (connect-src 'none'), nur eigene Dateien laden und den Datenbankmotor (WebAssembly) starten.
+/code-lernen/*
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'wasm-unsafe-eval'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'none'; worker-src 'self'; frame-src 'none'; frame-ancestors 'none'; object-src 'none'; base-uri 'none'; form-action 'none'
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: no-referrer
+
+# Der Ausführer für JavaScript-Übungen darf den eingegebenen Code auswerten, sonst nichts: keine Verbindungen, keine Dateien nachladen.
+/code-lernen/js/runner.js
+  ! Content-Security-Policy
+  Content-Security-Policy: default-src 'none'; script-src 'unsafe-eval'; connect-src 'none'; worker-src 'none'

@@ -4,7 +4,7 @@
 /* Logo als Link zur Startseite: sieht aus wie die Überschrift der App (header h1 in styles.css) */
 header .seite-marke{font-family:'DM Mono','Consolas',monospace;font-size:2.7rem;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:#eaf2f8;
   margin-bottom:8px;animation:titleGlitch 5.5s steps(1,end) infinite;display:inline-flex;align-items:center;gap:0.25em;text-decoration:none}
-header .seite-marke:focus-visible{outline:2px solid var(--cyan);outline-offset:6px;border-radius:8px}
+header .seite-marke:focus-visible{outline:2px solid var(--cyan);outline-offset:6px;border-radius:1px}
 @media(max-width:560px){header .seite-marke{font-size:2.35rem;letter-spacing:2px}}
 @media(prefers-reduced-motion:reduce){header .seite-marke{animation:none}}
 
@@ -15,7 +15,7 @@ h1.wie-h2{font-size:1.4rem;color:#eaf2f8;font-weight:700;padding-bottom:10px;mar
 /* Karten: jedes Kapitel einzeln aufrufen */
 .seite-karten{list-style:none;display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px;margin:0 0 30px}
 .seite-karten a{display:flex;flex-direction:column;gap:6px;height:100%;padding:14px 16px;background:var(--panel-2);border:1px solid var(--border);
-  border-radius:10px;text-decoration:none;color:var(--text);transition:border-color .15s,transform .15s}
+  border-radius:1px;text-decoration:none;color:var(--text);transition:border-color .15s,transform .15s}
 .seite-karten a:hover,.seite-karten a:focus-visible{border-color:var(--cyan);transform:translateY(-1px);outline:none}
 .sk-titel{font-weight:600;color:var(--cyan)}
 .sk-text{font-size:0.88rem;color:var(--muted);line-height:1.55}

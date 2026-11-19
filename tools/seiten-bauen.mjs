@@ -267,7 +267,7 @@ const urls = [
   ["/", "weekly", "1.0"], ["/nachschlagen/", "weekly", "0.9"],
   ...felder.map((f) => [feldUrl(f), "weekly", "0.8"]),
   ...kapitel.map((k) => [kapUrl(k), "monthly", "0.7"]),
-  ["/subnetting-trainer/", "monthly", "0.8"], ["/ap1-simulator/", "monthly", "0.8"], ["/osi-battle/", "monthly", "0.7"]
+  ["/subnetting-trainer/", "monthly", "0.8"], ["/ap1-simulator/", "monthly", "0.8"], ["/code-lernen/", "monthly", "0.8"]
 ];
 ausgabe.set("sitemap.xml", `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">

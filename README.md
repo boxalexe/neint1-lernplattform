@@ -50,7 +50,7 @@ tools/       seiten-bauen.mjs: erzeugt die Einzelseiten (siehe unten)
 docs/        Vorschaubild für dieses README (wird nicht ausgeliefert)
 ```
 
-Eigene Bereiche: Subnetting Trainer (`/subnetting-trainer/`), AP1 Simulator (`/ap1-simulator/`), Diagnose-Arena (`/osi-battle/`).
+Eigene Bereiche: Subnetting Trainer (`/subnetting-trainer/`), AP1 Simulator (`/ap1-simulator/`), CodeLernen (`/code-lernen/`, Programmieren bis zur AP2; die Diagnose-Arena in `/osi-battle/` ist seit 19.11.2026 offline und leitet dorthin um).
 
 ### Eigene Seiten für Suchmaschinen
 

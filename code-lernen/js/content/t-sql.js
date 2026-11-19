@@ -1,0 +1,133 @@
+/* Kurs: SQL (Beispieldatenbank "Shop": kunde, produkt, bestellung) */
+(function () {
+  'use strict';
+  const A = window.Academy, C = (lines, h, o) => A.code('sql', lines, h, o);
+  const T = (prompt, sol, hint, o) => A.sqlTask(prompt, sol, hint, o);
+
+  const SCHEMA = A.table(['Tabelle', 'Spalten', 'Bedeutung'], [
+    ['`kunde`', '`id`, `name`, `stadt`, `geburtsjahr`', 'Wer kauft ein? (8 Kunden, einer ohne Stadt)'],
+    ['`produkt`', '`id`, `name`, `kategorie`, `preis`', 'Was wird verkauft? (8 Produkte)'],
+    ['`bestellung`', '`id`, `kunde_id`, `produkt_id`, `menge`, `datum`', 'Wer hat wann wie viel von was bestellt? (14 Bestellungen)']
+  ], 'Unsere Beispieldatenbank „Shop“', 'Mit dieser Datenbank arbeitest du im ganzen Kurs. Du kannst sie jederzeit unter **Spielwiese → SQL** ansehen. Jede Ausführung beginnt mit frischen Daten: Du kannst nichts kaputt machen.');
+
+  A.track({
+    id: 'sql', title: 'SQL und Datenbanken', tag: 'SQL',
+    desc: 'Daten abfragen, filtern, zusammenfassen, verknüpfen und ändern. Mit echter Datenbank im Browser: Jede Abfrage läuft wirklich.',
+    intro: 'SQL ist die Sprache, mit der man mit Datenbanken spricht. Anders als bei Python oder Java sagst du **nicht, wie** etwas geht, sondern **was** du haben willst („zeige mir alle Kunden aus Berlin“), und die Datenbank findet den Weg. Fast jede Anwendung mit Daten benutzt sie.\n\nHier läuft eine **echte SQL-Datenbank (SQLite)** direkt in deinem Browser. Bei jedem Beispiel gibt es **„Ausprobieren und ändern“**, bei den Übungen prüft die App dein Ergebnis gegen die Musterlösung.',
+    lessons: [
+      {
+        id: 'einstieg', stage: 1, title: 'Was ist eine Datenbank? Dein erstes SELECT',
+        goal: 'Du verstehst Tabellen, Zeilen und Spalten und kannst Daten mit SELECT abrufen.',
+        parts: [
+          A.text('Tabellen wie in einer Tabellenkalkulation', 'Eine **relationale Datenbank** speichert Daten in **Tabellen**. Jede Tabelle hat **Spalten** (Eigenschaften, z. B. `name`, `stadt`) und **Zeilen** (ein Datensatz, z. B. ein Kunde). Jede Zeile hat einen eindeutigen **Primärschlüssel** (meist `id`), damit man sie sicher wiederfindet.'),
+          SCHEMA,
+          C(['SELECT * FROM kunde;§SELECT = „zeige mir“, * = alle Spalten, FROM kunde = aus der Tabelle kunde. Das Semikolon beendet die Anweisung.'], 'Alles aus einer Tabelle'),
+          C(['SELECT name, stadt§Nur diese beiden Spalten, durch Komma getrennt.', 'FROM kunde;§Aus der Tabelle kunde. Die Reihenfolge der Spalten bestimmst du selbst.'], 'Bestimmte Spalten'),
+          A.text('Die Grundform', 'Jede Abfrage beginnt mit `SELECT … FROM …`. Du schreibst SQL-Wörter üblicherweise **GROSS**, deine eigenen Namen klein. Das ist nur eine Konvention, macht aber Abfragen viel lesbarer. Zeilenumbrüche und Einrückung darfst du frei setzen.')
+        ],
+        tips: [A.tip('Mit `SELECT *` schaust du dir zuerst eine Tabelle an. In echten Programmen schreibt man lieber die Spalten auf, die man braucht: Das ist schneller und zeigt, was gemeint ist.')],
+        quiz: [A.q('Was bedeutet die Zeile `SELECT name FROM produkt;`?', ['Zeige die Spalte name aus der Tabelle produkt', 'Lösche die Tabelle produkt', 'Lege eine Spalte name an', 'Ändere alle Namen'], 0, 'SELECT wählt Spalten aus, FROM nennt die Tabelle. Es wird nichts verändert.'), A.q('Wofür steht ein **Primärschlüssel**?', ['Er kennzeichnet jede Zeile eindeutig', 'Er verschlüsselt die Datenbank', 'Er ist das Passwort', 'Er sortiert die Tabelle'], 0, 'Meist die Spalte id. Kein Wert darf doppelt vorkommen.')],
+        tasks: [T('Zeige **alle Spalten** aller Produkte.', 'SELECT * FROM produkt', 'Der Stern bedeutet „alle Spalten“.'), T('Zeige nur den **Namen** und den **Preis** aller Produkte.', 'SELECT name, preis FROM produkt', 'Zwei Spalten, durch Komma getrennt.')]
+      },
+      {
+        id: 'select', stage: 1, title: 'Sortieren, Umbenennen und Begrenzen',
+        goal: 'Du kannst Ergebnisse sortieren, Spalten umbenennen, Doppelte entfernen und die Zeilenanzahl begrenzen.',
+        parts: [
+          C(['SELECT name, preis§Die gewünschten Spalten.', 'FROM produkt§Die Tabelle.', 'ORDER BY preis DESC;§Sortiert nach preis. DESC = absteigend (teuerstes zuerst), ASC = aufsteigend (Standard).'], 'Sortieren mit ORDER BY'),
+          C(['SELECT name, preis§Wieder Name und Preis.', 'FROM produkt§Aus der Tabelle produkt.', 'ORDER BY preis DESC§Teuerste zuerst.', 'LIMIT 3;§LIMIT begrenzt die Zeilenzahl: nur die ersten drei. So bekommst du die „Top 3“.'], 'Die drei teuersten Produkte'),
+          C(['SELECT name AS produkt, preis AS euro§AS gibt einer Spalte im Ergebnis einen **anderen Namen** (Alias). Die Tabelle bleibt unverändert.', 'FROM produkt;§Die Spaltenüberschriften lauten jetzt produkt und euro.'], 'Spalten umbenennen mit AS'),
+          C(['SELECT DISTINCT stadt§DISTINCT entfernt **doppelte** Zeilen.', 'FROM kunde;§Jede Stadt erscheint nur einmal (auch NULL für „unbekannt“).'], 'Doppelte vermeiden mit DISTINCT'),
+          C(['SELECT name, preis, preis * 1.19 AS brutto§In SELECT darfst du **rechnen**. preis * 1.19 ergibt den Preis mit 19 % Steuer.', 'FROM produkt;§Für jede Zeile wird neu gerechnet.'], 'Rechnen in der Abfrage')
+        ],
+        tips: [A.info('Die Reihenfolge der Wörter ist fest: `SELECT … FROM … WHERE … GROUP BY … HAVING … ORDER BY … LIMIT …`. Nicht jedes Teil muss vorkommen, aber **wenn**, dann in dieser Reihenfolge.')],
+        quiz: [A.q('Was bewirkt `ORDER BY preis DESC`?', ['Sortiert vom höchsten zum niedrigsten Preis', 'Sortiert vom niedrigsten zum höchsten', 'Löscht den Preis', 'Zählt die Preise'], 0, 'DESC = descending = absteigend.')],
+        tasks: [T('Zeige **Name und Preis** aller Produkte, **das teuerste zuerst**.', 'SELECT name, preis FROM produkt ORDER BY preis DESC', 'ORDER BY mit DESC.', { ordered: true }), T('Zeige die **zwei günstigsten** Produkte mit Name und Preis (günstigstes zuerst).', 'SELECT name, preis FROM produkt ORDER BY preis ASC LIMIT 2', 'Aufsteigend sortieren, dann LIMIT 2.', { ordered: true }), T('Zeige jede **Kategorie** der Produkte genau einmal.', 'SELECT DISTINCT kategorie FROM produkt', 'DISTINCT entfernt Doppelte.')]
+      },
+      {
+        id: 'where', stage: 1, title: 'Filtern mit WHERE',
+        goal: 'Du kannst Zeilen nach Bedingungen auswählen, auch mit UND, ODER, Bereichen, Listen und Textmustern.',
+        parts: [
+          A.text('Nur bestimmte Zeilen', 'Mit **WHERE** legst du fest, welche **Zeilen** im Ergebnis erscheinen. Die Bedingung funktioniert genau wie `if` in anderen Sprachen: Nur wenn sie WAHR ist, kommt die Zeile durch.'),
+          C(['SELECT name, stadt§Die gewünschten Spalten.', 'FROM kunde§Die Tabelle.', "WHERE stadt = 'Berlin';§Nur Kunden, bei denen stadt gleich Berlin ist. **Text steht in einfachen Anführungszeichen**, und = vergleicht (ein einzelnes Gleichheitszeichen)."], 'Eine Bedingung'),
+          C(['SELECT name, preis, kategorie§Name, Preis, Kategorie.', 'FROM produkt§Aus produkt.', "WHERE kategorie = 'Zubehör' AND preis > 20;§AND = UND: **beide** Bedingungen müssen stimmen. Es erscheinen nur teurere Zubehörteile."], 'Bedingungen verknüpfen mit AND, OR, NOT'),
+          A.table(['Wort', 'Bedeutung', 'Beispiel'], [['`=`, `<>`', 'gleich, ungleich', "`stadt <> 'Berlin'`"], ['`<`, `>`, `<=`, `>=`', 'Vergleiche', '`preis >= 100`'], ['`AND`, `OR`, `NOT`', 'UND, ODER, NICHT', '`preis < 20 OR preis > 500`'], ['`BETWEEN a AND b`', 'im Bereich (Grenzen inklusive)', '`preis BETWEEN 30 AND 100`'], ['`IN (…)`', 'in einer Liste', "`stadt IN ('Köln','Hamburg')`"], ['`LIKE`', 'Textmuster, % = beliebig viele Zeichen', "`name LIKE 'A%'` beginnt mit A"], ['`IS NULL`', 'ohne Wert (unbekannt)', '`stadt IS NULL`']], 'Die wichtigsten Bedingungen'),
+          C(["SELECT name FROM kunde WHERE stadt IN ('Hamburg', 'München');§Kunden aus Hamburg **oder** München, kürzer als zweimal OR.", "SELECT name, preis FROM produkt WHERE preis BETWEEN 30 AND 100;§Preise von 30 bis 100, beide Grenzen gehören dazu.", "SELECT name FROM kunde WHERE name LIKE 'A%';§Namen, die mit A beginnen. % steht für beliebig viele Zeichen.", 'SELECT name FROM kunde WHERE stadt IS NULL;§Kunden **ohne** Stadt. Für „kein Wert“ geht nur IS NULL, nie = NULL.'], 'Weitere Bedingungen')
+        ],
+        tips: [A.warn('**NULL ist kein Wert, sondern „unbekannt“.** `stadt = NULL` liefert nie etwas, auch nicht für Zeilen ohne Stadt. Benutze `IS NULL` bzw. `IS NOT NULL`.'), A.warn('Text braucht in SQL **einfache** Anführungszeichen (`\'Berlin\'`). Doppelte sind für Spaltennamen gedacht.')],
+        quiz: [A.q('Wie findest du Kunden ohne Stadt?', ['WHERE stadt IS NULL', 'WHERE stadt = NULL', "WHERE stadt = ''", 'WHERE stadt = 0'], 0, 'NULL heißt unbekannt und lässt sich nur mit IS NULL prüfen.'), A.q("Was liefert `name LIKE 'A%'`?", ['Namen, die mit A beginnen', 'Namen, die auf A enden', 'Namen, die genau A heißen', 'Namen mit einem A irgendwo'], 0, '% steht für beliebig viele (auch null) Zeichen. Das A steht vorne, also beginnt der Name damit.')],
+        tasks: [T('Zeige den **Namen** aller Kunden aus **Hamburg**.', "SELECT name FROM kunde WHERE stadt = 'Hamburg'", 'Text steht in einfachen Anführungszeichen.'), T('Zeige **Name und Preis** der Produkte, die **weniger als 50** kosten.', 'SELECT name, preis FROM produkt WHERE preis < 50', 'WHERE mit <.'), T('Zeige **Name** der Zubehör-Produkte, die **mehr als 30** kosten.', "SELECT name FROM produkt WHERE kategorie = 'Zubehör' AND preis > 30", 'Zwei Bedingungen mit AND.'), T('Zeige alle Kunden, die **nach 1995** geboren sind (Name und Geburtsjahr).', 'SELECT name, geburtsjahr FROM kunde WHERE geburtsjahr > 1995', 'Die Spalte heißt geburtsjahr.')]
+      },
+      {
+        id: 'aggregat', stage: 2, title: 'Zählen, Summieren und Gruppieren',
+        goal: 'Du kannst mit COUNT, SUM, AVG, MIN und MAX auswerten und Ergebnisse mit GROUP BY gruppieren.',
+        parts: [
+          A.text('Aus vielen Zeilen eine Zahl', '**Aggregatfunktionen** fassen viele Zeilen zu **einem Wert** zusammen:\n- `COUNT(*)` Anzahl der Zeilen\n- `SUM(spalte)` Summe\n- `AVG(spalte)` Durchschnitt\n- `MIN(spalte)`, `MAX(spalte)` kleinster und größter Wert'),
+          C(['SELECT COUNT(*) AS anzahl§Zählt alle Zeilen im Ergebnis.', 'FROM kunde;§Ergebnis: 8 Kunden.'], 'Zählen'),
+          C(['SELECT MIN(preis), MAX(preis), ROUND(AVG(preis), 2)§Kleinster, größter und auf 2 Stellen gerundeter durchschnittlicher Preis.', 'FROM produkt;§Eine einzige Ergebniszeile.'], 'Kleinster, größter, durchschnittlicher Wert'),
+          A.text('Gruppieren mit GROUP BY', 'Oft willst du die Auswertung **je Gruppe**: „Wie viele Produkte gibt es je Kategorie?“ `GROUP BY kategorie` bildet für jede Kategorie eine Gruppe, und die Aggregatfunktion rechnet **innerhalb jeder Gruppe**.'),
+          C(['SELECT kategorie, COUNT(*) AS anzahl§Die Spalte, nach der gruppiert wird, plus eine Zählung.', 'FROM produkt§Aus produkt.', 'GROUP BY kategorie;§Eine Ergebniszeile **je Kategorie**: Computer, Zubehör, Audio mit ihrer Anzahl.'], 'Je Kategorie zählen'),
+          C(['SELECT kategorie, COUNT(*) AS anzahl§Pro Kategorie die Anzahl.', 'FROM produkt§Aus produkt.', 'GROUP BY kategorie§Gruppen bilden.', 'HAVING COUNT(*) > 1;§HAVING filtert **Gruppen** nach dem Gruppieren. Nur Kategorien mit mehr als einem Produkt bleiben.'], 'Gruppen filtern mit HAVING'),
+          A.table(['', 'WHERE', 'HAVING'], [['Wirkt auf', '**einzelne Zeilen**', '**Gruppen**'], ['Wann', 'vor dem Gruppieren', 'nach dem Gruppieren'], ['Darf Aggregate enthalten', 'nein', 'ja']], 'WHERE oder HAVING?')
+        ],
+        tips: [A.warn('In einer Abfrage mit `GROUP BY` darfst du in `SELECT` nur die **Gruppierungsspalten** und **Aggregate** angeben. `SELECT name, COUNT(*) … GROUP BY kategorie` ergibt keinen Sinn: Welcher von vielen Namen soll gemeint sein?')],
+        quiz: [A.q('Du willst nur Kategorien mit **mehr als einem Produkt**. Was nimmst du?', ['HAVING COUNT(*) > 1', 'WHERE COUNT(*) > 1', 'ORDER BY COUNT(*) > 1', 'LIMIT 1'], 0, 'Aggregate wie COUNT gibt es erst nach dem Gruppieren, darum HAVING.'), A.q('Was liefert `SELECT AVG(preis) FROM produkt;`?', ['Eine Zeile mit dem Durchschnittspreis', 'Eine Zeile je Produkt', 'Den höchsten Preis', 'Die Anzahl der Produkte'], 0, 'Ohne GROUP BY wird alles zu einer einzigen Zeile zusammengefasst.')],
+        tasks: [T('Wie viele **Produkte** gibt es? (Eine Zahl.)', 'SELECT COUNT(*) FROM produkt', 'COUNT(*) zählt die Zeilen.'), T('Zeige, wie viele **Kunden je Stadt** es gibt (Stadt und Anzahl).', 'SELECT stadt, COUNT(*) FROM kunde GROUP BY stadt', 'GROUP BY stadt.'), T('Zeige den **durchschnittlichen Preis je Kategorie** (Kategorie und Durchschnitt).', 'SELECT kategorie, AVG(preis) FROM produkt GROUP BY kategorie', 'AVG(preis) zusammen mit GROUP BY kategorie.'), T('Zeige die **gesamte bestellte Menge** (alle Bestellungen zusammen). Eine Zahl.', 'SELECT SUM(menge) FROM bestellung', 'SUM(menge) über alle Zeilen.')]
+      },
+      {
+        id: 'join', stage: 2, title: 'Tabellen verknüpfen mit JOIN',
+        goal: 'Du verstehst Fremdschlüssel und kannst Daten aus mehreren Tabellen mit JOIN zusammenführen.',
+        parts: [
+          A.text('Warum mehrere Tabellen?', 'Eine Bestellung speichert nicht den ganzen Kundennamen und Produktnamen, sondern nur deren **Nummern** (`kunde_id`, `produkt_id`). Der Kundenname steht **einmal** in `kunde`. Ändert er sich, ändert man ihn nur an einer Stelle. Eine Spalte, die auf den Primärschlüssel einer anderen Tabelle zeigt, heißt **Fremdschlüssel**.'),
+          A.uml('klasse kunde\n  id: INTEGER PK\n  name: TEXT\n  stadt: TEXT\nklasse bestellung\n  id: INTEGER PK\n  kunde_id: INTEGER FK\n  produkt_id: INTEGER FK\n  menge: INTEGER\nklasse produkt\n  id: INTEGER PK\n  name: TEXT\n  preis: REAL\nkunde "1" --> "*" bestellung : gibt auf\nprodukt "1" --> "*" bestellung : kommt vor in', 'Die Beziehungen im Überblick', 'Ein Kunde hat **viele** Bestellungen, ein Produkt kommt in **vielen** Bestellungen vor. Diese Darstellung heißt Entity-Relationship-Modell (hier als Kästen gezeichnet).'),
+          C(['SELECT kunde.name, bestellung.menge§Spalten aus **zwei** Tabellen. Mit Tabellenname und Punkt sagst du, woher eine Spalte kommt.', 'FROM bestellung§Wir beginnen bei den Bestellungen.', 'JOIN kunde ON bestellung.kunde_id = kunde.id;§JOIN holt die Kundenzeile dazu. ON sagt, **wie** die Tabellen zusammengehören: kunde_id der Bestellung = id des Kunden.'], 'Zwei Tabellen verbinden'),
+          C(['SELECT kunde.name, produkt.name AS produkt, bestellung.menge§Kundenname, Produktname (als „produkt“ umbenannt, weil beide Spalten name heißen) und Menge.', 'FROM bestellung§Ausgangspunkt.', 'JOIN kunde ON bestellung.kunde_id = kunde.id§Erste Verknüpfung.', 'JOIN produkt ON bestellung.produkt_id = produkt.id;§Zweite Verknüpfung. So hängst du beliebig viele Tabellen an.'], 'Drei Tabellen verbinden'),
+          C(['SELECT kunde.name, COUNT(bestellung.id) AS bestellungen§Zählt die Bestellungen je Kunde.', 'FROM kunde§Beginne bei **allen Kunden**.', 'LEFT JOIN bestellung ON bestellung.kunde_id = kunde.id§LEFT JOIN behält **alle** Zeilen der linken Tabelle, auch wenn es keine passende Bestellung gibt.', 'GROUP BY kunde.id;§Eine Zeile je Kunde. Hans Jung hat keine Bestellung und erscheint trotzdem mit 0.'], 'LEFT JOIN: auch Kunden ohne Bestellung'),
+          A.table(['Art', 'Ergebnis'], [['`JOIN` (= `INNER JOIN`)', 'nur Zeilen mit passendem Partner in **beiden** Tabellen'], ['`LEFT JOIN`', 'alle Zeilen der linken Tabelle, fehlende Partner als NULL']], 'JOIN oder LEFT JOIN?')
+        ],
+        tips: [A.warn('Vergisst du die `ON`-Bedingung, entsteht ein riesiges Ergebnis aus **allen Kombinationen** der Zeilen. Zu jedem JOIN gehört ein ON.')],
+        quiz: [A.q('Was ist ein **Fremdschlüssel**?', ['Eine Spalte, die auf den Primärschlüssel einer anderen Tabelle verweist', 'Ein Passwort', 'Eine Spalte, die nur Zahlen enthält', 'Ein Sortierschlüssel'], 0, 'kunde_id in bestellung verweist auf id in kunde.'), A.q('Du willst **alle** Kunden sehen, auch die ohne Bestellung. Was nimmst du?', ['LEFT JOIN', 'JOIN', 'GROUP BY', 'DISTINCT'], 0, 'Ein normaler JOIN würde Kunden ohne Bestellung weglassen.')],
+        tasks: [T('Zeige zu jeder Bestellung den **Kundennamen** und die **Menge** (Spalten: name, menge).', 'SELECT kunde.name, bestellung.menge FROM bestellung JOIN kunde ON bestellung.kunde_id = kunde.id', 'JOIN kunde ON bestellung.kunde_id = kunde.id'), T('Zeige zu jeder Bestellung den **Produktnamen** und die **Menge**.', 'SELECT produkt.name, bestellung.menge FROM bestellung JOIN produkt ON bestellung.produkt_id = produkt.id', 'JOIN produkt ON bestellung.produkt_id = produkt.id'), T('Zeige je Kunde die **Anzahl seiner Bestellungen** (Kundenname und Anzahl), auch Kunden ohne Bestellung.', 'SELECT kunde.name, COUNT(bestellung.id) FROM kunde LEFT JOIN bestellung ON bestellung.kunde_id = kunde.id GROUP BY kunde.id', 'LEFT JOIN und COUNT auf eine Spalte der Bestellung (nicht COUNT(*)).')]
+      },
+      {
+        id: 'aendern', stage: 3, title: 'Daten ändern: INSERT, UPDATE, DELETE',
+        goal: 'Du kannst Datensätze einfügen, ändern und löschen und kennst die wichtigste Sicherheitsregel.',
+        parts: [
+          C(["INSERT INTO kunde (name, stadt, geburtsjahr)§Neue Zeile in die Tabelle kunde. In Klammern: **welche Spalten** du füllst.", "VALUES ('Ida Klein', 'Bonn', 2003);§Die Werte in **derselben Reihenfolge**. Die id vergibt die Datenbank selbst."], 'Einfügen mit INSERT'),
+          C(['UPDATE produkt§Ändert Zeilen der Tabelle produkt.', 'SET preis = 17.9§Setzt die Spalte preis auf einen neuen Wert. Mehrere Spalten trennst du mit Komma.', "WHERE name = 'Maus';§**WHERE nicht vergessen!** Es wird nur die Maus geändert."], 'Ändern mit UPDATE'),
+          C(['DELETE FROM bestellung§Löscht Zeilen aus bestellung.', 'WHERE id = 14;§Nur die Bestellung mit der id 14.'], 'Löschen mit DELETE'),
+          A.warn('**Ohne `WHERE` wirken UPDATE und DELETE auf JEDE Zeile der Tabelle!** `DELETE FROM bestellung;` löscht alle Bestellungen, `UPDATE produkt SET preis = 0;` setzt jeden Preis auf 0. Es gibt keinen Papierkorb. Schreibe deshalb zuerst ein `SELECT` mit derselben WHERE-Bedingung, prüfe, welche Zeilen getroffen werden, und ändere es erst dann in UPDATE oder DELETE um.')
+        ],
+        tips: [A.info('Änderungen bei **Ausprobieren** gelten nur für die jeweilige Ausführung. Die Beispieldatenbank ist beim nächsten Mal wieder im Ausgangszustand.')],
+        quiz: [A.q('Was passiert bei `DELETE FROM bestellung;` ohne WHERE?', ['Alle Bestellungen werden gelöscht', 'Nichts, es fehlt die Bedingung', 'Nur die erste wird gelöscht', 'Die Tabelle wird gelöscht'], 0, 'Ohne WHERE gilt die Anweisung für alle Zeilen. Die Tabelle selbst bleibt (leer) bestehen.'), A.q('Welche Anweisung ändert bestehende Daten?', ['UPDATE', 'INSERT', 'SELECT', 'CREATE'], 0, 'UPDATE ändert, INSERT fügt hinzu, SELECT liest nur.')],
+        tasks: [T("Füge den Kunden **Ida Klein** aus **Bonn**, geboren **2003**, ein.", "INSERT INTO kunde (name, stadt, geburtsjahr) VALUES ('Ida Klein', 'Bonn', 2003)", 'INSERT INTO kunde (name, stadt, geburtsjahr) VALUES (…)', { verify: "SELECT name, stadt, geburtsjahr FROM kunde WHERE name = 'Ida Klein'" }), T("Ändere den Preis des Produkts **Maus** auf **17.9**.", "UPDATE produkt SET preis = 17.9 WHERE name = 'Maus'", 'UPDATE … SET … WHERE …', { verify: "SELECT name, preis FROM produkt WHERE name = 'Maus'" }), T('Lösche die Bestellung mit der **id 14**.', 'DELETE FROM bestellung WHERE id = 14', 'DELETE FROM … WHERE id = 14', { verify: 'SELECT COUNT(*) FROM bestellung' })]
+      },
+      {
+        id: 'tabellen', stage: 3, title: 'Tabellen entwerfen mit CREATE TABLE',
+        goal: 'Du kannst eigene Tabellen mit Datentypen und Schlüsseln anlegen und kennst die Grundidee guter Datenmodelle.',
+        parts: [
+          C(['CREATE TABLE lieferant (§Legt eine neue Tabelle namens lieferant an. In Klammern stehen die Spalten.', '  id INTEGER PRIMARY KEY,§Spalte id mit ganzen Zahlen. PRIMARY KEY macht sie zum eindeutigen Schlüssel.', '  name TEXT NOT NULL,§Spalte name mit Text. NOT NULL: Es muss immer ein Wert angegeben werden.', "  land TEXT DEFAULT 'Deutschland'§Ohne Angabe wird automatisch Deutschland eingetragen.", ');§Ende der Tabellendefinition.'], 'Eine Tabelle anlegen'),
+          A.table(['Datentyp', 'Speichert', 'Beispiel'], [['`INTEGER`', 'ganze Zahlen', '`42`'], ['`REAL`', 'Kommazahlen', '`19.99`'], ['`TEXT`', 'Texte', "`'Berlin'`"], ['`DATE` / Text', 'Datumsangaben (in SQLite als Text `JJJJ-MM-TT`)', "`'2024-05-30'`"]], 'Die wichtigsten Datentypen', 'Die genauen Typnamen unterscheiden sich je nach Datenbanksystem (MySQL, PostgreSQL, SQL Server), das Prinzip bleibt gleich.'),
+          C(['CREATE TABLE bewertung (§Eine Tabelle für Produktbewertungen.', '  id INTEGER PRIMARY KEY,§Eigener Schlüssel.', '  produkt_id INTEGER NOT NULL,§Zu welchem Produkt gehört die Bewertung?', '  sterne INTEGER,§1 bis 5 Sterne.', '  FOREIGN KEY (produkt_id) REFERENCES produkt(id)§Der **Fremdschlüssel**: produkt_id muss ein vorhandenes Produkt sein. Die Datenbank sichert die Verknüpfung ab.', ');§Ende.'], 'Fremdschlüssel festlegen'),
+          A.text('Gute Tabellen: ein Gedanke, ein Ort', '- **Jede Tabelle beschreibt eine Sache** (Kunden, Produkte, Bestellungen).\n- **Jede Information steht nur einmal.** Der Kundenname gehört in `kunde`, nicht in jede Bestellung.\n- **Jede Zeile hat einen Primärschlüssel.**\n- **Verknüpfungen laufen über Fremdschlüssel.**\n\nDas Vorgehen, Daten so aufzuteilen, dass nichts doppelt steht, heißt **Normalisierung**.')
+        ],
+        tips: [A.warn('Wenn du in einer Tabelle Spalten wie `produkt1`, `produkt2`, `produkt3` hast, fehlt dir eine zweite Tabelle. Lege lieber eine Tabelle an, in der **jede Zeile ein Produkt** ist.')],
+        quiz: [A.q('Was bewirkt `NOT NULL` bei einer Spalte?', ['Es muss immer ein Wert eingetragen werden', 'Die Spalte darf nur Zahlen enthalten', 'Die Spalte wird nicht angezeigt', 'Die Werte müssen eindeutig sein'], 0, 'NOT NULL verbietet „unbekannt“.')],
+        tasks: [T('Lege eine Tabelle **lieferant** mit den Spalten **id** (ganze Zahl, Primärschlüssel) und **name** (Text) an.', 'CREATE TABLE lieferant (id INTEGER PRIMARY KEY, name TEXT)', 'CREATE TABLE lieferant (id INTEGER PRIMARY KEY, name TEXT)', { verify: "SELECT name, type, pk FROM pragma_table_info('lieferant') ORDER BY cid", ordered: true })]
+      },
+      {
+        id: 'vertiefung', stage: 4, title: 'Vertiefung: Unterabfragen, CASE und Auswertungen',
+        goal: 'Du kannst Abfragen schachteln, Werte mit CASE einteilen und aus mehreren Techniken eine Auswertung bauen.',
+        parts: [
+          A.text('Unterabfragen', 'Eine Abfrage darf in einer anderen Abfrage stehen. Die innere läuft zuerst und liefert einen Wert (oder eine Liste), den die äußere benutzt. Beispiel: „Welche Produkte sind teurer als der Durchschnitt?“'),
+          C(['SELECT name, preis§Ausgegeben werden Name und Preis.', 'FROM produkt§Aus der Tabelle produkt.', 'WHERE preis > (SELECT AVG(preis) FROM produkt);§Die **innere** Abfrage in Klammern berechnet den Durchschnittspreis, die äußere vergleicht damit jede Zeile.'], 'Teurer als der Durchschnitt'),
+          C(['SELECT name,§Der Name des Produkts.', '  CASE§CASE ist das „if/else“ von SQL. Es ergibt für jede Zeile einen Wert.', "    WHEN preis < 20 THEN 'günstig'§Wenn preis unter 20 ist, gilt günstig.", "    WHEN preis < 100 THEN 'mittel'§Sonst, wenn unter 100: mittel. (Es wird von oben nach unten geprüft.)", "    ELSE 'teuer'§In allen übrigen Fällen: teuer.", '  END AS preisklasse§Ende von CASE, das Ergebnis heißt preisklasse.', 'FROM produkt;§Aus produkt.'], 'Werte einteilen mit CASE'),
+          C(['SELECT kunde.name,§Der Name des Kunden.', '  SUM(produkt.preis * bestellung.menge) AS umsatz§Für jede Bestellung Preis mal Menge, dann je Kunde summiert.', 'FROM bestellung§Ausgangspunkt.', 'JOIN kunde ON bestellung.kunde_id = kunde.id§Kundendaten dazu.', 'JOIN produkt ON bestellung.produkt_id = produkt.id§Produktpreise dazu.', 'GROUP BY kunde.id§Eine Zeile je Kunde.', 'ORDER BY umsatz DESC;§Der beste Kunde zuerst.'], 'Eine echte Auswertung: Umsatz je Kunde'),
+          A.text('Was es sonst noch gibt (nur zum Einordnen)', '- **Index**: wie ein Stichwortverzeichnis. Macht Suchen in großen Tabellen schnell (`CREATE INDEX …`).\n- **Transaktion**: mehrere Änderungen gelten **ganz oder gar nicht** (`BEGIN … COMMIT`). Wichtig z. B. bei einer Überweisung: abbuchen **und** gutschreiben.\n- **Sichten (Views)**: gespeicherte Abfragen, die sich wie Tabellen benutzen lassen.')
+        ],
+        tips: [],
+        quiz: [A.q('Was passiert zuerst, wenn eine Abfrage eine Unterabfrage in Klammern enthält?', ['Die innere Abfrage läuft zuerst', 'Die äußere läuft zuerst', 'Beide gleichzeitig', 'Keine'], 0, 'Die innere liefert das Zwischenergebnis (z. B. den Durchschnitt), das die äußere braucht.')],
+        tasks: [T('Zeige **Name und Preis** der Produkte, die **teurer als der Durchschnittspreis** sind.', 'SELECT name, preis FROM produkt WHERE preis > (SELECT AVG(preis) FROM produkt)', 'Die innere Abfrage berechnet den Durchschnitt.'), T('Zeige **je Kunde den Umsatz** (Kundenname und Summe von Preis mal Menge).', 'SELECT kunde.name, SUM(produkt.preis * bestellung.menge) FROM bestellung JOIN kunde ON bestellung.kunde_id = kunde.id JOIN produkt ON bestellung.produkt_id = produkt.id GROUP BY kunde.id', 'Beide JOINs wie im Beispiel, dann SUM und GROUP BY kunde.id.')]
+      }
+    ]
+  });
+})();

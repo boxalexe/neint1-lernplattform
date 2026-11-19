@@ -21453,7 +21453,7 @@ function baueDruckDokument(karten){
     '.schnitt.waag{border-top:.25mm solid #888}' +
     '.falz.senk{border-left:.25mm dashed #bbb}' +
     '.leiste{position:sticky;top:0;z-index:5;background:#f4f4f4;border-bottom:1px solid #ccc;padding:12px 16px;font-size:14px;line-height:1.45}' +
-    '.leiste button{font:inherit;font-weight:700;padding:8px 18px;margin-right:12px;border:1px solid #333;background:#111;color:#fff;border-radius:6px;cursor:pointer}' +
+    '.leiste button{font:inherit;font-weight:700;padding:8px 18px;margin-right:12px;border:1px solid #333;background:#111;color:#fff;border-radius:1px;cursor:pointer}' +
     '.leiste .warn{color:#b00020;font-weight:600;margin-top:6px}' +
     '@media screen{body{background:#e6e6e6}.blatt{margin:16px auto;box-shadow:0 1px 6px rgba(0,0,0,.25)}' +
     '.zulang{outline:.6mm solid #d0021b;outline-offset:-.6mm}}' +
