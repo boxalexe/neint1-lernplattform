@@ -29,7 +29,7 @@
         ],
         tips: [A.warn('Du kannst einer `int`-Variable keinen Text zuweisen: `int x = "5";` ist ein **Fehler beim Übersetzen**. Das ist gewollt: Der Compiler schützt dich.'), A.tip('Variablen und Methoden schreibt man in **camelCase** (`istStudent`), Klassen mit großem Anfang (`Konto`).')],
         quiz: [A.q('Was ist `String` in Java?', ['Der Datentyp für Text', 'Ein Zahlentyp', 'Ein Schlüsselwort für Schleifen', 'Eine Methode'], 0, 'String (mit großem S) steht für Text. Es ist eigentlich eine Klasse.')],
-        tasks: [PP('Was gibt das Programm aus?', ['int x = 3;', 'int y = x;', 'x = 10;', 'System.out.println(x + " " + y);'], '10 3', 'y bekam den Wert 3, bevor x geändert wurde.', 'Bei `int y = x;` wird der aktuelle Wert kopiert.'), A.fill('Ergänze den Datentyp für ganze Zahlen.', '{{int}} anzahl = 5;', 'Für ganze Zahlen gibt es in Java den Typ int.'), PP('Was gibt das Programm aus?', ['int tag = 3, monat = 7, jahr = 2026;', 'System.out.println(jahr + "-" + monat + "-" + tag);', 'System.out.println(String.format("%02d.%02d.%d", tag, monat, jahr));'], '2026-7-3\n03.07.2026', 'Einfaches + hängt die Zahlen ohne führende Null an. %02d füllt auf zwei Stellen auf, %d nicht.', 'Die erste Zeile setzt die Werte einfach zusammen. Die zweite formatiert Tag und Monat zweistellig mit führender Null.'), A.fill('Wandle den eingelesenen Text in eine ganze Zahl um.', 'int zahl = Integer.{{parseInt}}(sc.nextLine());', 'Die Methode der Wrapperklasse Integer, die Text in int umwandelt.')]
+        tasks: [PP('Was gibt das Programm aus?', ['int x = 3;', 'int y = x;', 'x = 10;', 'System.out.println(x + " " + y);'], '10 3', 'y bekam den Wert 3, bevor x geändert wurde.', 'Bei `int y = x;` wird der aktuelle Wert kopiert.'), A.fill('Ergänze den Datentyp für ganze Zahlen.', '{{int}} anzahl = 5;', 'Gesucht ist der übliche Typ für ganze Zahlen ohne Komma, 4 Byte groß.'), PP('Was gibt das Programm aus?', ['int tag = 3, monat = 7, jahr = 2026;', 'System.out.println(jahr + "-" + monat + "-" + tag);', 'System.out.println(String.format("%02d.%02d.%d", tag, monat, jahr));'], '2026-7-3\n03.07.2026', 'Einfaches + hängt die Zahlen ohne führende Null an. %02d füllt auf zwei Stellen auf, %d nicht.', 'Die erste Zeile setzt die Werte einfach zusammen. Die zweite formatiert Tag und Monat zweistellig mit führender Null.'), A.fill('Wandle den eingelesenen Text in eine ganze Zahl um.', 'int zahl = Integer.{{parseInt}}(sc.nextLine());', 'Die Methode der Wrapperklasse Integer, die Text in int umwandelt.')]
       },
       {
         concept: 'ops',
@@ -49,7 +49,7 @@
         ],
         tips: [A.warn('`if (x = 5)` ist in Java ein **Fehler beim Übersetzen**, weil `x = 5` kein Wahrheitswert ist. Das schützt dich vor einem Fehler, der in C passiert. Vergleichen heißt `==`.')],
         quiz: [A.q('Was passiert in einem `switch` ohne `break`?', ['Das Programm läuft in den nächsten Fall weiter', 'Der Compiler meldet einen Fehler und übersetzt nicht', 'Der switch endet nach dem Fall trotzdem', 'Der Fall wird übersprungen'], 0, 'Man nennt das „Durchfallen“. Meist ist es nicht gewollt.')],
-        tasks: [PP('Was wird ausgegeben?', ['int x = 10;', 'if (x > 5 && x < 8) {', '    System.out.println("A");', '} else if (x > 5) {', '    System.out.println("B");', '} else {', '    System.out.println("C");', '}'], 'B', 'Die erste Bedingung braucht x < 8 (falsch), die zweite stimmt.')]
+        tasks: [PP('Was wird ausgegeben?', ['int x = 10;', 'if (x > 5 && x < 8) {', '    System.out.println("A");', '} else if (x > 5) {', '    System.out.println("B");', '} else {', '    System.out.println("C");', '}'], 'B', 'Bei `&&` müssen beide Vergleiche stimmen. Prüfe jeden einzeln mit dem Wert von x, bevor du dich für einen Zweig entscheidest.')]
       },
       {
         concept: 'loops',
@@ -70,7 +70,7 @@
         ],
         tips: [A.info('Mehrere Methoden dürfen **denselben Namen** haben, wenn ihre Parameter sich unterscheiden (**Überladen**): `static int addiere(int a, int b)` und `static double addiere(double a, double b)`.')],
         quiz: [A.q('Was bedeutet `void` als Rückgabetyp?', ['Die Methode gibt nichts zurück', 'Die Methode gibt immer 0 zurück', 'Die Methode hat keinen Inhalt und keine Parameter', 'Die Methode ist privat'], 0, 'void bedeutet „kein Rückgabewert“.')],
-        tasks: [PP('Was wird ausgegeben?', ['static int doppelt(int n) {', '    return n * 2;', '}', '// in main:', 'System.out.println(doppelt(doppelt(3)));'], '12', 'doppelt(3) ist 6, dann doppelt(6) ist 12.')]
+        tasks: [PP('Was wird ausgegeben?', ['static int doppelt(int n) {', '    return n * 2;', '}', '// in main:', 'System.out.println(doppelt(doppelt(3)));'], '12', 'Bei verschachtelten Aufrufen wird der innere zuerst ausgerechnet. Sein Ergebnis ist das Argument für den äußeren.')]
       },
       {
         concept: 'coll',
@@ -92,7 +92,7 @@
         ],
         tips: [A.warn('Jede öffentliche Klasse steht in einer **eigenen Datei** mit gleichem Namen (`Konto.java`, `Tier.java`). Zum Ausprobieren kannst du kleine Klassen auch ohne `public` in dieselbe Datei schreiben.')],
         quiz: [A.q('Was bewirkt das Schlüsselwort `private` bei einem Attribut?', ['Nur Code innerhalb der Klasse darf darauf zugreifen', 'Nur die Klasse und ihre Unterklassen dürfen zugreifen', 'Alle Klassen im selben Paket dürfen zugreifen', 'Der Wert lässt sich nach dem Setzen nicht mehr ändern'], 0, 'private ist die Grundlage der Kapselung.'), A.q('Was ist ein Konstruktor in Java?', ['Eine Methode ohne Rückgabetyp, die wie die Klasse heißt', 'Eine Methode, die ein Objekt am Ende wieder löscht', 'Eine statische Methode, die den Rückgabetyp void hat', 'Ein Attribut, das beim Start automatisch gesetzt wird'], 0, 'Er läuft bei `new` und setzt Startwerte.')],
-        tasks: [PP('Was gibt das Programm aus?', ['Konto k = new Konto("Ada");', 'k.einzahlen(50);', 'k.einzahlen(25);', 'System.out.println(k.getKontostand());'], '75.0', 'Zwei Einzahlungen: 50 + 25. Der Kontostand ist ein double, deshalb erscheint 75.0.')]
+        tasks: [PP('Was gibt das Programm aus?', ['Konto k = new Konto("Ada");', 'k.einzahlen(50);', 'k.einzahlen(25);', 'System.out.println(k.getKontostand());'], '75.0', 'Verfolge den Kontostand nach jedem Methodenaufruf. Achte auf den Datentyp des Kontostands und darauf, wie Java ihn ausgibt.')]
       },
       {
         concept: 'err',

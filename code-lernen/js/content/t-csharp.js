@@ -30,7 +30,7 @@
         ],
         tips: [A.warn('`int x = "5";` ist ein Fehler beim Übersetzen: Der Compiler lässt keinen Text in einer Zahl-Variable zu. Und `String` oder `string` sind dasselbe, üblich ist `string`.')],
         quiz: [A.q('Was macht das `$` in `$"Hallo {name}"`?', ['Es setzt Werte in den Text ein', 'Es macht den Text zu Geld', 'Es kommentiert den Text aus', 'Es wandelt in eine Zahl um'], 0, 'Das ist String-Interpolation.')],
-        tasks: [PP('Was gibt das Programm aus?', ['int x = 3;', 'int y = x;', 'x = 10;', 'Console.WriteLine($"{x} {y}");'], '10 3', 'y bekam den Wert 3, bevor x geändert wurde.'), A.fill('Ergänze den Datentyp für ganze Zahlen.', '{{int}} anzahl = 5;', 'Für ganze Zahlen gibt es den Typ int.')]
+        tasks: [PP('Was gibt das Programm aus?', ['int x = 3;', 'int y = x;', 'x = 10;', 'Console.WriteLine($"{x} {y}");'], '10 3', 'y bekam den Wert 3, bevor x geändert wurde.'), A.fill('Ergänze den Datentyp für ganze Zahlen.', '{{int}} anzahl = 5;', 'Gesucht ist der übliche Typ für ganze Zahlen ohne Komma, 4 Byte groß.')]
       },
       {
         concept: 'ops',
@@ -50,7 +50,7 @@
         ],
         tips: [A.info('Die Kurzform `bedingung ? a : b` liefert `a`, wenn die Bedingung stimmt, sonst `b`: `string s = alter >= 18 ? "volljährig" : "minderjährig";`')],
         quiz: [A.q('Wofür steht `_` im switch-Ausdruck?', ['Für alle übrigen Fälle', 'Für einen Fehlerfall, der eine Ausnahme wirft', 'Für den ersten Fall', 'Für den Wert null'], 0, 'Der Unterstrich ist der Auffangfall.')],
-        tasks: [PP('Was wird ausgegeben?', ['int x = 10;', 'if (x > 5 && x < 8) {', '    Console.WriteLine("A");', '} else if (x > 5) {', '    Console.WriteLine("B");', '} else {', '    Console.WriteLine("C");', '}'], 'B', 'Die erste Bedingung braucht x < 8 (falsch), die zweite stimmt.')]
+        tasks: [PP('Was wird ausgegeben?', ['int x = 10;', 'if (x > 5 && x < 8) {', '    Console.WriteLine("A");', '} else if (x > 5) {', '    Console.WriteLine("B");', '} else {', '    Console.WriteLine("C");', '}'], 'B', 'Bei `&&` müssen beide Vergleiche stimmen. Prüfe jeden einzeln mit dem Wert von x, bevor du dich für einen Zweig entscheidest.')]
       },
       {
         concept: 'loops',
@@ -71,7 +71,7 @@
         ],
         tips: [A.info('Parameter dürfen **Standardwerte** haben: `static void Gruss(string name = "Welt")`. Dann geht auch `Gruss();`.')],
         quiz: [A.q('Was bedeutet `void`?', ['Die Methode gibt nichts zurück', 'Die Methode gibt immer 0 zurück', 'Die Methode hat keinen Inhalt und keine Parameter', 'Die Methode ist privat'], 0, 'void bedeutet „kein Rückgabewert“.')],
-        tasks: [PP('Was wird ausgegeben?', ['static int Doppelt(int n) => n * 2;', 'Console.WriteLine(Doppelt(Doppelt(3)));'], '12', 'Doppelt(3) ist 6, dann Doppelt(6) ist 12.')]
+        tasks: [PP('Was wird ausgegeben?', ['static int Doppelt(int n) => n * 2;', 'Console.WriteLine(Doppelt(Doppelt(3)));'], '12', 'Bei verschachtelten Aufrufen wird der innere zuerst ausgerechnet. Sein Ergebnis ist das Argument für den äußeren.')]
       },
       {
         concept: 'coll',
@@ -93,7 +93,7 @@
         ],
         tips: [A.info('In C# steht `override` zwingend dabei, und die Basismethode muss `virtual` sein. Das Gegenstück zu Javas `@Override` ist also Pflicht, nicht nur eine Markierung.')],
         quiz: [A.q('Was bewirkt `{ get; private set; }` bei einer Eigenschaft?', ['Lesen ist öffentlich, Schreiben nur innerhalb der Klasse', 'Schreiben ist öffentlich, Lesen nur innerhalb der Klasse', 'Lesen und Schreiben sind nur innerhalb der Klasse erlaubt', 'Der Wert kann genau einmal gesetzt und nie gelesen werden'], 0, 'So kapselst du ein Attribut mit einer Zeile.'), A.q('Wie erbt in C# die Klasse `Hund` von `Tier`?', ['class Hund : Tier', 'class Hund extends Tier', 'class Hund inherits Tier', 'class Hund(Tier)'], 0, 'Der Doppelpunkt kennzeichnet die Vererbung.')],
-        tasks: [PP('Was gibt das Programm aus?', ['var k = new Konto("Ada");', 'k.Einzahlen(50);', 'k.Einzahlen(25);', 'Console.WriteLine(k.Kontostand);'], '75', 'Zwei Einzahlungen: 50 + 25.', 'Console.WriteLine gibt ein double ohne Nachkommastellen aus, wenn es ganzzahlig ist.')]
+        tasks: [PP('Was gibt das Programm aus?', ['var k = new Konto("Ada");', 'k.Einzahlen(50);', 'k.Einzahlen(25);', 'Console.WriteLine(k.Kontostand);'], '75', 'Verfolge den Kontostand nach jedem Methodenaufruf.', 'Console.WriteLine gibt ein double ohne Nachkommastellen aus, wenn es ganzzahlig ist.')]
       },
       {
         concept: 'err',

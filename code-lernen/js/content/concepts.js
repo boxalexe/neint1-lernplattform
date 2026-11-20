@@ -48,7 +48,7 @@
     ],
     tasks: [
       A.predict('Welche Werte haben `a` und `b` am Ende? (Zeile 1: Wert von a und Zeile 2: Wert von b)', ['a <- 5', 'b <- a', 'a <- 10', 'AUSGABE a', 'AUSGABE b'], '10\n5', '`b <- a` kopiert den Wert von **diesem Moment**. Spätere Änderungen an a berühren b nicht.', 'b hat sich bei `b <- a` den Wert 5 gemerkt. Dass a danach auf 10 geändert wird, ändert b nicht.'),
-      A.predict('Was wird ausgegeben?', ['x <- 3', 'x <- x * 2', 'x <- x + 4', 'AUSGABE x'], '10', 'Gehe Zeile für Zeile durch und schreibe dir den aktuellen Wert von x auf: 3, dann 6, dann 10.')
+      A.predict('Was wird ausgegeben?', ['x <- 3', 'x <- x * 2', 'x <- x + 4', 'AUSGABE x'], '10', 'Gehe Zeile für Zeile durch und schreibe dir nach jeder Zeile den aktuellen Wert von x auf.')
     ]
   });
 
@@ -103,8 +103,8 @@
       A.q('`alter` ist 18. Welche Bedingung ist WAHR?', ['alter > 18', 'alter >= 18', 'alter < 18', 'alter != 18'], 1, '18 ist nicht größer als 18, aber größer-oder-gleich 18. Bei Grenzwerten immer genau hinsehen.')
     ],
     tasks: [
-      A.predict('Was wird ausgegeben?', ['x <- 10', 'WENN x > 5 UND x < 8 DANN', '  AUSGABE "A"', 'SONST WENN x > 5 DANN', '  AUSGABE "B"', 'SONST', '  AUSGABE "C"', 'ENDE WENN'], 'B', 'Die erste Bedingung braucht beides: x > 5 (WAHR) und x < 8 (FALSCH). Also weiter zur zweiten.'),
-      A.predict('Was wird ausgegeben?', ['n <- 4', 'WENN n MOD 2 = 0 DANN', '  AUSGABE "gerade"', 'SONST', '  AUSGABE "ungerade"', 'ENDE WENN', 'AUSGABE "fertig"'], 'gerade\nfertig', 'Nach dem Entscheiden läuft das Programm normal weiter: „fertig“ wird immer ausgegeben.')
+      A.predict('Was wird ausgegeben?', ['x <- 10', 'WENN x > 5 UND x < 8 DANN', '  AUSGABE "A"', 'SONST WENN x > 5 DANN', '  AUSGABE "B"', 'SONST', '  AUSGABE "C"', 'ENDE WENN'], 'B', 'Bei UND müssen beide Vergleiche stimmen. Prüfe jeden Vergleich einzeln mit dem Wert von x, bevor du dich für einen Zweig entscheidest.'),
+      A.predict('Was wird ausgegeben?', ['n <- 4', 'WENN n MOD 2 = 0 DANN', '  AUSGABE "gerade"', 'SONST', '  AUSGABE "ungerade"', 'ENDE WENN', 'AUSGABE "fertig"'], 'gerade\nfertig', 'Prüfe, welcher Zweig läuft. Danach geht das Programm ganz normal mit der nächsten Zeile nach dem Block weiter.')
     ]
   });
 
@@ -131,8 +131,8 @@
       A.q('Wann ist eine Schleife besser mit **Bedingung** (while) als mit Zähler (for) gelöst?', ['Wenn du nicht vorher weißt, wie oft sie laufen muss', 'Wenn du genau 10 Wiederholungen willst', 'Wenn die Schleife eine Liste von vorn bis hinten durchlaufen soll', 'Nie, eine while-Schleife ist immer langsamer'], 0, 'Eine Bedingungsschleife passt, wenn nur das **Ende** bekannt ist (z. B. „bis der Benutzer q eingibt“).')
     ],
     tasks: [
-      A.predict('Was wird ausgegeben? (Eine Zahl pro Zeile.)', ['FÜR i VON 1 BIS 4', '  AUSGABE i * i', 'ENDE FÜR'], '1\n4\n9\n16', 'Das Quadrat von 1, 2, 3 und 4.'),
-      A.predict('Was wird ausgegeben?', ['n <- 10', 'SOLANGE n > 0', '  n <- n - 3', 'ENDE SOLANGE', 'AUSGABE n'], '-2', 'n wird 7, dann 4, dann 1, dann -2. Bei -2 ist die Bedingung `n > 0` FALSCH, und die Schleife endet.')
+      A.predict('Was wird ausgegeben? (Eine Zahl pro Zeile.)', ['FÜR i VON 1 BIS 4', '  AUSGABE i * i', 'ENDE FÜR'], '1\n4\n9\n16', 'Schreib dir für jeden Durchlauf den Wert von i auf und rechne aus, was in dieser Runde ausgegeben wird.'),
+      A.predict('Was wird ausgegeben?', ['n <- 10', 'SOLANGE n > 0', '  n <- n - 3', 'ENDE SOLANGE', 'AUSGABE n'], '-2', 'Die Bedingung wird vor jedem Durchlauf geprüft. Ausgegeben wird erst nach der Schleife, also der Wert, bei dem sie aufgehört hat.')
     ]
   });
 
@@ -160,7 +160,7 @@
       A.q('Was bewirkt `GIB ZURÜCK` / `return`?', ['Die Funktion endet und liefert einen Wert an den Aufrufer', 'Der Wert wird auf dem Bildschirm ausgegeben, die Funktion läuft weiter', 'Das gesamte Programm wird an dieser Stelle beendet', 'Die Funktion springt zurück an ihren Anfang'], 0, 'Ausgabe auf dem Bildschirm ist etwas anderes. return liefert den Wert **zurück** an die Stelle, von der aus aufgerufen wurde.')
     ],
     tasks: [
-      A.predict('Was wird ausgegeben?', ['FUNKTION doppelt(n)', '  GIB ZURÜCK n * 2', 'ENDE FUNKTION', 'AUSGABE doppelt(doppelt(3))'], '12', 'Von innen nach außen: doppelt(3) = 6, danach doppelt(6) = 12.'),
+      A.predict('Was wird ausgegeben?', ['FUNKTION doppelt(n)', '  GIB ZURÜCK n * 2', 'ENDE FUNKTION', 'AUSGABE doppelt(doppelt(3))'], '12', 'Bei verschachtelten Aufrufen wird der innere zuerst ausgerechnet. Sein Ergebnis ist das Argument für den äußeren.'),
       A.predict('Was wird ausgegeben?', ['FUNKTION begruessung(name)', '  GIB ZURÜCK "Hallo " + name', 'ENDE FUNKTION', 'text <- begruessung("Ada")', 'AUSGABE text'], 'Hallo Ada', 'Die Funktion gibt den zusammengesetzten Text zurück, `text` speichert ihn, und AUSGABE zeigt ihn an.')
     ]
   });
@@ -190,7 +190,7 @@
     ],
     tasks: [
       A.predict('Was gibt das Programm aus? (Drei Werte in einer Zeile.)', ['l <- [10, 20, 30]', 'AUSGABE l[0], l[2], LÄNGE(l)'], '10 30 3', 'l[0] ist das erste, l[2] das dritte (und letzte) Element, LÄNGE zählt die Elemente.'),
-      A.predict('Was wird ausgegeben?', ['preise <- [4, 8, 15]', 'preise[1] <- 20', 'AUSGABE preise'], '[4, 20, 15]', 'preise[1] ist das **zweite** Element (Index 1). Es wird durch 20 ersetzt.')
+      A.predict('Was wird ausgegeben?', ['preise <- [4, 8, 15]', 'preise[1] <- 20', 'AUSGABE preise'], '[4, 20, 15]', 'Der Index beginnt bei 0. Welches Element wird also überschrieben?')
     ]
   });
 

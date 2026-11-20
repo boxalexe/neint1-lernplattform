@@ -105,7 +105,7 @@
       } else if (a === 'try') {
         if ($('.tryit', extra)) { extra.innerHTML = ''; b.classList.remove('on'); return; }
         b.classList.add('on');
-        extra.innerHTML = '<div class="tryit"><textarea spellcheck="false" rows="' + Math.min(18, lines.length + 2) + '">' + esc(plain) + '</textarea><div class="try-ctl"><button class="primary" data-a="run">Ausführen</button><span class="muted small">' + (lang === 'sql' ? 'Du darfst alles ändern. Jede Ausführung beginnt mit frischen Daten der Shop-Datenbank.' : 'Du darfst alles ändern. Das läuft nur in deinem Browser, in einer abgeschotteten Umgebung.') + '</span></div>' + (lang === 'sql' ? '<div class="sqlout"></div>' : '<pre class="console"></pre>') + '</div>';
+        extra.innerHTML = '<div class="tryit"><textarea data-lang="' + lang + '" spellcheck="false" rows="' + Math.min(18, lines.length + 2) + '">' + esc(plain) + '</textarea><div class="try-ctl"><button class="primary" data-a="run">Ausführen</button><span class="muted small">' + (lang === 'sql' ? 'Du darfst alles ändern. Jede Ausführung beginnt mit frischen Daten der Shop-Datenbank.' : 'Du darfst alles ändern. Das läuft nur in deinem Browser, in einer abgeschotteten Umgebung.') + '</span></div>' + (lang === 'sql' ? '<div class="sqlout"></div>' : '<pre class="console"></pre>') + '</div>';
       } else if (a === 'run') {
         const ta = $('textarea', extra);
         if (lang === 'sql') {
@@ -187,17 +187,20 @@
     fill(box, t, ok) {
       const parts = t.tpl.split(/\{\{(.*?)\}\}/);
       const html = parts.map((s, k) => (k % 2 ? '<input class="gap" data-k="' + (k >> 1) + '" spellcheck="false" size="' + Math.max(3, s.split('|')[0].length + 1) + '">' : esc(s))).join('');
-      box.innerHTML = '<pre class="fill">' + html + '</pre><div class="t-ctl"><button class="primary" data-a="check">Prüfen</button>' + hintBtn(t, box) + '</div>';
+      box.innerHTML = '<pre class="fill">' + html + '</pre><div class="t-ctl"><button class="primary" data-a="check">Prüfen</button>' + hintBtn(t, box) + '<button class="link" data-a="show" hidden>Lösung zeigen</button></div>';
       wireHint(box);
       const answers = []; parts.forEach((s, k) => { if (k % 2) answers.push(s.split('|')); });
+      // Lösung erst nach zwei Fehlversuchen abrufbar, wie bei den anderen Übungen (Allvater 20.11.2026)
+      let tries = 0; const show = $('[data-a=show]', box);
       $('[data-a=check]', box).addEventListener('click', () => {
         let all = true;
         $$('.gap', box).forEach((inp, k) => { const good = answers[k].includes(inp.value.trim()); inp.classList.toggle('right', good); inp.classList.toggle('wrong', !good); if (!good) all = false; });
-        if (all) { feedback(box, true, '<b>Alle Lücken stimmen.</b>'); ok(); } else feedback(box, false, 'Die roten Lücken stimmen noch nicht. Schau noch einmal in die Erklärung oben.');
+        if (all) { feedback(box, true, '<b>Alle Lücken stimmen.</b>'); ok(); } else { tries++; feedback(box, false, 'Die roten Lücken stimmen noch nicht. Schau noch einmal in die Erklärung oben.'); if (tries >= 2) show.hidden = false; }
       });
+      show.addEventListener('click', () => feedback(box, false, '<b>Lösung:</b><pre class="sol">' + esc(parts.map((s, k) => (k % 2 ? s.split('|')[0] : s)).join('')) + '</pre>'));
     },
     js(box, t, ok) {
-      box.innerHTML = '<textarea class="editor" rows="' + Math.max(6, t.starter.split('\n').length + 1) + '" spellcheck="false">' + esc(t.starter) + '</textarea><div class="t-ctl"><button class="primary" data-a="check">Prüfen</button>' + hintBtn(t, box) + '<button class="link" data-a="show" hidden>Lösung zeigen</button></div>';
+      box.innerHTML = '<textarea class="editor" data-lang="javascript" rows="' + Math.max(6, t.starter.split('\n').length + 1) + '" spellcheck="false">' + esc(t.starter) + '</textarea><div class="t-ctl"><button class="primary" data-a="check">Prüfen</button>' + hintBtn(t, box) + '<button class="link" data-a="show" hidden>Lösung zeigen</button></div>';
       wireHint(box);
       let tries = 0; const show = $('[data-a=show]', box);
       $('[data-a=check]', box).addEventListener('click', () => {
@@ -214,7 +217,7 @@
       show.addEventListener('click', () => feedback(box, false, '<b>Eine mögliche Lösung:</b><pre class="sol">' + esc(t.solution) + '</pre>'));
     },
     sql(box, t, ok) {
-      box.innerHTML = '<textarea class="editor" rows="4" spellcheck="false" placeholder="Deine Abfrage, zum Beispiel SELECT name FROM kunden"></textarea><div class="t-ctl"><button class="primary" data-a="check">Prüfen</button><button class="link" data-a="peek">Tabellen ansehen</button>' + hintBtn(t, box) + '<button class="link" data-a="show" hidden>Lösung zeigen</button></div><div class="peek" hidden></div>';
+      box.innerHTML = '<textarea class="editor" data-lang="sql" rows="4" spellcheck="false" placeholder="Deine Abfrage, zum Beispiel SELECT name FROM kunden"></textarea><div class="t-ctl"><button class="primary" data-a="check">Prüfen</button><button class="link" data-a="peek">Tabellen ansehen</button>' + hintBtn(t, box) + '<button class="link" data-a="show" hidden>Lösung zeigen</button></div><div class="peek" hidden></div>';
       wireHint(box);
       let tries = 0; const show = $('[data-a=show]', box);
       $('[data-a=peek]', box).addEventListener('click', async () => { const p = $('.peek', box); p.hidden = !p.hidden; if (!p.hidden && !p.innerHTML) p.innerHTML = await schemaHtml(); });
@@ -444,9 +447,89 @@
     }
     return h + '</div>';
   }
-  function glossarView() {
-    const items = A.glossary.slice().sort((a, b) => a.name.localeCompare(b.name, 'de'));
-    return '<div class="crumb"><a href="#/home">Start</a> › Begriffe</div><h1>Begriffe von A bis Z</h1><input class="search" id="gs" placeholder="Begriff suchen" spellcheck="false"><div id="gl">' + items.map((g) => '<div class="term" data-s="' + esc((g.name + ' ' + g.text).toLowerCase()) + '"><b>' + esc(g.name) + '</b><div>' + md(g.text) + '</div></div>').join('') + '</div>';
+  // Zwei Reiter: Begriffe von A bis Z und die Kürzel der Sprachen (dieselben Erklärungen wie beim Darüberfahren in den Texten)
+  function glossarView(tab) {
+    const kz = tab === 'kuerzel';
+    let h = '<div class="crumb"><a href="#/home">Start</a> › ' + (kz ? 'Kürzel' : 'Begriffe') + '</div><div class="tabs"><a class="' + (kz ? '' : 'on') + '" href="#/glossar">Begriffe von A bis Z</a><a class="' + (kz ? 'on' : '') + '" href="#/glossar/kuerzel">Kürzel der Sprachen</a></div>';
+    if (!kz) {
+      const items = A.glossary.slice().sort((a, b) => a.name.localeCompare(b.name, 'de'));
+      return h + '<h1>Begriffe von A bis Z</h1><input class="search" id="gs" placeholder="Begriff suchen" spellcheck="false"><div id="gl">' + items.map((g) => '<div class="term" data-s="' + esc((g.name + ' ' + g.text).toLowerCase()) + '"><b>' + esc(g.name) + '</b><div>' + md(g.text) + '</div></div>').join('') + '</div>';
+    }
+    const groups = {};
+    (A.kuerzel || []).forEach((e) => { (groups[e[1]] = groups[e[1]] || []).push(e); });
+    h += '<h1>Kürzel der Sprachen</h1><p class="lead">Schlüsselwörter, Datentypen und Standardfunktionen in einem Satz. In den Texten der Lektionen erscheinen dieselben Erklärungen, wenn du mit der Maus über ein gepunktet unterstrichenes Wort fährst oder es antippst.</p><input class="search" id="gs" placeholder="Kürzel suchen, zum Beispiel double oder args" spellcheck="false"><div id="gl" class="kz-list">';
+    for (const [g, es] of Object.entries(groups)) {
+      h += '<section class="kz-group"><h3>' + esc(g) + '</h3>' + es.slice().sort((a, b) => a[0].localeCompare(b[0], 'de', { sensitivity: 'base' })).map((e) => {
+        const o = e[3] || {}, extra = Object.entries(o.l || {}).map(([k, v]) => { const ln = A.langNames[k] || k; return '<div class="small"><b>' + esc(ln) + ':</b> ' + A.inl(v.startsWith(ln + ':') ? v.slice(ln.length + 1).trim() : v) + '</div>'; }).join('');
+        return '<div class="term" data-s="' + esc([e[0]].concat(o.a || [], e[2], Object.values(o.l || {})).join(' ').toLowerCase()) + '"><b><code>' + esc(e[0]) + '</code></b><div>' + A.inl(e[2]) + extra + '</div></div>';
+      }).join('') + '</section>';
+    }
+    return h + '</div>';
+  }
+
+  /* ---------- Kürzel: Erklärung beim Darüberfahren oder Antippen (Allvater 20.11.2026) ----------
+     Nur in Texten: Erklärungen, Tabellen, Fragen, Hinweise. Nie im Code (Beispiele, Übungsfelder, Lückentexte, Ausgaben) und
+     nie in Antwortknöpfen des Quiz, damit die Erklärung keine Antwort verrät. */
+  const KZ = (() => {
+    const all = A.kuerzel || [], map = new Map();
+    all.forEach((e, i) => [e[0]].concat((e[3] && e[3].a) || []).forEach((n) => { if (!map.has(n)) map.set(n, i); }));
+    const reEsc = (s) => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    const mk = (names) => (names.length ? new RegExp('(?<![A-Za-z0-9_ÄÖÜäöüß])(' + names.sort((a, b) => b.length - a.length).map((n) => reEsc(n).replace(/ /g, '\\s+')).join('|') + ')(?![A-Za-z0-9_ÄÖÜäöüß])', 'g') : null);
+    // Wörter (auch mit Punkt, # oder @ davor) suchen wir im Text; reine Zeichen wie % oder && nur, wenn sie allein in einem Code-Schnipsel stehen
+    const words = [...map.keys()].filter((n) => /^[A-Za-zÄÖÜäöüß_#@]/.test(n));
+    return { all, map, reCode: mk(words.slice()), reText: mk(words.filter((n) => !(all[map.get(n)][3] || {}).c)) };
+  })();
+  const KZ_SKIP = 'pre,textarea,input,button,select,script,style,svg,a,h1,h2,h3,.kz,.q-opts,.cb-head,.crumb,.tabs,.t-kind,.kz-list,#gl,.tr-code,.console,.refbox,.uml-wrap,td.src,.sol,.fill,#kz-tip';
+  function kzMark(root) {
+    if (!KZ.reText || !root || root.nodeType !== 1 || root.closest(KZ_SKIP)) return;
+    const tw = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, { acceptNode: (n) => (!n.nodeValue.trim() || n.parentElement.closest(KZ_SKIP) ? NodeFilter.FILTER_REJECT : NodeFilter.FILTER_ACCEPT) });
+    const nodes = []; while (tw.nextNode()) nodes.push(tw.currentNode);
+    for (const n of nodes) {
+      const code = n.parentElement.closest('code');
+      if (code && code.childNodes.length === 1) {
+        const k = code.textContent.trim(), i = KZ.map.get(k);
+        if (i !== undefined) { code.classList.add('kz'); code.dataset.k = i; code.tabIndex = 0; continue; }
+      }
+      const re = code ? KZ.reCode : KZ.reText, s = n.nodeValue, frag = document.createDocumentFragment();
+      let m, last = 0, hit = false; re.lastIndex = 0;
+      while ((m = re.exec(s))) {
+        const i = KZ.map.get(m[1].replace(/\s+/g, ' ')); if (i === undefined) continue;
+        hit = true; frag.append(s.slice(last, m.index));
+        const sp = document.createElement('span'); sp.className = 'kz'; sp.dataset.k = i; sp.tabIndex = 0; sp.textContent = m[1]; frag.append(sp);
+        last = m.index + m[1].length;
+      }
+      if (hit) { frag.append(s.slice(last)); n.replaceWith(frag); }
+    }
+  }
+  function kzTipInit() {
+    const tip = document.createElement('div'); tip.id = 'kz-tip'; tip.setAttribute('role', 'tooltip'); tip.hidden = true; document.body.appendChild(tip);
+    let curEl = null;
+    const show = (el) => {
+      const e = KZ.all[+el.dataset.k]; if (!e) return;
+      const o = e[3] || {}, tr = CUR && CUR.track.id, txt = (o.l && tr && o.l[tr]) || e[2];
+      tip.innerHTML = '<div class="kz-h"><code>' + esc(e[0]) + '</code><span>' + esc(e[1]) + '</span></div><div>' + A.inl(txt) + '</div>';
+      tip.hidden = false; curEl = el;
+      const r = el.getBoundingClientRect(), w = tip.offsetWidth, hh = tip.offsetHeight, vw = document.documentElement.clientWidth;
+      const left = Math.max(8, Math.min(vw - w - 8, r.left + r.width / 2 - w / 2));
+      const top = r.bottom + 8 + hh < window.innerHeight ? r.bottom + 8 : Math.max(8, r.top - hh - 8);
+      tip.style.left = left + 'px'; tip.style.top = top + 'px';
+    };
+    const hide = () => { tip.hidden = true; curEl = null; };
+    let pinned = null;
+    const kzOf = (ev) => ev.target.closest && ev.target.closest('.kz');
+    document.addEventListener('mouseover', (ev) => { const el = kzOf(ev); if (el) show(el); else if (curEl && !pinned) hide(); });
+    document.addEventListener('focusin', (ev) => { const el = kzOf(ev); if (el) show(el); });
+    document.addEventListener('focusout', (ev) => { if (kzOf(ev) && !pinned) hide(); });
+    // Antippen (Handy) oder Klicken hält die Erklärung fest; nochmal tippen oder daneben tippen schließt sie
+    document.addEventListener('click', (ev) => { const el = kzOf(ev); if (el) { if (pinned === el) { pinned = null; hide(); } else { pinned = el; show(el); } } else if (curEl) { pinned = null; hide(); } });
+    window.addEventListener('scroll', () => { pinned = null; hide(); }, { passive: true, capture: true });
+    document.addEventListener('keydown', (ev) => { if (ev.key === 'Escape') { pinned = null; hide(); } });
+    // Neue Inhalte (Seitenwechsel, Rückmeldungen, Tipps, Lösungen) bekommen die Erklärungen auch
+    new MutationObserver((ms) => {
+      const roots = new Set();
+      for (const m of ms) m.addedNodes.forEach((n) => { const r = n.nodeType === 1 ? n : n.parentElement; if (r) roots.add(r); });
+      roots.forEach(kzMark);
+    }).observe($('#main'), { childList: true, subtree: true });
   }
 
   /* ---------- Spielwiesen ---------- */
@@ -461,6 +544,7 @@
   }
   function playInit(what) {
     const src = $('#src');
+    if (what !== 'uml') src.dataset.lang = what === 'js' ? 'javascript' : what; // Autovervollständigung (editor.js)
     if (what === 'pseudo') {
       const S = A.pseudoSamples || {}, sel = $('#smp');
       sel.innerHTML = Object.keys(S).map((k) => '<option>' + esc(k) + '</option>').join('');
@@ -500,7 +584,7 @@
     $('#nav').innerHTML = '<a class="nav-top nav-home' + (home ? ' on' : '') + '" href="#/home">Start</a>' + A.tracks.map((t, i) => {
       const ls = A.lessons(t);
       return '<details name="kurs" style="--ac: var(' + NAV_AC[i % NAV_AC.length] + ')"' + (cur === t.id ? ' open' : '') + '><summary><span>' + esc(t.title) + '</span><span class="small muted">' + ls.filter((l) => P.done[l.id]).length + '/' + ls.length + '</span></summary>' + ls.map((l) => '<a class="nl' + (P.done[l.id] ? ' done' : '') + (CUR && CUR.lesson.id === l.id ? ' on' : '') + '" href="#/lesson/' + l.id + '"><span class="dot"></span>' + esc(l.title) + '</a>').join('') + '</details>';
-    }).join('') + '<div class="nav-sep"></div><a class="nav-top" href="#/play/pseudo">Spielwiese</a><a class="nav-top" href="#/compare/vars">Sprachvergleich</a><a class="nav-top" href="#/glossar">Begriffe von A bis Z</a><button class="nav-reset" type="button">Lernfortschritt löschen</button><div class="nav-sep"></div><a class="nav-top" href="/#impressum">Impressum und Datenschutz</a>';
+    }).join('') + '<div class="nav-sep"></div><a class="nav-top" href="#/play/pseudo">Spielwiese</a><a class="nav-top" href="#/compare/vars">Sprachvergleich</a><a class="nav-top" href="#/glossar">Begriffe von A bis Z</a><a class="nav-top" href="#/glossar/kuerzel">Kürzel der Sprachen</a><button class="nav-reset" type="button">Lernfortschritt löschen</button><div class="nav-sep"></div><a class="nav-top" href="/#impressum">Impressum und Datenschutz</a>';
     // Höchstens ein Kurs aufgeklappt (Allvater 20.11.2026): name="kurs" erledigt das in neuen Browsern, das hier in älteren
     $$('#nav details').forEach((d) => d.addEventListener('toggle', () => { if (d.open) $$('#nav details[open]').forEach((o) => { if (o !== d) o.open = false; }); }));
   }
@@ -515,7 +599,7 @@
     } else if (kind === 'track') { const t = A.tracks.find((x) => x.id === arg); html = t ? trackView(t) : homeView(); }
     else if (kind === 'play') html = playView(arg || 'pseudo');
     else if (kind === 'compare') html = compareView(arg || 'vars');
-    else if (kind === 'glossar') html = glossarView();
+    else if (kind === 'glossar') html = glossarView(arg);
     else html = homeView();
     main.innerHTML = html;
     activate(main);
@@ -526,7 +610,7 @@
     if (kind === 'glossar') $('#gs').addEventListener('input', (e) => { const q = e.target.value.toLowerCase().trim(); $$('.term').forEach((t) => { t.hidden = q && !t.dataset.s.includes(q); }); });
     renderNav();
     main.scrollTop = 0; window.scrollTo(0, 0);
-    document.title = (CUR ? CUR.lesson.title + ' | ' : '') + 'CodeLernen | Layer 8 Academy';
+    document.title = (CUR ? CUR.lesson.title + ' | ' : '') + 'Code lesen | Layer 8 Academy';
     drawer(false);
   }
 
@@ -556,6 +640,7 @@
   document.addEventListener('DOMContentLoaded', () => {
     applyPrefs();
     a11y();
+    kzTipInit();
     $('#fplus').addEventListener('click', () => { P.font = Math.min(150, P.font + 10); save(); applyPrefs(); });
     $('#fminus').addEventListener('click', () => { P.font = Math.max(80, P.font - 10); save(); applyPrefs(); });
     $('#menu').addEventListener('click', () => drawer(!$('#side').classList.contains('open')));

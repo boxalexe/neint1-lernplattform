@@ -27,7 +27,7 @@
         ],
         tips: [A.warn('Eine **nicht initialisierte** Variable hat keinen definierten Wert. Gib jeder Variable sofort einen Startwert, sonst rechnest du mit Müll.'), A.info('C hat keinen Text-Datentyp. Text ist ein Array aus `char` (siehe Lektion zu Arrays).')],
         quiz: [A.q('Welcher Platzhalter gehört zu einer ganzen Zahl in `printf`?', ['%d', '%f', '%c', '%s'], 0, '%d für ganze Zahlen, %f für Kommazahlen, %c für ein Zeichen, %s für Text.')],
-        tasks: [PP('Was gibt das Programm aus?', ['int x = 3;', 'int y = x;', 'x = 10;', 'printf("%d %d\\n", x, y);'], '10 3', 'y bekam den Wert 3, bevor x geändert wurde.'), A.fill('Ergänze den Platzhalter für eine ganze Zahl.', 'printf("{{%d}}", 42);', 'Für ganze Zahlen steht %d.')]
+        tasks: [PP('Was gibt das Programm aus?', ['int x = 3;', 'int y = x;', 'x = 10;', 'printf("%d %d\\n", x, y);'], '10 3', 'y bekam den Wert 3, bevor x geändert wurde.'), A.fill('Ergänze den Platzhalter für eine ganze Zahl.', 'printf("{{%d}}", 42);', 'In printf beginnt jeder Platzhalter mit %. Der Buchstabe danach verrät den Typ.')]
       },
       {
         concept: 'ops',
@@ -47,7 +47,7 @@
         ],
         tips: [],
         quiz: [A.q('Was passiert in einem `switch` ohne `break`?', ['Das Programm läuft in den nächsten Fall weiter', 'Der Compiler meldet einen Fehler und übersetzt nicht', 'Der switch endet nach dem Fall trotzdem', 'Der Fall wird übersprungen'], 0, 'Man nennt das „Durchfallen“.')],
-        tasks: [PP('Was wird ausgegeben?', ['int x = 10;', 'if (x > 5 && x < 8) {', '    printf("A");', '} else if (x > 5) {', '    printf("B");', '} else {', '    printf("C");', '}'], 'B', 'Die erste Bedingung braucht x < 8 (falsch), die zweite stimmt.')]
+        tasks: [PP('Was wird ausgegeben?', ['int x = 10;', 'if (x > 5 && x < 8) {', '    printf("A");', '} else if (x > 5) {', '    printf("B");', '} else {', '    printf("C");', '}'], 'B', 'Bei `&&` müssen beide Vergleiche stimmen. Prüfe jeden einzeln mit dem Wert von x, bevor du dich für einen Zweig entscheidest.')]
       },
       {
         concept: 'loops',
@@ -68,7 +68,7 @@
         ],
         tips: [A.info('Um das Original zu ändern, übergibst du seine **Adresse** (einen Zeiger). Dazu mehr in der Vertiefung.')],
         quiz: [A.q('Was passiert, wenn du eine Variable an eine Funktion übergibst und sie dort änderst?', ['Das Original bleibt unverändert, die Funktion ändert nur eine Kopie', 'Das Original wird geändert, weil C immer die Adresse übergibt', 'Der Compiler meldet einen Fehler, Parameter sind schreibgeschützt', 'Die Änderung gilt, bis die aufrufende Funktion endet'], 0, 'C übergibt standardmäßig Kopien (call by value).')],
-        tasks: [PP('Was wird ausgegeben?', ['int doppelt(int n) {', '    return n * 2;', '}', '// in main:', 'printf("%d\\n", doppelt(doppelt(3)));'], '12', 'doppelt(3) ist 6, dann doppelt(6) ist 12.')]
+        tasks: [PP('Was wird ausgegeben?', ['int doppelt(int n) {', '    return n * 2;', '}', '// in main:', 'printf("%d\\n", doppelt(doppelt(3)));'], '12', 'Bei verschachtelten Aufrufen wird der innere zuerst ausgerechnet. Sein Ergebnis ist das Argument für den äußeren.')]
       },
       {
         concept: 'coll',

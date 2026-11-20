@@ -165,7 +165,15 @@ function checkParts(where, parts) {
   if (nLongest / nUnique > 0.4) warn('Bei ' + Math.round(100 * nLongest / nUnique) + ' % der Quizfragen ist die richtige Antwort die längste (Ziel höchstens 40 %)');
   for (const [i, g] of A.glossary.entries()) if (!g.name || !g.text) bad('Glossar-Eintrag ' + i + ' unvollständig');
   for (const [k, v] of Object.entries(A.pseudoSamples || {})) { const r = Pseudo.run(v, { inputs: ['6'] }); if (r.error) bad('Pseudocode-Beispiel „' + k + '“: ' + r.error.msg); }
-  console.log('\n' + A.tracks.length + ' Kurse, ' + nLessons + ' Lektionen, ' + nCode + ' Codebeispiele, ' + nQuiz + ' Quizfragen, ' + nTasks + ' Übungen, ' + A.glossary.length + ' Begriffe.');
+  // Kürzel (Hover-Erklärungen): vollständig, jeder Name und jede Schreibweise nur einmal, Kurse in l: gibt es wirklich
+  const kzSeen = new Set(), trackIds = new Set(A.tracks.map((t) => t.id));
+  for (const [i, e] of (A.kuerzel || []).entries()) {
+    if (!e[0] || !e[1] || !e[2]) bad('Kürzel ' + i + ' unvollständig');
+    const o = e[3] || {};
+    for (const n of [e[0]].concat(o.a || [])) { if (kzSeen.has(n)) bad('Kürzel „' + n + '“ doppelt'); kzSeen.add(n); }
+    for (const k of Object.keys(o.l || {})) if (!trackIds.has(k)) bad('Kürzel „' + e[0] + '“: unbekannter Kurs ' + k);
+  }
+  console.log('\n' + A.tracks.length + ' Kurse, ' + nLessons + ' Lektionen, ' + nCode + ' Codebeispiele, ' + nQuiz + ' Quizfragen, ' + nTasks + ' Übungen, ' + A.glossary.length + ' Begriffe, ' + (A.kuerzel || []).length + ' Kürzel.');
   console.log(problems ? problems + ' FEHLER, ' + warnings + ' Hinweise' : 'Keine Fehler. ' + warnings + ' Hinweise.');
   process.exit(problems ? 1 : 0);
 })();

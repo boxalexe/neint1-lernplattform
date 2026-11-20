@@ -30,7 +30,7 @@
         ],
         tips: [A.tip('Python-Variablen schreibt man klein, mit Unterstrich: `ist_student`, `anzahl_kunden` (**snake_case**). Das ist Konvention, kein Zwang, aber alle halten sich daran.'), A.warn('`"5" + 3` ist ein Fehler (Text plus Zahl). Wandle zuerst um: `int("5") + 3` ergibt 8 oder `"5" + str(3)` ergibt "53".')],
         quiz: [A.q('Was liefert `input()` immer zurück?', ['Text (str)', 'Eine ganze Zahl', 'Eine Kommazahl', 'True oder False'], 0, 'Auch wenn der Benutzer 25 eintippt, ist es zunächst der Text "25". Mit int() oder float() wandelst du um.')],
-        tasks: [PP('Was gibt das Programm aus?', ['x = 3', 'y = x', 'x = 10', 'print(x, y)'], '10 3', 'y bekam den Wert 3, bevor x geändert wurde.', 'Bei `y = x` wird der **aktuelle Wert** kopiert.'), A.fill('Ergänze die Umwandlung in eine ganze Zahl.', 'zahl = {{int}}(input("Zahl: "))', 'Die Funktion für „ganze Zahl“ heißt wie der Datentyp: int.')]
+        tasks: [PP('Was gibt das Programm aus?', ['x = 3', 'y = x', 'x = 10', 'print(x, y)'], '10 3', 'y bekam den Wert 3, bevor x geändert wurde.', 'Bei `y = x` wird der **aktuelle Wert** kopiert.'), A.fill('Ergänze die Umwandlung in eine ganze Zahl.', 'zahl = {{int}}(input("Zahl: "))', 'Die Umwandlungsfunktion heißt genauso wie der Datentyp für ganze Zahlen.')]
       },
       {
         concept: 'ops',
@@ -39,7 +39,7 @@
         ],
         tips: [A.tip('In Python ergibt `7 / 2` richtig `3.5`. Willst du die ganzzahlige Division wie in Java oder C, nimm `//`.')],
         quiz: [A.q('Was ergibt `7 // 2` in Python?', ['3', '3.5', '4', '1'], 0, '`//` ist die Ganzzahl-Division und rundet nach unten ab. Bei positiven Zahlen fallen einfach die Nachkommastellen weg, bei negativen wird weiter nach unten gerundet: `-7 // 2` ergibt -4.')],
-        tasks: [A.predict('Was gibt das Programm aus?', ['print(17 // 5, 17 % 5)'], '3 2', '17 durch 5 ist 3 Rest 2.', 'Erst `//` (ganzzahlig), dann `%` (Rest).'), A.predict('Was gibt das Programm aus?', ['print(10 > 5 and 3 > 4)'], 'False', '`and` ist nur True, wenn beide Seiten True sind. 3 > 4 stimmt nicht.')].map((t) => Object.assign(t, { lang: 'python' }))
+        tasks: [A.predict('Was gibt das Programm aus?', ['print(17 // 5, 17 % 5)'], '3 2', '`//` teilt ganzzahlig, `%` liefert den Rest der Division.', 'Erst `//` (ganzzahlig), dann `%` (Rest).'), A.predict('Was gibt das Programm aus?', ['print(10 > 5 and 3 > 4)'], 'False', '`and` ist nur True, wenn beide Seiten True sind. Prüfe jede Seite einzeln.')].map((t) => Object.assign(t, { lang: 'python' }))
       },
       {
         concept: 'cond',
@@ -49,7 +49,7 @@
         ],
         tips: [A.warn('Vergiss den **Doppelpunkt** am Ende von `if`, `elif`, `else` nicht, sonst gibt es einen `SyntaxError`.')],
         quiz: [A.q('Welches Zeichen steht in Python am Ende einer if-Zeile?', ['Ein Doppelpunkt `:`', 'Ein Semikolon `;`', 'Eine geschweifte Klammer `{`', 'Nichts'], 0, 'Der Doppelpunkt leitet den eingerückten Block ein.')],
-        tasks: [Object.assign(A.predict('Was wird ausgegeben?', ['x = 10', 'if x > 5 and x < 8:', '    print("A")', 'elif x > 5:', '    print("B")', 'else:', '    print("C")'], 'B', 'Die erste Bedingung braucht beides, x < 8 stimmt aber nicht. Die zweite Bedingung stimmt.'), { lang: 'python' })]
+        tasks: [Object.assign(A.predict('Was wird ausgegeben?', ['x = 10', 'if x > 5 and x < 8:', '    print("A")', 'elif x > 5:', '    print("B")', 'else:', '    print("C")'], 'B', 'Bei `and` müssen beide Vergleiche stimmen. Prüfe jeden einzeln mit dem Wert von x, bevor du dich für einen Zweig entscheidest.'), { lang: 'python' })]
       },
       {
         concept: 'loops',
@@ -70,7 +70,7 @@
         ],
         tips: [A.warn('Ohne `return` gibt eine Python-Funktion `None` („nichts“) zurück. `print` in einer Funktion ist **nicht** dasselbe wie `return`.')],
         quiz: [A.q('Was passiert, wenn eine Python-Funktion kein `return` hat?', ['Sie liefert None', 'Sie liefert 0', 'Es gibt einen Fehler', 'Sie liefert den letzten Wert'], 0, 'None ist Pythons „kein Wert“.')],
-        tasks: [Object.assign(A.predict('Was wird ausgegeben?', ['def doppelt(n):', '    return n * 2', 'print(doppelt(doppelt(3)))'], '12', 'doppelt(3) ist 6, dann doppelt(6) ist 12.'), { lang: 'python' })]
+        tasks: [Object.assign(A.predict('Was wird ausgegeben?', ['def doppelt(n):', '    return n * 2', 'print(doppelt(doppelt(3)))'], '12', 'Bei verschachtelten Aufrufen wird der innere zuerst ausgerechnet. Sein Ergebnis ist das Argument für den äußeren.'), { lang: 'python' })]
       },
       {
         concept: 'coll',
@@ -81,7 +81,7 @@
         ],
         tips: [A.warn('Mit `b = a` kopierst du eine Liste **nicht**: Beide Namen zeigen auf dieselbe Liste. Eine echte Kopie bekommst du mit `b = a.copy()` oder `b = list(a)`.')],
         quiz: [A.q('Was liefert `liste[-1]` in Python?', ['Das letzte Element', 'Einen Fehler', 'Das erste Element', 'Die Länge'], 0, 'Negative Indizes zählen von hinten.')],
-        tasks: [Object.assign(A.predict('Was gibt das Programm aus?', ['l = [10, 20, 30]', 'print(l[0], l[-1], len(l))'], '10 30 3', 'l[0] erstes, l[-1] letztes Element, len() die Anzahl.'), { lang: 'python' }), Object.assign(A.predict('Was gibt das Programm aus?', ['t = "Python"', 'print(t[1:4])'], 'yth', 'Index 1 bis vor 4: y (1), t (2), h (3).'), { lang: 'python' })]
+        tasks: [Object.assign(A.predict('Was gibt das Programm aus?', ['l = [10, 20, 30]', 'print(l[0], l[-1], len(l))'], '10 30 3', 'l[0] erstes, l[-1] letztes Element, len() die Anzahl.'), { lang: 'python' }), Object.assign(A.predict('Was gibt das Programm aus?', ['t = "Python"', 'print(t[1:4])'], 'yth', 'Beim Slice gehört der Startindex dazu, der Endindex nicht. Zähle die Buchstaben ab 0.'), { lang: 'python' })]
       },
       {
         concept: 'oop',
@@ -116,7 +116,7 @@
         ],
         tips: [],
         quiz: [A.q('Was liefert `[x * 2 for x in [1, 2, 3]]`?', ['[2, 4, 6]', '[1, 2, 3]', '[3, 6]', '6'], 0, 'Jedes Element wird verdoppelt.'), A.q('Wozu dient `with open(...)`?', ['Die Datei wird am Ende des Blocks automatisch geschlossen', 'Die Datei wird nur zum Lesen geöffnet, Schreiben ist verboten', 'Die Datei wird im Speicher kopiert und das Original gesperrt', 'Die Datei wird angelegt, falls es sie noch nicht gibt'], 0, 'with sorgt für sauberes Aufräumen.')],
-        tasks: [Object.assign(A.predict('Was gibt das Programm aus?', ['print([n for n in range(1, 8) if n % 3 == 0])'], '[3, 6]', 'Von 1 bis 7 sind nur 3 und 6 durch 3 teilbar.'), { lang: 'python' })]
+        tasks: [Object.assign(A.predict('Was gibt das Programm aus?', ['print([n for n in range(1, 8) if n % 3 == 0])'], '[3, 6]', '`range(1, 8)` endet vor 8. In die Liste kommt nur, was die Bedingung nach `if` erfüllt.'), { lang: 'python' })]
       }
     ]
   });

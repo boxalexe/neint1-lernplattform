@@ -1,5 +1,5 @@
 /*
- * CodeLernen im Gewand der Layer 8 Academy (Allvater 19.11.2026):
+ * Code lesen im Gewand der Layer 8 Academy (Allvater 19.11.2026):
  * - Farben und Schriften wie die Hauptseite, mit denselben Kontrastmodi (Original, Hoher Kontrast, Blau/Orange)
  * - Ecken höchstens 2 px. Ausnahme sind nur echte Kreise (Fortschrittspunkte), die haben keine Ecken
  * - alle Codefelder (Beispiele, Eingabefelder, Ausgaben) in den Farben des VS-Code-Themes „Tokyo Hack“ (ajshortt)
@@ -249,6 +249,34 @@ svg.uml { width: 100%; height: auto; display: block; margin: 0 auto; font-family
 #nav .nav-top:not(.nav-home) { color: var(--th-note); }
 #nav .nav-top:not(.nav-home):hover { color: var(--th-fn); }
 #nav .nav-sep { background: var(--th-line); }
+
+/* ---------- Autovervollständigung in den Codefeldern (editor.js), Farben aus Tokyo Hack ---------- */
+.ac-box { position: fixed; z-index: 70; min-width: 220px; max-width: min(460px, calc(100vw - 16px)); background: var(--th-bg2); border: 1px solid var(--th-line);
+  border-radius: var(--r); box-shadow: 0 8px 24px rgba(0, 0, 0, .5); font: .85rem/1.4 var(--mono); color: var(--th-fg); padding: 2px 0; }
+.ac-box[hidden] { display: none; }
+.ac-it { display: flex; align-items: baseline; gap: 8px; padding: 3px 10px; cursor: pointer; white-space: nowrap; }
+.ac-it.on { background: var(--th-line); }
+.ac-it.on { flex-wrap: wrap; }
+.ac-l { flex-shrink: 0; }
+.ac-d { flex-basis: 100%; white-space: normal; font: .78rem/1.45 var(--ui); color: var(--th-note); padding: 2px 0 3px 18px; }
+.ac-d code { font-size: .95em; padding: 0 4px; }
+.ac-k { width: 10px; height: 10px; flex-shrink: 0; border-radius: var(--r); background: var(--th-var); align-self: center; }
+.ac-k.ac-kw { background: var(--th-kw); } .ac-k.ac-fn { background: var(--th-fn); } .ac-k.ac-snip { background: var(--th-pp); }
+.ac-k.ac-tbl { background: var(--th-ty); } .ac-k.ac-col { background: var(--th-str); }
+
+/* ---------- Kürzel: Erklärung beim Darüberfahren (Allvater 20.11.2026) ---------- */
+.kz { text-decoration: underline dotted color-mix(in srgb, var(--cyan) 70%, transparent); text-underline-offset: 3px; text-decoration-thickness: 1px; cursor: help; }
+code.kz { text-decoration-color: color-mix(in srgb, var(--cyan) 85%, transparent); }
+.kz:hover, .kz:focus-visible { color: var(--cyan); outline: none; }
+#kz-tip { position: fixed; z-index: 60; max-width: min(360px, calc(100vw - 16px)); padding: 9px 12px; background: var(--panel); color: var(--text);
+  border: 1px solid var(--border); border-left: 3px solid var(--cyan); border-radius: var(--r); box-shadow: 0 8px 24px rgba(0, 0, 0, .45);
+  font-size: .86rem; line-height: 1.5; pointer-events: none; }
+#kz-tip[hidden] { display: none; }
+#kz-tip .kz-h { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; margin-bottom: 4px; }
+#kz-tip .kz-h span { font: .7rem var(--mono); text-transform: uppercase; letter-spacing: .06em; color: var(--muted); }
+.kz-group h3 { margin-top: 1.6em; }
+.kz-list .term > b code { color: var(--th-kw); }
+.kz-list .term .small { margin-top: 2px; color: var(--muted); }
 
 @media (max-width: 900px) {
   #layout { grid-template-columns: 1fr; } #menu { display: inline-flex; }

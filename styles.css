@@ -645,6 +645,8 @@ table.sn-cheat td:nth-child(4),table.sn-cheat td:nth-child(5){color:var(--green)
 /* ---- Querverweis-Box: Streifen deutlich zurückgenommen ---- */
 .callout.xref{border-left-color:color-mix(in srgb, var(--cyan) 45%, transparent)}
 .callout.xref .tag{background:color-mix(in srgb, var(--cyan) 82%, transparent);color:var(--bg)}
+/* Schrift mittig im Streifen statt am linken Rand (Allvater 20.11.2026); 1px mehr links gleicht den Buchstabenabstand nach dem letzten Zeichen aus */
+.callout.xref .tag{text-align:center;padding:2px 8px 2px 9px}
 
 /* ---- Werkzeugleiste in der klebenden Menüzeile ---- */
 .a11y-wrap.in-menu{position:static;margin-left:auto;display:flex;align-items:center;gap:6px;flex-shrink:0}

@@ -10,7 +10,7 @@
     return new Promise((resolve) => {
       let w;
       try { w = new Worker('js/runner.js'); }
-      catch (e) { resolve({ logs: [], error: 'Dein Browser erlaubt hier keinen abgeschotteten Hintergrundprozess. Öffne CodeLernen über die Website, dann klappt das Ausführen.', results: null }); return; }
+      catch (e) { resolve({ logs: [], error: 'Dein Browser erlaubt hier keinen abgeschotteten Hintergrundprozess. Öffne Code lesen über die Website, dann klappt das Ausführen.', results: null }); return; }
       const timer = setTimeout(() => { w.terminate(); resolve({ logs: [], error: 'Zeitüberschreitung: Das Programm lief länger als ' + timeout / 1000 + ' Sekunden. Steckt irgendwo eine Endlosschleife?', results: null }); }, timeout);
       w.onmessage = (e) => { clearTimeout(timer); w.terminate(); const d = e.data || {}; resolve({ logs: Array.isArray(d.logs) ? d.logs.map(String) : [], error: d.error ? String(d.error) : null, results: Array.isArray(d.results) ? d.results : null }); };
       w.onerror = (e) => { clearTimeout(timer); w.terminate(); resolve({ logs: [], error: e.message || 'Fehler beim Ausführen', results: null }); };

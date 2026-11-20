@@ -119,5 +119,7 @@
     return out;
   };
 
+  // Schlüsselwörter und Typen einer Sprache, für die Autovervollständigung in den Eingabefeldern
+  A.langWords = (lang) => (LANG[lang] ? [...LANG[lang].kw, ...LANG[lang].ty] : []);
   A.langNames = { java: 'Java', javascript: 'JavaScript', python: 'Python', c: 'C', cpp: 'C++', csharp: 'C#', sql: 'SQL', pseudo: 'Pseudocode' };
 })(typeof window !== 'undefined' ? window : globalThis);

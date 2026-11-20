@@ -50,7 +50,7 @@ tools/       seiten-bauen.mjs: erzeugt die Einzelseiten (siehe unten)
 docs/        Vorschaubild für dieses README (wird nicht ausgeliefert)
 ```
 
-Eigene Bereiche: Subnetting Trainer (`/subnetting-trainer/`), AP1 Simulator (`/ap1-simulator/`), CodeLernen (`/code-lernen/`, Programmieren bis zur AP2; die Diagnose-Arena in `/osi-battle/` ist seit 19.11.2026 offline und leitet dorthin um).
+Eigene Bereiche: Subnetting Trainer (`/subnetting-trainer/`), AP1 Simulator (`/ap1-simulator/`), Code lesen (`/code-lernen/`, Programmieren bis zur AP2; die Diagnose-Arena in `/osi-battle/` ist seit 19.11.2026 offline und leitet dorthin um).
 
 ### Eigene Seiten für Suchmaschinen
 
@@ -70,14 +70,20 @@ Die Themenblasen und die Fußzeile der Startseite sind echte Links auf diese Sei
 
 `.assetsignore` hält `.git`, `tools`, `docs` und Konfiguration aus der Auslieferung heraus.
 
-### CodeLernen (`/code-lernen/`)
+### Code lesen (`/code-lernen/`)
 
-Programmieren lernen bis zum Stoff der AP2: Pseudocode, Software planen (PSS: Rechnergrundlagen, Lebenszyklus, Anforderungen, Anwendungsfall- und Aktivitätsdiagramm, PAP und Struktogramm, nach den Handouts der Umschulung), OOP und UML, SQL, Python, JavaScript, Java, C#, C, C++ und der Kurs „Prüfungswissen AP2“ (binäre Suche, Sortierverfahren, Stapel und Warteschlange, Struktogramm, Testen, Entwurfsmuster, weitere UML-Diagramme, ERM und Normalisierung, sicherer Code). Jede Codezeile hat eine Erklärung, dazu Quiz und Übungen. Startseite im Bauplan-Stil mit Kursen und Spielwiesen als drehbaren Litfaßsäulen; Use-Case- und Aktivitätsdiagramme zeichnet `uml.js` selbst. Gestaltung wie die übrige Seite, Codefelder in den Farben des VS-Code-Themes „Tokyo Hack“, Ecken höchstens 1 px.
+Programmieren lernen bis zum Stoff der AP2: Pseudocode, Software planen (PSS: Rechnergrundlagen, Lebenszyklus, Anforderungen, Anwendungsfall- und Aktivitätsdiagramm, PAP und Struktogramm, nach den Handouts der Umschulung), OOP und UML, SQL, Python, JavaScript, Java, C#, C, C++ und der Kurs „Prüfungswissen AP2“ (binäre Suche, Sortierverfahren, Stapel und Warteschlange, Struktogramm, Testen, Entwurfsmuster, weitere UML-Diagramme, ERM und Normalisierung, sicherer Code). Jede Codezeile hat eine Erklärung, dazu Quiz und Übungen. Startseite im Bauplan-Stil mit Kursen und Spielwiesen als drehbaren Litfaßsäulen; Use-Case- und Aktivitätsdiagramme zeichnet `uml.js` selbst. Gestaltung wie die übrige Seite, Codefelder in den Farben des VS-Code-Themes „Tokyo Hack“, Ecken höchstens 2 px.
+
+Kürzel der Sprachen (`code-lernen/js/content/kuerzel.js`, eine Quelle): Schlüsselwörter, Datentypen und Standardfunktionen wie int, double, args, printf oder GROUP BY bekommen in den Texten eine Erklärung beim Darüberfahren oder Antippen, nie im Code der Beispiele und Übungen und nie in den Antwortknöpfen des Quiz. Dieselben Einträge stehen im Reiter „Kürzel der Sprachen“ neben „Begriffe von A bis Z“. Neue Kürzel nur dort eintragen; Wörter, die auch im Satz vorkommen (if, in, case), mit `c: true` nur in Inline-Code erkennen lassen.
+
+Codefelder (Spielwiesen, Ausprobieren, Programmier- und SQL-Übungen) haben eine einfache Autovervollständigung wie in einer IDE (`code-lernen/js/editor.js`): Vorschläge aus Schlüsselwörtern, Standardfunktionen, bei SQL Tabellen und Spalten der Beispieldatenbank und Namen aus dem eigenen Code, Vorlagen wie for oder WENN, selbstschließende Klammern, Einrückung. Enter oder Tab übernimmt, Esc schließt, Strg+Leertaste öffnet. Antworten zu „Was gibt das aus?“ und Lückentexte bekommen keine Vorschläge, und nichts stammt aus den Musterlösungen.
+
+Tipps zu Übungen geben eine Richtung, nicht die Lösung. Die Lösung ist erst nach zwei Fehlversuchen abrufbar (bei allen Übungsarten).
 
 **Kein Code verlässt den Browser.** JavaScript-Übungen laufen in einem abgeschotteten Worker (`code-lernen/js/runner.js`), SQL in sql.js (WebAssembly, eingebettet), Pseudocode im eigenen Interpreter. Python, Java, C#, C und C++ werden nicht ausgeführt, dort heißt die Übung „Ausgabe vorhersagen“. Abgesichert in drei Schichten: Sicherheitsrichtlinie in `_headers` und im Seitenkopf (`connect-src 'none'`, keine Verbindungen nach außen), eigene strengere Richtlinie für den Worker, und im Worker werden `fetch`, `XMLHttpRequest`, `WebSocket`, `importScripts` und ähnliche vor dem Start abgeschaltet. Nach 2,5 Sekunden wird der Worker hart beendet.
 
 Prüfen (Werkzeuge in `tools/code-lernen/`, werden nicht ausgeliefert):
-- `node tools/code-lernen/check.js`: alle Inhalte, Musterlösungen werden ausgeführt; Quizfragen dürfen ihre richtige Antwort nicht durch die Länge verraten (höchstens 1,3-mal so lang wie die längste falsche)
+- `node tools/code-lernen/check.js`: alle Inhalte, Musterlösungen werden ausgeführt; Quizfragen dürfen ihre richtige Antwort nicht durch die Länge verraten (höchstens 1,3-mal so lang wie die längste falsche); Kürzel vollständig und ohne Doppelte
 - `node tools/code-lernen/pseudo-test.js`: der Pseudocode-Interpreter
 - `node tools/code-lernen/run-predict.js`: Vorhersage-Aufgaben mit echten Compilern, nur lokal (braucht Python, JDK, dotnet, gcc)
 

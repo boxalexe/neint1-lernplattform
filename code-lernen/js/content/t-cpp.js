@@ -27,7 +27,7 @@
         ],
         tips: [A.warn('Eine Variable ohne Startwert (`int x;`) enthält Zufallsmüll, wie in C. Gib jeder Variable sofort einen Wert.')],
         quiz: [A.q('Wofür nutzt man `const`?', ['Für Werte, die sich nicht mehr ändern dürfen', 'Für Werte, die nur in Schleifen gelten', 'Für Zahlen mit festen Nachkommastellen', 'Für Variablen, die global sichtbar sein sollen'], 0, 'const verbietet spätere Änderungen.')],
-        tasks: [PP('Was gibt das Programm aus?', ['int x = 3;', 'int y = x;', 'x = 10;', 'cout << x << " " << y << endl;'], '10 3', 'y bekam den Wert 3, bevor x geändert wurde.'), A.fill('Ergänze den Datentyp für ganze Zahlen.', '{{int}} anzahl = 5;', 'Für ganze Zahlen gibt es int.')]
+        tasks: [PP('Was gibt das Programm aus?', ['int x = 3;', 'int y = x;', 'x = 10;', 'cout << x << " " << y << endl;'], '10 3', 'y bekam den Wert 3, bevor x geändert wurde.'), A.fill('Ergänze den Datentyp für ganze Zahlen.', '{{int}} anzahl = 5;', 'Gesucht ist der übliche Typ für ganze Zahlen ohne Komma, 4 Byte groß.')]
       },
       {
         concept: 'ops',
@@ -47,7 +47,7 @@
         ],
         tips: [A.warn('Wie in C ist `if (x = 5)` erlaubt, setzt x auf 5 und ist immer wahr. Vergleichen heißt `==`. Übersetze mit `-Wall`, dann warnt dich der Compiler.')],
         quiz: [A.q('Was passiert in einem `switch` ohne `break`?', ['Das Programm läuft in den nächsten Fall weiter', 'Der Compiler meldet einen Fehler und übersetzt nicht', 'Der switch endet nach dem Fall trotzdem', 'Der Fall wird übersprungen'], 0, 'Man nennt das „Durchfallen“.')],
-        tasks: [PP('Was wird ausgegeben?', ['int x = 10;', 'if (x > 5 && x < 8) {', '    cout << "A";', '} else if (x > 5) {', '    cout << "B";', '} else {', '    cout << "C";', '}'], 'B', 'Die erste Bedingung braucht x < 8 (falsch), die zweite stimmt.')]
+        tasks: [PP('Was wird ausgegeben?', ['int x = 10;', 'if (x > 5 && x < 8) {', '    cout << "A";', '} else if (x > 5) {', '    cout << "B";', '} else {', '    cout << "C";', '}'], 'B', 'Bei `&&` müssen beide Vergleiche stimmen. Prüfe jeden einzeln mit dem Wert von x, bevor du dich für einen Zweig entscheidest.')]
       },
       {
         concept: 'loops',
@@ -68,7 +68,7 @@
         ],
         tips: [A.info('Ohne `&` bekommt die Funktion wie in C eine **Kopie**. Große Objekte (lange Texte, Listen) übergibt man gern als `const string &text`: keine Kopie, aber auch keine Änderung.')],
         quiz: [A.q('Was bewirkt `int &zahl` als Parameter?', ['Die Funktion arbeitet am Original statt an einer Kopie', 'Die Funktion bekommt eine Kopie, die sie nicht ändern darf', 'Die Funktion gibt die Adresse von zahl zurück', 'Die Zahl wird vor dem Aufruf in int umgewandelt'], 0, 'Eine Referenz ist ein zweiter Name für dieselbe Variable.')],
-        tasks: [PP('Was wird ausgegeben?', ['int doppelt(int n) {', '    return n * 2;', '}', '// in main:', 'cout << doppelt(doppelt(3)) << endl;'], '12', 'doppelt(3) ist 6, dann doppelt(6) ist 12.')]
+        tasks: [PP('Was wird ausgegeben?', ['int doppelt(int n) {', '    return n * 2;', '}', '// in main:', 'cout << doppelt(doppelt(3)) << endl;'], '12', 'Bei verschachtelten Aufrufen wird der innere zuerst ausgerechnet. Sein Ergebnis ist das Argument für den äußeren.')]
       },
       {
         concept: 'coll',
@@ -89,7 +89,7 @@
         ],
         tips: [A.info('Ohne `virtual` würde `t->laut()` die Methode von **Tier** aufrufen, obwohl dort ein Hund liegt. Polymorphie braucht in C++ ausdrücklich `virtual`.')],
         quiz: [A.q('Was bewirkt `private:` in einer Klasse?', ['Alles darunter ist von außen nicht erreichbar', 'Alles darunter ist nur für Unterklassen und die Klasse selbst sichtbar', 'Alles darunter wird als Konstante angelegt', 'Alles darunter wird beim Kopieren übersprungen'], 0, 'private: ist die Grundlage der Kapselung.'), A.q('Wozu dient `virtual`?', ['Eine Unterklasse darf die Methode ersetzen, aufgerufen wird die des echten Objekts', 'Die Methode existiert nur im Speicher und wird beim Beenden gelöscht', 'Die Methode ist nur für Unterklassen sichtbar, nicht für andere Klassen', 'Die Methode wird beim Übersetzen eingesetzt und läuft dadurch schneller'], 0, 'virtual ermöglicht Polymorphie.')],
-        tasks: [PP('Was gibt das Programm aus?', ['Konto k("Ada");', 'k.einzahlen(50);', 'k.einzahlen(25);', 'cout << k.getKontostand() << endl;'], '75', 'Zwei Einzahlungen: 50 + 25. Ein ganzzahliges double wird ohne Nachkommastellen ausgegeben.')]
+        tasks: [PP('Was gibt das Programm aus?', ['Konto k("Ada");', 'k.einzahlen(50);', 'k.einzahlen(25);', 'cout << k.getKontostand() << endl;'], '75', 'Verfolge den Kontostand nach jedem Methodenaufruf. Achte darauf, wie `cout` ein double ohne Nachkommaanteil ausgibt.')]
       },
       {
         concept: 'err',

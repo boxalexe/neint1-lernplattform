@@ -36,7 +36,7 @@
         ],
         tasks: [
           A.fill('Wie heißt die Kurzschreibweise für Maschinenbefehle wie mov, add oder jmp?', '{{Assembler|Assemblersprache|Mnemonics}}', 'Die Sprache direkt über dem Maschinencode.'),
-          A.fill('Welches Bauteil der CPU rechnet und vergleicht? (Abkürzung)', '{{ALU}}', 'Arithmetisch-logische Einheit.')
+          A.fill('Welches Bauteil der CPU rechnet und vergleicht? (Abkürzung)', '{{ALU}}', 'Gesucht ist das Rechenwerk der CPU. Die Abkürzung hat drei Buchstaben und steht für Rechnen (arithmetisch) und Vergleichen (logisch).')
         ]
       },
 
@@ -59,7 +59,7 @@
           A.q('Welche drei Schichten trennt die 3-Schicht-Architektur?', ['Präsentation, Logik, Datenhaltung', 'Hardware, Betriebssystem, Anwendung', 'Frontend, Backend, Cloud', 'Planung, Code, Test'], 0, 'Oberfläche, Geschäftsregeln und Datenbank.'),
           A.q('Wann ist ein Fehler am günstigsten zu beheben?', ['In der Planung', 'Nach der Auslieferung', 'Im Wartungsvertrag', 'Das ist immer gleich teuer'], 0, 'Je früher, desto billiger, bis zu hundertfach.')
         ],
-        tasks: [A.fill('Wie heißt das Prinzip „die einfachste klare Lösung wählen“? (Abkürzung)', '{{KISS}}', 'Keep it simple, stupid.')]
+        tasks: [A.fill('Wie heißt das Prinzip „die einfachste klare Lösung wählen“? (Abkürzung)', '{{KISS}}', 'Ein englischer Merksatz aus vier Wörtern, der zur Einfachheit mahnt. Gesucht sind die Anfangsbuchstaben.')]
       },
 
       /* ---------- 3. Der Lebenszyklus ---------- */
@@ -79,7 +79,7 @@
           A.q('Welcher Test prüft eine einzelne Methode für sich?', ['Unit-Test', 'Abnahmetest', 'Integrationstest', 'Systemtest'], 0, 'Unit heißt Einheit: die kleinste testbare Einheit.'),
           A.q('Die Anforderungen ändern sich ständig. Welches Vorgehen passt besser?', ['Agil, z. B. Scrum', 'Wasserfall', 'Gar keine Planung', 'Erst alles programmieren, dann planen'], 0, 'Agile Modelle sind auf Änderungen ausgelegt.')
         ],
-        tasks: [A.fill('Wie heißt das Dokument, in dem der Kunde beschreibt, was er will?', '{{Lastenheft}}', 'Die Last des Kunden.')]
+        tasks: [A.fill('Wie heißt das Dokument, in dem der Kunde beschreibt, was er will?', '{{Lastenheft}}', 'Der Kunde legt fest, was er verlangt. Das Gegenstück, das der Auftragnehmer schreibt, ist das Pflichtenheft.')]
       },
 
       /* ---------- 4. Anforderungen ---------- */
@@ -184,7 +184,7 @@
           A.q('Die Eingabe ist schon am Anfang 1. Wie oft läuft `SOLANGE x > 1`?', ['Keinmal', 'Einmal', 'Endlos', 'Zweimal'], 0, 'Kopfgesteuert: Die Bedingung ist sofort falsch.')
         ],
         tasks: [
-          A.predict('Was gibt das Programm aus?', ['SETZE x = 20', 'SOLANGE x > 1 WIEDERHOLE', '  SETZE x = x DIV 2', '  SCHREIBE x', 'ENDE SOLANGE'], ['10\n5\n2\n1'], '20 DIV 2 = 10, dann 5, dann 2, dann 1. Bei 1 ist die Bedingung falsch.'),
+          A.predict('Was gibt das Programm aus?', ['SETZE x = 20', 'SOLANGE x > 1 WIEDERHOLE', '  SETZE x = x DIV 2', '  SCHREIBE x', 'ENDE SOLANGE'], ['10\n5\n2\n1'], 'DIV schneidet den Rest ab. Rechne jeden Durchlauf einzeln und prüfe vor dem nächsten, ob die Bedingung noch stimmt.'),
           A.predict('Was gibt das Programm aus?', ['FÜR i VON 3 ABWÄRTS BIS 1 WIEDERHOLE', '  SCHREIBE i * 7', 'ENDE FÜR'], ['21\n14\n7'], 'i läuft 3, 2, 1.')
         ]
       }
