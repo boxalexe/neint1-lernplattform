@@ -106,7 +106,7 @@ function seite({ title, desc, url, nav, main }) {
   h = ersetze(h, /<meta name="description" content="[^"]*">/, '<meta name="description" content="' + esc(desc) + '">', 'description');
   h = ersetze(h, /<link rel="canonical" href="[^"]*">/, '<link rel="canonical" href="' + SITE + url + '">', 'canonical');
   h = ersetze(h, /<nav id="nav" aria-label="Kurse und Lektionen">[\s\S]*?<\/nav><\/aside>/, '<nav id="nav" aria-label="Kurse und Lektionen">' + nav + '</nav></aside>', 'nav');
-  h = ersetze(h, /<main id="main">[\s\S]*?<\/main>\r?\n<\/div>/, '<main id="main">' + main + '</main>\n</div>', 'main');
+  h = ersetze(h, /<main id="main"[^>]*>[\s\S]*?<\/main>\r?\n<\/div>/, '<main id="main" data-vorab>' + main + '</main>\n</div>', 'main');
   return h;
 }
 const ausgabe = new Map(), urls = [BASE];

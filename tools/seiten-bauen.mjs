@@ -75,7 +75,7 @@ const leiste = block(index, '<div class="tabs" id="tabBar">', "\n</div></div>");
 const fussApp = block(index, "<footer>", "</footer>");
 const pfeil = block(index, '<button id="scrollTopBtn"', "</button>");
 const version = /styles\.css\?v=([^"]+)"/.exec(index)?.[1] ?? "1";
-const jumpNav = block(index, '<nav class="jump">', "</nav>");
+const jumpNav = block(index, '<nav class="jump jump-hidden">', "</nav>");
 if (!kopf || !leiste || !fussApp || !pfeil || !jumpNav) fehler.push("index.html: Kopf, Menüleiste, Fußzeile, Pfeil oder Sprungliste nicht gefunden");
 
 const label = {};

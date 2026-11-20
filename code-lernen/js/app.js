@@ -254,12 +254,21 @@
   };
 
   /* ---------- SQL ---------- */
+  // SQL-Engine (sql.js, ~900 KB) erst beim ersten Gebrauch laden, damit die Seite sofort startet
   let sqlP = null;
+  const loadScript = (src) => new Promise((ok, fail) => {
+    const s = document.createElement('script'); s.src = src;
+    s.onload = ok; s.onerror = () => fail(new Error('SQL-Engine konnte nicht geladen werden.'));
+    document.head.appendChild(s);
+  });
   function getSQL() {
     if (!sqlP) {
-      const b = atob(window.SQLJS_WASM_B64), u = new Uint8Array(b.length);
-      for (let k = 0; k < b.length; k++) u[k] = b.charCodeAt(k);
-      sqlP = window.initSqlJs({ wasmBinary: u });
+      sqlP = Promise.all([loadScript(BASE + 'js/vendor/sql-wasm-b64.js'), loadScript(BASE + 'js/vendor/sql-wasm.js')]).then(() => {
+        const b = atob(window.SQLJS_WASM_B64), u = new Uint8Array(b.length);
+        for (let k = 0; k < b.length; k++) u[k] = b.charCodeAt(k);
+        return window.initSqlJs({ wasmBinary: u });
+      });
+      sqlP.catch(() => { sqlP = null; }); // nächster Versuch lädt neu
     }
     return sqlP;
   }
@@ -626,6 +635,7 @@
     else if (kind === 'glossar') html = glossarView(arg);
     else html = homeView();
     main.innerHTML = html;
+    main.removeAttribute('data-vorab'); // vorgerenderter Inhalt ist ersetzt, ab jetzt sichtbar
     activate(main);
     if (kind === 'play') playInit(arg || 'pseudo');
     const home = !['lesson', 'track', 'play', 'compare', 'glossar'].includes(kind);

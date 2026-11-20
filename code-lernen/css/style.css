@@ -381,3 +381,6 @@ html[data-theme="hc"] .bp { --grid: rgba(255, 255, 255, .1); --grid-f: rgba(255,
   .s-card .s-desc { -webkit-line-clamp: 3; max-height: 4.5em; font-size: .88rem; }
   .s-stage { perspective: 900px; }
 }
+
+/* Vorgerenderter Inhalt (tools/code-lernen/seiten-bauen.js) bleibt mit JavaScript unsichtbar, bis app.js ihn ersetzt (js/boot.js). */
+html.js #main[data-vorab] { visibility: hidden; }
