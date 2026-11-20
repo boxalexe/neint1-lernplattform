@@ -229,6 +229,27 @@ svg.uml { width: 100%; height: auto; display: block; margin: 0 auto; font-family
 ::-webkit-scrollbar { width: 10px; height: 10px; } ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 0; } ::-webkit-scrollbar-track { background: transparent; }
 
 /* ---------- Tablet und Handy ---------- */
+/* ---------- Seitenleiste im Tokyo-Hack-Gewand (Allvater 20.11.2026) ----------
+ * Grund und Hover aus dem Theme, jeder Kurs mit eigener Akzentfarbe (--ac, aus app.js): Streifen links, Plus, Zähler, aktive Lektion.
+ * Start ist größer und fett, damit klar ist, dass es zur Startseite zurückgeht. */
+#side { background: var(--th-bg); border-right-color: var(--th-line); }
+#nav .nav-home { font-size: 1.05rem; font-weight: 700; letter-spacing: .6px; color: var(--th-fg); padding: 10px 10px; margin-bottom: 8px; border-left: 3px solid var(--th-cursor); background: var(--th-bg2); }
+#nav .nav-home:hover, #nav .nav-home.on { color: var(--th-cursor); background: var(--th-hl-strong); }
+#nav details { border-left: 3px solid var(--ac, var(--th-line)); margin: 6px 0; }
+#nav summary { color: var(--th-fg); }
+#nav summary::before { color: var(--ac); }
+#nav summary .small { color: var(--ac); opacity: .85; }
+#nav summary:hover, #nav .nl:hover, #nav .nav-top:hover { background: var(--th-hl-strong); }
+#nav details[open] > summary { color: var(--ac); }
+#nav .nl { color: #dcd8f0; }
+#nav .nl:hover { color: var(--ac); }
+#nav .nl.on { background: var(--th-hl-strong); border-left-color: var(--ac); color: var(--ac); }
+#nav .dot { border-color: var(--th-line); }
+#nav .nl.done .dot { background: var(--ac); border-color: var(--ac); }
+#nav .nav-top:not(.nav-home) { color: var(--th-note); }
+#nav .nav-top:not(.nav-home):hover { color: var(--th-fn); }
+#nav .nav-sep { background: var(--th-line); }
+
 @media (max-width: 900px) {
   #layout { grid-template-columns: 1fr; } #menu { display: inline-flex; }
   #side { position: fixed; z-index: 25; left: 0; top: 54px; width: min(320px, 88vw); height: calc(100dvh - 54px); transform: translateX(-100%); transition: transform .2s; box-shadow: 8px 0 24px rgba(0, 0, 0, .5); }

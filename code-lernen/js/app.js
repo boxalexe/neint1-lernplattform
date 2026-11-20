@@ -350,7 +350,7 @@
   }
   function homeView() {
     const f = P.last && A.findLesson(P.last) ? A.findLesson(P.last) : null, o = firstOpen();
-    let h = '<div class="bp"><div class="bp-head"><span class="bp-sheet">CODELERNEN · BLATT 01</span><h1>Programmieren lernen, Schritt für Schritt</h1>'
+    let h = '<div class="bp"><div class="bp-head"><span class="bp-sheet">CODELERNEN · BLATT 01</span><h1>Programmieren lernen</h1>'
       + '<p class="bp-lead">Von den allerersten Begriffen bis zu sicherem Lesen und Schreiben von Code. In kleinen Schritten, mit Erklärung zu <b>jeder einzelnen Zeile</b> und Übungen zum Selbermachen, bis zum Stoff der AP2.</p>'
       + '<p class="small muted">Code wird nur in deinem Browser zum Üben ausgeführt. Nichts davon wird an einen Server geschickt, übersetzt oder gespeichert, außer deinem Lernfortschritt auf diesem Gerät.</p></div>';
     h += '<div class="bp-label"><span>A</span>So gehst du am besten vor</div><ol class="bp-path">'
@@ -492,11 +492,14 @@
   }
 
   /* ---------- Navigation ---------- */
+  const NAV_AC = ['--th-pp', '--th-fn', '--th-kw', '--th-ty', '--th-str', '--th-var', '--th-num'];
   function renderNav() {
     const cur = CUR ? CUR.track.id : (location.hash.match(/#\/track\/(\w+)/) || [])[1];
-    $('#nav').innerHTML = '<a class="nav-top" href="#/home">Start</a>' + A.tracks.map((t) => {
+    // Seitenleiste im Tokyo-Hack-Gewand (Allvater 20.11.2026): jeder Kurs hat seine Akzentfarbe aus der Palette, Start ist deutlich größer
+    const home = !location.hash || /^#\/home/.test(location.hash);
+    $('#nav').innerHTML = '<a class="nav-top nav-home' + (home ? ' on' : '') + '" href="#/home">Start</a>' + A.tracks.map((t, i) => {
       const ls = A.lessons(t);
-      return '<details' + (cur === t.id ? ' open' : '') + '><summary><span>' + esc(t.title) + '</span><span class="small muted">' + ls.filter((l) => P.done[l.id]).length + '/' + ls.length + '</span></summary>' + ls.map((l) => '<a class="nl' + (P.done[l.id] ? ' done' : '') + (CUR && CUR.lesson.id === l.id ? ' on' : '') + '" href="#/lesson/' + l.id + '"><span class="dot"></span>' + esc(l.title) + '</a>').join('') + '</details>';
+      return '<details style="--ac: var(' + NAV_AC[i % NAV_AC.length] + ')"' + (cur === t.id ? ' open' : '') + '><summary><span>' + esc(t.title) + '</span><span class="small muted">' + ls.filter((l) => P.done[l.id]).length + '/' + ls.length + '</span></summary>' + ls.map((l) => '<a class="nl' + (P.done[l.id] ? ' done' : '') + (CUR && CUR.lesson.id === l.id ? ' on' : '') + '" href="#/lesson/' + l.id + '"><span class="dot"></span>' + esc(l.title) + '</a>').join('') + '</details>';
     }).join('') + '<div class="nav-sep"></div><a class="nav-top" href="#/play/pseudo">Spielwiese</a><a class="nav-top" href="#/compare/vars">Sprachvergleich</a><a class="nav-top" href="#/glossar">Begriffe von A bis Z</a><button class="nav-reset" type="button">Lernfortschritt löschen</button><div class="nav-sep"></div><a class="nav-top" href="/#impressum">Impressum und Datenschutz</a>';
   }
 
