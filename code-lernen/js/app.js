@@ -5,6 +5,17 @@
   const $ = (s, r) => (r || document).querySelector(s);
   const $$ = (s, r) => Array.from((r || document).querySelectorAll(s));
 
+  /* ---------- Adressen ----------
+     Kurse und Lektionen haben eigene Seiten, die Google findet (tools/code-lernen/seiten-bauen.js): /code-lernen/kurs/<kurs>/<lektion>/ */
+  const BASE = (location.pathname.match(/^(.*?\/code-lernen\/)/) || [])[1] || '/code-lernen/';
+  let PATHS_ = null;
+  const PATHS = () => {
+    if (!PATHS_) { PATHS_ = {}; for (const t of A.tracks) for (const s of t.lessons) PATHS_[t.id + '-' + (s.concept || s.id)] = BASE + 'kurs/' + t.id + '/' + (s.concept || s.id) + '/'; }
+    return PATHS_;
+  };
+  const kursUrl = (id) => BASE + 'kurs/' + id + '/';
+  const lessonUrl = (id) => PATHS()[id] || BASE + '#/lesson/' + id;
+
   /* ---------- Fortschritt ---------- */
   const KEY = 'codelernen.v1';
   let P = { done: {}, task: {}, quiz: {}, theme: 'dark', font: 100, last: null };
@@ -310,7 +321,7 @@
     MOUNTS = [];
     const idx = track.lessons.findIndex((s) => track.id + '-' + (s.concept || s.id) === L.id);
     const prev = idx > 0 ? A.build(track, track.lessons[idx - 1]) : null, next = idx < track.lessons.length - 1 ? A.build(track, track.lessons[idx + 1]) : null;
-    let h = '<div class="crumb"><a href="#/track/' + track.id + '">' + esc(track.title) + '</a> › ' + esc(A.stages[L.stage] || '') + '</div><h1>' + esc(L.title) + '</h1>';
+    let h = '<div class="crumb"><a href="' + kursUrl(track.id) + '">' + esc(track.title) + '</a> › ' + esc(A.stages[L.stage] || '') + '</div><h1>' + esc(L.title) + '</h1>';
     if (L.goal) h += '<div class="goal"><b>Ziel dieser Lektion</b>' + md(L.goal) + '</div>';
     if (L.idea.length) h += '<section class="sec"><h2>Die Idee dahinter</h2>' + L.idea.map(renderPart).join('') + '</section>';
     if (L.parts.length) h += '<section class="sec"><h2>' + (L.concept && track.id !== 'pseudo' ? 'In ' + esc(track.title) : 'Der Stoff') + '</h2>' + L.parts.map(renderPart).join('') + '</section>';
@@ -319,7 +330,7 @@
     if (L.quiz.length) h += '<section class="sec"><h2>Prüfe dich</h2>' + mount('quiz', { lesson: L }) + '</section>';
     if (L.tasks.length) h += '<section class="sec"><h2>Übungen</h2>' + mount('tasks', { lesson: L }) + '</section>';
     h += mount('status', { lesson: L });
-    h += '<nav class="pn">' + (prev ? '<a href="#/lesson/' + prev.id + '">Zurück: ' + esc(prev.title) + '</a>' : '<span></span>') + (next ? '<a class="next" href="#/lesson/' + next.id + '">Weiter: ' + esc(next.title) + '</a>' : '<a class="next" href="#/track/' + track.id + '">Zur Kursübersicht →</a>') + '</nav>';
+    h += '<nav class="pn">' + (prev ? '<a href="' + lessonUrl(prev.id) + '">Zurück: ' + esc(prev.title) + '</a>' : '<span></span>') + (next ? '<a class="next" href="' + lessonUrl(next.id) + '">Weiter: ' + esc(next.title) + '</a>' : '<a class="next" href="' + kursUrl(track.id) + '">Zur Kursübersicht →</a>') + '</nav>';
     return h;
   }
 
@@ -335,11 +346,11 @@
    * Litfaßsäulen (saeuleInit). Ecken höchstens 2 px, Kreise ausgenommen.
    */
   const PLAYS = [
-    { href: '#/play/pseudo', tag: 'PSEUDOCODE', title: 'Pseudocode-Spielwiese', desc: 'Eigene Abläufe schreiben und Schritt für Schritt verfolgen, mit Variablen und Ausgabe.' },
-    { href: '#/play/js', tag: 'JAVASCRIPT', title: 'JavaScript-Spielwiese', desc: 'Code schreiben und sofort ausführen, abgeschottet in deinem Browser.' },
-    { href: '#/play/sql', tag: 'SQL', title: 'SQL-Spielwiese', desc: 'Echte Abfragen auf einer kleinen Shop-Datenbank, jedes Mal mit frischen Daten.' },
-    { href: '#/play/uml', tag: 'UML', title: 'UML-Werkstatt', desc: 'Klassendiagramme aus einfachem Text zeichnen lassen.' },
-    { href: '#/compare/vars', tag: 'VERGLEICH', title: 'Sprachvergleich', desc: 'Dasselbe Konzept in allen Sprachen nebeneinander.' }
+    { href: BASE + '#/play/pseudo', tag: 'PSEUDOCODE', title: 'Pseudocode-Spielwiese', desc: 'Eigene Abläufe schreiben und Schritt für Schritt verfolgen, mit Variablen und Ausgabe.' },
+    { href: BASE + '#/play/js', tag: 'JAVASCRIPT', title: 'JavaScript-Spielwiese', desc: 'Code schreiben und sofort ausführen, abgeschottet in deinem Browser.' },
+    { href: BASE + '#/play/sql', tag: 'SQL', title: 'SQL-Spielwiese', desc: 'Echte Abfragen auf einer kleinen Shop-Datenbank, jedes Mal mit frischen Daten.' },
+    { href: BASE + '#/play/uml', tag: 'UML', title: 'UML-Werkstatt', desc: 'Klassendiagramme aus einfachem Text zeichnen lassen.' },
+    { href: BASE + '#/compare/vars', tag: 'VERGLEICH', title: 'Sprachvergleich', desc: 'Dasselbe Konzept in allen Sprachen nebeneinander.' }
   ];
   function saeule(id, label, nr, cards) {
     // wenige Karten (Spielwiesen) werden wiederholt, bis die Säule rundum voll ist (mindestens 8 Plätze, sonst stünden die
@@ -360,14 +371,14 @@
       + '<li><b>Pseudocode</b> zuerst. Hier lernst du, wie man in Schritten denkt, ganz ohne Sprachregeln. Du kannst jeden Ablauf mit dem Player verfolgen.</li>'
       + '<li><b>Software planen (PSS)</b>: wie ein Computer arbeitet, Anforderungen, Lebenszyklus, Anwendungsfall- und Aktivitätsdiagramm, PAP und Struktogramm.</li>'
       + '<li><b>Objektorientierung und UML</b>, damit dir Klassendiagramme und Begriffe wie Vererbung nicht fremd sind.</li>'
-      + '<li><b>Eine Sprache deiner Wahl</b>. Alle Sprachen folgen demselben Lernweg: Ausgabe, Variablen, Rechnen, Entscheidungen, Schleifen, Funktionen, Sammlungen, Objekte. Wer eine kann, versteht die nächste viel schneller. Im <a href="#/compare/vars">Sprachvergleich</a> siehst du sie nebeneinander.</li>'
+      + '<li><b>Eine Sprache deiner Wahl</b>. Alle Sprachen folgen demselben Lernweg: Ausgabe, Variablen, Rechnen, Entscheidungen, Schleifen, Funktionen, Sammlungen, Objekte. Wer eine kann, versteht die nächste viel schneller. Im <a href="' + BASE + '#/compare/vars">Sprachvergleich</a> siehst du sie nebeneinander.</li>'
       + '<li><b>SQL und Datenbanken</b>, denn Abfragen kommen in jeder Prüfung vor.</li>'
       + '<li><b>Prüfungswissen AP2</b> zum Schluss: binäre Suche, Sortierverfahren, Stapel und Warteschlange, Struktogramm, Testen, Entwurfsmuster, weitere UML-Diagramme, Datenbankentwurf und sicherer Code.</li></ol>';
-    const go = f ? ['#/lesson/' + f.lesson.id, 'Weiterlernen: ' + f.lesson.title] : o ? ['#/lesson/' + o.l.id, 'Jetzt anfangen: ' + o.l.title] : null;
+    const go = f ? [lessonUrl(f.lesson.id), 'Weiterlernen: ' + f.lesson.title] : o ? [lessonUrl(o.l.id), 'Jetzt anfangen: ' + o.l.title] : null;
     if (go) h += '<div class="bp-go"><a class="btn primary" href="' + go[0] + '">' + esc(go[1]) + '</a></div>';
     h += saeule('kurse', 'Kurse', 'B', A.tracks.map((t) => {
       const p = trackProgress(t), pct = p.n ? Math.round(100 * p.d / p.n) : 0;
-      return '<a class="s-card" href="#/track/' + t.id + '"><span class="card-tag">' + esc(t.tag || '') + '</span><b>' + esc(t.title) + '</b><span class="s-desc">' + esc(t.desc || '') + '</span><span class="bar"><i style="width:' + pct + '%"></i></span><span class="small muted">' + p.d + ' von ' + p.n + ' Lektionen</span></a>';
+      return '<a class="s-card" href="' + kursUrl(t.id) + '"><span class="card-tag">' + esc(t.tag || '') + '</span><b>' + esc(t.title) + '</b><span class="s-desc">' + esc(t.desc || '') + '</span><span class="bar"><i style="width:' + pct + '%"></i></span><span class="small muted">' + p.d + ' von ' + p.n + ' Lektionen</span></a>';
     }));
     h += saeule('spiel', 'Spielwiesen', 'C', PLAYS.map((c) => '<a class="s-card" href="' + c.href + '"><span class="card-tag">' + c.tag + '</span><b>' + esc(c.title) + '</b><span class="s-desc">' + esc(c.desc) + '</span></a>'));
     return h + '</div>';
@@ -424,18 +435,18 @@
   }
   function trackView(t) {
     const ls = A.lessons(t), p = trackProgress(t);
-    let h = '<div class="crumb"><a href="#/home">Start</a> › Kurs</div><h1>' + esc(t.title) + '</h1><p class="lead">' + esc(t.desc || '') + '</p>' + (t.intro ? md(t.intro) : '') + '<div class="bar wide"><i style="width:' + (p.n ? Math.round(100 * p.d / p.n) : 0) + '%"></i></div><p class="small muted">' + p.d + ' von ' + p.n + ' Lektionen abgeschlossen</p>';
+    let h = '<div class="crumb"><a href="' + BASE + '">Start</a> › Kurs</div><h1>' + esc(t.title) + '</h1><p class="lead">' + esc(t.desc || '') + '</p>' + (t.intro ? md(t.intro) : '') + '<div class="bar wide"><i style="width:' + (p.n ? Math.round(100 * p.d / p.n) : 0) + '%"></i></div><p class="small muted">' + p.d + ' von ' + p.n + ' Lektionen abgeschlossen</p>';
     let stage = 0;
     for (const l of ls) {
       if (l.stage !== stage) { stage = l.stage; h += '<h2 class="stage">' + esc(A.stages[stage]) + '</h2>'; }
       const s = lessonStats(l);
-      h += '<a class="lrow' + (P.done[l.id] ? ' done' : '') + '" href="#/lesson/' + l.id + '"><span class="dot"></span><span class="lt"><b>' + esc(l.title) + '</b><span class="muted">' + esc((l.goal || '').split('\n')[0]) + '</span></span><span class="small muted">' + (s.t + s.q ? s.q + '/' + s.qn + ' Quiz, ' + s.t + '/' + s.tn + ' Übungen' : '') + '</span></a>';
+      h += '<a class="lrow' + (P.done[l.id] ? ' done' : '') + '" href="' + lessonUrl(l.id) + '"><span class="dot"></span><span class="lt"><b>' + esc(l.title) + '</b><span class="muted">' + esc((l.goal || '').split('\n')[0]) + '</span></span><span class="small muted">' + (s.t + s.q ? s.q + '/' + s.qn + ' Quiz, ' + s.t + '/' + s.tn + ' Übungen' : '') + '</span></a>';
     }
     return h;
   }
   function compareView(cid) {
     const cs = Object.values(A.concepts).filter((c) => c.compare !== false);
-    let h = '<div class="crumb"><a href="#/home">Start</a> › Sprachvergleich</div><h1>Sprachvergleich</h1><p class="lead">Dasselbe Konzept, verschiedene Schreibweisen. Wähle ein Thema:</p><div class="chips">' + cs.map((c) => '<a class="chip big' + (c.id === cid ? ' on' : '') + '" href="#/compare/' + c.id + '">' + esc(c.title) + '</a>').join('') + '</div>';
+    let h = '<div class="crumb"><a href="' + BASE + '">Start</a> › Sprachvergleich</div><h1>Sprachvergleich</h1><p class="lead">Dasselbe Konzept, verschiedene Schreibweisen. Wähle ein Thema:</p><div class="chips">' + cs.map((c) => '<a class="chip big' + (c.id === cid ? ' on' : '') + '" href="' + BASE + '#/compare/' + c.id + '">' + esc(c.title) + '</a>').join('') + '</div>';
     const c = A.concepts[cid]; if (!c) return h;
     MOUNTS = [];
     h += '<h2>' + esc(c.title) + '</h2><div class="cmp">';
@@ -443,14 +454,14 @@
       if (['pseudo', 'oop', 'sql'].includes(t.id)) continue;
       const s = t.lessons.find((x) => x.concept === cid); if (!s) continue;
       const part = (s.parts || []).find((p) => p.code); if (!part) continue;
-      h += '<div class="cmp-card"><div class="cmp-h"><b>' + esc(t.title) + '</b><a href="#/lesson/' + t.id + '-' + cid + '">Zur Lektion</a></div>' + mount('code', { part: Object.assign({}, part, { noRun: true }) }) + '</div>';
+      h += '<div class="cmp-card"><div class="cmp-h"><b>' + esc(t.title) + '</b><a href="' + lessonUrl(t.id + '-' + cid) + '">Zur Lektion</a></div>' + mount('code', { part: Object.assign({}, part, { noRun: true }) }) + '</div>';
     }
     return h + '</div>';
   }
   // Zwei Reiter: Begriffe von A bis Z und die Kürzel der Sprachen (dieselben Erklärungen wie beim Darüberfahren in den Texten)
   function glossarView(tab) {
     const kz = tab === 'kuerzel';
-    let h = '<div class="crumb"><a href="#/home">Start</a> › ' + (kz ? 'Kürzel' : 'Begriffe') + '</div><div class="tabs"><a class="' + (kz ? '' : 'on') + '" href="#/glossar">Begriffe von A bis Z</a><a class="' + (kz ? 'on' : '') + '" href="#/glossar/kuerzel">Kürzel der Sprachen</a></div>';
+    let h = '<div class="crumb"><a href="' + BASE + '">Start</a> › ' + (kz ? 'Kürzel' : 'Begriffe') + '</div><div class="tabs"><a class="' + (kz ? '' : 'on') + '" href="' + BASE + '#/glossar">Begriffe von A bis Z</a><a class="' + (kz ? 'on' : '') + '" href="' + BASE + '#/glossar/kuerzel">Kürzel der Sprachen</a></div>';
     if (!kz) {
       const items = A.glossary.slice().sort((a, b) => a.name.localeCompare(b.name, 'de'));
       return h + '<h1>Begriffe von A bis Z</h1><input class="search" id="gs" placeholder="Begriff suchen" spellcheck="false"><div id="gl">' + items.map((g) => '<div class="term" data-s="' + esc((g.name + ' ' + g.text).toLowerCase()) + '"><b>' + esc(g.name) + '</b><div>' + md(g.text) + '</div></div>').join('') + '</div>';
@@ -535,7 +546,7 @@
   /* ---------- Spielwiesen ---------- */
   function playView(what) {
     const tabs = [['pseudo', 'Pseudocode'], ['js', 'JavaScript'], ['sql', 'SQL'], ['uml', 'UML']];
-    let h = '<div class="crumb"><a href="#/home">Start</a> › Spielwiese</div><div class="tabs">' + tabs.map(([k, n]) => '<a class="' + (k === what ? 'on' : '') + '" href="#/play/' + k + '">' + n + '</a>').join('') + '</div>';
+    let h = '<div class="crumb"><a href="' + BASE + '">Start</a> › Spielwiese</div><div class="tabs">' + tabs.map(([k, n]) => '<a class="' + (k === what ? 'on' : '') + '" href="' + BASE + '#/play/' + k + '">' + n + '</a>').join('') + '</div>';
     if (what === 'pseudo') h += '<h1>Pseudocode-Spielwiese</h1><p class="lead">Schreibe einen Ablauf und verfolge ihn Schritt für Schritt. Wörter wie WENN, SOLANGE oder FÜR kennt der Player. Die Zeilen darfst du frei einrücken.</p><div class="pg"><div class="pg-top"><select id="smp"></select><button class="primary" id="run">Ausführen und verfolgen</button><button id="ref" class="link">Kurzübersicht der Wörter</button></div><textarea id="src" class="editor tall" spellcheck="false"></textarea><div id="inp-w" class="small muted">Eingaben (für EINGABE, eine pro Zeile): <textarea id="inp" rows="2" spellcheck="false"></textarea></div><div id="refbox" class="refbox" hidden></div><div id="tp"></div></div>';
     if (what === 'js') h += '<h1>JavaScript-Spielwiese</h1><p class="lead">Schreibe JavaScript und führe es aus. Mit <code>console.log(...)</code> gibst du etwas aus. Der Code läuft abgeschottet im Browser und wird nach 2,5 Sekunden beendet, falls er nicht fertig wird.</p><div class="pg"><textarea id="src" class="editor tall" spellcheck="false"></textarea><div class="pg-top"><button class="primary" id="run">Ausführen</button></div><pre class="console" id="out"></pre></div>';
     if (what === 'sql') h += '<h1>SQL-Spielwiese</h1><p class="lead">Eine kleine Shop-Datenbank zum Ausprobieren. Du kannst lesen (SELECT) und ändern (INSERT, UPDATE, DELETE). Jede Ausführung beginnt mit frischen Daten, kaputt machen kannst du nichts.</p><div class="pg"><div id="schema" class="schemabox"></div><textarea id="src" class="editor" rows="6" spellcheck="false">SELECT name, stadt FROM kunde\nWHERE stadt = \'Berlin\';</textarea><div class="pg-top"><button class="primary" id="run">Ausführen</button></div><div id="out"></div></div>';
@@ -578,24 +589,37 @@
   /* ---------- Navigation ---------- */
   const NAV_AC = ['--th-pp', '--th-fn', '--th-kw', '--th-ty', '--th-str', '--th-var', '--th-num'];
   function renderNav() {
-    const cur = CUR ? CUR.track.id : (location.hash.match(/#\/track\/(\w+)/) || [])[1];
+    const [sk, sa] = viewState(), cur = CUR ? CUR.track.id : sk === 'track' ? sa : null;
     // Seitenleiste im Tokyo-Hack-Gewand (Allvater 20.11.2026): jeder Kurs hat seine Akzentfarbe aus der Palette, Start ist deutlich größer
-    const home = !location.hash || /^#\/home/.test(location.hash);
-    $('#nav').innerHTML = '<a class="nav-top nav-home' + (home ? ' on' : '') + '" href="#/home">Start</a>' + A.tracks.map((t, i) => {
+    const home = sk === 'home';
+    $('#nav').innerHTML = '<a class="nav-top nav-home' + (home ? ' on' : '') + '" href="' + BASE + '">Start</a>' + A.tracks.map((t, i) => {
       const ls = A.lessons(t);
-      return '<details name="kurs" style="--ac: var(' + NAV_AC[i % NAV_AC.length] + ')"' + (cur === t.id ? ' open' : '') + '><summary><span>' + esc(t.title) + '</span><span class="small muted">' + ls.filter((l) => P.done[l.id]).length + '/' + ls.length + '</span></summary>' + ls.map((l) => '<a class="nl' + (P.done[l.id] ? ' done' : '') + (CUR && CUR.lesson.id === l.id ? ' on' : '') + '" href="#/lesson/' + l.id + '"><span class="dot"></span>' + esc(l.title) + '</a>').join('') + '</details>';
-    }).join('') + '<div class="nav-sep"></div><a class="nav-top" href="#/play/pseudo">Spielwiese</a><a class="nav-top" href="#/compare/vars">Sprachvergleich</a><a class="nav-top" href="#/glossar">Begriffe von A bis Z</a><a class="nav-top" href="#/glossar/kuerzel">Kürzel der Sprachen</a><button class="nav-reset" type="button">Lernfortschritt löschen</button><div class="nav-sep"></div><a class="nav-top" href="/#impressum">Impressum und Datenschutz</a>';
+      return '<details name="kurs" style="--ac: var(' + NAV_AC[i % NAV_AC.length] + ')"' + (cur === t.id ? ' open' : '') + '><summary><span>' + esc(t.title) + '</span><span class="small muted">' + ls.filter((l) => P.done[l.id]).length + '/' + ls.length + '</span></summary>' + ls.map((l) => '<a class="nl' + (P.done[l.id] ? ' done' : '') + (CUR && CUR.lesson.id === l.id ? ' on' : '') + '" href="' + lessonUrl(l.id) + '"><span class="dot"></span>' + esc(l.title) + '</a>').join('') + '</details>';
+    }).join('') + '<div class="nav-sep"></div><a class="nav-top" href="' + BASE + '#/play/pseudo">Spielwiese</a><a class="nav-top" href="' + BASE + '#/compare/vars">Sprachvergleich</a><a class="nav-top" href="' + BASE + '#/glossar">Begriffe von A bis Z</a><a class="nav-top" href="' + BASE + '#/glossar/kuerzel">Kürzel der Sprachen</a><button class="nav-reset" type="button">Lernfortschritt löschen</button><div class="nav-sep"></div><a class="nav-top" href="/#impressum">Impressum und Datenschutz</a>';
     // Höchstens ein Kurs aufgeklappt (Allvater 20.11.2026): name="kurs" erledigt das in neuen Browsern, das hier in älteren
     $$('#nav details').forEach((d) => d.addEventListener('toggle', () => { if (d.open) $$('#nav details[open]').forEach((o) => { if (o !== d) o.open = false; }); }));
   }
 
-  function route() {
-    const hash = location.hash.replace(/^#\/?/, '') || 'home', [kind, arg] = hash.split('/'), main = $('#main');
+  // Welche Ansicht gilt? Kurse und Lektionen haben echte Adressen (/code-lernen/kurs/java/vars/), die Werkzeuge bleiben unter #/…
+  function viewState() {
+    const h = location.hash.replace(/^#\/?/, '');
+    if (h) return h.split('/');
+    const m = location.pathname.slice(BASE.length).match(/^kurs\/([\w-]+)\/(?:([\w-]+)\/)?$/);
+    return m ? (m[2] ? ['lesson', m[1] + '-' + m[2]] : ['track', m[1]]) : ['home'];
+  }
+  let LAST = '';
+  function route(force) {
+    const [kind, arg] = viewState(), main = $('#main');
+    // alte Links mit #/lesson/…, #/track/… und #/home auf die echte Adresse umschreiben (Lesezeichen und Querverweise bleiben gültig)
+    const pretty = kind === 'lesson' && PATHS()[arg] ? PATHS()[arg] : kind === 'track' && A.tracks.some((t) => t.id === arg) ? kursUrl(arg) : kind === 'home' ? BASE : null;
+    if (pretty && location.hash && /^#\/(lesson|track|home)/.test(location.hash)) history.replaceState(null, '', pretty);
+    if (force !== true && location.href === LAST) return; // popstate und hashchange melden manchmal dieselbe Änderung doppelt
+    LAST = location.href;
     CUR = null; MOUNTS = [];
     let html = '';
     if (kind === 'lesson') {
       const f = A.findLesson(arg);
-      if (f) { CUR = f; P.last = arg; save(); html = lessonView(f.track, f.lesson); } else html = '<h1>Lektion nicht gefunden</h1><p><a href="#/home">Zum Start</a></p>';
+      if (f) { CUR = f; P.last = arg; save(); html = lessonView(f.track, f.lesson); } else html = '<h1>Lektion nicht gefunden</h1><p><a href="' + BASE + '">Zum Start</a></p>';
     } else if (kind === 'track') { const t = A.tracks.find((x) => x.id === arg); html = t ? trackView(t) : homeView(); }
     else if (kind === 'play') html = playView(arg || 'pseudo');
     else if (kind === 'compare') html = compareView(arg || 'vars');
@@ -610,7 +634,8 @@
     if (kind === 'glossar') $('#gs').addEventListener('input', (e) => { const q = e.target.value.toLowerCase().trim(); $$('.term').forEach((t) => { t.hidden = q && !t.dataset.s.includes(q); }); });
     renderNav();
     main.scrollTop = 0; window.scrollTo(0, 0);
-    document.title = (CUR ? CUR.lesson.title + ' | ' : '') + 'Code lesen | Layer 8 Academy';
+    const tt = kind === 'track' && A.tracks.find((x) => x.id === arg);
+    document.title = (CUR ? CUR.lesson.title + ' | ' + CUR.track.title + ' | ' : tt ? tt.title + ' | ' : '') + 'Code lesen | Layer 8 Academy';
     drawer(false);
   }
 
@@ -645,11 +670,22 @@
     $('#fminus').addEventListener('click', () => { P.font = Math.max(80, P.font - 10); save(); applyPrefs(); });
     $('#menu').addEventListener('click', () => drawer(!$('#side').classList.contains('open')));
     $('#shade').addEventListener('click', () => drawer(false));
-    const reset = () => { if (confirm('Wirklich den gesamten Lernfortschritt auf diesem Gerät löschen?')) { P.done = {}; P.task = {}; P.quiz = {}; P.last = null; save(); route(); } };
+    const reset = () => { if (confirm('Wirklich den gesamten Lernfortschritt auf diesem Gerät löschen?')) { P.done = {}; P.task = {}; P.quiz = {}; P.last = null; save(); route(true); } };
     $('#reset').addEventListener('click', reset);
     // auf dem Handy steht der Knopf im Kursmenü (die Kopfleiste ist dort zu schmal)
     $('#nav').addEventListener('click', (e) => { if (e.target.closest('.nav-reset')) reset(); });
-    window.addEventListener('hashchange', route);
+    window.addEventListener('hashchange', () => route());
+    window.addEventListener('popstate', () => route());
+    // Links innerhalb von Code lesen ohne Neuladen öffnen; neue Tabs, Strg-Klick und fremde Seiten bleiben, wie sie sind
+    document.addEventListener('click', (e) => {
+      const a = e.target.closest && e.target.closest('a[href]');
+      if (!a || e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || a.target || a.hasAttribute('download')) return;
+      const u = new URL(a.href, location.href);
+      if (u.origin !== location.origin || !u.pathname.startsWith(BASE) || /\.\w+$/.test(u.pathname)) return;
+      e.preventDefault();
+      if (u.href !== location.href) history.pushState(null, '', u.pathname + u.hash);
+      LAST = ''; route();
+    });
     route();
   });
   window.__academy = { route, P };

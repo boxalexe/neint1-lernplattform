@@ -82,9 +82,12 @@ Tipps zu Übungen geben eine Richtung, nicht die Lösung. Die Lösung ist erst n
 
 **Kein Code verlässt den Browser.** JavaScript-Übungen laufen in einem abgeschotteten Worker (`code-lernen/js/runner.js`), SQL in sql.js (WebAssembly, eingebettet), Pseudocode im eigenen Interpreter. Python, Java, C#, C und C++ werden nicht ausgeführt, dort heißt die Übung „Ausgabe vorhersagen“. Abgesichert in drei Schichten: Sicherheitsrichtlinie in `_headers` und im Seitenkopf (`connect-src 'none'`, keine Verbindungen nach außen), eigene strengere Richtlinie für den Worker, und im Worker werden `fetch`, `XMLHttpRequest`, `WebSocket`, `importScripts` und ähnliche vor dem Start abgeschaltet. Nach 2,5 Sekunden wird der Worker hart beendet.
 
+**Eigene Adressen (SEO):** Kurse und Lektionen haben echte Adressen wie `/code-lernen/kurs/java/vars/`, die in der Sitemap stehen und von Google einzeln gefunden werden. Jede Seite ist die normale App mit fertigem Inhalt im HTML; die App wechselt danach ohne Neuladen zwischen den Seiten (History-API). Alte Links mit `#/lesson/…` und `#/track/…` werden auf die neue Adresse umgeschrieben. Spielwiesen, Sprachvergleich und Glossar bleiben unter `/code-lernen/#/…`.
+
 Prüfen (Werkzeuge in `tools/code-lernen/`, werden nicht ausgeliefert):
 - `node tools/code-lernen/check.js`: alle Inhalte, Musterlösungen werden ausgeführt; Quizfragen dürfen ihre richtige Antwort nicht durch die Länge verraten (höchstens 1,3-mal so lang wie die längste falsche); Kürzel vollständig und ohne Doppelte
 - `node tools/code-lernen/pseudo-test.js`: der Pseudocode-Interpreter
+- `node tools/code-lernen/seiten-bauen.js`: baut nach jeder Inhaltsänderung die eigenen Seiten pro Kurs und Lektion (`/code-lernen/kurs/<kurs>/<lektion>/`) und `code-lernen/sitemap.xml` neu; `--pruefen` meldet Veraltetes. Die Seiten enthalten Text, Code, Tabellen, Diagramme, Fragen (gemischt wie in der App) und Aufgaben, aber nie Lösungen, Tipps oder Erklärungen zu Lösungen
 - `node tools/code-lernen/run-predict.js`: Vorhersage-Aufgaben mit echten Compilern, nur lokal (braucht Python, JDK, dotnet, gcc)
 
 ### Kartendruck

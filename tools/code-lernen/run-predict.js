@@ -8,7 +8,7 @@ const root = path.join(__dirname, '..', '..', 'code-lernen');
 require(path.join(root, 'js/pseudo.js')); require(path.join(root, 'js/uml.js')); require(path.join(root, 'js/core.js'));
 const A = globalThis.Academy;
 const html = fs.readFileSync(path.join(root, 'index.html'), 'utf8');
-for (const f of [...html.matchAll(/src="(js\/content\/[^"?]+)[^"]*"/g)].map((m) => m[1])) require(path.join(root, f));
+for (const f of [...html.matchAll(/src="(?:\/code-lernen\/)?(js\/content\/[^"?]+)[^"]*"/g)].map((m) => m[1])) require(path.join(root, f));
 
 const home = os.homedir();
 const find = (dir, name) => { try { for (const e of fs.readdirSync(dir, { withFileTypes: true })) { const p = path.join(dir, e.name); if (e.isFile() && e.name === name) return p; if (e.isDirectory()) { const r = find(p, name); if (r) return r; } } } catch (e) {} return null; };

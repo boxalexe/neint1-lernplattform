@@ -2,3 +2,4 @@ User-agent: *
 Allow: /
 
 Sitemap: https://layer8academy.boxberger.app/sitemap.xml
+Sitemap: https://layer8academy.boxberger.app/code-lernen/sitemap.xml

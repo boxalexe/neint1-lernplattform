@@ -15,7 +15,7 @@ require(path.join(root, 'js/core.js'));
 const A = globalThis.Academy;
 
 const html = fs.readFileSync(path.join(root, 'index.html'), 'utf8');
-const files = [...html.matchAll(/src="(js\/content\/[^"?]+)[^"]*"/g)].map((m) => m[1]);
+const files = [...html.matchAll(/src="(?:\/code-lernen\/)?(js\/content\/[^"?]+)[^"]*"/g)].map((m) => m[1]);
 let problems = 0, warnings = 0;
 const bad = (m) => { problems++; console.log('FEHLER  ' + m); };
 const warn = (m) => { warnings++; console.log('Hinweis ' + m); };
