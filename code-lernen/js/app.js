@@ -329,7 +329,7 @@
   /*
    * Startseite im Bauplan-Stil (Allvater 20.11.2026: kein Kasten, eigenständiges Aussehen statt Standard-Webseite):
    * Zeichnungskopf mit Rahmen, Lernweg als Leiterbahn mit „Weiterlernen“ darunter, Kurse und Spielwiesen als drehbare
-   * Litfaßsäulen (saeuleInit). Ecken höchstens 1 px, Kreise ausgenommen.
+   * Litfaßsäulen (saeuleInit). Ecken höchstens 2 px, Kreise ausgenommen.
    */
   const PLAYS = [
     { href: '#/play/pseudo', tag: 'PSEUDOCODE', title: 'Pseudocode-Spielwiese', desc: 'Eigene Abläufe schreiben und Schritt für Schritt verfolgen, mit Variablen und Ausgabe.' },

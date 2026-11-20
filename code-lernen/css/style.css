@@ -1,14 +1,14 @@
 /*
  * CodeLernen im Gewand der Layer 8 Academy (Allvater 19.11.2026):
  * - Farben und Schriften wie die Hauptseite, mit denselben Kontrastmodi (Original, Hoher Kontrast, Blau/Orange)
- * - Ecken höchstens 1 px. Ausnahme sind nur echte Kreise (Fortschrittspunkte), die haben keine Ecken
+ * - Ecken höchstens 2 px. Ausnahme sind nur echte Kreise (Fortschrittspunkte), die haben keine Ecken
  * - alle Codefelder (Beispiele, Eingabefelder, Ausgaben) in den Farben des VS-Code-Themes „Tokyo Hack“ (ajshortt)
  * - auf dem Handy: Kursmenü als Schublade, Code mit Erklärung untereinander, große Tippflächen, Eingaben ohne Zoom-Sprung
  */
 :root {
   --bg: #0a0e12; --panel: #111820; --panel-2: #0d141b; --border: #1e2c38;
   --text: #c9d6e0; --muted: #7d94a6; --cyan: #22d3ee; --green: #3ddc84; --amber: #f5b642; --red: #ff5f6b; --magenta: #ff3df0;
-  --sel: rgba(34, 211, 238, .12); --r: 1px;
+  --sel: rgba(34, 211, 238, .12); --r: 2px;
   --mono: 'DM Mono', Consolas, 'Cascadia Mono', 'Courier New', monospace;
   --ui: 'Segoe UI', system-ui, -apple-system, Roboto, sans-serif;
   /* Tokyo Hack: Hintergrund, Text, Zeilennummer, Zeilenmarkierung, Auswahl und Farben der Wortarten */
@@ -296,7 +296,7 @@ footer.legal a { color: var(--muted); text-decoration: underline; } footer.legal
  * Startseite als Bauplan (Allvater 20.11.2026): eigenständig statt Standard-Webseite. Feines Zeichenraster mit Blattrahmen,
  * Abschnittsmarken A/B/C wie auf einer technischen Zeichnung, der Lernweg als Leiterbahn mit Knotenpunkten, die in den
  * Weiterlernen-Knopf mündet, Kurse und Spielwiesen als drehbare Litfaßsäulen (3D-Zylinder, app.js saeuleInit).
- * Ecken höchstens 1 px; Kreise und Ellipsen (Knoten, Säulenringe) sind keine Ecken.
+ * Ecken höchstens 2 px; Kreise und Ellipsen (Knoten, Säulenringe) sind keine Ecken.
  */
 .bp { --grid: rgba(34, 211, 238, .07); --grid-f: rgba(34, 211, 238, .035); position: relative; padding: 30px clamp(16px, 3vw, 34px) 26px;
   background-image: linear-gradient(var(--grid) 1px, transparent 1px), linear-gradient(90deg, var(--grid) 1px, transparent 1px), linear-gradient(var(--grid-f) 1px, transparent 1px), linear-gradient(90deg, var(--grid-f) 1px, transparent 1px);

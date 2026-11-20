@@ -113,7 +113,7 @@
       if (r.bm) put(r.bm, p2[0] - ux * 18, p2[1] - uy * 18, -1);
     }
     for (const c of d.classes) {
-      s += '<rect class="u-box" x="' + c.x + '" y="' + c.y + '" width="' + c.w + '" height="' + c.h + '" rx="1"/>';
+      s += '<rect class="u-box" x="' + c.x + '" y="' + c.y + '" width="' + c.w + '" height="' + c.h + '" rx="2"/>';
       const cx = c.x + c.w / 2;
       if (c.kind === 'interface') s += '<text class="u-ster" x="' + cx + '" y="' + (c.y + 15) + '" text-anchor="middle">«interface»</text>';
       s += '<text class="u-name' + (c.abstract ? ' u-abs' : '') + '" x="' + cx + '" y="' + (c.y + (c.kind === 'interface' ? 32 : 19)) + '" text-anchor="middle">' + esc(c.name) + '</text>';
@@ -140,7 +140,7 @@
     let s = '<svg class="uml" viewBox="0 0 ' + W + ' ' + H + '" style="max-width:' + W + 'px" xmlns="http://www.w3.org/2000/svg" role="img">' + DEFS;
     actors.forEach((a) => {
       const bw = a.length * 9 + 28;
-      s += '<rect class="u-box" x="' + (X(a) - bw / 2) + '" y="' + TOP + '" width="' + bw + '" height="' + BOX + '" rx="1"/><text class="u-name" x="' + X(a) + '" y="' + (TOP + 20) + '" text-anchor="middle">' + esc(a) + '</text>';
+      s += '<rect class="u-box" x="' + (X(a) - bw / 2) + '" y="' + TOP + '" width="' + bw + '" height="' + BOX + '" rx="2"/><text class="u-name" x="' + X(a) + '" y="' + (TOP + 20) + '" text-anchor="middle">' + esc(a) + '</text>';
       s += '<line class="u-life" x1="' + X(a) + '" y1="' + (TOP + BOX) + '" x2="' + X(a) + '" y2="' + (H - 10) + '"/>';
     });
     msgs.forEach((m, i) => {
@@ -226,7 +226,7 @@
       return s;
     };
     let s = '<svg class="uml" viewBox="0 0 ' + W + ' ' + H + '" style="max-width:' + W + 'px" xmlns="http://www.w3.org/2000/svg" role="img">' + DEFS;
-    s += '<rect class="u-sys" x="' + SX + '" y="12" width="' + SW + '" height="' + (H - 22) + '" rx="1"/><text class="u-name" x="' + (SX + 10) + '" y="30">' + esc(d.system || 'System') + '</text>';
+    s += '<rect class="u-sys" x="' + SX + '" y="12" width="' + SW + '" height="' + (H - 22) + '" rx="2"/><text class="u-name" x="' + (SX + 10) + '" y="30">' + esc(d.system || 'System') + '</text>';
     (d.assoc || []).forEach(([a, c]) => { s += link(a, c); });
     (d.include || []).forEach(([a, b]) => { s += link(a, b, 'u-arr', '«include»', true); });
     const notes = [];
