@@ -226,7 +226,7 @@
         pos++;
         return { k: 'each', v: m[1], list, body, line: n };
       }
-      // FÜR i VON 5 ABWÄRTS BIS 1 (Schreibweise aus dem PSS-Handout): wie SCHRITT -1
+      // FÜR i VON 5 ABWÄRTS BIS 1 (alternative Schreibweise): wie SCHRITT -1
       const down = /\s+ABW(?:Ä|AE)RTS\s+BIS\s+/i.test(t);
       if ((m = R.for.exec(down ? t.replace(/\s+ABW(?:Ä|AE)RTS\s+BIS\s+/i, ' BIS ') : t))) {
         pos++;

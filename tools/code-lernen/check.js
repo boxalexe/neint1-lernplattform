@@ -1,4 +1,4 @@
-// Prüft alle Lerninhalte:  node tools/check.js
+// Prüft alle Lerninhalte:  node tools/code-lernen/check.js
 // - Quiz: Antwortindex gültig
 // - Pseudocode-Beispiele und -Aufgaben werden wirklich ausgeführt
 // - JavaScript-Beispiele laufen, JS-Aufgaben haben eine funktionierende Lösung, die Startvorlage besteht noch nicht
@@ -123,7 +123,7 @@ function checkParts(where, parts) {
         if (!(q.a >= 0 && q.a < q.o.length)) bad(L.id + ' Quiz ' + (i + 1) + ': Antwortindex ungültig');
         if (new Set(q.o).size !== q.o.length) bad(L.id + ' Quiz ' + (i + 1) + ': doppelte Antwortoptionen');
         if (!q.e) warn(L.id + ' Quiz ' + (i + 1) + ': keine Erklärung');
-        // Längen-Tell (Allvater 20.11.2026): Die richtige Antwort darf nicht durch ihre Länge auffallen.
+        // Längenhinweis: Die richtige Antwort darf nicht durch ihre Länge auffallen.
         // Ab 20 Zeichen höchstens 1,3-mal so lang wie die längste falsche; kurze Begriffe (FALSCH, Parallelogramm) sind ausgenommen.
         const len = (s) => String(s).replace(/\*\*|`/g, '').length, right = len(q.o[q.a]), wrongMax = Math.max(...q.o.filter((_, j) => j !== q.a).map(len));
         if (right >= 20 && right > wrongMax * 1.3) bad(L.id + ' Quiz ' + (i + 1) + ': richtige Antwort ' + (right / wrongMax).toFixed(1) + '-mal so lang wie die längste falsche (Längen-Tell)');

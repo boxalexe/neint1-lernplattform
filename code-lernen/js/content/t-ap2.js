@@ -1,4 +1,4 @@
-/* Kurs: Prüfungswissen AP2 (Allvater 19.11.2026): was bis zur Abschlussprüfung Teil 2 sitzen sollte und in den anderen Kursen noch fehlt */
+/* Kurs: Prüfungswissen AP2, was bis zur Abschlussprüfung Teil 2 sitzen sollte und in den anderen Kursen noch fehlt */
 (function () {
   'use strict';
   const A = window.Academy;
@@ -32,7 +32,7 @@
           A.fill('Beschreibe in einem Wort das Muster dieser Zeilen: `hilf <- a`, `a <- b`, `b <- hilf`.', '{{Tauschen|tauschen|Vertauschen|vertauschen}}', 'Spiel es mit a = 1 und b = 2 durch: Was steht danach in a und in b?')
         ]
       },
-      /* ---------- 0b. Prüfungsaufgaben im Stil der Abschlussprüfung (Allvater 20.11.2026, aus den simulierten Aufgaben im Ordner Sandmensch) ---------- */
+      /* ---------- 0b. Prüfungsaufgaben im Stil der Abschlussprüfung ---------- */
       {
         id: 'pruefung', stage: 4, title: 'Prüfungsaufgaben: Arrays, Schreibtischtest, Fehlersuche', goal: 'Du löst die typischen Programmieraufgaben der Prüfung: Fehler in einem Programmentwurf finden und begründen, einen Schreibtischtest als Tabelle ausfüllen, Ziffern mit Division und Modulo zerlegen und einen Entwurf nach Kommentaren vervollständigen.',
         parts: [

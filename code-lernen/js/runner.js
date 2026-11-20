@@ -1,10 +1,6 @@
 /*
  * Ausführer für JavaScript-Übungen (Web Worker, eigene Datei).
- *
- * Bild dazu: ein Übungsraum ohne Fenster und ohne Telefon. Der Code darf darin rechnen und Ausgaben auf einen Zettel schreiben,
- * mehr nicht. Er sieht die Seite nicht, kommt nicht an gespeicherte Daten und kann nichts ins Internet schicken.
- *
- * Drei Schichten:
+ * Kein Zugriff auf DOM, Speicher oder Netzwerk. Drei Schichten:
  * 1. Die Sicherheitsrichtlinie (CSP) dieser Datei verbietet jede Netzwerkverbindung (Kopfzeilen in /_headers).
  * 2. Hier werden vor dem Start alle Wege nach außen abgeschaltet (fetch, WebSocket, importScripts und ähnliche).
  * 3. Die Seite beendet den Worker nach 2,5 Sekunden hart, eine Endlosschleife friert also nichts ein.

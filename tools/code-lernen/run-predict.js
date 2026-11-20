@@ -1,5 +1,5 @@
 // Führt alle Vorhersage-Aufgaben der Compiler-Sprachen wirklich aus und vergleicht mit der hinterlegten Lösung.
-//   node tools/run-predict.js
+//   node tools/code-lernen/run-predict.js [sprache]
 // Braucht lokal: python, javac/java, dotnet, gcc, g++. Pfade über Umgebungsvariablen (PYTHON, JAVAC, JAVA, DOTNET, GCC, GPP)
 // oder die Vorgaben unten. Fehlt ein Werkzeug, wird die Sprache als NOT RUN gemeldet.
 const fs = require('fs'), os = require('os'), path = require('path'), cp = require('child_process');

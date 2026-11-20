@@ -61,7 +61,7 @@ header h1 .mono{font-family:'DM Mono','Consolas',monospace;color:var(--cyan)}
 .grade-scale{font-family:'DM Mono','Consolas',monospace;font-size:0.72rem;color:var(--muted);margin-top:16px;line-height:1.8;opacity:0.85}
 .grade-scale b{color:var(--text);font-weight:500}
 header p{color:var(--muted);font-size:0.95rem}
-/* Menüleiste undurchsichtig, ohne Weichzeichner und ohne will-change (Allvater 19.11.2026: Reiter wirkten nach rechts verschwommener): als eigene halbtransparente Ebene glättete Chrome die Schrift nur in Graustufen, auf den krummen Pixelpositionen der Reiter unscharf. So gilt wieder ClearType wie im Rest der Seite. */
+/* Menüleiste undurchsichtig, ohne Weichzeichner und ohne will-change: als eigene halbtransparente Ebene glättete Chrome die Schrift nur in Graustufen, auf den krummen Pixelpositionen der Reiter unscharf. So gilt wieder ClearType wie im Rest der Seite. */
 .tabs{position:sticky;top:0;z-index:30;background:var(--bg);border-bottom:1px solid var(--border);padding:10px 0;margin-bottom:32px;transition:transform 0.28s cubic-bezier(0.4,0,0.2,1),opacity 0.22s ease}
 .tabs.hidden{transform:translateY(-110%);opacity:0;pointer-events:none}
 .tabs .wrap{display:flex;gap:8px}
@@ -645,7 +645,7 @@ table.sn-cheat td:nth-child(4),table.sn-cheat td:nth-child(5){color:var(--green)
 /* ---- Querverweis-Box: Streifen deutlich zurückgenommen ---- */
 .callout.xref{border-left-color:color-mix(in srgb, var(--cyan) 45%, transparent)}
 .callout.xref .tag{background:color-mix(in srgb, var(--cyan) 82%, transparent);color:var(--bg)}
-/* Schrift mittig im Streifen statt am linken Rand (Allvater 20.11.2026); 1px mehr links gleicht den Buchstabenabstand nach dem letzten Zeichen aus */
+/* Schrift mittig im Streifen statt am linken Rand; 1px mehr links gleicht den Buchstabenabstand nach dem letzten Zeichen aus */
 .callout.xref .tag{text-align:center;padding:2px 8px 2px 9px}
 
 /* ---- Werkzeugleiste in der klebenden Menüzeile ---- */

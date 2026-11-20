@@ -1,5 +1,5 @@
 /*
- * Kürzel der Sprachen (Allvater 20.11.2026): Schlüsselwörter, Datentypen und Standardfunktionen mit einer kurzen Erklärung.
+ * Kürzel der Sprachen: Schlüsselwörter, Datentypen und Standardfunktionen mit einer kurzen Erklärung.
  * Eine Quelle für zwei Stellen: die Hover-Erklärung in den Texten (nicht im Code der Übungen) und den Abschnitt „Kürzel“
  * unter „Begriffe von A bis Z“.
  *
@@ -255,6 +255,6 @@
     ['jmp', X, 'Assembler: springt an eine andere Stelle im Programm.', { c: true }],
     ['ret', X, 'Assembler: kehrt aus einem Unterprogramm zurück.', { c: true }]
   ];
-  // Großgeschriebene Wörter aus Pseudocode und SQL (UND, ODER, SELECT …) nur als Code erkennen, nicht im Satz (Allvater 20.11.2026)
+  // Großgeschriebene Wörter aus Pseudocode und SQL (UND, ODER, SELECT …) nur als Code erkennen, nicht im Satz
   A.kuerzel.forEach((e) => { if (e[1] === P || e[1] === Q) e[3] = Object.assign({}, e[3], { c: true }); });
 })();

@@ -100,7 +100,7 @@
       else if (r.op === '*--') mk = ' marker-start="url(#u-dia-f)"';
       s += '<line class="u-line" x1="' + p1[0].toFixed(1) + '" y1="' + p1[1].toFixed(1) + '" x2="' + p2[0].toFixed(1) + '" y2="' + p2[1].toFixed(1) + '"' + dash + mk + '/>';
       const len = Math.hypot(p2[0] - p1[0], p2[1] - p1[1]) || 1, ux = (p2[0] - p1[0]) / len, uy = (p2[1] - p1[1]) / len, nx = -uy, ny = ux;
-      // Beschriftung neben die Linie, nie darauf (Allvater 19.11.2026: „verliehen an“ lag auf dem Pfeil): bei steilen Linien bündig links
+      // Beschriftung neben die Linie, nie darauf: bei steilen Linien bündig links
       // bzw. rechts daneben, bei flachen mittig darüber bzw. darunter. Name der Beziehung auf die eine Seite, Vielfachheiten auf die andere.
       const put = (txt, px, py, side) => {
         const sx = nx * side, sy = ny * side, steep = Math.abs(sx) > 0.5;
@@ -127,7 +127,7 @@
 
   /* Sequenzdiagramm: actors = ['Kunde','Shop'], msgs = [['Kunde','Shop','bestellen()'], ['Shop','Kunde','Rechnung','ret']] */
   function sequence(actors, msgs) {
-    // Abstand der Lebenslinien nach der längsten Nachricht (Allvater 19.11.2026: lange Beschriftungen liefen über die Linien): jede
+    // Abstand der Lebenslinien nach der längsten Nachricht: jede
     // Beschriftung passt zwischen ihre beiden Lebenslinien; Selbstnachrichten bekommen rechts Platz, damit nichts abgeschnitten wird
     const CHW = 6.8, idx = (n) => actors.indexOf(n);
     let SP = Math.max(150, Math.max(...actors.map((a) => a.length)) * 9 + 60);
@@ -237,7 +237,7 @@
     (d.gen || []).forEach(([a, b]) => { s += link(a, b, 'u-tri'); });
     cases.forEach((c) => { const p = pos[c.id]; s += '<ellipse class="u-box" cx="' + p.x + '" cy="' + p.y + '" rx="' + p.rx + '" ry="' + p.ry + '"/><text class="u-mem" x="' + p.x + '" y="' + (p.y + 4) + '" text-anchor="middle">' + esc(c.name) + '</text>'; });
     /*
-     * Notizen zuletzt (über allem). Lesbar und zuordbar (Allvater 20.11.2026): Für jede Notiz werden Plätze rund um die Mitte ihrer
+     * Notizen zuletzt (über allem): Für jede Notiz werden Plätze rund um die Mitte ihrer
      * Extend-Linie durchprobiert; gewählt wird der mit den wenigsten Überschneidungen mit Ovalen, Akteuren, Beschriftungen, anderen
      * Notizen und Linien, wobei auch die Verbindungslinie zur Notiz nichts kreuzen soll, und bei Gleichstand der nächste. Notiz und
      * Verbindung sind gleich gefärbt, ein Punkt markiert die Stelle auf der Extend-Linie.

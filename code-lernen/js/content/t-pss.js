@@ -1,6 +1,5 @@
-/* Kurs: Software planen (PSS), aus den Handouts der Umschulung (Algorithmus, Einführung PSS, Softwareanforderungen,
-   Anwendungsfall- und Aktivitätsdiagramm, PAP und Struktogramm, Einführung in die Programmierung). Fehler der Vorlagen sind
-   korrigiert (z. B. Pascal-Beispiel addierte 1 statt i). */
+/* Kurs: Software planen (PSS): Rechnergrundlagen, Lebenszyklus, Anforderungen, Anwendungsfall- und Aktivitätsdiagramm,
+   PAP und Struktogramm. */
 (function () {
   'use strict';
   const A = window.Academy, P = (lines, h, o) => A.code('pseudo', lines, h, o);
@@ -8,7 +7,7 @@
   A.track({
     id: 'pss', title: 'Software planen (PSS)', tag: 'ERST PLANEN, DANN CODEN',
     desc: 'Wie ein Computer arbeitet, warum man Software plant, der Lebenszyklus, Anforderungen, Anwendungsfall- und Aktivitätsdiagramm, PAP und Struktogramm.',
-    intro: 'PSS steht für **Planung strukturierter Software**. Bevor die erste Zeile Code entsteht, klärt man: Was soll das Programm können, wer benutzt es, und wie läuft es ab? Dieser Kurs folgt den Handouts der Umschulung und ergänzt sie um Beispiele, Quiz und Übungen. Viele Begriffe daraus fragt die IHK in der AP1 und AP2 ab.',
+    intro: 'PSS steht für **Planung strukturierter Software**. Bevor die erste Zeile Code entsteht, klärt man: Was soll das Programm können, wer benutzt es, und wie läuft es ab? Dieser Kurs folgt dem typischen Unterrichtsstoff und ergänzt ihn um Beispiele, Quiz und Übungen. Viele Begriffe daraus fragt die IHK in der AP1 und AP2 ab.',
     lessons: [
       /* ---------- 1. Wie ein Computer arbeitet ---------- */
       {
@@ -176,7 +175,7 @@
           A.nsd(['Ausgabe: „Hallo zusammen!“'], 'Methode begruessung (eigenes Struktogramm)'),
           P(['FUNKTION begruessung()§Die Methode wird hier nur beschrieben, sie läuft noch nicht.', '  SCHREIBE "Hallo zusammen!"§Ihre einzige Aufgabe.', 'ENDE FUNKTION§Ende der Beschreibung.', 'SCHREIBE "Gleich wird eine Methode aufgerufen:"§Das Hauptprogramm beginnt hier.', 'begruessung()§Aufruf: Jetzt läuft die Methode, danach geht es in der nächsten Zeile weiter.', 'SCHREIBE "Nun sind wir wieder im Hauptprogramm."§Zurück im Hauptprogramm.'], 'Methode und Aufruf als Pseudocode')
         ],
-        tips: [A.tip('In der Schreibweise der Handouts zählt eine Schleife auch abwärts: `FÜR i VON 5 ABWÄRTS BIS 1 WIEDERHOLE` ist dasselbe wie `FÜR i VON 5 BIS 1 SCHRITT -1`. Beides versteht der Player.')],
+        tips: [A.tip('In einer verbreiteten Schreibweise zählt eine Schleife auch abwärts: `FÜR i VON 5 ABWÄRTS BIS 1 WIEDERHOLE` ist dasselbe wie `FÜR i VON 5 BIS 1 SCHRITT -1`. Beides versteht der Player.')],
         quiz: [
           A.q('Welche Schleife läuft garantiert mindestens einmal?', ['Die fußgesteuerte', 'Die kopfgesteuerte', 'Keine', 'Nur die Zählschleife'], 0, 'Geprüft wird erst nach dem ersten Durchlauf.'),
           A.q('Im Pseudocode steht `WIEDERHOLE ... BIS x < 10`. Was ist `x < 10`?', ['Die Abbruchbedingung', 'Die Durchführungsbedingung', 'Ein Kommentar', 'Ein Methodenaufruf'], 0, 'Ist sie wahr, endet die Schleife.'),

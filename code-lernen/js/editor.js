@@ -1,5 +1,5 @@
 /*
- * Eingabefelder für Code wie in einer kleinen IDE (Allvater 20.11.2026, „grob wie IntelliJ/VS Code“):
+ * Code-Eingabefelder mit einfacher IDE-Unterstützung:
  * - Vorschläge beim Tippen: Schlüsselwörter und Typen der Sprache, Standardfunktionen (mit Erklärung aus den Kürzeln),
  *   bei SQL die Tabellen und Spalten der Beispieldatenbank, dazu Namen, die schon im eigenen Code stehen
  * - Pfeiltasten wählen, Enter oder Tab übernehmen, Esc schließt, Strg+Leertaste öffnet die Liste von Hand

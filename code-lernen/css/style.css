@@ -1,5 +1,5 @@
 /*
- * Code lesen im Gewand der Layer 8 Academy (Allvater 19.11.2026):
+ * Code lesen im Stil der Layer 8 Academy:
  * - Farben und Schriften wie die Hauptseite, mit denselben Kontrastmodi (Original, Hoher Kontrast, Blau/Orange)
  * - Ecken höchstens 2 px. Ausnahme sind nur echte Kreise (Fortschrittspunkte), die haben keine Ecken
  * - alle Codefelder (Beispiele, Eingabefelder, Ausgaben) in den Farben des VS-Code-Themes „Tokyo Hack“ (ajshortt)
@@ -229,7 +229,7 @@ svg.uml { width: 100%; height: auto; display: block; margin: 0 auto; font-family
 ::-webkit-scrollbar { width: 10px; height: 10px; } ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 0; } ::-webkit-scrollbar-track { background: transparent; }
 
 /* ---------- Tablet und Handy ---------- */
-/* ---------- Seitenleiste im Tokyo-Hack-Gewand (Allvater 20.11.2026) ----------
+/* ---------- Seitenleiste im Tokyo-Hack-Stil ----------
  * Grund und Hover aus dem Theme, jeder Kurs mit eigener Akzentfarbe (--ac, aus app.js): Streifen links, Plus, Zähler, aktive Lektion.
  * Start ist größer und fett, damit klar ist, dass es zur Startseite zurückgeht. */
 #side { background: var(--th-bg); border-right-color: var(--th-line); }
@@ -264,7 +264,7 @@ svg.uml { width: 100%; height: auto; display: block; margin: 0 auto; font-family
 .ac-k.ac-kw { background: var(--th-kw); } .ac-k.ac-fn { background: var(--th-fn); } .ac-k.ac-snip { background: var(--th-pp); }
 .ac-k.ac-tbl { background: var(--th-ty); } .ac-k.ac-col { background: var(--th-str); }
 
-/* ---------- Kürzel: Erklärung beim Darüberfahren (Allvater 20.11.2026) ---------- */
+/* ---------- Kürzel: Erklärung beim Darüberfahren ---------- */
 .kz { text-decoration: underline dotted color-mix(in srgb, var(--cyan) 70%, transparent); text-underline-offset: 3px; text-decoration-thickness: 1px; cursor: help; }
 code.kz { text-decoration-color: color-mix(in srgb, var(--cyan) 85%, transparent); }
 .kz:hover, .kz:focus-visible { color: var(--cyan); outline: none; }
@@ -321,7 +321,7 @@ footer.legal a { color: var(--muted); text-decoration: underline; } footer.legal
 @media (min-width: 901px) { footer.legal { margin-left: 290px; } }
 
 /*
- * Startseite als Bauplan (Allvater 20.11.2026): eigenständig statt Standard-Webseite. Feines Zeichenraster mit Blattrahmen,
+ * Startseite im Bauplan-Stil: feines Zeichenraster mit Blattrahmen,
  * Abschnittsmarken A/B/C wie auf einer technischen Zeichnung, der Lernweg als Leiterbahn mit Knotenpunkten, die in den
  * Weiterlernen-Knopf mündet, Kurse und Spielwiesen als drehbare Litfaßsäulen (3D-Zylinder, app.js saeuleInit).
  * Ecken höchstens 2 px; Kreise und Ellipsen (Knoten, Säulenringe) sind keine Ecken.

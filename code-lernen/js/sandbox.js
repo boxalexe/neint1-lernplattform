@@ -1,7 +1,6 @@
 /*
- * JavaScript ausführen, aber nur zum Üben: Der Code läuft in einem abgeschotteten Hintergrundprozess (js/runner.js) in deinem
- * Browser. Er wird nirgendwohin geschickt, nicht übersetzt und nicht auf einem Server ausgeführt. Nach 2,5 Sekunden wird der Prozess
- * hart beendet, damit eine Endlosschleife die Seite nicht einfriert.
+ * Führt JavaScript-Übungen in einem Web Worker (js/runner.js) aus. Kein Netzwerkzugriff, kein Server.
+ * Nach 2,5 Sekunden wird der Worker beendet, damit Endlosschleifen die Seite nicht blockieren.
  */
 (function (g) {
   'use strict';

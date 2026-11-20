@@ -1,6 +1,6 @@
 /*
- * Begriffe von A bis Z, Ergänzung (Allvater 19.11.2026: „deckt das Verzeichnis die wichtigsten Begriffe ab, besonders aus den Fragen?“).
- * Alle Begriffe, die in Quiz, Antworten und Texten fett vorkommen und vorher fehlten. Definitionen abgestimmt mit dem Nachschlagewerk
+ * Begriffe von A bis Z, Ergänzung zu concepts.js: Fachbegriffe aus Quiz, Antworten und Texten.
+ * Definitionen abgestimmt mit dem Nachschlagewerk
  * der Layer 8 Academy (OOP & UML, SQL & Datenbanken, IT-Sicherheit).
  */
 (function () {
@@ -69,7 +69,7 @@
     ['Hashwert', 'Ergebnis einer Einwegfunktion: Aus dem Hash lässt sich die Eingabe nicht zurückrechnen, wie aus Hackfleisch kein Steak. Passwörter werden nur als Hash gespeichert.'],
     ['Salt', 'Zufällige Zeichenkette pro Nutzer, die vor dem Hashen an das Passwort angehängt wird. Gleiche Passwörter ergeben so verschiedene Hashwerte.'],
     ['Cross-Site-Scripting (XSS)', 'Angriff, bei dem eingeschleuster Code im Browser anderer Nutzer läuft, weil eine Seite Eingaben ungeprüft anzeigt. Verhindert durch Maskieren der Ausgaben.'],
-    // Software planen (PSS), aus den Handouts der Umschulung (20.11.2026)
+    // Software planen (PSS)
     ['ALU', 'Arithmetisch-logische Einheit: der Teil der CPU, der rechnet und vergleicht.'],
     ['Register', 'Winzige, sehr schnelle Speicher direkt in der CPU, in denen sie gerade rechnet.'],
     ['Maschinencode', 'Die Befehle als Zahlen, die eine CPU direkt ausführt. Für Menschen kaum lesbar.'],
@@ -98,7 +98,7 @@
     ['include (UML)', 'Beziehung im Anwendungsfalldiagramm: Ein Fall bindet einen anderen immer ein. Gestrichelter Pfeil vom Haupt- zum eingebundenen Fall.'],
     ['extend (UML)', 'Beziehung im Anwendungsfalldiagramm: Ein Fall erweitert einen anderen nur unter einer Bedingung. Gestrichelter Pfeil vom Zusatz zurück zum Hauptfall.'],
     ['Pfadende', 'Knoten im Aktivitätsdiagramm (Kreis mit X): beendet nur einen Pfad, nicht die ganze Aktivität.'],
-    // Aus den Unterlagen der Umschulung, Ordner ClaudeCodeLernen (tag1 bis tag4, KD-Beispiele), 20.11.2026
+    // Java-Grundlagen, Datentypen, UML-Konventionen
     ['JIT-Compiler', 'Just-in-Time-Compiler, Teil der JVM: übersetzt häufig genutzten Bytecode erst während des Laufs in Maschinencode. Verbindet Plattformunabhängigkeit mit Geschwindigkeit.'],
     ['JDK (Java Development Kit)', 'Das SDK für Java: Compiler javac, JVM und Standardbibliothek. Nötig, um Java-Programme zu schreiben und zu übersetzen.'],
     ['SDK (Software Development Kit)', 'Paket aus Werkzeugen, Bibliotheken und Dokumentation, um Software für eine bestimmte Plattform oder Sprache zu entwickeln.'],

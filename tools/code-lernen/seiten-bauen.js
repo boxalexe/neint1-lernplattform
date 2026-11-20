@@ -1,4 +1,4 @@
-// Eigene Seiten für Code lesen, die Suchmaschinen finden und lesen können (Allvater 20.11.2026):
+// Statische Seiten für Code lesen, die Suchmaschinen lesen können:
 //   /code-lernen/                         Start mit Kursliste (vorgerendert in index.html)
 //   /code-lernen/kurs/<kurs>/             jeder Kurs mit seinen Lektionen
 //   /code-lernen/kurs/<kurs>/<lektion>/   jede Lektion mit Text, Codebeispielen, Tabellen, Diagrammen, Fragen und Aufgaben

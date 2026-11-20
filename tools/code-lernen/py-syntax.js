@@ -1,4 +1,4 @@
-// Prüft die Syntax aller Python-Codebeispiele (ast.parse):  node tools/py-syntax.js
+// Prüft die Syntax aller Python-Codebeispiele (ast.parse):  node tools/code-lernen/py-syntax.js
 const fs = require('fs'), os = require('os'), path = require('path'), cp = require('child_process');
 global.window = globalThis; const root = path.join(__dirname, '..', '..', 'code-lernen');
 require(path.join(root, 'js/pseudo.js')); require(path.join(root, 'js/uml.js')); require(path.join(root, 'js/core.js'));

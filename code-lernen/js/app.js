@@ -201,7 +201,7 @@
       box.innerHTML = '<pre class="fill">' + html + '</pre><div class="t-ctl"><button class="primary" data-a="check">Prüfen</button>' + hintBtn(t, box) + '<button class="link" data-a="show" hidden>Lösung zeigen</button></div>';
       wireHint(box);
       const answers = []; parts.forEach((s, k) => { if (k % 2) answers.push(s.split('|')); });
-      // Lösung erst nach zwei Fehlversuchen abrufbar, wie bei den anderen Übungen (Allvater 20.11.2026)
+      // Lösung erst nach zwei Fehlversuchen abrufbar, wie bei den anderen Übungen
       let tries = 0; const show = $('[data-a=show]', box);
       $('[data-a=check]', box).addEventListener('click', () => {
         let all = true;
@@ -341,7 +341,7 @@
     return null;
   }
   /*
-   * Startseite im Bauplan-Stil (Allvater 20.11.2026: kein Kasten, eigenständiges Aussehen statt Standard-Webseite):
+   * Startseite im Bauplan-Stil:
    * Zeichnungskopf mit Rahmen, Lernweg als Leiterbahn mit „Weiterlernen“ darunter, Kurse und Spielwiesen als drehbare
    * Litfaßsäulen (saeuleInit). Ecken höchstens 2 px, Kreise ausgenommen.
    */
@@ -478,7 +478,7 @@
     return h + '</div>';
   }
 
-  /* ---------- Kürzel: Erklärung beim Darüberfahren oder Antippen (Allvater 20.11.2026) ----------
+  /* ---------- Kürzel: Erklärung beim Darüberfahren oder Antippen ----------
      Nur in Texten: Erklärungen, Tabellen, Fragen, Hinweise. Nie im Code (Beispiele, Übungsfelder, Lückentexte, Ausgaben) und
      nie in Antwortknöpfen des Quiz, damit die Erklärung keine Antwort verrät. */
   const KZ = (() => {
@@ -486,7 +486,7 @@
     all.forEach((e, i) => [e[0]].concat((e[3] && e[3].a) || []).forEach((n) => { if (!map.has(n)) map.set(n, i); }));
     const reEsc = (s) => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
     const mk = (names) => (names.length ? new RegExp('(?<![A-Za-z0-9_ÄÖÜäöüß])(' + names.sort((a, b) => b.length - a.length).map((n) => reEsc(n).replace(/ /g, '\\s+')).join('|') + ')(?![A-Za-z0-9_ÄÖÜäöüß])', 'g') : null);
-    // Wörter (auch mit Punkt, # oder @ davor) suchen wir im Text; reine Zeichen wie % oder && nur, wenn sie allein in einem Code-Schnipsel stehen
+    // Wörter (auch mit Punkt, # oder @ davor) werden im Text gesucht; reine Zeichen wie % oder && nur, wenn sie allein in einem Code-Schnipsel stehen
     const words = [...map.keys()].filter((n) => /^[A-Za-zÄÖÜäöüß_#@]/.test(n));
     return { all, map, reCode: mk(words.slice()), reText: mk(words.filter((n) => !(all[map.get(n)][3] || {}).c)) };
   })();
@@ -590,13 +590,13 @@
   const NAV_AC = ['--th-pp', '--th-fn', '--th-kw', '--th-ty', '--th-str', '--th-var', '--th-num'];
   function renderNav() {
     const [sk, sa] = viewState(), cur = CUR ? CUR.track.id : sk === 'track' ? sa : null;
-    // Seitenleiste im Tokyo-Hack-Gewand (Allvater 20.11.2026): jeder Kurs hat seine Akzentfarbe aus der Palette, Start ist deutlich größer
+    // Seitenleiste im Tokyo-Hack-Stil: jeder Kurs hat seine Akzentfarbe aus der Palette, Start ist deutlich größer
     const home = sk === 'home';
     $('#nav').innerHTML = '<a class="nav-top nav-home' + (home ? ' on' : '') + '" href="' + BASE + '">Start</a>' + A.tracks.map((t, i) => {
       const ls = A.lessons(t);
       return '<details name="kurs" style="--ac: var(' + NAV_AC[i % NAV_AC.length] + ')"' + (cur === t.id ? ' open' : '') + '><summary><span>' + esc(t.title) + '</span><span class="small muted">' + ls.filter((l) => P.done[l.id]).length + '/' + ls.length + '</span></summary>' + ls.map((l) => '<a class="nl' + (P.done[l.id] ? ' done' : '') + (CUR && CUR.lesson.id === l.id ? ' on' : '') + '" href="' + lessonUrl(l.id) + '"><span class="dot"></span>' + esc(l.title) + '</a>').join('') + '</details>';
     }).join('') + '<div class="nav-sep"></div><a class="nav-top" href="' + BASE + '#/play/pseudo">Spielwiese</a><a class="nav-top" href="' + BASE + '#/compare/vars">Sprachvergleich</a><a class="nav-top" href="' + BASE + '#/glossar">Begriffe von A bis Z</a><a class="nav-top" href="' + BASE + '#/glossar/kuerzel">Kürzel der Sprachen</a><button class="nav-reset" type="button">Lernfortschritt löschen</button><div class="nav-sep"></div><a class="nav-top" href="/#impressum">Impressum und Datenschutz</a>';
-    // Höchstens ein Kurs aufgeklappt (Allvater 20.11.2026): name="kurs" erledigt das in neuen Browsern, das hier in älteren
+    // Höchstens ein Kurs aufgeklappt: name="kurs" erledigt das in neuen Browsern, das hier in älteren
     $$('#nav details').forEach((d) => d.addEventListener('toggle', () => { if (d.open) $$('#nav details[open]').forEach((o) => { if (o !== d) o.open = false; }); }));
   }
 
