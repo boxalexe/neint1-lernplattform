@@ -7,7 +7,7 @@
  *   WENN ... DANN / SONST WENN ... DANN / SONST / ENDE WENN
  *   SOLANGE ... / ENDE SOLANGE
  *   WIEDERHOLE ... BIS bedingung
- *   FÜR i VON 1 BIS 10 [SCHRITT 2] ... ENDE FÜR
+ *   FÜR i VON 1 BIS 10 [SCHRITT 2] ... ENDE FÜR    (auch: FÜR i VON 10 ABWÄRTS BIS 1)
  *   FÜR JEDES x IN liste ... ENDE FÜR
  *   FUNKTION name(a, b) ... GIB ZURÜCK wert ... ENDE FUNKTION
  * Listen: [1, 2, 3], liste[0] (Index beginnt bei 0), LÄNGE(liste), ANHÄNGEN(liste, wert),
@@ -226,9 +226,11 @@
         pos++;
         return { k: 'each', v: m[1], list, body, line: n };
       }
-      if ((m = R.for.exec(t))) {
+      // FÜR i VON 5 ABWÄRTS BIS 1 (Schreibweise aus dem PSS-Handout): wie SCHRITT -1
+      const down = /\s+ABW(?:Ä|AE)RTS\s+BIS\s+/i.test(t);
+      if ((m = R.for.exec(down ? t.replace(/\s+ABW(?:Ä|AE)RTS\s+BIS\s+/i, ' BIS ') : t))) {
         pos++;
-        const from = parseExpr(m[2], n), to = parseExpr(m[3], n), step = m[4] ? parseExpr(m[4], n) : null;
+        const from = parseExpr(m[2], n), to = parseExpr(m[3], n), step = m[4] ? parseExpr(m[4], n) : down ? parseExpr('-1', n) : null;
         const body = block([R.endFor]);
         if (pos >= lines.length) throw new PErr('FÜR wird nicht mit ENDE FÜR abgeschlossen', n);
         pos++;

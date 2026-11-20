@@ -118,7 +118,7 @@
         Sandbox.run(ta.value).then((r) => { out.className = 'console' + (r.error ? ' bad' : ''); out.textContent = (r.logs.length ? r.logs.join('\n') : r.error ? '' : '(keine Ausgabe, nutze console.log(...) um etwas auszugeben)') + (r.error ? (r.logs.length ? '\n' : '') + 'Fehler: ' + r.error : ''); });
       } else if (a === 'trace') {
         if ($('.tp', extra)) { extra.innerHTML = ''; b.classList.remove('on'); return; }
-        b.classList.add('on'); extra.innerHTML = '<div class="tp"></div>'; tracePlayer($('.tp', extra), plain);
+        b.classList.add('on'); extra.innerHTML = '<div class="tp"></div>'; tracePlayer($('.tp', extra), plain, part.input);
       }
     });
   }
@@ -297,6 +297,8 @@
     if (p.uml) s += '<div class="uml-wrap">' + UML.classDiagram(p.uml) + '</div>';
     if (p.seq) s += '<div class="uml-wrap">' + UML.sequence(p.seq.actors, p.seq.msgs) + '</div>';
     if (p.nsd) s += '<div class="uml-wrap">' + UML.nsd(p.nsd) + '</div>';
+    if (p.usecase) s += '<div class="uml-wrap">' + UML.useCase(p.usecase) + '</div>';
+    if (p.activity) s += '<div class="uml-wrap">' + UML.activity(p.activity) + '</div>';
     if (p.table) s += '<div class="tbl-wrap"><table class="res"><thead><tr>' + p.table.head.map((c) => '<th>' + A.inl(c) + '</th>').join('') + '</tr></thead><tbody>' + p.table.rows.map((r) => '<tr>' + r.map((c) => '<td>' + A.inl(c) + '</td>').join('') + '</tr>').join('') + '</tbody></table></div>';
     return s;
   }
@@ -324,14 +326,98 @@
     for (const t of A.tracks) for (const l of A.lessons(t)) if (!P.done[l.id]) return { t, l };
     return null;
   }
+  /*
+   * Startseite im Bauplan-Stil (Allvater 20.11.2026: kein Kasten, eigenständiges Aussehen statt Standard-Webseite):
+   * Zeichnungskopf mit Rahmen, Lernweg als Leiterbahn mit „Weiterlernen“ darunter, Kurse und Spielwiesen als drehbare
+   * Litfaßsäulen (saeuleInit). Ecken höchstens 1 px, Kreise ausgenommen.
+   */
+  const PLAYS = [
+    { href: '#/play/pseudo', tag: 'PSEUDOCODE', title: 'Pseudocode-Spielwiese', desc: 'Eigene Abläufe schreiben und Schritt für Schritt verfolgen, mit Variablen und Ausgabe.' },
+    { href: '#/play/js', tag: 'JAVASCRIPT', title: 'JavaScript-Spielwiese', desc: 'Code schreiben und sofort ausführen, abgeschottet in deinem Browser.' },
+    { href: '#/play/sql', tag: 'SQL', title: 'SQL-Spielwiese', desc: 'Echte Abfragen auf einer kleinen Shop-Datenbank, jedes Mal mit frischen Daten.' },
+    { href: '#/play/uml', tag: 'UML', title: 'UML-Werkstatt', desc: 'Klassendiagramme aus einfachem Text zeichnen lassen.' },
+    { href: '#/compare/vars', tag: 'VERGLEICH', title: 'Sprachvergleich', desc: 'Dasselbe Konzept in allen Sprachen nebeneinander.' }
+  ];
+  function saeule(id, label, nr, cards) {
+    // wenige Karten (Spielwiesen) werden wiederholt, bis die Säule rundum voll ist (mindestens 8 Plätze, sonst stünden die
+    // Nachbarn zu schräg oder die Säule hätte eine Lücke); die Wiederholungen sind für Vorleseprogramme verborgen
+    const all = cards.slice();
+    while (all.length < 8) all.push(...cards);
+    return '<section class="saeule" data-saeule="' + id + '" data-n="' + cards.length + '" aria-roledescription="Karussell" aria-label="' + esc(label) + '">'
+      + '<div class="bp-label"><span>' + nr + '</span>' + esc(label) + '<em>' + cards.length + ' Teile</em></div>'
+      + '<div class="s-stage"><div class="s-ring">' + all.join('') + '</div></div>'
+      + '<div class="s-ctl"><button class="s-prev" aria-label="Säule nach links drehen">&lt;</button><span class="s-pos" aria-live="polite"></span><button class="s-next" aria-label="Säule nach rechts drehen">&gt;</button></div></section>';
+  }
   function homeView() {
     const f = P.last && A.findLesson(P.last) ? A.findLesson(P.last) : null, o = firstOpen();
-    let h = '<div class="hero"><h1>Programmieren lernen, Schritt für Schritt</h1><p>Von den allerersten Begriffen bis zu sicherem Lesen und Schreiben von Code. In kleinen Schritten, mit Erklärung zu <b>jeder einzelnen Zeile</b> und Übungen zum Selbermachen, bis zum Stoff der AP2.</p><p class="small muted">Code wird nur in deinem Browser zum Üben ausgeführt. Nichts davon wird an einen Server geschickt, übersetzt oder gespeichert, außer deinem Lernfortschritt auf diesem Gerät.</p>';
-    h += '<div class="hero-btns">' + (f ? '<a class="btn primary" href="#/lesson/' + f.lesson.id + '">Weiterlernen: ' + esc(f.lesson.title) + '</a>' : o ? '<a class="btn primary" href="#/lesson/' + o.l.id + '">Jetzt anfangen: ' + esc(o.l.title) + '</a>' : '') + '<a class="btn" href="#/play/pseudo">Spielwiese</a></div></div>';
-    h += '<h2>So gehst du am besten vor</h2><ol class="path"><li><b>Pseudocode</b> zuerst. Hier lernst du, wie man in Schritten denkt, ganz ohne Sprachregeln. Du kannst jeden Ablauf mit dem Player verfolgen.</li><li><b>Objektorientierung und UML</b>, damit dir Klassendiagramme und Begriffe wie Vererbung nicht fremd sind.</li><li><b>Eine Sprache deiner Wahl</b>. Alle Sprachen folgen demselben Lernweg: Ausgabe, Variablen, Rechnen, Entscheidungen, Schleifen, Funktionen, Sammlungen, Objekte. Wer eine kann, versteht die nächste viel schneller. Im <a href="#/compare/vars">Sprachvergleich</a> siehst du sie nebeneinander.</li><li><b>SQL und Datenbanken</b>, denn Abfragen kommen in jeder Prüfung vor.</li><li><b>Prüfungswissen AP2</b> zum Schluss: binäre Suche, Sortierverfahren, Stapel und Warteschlange, Struktogramm, Testen, Entwurfsmuster, weitere UML-Diagramme, Datenbankentwurf und sicherer Code.</li></ol>';
-    h += '<h2>Kurse</h2><div class="cards">' + A.tracks.map((t) => { const p = trackProgress(t); return '<a class="card" href="#/track/' + t.id + '"><span class="card-tag">' + esc(t.tag || '') + '</span><b>' + esc(t.title) + '</b><span class="muted">' + esc(t.desc || '') + '</span><span class="bar"><i style="width:' + (p.n ? Math.round(100 * p.d / p.n) : 0) + '%"></i></span><span class="small muted">' + p.d + ' von ' + p.n + ' Lektionen abgeschlossen</span></a>'; }).join('') + '</div>';
-    h += '<h2>Werkzeuge</h2><div class="cards tools"><a class="card" href="#/play/pseudo"><b>Pseudocode-Spielwiese</b><span class="muted">Eigene Abläufe schreiben und Schritt für Schritt verfolgen.</span></a><a class="card" href="#/play/js"><b>JavaScript-Spielwiese</b><span class="muted">Code schreiben und sofort ausführen.</span></a><a class="card" href="#/play/sql"><b>SQL-Spielwiese</b><span class="muted">Echte Abfragen auf einer Beispieldatenbank.</span></a><a class="card" href="#/play/uml"><b>UML-Werkstatt</b><span class="muted">Klassendiagramme aus einfachem Text zeichnen.</span></a><a class="card" href="#/compare/vars"><b>Sprachvergleich</b><span class="muted">Dasselbe Konzept in allen Sprachen nebeneinander.</span></a><a class="card" href="#/glossar"><b>Begriffe von A bis Z</b><span class="muted">Kurz erklärt, was ein Fachwort bedeutet.</span></a></div>';
-    return h;
+    let h = '<div class="bp"><div class="bp-head"><span class="bp-sheet">CODELERNEN · BLATT 01</span><h1>Programmieren lernen, Schritt für Schritt</h1>'
+      + '<p class="bp-lead">Von den allerersten Begriffen bis zu sicherem Lesen und Schreiben von Code. In kleinen Schritten, mit Erklärung zu <b>jeder einzelnen Zeile</b> und Übungen zum Selbermachen, bis zum Stoff der AP2.</p>'
+      + '<p class="small muted">Code wird nur in deinem Browser zum Üben ausgeführt. Nichts davon wird an einen Server geschickt, übersetzt oder gespeichert, außer deinem Lernfortschritt auf diesem Gerät.</p></div>';
+    h += '<div class="bp-label"><span>A</span>So gehst du am besten vor</div><ol class="bp-path">'
+      + '<li><b>Pseudocode</b> zuerst. Hier lernst du, wie man in Schritten denkt, ganz ohne Sprachregeln. Du kannst jeden Ablauf mit dem Player verfolgen.</li>'
+      + '<li><b>Software planen (PSS)</b>: wie ein Computer arbeitet, Anforderungen, Lebenszyklus, Anwendungsfall- und Aktivitätsdiagramm, PAP und Struktogramm.</li>'
+      + '<li><b>Objektorientierung und UML</b>, damit dir Klassendiagramme und Begriffe wie Vererbung nicht fremd sind.</li>'
+      + '<li><b>Eine Sprache deiner Wahl</b>. Alle Sprachen folgen demselben Lernweg: Ausgabe, Variablen, Rechnen, Entscheidungen, Schleifen, Funktionen, Sammlungen, Objekte. Wer eine kann, versteht die nächste viel schneller. Im <a href="#/compare/vars">Sprachvergleich</a> siehst du sie nebeneinander.</li>'
+      + '<li><b>SQL und Datenbanken</b>, denn Abfragen kommen in jeder Prüfung vor.</li>'
+      + '<li><b>Prüfungswissen AP2</b> zum Schluss: binäre Suche, Sortierverfahren, Stapel und Warteschlange, Struktogramm, Testen, Entwurfsmuster, weitere UML-Diagramme, Datenbankentwurf und sicherer Code.</li></ol>';
+    const go = f ? ['#/lesson/' + f.lesson.id, 'Weiterlernen: ' + f.lesson.title] : o ? ['#/lesson/' + o.l.id, 'Jetzt anfangen: ' + o.l.title] : null;
+    if (go) h += '<div class="bp-go"><a class="btn primary" href="' + go[0] + '">' + esc(go[1]) + '</a></div>';
+    h += saeule('kurse', 'Kurse', 'B', A.tracks.map((t) => {
+      const p = trackProgress(t), pct = p.n ? Math.round(100 * p.d / p.n) : 0;
+      return '<a class="s-card" href="#/track/' + t.id + '"><span class="card-tag">' + esc(t.tag || '') + '</span><b>' + esc(t.title) + '</b><span class="s-desc">' + esc(t.desc || '') + '</span><span class="bar"><i style="width:' + pct + '%"></i></span><span class="small muted">' + p.d + ' von ' + p.n + ' Lektionen</span></a>';
+    }));
+    h += saeule('spiel', 'Spielwiesen', 'C', PLAYS.map((c) => '<a class="s-card" href="' + c.href + '"><span class="card-tag">' + c.tag + '</span><b>' + esc(c.title) + '</b><span class="s-desc">' + esc(c.desc) + '</span></a>'));
+    return h + '</div>';
+  }
+  /*
+   * Litfaßsäule: Die Karten stehen rundum auf einem Zylinder (rotateY + translateZ), die vordere ist aktiv, die Nachbarn sieht man
+   * links und rechts schräg. Drehen per Klick auf eine Seitenkarte, Pfeilknöpfe, Pfeiltasten oder Wischen; ein Klick auf die
+   * vordere Karte öffnet sie. Weniger Bewegung (prefers-reduced-motion) dreht ohne Übergang. Jede Säule merkt sich ihre Stellung.
+   */
+  const SPOS = {};
+  let saeuleResize = null;
+  function saeuleInit(root) {
+    const layouts = [];
+    if (saeuleResize) window.removeEventListener('resize', saeuleResize);
+    saeuleResize = () => layouts.forEach((f) => f());
+    window.addEventListener('resize', saeuleResize);
+    $$('[data-saeule]', root).forEach((sec) => {
+      // höchstens 45 Grad zwischen zwei Karten: Bei wenigen Karten (Spielwiesen) stünden die Nachbarn sonst zu schräg zum Lesen
+      const id = sec.dataset.saeule, ring = $('.s-ring', sec), cards = $$('.s-card', sec), n = cards.length, base = +sec.dataset.n || n, pos = $('.s-pos', sec), slots = n, step = 360 / slots;
+      let act = Math.min(SPOS[id] || 0, n - 1), turns = act;
+      const layout = () => {
+        const w = cards[0].offsetWidth || 280, r = Math.round((w / 2) / Math.tan(Math.PI / slots) + 24);
+        cards.forEach((c, i) => {
+          let d = ((i - act) % n + n) % n; if (d > n / 2) d -= n;
+          c.style.transform = 'rotateY(' + (i * step) + 'deg) translateZ(' + r + 'px)';
+          c.classList.toggle('on', d === 0);
+          c.style.opacity = d === 0 ? 1 : Math.abs(d) === 1 ? 0.5 : Math.abs(d) === 2 && n > 5 ? 0.15 : 0;
+          c.style.pointerEvents = Math.abs(d) <= 1 ? 'auto' : 'none';
+          c.tabIndex = d === 0 ? 0 : -1;
+          c.setAttribute('aria-hidden', d === 0 ? 'false' : 'true');
+        });
+        // der Ring dreht über die kürzere Seite weiter, statt von der letzten Karte zur ersten zurückzuspulen
+        ring.style.transform = 'translateZ(-' + r + 'px) rotateY(' + (-turns * step) + 'deg)';
+        pos.textContent = (act % base + 1) + ' / ' + base + ' · ' + $('b', cards[act]).textContent;
+        SPOS[id] = act;
+      };
+      const go = (to) => {
+        const next = ((to % n) + n) % n;
+        let d = next - act; if (d > n / 2) d -= n; if (d < -n / 2) d += n;
+        act = next; turns += d; layout();
+      };
+      // Wischen auf dem Handy: waagerecht mehr als 40 px dreht, senkrechtes Scrollen bleibt frei; der Klick danach öffnet nichts
+      let x0 = null, y0 = 0, swiped = false;
+      cards.forEach((c, i) => c.addEventListener('click', (e) => { if (swiped) { e.preventDefault(); swiped = false; return; } if (i !== act) { e.preventDefault(); go(i); } }));
+      $('.s-prev', sec).addEventListener('click', () => go(act - 1));
+      $('.s-next', sec).addEventListener('click', () => go(act + 1));
+      sec.addEventListener('keydown', (e) => { if (e.key === 'ArrowLeft') { go(act - 1); e.preventDefault(); } else if (e.key === 'ArrowRight') { go(act + 1); e.preventDefault(); } });
+      const stage = $('.s-stage', sec);
+      stage.addEventListener('pointerdown', (e) => { x0 = e.clientX; y0 = e.clientY; swiped = false; });
+      stage.addEventListener('pointerup', (e) => { if (x0 === null) return; const dx = e.clientX - x0, dy = e.clientY - y0; x0 = null; if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy)) { swiped = true; go(act + (dx < 0 ? 1 : -1)); } });
+      layout();
+      layouts.push(layout);
+    });
   }
   function trackView(t) {
     const ls = A.lessons(t), p = trackProgress(t);
@@ -429,6 +515,9 @@
     main.innerHTML = html;
     activate(main);
     if (kind === 'play') playInit(arg || 'pseudo');
+    const home = !['lesson', 'track', 'play', 'compare', 'glossar'].includes(kind);
+    main.classList.toggle('bp-home', home);
+    if (home) saeuleInit(main);
     if (kind === 'glossar') $('#gs').addEventListener('input', (e) => { const q = e.target.value.toLowerCase().trim(); $$('.term').forEach((t) => { t.hidden = q && !t.dataset.s.includes(q); }); });
     renderNav();
     main.scrollTop = 0; window.scrollTo(0, 0);

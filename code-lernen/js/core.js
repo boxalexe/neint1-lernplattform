@@ -28,6 +28,8 @@
   A.table = (head, rows, h, p) => ({ h, p, table: { head, rows } });
   A.uml = (dsl, h, p) => ({ h, p, uml: dsl });
   A.nsd = (blocks, h, p) => ({ h, p, nsd: blocks });
+  A.usecase = (spec, h, p) => ({ h, p, usecase: spec });
+  A.activity = (spec, h, p) => ({ h, p, activity: spec });
   A.seq = (actors, msgs, h, p) => ({ h, p, seq: { actors, msgs } });
   A.q = (q, o, a, e) => ({ q, o, a, e });
   // Aufgaben
