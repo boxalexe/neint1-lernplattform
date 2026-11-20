@@ -26,7 +26,7 @@
           C(['string eingabe;§Platz für den Text.', 'cout << "Dein Name: ";§Fragt nach.', 'cin >> eingabe;§cin liest ein Wort von der Tastatur. >> „holt“ den Wert in die Variable.', 'cout << "Hallo " << eingabe << "!" << endl;§Gibt ihn wieder aus.'], 'Eingabe mit cin')
         ],
         tips: [A.warn('Eine Variable ohne Startwert (`int x;`) enthält Zufallsmüll, wie in C. Gib jeder Variable sofort einen Wert.')],
-        quiz: [A.q('Wofür nutzt man `const`?', ['Für Werte, die sich nicht mehr ändern dürfen', 'Für Schleifen', 'Für Kommazahlen', 'Für Text'], 0, 'const verbietet spätere Änderungen.')],
+        quiz: [A.q('Wofür nutzt man `const`?', ['Für Werte, die sich nicht mehr ändern dürfen', 'Für Werte, die nur in Schleifen gelten', 'Für Zahlen mit festen Nachkommastellen', 'Für Variablen, die global sichtbar sein sollen'], 0, 'const verbietet spätere Änderungen.')],
         tasks: [PP('Was gibt das Programm aus?', ['int x = 3;', 'int y = x;', 'x = 10;', 'cout << x << " " << y << endl;'], '10 3', 'y bekam den Wert 3, bevor x geändert wurde.'), A.fill('Ergänze den Datentyp für ganze Zahlen.', '{{int}} anzahl = 5;', 'Für ganze Zahlen gibt es int.')]
       },
       {
@@ -46,7 +46,7 @@
           C(['int tag = 3;§Ein Wert mit mehreren festen Fällen.', 'switch (tag) {§switch wählt anhand des Werts einen Fall.', '    case 1:§Fall: tag ist 1.', '        cout << "Montag" << endl;§Bei 1.', '        break;§break beendet den switch. **Ohne break läuft es in den nächsten Fall weiter!**', '    case 3:§Fall: tag ist 3.', '        cout << "Mittwoch" << endl;§Hier landest du.', '        break;§Beendet den switch.', '    default:§Alle anderen Werte.', '        cout << "anderer Tag" << endl;§Auffangfall.', '}§Ende.'], 'switch für feste Fälle')
         ],
         tips: [A.warn('Wie in C ist `if (x = 5)` erlaubt, setzt x auf 5 und ist immer wahr. Vergleichen heißt `==`. Übersetze mit `-Wall`, dann warnt dich der Compiler.')],
-        quiz: [A.q('Was passiert in einem `switch` ohne `break`?', ['Das Programm läuft in den nächsten Fall weiter', 'Es gibt einen Fehler', 'Der switch endet sofort', 'Der Fall wird übersprungen'], 0, 'Man nennt das „Durchfallen“.')],
+        quiz: [A.q('Was passiert in einem `switch` ohne `break`?', ['Das Programm läuft in den nächsten Fall weiter', 'Der Compiler meldet einen Fehler und übersetzt nicht', 'Der switch endet nach dem Fall trotzdem', 'Der Fall wird übersprungen'], 0, 'Man nennt das „Durchfallen“.')],
         tasks: [PP('Was wird ausgegeben?', ['int x = 10;', 'if (x > 5 && x < 8) {', '    cout << "A";', '} else if (x > 5) {', '    cout << "B";', '} else {', '    cout << "C";', '}'], 'B', 'Die erste Bedingung braucht x < 8 (falsch), die zweite stimmt.')]
       },
       {
@@ -67,7 +67,7 @@
           C(['void erhoehe(int &zahl) {§Das **&** macht zahl zu einer **Referenz**: ein zweiter Name für das Original, keine Kopie.', '    zahl = zahl + 1;§Ändert das Original.', '}§Ende.', '', 'int a = 5;§Die Variable.', 'erhoehe(a);§Kein & beim Aufruf nötig.', 'cout << a << endl;§Ausgabe: 6'], 'Referenzen: das Original ändern')
         ],
         tips: [A.info('Ohne `&` bekommt die Funktion wie in C eine **Kopie**. Große Objekte (lange Texte, Listen) übergibt man gern als `const string &text`: keine Kopie, aber auch keine Änderung.')],
-        quiz: [A.q('Was bewirkt `int &zahl` als Parameter?', ['Die Funktion arbeitet am Original statt an einer Kopie', 'Die Zahl wird verdoppelt', 'Die Zahl wird gelöscht', 'Die Funktion gibt eine Adresse zurück'], 0, 'Eine Referenz ist ein zweiter Name für dieselbe Variable.')],
+        quiz: [A.q('Was bewirkt `int &zahl` als Parameter?', ['Die Funktion arbeitet am Original statt an einer Kopie', 'Die Funktion bekommt eine Kopie, die sie nicht ändern darf', 'Die Funktion gibt die Adresse von zahl zurück', 'Die Zahl wird vor dem Aufruf in int umgewandelt'], 0, 'Eine Referenz ist ein zweiter Name für dieselbe Variable.')],
         tasks: [PP('Was wird ausgegeben?', ['int doppelt(int n) {', '    return n * 2;', '}', '// in main:', 'cout << doppelt(doppelt(3)) << endl;'], '12', 'doppelt(3) ist 6, dann doppelt(6) ist 12.')]
       },
       {
@@ -88,7 +88,7 @@
           C(['class Tier {§Basisklasse.', 'public:§Öffentlicher Teil.', '    virtual string laut() {§**virtual**: Unterklassen dürfen diese Methode ersetzen.', '        return "...";§Standardlaut.', '    }§Ende.', '    virtual ~Tier() {}§Ein **virtueller Destruktor**: Pflicht, wenn man über Basiszeiger arbeitet.', '};§Ende von Tier.', '', 'class Hund : public Tier {§Der Doppelpunkt: Hund erbt öffentlich von Tier.', 'public:§Öffentlicher Teil.', '    string laut() override {§**override**: ersetzt die Methode der Basisklasse. Der Compiler prüft das.', '        return "Wau";§Hunde sagen Wau.', '    }§Ende.', '};§Ende von Hund.', '', 'Hund h;§Ein Hund-Objekt.', 'Tier *t = &h;§Ein **Zeiger** auf Tier darf auf einen Hund zeigen (Polymorphie).', 'cout << t->laut() << endl;§-> ruft die Methode über den Zeiger auf. Es erscheint "Wau".'], 'Vererbung und Polymorphie')
         ],
         tips: [A.info('Ohne `virtual` würde `t->laut()` die Methode von **Tier** aufrufen, obwohl dort ein Hund liegt. Polymorphie braucht in C++ ausdrücklich `virtual`.')],
-        quiz: [A.q('Was bewirkt `private:` in einer Klasse?', ['Alles darunter ist von außen nicht erreichbar', 'Alles darunter wird gelöscht', 'Alles darunter ist eine Konstante', 'Alles darunter ist für Unterklassen'], 0, 'private: ist die Grundlage der Kapselung.'), A.q('Wozu dient `virtual`?', ['Eine Methode darf in Unterklassen ersetzt werden und wird über das echte Objekt aufgerufen', 'Sie macht die Methode privat', 'Sie macht die Methode schneller', 'Sie löscht die Methode'], 0, 'virtual ermöglicht Polymorphie.')],
+        quiz: [A.q('Was bewirkt `private:` in einer Klasse?', ['Alles darunter ist von außen nicht erreichbar', 'Alles darunter ist nur für Unterklassen und die Klasse selbst sichtbar', 'Alles darunter wird als Konstante angelegt', 'Alles darunter wird beim Kopieren übersprungen'], 0, 'private: ist die Grundlage der Kapselung.'), A.q('Wozu dient `virtual`?', ['Eine Unterklasse darf die Methode ersetzen, aufgerufen wird die des echten Objekts', 'Die Methode existiert nur im Speicher und wird beim Beenden gelöscht', 'Die Methode ist nur für Unterklassen sichtbar, nicht für andere Klassen', 'Die Methode wird beim Übersetzen eingesetzt und läuft dadurch schneller'], 0, 'virtual ermöglicht Polymorphie.')],
         tasks: [PP('Was gibt das Programm aus?', ['Konto k("Ada");', 'k.einzahlen(50);', 'k.einzahlen(25);', 'cout << k.getKontostand() << endl;'], '75', 'Zwei Einzahlungen: 50 + 25. Ein ganzzahliges double wird ohne Nachkommastellen ausgegeben.')]
       },
       {
@@ -113,7 +113,7 @@
           C(['#include <algorithm>§Für sort, count_if und mehr.', 'vector<int> zahlen = {5, 2, 8, 1, 4};§Ausgangsdaten.', 'sort(zahlen.begin(), zahlen.end());§Sortiert aufsteigend. begin() und end() markieren den Bereich.', 'int gerade = count_if(zahlen.begin(), zahlen.end(), [](int x) { return x % 2 == 0; });§Zählt die Elemente, für die das Lambda true liefert: 2, 4, 8 sind gerade, also 3.', 'cout << zahlen[0] << " " << gerade << endl;§Ausgabe: 1 3'], 'sort und count_if')
         ],
         tips: [A.warn('Rohe Zeiger mit `new` sind die häufigste Fehlerquelle in C++. Faustregel: Nimm Objekte direkt (`Konto k;`), `vector` und `unique_ptr`, und rufe `new` gar nicht selbst auf.')],
-        quiz: [A.q('Wozu dient `unique_ptr`?', ['Er gibt sein Objekt automatisch frei', 'Er verdoppelt den Speicher', 'Er sortiert Daten', 'Er ersetzt Schleifen'], 0, 'Das nennt man RAII: Aufräumen passiert automatisch.'), A.q('Wofür steht `[](int x) { return x * 2; }`?', ['Ein Lambda: nimm x und liefere x * 2', 'Ein Array', 'Eine Klasse', 'Eine Schleife'], 0, 'Ein Lambda ist eine kurze Funktion ohne Namen.')],
+        quiz: [A.q('Wozu dient `unique_ptr`?', ['Er gibt sein Objekt automatisch frei', 'Er teilt sein Objekt mit beliebig vielen Besitzern', 'Er macht aus jedem Zeiger eine Kopie', 'Er prüft, ob ein Zeiger auf null zeigt'], 0, 'Das nennt man RAII: Aufräumen passiert automatisch.'), A.q('Wofür steht `[](int x) { return x * 2; }`?', ['Ein Lambda: nimm x und liefere x * 2', 'Ein leeres Array, gefüllt mit x * 2', 'Eine Klasse mit einer Methode für x * 2', 'Ein Makro, das der Präprozessor ersetzt'], 0, 'Ein Lambda ist eine kurze Funktion ohne Namen.')],
         tasks: [PP('Was wird ausgegeben?', ['int *p = new int(5);', '*p = *p + 3;', 'cout << *p << endl;', 'delete p;'], '8', '*p ist der Wert, auf den p zeigt.', 'Über den Zeiger wird der Wert 5 + 3 = 8.')]
       }
     ]

@@ -77,7 +77,7 @@ Programmieren lernen bis zum Stoff der AP2: Pseudocode, Software planen (PSS: Re
 **Kein Code verlässt den Browser.** JavaScript-Übungen laufen in einem abgeschotteten Worker (`code-lernen/js/runner.js`), SQL in sql.js (WebAssembly, eingebettet), Pseudocode im eigenen Interpreter. Python, Java, C#, C und C++ werden nicht ausgeführt, dort heißt die Übung „Ausgabe vorhersagen“. Abgesichert in drei Schichten: Sicherheitsrichtlinie in `_headers` und im Seitenkopf (`connect-src 'none'`, keine Verbindungen nach außen), eigene strengere Richtlinie für den Worker, und im Worker werden `fetch`, `XMLHttpRequest`, `WebSocket`, `importScripts` und ähnliche vor dem Start abgeschaltet. Nach 2,5 Sekunden wird der Worker hart beendet.
 
 Prüfen (Werkzeuge in `tools/code-lernen/`, werden nicht ausgeliefert):
-- `node tools/code-lernen/check.js`: alle Inhalte, Musterlösungen werden ausgeführt
+- `node tools/code-lernen/check.js`: alle Inhalte, Musterlösungen werden ausgeführt; Quizfragen dürfen ihre richtige Antwort nicht durch die Länge verraten (höchstens 1,3-mal so lang wie die längste falsche)
 - `node tools/code-lernen/pseudo-test.js`: der Pseudocode-Interpreter
 - `node tools/code-lernen/run-predict.js`: Vorhersage-Aufgaben mit echten Compilern, nur lokal (braucht Python, JDK, dotnet, gcc)
 

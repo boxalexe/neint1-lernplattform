@@ -24,7 +24,9 @@
         parts: [
           C(['int alter = 25;§**Typ Name = Wert**. int ist eine ganze Zahl.', 'double preis = 19.99;§double für Kommazahlen, Punkt als Trenner.', 'string name = "Ada";§string (klein!) ist Text in doppelten Anführungszeichen.', 'bool istStudent = true;§bool: nur true oder false (klein).', "char buchstabe = 'A';§char ist **ein** Zeichen in einfachen Anführungszeichen.", 'alter = alter + 1;§Neu zuweisen: ohne Typ. Jetzt 26.', 'Console.WriteLine($"{name} ist {alter}");§Das **$** vor dem Text macht eine Interpolation: Was in {} steht, wird eingesetzt. Ausgabe: Ada ist 26'], 'Variablen mit festem Typ'),
           C(['var zahl = 42;§var lässt C# den Typ erkennen (int). Er bleibt trotzdem fest.', 'const int MaxPunkte = 100;§const: Konstante, nicht mehr änderbar.', 'int ergebnis = int.Parse("25");§Wandelt Text in eine Zahl um. Bei ungültigem Text gibt es einen Fehler.', 'bool ok = int.TryParse("abc", out int wert);§TryParse versucht es und liefert true/false. Bei Misserfolg ist wert 0.', 'string text = 25.ToString();§Wandelt eine Zahl in Text um.'], 'var, Konstanten und Umwandlungen'),
-          C(['Console.Write("Dein Name: ");§Fragt nach.', 'string eingabe = Console.ReadLine();§Liest eine Zeile Text von der Tastatur.', 'Console.WriteLine($"Hallo {eingabe}!");§Setzt die Eingabe ein.'], 'Eingabe von der Tastatur')
+          C(['Console.Write("Dein Name: ");§Fragt nach.', 'string eingabe = Console.ReadLine();§Liest eine Zeile Text von der Tastatur.', 'Console.WriteLine($"Hallo {eingabe}!");§Setzt die Eingabe ein.'], 'Eingabe von der Tastatur'),
+          // Ganzzahltypen wie in der Anlage der Prüfungsaufgaben (Allvater 20.11.2026, Ordner Sandmensch)
+          A.table(['Datentyp', 'Größe', 'Wertebereich'], [['`sbyte`', '8 Bit mit Vorzeichen', '−128 bis 127'], ['`byte`', '8 Bit ohne Vorzeichen', '0 bis 255'], ['`short`', '16 Bit mit Vorzeichen', '−32.768 bis 32.767'], ['`ushort`', '16 Bit ohne Vorzeichen', '0 bis 65.535'], ['`int`', '32 Bit mit Vorzeichen', '−2.147.483.648 bis 2.147.483.647'], ['`uint`', '32 Bit ohne Vorzeichen', '0 bis 4.294.967.295'], ['`long`', '64 Bit mit Vorzeichen', 'etwa ±9,2 Trillionen']], 'Ganzzahltypen und ihre Wertebereiche', 'Diese Tabelle steht in der Prüfung oft in der Anlage. Gefragt wird dann, welcher Typ passt und warum: Prozentwerte von 0 bis 100 passen in `byte` und brauchen ein Viertel des Speichers von `int`. Mit Vorzeichen verschiebt sich der Bereich zur Hälfte ins Negative.')
         ],
         tips: [A.warn('`int x = "5";` ist ein Fehler beim Übersetzen: Der Compiler lässt keinen Text in einer Zahl-Variable zu. Und `String` oder `string` sind dasselbe, üblich ist `string`.')],
         quiz: [A.q('Was macht das `$` in `$"Hallo {name}"`?', ['Es setzt Werte in den Text ein', 'Es macht den Text zu Geld', 'Es kommentiert den Text aus', 'Es wandelt in eine Zahl um'], 0, 'Das ist String-Interpolation.')],
@@ -47,7 +49,7 @@
           C(['int tag = 3;§Ein Wert mit mehreren festen Fällen.', 'string name = tag switch {§Der **switch-Ausdruck** liefert direkt einen Wert zurück.', '    1 => "Montag",§Ist tag 1, ist das Ergebnis "Montag".', '    2 => "Dienstag",§Ist tag 2: Dienstag.', '    3 => "Mittwoch",§tag ist 3: Mittwoch.', '    _ => "anderer Tag"§Der Unterstrich fängt alle übrigen Werte auf.', '};§Ende, mit Semikolon.', 'Console.WriteLine(name);§Ausgabe: Mittwoch'], 'switch-Ausdruck')
         ],
         tips: [A.info('Die Kurzform `bedingung ? a : b` liefert `a`, wenn die Bedingung stimmt, sonst `b`: `string s = alter >= 18 ? "volljährig" : "minderjährig";`')],
-        quiz: [A.q('Wofür steht `_` im switch-Ausdruck?', ['Für alle übrigen Fälle', 'Für einen Fehler', 'Für den ersten Fall', 'Für null'], 0, 'Der Unterstrich ist der Auffangfall.')],
+        quiz: [A.q('Wofür steht `_` im switch-Ausdruck?', ['Für alle übrigen Fälle', 'Für einen Fehlerfall, der eine Ausnahme wirft', 'Für den ersten Fall', 'Für den Wert null'], 0, 'Der Unterstrich ist der Auffangfall.')],
         tasks: [PP('Was wird ausgegeben?', ['int x = 10;', 'if (x > 5 && x < 8) {', '    Console.WriteLine("A");', '} else if (x > 5) {', '    Console.WriteLine("B");', '} else {', '    Console.WriteLine("C");', '}'], 'B', 'Die erste Bedingung braucht x < 8 (falsch), die zweite stimmt.')]
       },
       {
@@ -68,7 +70,7 @@
           C(['static int Quadrat(int n) => n * n;§Mit **=>** schreibst du kurze Methoden in einer Zeile: „liefert n * n“.', 'Console.WriteLine(Quadrat(6));§Ausgabe: 36'], 'Kurzform mit =>')
         ],
         tips: [A.info('Parameter dürfen **Standardwerte** haben: `static void Gruss(string name = "Welt")`. Dann geht auch `Gruss();`.')],
-        quiz: [A.q('Was bedeutet `void`?', ['Die Methode gibt nichts zurück', 'Die Methode gibt 0 zurück', 'Die Methode ist leer', 'Die Methode ist privat'], 0, 'void bedeutet „kein Rückgabewert“.')],
+        quiz: [A.q('Was bedeutet `void`?', ['Die Methode gibt nichts zurück', 'Die Methode gibt immer 0 zurück', 'Die Methode hat keinen Inhalt und keine Parameter', 'Die Methode ist privat'], 0, 'void bedeutet „kein Rückgabewert“.')],
         tasks: [PP('Was wird ausgegeben?', ['static int Doppelt(int n) => n * 2;', 'Console.WriteLine(Doppelt(Doppelt(3)));'], '12', 'Doppelt(3) ist 6, dann Doppelt(6) ist 12.')]
       },
       {
@@ -90,7 +92,7 @@
           C(['class Tier {§Basisklasse.', '    public virtual string Laut() {§**virtual**: Unterklassen dürfen diese Methode ersetzen.', '        return "...";§Standardlaut.', '    }§Ende.', '}§Ende von Tier.', '', 'class Hund : Tier {§Der **Doppelpunkt** bedeutet: Hund erbt von Tier.', '    public override string Laut() {§**override**: ersetzt die Methode der Basisklasse.', '        return "Wau";§Hunde sagen Wau.', '    }§Ende.', '}§Ende von Hund.', '', 'Tier t = new Hund();§Eine Tier-Variable darf ein Hund-Objekt halten (Polymorphie).', 'Console.WriteLine(t.Laut());§Es erscheint "Wau": Das tatsächliche Objekt entscheidet.'], 'Vererbung und Polymorphie')
         ],
         tips: [A.info('In C# steht `override` zwingend dabei, und die Basismethode muss `virtual` sein. Das Gegenstück zu Javas `@Override` ist also Pflicht, nicht nur eine Markierung.')],
-        quiz: [A.q('Was bewirkt `{ get; private set; }` bei einer Eigenschaft?', ['Lesen ist öffentlich, Schreiben nur innerhalb der Klasse', 'Sie ist komplett unsichtbar', 'Sie ist eine Konstante', 'Sie kann nur einmal gelesen werden'], 0, 'So kapselst du ein Attribut mit einer Zeile.'), A.q('Wie erbt in C# die Klasse `Hund` von `Tier`?', ['class Hund : Tier', 'class Hund extends Tier', 'class Hund inherits Tier', 'class Hund(Tier)'], 0, 'Der Doppelpunkt kennzeichnet die Vererbung.')],
+        quiz: [A.q('Was bewirkt `{ get; private set; }` bei einer Eigenschaft?', ['Lesen ist öffentlich, Schreiben nur innerhalb der Klasse', 'Schreiben ist öffentlich, Lesen nur innerhalb der Klasse', 'Lesen und Schreiben sind nur innerhalb der Klasse erlaubt', 'Der Wert kann genau einmal gesetzt und nie gelesen werden'], 0, 'So kapselst du ein Attribut mit einer Zeile.'), A.q('Wie erbt in C# die Klasse `Hund` von `Tier`?', ['class Hund : Tier', 'class Hund extends Tier', 'class Hund inherits Tier', 'class Hund(Tier)'], 0, 'Der Doppelpunkt kennzeichnet die Vererbung.')],
         tasks: [PP('Was gibt das Programm aus?', ['var k = new Konto("Ada");', 'k.Einzahlen(50);', 'k.Einzahlen(25);', 'Console.WriteLine(k.Kontostand);'], '75', 'Zwei Einzahlungen: 50 + 25.', 'Console.WriteLine gibt ein double ohne Nachkommastellen aus, wenn es ganzzahlig ist.')]
       },
       {
@@ -113,7 +115,7 @@
           C(['using System.Linq;§Holt die LINQ-Methoden (in neuen Projekten oft automatisch da).', 'int[] zahlen = { 1, 2, 3, 4, 5 };§Ausgangsdaten.', 'var gerade = zahlen.Where(x => x % 2 == 0);§Where behält nur Elemente, für die das Lambda true liefert: 2 und 4.', 'var verdoppelt = gerade.Select(x => x * 2);§Select wandelt jedes Element um: 4 und 8.', 'Console.WriteLine(string.Join(", ", verdoppelt));§Join fügt alles zu einem Text zusammen: 4, 8', 'Console.WriteLine(zahlen.Sum());§Sum addiert alle: 15'], 'LINQ: Where, Select, Sum')
         ],
         tips: [],
-        quiz: [A.q('Wofür steht `x => x * 2`?', ['Ein Lambda: nimm x und liefere x * 2', 'Eine Zuweisung', 'Ein Vergleich', 'Eine Schleife'], 0, 'Ein Lambda ist eine kurze Funktion ohne Namen.'), A.q('Was macht `Where` in LINQ?', ['Es filtert Elemente nach einer Bedingung', 'Es sortiert die Liste', 'Es löscht die Liste', 'Es zählt die Elemente'], 0, 'Where behält nur Elemente, für die die Bedingung stimmt.')],
+        quiz: [A.q('Wofür steht `x => x * 2`?', ['Ein Lambda: nimm x und liefere x * 2', 'Ein Vergleich: ist x größer gleich x * 2', 'Eine Zuweisung: x wird zu x * 2', 'Ein Zeiger, der auf x mal 2 zeigt'], 0, 'Ein Lambda ist eine kurze Funktion ohne Namen.'), A.q('Was macht `Where` in LINQ?', ['Es filtert Elemente nach einer Bedingung', 'Es sortiert die Elemente nach einem Schlüssel', 'Es sucht die Position eines Elements', 'Es zählt die Elemente einer Liste'], 0, 'Where behält nur Elemente, für die die Bedingung stimmt.')],
         tasks: []
       }
     ]

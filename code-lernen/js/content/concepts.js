@@ -128,7 +128,7 @@
     ],
     quiz: [
       A.q('Wie oft läuft `FÜR i VON 1 BIS 5`?', ['4-mal', '5-mal', '6-mal', 'unendlich oft'], 1, 'Von 1 bis 5 einschließlich sind es die Zahlen 1, 2, 3, 4, 5, also 5 Durchläufe.'),
-      A.q('Wann ist eine Schleife besser mit **Bedingung** (while) als mit Zähler (for) gelöst?', ['Wenn du nicht vorher weißt, wie oft sie laufen muss', 'Wenn du genau 10 Wiederholungen willst', 'Wenn die Schleife nur einmal laufen soll', 'Nie, es geht immer nur mit for'], 0, 'Eine Bedingungsschleife passt, wenn nur das **Ende** bekannt ist (z. B. „bis der Benutzer q eingibt“).')
+      A.q('Wann ist eine Schleife besser mit **Bedingung** (while) als mit Zähler (for) gelöst?', ['Wenn du nicht vorher weißt, wie oft sie laufen muss', 'Wenn du genau 10 Wiederholungen willst', 'Wenn die Schleife eine Liste von vorn bis hinten durchlaufen soll', 'Nie, eine while-Schleife ist immer langsamer'], 0, 'Eine Bedingungsschleife passt, wenn nur das **Ende** bekannt ist (z. B. „bis der Benutzer q eingibt“).')
     ],
     tasks: [
       A.predict('Was wird ausgegeben? (Eine Zahl pro Zeile.)', ['FÜR i VON 1 BIS 4', '  AUSGABE i * i', 'ENDE FÜR'], '1\n4\n9\n16', 'Das Quadrat von 1, 2, 3 und 4.'),
@@ -156,8 +156,8 @@
       A.warn('Anzahl und Reihenfolge der Argumente müssen zu den Parametern passen. `teile(10, 2)` und `teile(2, 10)` sind zwei verschiedene Rechnungen.')
     ],
     quiz: [
-      A.q('Was ist der Unterschied zwischen **Parameter** und **Rückgabewert**?', ['Parameter gehen in die Funktion hinein, der Rückgabewert kommt heraus', 'Beide bedeuten dasselbe', 'Parameter kommen heraus, der Rückgabewert geht hinein', 'Parameter sind nur für Text, Rückgabewerte nur für Zahlen'], 0, 'Parameter sind die Eingaben, der Rückgabewert ist das Ergebnis.'),
-      A.q('Was bewirkt `GIB ZURÜCK` / `return`?', ['Die Funktion endet und liefert einen Wert an den Aufrufer', 'Der Wert wird auf dem Bildschirm ausgegeben', 'Das gesamte Programm wird beendet', 'Die Funktion startet von vorn'], 0, 'Ausgabe auf dem Bildschirm ist etwas anderes. return liefert den Wert **zurück** an die Stelle, von der aus aufgerufen wurde.')
+      A.q('Was ist der Unterschied zwischen **Parameter** und **Rückgabewert**?', ['Parameter gehen in die Funktion hinein, der Rückgabewert kommt heraus', 'Parameter kommen aus der Funktion heraus, der Rückgabewert geht hinein', 'Parameter sind nur für Text, Rückgabewerte nur für Zahlen', 'Beide bedeuten dasselbe, es sind nur zwei Namen'], 0, 'Parameter sind die Eingaben, der Rückgabewert ist das Ergebnis.'),
+      A.q('Was bewirkt `GIB ZURÜCK` / `return`?', ['Die Funktion endet und liefert einen Wert an den Aufrufer', 'Der Wert wird auf dem Bildschirm ausgegeben, die Funktion läuft weiter', 'Das gesamte Programm wird an dieser Stelle beendet', 'Die Funktion springt zurück an ihren Anfang'], 0, 'Ausgabe auf dem Bildschirm ist etwas anderes. return liefert den Wert **zurück** an die Stelle, von der aus aufgerufen wurde.')
     ],
     tasks: [
       A.predict('Was wird ausgegeben?', ['FUNKTION doppelt(n)', '  GIB ZURÜCK n * 2', 'ENDE FUNKTION', 'AUSGABE doppelt(doppelt(3))'], '12', 'Von innen nach außen: doppelt(3) = 6, danach doppelt(6) = 12.'),
@@ -214,8 +214,8 @@
       A.warn('Innerhalb einer Methode brauchst du eine Möglichkeit, auf die **eigenen** Attribute zuzugreifen (`this.` bzw. `self.`). Ohne sie ist unklar, ob du die Variable des Objekts oder eine lokale meinst.')
     ],
     quiz: [
-      A.q('Was ist der Unterschied zwischen **Klasse** und **Objekt**?', ['Die Klasse ist der Bauplan, das Objekt ein konkretes Exemplar', 'Die Klasse ist ein Objekt mit vielen Methoden', 'Das Objekt ist der Bauplan, die Klasse das Exemplar', 'Es gibt keinen Unterschied'], 0, 'Aus **einer** Klasse kannst du **beliebig viele** Objekte erzeugen, jedes mit eigenen Attributwerten.'),
-      A.q('Wozu dient ein **Konstruktor**?', ['Er legt ein neues Objekt an und setzt Startwerte', 'Er löscht ein Objekt', 'Er gibt eine Klasse auf dem Bildschirm aus', 'Er vergleicht zwei Klassen'], 0, 'Der Konstruktor läuft automatisch beim Erzeugen eines Objekts und bringt es in einen sinnvollen Anfangszustand.')
+      A.q('Was ist der Unterschied zwischen **Klasse** und **Objekt**?', ['Die Klasse ist der Bauplan, das Objekt ein konkretes Exemplar', 'Das Objekt ist der Bauplan, die Klasse ein konkretes Exemplar davon', 'Die Klasse ist ein Objekt mit besonders vielen Methoden', 'Es gibt keinen Unterschied, beide Wörter meinen dasselbe'], 0, 'Aus **einer** Klasse kannst du **beliebig viele** Objekte erzeugen, jedes mit eigenen Attributwerten.'),
+      A.q('Wozu dient ein **Konstruktor**?', ['Er legt ein neues Objekt an und setzt Startwerte', 'Er räumt ein Objekt auf, wenn es nicht mehr gebraucht wird', 'Er gibt eine Klasse auf dem Bildschirm aus', 'Er vergleicht zwei Objekte'], 0, 'Der Konstruktor läuft automatisch beim Erzeugen eines Objekts und bringt es in einen sinnvollen Anfangszustand.')
     ],
     tasks: []
   });
@@ -236,7 +236,7 @@
     ],
     quiz: [
       A.q('Dein Programm läuft ohne Meldung, rechnet aber falsch. Welche Fehlerart ist das?', ['Logikfehler', 'Syntaxfehler', 'Laufzeitfehler', 'Kompilierfehler'], 0, 'Der Computer hat genau getan, was du geschrieben hast, nur war es nicht das, was du meintest.'),
-      A.q('Wozu dient `try … catch` (bzw. `try … except`)?', ['Um Fehler abzufangen, ohne dass das Programm abstürzt', 'Um Schleifen zu beschleunigen', 'Um Variablen zu löschen', 'Um Kommentare zu schreiben'], 0, 'Im try-Teil steht der riskante Code, im catch/except-Teil steht, was bei einem Fehler passiert.')
+      A.q('Wozu dient `try … catch` (bzw. `try … except`)?', ['Um Fehler abzufangen, ohne dass das Programm abstürzt', 'Um eine Schleife bei einem Fehler zu wiederholen', 'Um Syntaxfehler schon beim Übersetzen zu finden', 'Um Code nur beim ersten Start auszuführen'], 0, 'Im try-Teil steht der riskante Code, im catch/except-Teil steht, was bei einem Fehler passiert.')
     ],
     tasks: []
   });

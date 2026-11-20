@@ -48,7 +48,7 @@
           C(['name = "Ada"§Ein Text.', 'if name == "Ada" or name == "Alan":§Texte vergleicht man mit ==. or = ODER.', '    print("Hallo Pionier")§Läuft, weil name gleich "Ada" ist.', 'if "d" in name:§in prüft, ob etwas enthalten ist (hier: kommt "d" im Text vor?).', '    print("enthält ein d")§Ausgabe: enthält ein d'], 'Text vergleichen und in prüfen')
         ],
         tips: [A.warn('Vergiss den **Doppelpunkt** am Ende von `if`, `elif`, `else` nicht, sonst gibt es einen `SyntaxError`.')],
-        quiz: [A.q('Welches Zeichen steht in Python am Ende einer if-Zeile?', ['Ein Doppelpunkt `:`', 'Ein Semikolon `;`', 'Ein Punkt `.`', 'Nichts'], 0, 'Der Doppelpunkt leitet den eingerückten Block ein.')],
+        quiz: [A.q('Welches Zeichen steht in Python am Ende einer if-Zeile?', ['Ein Doppelpunkt `:`', 'Ein Semikolon `;`', 'Eine geschweifte Klammer `{`', 'Nichts'], 0, 'Der Doppelpunkt leitet den eingerückten Block ein.')],
         tasks: [Object.assign(A.predict('Was wird ausgegeben?', ['x = 10', 'if x > 5 and x < 8:', '    print("A")', 'elif x > 5:', '    print("B")', 'else:', '    print("C")'], 'B', 'Die erste Bedingung braucht beides, x < 8 stimmt aber nicht. Die zweite Bedingung stimmt.'), { lang: 'python' })]
       },
       {
@@ -115,7 +115,7 @@
           C(['import math§Holt das Modul math.', 'import random§Holt das Modul random.', 'print(math.sqrt(16))§Quadratwurzel: 4.0', 'print(math.pi)§Die Kreiszahl: 3.141592653589793', 'print(random.randint(1, 6))§Eine Zufallszahl von 1 bis 6 (wie ein Würfel).'], 'Module benutzen')
         ],
         tips: [],
-        quiz: [A.q('Was liefert `[x * 2 for x in [1, 2, 3]]`?', ['[2, 4, 6]', '[1, 2, 3]', '[3, 6]', '6'], 0, 'Jedes Element wird verdoppelt.'), A.q('Wozu dient `with open(...)`?', ['Die Datei wird am Ende des Blocks automatisch geschlossen', 'Die Datei wird gelöscht', 'Die Datei wird verschlüsselt', 'Es startet ein zweites Programm'], 0, 'with sorgt für sauberes Aufräumen.')],
+        quiz: [A.q('Was liefert `[x * 2 for x in [1, 2, 3]]`?', ['[2, 4, 6]', '[1, 2, 3]', '[3, 6]', '6'], 0, 'Jedes Element wird verdoppelt.'), A.q('Wozu dient `with open(...)`?', ['Die Datei wird am Ende des Blocks automatisch geschlossen', 'Die Datei wird nur zum Lesen geöffnet, Schreiben ist verboten', 'Die Datei wird im Speicher kopiert und das Original gesperrt', 'Die Datei wird angelegt, falls es sie noch nicht gibt'], 0, 'with sorgt für sauberes Aufräumen.')],
         tasks: [Object.assign(A.predict('Was gibt das Programm aus?', ['print([n for n in range(1, 8) if n % 3 == 0])'], '[3, 6]', 'Von 1 bis 7 sind nur 3 und 6 durch 3 teilbar.'), { lang: 'python' })]
       }
     ]

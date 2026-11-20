@@ -499,8 +499,10 @@
     const home = !location.hash || /^#\/home/.test(location.hash);
     $('#nav').innerHTML = '<a class="nav-top nav-home' + (home ? ' on' : '') + '" href="#/home">Start</a>' + A.tracks.map((t, i) => {
       const ls = A.lessons(t);
-      return '<details style="--ac: var(' + NAV_AC[i % NAV_AC.length] + ')"' + (cur === t.id ? ' open' : '') + '><summary><span>' + esc(t.title) + '</span><span class="small muted">' + ls.filter((l) => P.done[l.id]).length + '/' + ls.length + '</span></summary>' + ls.map((l) => '<a class="nl' + (P.done[l.id] ? ' done' : '') + (CUR && CUR.lesson.id === l.id ? ' on' : '') + '" href="#/lesson/' + l.id + '"><span class="dot"></span>' + esc(l.title) + '</a>').join('') + '</details>';
+      return '<details name="kurs" style="--ac: var(' + NAV_AC[i % NAV_AC.length] + ')"' + (cur === t.id ? ' open' : '') + '><summary><span>' + esc(t.title) + '</span><span class="small muted">' + ls.filter((l) => P.done[l.id]).length + '/' + ls.length + '</span></summary>' + ls.map((l) => '<a class="nl' + (P.done[l.id] ? ' done' : '') + (CUR && CUR.lesson.id === l.id ? ' on' : '') + '" href="#/lesson/' + l.id + '"><span class="dot"></span>' + esc(l.title) + '</a>').join('') + '</details>';
     }).join('') + '<div class="nav-sep"></div><a class="nav-top" href="#/play/pseudo">Spielwiese</a><a class="nav-top" href="#/compare/vars">Sprachvergleich</a><a class="nav-top" href="#/glossar">Begriffe von A bis Z</a><button class="nav-reset" type="button">Lernfortschritt löschen</button><div class="nav-sep"></div><a class="nav-top" href="/#impressum">Impressum und Datenschutz</a>';
+    // Höchstens ein Kurs aufgeklappt (Allvater 20.11.2026): name="kurs" erledigt das in neuen Browsern, das hier in älteren
+    $$('#nav details').forEach((d) => d.addEventListener('toggle', () => { if (d.open) $$('#nav details[open]').forEach((o) => { if (o !== d) o.open = false; }); }));
   }
 
   function route() {

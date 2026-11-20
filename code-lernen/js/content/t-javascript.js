@@ -25,7 +25,7 @@
           C(['const eingabe = "25";§Text, auch wenn er wie eine Zahl aussieht.', 'const zahl = Number(eingabe);§Number() wandelt Text in eine Zahl um.', 'console.log(zahl + 1);§Rechnet: 26', 'console.log(eingabe + 1);§**Achtung:** Text + Zahl hängt aneinander: "251". Ein klassischer JavaScript-Stolperstein!'], 'Typen umwandeln')
         ],
         tips: [A.warn('Benutze **`let` und `const`**, nicht das alte `var`. `var` hat verwirrende Regeln und wird in neuem Code vermieden.'), A.tip('Variablen schreibt man in JavaScript in **camelCase**: `istStudent`, `anzahlKunden`.')],
-        quiz: [A.q('Was passiert bei `const x = 5; x = 6;`?', ['Fehler: Eine Konstante darf nicht neu zugewiesen werden', 'x ist danach 6', 'x ist danach 11', 'Nichts'], 0, 'const verbietet eine neue Zuweisung. Für veränderliche Werte nimm let.'), A.q('Was ergibt `"5" + 3` in JavaScript?', ['"53" (Text)', '8', 'Einen Fehler', '"8"'], 0, 'Sobald ein Text beteiligt ist, wird + zum Aneinanderhängen.')],
+        quiz: [A.q('Was passiert bei `const x = 5; x = 6;`?', ['Fehler: Eine Konstante darf nicht neu zugewiesen werden', 'x ist danach 6, const ist nur ein Hinweis für Leser', 'x bleibt still 5, die zweite Zeile wird übergangen', 'x ist danach 11, weil const Werte aufsummiert'], 0, 'const verbietet eine neue Zuweisung. Für veränderliche Werte nimm let.'), A.q('Was ergibt `"5" + 3` in JavaScript?', ['"53" (Text)', '8', 'Einen Fehler', '"8"'], 0, 'Sobald ein Text beteiligt ist, wird + zum Aneinanderhängen.')],
         tasks: [PP('Was gibt das Programm aus?', ['let x = 3;', 'let y = x;', 'x = 10;', 'console.log(x, y);'], '10 3', 'y bekam den Wert 3, bevor x geändert wurde.', 'Bei `y = x` wird der **aktuelle Wert** kopiert.'), A.js('Schreibe eine Funktion `verdoppeln(n)`, die das Doppelte von n zurückgibt.', 'function verdoppeln(n) {\n  // dein Code\n}', [{ fn: 'verdoppeln', args: [4], expect: 8 }, { fn: 'verdoppeln', args: [0], expect: 0 }, { fn: 'verdoppeln', args: [-3], expect: -6 }], 'Nutze `return n * 2;`.', 'function verdoppeln(n) {\n  return n * 2;\n}')]
       },
       {
@@ -45,7 +45,7 @@
           C(['const alter = 20;§Beispielwert.', 'const text = alter >= 18 ? "volljährig" : "minderjährig";§Der **Bedingungsoperator** ? : ist eine Kurzform von if/else für **einen Wert**: Bedingung ? wenn wahr : wenn falsch.', 'console.log(text);§Ausgabe: volljährig'], 'Kurzform mit ? :')
         ],
         tips: [A.warn('`=` weist zu, `===` vergleicht. `if (x = 5)` setzt x auf 5 und ist **immer wahr**. Das ist einer der häufigsten Fehler.')],
-        quiz: [A.q('Was steht in JavaScript hinter `if`?', ['Die Bedingung in runden Klammern', 'Ein Doppelpunkt', 'Das Wort then', 'Ein Semikolon'], 0, 'if (bedingung) { … }')],
+        quiz: [A.q('Was steht in JavaScript hinter `if`?', ['Die Bedingung in runden Klammern', 'Die Bedingung, dann ein Doppelpunkt', 'Die Bedingung, dann das Wort then', 'Die Bedingung in eckigen Klammern'], 0, 'if (bedingung) { … }')],
         tasks: [PP('Was wird ausgegeben?', ['const x = 10;', 'if (x > 5 && x < 8) {', '  console.log("A");', '} else if (x > 5) {', '  console.log("B");', '} else {', '  console.log("C");', '}'], 'B', 'Die erste Bedingung braucht x < 8 (falsch). Die zweite stimmt.'), A.js('Schreibe `note(punkte)`: ab 90 „sehr gut“, ab 75 „gut“, ab 50 „bestanden“, sonst „durchgefallen“.', 'function note(punkte) {\n  // dein Code\n}', [{ fn: 'note', args: [95], expect: 'sehr gut' }, { fn: 'note', args: [75], expect: 'gut' }, { fn: 'note', args: [50], expect: 'bestanden' }, { fn: 'note', args: [10], expect: 'durchgefallen' }], 'Prüfe vom Größten zum Kleinsten. Mit `return` beendest du die Funktion sofort.', 'function note(punkte) {\n  if (punkte >= 90) return "sehr gut";\n  if (punkte >= 75) return "gut";\n  if (punkte >= 50) return "bestanden";\n  return "durchgefallen";\n}')]
       },
       {
@@ -97,7 +97,7 @@
           C(['function teile(a, b) {§Eine Funktion, die selbst einen Fehler melden darf.', '  if (b === 0) {§Prüft den unmöglichen Fall.', '    throw new Error("Durch 0 geht nicht");§throw löst absichtlich einen Fehler aus.', '  }§Ende von if.', '  return a / b;§Normale Rechnung.', '}§Ende der Funktion.', 'try {§Aufruf absichern.', '  console.log(teile(10, 0));§Löst den Fehler aus.', '} catch (e) {§Fängt ihn.', '  console.log(e.message);§Gibt aus: Durch 0 geht nicht', '}§Ende.'], 'Eigene Fehler auslösen mit throw')
         ],
         tips: [A.tip('Fehlermeldungen im Browser (F12, Konsole) nennen die Art und die Zeile, z. B. `TypeError: Cannot read properties of undefined`. Das heißt meist: Du greifst auf etwas zu, das gar nicht existiert.')],
-        quiz: [A.q('Wozu dient `throw new Error("…")`?', ['Um absichtlich einen Fehler auszulösen', 'Um einen Fehler zu ignorieren', 'Um eine Variable zu löschen', 'Um eine Schleife zu beenden'], 0, 'So meldet eine Funktion, dass etwas Unmögliches verlangt wurde.')],
+        quiz: [A.q('Wozu dient `throw new Error("…")`?', ['Um absichtlich einen Fehler auszulösen', 'Um einen Fehler still zu ignorieren', 'Um eine Fehlermeldung nur zu protokollieren', 'Um eine laufende Schleife abzubrechen'], 0, 'So meldet eine Funktion, dass etwas Unmögliches verlangt wurde.')],
         tasks: []
       },
       {
@@ -112,7 +112,7 @@
           A.info('Dieses Beispiel braucht eine echte Webseite mit `<button id="knopf">` und `<p id="ausgabe">`. Probiere es in einer eigenen HTML-Datei aus.')
         ],
         tips: [],
-        quiz: [A.q('Was bewirkt `await` in einer async-Funktion?', ['Die Funktion wartet auf das Ergebnis, ohne das restliche Programm zu blockieren', 'Das ganze Programm bleibt stehen', 'Der Fehler wird ignoriert', 'Die Funktion startet doppelt'], 0, 'await pausiert nur die eigene Funktion.'), A.q('Wofür steht „DOM“ im Browser?', ['Der Baum aus Elementen, aus dem eine Webseite besteht', 'Ein Datenbanktyp', 'Eine Programmiersprache', 'Ein Fehler'], 0, 'Document Object Model: Darüber greifst du von JavaScript aus auf die Seite zu.')],
+        quiz: [A.q('Was bewirkt `await` in einer async-Funktion?', ['Die Funktion wartet auf das Ergebnis, ohne das restliche Programm zu blockieren', 'Das ganze Programm hält an, bis das Ergebnis da ist, auch die Oberfläche', 'Ein Fehler im Ergebnis wird abgefangen und ignoriert', 'Die Funktion wird parallel ein zweites Mal gestartet'], 0, 'await pausiert nur die eigene Funktion.'), A.q('Wofür steht „DOM“ im Browser?', ['Der Baum aus Elementen, aus dem eine Webseite besteht', 'Die Datenbank, in der der Browser Cookies ablegt', 'Die Skriptsprache, in der Webseiten geschrieben werden', 'Die Liste aller Fehler, die die Konsole meldet'], 0, 'Document Object Model: Darüber greifst du von JavaScript aus auf die Seite zu.')],
         tasks: []
       }
     ]

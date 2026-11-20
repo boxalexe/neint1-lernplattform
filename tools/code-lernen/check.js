@@ -15,7 +15,7 @@ require(path.join(root, 'js/core.js'));
 const A = globalThis.Academy;
 
 const html = fs.readFileSync(path.join(root, 'index.html'), 'utf8');
-const files = [...html.matchAll(/src="(js\/content\/[^"]+)"/g)].map((m) => m[1]);
+const files = [...html.matchAll(/src="(js\/content\/[^"?]+)[^"]*"/g)].map((m) => m[1]);
 let problems = 0, warnings = 0;
 const bad = (m) => { problems++; console.log('FEHLER  ' + m); };
 const warn = (m) => { warnings++; console.log('Hinweis ' + m); };
@@ -103,7 +103,8 @@ function checkParts(where, parts) {
   } catch (e) { warn('SQL-Motor nicht ladbar: ' + e.message); }
 
   const ids = new Set();
-  let nLessons = 0, nTasks = 0, nQuiz = 0, nCode = 0;
+  let nLessons = 0, nTasks = 0, nQuiz = 0, nCode = 0, nUnique = 0, nLongest = 0;
+  const seenQ = new Set();
   for (const t of A.tracks) {
     if (!t.id || !t.title || !Array.isArray(t.lessons)) { bad('Kurs unvollständig: ' + JSON.stringify(t.id)); continue; }
     for (const spec of t.lessons) {
@@ -122,6 +123,11 @@ function checkParts(where, parts) {
         if (!(q.a >= 0 && q.a < q.o.length)) bad(L.id + ' Quiz ' + (i + 1) + ': Antwortindex ungültig');
         if (new Set(q.o).size !== q.o.length) bad(L.id + ' Quiz ' + (i + 1) + ': doppelte Antwortoptionen');
         if (!q.e) warn(L.id + ' Quiz ' + (i + 1) + ': keine Erklärung');
+        // Längen-Tell (Allvater 20.11.2026): Die richtige Antwort darf nicht durch ihre Länge auffallen.
+        // Ab 20 Zeichen höchstens 1,3-mal so lang wie die längste falsche; kurze Begriffe (FALSCH, Parallelogramm) sind ausgenommen.
+        const len = (s) => String(s).replace(/\*\*|`/g, '').length, right = len(q.o[q.a]), wrongMax = Math.max(...q.o.filter((_, j) => j !== q.a).map(len));
+        if (right >= 20 && right > wrongMax * 1.3) bad(L.id + ' Quiz ' + (i + 1) + ': richtige Antwort ' + (right / wrongMax).toFixed(1) + '-mal so lang wie die längste falsche (Längen-Tell)');
+        if (!seenQ.has(q.q)) { seenQ.add(q.q); nUnique++; if (right > wrongMax) nLongest++; }
       }
       for (const [i, k] of L.tasks.entries()) {
         nTasks++;
@@ -155,6 +161,8 @@ function checkParts(where, parts) {
       }
     }
   }
+  // Bei vier Antworten wäre die richtige zufällig in etwa 25 % die längste; deutlich mehr wäre ein Muster zum Raten
+  if (nLongest / nUnique > 0.4) warn('Bei ' + Math.round(100 * nLongest / nUnique) + ' % der Quizfragen ist die richtige Antwort die längste (Ziel höchstens 40 %)');
   for (const [i, g] of A.glossary.entries()) if (!g.name || !g.text) bad('Glossar-Eintrag ' + i + ' unvollständig');
   for (const [k, v] of Object.entries(A.pseudoSamples || {})) { const r = Pseudo.run(v, { inputs: ['6'] }); if (r.error) bad('Pseudocode-Beispiel „' + k + '“: ' + r.error.msg); }
   console.log('\n' + A.tracks.length + ' Kurse, ' + nLessons + ' Lektionen, ' + nCode + ' Codebeispiele, ' + nQuiz + ' Quizfragen, ' + nTasks + ' Übungen, ' + A.glossary.length + ' Begriffe.');

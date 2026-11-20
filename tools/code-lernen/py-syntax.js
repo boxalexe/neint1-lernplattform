@@ -3,7 +3,7 @@ const fs = require('fs'), os = require('os'), path = require('path'), cp = requi
 global.window = globalThis; const root = path.join(__dirname, '..', '..', 'code-lernen');
 require(path.join(root, 'js/pseudo.js')); require(path.join(root, 'js/uml.js')); require(path.join(root, 'js/core.js'));
 const A = globalThis.Academy; const html = fs.readFileSync(path.join(root, 'index.html'), 'utf8');
-for (const f of [...html.matchAll(/src="(js\/content\/[^"]+)"/g)].map((m) => m[1])) require(path.join(root, f));
+for (const f of [...html.matchAll(/src="(js\/content\/[^"?]+)[^"]*"/g)].map((m) => m[1])) require(path.join(root, f));
 const py = process.env.PYTHON || path.join(os.homedir(), 'AppData/Local/Programs/Python/Python312/python.exe');
 let n = 0, bad = 0;
 for (const t of A.tracks) for (const s of t.lessons) { const L = A.build(t, s);

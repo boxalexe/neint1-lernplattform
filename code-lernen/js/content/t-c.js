@@ -46,7 +46,7 @@
           C(['int tag = 3;§Ein Wert mit mehreren festen Fällen.', 'switch (tag) {§switch wählt anhand des Werts einen Fall.', '    case 1:§Fall: tag ist 1.', '        printf("Montag\\n");§Bei 1.', '        break;§break beendet den switch. **Ohne break läuft es in den nächsten Fall weiter!**', '    case 3:§Fall: tag ist 3.', '        printf("Mittwoch\\n");§Hier landest du.', '        break;§Beendet den switch.', '    default:§Alle anderen Werte.', '        printf("anderer Tag\\n");§Auffangfall.', '}§Ende.'], 'switch für feste Fälle')
         ],
         tips: [],
-        quiz: [A.q('Was passiert in einem `switch` ohne `break`?', ['Das Programm läuft in den nächsten Fall weiter', 'Es gibt einen Fehler', 'Der switch endet sofort', 'Der Fall wird übersprungen'], 0, 'Man nennt das „Durchfallen“.')],
+        quiz: [A.q('Was passiert in einem `switch` ohne `break`?', ['Das Programm läuft in den nächsten Fall weiter', 'Der Compiler meldet einen Fehler und übersetzt nicht', 'Der switch endet nach dem Fall trotzdem', 'Der Fall wird übersprungen'], 0, 'Man nennt das „Durchfallen“.')],
         tasks: [PP('Was wird ausgegeben?', ['int x = 10;', 'if (x > 5 && x < 8) {', '    printf("A");', '} else if (x > 5) {', '    printf("B");', '} else {', '    printf("C");', '}'], 'B', 'Die erste Bedingung braucht x < 8 (falsch), die zweite stimmt.')]
       },
       {
@@ -67,7 +67,7 @@
           C(['void erhoehe(int zahl) {§zahl ist eine **Kopie**.', '    zahl = zahl + 1;§Ändert nur die Kopie.', '}§Ende.', '', 'int a = 5;§Die Originalvariable.', 'erhoehe(a);§Übergibt eine Kopie von a.', 'printf("%d\\n", a);§Weiterhin 5! Die Funktion hat a nicht verändert.'], 'C übergibt Werte als Kopie')
         ],
         tips: [A.info('Um das Original zu ändern, übergibst du seine **Adresse** (einen Zeiger). Dazu mehr in der Vertiefung.')],
-        quiz: [A.q('Was passiert, wenn du eine Variable an eine Funktion übergibst und sie dort änderst?', ['Das Original bleibt unverändert, die Funktion ändert nur eine Kopie', 'Das Original wird geändert', 'Es gibt einen Fehler', 'Die Variable wird gelöscht'], 0, 'C übergibt standardmäßig Kopien (call by value).')],
+        quiz: [A.q('Was passiert, wenn du eine Variable an eine Funktion übergibst und sie dort änderst?', ['Das Original bleibt unverändert, die Funktion ändert nur eine Kopie', 'Das Original wird geändert, weil C immer die Adresse übergibt', 'Der Compiler meldet einen Fehler, Parameter sind schreibgeschützt', 'Die Änderung gilt, bis die aufrufende Funktion endet'], 0, 'C übergibt standardmäßig Kopien (call by value).')],
         tasks: [PP('Was wird ausgegeben?', ['int doppelt(int n) {', '    return n * 2;', '}', '// in main:', 'printf("%d\\n", doppelt(doppelt(3)));'], '12', 'doppelt(3) ist 6, dann doppelt(6) ist 12.')]
       },
       {
@@ -88,7 +88,7 @@
           C(['#include <stdio.h>§Standard-Ein-/Ausgabe.', '#include <string.h>§Für strcpy.', '', 'struct Konto {§Eine **Struktur**: bündelt zusammengehörige Daten.', '    char inhaber[20];§Ein Text mit höchstens 19 Zeichen.', '    double kontostand;§Eine Kommazahl.', '};§Ende der Struktur (Semikolon nicht vergessen!).', '', 'void einzahlen(struct Konto *k, double betrag) {§Die Funktion bekommt die **Adresse** (Zeiger *) des Kontos, um das Original zu ändern.', '    k->kontostand += betrag;§**->** greift über den Zeiger auf ein Feld zu.', '}§Ende.', '', 'int main(void) {§Start.', '    struct Konto k;§Eine Variable vom Typ Konto.', '    strcpy(k.inhaber, "Ada");§Text kopiert man mit strcpy, nicht mit =.', '    k.kontostand = 0;§**.** greift bei einer normalen Struktur auf ein Feld zu.', '    einzahlen(&k, 100);§& übergibt die Adresse von k.', '    printf("%s: %.2f\\n", k.inhaber, k.kontostand);§Ausgabe: Ada: 100.00', '    return 0;§Ende.', '}§Ende von main.'], 'Eine Struktur und Funktionen darauf')
         ],
         tips: [A.info('Der Unterschied: In Java steckt die Methode **in** der Klasse. In C stehen Daten (`struct`) und Funktionen getrennt, und du gibst die Daten jeweils selbst mit.')],
-        quiz: [A.q('Wofür steht in C `k->kontostand`, wenn `k` ein Zeiger auf eine Struktur ist?', ['Zugriff auf das Feld kontostand über den Zeiger', 'Ein Vergleich', 'Eine Zuweisung', 'Ein Kommentar'], 0, 'Der Pfeil ersetzt (*k).kontostand.')],
+        quiz: [A.q('Wofür steht in C `k->kontostand`, wenn `k` ein Zeiger auf eine Struktur ist?', ['Zugriff auf das Feld kontostand über den Zeiger', 'Der Zeiger k wird auf kontostand verschoben', 'Die Adresse von kontostand wird in k gespeichert', 'Ein Vergleich, ob k größer als kontostand ist'], 0, 'Der Pfeil ersetzt (*k).kontostand.')],
         tasks: []
       },
       {
@@ -99,7 +99,7 @@
           C(['Segmentation fault (core dumped)§Der klassische Absturz in C: Das Programm hat auf Speicher zugegriffen, der ihm nicht gehört (falscher Zeiger, Array-Grenze, NULL). Die Meldung sagt nicht, wo. Hilfe: mit -g übersetzen und den Debugger gdb oder Valgrind nutzen.'], 'Die berüchtigtste Meldung', { noRun: true })
         ],
         tips: [A.warn('Wenn du in C den Rückgabewert einer Funktion nicht prüfst (Datei öffnen, Speicher anfordern, Eingabe lesen), arbeitest du im Zweifel mit einem Fehlerwert weiter.')],
-        quiz: [A.q('Wie melden C-Funktionen Fehler typischerweise?', ['Über den Rückgabewert', 'Mit try und catch', 'Mit throw', 'Gar nicht'], 0, 'C hat keine Ausnahmen, du prüfst den Rückgabewert.')],
+        quiz: [A.q('Wie melden C-Funktionen Fehler typischerweise?', ['Über den Rückgabewert', 'Mit try und catch um den Aufruf', 'Mit throw und einer Fehlerklasse', 'Über eine Meldung auf dem Bildschirm'], 0, 'C hat keine Ausnahmen, du prüfst den Rückgabewert.')],
         tasks: []
       },
       {
@@ -113,7 +113,7 @@
           C(['#include <stdlib.h>§Für malloc und free.', 'int n = 3;§Anzahl der gewünschten Zahlen.', 'int *feld = malloc(n * sizeof(int));§Fordert Speicher für 3 int an und liefert die Adresse.', 'if (feld == NULL) {§malloc kann scheitern und liefert dann NULL.', '    return 1;§Dann abbrechen.', '}§Ende der Prüfung.', 'for (int i = 0; i < n; i++) {§Alle Plätze füllen.', '    feld[i] = i * 10;§Zeiger lassen sich wie Arrays benutzen.', '}§Ende.', 'printf("%d\\n", feld[2]);§Ausgabe: 20', 'free(feld);§**Zurückgeben!** Danach darf man feld nicht mehr benutzen.'], 'Speicher anfordern und freigeben')
         ],
         tips: [A.warn('Typische Zeigerfehler: Zugriff nach `free`, doppeltes `free`, Zugriff auf `NULL`, nicht initialisierte Zeiger. Sie führen zu Abstürzen oder zu Sicherheitslücken. Werkzeug dagegen: **Valgrind** oder `-fsanitize=address` beim Übersetzen.')],
-        quiz: [A.q('Was liefert `&x`?', ['Die Adresse der Variable x', 'Den Wert von x', 'Das Doppelte von x', 'Eine Kopie von x'], 0, 'Das & holt die Adresse.'), A.q('Was passiert, wenn man `malloc` nutzt und nie `free` aufruft?', ['Ein Speicherleck: Der Speicher bleibt belegt', 'Das Programm wird schneller', 'Der Compiler meldet einen Fehler', 'Nichts'], 0, 'Der Speicher wird erst beim Programmende zurückgegeben.')],
+        quiz: [A.q('Was liefert `&x`?', ['Die Adresse der Variable x', 'Den Wert, auf den x zeigt', 'Eine Kopie des Werts von x', 'Den Wert von x als Wahrheitswert'], 0, 'Das & holt die Adresse.'), A.q('Was passiert, wenn man `malloc` nutzt und nie `free` aufruft?', ['Ein Speicherleck: Der Speicher bleibt belegt', 'Der Compiler gibt den Speicher selbst frei', 'Das Programm bricht sofort mit Fehler ab', 'Der Speicher wird beim nächsten malloc wiederverwendet'], 0, 'Der Speicher wird erst beim Programmende zurückgegeben.')],
         tasks: [PP('Was wird ausgegeben?', ['int x = 5;', 'int *p = &x;', '*p = *p + 3;', 'printf("%d\\n", x);'], '8', '*p ist dasselbe wie x.', 'Über den Zeiger wird x auf 5 + 3 = 8 gesetzt.')]
       }
     ]

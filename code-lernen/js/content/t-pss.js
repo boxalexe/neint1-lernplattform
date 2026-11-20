@@ -30,9 +30,9 @@
         quiz: [
           A.q('In welcher Reihenfolge arbeitet die CPU einen Befehl ab?', ['Holen, Dekodieren, Ausführen', 'Ausführen, Holen, Speichern', 'Dekodieren, Holen, Ausführen', 'Laden, Rechnen, Drucken'], 0, 'Fetch, Decode, Execute.'),
           A.q('Wie viele Bit hat ein Byte?', ['8', '2', '10', '16'], 0, 'Acht Bit sind ein Byte, zum Beispiel 00000101 für die Zahl 5.'),
-          A.q('Was unterscheidet einen Compiler von einem Interpreter?', ['Der Compiler übersetzt vor dem Start alles, der Interpreter führt Zeile für Zeile beim Ausführen aus', 'Der Compiler ist nur für Python', 'Der Interpreter erzeugt immer eine .exe-Datei', 'Es gibt keinen Unterschied'], 0, 'Compiler: vorher alles übersetzen. Interpreter: beim Laufen Zeile für Zeile.'),
+          A.q('Was unterscheidet einen Compiler von einem Interpreter?', ['Der Compiler übersetzt vor dem Start alles, der Interpreter arbeitet Zeile für Zeile beim Ausführen', 'Der Compiler führt den Code Zeile für Zeile aus, der Interpreter erzeugt vorher eine ausführbare Datei', 'Der Compiler ist nur für Skriptsprachen, der Interpreter nur für Sprachen wie C', 'Beide übersetzen alles vorab, der Interpreter prüft zusätzlich die Rechtschreibung'], 0, 'Compiler: vorher alles übersetzen. Interpreter: beim Laufen Zeile für Zeile.'),
           A.q('Ein Programm läuft ohne Absturz, rechnet aber den Durchschnitt falsch aus. Welche Fehlerart?', ['Logischer Fehler', 'Syntaxfehler', 'Laufzeitfehler', 'Ressourcenfehler'], 0, 'Es läuft, also kein Syntax- oder Laufzeitfehler. Das Ergebnis ist falsch: ein Denkfehler in der Logik.'),
-          A.q('Was führt Java-Bytecode aus?', ['Die Java Virtual Machine (JVM)', 'Der Linker', 'Der Browser', 'Die Grafikkarte'], 0, 'javac übersetzt in Bytecode, die JVM führt ihn auf jeder Plattform aus.')
+          A.q('Was führt Java-Bytecode aus?', ['Die Java Virtual Machine (JVM)', 'Der Linker des Betriebssystems', 'Der Prozessor direkt, ohne Zwischenschritt', 'Der Java-Compiler javac'], 0, 'javac übersetzt in Bytecode, die JVM führt ihn auf jeder Plattform aus.')
         ],
         tasks: [
           A.fill('Wie heißt die Kurzschreibweise für Maschinenbefehle wie mov, add oder jmp?', '{{Assembler|Assemblersprache|Mnemonics}}', 'Die Sprache direkt über dem Maschinencode.'),
@@ -54,7 +54,7 @@
         ],
         tips: [A.warn('„Programmieren“ und „Codieren“ sind nicht dasselbe. **Programmieren** ist das Planen und Beschreiben aller Arbeitsschritte, **Codieren** ist das Übersetzen dieses Plans in eine Programmiersprache.')],
         quiz: [
-          A.q('Was beschreibt der Begriff „technische Schulden“?', ['Den späteren Mehraufwand durch heute gewählte schnelle, schlechte Lösungen', 'Die Lizenzkosten einer IDE', 'Unbezahlte Rechnungen der IT-Abteilung', 'Zu wenig Arbeitsspeicher'], 0, 'Wie ein Kredit: jetzt schnell, später Zinsen in Form von Fehlern und Umbau.'),
+          A.q('Was beschreibt der Begriff „technische Schulden“?', ['Den späteren Mehraufwand durch heute gewählte schnelle, schlechte Lösungen', 'Die laufenden Lizenzkosten für Entwicklungsumgebung und Server', 'Rechnungen der IT-Abteilung, die noch nicht bezahlt wurden', 'Den Abschreibungswert alter Hardware in der Bilanz'], 0, 'Wie ein Kredit: jetzt schnell, später Zinsen in Form von Fehlern und Umbau.'),
           A.q('Wofür steht CRUD?', ['Create, Read, Update, Delete', 'Code, Run, Use, Debug', 'Create, Run, Undo, Deploy', 'Copy, Read, Upload, Download'], 0, 'Die vier Grundfunktionen beim Verwalten gespeicherter Daten.'),
           A.q('Welche drei Schichten trennt die 3-Schicht-Architektur?', ['Präsentation, Logik, Datenhaltung', 'Hardware, Betriebssystem, Anwendung', 'Frontend, Backend, Cloud', 'Planung, Code, Test'], 0, 'Oberfläche, Geschäftsregeln und Datenbank.'),
           A.q('Wann ist ein Fehler am günstigsten zu beheben?', ['In der Planung', 'Nach der Auslieferung', 'Im Wartungsvertrag', 'Das ist immer gleich teuer'], 0, 'Je früher, desto billiger, bis zu hundertfach.')
@@ -74,7 +74,7 @@
           A.table(['', 'Wasserfall (klassisch)', 'Agil (z. B. Scrum, Kanban)'], [['Ablauf', 'Phasen streng nacheinander, jede wird abgeschlossen und abgenommen', 'kurze Durchläufe (Sprints) mit jeweils lauffähigem Zwischenstand'], ['Änderungen', 'nach Phasenbeginn schwierig und teuer', 'erwünscht, werden im nächsten Durchlauf eingeplant'], ['Kunde', 'vor allem am Anfang (Lastenheft) und am Ende (Abnahme) beteiligt', 'regelmäßig beteiligt, gibt laufend Rückmeldung'], ['passt gut, wenn', 'die Anforderungen fest und klar sind', 'sich Anforderungen noch ändern oder unklar sind']], 'Vorgehensmodelle: wie die Phasen durchlaufen werden')
         ],
         quiz: [
-          A.q('In welcher Phase entsteht das Klassendiagramm?', ['Entwurf und Modellierung', 'Anforderungsanalyse', 'Test', 'Wartung'], 0, 'Erst klärt man das Was, dann im Entwurf das Wie, mit UML.'),
+          A.q('In welcher Phase entsteht das Klassendiagramm?', ['Entwurf und Modellierung', 'Anforderungsanalyse beim Kunden', 'Test und Abnahme', 'Wartung'], 0, 'Erst klärt man das Was, dann im Entwurf das Wie, mit UML.'),
           A.q('Wer schreibt das Pflichtenheft?', ['Der Auftragnehmer', 'Der Auftraggeber', 'Die IHK', 'Der Endnutzer'], 0, 'Das Pflichtenheft beschreibt, wie der Auftragnehmer das Lastenheft umsetzt.'),
           A.q('Welcher Test prüft eine einzelne Methode für sich?', ['Unit-Test', 'Abnahmetest', 'Integrationstest', 'Systemtest'], 0, 'Unit heißt Einheit: die kleinste testbare Einheit.'),
           A.q('Die Anforderungen ändern sich ständig. Welches Vorgehen passt besser?', ['Agil, z. B. Scrum', 'Wasserfall', 'Gar keine Planung', 'Erst alles programmieren, dann planen'], 0, 'Agile Modelle sind auf Änderungen ausgelegt.')
@@ -96,8 +96,8 @@
         quiz: [
           A.q('„Die Seite lädt in höchstens 2 Sekunden.“ Was für eine Anforderung ist das?', ['Nicht-funktional', 'Funktional', 'Gar keine', 'Eine User Story'], 0, 'Sie sagt nicht, was die Seite tut, sondern wie schnell.'),
           A.q('„Der Kunde kann eine Rechnung als PDF herunterladen.“ Was für eine Anforderung ist das?', ['Funktional', 'Nicht-funktional', 'Eine Testart', 'Ein Vorgehensmodell'], 0, 'Eine Funktion, die das System bietet.'),
-          A.q('Was ist Scope Creep?', ['Die schleichende, ungeplante Ausweitung des Projektumfangs', 'Ein Fehler im Quellcode', 'Ein Testverfahren', 'Die Wartungsphase'], 0, 'Immer neue Wünsche ohne Plan und Budget.'),
-          A.q('Welche Anforderung ist prüfbar formuliert?', ['Die Suche liefert bei 10 000 Datensätzen in unter 1 s ein Ergebnis', 'Die Suche soll schnell sein', 'Die Suche soll benutzerfreundlich sein', 'Die Suche soll modern aussehen'], 0, 'Nur hier gibt es eine messbare Grenze.')
+          A.q('Was ist Scope Creep?', ['Die schleichende, ungeplante Ausweitung des Projektumfangs', 'Ein Fehler, bei dem eine Variable ihren Gültigkeitsbereich verlässt', 'Ein Testverfahren, das den Umfang der Testfälle schrittweise steigert', 'Die Phase nach der Abnahme, in der nur noch gewartet wird'], 0, 'Immer neue Wünsche ohne Plan und Budget.'),
+          A.q('Welche Anforderung ist prüfbar formuliert?', ['Die Suche liefert bei 10 000 Datensätzen in unter 1 s ein Ergebnis', 'Die Suche soll auch bei sehr vielen Datensätzen schnell sein', 'Die Suche soll für alle Nutzer benutzerfreundlich bedienbar sein', 'Die Suche soll modern aussehen und gut ankommen'], 0, 'Nur hier gibt es eine messbare Grenze.')
         ],
         tasks: [A.fill('Ergänze das Wort, mit dem in einer User Story der Nutzen beginnt.', 'Als Kunde möchte ich mein Passwort zurücksetzen, {{damit}} ich mich wieder anmelden kann.', 'Rolle, Ziel und Nutzen in einem Satz.')]
       },
@@ -123,10 +123,10 @@
         tips: [A.warn('Benenne Anwendungsfälle mit **Substantiv und Verb** („Zimmer buchen“), nicht als Ablauf („Erst suchen, dann buchen“) und nicht als Oberfläche („Buchungsseite“).')],
         quiz: [
           A.q('Wo stehen die Akteure?', ['Außerhalb der Systemgrenze', 'Innerhalb der Systemgrenze', 'In einer Notiz', 'In der Mitte jedes Ovals'], 0, 'Akteure sind außen, Anwendungsfälle innen.'),
-          A.q('In welche Richtung zeigt der Pfeil bei «extend»?', ['Vom erweiternden Fall zurück zum Basisfall', 'Vom Basisfall zum erweiternden Fall', 'Vom Akteur zum Fall', 'Es gibt keinen Pfeil'], 0, 'Der Zusatz dockt an den Hauptfall an.'),
-          A.q('Mitglied und Mitarbeiter sind beide an „Vertrag kündigen“ beteiligt. Wie zeichnest du das?', ['Zwei Linien zum selben Fall, keine Verbindung zwischen den Akteuren', 'Generalisierung vom Mitarbeiter zum Mitglied', 'include zwischen den Akteuren', 'Nur einen Akteur zeichnen'], 0, 'Zusammenarbeit zweier Rollen, keine Vererbung.'),
-          A.q('Zeigt ein Anwendungsfalldiagramm die Reihenfolge der Schritte?', ['Nein, nur wer was mit dem System tun kann', 'Ja, von oben nach unten', 'Ja, über die Pfeilnummern', 'Nur bei include'], 0, 'Für Abläufe gibt es das Aktivitätsdiagramm.'),
-          A.q('Wie zeichnet man die Generalisierung zwischen Akteuren?', ['Durchgezogene Linie mit leerem Dreieck zum allgemeineren Akteur', 'Gestrichelter Pfeil mit «include»', 'Raute am allgemeineren Akteur', 'Zwei parallele Linien'], 0, 'Wie die Vererbung im Klassendiagramm.')
+          A.q('In welche Richtung zeigt der Pfeil bei «extend»?', ['Vom erweiternden Fall zurück zum Basisfall', 'Vom Basisfall hin zum erweiternden Fall', 'Vom Akteur zum erweiternden Fall', 'In beide Richtungen, mit zwei Spitzen'], 0, 'Der Zusatz dockt an den Hauptfall an.'),
+          A.q('Mitglied und Mitarbeiter sind beide an „Vertrag kündigen“ beteiligt. Wie zeichnest du das?', ['Zwei Linien zum selben Fall, keine Verbindung zwischen den Akteuren', 'Eine Generalisierung vom Mitarbeiter zum Mitglied, dann eine Linie', 'Eine «include»-Beziehung zwischen den beiden Akteuren', 'Nur den Akteur zeichnen, der die Kündigung auslöst'], 0, 'Zusammenarbeit zweier Rollen, keine Vererbung.'),
+          A.q('Zeigt ein Anwendungsfalldiagramm die Reihenfolge der Schritte?', ['Nein, nur wer was mit dem System tun kann', 'Ja, die Fälle werden von oben nach unten abgearbeitet', 'Ja, über die Nummern an den Pfeilen', 'Nur bei «include», dort kommt der Pflichtfall zuerst'], 0, 'Für Abläufe gibt es das Aktivitätsdiagramm.'),
+          A.q('Wie zeichnet man die Generalisierung zwischen Akteuren?', ['Durchgezogene Linie mit leerem Dreieck zum allgemeineren Akteur', 'Gestrichelter Pfeil mit «include» zum allgemeineren Akteur', 'Linie mit Raute am allgemeineren Akteur', 'Durchgezogene Linie mit leerem Dreieck zum spezielleren Akteur'], 0, 'Wie die Vererbung im Klassendiagramm.')
         ],
         tasks: [
           A.fill('Ein Fall läuft bei einem anderen IMMER mit. Welche Beziehung? (ohne spitze Klammern)', '{{include}}', 'Pflichtprogramm.'),
@@ -148,10 +148,10 @@
         ],
         tips: [A.tip('Bedingungen an Entscheidungen müssen sich **gegenseitig ausschließen** und **alle Fälle abdecken**: zu `[Betrag > 0]` gehört `[Betrag <= 0]`, nicht `[Betrag < 0]`.')],
         quiz: [
-          A.q('Was ist der Unterschied zwischen Aktivitätsende und Pfadende?', ['Das Aktivitätsende beendet alles, das Pfadende nur den einen Weg', 'Es gibt keinen Unterschied', 'Das Pfadende beendet alles', 'Das Aktivitätsende gibt es nur bei Schleifen'], 0, 'Kreis mit Punkt: alles vorbei. Kreis mit X: nur dieser Pfad.'),
-          A.q('Wann geht es nach einem Synchronisationsbalken weiter?', ['Wenn alle eingehenden parallelen Wege fertig sind', 'Sobald der erste Weg ankommt', 'Nach einer festen Zeit', 'Nie'], 0, 'Synchronisation wartet auf alle.'),
-          A.q('Wie schreibt man Bedingungen an die Ausgänge einer Entscheidung?', ['In eckigen Klammern, z. B. [PIN korrekt]', 'In spitzen Klammern', 'In Anführungszeichen', 'Gar nicht'], 0, 'Die eckigen Klammern heißen Guards (Wächter).'),
-          A.q('Wofür nutzt man Partitionen (Schwimmbahnen)?', ['Um zu zeigen, wer welche Aktion ausführt', 'Um Schleifen darzustellen', 'Um Klassen zu gruppieren', 'Um das Diagramm zu beenden'], 0, 'Jede Bahn gehört einem Beteiligten.')
+          A.q('Was ist der Unterschied zwischen Aktivitätsende und Pfadende?', ['Das Aktivitätsende beendet alles, das Pfadende nur den einen Weg', 'Das Pfadende beendet alles, das Aktivitätsende nur den einen Weg', 'Es sind zwei Namen für dasselbe Symbol', 'Das Aktivitätsende gibt es nur am Ende von Schleifen'], 0, 'Kreis mit Punkt: alles vorbei. Kreis mit X: nur dieser Pfad.'),
+          A.q('Wann geht es nach einem Synchronisationsbalken weiter?', ['Wenn alle eingehenden parallelen Wege fertig sind', 'Sobald der erste der parallelen Wege ankommt', 'Wenn die Mehrheit der Wege angekommen ist', 'Nach einer im Diagramm angegebenen Wartezeit'], 0, 'Synchronisation wartet auf alle.'),
+          A.q('Wie schreibt man Bedingungen an die Ausgänge einer Entscheidung?', ['In eckigen Klammern, z. B. [PIN korrekt]', 'In spitzen Klammern, z. B. <PIN korrekt>', 'In Anführungszeichen, z. B. "PIN korrekt"', 'In runden Klammern, z. B. (PIN korrekt)'], 0, 'Die eckigen Klammern heißen Guards (Wächter).'),
+          A.q('Wofür nutzt man Partitionen (Schwimmbahnen)?', ['Um zu zeigen, wer welche Aktion ausführt', 'Um Schleifen und ihre Abbruchbedingung darzustellen', 'Um Klassen nach Paketen zu gruppieren', 'Um parallele Abläufe zu starten und zu beenden'], 0, 'Jede Bahn gehört einem Beteiligten.')
         ],
         tasks: [
           A.fill('Ein Balken, von dem mehrere Pfeile ausgehen, heißt ...', '{{Gabelung|Fork|Parallelisierung}}', 'Ab hier läuft es parallel.'),
@@ -180,7 +180,7 @@
         quiz: [
           A.q('Welche Schleife läuft garantiert mindestens einmal?', ['Die fußgesteuerte', 'Die kopfgesteuerte', 'Keine', 'Nur die Zählschleife'], 0, 'Geprüft wird erst nach dem ersten Durchlauf.'),
           A.q('Im Pseudocode steht `WIEDERHOLE ... BIS x < 10`. Was ist `x < 10`?', ['Die Abbruchbedingung', 'Die Durchführungsbedingung', 'Ein Kommentar', 'Ein Methodenaufruf'], 0, 'Ist sie wahr, endet die Schleife.'),
-          A.q('Wie stellt man im Struktogramm den Aufruf einer Methode dar?', ['Als Kasten mit doppelten senkrechten Seitenlinien', 'Als Raute', 'Als Oval', 'Gar nicht'], 0, 'Die Methode selbst bekommt ein eigenes Struktogramm.'),
+          A.q('Wie stellt man im Struktogramm den Aufruf einer Methode dar?', ['Als Kasten mit doppelten senkrechten Seitenlinien', 'Als Kasten mit einem Dreieck oben', 'Als Kasten mit einem Rand links und unten', 'Als Oval mit dem Namen der Methode'], 0, 'Die Methode selbst bekommt ein eigenes Struktogramm.'),
           A.q('Die Eingabe ist schon am Anfang 1. Wie oft läuft `SOLANGE x > 1`?', ['Keinmal', 'Einmal', 'Endlos', 'Zweimal'], 0, 'Kopfgesteuert: Die Bedingung ist sofort falsch.')
         ],
         tasks: [
