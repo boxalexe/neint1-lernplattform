@@ -224,7 +224,7 @@
       const tr = A.traceFor(t.lang, t.code);
       if (!tr) { box.innerHTML = codeHtml + '<div class="note note-warn"><b>Ablauf fehlt</b>Für diese Aufgabe ist noch kein Ablauf aufgezeichnet.</div>'; return; }
       const rows = A.deskRows(tr, t.at).map((x) => t.cols.map((c) => { const v = A.deskValue(x, c); return v === null ? '–' : v; }));
-      const shown = (v) => String(v).replace(/^"(.*)"$/, '$1');
+      const shown = (v) => String(v).replace(/^(["'])(.*)\1$/, '$2');
       const norm = (v) => { const s = shown(v).trim().replace(/^'(.)'$/, '$1').replace(',', '.').toLowerCase(); return s === 'wahr' ? 'true' : s === 'falsch' ? 'false' : s; };
       box.innerHTML = codeHtml + '<p class="muted small">Eine Zeile pro Ausführung von Zeile ' + (t.at + 1) + ' (markiert), jeweils die Werte <b>danach</b>.</p>'
         + '<div class="tbl-wrap"><table class="res desk"><thead><tr><th>Durchlauf</th>' + t.cols.map((c) => '<th><code>' + esc(c) + '</code></th>').join('') + '</tr></thead><tbody>'

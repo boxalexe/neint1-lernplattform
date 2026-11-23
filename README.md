@@ -65,11 +65,11 @@ Dann `http://localhost:8000/` öffnen. Ein Webserver ist nötig, weil Web Worker
 | `node tools/seiten-bauen.mjs` | Kapitel- und Themenseiten der Hauptseite und `sitemap.xml` erzeugen |
 | `node tools/code-lernen/seiten-bauen.js` | Seiten pro Kurs und Lektion und `code-lernen/sitemap.xml` erzeugen |
 | `node tools/code-lernen/check.js` | Inhalte prüfen: Musterlösungen ausführen, Quiz, Doppelte, Antwortlängen |
-| `node tools/code-lernen/trace-bauen.js` | Java-Beispiele mit dem JDK schrittweise ausführen und die Abläufe aufzeichnen (JDK mit jdk.jdi nötig) |
+| `node tools/code-lernen/trace-bauen.js [java|python]` | Beispiele schrittweise ausführen und die Abläufe aufzeichnen: Java über JDI (JDK nötig), Python über `sys.settrace` (`trace-python/tracer.py`, nur Standardbibliothek) |
 | `node tools/code-lernen/pseudo-test.js` | Tests des Pseudocode-Interpreters |
 | `node tools/code-lernen/run-predict.js` | Vorhersage- und Bug-Aufgaben mit echten Compilern prüfen (Python, JDK, .NET, gcc lokal nötig) |
 
-Beide Seitenbauer kennen `--pruefen` und melden veraltete Seiten. Nach Änderungen an Java-Beispielen zuerst `trace-bauen.js`, dann `check.js`, dann den Seitenbauer. `check.js` meldet veraltete Abläufe.
+Beide Seitenbauer kennen `--pruefen` und melden veraltete Seiten. Nach Änderungen an Java- oder Python-Beispielen zuerst `trace-bauen.js` für die Sprache, dann `check.js`, dann den Seitenbauer. `check.js` meldet veraltete Abläufe.
 
 ## Sicherheit
 

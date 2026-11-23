@@ -18,6 +18,8 @@
 # Code lesen: zusammengelegte Lektionen
 /code-lernen/kurs/java/ops/   /code-lernen/kurs/java/vars/   301
 /code-lernen/kurs/java/ops    /code-lernen/kurs/java/vars/   301
+/code-lernen/kurs/python/ops/ /code-lernen/kurs/python/vars/ 301
+/code-lernen/kurs/python/ops  /code-lernen/kurs/python/vars/ 301
 
 # Alles darunter (Skripte, Stylesheets, Unterseiten) mitnehmen
 /subtrainer/*            /subnetting-trainer/:splat   301

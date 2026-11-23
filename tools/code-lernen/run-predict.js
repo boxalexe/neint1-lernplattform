@@ -36,7 +36,7 @@ function split(code) {
 function run(lang, code, dir) {
   const { defs, body } = split(code);
   const D = defs.join('\n'), B = body.join('\n'), uses = /Konto/.test(code.join('\n'));
-  if (lang === 'python') { fs.writeFileSync(path.join(dir, 'm.py'), code.join('\n')); return sh(tool.python, ['-I', 'm.py'], dir); }
+  if (lang === 'python') { fs.writeFileSync(path.join(dir, 'm.py'), code.join('\n')); const r = sh(tool.python, ['-I', '-X', 'utf8', 'm.py'], dir); if (r.status && /^(SyntaxError|IndentationError|TabError)\b/m.test(r.stderr || '')) r.phase = 'compile'; return r; }
   if (lang === 'java') {
     // gleicher Aufbau wie beim Aufzeichnen der Abläufe (eigene Klassen hinter Main, import an den Anfang)
     fs.writeFileSync(path.join(dir, 'Main.java'), require('./java-quelle').bauen(code).src + (uses ? KONTO.java : ''));
