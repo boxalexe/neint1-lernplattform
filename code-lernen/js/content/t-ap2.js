@@ -138,25 +138,83 @@
         ]
       },
 
-      /* ---------- 4. Struktogramm und PAP ---------- */
+      /* ---------- 4. Struktogramm und PAP (AP2-Vertiefung) ---------- */
       {
-        id: 'struktogramm', stage: 4, title: 'Struktogramm und Programmablaufplan', goal: 'Du kannst ein Struktogramm lesen und in Pseudocode übersetzen und kennst die Symbole des Programmablaufplans.',
+        id: 'struktogramm', standalone: true, domain: 'shop', stage: 4,
+        title: 'Struktogramm und PAP: Prüfungsvertiefung',
+        goal: 'Du übersetzt prüfungstypische Struktogramme und PAPs sicher in Pseudocode, prüfst sie per Schreibtischtest und erkennst typische IHK-Fallen bei Schleifen und Verzweigungen.',
+        terms: ['Struktogramm', ['Programmablaufplan (PAP)', 'PAP', 'Programmablaufplan'], 'Schreibtischtest', 'Kopfgesteuerte Schleife', 'Fußgesteuerte Schleife'],
         parts: [
-          A.text('Zwei Arten, einen Ablauf zu zeichnen', 'Pseudocode beschreibt einen Ablauf in Worten. In der Prüfung wird er oft auch **gezeichnet** verlangt oder vorgegeben. Die zwei üblichen Formen sind das **Struktogramm** (nach Nassi und Shneiderman, Kästen ineinander) und der **Programmablaufplan** (PAP, Symbole mit Pfeilen). Beide zeigen dasselbe: Anweisungen, Verzweigungen und Schleifen.'),
-          A.nsd(['summe <- 0', 'i <- 1', { solange: 'solange i <= 5', tue: ['summe <- summe + i', 'i <- i + 1'] }, { wenn: 'summe > 10 ?', ja: ['AUSGABE "groß"'], nein: ['AUSGABE "klein"'] }], 'Ein Struktogramm', 'Lies es von oben nach unten wie einen Stapel Bauklötze. Die Schleife ist ein Kasten mit einem **Rand links**: Alles im eingerückten Teil wird wiederholt. Die Verzweigung ist das **Dreieck**: links der Ja-Zweig, rechts der Nein-Zweig.'),
-          A.pseudo('summe <- 0\ni <- 1\nSOLANGE i <= 5\n  summe <- summe + i\n  i <- i + 1\nENDE SOLANGE\nWENN summe > 10 DANN\n  AUSGABE "groß"\nSONST\n  AUSGABE "klein"\nENDE WENN', 'Dasselbe als Pseudocode', 'Jeder Kasten im Struktogramm wird eine Zeile oder ein Block im Pseudocode. Die Summe ist 1 + 2 + 3 + 4 + 5 = 15, also erscheint „groß“.'),
-          A.nsd([{ wiederhole: ['EINGABE pin'], bis: 'bis pin = 1234' }, 'AUSGABE "Willkommen"'], 'Fußgesteuerte Schleife', 'Hier steht die Bedingung **unten**: Der Körper läuft mindestens einmal, erst danach wird geprüft. Das passt zur PIN-Eingabe, denn gefragt wird immer mindestens einmal.'),
-          A.table(['Symbol im PAP', 'Form', 'Bedeutung'], [['Start und Ende', 'Oval (abgerundetes Rechteck)', 'Beginn und Schluss des Ablaufs'], ['Anweisung', 'Rechteck', 'Etwas tun, zum Beispiel rechnen oder zuweisen'], ['Verzweigung', 'Raute', 'Frage mit Ja- und Nein-Ausgang'], ['Ein- und Ausgabe', 'Parallelogramm', 'Daten einlesen oder ausgeben'], ['Unterprogramm', 'Rechteck mit doppelten Seitenlinien', 'Aufruf einer Funktion, die woanders beschrieben ist'], ['Ablauf', 'Pfeil', 'Reihenfolge; eine Schleife ist ein Pfeil, der zurück nach oben führt']], 'Symbole des Programmablaufplans'),
-          A.text('Struktogramm oder PAP?', 'Im **PAP** kann man mit Pfeilen beliebig hin und her springen. Das ist flexibel, führt aber leicht zu unübersichtlichem „Spaghetti-Code“. Das **Struktogramm** erlaubt nur saubere Blöcke ohne Sprünge und zwingt so zu **strukturierter Programmierung**. Deshalb wird es in der Ausbildung gern verwendet.')
+          A.text('Grundlagen und Prüfungsfokus', 'Alle Symbole von PAP und Struktogramm (Sequenz, Verzweigung, Schleifen, Unterprogrammaufruf) lernst du Schritt für Schritt in [PSS: PAP und Struktogramm](/code-lernen/kurs/pss/pap/). Hier trainierst du gezielt, was die **AP2** verlangt: fremde Struktogramme lesen, **rückwärts in Pseudocode** übersetzen und Fehler im Ablaufplan aufdecken.'),
+          A.nsd([
+            'preise <- [1999, 4950, 999, 3490]',
+            'summe <- 0',
+            'i <- 0',
+            { solange: 'solange i < LÄNGE(preise)', tue: [
+              { wenn: 'preise[i] >= 2000 ?', ja: ['summe <- summe + preise[i]'], nein: ['// unter 20 Euro ignorieren'] },
+              'i <- i + 1'
+            ] },
+            'Ausgabe: summe'
+          ], 'Typische AP2-Aufgabe: Verzweigung in einer Schleife', 'Lies von außen nach innen: Die **kopfgesteuerte Schleife** läuft über alle Artikelpreise, die innere **Verzweigung** addiert nur Artikel ab 20 Euro (4950 + 3490 = 8440 Cent).'),
+          A.code('pseudo', [
+            'preise <- [1999, 4950, 999, 3490]',
+            'summe <- 0',
+            'i <- 0',
+            'SOLANGE i < LÄNGE(preise)§Äußerer Kasten im Struktogramm.',
+            '  WENN preise[i] >= 2000 DANN§Inneres Dreieck: nur Artikel ab 20 Euro zählen mit.',
+            '    summe <- summe + preise[i]',
+            '  ENDE WENN',
+            '  i <- i + 1§Wichtig: steht hinter ENDE WENN, damit i in jedem Durchlauf wächst!',
+            'ENDE SOLANGE',
+            'AUSGABE summe'
+          ], 'Übersetzung in Pseudocode (zum Mitverfolgen)', { praxis: 'In der AP2 ist oft genau ein solcher verschachtelter Kasten vorgegeben – und gefragt wird nach dem Endwert per Schreibtischtest oder nach dem passenden Pseudocode.' }),
+          A.table(['Typische Prüfungsfalle', 'Woran du sie erkennst', 'Richtige Lösung'], [
+            ['`i <- i + 1` steht im Ja-Zweig statt danach', 'Sobald die Bedingung falsch ist, wächst `i` nicht mehr → Endlosschleife', 'Zähler immer **hinter** der Verzweigung erhöhen'],
+            ['Durchführungs- vs. Abbruchbedingung', 'Fußgesteuerte Schleife: Struktogramm schreibt `solange x <= 0`, Pseudocode `WIEDERHOLE … BIS`', 'Für `BIS` die Bedingung **umdrehen** (`BIS x > 0`)'],
+            ['`summe` oder `min` falsch initialisiert', '`min <- 0` bei positiven Preisen bleibt für immer 0', '`summe <- 0`, aber `min <- preise[0]`'],
+            ['Spaghetti-Pfeile im PAP', 'Rücksprünge quer über mehrere Rauten', 'Sauberes **Struktogramm** erlaubt keine freien Sprünge (strukturierte Programmierung)']
+          ], 'Die vier häufigsten PAP-/Struktogramm-Fallen in der AP2'),
+          A.table(['Grundlagen nachschlagen', 'Direktlink'], [
+            ['Alle Symbole von PAP und Struktogramm', '[PSS: PAP und Struktogramm](/code-lernen/kurs/pss/pap/)'],
+            ['Schreibtischtest Schritt für Schritt üben', '[Pseudocode: Schreibtischtest und Fehlersuche](/code-lernen/kurs/pseudo/schreibtisch/)']
+          ], 'Verweise')
+        ],
+        tips: [
+          A.tip('Zeichne dir bei verschachtelten Struktogrammen in der Prüfung sofort eine kleine **Schreibtischtest-Tabelle** (`i`, `preise[i]`, `summe`) an den Rand – so entgeht dir kein Grenzwertfehler.')
         ],
         quiz: [
-          A.q('Wie wird im Struktogramm eine Verzweigung (wenn, dann, sonst) dargestellt?', ['Als Kasten mit einem Dreieck oben, darunter zwei Spalten für ja und nein', 'Als Raute mit je einem Pfeil für ja und nein nach unten', 'Als Kasten mit Rand links, in dem der Dann-Teil steht', 'Als zwei Kästen nebeneinander, getrennt durch eine Linie'], 0, 'Die Raute gehört zum PAP. Im Struktogramm teilt ein Dreieck den Kasten in Ja- und Nein-Teil.'),
-          A.q('Welches PAP-Symbol steht für eine Ein- oder Ausgabe?', ['Parallelogramm', 'Raute', 'Rechteck', 'Oval'], 0, 'Schräge Seiten, wie ein Blatt Papier, das hereingereicht wird.'),
-          A.q('Was ist der Unterschied einer fußgesteuerten zu einer kopfgesteuerten Schleife?', ['Die fußgesteuerte prüft nach dem Durchlauf, ihr Körper läuft also mindestens einmal', 'Die fußgesteuerte prüft vor dem Durchlauf, ihr Körper läuft also eventuell nie', 'Die fußgesteuerte läuft immer genau einmal und prüft danach nicht mehr', 'Die fußgesteuerte zählt mit, die kopfgesteuerte läuft ohne Zähler'], 0, 'WIEDERHOLE ... BIS prüft am Ende, SOLANGE prüft am Anfang.')
+          A.q('Warum zwingt ein Struktogramm stärker zu sauberem Code als ein PAP?', ['Es erlaubt nur geschachtelte Blöcke ohne beliebige Sprungpfeile', 'Es kann direkt ohne Übersetzung von der CPU ausgeführt werden', 'Es kennt keine Schleifen und verhindert dadurch Endlosschleifen', 'Es enthält automatisch alle Datentypen der Zielsprache'], 0, 'Im PAP kann man Pfeile beliebig kreuz und quer ziehen; das Struktogramm lässt nur strukturierte Blöcke zu.'),
+          A.q('Im Struktogramm steht `i <- i + 1` versehentlich **im** Ja-Zweig einer Verzweigung statt dahinter. Was passiert beim ersten Nein-Fall?', ['Endlosschleife, weil i nicht weitergezählt wird', 'Die Schleife bricht sofort ohne Ergebnis ab', 'i wird automatisch am Ende des Blocks erhöht', 'Es entsteht ein Syntaxfehler beim Übersetzen'], 0, 'Bleibt i unverändert, wird dasselbe Element immer wieder geprüft: Endlosschleife.'),
+          A.q('Wann wählst du in einer Prüfungsaufgabe eine **fußgesteuerte** statt einer kopfgesteuerten Schleife?', ['Wenn der Rumpf mindestens einmal laufen muss (z. B. Eingabeprüfung)', 'Wenn die Anzahl der Durchläufe vorab feststeht (z. B. 10-mal)', 'Wenn die Liste eventuell leer ist und nichts passieren darf', 'Wenn die Schleife eine Verzweigung im Inneren enthält'], 0, 'Fußgesteuert = erst ausführen, dann prüfen, also mindestens ein Durchlauf.')
         ],
         tasks: [
-          A.fill('Welches Symbol hat im Programmablaufplan eine Verzweigung?', 'eine {{Raute}}', 'Das Symbol hat oben einen Eingang und an den Seiten die Ausgänge ja und nein.'),
-          A.predict('Was gibt dieses Programm aus? (Es ist das erste Struktogramm, nur mit 4 statt 5.)', ['summe <- 0', 'i <- 1', 'SOLANGE i <= 4', '  summe <- summe + i', '  i <- i + 1', 'ENDE SOLANGE', 'WENN summe > 10 DANN', '  AUSGABE "groß"', 'SONST', '  AUSGABE "klein"', 'ENDE WENN'], 'klein', 'Rechne die Summe aus und lies die Bedingung genau: größer oder größer gleich?', 'Die Summe ist 10. Die Bedingung summe > 10 ist FALSCH, also läuft der Nein-Zweig.')
+          A.desk('AP2-Schreibtischtest: Nur Artikel ab 2000 Cent werden addiert. Trage i und summe nach jedem Durchlauf ein.', 'pseudo', [
+            'preise <- [1999, 4950, 999, 3490]',
+            'summe <- 0',
+            'i <- 0',
+            'SOLANGE i < LÄNGE(preise)',
+            '  WENN preise[i] >= 2000 DANN',
+            '    summe <- summe + preise[i]',
+            '  ENDE WENN',
+            '  i <- i + 1',
+            '  AUSGABE i, summe',
+            'ENDE SOLANGE'
+          ], { at: 8, cols: ['i', 'summe'] }, 'Prüfe bei jedem Durchlauf, ob preise[i] >= 2000 gilt.', '1999 nein (summe 0), 4950 ja (4950), 999 nein (4950), 3490 ja (8440).'),
+          A.bug('Prüfungsfalle: Der Filter soll alle Artikel **ab** 2000 Cent zählen, aber bei genau 2000 Cent zählt er nicht mit.', 'pseudo', [
+            'preise <- [1999, 2000, 3490, 4950]',
+            'anzahl <- 0',
+            'FÜR JEDES p IN preise',
+            '  WENN p > 2000 DANN',
+            '    anzahl <- anzahl + 1',
+            '  ENDE WENN',
+            'ENDE FÜR',
+            'AUSGABE anzahl'
+          ], { line: 3, kind: 'logik', fixes: [
+            'WENN p >= 2000 DANN',
+            'WENN p <= 2000 DANN',
+            'WENN p = 2000 DANN',
+            'WENN p < 2000 DANN'
+          ], expect: '3' }, '„Ab 2000“ schließt 2000 ein. Welcher Vergleichsoperator passt?', '> lässt 2000 aus und liefert 2 statt 3. Richtig ist >= 2000.')
         ]
       },
 
@@ -211,27 +269,68 @@
         ]
       },
 
-      /* ---------- 7. Weitere UML-Diagramme ---------- */
+      /* ---------- 7. Zustandsdiagramm & UML-Überblick (AP2-Vertiefung) ---------- */
       {
-        id: 'uml2', stage: 4, title: 'Weitere UML-Diagramme: Anwendungsfall, Aktivität, Zustand', goal: 'Du kennst Zweck und Elemente von Anwendungsfall-, Aktivitäts- und Zustandsdiagramm und kannst entscheiden, welches Diagramm zu einer Frage passt.',
+        id: 'uml2', standalone: true, domain: 'shop', stage: 4,
+        title: 'Zustandsdiagramm und die fünf UML-Diagramme im Vergleich',
+        goal: 'Du liest und entwirfst Zustandsdiagramme für Bestellungen und Tickets und entscheidest in Prüfungsaufgaben sicher, welches der fünf UML-Diagramme zu welcher Frage passt.',
+        terms: ['Zustandsdiagramm', ['Anwendungsfalldiagramm (Use Case)', 'Anwendungsfalldiagramm', 'Use-Case'], 'Aktivitätsdiagramm', 'Klassendiagramm', 'Sequenzdiagramm'],
         parts: [
-          A.text('Welche Frage beantwortet welches Diagramm?', 'UML hat viele Diagramme, die Prüfung fragt vor allem fünf ab. Klassen- und Sequenzdiagramm kennst du aus dem OOP-Kurs. Hier kommen die drei übrigen dazu. Merke dir zu jedem die **Frage**, die es beantwortet.'),
-          A.table(['Diagramm', 'Beantwortet die Frage', 'Art'], [['Anwendungsfalldiagramm (Use-Case)', 'Wer kann was mit dem System tun?', 'Verhalten, Anforderungen'], ['Aktivitätsdiagramm', 'In welcher Reihenfolge läuft ein Vorgang ab?', 'Verhalten'], ['Zustandsdiagramm', 'Welche Zustände hat ein Objekt, und wodurch wechselt es?', 'Verhalten'], ['Klassendiagramm', 'Welche Klassen gibt es und wie hängen sie zusammen?', 'Struktur'], ['Sequenzdiagramm', 'Wer ruft wen in welcher Reihenfolge auf?', 'Verhalten']], 'Die fünf wichtigsten im Überblick'),
-          A.text('Anwendungsfalldiagramm', 'Das ist die Speisekarte des Systems: Sie zeigt, **was** man bestellen kann, nicht wie gekocht wird. **Akteure** sind Strichmännchen außerhalb des Systems (Personen oder andere Systeme). Die **Anwendungsfälle** sind Ovale innerhalb eines Rahmens, der Systemgrenze. Linien verbinden Akteure mit den Fällen, die sie nutzen.\n\nZwei Beziehungen zwischen Anwendungsfällen werden gern gefragt:\n- **«include»**: Der eine Fall enthält **immer** den anderen. „Geld abheben“ schließt „PIN prüfen“ immer ein.\n- **«extend»**: Der andere Fall kommt **manchmal** dazu. „Beleg drucken“ erweitert „Geld abheben“ nur, wenn der Kunde es wünscht.'),
-          A.table(['Element', 'Darstellung', 'Beispiel Geldautomat'], [['Akteur', 'Strichmännchen außerhalb', 'Kunde, Bankmitarbeiter'], ['Anwendungsfall', 'Oval mit Verb und Objekt', 'Geld abheben, Kontostand anzeigen, Automat befüllen'], ['Systemgrenze', 'Rechteck um alle Ovale', 'Geldautomat'], ['«include»', 'gestrichelter Pfeil zum enthaltenen Fall', 'Geld abheben «include» PIN prüfen'], ['«extend»', 'gestrichelter Pfeil vom erweiternden Fall', 'Beleg drucken «extend» Geld abheben']], 'Elemente'),
-          A.text('Aktivitätsdiagramm', 'Ein Aktivitätsdiagramm ist ein Ablaufplan mit UML-Zeichen, ähnlich dem PAP. Es beginnt mit einem **schwarzen Punkt** (Start) und endet mit einem **Punkt im Kreis** (Ende). Dazwischen stehen **Aktionen** als abgerundete Rechtecke, **Entscheidungen** als Rauten mit Bedingungen in eckigen Klammern, zum Beispiel `[Ware vorrätig]`. Neu gegenüber dem PAP: Ein dicker Balken (**Gabelung**) teilt den Ablauf in Stränge, die **gleichzeitig** laufen, ein zweiter Balken (**Vereinigung**) wartet, bis alle fertig sind. Beispiel: Nach der Bestellung werden **parallel** die Rechnung erstellt und das Paket gepackt, versendet wird erst, wenn beides erledigt ist. Mit **Schwimmbahnen** (Swimlanes), also Spalten wie bei einem Schwimmbecken, ordnet man jede Aktion einem Verantwortlichen zu, etwa Kunde, Shop und Lager. Merke: Die Raute heißt **entweder oder**, genau ein Weg wird genommen. Der Balken heißt **sowohl als auch**, alle Wege laufen gleichzeitig.'),
-          A.text('Zustandsdiagramm', 'Eine Ampel ist immer in **genau einem** Zustand: Rot, Rot-Gelb, Grün oder Gelb. Ein **Ereignis** (der Takt läuft ab) löst einen **Übergang** aus. Das Zustandsdiagramm zeigt die Zustände als abgerundete Kästen und die Übergänge als Pfeile, beschriftet mit dem Ereignis und eventuell einer Bedingung in eckigen Klammern. Typisch ist es für Objekte mit Lebenslauf: eine Bestellung (neu, bezahlt, versendet, zugestellt, storniert) oder ein Ticket im Support.'),
-          A.table(['Zustand vorher', 'Ereignis [Bedingung]', 'Zustand nachher'], [['neu', 'bezahlen', 'bezahlt'], ['neu', 'stornieren', 'storniert'], ['bezahlt', 'versenden', 'versendet'], ['bezahlt', 'stornieren [noch nicht versendet]', 'storniert'], ['versendet', 'zustellen', 'zugestellt']], 'Die Bestellung als Zustandstabelle', 'So eine Tabelle ist die Vorstufe zum Diagramm: Jede Zeile wird ein Pfeil. Aus „versendet“ führt kein Pfeil mehr zu „storniert“, das ist eine fachliche Regel, die man im Diagramm sofort sieht.')
+          A.text('Die fünf UML-Diagramme der AP2 auf einen Blick', 'Vier der fünf prüfungsrelevanten UML-Diagramme kennst du bereits mit vielen Beispielen aus den Grundlagenkursen:\n- **Anwendungsfalldiagramm** → [PSS: Use-Case](/code-lernen/kurs/pss/usecase/)\n- **Aktivitätsdiagramm** → [PSS: Aktivitätsdiagramm](/code-lernen/kurs/pss/aktivitaet/)\n- **Klassendiagramm** → [Modellieren: Beziehungen & Entwurf](/code-lernen/kurs/oop/entwurf/)\n- **Sequenzdiagramm** → [Modellieren: Sequenzdiagramme](/code-lernen/kurs/oop/sequenz/)\n\nHier kommt das fünfte dazu – das **Zustandsdiagramm** – plus die sichere Abgrenzung für Prüfungsfragen.'),
+          A.table(['UML-Diagramm', 'Beantwortet die Frage', 'Art', 'Schlüssel-Elemente'], [
+            ['**Anwendungsfalldiagramm** (Use-Case)', 'Wer kann was mit dem System tun?', 'Verhalten', 'Akteure außen, Ovale innen, `«include»`, `«extend»`'],
+            ['**Aktivitätsdiagramm**', 'In welcher Reihenfolge läuft ein Vorgang ab?', 'Verhalten', 'Aktionen, Rauten `[Guard]`, Balken (parallel), Schwimmbahnen'],
+            ['**Zustandsdiagramm**', 'Welche Zustände hat **ein** Objekt, und wodurch wechselt es?', 'Verhalten', 'Zustände, Übergänge `Ereignis [Bedingung] / Aktion`'],
+            ['**Klassendiagramm**', 'Welche Klassen gibt es und wie hängen sie zusammen?', 'Struktur', '3 Fächer, `+ - # ~`, `--|>`, `..|>`, `*--`, `o--`, `-->`'],
+            ['**Sequenzdiagramm**', 'Wer ruft wen in welcher zeitlichen Reihenfolge auf?', 'Verhalten', 'Lebenslinien, Aufrufe, Rückgaben, `loop`/`alt`/`opt`']
+          ], 'Entscheidungshilfe für die AP2'),
+          A.text('Das Zustandsdiagramm: Lebenslauf eines Objekts', 'Ein Objekt wie eine **Bestellung** im Onlineshop oder ein **Ticket** im Service-Desk befindet sich zu jedem Zeitpunkt in **genau einem Zustand** (z. B. `neu`, `bezahlt`, `versendet`, `zugestellt`, `storniert`). Ein **Ereignis** löst einen **Übergang** in den nächsten Zustand aus – oft mit einer **Bedingung** in eckigen Klammern (`[Guard]`) und einer optionalen **Aktion** hinter einem Schrägstrich (`/`).'),
+          A.table(['Zustand vorher', 'Übergang: Ereignis [Bedingung] / Aktion', 'Zustand nachher'], [
+            ['`neu`', '`bezahlen [Betrag gedeckt] / Rechnung erstellen`', '`bezahlt`'],
+            ['`neu`', '`stornieren`', '`storniert`'],
+            ['`bezahlt`', '`versenden / Tracking-Mail senden`', '`versendet`'],
+            ['`bezahlt`', '`stornieren [noch nicht gepackt] / Betrag erstatten`', '`storniert`'],
+            ['`versendet`', '`zustellen`', '`zugestellt`']
+          ], 'Zustandstabelle einer Shop-Bestellung', 'Jede Zeile wird im Diagramm ein beschrifteter Pfeil zwischen zwei abgerundeten Kästen. Wichtig: Aus `versendet` gibt es **keinen** Pfeil mehr zu `storniert` – genau solche fachlichen Regeln macht das Zustandsdiagramm sofort sichtbar.'),
+          A.code('pseudo', [
+            'zustand <- "neu"§Startzustand der Bestellung.',
+            'ereignis <- "bezahlen"',
+            'WENN zustand = "neu" UND ereignis = "bezahlen" DANN§Übergang: nur aus „neu“ erlaubt.',
+            '  zustand <- "bezahlt"',
+            'ENDE WENN',
+            'ereignis <- "versenden"',
+            'WENN zustand = "bezahlt" UND ereignis = "versenden" DANN',
+            '  zustand <- "versendet"',
+            'ENDE WENN',
+            'AUSGABE "Aktueller Zustand:", zustand'
+          ], 'Zustandsübergänge im Code (Pseudocode)', { praxis: 'Genau so arbeiten Bestell- und Ticket-Workflows im Backend: Bevor eine Methode den Status ändert, prüft sie, ob der Übergang vom aktuellen Zustand aus erlaubt ist.' }),
+          A.table(['Zustand vorher (Ticketsystem)', 'Ereignis', 'Zustand nachher'], [
+            ['`offen`', '`zuweisen(techniker)`', '`in Arbeit`'],
+            ['`in Arbeit`', '`loesen()`', '`erledigt`'],
+            ['`erledigt`', '`wiedereroeffnen [Frist <= 14 Tage]`', '`offen`']
+          ], 'Zweites Beispiel: Lebenslauf eines IT-Tickets')
+        ],
+        tips: [
+          A.warn('Verwechsle in der Prüfung nicht **Aktivitätsdiagramm** (Ablauf von Arbeitsschritten, oft über mehrere Rollen) mit **Zustandsdiagramm** (Zustände **eines einzelnen** Objekts und Ereignisse dazwischen).'),
+          A.tip('Die Beschriftung eines Übergangs im Zustandsdiagramm folgt dem festen Muster: `Ereignis [Bedingung] / Aktion`.')
         ],
         quiz: [
-          A.q('Welches Diagramm zeigt, welche Akteure welche Funktionen eines Systems nutzen?', ['Anwendungsfalldiagramm', 'Klassendiagramm', 'Kommunikationsdiagramm', 'Verteilungsdiagramm'], 0, 'Strichmännchen und Ovale: wer kann was.'),
-          A.q('„Geld abheben“ enthält immer „PIN prüfen“. Welche Beziehung ist das?', ['«include»', '«extend»', 'Vererbung', 'Komposition'], 0, 'Immer enthalten heißt include. Extend wäre „nur manchmal“.'),
-          A.q('Wofür steht im Aktivitätsdiagramm ein dicker schwarzer Balken, von dem mehrere Pfeile ausgehen?', ['Gabelung: Die folgenden Aktionen laufen parallel', 'Entscheidung: Genau einer der Wege wird genommen', 'Zusammenführung: Die Wege werden wieder vereint', 'Ende: An dieser Stelle stoppt der ganze Ablauf'], 0, 'Gabelung (fork) teilt, Vereinigung (join) führt die Stränge wieder zusammen.'),
-          A.q('Mit welchem Diagramm beschreibst du den Lebenslauf einer Bestellung (neu, bezahlt, versendet)?', ['Zustandsdiagramm', 'Anwendungsfalldiagramm', 'Klassendiagramm', 'Verteilungsdiagramm'], 0, 'Zustände und die Ereignisse, die zwischen ihnen wechseln.')
+          A.q('Mit welchem UML-Diagramm modellierst du den Lebenslauf einer Bestellung (`neu`, `bezahlt`, `versendet`, `storniert`)?', ['Zustandsdiagramm', 'Anwendungsfalldiagramm', 'Klassendiagramm', 'Sequenzdiagramm'], 0, 'Zustände eines einzelnen Objekts und die Ereignisse zwischen ihnen gehören ins Zustandsdiagramm.'),
+          A.q('Welches der fünf UML-Diagramme ist ein **Strukturdiagramm** (kein Verhaltensdiagramm)?', ['Klassendiagramm', 'Sequenzdiagramm', 'Aktivitätsdiagramm', 'Anwendungsfalldiagramm'], 0, 'Das Klassendiagramm zeigt den statischen Aufbau (Struktur); die anderen vier zeigen Verhalten.'),
+          A.q('An einem Übergang im Zustandsdiagramm steht `stornieren [noch nicht gepackt] / Betrag erstatten`. Was ist `[noch nicht gepackt]`?', ['Die Bedingung (Guard), unter der der Übergang erlaubt ist', 'Der Name des nachfolgenden Zustands im Diagramm', 'Eine parallele Aktion, die gleichzeitig ausgeführt wird', 'Der Akteur, der die Stornierung ausgelöst hat'], 0, 'Ereignis [Bedingung] / Aktion: Eckige Klammern stehen immer für die Bedingung.'),
+          A.q('Ein Projekt möchte festhalten, welche Funktionen Kunden und Lageristen im Shop nutzen können – ohne zeitliche Reihenfolge. Welches Diagramm passt?', ['Anwendungsfalldiagramm', 'Zustandsdiagramm', 'Sequenzdiagramm', 'Aktivitätsdiagramm'], 0, 'Wer kann was ohne Reihenfolge = Anwendungsfalldiagramm.')
         ],
         tasks: [
-          A.fill('„Beleg drucken“ kommt nur auf Wunsch zu „Geld abheben“ hinzu. Welche Beziehung ist das? (ohne spitze Klammern)', '{{extend}}', 'Der Fall kommt nur unter einer Bedingung dazu, nicht jedes Mal.'),
-          A.fill('Im Aktivitätsdiagramm stehen Bedingungen an den Ausgängen einer Entscheidung in ...', '{{eckigen Klammern|eckige Klammern|[]}}', 'Schau im Beispiel oben nach, wie „Ware vorrätig“ an der Entscheidung geschrieben ist.')
+          A.fill('Vervollständige das Beschriftungsmuster für Übergänge im Zustandsdiagramm: `Ereignis [{{Bedingung}}] / Aktion`', '{{Bedingung|Guard}}', 'In eckigen Klammern steht die Voraussetzung für den Übergang.'),
+          A.predict('Zustandsprüfung im Shop: Was gibt der Code aus, wenn eine bereits versendete Bestellung storniert werden soll?', [
+            'zustand <- "versendet"',
+            'WENN zustand = "neu" ODER zustand = "bezahlt" DANN',
+            '  zustand <- "storniert"',
+            'SONST',
+            '  AUSGABE "Storno nicht mehr möglich"',
+            'ENDE WENN',
+            'AUSGABE zustand'
+          ], 'Storno nicht mehr möglich\nversendet', 'Prüfe, ob die Bedingung bei zustand = "versendet" wahr ist.', 'Aus „versendet“ führt kein Übergang zu „storniert“. Der Zustand bleibt unverändert.')
         ]
       },
 

@@ -10,14 +10,14 @@ Nach dem Muster umgebaut (Praxis-Szenario, geprüfte Aufgaben, Brücke zu den an
 | Python | 14 | Abläufe per `sys.settrace`, gleicher Aufbau wie Java |
 | Pseudocode | 11 | Schreibtischtest und Bug-Arena live über den Interpreter, Brücke zu Java und Python |
 | Modellieren (OOP & UML) | 7 | Diagramm & Code (Java/Python) nebeneinander, Shop/Login/Tickets, Aufgaben in beide Richtungen bis zum 4-Klassen-Shop-Entwurf |
+| Software planen (PSS) | 7 | Durchgehendes Shop-Projekt von Rechnergrundlagen, SDLC & Anforderungen über Use-Case/Aktivität bis PAP/Struktogramm & Pseudocode |
+| Prüfungswissen AP2 | 11 | Dopplung mit PSS bereinigt: `struktogramm` und `uml2` als Prüfungsvertiefung (Zustandsdiagramm, AP2-Fallen) mit Verweisen auf PSS |
 
-Noch im alten Format (dünn: wenig Aufgaben, nur Lückentext, kaum Szenario-Bezug): PSS, JavaScript, C#, C, C++. AP2 und SQL sind inhaltlich in Ordnung, AP2 überschneidet sich aber mit PSS.
+Noch im alten Format (dünn: wenig Aufgaben, nur Lückentext, kaum Szenario-Bezug): JavaScript, C#, C, C++. SQL ist inhaltlich in Ordnung.
 
 ## Nächste Schritte (in dieser Reihenfolge)
 
-1. **PSS mit durchgehendem Projekt.** Theorie ist gut, Aufgaben sind nur Lückentext. Ziel: der Shop als Projekt von Lastenheft über Use-Case, Aktivitätsdiagramm und PAP bis zum Pseudocode, mit echten Aufgaben (Anforderungen einordnen, Diagramm-Fehler finden, PAP in Pseudocode übersetzen und im Interpreter prüfen).
-2. **Dopplung PSS/AP2 bereinigen.** Struktogramm/PAP und Use-Case/Aktivität stehen in beiden Kursen. Grundlagen in PSS, AP2 nur noch Prüfungsvertiefung mit Verweis.
-3. **JavaScript, C#, C, C++** nach dem Java/Python-Muster. Für C# (.NET SDK) und C/C++ (gcc/g++) die Compiler lokal installieren, sonst meldet `run-predict.js` NOT RUN. Für Abläufe je Sprache einen Tracer nach dem Vorbild von `trace-python/tracer.py` (Ausgabeformat siehe Kopf von `trace-java/Tracer.java`).
+1. **JavaScript, C#, C, C++** nach dem Java/Python-Muster. Für C# (.NET SDK) und C/C++ (gcc/g++) die Compiler lokal installieren, sonst meldet `run-predict.js` NOT RUN. Für Abläufe je Sprache einen Tracer nach dem Vorbild von `trace-python/tracer.py` (Ausgabeformat siehe Kopf von `trace-java/Tracer.java`).
 
 ## Aufbau einer Lektion
 

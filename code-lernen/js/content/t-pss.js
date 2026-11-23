@@ -1,190 +1,469 @@
-/* Kurs: Software planen (PSS): Rechnergrundlagen, Lebenszyklus, Anforderungen, Anwendungsfall- und Aktivitätsdiagramm,
-   PAP und Struktogramm. */
+/* Kurs: Software planen (PSS) – durchgehendes Onlineshop-Projekt von den Rechnergrundlagen über Lastenheft,
+   Anforderungen, Use-Case und Aktivitätsdiagramm bis zu PAP, Struktogramm und Pseudocode. */
 (function () {
   'use strict';
   const A = window.Academy, P = (lines, h, o) => A.code('pseudo', lines, h, o);
 
   A.track({
     id: 'pss', title: 'Software planen (PSS)', tag: 'ERST PLANEN, DANN CODEN',
-    desc: 'Wie ein Computer arbeitet, warum man Software plant, der Lebenszyklus, Anforderungen, Anwendungsfall- und Aktivitätsdiagramm, PAP und Struktogramm.',
-    intro: 'PSS steht für **Planung strukturierter Software**. Bevor die erste Zeile Code entsteht, klärt man: Was soll das Programm können, wer benutzt es, und wie läuft es ab? Dieser Kurs folgt dem typischen Unterrichtsstoff und ergänzt ihn um Beispiele, Quiz und Übungen. Viele Begriffe daraus fragt die IHK in der AP1 und AP2 ab.',
+    desc: 'Vom Auftrag zum sauberen Plan am durchgehenden Onlineshop-Projekt: Rechnergrundlagen, SDLC, Lasten- und Pflichtenheft, Anforderungen, Use-Case, Aktivitätsdiagramm, PAP und Struktogramm.',
+    intro: 'PSS steht für **Planung strukturierter Software**. Bevor in einem Projekt die erste Zeile Code entsteht, klärt das Team: Was soll die Software leisten, wer nutzt sie, und wie laufen die Prozesse im Detail ab? Genau diesen Weg gehst du hier Schritt für Schritt an unserem **Onlineshop für IT-Zubehör** durch – vom ersten Kundenwunsch im Lastenheft über Use-Case, Aktivitätsdiagramm und Struktogramm bis zum ausführbaren Pseudocode. Alle Themen sind fester Prüfungsstoff in AP1 und AP2.',
     lessons: [
       /* ---------- 1. Wie ein Computer arbeitet ---------- */
       {
-        id: 'rechner', stage: 1, title: 'Wie ein Computer arbeitet: vom Maschinencode zur Hochsprache', goal: 'Du kennst die Bauteile eines Rechners, den Befehlszyklus, Bits und Bytes und weißt, was Compiler, Interpreter, Linker und IDE tun.',
+        id: 'rechner', standalone: true, domain: 'shop', stage: 1,
+        title: 'Wie ein Computer arbeitet: vom Maschinencode zur Hochsprache',
+        goal: 'Du kennst die Bauteile eines Rechners, den Befehlszyklus, Bits und Bytes und weißt, was Compiler, Interpreter, Linker, JVM und IDE tun.',
+        terms: ['ALU', 'Register', 'Maschinencode', 'Assembler', 'Linker', 'Bytecode', ['JVM (Java Virtual Machine)', 'JVM'], 'Debugger'],
         parts: [
-          A.text('Programmieren heißt: ganz genau sagen', 'Ein Computer ist extrem schnell, aber er denkt nicht mit. Er führt Befehle **genau so** aus, wie sie dastehen, nicht so, wie sie gemeint waren. Sagst du einem Menschen „Mach mir ein Butterbrot“, weiß er, was zu tun ist. Ein Computer braucht jeden Schritt einzeln: Messer nehmen, Butterdose öffnen, Butter aufnehmen, auf die Scheibe streichen. Dieses Zerlegen in eindeutige Teilschritte heißt **algorithmisches Denken**.'),
-          A.table(['Bauteil', 'Aufgabe', 'Bild'], [['**CPU** (Prozessor)', 'führt Befehle aus, rechnet, vergleicht. Besteht aus Rechenwerk (**ALU**), Steuerwerk und **Registern** (winzige, sehr schnelle Zwischenspeicher)', 'das Gehirn'], ['**RAM** (Arbeitsspeicher)', 'hält Programme und Daten, die gerade laufen; flüchtig, nach dem Ausschalten leer', 'der Schreibtisch'], ['**Massenspeicher** (SSD, Festplatte)', 'speichert dauerhaft, auch ausgeschaltet', 'der Aktenschrank'], ['**Ein- und Ausgabe**', 'Tastatur, Maus, Sensoren liefern Daten; Bildschirm, Drucker, Lautsprecher geben sie aus', 'Ohren und Mund']], 'Die wichtigsten Bauteile'),
-          A.text('Der Befehlszyklus: Holen, Dekodieren, Ausführen', 'Die CPU arbeitet immer im selben Takt, Milliarden Mal pro Sekunde:\n\n1. **Fetch** (Holen): den nächsten Befehl aus dem Arbeitsspeicher holen.\n2. **Decode** (Dekodieren): Das Steuerwerk stellt fest, was zu tun ist.\n3. **Execute** (Ausführen): Die ALU rechnet, vergleicht oder speichert.\n\nDann beginnt der Zyklus von vorn. Ein Programm ist für die CPU also nur eine lange Liste solcher Befehle.'),
-          A.text('Alles ist 0 und 1', 'Im Rechner liegt alles als **Binärwert**. Eine einzelne 0 oder 1 ist ein **Bit**, acht Bit sind ein **Byte**. Die Zahl 5 ist `00000101`, der Buchstabe A im ASCII-Code `01000001`. Programmiersprachen verstecken das hinter **Datentypen**: Du schreibst `5` oder `"A"`, der Datentyp sagt dem Rechner, wie die Bits zu lesen sind und wie viel Platz sie brauchen.'),
-          A.table(['Datentyp (Java)', 'Inhalt', 'Beispiel'], [['`int`', 'ganze Zahl', '`42`'], ['`double`', 'Kommazahl', '`3.14`'], ['`char`', 'ein einzelnes Zeichen', '`\'A\'`'], ['`boolean`', 'Wahrheitswert', '`true`'], ['`String`', 'Zeichenkette', '`"Hallo"`']], 'Datentypen geben den Bits eine Bedeutung'),
-          A.text('Drei Stufen: Maschinencode, Assembler, Hochsprache', '**Maschinencode** sind die Zahlen, die die CPU direkt versteht. Für Menschen kaum lesbar. **Assembler** schreibt dieselben Befehle als Kürzel (**Mnemonics**) wie `mov`, `add` oder `jmp`; ein Übersetzer macht daraus wieder Maschinencode. **Hochsprachen** wie Python, Java oder C++ orientieren sich an menschlicher Sprache: Man kümmert sich nicht mehr um Register und Speicheradressen. Das kostet etwas Geschwindigkeit, spart aber enorm viel Arbeit und Fehler.'),
-          A.table(['Maschinencode (hex)', 'Assembler', 'Bedeutung'], [['`b8 00 00 00 00`', '`mov eax, 0`', 'Register EAX auf 0 setzen, es ist die Summe'], ['`bb 01 00 00 00`', '`mov ebx, 1`', 'Register EBX auf 1 setzen, es ist der Zähler i'], ['`83 fb 0a`', '`cmp ebx, 10`', 'i mit 10 vergleichen (setzt nur Statusbits)'], ['`7f 07`', '`jg end`', 'wenn i größer als 10: 7 Bytes weiter springen, zum Ende'], ['`01 d8`', '`add eax, ebx`', 'Summe = Summe + i'], ['`83 c3 01`', '`add ebx, 1`', 'i = i + 1'], ['`eb f4`', '`jmp loop`', 'zurück zum Vergleich (f4 ist ein negativer Sprung)'], ['`c3`', '`ret`', 'fertig, das Ergebnis 55 steht in EAX']], 'Dasselbe Programm in Maschinencode und Assembler: die Zahlen 1 bis 10 addieren'),
-          A.code('c', ['int summe(void) {§Eine Funktion, die eine ganze Zahl zurückgibt und keine Parameter hat.', '    int sum = 0;§Die Summe beginnt bei 0 (im Assembler: mov eax, 0).', '    for (int i = 1; i <= 10; i++) {§Zählschleife von 1 bis 10 (mov ebx, 1 / cmp / jg / add ebx, 1 / jmp).', '        sum += i;§Kurz für sum = sum + i (add eax, ebx).', '    }§Ende der Schleife.', '    return sum;§Gibt 55 zurück (ret, Ergebnis in EAX).', '}§Ende der Funktion.'], 'Dieselbe Idee in C'),
-          A.code('python', ['def summe():§Funktion ohne Parameter.', '    s = 0§Startwert der Summe.', '    for i in range(1, 11):§range(1, 11) liefert 1 bis 10: die 11 ist ausgeschlossen.', '        s += i§Zum bisherigen Wert addieren.', '    return s§Ergebnis 55 zurückgeben.', 'print("Summe:", summe())§Ruft die Funktion auf und gibt „Summe: 55“ aus.'], 'Und in Python'),
-          A.table(['Werkzeug', 'Was es tut', 'Beispiel'], [['**Compiler**', 'übersetzt den ganzen Quellcode **vorher** in ausführbaren Code', 'C, C++; Java übersetzt in Bytecode'], ['**Interpreter**', 'liest den Code beim Ausführen Zeile für Zeile und führt ihn sofort aus', 'Python, JavaScript'], ['**Linker**', 'verbindet übersetzte Teile und Bibliotheken zu einem fertigen Programm', 'bei C und C++'], ['**JVM**', 'Java-Laufzeitumgebung: führt den plattformunabhängigen Bytecode (.class) aus', '„Write once, run anywhere“'], ['**IDE**', 'Entwicklungsumgebung: Editor, Compiler/Interpreter, Debugger und Projektverwaltung in einem Programm', 'IntelliJ IDEA, Visual Studio, PyCharm']], 'Vom Quelltext zum laufenden Programm'),
-          A.table(['Fehlerart', 'Wann merkt man es?', 'Beispiel'], [['**Syntaxfehler**', 'beim Übersetzen, das Programm startet gar nicht', 'Klammer fehlt, Befehl falsch geschrieben'], ['**Laufzeitfehler**', 'während das Programm läuft, es bricht ab', 'Division durch 0, Datei fehlt'], ['**Logischer Fehler**', 'das Programm läuft, liefert aber Falsches', 'Durchschnitt durch die falsche Anzahl geteilt'], ['**Typfehler**', 'beim Übersetzen oder Ausführen', 'Zahl und Text addiert'], ['**Ressourcenfehler**', 'unter Last', 'Speicher voll, Netzwerk weg']], 'Fehler gehören dazu: Debugging')
+          A.text('Programmieren heißt: ganz genau sagen', 'Ein Computer ist extrem schnell, aber er denkt nicht mit. Er führt Befehle **genau so** aus, wie sie dastehen – nicht so, wie sie gemeint waren. Sagst du einem Mitarbeiter „Berechne den Endbetrag im Shop“, weiß er, was gemeint ist. Ein Computer braucht jeden einzelnen Schritt: Artikelpreise summieren, Grenze von 50 Euro prüfen, Versand addieren, Ergebnis ausgeben. Dieses Zerlegen in eindeutige Teilschritte heißt **algorithmisches Denken**.'),
+          A.table(['Bauteil', 'Aufgabe', 'Im Onlineshop'], [
+            ['**CPU** (Prozessor)', 'führt Befehle aus, rechnet, vergleicht. Besteht aus Rechenwerk (**ALU**), Steuerwerk und **Registern** (winzige, sehr schnelle Zwischenspeicher)', 'rechnet Warenkorb-Summe und Versandkosten aus'],
+            ['**RAM** (Arbeitsspeicher)', 'hält laufende Programme und aktuelle Daten; flüchtig, nach dem Ausschalten leer', 'hält den aktuellen Warenkorb während der Sitzung'],
+            ['**Massenspeicher** (SSD, Festplatte)', 'speichert dauerhaft, auch ohne Strom', 'speichert Artikelkatalog und Bestellungen in der Datenbank'],
+            ['**Ein- und Ausgabe**', 'Tastatur, Maus, Scanner liefern Daten; Bildschirm, Drucker geben sie aus', 'Bestellformular im Browser, gedrucktes Versandetikett']
+          ], 'Die wichtigsten Bauteile'),
+          A.text('Der Befehlszyklus: Holen, Dekodieren, Ausführen', 'Die CPU arbeitet immer im selben Takt, Milliarden Mal pro Sekunde:\n\n1. **Fetch** (Holen): den nächsten Befehl aus dem Arbeitsspeicher (RAM) holen.\n2. **Decode** (Dekodieren): Das Steuerwerk entschlüsselt, was zu tun ist.\n3. **Execute** (Ausführen): Die **ALU** rechnet, vergleicht oder schreibt ein Ergebnis ins **Register**.\n\nDann beginnt der Zyklus von vorn. Jedes Shop-Programm ist für die CPU letztlich eine lange Liste solcher Einzelschritte.'),
+          A.text('Alles ist 0 und 1', 'Im Rechner liegt alles als **Binärwert**. Eine einzelne 0 oder 1 ist ein **Bit**, acht Bit sind ein **Byte**. Die Bestellmenge 5 ist `00000101`, der Buchstabe A im ASCII-Code `01000001`. Programmiersprachen verstecken diese Bits hinter **Datentypen**: Du schreibst `1999` (Cent) oder `"Funkmaus"`, der Datentyp legt fest, wie die Bits interpretiert werden.'),
+          A.table(['Datentyp (Java)', 'Inhalt', 'Beispiel aus dem Shop'], [
+            ['`int` / `long`', 'ganze Zahl', '`1999` (Preis in Cent), `35` (Lagerbestand)'],
+            ['`double`', 'Kommazahl', '`0.19` (Mehrwertsteuersatz)'],
+            ['`char`', 'ein einzelnes Zeichen', '`\'A\'` (Versandklasse)'],
+            ['`boolean`', 'Wahrheitswert', '`true` (lieferbar)'],
+            ['`String`', 'Zeichenkette', '`"Funkmaus"` (Artikelname)']
+          ], 'Datentypen geben den Bits eine Bedeutung'),
+          A.text('Drei Stufen: Maschinencode, Assembler, Hochsprache', '**Maschinencode** besteht aus reinen Zahlen, die die CPU direkt ausführt – für Menschen kaum lesbar. **Assembler** schreibt dieselben Befehle als Kürzel (**Mnemonics**) wie `mov`, `add` oder `cmp`; ein Übersetzer erzeugt daraus Maschinencode. **Hochsprachen** wie Python, Java oder C orientieren sich an menschlicher Sprache: Man rechnet mit `preisInCent` statt mit Registern.'),
+          A.code('c', [
+            'int gesamtpreis(int preisInCent, int menge) {§Eine Funktion in C: rechnet den Zeilenbetrag einer Bestellposition.',
+            '    int summe = preisInCent * menge;§Statt Register-Befehlen (mov, imul) reicht eine lesbare Zeile.',
+            '    if (summe < 5000) {§Versandkostenfrei erst ab 50,00 Euro (5000 Cent).',
+            '        summe += 495;§Sonst 4,95 Euro Versand addieren.',
+            '    }',
+            '    return summe;§Gibt den Endbetrag in Cent zurück.',
+            '}'
+          ], 'Dasselbe in einer Hochsprache (C)', { praxis: 'C wird vor dem Start komplett in Maschinencode übersetzt und vom Linker gebunden – ideal für schnelle Systemsoftware oder eingebettete Kassenterminals.' }),
+          A.code('python', [
+            'def gesamtpreis(preis_in_cent, menge):§Dieselbe Shop-Regel in einer interpretierten Hochsprache.',
+            '    summe = preis_in_cent * menge§Kein Compiler-Lauf vorher nötig: der Interpreter führt direkt aus.',
+            '    if summe < 5000:',
+            '        summe += 495',
+            '    return summe',
+            'print("Endbetrag:", gesamtpreis(1999, 2), "Cent")§2 Funkmäuse = 3998 Cent + 495 Cent Versand = 4493 Cent.'
+          ], 'Und in Python (interpretiert)', { trace: true, praxis: 'Der Python-Interpreter liest und startet den Code sofort. Das spart Zeit beim Entwickeln von Skripten, Imports und Web-Backends.' }),
+          A.table(['Werkzeug', 'Was es tut', 'Beispiel'], [
+            ['**Compiler**', 'übersetzt den gesamten Quellcode **vorher** in ausführbaren Code', 'C, C++; Java übersetzt in **Bytecode**'],
+            ['**Interpreter**', 'liest und führt den Code beim Start Zeile für Zeile aus', 'Python, JavaScript'],
+            ['**Linker**', 'verbindet übersetzte Programmteile und Bibliotheken zur fertigen Datei', 'bei C und C++'],
+            ['**JVM**', 'Java Virtual Machine: führt plattformunabhängigen Bytecode (`.class`) aus', '„Write once, run anywhere“'],
+            ['**IDE**', 'Entwicklungsumgebung: Editor, Compiler/Interpreter, **Debugger** und Projektverwaltung', 'IntelliJ IDEA, Visual Studio, PyCharm']
+          ], 'Vom Quelltext zum laufenden Programm'),
+          A.table(['Fehlerart', 'Wann merkt man es?', 'Beispiel aus dem Shop'], [
+            ['**Syntaxfehler**', 'beim Übersetzen – das Programm startet gar nicht', 'fehlende Klammer oder Semikolon'],
+            ['**Laufzeitfehler**', 'während das Programm läuft – es bricht ab', 'Text „zwei“ statt Zahl im Mengenfeld'],
+            ['**Logischer Fehler**', 'Programm läuft durch, liefert aber ein falsches Ergebnis', 'Versandkosten auch über 50 Euro berechnet']
+          ], 'Fehlerarten beim Debugging'),
+          A.table(['Weiterlesen', 'Passender Kurs'], [
+            ['Wie Algorithmen aufgebaut sind', '[Pseudocode: Was ist ein Algorithmus?](/code-lernen/kurs/pseudo/algo/)'],
+            ['Fehlersuche live üben', '[Java: Bug-Arena](/code-lernen/kurs/java/bugs/) und [Python: Bug-Arena](/code-lernen/kurs/python/bugs/)']
+          ], 'Verbindung zu den anderen Kursen')
         ],
-        tips: [A.tip('Ein **Debugger** führt das Programm Schritt für Schritt aus und zeigt die Werte aller Variablen. Genau das macht in dieser App der Knopf **Ablauf verfolgen**.')],
+        tips: [
+          A.tip('Ein **Debugger** führt Code Schritt für Schritt aus und zeigt alle Variablenwerte – genau wie der Knopf **Ablauf verfolgen** hier in der App.')
+        ],
         quiz: [
-          A.q('In welcher Reihenfolge arbeitet die CPU einen Befehl ab?', ['Holen, Dekodieren, Ausführen', 'Ausführen, Holen, Speichern', 'Dekodieren, Holen, Ausführen', 'Laden, Rechnen, Drucken'], 0, 'Fetch, Decode, Execute.'),
-          A.q('Wie viele Bit hat ein Byte?', ['8', '2', '10', '16'], 0, 'Acht Bit sind ein Byte, zum Beispiel 00000101 für die Zahl 5.'),
-          A.q('Was unterscheidet einen Compiler von einem Interpreter?', ['Der Compiler übersetzt vor dem Start alles, der Interpreter arbeitet Zeile für Zeile beim Ausführen', 'Der Compiler führt den Code Zeile für Zeile aus, der Interpreter erzeugt vorher eine ausführbare Datei', 'Der Compiler ist nur für Skriptsprachen, der Interpreter nur für Sprachen wie C', 'Beide übersetzen alles vorab, der Interpreter prüft zusätzlich die Rechtschreibung'], 0, 'Compiler: vorher alles übersetzen. Interpreter: beim Laufen Zeile für Zeile.'),
-          A.q('Ein Programm läuft ohne Absturz, rechnet aber den Durchschnitt falsch aus. Welche Fehlerart?', ['Logischer Fehler', 'Syntaxfehler', 'Laufzeitfehler', 'Ressourcenfehler'], 0, 'Es läuft, also kein Syntax- oder Laufzeitfehler. Das Ergebnis ist falsch: ein Denkfehler in der Logik.'),
-          A.q('Was führt Java-Bytecode aus?', ['Die Java Virtual Machine (JVM)', 'Der Linker des Betriebssystems', 'Der Prozessor direkt, ohne Zwischenschritt', 'Der Java-Compiler javac'], 0, 'javac übersetzt in Bytecode, die JVM führt ihn auf jeder Plattform aus.')
+          A.q('In welcher Reihenfolge arbeitet die CPU einen Befehl ab?', ['Holen, Dekodieren, Ausführen', 'Ausführen, Holen, Speichern', 'Dekodieren, Holen, Ausführen', 'Laden, Rechnen, Drucken'], 0, 'Fetch, Decode, Execute – immer im selben Takt.'),
+          A.q('Wie viele Bit ergeben ein Byte?', ['8', '2', '10', '16'], 0, 'Acht Bit bilden ein Byte.'),
+          A.q('Was unterscheidet einen Compiler von einem Interpreter?', ['Der Compiler übersetzt vor dem Start alles, der Interpreter arbeitet beim Ausführen', 'Der Compiler führt Zeile für Zeile aus, der Interpreter erzeugt vorher eine Datei', 'Der Compiler ist nur für Skriptsprachen, der Interpreter nur für C und C++', 'Beide übersetzen alles vorab, der Interpreter prüft zusätzlich die Logik'], 0, 'Compiler übersetzen vorab, Interpreter führen beim Start direkt aus.'),
+          A.q('Der Shop läuft ohne Absturz, berechnet aber ab 50 Euro trotzdem Versandkosten. Welche Fehlerart?', ['Logischer Fehler', 'Syntaxfehler', 'Laufzeitfehler', 'Linkerfehler'], 0, 'Kein Abbruch und kein Übersetzungsfehler, aber falsches Ergebnis: Logikfehler.'),
+          A.q('Was führt Java-Bytecode (`.class`-Dateien) aus?', ['Die Java Virtual Machine (JVM)', 'Der Linker des Betriebssystems', 'Die ALU direkt ohne Zwischenschicht', 'Der Texteditor der IDE'], 0, 'javac übersetzt in Bytecode, die JVM führt ihn auf dem jeweiligen System aus.')
         ],
         tasks: [
-          A.fill('Wie heißt die Kurzschreibweise für Maschinenbefehle wie mov, add oder jmp?', '{{Assembler|Assemblersprache|Mnemonics}}', 'Die Sprache direkt über dem Maschinencode.'),
-          A.fill('Welches Bauteil der CPU rechnet und vergleicht? (Abkürzung)', '{{ALU}}', 'Gesucht ist das Rechenwerk der CPU. Die Abkürzung hat drei Buchstaben und steht für Rechnen (arithmetisch) und Vergleichen (logisch).')
+          A.fill('Wie heißt die Kurzschreibweise für Maschinenbefehle wie `mov`, `add` oder `jmp`?', '{{Assembler|Assemblersprache|Mnemonics}}', 'Die Ebene direkt über dem binären Maschinencode.'),
+          A.fill('Welches Bauteil der CPU rechnet und vergleicht? (3 Buchstaben)', '{{ALU}}', 'Arithmetisch-logische Einheit.'),
+          A.predict('Algorithmisches Denken am Shop-Beispiel: Was gibt der Ablauf aus?', [
+            'preis <- 1999',
+            'menge <- 3',
+            'summe <- preis * menge',
+            'WENN summe < 5000 DANN',
+            '  summe <- summe + 495',
+            'ENDE WENN',
+            'AUSGABE summe'
+          ], '5997', 'Rechne 1999 * 3 und prüfe danach, ob die Summe unter 5000 liegt.', '1999 * 3 = 5997. Da 5997 nicht kleiner als 5000 ist, entfallen die Versandkosten.')
         ]
       },
 
       /* ---------- 2. Warum strukturiert planen ---------- */
       {
-        id: 'planen', stage: 1, title: 'Warum man Software plant', goal: 'Du kannst begründen, warum Planung Kosten spart, und kennst Spaghetti-Code, technische Schulden, CRUD, KISS, Modularität und die 3-Schicht-Architektur.',
+        id: 'planen', standalone: true, domain: 'shop', stage: 1,
+        title: 'Warum man Software plant',
+        goal: 'Du begründest, warum Planung Kosten spart, erkennst Spaghetti-Code und technische Schulden und wendest CRUD, KISS, Modularität und die 3-Schicht-Architektur auf den Onlineshop an.',
+        terms: ['Spaghetti-Code', 'Technische Schulden', 'CRUD', 'KISS', 'Programmierparadigma'],
         parts: [
-          A.text('Hobby gegen Firma', 'Ein privates Projekt darf nach „Ausprobieren und Ändern“ entstehen. Software in einem Unternehmen muss mehr können: Sie muss **zuverlässig** laufen, **wartbar** sein (andere und du selbst in einem Jahr verstehen sie noch) und **skalieren** (mit mehr Nutzern und Daten zurechtkommen). Das schafft niemand ohne Plan.'),
-          A.text('Ein Beispiel, wie es schiefgeht', 'Ein Azubi soll eine Kundenverwaltung bauen, eine **CRUD-Anwendung**: Create (anlegen), Read (anzeigen), Update (ändern), Delete (löschen). Er fängt sofort an zu programmieren (**Code-and-Fix**), benutzt **globale Variablen**, mischt die Rechenlogik mit der Oberfläche und kommentiert kaum.\n\nNach ein paar Wochen ist der Code **Spaghetti-Code**: Niemand findet mehr Anfang und Ende eines Fadens. Fehler häufen sich, Daten widersprechen sich (ein Kunde steht mit zwei Postleitzahlen in der Datenbank), und jede Änderung an der Datenbank betrifft das ganze Programm. Er steckt in **technischen Schulden**: Wie bei einem Kredit war der schnelle Weg erst bequem, jetzt zahlt er Zinsen in Form von Fehlersuche und Umbau.'),
-          A.table(['Begriff', 'Bedeutung'], [['Globale Variable', 'überall im Programm les- und änderbar; man weiß nicht mehr, wer sie wann verändert hat. Besser: lokale Variablen, die nur in einer Funktion gelten'], ['Trennung der Belange (Separation of Concerns)', 'Oberfläche, Geschäftslogik und Datenhaltung getrennt halten, damit eine Änderung nicht alles andere mitreißt'], ['Datenkonsistenz', 'Daten sind korrekt und widerspruchsfrei'], ['Technische Schulden (Technical Debt)', 'Mehraufwand später, weil jetzt eine schnelle, schlechte Lösung gewählt wurde']], 'Die Fachbegriffe aus dem Beispiel'),
-          A.table(['Prinzip', 'Kurz gesagt'], [['**Modularität**', 'kleine, abgeschlossene Bausteine mit genau einer Aufgabe; einzeln test- und austauschbar'], ['**KISS** (Keep it simple, stupid)', 'die einfachste klare Lösung wählen, nichts unnötig verkomplizieren'], ['**3-Schicht-Architektur**', 'Präsentation (Oberfläche), Logik (Geschäftsregeln), Datenhaltung (Datenbank) getrennt; so lässt sich etwa die Datenbank tauschen, ohne alles neu zu schreiben'], ['**Coding Conventions**', 'gemeinsame Regeln für Namen, Einrückung und Klammern, damit Code im Team aussieht wie von einer Person']], 'Was strukturierte Planung bringt'),
-          A.text('Fehler werden mit der Zeit teurer', 'Ein Fehler, den man in der **Planung** findet, kostet eine Änderung im Dokument. Derselbe Fehler nach dem **Deployment** (Auslieferung beim Kunden) kostet Fehlersuche, Codeänderung, neue Tests, neue Auslieferung und vielleicht Schaden beim Kunden. Erfahrungswerte sprechen von **bis zu hundertfachen** Kosten. Darum lohnt sich Planung, auch wenn sie am Anfang Zeit kostet.'),
-          A.text('Die Werkzeuge der Planung: Modell und Pseudocode', 'Wie ein Architekt vor dem Hausbau Baupläne zeichnet, nutzen Entwickler **Modelle** (meist in **UML**) und **Pseudocode**. Beide trennen die **Logik** (das Was: was soll passieren, wie hängt es zusammen) von der **Implementierung** (das Wie: der Code in einer bestimmten Sprache). Ein typischer Weg in einem Team:\n\n1. **Anwendungsfalldiagramm**: Wer macht was mit dem System?\n2. **Klassendiagramm**: Welche Daten und Klassen gibt es?\n3. **Aktivitätsdiagramm**: Wie läuft ein Vorgang ab?\n4. **Pseudocode**: Die wichtigen Algorithmen ausformulieren und auf Denkfehler prüfen.\n5. Erst dann **programmieren**, zum Beispiel in Java oder Python.'),
-          A.table(['Paradigma', 'Denkweise', 'Typisch für'], [['**Prozedural**', 'eine Abfolge von Befehlen, gegliedert in Prozeduren (Funktionen)', 'C, Pascal, Skripte'], ['**Objektorientiert**', 'Objekte bündeln Daten (Attribute) und Verhalten (Methoden)', 'Java, C#, C++'], ['**Funktional**', 'Funktionen ohne Seiteneffekte verarbeiten Eingaben zu Ausgaben', 'Streams in Java, Haskell'], ['**Ereignisgesteuert**', 'Der Ablauf folgt Ereignissen wie Klicks oder Meldungen', 'Oberflächen, Webseiten']], 'Programmierparadigmen: Arten, ein Programm zu denken')
+          A.text('Hobby gegen professionellen Betrieb', 'Ein kleines Privatskript darf nach „Ausprobieren und Ändern“ entstehen. Ein **Onlineshop** im laufenden Betrieb muss mehr leisten: Er muss **zuverlässig** kassieren, **wartbar** bleiben (andere Entwickler müssen ihn in einem Jahr noch verstehen) und **skalieren**, wenn am Black Friday zehnmal so viele Bestellungen eingehen. Das funktioniert nur mit Planung.'),
+          A.text('Wie ein Shop ohne Planung scheitert', 'Ein Team soll eine Artikel- und Kundenverwaltung bauen – eine klassische **CRUD-Anwendung**: **C**reate (Artikel anlegen), **R**ead (Katalog anzeigen), **U**pdate (Preis ändern), **D**elete (Artikel entfernen). Statt zu planen, startet jemand sofort mit **Code-and-Fix**: globale Variablen, Versandregeln mitten im HTML-Code, Datenbankabfragen direkt am Button.\n\nNach drei Monaten entsteht **Spaghetti-Code**: Niemand weiß mehr, welche Stelle den Lagerbestand ändert. Ein Artikel steht im Katalog mit 19,99 € und auf der Rechnung mit 24,99 €. Das Team steckt in **technischen Schulden**: Der schnelle Start war wie ein Kredit – jetzt frisst die Fehlersuche jede Arbeitswoche auf.'),
+          A.table(['Schicht (3-Schicht-Architektur)', 'Aufgabe im Onlineshop', 'Vorteil der Trennung'], [
+            ['**1. Präsentation** (Oberfläche)', 'Webseite oder App: Warenkorb anzeigen, Klicks entgegennehmen', 'Neues Design oder Mobile-App möglich, ohne Geschäftsregeln neu zu schreiben'],
+            ['**2. Geschäftslogik** (Logik)', 'Versandkosten, Rabatte, Lagerprüfung, Login-Sperre', 'Alle Regeln stehen an genau einer Stelle und sind automatisch testbar'],
+            ['**3. Datenhaltung** (Datenbank)', 'Artikel, Kunden und Bestellungen dauerhaft speichern', 'Datenbank lässt sich wechseln oder sichern, ohne die Oberfläche anzufassen']
+          ], 'Die 3-Schicht-Architektur am Onlineshop', 'Diese Trennung (Separation of Concerns) ist der Gegenentwurf zu Spaghetti-Code.'),
+          A.table(['Prinzip', 'Bedeutung', 'Beispiel im Shop'], [
+            ['**Modularität**', 'System in kleine, abgeschlossene Bausteine mit einer Aufgabe zerlegen', 'Eigene Bausteine für `Warenkorb`, `RabattRechner` und `Zahlung`'],
+            ['**KISS** (Keep it simple, stupid)', 'Die einfachste klare Lösung wählen, nichts unnötig verkomplizieren', 'Versandgrenze als klare Konstante statt verschachteltem Sonderkonstrukt'],
+            ['**Coding Conventions**', 'Einheitliche Regeln für Namen, Einrückung und Struktur im Team', 'Preise heißen überall `preisInCent`, nie mal `p` und mal `eur`']
+          ], 'Grundprinzipien strukturierter Planung'),
+          A.text('Fehler werden mit der Zeit bis zu 100-mal teurer', 'Wird eine fehlende Versandregel in der **Planung** bemerkt, reicht ein Satz im Dokument. Fällt derselbe Fehler erst nach dem **Deployment** im Live-Shop auf, folgen falsche Rechnungen, Support-Tickets, Notfall-Patch, neue Tests und Kundenverlust. Planung kostet am Anfang Stunden – sie spart am Ende Wochen.'),
+          A.table(['Programmierparadigma', 'Denkweise', 'Typisch für'], [
+            ['**Prozedural**', 'Abfolge von Schritten, gegliedert in Funktionen', 'C, Skripte, einfache Batch-Jobs'],
+            ['**Objektorientiert**', 'Objekte bündeln Daten und Verhalten', 'Java, Python, C#, unser 4-Klassen-Shop'],
+            ['**Funktional**', 'Werte durch reine Funktionen verarbeiten ohne Nebeneffekte', 'Java Streams, Datenpipelines'],
+            ['**Ereignisgesteuert**', 'Ablauf reagiert auf Ereignisse wie Klicks oder Anfragen', 'Web-Oberflächen, JavaScript im Browser']
+          ], 'Programmierparadigmen im Überblick'),
+          A.table(['Weiterlesen', 'Passender Kurs'], [
+            ['Wie man Spaghetti-Code im Kleinen verhindert', '[Java: Clean Code](/code-lernen/kurs/java/clean/) und [Python: Clean Code](/code-lernen/kurs/python/clean/)'],
+            ['Wie der 4-Klassen-Shop entworfen wird', '[Modellieren: Von der Aufgabe zum Klassendiagramm](/code-lernen/kurs/oop/entwurf/)']
+          ], 'Verbindung zu den anderen Kursen')
         ],
-        tips: [A.warn('„Programmieren“ und „Codieren“ sind nicht dasselbe. **Programmieren** ist das Planen und Beschreiben aller Arbeitsschritte, **Codieren** ist das Übersetzen dieses Plans in eine Programmiersprache.')],
+        tips: [
+          A.warn('**Programmieren** ist das Planen und Entwerfen der Lösung; **Codieren** ist erst das Übersetzen des Plans in eine Programmiersprache.')
+        ],
         quiz: [
-          A.q('Was beschreibt der Begriff „technische Schulden“?', ['Den späteren Mehraufwand durch heute gewählte schnelle, schlechte Lösungen', 'Die laufenden Lizenzkosten für Entwicklungsumgebung und Server', 'Rechnungen der IT-Abteilung, die noch nicht bezahlt wurden', 'Den Abschreibungswert alter Hardware in der Bilanz'], 0, 'Wie ein Kredit: jetzt schnell, später Zinsen in Form von Fehlern und Umbau.'),
-          A.q('Wofür steht CRUD?', ['Create, Read, Update, Delete', 'Code, Run, Use, Debug', 'Create, Run, Undo, Deploy', 'Copy, Read, Upload, Download'], 0, 'Die vier Grundfunktionen beim Verwalten gespeicherter Daten.'),
-          A.q('Welche drei Schichten trennt die 3-Schicht-Architektur?', ['Präsentation, Logik, Datenhaltung', 'Hardware, Betriebssystem, Anwendung', 'Frontend, Backend, Cloud', 'Planung, Code, Test'], 0, 'Oberfläche, Geschäftsregeln und Datenbank.'),
-          A.q('Wann ist ein Fehler am günstigsten zu beheben?', ['In der Planung', 'Nach der Auslieferung', 'Im Wartungsvertrag', 'Das ist immer gleich teuer'], 0, 'Je früher, desto billiger, bis zu hundertfach.')
+          A.q('Was beschreibt der Begriff „Technische Schulden“?', ['Späterer Mehraufwand durch heute gewählte schnelle, unsaubere Lösungen', 'Laufende monatliche Server- und Lizenzkosten einer Webanwendung', 'Offene Rechnungen der IT-Abteilung beim externen Dienstleister', 'Veraltete Büro-Hardware, die noch nicht abgeschrieben wurde'], 0, 'Wie ein Kredit: heute Zeit gespart, später Zinsen durch langsame Fehlersuche und Umbauten.'),
+          A.q('Wofür steht die Abkürzung CRUD?', ['Create, Read, Update, Delete', 'Code, Run, Use, Debug', 'Create, Run, Undo, Deploy', 'Copy, Read, Upload, Download'], 0, 'Die vier Grundoperationen jeder Datenverwaltung: Anlegen, Lesen, Ändern, Löschen.'),
+          A.q('In welcher Schicht der 3-Schicht-Architektur liegt die Berechnung der Versandkosten?', ['Geschäftslogik (Logikschicht)', 'Präsentationsschicht (Oberfläche)', 'Datenhaltungsschicht (Datenbank)', 'Betriebssystemschicht (Kernel)'], 0, 'Geschäftsregeln wie Versandgrenzen und Rabatte gehören in die Logikschicht, nicht in die Oberfläche.'),
+          A.q('Wann ist ein Denkfehler in der Softwareentwicklung am günstigsten zu beheben?', ['Bereits in der Planungsphase', 'Erst nach dem Live-Deployment', 'Während der Wartung beim Kunden', 'In jeder Phase genau gleich teuer'], 0, 'Je später ein Fehler entdeckt wird, desto teurer sind Korrektur, Test und Auslieferung.')
         ],
-        tasks: [A.fill('Wie heißt das Prinzip „die einfachste klare Lösung wählen“? (Abkürzung)', '{{KISS}}', 'Ein englischer Merksatz aus vier Wörtern, der zur Einfachheit mahnt. Gesucht sind die Anfangsbuchstaben.')]
+        tasks: [
+          A.fill('Wie heißt das Prinzip „die einfachste klare Lösung wählen“? (Abkürzung)', '{{KISS}}', 'Vier Anfangsbuchstaben: Keep it simple, stupid.'),
+          A.fill('Ergänze den CRUD-Buchstaben für das Ändern eines Artikelpreises: Create, Read, {{Update}}, Delete.', '{{Update}}', 'Englisches Wort für Aktualisieren/Ändern.'),
+          A.choose('Shop-Versandregel: Beide Varianten berechnen dasselbe. Welche folgt KISS und Modularität statt Code-and-Fix?', 'pseudo', [
+            [
+              'w1 <- 3998',
+              'WENN w1 >= 5000 DANN',
+              '  AUSGABE 0',
+              'SONST',
+              '  AUSGABE 495',
+              'ENDE WENN',
+              'w2 <- 6200',
+              'WENN w2 >= 5000 DANN',
+              '  AUSGABE 0',
+              'SONST',
+              '  AUSGABE 495',
+              'ENDE WENN'
+            ],
+            [
+              'FUNKTION versandInCent(warenwert)',
+              '  WENN warenwert >= 5000 DANN',
+              '    GIB ZURÜCK 0',
+              '  ENDE WENN',
+              '  GIB ZURÜCK 495',
+              'ENDE FUNKTION',
+              'AUSGABE versandInCent(3998)',
+              'AUSGABE versandInCent(6200)'
+            ]
+          ], { a: 1, expect: '495\n0' }, 'Wo musst du ändern, wenn die Versandgrenze auf 60 Euro steigt?', 'Die Funktion kapselt die Versandregel als eigenen Baustein an genau einer Stelle. Die erste Variante kopiert die Regel und erzeugt technische Schulden.')
+        ]
       },
 
       /* ---------- 3. Der Lebenszyklus ---------- */
       {
-        id: 'sdlc', stage: 2, title: 'Der Software-Lebenszyklus (SDLC)', goal: 'Du kennst die sechs Phasen, die Ergebnisse jeder Phase, Lasten- und Pflichtenheft, die Testarten und den Unterschied zwischen Wasserfall und agil.',
+        id: 'sdlc', standalone: true, domain: 'shop', stage: 2,
+        title: 'Der Software-Lebenszyklus (SDLC)',
+        goal: 'Du ordnest die sechs SDLC-Phasen am Onlineshop-Projekt ein, unterscheidest Lasten- und Pflichtenheft, kennst die vier Teststufen und vergleichst Wasserfall mit Scrum.',
+        terms: ['SDLC', 'Lastenheft', 'Pflichtenheft', 'Wasserfallmodell', 'Scrum', ['Unit-Test (Modultest)', 'Unit-Test']],
         parts: [
-          A.text('Ein fester Fahrplan', 'Jede professionelle Software durchläuft dieselben Phasen, egal wie klein oder groß sie ist. Diesen Rahmen nennt man **Software Development Life Cycle (SDLC)**, den Software-Lebenszyklus. Er legt fest, dass nichts vergessen wird: Erst klären, was gebraucht wird, dann entwerfen, bauen, prüfen, ausliefern und pflegen.'),
-          A.table(['Phase', 'Leitfrage', 'Ergebnis'], [['1. **Anforderungsanalyse**', 'Was soll die Software können?', 'Lastenheft, Pflichtenheft, Anforderungsliste'], ['2. **Entwurf und Modellierung**', 'Wie wird sie technisch aufgebaut?', 'Architektur, UML-Diagramme, Datenmodell'], ['3. **Implementierung**', 'Wie setzen wir das in Code um?', 'Quellcode, Unit-Tests'], ['4. **Test**', 'Funktioniert alles wie gefordert?', 'Testprotokolle, Fehlerberichte'], ['5. **Deployment**', 'Wie kommt sie zu den Nutzern?', 'ausgelieferte Version, Installationsanleitung'], ['6. **Wartung**', 'Wie bleibt sie nutzbar?', 'Fehlerbehebungen (Bugfixes), Updates, neue Anforderungen (zurück zu Phase 1)']], 'Die sechs Phasen'),
-          A.table(['Dokument', 'Wer schreibt es?', 'Beantwortet'], [['**Lastenheft**', 'der **Auftraggeber** (Kunde)', '**Was** will ich haben, wofür? Grundlage für das Angebot'], ['**Pflichtenheft**', 'der **Auftragnehmer** (Entwicklungsteam)', '**Wie** und womit wird das Lastenheft umgesetzt? Wird Vertragsbestandteil']], 'Lastenheft und Pflichtenheft'),
-          A.tip('Merkhilfe: Im **L**astenheft steht die **L**ast, die der Kunde trägt (seine Wünsche). Im **P**flichtenheft stehen die **P**flichten des Auftragnehmers.'),
-          A.table(['Testart', 'Was wird geprüft?', 'Wer?'], [['**Unit-Test** (Modultest)', 'eine einzelne Funktion oder Klasse für sich', 'Entwickler, meist automatisch'], ['**Integrationstest**', 'das Zusammenspiel mehrerer Bausteine', 'Entwickler oder Testteam'], ['**Systemtest**', 'das ganze System gegen die Anforderungen', 'Testteam (QA)'], ['**Abnahmetest** (Akzeptanztest)', 'erfüllt die Software den Vertrag?', 'Kunde oder in seinem Auftrag']], 'Die Testarten der Phase 4'),
-          A.table(['', 'Wasserfall (klassisch)', 'Agil (z. B. Scrum, Kanban)'], [['Ablauf', 'Phasen streng nacheinander, jede wird abgeschlossen und abgenommen', 'kurze Durchläufe (Sprints) mit jeweils lauffähigem Zwischenstand'], ['Änderungen', 'nach Phasenbeginn schwierig und teuer', 'erwünscht, werden im nächsten Durchlauf eingeplant'], ['Kunde', 'vor allem am Anfang (Lastenheft) und am Ende (Abnahme) beteiligt', 'regelmäßig beteiligt, gibt laufend Rückmeldung'], ['passt gut, wenn', 'die Anforderungen fest und klar sind', 'sich Anforderungen noch ändern oder unklar sind']], 'Vorgehensmodelle: wie die Phasen durchlaufen werden')
+          A.text('Ein fester Fahrplan für unser Shop-Projekt', 'Ein mittelständischer Händler beauftragt dein Entwicklerteam mit dem **Onlineshop für IT-Zubehör**. Damit nichts vergessen wird, durchläuft das Projekt sechs feste Phasen – den **Software Development Life Cycle (SDLC)**:'),
+          A.table(['Phase', 'Leitfrage', 'Konkretes Ergebnis im Shop-Projekt'], [
+            ['1. **Anforderungsanalyse**', 'Was soll der Shop können?', 'Lastenheft des Händlers, Pflichtenheft des Teams'],
+            ['2. **Entwurf & Modellierung**', 'Wie bauen wir ihn technisch auf?', 'Use-Case-, Aktivitäts-, Klassen- und ER-Diagramm'],
+            ['3. **Implementierung**', 'Wie setzen wir das in Code um?', 'Java-/Python-Klassen, SQL-Tabellen, Unit-Tests'],
+            ['4. **Test**', 'Funktioniert alles wie vereinbart?', 'Unit-, Integrations-, System- und Abnahmetest'],
+            ['5. **Deployment**', 'Wie kommt der Shop online?', 'Live-Schaltung auf dem Server, Betriebshandbuch'],
+            ['6. **Wartung**', 'Wie bleibt er aktuell und sicher?', 'Bugfixes, neue Zahlungsarten (zurück zu Phase 1)']
+          ], 'Die sechs Phasen des SDLC'),
+          A.table(['Dokument', 'Wer schreibt es?', 'Beispiel aus unserem Shop'], [
+            ['**Lastenheft**', 'der **Auftraggeber** (Shop-Betreiber)', '„Kunden sollen Artikel in den Warenkorb legen; ab 50 € ist der Versand kostenlos.“ (**Was** und **Wofür**?)'],
+            ['**Pflichtenheft**', 'der **Auftragnehmer** (IT-Dienstleister)', '„Umsetzung als Web-App mit 3-Schicht-Architektur, Preise als `long` in Cent, SQL-Datenbank.“ (**Wie** und **Womit**?)']
+          ], 'Lastenheft und Pflichtenheft', 'Das Pflichtenheft wird nach Prüfung und Unterschrift **Vertragsbestandteil**.'),
+          A.tip('Merkhilfe: Im **L**astenheft steht die **L**ast (die Wünsche) des Auftraggebers. Im **P**flichtenheft stehen die **P**flichten des Auftragnehmers.'),
+          A.table(['Teststufe', 'Was wird im Shop geprüft?', 'Wer testet?'], [
+            ['**Unit-Test** (Modultest)', 'eine einzelne Methode für sich, z. B. `rabattInCent(10000) == 1000`', 'Entwickler (automatisiert)'],
+            ['**Integrationstest**', 'Zusammenspiel mehrerer Teile, z. B. `Warenkorb` + Datenbank', 'Entwickler / Testteam'],
+            ['**Systemtest**', 'der komplette Shop gegen alle Anforderungen aus dem Pflichtenheft', 'Testteam (QA)'],
+            ['**Abnahmetest** (Akzeptanztest)', 'erfüllt der fertige Shop den Vertrag?', 'Auftraggeber (Kunde)']
+          ], 'Die vier Teststufen in Phase 4'),
+          A.table(['', 'Wasserfallmodell (klassisch)', 'Agil (z. B. Scrum)'], [
+            ['Ablauf', 'Phasen streng nacheinander, jede wird abgenommen', 'kurze **Sprints** (1–4 Wochen), jeder liefert ein lauffähiges Stück Shop'],
+            ['Änderungen', 'nach Phasenbeginn teuer und schwer', 'ausdrücklich möglich, kommen ins Backlog für den nächsten Sprint'],
+            ['Kunde', 'vor allem am Anfang (Lastenheft) und Ende (Abnahme)', 'nach jedem Sprint beim Review eingebunden'],
+            ['Wann sinnvoll?', 'Anforderungen stehen von Anfang an fest (z. B. behördliche Vorgaben)', 'Anforderungen entwickeln sich weiter (z. B. neuer Onlineshop)']
+          ], 'Wasserfallmodell vs. Scrum'),
+          A.table(['Weiterlesen', 'Passender Kurs'], [
+            ['Testfälle, Grenzwerte und JUnit-Tests', '[AP2: Testen: Testfälle, Grenzwerte, Unit-Tests](/code-lernen/kurs/ap2/testen/)']
+          ], 'Vertiefung in AP2')
         ],
         quiz: [
-          A.q('In welcher Phase entsteht das Klassendiagramm?', ['Entwurf und Modellierung', 'Anforderungsanalyse beim Kunden', 'Test und Abnahme', 'Wartung'], 0, 'Erst klärt man das Was, dann im Entwurf das Wie, mit UML.'),
-          A.q('Wer schreibt das Pflichtenheft?', ['Der Auftragnehmer', 'Der Auftraggeber', 'Die IHK', 'Der Endnutzer'], 0, 'Das Pflichtenheft beschreibt, wie der Auftragnehmer das Lastenheft umsetzt.'),
-          A.q('Welcher Test prüft eine einzelne Methode für sich?', ['Unit-Test', 'Abnahmetest', 'Integrationstest', 'Systemtest'], 0, 'Unit heißt Einheit: die kleinste testbare Einheit.'),
-          A.q('Die Anforderungen ändern sich ständig. Welches Vorgehen passt besser?', ['Agil, z. B. Scrum', 'Wasserfall', 'Gar keine Planung', 'Erst alles programmieren, dann planen'], 0, 'Agile Modelle sind auf Änderungen ausgelegt.')
+          A.q('In welcher SDLC-Phase entstehen Klassendiagramm und Datenbankmodell?', ['Entwurf und Modellierung', 'Anforderungsanalyse beim Kunden', 'System- und Abnahmetest', 'Deployment und Wartung'], 0, 'Erst klärt Phase 1 das Was, danach plant Phase 2 den technischen Aufbau.'),
+          A.q('Wer verfasst das Pflichtenheft?', ['Der Auftragnehmer (Entwicklungsteam)', 'Der Auftraggeber (Kunde)', 'Die Endkunden des Onlineshops', 'Ein externer Wirtschaftsprüfer'], 0, 'Der Auftraggeber schreibt das Lastenheft (Was), der Auftragnehmer antwortet mit dem Pflichtenheft (Wie).'),
+          A.q('Welche Teststufe prüft, ob `Warenkorb` und SQL-Datenbank korrekt zusammenarbeiten?', ['Integrationstest', 'Unit-Test', 'Abnahmetest', 'Black-Box-Syntaxtest'], 0, 'Einzelne Methode = Unit-Test. Zusammenspiel mehrerer Komponenten = Integrationstest.'),
+          A.q('Der Shop-Betreiber will nach jeder zweiten Woche neue Funktionen testen und Wünsche anpassen. Welches Vorgehen passt?', ['Scrum (agiles Vorgehen)', 'Strenges Wasserfallmodell', 'Code-and-Fix ohne Planung', 'Erst nach einem Jahr testen'], 0, 'Scrum arbeitet in kurzen Sprints mit regelmäßiger Kundenrückmeldung.')
         ],
-        tasks: [A.fill('Wie heißt das Dokument, in dem der Kunde beschreibt, was er will?', '{{Lastenheft}}', 'Der Kunde legt fest, was er verlangt. Das Gegenstück, das der Auftragnehmer schreibt, ist das Pflichtenheft.')]
+        tasks: [
+          A.fill('Wie heißt das Dokument, in dem der Auftraggeber beschreibt, **was** der Shop leisten soll?', '{{Lastenheft}}', 'Das Gegenstück zum Pflichtenheft des Auftragnehmers.'),
+          A.fill('Welche Teststufe führt am Ende der Auftraggeber durch, um den Vertrag abzunehmen?', '{{Abnahmetest|Akzeptanztest}}', 'Beginnt mit Abnahme… oder Akzeptanz….'),
+          A.fill('In agilen Projekten nach Scrum heißen die kurzen, festen Entwicklungsabschnitte (1–4 Wochen) ...', '{{Sprints|Sprint}}', 'Englisches Wort aus dem Laufsport.')
+        ]
       },
 
       /* ---------- 4. Anforderungen ---------- */
       {
-        id: 'anforderungen', stage: 2, title: 'Anforderungen erfassen', goal: 'Du unterscheidest funktionale und nicht-funktionale Anforderungen sicher, kennst User Stories und Scope Creep und weißt, wie man vom Text zum Anwendungsfalldiagramm kommt.',
+        id: 'anforderungen', standalone: true, domain: 'shop', stage: 2,
+        title: 'Anforderungen erfassen: vom Kundenwunsch zur User Story',
+        goal: 'Du trennst funktionale und nicht-funktionale Anforderungen am Onlineshop, formulierst prüfbare Messwerte, schreibst User Stories und erkennst Scope Creep.',
+        terms: ['Funktionale Anforderung', 'Nicht-funktionale Anforderung', 'User Story', 'Scope Creep'],
         parts: [
-          A.text('Bevor der Code fließt, muss die Funktion klar sein', '**Anforderungen** beschreiben, was ein System leisten soll und unter welchen Bedingungen. Ohne sie baut man ein Haus ohne Bauplan: Das Ergebnis ist Zufall. Gute Anforderungen sind eindeutig, prüfbar und vollständig.'),
-          A.table(['', 'Funktionale Anforderung', 'Nicht-funktionale Anforderung'], [['Frage', '**Was** soll das System tun?', '**Wie** gut soll es das tun?'], ['Beispiel', 'Der Benutzer kann sich mit E-Mail-Adresse und Passwort anmelden.', 'Die Anmeldeseite lädt in höchstens 2 Sekunden.'], ['Beispiel', 'Das System zeigt den aktuellen Lagerbestand an.', 'Das System ist zu 99,9 % verfügbar.'], ['Bereiche', 'Funktionen, Eingaben, Ausgaben, Berechnungen', 'Leistung, Zuverlässigkeit, Sicherheit, Bedienbarkeit, Wartbarkeit']], 'Das Was und das Wie'),
-          A.text('Prüfbar formulieren', '„Das System soll schnell sein“ ist keine gute Anforderung, denn niemand kann prüfen, ob sie erfüllt ist. „Die Suche liefert bei 10 000 Datensätzen in unter einer Sekunde ein Ergebnis“ lässt sich messen. In Prüfungen ist oft gefragt, eine schwammige Anforderung messbar umzuschreiben.'),
-          A.text('User Stories', 'In agilen Teams schreibt man Anforderungen gern als kurze **User Story**: „Als **Mitglied** möchte ich **einen Kurs buchen**, damit **ich sicher einen Platz habe**.“ Rolle, Ziel und Nutzen in einem Satz. Mehrere Stories zusammen ergeben die Liste der Funktionen.'),
-          A.text('Scope Creep', 'Werden Anforderungen am Anfang nicht genau festgehalten, kommen während der Entwicklung ständig neue Wünsche dazu, die niemand eingeplant hat. Das heißt **Scope Creep** (schleichende Ausweitung des Umfangs) und führt zu Verzögerungen und Mehrkosten. Ein sauberes Lastenheft ist der beste Schutz.'),
-          A.text('Vom Text zum Bild', 'Anforderungen liegen zuerst als Text vor: lange Listen oder User Stories. Das ist genau, aber unübersichtlich. Das **Anwendungsfalldiagramm** zeigt dieselben Funktionen als Bild: wer mit dem System was tun kann. **Der Text liefert die Details, das Diagramm den Überblick.** Wie man es zeichnet, lernst du in der nächsten Lektion.')
+          A.text('Gute Anforderungen sind messbar', 'Im Kick-off-Gespräch sagt der Shop-Betreiber: „Der Shop soll schnell sein, sicher sein und natürlich Artikel verkaufen.“ Damit kann kein Entwickler arbeiten und kein Tester prüfen. Gute Anforderungen sind **eindeutig**, **prüfbar** und **vollständig** – und sie trennen klar zwischen dem **Was** und dem **Wie gut**.'),
+          A.table(['', 'Funktionale Anforderung', 'Nicht-funktionale Anforderung'], [
+            ['Leitfrage', '**Was** soll der Shop tun?', '**Wie gut** muss er es tun?'],
+            ['Beispiel 1 (Shop)', 'Kunden können Artikel in den Warenkorb legen und Mengen ändern.', 'Die Artikelsuche liefert bei 10 000 Artikeln in unter 0,5 Sekunden ein Ergebnis.'],
+            ['Beispiel 2 (Login)', 'Nach 3 falschen Passwörtern wird das Benutzerkonto gesperrt.', 'Passwörter werden ausschließlich gesalzen und mit Argon2 gehasht gespeichert.'],
+            ['Kategorien', 'Funktionen, Berechnungen, Eingaben, Ausgaben', 'Leistung, Sicherheit, Verfügbarkeit (z. B. 99,9 %), Bedienbarkeit, Wartbarkeit']
+          ], 'Funktional vs. nicht-funktional'),
+          A.table(['Schwammig (nicht prüfbar)', 'Messbar & prüfbar (IHK-reif)'], [
+            ['„Der Shop soll schnell laden.“', '„Die Produktseite lädt bei 500 gleichzeitigen Nutzern in höchstens 2 Sekunden.“'],
+            ['„Der Shop soll immer erreichbar sein.“', '„Die Verfügbarkeit beträgt mindestens 99,5 % im Jahresmittel.“'],
+            ['„Der Checkout soll sicher sein.“', '„Alle Bestelldaten werden über TLS 1.3 verschlüsselt übertragen.“']
+          ], 'Schwammige Wünsche prüfbar umschreiben', 'In AP1 und AP2 wird sehr oft verlangt, eine unklare Anforderung messbar zu machen.'),
+          A.text('User Stories im Shop-Backlog', 'In agilen Teams werden funktionale Anforderungen als **User Story** notiert – immer nach dem Muster **Rolle – Ziel – Nutzen**:\n\n- „Als **Kunde** möchte ich **einen Rabattcode im Checkout eingeben**, damit **ich bei Aktionen Geld spare**.“\n- „Als **Lagerist** möchte ich **Artikel mit Bestand 0 hervorgehoben sehen**, damit **ich rechtzeitig nachbestelle**.“\n\nSo versteht jeder Entwickler sofort, **für wen** und **warum** er eine Funktion baut.'),
+          A.text('Gefahr Scope Creep', 'Mitten im zweiten Sprint ruft der Auftraggeber an: „Können wir noch schnell ein Bonusprogramm, einen Live-Chat und eine App dazubauen?“ Wer solche ungeplanten Wünsche ohne Anpassung von Zeit und Budget übernimmt, gerät in **Scope Creep** (schleichende Ausweitung des Projektumfangs). Gegenmittel: Jede neue Anforderung wird dokumentiert, geschätzt und erst nach Freigabe eingeplant.'),
+          A.text('Vom Text zum Bild', 'Lange Anforderungslisten sind genau, aber schwer zu überblicken. Im nächsten Schritt übersetzen wir die Shop-Anforderungen in ein **Anwendungsfalldiagramm (Use-Case)** – auf einen Blick sichtbar, wer im Shop was tun darf.')
+        ],
+        tips: [
+          A.tip('Prüfe jede Anforderung mit der Frage: „Wie würde ein Tester sie mit Ja/Nein abhaken?“ Fehlt eine Zahl, Zeitgrenze oder klare Bedingung, ist sie noch zu schwammig.')
         ],
         quiz: [
-          A.q('„Die Seite lädt in höchstens 2 Sekunden.“ Was für eine Anforderung ist das?', ['Nicht-funktional', 'Funktional', 'Gar keine', 'Eine User Story'], 0, 'Sie sagt nicht, was die Seite tut, sondern wie schnell.'),
-          A.q('„Der Kunde kann eine Rechnung als PDF herunterladen.“ Was für eine Anforderung ist das?', ['Funktional', 'Nicht-funktional', 'Eine Testart', 'Ein Vorgehensmodell'], 0, 'Eine Funktion, die das System bietet.'),
-          A.q('Was ist Scope Creep?', ['Die schleichende, ungeplante Ausweitung des Projektumfangs', 'Ein Fehler, bei dem eine Variable ihren Gültigkeitsbereich verlässt', 'Ein Testverfahren, das den Umfang der Testfälle schrittweise steigert', 'Die Phase nach der Abnahme, in der nur noch gewartet wird'], 0, 'Immer neue Wünsche ohne Plan und Budget.'),
-          A.q('Welche Anforderung ist prüfbar formuliert?', ['Die Suche liefert bei 10 000 Datensätzen in unter 1 s ein Ergebnis', 'Die Suche soll auch bei sehr vielen Datensätzen schnell sein', 'Die Suche soll für alle Nutzer benutzerfreundlich bedienbar sein', 'Die Suche soll modern aussehen und gut ankommen'], 0, 'Nur hier gibt es eine messbare Grenze.')
+          A.q('„Die Produktseite lädt in höchstens 1,5 Sekunden.“ Welche Art von Anforderung ist das?', ['Nicht-funktionale Anforderung', 'Funktionale Anforderung', 'Eine User Story', 'Ein Anwendungsfall'], 0, 'Sie beschreibt keine Funktion, sondern die Leistungsqualität (wie schnell).'),
+          A.q('„Ab 50 Euro Warenwert entfallen die Versandkosten.“ Welche Art von Anforderung ist das?', ['Funktionale Anforderung', 'Nicht-funktionale Anforderung', 'Ein Vorgehensmodell', 'Ein Abnahmekriterium für Hardware'], 0, 'Das ist eine fachliche Berechnung bzw. Funktion des Shops.'),
+          A.q('Was bezeichnet Scope Creep in einem Softwareprojekt?', ['Die schleichende, ungeplante Ausweitung des Projektumfangs', 'Das bewusste Streichen unwichtiger Funktionen vor dem Start', 'Einen Fehler beim Gültigkeitsbereich lokaler Variablen', 'Die schrittweise Erhöhung der Testabdeckung in Sprints'], 0, 'Immer neue Sonderwünsche während der Umsetzung ohne Zeit- und Budgetanpassung.'),
+          A.q('Welche Anforderung ist wirklich prüfbar formuliert?', ['Die Suche findet unter 10 000 Artikeln in unter 1 Sekunde Treffer', 'Die Suche soll auch bei vielen Artikeln angenehm schnell sein', 'Der Warenkorb soll modern und übersichtlich gestaltet werden', 'Das System soll für alle Kunden möglichst sicher laufen'], 0, 'Nur die erste nennt konkrete, messbare Zahlen (10 000 Artikel, unter 1 Sekunde).')
         ],
-        tasks: [A.fill('Ergänze das Wort, mit dem in einer User Story der Nutzen beginnt.', 'Als Kunde möchte ich mein Passwort zurücksetzen, {{damit}} ich mich wieder anmelden kann.', 'Rolle, Ziel und Nutzen in einem Satz.')]
+        tasks: [
+          A.fill('Ergänze das fehlende Wort für den Nutzen einer User Story.', 'Als Kunde möchte ich meine Bestellungen einsehen, {{damit}} ich den Lieferstatus prüfen kann.', 'Das dreiteilige Muster lautet: Als [Rolle] möchte ich [Ziel], … [Nutzen].'),
+          A.fill('Ordne ein: „Das System ist zu 99,9 % im Jahr verfügbar.“ → {{nicht-funktionale|nicht-funktional}} Anforderung.', '{{nicht-funktionale|nicht-funktional}}', 'Verfügbarkeit beschreibt die Qualität, nicht eine einzelne Funktion.'),
+          A.fill('Wie heißt die ungeplante Ausweitung des Projektumfangs während der Entwicklung? (2 englische Wörter)', '{{Scope Creep}}', 'Scope = Umfang, Creep = schleichen.')
+        ]
       },
 
       /* ---------- 5. Anwendungsfalldiagramm ---------- */
       {
-        id: 'usecase', stage: 3, title: 'Das Anwendungsfalldiagramm (Use-Case)', goal: 'Du zeichnest Akteure, Systemgrenze und Anwendungsfälle, setzt include, extend und Generalisierung richtig ein und vermeidest den häufigsten Prüfungsfehler.',
+        id: 'usecase', standalone: true, domain: 'shop', stage: 3,
+        title: 'Das Anwendungsfalldiagramm (Use-Case) am Onlineshop',
+        goal: 'Du modellierst Akteure, Systemgrenze und Anwendungsfälle für den Onlineshop, setzt «include», «extend» und Generalisierung fehlerfrei ein und vermeidest typische Prüfungsfehler.',
+        terms: [['Anwendungsfalldiagramm (Use Case)', 'Anwendungsfalldiagramm', 'Use-Case'], 'Akteur', 'Systemgrenze', ['include (UML)', 'include'], ['extend (UML)', 'extend']],
         parts: [
-          A.text('Was es zeigt und was nicht', 'Das Anwendungsfalldiagramm ist ein **Verhaltensdiagramm** der UML. Es zeigt die Funktionen eines Systems **aus Sicht der Nutzer**: Welche Ziele können sie erreichen? Es zeigt das **Was**, nie das Wie.\n\nHäufiger Anfängerfehler: Es ist **kein Ablaufplan**. Es gibt keine Reihenfolge, kein „wenn, dann“ und keine Schleifen. Abläufe gehören ins Aktivitäts- oder Sequenzdiagramm.'),
-          A.table(['Element', 'Darstellung', 'Regel'], [['**Akteur**', 'Strichmännchen außerhalb des Systems', 'eine **Rolle** (Mensch oder externes System), keine bestimmte Person'], ['**Anwendungsfall**', 'Oval innerhalb des Systems', 'Benennung als Substantiv und Verb: „Beitrag löschen“, „Kurs buchen“'], ['**Systemgrenze**', 'Rechteck mit dem Systemnamen', 'Fälle immer drinnen, Akteure immer draußen'], ['**Assoziation**', 'durchgezogene Linie', 'Der Akteur ist an diesem Fall beteiligt'], ['**Generalisierung**', 'durchgezogene Linie mit leerem Dreieck', 'Vererbung, bei Akteuren und bei Fällen'], ['**«include»**', 'gestrichelter Pfeil zum eingebundenen Fall', 'Pflicht: läuft **immer** mit'], ['**«extend»**', 'gestrichelter Pfeil zurück zum Basisfall', 'optional: nur unter einer Bedingung'], ['**Notiz**', 'Kasten mit Eselsohr, gestrichelt angehängt', 'dokumentiert z. B. die Bedingung eines extend']], 'Die Bausteine'),
-          A.usecase({ system: 'Fitness-App', actors: [{ id: 'm', name: 'Mitglied', side: 'l', row: 0 }], cases: [{ id: 'kb', name: 'Kurs buchen', row: 0 }], assoc: [['m', 'kb']] }, 'Schritt 1: Akteur und Anwendungsfall', 'Ein Mitglied möchte einen Platz in einem Fitnesskurs reservieren. Die Systemgrenze heißt „Fitness-App“, der Akteur steht draußen, der Fall drinnen, eine Linie verbindet beide.'),
-          A.usecase({ system: 'Fitness-App', actors: [{ id: 'm', name: 'Mitglied', side: 'l', row: 0 }], cases: [{ id: 'kb', name: 'Kurs buchen', row: 0, col: 0 }, { id: 'ap', name: 'Anmeldestatus prüfen', row: 0, col: 1 }], assoc: [['m', 'kb']], include: [['kb', 'ap']] }, 'Schritt 2: Pflichtteil mit «include»', 'Für jede Buchung muss das System wissen, wer bucht. Darum bindet „Kurs buchen“ den Fall „Anmeldestatus prüfen“ **immer** ein. Ist das Mitglied schon eingeloggt, ist die Prüfung sofort erfolgreich, sonst fordert das System hier zum Login auf.'),
-          A.usecase({ system: 'Fitness-App', actors: [{ id: 'm', name: 'Mitglied', side: 'l', row: 0 }], cases: [{ id: 'kb', name: 'Kurs buchen', row: 0, col: 0 }, { id: 'ap', name: 'Anmeldestatus prüfen', row: 0, col: 1 }, { id: 'rc', name: 'Rabattcode einlösen', row: 1, col: 1 }], assoc: [['m', 'kb']], include: [['kb', 'ap']], extend: [['rc', 'kb', 'Bedingung: Rabattcode vorhanden']] }, 'Schritt 3: Optionales mit «extend» und Notiz', 'Beim Buchen **kann** das Mitglied einen Rabattcode einlösen, aber nur, wenn es einen hat. Der Pfeil zeigt vom Zusatz **zurück** zum Basisfall, die Bedingung steht in einer Notiz (Erweiterungspunkt).'),
-          A.usecase({ system: 'Fitness-App', actors: [{ id: 'm', name: 'Mitglied', side: 'l', row: 0 }, { id: 'pm', name: 'Premium-Mitglied', side: 'l', row: 2 }], cases: [{ id: 'kb', name: 'Kurs buchen', row: 0, col: 0 }, { id: 'yk', name: 'Yoga-Kurs buchen', row: 1, col: 1 }, { id: 'sk', name: 'Spinning-Kurs buchen', row: 0, col: 1 }, { id: 'pt', name: 'Personal Trainer buchen', row: 2, col: 0 }], assoc: [['m', 'kb'], ['pm', 'pt']], gen: [['pm', 'm'], ['yk', 'kb'], ['sk', 'kb']] }, 'Schritt 4: Vererbung (Generalisierung)', 'Ein **Premium-Mitglied** kann alles, was ein Mitglied kann, und zusätzlich einen Personal Trainer buchen: Pfeil mit leerem Dreieck vom Premium-Mitglied zum Mitglied. Ebenso sind „Yoga-Kurs buchen“ und „Spinning-Kurs buchen“ spezielle Formen von „Kurs buchen“ und erben dessen Login-Pflicht.'),
-          A.text('Der häufigste Prüfungsfehler: zwei Akteure', '**Fall A, Zusammenarbeit:** Ein Mitglied kündigt seinen Vertrag, ein Mitarbeiter muss die Kündigung bestätigen. Beide sind eigenständige Rollen und beide nötig. Darstellung: **zwei getrennte Linien** von beiden Akteuren zum selben Fall „Vertrag kündigen“, **keine** Verbindung zwischen den Akteuren.\n\n**Fall B, Vererbung:** Das Premium-Mitglied **ist ein** Mitglied mit Extras. Darstellung: **Generalisierungspfeil** vom Premium-Mitglied zum Mitglied, **keine** zusätzlichen Linien zu den Fällen, die es ohnehin erbt.'),
-          A.usecase({ system: 'Fitness-App', actors: [{ id: 'm', name: 'Mitglied', side: 'l', row: 0 }, { id: 'ma', name: 'Mitarbeiter', side: 'r', row: 0 }], cases: [{ id: 'vk', name: 'Vertrag kündigen', row: 0 }], assoc: [['m', 'vk'], ['ma', 'vk']] }, 'Fall A: Zusammenarbeit an einem Fall', 'Zwei Linien zum selben Fall, keine Linie zwischen den Akteuren.'),
-          A.table(['', '«include»', '«extend»'], [['Bedeutung', 'Pflichtprogramm: läuft **immer** mit', 'Bonus: nur **unter einer Bedingung**'], ['Pfeilrichtung', 'vom Hauptfall **zum** Hilfsfall', 'vom Zusatz **zurück zum** Hauptfall'], ['Merksatz', '„Ich buche, also muss ich den Status prüfen.“', '„Der Zusatz dockt an den Hauptfall an.“'], ['Beispiel', 'Geld abheben «include» PIN prüfen', 'Beleg drucken «extend» Geld abheben']], 'Spickzettel: include gegen extend'),
-          A.text('Übung: Hotel-Buchungssystem', 'Zeichne das Diagramm selbst, bevor du die Lösung darunter anschaust:\n\n1. Jeder **Gast** kann nach freien Zimmern suchen.\n2. Ein **registrierter Gast** kann zusätzlich ein Zimmer buchen und erbt die Suche.\n3. **Zimmer buchen** erfordert immer die Prüfung der Zahlungsdaten.\n4. Auf Wunsch kann beim Buchen eine **Reiserücktrittsversicherung** abgeschlossen werden (Bedingung als Notiz).\n5. Am Buchen ist zusätzlich ein externes **Kreditkarten-Institut** beteiligt, das die Bonität prüft.'),
-          A.usecase({ system: 'Hotel-Buchungssystem', actors: [{ id: 'g', name: 'Gast', side: 'l', row: 0 }, { id: 'rg', name: 'Registrierter Gast', side: 'l', row: 2 }, { id: 'kk', name: 'Kreditkarten-Institut', side: 'r', row: 1 }], cases: [{ id: 'zs', name: 'Zimmer suchen', row: 0, col: 0 }, { id: 'zb', name: 'Zimmer buchen', row: 1, col: 0 }, { id: 'zv', name: 'Zahlungsdaten validieren', row: 0, col: 1 }, { id: 'va', name: 'Versicherung abschließen', row: 2, col: 1 }], assoc: [['g', 'zs'], ['rg', 'zb'], ['kk', 'zb']], gen: [['rg', 'g']], include: [['zb', 'zv']], extend: [['va', 'zb', 'Rücktritt gewünscht']] }, 'Lösung: Hotel-Buchungssystem', 'Generalisierung zwischen den Gästen, include für die Zahlungsprüfung, extend mit Notiz für die Versicherung, und das Kreditkarten-Institut als **zweiter Akteur** am selben Fall (Zusammenarbeit, keine Vererbung).'),
-          A.text('Übung: Vokabeltrainer', 'Ein **User** kann neue Vokabeln eingeben oder Vokabeln trainieren. Ist eine eingegebene Vokabel schon vorhanden, gibt das Programm eine Fehlermeldung aus, sonst speichert es sie. Beim Training zeigt das Programm stets Vokabeln an, der User gibt stets Antworten ein, und nach jeder Eingabe erscheint die Erfolgsquote. Die richtige Antwort zeigt das Programm nur, wenn die Antwort falsch war.\n\nÜberlege, was **immer** passiert (include) und was nur **manchmal** (extend).'),
-          A.usecase({ system: 'Vokabeltrainer', actors: [{ id: 'u', name: 'User', side: 'l', row: 2.5 }], cases: [{ id: 've', name: 'Vokabel eingeben', row: 1, col: 0 }, { id: 'fm', name: 'Fehlermeldung ausgeben', row: 0, col: 1 }, { id: 'vs', name: 'Vokabel speichern', row: 2, col: 1 }, { id: 'vt', name: 'Vokabeln trainieren', row: 4, col: 0 }, { id: 'eq', name: 'Erfolgsquote anzeigen', row: 4, col: 1 }, { id: 'ra', name: 'Richtige Antwort zeigen', row: 5, col: 1 }], assoc: [['u', 've'], ['u', 'vt']], extend: [['fm', 've', 'Vokabel vorhanden'], ['vs', 've', 'Vokabel neu'], ['ra', 'vt', 'Antwort falsch']], include: [['vt', 'eq']] }, 'Eine mögliche Lösung: Vokabeltrainer', 'Anzeigen der Vokabel und Eingeben der Antwort gehören zum Fall „Vokabeln trainieren“ selbst. Die Erfolgsquote kommt **immer** (include). Fehlermeldung, Speichern und richtige Antwort hängen an Bedingungen (extend). Andere sinnvolle Lösungen sind möglich, solange include und extend richtig verwendet sind.')
+          A.text('Was es zeigt – und was ausdrücklich nicht', 'Das **Anwendungsfalldiagramm (Use-Case)** fasst unsere Shop-Anforderungen als Bild zusammen: **Wer** (Akteure außen) kann **was** (Anwendungsfälle innen) mit dem System tun?\n\nWichtigste Regel für die Prüfung: Es ist **kein Ablaufplan**! Es zeigt keine Reihenfolge, keine Schleifen und kein „erst A, dann B“. Abläufe gehören in die nächste Lektion (Aktivitätsdiagramm).'),
+          A.table(['Element', 'Darstellung', 'Regel für die Prüfung'], [
+            ['**Akteur**', 'Strichmännchen außerhalb', 'eine **Rolle** (Mensch oder externes System wie Zahlungsdienst), keine Einzelperson'],
+            ['**Anwendungsfall**', 'Oval innerhalb', 'immer **Substantiv + Verb**: „Bestellung aufgeben“, „Artikel suchen“'],
+            ['**Systemgrenze**', 'Rechteck mit Systemname', 'Anwendungsfälle drinnen, Akteure immer draußen'],
+            ['**Assoziation**', 'durchgezogene Linie', 'Akteur ist an diesem Anwendungsfall beteiligt'],
+            ['**Generalisierung**', 'durchgezogene Linie + leeres Dreieck', 'Vererbung bei Akteuren (Stammkunde → Gast) oder Fällen'],
+            ['**«include»**', 'gestrichelter Pfeil **zum** Hilfsfall', 'Pflicht: läuft **immer** mit'],
+            ['**«extend»**', 'gestrichelter Pfeil **zurück zum** Basisfall', 'optional: nur **unter einer Bedingung** (als Notiz angeben)']
+          ], 'Die Bausteine des Use-Case-Diagramms'),
+          A.usecase({ system: 'Onlineshop', actors: [{ id: 'g', name: 'Gast', side: 'l', row: 0 }, { id: 'k', name: 'Kunde', side: 'l', row: 1.5 }, { id: 'zd', name: 'Zahlungsdienst', side: 'r', row: 1.5 }], cases: [{ id: 'as', name: 'Artikel suchen', row: 0, col: 0 }, { id: 'ba', name: 'Bestellung aufgeben', row: 1.5, col: 0 }, { id: 'ap', name: 'Anmeldestatus prüfen', row: 0.5, col: 1 }, { id: 'rc', name: 'Rabattcode einlösen', row: 2.3, col: 1 }], assoc: [['g', 'as'], ['k', 'ba'], ['zd', 'ba']], gen: [['k', 'g']], include: [['ba', 'ap']], extend: [['rc', 'ba', 'Rabattcode vorhanden']] }, 'Unser Onlineshop als Anwendungsfalldiagramm', 'Schau dir jede Beziehung an:\n- **Generalisierung**: Ein `Kunde` **ist ein** `Gast` mit Extras – er erbt „Artikel suchen“ automatisch und darf zusätzlich bestellen.\n- **«include»**: „Bestellung aufgeben“ prüft **immer** den Anmeldestatus (Pfeil vom Haupt- zum Pflichtfall).\n- **«extend»**: „Rabattcode einlösen“ kommt nur **optional** dazu (Pfeil vom Zusatz zurück zum Hauptfall, Bedingung in der Notiz).\n- **Zusammenarbeit**: Das externe System `Zahlungsdienst` ist als zweiter Akteur rechts direkt mit „Bestellung aufgeben“ verbunden.'),
+          A.table(['', '«include»', '«extend»'], [
+            ['Bedeutung', 'Pflichtteil: läuft **immer** mit', 'Option: nur **unter einer Bedingung**'],
+            ['Pfeilrichtung', 'vom Basisfall **zum** Pflichtfall', 'vom Zusatz **zurück zum** Basisfall'],
+            ['Merksatz', '„Bestellen schließt Statusprüfung immer ein.“', '„Rabattcode dockt bei Bedarf am Bestellen an.“'],
+            ['Weiteres Beispiel', 'Geld abheben «include» PIN prüfen', 'Beleg drucken «extend» Geld abheben']
+          ], 'Prüfungs-Spickzettel: include vs. extend'),
+          A.text('Zweiter häufiger Prüfungsfehler: Zwei Akteure richtig verbinden', '**Zusammenarbeit** (z. B. `Kunde` und `Zahlungsdienst` bei „Bestellung aufgeben“): **zwei getrennte Linien** zum selben Oval, **keine** Linie zwischen den Akteuren.\n**Vererbung** (z. B. `Kunde` und `Gast`): **Generalisierungspfeil** vom spezielleren zum allgemeineren Akteur – und dann keine doppelte Linie zu den geerbten Fällen.'),
+          A.text('Transfer-Übung (IHK-Klassiker): Hotel-Buchungssystem', 'Prüfe dein Verständnis an einem zweiten Szenario:\n1. Jeder **Gast** kann Zimmer suchen.\n2. Ein **Registrierter Gast** erbt die Suche und kann Zimmer buchen.\n3. **Zimmer buchen** validiert **immer** die Zahlungsdaten.\n4. Optional kann eine **Versicherung** abgeschlossen werden.\n5. Ein externes **Kreditkarten-Institut** ist am Buchen beteiligt.'),
+          A.usecase({ system: 'Hotel-Buchungssystem', actors: [{ id: 'g', name: 'Gast', side: 'l', row: 0 }, { id: 'rg', name: 'Registrierter Gast', side: 'l', row: 2 }, { id: 'kk', name: 'Kreditkarten-Institut', side: 'r', row: 1 }], cases: [{ id: 'zs', name: 'Zimmer suchen', row: 0, col: 0 }, { id: 'zb', name: 'Zimmer buchen', row: 1, col: 0 }, { id: 'zv', name: 'Zahlungsdaten validieren', row: 0, col: 1 }, { id: 'va', name: 'Versicherung abschließen', row: 2, col: 1 }], assoc: [['g', 'zs'], ['rg', 'zb'], ['kk', 'zb']], gen: [['rg', 'g']], include: [['zb', 'zv']], extend: [['va', 'zb', 'Rücktritt gewünscht']] }, 'Lösung: Hotel-Buchungssystem', 'Exakt dieselben vier Bausteine wie im Onlineshop: Generalisierung, include, extend mit Notiz und zweiter Akteur rechts.'),
+          A.table(['Weiterlesen', 'Passender Kurs'], [
+            ['Wie die fünf UML-Diagramme in der AP2 abgegrenzt werden', '[AP2: UML-Diagramme im Prüfungsvergleich](/code-lernen/kurs/ap2/uml2/)']
+          ], 'Vertiefung in AP2')
         ],
-        tips: [A.warn('Benenne Anwendungsfälle mit **Substantiv und Verb** („Zimmer buchen“), nicht als Ablauf („Erst suchen, dann buchen“) und nicht als Oberfläche („Buchungsseite“).')],
+        tips: [
+          A.warn('Benenne Anwendungsfälle immer mit **Substantiv + Verb** („Bestellung aufgeben“), niemals als Menüpunkt („Kasse-Seite“) oder Schrittfolge („Erst einloggen, dann bestellen“).')
+        ],
         quiz: [
-          A.q('Wo stehen die Akteure?', ['Außerhalb der Systemgrenze', 'Innerhalb der Systemgrenze', 'In einer Notiz', 'In der Mitte jedes Ovals'], 0, 'Akteure sind außen, Anwendungsfälle innen.'),
-          A.q('In welche Richtung zeigt der Pfeil bei «extend»?', ['Vom erweiternden Fall zurück zum Basisfall', 'Vom Basisfall hin zum erweiternden Fall', 'Vom Akteur zum erweiternden Fall', 'In beide Richtungen, mit zwei Spitzen'], 0, 'Der Zusatz dockt an den Hauptfall an.'),
-          A.q('Mitglied und Mitarbeiter sind beide an „Vertrag kündigen“ beteiligt. Wie zeichnest du das?', ['Zwei Linien zum selben Fall, keine Verbindung zwischen den Akteuren', 'Eine Generalisierung vom Mitarbeiter zum Mitglied, dann eine Linie', 'Eine «include»-Beziehung zwischen den beiden Akteuren', 'Nur den Akteur zeichnen, der die Kündigung auslöst'], 0, 'Zusammenarbeit zweier Rollen, keine Vererbung.'),
-          A.q('Zeigt ein Anwendungsfalldiagramm die Reihenfolge der Schritte?', ['Nein, nur wer was mit dem System tun kann', 'Ja, die Fälle werden von oben nach unten abgearbeitet', 'Ja, über die Nummern an den Pfeilen', 'Nur bei «include», dort kommt der Pflichtfall zuerst'], 0, 'Für Abläufe gibt es das Aktivitätsdiagramm.'),
-          A.q('Wie zeichnet man die Generalisierung zwischen Akteuren?', ['Durchgezogene Linie mit leerem Dreieck zum allgemeineren Akteur', 'Gestrichelter Pfeil mit «include» zum allgemeineren Akteur', 'Linie mit Raute am allgemeineren Akteur', 'Durchgezogene Linie mit leerem Dreieck zum spezielleren Akteur'], 0, 'Wie die Vererbung im Klassendiagramm.')
+          A.q('Wo stehen Akteure wie `Kunde` oder `Zahlungsdienst` im Use-Case-Diagramm?', ['Immer außerhalb der Systemgrenze', 'Innerhalb der Systemgrenze neben den Ovalen', 'In einer gestrichelten Notiz unten rechts', 'Direkt in der Überschrift der Systemgrenze'], 0, 'Akteure interagieren von außen mit dem System; nur Anwendungsfälle stehen drinnen.'),
+          A.q('In welche Richtung zeigt der Pfeil bei «extend» („Rabattcode einlösen“ erweitert „Bestellung aufgeben“)?', ['Von „Rabattcode einlösen“ zurück zu „Bestellung aufgeben“', 'Von „Bestellung aufgeben“ hin zu „Rabattcode einlösen“', 'Vom Akteur „Kunde“ direkt zu „Rabattcode einlösen“', 'In beide Richtungen mit zwei offenen Pfeilspitzen'], 0, 'Bei extend zeigt der gestrichelte Pfeil immer vom optionalen Zusatz zurück zum Basisfall.'),
+          A.q('Ein `Kunde` soll alles können, was ein `Gast` kann, plus bestellen. Wie modellierst du das?', ['Generalisierungspfeil von Kunde zu Gast, nur Bestellen an Kunde', 'Eine «include»-Linie vom Kunden zum Gast zeichnen', 'Eine Linie zwischen Kunde und Gast und beide an jeden Fall', 'Nur den Kunden zeichnen und den Gast komplett weglassen'], 0, 'Generalisierung (leeres Dreieck) vererbt alle Anwendungsfälle des Gasts an den Kunden.'),
+          A.q('Ein Prüfling zeichnet Pfeile zwischen „Artikel suchen“ → „In Warenkorb legen“ → „Bezahlen“, um die Reihenfolge zu zeigen. Was ist daran falsch?', ['Use-Case-Diagramme zeigen keine zeitliche Reihenfolge', 'Pfeile zwischen Ovalen müssen immer durchgezogen sein', 'Es fehlen die Multiplizitäten 1 und * an den Ovalen', 'Man darf höchstens zwei Anwendungsfälle zeichnen'], 0, 'Ein Use-Case-Diagramm ist kein Ablaufplan. Reihenfolgen gehören ins Aktivitäts- oder Sequenzdiagramm.')
         ],
         tasks: [
-          A.fill('Ein Fall läuft bei einem anderen IMMER mit. Welche Beziehung? (ohne spitze Klammern)', '{{include}}', 'Pflichtprogramm.'),
-          A.fill('Wie heißt das Rechteck, das das System von der Außenwelt trennt?', '{{Systemgrenze}}', 'Fälle drinnen, Akteure draußen.')
+          A.fill('„Bestellung aufgeben“ prüft **immer** den Anmeldestatus. Welche Beziehung? (ohne spitze Klammern)', '{{include}}', 'Pflichtteil, der bei jeder Ausführung mitläuft.'),
+          A.fill('„Rabattcode einlösen“ passiert nur, wenn der Kunde einen Code hat. Welche Beziehung? (ohne spitze Klammern)', '{{extend}}', 'Optionale Erweiterung unter einer Bedingung.'),
+          A.fill('Wie heißt das Rechteck, das die Anwendungsfälle umschließt und die Akteure außen lässt?', '{{Systemgrenze}}', 'Grenzt das System von seiner Umwelt ab.')
         ]
       },
 
       /* ---------- 6. Aktivitätsdiagramm ---------- */
       {
-        id: 'aktivitaet', stage: 3, title: 'Das Aktivitätsdiagramm', goal: 'Du liest und zeichnest Aktivitätsdiagramme mit Aktionen, Entscheidungen, Parallelität, Partitionen und den beiden Endknoten.',
+        id: 'aktivitaet', standalone: true, domain: 'shop', stage: 3,
+        title: 'Das Aktivitätsdiagramm: Checkout-Ablauf und Parallelität',
+        goal: 'Du liest und zeichnest Aktivitätsdiagramme mit Entscheidungen, Schleifen, Gabelung/Synchronisation, Partitionen und Endknoten am Onlineshop-Checkout.',
+        terms: ['Aktivitätsdiagramm', 'Pfadende'],
         parts: [
-          A.text('Abläufe zeigen', 'Das Aktivitätsdiagramm zeigt, **in welcher Reihenfolge** etwas passiert. Es ähnelt dem Programmablaufplan, kann aber mehr: **parallele** Abläufe und die Aufteilung auf **mehrere Beteiligte**. Man nutzt es für Geschäftsprozesse, um einen Anwendungsfall genauer zu beschreiben, oder für einen Algorithmus.'),
-          A.table(['Element', 'Darstellung', 'Bedeutung'], [['**Startknoten**', 'schwarzer Punkt', 'hier beginnt der Ablauf'], ['**Aktion**', 'Rechteck mit runden Ecken', 'ein Schritt, den jemand ausführt'], ['**Kontrollfluss**', 'Pfeil', 'die Reihenfolge'], ['**Entscheidung**', 'Raute mit einem Eingang und mehreren Ausgängen', 'verzweigt; jeder Ausgang trägt eine Bedingung in eckigen Klammern, z. B. `[PIN korrekt]`'], ['**Zusammenführung**', 'Raute mit mehreren Eingängen', 'die Wege laufen wieder zusammen'], ['**Gabelung**', 'dicker Balken mit mehreren Ausgängen', 'ab hier laufen Wege **parallel**'], ['**Synchronisation**', 'dicker Balken mit mehreren Eingängen', 'weiter erst, wenn **alle** parallelen Wege fertig sind'], ['**Aktivitätsende**', 'Kreis mit Punkt', 'beendet die **ganze** Aktivität'], ['**Pfadende**', 'Kreis mit X', 'beendet nur **diesen einen** Pfad, die anderen laufen weiter'], ['**Partition** (Schwimmbahn)', 'Spalten oder Zeilen mit Namen', 'zeigt, wer welche Aktion ausführt'], ['**Konnektor**', 'kleiner Kreis mit Buchstaben', 'verbindet Stellen, um lange, sich kreuzende Linien zu vermeiden']], 'Die Bausteine'),
-          A.activity({ flow: ['Karte einführen', 'Option wählen', { wenn: 'Abheben?', jl: '[Abheben]', nl: '[andere Option]', ja: ['Betrag eingeben', 'PIN eingeben', { wenn: 'PIN und Geld ok?', jl: '[ja]', nl: '[nein]', ja: ['Geld auszahlen'], nein: ['Meldung ausgeben'] }], nein: [{ pfadende: true }] }] }, 'Beispiel: Geld abheben', 'Nach dem Einführen der Karte wählt der Kunde eine Option. Beim Abheben gibt er Betrag und PIN ein. Stimmen PIN und Kontodeckung, wird ausgezahlt, sonst erscheint eine Meldung. Die anderen Optionen (Einzahlung, Kontostand) sind hier nicht weiter ausmodelliert und enden mit einem **Pfadende**.'),
-          A.activity({ flow: ['PIN eingeben', { solange: '[PIN falsch und weniger als 3 Versuche]', tue: ['Fehler melden', 'PIN erneut eingeben'], raus: '[sonst]' }, { wenn: 'PIN korrekt?', jl: '[ja]', nl: '[3 Fehlversuche]', ja: ['Weiter zur Auswahl'], nein: ['Karte sperren'] }] }, 'Wiederholung: drei Versuche für die PIN', 'Eine Schleife entsteht im Aktivitätsdiagramm aus zwei Rauten: Die obere führt die Wege zusammen, die untere entscheidet, ob es noch einmal läuft. Nach drei falschen Eingaben wird die Karte gesperrt.'),
-          A.activity({ flow: ['Bestellung annehmen', { parallel: [['Ware verpacken', 'Ware versenden'], ['Rechnung erstellen', 'Rechnung senden']] }, 'Bestellung abschließen'] }, 'Parallelität: Gabelung und Synchronisation', 'Verpacken und Rechnung schreiben laufen gleichzeitig. „Bestellung abschließen“ beginnt erst, wenn **beide** Stränge fertig sind.'),
-          A.table(['Kunde', 'System'], [['Mietzeitraum und Abholstation wählen', ''], ['', 'Daten prüfen, verfügbare Fahrzeuge anzeigen'], ['Fahrzeug wählen, Vertrags- und Zahlungsdaten eingeben', ''], ['', 'Daten prüfen'], ['', '[ok]: Fahrzeug reservieren und gleichzeitig Rechnung schicken'], ['bei [nicht ok]: Daten erneut eingeben', '']], 'Partitionen am Beispiel Autovermietung', 'Jede Spalte ist eine Schwimmbahn. Eine Aktion steht immer in der Bahn dessen, der sie ausführt. So sieht man sofort, wer wann dran ist.'),
-          A.activity({ flow: ['Zeitraum und Station wählen', 'Verfügbare Fahrzeuge anzeigen', 'Fahrzeug wählen, Vertrags- und Zahlungsdaten eingeben', 'Daten prüfen', { solange: '[Daten nicht in Ordnung]', tue: ['Zur erneuten Eingabe auffordern', 'Daten erneut eingeben', 'Daten prüfen'], raus: '[Daten ok]' }, { parallel: [['Fahrzeug reservieren'], ['Rechnung schicken']] }] }, 'Lösung Autovermietung (ohne Schwimmbahnen)', 'Nach der Eingabe prüft das System die Daten. Sind sie nicht in Ordnung, fordert es zur erneuten Eingabe auf und prüft wieder. Reservierung und Rechnung laufen **gleichzeitig**, darum Gabelung und Synchronisation.')
+          A.text('Vom Was zum Wie: der genaue Ablauf', 'Das Use-Case-Diagramm hat gezeigt, **dass** Kunden bestellen können. Jetzt zeigt das **Aktivitätsdiagramm**, **in welcher Reihenfolge** der Checkout abläuft – inklusive Verzweigungen, Login-Schleife und Aufgaben, die **gleichzeitig** passieren (Paket packen und Rechnung erstellen).'),
+          A.table(['Element', 'Darstellung', 'Bedeutung'], [
+            ['**Startknoten**', 'ausgefüllter schwarzer Punkt', 'Beginn des Ablaufs'],
+            ['**Aktion**', 'Rechteck mit abgerundeten Ecken', 'ein einzelner Arbeitsschritt'],
+            ['**Entscheidung**', 'Raute mit 1 Eingang, mehreren Ausgängen', 'entweder oder: jeder Ausgang trägt eine Bedingung in `[eckigen Klammern]`'],
+            ['**Zusammenführung**', 'Raute mit mehreren Eingängen', 'alternative Wege laufen wieder zusammen'],
+            ['**Gabelung (Fork)**', 'dicker Balken, mehrere Ausgänge', 'sowohl als auch: ab hier laufen Wege **parallel**'],
+            ['**Synchronisation (Join)**', 'dicker Balken, mehrere Eingänge', 'weiter erst, wenn **alle** parallelen Wege fertig sind'],
+            ['**Aktivitätsende**', 'Kreis mit Punkt innen', 'beendet die **gesamte** Aktivität'],
+            ['**Pfadende**', 'Kreis mit X', 'beendet nur **diesen einen** Zweig'],
+            ['**Partition (Schwimmbahn)**', 'Spalten/Zeilen mit Rollennamen', 'zeigt, wer welche Aktion ausführt']
+          ], 'Die Bausteine des Aktivitätsdiagramms'),
+          A.activity({ flow: ['Passwort eingeben', { solange: '[Passwort falsch und Versuche < 3]', tue: ['Fehlermeldung anzeigen', 'Passwort erneut eingeben'], raus: '[sonst]' }, { wenn: 'Passwort korrekt?', jl: '[ja]', nl: '[3 Fehlversuche]', ja: ['Zur Kasse weiterleiten'], nein: ['Konto sperren'] }] }, 'Schritt 1: Login-Schleife im Shop', 'Eine Schleife im Aktivitätsdiagramm besteht aus zwei Rauten: oben die Zusammenführung, unten die Entscheidung mit Bedingung in eckigen Klammern. Nach 3 Fehlversuchen wird das Konto gesperrt – exakt unsere Regel aus dem Login-Szenario.'),
+          A.activity({ flow: ['Bestellung prüfen', { wenn: 'Alle Artikel auf Lager?', jl: '[ja]', nl: '[nein]', ja: ['Zahlung buchen', { parallel: [['Paket im Lager packen', 'Paket versenden'], ['Rechnung als PDF erstellen', 'Rechnung mailen']] }, 'Bestellung abschließen'], nein: ['Fehlbestand melden', { pfadende: true }] }] }, 'Schritt 2: Checkout mit Entscheidung, Parallelität und Pfadende', 'Sind alle Artikel auf Lager, laufen **Lager-Versand** und **Rechnungsversand** nach der Gabelung **gleichzeitig**. „Bestellung abschließen“ startet erst nach dem Synchronisationsbalken, wenn **beide** Stränge fertig sind. Bei Fehlbestand endet nur dieser Pfad am **Pfadende**.'),
+          A.table(['Kunde', 'Onlineshop', 'Lager'], [
+            ['Bestellung absenden', '', ''],
+            ['', 'Lagerbestand & Zahlung prüfen', ''],
+            ['', 'Rechnung erstellen & mailen (parallel)', 'Paket packen & versenden (parallel)'],
+            ['Bestätigung erhalten', 'Bestellung abschließen', '']
+          ], 'Partitionen (Schwimmbahnen) im Onlineshop', 'Jede Spalte gehört einer Rolle. So sieht das Team sofort, an welchen Stellen Daten zwischen Kunde, Shop-Backend und Lager übergeben werden müssen.'),
+          A.table(['Weiterlesen', 'Passender Kurs'], [
+            ['Aufrufe zwischen konkreten Objekten', '[Modellieren: Sequenzdiagramme](/code-lernen/kurs/oop/sequenz/)'],
+            ['Zustände einer Bestellung (neu → bezahlt → versendet)', '[AP2: Zustandsdiagramm & Diagrammvergleich](/code-lernen/kurs/ap2/uml2/)']
+          ], 'Verbindung zu den anderen Kursen')
         ],
-        tips: [A.tip('Bedingungen an Entscheidungen müssen sich **gegenseitig ausschließen** und **alle Fälle abdecken**: zu `[Betrag > 0]` gehört `[Betrag <= 0]`, nicht `[Betrag < 0]`.')],
+        tips: [
+          A.warn('**Häufiger Prüfungsfehler an Entscheidungsrauten:** Die Bedingungen an den Ausgängen müssen sich gegenseitig ausschließen und alle Fälle abdecken! Zu `[summe >= 5000]` gehört `[summe < 5000]`, nicht `[summe <= 5000]` (sonst wäre 5000 doppelt belegt).'),
+          A.tip('Merksatz: **Raute = entweder oder** (genau ein Weg). **Balken = sowohl als auch** (alle Wege parallel).')
+        ],
         quiz: [
-          A.q('Was ist der Unterschied zwischen Aktivitätsende und Pfadende?', ['Das Aktivitätsende beendet alles, das Pfadende nur den einen Weg', 'Das Pfadende beendet alles, das Aktivitätsende nur den einen Weg', 'Es sind zwei Namen für dasselbe Symbol', 'Das Aktivitätsende gibt es nur am Ende von Schleifen'], 0, 'Kreis mit Punkt: alles vorbei. Kreis mit X: nur dieser Pfad.'),
-          A.q('Wann geht es nach einem Synchronisationsbalken weiter?', ['Wenn alle eingehenden parallelen Wege fertig sind', 'Sobald der erste der parallelen Wege ankommt', 'Wenn die Mehrheit der Wege angekommen ist', 'Nach einer im Diagramm angegebenen Wartezeit'], 0, 'Synchronisation wartet auf alle.'),
-          A.q('Wie schreibt man Bedingungen an die Ausgänge einer Entscheidung?', ['In eckigen Klammern, z. B. [PIN korrekt]', 'In spitzen Klammern, z. B. <PIN korrekt>', 'In Anführungszeichen, z. B. "PIN korrekt"', 'In runden Klammern, z. B. (PIN korrekt)'], 0, 'Die eckigen Klammern heißen Guards (Wächter).'),
-          A.q('Wofür nutzt man Partitionen (Schwimmbahnen)?', ['Um zu zeigen, wer welche Aktion ausführt', 'Um Schleifen und ihre Abbruchbedingung darzustellen', 'Um Klassen nach Paketen zu gruppieren', 'Um parallele Abläufe zu starten und zu beenden'], 0, 'Jede Bahn gehört einem Beteiligten.')
+          A.q('Was ist der Unterschied zwischen Aktivitätsende (Kreis mit Punkt) und Pfadende (Kreis mit X)?', ['Das Aktivitätsende stoppt den gesamten Ablauf, das Pfadende nur einen Zweig', 'Das Pfadende stoppt den gesamten Ablauf, das Aktivitätsende nur einen Zweig', 'Beide Symbole bedeuten dasselbe, das Pfadende ist nur die ältere Schreibweise', 'Das Aktivitätsende darf nur innerhalb von parallelen Balken stehen'], 0, 'Kreis mit Punkt = alles endet. Kreis mit X = nur dieser einzelne Pfad endet.'),
+          A.q('Wann startet „Bestellung abschließen“ nach dem Synchronisationsbalken?', ['Erst wenn sowohl der Versand- als auch der Rechnungsstrang fertig sind', 'Sobald der schnellere der beiden parallelen Stränge am Balken ankommt', 'Noch bevor die beiden parallelen Stränge abgearbeitet werden', 'Nur wenn eine zusätzliche Entscheidungsraute den Weg freigibt'], 0, 'Synchronisation (Join) wartet immer auf alle eingehenden parallelen Pfade.'),
+          A.q('An einer Entscheidung stehen die Ausgänge `[summe > 5000]` und `[summe < 5000]`. Welcher Fehler steckt darin?', ['Der Fall summe = 5000 fehlt komplett (nicht vollständig)', 'Die Bedingungen müssten in runden statt eckigen Klammern stehen', 'Ein Aktivitätsdiagramm darf keine Vergleiche mit Zahlen enthalten', 'Für Zahlenvergleiche braucht man immer einen Gabelungsbalken'], 0, 'Bei genau 5000 Cent passt kein Ausgang! Richtig wäre [summe >= 5000] und [summe < 5000].'),
+          A.q('Wofür setzt man Partitionen (Schwimmbahnen) im Aktivitätsdiagramm ein?', ['Um klar zu zeigen, welche Rolle oder welches System welche Aktion ausführt', 'Um parallele Stränge wieder auf einen einzelnen Pfad zusammenzuführen', 'Um die Attribute und Methoden einer Klasse nach Sichtbarkeit zu trennen', 'Um die Anzahl der Schleifendurchläufe im Voraus festzulegen'], 0, 'Jede Schwimmbahn (Spalte/Zeile) steht für einen Verantwortlichen, z. B. Kunde, Shop, Lager.')
         ],
         tasks: [
-          A.fill('Ein Balken, von dem mehrere Pfeile ausgehen, heißt ...', '{{Gabelung|Fork|Parallelisierung}}', 'Ab hier läuft es parallel.'),
-          A.fill('Welches Element verbindet zwei Stellen, damit sich Linien nicht kreuzen?', '{{Konnektor}}', 'Ein kleiner Kreis mit Buchstabe.')
+          A.fill('Wie heißt der dicke Balken, der einen Ablauf in mehrere parallele Wege aufteilt?', '{{Gabelung|Fork|Parallelisierung}}', 'Das Gegenstück zur Synchronisation (Join).'),
+          A.fill('Vervollständige die fehlende Gegenbedingung am zweiten Ausgang der Raute: `[bestand > 0]` und `[{{bestand <= 0}}]`', '{{bestand <= 0|bestand = 0}}', 'Alle übrigen Fälle müssen abgedeckt sein, ohne Lücke bei 0.'),
+          A.predict('Übersetze die Login-Schleife aus dem Aktivitätsdiagramm: Was gibt dieser Pseudocode aus?', [
+            'versuche <- 0',
+            'SOLANGE versuche < 3',
+            '  versuche <- versuche + 1',
+            '  AUSGABE "Versuch", versuche, "fehlgeschlagen"',
+            'ENDE SOLANGE',
+            'AUSGABE "Konto gesperrt"'
+          ], 'Versuch 1 fehlgeschlagen\nVersuch 2 fehlgeschlagen\nVersuch 3 fehlgeschlagen\nKonto gesperrt', 'Zähle jeden Durchlauf, solange versuche < 3 wahr ist.', 'Die Schleife läuft für versuche = 0, 1, 2 (also 3-mal) und gibt danach „Konto gesperrt“ aus.')
         ]
       },
 
-      /* ---------- 7. PAP und Struktogramm in der Praxis ---------- */
+      /* ---------- 7. PAP und Struktogramm ---------- */
       {
-        id: 'pap', stage: 4, title: 'PAP und Struktogramm: Schleifen und Methoden', goal: 'Du zeichnest Sequenz, Verzweigung, kopf- und fußgesteuerte Schleife und Methodenaufrufe als Struktogramm und übersetzt sie in Pseudocode.',
+        id: 'pap', standalone: true, domain: 'shop', stage: 4,
+        title: 'PAP und Struktogramm: vom Plan zum Pseudocode',
+        goal: 'Du liest und entwirfst Sequenz, Verzweigung, kopf- und fußgesteuerte Schleifen sowie Methodenaufrufe im PAP und Struktogramm und prüfst sie direkt im Pseudocode-Interpreter.',
+        terms: [['Programmablaufplan (PAP)', 'PAP', 'Programmablaufplan'], 'Struktogramm', 'Kopfgesteuerte Schleife', 'Fußgesteuerte Schleife', 'Schreibtischtest'],
         parts: [
-          A.text('Zwei Bilder für denselben Algorithmus', 'Der **Programmablaufplan** (PAP) zeichnet einen Ablauf mit Symbolen und Pfeilen: Oval für Start und Ende, Rechteck für Verarbeitung, Parallelogramm für Ein- und Ausgabe, Raute für Entscheidungen, Rechteck mit doppelten Seitenlinien für einen Unterprogrammaufruf. Das **Struktogramm** (Nassi-Shneiderman) braucht keine Pfeile: Blöcke stehen untereinander, Verzweigungen teilen sich, Schleifen umschließen ihren Rumpf. Beide zeigen dieselbe Logik, die Prüfung fragt beides ab.'),
-          A.nsd(['a = 5', 'b = 7', 'c = a + b', 'Ausgabe: c'], 'Sequenz', 'Vier Anweisungen nacheinander. Im PAP wären es Start, drei Rechtecke, ein Parallelogramm und Ende, verbunden durch Pfeile.'),
-          A.nsd(['Eingabe: aktJahr', 'Eingabe: gebJahr', 'Eingabe: schonGeburtstagGehabt', { wenn: 'schonGeburtstagGehabt = \'j\'', ja: ['alter = aktJahr - gebJahr'], nein: ['alter = aktJahr - gebJahr - 1'] }, 'Ausgabe: alter'], 'Verzweigung: Alter berechnen', 'Hatte die Person dieses Jahr schon Geburtstag, ist sie aktJahr minus gebJahr alt, sonst ein Jahr weniger.'),
-          P(['LIES x§Liest eine ganze Zahl ein (im Player erscheint ein Eingabefeld).', 'SOLANGE x > 1 WIEDERHOLE§Kopfgesteuert: Ist x schon am Anfang höchstens 1, läuft die Schleife kein einziges Mal.', '  SETZE x = x DIV 2§Ganzzahlig halbieren, ohne Rest (DIV).', '  SCHREIBE x§Den aktuellen Wert ausgeben.', 'ENDE SOLANGE§Ende des Schleifenrumpfs.', 'SCHREIBE "Schleife wurde abgearbeitet"§Läuft genau einmal nach der Schleife.'], 'Kopfgesteuerte Schleife: halbieren, solange x > 1', { input: ['20'] }),
-          A.nsd(['Eingabe: x', { solange: 'solange x > 1', tue: ['x = x / 2 (ohne Rest)', 'Ausgabe: x'] }, 'Ausgabe: „Schleife wurde abgearbeitet“'], 'Dasselbe als Struktogramm'),
-          A.text('Fußgesteuert: mindestens einmal', 'Bei einer **fußgesteuerten** Schleife (Do-While) wird erst **nach** dem Durchlauf geprüft. Sie läuft darum **mindestens einmal**. Typisch ist die Eingabeprüfung: Man kann erst prüfen, ob eine Eingabe stimmt, nachdem sie gemacht wurde.\n\nAchte auf die Richtung der Bedingung. Im **PAP und Struktogramm** steht meist die **Durchführungsbedingung**: Solange sie wahr ist, läuft es weiter (`x >= 10`, Eingabe noch falsch). Im Pseudocode **WIEDERHOLE ... BIS** steht dagegen die **Abbruchbedingung**: Ist sie wahr, ist Schluss (`BIS x < 10`). Beide beschreiben dieselbe Schleife, nur von der anderen Seite.'),
-          A.nsd([{ wiederhole: ['Eingabe: x'], bis: 'solange x >= 10' }, 'Ausgabe: „Glückwunsch!“'], 'Fußgesteuert im Struktogramm (Durchführungsbedingung)'),
-          P(['WIEDERHOLE§Fußgesteuert: der Rumpf läuft mindestens einmal.', '  LIES x§Eine ganze Zahl kleiner als 10 abfragen.', 'BIS x < 10§Abbruchbedingung: Erst wenn die Eingabe stimmt, ist die Schleife zu Ende.', 'SCHREIBE "Glückwunsch!"§Nach der gültigen Eingabe.'], 'Dieselbe Schleife als Pseudocode (Abbruchbedingung)', { input: ['15', '12', '7'] }),
-          A.text('Methoden: einmal schreiben, oft aufrufen', 'Eine **Methode** (Funktion, Unterprogramm) ist ein benannter Block, den das Hauptprogramm bei Bedarf startet. Danach geht es im Hauptprogramm an derselben Stelle weiter. Auch `println` ist so ein Unterprogramm: einmal geschrieben, millionenfach benutzt. Im PAP und im Struktogramm steht der Aufruf als Kasten mit **doppelten Seitenlinien**, die Methode selbst bekommt einen **eigenen** PAP bzw. ein eigenes Struktogramm.'),
-          A.nsd(['Ausgabe: „Gleich wird eine Methode aufgerufen:“', { aufruf: 'begruessung' }, 'Ausgabe: „Nun sind wir wieder im Hauptprogramm.“'], 'Hauptprogramm (main) mit Methodenaufruf'),
-          A.nsd(['Ausgabe: „Hallo zusammen!“'], 'Methode begruessung (eigenes Struktogramm)'),
-          P(['FUNKTION begruessung()§Die Methode wird hier nur beschrieben, sie läuft noch nicht.', '  SCHREIBE "Hallo zusammen!"§Ihre einzige Aufgabe.', 'ENDE FUNKTION§Ende der Beschreibung.', 'SCHREIBE "Gleich wird eine Methode aufgerufen:"§Das Hauptprogramm beginnt hier.', 'begruessung()§Aufruf: Jetzt läuft die Methode, danach geht es in der nächsten Zeile weiter.', 'SCHREIBE "Nun sind wir wieder im Hauptprogramm."§Zurück im Hauptprogramm.'], 'Methode und Aufruf als Pseudocode')
+          A.text('Der letzte Schritt vor dem echten Code', 'Vom Lastenheft über Use-Case und Aktivitätsdiagramm sind wir jetzt auf der Ebene eines einzelnen Algorithmus angelangt. Bevor du ihn in Java oder Python schreibst, zeichnest du ihn als **Programmablaufplan (PAP)** (Symbole mit Pfeilen) oder als **Struktogramm** (geschachtelte Kästen nach Nassi-Shneiderman, ohne Pfeile) – und prüfst ihn im **Pseudocode-Interpreter**.'),
+          A.table(['Baustein', 'Symbol im PAP', 'Darstellung im Struktogramm'], [
+            ['Start / Ende', 'Oval (abgerundetes Rechteck)', 'Anfang und Ende des gesamten Kastens'],
+            ['Anweisung / Rechnung', 'Rechteck', 'einfacher rechteckiger Block'],
+            ['Ein- / Ausgabe', 'Parallelogramm', 'Block mit `Eingabe:` / `Ausgabe:`'],
+            ['Verzweigung (`if/else`)', 'Raute mit Ja-/Nein-Pfeil', 'Kasten mit Dreieck oben, links Ja, rechts Nein'],
+            ['Schleife', 'Raute + Rückwärtspfeil nach oben', 'Kasten mit Rand links (oben = kopfgesteuert, unten = fußgesteuert)'],
+            ['Methodenaufruf', 'Rechteck mit doppelten Seitenlinien', 'Block mit doppelten Seitenlinien, Methode hat eigenes Struktogramm']
+          ], 'PAP und Struktogramm direkt im Vergleich'),
+          A.nsd([
+            'warenwert <- 3998',
+            { wenn: 'warenwert >= 5000 ?', ja: ['versand <- 0'], nein: ['versand <- 495'] },
+            'gesamt <- warenwert + versand',
+            'Ausgabe: gesamt'
+          ], 'Verzweigung im Struktogramm: Versandkosten', 'Lies von oben nach unten: Da 3998 < 5000 ist, läuft der rechte Zweig (`versand <- 495`), danach werden beide addiert (4493 Cent).'),
+          A.nsd([
+            'summe <- 0',
+            'i <- 0',
+            { solange: 'solange i < LÄNGE(preise)', tue: ['summe <- summe + preise[i]', 'i <- i + 1'] },
+            'Ausgabe: summe'
+          ], 'Kopfgesteuerte Schleife: Warenkorb summieren', 'Die Bedingung steht **oben**: Bei einem leeren Warenkorb (`LÄNGE = 0`) läuft der Rumpf kein einziges Mal.'),
+          P([
+            'preise <- [1999, 999, 3490]§Funkmaus, USB-C-Kabel und Headset in Cent.',
+            'summe <- 0',
+            'i <- 0',
+            'SOLANGE i < LÄNGE(preise)§Kopfgesteuert: prüft vor jedem Durchlauf.',
+            '  summe <- summe + preise[i]',
+            '  i <- i + 1',
+            'ENDE SOLANGE',
+            'AUSGABE "Warenkorb:", summe, "Cent"'
+          ], 'Dasselbe Struktogramm als ausführbarer Pseudocode', { praxis: 'Jeder Kasten im Struktogramm wird 1:1 zu einer Zeile Pseudocode. Klicke auf „Ablauf verfolgen“, um die Schleife live zu prüfen.' }),
+          A.text('Fußgesteuerte Schleife: Eingabeprüfung im Bestellformular', 'Eine **fußgesteuerte Schleife** prüft erst **nach** dem Durchlauf – sie läuft also **mindestens einmal**. Typisch ist das Mengenfeld im Shop: Erst muss der Kunde etwas eingeben, dann prüft das Programm, ob die Menge positiv ist.\n\n**Wichtige Prüfungsfalle:** Im PAP und Struktogramm steht oft die **Durchführungsbedingung** (`solange menge <= 0` → wiederhole, solange ungültig). Im Pseudocode `WIEDERHOLE … BIS` steht die **Abbruchbedingung** (`BIS menge > 0` → stoppe, sobald gültig). Beide meinen dieselbe Schleife – nur umgedreht!'),
+          A.nsd([{ wiederhole: ['Eingabe: menge'], bis: 'solange menge <= 0' }, 'Ausgabe: „Menge übernommen“'], 'Fußgesteuert im Struktogramm (Durchführungsbedingung)'),
+          P([
+            'WIEDERHOLE§Fußgesteuert: läuft mindestens einmal.',
+            '  LIES menge§Kunde tippt im Bestellformular eine Menge ein.',
+            'BIS menge > 0§Abbruchbedingung: erst bei positiver Menge geht es weiter.',
+            'SCHREIBE "Menge übernommen:", menge'
+          ], 'Dieselbe Eingabeprüfung als Pseudocode (Abbruchbedingung)', { input: ['0', '-2', '3'], praxis: 'Bestellformulare, PIN-Eingaben und Konsolenmenüs nutzen genau dieses Muster: erst fragen, dann prüfen.' }),
+          A.nsd(['summe <- 4790', { aufruf: 'versand <- versandInCent(summe)' }, 'Ausgabe: summe + versand'], 'Hauptprogramm mit Unterprogramm-Aufruf (doppelte Seitenlinien)'),
+          P([
+            'FUNKTION versandInCent(warenwert)§Eigenes Unterprogramm: einmal geplant, überall nutzbar.',
+            '  WENN warenwert >= 5000 DANN',
+            '    GIB ZURÜCK 0',
+            '  ENDE WENN',
+            '  GIB ZURÜCK 495',
+            'ENDE FUNKTION',
+            'summe <- 4790§Hauptprogramm startet hier.',
+            'versand <- versandInCent(summe)§Entspricht dem Kasten mit doppelten Seitenlinien.',
+            'AUSGABE "Gesamt:", summe + versand, "Cent"'
+          ], 'Unterprogramm-Aufruf im Pseudocode', { praxis: 'Genau hier endet PSS und beginnt der eigentliche Code: Aus diesem Pseudocode entstehen direkt die Module in Java und Python.' }),
+          A.table(['Nächster Schritt im Lernpfad', 'Passender Kurs'], [
+            ['Schreibtischtest & Fehlersuche in Pseudocode', '[Pseudocode: Schreibtischtest und Fehlersuche](/code-lernen/kurs/pseudo/schreibtisch/)'],
+            ['AP2-Prüfungsaufgaben zu Struktogramm & PAP', '[AP2: Struktogramm & PAP – Prüfungsvertiefung](/code-lernen/kurs/ap2/struktogramm/)'],
+            ['Dasselbe Shop-Projekt in Java oder Python', '[Java, Modul 1](/code-lernen/kurs/java/hello/) und [Python, Modul 1](/code-lernen/kurs/python/hello/)']
+          ], 'Von der Planung direkt in den Code')
         ],
-        tips: [A.tip('In einer verbreiteten Schreibweise zählt eine Schleife auch abwärts: `FÜR i VON 5 ABWÄRTS BIS 1 WIEDERHOLE` ist dasselbe wie `FÜR i VON 5 BIS 1 SCHRITT -1`. Beides versteht der Player.')],
+        tips: [
+          A.warn('Achte bei `WIEDERHOLE … BIS` immer darauf, ob nach der **Durchführungsbedingung** („solange falsch“) oder der **Abbruchbedingung** („bis richtig“) gefragt ist.')
+        ],
         quiz: [
-          A.q('Welche Schleife läuft garantiert mindestens einmal?', ['Die fußgesteuerte', 'Die kopfgesteuerte', 'Keine', 'Nur die Zählschleife'], 0, 'Geprüft wird erst nach dem ersten Durchlauf.'),
-          A.q('Im Pseudocode steht `WIEDERHOLE ... BIS x < 10`. Was ist `x < 10`?', ['Die Abbruchbedingung', 'Die Durchführungsbedingung', 'Ein Kommentar', 'Ein Methodenaufruf'], 0, 'Ist sie wahr, endet die Schleife.'),
-          A.q('Wie stellt man im Struktogramm den Aufruf einer Methode dar?', ['Als Kasten mit doppelten senkrechten Seitenlinien', 'Als Kasten mit einem Dreieck oben', 'Als Kasten mit einem Rand links und unten', 'Als Oval mit dem Namen der Methode'], 0, 'Die Methode selbst bekommt ein eigenes Struktogramm.'),
-          A.q('Die Eingabe ist schon am Anfang 1. Wie oft läuft `SOLANGE x > 1`?', ['Keinmal', 'Einmal', 'Endlos', 'Zweimal'], 0, 'Kopfgesteuert: Die Bedingung ist sofort falsch.')
+          A.q('Welche Schleifenart läuft garantiert mindestens einmal?', ['Fußgesteuerte Schleife', 'Kopfgesteuerte Schleife', 'Zählschleife mit Start > Ende', 'Keine Schleife läuft garantiert'], 0, 'Die fußgesteuerte Schleife prüft erst am Ende des Rumpfs.'),
+          A.q('Im Struktogramm steht unten `solange menge <= 0`. Wie lautet die passende **Abbruchbedingung** in `WIEDERHOLE … BIS`?', ['BIS menge > 0', 'BIS menge <= 0', 'BIS menge < 0', 'BIS menge = 0'], 0, 'Das Gegenteil von „kleiner gleich 0“ ist „größer als 0“.'),
+          A.q('Welches PAP-Symbol steht für den Aufruf einer Methode (Unterprogramm)?', ['Rechteck mit doppelten senkrechten Seitenlinien', 'Parallelogramm mit schrägen Seitenlinien', 'Raute mit zwei beschrifteten Ausgängen', 'Abgerundetes Rechteck (Oval)'], 0, 'Doppelte Seitenlinien zeigen einen Unterprogrammaufruf; Parallelogramm ist Ein-/Ausgabe.'),
+          A.q('Der Warenkorb ist leer (`LÄNGE(preise) = 0`). Wie oft läuft `SOLANGE i < LÄNGE(preise)` (mit `i = 0`)?', ['Keinmal (0 Durchläufe)', 'Genau einmal (1 Durchlauf)', 'Zweimal (2 Durchläufe)', 'Endlos viele Durchläufe'], 0, 'Kopfgesteuert: 0 < 0 ist sofort falsch, der Rumpf wird übersprungen.')
         ],
         tasks: [
-          A.predict('Was gibt das Programm aus?', ['SETZE x = 20', 'SOLANGE x > 1 WIEDERHOLE', '  SETZE x = x DIV 2', '  SCHREIBE x', 'ENDE SOLANGE'], ['10\n5\n2\n1'], 'DIV schneidet den Rest ab. Rechne jeden Durchlauf einzeln und prüfe vor dem nächsten, ob die Bedingung noch stimmt.'),
-          A.predict('Was gibt das Programm aus?', ['FÜR i VON 3 ABWÄRTS BIS 1 WIEDERHOLE', '  SCHREIBE i * 7', 'ENDE FÜR'], ['21\n14\n7'], 'i läuft 3, 2, 1.')
+          A.desk('Schreibtischtest zum Warenkorb-Struktogramm: Trage i und summe nach jedem Durchlauf ein.', 'pseudo', [
+            'preise <- [1999, 999, 3490]',
+            'summe <- 0',
+            'i <- 0',
+            'SOLANGE i < LÄNGE(preise)',
+            '  summe <- summe + preise[i]',
+            '  i <- i + 1',
+            '  AUSGABE i, summe',
+            'ENDE SOLANGE'
+          ], { at: 6, cols: ['i', 'summe'] }, 'Addiere in jedem Durchlauf den nächsten Preis zur bisherigen Summe.', 'Durchlauf 1: i=1, summe=1999; Durchlauf 2: i=2, summe=2998; Durchlauf 3: i=3, summe=6488.'),
+          A.predict('Übersetze das Versand-Struktogramm für einen Warenwert von genau 5000 Cent: Was wird ausgegeben?', [
+            'warenwert <- 5000',
+            'WENN warenwert >= 5000 DANN',
+            '  versand <- 0',
+            'SONST',
+            '  versand <- 495',
+            'ENDE WENN',
+            'AUSGABE warenwert + versand'
+          ], '5000', 'Prüfe den Grenzwert 5000 genau gegen >= 5000.', '5000 >= 5000 ist WAHR, also versand = 0 und Ausgabe 5000.'),
+          A.bug('Shop-Struktogramm als Pseudocode: Die Warenkorb-Summe bleibt endlos stecken bzw. bricht ab, weil der Schleifenzähler vergessen wurde. Korrigiere die fehlerhafte Zeile.', 'pseudo', [
+            'preise <- [1999, 999]',
+            'summe <- 0',
+            'i <- 0',
+            'SOLANGE i < LÄNGE(preise)',
+            '  summe <- summe + preise[i]',
+            '  i <- i - 1',
+            'ENDE SOLANGE',
+            'AUSGABE summe'
+          ], { line: 5, kind: 'laufzeit', fixes: [
+            'i <- i + 1',
+            'i <- 0',
+            'i <- i + 2',
+            'summe <- summe + 1'
+          ], expect: '2998' }, 'In welche Richtung muss der Index i laufen, um alle Elemente 0 und 1 zu besuchen?', 'Mit i - 1 wird i negativ (-1), was beim nächsten Zugriff preise[-1] zu einem Indexfehler führt. Richtig ist i <- i + 1.')
         ]
       }
     ]
