@@ -38,8 +38,9 @@ function run(lang, code, dir) {
   const D = defs.join('\n'), B = body.join('\n'), uses = /Konto/.test(code.join('\n'));
   if (lang === 'python') { fs.writeFileSync(path.join(dir, 'm.py'), code.join('\n')); return sh(tool.python, ['-I', 'm.py'], dir); }
   if (lang === 'java') {
-    fs.writeFileSync(path.join(dir, 'Main.java'), 'public class Main {\n' + D + '\npublic static void main(String[] args) {\n' + B + '\n}\n}\n' + (uses ? KONTO.java : ''));
-    const c = sh(tool.javac, ['Main.java'], dir); if (c.status) return c; return sh(tool.java, ['-cp', dir, 'Main'], dir);
+    // gleicher Aufbau wie beim Aufzeichnen der Abläufe (eigene Klassen hinter Main, import an den Anfang)
+    fs.writeFileSync(path.join(dir, 'Main.java'), require('./java-quelle').bauen(code).src + (uses ? KONTO.java : ''));
+    const c = sh(tool.javac, ['-encoding', 'UTF-8', 'Main.java'], dir); if (c.status) { c.phase = 'compile'; return c; } return sh(tool.java, ['-Dstdout.encoding=UTF-8', '-cp', dir, 'Main'], dir);
   }
   if (lang === 'csharp') {
     fs.writeFileSync(path.join(dir, 'p.csproj'), '<Project Sdk="Microsoft.NET.Sdk"><PropertyGroup><OutputType>Exe</OutputType><TargetFramework>net8.0</TargetFramework><ImplicitUsings>enable</ImplicitUsings><Nullable>disable</Nullable></PropertyGroup></Project>');
@@ -72,6 +73,30 @@ for (const t of A.tracks) for (const spec of t.lessons) {
     if (r.status !== 0 && r.status !== undefined) { fail++; console.log('FAIL  ' + w + ' [' + k.lang + '] Übersetzen/Laufen schlug fehl:\n' + ((r.stdout || '') + (r.stderr || '')).split('\n').slice(0, 6).join('\n')); continue; }
     if (k.answer.some((a) => norm(a) === out)) pass++;
     else { fail++; console.log('FAIL  ' + w + ' [' + k.lang + '] hinterlegt ' + JSON.stringify(k.answer[0]) + ', tatsächlich ' + JSON.stringify(out)); }
+  }
+  // Sauberer Code: Alle Varianten müssen dasselbe ausgeben, sonst wäre es kein Refactoring
+  for (const [i, k] of L.tasks.entries()) {
+    if (k.type !== 'choose' || !need[k.lang] || !k.expect || (only && only !== k.lang)) continue;
+    const w = L.id + ' Aufgabe ' + (i + 1) + ' (Clean Code)';
+    if (need[k.lang].some((x) => !tool[x] || !fs.existsSync(tool[x]))) { notrun[k.lang] = (notrun[k.lang] || 0) + 1; continue; }
+    const abw = k.variants.map((v, j) => { const r = run(k.lang, v, fs.mkdtempSync(path.join(tmp, 'cc-'))); const out = norm(r.stdout || ''); return r.status || out !== norm(k.expect) ? 'Variante ' + (j + 1) + ' liefert ' + (r.status ? 'einen Fehler' : JSON.stringify(out)) : null; }).filter(Boolean);
+    if (abw.length) { fail++; console.log('FAIL  ' + w + ': ' + abw.join('; ') + ' statt ' + JSON.stringify(k.expect)); } else pass++;
+  }
+  // Bug-Arena: Der Fehler tritt auf und passt zur Fehlerart, genau die richtige Korrektur liefert die erwartete Ausgabe
+  for (const [i, k] of L.tasks.entries()) {
+    if (k.type !== 'bug' || !need[k.lang] || !k.expect || (only && only !== k.lang)) continue;
+    const w = L.id + ' Aufgabe ' + (i + 1) + ' (Bug)';
+    if (need[k.lang].some((x) => !tool[x] || !fs.existsSync(tool[x]))) { notrun[k.lang] = (notrun[k.lang] || 0) + 1; continue; }
+    const probe = (code) => { const r = run(k.lang, code, fs.mkdtempSync(path.join(tmp, 'bug-'))); return { ok: !r.status, art: r.phase === 'compile' ? 'syntax' : r.status ? 'laufzeit' : 'lauf', out: norm(r.stdout || '') }; };
+    const line = [].concat(k.line)[0], fehler = [];
+    const b = probe(k.code), artIst = b.art === 'lauf' ? (b.out === norm(k.expect) ? 'kein Fehler' : 'logik') : b.art;
+    if (artIst !== k.kind) fehler.push('fehlerhafte Version zeigt ' + artIst + ', hinterlegt ist ' + k.kind);
+    k.fixes.forEach((f, j) => {
+      const r = probe(A.applyFix(k.code, line, f)), richtig = r.ok && r.out === norm(k.expect);
+      if (j === k.a && !richtig) fehler.push('richtige Korrektur liefert ' + (r.ok ? JSON.stringify(r.out) : r.art) + ' statt ' + JSON.stringify(k.expect));
+      if (j !== k.a && richtig) fehler.push('Korrektur ' + (j + 1) + ' wäre ebenfalls richtig: ' + f);
+    });
+    if (fehler.length) { fail++; console.log('FAIL  ' + w + ': ' + fehler.join('; ')); } else pass++;
   }
 }
 fs.rmSync(tmp, { recursive: true, force: true });

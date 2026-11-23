@@ -373,12 +373,6 @@
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://layer8academy.boxberger.app/code-lernen/kurs/java/ops/</loc>
-    <lastmod>2026-11-20</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
     <loc>https://layer8academy.boxberger.app/code-lernen/kurs/java/cond/</loc>
     <lastmod>2026-11-20</lastmod>
     <changefreq>monthly</changefreq>
@@ -409,7 +403,37 @@
     <priority>0.6</priority>
   </url>
   <url>
+    <loc>https://layer8academy.boxberger.app/code-lernen/kurs/java/kapselung/</loc>
+    <lastmod>2026-11-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://layer8academy.boxberger.app/code-lernen/kurs/java/vererbung/</loc>
+    <lastmod>2026-11-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
     <loc>https://layer8academy.boxberger.app/code-lernen/kurs/java/err/</loc>
+    <lastmod>2026-11-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://layer8academy.boxberger.app/code-lernen/kurs/java/architektur/</loc>
+    <lastmod>2026-11-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://layer8academy.boxberger.app/code-lernen/kurs/java/clean/</loc>
+    <lastmod>2026-11-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://layer8academy.boxberger.app/code-lernen/kurs/java/bugs/</loc>
     <lastmod>2026-11-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>

@@ -157,7 +157,41 @@ function checkParts(where, parts) {
             const res = k.verify ? db.exec(k.verify) : r;
             if (!res.length || !res[res.length - 1].values.length) warn(w + ': Musterlösung liefert keine Zeilen');
           } catch (e) { bad(w + ': Musterlösung fehlerhaft: ' + e.message); }
+        } else if (k.type === 'desk') {
+          // Schreibtischtest: Ablauf aktuell, markierte Zeile wird ausgeführt, Spalten sind Variablen des Ablaufs
+          const tr = A.traceFor(k.lang, k.code);
+          if (!tr) { bad(w + ': Ablauf fehlt oder ist veraltet (node tools/code-lernen/trace-bauen.js)'); continue; }
+          const rows = A.deskRows(tr, k.at);
+          if (rows.length < 2) bad(w + ': Zeile ' + (k.at + 1) + ' wird nur ' + rows.length + '-mal ausgeführt, zu wenig für einen Schreibtischtest');
+          for (const c of k.cols) if (!rows.every((x) => A.deskValue(x, c) !== null)) bad(w + ': Spalte „' + c + '“ ist keine Variable im Ablauf');
+          if (!(k.given >= 0 && k.given < rows.length)) bad(w + ': given muss kleiner als die Zahl der Zeilen sein');
+        } else if (k.type === 'choose') {
+          if (!Array.isArray(k.variants) || k.variants.length < 2 || !(k.a >= 0 && k.a < k.variants.length)) bad(w + ': mindestens 2 Varianten und ein gültiger Index a');
+          if (!k.expl) bad(w + ': Begründung fehlt');
+          if (!k.expect) bad(w + ': expect fehlt, ohne sie prüft run-predict.js nicht, dass alle Varianten dasselbe tun');
+        } else if (k.type === 'bug') {
+          const ls = [].concat(k.line);
+          if (!ls.length || ls.some((n) => !(n >= 0 && n < k.code.length))) bad(w + ': Zeile außerhalb des Codes');
+          if (!A.bugKinds[k.kind]) bad(w + ': Fehlerart „' + k.kind + '“ unbekannt');
+          if (!Array.isArray(k.fixes) || k.fixes.length < 3 || !(k.a >= 0 && k.a < k.fixes.length)) bad(w + ': mindestens 3 Korrekturen und ein gültiger Index a');
+          else if (new Set(k.fixes).size !== k.fixes.length) bad(w + ': doppelte Korrekturen');
+          if (!k.expect) bad(w + ': expect (Ausgabe mit Korrektur) fehlt, ohne sie prüft run-predict.js den Fix nicht');
+          if (!k.expl) bad(w + ': Erklärung fehlt');
+          if (k.trace && !A.traceFor(k.lang, k.code)) bad(w + ': Ablauf fehlt oder ist veraltet (node tools/code-lernen/trace-bauen.js)');
         } else bad(w + ': unbekannter Typ');
+      }
+      // Java-Beispiele mit Ablauf: aufgezeichnet und zum Code passend
+      for (const p of all) if (p.code && p.trace && !A.traceFor(p.code.lang, p.code.lines.map((l) => l[0]))) bad(L.id + ' „' + (p.h || '') + '“: Ablauf fehlt oder ist veraltet (node tools/code-lernen/trace-bauen.js)');
+      // Lektionen im Praxis-Format: jedes Codebeispiel mit „In der Praxis“, jeder Pflichtbegriff im Glossar und im Text
+      if (L.standalone) {
+        for (const p of L.parts) if (p.code && !p.praxis) bad(L.id + ' „' + (p.h || '') + '“: „In der Praxis“ fehlt');
+        if (L.domain && !A.domains[L.domain]) bad(L.id + ': Szenario „' + L.domain + '“ gibt es nicht');
+        const text = JSON.stringify([L.parts, L.pitfalls, L.goal]).toLowerCase();
+        for (const t of L.terms) {
+          const [name, ...alias] = Array.isArray(t) ? t : [t];
+          if (!A.glossary.some((g) => g.name === name)) bad(L.id + ': Begriff „' + name + '“ fehlt im Glossar');
+          else if (![name].concat(alias).some((x) => text.includes(x.toLowerCase()))) warn(L.id + ': Begriff „' + name + '“ kommt im Text nicht vor');
+        }
       }
     }
   }
@@ -166,6 +200,8 @@ function checkParts(where, parts) {
   for (const [i, g] of A.glossary.entries()) if (!g.name || !g.text) bad('Glossar-Eintrag ' + i + ' unvollständig');
   const glSeen = new Set(); for (const g of A.glossary) { const k = (g.name || '').toLowerCase(); if (glSeen.has(k)) bad('Glossar: „' + g.name + '“ doppelt'); glSeen.add(k); }
   for (const [k, v] of Object.entries(A.pseudoSamples || {})) { const r = Pseudo.run(v, { inputs: ['6'] }); if (r.error) bad('Pseudocode-Beispiel „' + k + '“: ' + r.error.msg); }
+  // Aufgezeichnete Abläufe: kein Ersatzzeichen (falsch gelesene Umlaute)
+  for (const [k, t] of Object.entries(A.traces || {})) if (JSON.stringify(t).includes('�') || JSON.stringify(t).includes('�')) bad('Ablauf ' + k + ': Umlaute falsch kodiert (Ersatzzeichen im Ablauf)');
   // Kürzel (Hover-Erklärungen): vollständig, jeder Name und jede Schreibweise nur einmal, Kurse in l: gibt es wirklich
   const kzSeen = new Set(), trackIds = new Set(A.tracks.map((t) => t.id));
   for (const [i, e] of (A.kuerzel || []).entries()) {

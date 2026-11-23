@@ -47,6 +47,7 @@ function partHtml(p) {
   if (p.h && !p.code) s += '<h3>' + esc(p.h) + '</h3>';
   if (p.p && !p.code) s += md(p.p);
   if (p.code) s += codeHtml(p.code.lang, p.code.lines, p.h) + (p.p ? md(p.p) : '');
+  if (p.praxis) s += '<div class="note note-praxis"><b>In der Praxis</b>' + md(p.praxis) + '</div>';
   if (p.uml) s += diagramm(UML.classDiagram, p.uml);
   if (p.seq) s += diagramm(UML.sequence, p.seq.actors, p.seq.msgs);
   if (p.nsd) s += diagramm(UML.nsd, p.nsd);
@@ -66,6 +67,9 @@ function reihenfolge(q) {
 function aufgabeHtml(k) {
   let s = '<li class="task"><div class="t-prompt">' + md(k.prompt) + '</div>';
   if (k.type === 'predict') s += codeHtml(k.lang || 'pseudo', k.code.map((l) => [l, '']));
+  if (k.type === 'desk') s += codeHtml(k.lang, k.code.map((l) => [l, ''])) + '<table class="res desk"><thead><tr><th>Durchlauf</th>' + k.cols.map((c) => '<th><code>' + esc(c) + '</code></th>').join('') + '</tr></thead></table>';
+  if (k.type === 'choose') s += reihenfolge({ q: k.prompt, o: k.variants }).map((j, n) => '<p><b>Variante ' + String.fromCharCode(65 + n) + '</b></p>' + codeHtml(k.lang, k.variants[j].map((l) => [l, '']))).join('');
+  if (k.type === 'bug') s += codeHtml(k.lang, k.code.map((l) => [l, '']));
   if (k.type === 'fill') s += '<pre class="fill">' + k.tpl.split(/\{\{.*?\}\}/).map(esc).join('<span class="gap">_____</span>') + '</pre>';
   if (k.type === 'js' && k.starter) s += codeHtml('javascript', k.starter.split('\n').map((l) => [l, '']));
   return s + '</li>';
@@ -74,8 +78,10 @@ function lektionHtml(t, i) {
   const s = t.lessons[i], L = A.build(t, s), prev = i > 0 ? t.lessons[i - 1] : null, next = i < t.lessons.length - 1 ? t.lessons[i + 1] : null;
   let h = '<div class="crumb"><a href="' + BASE + '">Start</a> › <a href="' + kursUrl(t) + '">' + esc(t.title) + '</a> › ' + esc(A.stages[L.stage] || '') + '</div><h1>' + esc(L.title) + '</h1>';
   if (L.goal) h += '<div class="goal"><b>Ziel dieser Lektion</b>' + md(L.goal) + '</div>';
+  const dom = L.domain && A.domains[L.domain];
+  if (dom) h += '<div class="szenario"><b>Szenario: ' + esc(dom.title) + '</b>' + md(dom.text) + '</div>';
   if (L.idea.length) h += '<section class="sec"><h2>Die Idee dahinter</h2>' + L.idea.map(partHtml).join('') + '</section>';
-  if (L.parts.length) h += '<section class="sec"><h2>' + (L.concept && t.id !== 'pseudo' ? 'In ' + esc(t.title) : 'Der Stoff') + '</h2>' + L.parts.map(partHtml).join('') + '</section>';
+  if (L.parts.length) h += '<section class="sec"><h2>' + (L.concept && !L.standalone && t.id !== 'pseudo' ? 'In ' + esc(t.title) : 'Der Stoff') + '</h2>' + L.parts.map(partHtml).join('') + '</section>';
   if (L.pseudo.length) h += '<section class="sec"><h2>Im Kopf ausführen (sprachunabhängig)</h2>' + L.pseudo.map(partHtml).join('') + '</section>';
   if (L.pitfalls.length) h += '<section class="sec"><h2>Typische Stolperfallen</h2>' + L.pitfalls.map(partHtml).join('') + '</section>';
   if (L.quiz.length) h += '<section class="sec"><h2>Prüfe dich</h2><ol class="quiz">' + L.quiz.map((q) => '<li class="qcard"><div class="q-text">' + inl(q.q) + '</div><ul>' + reihenfolge(q).map((j) => '<li>' + inl(q.o[j]) + '</li>').join('') + '</ul></li>').join('') + '</ol></section>';
@@ -89,7 +95,7 @@ function kursHtml(t) {
     + '<ol class="lessons">' + t.lessons.map((s) => { const L = A.build(t, s); return '<li><a class="lrow" href="' + lekUrl(t, s) + '"><span class="lt"><b>' + esc(L.title) + '</b><span class="small muted">' + esc(plain(L.goal)) + '</span></span></a></li>'; }).join('') + '</ol>';
 }
 function startHtml() {
-  return '<h1>Programmieren lernen</h1><p class="lead">Von den allerersten Begriffen bis zu sicherem Lesen und Schreiben von Code, mit Erklärung zu jeder Zeile, Quiz und Übungen bis zum Stoff der AP2.</p>'
+  return '<h1>Grundkenntnisse aneignen</h1><p class="lead">Von den allerersten Begriffen bis zu sicherem Lesen und Schreiben von Code, mit Erklärung zu jeder Zeile, Quiz und Übungen bis zum Stoff der AP2.</p>'
     + A.tracks.map((t) => '<section class="sec"><h2><a href="' + kursUrl(t) + '">' + esc(t.title) + '</a></h2><p>' + esc(t.desc || '') + '</p><ul>' + t.lessons.map((s) => '<li><a href="' + lekUrl(t, s) + '">' + esc(A.build(t, s).title) + '</a></li>').join('') + '</ul></section>').join('');
 }
 function navHtml(curT, curS) {

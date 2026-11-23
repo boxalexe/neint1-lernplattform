@@ -34,24 +34,28 @@
     });
   }
 
-  /* ---------- Ablauf-Player (Pseudocode) ---------- */
+  /* ---------- Ablauf-Player ----------
+     Pseudocode wird live interpretiert (pseudo.js), Java spielt einen mit dem echten JDK aufgezeichneten Ablauf ab
+     (js/content/traces-java.js). Beide liefern dieselben Ereignisse: { line, msg, scopes: [{ name, vars }], out, error?, end? }. */
   function tracePlayer(el, src, inputs) {
-    const lines = src.split('\n');
     const r = Pseudo.run(src, { inputs });
-    const ev = r.events;
-    if (!ev.length) {
+    if (!r.events.length) {
       el.innerHTML = '<div class="note note-warn"><b>Fehler</b> ' + (r.error ? 'Zeile ' + (r.error.line + 1) + ': ' + esc(r.error.msg) : 'Es gibt nichts auszuführen.') + '</div>';
       return;
     }
+    playEvents(el, 'pseudo', src.split('\n'), r.events);
+  }
+  function playEvents(el, lang, lines, ev) {
+    const fmt = lang === 'pseudo' ? Pseudo.fmt : (v) => v, fnLabel = lang === 'pseudo' ? 'In der Funktion ' : 'In der Methode ';
     let i = -1, timer = null;
     el.innerHTML = '<div class="trace"><div class="tr-code"></div><div class="tr-side"><div class="tr-msg"></div><div class="tr-vars"></div><div class="tr-outw"><h5>Ausgabe</h5><pre class="tr-out"></pre></div></div></div>'
       + '<div class="tr-ctl"><button data-a="reset" title="Zum Anfang">Zum Anfang</button><button data-a="back">Zurück</button><button data-a="next" class="primary">Weiter</button><button data-a="play">Abspielen</button><span class="tr-count"></span></div>';
     const codeEl = $('.tr-code', el), msgEl = $('.tr-msg', el), varsEl = $('.tr-vars', el), outEl = $('.tr-out', el), cnt = $('.tr-count', el), playBtn = $('[data-a=play]', el);
-    codeEl.innerHTML = '<table class="cb-table">' + lines.map((l, n) => '<tr data-n="' + n + '"><td class="ln">' + (n + 1) + '</td><td class="src"><pre>' + (A.hl('pseudo', l) || '&nbsp;') + '</pre></td></tr>').join('') + '</table>';
+    codeEl.innerHTML = '<table class="cb-table">' + lines.map((l, n) => '<tr data-n="' + n + '"><td class="ln">' + (n + 1) + '</td><td class="src"><pre>' + (A.hl(lang, l) || '&nbsp;') + '</pre></td></tr>').join('') + '</table>';
     const scopeHtml = (sc, prev) => sc.map((s, k) => {
       const names = Object.keys(s.vars), pv = prev && prev[k] && prev[k].name === s.name ? prev[k].vars : {};
-      return '<div class="scope"><div class="scope-h">' + (s.name ? 'In der Funktion ' + esc(s.name) : 'Variablen') + '</div>'
-        + (names.length ? '<table class="vars">' + names.map((n) => { const v = Pseudo.fmt(s.vars[n]), ch = !(n in pv) || JSON.stringify(pv[n]) !== JSON.stringify(s.vars[n]); return '<tr class="' + (ch ? 'chg' : '') + '"><td>' + esc(n) + '</td><td>' + esc(v) + '</td></tr>'; }).join('') + '</table>' : '<div class="muted small">noch keine</div>') + '</div>';
+      return '<div class="scope"><div class="scope-h">' + (s.lambda ? 'Im Lambda' : s.name ? (s.ctor ? 'Im Konstruktor ' : fnLabel) + '<code>' + esc(s.name) + '()</code>' : 'Variablen') + '</div>'
+        + (names.length ? '<table class="vars">' + names.map((n) => { const v = fmt(s.vars[n]), ch = !(n in pv) || JSON.stringify(pv[n]) !== JSON.stringify(s.vars[n]); return '<tr class="' + (ch ? 'chg' : '') + '"><td>' + esc(n) + '</td><td>' + esc(v) + '</td></tr>'; }).join('') + '</table>' : '<div class="muted small">noch keine</div>') + '</div>';
     }).join('');
     function paint() {
       $$('tr.cur, tr.err', codeEl).forEach((t) => t.classList.remove('cur', 'err'));
@@ -87,10 +91,11 @@
     el.className = 'codeblock';
     const rows = lines.map((l, n) => '<tr data-i="' + n + '"><td class="ln">' + (n + 1) + '</td><td class="src"><pre>' + (A.hl(lang, l[0]) || '&nbsp;') + '</pre></td><td class="note">' + A.inl(l[1]) + '</td></tr>').join('');
     const canTry = (lang === 'javascript' || lang === 'sql') && !part.noRun;
+    const rec = lang !== 'pseudo' ? A.traceFor(lang, lines.map((l) => l[0])) : null; // aufgezeichneter Ablauf (Java)
     el.innerHTML = '<div class="cb-head"><span class="cb-lang">' + esc(A.langNames[lang] || lang) + '</span><span class="cb-btns">'
       + (hasNotes ? '<button data-a="focus">Schritt für Schritt</button>' : '')
       + (canTry ? '<button data-a="try">Ausprobieren und ändern</button>' : '')
-      + (lang === 'pseudo' ? '<button data-a="trace">Ablauf verfolgen</button>' : '') + '</span></div>'
+      + (lang === 'pseudo' || rec ? '<button data-a="trace">Ablauf verfolgen</button>' : '') + '</span></div>'
       + '<div class="cb-body"><table class="cb-table' + (hasNotes ? ' has-notes' : '') + '">' + rows + '</table></div><div class="cb-extra"></div>';
     const table = $('.cb-table', el), extra = $('.cb-extra', el);
     const plain = lines.map((l) => l[0]).join('\n');
@@ -129,22 +134,25 @@
         Sandbox.run(ta.value).then((r) => { out.className = 'console' + (r.error ? ' bad' : ''); out.textContent = (r.logs.length ? r.logs.join('\n') : r.error ? '' : '(keine Ausgabe, nutze console.log(...) um etwas auszugeben)') + (r.error ? (r.logs.length ? '\n' : '') + 'Fehler: ' + r.error : ''); });
       } else if (a === 'trace') {
         if ($('.tp', extra)) { extra.innerHTML = ''; b.classList.remove('on'); return; }
-        b.classList.add('on'); extra.innerHTML = '<div class="tp"></div>'; tracePlayer($('.tp', extra), plain, part.input);
+        b.classList.add('on'); extra.innerHTML = '<div class="tp"></div>';
+        if (rec) playEvents($('.tp', extra), lang, lines.map((l) => l[0]), rec.ev); else tracePlayer($('.tp', extra), plain, part.input);
       }
     });
   }
 
   /* ---------- Quiz ---------- */
+  // Feste Mischung aus einem Text: gleiche Frage, gleiche Reihenfolge bei jedem Besuch (auch in tools/code-lernen/seiten-bauen.js)
+  function mixOrder(text, n) {
+    let h = 2166136261; for (const ch of text) h = Math.imul(h ^ ch.charCodeAt(0), 16777619) >>> 0;
+    const idx = Array.from({ length: n }, (_, j) => j);
+    for (let k = idx.length - 1; k > 0; k--) { h = Math.imul(h ^ (h >>> 15), 2246822507) >>> 0; const r = h % (k + 1); [idx[k], idx[r]] = [idx[r], idx[k]]; }
+    return idx;
+  }
   function initQuiz(el, { lesson }) {
     el.className = 'quiz';
     // Antworten fest gemischt: in den Inhalten steht die richtige Antwort vorn, auf dem Bildschirm an wechselnder Stelle. Die Mischung
     // hängt nur am Fragetext, damit dieselbe Frage beim nächsten Besuch gleich aussieht. data-o behält die ursprüngliche Nummer.
-    const order = (q) => {
-      let h = 2166136261; for (const ch of q.q) h = Math.imul(h ^ ch.charCodeAt(0), 16777619) >>> 0;
-      const idx = q.o.map((_, j) => j);
-      for (let k = idx.length - 1; k > 0; k--) { h = Math.imul(h ^ (h >>> 15), 2246822507) >>> 0; const r = h % (k + 1); [idx[k], idx[r]] = [idx[r], idx[k]]; }
-      return idx;
-    };
+    const order = (q) => mixOrder(q.q, q.o.length);
     el.innerHTML = lesson.quiz.map((q, i) => '<div class="qcard" data-q="' + i + '"><div class="q-text"><span class="q-n">' + (i + 1) + '</span><span>' + A.inl(q.q) + '</span></div><div class="q-opts">' + order(q).map((j) => '<button data-o="' + j + '">' + A.inl(q.o[j]) + '</button>').join('') + '</div><div class="q-fb"></div></div>').join('');
     // bereits richtig beantwortet?
     lesson.quiz.forEach((q, i) => { if (P.quiz[lesson.id + ':' + i]) { const c = $('.qcard[data-q="' + i + '"]', el); mark(c, q, q.a, true, true); } });
@@ -171,7 +179,7 @@
 
   function initTasks(el, { lesson }) {
     el.className = 'tasks';
-    el.innerHTML = lesson.tasks.map((t, i) => '<div class="task' + (P.task[lesson.id + ':' + i] ? ' solved' : '') + '" data-t="' + i + '"><div class="t-head"><span class="t-n">' + (i + 1) + '</span><span class="t-kind">' + ({ predict: 'Was gibt das aus?', fill: 'Lückentext', js: 'Programmieren', sql: 'Abfrage schreiben' }[t.type]) + '</span><span class="t-ok">gelöst</span></div><div class="t-prompt">' + md(t.prompt) + '</div><div class="t-body"></div></div>').join('');
+    el.innerHTML = lesson.tasks.map((t, i) => '<div class="task' + (P.task[lesson.id + ':' + i] ? ' solved' : '') + '" data-t="' + i + '"><div class="t-head"><span class="t-n">' + (i + 1) + '</span><span class="t-kind">' + ({ predict: 'Was gibt das aus?', fill: 'Lückentext', desk: 'Schreibtischtest', bug: 'Fehler finden', choose: 'Sauberer Code', js: 'Programmieren', sql: 'Abfrage schreiben' }[t.type]) + '</span><span class="t-ok">gelöst</span></div><div class="t-prompt">' + md(t.prompt) + '</div><div class="t-body"></div></div>').join('');
     lesson.tasks.forEach((t, i) => {
       const box = $('.task[data-t="' + i + '"] .t-body', el), card = box.parentElement;
       const ok = () => { card.classList.add('solved'); taskDone(lesson.id, i); };
@@ -209,6 +217,88 @@
         if (all) { feedback(box, true, '<b>Alle Lücken stimmen.</b>'); ok(); } else { tries++; feedback(box, false, 'Die roten Lücken stimmen noch nicht. Schau noch einmal in die Erklärung oben.'); if (tries >= 2) show.hidden = false; }
       });
       show.addEventListener('click', () => feedback(box, false, '<b>Lösung:</b><pre class="sol">' + esc(parts.map((s, k) => (k % 2 ? s.split('|')[0] : s)).join('')) + '</pre>'));
+    },
+    // Schreibtischtest: Werte nach jeder Ausführung der Zeile t.at eintragen, geprüft gegen den aufgezeichneten Ablauf
+    desk(box, t, ok) {
+      const codeHtml = '<div class="codeblock small"><table class="cb-table">' + t.code.map((l, n) => '<tr class="' + (n === t.at ? 'desk-at' : '') + '"><td class="ln">' + (n + 1) + '</td><td class="src"><pre>' + (A.hl(t.lang, l) || '&nbsp;') + '</pre></td></tr>').join('') + '</table></div>';
+      const tr = A.traceFor(t.lang, t.code);
+      if (!tr) { box.innerHTML = codeHtml + '<div class="note note-warn"><b>Ablauf fehlt</b>Für diese Aufgabe ist noch kein Ablauf aufgezeichnet.</div>'; return; }
+      const rows = A.deskRows(tr, t.at).map((x) => t.cols.map((c) => { const v = A.deskValue(x, c); return v === null ? '–' : v; }));
+      const shown = (v) => String(v).replace(/^"(.*)"$/, '$1');
+      const norm = (v) => { const s = shown(v).trim().replace(/^'(.)'$/, '$1').replace(',', '.').toLowerCase(); return s === 'wahr' ? 'true' : s === 'falsch' ? 'false' : s; };
+      box.innerHTML = codeHtml + '<p class="muted small">Eine Zeile pro Ausführung von Zeile ' + (t.at + 1) + ' (markiert), jeweils die Werte <b>danach</b>.</p>'
+        + '<div class="tbl-wrap"><table class="res desk"><thead><tr><th>Durchlauf</th>' + t.cols.map((c) => '<th><code>' + esc(c) + '</code></th>').join('') + '</tr></thead><tbody>'
+        + rows.map((r, i) => '<tr><td>' + (i + 1) + '</td>' + r.map((v, j) => '<td>' + (i < t.given ? '<span class="given">' + esc(shown(v)) + '</span>' : '<input class="gap desk-in" data-r="' + i + '" data-c="' + j + '" spellcheck="false" size="' + Math.max(4, shown(v).length + 1) + '" aria-label="' + esc(t.cols[j]) + ' im Durchlauf ' + (i + 1) + '">') + '</td>').join('') + '</tr>').join('')
+        + '</tbody></table></div><div class="t-ctl"><button class="primary" data-a="check">Prüfen</button>' + hintBtn(t, box) + '<button class="link" data-a="show" hidden>Lösung zeigen</button><button class="link" data-a="play" hidden>Ablauf verfolgen</button></div><div class="desk-play"></div>';
+      wireHint(box);
+      let tries = 0; const show = $('[data-a=show]', box), play = $('[data-a=play]', box);
+      const fertig = () => { play.hidden = false; };
+      $('[data-a=check]', box).addEventListener('click', () => {
+        let all = true;
+        $$('.desk-in', box).forEach((inp) => { const good = norm(inp.value) === norm(rows[+inp.dataset.r][+inp.dataset.c]); inp.classList.toggle('right', good); inp.classList.toggle('wrong', !good); if (!good) all = false; });
+        if (all) { feedback(box, true, '<b>Schreibtischtest stimmt.</b> ' + A.inl(t.expl || '')); ok(); fertig(); }
+        else { tries++; feedback(box, false, 'Die roten Felder stimmen noch nicht. Geh die Schleife Durchlauf für Durchlauf durch und notiere die Werte nach der markierten Zeile.'); if (tries >= 2) show.hidden = false; }
+      });
+      show.addEventListener('click', () => { $$('.desk-in', box).forEach((inp) => { inp.value = shown(rows[+inp.dataset.r][+inp.dataset.c]); inp.classList.remove('wrong'); inp.readOnly = true; }); show.hidden = true; feedback(box, false, '<b>Lösung eingetragen.</b> ' + A.inl(t.expl || '')); fertig(); });
+      play.addEventListener('click', () => { const p = $('.desk-play', box); if (p.innerHTML) { p.innerHTML = ''; return; } p.innerHTML = '<div class="tp"></div>'; playEvents($('.tp', p), t.lang, t.code, tr.ev); });
+    },
+    // Bug-Arena: Zeile anklicken, Fehlerart wählen, Fix wählen. Fixes gemischt wie Quizantworten (fest je Aufgabe).
+    bug(box, t, ok) {
+      const lines = [].concat(t.line), kinds = Object.keys(A.bugKinds);
+      const order = mixOrder(t.prompt, t.fixes.length);
+      const sel = { line: null, kind: null, fix: null };
+      box.innerHTML = '<p class="bug-step">1. Klicke die Zeile an, die den Fehler verursacht.</p>'
+        + '<div class="codeblock small"><table class="cb-table bug-code">' + t.code.map((l, n) => '<tr data-n="' + n + '" tabindex="0" role="button" aria-label="Zeile ' + (n + 1) + '"><td class="ln">' + (n + 1) + '</td><td class="src"><pre>' + (A.hl(t.lang, l) || '&nbsp;') + '</pre></td></tr>').join('') + '</table></div>'
+        + '<p class="bug-step">2. Welche Fehlerart ist es?</p><div class="bug-opts bug-kinds">' + kinds.map((k) => '<button data-k="' + k + '">' + esc(A.bugKinds[k]) + '</button>').join('') + '</div>'
+        + '<p class="bug-step">3. Welche Korrektur behebt die Ursache?</p><div class="bug-opts bug-fixes">' + order.map((j) => '<button data-f="' + j + '"><pre>' + t.fixes[j].split('\n').map((x) => A.hl(t.lang, x)).join('\n') + '</pre></button>').join('') + '</div>'
+        + '<div class="t-ctl"><button class="primary" data-a="check">Prüfen</button>' + hintBtn(t, box) + '<button class="link" data-a="show" hidden>Lösung zeigen</button><button class="link" data-a="play" hidden>Ablauf mit dem Fehler ansehen</button></div><div class="desk-play"></div>';
+      wireHint(box);
+      const pick = (sel2, attr, val) => { $$(sel2, box).forEach((b) => b.classList.toggle('on', b.getAttribute(attr) === String(val))); };
+      const setLine = (n) => { sel.line = n; $$('.bug-code tr', box).forEach((r) => r.classList.toggle('picked', +r.dataset.n === n)); };
+      box.addEventListener('click', (e) => {
+        if (box.classList.contains('locked')) return;
+        const r = e.target.closest('.bug-code tr'); if (r) { setLine(+r.dataset.n); return; }
+        const k = e.target.closest('[data-k]'); if (k) { sel.kind = k.dataset.k; pick('[data-k]', 'data-k', sel.kind); return; }
+        const f = e.target.closest('[data-f]'); if (f) { sel.fix = +f.dataset.f; pick('[data-f]', 'data-f', sel.fix); }
+      });
+      box.addEventListener('keydown', (e) => { const r = e.target.closest && e.target.closest('.bug-code tr'); if (r && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); setLine(+r.dataset.n); } });
+      let tries = 0; const show = $('[data-a=show]', box), play = $('[data-a=play]', box), tr = A.traceFor(t.lang, t.code);
+      const mark = () => {
+        $$('.bug-code tr', box).forEach((r) => { const n = +r.dataset.n; r.classList.toggle('right', n === sel.line && lines.includes(n)); r.classList.toggle('wrong', n === sel.line && !lines.includes(n)); });
+        $$('[data-k]', box).forEach((b) => { b.classList.toggle('right', b.dataset.k === sel.kind && sel.kind === t.kind); b.classList.toggle('wrong', b.dataset.k === sel.kind && sel.kind !== t.kind); });
+        $$('[data-f]', box).forEach((b) => { b.classList.toggle('right', +b.dataset.f === sel.fix && sel.fix === t.a); b.classList.toggle('wrong', +b.dataset.f === sel.fix && sel.fix !== t.a); });
+      };
+      const done = () => { box.classList.add('locked'); if (tr) play.hidden = false; };
+      $('[data-a=check]', box).addEventListener('click', () => {
+        if (box.classList.contains('locked')) return;
+        if (sel.line === null || !sel.kind || sel.fix === null) { feedback(box, false, 'Wähle zuerst eine Zeile, eine Fehlerart und eine Korrektur.'); return; }
+        mark();
+        const okL = lines.includes(sel.line), okK = sel.kind === t.kind, okF = sel.fix === t.a;
+        if (okL && okK && okF) { feedback(box, true, '<b>Bug gefunden und behoben.</b> ' + A.inl(t.expl || '')); ok(); done(); return; }
+        tries++;
+        feedback(box, false, 'Noch nicht ganz: ' + [okL ? '' : 'die Zeile', okK ? '' : 'die Fehlerart', okF ? '' : 'die Korrektur'].filter(Boolean).join(', ') + (tries >= 2 ? '.' : '. Rot markiert ist, was nicht stimmt.'));
+        if (tries >= 2) show.hidden = false;
+      });
+      show.addEventListener('click', () => { setLine(lines[0]); sel.kind = t.kind; sel.fix = t.a; pick('[data-k]', 'data-k', t.kind); pick('[data-f]', 'data-f', t.a); mark(); show.hidden = true; feedback(box, false, '<b>Lösung:</b> Zeile ' + (lines[0] + 1) + ', ' + esc(A.bugKinds[t.kind]) + '. ' + A.inl(t.expl || '')); done(); });
+      play.addEventListener('click', () => { const p = $('.desk-play', box); if (p.innerHTML) { p.innerHTML = ''; return; } p.innerHTML = '<div class="tp"></div>'; playEvents($('.tp', p), t.lang, t.code, tr.ev); });
+    },
+    // Sauberer Code: Varianten nebeneinander, gemischt wie Quizantworten; die Begründung kommt nach dem Prüfen
+    choose(box, t, ok) {
+      const order = mixOrder(t.prompt, t.variants.length);
+      const code = (v) => '<div class="codeblock small"><table class="cb-table">' + v.map((l, n) => '<tr><td class="ln">' + (n + 1) + '</td><td class="src"><pre>' + (A.hl(t.lang, l) || '&nbsp;') + '</pre></td></tr>').join('') + '</table></div>';
+      box.innerHTML = '<div class="choose-opts">' + order.map((j, n) => '<div class="choose-opt" role="button" tabindex="0" data-v="' + j + '"><span class="choose-tag">Variante ' + String.fromCharCode(65 + n) + '</span>' + code(t.variants[j]) + '</div>').join('') + '</div>'
+        + '<div class="t-ctl"><button class="primary" data-a="check">Prüfen</button>' + hintBtn(t, box) + '</div>';
+      wireHint(box);
+      let sel = null;
+      const opts = $$('.choose-opt', box);
+      const pick = (el) => { if (box.classList.contains('locked')) return; sel = +el.dataset.v; opts.forEach((o) => o.classList.toggle('on', o === el)); };
+      opts.forEach((o) => { o.addEventListener('click', () => pick(o)); o.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); pick(o); } }); });
+      $('[data-a=check]', box).addEventListener('click', () => {
+        if (sel === null) { feedback(box, false, 'Wähle zuerst eine Variante.'); return; }
+        opts.forEach((o) => { const v = +o.dataset.v; o.classList.toggle('right', v === t.a && v === sel); o.classList.toggle('wrong', v === sel && v !== t.a); });
+        if (sel === t.a) { box.classList.add('locked'); feedback(box, true, '<b>Richtig.</b> ' + A.inl(t.expl || '')); ok(); }
+        else feedback(box, false, '<b>Noch nicht.</b> Die Varianten tun alle dasselbe, es geht nur um Lesbarkeit und Änderbarkeit. ' + (t.hint ? A.inl(t.hint) : ''));
+      });
     },
     js(box, t, ok) {
       box.innerHTML = '<textarea class="editor" data-lang="javascript" rows="' + Math.max(6, t.starter.split('\n').length + 1) + '" spellcheck="false">' + esc(t.starter) + '</textarea><div class="t-ctl"><button class="primary" data-a="check">Prüfen</button>' + hintBtn(t, box) + '<button class="link" data-a="show" hidden>Lösung zeigen</button></div>';
@@ -317,6 +407,7 @@
     if (p.h) s += '<h3>' + esc(p.h) + '</h3>';
     if (p.p) s += md(p.p);
     if (p.code) s += mount('code', { part: p });
+    if (p.praxis) s += '<div class="note note-praxis"><b>In der Praxis</b>' + md(p.praxis) + '</div>';
     if (p.uml) s += '<div class="uml-wrap">' + UML.classDiagram(p.uml) + '</div>';
     if (p.seq) s += '<div class="uml-wrap">' + UML.sequence(p.seq.actors, p.seq.msgs) + '</div>';
     if (p.nsd) s += '<div class="uml-wrap">' + UML.nsd(p.nsd) + '</div>';
@@ -332,8 +423,10 @@
     const prev = idx > 0 ? A.build(track, track.lessons[idx - 1]) : null, next = idx < track.lessons.length - 1 ? A.build(track, track.lessons[idx + 1]) : null;
     let h = '<div class="crumb"><a href="' + kursUrl(track.id) + '">' + esc(track.title) + '</a> › ' + esc(A.stages[L.stage] || '') + '</div><h1>' + esc(L.title) + '</h1>';
     if (L.goal) h += '<div class="goal"><b>Ziel dieser Lektion</b>' + md(L.goal) + '</div>';
+    const dom = L.domain && A.domains[L.domain];
+    if (dom) h += '<div class="szenario"><b>Szenario: ' + esc(dom.title) + '</b>' + md(dom.text) + '</div>';
     if (L.idea.length) h += '<section class="sec"><h2>Die Idee dahinter</h2>' + L.idea.map(renderPart).join('') + '</section>';
-    if (L.parts.length) h += '<section class="sec"><h2>' + (L.concept && track.id !== 'pseudo' ? 'In ' + esc(track.title) : 'Der Stoff') + '</h2>' + L.parts.map(renderPart).join('') + '</section>';
+    if (L.parts.length) h += '<section class="sec"><h2>' + (L.concept && !L.standalone && track.id !== 'pseudo' ? 'In ' + esc(track.title) : 'Der Stoff') + '</h2>' + L.parts.map(renderPart).join('') + '</section>';
     if (L.pseudo.length) h += '<section class="sec"><h2>Im Kopf ausführen (sprachunabhängig)</h2><p class="muted">Dasselbe Prinzip als Pseudocode. Geh es mit „Weiter“ Schritt für Schritt durch und beobachte, wie sich die Variablen verändern. Das hilft dir in jeder Sprache.</p>' + L.pseudo.map(renderPart).join('') + '</section>';
     if (L.pitfalls.length) h += '<section class="sec"><h2>Typische Stolperfallen</h2>' + L.pitfalls.map((p) => renderPart(typeof p === 'string' ? A.warn(p) : p)).join('') + '</section>';
     if (L.quiz.length) h += '<section class="sec"><h2>Prüfe dich</h2>' + mount('quiz', { lesson: L }) + '</section>';
@@ -373,7 +466,7 @@
   }
   function homeView() {
     const f = P.last && A.findLesson(P.last) ? A.findLesson(P.last) : null, o = firstOpen();
-    let h = '<div class="bp"><div class="bp-head"><span class="bp-sheet">CODELERNEN · BLATT 01</span><h1>Programmieren lernen</h1>'
+    let h = '<div class="bp"><div class="bp-head"><h1>Grundkenntnisse aneignen</h1>'
       + '<p class="bp-lead">Von den allerersten Begriffen bis zu sicherem Lesen und Schreiben von Code. In kleinen Schritten, mit Erklärung zu <b>jeder einzelnen Zeile</b> und Übungen zum Selbermachen, bis zum Stoff der AP2.</p>'
       + '<p class="small muted">Code wird nur in deinem Browser zum Üben ausgeführt. Nichts davon wird an einen Server geschickt, übersetzt oder gespeichert, außer deinem Lernfortschritt auf diesem Gerät.</p></div>';
     h += '<div class="bp-label"><span>A</span>So gehst du am besten vor</div><ol class="bp-path">'
@@ -500,10 +593,41 @@
     return { all, map, reCode: mk(words.slice()), reText: mk(words.filter((n) => !(all[map.get(n)][3] || {}).c)) };
   })();
   const KZ_SKIP = 'pre,textarea,input,button,select,script,style,svg,a,h1,h2,h3,.kz,.q-opts,.cb-head,.crumb,.tabs,.t-kind,.kz-list,#gl,.tr-code,.console,.refbox,.uml-wrap,td.src,.sol,.fill,#kz-tip';
+  // Fachbegriffe der aktuellen Lektion (lesson.terms): Glossar-Erklärung beim ersten Vorkommen auf der Seite.
+  // Eintrag 'Name' oder ['Name', 'Schreibweise im Text', …]; gebeugte Formen (Arrays, Schleifen) werden mit erkannt.
+  let TERMS = null;
+  function setTerms(L) {
+    TERMS = null;
+    if (!L || !L.terms || !L.terms.length) return;
+    const map = new Map(), alle = [];
+    for (const t of L.terms) {
+      const [name, ...alias] = Array.isArray(t) ? t : [t], g = A.glossary.findIndex((x) => x.name === name);
+      if (g < 0) continue;
+      for (const w of [name].concat(alias)) { map.set(w.toLowerCase(), g); alle.push(w); }
+    }
+    if (!alle.length) return;
+    const reEsc = (s) => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    const re = new RegExp('(?<![A-Za-zÄÖÜäöüß])(' + alle.sort((a, b) => b.length - a.length).map(reEsc).join('|') + ')(?:e|en|er|es|n|s)?(?![A-Za-zÄÖÜäöüß])', 'gi');
+    TERMS = { re, map, seen: new Set() };
+  }
+  function termMark(nodes) {
+    for (const n of nodes) {
+      if (!n.parentNode || n.parentElement.closest('code')) continue;
+      const s = n.nodeValue, frag = document.createDocumentFragment(); let m, last = 0, hit = false; TERMS.re.lastIndex = 0;
+      while ((m = TERMS.re.exec(s))) {
+        const g = TERMS.map.get(m[1].toLowerCase()); if (g === undefined || TERMS.seen.has(g)) continue;
+        TERMS.seen.add(g); hit = true; frag.append(s.slice(last, m.index));
+        const sp = document.createElement('span'); sp.className = 'kz kz-term'; sp.dataset.g = g; sp.tabIndex = 0; sp.textContent = m[0]; frag.append(sp);
+        last = m.index + m[0].length;
+      }
+      if (hit) { frag.append(s.slice(last)); n.replaceWith(frag); }
+    }
+  }
   function kzMark(root) {
     if (!KZ.reText || !root || root.nodeType !== 1 || root.closest(KZ_SKIP)) return;
-    const tw = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, { acceptNode: (n) => (!n.nodeValue.trim() || n.parentElement.closest(KZ_SKIP) ? NodeFilter.FILTER_REJECT : NodeFilter.FILTER_ACCEPT) });
-    const nodes = []; while (tw.nextNode()) nodes.push(tw.currentNode);
+    const walk = () => { const tw = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, { acceptNode: (n) => (!n.nodeValue.trim() || n.parentElement.closest(KZ_SKIP) ? NodeFilter.FILTER_REJECT : NodeFilter.FILTER_ACCEPT) }); const a = []; while (tw.nextNode()) a.push(tw.currentNode); return a; };
+    if (TERMS) termMark(walk());
+    const nodes = walk();
     for (const n of nodes) {
       const code = n.parentElement.closest('code');
       if (code && code.childNodes.length === 1) {
@@ -525,9 +649,14 @@
     const tip = document.createElement('div'); tip.id = 'kz-tip'; tip.setAttribute('role', 'tooltip'); tip.hidden = true; document.body.appendChild(tip);
     let curEl = null;
     const show = (el) => {
-      const e = KZ.all[+el.dataset.k]; if (!e) return;
-      const o = e[3] || {}, tr = CUR && CUR.track.id, txt = (o.l && tr && o.l[tr]) || e[2];
-      tip.innerHTML = '<div class="kz-h"><code>' + esc(e[0]) + '</code><span>' + esc(e[1]) + '</span></div><div>' + A.inl(txt) + '</div>';
+      if (el.dataset.g !== undefined) {
+        const g = A.glossary[+el.dataset.g]; if (!g) return;
+        tip.innerHTML = '<div class="kz-h"><b>' + esc(g.name) + '</b><span>Begriff</span></div><div>' + A.inl(g.text) + '</div>';
+      } else {
+        const e = KZ.all[+el.dataset.k]; if (!e) return;
+        const o = e[3] || {}, tr = CUR && CUR.track.id, txt = (o.l && tr && o.l[tr]) || e[2];
+        tip.innerHTML = '<div class="kz-h"><code>' + esc(e[0]) + '</code><span>' + esc(e[1]) + '</span></div><div>' + A.inl(txt) + '</div>';
+      }
       tip.hidden = false; curEl = el;
       const r = el.getBoundingClientRect(), w = tip.offsetWidth, hh = tip.offsetHeight, vw = document.documentElement.clientWidth;
       const left = Math.max(8, Math.min(vw - w - 8, r.left + r.width / 2 - w / 2));
@@ -610,11 +739,12 @@
   }
 
   // Welche Ansicht gilt? Kurse und Lektionen haben echte Adressen (/code-lernen/kurs/java/vars/), die Werkzeuge bleiben unter #/…
+  // Zusammengelegte Lektionen (A.moved): eine alte Kennung zeigt auf die neue
   function viewState() {
     const h = location.hash.replace(/^#\/?/, '');
-    if (h) return h.split('/');
     const m = location.pathname.slice(BASE.length).match(/^kurs\/([\w-]+)\/(?:([\w-]+)\/)?$/);
-    return m ? (m[2] ? ['lesson', m[1] + '-' + m[2]] : ['track', m[1]]) : ['home'];
+    const v = h ? h.split('/') : m ? (m[2] ? ['lesson', m[1] + '-' + m[2]] : ['track', m[1]]) : ['home'];
+    return v[0] === 'lesson' && A.moved[v[1]] ? ['lesson', A.moved[v[1]]] : v;
   }
   let LAST = '';
   function route(force) {
@@ -634,6 +764,7 @@
     else if (kind === 'compare') html = compareView(arg || 'vars');
     else if (kind === 'glossar') html = glossarView(arg);
     else html = homeView();
+    setTerms(CUR ? CUR.lesson : null); // vor dem Einsetzen, damit kzMark die Begriffe schon kennt
     main.innerHTML = html;
     main.removeAttribute('data-vorab'); // vorgerenderter Inhalt ist ersetzt, ab jetzt sichtbar
     activate(main);

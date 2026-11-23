@@ -18,7 +18,7 @@ Kostenlos, ohne Anmeldung, ohne Tracking.
 | Subnetting-Trainer | IPv4 und IPv6 |
 | Code lesen | 11 Kurse, 103 Lektionen: Pseudocode, Softwareplanung, OOP/UML, SQL, Python, JavaScript, Java, C#, C, C++, Prüfungswissen AP2 |
 
-Code lesen: Erklärung zu jeder Codezeile, Quiz, Übungen, Schritt-für-Schritt-Ausführung von Pseudocode, JavaScript und SQL laufen im Browser, Autovervollständigung in den Codefeldern, Erklärung von Schlüsselwörtern beim Darüberfahren.
+Code lesen: Erklärung zu jeder Codezeile, Quiz, Übungen, Schritt-für-Schritt-Ausführung von Pseudocode und Java (mit dem JDK aufgezeichnet), interaktive Schreibtischtests, Bug-Arena (Fehlerzeile, Fehlerart und Korrektur finden; jede Korrektur ist mit dem JDK geprüft), JavaScript und SQL laufen im Browser, Autovervollständigung in den Codefeldern, Erklärung von Schlüsselwörtern beim Darüberfahren.
 
 ## Technik
 
@@ -43,7 +43,8 @@ code-lernen/
   js/uml.js                      SVG-Renderer für Klassen-, Sequenz-, Use-Case-, Aktivitätsdiagramme, Struktogramme
   js/editor.js                   Autovervollständigung
   js/sandbox.js, js/runner.js    JavaScript-Ausführung im Web Worker
-  js/content/                    Kursinhalte, Begriffe, Kürzel
+  js/content/                    Kursinhalte, Begriffe, Kürzel, Praxis-Szenarien (domains.js)
+  js/content/traces-java.js      aufgezeichnete Java-Abläufe für Player und Schreibtischtests (erzeugt)
   kurs/                          erzeugte Seiten pro Kurs und Lektion
 tools/                           Build- und Prüfskripte (werden nicht ausgeliefert)
 _headers, _redirects             Sicherheits-Header, Weiterleitungen
@@ -64,10 +65,11 @@ Dann `http://localhost:8000/` öffnen. Ein Webserver ist nötig, weil Web Worker
 | `node tools/seiten-bauen.mjs` | Kapitel- und Themenseiten der Hauptseite und `sitemap.xml` erzeugen |
 | `node tools/code-lernen/seiten-bauen.js` | Seiten pro Kurs und Lektion und `code-lernen/sitemap.xml` erzeugen |
 | `node tools/code-lernen/check.js` | Inhalte prüfen: Musterlösungen ausführen, Quiz, Doppelte, Antwortlängen |
+| `node tools/code-lernen/trace-bauen.js` | Java-Beispiele mit dem JDK schrittweise ausführen und die Abläufe aufzeichnen (JDK mit jdk.jdi nötig) |
 | `node tools/code-lernen/pseudo-test.js` | Tests des Pseudocode-Interpreters |
-| `node tools/code-lernen/run-predict.js` | Vorhersage-Aufgaben mit echten Compilern prüfen (Python, JDK, .NET, gcc lokal nötig) |
+| `node tools/code-lernen/run-predict.js` | Vorhersage- und Bug-Aufgaben mit echten Compilern prüfen (Python, JDK, .NET, gcc lokal nötig) |
 
-Beide Seitenbauer kennen `--pruefen` und melden veraltete Seiten. Nach Änderungen an Inhalten zuerst `check.js`, dann den passenden Seitenbauer ausführen.
+Beide Seitenbauer kennen `--pruefen` und melden veraltete Seiten. Nach Änderungen an Java-Beispielen zuerst `trace-bauen.js`, dann `check.js`, dann den Seitenbauer. `check.js` meldet veraltete Abläufe.
 
 ## Sicherheit
 

@@ -21,6 +21,8 @@
     ['Multiplizität', 'Zahl an einem Linienende im UML, die angibt, wie viele Objekte beteiligt sind: `1`, `0..1`, `*` (beliebig viele), `1..*` (mindestens eins).'],
     ['Statisch (static)', 'Gehört zur Klasse selbst, nicht zu einem einzelnen Objekt. Eine statische Variable gibt es nur einmal, egal wie viele Objekte existieren.'],
     ['Lambda', 'Kurze Funktion ohne Namen, die man direkt an Ort und Stelle schreibt, zum Beispiel `x => x * 2`.'],
+    ['Stream', 'Java: Verarbeitung einer Liste wie auf einem Fließband, Station für Station: `filter` behält passende Elemente, `map` wandelt um, `count` oder `toList` liefern das Ergebnis. Die Liste selbst bleibt unverändert.'],
+    ['Methodenreferenz', 'Java: Kurzform für ein Lambda, das nur eine vorhandene Methode aufruft. `Ticket::getTitel` bedeutet dasselbe wie `t -> t.getTitel()`.'],
     ['Generics', 'Platzhalter für Datentypen, damit eine Klasse für verschiedene Typen funktioniert, zum Beispiel `List<String>` und `List<Integer>`.'],
     // UML-Diagramme
     ['Klassendiagramm', 'UML-Diagramm für den Aufbau: Welche Klassen gibt es, mit welchen Attributen und Methoden, und wie hängen sie zusammen?'],
@@ -117,6 +119,24 @@
     ['Instanzattribut', 'IHK-Begriff für ein nicht statisches Attribut: Jedes Objekt hat seinen eigenen Wert.'],
     ['Klassenattribut', 'IHK-Begriff für ein statisches Attribut: Es gibt den Wert nur einmal für die ganze Klasse. Im UML unterstrichen oder mit `{static}`.'],
     ['Standardkonstruktor', 'Parameterloser Konstruktor, den der Compiler automatisch anlegt, wenn eine Klasse keinen eigenen hat. Wird im Klassendiagramm nicht eingezeichnet.'],
-    ['Stereotyp (UML)', 'Zusatz in Guillemets über einem Namen, der die Art des Elements angibt, zum Beispiel «interface» oder «enum».']
+    ['Stereotyp (UML)', 'Zusatz in Guillemets über einem Namen, der die Art des Elements angibt, zum Beispiel «interface» oder «enum».'],
+    ['Endlosschleife', 'Schleife, deren Bedingung nie falsch wird, weil der Rumpf nichts daran ändert. Das Programm hängt, bis es abgebrochen wird.'],
+    ['Off-by-one-Fehler', 'Eine Schleife läuft einmal zu oft oder zu selten, meist durch `<=` statt `<`. Bei Arrays folgt dann ein Zugriff auf einen Index, den es nicht gibt.'],
+    ['Syntaxfehler', 'Verstoß gegen die Schreibregeln der Sprache, zum Beispiel ein fehlendes Semikolon oder `=` statt `==`. Der Compiler meldet ihn, das Programm startet gar nicht.'],
+    ['Laufzeitfehler', 'Fehler, der erst beim Ausführen auftritt und das Programm mit einer Exception abbricht, zum Beispiel ein Zugriff außerhalb eines Arrays.'],
+    ['Logikfehler', 'Das Programm läuft ohne Meldung, liefert aber ein falsches Ergebnis, weil der Gedanke dahinter falsch umgesetzt ist. Finden lässt er sich nur mit Tests oder einem Schreibtischtest.'],
+    ['Stacktrace', 'Fehlermeldung einer Exception: Art und Grund des Fehlers, darunter die Kette der Methodenaufrufe mit Datei und Zeile. Die erste Zeile mit der eigenen Klasse zeigt die Stelle im eigenen Code.'],
+    ['Stack und Heap', 'Zwei Speicherbereiche, vereinfacht: Auf dem Stack liegen die lokalen Variablen jeder laufenden Methode (Werte primitiver Typen und Referenzen), im Heap die mit new erzeugten Objekte. Nicht mehr erreichbare Objekte räumt der Garbage Collector weg.'],
+    ['Oberklasse und Unterklasse', 'Bei der Vererbung gibt die Oberklasse (auch Basisklasse) Attribute und Methoden weiter, die Unterklasse (abgeleitete Klasse) übernimmt sie mit extends und ergänzt oder überschreibt sie. Prüfung: Die Unterklasse ist eine Oberklasse.'],
+    ['Checked und Unchecked Exception', 'Geprüfte Exceptions (checked, z. B. IOException) muss man abfangen oder mit throws weiterreichen, sonst übersetzt der Compiler nicht. Ungeprüfte (unchecked, Unterklassen von RuntimeException wie NullPointerException) verlangt er nicht.'],
+    ['Single Responsibility', 'Entwurfsprinzip: Jede Klasse und jede Methode hat genau eine Aufgabe. Lässt sie sich nicht in einem Satz ohne „und“ beschreiben, macht sie zu viel.'],
+    ['Clean Code', 'Code, der für Menschen leicht zu lesen und zu ändern ist: sprechende Namen, kleine Methoden, keine Wiederholungen, keine magischen Zahlen.'],
+    ['Magic Number', 'Eine Zahl mitten im Code ohne erklärenden Namen, etwa 5000 für die Versandgrenze. Besser: eine benannte Konstante.'],
+    ['Guard Clause', 'Eine Prüfung am Anfang einer Methode, die einen Sonder- oder Fehlerfall sofort mit return beendet. Ersetzt tief verschachtelte if-Blöcke.'],
+    ['DRY', 'Don’t Repeat Yourself: Jede Regel und jede Logik steht an genau einer Stelle, statt kopiert an mehreren.'],
+    ['Refactoring', 'Code umbauen, damit er lesbarer und wartbarer wird, ohne sein Verhalten zu ändern. Tests sichern ab, dass das Ergebnis gleich bleibt.'],
+    ['Verzweigung', 'Stelle im Programm, an der abhängig von einer Bedingung der eine oder der andere Weg läuft: if/else, else if, switch.'],
+    ['Bedingungsoperator', 'Kurzform einer Verzweigung, die einen Wert liefert: `bedingung ? wennWahr : wennFalsch`. Auch ternärer Operator genannt.'],
+    ['NullPointerException', 'Laufzeitfehler in Java, wenn eine Methode auf einer Variable aufgerufen wird, die `null` enthält, also auf kein Objekt zeigt.']
   ].forEach(([n, t]) => A.term(n, t));
 })();

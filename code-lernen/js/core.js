@@ -5,7 +5,7 @@
 (function (g) {
   'use strict';
   const A = (g.Academy = {
-    tracks: [], concepts: {}, glossary: [], sqlSetup: '',
+    tracks: [], concepts: {}, glossary: [], sqlSetup: '', domains: {}, traces: {}, moved: {},
     stages: { 1: 'Stufe 1: Einstieg', 2: 'Stufe 2: Kontrolle und Struktur', 3: 'Stufe 3: Daten und Objekte', 4: 'Stufe 4: Vertiefung bis zur AP2' }
   });
   const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
@@ -37,20 +37,54 @@
   A.fill = (prompt, tpl, hint) => ({ type: 'fill', prompt, tpl, hint });
   A.js = (prompt, starter, tests, hint, solution) => ({ type: 'js', prompt, starter, tests, hint, solution });
   A.sqlTask = (prompt, solution, hint, o) => Object.assign({ type: 'sql', prompt, solution, hint }, o || {});
+  // Schreibtischtest: Code läuft als aufgezeichneter Ablauf; jedes Mal, wenn Zeile `at` (0-basiert) ausgeführt ist,
+  // trägt der Lernende die Werte der Spalten `cols` ein. Die ersten `given` Zeilen sind als Beispiel vorgegeben.
+  A.desk = (prompt, lang, code, o, hint, expl) => Object.assign({ type: 'desk', prompt, lang, code, given: 1, hint, expl }, o);
+  // Bug-Arena: fehlerhafte Zeile (line, 0-basiert, oder Liste gleichwertiger Zeilen) anklicken, Fehlerart wählen
+  // (syntax | laufzeit | logik), Fix wählen. fixes[a] ersetzt die Zeile (\n für mehrere Zeilen); expect ist die Ausgabe mit Fix.
+  A.bug = (prompt, lang, code, o, hint, expl) => Object.assign({ type: 'bug', prompt, lang, code, a: 0, hint, expl }, o);
+  // Clean Code: mehrere Varianten mit gleichem Verhalten (expect prüft run-predict.js für alle), variants[a] ist die sauberste
+  A.choose = (prompt, lang, variants, o, hint, expl) => Object.assign({ type: 'choose', prompt, lang, variants, a: 0, hint, expl }, o);
+  A.bugKinds = { syntax: 'Syntaxfehler (Compiler meldet ihn)', laufzeit: 'Laufzeitfehler (Exception, Abbruch)', logik: 'Logikfehler (läuft, rechnet falsch)' };
+  // Zeile durch einen Fix ersetzen, Einrückung der Originalzeile übernehmen
+  A.applyFix = (code, line, fix) => { const ind = (code[line].match(/^\s*/) || [''])[0]; return code.slice(0, line).concat(fix.split('\n').map((l) => ind + l.trim()), code.slice(line + 1)); };
+
+  /* ---------- Aufgezeichnete Abläufe (tools/code-lernen/trace-bauen.js) ---------- */
+  // Schlüssel: Sprache + Prüfsumme des Codes. Ändert sich der Code, passt der alte Ablauf nicht mehr und check.js meldet es.
+  A.hash = (s) => { let h = 2166136261; for (const ch of String(s)) h = Math.imul(h ^ ch.codePointAt(0), 16777619) >>> 0; return h.toString(16).padStart(8, '0'); };
+  A.traceKey = (lang, lines) => lang + ':' + A.hash(lines.join('\n'));
+  A.traceFor = (lang, lines) => A.traces[A.traceKey(lang, lines)] || null;
+  // Zeilen eines Schreibtischtests: jede fertige Ausführung der Zeile `at`. Ruft die Zeile eine Methode auf, meldet der Ablauf
+  // sie zweimal (beim Sprung hinein und nach der Rückkehr); gezählt wird nur der Stand auf der Ebene der Zeile selbst.
+  A.deskRows = (tr, at) => {
+    const ev = tr.ev.map((e, i) => ({ e, prev: tr.ev[i - 1] })).filter((x) => x.e.line === at && !x.e.end && !x.e.error);
+    const tiefe = Math.min(...ev.map((x) => x.e.scopes.length));
+    return ev.filter((x) => x.e.scopes.length === tiefe);
+  };
+  // Wert einer Variable nach der Zeile. Ist sie danach schon außer Sichtweite (Laufvariable von for-each am Rumpfende),
+  // gilt der Stand vor der Zeile.
+  A.deskValue = (row, name) => {
+    for (const sc of [row.e.scopes, row.prev ? row.prev.scopes : []]) for (let k = sc.length - 1; k >= 0; k--) if (name in sc[k].vars) return sc[k].vars[name];
+    return null;
+  };
 
   /* ---------- Zusammenbau einer Lektion aus Konzept + Sprache ---------- */
+  // standalone: die Lektion bringt alles selbst mit (Beispiele aus einem Praxis-Szenario); vom Konzept bleiben nur Titel und Ziel als Rückfall.
+  // domain: Schlüssel in A.domains, wird als Szenario über der Lektion gezeigt. terms: Fachbegriffe, die im Text erklärt werden müssen.
   A.build = (track, spec) => {
     const c = spec.concept ? A.concepts[spec.concept] : null;
     if (spec.concept && !c) throw new Error('Konzept fehlt: ' + spec.concept);
+    const own = !!spec.standalone, cc = own ? null : c;
     const L = {
       id: track.id + '-' + (spec.concept || spec.id), track: track.id,
       title: spec.title || (c && c.title), goal: spec.goal || (c && c.goal), stage: spec.stage || (c && c.stage) || 1, concept: spec.concept || null,
-      idea: c && !spec.noIdea ? c.idea : [],
+      standalone: own, domain: spec.domain || null, terms: spec.terms || [],
+      idea: cc && !spec.noIdea ? cc.idea : [],
       parts: spec.parts || [],
-      pseudo: c && track.id !== 'pseudo' ? c.pseudo || [] : [],
-      pitfalls: [].concat(c && c.pitfalls ? c.pitfalls : [], spec.tips || []),
-      quiz: [].concat(c && c.quiz ? c.quiz : [], spec.quiz || []),
-      tasks: [].concat(spec.tasks || [], c && c.tasks && track.id !== 'sql' ? c.tasks : [])
+      pseudo: cc && track.id !== 'pseudo' ? cc.pseudo || [] : [],
+      pitfalls: [].concat(cc && cc.pitfalls ? cc.pitfalls : [], spec.tips || []),
+      quiz: [].concat(cc && cc.quiz ? cc.quiz : [], spec.quiz || []),
+      tasks: [].concat(spec.tasks || [], cc && cc.tasks && track.id !== 'sql' ? cc.tasks : [])
     };
     return L;
   };
@@ -121,5 +155,5 @@
 
   // Schlüsselwörter und Typen einer Sprache, für die Autovervollständigung in den Eingabefeldern
   A.langWords = (lang) => (LANG[lang] ? [...LANG[lang].kw, ...LANG[lang].ty] : []);
-  A.langNames = { java: 'Java', javascript: 'JavaScript', python: 'Python', c: 'C', cpp: 'C++', csharp: 'C#', sql: 'SQL', pseudo: 'Pseudocode' };
+  A.langNames = { text: 'Konsole', java: 'Java', javascript: 'JavaScript', python: 'Python', c: 'C', cpp: 'C++', csharp: 'C#', sql: 'SQL', pseudo: 'Pseudocode' };
 })(typeof window !== 'undefined' ? window : globalThis);
