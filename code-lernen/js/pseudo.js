@@ -482,5 +482,5 @@
 
   const API = { run, fmt, parse };
   if (typeof module !== 'undefined' && module.exports) module.exports = API;
-  else g.Pseudo = API;
+  g.Pseudo = API; // auch in Node global, damit core.js Abläufe für Schreibtischtest und Bug-Arena live erzeugen kann
 })(typeof window !== 'undefined' ? window : globalThis);

@@ -53,7 +53,12 @@
   // Schlüssel: Sprache + Prüfsumme des Codes. Ändert sich der Code, passt der alte Ablauf nicht mehr und check.js meldet es.
   A.hash = (s) => { let h = 2166136261; for (const ch of String(s)) h = Math.imul(h ^ ch.codePointAt(0), 16777619) >>> 0; return h.toString(16).padStart(8, '0'); };
   A.traceKey = (lang, lines) => lang + ':' + A.hash(lines.join('\n'));
-  A.traceFor = (lang, lines) => A.traces[A.traceKey(lang, lines)] || null;
+  // Pseudocode braucht keine Aufzeichnung: Der Interpreter (pseudo.js) liefert den Ablauf live, einmal je Code zwischengespeichert
+  A.traceFor = (lang, lines) => {
+    const k = A.traceKey(lang, lines);
+    if (lang === 'pseudo' && !A.traces[k] && globalThis.Pseudo) A.traces[k] = { ev: globalThis.Pseudo.run(lines.join('\n'), { inputs: [] }).events };
+    return A.traces[k] || null;
+  };
   // Zeilen eines Schreibtischtests: jede fertige Ausführung der Zeile `at`. Ruft die Zeile eine Methode auf, meldet der Ablauf
   // sie zweimal (beim Sprung hinein und nach der Rückkehr); gezählt wird nur der Stand auf der Ebene der Zeile selbst.
   A.deskRows = (tr, at) => {
@@ -92,7 +97,8 @@
   A.findLesson = (id) => { for (const t of A.tracks) for (const s of t.lessons) { const l = A.build(t, s); if (l.id === id) return { track: t, lesson: l }; } return null; };
 
   /* ---------- Text: **fett**, `code`, Absätze, Listen ---------- */
-  const inl = (t) => esc(t).replace(/`([^`]+)`/g, '<code>$1</code>').replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
+  // [Text](/code-lernen/kurs/…): Verweis auf eine andere Lektion, nur interne Pfade
+  const inl = (t) => esc(t).replace(/`([^`]+)`/g, '<code>$1</code>').replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>').replace(/\[([^\]]+)\]\((\/code-lernen\/kurs\/[a-z0-9\/-]+\/)\)/g, '<a href="$2">$1</a>');
   A.md = (s) => {
     if (!s) return '';
     return String(s).split(/\n{2,}/).map((b) => {

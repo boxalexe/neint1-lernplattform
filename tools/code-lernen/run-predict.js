@@ -36,6 +36,12 @@ function split(code) {
 function run(lang, code, dir) {
   const { defs, body } = split(code);
   const D = defs.join('\n'), B = body.join('\n'), uses = /Konto/.test(code.join('\n'));
+  if (lang === 'pseudo') {
+    const P = require(path.join(__dirname, '..', '..', 'code-lernen', 'js', 'pseudo.js'));
+    try { P.parse(code.join('\n')); } catch (e) { return { status: 1, phase: 'compile', stdout: '', stderr: e.message }; }
+    const r = P.run(code.join('\n'), { inputs: [] });
+    return { status: r.error ? 1 : 0, stdout: r.output, stderr: r.error ? r.error.msg : '' };
+  }
   if (lang === 'python') { fs.writeFileSync(path.join(dir, 'm.py'), code.join('\n')); const r = sh(tool.python, ['-I', '-X', 'utf8', 'm.py'], dir); if (r.status && /^(SyntaxError|IndentationError|TabError)\b/m.test(r.stderr || '')) r.phase = 'compile'; return r; }
   if (lang === 'java') {
     // gleicher Aufbau wie beim Aufzeichnen der Abläufe (eigene Klassen hinter Main, import an den Anfang)
@@ -56,7 +62,7 @@ function run(lang, code, dir) {
     const c = sh(tool.gpp, ['-std=c++17', '-Wall', 'm.cpp', '-o', 'm.exe'], dir); if (c.status) return c; return sh(path.join(dir, 'm.exe'), [], dir);
   }
 }
-const need = { python: ['python'], java: ['javac', 'java'], csharp: ['dotnet'], c: ['gcc'], cpp: ['gpp'] };
+const need = { pseudo: [], python: ['python'], java: ['javac', 'java'], csharp: ['dotnet'], c: ['gcc'], cpp: ['gpp'] };
 const only = process.argv[2];
 let pass = 0, fail = 0; const notrun = {};
 const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'cl-pred-'));

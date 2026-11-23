@@ -146,6 +146,9 @@
     ['PEP 8', 'Der offizielle Stil-Leitfaden für Python-Code: 4 Leerzeichen Einrückung, snake_case für Funktionen und Variablen, CamelCase für Klassen, Konstanten in Großbuchstaben.'],
     ['List Comprehension', 'Python: Kurzschreibweise, die eine Liste aus einer anderen baut, etwa `[p * 2 for p in preise if p < 4000]`. Entspricht einer Schleife mit append.'],
     ['Modul', 'Python: eine Datei mit Code, die sich mit import in andere Dateien laden lässt. Die Standardbibliothek bringt viele fertige Module mit, etwa math, datetime oder csv.'],
+    ['Sequenz', 'Die einfachste Kontrollstruktur: Anweisungen laufen der Reihe nach von oben nach unten, jede genau einmal.'],
+    ['Modulo', 'Rest einer ganzzahligen Division. 17 MOD 5 ist 2. In Java und Python geschrieben als `%`. Typisch: gerade Zahl prüfen mit `x MOD 2 = 0`.'],
+    ['Liste', 'Geordnete Folge von Werten unter einem Namen, Zugriff über den Index ab 0. Im Pseudocode `[1, 2, 3]`, in Java Array oder ArrayList, in Python list.'],
     ['Verzweigung', 'Stelle im Programm, an der abhängig von einer Bedingung der eine oder der andere Weg läuft: if/else, else if, switch.'],
     ['Bedingungsoperator', 'Kurzform einer Verzweigung, die einen Wert liefert: `bedingung ? wennWahr : wennFalsch`. Auch ternärer Operator genannt.'],
     ['NullPointerException', 'Laufzeitfehler in Java, wenn eine Methode auf einer Variable aufgerufen wird, die `null` enthält, also auf kein Objekt zeigt.']

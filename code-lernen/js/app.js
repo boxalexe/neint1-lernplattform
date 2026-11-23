@@ -223,7 +223,7 @@
       const codeHtml = '<div class="codeblock small"><table class="cb-table">' + t.code.map((l, n) => '<tr class="' + (n === t.at ? 'desk-at' : '') + '"><td class="ln">' + (n + 1) + '</td><td class="src"><pre>' + (A.hl(t.lang, l) || '&nbsp;') + '</pre></td></tr>').join('') + '</table></div>';
       const tr = A.traceFor(t.lang, t.code);
       if (!tr) { box.innerHTML = codeHtml + '<div class="note note-warn"><b>Ablauf fehlt</b>Für diese Aufgabe ist noch kein Ablauf aufgezeichnet.</div>'; return; }
-      const rows = A.deskRows(tr, t.at).map((x) => t.cols.map((c) => { const v = A.deskValue(x, c); return v === null ? '–' : v; }));
+      const rows = A.deskRows(tr, t.at).map((x) => t.cols.map((c) => { const v = A.deskValue(x, c); return v === null ? '–' : t.lang === 'pseudo' ? Pseudo.fmt(v) : v; }));
       const shown = (v) => String(v).replace(/^(["'])(.*)\1$/, '$2');
       const norm = (v) => { const s = shown(v).trim().replace(/^'(.)'$/, '$1').replace(',', '.').toLowerCase(); return s === 'wahr' ? 'true' : s === 'falsch' ? 'false' : s; };
       box.innerHTML = codeHtml + '<p class="muted small">Eine Zeile pro Ausführung von Zeile ' + (t.at + 1) + ' (markiert), jeweils die Werte <b>danach</b>.</p>'
