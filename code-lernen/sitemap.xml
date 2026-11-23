@@ -517,12 +517,6 @@
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://layer8academy.boxberger.app/code-lernen/kurs/csharp/ops/</loc>
-    <lastmod>2026-11-23</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
     <loc>https://layer8academy.boxberger.app/code-lernen/kurs/csharp/cond/</loc>
     <lastmod>2026-11-23</lastmod>
     <changefreq>monthly</changefreq>
@@ -553,7 +547,37 @@
     <priority>0.6</priority>
   </url>
   <url>
+    <loc>https://layer8academy.boxberger.app/code-lernen/kurs/csharp/kapselung/</loc>
+    <lastmod>2026-11-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://layer8academy.boxberger.app/code-lernen/kurs/csharp/vererbung/</loc>
+    <lastmod>2026-11-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
     <loc>https://layer8academy.boxberger.app/code-lernen/kurs/csharp/err/</loc>
+    <lastmod>2026-11-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://layer8academy.boxberger.app/code-lernen/kurs/csharp/architektur/</loc>
+    <lastmod>2026-11-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://layer8academy.boxberger.app/code-lernen/kurs/csharp/clean/</loc>
+    <lastmod>2026-11-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://layer8academy.boxberger.app/code-lernen/kurs/csharp/bugs/</loc>
     <lastmod>2026-11-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>

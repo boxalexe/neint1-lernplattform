@@ -13,12 +13,13 @@ Nach dem Muster umgebaut (Praxis-Szenario, geprüfte Aufgaben, Brücke zu den an
 | Software planen (PSS) | 7 | Durchgehendes Shop-Projekt von Rechnergrundlagen, SDLC & Anforderungen über Use-Case/Aktivität bis PAP/Struktogramm & Pseudocode |
 | Prüfungswissen AP2 | 11 | Dopplung mit PSS bereinigt: `struktogramm` und `uml2` als Prüfungsvertiefung (Zustandsdiagramm, AP2-Fallen) mit Verweisen auf PSS |
 | JavaScript | 14 | Alle 14 Module nach dem Java-/Python-Muster (Shop/Login/Tickets, `#`-Kapselung, 4-Klassen-Architektur, Clean Code, Bug-Arena, JSON/async/DOM); alle Aufgaben per Node-VM geprüft |
+| C# | 14 | Alle 14 Module nach dem Java-/Python-Muster (Shop/Login/Tickets, `TryParse`, `switch`-Ausdruck, Properties, `virtual`/`override`, `IZahlungsmethode`, 4-Klassen-Architektur, Clean Code, Bug-Arena, LINQ) |
 
-Noch im alten Format (dünn: wenig Aufgaben, nur Lückentext, kaum Szenario-Bezug): C#, C, C++. SQL ist inhaltlich in Ordnung.
+Noch im alten Format (dünn: wenig Aufgaben, nur Lückentext, kaum Szenario-Bezug): C, C++. SQL ist inhaltlich in Ordnung.
 
 ## Nächste Schritte (in dieser Reihenfolge)
 
-1. **C#, C, C++** nach dem Java/Python-Muster. Für C# (.NET SDK) und C/C++ (gcc/g++) die Compiler lokal installieren, sonst meldet `run-predict.js` NOT RUN. Für Abläufe je Sprache einen Tracer nach dem Vorbild von `trace-python/tracer.py` (Ausgabeformat siehe Kopf von `trace-java/Tracer.java`).
+1. **C und C++** nach dem Java/Python-Muster. Auf dem Zielrechner mit `.NET SDK` und `gcc`/`g++` anschließend `node tools/code-lernen/run-predict.js` laufen lassen und bei Bedarf Tracer nach dem Vorbild von `trace-python/tracer.py` ergänzen.
 
 ## Aufbau einer Lektion
 
