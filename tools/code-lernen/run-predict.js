@@ -42,6 +42,18 @@ function run(lang, code, dir) {
     const r = P.run(code.join('\n'), { inputs: [] });
     return { status: r.error ? 1 : 0, stdout: r.output, stderr: r.error ? r.error.msg : '' };
   }
+  if (lang === 'javascript') {
+    const vm = require('vm');
+    const logs = [];
+    const ctx = vm.createContext({ console: { log: (...a) => logs.push(a.map((x) => (typeof x === 'string' ? x : JSON.stringify(x))).join(' ')) } });
+    try {
+      const script = new vm.Script(code.join('\n'));
+      script.runInContext(ctx, { timeout: 1500 });
+      return { status: 0, stdout: logs.join('\n'), stderr: '' };
+    } catch (e) {
+      return { status: 1, phase: e instanceof SyntaxError ? 'compile' : 'runtime', stdout: logs.join('\n'), stderr: e.message };
+    }
+  }
   if (lang === 'python') { fs.writeFileSync(path.join(dir, 'm.py'), code.join('\n')); const r = sh(tool.python, ['-I', '-X', 'utf8', 'm.py'], dir); if (r.status && /^(SyntaxError|IndentationError|TabError)\b/m.test(r.stderr || '')) r.phase = 'compile'; return r; }
   if (lang === 'java') {
     // gleicher Aufbau wie beim Aufzeichnen der Abläufe (eigene Klassen hinter Main, import an den Anfang)
@@ -62,7 +74,7 @@ function run(lang, code, dir) {
     const c = sh(tool.gpp, ['-std=c++17', '-Wall', 'm.cpp', '-o', 'm.exe'], dir); if (c.status) return c; return sh(path.join(dir, 'm.exe'), [], dir);
   }
 }
-const need = { pseudo: [], python: ['python'], java: ['javac', 'java'], csharp: ['dotnet'], c: ['gcc'], cpp: ['gpp'] };
+const need = { pseudo: [], javascript: [], python: ['python'], java: ['javac', 'java'], csharp: ['dotnet'], c: ['gcc'], cpp: ['gpp'] };
 const only = process.argv[2];
 let pass = 0, fail = 0; const notrun = {};
 const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'cl-pred-'));
