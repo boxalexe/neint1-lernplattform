@@ -93,7 +93,7 @@
     const canTry = (lang === 'javascript' || lang === 'sql') && !part.noRun;
     const rec = lang !== 'pseudo' ? A.traceFor(lang, lines.map((l) => l[0])) : null; // aufgezeichneter Ablauf (Java)
     el.innerHTML = '<div class="cb-head"><span class="cb-lang">' + esc(A.langNames[lang] || lang) + '</span><span class="cb-btns">'
-      + (hasNotes ? '<button data-a="focus">Schritt für Schritt</button>' : '')
+      + (hasNotes ? '<button data-a="notes">Kommentare ausblenden</button><button data-a="focus">Schritt für Schritt</button>' : '')
       + (canTry ? '<button data-a="try">Ausprobieren und ändern</button>' : '')
       + (lang === 'pseudo' || rec ? '<button data-a="trace">Ablauf verfolgen</button>' : '') + '</span></div>'
       + '<div class="cb-body"><table class="cb-table' + (hasNotes ? ' has-notes' : '') + '">' + rows + '</table></div><div class="cb-extra"></div>';
@@ -106,9 +106,16 @@
       if (row && table.contains(row)) { act = +row.dataset.i; if (focus) setAct(act); else { $$('tr', table).forEach((t) => t.classList.toggle('active', t === row)); } return; }
       const b = e.target.closest('button[data-a]'); if (!b) return;
       const a = b.dataset.a;
-      if (a === 'focus') {
+      if (a === 'notes') {
+        const hidden = table.classList.toggle('hide-notes');
+        b.classList.toggle('on', hidden);
+        b.textContent = hidden ? 'Kommentare einblenden' : 'Kommentare ausblenden';
+      } else if (a === 'focus') {
         focus = !focus; table.classList.toggle('focus', focus); b.classList.toggle('on', focus);
         if (focus) {
+          table.classList.remove('hide-notes');
+          const nb = $('button[data-a="notes"]', el);
+          if (nb) { nb.classList.remove('on'); nb.textContent = 'Kommentare ausblenden'; }
           // Erste Zeile mit Erklärung zuerst
           const first = Math.max(0, lines.findIndex((l) => l[1]));
           extra.innerHTML = '<div class="focus-ctl"><button data-a="fprev">Vorherige Zeile</button><span class="fc-pos"></span><button data-a="fnext" class="primary">Nächste Zeile</button></div>';

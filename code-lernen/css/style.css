@@ -147,6 +147,7 @@ table.res th { background: var(--panel); font: 500 .8rem var(--mono); color: var
 .cb-table tr.active .line-note { color: var(--th-fg); border-left-color: var(--th-kw); }
 .cb-table tr.active .line-note::before { color: var(--th-kw); }
 .cb-table.focus .line-note { display: none; } .cb-table.focus tr.active .line-note { display: block; }
+.cb-table.hide-notes .line-note { display: none !important; }
 .cb-table.focus tr:not(.active) .src pre { opacity: .45; }
 .focus-ctl, .try-ctl, .t-ctl, .tr-ctl, .pg-top { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; padding: 8px 12px; }
 .codeblock .focus-ctl, .codeblock .try-ctl { background: var(--th-bg2); border-top: 1px solid var(--th-line); }
