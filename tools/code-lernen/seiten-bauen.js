@@ -101,7 +101,7 @@ function startHtml() {
 function navHtml(curT, curS) {
   return '<a class="nav-top nav-home' + (!curT ? ' on' : '') + '" href="' + BASE + '">Start</a>' + A.tracks.map((t, i) => '<details name="kurs" style="--ac: var(' + NAV_AC[i % NAV_AC.length] + ')"' + (curT === t ? ' open' : '') + '><summary><span>' + esc(t.title) + '</span></summary>'
     + t.lessons.map((s) => '<a class="nl' + (curS === s ? ' on' : '') + '" href="' + lekUrl(t, s) + '"><span class="dot"></span>' + esc(A.build(t, s).title) + '</a>').join('') + '</details>').join('')
-    + '<div class="nav-sep"></div><a class="nav-top" href="' + BASE + '#/play/pseudo">Spielwiese</a><a class="nav-top" href="' + BASE + '#/compare/vars">Sprachvergleich</a><a class="nav-top" href="' + BASE + '#/glossar">Begriffe von A bis Z</a><a class="nav-top" href="' + BASE + '#/glossar/kuerzel">Kürzel der Sprachen</a><div class="nav-sep"></div><a class="nav-top" href="/#impressum">Impressum und Datenschutz</a>';
+    + '<div class="nav-sep"></div><a class="nav-top" href="' + BASE + '#/play/pseudo">Spielwiese</a><a class="nav-top" href="' + BASE + '#/compare/vars">Sprachvergleich</a><a class="nav-top" href="' + BASE + '#/glossar">Begriffe von A bis Z</a><a class="nav-top" href="' + BASE + '#/glossar/kuerzel">Kürzel der Sprachen</a>';
 }
 
 /* ---------- Seiten zusammensetzen ---------- */
