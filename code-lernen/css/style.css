@@ -320,7 +320,11 @@ code.kz { text-decoration-color: color-mix(in srgb, var(--cyan) 85%, transparent
 /* Fußzeile mit Impressum und Datenschutz (von jeder Seite aus erreichbar) */
 footer.legal { border-top: 1px solid var(--border); padding: 14px 16px 22px; text-align: center; font: .78rem var(--mono); color: var(--muted); background: var(--bg); }
 footer.legal a { color: var(--muted); text-decoration: underline; } footer.legal a:hover { color: var(--cyan); }
-@media (min-width: 901px) { footer.legal { margin-left: 290px; } }
+@media (min-width: 901px) {
+  #side { position: fixed; left: 0; top: 54px; bottom: 0; width: 290px; height: auto; z-index: 15; padding-bottom: 24px; }
+  #main { grid-column: 2; }
+  footer.legal { margin-left: 290px; position: relative; z-index: 1; }
+}
 
 /*
  * Startseite im Bauplan-Stil: feines Zeichenraster mit Blattrahmen,
