@@ -36,7 +36,7 @@ for (const t of A.tracks) {
 function codeHtml(lang, lines, h) {
   const notes = lines.some((l) => l[1]);
   return (h ? '<h3>' + esc(h) + '</h3>' : '') + '<div class="codeblock"><div class="cb-head"><span class="cb-lang">' + esc(A.langNames[lang] || lang) + '</span></div><div class="cb-body"><table class="cb-table' + (notes ? ' has-notes' : '') + '">'
-    + lines.map((l, n) => '<tr><td class="ln">' + (n + 1) + '</td><td class="src"><pre>' + (A.hl(lang, l[0]) || '&nbsp;') + '</pre></td><td class="note">' + inl(l[1] || '') + '</td></tr>').join('') + '</table></div></div>';
+    + lines.map((l, n) => '<tr><td class="ln">' + (n + 1) + '</td><td class="src"><pre>' + (A.hl(lang, l[0]) || '&nbsp;') + '</pre>' + (l[1] ? '<div class="line-note">' + inl(l[1]) + '</div>' : '') + '</td></tr>').join('') + '</table></div></div>';
 }
 function diagramm(fn, ...args) { try { return '<div class="uml-wrap">' + fn(...args) + '</div>'; } catch (e) { return ''; } }
 function partHtml(p) {

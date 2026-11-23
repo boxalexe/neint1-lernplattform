@@ -89,7 +89,7 @@
   function initCode(el, { part }) {
     const { lang, lines } = part.code, hasNotes = lines.some((l) => l[1]);
     el.className = 'codeblock';
-    const rows = lines.map((l, n) => '<tr data-i="' + n + '"><td class="ln">' + (n + 1) + '</td><td class="src"><pre>' + (A.hl(lang, l[0]) || '&nbsp;') + '</pre></td><td class="note">' + A.inl(l[1]) + '</td></tr>').join('');
+    const rows = lines.map((l, n) => '<tr data-i="' + n + '"><td class="ln">' + (n + 1) + '</td><td class="src"><pre>' + (A.hl(lang, l[0]) || '&nbsp;') + '</pre>' + (l[1] ? '<div class="line-note">' + A.inl(l[1]) + '</div>' : '') + '</td></tr>').join('');
     const canTry = (lang === 'javascript' || lang === 'sql') && !part.noRun;
     const rec = lang !== 'pseudo' ? A.traceFor(lang, lines.map((l) => l[0])) : null; // aufgezeichneter Ablauf (Java)
     el.innerHTML = '<div class="cb-head"><span class="cb-lang">' + esc(A.langNames[lang] || lang) + '</span><span class="cb-btns">'

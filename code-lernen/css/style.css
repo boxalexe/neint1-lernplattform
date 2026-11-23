@@ -138,13 +138,16 @@ table.res th { background: var(--panel); font: 500 .8rem var(--mono); color: var
 .cb-body { overflow-x: auto; -webkit-overflow-scrolling: touch; }
 .cb-table { border-collapse: collapse; width: 100%; font-family: var(--mono); font-size: .9rem; }
 .cb-table td { vertical-align: top; padding: 0; } .cb-table tr:hover td { background: var(--th-hl); }
-.cb-table .ln { width: 38px; text-align: right; padding: 2px 10px 2px 8px; color: var(--th-ln); user-select: none; border-right: 1px solid var(--th-line); }
-.cb-table .src { padding: 2px 14px; white-space: pre; color: var(--th-fg); } .cb-table pre { margin: 0; font: inherit; }
-.cb-table .note { display: table-cell; margin: 0; border: 0; border-left: 1px dashed var(--th-line); background: transparent; border-radius: 0; padding: 2px 14px; font: .86rem/1.45 var(--ui); color: var(--th-note); min-width: 220px; width: 42%; }
-.cb-table .note code { font-size: .85em; background: var(--th-bg2); }
-.cb-table tr.active td { background: var(--th-hl-strong) !important; } .cb-table tr.active .note { color: var(--th-fg); }
-.cb-table.focus .note { visibility: hidden; } .cb-table.focus tr.active .note { visibility: visible; }
-.cb-table.focus tr:not(.active) .src { opacity: .5; }
+.cb-table .ln { width: 38px; text-align: right; padding: 3px 10px 3px 8px; color: var(--th-ln); user-select: none; border-right: 1px solid var(--th-line); }
+.cb-table .src { padding: 3px 14px; color: var(--th-fg); } .cb-table pre { margin: 0; font: inherit; white-space: pre-wrap; overflow-wrap: anywhere; }
+.cb-table .line-note { margin: 2px 0 5px 4px; padding: 2px 10px; border-left: 2px solid var(--th-line); font: .84rem/1.45 var(--ui); color: var(--th-note); white-space: normal; }
+.cb-table .line-note::before { content: "↳ "; color: var(--th-com); font-family: var(--mono); }
+.cb-table .line-note code { font-size: .85em; background: var(--th-bg2); }
+.cb-table tr.active td { background: var(--th-hl-strong) !important; }
+.cb-table tr.active .line-note { color: var(--th-fg); border-left-color: var(--th-kw); }
+.cb-table tr.active .line-note::before { color: var(--th-kw); }
+.cb-table.focus .line-note { display: none; } .cb-table.focus tr.active .line-note { display: block; }
+.cb-table.focus tr:not(.active) .src pre { opacity: .45; }
 .focus-ctl, .try-ctl, .t-ctl, .tr-ctl, .pg-top { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; padding: 8px 12px; }
 .codeblock .focus-ctl, .codeblock .try-ctl { background: var(--th-bg2); border-top: 1px solid var(--th-line); }
 .codeblock .muted, .fc-pos { color: var(--th-note); }
@@ -224,7 +227,7 @@ svg.uml { width: 100%; height: auto; display: block; margin: 0 auto; font-family
 .chip { display: inline-block; padding: 1px 9px; margin: 2px 4px 2px 0; border: 1px solid var(--border); border-radius: var(--r); font-family: var(--mono); font-size: .78rem; background: var(--panel); } .chip i { color: var(--muted); font-style: normal; }
 .chips { display: flex; flex-wrap: wrap; gap: 8px; margin: 10px 0 18px; } .chip.big { font-size: .85rem; padding: 5px 14px; color: var(--text); } .chip.on { background: var(--sel); border-color: var(--cyan); color: var(--cyan); }
 .cmp { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(380px, 100%), 1fr)); gap: 14px; } .cmp-card { min-width: 0; } .cmp-h { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; }
-.cmp-card .cb-table .note { display: none; } .cmp-card .cb-table .src { white-space: pre; }
+.cmp-card .cb-table .line-note { display: none; } .cmp-card .cb-table .src pre { white-space: pre; }
 .search { width: 100%; max-width: 420px; margin: 8px 0 16px; } .term { padding: 10px 0; border-bottom: 1px solid var(--border); } .term > b { color: var(--cyan); font-family: var(--mono); font-weight: 500; }
 ::-webkit-scrollbar { width: 10px; height: 10px; } ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 0; } ::-webkit-scrollbar-track { background: transparent; }
 
@@ -284,13 +287,11 @@ code.kz { text-decoration-color: color-mix(in srgb, var(--cyan) 85%, transparent
   #side.open { transform: none; }
   #shade { display: block; position: fixed; inset: 54px 0 0 0; z-index: 20; background: rgba(0, 0, 0, .55); } #shade[hidden] { display: none; }
   .trace, .uml-pg { grid-template-columns: 1fr; } .tr-code { border-right: 0; border-bottom: 1px solid var(--th-line); max-height: 300px; }
-  /* Code und Erklärung untereinander statt nebeneinander */
-  .cb-table, .cb-table tbody { display: block; } .cb-table tr { display: block; border-bottom: 1px solid rgba(47, 43, 99, .6); }
-  .cb-table td { display: block; } .cb-table .ln { display: none; }
-  .cb-table .src { overflow-x: auto; padding: 4px 12px; }
-  .cb-table .note { display: block; width: auto; min-width: 0; border-left: 2px solid var(--th-line); margin: 0 12px 6px 18px; padding: 0 10px 2px; }
-  .cb-table.focus .note { display: none; } .cb-table.focus tr.active .note { display: block; }
-  .cmp-card .cb-table .note { display: none; }
+  /* Auf schmalen Bildschirmen: Zeilennummer ausblenden, Code und Erklärung bleiben sauber untereinander */
+  .cb-table .ln { display: none; }
+  .cb-table .src { padding: 4px 12px; }
+  .cb-table .line-note { margin: 2px 0 4px 2px; }
+  .cmp-card .cb-table .line-note { display: none; }
 }
 @media (max-width: 640px) {
   #top { gap: 6px; padding: 6px 10px; }
@@ -453,18 +454,3 @@ html[data-theme="hc"] #main.bp-home { --grid: rgba(255, 255, 255, .1); --grid-f:
 .choose-tag { font: 500 .74rem var(--mono); letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
 .choose-opt.on .choose-tag { color: var(--cyan); }
 .locked .choose-opt { cursor: default; }
-
-/* ---------- Desktop: Tokyo-Hack-Codefelder nach rechts ausdehnen, damit Code + Beschreibung ohne Sliden lesbar sind ---------- */
-@media (min-width: 1180px) {
-  .sec > .codeblock,
-  #main > .codeblock,
-  .tracebox,
-  .task:has(.codeblock, pre.fill, textarea) {
-    width: max(100%, min(1520px, calc(100vw - 290px - clamp(16px, 4vw, 56px) - 40px)));
-    max-width: none;
-  }
-  .cb-table .note {
-    min-width: 260px;
-    width: 38%;
-  }
-}
