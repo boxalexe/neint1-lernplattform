@@ -453,3 +453,18 @@ html[data-theme="hc"] #main.bp-home { --grid: rgba(255, 255, 255, .1); --grid-f:
 .choose-tag { font: 500 .74rem var(--mono); letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
 .choose-opt.on .choose-tag { color: var(--cyan); }
 .locked .choose-opt { cursor: default; }
+
+/* ---------- Desktop: Tokyo-Hack-Codefelder nach rechts ausdehnen, damit Code + Beschreibung ohne Sliden lesbar sind ---------- */
+@media (min-width: 1180px) {
+  .sec > .codeblock,
+  #main > .codeblock,
+  .tracebox,
+  .task:has(.codeblock, pre.fill, textarea) {
+    width: max(100%, min(1520px, calc(100vw - 290px - clamp(16px, 4vw, 56px) - 40px)));
+    max-width: none;
+  }
+  .cb-table .note {
+    min-width: 260px;
+    width: 38%;
+  }
+}
