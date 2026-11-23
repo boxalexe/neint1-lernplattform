@@ -607,12 +607,6 @@
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://layer8academy.boxberger.app/code-lernen/kurs/c/ops/</loc>
-    <lastmod>2026-11-23</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
     <loc>https://layer8academy.boxberger.app/code-lernen/kurs/c/cond/</loc>
     <lastmod>2026-11-23</lastmod>
     <changefreq>monthly</changefreq>
@@ -649,6 +643,18 @@
     <priority>0.6</priority>
   </url>
   <url>
+    <loc>https://layer8academy.boxberger.app/code-lernen/kurs/c/clean/</loc>
+    <lastmod>2026-11-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://layer8academy.boxberger.app/code-lernen/kurs/c/bugs/</loc>
+    <lastmod>2026-11-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
     <loc>https://layer8academy.boxberger.app/code-lernen/kurs/c/adv/</loc>
     <lastmod>2026-11-23</lastmod>
     <changefreq>monthly</changefreq>
@@ -668,12 +674,6 @@
   </url>
   <url>
     <loc>https://layer8academy.boxberger.app/code-lernen/kurs/cpp/vars/</loc>
-    <lastmod>2026-11-23</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://layer8academy.boxberger.app/code-lernen/kurs/cpp/ops/</loc>
     <lastmod>2026-11-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -709,7 +709,37 @@
     <priority>0.6</priority>
   </url>
   <url>
+    <loc>https://layer8academy.boxberger.app/code-lernen/kurs/cpp/kapselung/</loc>
+    <lastmod>2026-11-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://layer8academy.boxberger.app/code-lernen/kurs/cpp/vererbung/</loc>
+    <lastmod>2026-11-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
     <loc>https://layer8academy.boxberger.app/code-lernen/kurs/cpp/err/</loc>
+    <lastmod>2026-11-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://layer8academy.boxberger.app/code-lernen/kurs/cpp/architektur/</loc>
+    <lastmod>2026-11-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://layer8academy.boxberger.app/code-lernen/kurs/cpp/clean/</loc>
+    <lastmod>2026-11-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://layer8academy.boxberger.app/code-lernen/kurs/cpp/bugs/</loc>
     <lastmod>2026-11-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>

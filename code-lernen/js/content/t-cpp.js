@@ -1,120 +1,478 @@
-/* Kurs: C++ */
+/* Kurs: C++ – 14 Module nach dem Java-/Python-/C#-Muster (Onlineshop, Login, Ticketsystem) */
 (function () {
   'use strict';
   const A = window.Academy, C = (lines, h, o) => A.code('cpp', lines, h, o);
   const PP = (prompt, code, ans, hint, expl) => Object.assign(A.predict(prompt, code, ans, hint, expl), { lang: 'cpp' });
+  A.moved['cpp-ops'] = 'cpp-vars'; // „Rechnen und Vergleichen“ ist in Modul 2 und 3 aufgegangen
 
   A.track({
     id: 'cpp', title: 'C++', tag: 'C++',
-    desc: 'C mit Klassen und einer großen Standardbibliothek: Variablen, Funktionen, Vektoren, Referenzen, Klassen und Vererbung.',
-    intro: 'C++ baut auf C auf und fügt **Klassen**, **Referenzen** und eine mächtige **Standardbibliothek** (`string`, `vector`, `map`) hinzu. Du hast weiter die Kontrolle über den Speicher, musst dich aber im Alltag viel seltener darum kümmern als in C.\n\nZum Ausprobieren brauchst du einen Compiler, z. B. **g++** (unter Windows über MSYS2 oder WSL). Übersetzen: `g++ -std=c++17 -Wall main.cpp -o main`, starten: `./main`.',
+    desc: 'C mit Klassen, Referenzen und moderner Standardbibliothek am Onlineshop-Projekt: von cout, vector und Referenzen über Klassen, virtual/override und Architektur bis zu Clean Code, Bug-Arena, unique_ptr und Algorithmen.',
+    intro: 'C++ verbindet die Geschwindigkeit von C mit **Objektorientierung**, **Referenzen** und einer starken **Standardbibliothek** (`string`, `vector`, `map`, `unique_ptr`, `<algorithm>`). Spiele-Engines, Browser, Datenbanken und Hochleistungs-Server laufen in C++. Wie in Java, Python, JavaScript und C# zieht sich unser **Onlineshop für IT-Zubehör** als roter Faden durch alle 14 Module.\n\nÜbersetzen mit **g++**: `g++ -std=c++17 -Wall main.cpp -o main`, starten: `./main`.',
     lessons: [
+      /* ---------- 1. Erstes Programm ---------- */
       {
-        concept: 'hello',
+        concept: 'hello', standalone: true, domain: 'shop', stage: 1,
+        title: 'Das erste Programm: eine Bestellbestätigung',
+        goal: 'Du gibst Text mit cout << aus, kennst #include <iostream> und "\\n" gegen endl und weißt, wie g++ C++-Code kompiliert.',
+        terms: ['Quellcode', 'Compiler', 'Syntaxfehler'],
         parts: [
-          C(['#include <iostream>§Bindet die Ein-/Ausgabe ein. Ohne diese Zeile kennt C++ cout nicht.', 'using namespace std;§Erlaubt, cout statt std::cout zu schreiben. Für Lernbeispiele bequem.', '', 'int main() {§Hier beginnt jedes C++-Programm.', '    cout << "Hallo Welt" << endl;§cout ist die Ausgabe. Mit << „schiebst“ du Dinge hinein. endl macht einen Zeilenumbruch.', '    return 0;§0 bedeutet: Programm war erfolgreich.', '}§Ende von main.'], 'Dein erstes C++-Programm')
+          A.text('Schnell wie C, komfortabel wie Java', 'C++ übersetzt deinen **Quellcode** über den **Compiler** (`g++`) direkt in Maschinencode – fehlt ein Semikolon, meldet `g++` sofort einen **Syntaxfehler**. Ausgaben schiebst du mit `<<` in den Ausgabestrom `cout`.'),
+          C([
+            '#include <iostream>§Bindet cout und cin ein.',
+            'using namespace std;§Erlaubt cout statt std::cout.',
+            'int main() {',
+            '    cout << "Vielen Dank fuer deine Bestellung!\\n";§\\n macht einen Zeilenumbruch (schneller als endl).',
+            '    cout << "Bestellnummer: " << 10427 << "\\n";§Mehrere << lassen sich beliebig verketten.',
+            '    return 0;',
+            '}'
+          ], 'Die Bestellbestätigung in C++', { praxis: 'In C++-Tools und Server-Anwendungen werden Ausgaben über Streams (cout, cerr, Dateistreams) mit genau diesem <<-Operator gebaut.' }),
+          A.table(['', 'C++', 'C', 'Java'], [
+            ['Ausgabe', '`cout << "Nr: " << 10427 << "\\n";`', '`printf("Nr: %d\\n", 10427);`', '`System.out.println("Nr: " + 10427);`'],
+            ['Texttyp', '`string` (dynamisch, sicher)', '`char[]` (feste Größe + `\\0`)', '`String`']
+          ], 'Dasselbe in C und Java', 'Weiter zum Vergleich: [C, Modul 1](/code-lernen/kurs/c/hello/) und [Java, Modul 1](/code-lernen/kurs/java/hello/).')
         ],
-        tips: [A.info('Statt `endl` kannst du auch `"\\n"` schreiben. `endl` leert zusätzlich den Ausgabepuffer, das ist langsamer.')],
-        quiz: [A.q('Was macht `<<` in `cout << "Hallo"`?', ['Es schiebt den Text in die Ausgabe', 'Es vergleicht zwei Werte', 'Es verschiebt Bits nach links in diesem Fall', 'Es kommentiert aus'], 0, 'Bei cout „füttert“ << die Ausgabe.')],
-        tasks: [PP('Was gibt das Programm aus?', ['cout << "a" << endl;', 'cout << "b";', 'cout << "c" << endl;'], 'a\nbc', 'endl macht einen Umbruch, sonst nichts.')]
+        tips: [
+          A.tip('Nutze `"\\n"` statt `endl`, wenn du nicht sofort den Puffer leeren musst – das ist schneller und genauso lesbar.')
+        ],
+        quiz: [
+          A.q('Was bewirkt `<<` in `cout << "Hallo" << "\\n";`?', ['Es schiebt Werte der Reihe nach in die Ausgabe', 'Es vergleicht zwei Strings auf Gleichheit', 'Es weist einer Variable einen neuen Wert zu', 'Es kommentiert den Rest der Zeile aus'], 0, 'Bei cout füttert << den Ausgabestrom.'),
+          A.q('Welcher Header wird in C++ für `cout` und `cin` eingebunden?', ['#include <iostream>', '#include <stdio.h>', '#include <vector>', '#include <string>'], 0, 'iostream steht für Input/Output Stream.')
+        ],
+        tasks: [
+          PP('Was gibt das Programm aus?', ['cout << "Bestellung " << 10427 << "\\n";', 'cout << "Versand: " << "frei\\n";'], 'Bestellung 10427\nVersand: frei', '<< verkettet ohne automatisches Leerzeichen.', 'Beide Zeilen werden exakt so ausgegeben.'),
+          A.fill('Binde die Standard-Ein-/Ausgabe für `cout` ein.', '#include <{{iostream}}>', 'Name des Stream-Headers in C++.')
+        ]
       },
+
+      /* ---------- 2. Variablen, Datentypen, Rechnen ---------- */
       {
-        concept: 'vars',
+        concept: 'vars', standalone: true, domain: 'shop', stage: 1,
+        title: 'Variablen, Datentypen und Umwandlung: Preise, Mengen, Eingaben',
+        goal: 'Du nutzt int, long, double, string und bool, rechnest Preise exakt in Cent, kennst const, auto, stoi/to_string und vergleichst C++-Strings mit ==.',
+        terms: ['Variable', 'Datentyp', 'Konstante', 'Modulo', ['Parsen', 'parsen'], ['Cast (Typumwandlung)', 'Cast']],
         parts: [
-          C(['int alter = 25;§Ganze Zahl.', 'double preis = 19.99;§Kommazahl mit Punkt.', 'string name = "Ada";§string ist Text (aus <string>, meist schon durch iostream dabei).', 'bool istStudent = true;§bool: nur true oder false.', "char buchstabe = 'A';§Ein Zeichen in einfachen Anführungszeichen.", 'alter = alter + 1;§Neu zuweisen: 26.', 'cout << name << " ist " << alter << endl;§Mehrere << hintereinander. Ausgabe: Ada ist 26'], 'Variablen mit festem Typ'),
-          C(['const int MAX_PUNKTE = 100;§const: nicht mehr änderbar.', 'auto zahl = 42;§auto lässt den Compiler den Typ erkennen (int). Er bleibt fest.', 'int ergebnis = stoi("25");§stoi wandelt Text in eine Zahl um.', 'string text = to_string(25);§to_string wandelt eine Zahl in Text um.'], 'const, auto und Umwandlungen'),
-          C(['string eingabe;§Platz für den Text.', 'cout << "Dein Name: ";§Fragt nach.', 'cin >> eingabe;§cin liest ein Wort von der Tastatur. >> „holt“ den Wert in die Variable.', 'cout << "Hallo " << eingabe << "!" << endl;§Gibt ihn wieder aus.'], 'Eingabe mit cin')
+          A.text('Echte Strings und feste Typen', 'Anders als C bringt C++ mit `std::string` einen komfortablen Text-**Datentyp** mit, der sogar direkt mit `==` den **Inhalt** vergleicht. Wie in C gilt: Jede lokale **Variable** sofort initialisieren! Mit `const` schützt du **Konstanten**, `stoi("3")` übernimmt das **Parsen** von Text in Zahlen, und für eine Komma-Division aus zwei `int` brauchst du einen **Cast** wie `(double)summe / anzahl`.'),
+          C([
+            'string artikel = "Funkmaus";§Echter String – wächst automatisch, kein \\0-Stress.',
+            'long preisInCent = 1999;§Preise in Cent als ganze Zahl.',
+            'int menge = 2;',
+            'const long VERSAND_IN_CENT = 495;',
+            'menge = menge + 1;',
+            'long summe = preisInCent * menge;',
+            'cout << summe / 100 << "," << summe % 100 << " Euro\\n";§Ganzzahl-Division und Modulo.',
+            'int eingabe = stoi("3");§Parsen: Text -> int (umgekehrt: to_string(3)).',
+            'cout << (artikel == "Funkmaus") << " " << eingabe << "\\n";§String-Vergleich mit == liefert 1 (wahr).'
+          ], 'Artikel, Modulo, stoi und String-Vergleich', { praxis: 'Bei cout immer Vergleiche wie (artikel == "Funkmaus") einklammern, weil << sonst stärker bindet als ==.' })
         ],
-        tips: [A.warn('Eine Variable ohne Startwert (`int x;`) enthält Zufallsmüll, wie in C. Gib jeder Variable sofort einen Wert.')],
-        quiz: [A.q('Wofür nutzt man `const`?', ['Für Werte, die sich nicht mehr ändern dürfen', 'Für Werte, die nur in Schleifen gelten', 'Für Zahlen mit festen Nachkommastellen', 'Für Variablen, die global sichtbar sein sollen'], 0, 'const verbietet spätere Änderungen.')],
-        tasks: [PP('Was gibt das Programm aus?', ['int x = 3;', 'int y = x;', 'x = 10;', 'cout << x << " " << y << endl;'], '10 3', 'y bekam den Wert 3, bevor x geändert wurde.'), A.fill('Ergänze den Datentyp für ganze Zahlen.', '{{int}} anzahl = 5;', 'Gesucht ist der übliche Typ für ganze Zahlen ohne Komma, 4 Byte groß.')]
+        quiz: [
+          A.q('Wie wandelst du in C++ den Text `"25"` in ein `int` um?', ['stoi("25")', 'int.Parse("25")', 'Integer.parseInt("25")', 'Number("25")'], 0, 'stoi steht für „string to int“ (aus <string>).'),
+          A.q('Was prüft `a == b` bei zwei `std::string`-Variablen in C++?', ['Den Textinhalt beider Strings', 'Nur die Speicheradresse im RAM', 'Nur die Anzahl der Buchstaben', 'Es erzeugt einen Compilerfehler'], 0, 'Anders als C-Strings (char[]) vergleicht std::string mit == den Inhalt.')
+        ],
+        tasks: [
+          PP('Was gibt das Programm aus?', ['int summe = 22905;', 'cout << summe / 100 << " " << summe % 100 << "\\n";'], '229 5', 'Ganzzahl-Division liefert Euro, % liefert Rest-Cent.', '22905 / 100 = 229, Rest 5.'),
+          A.bug('Bewertung: 17 Sterne aus 4 Bewertungen ergeben 4 statt 4.25.', 'cpp', [
+            'int summe = 17;',
+            'int anzahl = 4;',
+            'double schnitt = summe / anzahl;',
+            'cout << schnitt << "\\n";'
+          ], { line: 2, kind: 'logik', fixes: [
+            'double schnitt = (double)summe / anzahl;',
+            'double schnitt = (double)(summe / anzahl);',
+            'int schnitt = summe / anzahl;',
+            'double schnitt = summe % anzahl;'
+          ], expect: '4.25' }, 'Zwei int teilen ganzzahlig. Wo muss der Cast hin?', 'Mit (double)summe / anzahl wird als Fließkommazahl geteilt.')
+        ]
       },
+
+      /* ---------- 3. Verzweigungen ---------- */
       {
-        concept: 'ops',
+        concept: 'cond', standalone: true, domain: 'shop', stage: 1,
+        title: 'Verzweigungen: Versandkosten, Login-Sperre und switch',
+        goal: 'Du steuerst Business-Logik mit if/else if/else, switch und ? : und vermeidest Fall-through- und = statt ==-Fehler.',
+        terms: ['Verzweigung', 'Bedingung', 'Grenzwert', 'Bedingungsoperator'],
         parts: [
-          C(['cout << 7 + 3 << endl;§Addition: 10', 'cout << 7 / 2 << endl;§**Achtung:** Zwei int werden **ganzzahlig** geteilt: 3', 'cout << 7 / 2.0 << endl;§Mit einer Kommazahl normal: 3.5', 'cout << 7 % 2 << endl;§Rest der Division: 1', 'cout << (5 > 3 && 5 < 10) << endl;§&& ist UND. Ein bool wird als 1 (wahr) oder 0 (falsch) ausgegeben: 1', 'cout << !(5 == 5) << endl;§! ist NICHT: 0', 'cout << (5 != 4) << endl;§ungleich: 1'], 'Rechnen, Vergleichen, Verknüpfen'),
-          C(['string a = "Hallo";§Ein Text.', 'string b = "Hal";§Ein Textanfang.', 'b += "lo";§Hängt an: Hallo.', 'cout << (a == b) << endl;§In C++ vergleicht == bei string den **Inhalt**: 1'], 'Texte vergleichen')
+          A.text('Entscheidungen im Shop', 'Verzweigungen funktionieren in C++ wie in C und Java. Prüfe jeden **Grenzwert** (wie `5000` Cent) genau und achte auf `==` statt `=` im `if` sowie auf `break;` im `switch`.'),
+          C([
+            'long warenwert = 4790;',
+            'bool istPrime = false;',
+            'long versand = (warenwert >= 5000 || istPrime) ? 0 : 495;§Bedingungsoperator ? :.',
+            'cout << "Versand: " << versand << " Cent\\n";',
+            'int prio = 2;',
+            'switch (prio) {',
+            '    case 1: cout << "sofort\\n"; break;',
+            '    case 2: cout << "4 Stunden\\n"; break;',
+            '    default: cout << "1 Woche\\n";',
+            '}'
+          ], 'Versandkosten und switch in C++', { praxis: 'Mit -Wall warnt g++ dich sofort, wenn du im if versehentlich = statt == schreibst.' })
         ],
-        tips: [A.warn('Klammere Vergleiche in `cout << (…)`: Ohne Klammern trifft `<<` mit den Operatoren zusammen und der Compiler meldet Unsinn.')],
-        quiz: [A.q('Was ergibt `7 / 2` bei zwei int-Zahlen?', ['3', '3.5', '4', '3.0'], 0, 'Ganzzahl-Division schneidet die Nachkommastellen ab.')],
-        tasks: [PP('Was gibt das Programm aus?', ['cout << 17 / 5 << endl;', 'cout << 17 % 5 << endl;'], '3\n2', 'Beides sind int: ganzzahlige Division und Rest.')]
+        quiz: [
+          A.q('Was passiert im C++-`switch`, wenn nach `case 2:` das `break;` fehlt?', ['Der Code im nächsten case läuft ebenfalls mit (Fall-through)', 'Der switch endet automatisch am Ende von case 2', 'Der Compiler wirft immer einen Fehler', 'Der default-Zweig wird übersprungen'], 0, 'Ohne break rutscht die Ausführung in den nächsten Fall durch.')
+        ],
+        tasks: [
+          PP('Was gibt das Programm aus?', ['long w = 5000;', 'long v = w >= 5000 ? 0 : 495;', 'cout << w + v << "\\n";'], '5000', '5000 >= 5000 ist wahr.', 'Versand ist 0, also Ausgabe 5000.')
+        ]
       },
+
+      /* ---------- 4. Schleifen ---------- */
       {
-        concept: 'cond',
+        concept: 'loops', standalone: true, domain: 'shop', stage: 2,
+        title: 'Schleifen: Warenkorb, Login-Versuche, Ticketlisten',
+        goal: 'Du nutzt die bereichsbasierte for-Schleife (for (int p : preise)), Zählschleifen und while-Schleifen sicher ohne Off-by-one-Fehler.',
+        terms: ['Schleife', 'Endlosschleife', 'Off-by-one-Fehler'],
         parts: [
-          C(['int temperatur = 22;§Der Wert, nach dem entschieden wird.', 'if (temperatur > 25) {§Bedingung in Klammern, Block in geschweiften Klammern.', '    cout << "heiß" << endl;§Nur bei erfüllter Bedingung.', '} else if (temperatur > 15) {§Nur geprüft, wenn die erste falsch war.', '    cout << "angenehm" << endl;§22 > 15: Ausgabe angenehm.', '} else {§Alle übrigen Fälle.', '    cout << "kühl" << endl;§Hier nicht erreicht.', '}§Ende.'], 'if, else if, else'),
-          C(['int tag = 3;§Ein Wert mit mehreren festen Fällen.', 'switch (tag) {§switch wählt anhand des Werts einen Fall.', '    case 1:§Fall: tag ist 1.', '        cout << "Montag" << endl;§Bei 1.', '        break;§break beendet den switch. **Ohne break läuft es in den nächsten Fall weiter!**', '    case 3:§Fall: tag ist 3.', '        cout << "Mittwoch" << endl;§Hier landest du.', '        break;§Beendet den switch.', '    default:§Alle anderen Werte.', '        cout << "anderer Tag" << endl;§Auffangfall.', '}§Ende.'], 'switch für feste Fälle')
+          A.text('Moderne for-Schleife über Vektoren', 'Anders als C kennt C++ die **bereichsbasierte `for`-Schleife** `for (int p : preise)` – genau wie `for (int p : preise)` in Java. So vermeidest du Indexfehler beim Summieren und Filtern; bei `while` musst du den Zustand im Rumpf ändern, sonst droht eine **Endlosschleife**.'),
+          C([
+            'vector<int> preise = {1999, 999, 3490};',
+            'int summe = 0;',
+            'for (int p : preise) {§Bereichsbasiert: kein Index, kein Off-by-one-Fehler.',
+            '    summe += p;',
+            '}',
+            'cout << "Warenkorb: " << summe << " Cent\\n";'
+          ], 'Warenkorb-Summe mit range-based for', { praxis: 'Bei großen Objekten schreibst du for (const auto &a : artikel) – so wird kein einziges Objekt kopiert.' })
         ],
-        tips: [A.warn('Wie in C ist `if (x = 5)` erlaubt, setzt x auf 5 und ist immer wahr. Vergleichen heißt `==`. Übersetze mit `-Wall`, dann warnt dich der Compiler.')],
-        quiz: [A.q('Was passiert in einem `switch` ohne `break`?', ['Das Programm läuft in den nächsten Fall weiter', 'Der Compiler meldet einen Fehler und übersetzt nicht', 'Der switch endet nach dem Fall trotzdem', 'Der Fall wird übersprungen'], 0, 'Man nennt das „Durchfallen“.')],
-        tasks: [PP('Was wird ausgegeben?', ['int x = 10;', 'if (x > 5 && x < 8) {', '    cout << "A";', '} else if (x > 5) {', '    cout << "B";', '} else {', '    cout << "C";', '}'], 'B', 'Bei `&&` müssen beide Vergleiche stimmen. Prüfe jeden einzeln mit dem Wert von x, bevor du dich für einen Zweig entscheidest.')]
+        quiz: [
+          A.q('Wie lautet die moderne C++-Schleife über alle Elemente eines `vector<int> preise`?', ['for (int p : preise)', 'foreach (int p in preise)', 'for (int p of preise)', 'for p in preise:'], 0, 'C++ nutzt den Doppelpunkt wie Java.')
+        ],
+        tasks: [
+          PP('Was gibt das Programm aus?', ['vector<int> preise = {1000, 2500, 500};', 'int s = 0;', 'for (int p : preise) { if (p >= 1000) s += p; }', 'cout << s << "\\n";'], '3500', 'Addiere nur Preise >= 1000.', '1000 + 2500 = 3500.')
+        ]
       },
+
+      /* ---------- 5. Funktionen & Referenzen ---------- */
       {
-        concept: 'loops',
+        concept: 'funcs', standalone: true, domain: 'shop', stage: 2,
+        title: 'Funktionen und Referenzen: Bausteine ohne teure Kopien',
+        goal: 'Du schreibst Funktionen mit return/void, nutzt Referenzen (&) zum Ändern von Originalen und const-Referenzen (const T &) zum schnellen Lesen ohne Kopie.',
+        terms: ['Funktion', 'Parameter', 'Rückgabewert', 'Referenz'],
         parts: [
-          C(['for (int i = 1; i <= 3; i++) {§Start (int i = 1), Bedingung (i <= 3), Schritt (i++). Läuft für 1, 2, 3.', '    cout << "Durchlauf " << i << endl;§Schleifenkörper.', '}§Ende.'], 'Zählschleife for'),
-          C(['int zahl = 1;§Startwert.', 'while (zahl < 50) {§Bedingung wird vor jedem Durchlauf geprüft.', '    zahl = zahl * 3;§Etwas muss sich ändern, sonst läuft es ewig.', '}§Ende.', 'cout << zahl << endl;§Ausgabe: 81'], 'Bedingungsschleife while'),
-          C(['vector<string> farben = {"rot", "grün", "blau"};§Ein vector (siehe nächste Lektionen) mit drei Texten.', 'for (string farbe : farben) {§Die **bereichsbasierte** for-Schleife: „für jede farbe in farben“.', '    cout << farbe << endl;§Gibt rot, grün, blau aus.', '}§Ende.'], 'Alle Elemente durchlaufen')
+          A.text('Referenzen statt roher Zeiger', 'Standardmäßig kopiert C++ Parameter wie C. Mit **`&`** am Parameter entsteht eine **Referenz** – ein zweiter Name für das Original, ganz ohne Zeiger-Syntax (`*` und `->`). Für große Objekte, die nur gelesen werden, ist **`const string &`** der C++-Standard: keine Kopie, und garantiert unveränderlich.'),
+          C([
+            'long rabattInCent(long summe) {',
+            '    return summe >= 10000 ? summe * 10 / 100 : 0;',
+            '}',
+            'void verkaufen(int &lager, int menge) {§Referenz (&): ändert das Original lager in main!',
+            '    if (menge > 0 && menge <= lager) lager -= menge;',
+            '}',
+            '// in main',
+            'int bestand = 35;',
+            'verkaufen(bestand, 5);§Kein & beim Aufruf nötig!',
+            'cout << bestand << " " << rabattInCent(12000) << "\\n";§30 und 1200.'
+          ], 'Funktionen mit Rückgabewert und Referenz', { praxis: 'const vector<Artikel> &korb spart in Hochleistungs-Anwendungen tausende unnötige Kopien pro Sekunde.' })
         ],
-        tips: [A.warn('Ein Semikolon direkt nach `for (…)` oder `while (…)` macht den Block danach unabhängig von der Schleife.')],
-        quiz: [A.q('Wie oft läuft `for (int i = 0; i < 5; i++)`?', ['5-mal', '4-mal', '6-mal', 'Nie'], 0, 'i ist 0, 1, 2, 3, 4.')],
-        tasks: [PP('Was wird ausgegeben? (Eine Zahl pro Zeile.)', ['for (int i = 0; i < 3; i++) {', '    cout << i * 2 << endl;', '}'], '0\n2\n4', 'i ist 0, 1 und 2.')]
+        quiz: [
+          A.q('Was bewirkt `const string &name` als Parameter einer C++-Funktion?', ['Vermeidet eine Kopie und schützt das Original vor Änderungen', 'Erzeugt zwei Kopien des Strings im Heap', 'Erlaubt der Funktion, den Original-String zu überschreiben', 'Wandelt den String automatisch in ein int um'], 0, 'Referenz (&) spart die Kopie, const verhindert versehentliche Änderungen.')
+        ],
+        tasks: [
+          PP('Was gibt das Programm aus?', ['void buche(int &lager, int m) { lager -= m; }', '// in main', 'int b = 14; buche(b, 4);', 'cout << b << "\\n";'], '10', 'lager ist eine Referenz auf b.', 'b wird direkt von 14 auf 10 verringert.')
+        ]
       },
+
+      /* ---------- 6. vector, map & 4 Standardalgorithmen ---------- */
       {
-        concept: 'funcs',
+        concept: 'coll', standalone: true, domain: 'shop', stage: 2,
+        title: 'vector, map und die vier Standardalgorithmen',
+        goal: 'Du nutzt vector<T> (push_back, size, at) und map<K, V> und wendest die vier IHK-Standardalgorithmen sicher an.',
+        terms: ['Liste', 'Lineare Suche'],
         parts: [
-          C(['#include <iostream>§Ein-/Ausgabe.', 'using namespace std;§Kurzschreibweise.', '', 'int flaeche(int laenge, int breite) {§Eine Funktion: **Rückgabetyp**, Name, Parameter mit Typ. Sie muss vor dem Aufruf stehen.', '    return laenge * breite;§Liefert das Ergebnis.', '}§Ende.', '', 'void gruss(string name) {§void: gibt nichts zurück.', '    cout << "Hallo " << name << "!" << endl;§Eine Ausgabe.', '}§Ende.', '', 'int main() {§Hier startet das Programm.', '    int raum = flaeche(4, 5);§Aufruf: Ergebnis 20.', '    cout << "Raumgröße: " << raum << endl;§Gibt aus: Raumgröße: 20', '    gruss("Ada");§Gibt aus: Hallo Ada!', '    return 0;§Erfolgreich beendet.', '}§Ende.'], 'Funktionen mit Rückgabewert und void'),
-          C(['void erhoehe(int &zahl) {§Das **&** macht zahl zu einer **Referenz**: ein zweiter Name für das Original, keine Kopie.', '    zahl = zahl + 1;§Ändert das Original.', '}§Ende.', '', 'int a = 5;§Die Variable.', 'erhoehe(a);§Kein & beim Aufruf nötig.', 'cout << a << endl;§Ausgabe: 6'], 'Referenzen: das Original ändern')
+          A.text('Sichere Container aus der Standardbibliothek', '`std::vector<T>` ist die dynamische **Liste** in C++ (wie `ArrayList` in Java): `.push_back()` hängt an, `.size()` liefert die Länge, und **`.at(i)`** prüft anders als `[i]` die Array-Grenzen! Über `vector` setzt du Summieren, Minimum und **lineare Suche** direkt mit einer Schleife um; `std::map<string, int>` speichert Schlüssel-Wert-Paare.'),
+          C([
+            'vector<int> preise = {1999, 4950, 999, 3490};',
+            'preise.push_back(22900);§Hängt den Monitor hinten an.',
+            'int summe = 0, min = preise[0];',
+            'for (int p : preise) { summe += p; if (p < min) min = p; }§Summieren & Minimum.',
+            'map<string, int> lager = {{"Funkmaus", 35}, {"Tastatur", 0}};',
+            'cout << preise.size() << " " << min << " " << lager["Funkmaus"] << "\\n";'
+          ], 'vector und map im Onlineshop', { praxis: 'Im Vergleich zu rohen C-Arrays verwaltet vector seinen Speicher automatisch – kein malloc und kein free nötig!' })
         ],
-        tips: [A.info('Ohne `&` bekommt die Funktion wie in C eine **Kopie**. Große Objekte (lange Texte, Listen) übergibt man gern als `const string &text`: keine Kopie, aber auch keine Änderung.')],
-        quiz: [A.q('Was bewirkt `int &zahl` als Parameter?', ['Die Funktion arbeitet am Original statt an einer Kopie', 'Die Funktion bekommt eine Kopie, die sie nicht ändern darf', 'Die Funktion gibt die Adresse von zahl zurück', 'Die Zahl wird vor dem Aufruf in int umgewandelt'], 0, 'Eine Referenz ist ein zweiter Name für dieselbe Variable.')],
-        tasks: [PP('Was wird ausgegeben?', ['int doppelt(int n) {', '    return n * 2;', '}', '// in main:', 'cout << doppelt(doppelt(3)) << endl;'], '12', 'Bei verschachtelten Aufrufen wird der innere zuerst ausgerechnet. Sein Ergebnis ist das Argument für den äußeren.')]
+        quiz: [
+          A.q('Was unterscheidet `preise.at(10)` von `preise[10]` bei einem `vector` mit 4 Elementen?', ['at() prüft die Grenzen und wirft out_of_range, [] prüft nicht', '[] wirft out_of_range, at() liefert automatisch 0', 'Beide vergrößern den vector automatisch auf 11 Elemente', 'at() funktioniert nur bei map, nicht bei vector'], 0, 'at() schützt vor undefiniertem Speicherzugriff.')
+        ],
+        tasks: [
+          PP('Was gibt das Programm aus?', ['vector<int> p = {1999, 999};', 'p.push_back(3490);', 'cout << p[0] << " " << p.at(2) << " " << p.size() << "\\n";'], '1999 3490 3', 'Nach push_back hat p drei Elemente (Indizes 0, 1, 2).', 'Index 0 ist 1999, Index 2 ist 3490, Größe ist 3.')
+        ]
       },
+
+      /* ---------- 7. Klassen und Objekte ---------- */
       {
-        concept: 'coll',
+        concept: 'oop', standalone: true, domain: 'shop', stage: 3,
+        title: 'Klassen und Objekte: aus Vektoren wird der Artikel',
+        goal: 'Du definierst C++-Klassen mit private:/public:, Konstruktor und const-Methoden und legst Objekte direkt auf dem Stack ohne new an.',
+        terms: ['Klasse', 'Objekt', 'Instanz', 'Attribut', 'Konstruktor'],
         parts: [
-          C(['#include <vector>§Holt die Klasse vector.', 'vector<int> zahlen = {4, 9, 7, 1};§Ein **vector** ist eine Liste, die wachsen kann. In <> steht der Typ der Elemente.', 'cout << zahlen[0] << endl;§Zugriff wie bei einem Array: 4', 'zahlen.push_back(5);§push_back hängt ein Element hinten an.', 'cout << zahlen.size() << endl;§size() ist die Anzahl: 5', 'for (int z : zahlen) {§Alle durchlaufen.', '    cout << z << endl;§Gibt jedes Element aus.', '}§Ende.'], 'vector: eine Liste, die wächst'),
-          C(['#include <map>§Holt die Klasse map.', 'map<string, int> alter;§Eine **map** speichert Paare aus Schlüssel (Text) und Wert (Zahl).', 'alter["Ada"] = 36;§Fügt ein Paar hinzu oder ersetzt den Wert.', 'cout << alter["Ada"] << endl;§Zugriff über den Schlüssel: 36'], 'map: Schlüssel und Werte')
+          A.text('Objekte ohne new – direkt auf dem Stack', 'Eine C++-**Klasse** teilt sich in `private:`- und `public:`-Abschnitte für **Attribute** und Methoden und endet zwingend mit einem **Semikolon (`};`)**. Anders als in Java brauchst du kein `new`: `Artikel maus("Funkmaus", 1999, 35);` legt die **Instanz** (das **Objekt**) direkt und blitzschnell auf dem Stack an.'),
+          C([
+            'class Artikel {',
+            'private:§Standard in class: von außen nicht sichtbar.',
+            '    string name;',
+            '    long preisInCent;',
+            '    int lager;',
+            'public:',
+            '    Artikel(string n, long p, int l) : name(n), preisInCent(p), lager(l) {}§Initialisierungsliste im Konstruktor.',
+            '    bool istLieferbar() const { return lager > 0; }§const: diese Methode ändert das Objekt nicht.',
+            '    long getPreisInCent() const { return preisInCent; }',
+            '};§Semikolon am Klassenende nicht vergessen!',
+            '// in main',
+            'Artikel maus("Funkmaus", 1999, 35);§Kein new nötig!',
+            'cout << maus.istLieferbar() << " " << maus.getPreisInCent() << "\\n";'
+          ], 'Die Klasse Artikel in C++', { praxis: 'Initialisierungslisten (: name(n)) und const-Methoden sind das Markenzeichen von sauberem, schnellem C++-Code.' })
         ],
-        tips: [A.warn('`zahlen[10]` bei einem kleineren vector wird **nicht** geprüft und führt zu undefiniertem Verhalten. Sicherer ist `zahlen.at(10)`: Das wirft einen Fehler (`out_of_range`), statt still falschen Speicher zu lesen.')],
-        quiz: [A.q('Was macht `push_back` bei einem vector?', ['Hängt ein Element hinten an', 'Löscht das letzte Element', 'Sortiert den vector', 'Leert den vector'], 0, 'push_back fügt am Ende ein Element hinzu.')],
-        tasks: [PP('Was gibt das Programm aus?', ['vector<int> l = {10, 20, 30};', 'l.push_back(40);', 'cout << l[0] << " " << l[3] << " " << l.size() << endl;'], '10 40 4', 'Nach push_back hat der vector vier Elemente, der Index des letzten ist 3.')]
+        quiz: [
+          A.q('Was bedeutet `const` hinter der Klammer in `long getPreisInCent() const`?', ['Die Methode verspricht, keine Attribute des Objekts zu verändern', 'Die Methode gibt immer eine unveränderliche Zahl 0 zurück', 'Die Methode darf nur einmal im Programm aufgerufen werden', 'Die Methode ist privat und nur in der Klasse sichtbar'], 0, 'const-Methoden dürfen auch auf const-Referenzen (const Artikel &a) aufgerufen werden.')
+        ],
+        tasks: [
+          A.fill('Ergänze das Pflichtzeichen am Ende jeder C++-Klassendefinition.', 'class Artikel {\n    int lager;\n}{{;}}', 'Anders als in Java oder C# endet class { ... } in C++ mit diesem Zeichen.')
+        ]
       },
+
+      /* ---------- 8. Kapselung ---------- */
       {
-        concept: 'oop',
+        id: 'kapselung', standalone: true, domain: 'shop', stage: 3,
+        title: 'Kapselung: Lagerbestand und Passwort schützen',
+        goal: 'Du kapselst Zustände mit private:-Abschnitten, prüfst Eingaben in Konstruktor und Methoden und liest Sichtbarkeiten im UML.',
+        terms: ['Kapselung', ['Getter und Setter', 'Getter', 'Setter'], 'Sichtbarkeit'],
         parts: [
-          C(['#include <iostream>§Ein-/Ausgabe.', '#include <string>§Für string.', 'using namespace std;§Kurzschreibweise.', '', 'class Konto {§Beginnt die Klasse Konto.', 'private:§Alles darunter ist von außen **nicht** erreichbar (Kapselung).', '    string inhaber;§Ein privates Attribut.', '    double kontostand;§Auch privat.', '', 'public:§Alles darunter darf von außen benutzt werden.', '    Konto(string name) {§Der **Konstruktor**: heißt wie die Klasse, kein Rückgabetyp.', '        inhaber = name;§Setzt den Inhaber.', '        kontostand = 0;§Startwert.', '    }§Ende des Konstruktors.', '', '    void einzahlen(double betrag) {§Eine öffentliche Methode.', '        kontostand += betrag;§Erhöht den Kontostand.', '    }§Ende.', '', '    bool abheben(double betrag) {§Liefert true oder false.', '        if (betrag <= kontostand) {§Genug Geld da?', '            kontostand -= betrag;§Abziehen.', '            return true;§Hat geklappt.', '        }§Ende von if.', '        return false;§Abgelehnt.', '    }§Ende.', '', '    double getKontostand() const {§Ein **Getter**. const hinter der Klammer heißt: Diese Methode ändert das Objekt nicht.', '        return kontostand;§Gibt den Wert zurück.', '    }§Ende.', '};§Ende der Klasse. **Hier steht ein Semikolon!**'], 'Eine Klasse mit Kapselung'),
-          C(['Konto k("Ada");§Erzeugt ein Objekt und ruft den Konstruktor auf. Kein new nötig.', 'k.einzahlen(100);§Methode am Objekt aufrufen: Kontostand 100.', 'bool ok = k.abheben(30);§Hebt 30 ab: true.', 'cout << ok << " " << k.getKontostand() << endl;§Gibt aus: 1 70'], 'Objekt benutzen (in main)'),
-          C(['class Tier {§Basisklasse.', 'public:§Öffentlicher Teil.', '    virtual string laut() {§**virtual**: Unterklassen dürfen diese Methode ersetzen.', '        return "...";§Standardlaut.', '    }§Ende.', '    virtual ~Tier() {}§Ein **virtueller Destruktor**: Pflicht, wenn man über Basiszeiger arbeitet.', '};§Ende von Tier.', '', 'class Hund : public Tier {§Der Doppelpunkt: Hund erbt öffentlich von Tier.', 'public:§Öffentlicher Teil.', '    string laut() override {§**override**: ersetzt die Methode der Basisklasse. Der Compiler prüft das.', '        return "Wau";§Hunde sagen Wau.', '    }§Ende.', '};§Ende von Hund.', '', 'Hund h;§Ein Hund-Objekt.', 'Tier *t = &h;§Ein **Zeiger** auf Tier darf auf einen Hund zeigen (Polymorphie).', 'cout << t->laut() << endl;§-> ruft die Methode über den Zeiger auf. Es erscheint "Wau".'], 'Vererbung und Polymorphie')
+          A.text('private: als Standard', 'In einer C++-`class` ist alles vor dem ersten Label automatisch `private:`. Durch **Kapselung** über `private:` und fachliche Methoden wie `verkaufen()` stellst du sicher, dass kein Bestand negativ wird.'),
+          C([
+            'class Artikel {',
+            'private:',
+            '    int lager;',
+            'public:',
+            '    Artikel(int l) : lager(l < 0 ? 0 : l) {}',
+            '    int getLager() const { return lager; }§Getter (const).',
+            '    bool verkaufen(int menge) {§Geprüfte fachliche Methode statt offenem Setter.',
+            '        if (menge <= 0 || menge > lager) return false;',
+            '        lager -= menge;',
+            '        return true;',
+            '    }',
+            '};',
+            '// in main',
+            'Artikel maus(35);',
+            'cout << maus.verkaufen(50) << " " << maus.verkaufen(5) << " " << maus.getLager() << "\\n";'
+          ], 'Gekapselter Artikel in C++', { praxis: 'Dieselbe Regel wie in Java, Python und C#: Kein Code außerhalb von Artikel kann lager direkt auf -15 setzen.' })
         ],
-        tips: [A.info('Ohne `virtual` würde `t->laut()` die Methode von **Tier** aufrufen, obwohl dort ein Hund liegt. Polymorphie braucht in C++ ausdrücklich `virtual`.')],
-        quiz: [A.q('Was bewirkt `private:` in einer Klasse?', ['Alles darunter ist von außen nicht erreichbar', 'Alles darunter ist nur für Unterklassen und die Klasse selbst sichtbar', 'Alles darunter wird als Konstante angelegt', 'Alles darunter wird beim Kopieren übersprungen'], 0, 'private: ist die Grundlage der Kapselung.'), A.q('Wozu dient `virtual`?', ['Eine Unterklasse darf die Methode ersetzen, aufgerufen wird die des echten Objekts', 'Die Methode existiert nur im Speicher und wird beim Beenden gelöscht', 'Die Methode ist nur für Unterklassen sichtbar, nicht für andere Klassen', 'Die Methode wird beim Übersetzen eingesetzt und läuft dadurch schneller'], 0, 'virtual ermöglicht Polymorphie.')],
-        tasks: [PP('Was gibt das Programm aus?', ['Konto k("Ada");', 'k.einzahlen(50);', 'k.einzahlen(25);', 'cout << k.getKontostand() << endl;'], '75', 'Verfolge den Kontostand nach jedem Methodenaufruf. Achte darauf, wie `cout` ein double ohne Nachkommaanteil ausgibt.')]
+        quiz: [
+          A.q('Welche Sichtbarkeit haben Attribute in einer C++-`class`, wenn kein `public:` davor steht?', ['private', 'public', 'protected', 'static'], 0, 'In class ist private der Standard (in struct wäre es public).')
+        ],
+        tasks: [
+          A.bug('Lager: Bei Bestand 5 schlägt der Kauf von genau 5 Stück fehl.', 'cpp', [
+            'class Artikel {',
+            '    int lager;',
+            'public:',
+            '    Artikel(int l) : lager(l) {}',
+            '    bool verkaufen(int m) {',
+            '        if (m <= 0 || m >= lager) return false;',
+            '        lager -= m; return true;',
+            '    }',
+            '    int getLager() const { return lager; }',
+            '};',
+            '// in main',
+            'Artikel a(5);',
+            'cout << a.verkaufen(6) << " " << a.verkaufen(5) << " " << a.getLager() << "\\n";'
+          ], { line: 5, kind: 'logik', fixes: [
+            'if (m <= 0 || m > lager) return false;',
+            'if (m <= 0 || m < lager) return false;',
+            'if (m < 0 || m >= lager) return false;',
+            'if (m <= 0 && m > lager) return false;'
+          ], expect: '0 1 0' }, 'Darf man genau den Restbestand kaufen?', '>= weist auch m == lager ab; richtig ist m > lager.')
+        ]
       },
+
+      /* ---------- 9. Vererbung, virtual & Polymorphie ---------- */
       {
-        concept: 'err',
+        id: 'vererbung', standalone: true, domain: 'shop', stage: 3,
+        title: 'Vererbung, Polymorphie und rein virtuelle Schnittstellen',
+        goal: 'Du nutzt : public Oberklasse, virtual, override, den virtuellen Destruktor und rein virtuelle Methoden (= 0) als Schnittstelle in C++.',
+        terms: ['Vererbung', ['Oberklasse und Unterklasse', 'Oberklasse', 'Unterklasse'], ['Überschreiben (Override)', 'Überschreiben'], 'Polymorphie', ['Schnittstelle (Interface)', 'Interface']],
         parts: [
-          C(['#include <stdexcept>§Holt die Standard-Fehlerklassen.', 'try {§Hier steht der Code, der schiefgehen kann.', '    int zahl = stoi("abc");§"abc" ist keine Zahl: löst eine invalid_argument-Ausnahme aus.', '    cout << 10 / zahl << endl;§Wird nicht erreicht.', '} catch (const invalid_argument &e) {§Fängt genau diesen Fehlertyp (als Referenz, ohne Kopie).', '    cout << "Das war keine Zahl" << endl;§Freundliche Meldung statt Absturz.', '} catch (const exception &e) {§Fängt alle übrigen Standardfehler.', '    cout << "Fehler: " << e.what() << endl;§e.what() liefert die Beschreibung.', '}§Ende.'], 'try und catch'),
-          C(['terminate called after throwing an instance of \'std::out_of_range\'§**Art** des Fehlers: Eine Ausnahme wurde ausgelöst, aber nirgends gefangen. Das Programm bricht ab.', '  what():  vector::_M_range_check: __n (which is 10) >= this->size() (which is 4)§Die Erklärung: Zugriff auf Index 10, obwohl der vector nur 4 Elemente hat.'], 'Eine Fehlermeldung lesen', { noRun: true })
+          A.text('virtual ist Pflicht für Polymorphie', 'Bei **Vererbung** (`: public Oberklasse`) braucht **Polymorphie** in C++ drei Dinge: **`virtual`** in der Oberklasse, **`override`** beim **Überschreiben** in der Unterklasse und den Aufruf über eine **Referenz oder einen Zeiger** (`Artikel &` oder `Artikel *`). Ein **Interface** gibt es als abstrakte Klasse mit rein virtuellen Methoden (`= 0`) und virtuellem Destruktor.'),
+          C([
+            'class Zahlungsmethode {§Abstrakte Klasse als Interface in C++.',
+            'public:',
+            '    virtual long gebuehrInCent(long betrag) const = 0;§= 0: rein virtuell (muss überschrieben werden).',
+            '    virtual ~Zahlungsmethode() = default;§Virtueller Destruktor: Pflicht bei Polymorphie!',
+            '};',
+            'class PayPal : public Zahlungsmethode {',
+            'public:',
+            '    long gebuehrInCent(long b) const override { return b * 249 / 10000 + 35; }',
+            '};',
+            'class Rechnung : public Zahlungsmethode {',
+            'public:',
+            '    long gebuehrInCent(long b) const override { return 0; }',
+            '};',
+            '// in main',
+            'PayPal pp; Rechnung r;',
+            'const Zahlungsmethode &z1 = pp; const Zahlungsmethode &z2 = r;',
+            'cout << z1.gebuehrInCent(10000) << " " << z2.gebuehrInCent(10000) << "\\n";'
+          ], 'Rein virtuelles Interface und Polymorphie in C++', { praxis: 'Ohne virtual ruft C++ aus Geschwindigkeitsgründen immer die Methode des Variablentyps auf – Polymorphie schaltest du in C++ bewusst mit virtual ein.' })
         ],
-        tips: [A.info('Mit `throw runtime_error("…");` löst du selbst einen Fehler aus. Anders als in Java gibt es keine Pflicht, Fehler zu fangen.')],
-        quiz: [A.q('Welches Schlüsselwort löst absichtlich eine Ausnahme aus?', ['throw', 'catch', 'try', 'raise'], 0, '`throw runtime_error("…")` meldet einen Fehler.')],
-        tasks: []
+        quiz: [
+          A.q('Was bedeutet `= 0` am Ende einer virtuellen Methode (`virtual long gebuehr() = 0;`)?', ['Rein virtuell: abstrakte Vorgabe ohne Rumpf (Interface)', 'Die Methode gibt immer 0 zurück', 'Die Methode darf nicht überschrieben werden', 'Die Methode wird zur Laufzeit gelöscht'], 0, 'Eine Klasse mit mindestens einer = 0-Methode ist abstrakt und dient als Interface.'),
+          A.q('Warum braucht eine polymorphe Basisklasse in C++ einen `virtual` Destruktor?', ['Damit beim Löschen über Basiszeiger die Unterklasse aufgeräumt wird', 'Damit Objekte ohne eigenen Konstruktor direkt erzeugt werden können', 'Damit die Unterklasse kein override an Methoden mehr schreiben muss', 'Damit das Objekt beim Verlassen der Funktion auf dem Stack bleibt'], 0, 'Ohne virtuellen Destruktor entsteht beim Löschen über Basiszeiger undefiniertes Verhalten.')
+        ],
+        tasks: [
+          A.fill('Leite `DigitalArtikel` öffentlich von `Artikel` ab.', 'class DigitalArtikel : {{public}} Artikel { };', 'Sichtbarkeit bei normaler C++-Vererbung.')
+        ]
       },
+
+      /* ---------- 10. Exceptions ---------- */
       {
-        id: 'adv', stage: 4, title: 'Vertiefung: Zeiger, Speicher und die Standardbibliothek',
-        goal: 'Du verstehst Zeiger und new/delete, kennst smart pointers und kannst einfache Algorithmen aus der Standardbibliothek lesen.',
+        concept: 'err', standalone: true, domain: 'shop', stage: 3,
+        title: 'Exceptions: Fehler abfangen statt abstürzen',
+        goal: 'Du fängst Exceptions mit try und catch (const exception &e) ab, wirfst eigene Fehler mit throw runtime_error und liest e.what().',
+        terms: [['Ausnahme (Exception)', 'Exception'], 'Laufzeitfehler'],
         parts: [
-          A.text('Zeiger und new/delete', 'Wie in C ist ein **Zeiger** eine Variable mit einer Adresse. Mit `new` legst du ein Objekt dynamisch an, mit `delete` gibst du es wieder frei. **Wer `delete` vergisst, hat ein Speicherleck.**'),
-          C(['int *p = new int(5);§new legt einen int mit Wert 5 im Speicher an und liefert dessen Adresse.', '*p = *p + 1;§Ändert den Wert über den Zeiger: 6.', 'cout << *p << endl;§Ausgabe: 6', 'delete p;§**Freigeben!** Danach darf p nicht mehr benutzt werden.'], 'new und delete'),
-          A.text('Smart Pointer', 'Moderne C++-Programme vermeiden rohes `new`/`delete`. Ein **`unique_ptr`** gibt sein Objekt **automatisch** frei, wenn er verschwindet.'),
-          C(['#include <memory>§Holt unique_ptr und make_unique.', '{§Ein Block (z. B. eine Funktion).', '    auto k = make_unique<Konto>("Ada");§Erzeugt ein Konto und verpackt es in einem unique_ptr.', '    k->einzahlen(100);§Benutzung wie ein normaler Zeiger.', '}§Am Blockende wird das Konto **automatisch** freigegeben. Kein delete nötig.'], 'unique_ptr', { noRun: true }),
-          A.text('Algorithmen und Lambdas', 'Die Standardbibliothek bringt fertige Algorithmen mit (zum Beispiel `sort` und `count_if`). Ein **Lambda** ist eine kurze namenlose Funktion: `[](int x) { return x % 2 == 0; }` heißt „nimm x, prüfe ob gerade“.'),
-          C(['#include <algorithm>§Für sort, count_if und mehr.', 'vector<int> zahlen = {5, 2, 8, 1, 4};§Ausgangsdaten.', 'sort(zahlen.begin(), zahlen.end());§Sortiert aufsteigend. begin() und end() markieren den Bereich.', 'int gerade = count_if(zahlen.begin(), zahlen.end(), [](int x) { return x % 2 == 0; });§Zählt die Elemente, für die das Lambda true liefert: 2, 4, 8 sind gerade, also 3.', 'cout << zahlen[0] << " " << gerade << endl;§Ausgabe: 1 3'], 'sort und count_if')
+          A.text('Immer per const-Referenz fangen', 'Anders als C kennt C++ `try`, `catch` und `throw` (aus `<stdexcept>`), um einen **Laufzeitfehler** wie ungültige Texteingaben bei `stoi` sauber abzufangen. Fange Exceptions immer als **`const`-Referenz** (`catch (const exception &e)`), um unnötiges Kopieren zu vermeiden. Die Beschreibung liefert `e.what()`.'),
+          C([
+            '#include <stdexcept>',
+            'try {',
+            '    int menge = stoi("zwei");§Wirft invalid_argument.',
+            '    cout << menge << "\\n";',
+            '} catch (const invalid_argument &e) {',
+            '    cout << "Ungueltige Menge\\n";',
+            '} catch (const exception &e) {',
+            '    cout << "Fehler: " << e.what() << "\\n";',
+            '}'
+          ], 'try und catch in C++', { praxis: 'C++ hat kein finally – stattdessen räumt RAII (Destruktoren, unique_ptr, vector) am Blockende automatisch auf, selbst wenn eine Exception fliegt!' })
         ],
-        tips: [A.warn('Rohe Zeiger mit `new` sind die häufigste Fehlerquelle in C++. Faustregel: Nimm Objekte direkt (`Konto k;`), `vector` und `unique_ptr`, und rufe `new` gar nicht selbst auf.')],
-        quiz: [A.q('Wozu dient `unique_ptr`?', ['Er gibt sein Objekt automatisch frei', 'Er teilt sein Objekt mit beliebig vielen Besitzern', 'Er macht aus jedem Zeiger eine Kopie', 'Er prüft, ob ein Zeiger auf null zeigt'], 0, 'Das nennt man RAII: Aufräumen passiert automatisch.'), A.q('Wofür steht `[](int x) { return x * 2; }`?', ['Ein Lambda: nimm x und liefere x * 2', 'Ein leeres Array, gefüllt mit x * 2', 'Eine Klasse mit einer Methode für x * 2', 'Ein Makro, das der Präprozessor ersetzt'], 0, 'Ein Lambda ist eine kurze Funktion ohne Namen.')],
-        tasks: [PP('Was wird ausgegeben?', ['int *p = new int(5);', '*p = *p + 3;', 'cout << *p << endl;', 'delete p;'], '8', '*p ist der Wert, auf den p zeigt.', 'Über den Zeiger wird der Wert 5 + 3 = 8.')]
+        quiz: [
+          A.q('Warum gibt es in C++ kein `finally` wie in Java oder C#?', ['Weil Destruktoren (RAII) am Blockende automatisch aufräumen', 'Weil Exceptions in C++ das Programm immer sofort beenden', 'Weil catch in C++ automatisch doppelt ausgeführt wird', 'Weil C++ gar keine try-Blöcke unterstützt'], 0, 'RAII (Resource Acquisition Is Initialization) schließt Dateien und Speicher deterministisch am Blockende.')
+        ],
+        tasks: [
+          A.fill('Wirf in C++ eine eigene Ausnahme bei leerem Lager.', 'if (menge > lager) {{throw}} runtime_error("Zu wenig auf Lager");', 'Schlüsselwort zum Auslösen einer Exception.')
+        ]
+      },
+
+      /* ---------- 11. Architektur ---------- */
+      {
+        id: 'architektur', standalone: true, domain: 'shop', stage: 4,
+        title: 'Zusammenhänge: Warenkorb, Position, Artikel und RabattRechner',
+        goal: 'Du liest das 4-Klassen-Shop-Modell in C++ und erkennst Komposition (vector<Position>), Assoziation und Single Responsibility.',
+        terms: ['Klassendiagramm', 'Komposition', 'Assoziation', 'Single Responsibility'],
+        parts: [
+          A.text('Vier Klassen, eine Bestellung', 'Exakt dasselbe 4-Klassen-Shop-Modell wie in Java, Python, JavaScript und C# – hier in modernem C++ mit `vector<Position>` (**Komposition**) und `const Artikel *` (**Assoziation**).'),
+          A.uml('klasse Warenkorb\n  - positionen: vector<Position>\n  + hinzufuegen(a: Artikel, menge: int): void\n  + summeInCent(): long\nklasse Position\n  - menge: int\n  + betragInCent(): long\nklasse Artikel\n  - name: string\n  - preisInCent: long\n  + getPreisInCent(): long\nklasse RabattRechner\n  + rabattInCent(summeInCent: long): long\nWarenkorb "1" *-- "*" Position : enthält\nPosition "*" --> "1" Artikel', 'Das Shop-Klassendiagramm'),
+          C([
+            'class Artikel {',
+            '    string name; long preis;',
+            'public:',
+            '    Artikel(string n, long p) : name(n), preis(p) {}',
+            '    long getPreis() const { return preis; }',
+            '};',
+            'class Position {',
+            '    const Artikel *artikel; int menge;§Assoziation (* --> 1).',
+            'public:',
+            '    Position(const Artikel *a, int m) : artikel(a), menge(m) {}',
+            '    long betrag() const { return artikel->getPreis() * menge; }',
+            '};',
+            'class Warenkorb {',
+            '    vector<Position> positionen;§Komposition (1 *-- *): lebt im Warenkorb.',
+            'public:',
+            '    void hinzufuegen(const Artikel &a, int m) { positionen.push_back(Position(&a, m)); }',
+            '    long summe() const { long s = 0; for (const auto &p : positionen) s += p.betrag(); return s; }',
+            '};',
+            '// in main',
+            'Artikel maus("Funkmaus", 1999), monitor("Monitor", 22900);',
+            'Warenkorb korb; korb.hinzufuegen(maus, 2); korb.hinzufuegen(monitor, 1);',
+            'long s = korb.summe(); long r = s >= 10000 ? s * 10 / 100 : 0;',
+            'cout << "Zu zahlen: " << (s - r) << " Cent\\n";'
+          ], 'Das 4-Klassen-Modell in C++', { praxis: 'Dank vector<Position> auf dem Stack wird beim Verlassen von main alles ohne ein einziges delete sauber abgeräumt.' })
+        ],
+        quiz: [
+          A.q('Warum nutzt `Warenkorb` ein `vector<Position>` statt eines rohen `new Position[]`?', ['vector verwaltet seinen Speicher automatisch ohne Speicherlecks', 'vector kann nur genau zwei Positionen speichern', 'new ist in C++ für Klassen verboten', 'vector sortiert alle Positionen automatisch nach Preis'], 0, 'Standardcontainer wie vector sind sicherer und genauso schnell wie rohe Arrays.')
+        ],
+        tasks: [
+          A.fill('Hänge in `Warenkorb` eine neue Position ans Ende des Vektors an.', 'positionen.{{push_back}}(Position(&a, m));', 'Die vector-Methode zum Anhängen ans Ende.')
+        ]
+      },
+
+      /* ---------- 12. Clean Code ---------- */
+      {
+        id: 'clean', standalone: true, domain: 'shop', stage: 4,
+        title: 'Clean Code in C++: lesbar und speichersicher',
+        goal: 'Du erkennst unsauberen C++-Code und wählst sauberes Refactoring (Guard Clauses, Konstanten, DRY, const-Referenzen).',
+        terms: ['Clean Code', 'Magic Number', 'Guard Clause', 'DRY', 'Refactoring'],
+        parts: [
+          A.text('Sauberes, modernes C++', 'Neben den allgemeinen **Clean Code**-Regeln (sprechende Namen, keine **Magic Numbers**, **Guard Clauses**, **DRY**) gilt in C++: kein rohes `new`/`delete`, immer `const &` bei großen Parametern und `vector` statt C-Arrays.'),
+          C([
+            'string pruefe(int menge, int lager, bool bezahlt) {',
+            '    if (menge <= 0) return "ungueltig";§Guard Clauses statt tiefer if-Treppe.',
+            '    if (menge > lager) return "zu wenig";',
+            '    if (!bezahlt) return "warten";',
+            '    return "versenden";',
+            '}',
+            '// in main',
+            'cout << pruefe(2, 5, true) << "\\n";'
+          ], 'Guard Clauses in C++', { praxis: 'Lesbarer Code reduziert in C++ nicht nur Denkfehler, sondern auch gefährliche Speicherfehler.' })
+        ],
+        quiz: [
+          A.q('Was ändert sich bei einem echten Refactoring?', ['Nur die innere Struktur, niemals das Verhalten', 'Sowohl die innere Struktur als auch die Ausgabe', 'Nur die gewählten Compiler-Flags beim Bauen', 'Alle berechneten Preise werden neu gerundet'], 0, 'Refactoring verbessert Wartbarkeit bei identischem Ergebnis.')
+        ],
+        tasks: [
+          A.choose('Beide Varianten rechnen die Versandkosten gleich. Welche folgt DRY?', 'cpp', [
+            ['cout << (3000 >= 5000 ? 0 : 495) << "\\n";', 'cout << (7200 >= 5000 ? 0 : 495) << "\\n";'],
+            ['long versand(long w) { return w >= 5000 ? 0 : 495; }', '// in main', 'cout << versand(3000) << "\\n";', 'cout << versand(7200) << "\\n";']
+          ], { a: 1, expect: '495\n0' }, 'Welche Variante hat die Versandregel an genau einer Stelle?', 'Mit der Funktion versand() steht die Regel genau einmal im Code.')
+        ]
+      },
+
+      /* ---------- 13. Bug-Arena ---------- */
+      {
+        id: 'bugs', standalone: true, domain: 'shop', stage: 4,
+        title: 'Bug-Arena: typische C++-Fehler finden und beheben',
+        goal: 'Du findest klassische C++-Bugs (Off-by-one, fehlendes break, Rabatt-Klammerung) und wählst den kleinsten richtigen Fix.',
+        terms: ['Syntaxfehler', 'Laufzeitfehler', 'Logikfehler', 'Off-by-one-Fehler', 'Debugging'],
+        parts: [
+          A.text('Fehlersuche wie in der Prüfung', 'Trenne beim **Debugging** in C++ sauber zwischen **Syntaxfehler**, **Laufzeitfehler** (z. B. `out_of_range`) und **Logikfehler** – achte besonders auf **Off-by-one-Fehler** (weil `vec[i]` nicht prüft), fehlende `break` im `switch` und Operator-Priorität.')
+        ],
+        quiz: [
+          A.q('Welcher Fehler tritt auf, wenn ein Programm durchläuft, aber 4445 statt 4045 Cent berechnet?', ['Logikfehler', 'Syntaxfehler', 'Laufzeitfehler', 'Linkerfehler'], 0, 'Kein Abbruch, aber falsches Ergebnis = Logikfehler.')
+        ],
+        tasks: [
+          A.bug('Kasse: 10 % Rabatt auf Ware + Versand soll 4045 Cent ergeben, nicht 4445.', 'cpp', [
+            'int preis = 4000;',
+            'int versand = 495;',
+            'int gesamt = preis + versand * 90 / 100;',
+            'cout << gesamt << "\\n";'
+          ], { line: 2, kind: 'logik', fixes: [
+            'int gesamt = (preis + versand) * 90 / 100;',
+            'int gesamt = preis + (versand * 90) / 100;',
+            'int gesamt = (preis + versand) * 10 / 100;',
+            'int gesamt = preis * 90 / 100 + versand;'
+          ], expect: '4045' }, 'Worauf wirkt * 90 / 100 ohne Klammern?', 'Erst (preis + versand) addieren, dann 90 % nehmen.')
+        ]
+      },
+
+      /* ---------- 14. Vertiefung: Smart Pointer & Algorithmen ---------- */
+      {
+        id: 'adv', standalone: true, domain: 'tickets', stage: 4,
+        title: 'Vertiefung: Smart Pointer (unique_ptr) und Algorithmen mit Lambdas',
+        goal: 'Du vermeidest Speicherlecks mit unique_ptr (RAII) und nutzt Standard-Algorithmen wie sort und count_if mit Lambdas am Ticketsystem.',
+        terms: ['Lambda'],
+        parts: [
+          A.text('unique_ptr statt new und delete', 'Rohes `new` und `delete` sind in modernem C++ veraltet, weil vergessene `delete`s Speicherlecks erzeugen. **`std::unique_ptr`** gibt das Objekt am Blockende **automatisch** frei (RAII).'),
+          C([
+            '#include <memory>',
+            '{',
+            '    auto t = make_unique<string>("Server nicht erreichbar");§Erzeugt das Objekt sicher im unique_ptr.',
+            '    cout << *t << "\\n";',
+            '}§Am Blockende wird der Speicher automatisch freigegeben – kein delete nötig!'
+          ], 'Speichersicherheit mit unique_ptr', { noRun: true, praxis: 'In modernem C++ (ab C++14) gilt die Regel: kein rohes new/delete im Anwendungscode – immer Objekte direkt oder unique_ptr.' }),
+          C([
+            '#include <algorithm>',
+            'vector<int> prios = {3, 1, 4, 2, 1};',
+            'sort(prios.begin(), prios.end());§Sortiert aufsteigend: 1, 1, 2, 3, 4.',
+            'int kritisch = count_if(prios.begin(), prios.end(), [](int p) { return p == 1; });§Lambda [](int p) zählt alle Prio-1-Tickets.',
+            'cout << "Wichtigste: " << prios[0] << ", Kritisch: " << kritisch << "\\n";'
+          ], 'sort und count_if mit Lambda im Ticketsystem', { praxis: 'Die STL-Algorithmen (<algorithm>) sind hochoptimiert und funktionieren auf allen Containern – genau wie LINQ in C# oder Streams in Java.' })
+        ],
+        quiz: [
+          A.q('Welches Problem löst `std::unique_ptr` in modernem C++?', ['Er gibt dynamischen Speicher am Blockende automatisch frei', 'Er kopiert jedes Objekt automatisch in zwei Threads', 'Er ersetzt alle for-Schleifen durch Rekursion', 'Er verhindert Syntaxfehler beim Kompilieren'], 0, 'RAII: Kein vergessenes delete, kein Speicherleck.'),
+          A.q('Wofür steht `[](int p) { return p == 1; }` in C++?', ['Ein Lambda (kurze namenlose Funktion)', 'Ein Array mit einem Element', 'Eine Klassendefinition ohne Namen', 'Eine Präprozessor-Anweisung'], 0, 'Die eckigen Klammern [] leiten in C++ ein Lambda ein.')
+        ],
+        tasks: [
+          A.fill('Erzeuge einen sicheren Smart Pointer für ein `Ticket` ohne rohes `new`.', 'auto t = {{make_unique}}<Ticket>(502);', 'Hilfsfunktion aus <memory> für unique_ptr.')
+        ]
       }
     ]
   });

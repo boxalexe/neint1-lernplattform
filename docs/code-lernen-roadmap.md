@@ -14,12 +14,15 @@ Nach dem Muster umgebaut (Praxis-Szenario, geprüfte Aufgaben, Brücke zu den an
 | Prüfungswissen AP2 | 11 | Dopplung mit PSS bereinigt: `struktogramm` und `uml2` als Prüfungsvertiefung (Zustandsdiagramm, AP2-Fallen) mit Verweisen auf PSS |
 | JavaScript | 14 | Alle 14 Module nach dem Java-/Python-Muster (Shop/Login/Tickets, `#`-Kapselung, 4-Klassen-Architektur, Clean Code, Bug-Arena, JSON/async/DOM); alle Aufgaben per Node-VM geprüft |
 | C# | 14 | Alle 14 Module nach dem Java-/Python-Muster (Shop/Login/Tickets, `TryParse`, `switch`-Ausdruck, Properties, `virtual`/`override`, `IZahlungsmethode`, 4-Klassen-Architektur, Clean Code, Bug-Arena, LINQ) |
+| C | 11 | Durchgehendes Shop-/Ticket-Szenario (`printf`, `char[]`/`strcmp`, `struct` + Zeiger, Fehlercodes, Clean Code, Bug-Arena, `malloc`/`free`) |
+| C++ | 14 | Alle 14 Module nach dem Java-/Python-Muster (Shop/Login/Tickets, `string`, `vector`, Referenzen, `virtual`/`override`, 4-Klassen-Architektur, Clean Code, Bug-Arena, `unique_ptr` & STL-Algorithmen) |
 
-Noch im alten Format (dünn: wenig Aufgaben, nur Lückentext, kaum Szenario-Bezug): C, C++. SQL ist inhaltlich in Ordnung.
+Alle Kurse sind auf das neue Praxis-Format umgestellt (SQL war bereits im Zielformat).
 
-## Nächste Schritte (in dieser Reihenfolge)
+## Optionale nächste Schritte
 
-1. **C und C++** nach dem Java/Python-Muster. Auf dem Zielrechner mit `.NET SDK` und `gcc`/`g++` anschließend `node tools/code-lernen/run-predict.js` laufen lassen und bei Bedarf Tracer nach dem Vorbild von `trace-python/tracer.py` ergänzen.
+1. Auf einem Rechner mit installiertem `.NET SDK`, `gcc` und `g++` einmal `node tools/code-lernen/run-predict.js` für `csharp`, `c` und `cpp` ausführen (für `java`, `python`, `javascript` und `pseudo` bereits komplett grün).
+2. Optional eigene Ablauf-Tracer für JavaScript, C#, C und C++ nach dem Vorbild von `trace-python/tracer.py` ergänzen.
 
 ## Aufbau einer Lektion
 

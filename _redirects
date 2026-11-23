@@ -24,6 +24,10 @@
 /code-lernen/kurs/javascript/ops  /code-lernen/kurs/javascript/vars/ 301
 /code-lernen/kurs/csharp/ops/     /code-lernen/kurs/csharp/vars/     301
 /code-lernen/kurs/csharp/ops      /code-lernen/kurs/csharp/vars/     301
+/code-lernen/kurs/c/ops/          /code-lernen/kurs/c/vars/          301
+/code-lernen/kurs/c/ops           /code-lernen/kurs/c/vars/          301
+/code-lernen/kurs/cpp/ops/        /code-lernen/kurs/cpp/vars/        301
+/code-lernen/kurs/cpp/ops         /code-lernen/kurs/cpp/vars/        301
 
 # Alles darunter (Skripte, Stylesheets, Unterseiten) mitnehmen
 /subtrainer/*            /subnetting-trainer/:splat   301
