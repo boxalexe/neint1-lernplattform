@@ -236,12 +236,12 @@ svg.uml { width: 100%; height: auto; display: block; margin: 0 auto; font-family
 /* ---------- Seitenleiste im Tokyo-Hack-Stil ----------
  * Grund und Hover aus dem Theme, jeder Kurs mit eigener Akzentfarbe (--ac, aus app.js): Streifen links, Plus, Zähler, aktive Lektion.
  * Start ist größer und fett, damit klar ist, dass es zur Startseite zurückgeht. */
-#side { background: var(--th-bg); border-right-color: var(--th-line); padding: 8px 10px 10px; }
+#side { background: var(--th-bg); border-right-color: var(--th-line); padding: 6px 10px 8px; }
 #nav { display: flex; flex-direction: column; min-height: 100%; }
-#nav .nav-home { font-size: 1.02rem; font-weight: 700; letter-spacing: .6px; color: var(--th-fg); padding: 8px 10px; margin-bottom: 6px; border-left: 3px solid var(--th-cursor); background: var(--th-bg2); }
+#nav .nav-home { font-size: 1rem; font-weight: 700; letter-spacing: .6px; color: var(--th-fg); padding: 6px 10px; margin-bottom: 2px; border-left: 3px solid var(--th-cursor); background: var(--th-bg2); }
 #nav .nav-home:hover, #nav .nav-home.on { color: var(--th-cursor); background: var(--th-hl-strong); }
-#nav details { border-left: 3px solid var(--ac, var(--th-line)); margin: 3px 0; }
-#nav summary { color: var(--th-fg); padding: 6px 8px; line-height: 1.35; font-size: .88rem; }
+#nav details { border-left: 3px solid var(--ac, var(--th-line)); margin: 2px 0; }
+#nav summary { color: var(--th-fg); padding: 4px 8px; line-height: 1.28; font-size: .86rem; }
 #nav summary::before { color: var(--ac); }
 #nav summary .small { color: var(--ac); opacity: .85; }
 #nav summary:hover, #nav .nl:hover, #nav .nav-top:hover { background: var(--th-hl-strong); }
@@ -251,10 +251,10 @@ svg.uml { width: 100%; height: auto; display: block; margin: 0 auto; font-family
 #nav .nl.on { background: var(--th-hl-strong); border-left-color: var(--ac); color: var(--ac); }
 #nav .dot { border-color: var(--th-line); }
 #nav .nl.done .dot { background: var(--ac); border-color: var(--ac); }
-#nav .nav-top:not(.nav-home) { color: var(--th-note); padding: 5px 8px; line-height: 1.4; font-size: .88rem; }
+#nav .nav-top:not(.nav-home) { color: var(--th-note); padding: 4px 8px; line-height: 1.3; font-size: .86rem; }
 #nav .nav-top:not(.nav-home):hover { color: var(--th-fn); }
-#nav .nav-sep { background: var(--th-line); margin: 8px 4px; flex-shrink: 0; }
-#nav .nav-grp { display: flex; align-items: center; gap: 8px; margin: 12px 4px 4px; font: 600 .68rem var(--mono); text-transform: uppercase; letter-spacing: .14em; color: var(--th-ln); }
+#nav .nav-sep { background: var(--th-line); margin: 6px 4px; flex-shrink: 0; }
+#nav .nav-grp { display: flex; align-items: center; gap: 8px; margin: 7px 4px 2px; font: 600 .66rem var(--mono); text-transform: uppercase; letter-spacing: .14em; color: var(--th-ln); }
 #nav .nav-grp::after { content: ""; flex: 1; height: 1px; background: var(--th-line); }
 
 /* ---------- Autovervollständigung in den Codefeldern (editor.js), Farben aus Tokyo Hack ---------- */

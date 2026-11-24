@@ -6,7 +6,7 @@
 
   A.track({
     id: 'ap2', title: 'Prüfungswissen AP2', tag: 'BIS ZUR PRÜFUNG',
-    desc: 'Fremden Code lesen und erklären, binäre Suche, Sortierverfahren, Stapel und Warteschlange, Struktogramm, Testen, Entwurfsmuster, weitere UML-Diagramme, Datenbankentwurf und sicherer Code.',
+    desc: 'Fremden Code lesen, 2D-Arrays, Schreibtischtest, binäre Suche, Sortierverfahren, Stapel/Queue, Struktogramm, Testen (C0/C1/C2, TDD), Entwurfsmuster (Factory, Strategy, MVC), UML, ERM & ACID, REST-APIs/JSON, Software-Ergonomie (ISO 9241-110) und sicherer Code.',
     intro: 'Dieser Kurs sammelt die Themen, die in der **Abschlussprüfung Teil 2** regelmäßig vorkommen und über die Grundlagen hinausgehen. Mach zuerst **Pseudocode**, **Objektorientierung und UML** und **SQL**, dann passt hier jedes Teil an seinen Platz. Die Beispiele sind bewusst klein: Es geht ums Verstehen und ums Erklären in eigenen Worten, so wie es die Prüfung verlangt.',
     lessons: [
       /* ---------- 0. Fremden Code lesen ---------- */
@@ -49,6 +49,16 @@
           A.text('Fall 5: Datentypen begründen', 'Für Prozentwerte von 0 bis 100 reicht `byte` (0 bis 255, ein Byte) statt `int` (vier Byte, genau −2.147.483.648 bis 2.147.483.647). Begründung für die Prüfung: Der Wertebereich genügt, und bei großen Mengen von Messwerten spart das drei Viertel des Speichers. Gegenargument, falls gefragt: Mit `byte` muss man beim Rechnen öfter umwandeln, weil C# und Java Rechenergebnisse als `int` liefern.'),
           A.text('Fall 6: Entwurf nach Kommentaren vervollständigen', 'Bei diesem Typ ist das Gerüst vorgegeben, du füllst die Lücken. Beispiel aus der Aufgabe: Die stündliche RAM-Auslastung steht in einem Array mit 24 Werten. Ist der Mittelwert über 75 Prozent, soll eine Messagebox warnen. Wichtig ist, dass jede Zeile genau das tut, was ihr Kommentar sagt.'),
           A.code('csharp', ['string message = "Wenig freier Speicher";', 'string title = "Warnung";', 'int avgUsedRam = 0;', 'int sumTemp = 0;', 'int[] usedRAM = new int[24] {17, 17, 16, 18, 20, 25, 33, 44, 40, 52, 60, 56,§Array mit Testdaten: 24 Stundenwerte, Index 0 bis 23.', '                             33, 44, 40, 52, 60, 56, 33, 44, 34, 28, 23, 16};', 'for (int i = 0; i < usedRAM.Length; i++)§Schleifenkopf: alle 24 Felder, Index 0 bis 23.', '{', '    sumTemp = sumTemp + usedRAM[i];§Schleifenrumpf: Muster Summieren.', '}', 'avgUsedRam = sumTemp / usedRAM.Length;§Berechnung Mittelwert. Ganzzahldivision: 861 / 24 ergibt 35.', 'if (avgUsedRam > 75)§Ausgabe Warnmeldung nur über 75. Mit diesen Testdaten erscheint also keine Messagebox.', '{', '    MessageBox.Show(message, title);', '}'], 'Eine mögliche Lösung'),
+          A.text('Fall 7: 2D-Arrays (verschachtelte Schleifen) und Rekursion', 'In der AP2 Teil 2 tauchen regelmäßig **zweidimensionale Arrays** auf – zum Beispiel Lagerbestände je Filiale (Zeile `z`) und Artikel (Spalte `s`). Du läufst mit einer **äußeren Schleife** über die Zeilen und einer **inneren Schleife** über die Spalten (`bestand[z][s]`). Ebenfalls beliebt: eine kurze **rekursive Funktion** per Schreibtischtest verfolgen – prüfe zuerst immer den **Basisfall** (Abbruchbedingung), sonst läuft die Rekursion endlos.'),
+          A.code('java', [
+            'int[][] bestand = { {12, 0, 5}, {4, 8, 0} };§2 Filialen (Zeilen 0..1), 3 Artikel (Spalten 0..2).',
+            'int leer = 0;',
+            'for (int z = 0; z < bestand.length; z++) {§Äußere Schleife: Filialen.',
+            '    for (int s = 0; s < bestand[z].length; s++) {§Innere Schleife: Artikel in dieser Filiale.',
+            '        if (bestand[z][s] == 0) leer++;§Zählt alle ausverkauften Positionen (hier: 2).',
+            '    }',
+            '}'
+          ], '2D-Array in Java: Ausverkaufte Artikel zählen', { praxis: 'Tabellen, Sitzpläne, Schichtpläne und Lager-Matrizen funktionieren in Prüfungsaufgaben alle nach genau diesem Doppel-Schleifen-Muster.' }),
           A.text('Erläutern-Fragen, die immer wiederkommen', '- **Vorteile von Arrays**: schneller Zugriff über den Index, wenig Verwaltungsaufwand. **Nachteile**: feste Größe beim Anlegen, nur ein Datentyp, Einfügen in der Mitte heißt alles verschieben.\n- **Ursachen für eine Exception**: Zugriff außerhalb der Array-Grenzen, Division durch 0, Text, der sich nicht in eine Zahl umwandeln lässt, eine Datei, die es nicht gibt, ein Objekt, das `null` ist.\n- **Vorteile von Pseudocode**: unabhängig von einer Programmiersprache, auch für Nicht-Programmierer lesbar, man denkt über die Logik nach statt über Syntax.\n- **Hängendes Programm beenden**: im Task-Manager den Prozess beenden, unter Linux mit `kill` und der Prozess-ID, in der Konsole mit Strg+C.'),
           A.warn('Zwei Fallen, die in diesen Aufgaben fast immer stecken: **Grenzen** (`<=` statt `<` bei Arrays) und **Ganzzahldivision** (`19 / 20` ist 0, nicht 0,95). Wer beides bei jeder Schleife und jeder Division bewusst prüft, holt die meisten Punkte.')
         ],
@@ -229,12 +239,18 @@
           A.text('Grenzwerte: wo die Fehler wohnen', 'Fehler passieren am liebsten **an den Rändern**: Wer `<` schreibt, wo `<=` gemeint war, liegt genau an der Grenze daneben. Deshalb testet man zusätzlich die **Grenzwerte**, also den letzten Wert vor und den ersten Wert nach jeder Grenze: **5 und 6, 17 und 18, 64 und 65**. Das ist wie beim Türsteher, der „ab 18“ prüft: Spannend sind nicht 30-Jährige, sondern jemand, der heute 18 wird.'),
           A.pseudo('FUNKTION eintrittspreis(alter)\n  WENN alter < 6 DANN\n    GIB ZURÜCK 0\n  SONST WENN alter < 18 DANN\n    GIB ZURÜCK 5\n  SONST WENN alter < 65 DANN\n    GIB ZURÜCK 12\n  SONST\n    GIB ZURÜCK 8\n  ENDE WENN\nENDE FUNKTION\nFÜR JEDES a IN [5, 6, 17, 18, 64, 65]\n  AUSGABE a, eintrittspreis(a)\nENDE FÜR', 'Grenzwerte durchspielen', 'Verfolge, welcher Zweig bei 17 und welcher bei 18 greift. Genau dort würde ein falsches `<=` auffallen.'),
           A.code('java', ['@Test§Markiert eine Methode als Test (JUnit). Das Testwerkzeug findet und startet sie automatisch.', 'void jugendlicheZahlenFuenfEuro() {§Der Name sagt, was geprüft wird. So versteht man einen roten Test sofort.', '    int alter = 17;§Arrange: Ausgangslage vorbereiten.', '    int preis = Kasse.eintrittspreis(alter);§Act: die zu prüfende Methode aufrufen.', '    assertEquals(5, preis);§Assert: Erwartung prüfen. Erst der erwartete Wert, dann der tatsächliche.', '}§'], 'Ein Unit-Test in Java', 'Ein **Unit-Test** prüft eine kleine Einheit, meist eine einzelne Methode, automatisch. Das Muster heißt **Arrange, Act, Assert**: vorbereiten, ausführen, prüfen. Laufen alle Tests nach jeder Änderung, merkt man sofort, wenn etwas kaputtgeht (**Regressionstest**).'),
-          A.table(['Teststufe', 'Was wird geprüft?'], [['Unit-Test (Modultest)', 'einzelne Methoden und Klassen'], ['Integrationstest', 'das Zusammenspiel mehrerer Teile, zum Beispiel Programm und Datenbank'], ['Systemtest', 'das ganze System gegen die Anforderungen'], ['Abnahmetest', 'der Kunde prüft, ob er das Ergebnis annimmt']], 'Die Teststufen')
+          A.table(['Teststufe', 'Was wird geprüft?'], [['Unit-Test (Modultest)', 'einzelne Methoden und Klassen'], ['Integrationstest', 'das Zusammenspiel mehrerer Teile, zum Beispiel Programm und Datenbank'], ['Systemtest', 'das ganze System gegen die Anforderungen'], ['Abnahmetest', 'der Kunde prüft, ob er das Ergebnis annimmt']], 'Die Teststufen'),
+          A.table(['Maß', 'Name', 'Was muss mindestens einmal laufen?'], [
+            ['**C0**', 'Anweisungsüberdeckung', 'Jede einzelne Codezeile (Anweisung) im Programm mindestens einmal.'],
+            ['**C1**', 'Zweigüberdeckung', 'Jeder `if`- und `else`-Zweig (wahr **und** falsch) mindestens einmal – stärker als C0!'],
+            ['**C2**', 'Pfadüberdeckung', 'Jede mögliche Kombination aus Zweigen (bei vielen Schleifen/Verzweigungen oft nicht mehr vollständig testbar).']
+          ], 'White-Box-Überdeckungsmaße (C0, C1, C2)', 'In der AP2 häufig gefragt: **Test-Driven Development (TDD)** dreht die Reihenfolge um (**Red → Green → Refactor**): Erst scheiternden Test schreiben, dann minimalen Code bis er grün ist, dann aufräumen. Und wenn eine Methode z. B. eine Datenbank oder ein Zahlungsgateway braucht, ersetzt ein **Mock** (Attrappe) die echte Gegenstelle im Unit-Test.')
         ],
         quiz: [
           A.q('Was kennzeichnet einen Black-Box-Test?', ['Er prüft Ein- und Ausgaben anhand der Anforderungen, ohne in den Code zu schauen', 'Er prüft jeden Zweig im Quellcode, damit jede Zeile einmal ausgeführt wird', 'Er prüft, ob neue Änderungen alte, schon getestete Funktionen kaputt machen', 'Er wird vom Compiler beim Übersetzen automatisch ausgeführt'], 0, 'Der Code ist eine schwarze Kiste. Gefragt ist nur: Kommt bei dieser Eingabe das Richtige heraus?'),
           A.q('Gültig sind Werte von 18 bis 65. Welche Grenzwerte testest du?', ['17, 18, 65 und 66', '18, 19, 64 und 65', '0, 18, 65 und 100', '17 und 66'], 0, 'Jeweils der letzte ungültige und der erste gültige Wert an beiden Grenzen.'),
           A.q('Wofür steht „Arrange, Act, Assert“?', ['Vorbereiten, ausführen, prüfen: der Aufbau eines Unit-Tests', 'Planen, umsetzen, abnehmen: die Phasen eines Projekts', 'Anforderung, Analyse, Abnahme: die Schritte der Planung', 'Anlegen, ändern, auslesen: die Grundbefehle einer Datenbank'], 0, 'Jeder gute Unit-Test hat diese drei Teile.'),
+          A.q('Was verlangt die **C1-Überdeckung** (Zweigüberdeckung) im White-Box-Test?', ['Jeder wahre und jeder falsche Zweig jeder Verzweigung läuft mindestens einmal', 'Jeder mögliche Pfad durch alle Schleifen wird vollständig durchlaufen', 'Es werden ausschließlich Grenzwerte aus dem Pflichtenheft geprüft', 'Nur die Hauptmethode ohne Fehlerzweige wird einmal ausgeführt'], 0, 'C0 = jede Anweisung, C1 = jeder Zweig (auch leere else-Zweige!), C2 = jeder Pfad.'),
           A.q('Wer führt üblicherweise den Abnahmetest durch?', ['Der Kunde bzw. Auftraggeber', 'Der Compiler', 'Nur der Entwickler der Methode', 'Das Betriebssystem'], 0, 'Bei der Abnahme entscheidet der Auftraggeber, ob das Ergebnis den Anforderungen entspricht.')
         ],
         tasks: [
@@ -255,12 +271,18 @@
           A.uml('klasse Kanal\n  - abonnenten: List\n  + abonnieren(a: Abonnent): void\n  + veroeffentlichen(titel: String): void\nschnittstelle Abonnent\n  + benachrichtigen(titel: String): void\nklasse Zuschauer\n  + benachrichtigen(titel: String): void\nklasse Mailversand\n  + benachrichtigen(titel: String): void\nKanal "1" --> "*" Abonnent : informiert\nZuschauer ..|> Abonnent\nMailversand ..|> Abonnent', 'Observer im Klassendiagramm', 'Der `Kanal` kennt nur die Schnittstelle `Abonnent`. Ob ein Zuschauer oder ein Mailversand dahintersteckt, ist ihm egal. Neue Abonnenten-Arten kommen dazu, ohne den Kanal zu ändern.'),
           A.code('java', ['public void veroeffentlichen(String titel) {§Etwas Neues ist passiert.', '    for (Abonnent a : abonnenten) {§Alle, die sich angemeldet haben, der Reihe nach.', '        a.benachrichtigen(titel);§Jeder bekommt Bescheid und reagiert auf seine Art (Polymorphie).', '    }§', '}§'], 'Das Herz des Observers'),
           A.text('MVC: Model, View, Controller', 'Ein Restaurant hat drei Bereiche, die sich nicht in die Quere kommen: Die **Küche** hat die Zutaten und kocht (das **Model**, die Daten und Regeln). Der **Teller** zeigt, was gekocht wurde, schön angerichtet (die **View**, die Anzeige). Der **Kellner** nimmt Bestellungen an, gibt sie an die Küche weiter und bringt den Teller (der **Controller**, die Steuerung). Weil die Teile getrennt sind, kann man die Anzeige austauschen, zum Beispiel eine App statt einer Webseite, ohne die Küche umzubauen.'),
-          A.seq(['Nutzer', 'Controller', 'Model', 'View'], [['Nutzer', 'Controller', 'klickt „Speichern“'], ['Controller', 'Model', 'speichereKunde(daten)'], ['Model', 'Controller', 'gespeichert', 'ret'], ['Controller', 'View', 'zeigeBestaetigung()'], ['View', 'Nutzer', 'Meldung „Gespeichert“', 'ret']], 'Ein Klick durch MVC')
+          A.seq(['Nutzer', 'Controller', 'Model', 'View'], [['Nutzer', 'Controller', 'klickt „Speichern“'], ['Controller', 'Model', 'speichereKunde(daten)'], ['Model', 'Controller', 'gespeichert', 'ret'], ['Controller', 'View', 'zeigeBestaetigung()'], ['View', 'Nutzer', 'Meldung „Gespeichert“', 'ret']], 'Ein Klick durch MVC'),
+          A.table(['Muster / Architektur', 'Kategorie', 'Kurz erklärt am Onlineshop'], [
+            ['**Factory** (Fabrikmethode)', 'Erzeugungsmuster', 'Eine zentrale Methode erzeugt das passende Objekt (`PayPal`, `Rechnung`, `Kreditkarte`), ohne dass der Aufrufer überall `new` schreiben muss.'],
+            ['**Strategy** (Strategie)', 'Verhaltensmuster', 'Austauschbare Rechenregeln hinter einer Schnittstelle (z. B. `StandardRabatt`, `BlackFridayRabatt`, `StammkundenRabatt`) – zur Laufzeit wechselbar.'],
+            ['**3-Schichten-Architektur**', 'Architekturmuster', 'Trennung in **Präsentation** (UI), **Fachlogik** (Geschäftsregeln) und **Datenhaltung** (Datenbank) – jede Schicht spricht nur mit der nächsten.']
+          ], 'Weitere häufige AP2-Muster: Factory, Strategy und 3-Schichten')
         ],
         quiz: [
           A.q('Welches Problem löst das Singleton-Muster?', ['Es stellt sicher, dass es von einer Klasse höchstens ein Objekt gibt', 'Es benachrichtigt alle angemeldeten Objekte, sobald sich etwas ändert', 'Es trennt Daten, Anzeige und Steuerung in drei eigene Teile', 'Es erzeugt Objekte, ohne dass der Aufrufer die Klasse kennt'], 0, 'Ein Kapitän pro Schiff: privater Konstruktor, eine statische Methode liefert immer dasselbe Objekt.'),
           A.q('Woran erkennst du ein Singleton im Code?', ['Privater Konstruktor und eine statische Methode, die das Objekt liefert', 'Öffentlicher Konstruktor und eine Liste, in der sich Beobachter anmelden', 'Drei getrennte Pakete mit den Namen Model, View und Controller', 'Eine abstrakte Klasse, von der genau eine Unterklasse erbt'], 0, 'Ohne privaten Konstruktor könnte jeder mit new weitere Objekte erzeugen.'),
           A.q('Im MVC-Muster: Welcher Teil enthält die Daten und die Geschäftsregeln?', ['Model', 'View', 'Controller', 'Router'], 0, 'Die Küche im Restaurant-Bild.'),
+          A.q('Ein Shop will Rabattregeln (Standard, Aktion, Stammkunde) zur Laufzeit austauschen, ohne den Warenkorb umzubauen. Welches Muster passt?', ['Strategy', 'Singleton', 'Observer', 'Bubble Sort'], 0, 'Strategy kapselt austauschbare Algorithmen hinter einer gemeinsamen Schnittstelle.'),
           A.q('Eine Wetterstation soll bei jeder neuen Messung mehrere Anzeigen aktualisieren. Welches Muster passt?', ['Observer', 'Singleton', 'MVC', 'Bubble Sort'], 0, 'Die Station ist das Subjekt, die Anzeigen sind die Beobachter.')
         ],
         tasks: [
@@ -345,13 +367,20 @@
           A.text('Normalisierung: Ordnung im Werkzeugkasten', 'Ein Werkzeugkasten, in dem jede Schublade alles enthält, ist schnell befüllt, aber man findet nichts und hat vieles doppelt. **Normalisierung** sortiert die Daten so, dass jede Information **nur einmal** gespeichert wird. Sonst drohen **Anomalien**: Ändert sich die Adresse eines Kunden, muss sie in jeder seiner Bestellungen geändert werden (**Änderungsanomalie**). Ein neuer Kunde lässt sich erst speichern, wenn er etwas bestellt hat (**Einfügeanomalie**). Wird seine letzte Bestellung gelöscht, ist auch der Kunde weg (**Löschanomalie**).'),
           A.table(['BestNr', 'Datum', 'KundeNr', 'Kunde', 'PLZ', 'Ort', 'Artikel'], [['1', '03.11.', 'K7', 'Ada Meier', '48143', 'Münster', 'Maus, Tastatur'], ['2', '05.11.', 'K7', 'Ada Meier', '48143', 'Münster', 'Monitor']], 'Ausgangslage: alles in einer Tabelle', 'Hier stimmt einiges nicht: In „Artikel“ stehen **mehrere Werte** in einer Zelle, und Ada Meier mit Adresse steht **doppelt** da.'),
           A.table(['Normalform', 'Regel', 'Hier konkret'], [['1. NF', 'Jede Zelle enthält nur **einen** Wert (atomar), keine Listen.', 'Für jeden Artikel einer Bestellung eine eigene Zeile, zum Beispiel in einer Tabelle Bestellposition (BestNr, ArtikelNr, Menge).'], ['2. NF', '1. NF und jedes Nicht-Schlüssel-Attribut hängt vom **ganzen** Schlüssel ab, nicht nur von einem Teil.', 'In Bestellposition hängt der Artikelname nur von ArtikelNr ab, nicht von BestNr. Also eigene Tabelle Artikel (ArtikelNr, Name, Preis).'], ['3. NF', '2. NF und kein Nicht-Schlüssel-Attribut hängt von einem **anderen** Nicht-Schlüssel-Attribut ab.', 'Der Ort hängt an der PLZ, nicht direkt am Kunden. Also eigene Tabelle Ort (PLZ, Ort), im Kunden bleibt nur die PLZ.']], 'Die drei Normalformen', 'Ein Merksatz für die 3. NF: Jedes Attribut hängt **vom Schlüssel, vom ganzen Schlüssel und von nichts als dem Schlüssel** ab.'),
-          A.text('Das Ergebnis', 'Nach der Zerlegung gibt es die Tabellen **Kunde** (KundeNr, Name, PLZ), **Ort** (PLZ, Ort), **Bestellung** (BestNr, Datum, KundeNr), **Bestellposition** (BestNr, ArtikelNr, Menge) und **Artikel** (ArtikelNr, Name, Preis). Jede Information steht genau einmal, verbunden über Fremdschlüssel. Ändert Ada ihre Adresse, ist das eine einzige Änderung.')
+          A.text('Das Ergebnis', 'Nach der Zerlegung gibt es die Tabellen **Kunde** (KundeNr, Name, PLZ), **Ort** (PLZ, Ort), **Bestellung** (BestNr, Datum, KundeNr), **Bestellposition** (BestNr, ArtikelNr, Menge) und **Artikel** (ArtikelNr, Name, Preis). Jede Information steht genau einmal, verbunden über Fremdschlüssel. Ändert Ada ihre Adresse, ist das eine einzige Änderung.'),
+          A.table(['Buchstabe', 'Eigenschaft', 'Bedeutung am Onlineshop'], [
+            ['**A**', 'Atomicity (Atomarität)', 'Alles oder nichts: Bricht eine Bestellung beim Abbuchen ab, wird per `ROLLBACK` auch die Lagerbuchung zurückgerollt.'],
+            ['**C**', 'Consistency (Konsistenz)', 'Die Datenbank bleibt gültig (keine negativen Bestände, keine Fremdschlüssel ins Leere – **referenzielle Integrität**).'],
+            ['**I**', 'Isolation', 'Zwei gleichzeitige Bestellungen des letzten Monitors stören einander nicht.'],
+            ['**D**', 'Durability (Dauerhaftigkeit)', 'Nach einem `COMMIT` bleibt die Bestellung dauerhaft gespeichert, selbst bei Stromausfall.']
+          ], 'Transaktionen nach dem ACID-Prinzip', 'Bei Fremdschlüsseln fragt die IHK auch nach `ON DELETE RESTRICT` (Kunde darf nicht gelöscht werden, solange Bestellungen existieren) vs. `ON DELETE CASCADE` (zugehörige Positionen werden mitgelöscht).')
         ],
         tips: [A.tip('In der Prüfung reicht es meist, die Verletzung zu **benennen** („Ort ist transitiv abhängig von der PLZ, also Verstoß gegen die 3. NF“) und die neue Tabellenaufteilung anzugeben. Schreibe die Schlüssel dazu, unterstrichen oder mit PK und FK markiert.')],
         quiz: [
           A.q('Wie wird eine n:m-Beziehung in Tabellen umgesetzt?', ['Mit einer eigenen Zwischentabelle, die beide Fremdschlüssel enthält', 'Mit je einem Fremdschlüssel in beiden Tabellen, der auf die andere zeigt', 'Indem man beide Tabellen zu einer zusammenlegt', 'Mit einer Liste von IDs in einer Spalte'], 0, 'Die Brücke zwischen den Ufern: zum Beispiel bestellung mit kunde_id und produkt_id.'),
           A.q('Eine Zelle enthält „Maus, Tastatur“. Gegen welche Normalform verstößt das?', ['1. Normalform', '2. Normalform', '3. Normalform', 'gegen keine'], 0, 'Die 1. NF verlangt atomare Werte, also einen Wert pro Zelle.'),
           A.q('In der Tabelle Kunde (KundeNr, Name, PLZ, Ort) hängt Ort an der PLZ. Welche Normalform ist verletzt?', ['3. Normalform', '1. Normalform', '2. Normalform', 'keine'], 0, 'Ort hängt über die PLZ nur indirekt (transitiv) vom Schlüssel ab.'),
+          A.q('Wofür steht das **A** (Atomicity) im ACID-Prinzip für Datenbanktransaktionen?', ['Eine Transaktion wird entweder vollständig ausgeführt oder komplett zurückgerollt', 'Jede einzelne Zelle darf nur noch einen einzigen atomaren Wert enthalten', 'Alle Fremdschlüssel werden automatisch als Primärschlüssel angelegt', 'Abfragen werden automatisch auf mehrere Server verteilt'], 0, 'Alles oder nichts: COMMIT bei Erfolg, ROLLBACK bei Fehler.'),
           A.q('Ein Kunde hat viele Bestellungen, jede Bestellung gehört zu genau einem Kunden. Wo steht der Fremdschlüssel?', ['In der Tabelle Bestellung (die n-Seite)', 'In der Tabelle Kunde (die 1-Seite)', 'In beiden Tabellen, jeweils auf die andere', 'In einer eigenen Zwischentabelle'], 0, 'Bei 1:n wandert der Fremdschlüssel auf die n-Seite.')
         ],
         tasks: [
@@ -383,6 +412,89 @@
         tasks: [
           A.fill('Ergänze den Platzhalter für ein Prepared Statement.', 'SELECT * FROM nutzer WHERE name = {{?}}', 'In Java und Python steht an der Stelle des Werts ein einzelnes Satzzeichen.'),
           A.sqlTask('Ein unsicheres Programm baut `SELECT name FROM kunde WHERE name = \'EINGABE\'` zusammen. Ein Angreifer gibt `\' OR \'1\'=\'1` ein. Schreibe die Abfrage, die dabei entsteht, und führe sie aus. Du siehst: Statt keinem Kunden kommen **alle** heraus.', 'SELECT name FROM kunde WHERE name = \'\' OR \'1\'=\'1\'', 'Setze die Eingabe genau an die Stelle von EINGABE, mitsamt ihren Hochkommas.')
+        ]
+      },
+
+      /* ---------- 10. REST-APIs, HTTP und JSON ---------- */
+      {
+        id: 'rest', standalone: true, domain: 'shop', stage: 4,
+        title: 'REST-APIs, HTTP und JSON',
+        goal: 'Du ordnest HTTP-Methoden (GET, POST, PUT, PATCH, DELETE) und Statuscodes sicher zu, liest und entwirfst JSON-Antworten und kennst den Unterschied zwischen REST und SOAP.',
+        parts: [
+          A.text('Wie Web-Apps mit dem Server sprechen', 'In fast jeder modernen Anwendung trennt man Oberfläche (Browser/App) und Server. Beide sprechen über eine **REST-API** per **HTTP/HTTPS** und tauschen Daten im Format **JSON** aus. Jede Ressource hat eine klare Adresse (Endpoint), zum Beispiel `/api/artikel/42` – und die **HTTP-Methode** sagt, was damit passiert.'),
+          A.table(['Methode', 'Aufgabe (CRUD)', 'Idempotent?', 'Beispiel im Onlineshop'], [
+            ['`GET`', 'Lesen (Read)', 'ja', '`GET /api/artikel/42` – Artikeldaten abrufen (ändert nichts)'],
+            ['`POST`', 'Neu anlegen (Create)', 'nein', '`POST /api/bestellungen` – neue Bestellung anlegen (zweimal = zwei Bestellungen!)'],
+            ['`PUT`', 'Vollständig ersetzen (Update)', 'ja', '`PUT /api/artikel/42` – gesamten Artikel mit neuem Stand überschreiben'],
+            ['`PATCH`', 'Teilweise ändern (Update)', 'meist ja', '`PATCH /api/artikel/42` – nur `preisInCent` ändern'],
+            ['`DELETE`', 'Löschen (Delete)', 'ja', '`DELETE /api/warenkorb/42` – Artikel aus dem Warenkorb entfernen']
+          ], 'Die fünf HTTP-Methoden in der AP2', '**Idempotent** bedeutet: Mehrfaches Ausführen derselben Anfrage hat denselben Endzustand wie einmaliges Ausführen – ein beliebter IHK-Prüfungsbegriff!'),
+          A.table(['Code', 'Bedeutung', 'Wann liefert der Shop-Server diesen Code?'], [
+            ['`200 OK`', 'Erfolg', 'Artikel oder Liste erfolgreich geladen'],
+            ['`201 Created`', 'Erfolgreich angelegt', 'Neue Bestellung per `POST` gespeichert'],
+            ['`204 No Content`', 'Erfolg ohne Antwort-Body', 'Artikel per `DELETE` gelöscht'],
+            ['`400 Bad Request`', 'Ungültige Eingabe', 'Pflichtfeld fehlt oder negative Bestellmenge'],
+            ['`401 Unauthorized`', 'Nicht angemeldet', 'Kein oder abgelaufener Login-Token'],
+            ['`403 Forbidden`', 'Keine Berechtigung', 'Eingeloggt, aber kein Admin für diese Aktion'],
+            ['`404 Not Found`', 'Nicht gefunden', 'Artikel-ID 9999 existiert nicht'],
+            ['`409 Conflict`', 'Konflikt mit aktuellem Zustand', 'Lagerbestand reicht nicht oder doppelte E-Mail'],
+            ['`500 Internal Server Error`', 'Serverfehler', 'Unerwarteter Absturz im Backend']
+          ], 'Die wichtigsten HTTP-Statuscodes', 'Merkhilfe: **2xx** = Erfolg, **4xx** = Fehler beim Client (Anfrage/Rechte), **5xx** = Fehler auf dem Server.'),
+          A.code('javascript', [
+            '{§Ein JSON-Objekt beginnt mit geschweiften Klammern.',
+            '  "bestellNr": 10427,§Schlüssel stehen in JSON IMMER in doppelten Anführungszeichen!',
+            '  "status": "bezahlt",',
+            '  "positionen": [§Eckige Klammern = Array (Liste).',
+            '    { "artikel": "Funkmaus", "menge": 2, "preisInCent": 1999 },',
+            '    { "artikel": "USB-C-Kabel", "menge": 1, "preisInCent": 999 }',
+            '  ]',
+            '}§Kein nachgestelltes Komma nach dem letzten Element erlaubt!'
+          ], 'Typische JSON-Antwort von GET /api/bestellungen/10427', { noRun: true, praxis: 'In der AP2 musst du oft fehlerhaftes JSON korrigieren (einfache Anführungszeichen, fehlende Kommas, Trailing Comma) oder eine passende REST-Route + Statuscode benennen.' }),
+          A.text('REST vs. SOAP (Kurzvergleich für die Prüfung)', '**REST** ist zustandslos (stateless), nutzt HTTP direkt, meist mit kompaktem **JSON** – heute Standard für Web- und Mobile-APIs. **SOAP** ist ein strenges Protokoll auf Basis von **XML** mit formaler Beschreibung (**WSDL**), das noch in älteren Unternehmens- und Bankensystemen vorkommt.')
+        ],
+        tips: [
+          A.warn('Verwechsle in der Prüfung nicht **401 Unauthorized** („Wer bist du? Nicht eingeloggt“) mit **403 Forbidden** („Ich weiß wer du bist, aber du darfst das nicht“).')
+        ],
+        quiz: [
+          A.q('Welcher HTTP-Statuscode passt, wenn ein Nutzer eingeloggt ist, aber eine reine Admin-Funktion aufruft?', ['403 Forbidden', '401 Unauthorized', '404 Not Found', '500 Internal Server Error'], 0, '401 = nicht authentifiziert (Login fehlt), 403 = authentifiziert, aber fehlende Berechtigung.'),
+          A.q('Welche HTTP-Methode ist standardmäßig **nicht** idempotent?', ['POST', 'GET', 'PUT', 'DELETE'], 0, 'Zweimal POST /api/bestellungen legt zwei Bestellungen an; GET/PUT/DELETE erzeugen denselben Endzustand.'),
+          A.q('Welcher Fehler macht ein JSON-Dokument ungültig?', ['Einfache Anführungszeichen oder ein Komma am Ende', 'Verschachtelte Objekte innerhalb eines Arrays', 'Zahlenwerte ohne Anführungszeichen wie 1999', 'Wahrheitswerte true und false in Kleinbuchstaben'], 0, 'JSON erlaubt nur doppelte Anführungszeichen für Schlüssel und Strings und keine nachgestellten Kommas.'),
+          A.q('Welcher Statuscode passt direkt nach dem erfolgreichen Anlegen einer neuen Bestellung per POST?', ['201 Created', '200 OK nur bei Fehlern', '400 Bad Request', '301 Moved Permanently'], 0, '201 Created meldet, dass eine neue Ressource erzeugt wurde.')
+        ],
+        tasks: [
+          A.fill('Ergänze HTTP-Methode und passenden Statuscode für das vollständige Löschen einer Ressource ohne Antworttext.', '{{DELETE}} /api/warenkorb/42 → Status {{204}}', 'Löschen = DELETE, Erfolg ohne Body = 204 No Content.'),
+          A.js('Schreibe `gesamtInCent(bestellung)`: Du bekommst ein geparstes JSON-Objekt mit `positionen` (jedes Element hat `menge` und `preisInCent`). Gib die Gesamtsumme in Cent zurück.', 'function gesamtInCent(bestellung) {\n  // dein Code\n}', [{ fn: 'gesamtInCent', args: [{ bestellNr: 10427, positionen: [{ artikel: 'Maus', menge: 2, preisInCent: 1999 }, { artikel: 'Kabel', menge: 1, preisInCent: 999 }] }], expect: 4997 }, { fn: 'gesamtInCent', args: [{ bestellNr: 10428, positionen: [] }], expect: 0 }], 'Summiere für jede Position menge * preisInCent über bestellung.positionen.', 'function gesamtInCent(bestellung) {\n  let summe = 0;\n  for (const p of bestellung.positionen) summe += p.menge * p.preisInCent;\n  return summe;\n}')
+        ]
+      },
+
+      /* ---------- 11. Software-Ergonomie (ISO 9241-110) ---------- */
+      {
+        id: 'ergonomie', standalone: true, domain: 'shop', stage: 4,
+        title: 'Software-Ergonomie (ISO 9241-110) und Qualität',
+        goal: 'Du kennst die sieben Grundsätze der Dialoggestaltung nach ISO 9241-110 und wendest sie sicher auf Mockups und Oberflächen in AP2-Aufgaben an.',
+        parts: [
+          A.text('Warum die IHK Oberflächen prüft', 'In der AP2 Teil 1 liegt oft ein Bildschirm-Entwurf (Mockup) bei – etwa ein Bestellformular oder ein Ticket-Dialog – mit der Frage: *„Bewerten Sie die Maske nach ISO 9241-110 und nennen Sie konkrete Verbesserungen.“* Wer die sieben Grundsätze kennt, holt hier fast garantierte Punkte.'),
+          A.table(['Grundsatz (ISO 9241-110)', 'Kurz erklärt', 'Konkretes Beispiel im Onlineshop'], [
+            ['**Aufgabenangemessenheit**', 'Nur nötige Felder, keine unnötigen Schritte', 'Pflichtfelder klar markieren, PLZ füllt Ort automatisch vor'],
+            ['**Selbstbeschreibungsfähigkeit**', 'Nutzer weiß jederzeit, wo er ist und was erwartet wird', 'Klare Beschriftungen, Hinweise wie „Passwort mind. 8 Zeichen“, Schrittanzeige 1/3'],
+            ['**Erwartungskonformität**', 'Verhält sich wie gewohnt und überall einheitlich', 'Speichern immer rechts/grün, Warenkorb oben rechts, Standard-Tastenkürzel'],
+            ['**Lernförderlichkeit**', 'Einarbeitung wird unterstützt', 'Kurze Tooltips, verständliche Beispiele im Eingabefeld (Placeholder)'],
+            ['**Steuerbarkeit**', 'Nutzer bestimmt Tempo und Weg', 'Zurück-Button im Checkout, Abbrechen jederzeit möglich'],
+            ['**Fehlertoleranz**', 'Fehler leicht erkennbar und ohne Datenverlust korrigierbar', 'Eingaben bleiben bei Tippfehler erhalten, konkrete Meldung „Bitte gültige PLZ“'],
+            ['**Individualisierbarkeit**', 'Anpassbar an Vorlieben und Bedürfnisse', 'Schriftgröße A+/A-, Hoher Kontrast, Dark Mode, Sprachwahl']
+          ], 'Die sieben Grundsätze der Dialoggestaltung (ISO 9241-110)'),
+          A.text('Qualitätsmerkmale nach ISO 25010 (Überblick)', 'Für nicht-funktionale Anforderungen fragt die IHK gerne nach **ISO 25010**: Funktionalität, Zuverlässigkeit, Benutzbarkeit (Usability), Effizienz (Performance), Änderbarkeit (Wartbarkeit), Übertragbarkeit (Portabilität) und **Sicherheit** (Security).')
+        ],
+        tips: [
+          A.tip('Nenne in der Prüfung immer **Grundsatz + konkreten Mangel im Mockup + konkreten Verbesserungsvorschlag** – das gibt volle Punktzahl.')
+        ],
+        quiz: [
+          A.q('Nach einem Tippfehler im Bestellformular werden alle anderen Felder geleert. Welcher Grundsatz der ISO 9241-110 ist verletzt?', ['Fehlertoleranz', 'Individualisierbarkeit', 'Übertragbarkeit', 'Normalisierung'], 0, 'Fehlertoleranz verlangt, dass Fehler mit minimalem Aufwand und ohne Datenverlust korrigiert werden können.'),
+          A.q('Ein Nutzer kann Schriftgröße und Kontrastmodus an seine Sehstärke anpassen. Welcher Grundsatz ist erfüllt?', ['Individualisierbarkeit', 'Erwartungskonformität', 'Atomarität', 'Steuerbarkeit'], 0, 'Anpassung an persönliche Bedürfnisse = Individualisierbarkeit.'),
+          A.q('Ein Button ist nur mit „OK“ beschriftet, obwohl er eine kostenpflichtige Bestellung auslöst. Welcher Grundsatz ist vor allem verletzt?', ['Selbstbeschreibungsfähigkeit', 'Erwartungskonformität', 'Individualisierbarkeit', 'Lernförderlichkeit'], 0, 'Die Beschriftung muss sofort klar machen, was der Klick bewirkt („Jetzt zahlungspflichtig bestellen“).')
+        ],
+        tasks: [
+          A.fill('Welcher Grundsatz der ISO 9241-110 besagt, dass eine Oberfläche sich konsistent und wie gewohnt verhält?', '{{Erwartungskonformität}}', 'Die Oberfläche entspricht den Erwartungen der Nutzer.')
         ]
       }
     ]
