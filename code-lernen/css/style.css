@@ -253,8 +253,9 @@ svg.uml { width: 100%; height: auto; display: block; margin: 0 auto; font-family
 #nav .nl.done .dot { background: var(--ac); border-color: var(--ac); }
 #nav .nav-top:not(.nav-home) { color: var(--th-note); padding: 5px 8px; line-height: 1.4; font-size: .88rem; }
 #nav .nav-top:not(.nav-home):hover { color: var(--th-fn); }
-#nav .nav-sep { background: var(--th-line); margin: auto 4px 8px; flex-shrink: 0; }
-#nav:has(details[open]) .nav-sep { margin-top: 10px; }
+#nav .nav-sep { background: var(--th-line); margin: 8px 4px; flex-shrink: 0; }
+#nav .nav-grp { display: flex; align-items: center; gap: 8px; margin: 12px 4px 4px; font: 600 .68rem var(--mono); text-transform: uppercase; letter-spacing: .14em; color: var(--th-ln); }
+#nav .nav-grp::after { content: ""; flex: 1; height: 1px; background: var(--th-line); }
 
 /* ---------- Autovervollständigung in den Codefeldern (editor.js), Farben aus Tokyo Hack ---------- */
 .ac-box { position: fixed; z-index: 70; min-width: 220px; max-width: min(460px, calc(100vw - 16px)); background: var(--th-bg2); border: 1px solid var(--th-line);
