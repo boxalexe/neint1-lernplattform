@@ -37,6 +37,47 @@
   A.fill = (prompt, tpl, hint) => ({ type: 'fill', prompt, tpl, hint });
   A.js = (prompt, starter, tests, hint, solution) => ({ type: 'js', prompt, starter, tests, hint, solution });
   A.sqlTask = (prompt, solution, hint, o) => Object.assign({ type: 'sql', prompt, solution, hint }, o || {});
+
+  /* ---------- SQL im IHK-Dialekt ----------
+     Der Belegsatz der Prüfung nutzt Funktionen aus SQL Server bzw. MySQL (NOW, YEAR, DATEDIFF(MINUTE, …), LEFT …), die
+     SQLite nicht kennt. A.sqlIhk(db) rüstet sie als eigene Funktionen nach, A.sqlFix(q) setzt den Datumsteil von DATEDIFF
+     und DATEADD in Anführungszeichen, sonst hielte SQLite MINUTE für einen Spaltennamen. Datumswerte sind Text 'JJJJ-MM-TT [hh:mm[:ss]]'. */
+  const pad2 = (n) => String(n).padStart(2, '0');
+  const parseDt = (v) => { const m = /^(\d{4})-(\d{1,2})-(\d{1,2})(?:[ T](\d{1,2}):(\d{2})(?::(\d{2}))?)?/.exec(v == null ? '' : String(v)); return m ? { y: +m[1], mo: +m[2], d: +m[3], h: +(m[4] || 0), mi: +(m[5] || 0), s: +(m[6] || 0), time: !!m[4] } : null; };
+  const utcOf = (p) => Date.UTC(p.y, p.mo - 1, p.d, p.h, p.mi, p.s);
+  const fmtDt = (t, time) => t.getUTCFullYear() + '-' + pad2(t.getUTCMonth() + 1) + '-' + pad2(t.getUTCDate()) + (time ? ' ' + pad2(t.getUTCHours()) + ':' + pad2(t.getUTCMinutes()) + ':' + pad2(t.getUTCSeconds()) : '');
+  const DT_PART = { YEAR: 'y', MONTH: 'mo', DAY: 'd', HOUR: 'h', MINUTE: 'mi', SECOND: 's' };
+  // sql.js gibt nur geworfene Strings als Fehlermeldung weiter (bei Error-Objekten bleibt die Meldung leer)
+  const dtPart = (p) => { const k = DT_PART[String(p).toUpperCase()]; if (!k) throw 'Datumsteil „' + p + '“ unbekannt, erlaubt sind DAY, MONTH, YEAR, HOUR, MINUTE'; return k; };
+  A.sqlFix = (q) => String(q).replace(/\b(DATEDIFF|DATEADD)\s*\(\s*(YEAR|MONTH|DAY|HOUR|MINUTE|SECOND)\s*,/gi, (m, f, p) => f + "('" + p.toUpperCase() + "',");
+  A.sqlIhk = (db) => {
+    const fn = (name, f) => db.create_function(name, f);
+    fn('NOW', () => { const n = new Date(); return fmtDt(new Date(Date.UTC(n.getFullYear(), n.getMonth(), n.getDate(), n.getHours(), n.getMinutes(), n.getSeconds())), true); });
+    [['YEAR', 'y'], ['MONTH', 'mo'], ['DAY', 'd'], ['HOUR', 'h'], ['MINUTE', 'mi']].forEach(([n, k]) => fn(n, (v) => { const p = parseDt(v); return p ? p[k] : null; }));
+    fn('WEEKDAY', (v) => { const p = parseDt(v); return p ? (new Date(utcOf(p)).getUTCDay() + 6) % 7 : null; }); // wie MySQL: Montag = 0
+    fn('DATEADD', (part, n, v) => {
+      const p = parseDt(v); if (!p || n == null) return null;
+      const k = dtPart(part); p[k] += Math.trunc(n);
+      if (k === 'y' || k === 'mo') { const last = new Date(Date.UTC(p.y, p.mo, 0)).getUTCDate(); if (p.d > last) p.d = last; } // 31.01. + 1 Monat = 28./29.02.
+      return fmtDt(new Date(utcOf(p)), p.time || k === 'h' || k === 'mi' || k === 's');
+    });
+    fn('DATEDIFF', (part, a, b) => { // Ende minus Anfang, gezählt werden überschrittene Grenzen (wie SQL Server)
+      const x = parseDt(a), y = parseDt(b); if (!x || !y) return null;
+      const k = dtPart(part);
+      if (k === 'y') return y.y - x.y;
+      if (k === 'mo') return (y.y - x.y) * 12 + y.mo - x.mo;
+      const unit = { d: 864e5, h: 36e5, mi: 6e4, s: 1e3 }[k];
+      return Math.floor(utcOf(y) / unit) - Math.floor(utcOf(x) / unit);
+    });
+    fn('LEFT', (s, n) => (s == null ? null : String(s).slice(0, Math.max(0, n))));
+    fn('RIGHT', (s, n) => (s == null ? null : n > 0 ? String(s).slice(-n) : ''));
+    const spread = (st, root) => { if (!st.length) return null; const m = st.reduce((a, b) => a + b, 0) / st.length, v = st.reduce((a, b) => a + (b - m) * (b - m), 0) / st.length; return root ? Math.sqrt(v) : v; };
+    if (db.create_aggregate) {
+      db.create_aggregate('STDDEV', { init: () => [], step: (st, v) => { if (v != null) st.push(+v); return st; }, finalize: (st) => spread(st, true) });
+      db.create_aggregate('VARIANCE', { init: () => [], step: (st, v) => { if (v != null) st.push(+v); return st; }, finalize: (st) => spread(st, false) });
+    }
+    return db;
+  };
   // Schreibtischtest: Code läuft als aufgezeichneter Ablauf; jedes Mal, wenn Zeile `at` (0-basiert) ausgeführt ist,
   // trägt der Lernende die Werte der Spalten `cols` ein. Die ersten `given` Zeilen sind als Beispiel vorgegeben.
   A.desk = (prompt, lang, code, o, hint, expl) => Object.assign({ type: 'desk', prompt, lang, code, given: 1, hint, expl }, o);
@@ -119,7 +160,7 @@
     c: { c: '//', pp: true, kw: W('break case continue default do else enum for goto if return sizeof static struct switch typedef while const NULL'), ty: W('int long double float char void short unsigned signed size_t FILE bool') },
     cpp: { c: '//', pp: true, kw: W('break case catch class const continue default delete do else enum for friend if namespace new nullptr operator override private protected public return static struct switch template this throw try using virtual while true false auto'), ty: W('int long double float char void bool string vector map cout cin endl std size_t unsigned') },
     csharp: { c: '//', kw: W('abstract as base break case catch class const continue default do else enum finally for foreach if in interface internal is namespace new null override private protected public readonly return static struct switch this throw try using var virtual void while true false get set'), ty: W('int long double float bool char string decimal object List Dictionary Console Math Exception') },
-    sql: { c: '--', ci: true, kw: W('SELECT FROM WHERE AND OR NOT IN BETWEEN LIKE IS NULL ORDER BY GROUP HAVING JOIN INNER LEFT RIGHT OUTER ON AS DISTINCT LIMIT OFFSET INSERT INTO VALUES UPDATE SET DELETE CREATE TABLE PRIMARY KEY FOREIGN REFERENCES DEFAULT ASC DESC UNION CASE WHEN THEN ELSE END DROP ALTER ADD'), ty: W('INTEGER INT TEXT REAL VARCHAR DATE COUNT SUM AVG MIN MAX ROUND LENGTH UPPER LOWER') },
+    sql: { c: '--', ci: true, kw: W('SELECT FROM WHERE AND OR NOT IN BETWEEN LIKE IS NULL ORDER BY GROUP HAVING JOIN INNER LEFT RIGHT OUTER ON AS DISTINCT LIMIT OFFSET INSERT INTO VALUES UPDATE SET DELETE CREATE TABLE PRIMARY KEY FOREIGN REFERENCES DEFAULT ASC DESC UNION CASE WHEN THEN ELSE END DROP ALTER ADD COLUMN MODIFY EXISTS GRANT REVOKE TO WITH OPTION USER IDENTIFIED INDEX'), ty: W('INTEGER INT TEXT REAL VARCHAR CHAR DECIMAL DOUBLE BOOLEAN DATE DATETIME COUNT SUM AVG MIN MAX ROUND LENGTH UPPER LOWER NOW YEAR MONTH DAY HOUR MINUTE WEEKDAY DATEADD DATEDIFF STDDEV VARIANCE') },
     pseudo: { c: '//', ci: true, kw: W('ALGORITHMUS START METHODE RÜCKGABE RUECKGABE SCHREIBE LIES AUSGABE EINGABE WENN DANN SONST ENDE SOLANGE MACHE WIEDERHOLE BIS FÜR FUER VON SCHRITT JEDES IN FUNKTION GIB ZURÜCK ZURUECK SETZE AUF UND ODER NICHT DIV MOD WAHR FALSCH'), ty: W('LÄNGE LAENGE ANHÄNGEN ANHAENGEN LETZTES_ENTFERNEN ERSTES_ENTFERNEN BETRAG WURZEL ABRUNDEN AUFRUNDEN RUNDEN MAX MIN TEXT ZAHL') }
   };
   function findComment(line, marker) {
@@ -161,5 +202,5 @@
 
   // Schlüsselwörter und Typen einer Sprache, für die Autovervollständigung in den Eingabefeldern
   A.langWords = (lang) => (LANG[lang] ? [...LANG[lang].kw, ...LANG[lang].ty] : []);
-  A.langNames = { text: 'Konsole', java: 'Java', javascript: 'JavaScript', python: 'Python', c: 'C', cpp: 'C++', csharp: 'C#', sql: 'SQL', pseudo: 'Pseudocode' };
+  A.langNames = { text: 'Konsole', java: 'Java', javascript: 'JavaScript', python: 'Python', c: 'C', cpp: 'C++', csharp: 'C#', sql: 'SQL', pseudo: 'Pseudocode', xml: 'XML', shell: 'Shell', mockup: 'Mockup' };
 })(typeof window !== 'undefined' ? window : globalThis);

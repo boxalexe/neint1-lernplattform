@@ -153,6 +153,31 @@
     ['Liste', 'Geordnete Folge von Werten unter einem Namen, Zugriff über den Index ab 0. Im Pseudocode `[1, 2, 3]`, in Java Array oder ArrayList, in Python list.'],
     ['Verzweigung', 'Stelle im Programm, an der abhängig von einer Bedingung der eine oder der andere Weg läuft: if/else, else if, switch.'],
     ['Bedingungsoperator', 'Kurzform einer Verzweigung, die einen Wert liefert: `bedingung ? wennWahr : wennFalsch`. Auch ternärer Operator genannt.'],
-    ['NullPointerException', 'Laufzeitfehler in Java, wenn eine Methode auf einer Variable aufgerufen wird, die `null` enthält, also auf kein Objekt zeigt.']
+    ['NullPointerException', 'Laufzeitfehler in Java, wenn eine Methode auf einer Variable aufgerufen wird, die `null` enthält, also auf kein Objekt zeigt.'],
+    // Prüfungswissen AP2: Planen, Sicherheit, Austauschformate
+    ['Hybride Verschlüsselung', 'Kombination aus asymmetrischer und symmetrischer Verschlüsselung, wie bei TLS: Mit dem öffentlichen Schlüssel des Servers wird ein gemeinsamer Sitzungsschlüssel sicher ausgetauscht, die eigentlichen Daten werden danach schnell symmetrisch (z. B. mit AES) verschlüsselt.'],
+    ['Digitales Zertifikat', 'Elektronischer Ausweis, der einen öffentlichen Schlüssel an einen Namen (z. B. eine Domain) bindet. Eine Zertifizierungsstelle (CA) bestätigt das mit ihrer digitalen Signatur. So lässt sich die Echtheit eines Servers prüfen, ohne seinen Schlüssel vorher zu kennen.'],
+    ['Digitale Signatur', 'Der Hashwert eines Dokuments, verschlüsselt mit dem privaten Schlüssel des Absenders. Jeder kann sie mit dem öffentlichen Schlüssel prüfen und erkennt so, wer unterschrieben hat (Authentizität) und ob das Dokument verändert wurde (Integrität).'],
+    ['Single Sign-On (SSO)', 'Einmal anmelden, viele Anwendungen nutzen: Ein zentraler Identity Provider bestätigt die Anmeldung gegenüber allen angebundenen Diensten. Bequemer und zentral sperrbar, aber ein gestohlenes Konto öffnet alle Dienste auf einmal.'],
+    ['OAuth 2.0', 'Standard, mit dem eine Anwendung im Namen eines Nutzers auf Daten zugreifen darf, ohne dessen Passwort zu erfahren. Der Nutzer meldet sich beim Anbieter an, die Anwendung bekommt nur ein zeitlich begrenztes Zugriffstoken mit festgelegten Rechten.'],
+    ['V-Modell', 'Sequenzielles Vorgehensmodell: Jeder Entwicklungsstufe links (Anforderungen, Entwurf, Implementierung) steht rechts eine Teststufe gegenüber (Abnahmetest, Systemtest, Integrationstest, Komponententest). Erweitert das Wasserfallmodell um eine klare Testplanung.'],
+    ['Kanban', 'Agile Methode mit einer Tafel aus Spalten (z. B. Offen, In Arbeit, Fertig). Begrenzt, wie viele Aufgaben gleichzeitig in Arbeit sein dürfen (WIP-Limit), und arbeitet ohne feste Sprints.'],
+    ['Meilenstein', 'Wichtiger, überprüfbarer Zeitpunkt im Projekt, an dem ein Zwischenergebnis vorliegen muss, z. B. „Pflichtenheft abgenommen“. Ein Meilenstein hat keine Dauer.'],
+    ['Stakeholder', 'Person oder Gruppe, die ein Interesse am Projekt hat oder von ihm betroffen ist: Auftraggeber, Nutzer, Betriebsrat, Datenschutzbeauftragter. Jeder hat Erwartungen und Befürchtungen, die man früh kennen sollte.'],
+    ['Change Request', 'Formaler Antrag, eine bereits vereinbarte Anforderung zu ändern. Im Change Request Management wird jeder Antrag auf Aufwand, Kosten und Termin geprüft und erst nach Freigabe umgesetzt.'],
+    ['Lessons Learned', 'Rückblick am Ende eines Projekts oder einer Phase: Was lief gut, was schlecht, was machen wir beim nächsten Mal anders? Die Ergebnisse werden dokumentiert, damit spätere Projekte davon profitieren.'],
+    ['Netzplan', 'Darstellung aller Vorgänge eines Projekts mit Dauer und Abhängigkeiten. Daraus lassen sich früheste und späteste Anfangs- und Endzeitpunkte, die Puffer und der kritische Pfad berechnen.'],
+    ['Kritischer Pfad', 'Folge von Vorgängen im Netzplan ohne Puffer. Jede Verzögerung auf dem kritischen Pfad verschiebt direkt das Projektende.'],
+    ['Puffer (Netzplan)', 'Zeit, um die ein Vorgang sich verschieben darf. Der Gesamtpuffer (SAZ minus FAZ) schont das Projektende, der freie Puffer verschiebt zusätzlich keinen Nachfolger.'],
+    ['Versionsverwaltung', 'Werkzeug wie Git, das jede Änderung am Quellcode mit Autor und Zeit speichert. Ermöglicht paralleles Arbeiten in Zweigen (Branches), Zusammenführen (Merge) und das Zurückgehen auf jeden früheren Stand.'],
+    ['CI/CD', 'Continuous Integration und Continuous Delivery/Deployment: Bei jeder Änderung baut ein Server die Software automatisch, führt die Tests aus und liefert sie bei Erfolg aus. Fehler fallen früh auf, Auslieferungen werden wiederholbar.'],
+    ['Open Source', 'Software, deren Quellcode offen liegt und unter einer Lizenz steht, die Nutzung, Änderung und Weitergabe erlaubt. Frei heißt nicht bedingungslos: Die Lizenz kann Pflichten auferlegen.'],
+    ['Copyleft', 'Lizenzbedingung (z. B. GPL): Wer die Software verändert oder in eigene Software einbaut und diese weitergibt, muss sie unter derselben Lizenz samt Quellcode weitergeben. Permissive Lizenzen wie MIT verlangen nur den Lizenzhinweis.'],
+    ['Mockup', 'Skizze einer Benutzeroberfläche, die Aufbau und Bedienelemente zeigt, aber noch nicht funktioniert. Dient dazu, mit dem Kunden früh über die Oberfläche zu sprechen.'],
+    ['Barrierefreiheit', 'Gestaltung, die alle Menschen nutzen können, auch mit Seh-, Hör- oder Bewegungseinschränkungen: ausreichender Kontrast, skalierbare Schrift, Alternativtexte, Bedienung per Tastatur. In Deutschland geregelt u. a. in BITV 2.0 und Barrierefreiheitsstärkungsgesetz.'],
+    ['XML', 'Extensible Markup Language: Textformat, das Daten zwischen Start- und End-Tags speichert. Wohlgeformt, wenn es die XML-Regeln einhält, gültig, wenn es zusätzlich seiner DTD oder seinem Schema entspricht.'],
+    ['DTD', 'Document Type Definition: legt für ein XML-Dokument fest, welche Elemente und Attribute es gibt, in welcher Reihenfolge und wie oft sie vorkommen dürfen.'],
+    ['Factory Method', 'Erzeugungsmuster: Eine abstrakte Methode in der Oberklasse erzeugt das Produkt, jede Unterklasse überschreibt sie und legt so fest, welches konkrete Objekt entsteht. Alle Produkte brauchen eine gemeinsame Schnittstelle.'],
+    ['Wächterbedingung (Guard)', 'Bedingung in eckigen Klammern an einem Übergang im Zustands- oder Aktivitätsdiagramm, z. B. `[ladung < 20]`. Der Übergang findet nur statt, wenn sie wahr ist.']
   ].forEach(([n, t]) => A.term(n, t));
 })();

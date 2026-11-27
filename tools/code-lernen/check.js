@@ -76,8 +76,9 @@ function checkParts(where, parts) {
         const r = runJs(lines.join('\n'));
         if (r.error) bad(w + ' [javascript] läuft nicht: ' + r.error);
       }
-      if (p.code.lang === 'sql' && globalThis.__SQL) {
-        try { const db = new globalThis.__SQL.Database(); db.run(A.sqlSetup); db.exec(lines.join('\n')); } catch (e) { bad(w + ' [sql] läuft nicht: ' + e.message); }
+      // noRun: Anweisungen, die SQLite nicht kennt (GRANT, REVOKE, ALTER … MODIFY), stehen nur zum Lesen da
+      if (p.code.lang === 'sql' && globalThis.__SQL && !p.noRun) {
+        try { const db = A.sqlIhk(new globalThis.__SQL.Database()); db.run(A.sqlSetup); db.exec(A.sqlFix(lines.join('\n'))); } catch (e) { bad(w + ' [sql] läuft nicht: ' + e.message); }
       }
       if (p.code.lang === 'pseudo') {
         const r = Pseudo.run(lines.join('\n'), { inputs: ['4', '7'] });
@@ -152,9 +153,9 @@ function checkParts(where, parts) {
         } else if (k.type === 'sql') {
           if (!SQL) continue;
           try {
-            const db = new SQL.Database(); db.run(A.sqlSetup);
-            const r = db.exec(k.solution);
-            const res = k.verify ? db.exec(k.verify) : r;
+            const db = A.sqlIhk(new SQL.Database()); db.run(A.sqlSetup);
+            const r = db.exec(A.sqlFix(k.solution));
+            const res = k.verify ? db.exec(A.sqlFix(k.verify)) : r;
             if (!res.length || !res[res.length - 1].values.length) warn(w + ': Musterlösung liefert keine Zeilen');
           } catch (e) { bad(w + ': Musterlösung fehlerhaft: ' + e.message); }
         } else if (k.type === 'desk') {

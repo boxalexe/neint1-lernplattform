@@ -409,6 +409,12 @@
     <priority>0.6</priority>
   </url>
   <url>
+    <loc>https://layer8academy.boxberger.app/code-lernen/kurs/sql/ihk/</loc>
+    <lastmod>2026-11-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
     <loc>https://layer8academy.boxberger.app/code-lernen/kurs/java/</loc>
     <lastmod>2026-11-27</lastmod>
     <changefreq>monthly</changefreq>
@@ -769,6 +775,12 @@
     <priority>0.6</priority>
   </url>
   <url>
+    <loc>https://layer8academy.boxberger.app/code-lernen/kurs/ap2/pruefung2/</loc>
+    <lastmod>2026-11-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
     <loc>https://layer8academy.boxberger.app/code-lernen/kurs/ap2/binaer/</loc>
     <lastmod>2026-11-27</lastmod>
     <changefreq>monthly</changefreq>
@@ -830,6 +842,12 @@
   </url>
   <url>
     <loc>https://layer8academy.boxberger.app/code-lernen/kurs/ap2/ergonomie/</loc>
+    <lastmod>2026-11-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://layer8academy.boxberger.app/code-lernen/kurs/ap2/planen/</loc>
     <lastmod>2026-11-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>

@@ -393,7 +393,7 @@
           const ru = runSql(dbU, q), rs = runSql(dbS, t.solution);
           if (ru.error) { tries++; feedback(box, false, '<b>SQL-Fehler:</b> ' + esc(ru.error)); }
           else {
-            const eu = t.verify ? dbU.exec(t.verify) : ru.res, es = t.verify ? dbS.exec(t.verify) : rs.res;
+            const eu = t.verify ? dbU.exec(A.sqlFix(t.verify)) : ru.res, es = t.verify ? dbS.exec(A.sqlFix(t.verify)) : rs.res;
             const nu = rowsOf(eu, t.ordered), ns = rowsOf(es, t.ordered);
             const same = nu && ns && nu.cols === ns.cols && nu.rows.length === ns.rows.length && nu.rows.every((r, k) => r === ns.rows[k]);
             if (same) { feedback(box, true, '<b>Das Ergebnis stimmt.</b>' + sqlTable(ru.res)); ok(); }
@@ -425,8 +425,8 @@
     }
     return sqlP;
   }
-  async function newDb() { const SQL = await getSQL(); const db = new SQL.Database(); db.run(A.sqlSetup); return db; }
-  function runSql(db, q) { try { return { res: db.exec(q), changed: db.getRowsModified() }; } catch (e) { return { error: e.message }; } }
+  async function newDb() { const SQL = await getSQL(); const db = A.sqlIhk(new SQL.Database()); db.run(A.sqlSetup); return db; }
+  function runSql(db, q) { try { return { res: db.exec(A.sqlFix(q)), changed: db.getRowsModified() }; } catch (e) { return { error: e.message }; } }
   function rowsOf(res, ordered) {
     if (!res || !res.length) return null;
     const r = res[res.length - 1], rows = r.values.map((row) => JSON.stringify(row.map((v) => (typeof v === 'number' ? Math.round(v * 1e6) / 1e6 : v))));
@@ -435,7 +435,8 @@
   function sqlTable(res) {
     if (!res || !res.length) return '<p class="muted small">Keine Ergebnistabelle (die Anweisung wurde ausgeführt).</p>';
     const r = res[res.length - 1];
-    return '<div class="tbl-wrap"><table class="res"><thead><tr>' + r.columns.map((c) => '<th>' + esc(c) + '</th>').join('') + '</tr></thead><tbody>' + r.values.slice(0, 200).map((row) => '<tr>' + row.map((v) => '<td>' + (v === null ? '<i>NULL</i>' : esc(v)) + '</td>').join('') + '</tr>').join('') + '</tbody></table></div><p class="muted small">' + r.values.length + ' Zeile(n)' + (r.values.length > 200 ? ', die ersten 200 werden gezeigt' : '') + '</p>';
+    // Spaltenköpfe ohne die interne Umschreibung von A.sqlFix: DATEDIFF('HOUR', …) wieder als DATEDIFF(HOUR, …)
+    return '<div class="tbl-wrap"><table class="res"><thead><tr>' + r.columns.map((c) => '<th>' + esc(c.replace(/\b(DATEDIFF|DATEADD)\('(\w+)',/gi, '$1($2,')) + '</th>').join('') + '</tr></thead><tbody>' + r.values.slice(0, 200).map((row) => '<tr>' + row.map((v) => '<td>' + (v === null ? '<i>NULL</i>' : esc(v)) + '</td>').join('') + '</tr>').join('') + '</tbody></table></div><p class="muted small">' + r.values.length + ' Zeile(n)' + (r.values.length > 200 ? ', die ersten 200 werden gezeigt' : '') + '</p>';
   }
   async function schemaHtml() {
     const db = await newDb(), t = db.exec("SELECT name FROM sqlite_master WHERE type='table' ORDER BY name");
