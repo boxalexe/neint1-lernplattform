@@ -45,6 +45,43 @@
     }
     playEvents(el, 'pseudo', src.split('\n'), r.events);
   }
+  /* ---------- Sprungpfeil ----------
+     Leuchtender Knopf links neben der aktuellen Zeile. Er zeigt, wohin der nächste Schritt geht (nach unten, bei Schleifen
+     zurück nach oben, oder dieselbe Zeile noch einmal) und führt ihn per Klick aus, ohne zu den Knöpfen unter dem Code zu scrollen.
+     Ein Pfeil pro Codeblock (host), den der gerade offene Modus steuert. */
+  const JUMPS = new Set();
+  const JUMP_DIR = { down: ['↓', 'Nächste Zeile (weiter unten)'], up: ['↑', 'Nächste Zeile (zurück nach oben, zum Beispiel in einer Schleife)'], same: ['↻', 'Dieselbe Zeile kommt noch einmal dran'], start: ['→', 'Hier geht es los'] };
+  window.addEventListener('resize', () => JUMPS.forEach((j) => j.place()));
+  function jumpArrow(host) {
+    if (host._jump) return host._jump;
+    const b = document.createElement('button');
+    b.type = 'button'; b.className = 'jump'; b.hidden = true;
+    host.appendChild(b);
+    let row = null, fn = null;
+    b.addEventListener('click', (e) => { e.stopPropagation(); if (fn) fn(); });
+    const place = () => {
+      if (!row || !row.isConnected) { b.hidden = true; return; }
+      const anchor = $('pre', row) || row, h = host.getBoundingClientRect(), r = anchor.getBoundingClientRect(), mid = r.top + r.height / 2;
+      const sc = row.closest('.tr-code'), s = sc && sc.getBoundingClientRect();
+      const main = host.closest('#main'), pad = main ? parseFloat(getComputedStyle(main).paddingLeft) || 0 : 0;
+      b.classList.toggle('inside', pad < 50); // schmaler Rand (Handy): über die Zeilennummern statt daneben
+      b.style.top = (mid - h.top) + 'px';
+      b.hidden = false;
+      b.style.visibility = s && (mid < s.top || mid > s.bottom) ? 'hidden' : '';
+    };
+    const j = host._jump = {
+      set(r, dir, f) {
+        row = r || null; fn = f || null;
+        if (!row) { b.hidden = true; JUMPS.delete(j); return; }
+        const [sym, label] = JUMP_DIR[dir] || JUMP_DIR.down;
+        b.textContent = sym; b.title = label; b.setAttribute('aria-label', label); b.dataset.dir = dir;
+        JUMPS.add(j); place(); requestAnimationFrame(place);
+      },
+      place
+    };
+    return j;
+  }
+
   function playEvents(el, lang, lines, ev) {
     const fmt = lang === 'pseudo' ? Pseudo.fmt : (v) => v, fnLabel = lang === 'pseudo' ? 'In der Funktion ' : 'In der Methode ';
     let i = -1, timer = null;
@@ -57,8 +94,20 @@
       return '<div class="scope"><div class="scope-h">' + (s.lambda ? 'Im Lambda' : s.name ? (s.ctor ? 'Im Konstruktor ' : fnLabel) + '<code>' + esc(s.name) + '()</code>' : 'Variablen') + '</div>'
         + (names.length ? '<table class="vars">' + names.map((n) => { const v = fmt(s.vars[n]), ch = !(n in pv) || JSON.stringify(pv[n]) !== JSON.stringify(s.vars[n]); return '<tr class="' + (ch ? 'chg' : '') + '"><td>' + esc(n) + '</td><td>' + esc(v) + '</td></tr>'; }).join('') + '</table>' : '<div class="muted small">noch keine</div>') + '</div>';
     }).join('');
+    const host = el.closest('.jump-host'), jump = host ? jumpArrow(host) : null;
+    // Pfeil neben die aktuelle Zeile, Richtung zur Zeile des nächsten Ereignisses
+    function aim() {
+      if (!jump) return;
+      const nx = ev[i + 1], rowOf = (e) => (e && !e.end ? $('tr[data-n="' + e.line + '"]', codeEl) : null);
+      if (!nx) { jump.set(null); return; }
+      if (i < 0) { jump.set(rowOf(nx), 'start', step); return; }
+      const cur = ev[i];
+      jump.set(rowOf(cur), nx.end || nx.line > cur.line ? 'down' : nx.line < cur.line ? 'up' : 'same', step);
+    }
+    codeEl.addEventListener('scroll', () => { if (jump) jump.place(); });
     function paint() {
       $$('tr.cur, tr.err', codeEl).forEach((t) => t.classList.remove('cur', 'err'));
+      aim();
       if (i < 0) { msgEl.innerHTML = '<span class="muted">Bereit. Mit „Weiter“ gehst du das Programm Schritt für Schritt durch.</span>'; varsEl.innerHTML = '<div class="scope"><div class="scope-h">Variablen</div><div class="muted small">noch keine</div></div>'; outEl.textContent = ''; cnt.textContent = 'Start'; return; }
       const e = ev[i], row = $('tr[data-n="' + e.line + '"]', codeEl);
       if (row && !e.end) { row.classList.add(e.error ? 'err' : 'cur'); row.scrollIntoView({ block: 'nearest' }); }
@@ -69,6 +118,7 @@
     }
     const stop = () => { if (timer) { clearInterval(timer); timer = null; playBtn.textContent = 'Abspielen'; } };
     const go = (d) => { i = Math.max(-1, Math.min(ev.length - 1, i + d)); paint(); if (i >= ev.length - 1) stop(); };
+    function step() { stop(); go(1); }
     el.addEventListener('click', (e) => {
       const b = e.target.closest('button[data-a]'); if (!b) return;
       const a = b.dataset.a;
@@ -80,7 +130,7 @@
     paint();
   }
   function initTrace(el, { src, h, p }) {
-    el.className = 'tracebox';
+    el.className = 'tracebox jump-host';
     el.innerHTML = (h ? '<h3>' + esc(h) + '</h3>' : '') + md(p) + '<div class="tp"></div>';
     tracePlayer($('.tp', el), src);
   }
@@ -88,19 +138,26 @@
   /* ---------- Codeblock mit Erklärungen ---------- */
   function initCode(el, { part }) {
     const { lang, lines } = part.code, hasNotes = lines.some((l) => l[1]);
-    el.className = 'codeblock';
-    const rows = lines.map((l, n) => '<tr data-i="' + n + '"><td class="ln">' + (n + 1) + '</td><td class="src"><pre>' + (A.hl(lang, l[0]) || '&nbsp;') + '</pre>' + (l[1] ? '<div class="line-note">' + A.inl(l[1]) + '</div>' : '') + '</td></tr>').join('');
+    el.className = 'cb-wrap jump-host'; // äußere Hülle ohne overflow: hidden, damit der Sprungpfeil links daneben stehen kann
+    const rows =lines.map((l, n) => '<tr data-i="' + n + '"><td class="ln">' + (n + 1) + '</td><td class="src"><pre>' + (A.hl(lang, l[0]) || '&nbsp;') + '</pre>' + (l[1] ? '<div class="line-note">' + A.inl(l[1]) + '</div>' : '') + '</td></tr>').join('');
     const canTry = (lang === 'javascript' || lang === 'sql') && !part.noRun;
     const rec = lang !== 'pseudo' ? A.traceFor(lang, lines.map((l) => l[0])) : null; // aufgezeichneter Ablauf (Java)
-    el.innerHTML = '<div class="cb-head"><span class="cb-lang">' + esc(A.langNames[lang] || lang) + '</span><span class="cb-btns">'
+    el.innerHTML = '<div class="codeblock"><div class="cb-head"><span class="cb-lang">' + esc(A.langNames[lang] || lang) + '</span><span class="cb-btns">'
       + (hasNotes ? '<button data-a="notes">Kommentare ausblenden</button><button data-a="focus">Schritt für Schritt</button>' : '')
       + (canTry ? '<button data-a="try">Ausprobieren und ändern</button>' : '')
       + (lang === 'pseudo' || rec ? '<button data-a="trace">Ablauf verfolgen</button>' : '') + '</span></div>'
-      + '<div class="cb-body"><table class="cb-table' + (hasNotes ? ' has-notes' : '') + '">' + rows + '</table></div><div class="cb-extra"></div>';
-    const table = $('.cb-table', el), extra = $('.cb-extra', el);
+      + '<div class="cb-body"><table class="cb-table' + (hasNotes ? ' has-notes' : '') + '">' + rows + '</table></div><div class="cb-extra"></div></div>';
+    const table = $('.cb-table', el), extra = $('.cb-extra', el), jump = jumpArrow(el);
     const plain = lines.map((l) => l[0]).join('\n');
     let focus = false, act = 0;
-    const setAct = (n) => { act = Math.max(0, Math.min(lines.length - 1, n)); $$('tr', table).forEach((t) => t.classList.toggle('active', +t.dataset.i === act)); const t = $('tr[data-i="' + act + '"]', table); if (t) t.scrollIntoView({ block: 'nearest' }); const c = $('.fc-pos', extra); if (c) c.textContent = 'Zeile ' + (act + 1) + ' von ' + lines.length; };
+    // nächste Zeile mit Erklärung in Richtung d (+1/-1), -1 wenn keine mehr kommt
+    const nextNote = (from, d) => { let n = from + d; while (n >= 0 && n < lines.length && !lines[n][1]) n += d; return n >= 0 && n < lines.length ? n : -1; };
+    const setAct = (n) => {
+      act = Math.max(0, Math.min(lines.length - 1, n)); $$('tr', table).forEach((t) => t.classList.toggle('active', +t.dataset.i === act));
+      const t = $('tr[data-i="' + act + '"]', table); if (t) t.scrollIntoView({ block: 'nearest' });
+      const c = $('.fc-pos', extra); if (c) c.textContent = 'Zeile ' + (act + 1) + ' von ' + lines.length;
+      if (focus) { const nx = nextNote(act, 1); jump.set(nx < 0 ? null : t, 'down', () => setAct(nx)); }
+    };
     el.addEventListener('click', (e) => {
       const row = e.target.closest('tr[data-i]');
       if (row && table.contains(row)) { act = +row.dataset.i; if (focus) setAct(act); else { $$('tr', table).forEach((t) => t.classList.toggle('active', t === row)); } return; }
@@ -120,11 +177,10 @@
           const first = Math.max(0, lines.findIndex((l) => l[1]));
           extra.innerHTML = '<div class="focus-ctl"><button data-a="fprev">Vorherige Zeile</button><span class="fc-pos"></span><button data-a="fnext" class="primary">Nächste Zeile</button></div>';
           setAct(first);
-        } else { extra.innerHTML = ''; $$('tr', table).forEach((t) => t.classList.remove('active')); }
+        } else { extra.innerHTML = ''; $$('tr', table).forEach((t) => t.classList.remove('active')); jump.set(null); }
       } else if (a === 'fprev' || a === 'fnext') {
-        let n = act + (a === 'fnext' ? 1 : -1);
-        while (n >= 0 && n < lines.length && !lines[n][1]) n += a === 'fnext' ? 1 : -1; // Zeilen ohne Erklärung überspringen
-        if (n >= 0 && n < lines.length) setAct(n);
+        const n = nextNote(act, a === 'fnext' ? 1 : -1); // Zeilen ohne Erklärung überspringen
+        if (n >= 0) setAct(n);
       } else if (a === 'try') {
         if ($('.tryit', extra)) { extra.innerHTML = ''; b.classList.remove('on'); return; }
         b.classList.add('on');
@@ -140,7 +196,7 @@
         out.textContent = 'läuft gerade'; out.className = 'console';
         Sandbox.run(ta.value).then((r) => { out.className = 'console' + (r.error ? ' bad' : ''); out.textContent = (r.logs.length ? r.logs.join('\n') : r.error ? '' : '(keine Ausgabe, nutze console.log(...) um etwas auszugeben)') + (r.error ? (r.logs.length ? '\n' : '') + 'Fehler: ' + r.error : ''); });
       } else if (a === 'trace') {
-        if ($('.tp', extra)) { extra.innerHTML = ''; b.classList.remove('on'); return; }
+        if ($('.tp', extra)) { extra.innerHTML = ''; b.classList.remove('on'); jump.set(null); return; }
         b.classList.add('on'); extra.innerHTML = '<div class="tp"></div>';
         if (rec) playEvents($('.tp', extra), lang, lines.map((l) => l[0]), rec.ev); else tracePlayer($('.tp', extra), plain, part.input);
       }

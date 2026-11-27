@@ -131,6 +131,15 @@ table.res th { background: var(--panel); font: 500 .8rem var(--mono); color: var
 
 /* ---------- Codeblock (Tokyo Hack) ---------- */
 .codeblock { border: 1px solid var(--th-line); border-radius: var(--r); overflow: hidden; margin: 14px 0; background: var(--th-bg); color: var(--th-fg); }
+/* Sprungpfeil neben der aktuellen Zeile (Schritt für Schritt, Ablauf verfolgen) */
+.jump-host { position: relative; }
+.jump { position: absolute; left: -46px; width: 34px; height: 34px; margin-top: -17px; padding: 0; z-index: 5; display: flex; align-items: center; justify-content: center;
+  font: 700 1.2rem/1 var(--mono); color: var(--cyan); background: #05080c; border: 1px solid var(--cyan); border-radius: 6px;
+  box-shadow: 0 0 12px -2px var(--cyan), inset 0 0 6px -2px var(--cyan); transition: top .18s ease; animation: jump-glow 1.8s ease-in-out infinite; }
+.jump:hover:not(:disabled) { background: var(--cyan); color: #05080c; border-color: var(--cyan); }
+.jump.inside { left: 2px; width: 28px; height: 28px; margin-top: -14px; font-size: 1rem; }
+@keyframes jump-glow { 50% { box-shadow: 0 0 20px 0 var(--cyan), inset 0 0 8px -2px var(--cyan); } }
+@media (prefers-reduced-motion: reduce) { .jump { animation: none; transition: none; } }
 .cb-head { display: flex; justify-content: space-between; align-items: center; gap: 8px; padding: 6px 12px; background: var(--th-bg2); border-bottom: 1px solid var(--th-line); flex-wrap: wrap; }
 .cb-lang { font-family: var(--mono); font-size: .75rem; color: var(--th-var); text-transform: uppercase; letter-spacing: .1em; }
 .cb-btns { display: flex; gap: 6px; flex-wrap: wrap; } .cb-btns button { padding: 4px 10px; font-size: .82rem; background: transparent; color: var(--th-fg); border-color: var(--th-line); }
