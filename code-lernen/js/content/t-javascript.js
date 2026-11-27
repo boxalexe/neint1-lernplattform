@@ -132,7 +132,7 @@
         concept: 'cond', standalone: true, domain: 'shop', stage: 1,
         title: 'Verzweigungen: Versandkosten, Altersfreigabe, Login-Sperre',
         goal: 'Du steuerst Business-Logik mit if/else if/else, switch und Bedingungsoperator, verknüpfst Bedingungen mit &&, || und ! und prüfst Grenzwerte sauber.',
-        terms: ['Verzweigung', 'Bedingung', 'Grenzwert', 'Bedingungsoperator'],
+        terms: ['Verzweigung', 'Bedingung', 'Grenzwert', 'Bedingungsoperator', 'Wahrheitstabelle'],
         parts: [
           A.text('Entscheidungen im Shop und beim Login', 'Eine **Verzweigung** entscheidet anhand einer **Bedingung** (`true` oder `false`), welcher Codeblock läuft. Die Reihenfolge bei `else if` ist entscheidend: Der erste wahre Zweig gewinnt, alle folgenden werden übersprungen. Prüfe **Grenzwerte** immer genau („ab 50 Euro“ heißt `>= 5000`).'),
           C([
@@ -170,6 +170,8 @@
             'const statusText = prio <= 2 ? "dringend" : "normal";§Bedingungsoperator ? : für eine kurze Entweder-oder-Zuweisung.',
             'console.log(reaktion, "-", statusText);'
           ], 'switch und Bedingungsoperator (? :)', { praxis: 'Feste Statuswerte (Ticket-Priorität, Bestellstatus, Benutzerrolle) lassen sich mit switch übersichtlich abbilden.' }),
+          C(['let x = 7;§Erster Durchgang: ein Wert über der Grenze.', 'if (x > 5) {§7 > 5 ist **true**: Der if-Zweig läuft.', '  console.log(x, "> 5 ist true: if-Zweig");', '} else {', '  console.log(x, "> 5 ist false: else-Zweig");', '}', 'x = 5;§Zweiter Durchgang: genau auf der Grenze.', 'if (x > 5) {§5 > 5 ist **false**: JavaScript springt zu else.', '  console.log(x, "> 5 ist true: if-Zweig");', '} else {', '  console.log(x, "> 5 ist false: else-Zweig");', '}', 'console.log(7 > 5, 5 > 5);§Eine Bedingung ist selbst ein Wert: true oder false.'], 'Trocken: dieselbe Bedingung einmal true, einmal false', { praxis: 'So testet man jede Bedingung: einmal mit einem Wert, der sie wahr macht, einmal mit einem, der sie falsch macht, am besten genau auf der Grenze. In der Qualitätssicherung heißen diese Testfälle Positiv- und Negativtest.' }),
+          A.table(['a', 'b', '`a && b`', '`a || b`', '`!a`'], [['true', 'true', '**true**', '**true**', 'false'], ['true', 'false', 'false', '**true**', 'false'], ['false', 'true', 'false', '**true**', '**true**'], ['false', 'false', 'false', 'false', '**true**']], 'Wahrheitstabelle: alle Fälle von true und false', '`&&` ist nur true, wenn beide Seiten true sind. `||` ist nur false, wenn beide Seiten false sind. `!` dreht um. Zwei Wahrheitswerte ergeben genau vier Kombinationen, wer eine verknüpfte Bedingung prüft, geht alle vier durch.'),
           A.table(['JavaScript', 'Java', 'Python'], [
             ['`if (x >= 5000) { … } else if …`', '`if (x >= 5000) { … } else if …`', '`if x >= 5000: … elif …`'],
             ['`&&`, `||`, `!`', '`&&`, `||`, `!`', '`and`, `or`, `not`'],
@@ -183,7 +185,8 @@
         quiz: [
           A.q('Was passiert im `switch`, wenn am Ende eines `case` das `break;` fehlt?', ['Die Anweisungen des nächsten case laufen zusätzlich mit (Fall-through)', 'JavaScript bricht sofort mit einem SyntaxError ab', 'Der switch springt automatisch direkt zum default-Zweig', 'Die Variable wird auf undefined zurückgesetzt'], 0, 'Ohne break endet der switch nicht, sondern fällt in den nächsten Fall durch.'),
           A.q('`warenwert = 5000`, `istPrime = false`. Was liefert `warenwert >= 5000 || istPrime`?', ['true', 'false', '5000', 'undefined'], 0, 'Bei || genügt eine wahre Seite. 5000 >= 5000 ist true.'),
-          A.q('Wofür steht `const text = lager > 0 ? "auf Lager" : "ausverkauft";`?', ['Kurzform von if/else für einen Wert', 'Prüfung, ob lager definiert oder undefined ist', 'Eine Schleife, die läuft solange lager > 0 gilt', 'Eine Funktionsdefinition mit zwei Parametern'], 0, 'Bedingung ? WertWennWahr : WertWennFalsch.')
+          A.q('Wofür steht `const text = lager > 0 ? "auf Lager" : "ausverkauft";`?', ['Kurzform von if/else für einen Wert', 'Prüfung, ob lager definiert oder undefined ist', 'Eine Schleife, die läuft solange lager > 0 gilt', 'Eine Funktionsdefinition mit zwei Parametern'], 0, 'Bedingung ? WertWennWahr : WertWennFalsch.'),
+          A.q('Ein Test prüft `x > 5` nur mit x = 7. Was fehlt noch?', ['Ein Test mit einem Wert, der die Bedingung false macht', 'Ein zweiter Test mit einem noch größeren Wert wie 70', 'Nichts, ein bestandener Test beweist die Bedingung komplett', 'Ein Test, ob 7 wirklich als ganze Zahl gespeichert ist'], 0, 'Erst der Gegenfall zeigt, ob der else-Zweig stimmt. Am besten genau auf der Grenze: x = 5.')
         ],
         tasks: [
           PP('Was gibt das Programm aus?', ['const warenwert = 5000;', 'const versand = warenwert >= 5000 ? 0 : 495;', 'console.log(warenwert + versand);'], '5000', 'Prüfe den Grenzwert 5000 genau.', '5000 >= 5000 ist true, also versand = 0, Ausgabe 5000.'),
@@ -207,7 +210,8 @@
             'case 2: reaktion = "4 Stunden"; continue;',
             'case 2: reaktion += "4 Stunden";',
             'case 2: break; reaktion = "4 Stunden";'
-          ], expect: '4 Stunden' }, 'Warum wird case 3 noch ausgeführt, obwohl prio 2 ist?', 'In case 2 fehlt break; – deshalb überschreibt case 3 die Variable reaktion.')
+          ], expect: '4 Stunden' }, 'Warum wird case 3 noch ausgeführt, obwohl prio 2 ist?', 'In case 2 fehlt break; – deshalb überschreibt case 3 die Variable reaktion.'),
+          PP('Alle Fälle von && und ||: Was gibt das Programm aus?', ['const x = 5;', 'console.log(x > 5 && x < 10, x > 5 || x < 10, !(x > 5));'], 'false true true', 'Werte zuerst die beiden Vergleiche für x = 5 aus, dann die Verknüpfung.', 'x > 5 ist false, x < 10 ist true. false && true ist false, false || true ist true, !false ist true.')
         ]
       },
 
@@ -216,7 +220,7 @@
         concept: 'loops', standalone: true, domain: 'shop', stage: 2,
         title: 'Schleifen: Warenkorb, Login-Versuche, Ticketlisten',
         goal: 'Du wählst sicher zwischen for, while, do…while und for…of, steuerst Durchläufe mit break und continue und vermeidest Off-by-one-Fehler.',
-        terms: ['Schleife', 'Endlosschleife', 'Off-by-one-Fehler'],
+        terms: ['Schleife', 'Endlosschleife', 'Off-by-one-Fehler', ['Kopfgesteuerte Schleife', 'kopfgesteuert'], ['Fußgesteuerte Schleife', 'fußgesteuert']],
         parts: [
           A.text('Vier Schleifen, vier Einsatzfälle', 'Eine **Schleife** wiederholt einen Block, bis eine Bedingung nicht mehr stimmt. In JavaScript nutzt du im Alltag vor allem `for…of` (für alle Elemente eines Arrays), `for` (wenn du den Index brauchst) und `while` (wenn erst zur Laufzeit klar ist, wann Schluss ist).'),
           C([
@@ -247,6 +251,7 @@
             '}',
             'console.log("Lieferbare Artikel:", lieferbar);'
           ], 'for mit Index und continue: ausverkaufte Artikel überspringen', { praxis: 'Im Shop-Katalog filtert genau dieses Muster ausverkaufte Ware heraus oder zählt, wie viele Produkte sofort versendbar sind.' }),
+          C(['let zaehler = 5;§Ein Startwert, der die Bedingung schon vor dem ersten Durchlauf **false** macht.', 'while (zaehler < 3) {§Kopfgesteuert: 5 < 3 ist false, der Block läuft kein einziges Mal.', '  console.log("while-Block:", zaehler);', '  zaehler++;', '}', 'console.log("nach while:", zaehler);§zaehler ist unverändert 5.', 'zaehler = 5;', 'do {§Fußgesteuert: Der Block läuft zuerst, ohne Prüfung.', '  console.log("do-Block:", zaehler);', '  zaehler++;', '} while (zaehler < 3);§Erst jetzt wird geprüft: 6 < 3 ist false, Schluss.', 'console.log("nach do-while:", zaehler);'], 'Trocken: while und do-while, wenn die Bedingung sofort false ist', { praxis: 'while ist kopfgesteuert: Eine leere Druckwarteschlange druckt nichts. do-while ist fußgesteuert: Ein Menü erscheint auch dann einmal, wenn als Erstes „Beenden“ gewählt wird. Mit Startwert 1 laufen beide gleich oft. Den Unterschied sieht man nur, wenn die Bedingung schon am Anfang falsch ist.' }),
           A.table(['JavaScript', 'Java', 'Python'], [
             ['`for (const p of preise)`', '`for (int p : preise)`', '`for p in preise:`'],
             ['`for (let i = 0; i < n; i++)`', '`for (int i = 0; i < n; i++)`', '`for i in range(n):`'],
@@ -259,7 +264,8 @@
         quiz: [
           A.q('Welche Schleife wählst du am besten, um alle Artikelpreise eines Arrays ohne Index zu summieren?', ['for (const p of preise)', 'while (true)', 'do … while (false)', 'switch (preise)'], 0, 'for…of liest jedes Element direkt und schließt Indexfehler aus.'),
           A.q('Was bewirkt `continue;` mitten in einer Schleife?', ['Es bricht nur den aktuellen Durchlauf ab und startet den nächsten', 'Es beendet die gesamte Schleife sofort und springt dahinter', 'Es setzt den Schleifenzähler wieder zurück auf 0', 'Es startet das gesamte Programm von vorne'], 0, 'break beendet die ganze Schleife, continue überspringt nur den Rest des aktuellen Durchlaufs.'),
-          A.q('Wie oft läuft `for (let i = 0; i < 4; i++)`?', ['4-mal (i = 0, 1, 2, 3)', '3-mal (i = 0, 1, 2)', '5-mal (i = 0, 1, 2, 3, 4)', 'Unendlich oft'], 0, 'Bei i = 4 ist 4 < 4 falsch, die Schleife endet nach 4 Durchläufen.')
+          A.q('Wie oft läuft `for (let i = 0; i < 4; i++)`?', ['4-mal (i = 0, 1, 2, 3)', '3-mal (i = 0, 1, 2)', '5-mal (i = 0, 1, 2, 3, 4)', 'Unendlich oft'], 0, 'Bei i = 4 ist 4 < 4 falsch, die Schleife endet nach 4 Durchläufen.'),
+          A.q('Die Bedingung ist schon beim Start falsch. Wie oft laufen while und do-while?', ['while 0-mal, do-while genau 1-mal', 'Beide laufen kein einziges Mal', 'Beide laufen genau einmal durch', 'while 1-mal, do-while 0-mal'], 0, 'while prüft vor dem ersten Durchlauf (kopfgesteuert), do-while erst danach (fußgesteuert).')
         ],
         tasks: [
           PP('Was gibt das Programm aus?', ['const preise = [1000, 2500, 500];', 'let summe = 0;', 'for (const p of preise) {', '  if (p >= 1000) summe += p;', '}', 'console.log(summe);'], '3500', 'Addiere nur Preise ab 1000.', '1000 + 2500 = 3500; 500 wird ignoriert.'),
@@ -280,7 +286,8 @@
             'for (let i = 1; i <= preise.length; i++) {',
             'for (let i = 0; i < preise.length - 1; i++) {',
             'for (let i = 0; i <= preise.length; i--) {'
-          ], expect: '6488' }, 'Was steht an Index preise[3], und was ergibt 6488 + undefined?', 'Bei i === 3 ist preise[3] undefined, und Zahl + undefined ergibt NaN (Off-by-one-Fehler). Richtig ist i < preise.length.')
+          ], expect: '6488' }, 'Was steht an Index preise[3], und was ergibt 6488 + undefined?', 'Bei i === 3 ist preise[3] undefined, und Zahl + undefined ergibt NaN (Off-by-one-Fehler). Richtig ist i < preise.length.'),
+          PP('Kopf- gegen fußgesteuert: Was gibt das Programm aus?', ['let n = 10;', 'while (n < 5) { n++; }', 'do { n++; } while (n < 5);', 'console.log(n);'], '11', 'Prüfe bei beiden Schleifen, wann die Bedingung zum ersten Mal geprüft wird.', 'while: 10 < 5 ist false, kein Durchlauf. do-while: ein Durchlauf ohne Prüfung, n wird 11, dann ist 11 < 5 false.')
         ]
       },
 
@@ -302,6 +309,8 @@
             'const rabatt = rabattInCent(summe);§Ergebnis lässt sich direkt weiterrechnen.',
             'console.log("Zu zahlen:", alsEuro(summe - rabatt));'
           ], 'Funktionen mit return, Standardwert und Pfeilfunktion', { praxis: 'In jeder Web-App sind Preis-, Steuer- und Versandfunktionen reine Bausteine mit return. Die Oberfläche ruft sie nur auf und zeigt das Ergebnis an.' }),
+          C(['function istSchaltjahr(jahr) {', '  if (jahr % 400 === 0) return true;§Durch 400 teilbar: immer ein Schaltjahr.', '  if (jahr % 100 === 0) return false;§Durch 100, aber nicht durch 400: kein Schaltjahr.', '  return jahr % 4 === 0;§Sonst entscheidet die 4. Der Vergleich ist schon true oder false.', '}', 'for (const jahr of [2024, 2023, 1900, 2000]) {§Testwerte für jede Regel, für true und für false.', '  console.log(jahr, istSchaltjahr(jahr));', '}'], 'Trocken: eine Prüffunktion mit beiden Ergebnissen', { praxis: 'Kalender, Fristen und Zinstage hängen an dieser Regel. Zu einer Prüffunktion gehören Testwerte für beide Ergebnisse. Wer nur 2024 testet, merkt nicht, dass die Ausnahme für 1900 fehlt.' }),
+          C(['function bucheEntnahme(menge) {', '  if (menge <= 0) {', '    console.log("Abgelehnt: Menge", menge, "ist ungültig");', '    return;§**Früher Ausstieg**: return ohne Wert beendet die Funktion sofort, das Ergebnis ist undefined.', '  }', '  console.log("Gebucht:", menge, "Stück entnommen");§Läuft nur, wenn das return oben nicht gegriffen hat.', '}', 'bucheEntnahme(5);§Bedingung false: Die Funktion läuft bis zum Ende.', 'bucheEntnahme(-5);§Bedingung true: Ausstieg direkt nach der Meldung.'], 'Trocken: früher Ausstieg und Normalfall', { praxis: 'Lagerbuchungen, Zahlungen, Formulare: Ungültiges wird am Anfang abgewiesen, der Normalfall folgt ohne Verschachtelung. Dieses Muster heißt Guard Clause und kommt im Modul Clean Code wieder.' }),
           A.table(['JavaScript', 'Java', 'Python'], [
             ['`function f(a, b = 10) { return …; }`', '`static int f(int a, int b) { return …; }`', '`def f(a, b=10): return …`'],
             ['`(x) => x * 2` (Pfeilfunktion)', '`x -> x * 2` (Lambda)', '`lambda x: x * 2`'],
@@ -315,7 +324,8 @@
         quiz: [
           A.q('Was gibt eine JavaScript-Funktion zurück, wenn sie kein `return` enthält?', ['undefined', 'null', '0', 'false'], 0, 'Ohne return liefert jeder Funktionsaufruf automatisch undefined.'),
           A.q('Warum sollte `rabattInCent()` das Ergebnis mit `return` liefern statt mit `console.log`?', ['Damit der Aufrufer damit weiterrechnen und es testen kann', 'Weil console.log innerhalb von Funktionen verboten ist', 'Weil return Zahlen automatisch in Euro umrechnet', 'Weil Pfeilfunktionen kein console.log unterstützen'], 0, 'Trennung von Verarbeitung und Ausgabe: return macht die Funktion wiederverwendbar.'),
-          A.q('Was liefert `const doppelt = (n) => n * 2; doppelt(6);`?', ['12', 'undefined', 'n * 2', '62'], 0, 'Bei einer einzeiligen Pfeilfunktion ohne geschweifte Klammern wird der Ausdruck direkt zurückgegeben.')
+          A.q('Was liefert `const doppelt = (n) => n * 2; doppelt(6);`?', ['12', 'undefined', 'n * 2', '62'], 0, 'Bei einer einzeiligen Pfeilfunktion ohne geschweifte Klammern wird der Ausdruck direkt zurückgegeben.'),
+          A.q('Was liefert eine Funktion, die mit `return;` endet?', ['undefined, der Aufrufer bekommt keinen Wert', 'Den Wert 0 als Standard-Rückgabewert', 'null, weil kein Objekt vorhanden ist', 'Einen TypeError beim Aufruf der Funktion'], 0, 'return ohne Wert beendet die Funktion. Wer das Ergebnis trotzdem speichert, bekommt undefined.')
         ],
         tasks: [
           PP('Was gibt das Programm aus?', ['function rabatt(summe) {', '  return summe >= 10000 ? Math.floor(summe / 10) : 0;', '}', 'console.log(rabatt(9999), rabatt(15000));'], '0 1500', 'Prüfe beide Beträge gegen die Grenze 10000.', '9999 liegt unter 10000 (0), 15000 ergibt 1500.'),
@@ -335,7 +345,8 @@
             'console.log(r);',
             'let ergebnis = r;',
             'return summe;'
-          ], expect: 'Zu zahlen: 10800' }, 'Was liefert rabatt(12000) zurück, wenn kein return drinsteht?', 'Ohne return liefert rabatt() undefined, und 12000 - undefined ergibt NaN. Richtig ist return r;.')
+          ], expect: 'Zu zahlen: 10800' }, 'Was liefert rabatt(12000) zurück, wenn kein return drinsteht?', 'Ohne return liefert rabatt() undefined, und 12000 - undefined ergibt NaN. Richtig ist return r;.'),
+          PP('Einlasskontrolle mit frühem Ausstieg: Was gibt das Programm aus?', ['function einlass(alter) {', '  if (alter < 0) return "Fehler";', '  if (alter >= 18) return "Einlass";', '  return "Abgewiesen";', '}', 'console.log(einlass(18), einlass(17), einlass(-1));'], 'Einlass Abgewiesen Fehler', 'Gehe für jeden Aufruf die return-Zeilen von oben durch. Das erste, das greift, beendet die Funktion.', '18 >= 18 ist true: Einlass. 17 erfüllt keine der ersten beiden Bedingungen: Abgewiesen. -1 < 0 greift schon in der ersten Zeile: Fehler.')
         ]
       },
 
@@ -380,6 +391,9 @@
             'const prioSumme = tickets.reduce((s, t) => s + t.prio, 0);§reduce fasst zu einem Wert zusammen.',
             'console.log(titel.join(", "), "| Prio-Summe:", prioSumme);'
           ], 'Kurzform in modernem JavaScript: filter, map, reduce', { praxis: 'In React-, Vue- und Node.js-Projekten ersetzen filter, map und reduce viele handgeschriebene Schleifen.' }),
+          C(['const zeile = "Kiel;Bonn;Ulm";', 'const teile = zeile.split(";");§Hin: split zerlegt den Text in 3 Teile.', 'const wieder = teile.join(";");§Zurück: join klebt die Teile wieder zusammen.', 'console.log(teile.length, "Teile, gleich wie vorher:", wieder === zeile);', 'const name = "Funkmaus";', 'console.log(name.toUpperCase(), name.toUpperCase().toLowerCase());§Nicht jeder Rückweg ist verlustfrei: Aus „Funkmaus“ wird „funkmaus“.', 'const korb = ["Maus", "Kabel"];', 'korb.push("Headset");§Hin: hinten anhängen.', 'const weg = korb.pop();§Zurück: pop nimmt das letzte Element wieder heraus und gibt es zurück.', 'console.log(weg, korb.length);', 'const json = JSON.stringify({ nr: 10427, menge: 2 });§Hin: Objekt wird zu Text, zum Senden oder Speichern.', 'const bestellung = JSON.parse(json);§Zurück: Text wird wieder zum Objekt.', 'console.log(json, bestellung.menge);'], 'Gegenstücke: Hin- und Rückweg', { praxis: 'Gegenstücke testet man als Hin- und Rückweg: Zerlegen und wieder Zusammensetzen muss beim Original landen. Genau so prüfen Import/Export-Schnittstellen, ob beim Speichern und Laden nichts verloren geht.' }),
+          C(['const datei = "bericht.final.pdf";', 'const erster = datei.indexOf(".");§Von vorn gesucht: der erste Punkt steht an Index 7.', 'const letzter = datei.lastIndexOf(".");§Von hinten gesucht: der letzte Punkt an Index 13.', 'console.log(erster, letzter, datei.slice(letzter + 1));§Hinter dem letzten Punkt steht die Endung.', 'console.log(Math.floor(4.2), Math.ceil(4.2));§Abrunden und Aufrunden: 4 und 5.', 'console.log(Math.min(7, 3), Math.max(7, 3));'], 'Gegenstücke: vorn und hinten, unten und oben', { praxis: 'Dateiname und Endung trennen, Preise auf ganze Kartons runden, kleinsten und größten Messwert finden: Diese Paare kommen in fast jedem Programm vor. Wer eins kennt, sucht das andere gleich mit.' }),
+          A.table(['Hin', 'Zurück', 'Wofür'], [['`text.split(";")`', '`teile.join(";")`', 'CSV-Zeile zerlegen und wieder bauen'], ['`push(x)`', '`pop()`', 'hinten anhängen und hinten wegnehmen (Stapel)'], ['`unshift(x)`', '`shift()`', 'vorn einfügen und vorn wegnehmen'], ['`JSON.stringify(obj)`', '`JSON.parse(text)`', 'Daten senden und empfangen'], ['`toUpperCase()`', '`toLowerCase()`', 'Eingaben vergleichbar machen'], ['`indexOf(x)`', '`lastIndexOf(x)`', 'von vorn oder von hinten suchen'], ['`startsWith(x)`', '`endsWith(x)`', 'Präfix oder Endung prüfen'], ['`Math.floor(x)`', '`Math.ceil(x)`', 'ab- oder aufrunden'], ['`Math.min(...)`', '`Math.max(...)`', 'kleinster oder größter Wert']], 'Gegenstücke auf einen Blick', 'Zu fast jeder Operation gibt es eine, die sie umkehrt oder von der anderen Seite her arbeitet. Nicht jeder Rückweg ist verlustfrei: Nach Großschreibung und wieder Kleinschreibung ist die ursprüngliche Schreibweise weg. Vorsicht: Das Gegenstück zu `push` ist `pop`, nicht `shift`. `shift` nimmt vorn weg, das gehört zu `unshift`.'),
           A.table(['JavaScript', 'Java', 'Python'], [
             ['`arr.push(x)` / `arr.length`', '`list.add(x)` / `list.size()`', '`liste.append(x)` / `len(liste)`'],
             ['`{ name: "Maus", preis: 1999 }`', 'eigene Klasse / `HashMap`', '`{"name": "Maus", "preis": 1999}`'],
@@ -392,7 +406,9 @@
         quiz: [
           A.q('Warum startet man beim Suchen des günstigsten Preises mit `let min = preise[0];` statt mit `0`?', ['Weil kein positiver Preis kleiner als 0 ist und min sonst 0 bliebe', 'Weil 0 in JavaScript kein gültiger Datentyp number ist', 'Weil Arrays in JavaScript keine 0 enthalten dürfen', 'Weil preise[0] automatisch immer der kleinste Wert ist'], 0, 'Der Startwert muss ein echter Kandidat aus dem Array sein.'),
           A.q('Was liefert `tickets.filter((t) => t.prio === 1)`?', ['Ein neues Array mit allen Tickets der Priorität 1', 'Nur das erste Ticket mit Priorität 1 als Objekt', 'Die Anzahl der Tickets mit Priorität 1 als Zahl', 'Verändert das bestehende Array ohne Rückgabewert'], 0, 'filter erzeugt immer ein neues Array mit den passenden Elementen.'),
-          A.q('Woran erkennst du, dass `arr.length` kein Methodenaufruf ist?', ['Es stehen keine Klammern dahinter', 'Es beginnt mit einem Großbuchstaben', 'Es steht immer hinter einem return', 'Es liefert immer true oder false'], 0, 'length ist eine Eigenschaft, push() dagegen eine Methode.')
+          A.q('Woran erkennst du, dass `arr.length` kein Methodenaufruf ist?', ['Es stehen keine Klammern dahinter', 'Es beginnt mit einem Großbuchstaben', 'Es steht immer hinter einem return', 'Es liefert immer true oder false'], 0, 'length ist eine Eigenschaft, push() dagegen eine Methode.'),
+          A.q('Welcher Aufruf macht `zeile.split(";")` rückgängig?', ['teile.join(";")', 'teile.reverse()', 'zeile.trim()', 'teile.concat(";")'], 0, 'split zerlegt an jedem Trennzeichen, join setzt die Teile mit demselben Trennzeichen wieder zusammen.'),
+          A.q('`korb.push("Headset")` hängt hinten an. Welcher Aufruf nimmt genau dieses Element wieder weg?', ['korb.pop()', 'korb.shift()', 'korb.unshift()', 'korb.slice(1)'], 0, 'push und pop arbeiten am Ende des Arrays. shift und unshift arbeiten am Anfang.')
         ],
         tasks: [
           PP('Was gibt das Programm aus?', ['const preise = [1999, 999, 3490];', 'const klein = preise.filter((p) => p < 2000);', 'console.log(klein.length, klein[1]);'], '2 999', 'Welche Werte sind < 2000, und welcher steht an Index 1?', 'klein ist [1999, 999]: Länge 2, Index 1 ist 999.'),
@@ -413,7 +429,8 @@
             'let min = 1;',
             'let min = -1;',
             'let min = preise.length;'
-          ], expect: 'Günstigster: 999' }, 'Kann irgendein Artikelpreis kleiner als 0 sein?', 'Kein Preis ist kleiner als 0, also wird min nie aktualisiert. Starte mit preise[0].')
+          ], expect: 'Günstigster: 999' }, 'Kann irgendein Artikelpreis kleiner als 0 sein?', 'Kein Preis ist kleiner als 0, also wird min nie aktualisiert. Starte mit preise[0].'),
+          PP('Vorn oder hinten? Was gibt das Programm aus?', ['const korb = ["Maus", "Kabel"];', 'korb.push("Headset");', 'const weg = korb.shift();', 'console.log(weg, korb.join("+"));'], 'Maus Kabel+Headset', 'push arbeitet hinten. Wo arbeitet shift?', 'push hängt Headset hinten an. shift ist nicht das Gegenstück zu push, es nimmt das erste Element weg: Maus. Übrig bleiben Kabel und Headset.')
         ]
       },
 

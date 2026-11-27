@@ -90,7 +90,7 @@
         concept: 'cond', standalone: true, domain: 'shop', stage: 1,
         title: 'Verzweigungen: Versandkosten, Login-Sperre und switch',
         goal: 'Du steuerst Business-Logik mit if/else if/else, switch und ? : und vermeidest Fall-through- und = statt ==-Fehler.',
-        terms: ['Verzweigung', 'Bedingung', 'Grenzwert', 'Bedingungsoperator'],
+        terms: ['Verzweigung', 'Bedingung', 'Grenzwert', 'Bedingungsoperator', 'Wahrheitstabelle'],
         parts: [
           A.text('Entscheidungen im Shop', 'Verzweigungen funktionieren in C++ wie in C und Java. Prüfe jeden **Grenzwert** (wie `5000` Cent) genau und achte auf `==` statt `=` im `if` sowie auf `break;` im `switch`.'),
           C([
@@ -104,13 +104,17 @@
             '    case 2: cout << "4 Stunden\\n"; break;',
             '    default: cout << "1 Woche\\n";',
             '}'
-          ], 'Versandkosten und switch in C++', { praxis: 'Mit -Wall warnt g++ dich sofort, wenn du im if versehentlich = statt == schreibst.' })
+          ], 'Versandkosten und switch in C++', { praxis: 'Mit -Wall warnt g++ dich sofort, wenn du im if versehentlich = statt == schreibst.' }),
+          C(['int x = 7;§Erster Durchgang: ein Wert über der Grenze.', 'if (x > 5) {§7 > 5 ist **true**: Der if-Zweig läuft.', '    cout << x << " > 5 ist true: if-Zweig\\n";', '} else {', '    cout << x << " > 5 ist false: else-Zweig\\n";', '}', 'x = 5;§Zweiter Durchgang: genau auf der Grenze.', 'if (x > 5) {§5 > 5 ist **false**: C++ springt zu else.', '    cout << x << " > 5 ist true: if-Zweig\\n";', '} else {', '    cout << x << " > 5 ist false: else-Zweig\\n";', '}', 'cout << (7 > 5) << " " << (5 > 5) << "\\n";§cout gibt bool als 1 und 0 aus.', 'cout << boolalpha << (7 > 5) << " " << (5 > 5) << "\\n";§Mit boolalpha steht da true und false.'], 'Trocken: dieselbe Bedingung einmal true, einmal false', { praxis: 'So testet man jede Bedingung: einmal mit einem Wert, der sie wahr macht, einmal mit einem, der sie falsch macht, am besten genau auf der Grenze. In der Qualitätssicherung heißen diese Testfälle Positiv- und Negativtest.' }),
+          A.table(['a', 'b', '`a && b`', '`a || b`', '`!a`'], [['true', 'true', '**true**', '**true**', 'false'], ['true', 'false', 'false', '**true**', 'false'], ['false', 'true', 'false', '**true**', '**true**'], ['false', 'false', 'false', 'false', '**true**']], 'Wahrheitstabelle: alle Fälle von true und false', '`&&` ist nur true, wenn beide Seiten true sind. `||` ist nur false, wenn beide Seiten false sind. `!` dreht um. Zwei Wahrheitswerte ergeben genau vier Kombinationen, wer eine verknüpfte Bedingung prüft, geht alle vier durch. Ohne `boolalpha` gibt `cout` statt true und false die Zahlen 1 und 0 aus.')
         ],
         quiz: [
-          A.q('Was passiert im C++-`switch`, wenn nach `case 2:` das `break;` fehlt?', ['Der Code im nächsten case läuft ebenfalls mit (Fall-through)', 'Der switch endet automatisch am Ende von case 2', 'Der Compiler wirft immer einen Fehler', 'Der default-Zweig wird übersprungen'], 0, 'Ohne break rutscht die Ausführung in den nächsten Fall durch.')
+          A.q('Was passiert im C++-`switch`, wenn nach `case 2:` das `break;` fehlt?', ['Der Code im nächsten case läuft ebenfalls mit (Fall-through)', 'Der switch endet automatisch am Ende von case 2', 'Der Compiler wirft immer einen Fehler', 'Der default-Zweig wird übersprungen'], 0, 'Ohne break rutscht die Ausführung in den nächsten Fall durch.'),
+          A.q('Ein Test prüft `x > 5` nur mit x = 7. Was fehlt noch?', ['Ein Test mit einem Wert, der die Bedingung false macht', 'Ein zweiter Test mit einem noch größeren Wert wie 70', 'Nichts, ein bestandener Test beweist die Bedingung komplett', 'Ein Test, ob 7 wirklich als ganze Zahl gespeichert ist'], 0, 'Erst der Gegenfall zeigt, ob der else-Zweig stimmt. Am besten genau auf der Grenze: x = 5.')
         ],
         tasks: [
-          PP('Was gibt das Programm aus?', ['long w = 5000;', 'long v = w >= 5000 ? 0 : 495;', 'cout << w + v << "\\n";'], '5000', '5000 >= 5000 ist wahr.', 'Versand ist 0, also Ausgabe 5000.')
+          PP('Was gibt das Programm aus?', ['long w = 5000;', 'long v = w >= 5000 ? 0 : 495;', 'cout << w + v << "\\n";'], '5000', '5000 >= 5000 ist wahr.', 'Versand ist 0, also Ausgabe 5000.'),
+          PP('Alle Fälle von && und ||: Was gibt das Programm aus?', ['int x = 5;', 'cout << boolalpha << (x > 5 && x < 10) << " " << (x > 5 || x < 10) << " " << !(x > 5) << "\\n";'], 'false true true', 'Werte zuerst die beiden Vergleiche für x = 5 aus. boolalpha schreibt true und false aus.', 'x > 5 ist false, x < 10 ist true. false && true ist false, false || true ist true, !false ist true.')
         ]
       },
 
@@ -119,7 +123,7 @@
         concept: 'loops', standalone: true, domain: 'shop', stage: 2,
         title: 'Schleifen: Warenkorb, Login-Versuche, Ticketlisten',
         goal: 'Du nutzt die bereichsbasierte for-Schleife (for (int p : preise)), Zählschleifen und while-Schleifen sicher ohne Off-by-one-Fehler.',
-        terms: ['Schleife', 'Endlosschleife', 'Off-by-one-Fehler'],
+        terms: ['Schleife', 'Endlosschleife', 'Off-by-one-Fehler', ['Kopfgesteuerte Schleife', 'kopfgesteuert'], ['Fußgesteuerte Schleife', 'fußgesteuert']],
         parts: [
           A.text('Moderne for-Schleife über Vektoren', 'Anders als C kennt C++ die **bereichsbasierte `for`-Schleife** `for (int p : preise)` – genau wie `for (int p : preise)` in Java. So vermeidest du Indexfehler beim Summieren und Filtern; bei `while` musst du den Zustand im Rumpf ändern, sonst droht eine **Endlosschleife**.'),
           C([
@@ -129,13 +133,16 @@
             '    summe += p;',
             '}',
             'cout << "Warenkorb: " << summe << " Cent\\n";'
-          ], 'Warenkorb-Summe mit range-based for', { praxis: 'Bei großen Objekten schreibst du for (const auto &a : artikel) – so wird kein einziges Objekt kopiert.' })
+          ], 'Warenkorb-Summe mit range-based for', { praxis: 'Bei großen Objekten schreibst du for (const auto &a : artikel) – so wird kein einziges Objekt kopiert.' }),
+          C(['int zaehler = 5;§Ein Startwert, der die Bedingung schon vor dem ersten Durchlauf **false** macht.', 'while (zaehler < 3) {§Kopfgesteuert: 5 < 3 ist false, der Block läuft kein einziges Mal.', '    cout << "while-Block: " << zaehler << "\\n";', '    zaehler++;', '}', 'cout << "nach while: " << zaehler << "\\n";§zaehler ist unverändert 5.', 'zaehler = 5;', 'do {§Fußgesteuert: Der Block läuft zuerst, ohne Prüfung.', '    cout << "do-Block: " << zaehler << "\\n";', '    zaehler++;', '} while (zaehler < 3);§Erst jetzt wird geprüft: 6 < 3 ist false, Schluss.', 'cout << "nach do-while: " << zaehler << "\\n";'], 'Trocken: while und do-while, wenn die Bedingung sofort false ist', { praxis: 'while ist kopfgesteuert: Eine leere Druckwarteschlange druckt nichts. do-while ist fußgesteuert: Ein Menü erscheint auch dann einmal, wenn als Erstes „Beenden“ gewählt wird. Mit Startwert 1 laufen beide gleich oft. Den Unterschied sieht man nur, wenn die Bedingung schon am Anfang falsch ist.' })
         ],
         quiz: [
-          A.q('Wie lautet die moderne C++-Schleife über alle Elemente eines `vector<int> preise`?', ['for (int p : preise)', 'foreach (int p in preise)', 'for (int p of preise)', 'for p in preise:'], 0, 'C++ nutzt den Doppelpunkt wie Java.')
+          A.q('Wie lautet die moderne C++-Schleife über alle Elemente eines `vector<int> preise`?', ['for (int p : preise)', 'foreach (int p in preise)', 'for (int p of preise)', 'for p in preise:'], 0, 'C++ nutzt den Doppelpunkt wie Java.'),
+          A.q('Die Bedingung ist schon beim Start falsch. Wie oft laufen while und do-while?', ['while 0-mal, do-while genau 1-mal', 'Beide laufen kein einziges Mal', 'Beide laufen genau einmal durch', 'while 1-mal, do-while 0-mal'], 0, 'while prüft vor dem ersten Durchlauf (kopfgesteuert), do-while erst danach (fußgesteuert).')
         ],
         tasks: [
-          PP('Was gibt das Programm aus?', ['vector<int> preise = {1000, 2500, 500};', 'int s = 0;', 'for (int p : preise) { if (p >= 1000) s += p; }', 'cout << s << "\\n";'], '3500', 'Addiere nur Preise >= 1000.', '1000 + 2500 = 3500.')
+          PP('Was gibt das Programm aus?', ['vector<int> preise = {1000, 2500, 500};', 'int s = 0;', 'for (int p : preise) { if (p >= 1000) s += p; }', 'cout << s << "\\n";'], '3500', 'Addiere nur Preise >= 1000.', '1000 + 2500 = 3500.'),
+          PP('Kopf- gegen fußgesteuert: Was gibt das Programm aus?', ['int n = 10;', 'while (n < 5) { n++; }', 'do { n++; } while (n < 5);', 'cout << n << "\\n";'], '11', 'Prüfe bei beiden Schleifen, wann die Bedingung zum ersten Mal geprüft wird.', 'while: 10 < 5 ist false, kein Durchlauf. do-while: ein Durchlauf ohne Prüfung, n wird 11, dann ist 11 < 5 false.')
         ]
       },
 
@@ -158,13 +165,16 @@
             'int bestand = 35;',
             'verkaufen(bestand, 5);§Kein & beim Aufruf nötig!',
             'cout << bestand << " " << rabattInCent(12000) << "\\n";§30 und 1200.'
-          ], 'Funktionen mit Rückgabewert und Referenz', { praxis: 'const vector<Artikel> &korb spart in Hochleistungs-Anwendungen tausende unnötige Kopien pro Sekunde.' })
+          ], 'Funktionen mit Rückgabewert und Referenz', { praxis: 'const vector<Artikel> &korb spart in Hochleistungs-Anwendungen tausende unnötige Kopien pro Sekunde.' }),
+          C(['bool istSchaltjahr(int jahr) {', '    if (jahr % 400 == 0) return true;§Durch 400 teilbar: immer ein Schaltjahr.', '    if (jahr % 100 == 0) return false;§Durch 100, aber nicht durch 400: kein Schaltjahr.', '    return jahr % 4 == 0;§Sonst entscheidet die 4. Der Vergleich ist schon true oder false.', '}', '// in main', 'for (int jahr : {2024, 2023, 1900, 2000}) {§Testwerte für jede Regel, für true und für false.', '    cout << jahr << " " << boolalpha << istSchaltjahr(jahr) << "\\n";', '}'], 'Trocken: eine Prüffunktion mit beiden Ergebnissen', { praxis: 'Kalender, Fristen und Zinstage hängen an dieser Regel. Zu einer Prüffunktion gehören Testwerte für beide Ergebnisse. Wer nur 2024 testet, merkt nicht, dass die Ausnahme für 1900 fehlt.' }),
+          C(['void bucheEntnahme(int menge) {', '    if (menge <= 0) {', '        cout << "Abgelehnt: Menge " << menge << " ist ungültig\\n";', '        return;§**Früher Ausstieg**: return ohne Wert beendet eine void-Funktion sofort.', '    }', '    cout << "Gebucht: " << menge << " Stück entnommen\\n";§Läuft nur, wenn das return oben nicht gegriffen hat.', '}', '// in main', 'bucheEntnahme(5);§Bedingung false: Die Funktion läuft bis zum Ende.', 'bucheEntnahme(-5);§Bedingung true: Ausstieg direkt nach der Meldung.'], 'Trocken: früher Ausstieg und Normalfall', { praxis: 'Lagerbuchungen, Zahlungen, Formulare: Ungültiges wird am Anfang abgewiesen, der Normalfall folgt ohne Verschachtelung. Dieses Muster heißt Guard Clause und kommt im Modul Clean Code wieder.' })
         ],
         quiz: [
           A.q('Was bewirkt `const string &name` als Parameter einer C++-Funktion?', ['Vermeidet eine Kopie und schützt das Original vor Änderungen', 'Erzeugt zwei Kopien des Strings im Heap', 'Erlaubt der Funktion, den Original-String zu überschreiben', 'Wandelt den String automatisch in ein int um'], 0, 'Referenz (&) spart die Kopie, const verhindert versehentliche Änderungen.')
         ],
         tasks: [
-          PP('Was gibt das Programm aus?', ['void buche(int &lager, int m) { lager -= m; }', '// in main', 'int b = 14; buche(b, 4);', 'cout << b << "\\n";'], '10', 'lager ist eine Referenz auf b.', 'b wird direkt von 14 auf 10 verringert.')
+          PP('Was gibt das Programm aus?', ['void buche(int &lager, int m) { lager -= m; }', '// in main', 'int b = 14; buche(b, 4);', 'cout << b << "\\n";'], '10', 'lager ist eine Referenz auf b.', 'b wird direkt von 14 auf 10 verringert.'),
+          PP('Schaltjahr-Regeln: Was gibt das Programm aus?', ['bool istSchaltjahr(int j) {', '    if (j % 400 == 0) return true;', '    if (j % 100 == 0) return false;', '    return j % 4 == 0;', '}', '// in main', 'cout << boolalpha << istSchaltjahr(1900) << " " << istSchaltjahr(2024) << " " << istSchaltjahr(2023) << "\\n";'], 'false true false', 'Prüfe für jedes Jahr die Regeln in der Reihenfolge der Funktion.', '1900 ist durch 100, aber nicht durch 400 teilbar: false. 2024 erreicht die letzte Zeile und ist durch 4 teilbar: true. 2023 nicht: false.')
         ]
       },
 
@@ -183,13 +193,17 @@
             'for (int p : preise) { summe += p; if (p < min) min = p; }§Summieren & Minimum.',
             'map<string, int> lager = {{"Funkmaus", 35}, {"Tastatur", 0}};',
             'cout << preise.size() << " " << min << " " << lager["Funkmaus"] << "\\n";'
-          ], 'vector und map im Onlineshop', { praxis: 'Im Vergleich zu rohen C-Arrays verwaltet vector seinen Speicher automatisch – kein malloc und kein free nötig!' })
+          ], 'vector und map im Onlineshop', { praxis: 'Im Vergleich zu rohen C-Arrays verwaltet vector seinen Speicher automatisch – kein malloc und kein free nötig!' }),
+          C(['int menge = 42;', 'string text = to_string(menge);§Hin: Zahl wird Text.', 'int zurueck = stoi(text);§Zurück: stoi macht aus dem Text wieder eine Zahl.', 'cout << text << " " << zurueck << " " << (zurueck == menge) << "\\n";§Der Vergleich erscheint als 1.', 'vector<string> korb = {"Maus", "Kabel"};', 'korb.push_back("Headset");§Hin: hinten anhängen.', 'cout << korb.size() << " " << korb.back() << "\\n";', 'korb.pop_back();§Zurück: das letzte Element wieder entfernen.', 'cout << korb.size() << " " << korb.back() << "\\n";', 'map<string, int> lager;', 'lager["Maus"] = 35;§Eintrag anlegen.', 'cout << lager.count("Maus") << " ";§1: vorhanden.', 'lager.erase("Maus");§Gegenstück: Eintrag löschen.', 'cout << lager.count("Maus") << "\\n";§0: weg.'], 'Gegenstücke: Hin- und Rückweg', { praxis: 'Gegenstücke testet man als Hin- und Rückweg: Zerlegen und wieder Zusammensetzen muss beim Original landen. Genau so prüfen Import/Export-Schnittstellen, ob beim Speichern und Laden nichts verloren geht.' }),
+          A.table(['Hin', 'Zurück', 'Wofür'], [['`to_string(n)`', '`stoi(text)`', 'Zahl zu Text und zurück'], ['`push_back(x)`', '`pop_back()`', 'hinten anhängen und hinten wegnehmen'], ['`m[k] = v` oder `insert`', '`erase(k)`', 'Eintrag anlegen und löschen'], ['`front()`', '`back()`', 'erstes oder letztes Element'], ['`new`', '`delete`', 'Speicher holen und zurückgeben, besser gleich `vector` oder Smart Pointer'], ['`min(a, b)`', '`max(a, b)`', 'kleinster oder größter Wert, aus `<algorithm>`']], 'Gegenstücke auf einen Blick', 'Zu fast jeder Operation gibt es eine, die sie umkehrt oder von der anderen Seite her arbeitet. Nicht jeder Rückweg ist verlustfrei: Nach Großschreibung und wieder Kleinschreibung ist die ursprüngliche Schreibweise weg.')
         ],
         quiz: [
-          A.q('Was unterscheidet `preise.at(10)` von `preise[10]` bei einem `vector` mit 4 Elementen?', ['at() prüft die Grenzen und wirft out_of_range, [] prüft nicht', '[] wirft out_of_range, at() liefert automatisch 0', 'Beide vergrößern den vector automatisch auf 11 Elemente', 'at() funktioniert nur bei map, nicht bei vector'], 0, 'at() schützt vor undefiniertem Speicherzugriff.')
+          A.q('Was unterscheidet `preise.at(10)` von `preise[10]` bei einem `vector` mit 4 Elementen?', ['at() prüft die Grenzen und wirft out_of_range, [] prüft nicht', '[] wirft out_of_range, at() liefert automatisch 0', 'Beide vergrößern den vector automatisch auf 11 Elemente', 'at() funktioniert nur bei map, nicht bei vector'], 0, 'at() schützt vor undefiniertem Speicherzugriff.'),
+          A.q('Welche Funktion macht `to_string(n)` rückgängig?', ['stoi(text)', 'text.size()', 'text.clear()', 'to_string(text)'], 0, 'to_string macht aus der Zahl einen string, stoi (string to int) liest daraus wieder eine Zahl.')
         ],
         tasks: [
-          PP('Was gibt das Programm aus?', ['vector<int> p = {1999, 999};', 'p.push_back(3490);', 'cout << p[0] << " " << p.at(2) << " " << p.size() << "\\n";'], '1999 3490 3', 'Nach push_back hat p drei Elemente (Indizes 0, 1, 2).', 'Index 0 ist 1999, Index 2 ist 3490, Größe ist 3.')
+          PP('Was gibt das Programm aus?', ['vector<int> p = {1999, 999};', 'p.push_back(3490);', 'cout << p[0] << " " << p.at(2) << " " << p.size() << "\\n";'], '1999 3490 3', 'Nach push_back hat p drei Elemente (Indizes 0, 1, 2).', 'Index 0 ist 1999, Index 2 ist 3490, Größe ist 3.'),
+          PP('Vektor hin und zurück: Was gibt das Programm aus?', ['vector<int> v = {4, 8};', 'v.push_back(15);', 'v.pop_back();', 'v.push_back(16);', 'cout << v.size() << " " << v.back() << " " << to_string(v.back()).size() << "\\n";'], '3 16 2', 'pop_back nimmt das zuletzt angehängte Element wieder weg.', 'push_back(15) und pop_back() heben sich auf. Danach kommt 16 dazu: {4, 8, 16}. to_string(16) ist "16", also 2 Zeichen.')
         ]
       },
 

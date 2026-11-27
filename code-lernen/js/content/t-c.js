@@ -114,7 +114,7 @@
         concept: 'cond', standalone: true, domain: 'shop', stage: 1,
         title: 'Verzweigungen: Versandkosten, Login-Sperre und switch',
         goal: 'Du steuerst Entscheidungen mit if/else if/else, switch und &&/||/!, erkennst die gefährliche if (x = 5)-Falle in C und prüfst Grenzwerte genau.',
-        terms: ['Verzweigung', 'Bedingung', 'Grenzwert', 'Bedingungsoperator'],
+        terms: ['Verzweigung', 'Bedingung', 'Grenzwert', 'Bedingungsoperator', 'Wahrheitstabelle'],
         parts: [
           A.text('Vorsicht bei = statt == in C', 'Verzweigungen funktionieren in C wie in Java – mit einer berühmten Falle: **`if (fehlversuche = 3)` ist in C gültiger Code!** Es weist 3 zu, 3 ist ungleich 0 (also wahr), und der Zweig läuft immer. Vergleichen heißt **`==`**.'),
           C([
@@ -128,11 +128,14 @@
             '    case 2: printf("4 Stunden\\n"); break;',
             '    default: printf("1 Woche\\n");',
             '}'
-          ], 'Versandkosten und Ticket-Priorität in C', { praxis: 'Auf Mikrocontrollern und in Netzwerk-Daemons ist switch extrem schnell und übersichtlich für Statuscodes.' })
+          ], 'Versandkosten und Ticket-Priorität in C', { praxis: 'Auf Mikrocontrollern und in Netzwerk-Daemons ist switch extrem schnell und übersichtlich für Statuscodes.' }),
+          C(['int x = 7;§Erster Durchgang: ein Wert über der Grenze.', 'if (x > 5) {§7 > 5 ist **wahr**: Der if-Zweig läuft.', '    printf("%d > 5 ist wahr: if-Zweig\\n", x);', '} else {', '    printf("%d > 5 ist falsch: else-Zweig\\n", x);', '}', 'x = 5;§Zweiter Durchgang: genau auf der Grenze.', 'if (x > 5) {§5 > 5 ist **falsch**: C springt zu else.', '    printf("%d > 5 ist wahr: if-Zweig\\n", x);', '} else {', '    printf("%d > 5 ist falsch: else-Zweig\\n", x);', '}', 'printf("Wert der Bedingungen: %d %d\\n", 7 > 5, 5 > 5);§In C ist eine Bedingung eine Zahl: 1 für wahr, 0 für falsch.'], 'Trocken: dieselbe Bedingung einmal wahr, einmal falsch', { praxis: 'So testet man jede Bedingung: einmal mit einem Wert, der sie wahr macht, einmal mit einem, der sie falsch macht, am besten genau auf der Grenze. In der Qualitätssicherung heißen diese Testfälle Positiv- und Negativtest. In C sieht man dabei direkt die Zahlen 1 und 0.' }),
+          A.table(['a', 'b', '`a && b`', '`a || b`', '`!a`'], [['1', '1', '**1**', '**1**', '0'], ['1', '0', '0', '**1**', '0'], ['0', '1', '0', '**1**', '**1**'], ['0', '0', '0', '0', '**1**']], 'Wahrheitstabelle: alle Fälle von 1 und 0', '`&&` ist nur 1, wenn beide Seiten 1 sind. `||` ist nur 0, wenn beide Seiten 0 sind. `!` dreht um. Zwei Wahrheitswerte ergeben genau vier Kombinationen, wer eine verknüpfte Bedingung prüft, geht alle vier durch. C hat ohne `<stdbool.h>` keinen eigenen Wahrheitstyp: 0 ist falsch, jede andere Zahl wahr, und Vergleiche liefern 1 oder 0.')
         ],
         quiz: [
           A.q('Was passiert in C bei `if (x = 5)`?', ['x wird auf 5 gesetzt und die Bedingung ist immer wahr', 'Der Compiler bricht zwingend mit einem Syntaxfehler ab', 'x wird mit 5 verglichen, ohne x zu verändern', 'Die Bedingung ist immer falsch'], 0, 'Eine Zuweisung liefert den zugewiesenen Wert (5 != 0 = wahr). Mit -Wall warnt gcc davor.'),
-          A.q('Was passiert im `switch`, wenn nach `case 2:` das `break;` fehlt?', ['Die Anweisungen im nächsten case laufen ebenfalls mit', 'Der switch endet automatisch am Ende von case 2', 'Der Compiler bricht zwingend mit einer Fehlermeldung ab', 'Der Block von case 2 wird komplett übersprungen'], 0, 'Fall-through: ohne break läuft der nächste Fall mit.')
+          A.q('Was passiert im `switch`, wenn nach `case 2:` das `break;` fehlt?', ['Die Anweisungen im nächsten case laufen ebenfalls mit', 'Der switch endet automatisch am Ende von case 2', 'Der Compiler bricht zwingend mit einer Fehlermeldung ab', 'Der Block von case 2 wird komplett übersprungen'], 0, 'Fall-through: ohne break läuft der nächste Fall mit.'),
+          A.q('Ein Test prüft `x > 5` nur mit x = 7. Was fehlt noch?', ['Ein Test mit einem Wert, der die Bedingung falsch macht', 'Ein zweiter Test mit einem noch größeren Wert wie 70', 'Nichts, ein bestandener Test beweist die Bedingung komplett', 'Ein Test, ob 7 wirklich als ganze Zahl gespeichert ist'], 0, 'Erst der Gegenfall zeigt, ob der else-Zweig stimmt. Am besten genau auf der Grenze: x = 5.')
         ],
         tasks: [
           PP('Was gibt das Programm aus?', ['int warenwert = 5000;', 'int versand = warenwert >= 5000 ? 0 : 495;', 'printf("%d\\n", warenwert + versand);'], '5000', 'Prüfe den Grenzwert 5000 genau.', '5000 >= 5000 ist wahr (1), also versand = 0.'),
@@ -149,7 +152,8 @@
             'case 2: printf("4 Stunden\\n"); continue;',
             'case 2: break; printf("4 Stunden\\n");',
             'case 2: return 0;'
-          ], expect: '4 Stunden' }, 'Warum läuft case 3 noch mit?', 'In case 2 fehlt das break;.')
+          ], expect: '4 Stunden' }, 'Warum läuft case 3 noch mit?', 'In case 2 fehlt das break;.'),
+          PP('Alle Fälle von && und ||: Was gibt das Programm aus?', ['int x = 5;', 'printf("%d %d %d\\n", x > 5 && x < 10, x > 5 || x < 10, !(x > 5));'], '0 1 1', 'In C liefert jeder Vergleich 1 (wahr) oder 0 (falsch).', 'x > 5 ist 0, x < 10 ist 1. 0 && 1 ist 0, 0 || 1 ist 1, !0 ist 1.')
         ]
       },
 
@@ -158,7 +162,7 @@
         concept: 'loops', standalone: true, domain: 'shop', stage: 2,
         title: 'Schleifen: Warenkorb, Login-Versuche, Bestände',
         goal: 'Du schreibst for-, while- und do…while-Schleifen sicher, steuerst sie mit break und continue und vermeidest Array-Überschreitungen.',
-        terms: ['Schleife', 'Endlosschleife', 'Off-by-one-Fehler'],
+        terms: ['Schleife', 'Endlosschleife', 'Off-by-one-Fehler', ['Kopfgesteuerte Schleife', 'kopfgesteuert'], ['Fußgesteuerte Schleife', 'fußgesteuert']],
         parts: [
           A.text('Keine foreach-Schleife in C', 'C kennt kein `foreach` – über Arrays läufst du immer mit einer **`for`-Schleife** und einem Index `i` von `0` bis `anzahl - 1`. Da C **keine Array-Grenzen prüft**, ist ein **Off-by-one-Fehler** (`<= anzahl`) hier besonders gefährlich: Er liest fremden Speicher! Und in einer `while`-Schleife droht eine **Endlosschleife**, wenn sich die Abbruchbedingung nie ändert.'),
           C([
@@ -168,14 +172,16 @@
             '    summe += preise[i];',
             '}',
             'printf("Warenkorb: %d Cent\\n", summe);'
-          ], 'Warenkorb-Summe mit for-Schleife', { praxis: 'In C-Code stehen Array-Größen immer als Konstante oder Parameter dabei – die Schleifenbedingung < n ist das wichtigste Sicherheitsnetz.' })
+          ], 'Warenkorb-Summe mit for-Schleife', { praxis: 'In C-Code stehen Array-Größen immer als Konstante oder Parameter dabei – die Schleifenbedingung < n ist das wichtigste Sicherheitsnetz.' }),
+          C(['int zaehler = 5;§Ein Startwert, der die Bedingung schon vor dem ersten Durchlauf **falsch** macht.', 'while (zaehler < 3) {§Kopfgesteuert: 5 < 3 ist falsch, der Block läuft kein einziges Mal.', '    printf("while-Block: %d\\n", zaehler);', '    zaehler++;', '}', 'printf("nach while: %d\\n", zaehler);§zaehler ist unverändert 5.', 'zaehler = 5;', 'do {§Fußgesteuert: Der Block läuft zuerst, ohne Prüfung.', '    printf("do-Block: %d\\n", zaehler);', '    zaehler++;', '} while (zaehler < 3);§Erst jetzt wird geprüft: 6 < 3 ist falsch, Schluss.', 'printf("nach do-while: %d\\n", zaehler);'], 'Trocken: while und do-while, wenn die Bedingung sofort falsch ist', { praxis: 'while ist kopfgesteuert: Eine leere Druckwarteschlange druckt nichts. do-while ist fußgesteuert: Ein Menü erscheint auch dann einmal, wenn als Erstes „Beenden“ gewählt wird. Mit Startwert 1 laufen beide gleich oft. Den Unterschied sieht man nur, wenn die Bedingung schon am Anfang falsch ist.' })
         ],
         quiz: [
           A.q('Was passiert in C bei `preise[3]` in einem Array `int preise[3]`?', ['C liest fremden Speicher (undefiniertes Verhalten / Absturz)', 'C wirft automatisch eine IndexOutOfRangeException', 'C liefert garantiert immer den Wert 0', 'C vergrößert das Array automatisch auf 4 Elemente'], 0, 'C prüft Array-Grenzen aus Geschwindigkeitsgründen nicht – Quelle klassischer Buffer-Overflows!'),
           A.q('Welche Schleife läuft garantiert mindestens einmal?', ['do { … } while (bedingung);', 'while (bedingung) { … }', 'for (int i = 0; i < 0; i++) { … }', 'Keine Schleife in C'], 0, 'do…while prüft die Bedingung erst nach dem ersten Durchlauf.')
         ],
         tasks: [
-          PP('Was gibt das Programm aus?', ['int p[3] = {1000, 2500, 500};', 'int s = 0;', 'for (int i = 0; i < 3; i++) { if (p[i] >= 1000) s += p[i]; }', 'printf("%d\\n", s);'], '3500', 'Addiere nur Werte >= 1000.', '1000 + 2500 = 3500.')
+          PP('Was gibt das Programm aus?', ['int p[3] = {1000, 2500, 500};', 'int s = 0;', 'for (int i = 0; i < 3; i++) { if (p[i] >= 1000) s += p[i]; }', 'printf("%d\\n", s);'], '3500', 'Addiere nur Werte >= 1000.', '1000 + 2500 = 3500.'),
+          PP('Kopf- gegen fußgesteuert: Was gibt das Programm aus?', ['int n = 10;', 'while (n < 5) { n++; }', 'do { n++; } while (n < 5);', 'printf("%d\\n", n);'], '11', 'Prüfe bei beiden Schleifen, wann die Bedingung zum ersten Mal geprüft wird.', 'while: 10 < 5 ist falsch, kein Durchlauf. do-while: ein Durchlauf ohne Prüfung, n wird 11, dann ist 11 < 5 falsch.')
         ]
       },
 
@@ -199,13 +205,16 @@
             'int summe = 12500;',
             'int r = rabattInCent(summe);',
             'printf("Zu zahlen: %d Cent\\n", summe - r + versandInCent(summe - r));'
-          ], 'Shop-Funktionen in C', { praxis: 'In großen C-Projekten stehen die Funktionsköpfe (Prototypen) in Header-Dateien (.h) und die Implementierung in .c-Dateien.' })
+          ], 'Shop-Funktionen in C', { praxis: 'In großen C-Projekten stehen die Funktionsköpfe (Prototypen) in Header-Dateien (.h) und die Implementierung in .c-Dateien.' }),
+          C(['int istSchaltjahr(int jahr) {§Rückgabe 1 (wahr) oder 0 (falsch).', '    if (jahr % 400 == 0) return 1;§Durch 400 teilbar: immer ein Schaltjahr.', '    if (jahr % 100 == 0) return 0;§Durch 100, aber nicht durch 400: kein Schaltjahr.', '    return jahr % 4 == 0;§Sonst entscheidet die 4. Der Vergleich liefert schon 1 oder 0.', '}', '// in main', 'int jahre[4] = {2024, 2023, 1900, 2000};§Testwerte für jede Regel, für 1 und für 0.', 'for (int i = 0; i < 4; i++) {', '    printf("%d %d\\n", jahre[i], istSchaltjahr(jahre[i]));', '}'], 'Trocken: eine Prüffunktion mit beiden Ergebnissen', { praxis: 'Kalender, Fristen und Zinstage hängen an dieser Regel. Zu einer Prüffunktion gehören Testwerte für beide Ergebnisse. Wer nur 2024 testet, merkt nicht, dass die Ausnahme für 1900 fehlt.' }),
+          C(['void bucheEntnahme(int menge) {', '    if (menge <= 0) {', '        printf("Abgelehnt: Menge %d ist ungültig\\n", menge);', '        return;§**Früher Ausstieg**: return ohne Wert beendet eine void-Funktion sofort.', '    }', '    printf("Gebucht: %d Stück entnommen\\n", menge);§Läuft nur, wenn das return oben nicht gegriffen hat.', '}', '// in main', 'bucheEntnahme(5);§Bedingung falsch: Die Funktion läuft bis zum Ende.', 'bucheEntnahme(-5);§Bedingung wahr: Ausstieg direkt nach der Meldung.'], 'Trocken: früher Ausstieg und Normalfall', { praxis: 'Lagerbuchungen, Zahlungen, Formulare: Ungültiges wird am Anfang abgewiesen, der Normalfall folgt ohne Verschachtelung. Dieses Muster heißt Guard Clause und kommt im Modul Clean Code wieder.' })
         ],
         quiz: [
           A.q('Was passiert, wenn eine C-Funktion ihren Parameter `int lager` um 1 verringert?', ['Nur die lokale Kopie ändert sich, das Original in main bleibt gleich', 'Das Original in main wird direkt um 1 verringert', 'Der Compiler meldet einen Fehler wegen fehlendem const', 'Das Programm bricht mit einem Speicherfehler ab'], 0, 'Call by Value: Um das Original zu ändern, braucht die Funktion einen Zeiger (int *lager).')
         ],
         tasks: [
-          PP('Was gibt das Programm aus?', ['int rabatt(int s) { return s >= 10000 ? s * 10 / 100 : 0; }', '// in main', 'printf("%d %d\\n", rabatt(9999), rabatt(15000));'], '0 1500', 'Prüfe beide Werte gegen >= 10000.', '9999 → 0, 15000 → 1500.')
+          PP('Was gibt das Programm aus?', ['int rabatt(int s) { return s >= 10000 ? s * 10 / 100 : 0; }', '// in main', 'printf("%d %d\\n", rabatt(9999), rabatt(15000));'], '0 1500', 'Prüfe beide Werte gegen >= 10000.', '9999 → 0, 15000 → 1500.'),
+          PP('Schaltjahr-Regeln: Was gibt das Programm aus?', ['int istSchaltjahr(int j) {', '    if (j % 400 == 0) return 1;', '    if (j % 100 == 0) return 0;', '    return j % 4 == 0;', '}', '// in main', 'printf("%d %d %d\\n", istSchaltjahr(2100), istSchaltjahr(2400), istSchaltjahr(2028));'], '0 1 1', 'Prüfe für jedes Jahr die Regeln in der Reihenfolge der Funktion.', '2100 ist nicht durch 400, aber durch 100 teilbar: 0. 2400 ist durch 400 teilbar: 1. 2028 erreicht die letzte Zeile, 2028 % 4 == 0: 1.')
         ]
       },
 
@@ -231,15 +240,19 @@
           C([
             'char artikel[] = "Maus";§Belegt 5 Bytes: M, a, u, s, \\0!',
             'printf("Laenge: %d, gleich: %d\\n", (int)strlen(artikel), strcmp(artikel, "Maus") == 0);§strcmp liefert 0 bei Gleichheit!'
-          ], 'char-Strings mit strlen und strcmp', { praxis: 'Fehlt das Endzeichen \\0 in einem char-Array, liest printf weiter durch den Speicher – eine der bekanntesten C-Sicherheitslücken.' })
+          ], 'char-Strings mit strlen und strcmp', { praxis: 'Fehlt das Endzeichen \\0 in einem char-Array, liest printf weiter durch den Speicher – eine der bekanntesten C-Sicherheitslücken.' }),
+          C(['char text[16];', 'int menge = 42;', 'sprintf(text, "%d", menge);§Hin: Zahl wird Text. In text stehen jetzt die Zeichen \'4\' und \'2\'.', 'int zurueck = atoi(text);§Zurück: atoi macht aus dem Text wieder eine Zahl.', 'printf("Text %s, Zahl %d, gleich: %d\\n", text, zurueck, zurueck == menge);', 'int stapel[5];§Ein Stapel aus Array und Zähler.', 'int oben = 0;§oben zählt, wie viele Elemente liegen.', 'stapel[oben] = 10; oben++;§push: ablegen, dann Zähler erhöhen.', 'stapel[oben] = 20; oben++;', 'oben--; int weg = stapel[oben];§pop, das Gegenstück: erst Zähler senken, dann den obersten Wert holen.', 'printf("pop: %d, übrig: %d\\n", weg, oben);'], 'Gegenstücke: Hin- und Rückweg', { praxis: 'Gegenstücke testet man als Hin- und Rückweg: Zerlegen und wieder Zusammensetzen muss beim Original landen. Genau so prüfen Import/Export-Schnittstellen, ob beim Speichern und Laden nichts verloren geht. In C baut man solche Paare oft selbst, etwa Stapel aus Array und Zähler.' }),
+          A.table(['Hin', 'Zurück', 'Wofür'], [['`sprintf(text, "%d", n)`', '`atoi(text)`', 'Zahl zu Text und zurück'], ['`push`: `stapel[oben] = x; oben++;`', '`pop`: `oben--; x = stapel[oben];`', 'Stapel füllen und leeren, Reihenfolge genau umgekehrt'], ['`malloc(groesse)`', '`free(zeiger)`', 'Speicher holen und zurückgeben, jedes malloc braucht ein free'], ['`fopen(name, "r")`', '`fclose(datei)`', 'Datei öffnen und schließen'], ['`toupper(c)`', '`tolower(c)`', 'Zeichen umwandeln, braucht `#include <ctype.h>`'], ['`i++`', '`i--`', 'hoch- und herunterzählen']], 'Gegenstücke auf einen Blick', 'Zu fast jeder Operation gibt es eine, die sie umkehrt oder von der anderen Seite her arbeitet. Nicht jeder Rückweg ist verlustfrei: Nach Großschreibung und wieder Kleinschreibung ist die ursprüngliche Schreibweise weg.')
         ],
         quiz: [
           A.q('Wie viele Bytes belegt `char s[] = "Maus";` im Speicher?', ['5 (4 Buchstaben plus Endzeichen \\0)', '4 (genau die 4 Buchstaben)', '8 (immer ein Vielfaches von 8)', '1 (nur der Zeiger)'], 0, 'Jeder C-String endet automatisch mit dem Nullbyte \\0.'),
-          A.q('Wann sind zwei C-Strings `a` und `b` inhaltlich gleich?', ['Wenn strcmp(a, b) == 0 ergibt', 'Wenn a == b ergibt', 'Wenn strcmp(a, b) == 1 ergibt', 'Wenn strlen(a) == strlen(b) ergibt'], 0, 'a == b vergleicht nur Adressen; strcmp liefert 0 bei identischem Inhalt.')
+          A.q('Wann sind zwei C-Strings `a` und `b` inhaltlich gleich?', ['Wenn strcmp(a, b) == 0 ergibt', 'Wenn a == b ergibt', 'Wenn strcmp(a, b) == 1 ergibt', 'Wenn strlen(a) == strlen(b) ergibt'], 0, 'a == b vergleicht nur Adressen; strcmp liefert 0 bei identischem Inhalt.'),
+          A.q('Welche Funktion macht `sprintf(text, "%d", n)` rückgängig?', ['atoi(text)', 'strlen(text)', 'strcpy(text, "")', 'printf(text)'], 0, 'sprintf schreibt die Zahl als Zeichen in text, atoi liest aus diesen Zeichen wieder eine Zahl.')
         ],
         tasks: [
           PP('Was gibt das Programm aus?', ['int preise[3] = {1999, 999, 3490};', 'int min = preise[0];', 'for (int i = 1; i < 3; i++) { if (preise[i] < min) min = preise[i]; }', 'printf("%d\\n", min);'], '999', 'Startwert ist 1999, verglichen wird mit 999 und 3490.', '999 ist der kleinste Wert.'),
-          A.fill('Prüfe in C, ob `eingabe` gleich `"admin"` ist.', 'if ({{strcmp}}(eingabe, "admin") == {{0}}) { printf("ok\\n"); }', 'Textvergleichsfunktion aus <string.h> und ihr Rückgabewert bei Gleichheit.')
+          A.fill('Prüfe in C, ob `eingabe` gleich `"admin"` ist.', 'if ({{strcmp}}(eingabe, "admin") == {{0}}) { printf("ok\\n"); }', 'Textvergleichsfunktion aus <string.h> und ihr Rückgabewert bei Gleichheit.'),
+          PP('Zahl zu Text und zurück: Was gibt das Programm aus?', ['char t[8];', 'sprintf(t, "%d", 125);', 'int z = atoi(t) + 1;', 'printf("%s %d %d\\n", t, z, (int)strlen(t));'], '125 126 3', 'Was steht nach sprintf in t, und wie viele Zeichen sind das?', 'sprintf schreibt die Zeichen 1, 2, 5 in t. atoi liest 125, plus 1 ergibt 126. strlen zählt 3 Zeichen.')
         ]
       },
 

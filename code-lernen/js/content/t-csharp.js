@@ -142,7 +142,7 @@
         concept: 'cond', standalone: true, domain: 'shop', stage: 1,
         title: 'Verzweigungen: Versandkosten, Altersfreigabe, Login-Sperre',
         goal: 'Du triffst Entscheidungen mit if/else if/else, modernem switch-Ausdruck und Bedingungsoperator, verknüpfst Bedingungen mit &&, || und ! und prüfst Grenzwerte sicher.',
-        terms: ['Verzweigung', 'Bedingung', 'Grenzwert', 'Bedingungsoperator'],
+        terms: ['Verzweigung', 'Bedingung', 'Grenzwert', 'Bedingungsoperator', 'Wahrheitstabelle'],
         parts: [
           A.text('Entscheidungen im Shop und Service-Desk', 'Wie in Java prüft jede **Verzweigung** mit `if` eine **Bedingung** in runden Klammern. C# verlangt dabei zwingend einen echten `bool` – ein versehentliches `if (x = 5)` fängt der Compiler sofort ab. Besonders elegant ist der moderne **`switch`-Ausdruck**, der direkt einen Wert zurückliefert.'),
           C([
@@ -173,6 +173,8 @@
             '};',
             'Console.WriteLine($"Priorität {prio}: {reaktion}");'
           ], 'Moderner switch-Ausdruck im Ticketsystem', { praxis: 'Der switch-Ausdruck ist eine Stärke von C#: kompakt, garantiert ohne vergessenes break und direkt prüfbar.' }),
+          C(['int x = 7;§Erster Durchgang: ein Wert über der Grenze.', 'if (x > 5)§7 > 5 ist **true**: Der if-Zweig läuft.', '    Console.WriteLine($"{x} > 5 ist true: if-Zweig");', 'else', '    Console.WriteLine($"{x} > 5 ist false: else-Zweig");', 'x = 5;§Zweiter Durchgang: genau auf der Grenze.', 'if (x > 5)§5 > 5 ist **false**: C# springt zu else.', '    Console.WriteLine($"{x} > 5 ist true: if-Zweig");', 'else', '    Console.WriteLine($"{x} > 5 ist false: else-Zweig");', 'Console.WriteLine($"{7 > 5} {5 > 5}");§Eine Bedingung ist selbst ein Wert vom Typ bool. C# schreibt ihn groß: True und False.'], 'Trocken: dieselbe Bedingung einmal true, einmal false', { praxis: 'So testet man jede Bedingung: einmal mit einem Wert, der sie wahr macht, einmal mit einem, der sie falsch macht, am besten genau auf der Grenze. In der Qualitätssicherung heißen diese Testfälle Positiv- und Negativtest.' }),
+          A.table(['a', 'b', '`a && b`', '`a || b`', '`!a`'], [['true', 'true', '**true**', '**true**', 'false'], ['true', 'false', 'false', '**true**', 'false'], ['false', 'true', 'false', '**true**', '**true**'], ['false', 'false', 'false', 'false', '**true**']], 'Wahrheitstabelle: alle Fälle von true und false', '`&&` ist nur true, wenn beide Seiten true sind. `||` ist nur false, wenn beide Seiten false sind. `!` dreht um. Zwei Wahrheitswerte ergeben genau vier Kombinationen, wer eine verknüpfte Bedingung prüft, geht alle vier durch. In der Ausgabe schreibt C# `True` und `False` groß, im Code klein.'),
           A.table(['C#', 'Java', 'Python'], [
             ['`prio switch { 1 => "sofort", _ => "1 Woche" };`', '`switch (prio) { case 1 -> "sofort"; default -> "1 Woche"; };`', '`match prio: case 1: ... case _: ...`'],
             ['`&&`, `||`, `!`', '`&&`, `||`, `!`', '`and`, `or`, `not`']
@@ -184,7 +186,8 @@
         quiz: [
           A.q('Wofür steht der Unterstrich `_` im C#-`switch`-Ausdruck?', ['Für alle übrigen Fälle (wie default)', 'Für einen ungültigen Wert null', 'Für das erste Element eines Arrays', 'Für das Abbrechen einer Schleife'], 0, 'Der Unterstrich (Discard) fängt alle noch nicht abgedeckten Fälle auf.'),
           A.q('Welchen großen Vorteil hat der `switch`-Ausdruck gegenüber dem klassischen `switch`?', ['Kein break nötig und kein Fall-through', 'Er braucht gar keine Bedingungen mehr', 'Er funktioniert nur für feste Strings', 'Er ersetzt alle Schleifen im Programm'], 0, 'Jeder Zweig liefert genau einen Ausdruck und endet automatisch.'),
-          A.q('`warenwert = 5000`. Welcher Zweig läuft bei `warenwert >= 5000 ? 0 : 495`?', ['0 (Versand kostenlos)', '495 (Standardversand)', '5000', 'Compilerfehler'], 0, '5000 >= 5000 ist wahr, also wird der Wert vor dem Doppelpunkt gewählt.')
+          A.q('`warenwert = 5000`. Welcher Zweig läuft bei `warenwert >= 5000 ? 0 : 495`?', ['0 (Versand kostenlos)', '495 (Standardversand)', '5000', 'Compilerfehler'], 0, '5000 >= 5000 ist wahr, also wird der Wert vor dem Doppelpunkt gewählt.'),
+          A.q('Ein Test prüft `x > 5` nur mit x = 7. Was fehlt noch?', ['Ein Test mit einem Wert, der die Bedingung false macht', 'Ein zweiter Test mit einem noch größeren Wert wie 70', 'Nichts, ein bestandener Test beweist die Bedingung komplett', 'Ein Test, ob 7 wirklich als ganze Zahl gespeichert ist'], 0, 'Erst der Gegenfall zeigt, ob der else-Zweig stimmt. Am besten genau auf der Grenze: x = 5.')
         ],
         tasks: [
           PP('Was gibt das Programm aus?', ['int prio = 4;', 'string r = prio switch { 1 => "sofort", 2 => "4h", _ => "normal" };', 'Console.WriteLine(r);'], 'normal', 'Prüfe, ob 4 bei 1 oder 2 passt.', '4 fällt in den Auffangfall _ und ergibt „normal“.'),
@@ -196,9 +199,10 @@
           ], { line: 1, kind: 'logik', fixes: [
             'long versand = warenwert >= 5000 ? 0 : 495;',
             'long versand = warenwert < 5000 ? 0 : 495;',
-            'long versand = warenwert <= 5000 ? 0 : 495;',
+            'long versand = warenwert >= 5000 ? 495 : 0;',
             'long versand = warenwert != 5000 ? 0 : 495;'
-          ], expect: '0' }, 'Gehört der Grenzwert 5000 zu „ab 50 Euro“ dazu?', '> schließt 5000 aus. Richtig ist >= 5000.')
+          ], expect: '0' }, 'Gehört der Grenzwert 5000 zu „ab 50 Euro“ dazu?', '> schließt 5000 aus. Richtig ist >= 5000.'),
+          PP('Alle Fälle von && und ||: Was gibt das Programm aus?', ['bool a = true, b = false;', 'Console.WriteLine($"{a && b} {a || b} {!b}");'], 'False True True', '&& braucht beide Seiten true, || nur eine. ! dreht um.', 'true && false ist False, true || false ist True, !false ist True. C# gibt bool großgeschrieben aus.')
         ]
       },
 
@@ -207,7 +211,7 @@
         concept: 'loops', standalone: true, domain: 'shop', stage: 2,
         title: 'Schleifen: Warenkorb, Login-Versuche, Ticketlisten',
         goal: 'Du nutzt foreach, for, while und do…while gezielt für Warenkörbe, Login-Versuche und Ticketlisten und vermeidest Off-by-one-Fehler.',
-        terms: ['Schleife', 'Endlosschleife', 'Off-by-one-Fehler'],
+        terms: ['Schleife', 'Endlosschleife', 'Off-by-one-Fehler', ['Kopfgesteuerte Schleife', 'kopfgesteuert'], ['Fußgesteuerte Schleife', 'fußgesteuert']],
         parts: [
           A.text('Vier Schleifen für echte Aufgaben', 'In C# heißt die komfortable Schleife über Arrays und Listen **`foreach (var item in sammlung)`**. Brauchst du den Index, nimmst du `for`; hängt das Ende von einem Ereignis ab (z. B. Login-Versuche), nimmst du `while`.'),
           C([
@@ -238,6 +242,7 @@
             '}',
             'Console.WriteLine($"Lieferbar: {lieferbar}");'
           ], 'for mit continue: ausverkaufte Ware überspringen', { praxis: 'Wenn du neben dem Wert auch die Position im Array brauchst (z. B. Zeilennummer auf der Rechnung), ist for die richtige Wahl.' }),
+          C(['int zaehler = 5;§Ein Startwert, der die Bedingung schon vor dem ersten Durchlauf **false** macht.', 'while (zaehler < 3) {§Kopfgesteuert: 5 < 3 ist false, der Block läuft kein einziges Mal.', '    Console.WriteLine($"while-Block: {zaehler}");', '    zaehler++;', '}', 'Console.WriteLine($"nach while: {zaehler}");§zaehler ist unverändert 5.', 'zaehler = 5;', 'do {§Fußgesteuert: Der Block läuft zuerst, ohne Prüfung.', '    Console.WriteLine($"do-Block: {zaehler}");', '    zaehler++;', '} while (zaehler < 3);§Erst jetzt wird geprüft: 6 < 3 ist false, Schluss.', 'Console.WriteLine($"nach do-while: {zaehler}");'], 'Trocken: while und do-while, wenn die Bedingung sofort false ist', { praxis: 'while ist kopfgesteuert: Eine leere Druckwarteschlange druckt nichts. do-while ist fußgesteuert: Ein Menü erscheint auch dann einmal, wenn als Erstes „Beenden“ gewählt wird. Mit Startwert 1 laufen beide gleich oft. Den Unterschied sieht man nur, wenn die Bedingung schon am Anfang falsch ist.' }),
           A.table(['C#', 'Java', 'Python'], [
             ['`foreach (long p in preise)`', '`for (long p : preise)`', '`for p in preise:`'],
             ['`for (int i = 0; i < a.Length; i++)`', '`for (int i = 0; i < a.length; i++)`', '`for i in range(len(a)):`']
@@ -249,7 +254,8 @@
         quiz: [
           A.q('Wie heißt die Schleife in C#, die alle Elemente eines Arrays ohne Zähler durchläuft?', ['foreach (var x in arr)', 'for (var x of arr)', 'for (var x : arr)', 'each (var x in arr)'], 0, 'foreach … in ist C#, for … of ist JavaScript, for … : ist Java.'),
           A.q('Was passiert bei `for (int i = 0; i <= arr.Length; i++)` beim Zugriff `arr[i]`?', ['IndexOutOfRangeException beim letzten Durchlauf', 'arr[arr.Length] liefert automatisch 0', 'Der Compiler bricht schon beim Übersetzen ab', 'Die Schleife läuft einmal zu wenig'], 0, 'Der letzte gültige Index ist Length - 1. Bei i == Length knallt es zur Laufzeit.'),
-          A.q('Wofür steht `continue;` in einer Schleife?', ['Überspringt den Rest dieses Durchlaufs und geht zum nächsten', 'Beendet die gesamte Schleife sofort', 'Startet den aktuellen Durchlauf mit demselben i neu', 'Verlässt die gesamte Methode sofort'], 0, 'continue springt zum nächsten Durchlauf, break bricht die ganze Schleife ab.')
+          A.q('Wofür steht `continue;` in einer Schleife?', ['Überspringt den Rest dieses Durchlaufs und geht zum nächsten', 'Beendet die gesamte Schleife sofort', 'Startet den aktuellen Durchlauf mit demselben i neu', 'Verlässt die gesamte Methode sofort'], 0, 'continue springt zum nächsten Durchlauf, break bricht die ganze Schleife ab.'),
+          A.q('Die Bedingung ist schon beim Start falsch. Wie oft laufen while und do-while?', ['while 0-mal, do-while genau 1-mal', 'Beide laufen kein einziges Mal', 'Beide laufen genau einmal durch', 'while 1-mal, do-while 0-mal'], 0, 'while prüft vor dem ersten Durchlauf (kopfgesteuert), do-while erst danach (fußgesteuert).')
         ],
         tasks: [
           PP('Was gibt das Programm aus?', ['int[] preise = { 1000, 2500, 500 };', 'int summe = 0;', 'foreach (int p in preise) { if (p >= 1000) summe += p; }', 'Console.WriteLine(summe);'], '3500', 'Addiere nur Preise >= 1000.', '1000 + 2500 = 3500.'),
@@ -266,7 +272,8 @@
             'for (int i = 1; i <= preise.Length; i++) {',
             'for (int i = 0; i < preise.Length - 1; i++) {',
             'for (int i = 0; i <= preise.Length; i--) {'
-          ], expect: '6488' }, 'Welcher Index ist bei Länge 3 der letzte gültige?', 'Gültig sind 0, 1 und 2. Mit <= greift i = 3 außerhalb des Arrays zu.')
+          ], expect: '6488' }, 'Welcher Index ist bei Länge 3 der letzte gültige?', 'Gültig sind 0, 1 und 2. Mit <= greift i = 3 außerhalb des Arrays zu.'),
+          PP('Kopf- gegen fußgesteuert: Was gibt das Programm aus?', ['int n = 10;', 'while (n < 5) { n++; }', 'do { n++; } while (n < 5);', 'Console.WriteLine(n);'], '11', 'Prüfe bei beiden Schleifen, wann die Bedingung zum ersten Mal geprüft wird.', 'while: 10 < 5 ist false, kein Durchlauf. do-while: ein Durchlauf ohne Prüfung, n wird 11, dann ist 11 < 5 false.')
         ]
       },
 
@@ -288,6 +295,8 @@
             'long rabatt = RabattInCent(summe);§Ergebnis wird direkt weiterverarbeitet.',
             'Console.WriteLine($"Zu zahlen: {summe - rabatt + VersandInCent(summe - rabatt)} Cent");'
           ], 'Shop-Methoden mit return, Standardwert und =>', { praxis: 'In .NET-Projekten werden Geschäftsregeln als kleine, reine Methoden mit Rückgabewert geschrieben – nur so können xUnit/NUnit-Tests sie automatisch prüfen.' }),
+          C(['static bool IstSchaltjahr(int jahr) {', '    if (jahr % 400 == 0) return true;§Durch 400 teilbar: immer ein Schaltjahr.', '    if (jahr % 100 == 0) return false;§Durch 100, aber nicht durch 400: kein Schaltjahr.', '    return jahr % 4 == 0;§Sonst entscheidet die 4. Der Vergleich ist schon true oder false.', '}', '// in main', 'foreach (int jahr in new[] { 2024, 2023, 1900, 2000 })§Testwerte für jede Regel, für true und für false.', '    Console.WriteLine($"{jahr} {IstSchaltjahr(jahr)}");'], 'Trocken: eine Prüfmethode mit beiden Ergebnissen', { praxis: 'Kalender, Fristen und Zinstage hängen an dieser Regel. Zu einer Prüffunktion gehören Testwerte für beide Ergebnisse. Wer nur 2024 testet, merkt nicht, dass die Ausnahme für 1900 fehlt.' }),
+          C(['static void BucheEntnahme(int menge) {', '    if (menge <= 0) {', '        Console.WriteLine($"Abgelehnt: Menge {menge} ist ungültig");', '        return;§**Früher Ausstieg**: return ohne Wert beendet eine void-Methode sofort.', '    }', '    Console.WriteLine($"Gebucht: {menge} Stück entnommen");§Läuft nur, wenn das return oben nicht gegriffen hat.', '}', '// in main', 'BucheEntnahme(5);§Bedingung false: Die Methode läuft bis zum Ende.', 'BucheEntnahme(-5);§Bedingung true: Ausstieg direkt nach der Meldung.'], 'Trocken: früher Ausstieg und Normalfall', { praxis: 'Lagerbuchungen, Zahlungen, Formulare: Ungültiges wird am Anfang abgewiesen, der Normalfall folgt ohne Verschachtelung. Dieses Muster heißt Guard Clause und kommt im Modul Clean Code wieder.' }),
           A.table(['C#', 'Java', 'Python'], [
             ['`static long Rabatt(long s, int p = 10)`', '`static long rabatt(long s, int p)` (keine Default-Params)', '`def rabatt(s, p=10):`'],
             ['`static bool IstFrei(long w) => w >= 5000;`', '`static boolean istFrei(long w) { return w >= 5000; }`', '`def ist_frei(w): return w >= 5000`']
@@ -299,11 +308,13 @@
         quiz: [
           A.q('Was bedeutet der Rückgabetyp `void` an einer C#-Methode?', ['Die Methode gibt keinen Wert zurück', 'Die Methode gibt immer 0 zurück', 'Die Methode darf keine Parameter haben', 'Die Methode ist automatisch privat'], 0, 'void heißt leer: nur eine Aktion (z. B. Ausgabe), kein Rückgabewert.'),
           A.q('Wofür steht `static long Versand(long w) => w >= 5000 ? 0 : 495;`?', ['Kurze Methode mit direkter Rückgabe', 'Ein Vergleich zwischen Versand und 5000', 'Eine Schleife über alle Werte ab 5000', 'Eine Variable vom Typ long ohne Wert'], 0, 'Expression-Bodied Method: spart geschweifte Klammern und return bei Einzeilern.'),
-          A.q('Wie ruft man `static long Rabatt(long summe, int prozent = 10)` mit dem Standardwert auf?', ['Rabatt(12000)', 'Rabatt(12000, default)', 'Rabatt(prozent)', 'Rabatt()'], 0, 'Lässt man den optionalen Parameter weg, gilt automatisch der Standardwert 10.')
+          A.q('Wie ruft man `static long Rabatt(long summe, int prozent = 10)` mit dem Standardwert auf?', ['Rabatt(12000)', 'Rabatt(12000, default)', 'Rabatt(prozent)', 'Rabatt()'], 0, 'Lässt man den optionalen Parameter weg, gilt automatisch der Standardwert 10.'),
+          A.q('Was macht `return;` in einer `void`-Methode?', ['Es beendet die Methode sofort, ohne Rückgabewert', 'Es springt zurück an den Anfang der Methode', 'Es gibt automatisch den Wert 0 an den Aufrufer', 'Es beendet das gesamte Programm auf der Stelle'], 0, 'Der Aufrufer macht hinter dem Aufruf normal weiter. Nur die Methode selbst ist zu Ende.')
         ],
         tasks: [
           PP('Was gibt das Programm aus?', ['static long Rabatt(long s) => s >= 10000 ? s * 10 / 100 : 0;', 'Console.WriteLine($"{Rabatt(9999)} {Rabatt(15000)}");'], '0 1500', 'Prüfe 9999 und 15000 gegen >= 10000.', '9999 → 0, 15000 → 1500.'),
-          A.fill('Ergänze den Rückgabetyp für eine Prüfmethode, die `true` oder `false` liefert.', 'static {{bool}} IstLieferbar(int lager) => lager > 0;', 'In C# heißt der Wahrheitswert-Typ kurz … (4 Buchstaben).')
+          A.fill('Ergänze den Rückgabetyp für eine Prüfmethode, die `true` oder `false` liefert.', 'static {{bool}} IstLieferbar(int lager) => lager > 0;', 'In C# heißt der Wahrheitswert-Typ kurz … (4 Buchstaben).'),
+          PP('Einlasskontrolle mit frühem Ausstieg: Was gibt das Programm aus?', ['static string Einlass(int alter) {', '    if (alter < 0) return "Fehler";', '    if (alter >= 18) return "Einlass";', '    return "Abgewiesen";', '}', '// in main', 'Console.WriteLine($"{Einlass(18)} {Einlass(17)} {Einlass(-1)}");'], 'Einlass Abgewiesen Fehler', 'Gehe für jeden Aufruf die return-Zeilen von oben durch. Das erste, das greift, beendet die Methode.', '18 >= 18 ist true: Einlass. 17 erfüllt keine der ersten beiden Bedingungen: Abgewiesen. -1 < 0 greift schon in der ersten Zeile: Fehler.')
         ]
       },
 
@@ -335,6 +346,9 @@
             'var lager = new Dictionary<string, int> { ["Funkmaus"] = 35, ["Tastatur"] = 0 };§Schlüssel -> Wert.',
             'Console.WriteLine($"Im Korb: {korb.Count}, Maus-Lager: {lager["Funkmaus"]}");'
           ], 'List<T> und Dictionary im Onlineshop', { praxis: 'List<T> ist die meistgenutzte Sammlung in C#, Dictionary ersetzt langsames Suchen in Listen durch direkten Zugriff über die Artikelnummer.' }),
+          C(['string zeile = "Kiel;Bonn;Ulm";', 'string[] teile = zeile.Split(\';\');§Hin: Split zerlegt den Text in 3 Teile.', 'string wieder = string.Join(";", teile);§Zurück: Join klebt die Teile wieder zusammen.', 'Console.WriteLine($"{teile.Length} Teile, gleich wie vorher: {wieder == zeile}");', 'string name = "Funkmaus";', 'Console.WriteLine($"{name.ToUpper()} {name.ToUpper().ToLower()}");§Nicht jeder Rückweg ist verlustfrei: Aus „Funkmaus“ wird „funkmaus“.', 'var korb = new List<string> { "Maus", "Kabel" };', 'korb.Add("Headset");§Hin: ein drittes Element.', 'korb.Remove("Headset");§Zurück: Remove nimmt es wieder heraus.', 'Console.WriteLine(korb.Count);'], 'Gegenstücke: Hin- und Rückweg', { praxis: 'Gegenstücke testet man als Hin- und Rückweg: Zerlegen und wieder Zusammensetzen muss beim Original landen. Genau so prüfen Import/Export-Schnittstellen, ob beim Speichern und Laden nichts verloren geht.' }),
+          C(['string datei = "bericht.final.pdf";', 'int erster = datei.IndexOf(\'.\');§Von vorn gesucht: der erste Punkt steht an Index 7.', 'int letzter = datei.LastIndexOf(\'.\');§Von hinten gesucht: der letzte Punkt an Index 13.', 'Console.WriteLine($"{erster} {letzter} {datei.Substring(letzter + 1)}");§Hinter dem letzten Punkt steht die Endung.', 'Console.WriteLine($"{Math.Floor(4.2)} {Math.Ceiling(4.2)}");§Abrunden und Aufrunden: 4 und 5.', 'Console.WriteLine($"{Math.Min(7, 3)} {Math.Max(7, 3)}");'], 'Gegenstücke: vorn und hinten, unten und oben', { praxis: 'Dateiname und Endung trennen, Preise auf ganze Kartons runden, kleinsten und größten Messwert finden: Diese Paare kommen in fast jedem Programm vor. Wer eins kennt, sucht das andere gleich mit.' }),
+          A.table(['Hin', 'Zurück', 'Wofür'], [['`text.Split(\';\')`', '`string.Join(";", teile)`', 'CSV-Zeile zerlegen und wieder bauen'], ['`liste.Add(x)`', '`liste.Remove(x)`', 'Warenkorb füllen und leeren'], ['`int.Parse("42")`', '`zahl.ToString()`', 'Text zu Zahl und zurück'], ['`ToUpper()`', '`ToLower()`', 'Eingaben vergleichbar machen'], ['`IndexOf(x)`', '`LastIndexOf(x)`', 'von vorn oder von hinten suchen'], ['`StartsWith(x)`', '`EndsWith(x)`', 'Präfix oder Endung prüfen'], ['`Math.Floor(x)`', '`Math.Ceiling(x)`', 'ab- oder aufrunden'], ['`Math.Min(a, b)`', '`Math.Max(a, b)`', 'kleinster oder größter Wert']], 'Gegenstücke auf einen Blick', 'Zu fast jeder Operation gibt es eine, die sie umkehrt oder von der anderen Seite her arbeitet. Nicht jeder Rückweg ist verlustfrei: Nach Großschreibung und wieder Kleinschreibung ist die ursprüngliche Schreibweise weg.'),
           A.table(['C#', 'Java', 'Python'], [
             ['`arr.Length` / `list.Count`', '`arr.length` / `list.size()`', '`len(liste)`'],
             ['`List<string>` + `.Add(x)`', '`ArrayList<String>` + `.add(x)`', '`list` + `.append(x)`'],
@@ -347,7 +361,9 @@
         quiz: [
           A.q('Welche Eigenschaft liefert die Anzahl der Elemente einer `List<string>` in C#?', ['.Count', '.Length', '.size()', 'len()'], 0, 'Arrays haben .Length, Listen und Dictionaries haben .Count.'),
           A.q('Womit startest du beim Suchen des günstigsten Preises im Array `preise`?', ['int min = preise[0];', 'int min = 0;', 'int min = -1;', 'int min = preise.Length;'], 0, 'Bei 0 würde kein positiver Preis kleiner sein als min.'),
-          A.q('Welche Datenstruktur eignet sich am besten, um zu einer Artikelnummer sofort den Lagerbestand nachzuschlagen?', ['Dictionary<int, int>', 'Ein Array int[]', 'Ein langer string', 'Eine Liste bool[]'], 0, 'Dictionary ordnet jedem Schlüssel (Artikelnummer) direkt einen Wert (Bestand) zu.')
+          A.q('Welche Datenstruktur eignet sich am besten, um zu einer Artikelnummer sofort den Lagerbestand nachzuschlagen?', ['Dictionary<int, int>', 'Ein Array int[]', 'Ein langer string', 'Eine Liste bool[]'], 0, 'Dictionary ordnet jedem Schlüssel (Artikelnummer) direkt einen Wert (Bestand) zu.'),
+          A.q('Welcher Aufruf macht `zeile.Split(\';\')` rückgängig?', ['string.Join(";", teile)', 'teile.Reverse()', 'zeile.Trim(\';\')', 'string.Concat(zeile, ";")'], 0, 'Split zerlegt an jedem Trennzeichen, Join setzt die Teile mit demselben Trennzeichen wieder zusammen.'),
+          A.q('Was ergibt `"Funkmaus".ToUpper().ToLower()`?', ['"funkmaus", die ursprüngliche Schreibweise ist weg', '"Funkmaus", das Gegenstück stellt alles wieder her', '"FUNKMAUS", ToLower wirkt nur auf neue Texte', 'Einen Compilerfehler wegen der doppelten Umwandlung'], 0, 'ToLower kennt das Original nicht mehr, es macht einfach alles klein. Nicht jedes Gegenstück ist ein verlustfreier Rückweg.')
         ],
         tasks: [
           PP('Was gibt das Programm aus?', ['var korb = new List<string> { "Monitor", "Kabel", "Maus" };', 'korb.RemoveAt(0);', 'Console.WriteLine($"{korb[0]} {korb.Count}");'], 'Kabel 2', 'RemoveAt(0) entfernt das erste Element; der Rest rückt nach.', 'Monitor fällt weg, Kabel ist neu auf Index 0, 2 Elemente bleiben.'),
@@ -362,7 +378,8 @@
             'int min = 1;',
             'int min = -1;',
             'int min = preise.Length;'
-          ], expect: '999' }, 'Kann ein positiver Preis kleiner als 0 sein?', 'Der Startwert muss das erste Element preise[0] sein.')
+          ], expect: '999' }, 'Kann ein positiver Preis kleiner als 0 sein?', 'Der Startwert muss das erste Element preise[0] sein.'),
+          PP('Warenkorb hin und zurück: Was gibt das Programm aus?', ['var korb = new List<string> { "Maus" };', 'korb.Add("Kabel");', 'korb.Add("Headset");', 'korb.Remove("Maus");', 'Console.WriteLine($"{korb.Count} {korb[0]} {string.Join("+", korb)}");'], '2 Kabel Kabel+Headset', 'Verfolge die Liste nach jedem Aufruf. Was rückt nach, wenn vorn etwas entfernt wird?', 'Nach Add steht [Maus, Kabel, Headset]. Remove("Maus") nimmt das erste Element heraus, die anderen rücken nach vorn: [Kabel, Headset].')
         ]
       },
 

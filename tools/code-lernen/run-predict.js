@@ -21,7 +21,7 @@ const tool = {
   gpp: process.env.GPP || find(path.join(home, 'AppData/Local/Microsoft/WinGet/Packages'), 'g++.exe'),
 };
 const norm = (s) => String(s).replace(/\r/g, '').split('\n').map((x) => x.trim()).filter((x) => x !== '').join('\n');
-const sh = (cmd, args, cwd, input) => cp.spawnSync(cmd, args, { cwd, encoding: 'utf8', timeout: 120000, input, env: Object.assign({}, Object.fromEntries(Object.entries(process.env).filter(([k]) => !/^(__PYVENV_LAUNCHER__|VIRTUAL_ENV|PYTHON.*)$/i.test(k))), { DOTNET_CLI_TELEMETRY_OPTOUT: '1', DOTNET_NOLOGO: '1', DOTNET_SKIP_FIRST_TIME_EXPERIENCE: '1', PATH: path.dirname(tool.gpp || '') + path.delimiter + process.env.PATH }) });
+const sh = (cmd, args, cwd, input) => cp.spawnSync(cmd, args, { cwd, encoding: 'utf8', timeout: 120000, input, env: Object.assign({}, Object.fromEntries(Object.entries(process.env).filter(([k]) => !/^(__PYVENV_LAUNCHER__|VIRTUAL_ENV|PYTHON.*)$/i.test(k))), { DOTNET_CLI_TELEMETRY_OPTOUT: '1', DOTNET_SYSTEM_GLOBALIZATION_INVARIANT: '1', DOTNET_NOLOGO: '1', DOTNET_SKIP_FIRST_TIME_EXPERIENCE: '1', PATH: path.dirname(tool.gpp || '') + path.delimiter + process.env.PATH }) });
 
 // Vorspann für Aufgaben, die die Klasse Konto benutzen
 const KONTO = {
@@ -63,15 +63,15 @@ function run(lang, code, dir) {
   if (lang === 'csharp') {
     fs.writeFileSync(path.join(dir, 'p.csproj'), '<Project Sdk="Microsoft.NET.Sdk"><PropertyGroup><OutputType>Exe</OutputType><TargetFramework>net8.0</TargetFramework><ImplicitUsings>enable</ImplicitUsings><Nullable>disable</Nullable></PropertyGroup></Project>');
     fs.writeFileSync(path.join(dir, 'Program.cs'), D + '\n' + B + '\n' + (uses ? KONTO.csharp : ''));
-    return sh(tool.dotnet, ['run', '--nologo', '-v', 'q'], dir);
+    const r = sh(tool.dotnet, ['run', '--nologo', '-v', 'q'], dir); if (r.status && /error CS\d+/.test((r.stdout || '') + (r.stderr || ''))) r.phase = 'compile'; return r;
   }
   if (lang === 'c') {
     fs.writeFileSync(path.join(dir, 'm.c'), '#include <stdio.h>\n#include <string.h>\n#include <stdlib.h>\n' + D + '\nint main(void) {\n' + B + '\nreturn 0;\n}\n');
-    const c = sh(tool.gcc, ['-Wall', 'm.c', '-o', 'm.exe'], dir); if (c.status) return c; return sh(path.join(dir, 'm.exe'), [], dir);
+    const c = sh(tool.gcc, ['-Wall', 'm.c', '-o', 'm.exe'], dir); if (c.status) { c.phase = 'compile'; return c; } return sh(path.join(dir, 'm.exe'), [], dir);
   }
   if (lang === 'cpp') {
     fs.writeFileSync(path.join(dir, 'm.cpp'), '#include <iostream>\n#include <string>\n#include <vector>\n#include <map>\nusing namespace std;\n' + (uses ? KONTO.cpp : '') + D + '\nint main() {\n' + B + '\nreturn 0;\n}\n');
-    const c = sh(tool.gpp, ['-std=c++17', '-Wall', 'm.cpp', '-o', 'm.exe'], dir); if (c.status) return c; return sh(path.join(dir, 'm.exe'), [], dir);
+    const c = sh(tool.gpp, ['-std=c++17', '-Wall', 'm.cpp', '-o', 'm.exe'], dir); if (c.status) { c.phase = 'compile'; return c; } return sh(path.join(dir, 'm.exe'), [], dir);
   }
 }
 const need = { pseudo: [], javascript: [], python: ['python'], java: ['javac', 'java'], csharp: ['dotnet'], c: ['gcc'], cpp: ['gpp'] };
@@ -117,6 +117,6 @@ for (const t of A.tracks) for (const spec of t.lessons) {
     if (fehler.length) { fail++; console.log('FAIL  ' + w + ': ' + fehler.join('; ')); } else pass++;
   }
 }
-fs.rmSync(tmp, { recursive: true, force: true });
+try { fs.rmSync(tmp, { recursive: true, force: true, maxRetries: 5, retryDelay: 200 }); } catch (e) { console.log('Hinweis: Temp-Ordner nicht gelöscht (' + e.code + ')'); }
 console.log('\nPASS ' + pass + ', FAIL ' + fail + (Object.keys(notrun).length ? ', NOT RUN: ' + JSON.stringify(notrun) : ''));
 process.exit(fail ? 1 : 0);
