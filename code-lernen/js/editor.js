@@ -138,6 +138,18 @@
     quiet = false;
   }
 
+  // Pseudocode: Ist die Zeile das SOLANGE am Ende eines WIEDERHOLE? Wie im Interpreter entscheidet die Einrückung:
+  // Die nächste Zeile darüber, die nicht tiefer eingerückt ist, muss das WIEDERHOLE sein. Dann wird nach Enter nicht eingerückt.
+  function repeatFoot(v, a) {
+    const lines = v.slice(0, a).split('\n'), cur = lines.pop();
+    if (!/^\s*SOLANGE\b/i.test(cur) || /\s(?:MACHE|WIEDERHOLE)\s*$/i.test(cur)) return false;
+    const w = (l) => l.match(/^[ \t]*/)[0].replace(/\t/g, '    ').length, ci = w(cur);
+    for (let i = lines.length - 1; i >= 0; i--) {
+      if (!lines[i].trim() || w(lines[i]) > ci) continue;
+      return w(lines[i]) === ci && /^\s*WIEDERHOLE\s*$/i.test(lines[i]);
+    }
+    return false;
+  }
   const PAIRS = { '(': ')', '[': ']', '{': '}', '"': '"', "'": "'" };
   document.addEventListener('keydown', (e) => {
     const ta = e.target; if (!(ta instanceof HTMLTextAreaElement) || !ta.dataset.lang) return;
@@ -152,7 +164,7 @@
     if (e.key === 'Tab' && !e.shiftKey && a === b) { e.preventDefault(); insert(ta, a, b, IND); return; }
     if (e.key === 'Enter' && a === b) {
       e.preventDefault();
-      const ind = indentOf(v, a), open1 = /[{([]$/.test(prev) || (ta.dataset.lang === 'pseudo' && /^\s*(WENN|SONST|SOLANGE|FÜR|FUNKTION|WIEDERHOLE)\b/i.test(v.slice(lineStart(v, a), a)));
+      const ind = indentOf(v, a), open1 = /[{([]$/.test(prev) || (ta.dataset.lang === 'pseudo' && /^\s*(WENN|SONST|SOLANGE|FÜR|FUNKTION|WIEDERHOLE)\b/i.test(v.slice(lineStart(v, a), a)) && !repeatFoot(v, a));
       if (open1 && PAIRS[prev] === next) { insert(ta, a, b, '\n' + ind + IND + '\n' + ind); const p = a + 1 + ind.length + IND.length; ta.setSelectionRange(p, p); }
       else insert(ta, a, b, '\n' + ind + (open1 ? IND : ''));
       return;

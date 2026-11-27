@@ -6,7 +6,10 @@
  *   EINGABE x         Wert einlesen
  *   WENN ... DANN / SONST WENN ... DANN / SONST / ENDE WENN
  *   SOLANGE ... / ENDE SOLANGE
- *   WIEDERHOLE ... BIS bedingung
+ *   WIEDERHOLE ... BIS bedingung       (Abbruchbedingung: hört auf, sobald sie WAHR ist)
+ *   WIEDERHOLE ... SOLANGE bedingung   (Laufbedingung: macht weiter, solange sie WAHR ist)
+ *     Die SOLANGE-Zeile schließt das WIEDERHOLE ab, wenn sie nicht tiefer eingerückt ist als WIEDERHOLE.
+ *     Tiefer eingerückt beginnt sie eine innere Schleife SOLANGE ... ENDE SOLANGE.
  *   FÜR i VON 1 BIS 10 [SCHRITT 2] ... ENDE FÜR    (auch: FÜR i VON 10 ABWÄRTS BIS 1)
  *   FÜR JEDES x IN liste ... ENDE FÜR
  *   FUNKTION name(a, b) ... GIB ZURÜCK wert ... ENDE FUNKTION
@@ -159,7 +162,8 @@
     const lines = [];
     raw.forEach((l, i) => {
       const t = l.replace(/\s*(\/\/|#).*$/, (m, c, off) => (insideString(l, off) ? m : '')).trim();
-      if (t) lines.push({ n: i, t });
+      // Einrückung merken (Tab = 4 Leerzeichen): Sie unterscheidet das SOLANGE am Ende eines WIEDERHOLE von einer inneren Schleife
+      if (t) lines.push({ n: i, t, ind: l.match(/^[ \t]*/)[0].replace(/\t/g, '    ').length });
     });
     let pos = 0;
     const funcs = {};
@@ -174,12 +178,12 @@
       const body = [];
       while (pos < lines.length) {
         const { n, t } = lines[pos];
-        if (stops.some((r) => r.test(t))) return body;
+        if (stops.some((r) => (typeof r === 'function' ? r(lines[pos]) : r.test(t)))) return body;
         body.push(stmt());
       }
       if (stops.length) {
         const last = lines[lines.length - 1];
-        throw new PErr('Der Block wird nicht abgeschlossen (es fehlt das passende Ende, zum Beispiel ENDE WENN, ENDE SOLANGE oder bei WIEDERHOLE das BIS)', last ? last.n : 0);
+        throw new PErr('Der Block wird nicht abgeschlossen (es fehlt das passende Ende, zum Beispiel ENDE WENN, ENDE SOLANGE oder bei WIEDERHOLE das BIS bzw. SOLANGE)', last ? last.n : 0);
       }
       return body;
     }
@@ -212,11 +216,15 @@
         return { k: 'while', cond, text, body, line: n };
       }
       if (R.repeat.test(t)) {
+        const ind = lines[pos].ind;
         pos++;
-        const body = block([R.until]);
-        if (pos >= lines.length) throw new PErr('WIEDERHOLE braucht am Ende eine Zeile BIS bedingung', n);
-        const u = lines[pos]; const um = R.until.exec(u.t); pos++;
-        return { k: 'repeat', body, cond: parseExpr(um[1], u.n), text: um[1].trim(), line: n, untilLine: u.n };
+        // Fußzeile: BIS (Abbruchbedingung) oder SOLANGE (Laufbedingung) auf der Ebene von WIEDERHOLE
+        // „SOLANGE x WIEDERHOLE“ oder „SOLANGE x MACHE“ ist immer ein Schleifenkopf, nie eine Fußzeile
+        const foot = (l) => R.while.test(l.t) && !/\s(?:MACHE|WIEDERHOLE)$/i.test(l.t) && l.ind <= ind;
+        const body = block([R.until, foot]);
+        if (pos >= lines.length) throw new PErr('WIEDERHOLE braucht am Ende eine Zeile BIS bedingung oder SOLANGE bedingung', n);
+        const u = lines[pos], bis = R.until.exec(u.t), um = bis || R.while.exec(u.t); pos++;
+        return { k: 'repeat', mode: bis ? 'bis' : 'solange', body, cond: parseExpr(um[1], u.n), text: um[1].trim(), line: n, untilLine: u.n };
       }
       if ((m = R.each.exec(t))) {
         pos++;
@@ -427,7 +435,15 @@
             break;
           }
           case 'repeat': {
-            do { exec(s.body); var c = needBool(ev(s.cond, s.untilLine), s.untilLine); emit(s.untilLine, 'Prüfe: ' + s.text + '. Ergebnis: ' + (c ? 'WAHR, jetzt wird aufgehört' : 'FALSCH, es geht von vorn los')); } while (!c);
+            // BIS: aufhören, sobald WAHR. SOLANGE: weitermachen, solange WAHR. Gleicher Ablauf, umgekehrte Bedeutung.
+            const weiter = s.mode === 'solange';
+            let nochmal;
+            do {
+              exec(s.body);
+              const c = needBool(ev(s.cond, s.untilLine), s.untilLine);
+              nochmal = weiter ? c : !c;
+              emit(s.untilLine, 'Prüfe: ' + s.text + '. Ergebnis: ' + (c ? 'WAHR' : 'FALSCH') + ', ' + (nochmal ? 'es geht von vorn los' : 'die Schleife ist beendet'));
+            } while (nochmal);
             break;
           }
           case 'for': {

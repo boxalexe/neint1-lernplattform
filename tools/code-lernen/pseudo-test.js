@@ -16,6 +16,16 @@ t('WENN', 'x <- 15\nWENN x < 10 DANN\n  AUSGABE "klein"\nSONST WENN x < 20 DANN\
 t('UND ODER NICHT', 'a <- 5\nWENN a > 1 UND NICHT a > 10 DANN\n AUSGABE "ja"\nENDE WENN\nWENN a = 1 ODER a = 5 DANN\n AUSGABE "auch"\nENDE WENN', 'ja\nauch');
 t('SOLANGE', 'n <- 1\nSOLANGE n < 100\n  n <- n * 2\nENDE SOLANGE\nAUSGABE n', '128');
 t('WIEDERHOLE', 'n <- 0\nWIEDERHOLE\n  n <- n + 3\nBIS n >= 10\nAUSGABE n', '12');
+// WIEDERHOLE … SOLANGE: Laufbedingung statt Abbruchbedingung (Schreibweise vieler Schulen und IHK-Aufgaben)
+t('WIEDERHOLE SOLANGE', 'n <- 0\nWIEDERHOLE\n  n <- n + 3\nSOLANGE n < 10\nAUSGABE n', '12');
+t('WIEDERHOLE SOLANGE mit Klammern', 'versuche <- 0\nWIEDERHOLE\n  versuche <- versuche + 1\nSOLANGE (versuche != 3)\nAUSGABE versuche', '3');
+t('WIEDERHOLE SOLANGE läuft einmal', 'n <- 5\nWIEDERHOLE\n  AUSGABE n\nSOLANGE n < 3', '5');
+t('BIS und SOLANGE gegensätzlich', 'a <- 0\nWIEDERHOLE\n  a <- a + 1\nBIS a < 3\nb <- 0\nWIEDERHOLE\n  b <- b + 1\nSOLANGE b < 3\nAUSGABE a, b', '1 3');
+t('Innere Schleife tiefer eingerückt', 'i <- 0\nWIEDERHOLE\n  j <- 0\n  SOLANGE j < 2\n    j <- j + 1\n  ENDE SOLANGE\n  i <- i + j\nSOLANGE i < 6\nAUSGABE i', '6');
+t('Innere Schleife mit WIEDERHOLE im Kopf', 'i <- 0\nWIEDERHOLE\nSOLANGE i < 2 WIEDERHOLE\ni <- i + 1\nENDE SOLANGE\ni <- i + 10\nSOLANGE i < 30\nAUSGABE i', '32');
+t('WIEDERHOLE SOLANGE in Funktion', 'FUNKTION quersumme(z)\n  s <- 0\n  WIEDERHOLE\n    s <- s + z MOD 10\n    z <- z DIV 10\n  SOLANGE z > 0\n  GIB ZURÜCK s\nENDE FUNKTION\nAUSGABE quersumme(4711), quersumme(0)', '13 0');
+t('Verschachteltes WIEDERHOLE', 'i <- 0\nk <- 0\nWIEDERHOLE\n  j <- 0\n  WIEDERHOLE\n    j <- j + 1\n    k <- k + 1\n  SOLANGE j < 2\n  i <- i + 1\nBIS i = 3\nAUSGABE i, k', '3 6');
+t('Tabs als Einrückung', 'n <- 0\nWIEDERHOLE\n\tn <- n + 1\nSOLANGE n < 4\nAUSGABE n', '4');
 t('FÜR', 's <- 0\nFÜR i VON 1 BIS 5\n  s <- s + i\nENDE FÜR\nAUSGABE s', '15');
 t('FUER rückwärts', 'FUER i VON 3 BIS 1 SCHRITT -1\n AUSGABE i\nENDE FUER', '3\n2\n1');
 t('FÜR JEDES', 'zahlen <- [4, 8, 15]\nsumme <- 0\nFÜR JEDES z IN zahlen\n  summe <- summe + z\nENDE FÜR\nAUSGABE summe, LÄNGE(zahlen)', '27 3');
@@ -32,7 +42,8 @@ t('Endlosschleife', 'n <- 1\nSOLANGE n > 0\n n <- n + 1\nENDE SOLANGE', 'FEHLER:
 t('Variable fehlt', 'AUSGABE y', 'FEHLER: Die Variable „y“ hat noch keinen Wert. Sie muss vorher mit ← gesetzt werden');
 t('Index', 'l <- [1,2]\nAUSGABE l[2]', 'FEHLER: Index 2 gibt es nicht: gültig sind 0 bis 1 (die Zählung beginnt bei 0)');
 t('Durch 0', 'AUSGABE 5 / 0', 'FEHLER: Durch 0 kann man nicht teilen');
-t('Block offen', 'WENN 1 < 2 DANN\n AUSGABE 1', 'FEHLER: Der Block wird nicht abgeschlossen (es fehlt das passende Ende, zum Beispiel ENDE WENN, ENDE SOLANGE oder bei WIEDERHOLE das BIS)');
+t('Block offen', 'WENN 1 < 2 DANN\n AUSGABE 1', 'FEHLER: Der Block wird nicht abgeschlossen (es fehlt das passende Ende, zum Beispiel ENDE WENN, ENDE SOLANGE oder bei WIEDERHOLE das BIS bzw. SOLANGE)');
+t('WIEDERHOLE ohne Fuß', 'n <- 0\nWIEDERHOLE\n  n <- n + 1', 'FEHLER: Der Block wird nicht abgeschlossen (es fehlt das passende Ende, zum Beispiel ENDE WENN, ENDE SOLANGE oder bei WIEDERHOLE das BIS bzw. SOLANGE)');
 t('Streuner ENDE', 'AUSGABE 1\nENDE WENN', 'FEHLER: „ENDE WENN“ passt hier zu keinem Anfang (ein Block wurde nicht geöffnet oder schon geschlossen)');
 t('Bedingung keine Bool', 'WENN 5 DANN\n AUSGABE 1\nENDE WENN', 'FEHLER: Hier muss eine Bedingung stehen (WAHR oder FALSCH), nicht 5');
 t('Text minus', 'AUSGABE "a" - 1', 'FEHLER: „-“ rechnet nur mit Zahlen, hier steht aber "a"');
